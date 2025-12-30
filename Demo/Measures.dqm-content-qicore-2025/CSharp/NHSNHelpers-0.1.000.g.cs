@@ -81,8 +81,8 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
     [CqlFunctionDefinition("Normalize Interval")]
     public CqlInterval<CqlDateTime> Normalize_Interval(CqlContext context, object choice)
     {
-        CqlInterval<CqlDateTime> a_()
-        {
+
+        CqlInterval<CqlDateTime> a_() {
             if (choice is FhirDateTime)
             {
                 CqlDateTime b_ = FHIRHelpers_4_4_000.Instance.ToDateTime(context, choice as FhirDateTime);
@@ -214,8 +214,9 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
             else
             {
                 return null as CqlInterval<CqlDateTime>;
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -238,8 +239,8 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
     public Location GetLocation(CqlContext context, ResourceReference reference)
     {
         IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Location"));
-        bool? b_(Location Locations)
-        {
+
+        bool? b_(Location Locations) {
             Id e_ = Locations?.IdElement;
             string f_ = FHIRHelpers_4_4_000.Instance.ToString(context, e_);
             FhirString g_ = reference?.ReferenceElement;
@@ -247,7 +248,8 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
             string i_ = this.GetId(context, h_);
             bool? j_ = context.Operators.Equal(f_, i_);
             return j_;
-        };
+        }
+
         IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
         Location d_ = context.Operators.SingletonFrom<Location>(c_);
         return d_;

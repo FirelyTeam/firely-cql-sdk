@@ -136,8 +136,8 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
             {
                 CqlValueSet a_ = this.Encounter_Inpatient(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? c_(Encounter InpatientEncounter)
-                {
+
+                bool? c_(Encounter InpatientEncounter) {
                     Code<Encounter.EncounterStatus> e_ = InpatientEncounter?.StatusElement;
                     Encounter.EncounterStatus? f_ = e_?.Value;
                     Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
@@ -158,7 +158,8 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
                     bool? w_ = context.Operators.GreaterOrEqual(v_, 18);
                     bool? x_ = context.Operators.And(n_, w_);
                     return x_;
-                };
+                }
+
                 IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
                 return d_;
             });
@@ -227,11 +228,11 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
                 CqlCode a_ = this.CT_dose_and_image_quality_category(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-                IEnumerable<Observation> d_(Observation CTScan)
-                {
+
+                IEnumerable<Observation> d_(Observation CTScan) {
                     IEnumerable<Encounter> f_ = this.Qualifying_Inpatient_Encounters(context);
-                    bool? g_(Encounter InpatientEncounters)
-                    {
+
+                    bool? g_(Encounter InpatientEncounters) {
                         Code<ObservationStatus> k_ = CTScan?.StatusElement;
                         ObservationStatus? l_ = k_?.Value;
                         string m_ = context.Operators.Convert<string>(l_);
@@ -256,13 +257,14 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
                         bool? ac_ = context.Operators.In<CqlDateTime>(aa_, ab_, "day");
                         bool? ad_ = context.Operators.And(w_, ac_);
                         return ad_;
-                    };
+                    }
+
                     IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
-                    Observation i_(Encounter InpatientEncounters) =>
-                    CTScan;
+                    Observation i_(Encounter InpatientEncounters) => CTScan;
                     IEnumerable<Observation> j_ = context.Operators.Select<Encounter, Observation>(h_, i_);
                     return j_;
-                };
+                }
+
                 IEnumerable<Observation> e_ = context.Operators.SelectMany<Observation, Observation>(c_, d_);
                 return e_;
             });
@@ -277,8 +279,8 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
             () =>
             {
                 IEnumerable<Observation> a_ = this.Qualifying_Scan_During_Inpatient_Encounter(context);
-                bool? b_(Observation CTScan)
-                {
+
+                bool? b_(Observation CTScan) {
                     decimal? d_ = AlaraCommonFunctions_1_10_000.Instance.globalNoiseValue(context, CTScan);
                     bool? e_ = context.Operators.Not((bool?)(d_ is null));
                     decimal? f_ = AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan);
@@ -289,7 +291,8 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
                     bool? k_ = context.Operators.Not((bool?)(j_ is null));
                     bool? l_ = context.Operators.And(h_, k_);
                     return l_;
-                };
+                }
+
                 IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
                 return c_;
             });
@@ -304,11 +307,12 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
             () =>
             {
                 IEnumerable<Observation> a_ = this.Qualifying_Scan_With_Values(context);
-                bool? b_(Observation CTScanWithValues)
-                {
+
+                bool? b_(Observation CTScanWithValues) {
                     bool? d_ = AlaraCommonFunctions_1_10_000.Instance.ctScanQualifies(context, CTScanWithValues);
                     return d_;
-                };
+                }
+
                 IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
                 return c_;
             });
@@ -349,15 +353,16 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
             () =>
             {
                 IEnumerable<Observation> a_ = this.Qualifying_Scan_With_Values(context);
-                bool? b_(Observation CTScanWithValues)
-                {
+
+                bool? b_(Observation CTScanWithValues) {
                     DataType d_ = CTScanWithValues?.Value;
                     object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
                     IReadOnlyList<CqlCode> f_ = (e_ as CqlConcept)?.codes;
                     CqlCode g_ = this.Full_Body(context);
                     bool? h_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
                 return c_;
             });

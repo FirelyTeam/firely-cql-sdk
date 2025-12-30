@@ -220,14 +220,15 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
                 IEnumerable<Encounter> u_ = Status_1_15_000.Instance.isEncounterPerformed(context, t_);
-                bool? v_(Encounter ValidEncounters)
-                {
+
+                bool? v_(Encounter ValidEncounters) {
                     CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
                     Period y_ = ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                     bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
                     return aa_;
-                };
+                }
+
                 IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(u_, v_);
                 return w_;
             });
@@ -284,13 +285,14 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
                 IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
-                bool? g_(object PregnancyDiag)
-                {
+
+                bool? g_(object PregnancyDiag) {
                     CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDiag);
                     CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
                     bool? k_ = context.Operators.Overlaps(i_, j_, default);
                     return k_;
-                };
+                }
+
                 IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
                 return h_;
             });
@@ -322,8 +324,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             {
                 IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/pediatric-bmi-for-age"));
                 IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationPediatricBMI(context, a_);
-                bool? c_(Observation BMIPercentile)
-                {
+
+                bool? c_(Observation BMIPercentile) {
                     CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
                     DataType f_ = BMIPercentile?.Effective;
                     object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
@@ -334,7 +336,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                     bool? l_ = context.Operators.Not((bool?)(k_ is null));
                     bool? m_ = context.Operators.And(i_, l_);
                     return m_;
-                };
+                }
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
             });
@@ -350,8 +353,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             {
                 IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-height"));
                 IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationBodyHeight(context, a_);
-                bool? c_(Observation HeightExam)
-                {
+
+                bool? c_(Observation HeightExam) {
                     CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
                     DataType f_ = HeightExam?.Effective;
                     object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
@@ -362,7 +365,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                     bool? l_ = context.Operators.Not((bool?)(k_ is null));
                     bool? m_ = context.Operators.And(i_, l_);
                     return m_;
-                };
+                }
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
             });
@@ -378,8 +382,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
             {
                 IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-weight"));
                 IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationBodyWeight(context, a_);
-                bool? c_(Observation WeightExam)
-                {
+
+                bool? c_(Observation WeightExam) {
                     CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
                     DataType f_ = WeightExam?.Effective;
                     object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
@@ -390,7 +394,8 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                     bool? l_ = context.Operators.Not((bool?)(k_ is null));
                     bool? m_ = context.Operators.And(i_, l_);
                     return m_;
-                };
+                }
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
             });
@@ -427,39 +432,43 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 CqlValueSet a_ = this.Counseling_for_Nutrition(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                 IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isInterventionPerformed(context, b_);
-                bool? d_(Procedure NutritionCounseling)
-                {
+
+                bool? d_(Procedure NutritionCounseling) {
                     CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
-                    object h_()
-                    {
-                        bool k_()
-                        {
+
+                    object h_() {
+
+                        bool k_() {
                             DataType o_ = NutritionCounseling?.Performed;
                             object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                             bool q_ = p_ is CqlDateTime;
                             return q_;
-                        };
-                        bool l_()
-                        {
+                        }
+
+
+                        bool l_() {
                             DataType r_ = NutritionCounseling?.Performed;
                             object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                             bool t_ = s_ is CqlInterval<CqlDateTime>;
                             return t_;
-                        };
-                        bool m_()
-                        {
+                        }
+
+
+                        bool m_() {
                             DataType u_ = NutritionCounseling?.Performed;
                             object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                             bool w_ = v_ is CqlQuantity;
                             return w_;
-                        };
-                        bool n_()
-                        {
+                        }
+
+
+                        bool n_() {
                             DataType x_ = NutritionCounseling?.Performed;
                             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                             bool z_ = y_ is CqlInterval<CqlQuantity>;
                             return z_;
-                        };
+                        }
+
                         if (k_())
                         {
                             DataType aa_ = NutritionCounseling?.Performed;
@@ -487,12 +496,14 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                         else
                         {
                             return null;
-                        }
-                    };
+                        };
+                    }
+
                     CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_());
                     bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
                     return j_;
-                };
+                }
+
                 IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
                 bool? f_ = context.Operators.Exists<Procedure>(e_);
                 return f_;
@@ -510,39 +521,43 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                 CqlValueSet a_ = this.Counseling_for_Physical_Activity(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                 IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isInterventionPerformed(context, b_);
-                bool? d_(Procedure ActivityCounseling)
-                {
+
+                bool? d_(Procedure ActivityCounseling) {
                     CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
-                    object h_()
-                    {
-                        bool k_()
-                        {
+
+                    object h_() {
+
+                        bool k_() {
                             DataType o_ = ActivityCounseling?.Performed;
                             object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                             bool q_ = p_ is CqlDateTime;
                             return q_;
-                        };
-                        bool l_()
-                        {
+                        }
+
+
+                        bool l_() {
                             DataType r_ = ActivityCounseling?.Performed;
                             object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                             bool t_ = s_ is CqlInterval<CqlDateTime>;
                             return t_;
-                        };
-                        bool m_()
-                        {
+                        }
+
+
+                        bool m_() {
                             DataType u_ = ActivityCounseling?.Performed;
                             object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                             bool w_ = v_ is CqlQuantity;
                             return w_;
-                        };
-                        bool n_()
-                        {
+                        }
+
+
+                        bool n_() {
                             DataType x_ = ActivityCounseling?.Performed;
                             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                             bool z_ = y_ is CqlInterval<CqlQuantity>;
                             return z_;
-                        };
+                        }
+
                         if (k_())
                         {
                             DataType aa_ = ActivityCounseling?.Performed;
@@ -570,12 +585,14 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
                         else
                         {
                             return null;
-                        }
-                    };
+                        };
+                    }
+
                     CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_());
                     bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, i_, "day");
                     return j_;
-                };
+                }
+
                 IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
                 bool? f_ = context.Operators.Exists<Procedure>(e_);
                 return f_;

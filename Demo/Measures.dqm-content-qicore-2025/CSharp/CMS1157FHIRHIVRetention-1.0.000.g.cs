@@ -193,8 +193,8 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-                bool? f_(object HIVDx)
-                {
+
+                bool? f_(object HIVDx) {
                     CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDx);
                     CqlDateTime j_ = context.Operators.Start(i_);
                     CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
@@ -205,7 +205,8 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                     bool? p_ = this.isVerified(context, HIVDx);
                     bool? q_ = context.Operators.And(o_, p_);
                     return q_;
-                };
+                }
+
                 IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
                 bool? h_ = context.Operators.Exists<object>(g_);
                 return h_;
@@ -252,8 +253,8 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 CqlValueSet ad_ = this.Preventive_Care_Services_Other(context);
                 IEnumerable<Encounter> ae_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> af_ = context.Operators.Union<Encounter>(ac_, ae_);
-                bool? ag_(Encounter QualifyingEncounter)
-                {
+
+                bool? ag_(Encounter QualifyingEncounter) {
                     CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
                     CqlDateTime ak_ = context.Operators.Start(aj_);
                     CqlDateTime am_ = context.Operators.Start(aj_);
@@ -264,7 +265,8 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                     CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aq_);
                     bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
                     return as_;
-                };
+                }
+
                 IEnumerable<Encounter> ah_ = context.Operators.Where<Encounter>(af_, ag_);
                 bool? ai_ = context.Operators.Exists<Encounter>(ah_);
                 return ai_;
@@ -339,14 +341,14 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 CqlValueSet ad_ = this.Preventive_Care_Services_Other(context);
                 IEnumerable<Encounter> ae_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> af_ = context.Operators.Union<Encounter>(ac_, ae_);
-                IEnumerable<Encounter> ag_(Encounter ValidEncounter)
-                {
+
+                IEnumerable<Encounter> ag_(Encounter ValidEncounter) {
                     CqlValueSet ai_ = this.HIV(context);
                     IEnumerable<Condition> aj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                     IEnumerable<Condition> al_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                     IEnumerable<object> am_ = context.Operators.Union<object>(aj_ as IEnumerable<object>, al_ as IEnumerable<object>);
-                    bool? an_(object HIVDiagnosis)
-                    {
+
+                    bool? an_(object HIVDiagnosis) {
                         CqlInterval<CqlDateTime> ar_ = this.Measurement_Period(context);
                         Period as_ = ValidEncounter?.Period;
                         CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, as_);
@@ -365,13 +367,14 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                         bool? bh_ = this.isVerified(context, HIVDiagnosis);
                         bool? bi_ = context.Operators.And(bg_, bh_);
                         return bi_;
-                    };
+                    }
+
                     IEnumerable<object> ao_ = context.Operators.Where<object>(am_, an_);
-                    Encounter ap_(object HIVDiagnosis) =>
-                    ValidEncounter;
+                    Encounter ap_(object HIVDiagnosis) => ValidEncounter;
                     IEnumerable<Encounter> aq_ = context.Operators.Select<object, Encounter>(ao_, ap_);
                     return aq_;
-                };
+                }
+
                 IEnumerable<Encounter> ah_ = context.Operators.SelectMany<Encounter, Encounter>(af_, ag_);
                 return ah_;
             });
@@ -386,12 +389,12 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_During_Measurement_Period_With_HIV(context);
-                IEnumerable<Encounter> b_(Encounter EncounterWithHIV)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EncounterWithHIV) {
                     CqlValueSet e_ = this.HIV_Viral_Load_Tests(context);
                     IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
-                    bool? g_(Observation ViralLoadTest)
-                    {
+
+                    bool? g_(Observation ViralLoadTest) {
                         Code<ObservationStatus> k_ = ViralLoadTest?.StatusElement;
                         ObservationStatus? l_ = k_?.Value;
                         string m_ = context.Operators.Convert<string>(l_);
@@ -426,13 +429,14 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                         bool? ap_ = context.Operators.Or(ae_, ao_);
                         bool? aq_ = context.Operators.And(u_, ap_);
                         return aq_;
-                    };
+                    }
+
                     IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
-                    Encounter i_(Observation ViralLoadTest) =>
-                    EncounterWithHIV;
+                    Encounter i_(Observation ViralLoadTest) => EncounterWithHIV;
                     IEnumerable<Encounter> j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
                     return j_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 bool? d_ = context.Operators.Exists<Encounter>(c_);
                 return d_;
@@ -448,11 +452,11 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_During_Measurement_Period_With_HIV(context);
-                IEnumerable<Encounter> b_(Encounter EncounterWithHIV)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EncounterWithHIV) {
                     IEnumerable<Encounter> e_ = this.Encounter_During_Measurement_Period_With_HIV(context);
-                    bool? f_(Encounter AnotherEncounterWithHIV)
-                    {
+
+                    bool? f_(Encounter AnotherEncounterWithHIV) {
                         bool? j_ = context.Operators.Equivalent(EncounterWithHIV, AnotherEncounterWithHIV);
                         bool? k_ = context.Operators.Not(j_);
                         Period l_ = AnotherEncounterWithHIV?.Period;
@@ -466,13 +470,14 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                         bool? t_ = context.Operators.SameOrAfter(n_, s_, "day");
                         bool? u_ = context.Operators.And(k_, t_);
                         return u_;
-                    };
+                    }
+
                     IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
-                    Encounter h_(Encounter AnotherEncounterWithHIV) =>
-                    EncounterWithHIV;
+                    Encounter h_(Encounter AnotherEncounterWithHIV) => EncounterWithHIV;
                     IEnumerable<Encounter> i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
                     return i_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 bool? d_ = context.Operators.Exists<Encounter>(c_);
                 return d_;

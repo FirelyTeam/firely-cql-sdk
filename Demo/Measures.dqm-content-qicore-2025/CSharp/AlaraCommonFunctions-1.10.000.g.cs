@@ -295,8 +295,8 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
     public decimal? globalNoiseValue(CqlContext context, Observation Result)
     {
         List<Observation.ComponentComponent> a_ = Result?.Component;
-        bool? b_(Observation.ComponentComponent C)
-        {
+
+        bool? b_(Observation.ComponentComponent C) {
             Code<ObservationStatus> h_ = Result?.StatusElement;
             ObservationStatus? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
@@ -318,15 +318,17 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             bool? v_ = context.Operators.Equal(u_, "[hnsf'U]");
             bool? w_ = context.Operators.And(r_, v_);
             return w_;
-        };
+        }
+
         IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
-        decimal? d_(Observation.ComponentComponent C)
-        {
+
+        decimal? d_(Observation.ComponentComponent C) {
             DataType x_ = C?.Value;
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
             decimal? z_ = (y_ as CqlQuantity)?.value;
             return z_;
-        };
+        }
+
         IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
         IEnumerable<decimal?> f_ = context.Operators.Distinct<decimal?>(e_);
         decimal? g_ = context.Operators.SingletonFrom<decimal?>(f_);
@@ -338,8 +340,8 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
     public decimal? sizeAdjustedValue(CqlContext context, Observation Result)
     {
         List<Observation.ComponentComponent> a_ = Result?.Component;
-        bool? b_(Observation.ComponentComponent C)
-        {
+
+        bool? b_(Observation.ComponentComponent C) {
             Code<ObservationStatus> h_ = Result?.StatusElement;
             ObservationStatus? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
@@ -361,15 +363,17 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             bool? v_ = context.Operators.Equal(u_, "mGy.cm");
             bool? w_ = context.Operators.And(r_, v_);
             return w_;
-        };
+        }
+
         IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
-        decimal? d_(Observation.ComponentComponent C)
-        {
+
+        decimal? d_(Observation.ComponentComponent C) {
             DataType x_ = C?.Value;
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
             decimal? z_ = (y_ as CqlQuantity)?.value;
             return z_;
-        };
+        }
+
         IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
         IEnumerable<decimal?> f_ = context.Operators.Distinct<decimal?>(e_);
         decimal? g_ = context.Operators.SingletonFrom<decimal?>(f_);
@@ -481,8 +485,8 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
     public decimal? Global_Noise_Value(CqlContext context, Observation Result)
     {
         List<Observation.ComponentComponent> a_ = Result?.Component;
-        bool? b_(Observation.ComponentComponent C)
-        {
+
+        bool? b_(Observation.ComponentComponent C) {
             Code<ObservationStatus> h_ = Result?.StatusElement;
             ObservationStatus? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
@@ -504,15 +508,17 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             bool? v_ = context.Operators.Equal(u_, "[hnsf'U]");
             bool? w_ = context.Operators.And(r_, v_);
             return w_;
-        };
+        }
+
         IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
-        decimal? d_(Observation.ComponentComponent C)
-        {
+
+        decimal? d_(Observation.ComponentComponent C) {
             DataType x_ = C?.Value;
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
             decimal? z_ = (y_ as CqlQuantity)?.value;
             return z_;
-        };
+        }
+
         IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
         IEnumerable<decimal?> f_ = context.Operators.Distinct<decimal?>(e_);
         decimal? g_ = context.Operators.SingletonFrom<decimal?>(f_);
@@ -524,8 +530,8 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
     public decimal? Size_Adjusted_Value(CqlContext context, Observation Result)
     {
         List<Observation.ComponentComponent> a_ = Result?.Component;
-        bool? b_(Observation.ComponentComponent C)
-        {
+
+        bool? b_(Observation.ComponentComponent C) {
             Code<ObservationStatus> h_ = Result?.StatusElement;
             ObservationStatus? i_ = h_?.Value;
             string j_ = context.Operators.Convert<string>(i_);
@@ -547,15 +553,17 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             bool? v_ = context.Operators.Equal(u_, "mGy.cm");
             bool? w_ = context.Operators.And(r_, v_);
             return w_;
-        };
+        }
+
         IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
-        decimal? d_(Observation.ComponentComponent C)
-        {
+
+        decimal? d_(Observation.ComponentComponent C) {
             DataType x_ = C?.Value;
             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
             decimal? z_ = (y_ as CqlQuantity)?.value;
             return z_;
-        };
+        }
+
         IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
         IEnumerable<decimal?> f_ = context.Operators.Distinct<decimal?>(e_);
         decimal? g_ = context.Operators.SingletonFrom<decimal?>(f_);

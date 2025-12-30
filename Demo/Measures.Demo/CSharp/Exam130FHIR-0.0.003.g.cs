@@ -223,7 +223,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
                 object d_ = context.ResolveParameter("Exam130FHIR-0.0.003", "Measurement Period", c_);
                 return (CqlInterval<CqlDateTime>)d_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -241,7 +242,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
@@ -254,7 +256,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
@@ -267,7 +270,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             {
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
@@ -280,7 +284,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<CqlCode> _SDE_Sex_Cached = new();
@@ -293,7 +298,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             {
                 CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Telehealth_Services_Cached = new();
@@ -320,10 +326,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
                     bool? o_ = context.Operators.And(j_, n_);
                     return o_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
                 return g_;
-            });
+            }
+            );
 
 
     private Cached<int?> _Age_at_start_of_Measurement_Period_Cached = new();
@@ -343,7 +351,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDate g_ = context.Operators.DateFrom(f_);
                 int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
                 return h_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Initial_Population_Cached = new();
@@ -370,7 +379,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 bool? n_ = context.Operators.Exists<Encounter>(m_);
                 bool? o_ = context.Operators.And(j_, n_);
                 return o_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_Cached = new();
@@ -383,7 +393,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             {
                 bool? a_ = this.Initial_Population(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Condition>> _Malignant_Neoplasm_Cached = new();
@@ -404,10 +415,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     CqlDateTime h_ = context.Operators.End(g_);
                     bool? i_ = context.Operators.SameOrBefore(f_, h_, default);
                     return i_;
-                };
+                }
+                ;
                 IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Procedure>> _Total_Colectomy_Performed_Cached = new();
@@ -433,10 +446,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? m_ = context.Operators.SameOrBefore(j_, l_, default);
                     bool? n_ = context.Operators.And(g_, m_);
                     return n_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Condition>> _Total_Colectomy_Condition_Cached = new();
@@ -457,10 +472,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     CqlDateTime h_ = context.Operators.End(g_);
                     bool? i_ = context.Operators.SameOrBefore(f_, h_, default);
                     return i_;
-                };
+                }
+                ;
                 IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_Exclusions_Cached = new();
@@ -498,7 +515,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 bool? y_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
                 bool? z_ = context.Operators.Or(x_, y_);
                 return z_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>> _Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Cached = new();
@@ -523,7 +541,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, false, false);
                     bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, default);
                     return q_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FecalOccult)
                 {
@@ -536,13 +555,15 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                         FhirString ap_ = @this?.DisplayElement;
                         bool? aq_ = context.Operators.Not((bool?)(ap_ is null));
                         return aq_;
-                    };
+                    }
+                    ;
                     IEnumerable<Coding> w_ = context.Operators.Where<Coding>(u_, v_);
                     FhirString x_(Coding @this)
                     {
                         FhirString ar_ = @this?.DisplayElement;
                         return ar_;
-                    };
+                    }
+                    ;
                     IEnumerable<FhirString> y_ = context.Operators.Select<Coding, FhirString>(w_, x_);
                     List<CodeableConcept> z_ = FecalOccult?.Category;
                     bool? aa_(CodeableConcept @this)
@@ -550,13 +571,15 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                         List<Coding> as_ = @this?.Coding;
                         bool? at_ = context.Operators.Not((bool?)(as_ is null));
                         return at_;
-                    };
+                    }
+                    ;
                     IEnumerable<CodeableConcept> ab_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)z_, aa_);
                     List<Coding> ac_(CodeableConcept @this)
                     {
                         List<Coding> au_ = @this?.Coding;
                         return au_;
-                    };
+                    }
+                    ;
                     IEnumerable<List<Coding>> ad_ = context.Operators.Select<CodeableConcept, List<Coding>>(ab_, ac_);
                     IEnumerable<Coding> ae_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ad_);
                     bool? af_(Coding @this)
@@ -564,35 +587,41 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                         Code av_ = @this?.CodeElement;
                         bool? aw_ = context.Operators.Not((bool?)(av_ is null));
                         return aw_;
-                    };
+                    }
+                    ;
                     IEnumerable<Coding> ag_ = context.Operators.Where<Coding>(ae_, af_);
                     Code ah_(Coding @this)
                     {
                         Code ax_ = @this?.CodeElement;
                         return ax_;
-                    };
+                    }
+                    ;
                     IEnumerable<Code> ai_ = context.Operators.Select<Coding, Code>(ag_, ah_);
                     bool? aj_(Code @this)
                     {
                         string ay_ = @this?.Value;
                         bool? az_ = context.Operators.Not((bool?)(ay_ is null));
                         return az_;
-                    };
+                    }
+                    ;
                     IEnumerable<Code> ak_ = context.Operators.Where<Code>(ai_, aj_);
                     string al_(Code @this)
                     {
                         string ba_ = @this?.Value;
                         return ba_;
-                    };
+                    }
+                    ;
                     IEnumerable<string> am_ = context.Operators.Select<Code, string>(ak_, al_);
                     Code<ObservationStatus> an_ = FecalOccult?.StatusElement;
                     (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ao_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, s_, y_, am_, an_);
                     return ao_;
-                };
+                }
+                ;
                 IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> f_ = context.Operators.Select<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(d_, e_);
                 IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> g_ = context.Operators.Distinct<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(f_);
                 return g_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed_Cached = new();
@@ -624,33 +653,38 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                             Code ag_ = @this?.CodeElement;
                             bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
                             return ah_;
-                        };
+                        }
+                        ;
                         IEnumerable<Coding> x_ = context.Operators.Where<Coding>((IEnumerable<Coding>)v_, w_);
                         Code y_(Coding @this)
                         {
                             Code ai_ = @this?.CodeElement;
                             return ai_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> z_ = context.Operators.Select<Coding, Code>(x_, y_);
                         bool? aa_(Code @this)
                         {
                             string aj_ = @this?.Value;
                             bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
                             return ak_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> ab_ = context.Operators.Where<Code>(z_, aa_);
                         string ac_(Code @this)
                         {
                             string al_ = @this?.Value;
                             return al_;
-                        };
+                        }
+                        ;
                         IEnumerable<string> ad_ = context.Operators.Select<Code, string>(ab_, ac_);
                         string[] ae_ = [
                             "laboratory",
                         ];
                         bool? af_ = context.Operators.Equivalent<string>(ad_, (IEnumerable<string>)ae_);
                         return af_;
-                    };
+                    }
+                    ;
                     IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
                     bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
                     bool? m_ = context.Operators.And(h_, l_);
@@ -663,10 +697,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, default);
                     bool? u_ = context.Operators.And(p_, t_);
                     return u_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Cached = new();
@@ -698,33 +734,38 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                             Code ag_ = @this?.CodeElement;
                             bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
                             return ah_;
-                        };
+                        }
+                        ;
                         IEnumerable<Coding> x_ = context.Operators.Where<Coding>((IEnumerable<Coding>)v_, w_);
                         Code y_(Coding @this)
                         {
                             Code ai_ = @this?.CodeElement;
                             return ai_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> z_ = context.Operators.Select<Coding, Code>(x_, y_);
                         bool? aa_(Code @this)
                         {
                             string aj_ = @this?.Value;
                             bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
                             return ak_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> ab_ = context.Operators.Where<Code>(z_, aa_);
                         string ac_(Code @this)
                         {
                             string al_ = @this?.Value;
                             return al_;
-                        };
+                        }
+                        ;
                         IEnumerable<string> ad_ = context.Operators.Select<Code, string>(ab_, ac_);
                         string[] ae_ = [
                             "laboratory",
                         ];
                         bool? af_ = context.Operators.Equivalent<string>(ad_, (IEnumerable<string>)ae_);
                         return af_;
-                    };
+                    }
+                    ;
                     IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
                     bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
                     bool? m_ = context.Operators.And(h_, l_);
@@ -737,10 +778,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
                     bool? u_ = context.Operators.And(p_, t_);
                     return u_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Cached = new();
@@ -764,26 +807,30 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                             Code ac_ = @this?.CodeElement;
                             bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
                             return ad_;
-                        };
+                        }
+                        ;
                         IEnumerable<Coding> s_ = context.Operators.Where<Coding>((IEnumerable<Coding>)q_, r_);
                         Code t_(Coding @this)
                         {
                             Code ae_ = @this?.CodeElement;
                             return ae_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> u_ = context.Operators.Select<Coding, Code>(s_, t_);
                         bool? v_(Code @this)
                         {
                             string af_ = @this?.Value;
                             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
                             return ag_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> w_ = context.Operators.Where<Code>(u_, v_);
                         string x_(Code @this)
                         {
                             string ah_ = @this?.Value;
                             return ah_;
-                        };
+                        }
+                        ;
                         IEnumerable<string> y_ = context.Operators.Select<Code, string>(w_, x_);
                         string[] z_ = [
                             "laboratory",
@@ -791,7 +838,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                         bool? aa_ = context.Operators.Equivalent<string>(y_, (IEnumerable<string>)z_);
                         bool? ab_ = context.Operators.Not(aa_);
                         return ab_;
-                    };
+                    }
+                    ;
                     IEnumerable<CodeableConcept> g_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)e_, f_);
                     bool? h_ = context.Operators.Exists<CodeableConcept>(g_);
                     DataType i_ = FecalOccult?.Value;
@@ -803,10 +851,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
                     bool? p_ = context.Operators.And(k_, o_);
                     return p_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Cached = new();
@@ -839,10 +889,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, "day");
                     bool? q_ = context.Operators.And(l_, p_);
                     return q_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>> _Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Cached = new();
@@ -870,7 +922,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? t_ = context.Operators.Not((bool?)(s_ is null));
                     bool? u_ = context.Operators.And(q_, t_);
                     return u_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FitDNA)
                 {
@@ -883,13 +936,15 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                         FhirString at_ = @this?.DisplayElement;
                         bool? au_ = context.Operators.Not((bool?)(at_ is null));
                         return au_;
-                    };
+                    }
+                    ;
                     IEnumerable<Coding> aa_ = context.Operators.Where<Coding>(y_, z_);
                     FhirString ab_(Coding @this)
                     {
                         FhirString av_ = @this?.DisplayElement;
                         return av_;
-                    };
+                    }
+                    ;
                     IEnumerable<FhirString> ac_ = context.Operators.Select<Coding, FhirString>(aa_, ab_);
                     List<CodeableConcept> ad_ = FitDNA?.Category;
                     bool? ae_(CodeableConcept @this)
@@ -897,13 +952,15 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                         List<Coding> aw_ = @this?.Coding;
                         bool? ax_ = context.Operators.Not((bool?)(aw_ is null));
                         return ax_;
-                    };
+                    }
+                    ;
                     IEnumerable<CodeableConcept> af_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)ad_, ae_);
                     List<Coding> ag_(CodeableConcept @this)
                     {
                         List<Coding> ay_ = @this?.Coding;
                         return ay_;
-                    };
+                    }
+                    ;
                     IEnumerable<List<Coding>> ah_ = context.Operators.Select<CodeableConcept, List<Coding>>(af_, ag_);
                     IEnumerable<Coding> ai_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ah_);
                     bool? aj_(Coding @this)
@@ -911,35 +968,41 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                         Code az_ = @this?.CodeElement;
                         bool? ba_ = context.Operators.Not((bool?)(az_ is null));
                         return ba_;
-                    };
+                    }
+                    ;
                     IEnumerable<Coding> ak_ = context.Operators.Where<Coding>(ai_, aj_);
                     Code al_(Coding @this)
                     {
                         Code bb_ = @this?.CodeElement;
                         return bb_;
-                    };
+                    }
+                    ;
                     IEnumerable<Code> am_ = context.Operators.Select<Coding, Code>(ak_, al_);
                     bool? an_(Code @this)
                     {
                         string bc_ = @this?.Value;
                         bool? bd_ = context.Operators.Not((bool?)(bc_ is null));
                         return bd_;
-                    };
+                    }
+                    ;
                     IEnumerable<Code> ao_ = context.Operators.Where<Code>(am_, an_);
                     string ap_(Code @this)
                     {
                         string be_ = @this?.Value;
                         return be_;
-                    };
+                    }
+                    ;
                     IEnumerable<string> aq_ = context.Operators.Select<Code, string>(ao_, ap_);
                     Code<ObservationStatus> ar_ = FitDNA?.StatusElement;
                     (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? as_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, w_, ac_, aq_, ar_);
                     return as_;
-                };
+                }
+                ;
                 IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> f_ = context.Operators.Select<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(d_, e_);
                 IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> g_ = context.Operators.Distinct<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(f_);
                 return g_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed_Cached = new();
@@ -971,33 +1034,38 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                             Code aq_ = @this?.CodeElement;
                             bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
                             return ar_;
-                        };
+                        }
+                        ;
                         IEnumerable<Coding> ah_ = context.Operators.Where<Coding>((IEnumerable<Coding>)af_, ag_);
                         Code ai_(Coding @this)
                         {
                             Code as_ = @this?.CodeElement;
                             return as_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> aj_ = context.Operators.Select<Coding, Code>(ah_, ai_);
                         bool? ak_(Code @this)
                         {
                             string at_ = @this?.Value;
                             bool? au_ = context.Operators.Not((bool?)(at_ is null));
                             return au_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> al_ = context.Operators.Where<Code>(aj_, ak_);
                         string am_(Code @this)
                         {
                             string av_ = @this?.Value;
                             return av_;
-                        };
+                        }
+                        ;
                         IEnumerable<string> an_ = context.Operators.Select<Code, string>(al_, am_);
                         string[] ao_ = [
                             "laboratory",
                         ];
                         bool? ap_ = context.Operators.Equivalent<string>(an_, (IEnumerable<string>)ao_);
                         return ap_;
-                    };
+                    }
+                    ;
                     IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
                     bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
                     bool? m_ = context.Operators.And(h_, l_);
@@ -1018,10 +1086,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? ad_ = context.Operators.And(z_, ac_);
                     bool? ae_ = context.Operators.And(p_, ad_);
                     return ae_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Cached = new();
@@ -1053,33 +1123,38 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                             Code aq_ = @this?.CodeElement;
                             bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
                             return ar_;
-                        };
+                        }
+                        ;
                         IEnumerable<Coding> ah_ = context.Operators.Where<Coding>((IEnumerable<Coding>)af_, ag_);
                         Code ai_(Coding @this)
                         {
                             Code as_ = @this?.CodeElement;
                             return as_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> aj_ = context.Operators.Select<Coding, Code>(ah_, ai_);
                         bool? ak_(Code @this)
                         {
                             string at_ = @this?.Value;
                             bool? au_ = context.Operators.Not((bool?)(at_ is null));
                             return au_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> al_ = context.Operators.Where<Code>(aj_, ak_);
                         string am_(Code @this)
                         {
                             string av_ = @this?.Value;
                             return av_;
-                        };
+                        }
+                        ;
                         IEnumerable<string> an_ = context.Operators.Select<Code, string>(al_, am_);
                         string[] ao_ = [
                             "laboratory",
                         ];
                         bool? ap_ = context.Operators.Equivalent<string>(an_, (IEnumerable<string>)ao_);
                         return ap_;
-                    };
+                    }
+                    ;
                     IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
                     bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
                     bool? m_ = context.Operators.And(h_, l_);
@@ -1100,10 +1175,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? ad_ = context.Operators.And(z_, ac_);
                     bool? ae_ = context.Operators.And(p_, ad_);
                     return ae_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Cached = new();
@@ -1127,26 +1204,30 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                             Code am_ = @this?.CodeElement;
                             bool? an_ = context.Operators.Not((bool?)(am_ is null));
                             return an_;
-                        };
+                        }
+                        ;
                         IEnumerable<Coding> ac_ = context.Operators.Where<Coding>((IEnumerable<Coding>)aa_, ab_);
                         Code ad_(Coding @this)
                         {
                             Code ao_ = @this?.CodeElement;
                             return ao_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> ae_ = context.Operators.Select<Coding, Code>(ac_, ad_);
                         bool? af_(Code @this)
                         {
                             string ap_ = @this?.Value;
                             bool? aq_ = context.Operators.Not((bool?)(ap_ is null));
                             return aq_;
-                        };
+                        }
+                        ;
                         IEnumerable<Code> ag_ = context.Operators.Where<Code>(ae_, af_);
                         string ah_(Code @this)
                         {
                             string ar_ = @this?.Value;
                             return ar_;
-                        };
+                        }
+                        ;
                         IEnumerable<string> ai_ = context.Operators.Select<Code, string>(ag_, ah_);
                         string[] aj_ = [
                             "laboratory",
@@ -1154,7 +1235,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                         bool? ak_ = context.Operators.Equivalent<string>(ai_, (IEnumerable<string>)aj_);
                         bool? al_ = context.Operators.Not(ak_);
                         return al_;
-                    };
+                    }
+                    ;
                     IEnumerable<CodeableConcept> g_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)e_, f_);
                     bool? h_ = context.Operators.Exists<CodeableConcept>(g_);
                     DataType i_ = FitDNA?.Value;
@@ -1174,10 +1256,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? y_ = context.Operators.And(u_, x_);
                     bool? z_ = context.Operators.And(k_, y_);
                     return z_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Cached = new();
@@ -1218,10 +1302,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? z_ = context.Operators.And(v_, y_);
                     bool? aa_ = context.Operators.And(l_, z_);
                     return aa_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<CqlDateTime>> _CT_Colonography_Display_Date_Cached = new();
@@ -1250,18 +1336,21 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? u_ = context.Operators.Not((bool?)(t_ is null));
                     bool? v_ = context.Operators.And(r_, u_);
                     return v_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 CqlDateTime e_(Observation Colonography)
                 {
                     DataType w_ = Colonography?.Effective;
                     CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, w_);
                     return x_;
-                };
+                }
+                ;
                 IEnumerable<CqlDateTime> f_ = context.Operators.Select<Observation, CqlDateTime>(d_, e_);
                 IEnumerable<CqlDateTime> g_ = context.Operators.Distinct<CqlDateTime>(f_);
                 return g_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _CT_Colonography_Performed_Cached = new();
@@ -1300,10 +1389,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? w_ = context.Operators.And(s_, v_);
                     bool? x_ = context.Operators.And(h_, w_);
                     return x_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _CT_Colonography_Performed_without_appropriate_status_Cached = new();
@@ -1343,10 +1434,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? x_ = context.Operators.And(t_, w_);
                     bool? y_ = context.Operators.And(i_, x_);
                     return y_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<CqlDateTime>> _Flexible_Sigmoidoscopy_Display_Date_Cached = new();
@@ -1375,18 +1468,21 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? u_ = context.Operators.Not((bool?)(t_ is null));
                     bool? v_ = context.Operators.And(r_, u_);
                     return v_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 CqlDateTime e_(Procedure FlexibleSigmoidoscopy)
                 {
                     DataType w_ = FlexibleSigmoidoscopy?.Performed;
                     CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, w_);
                     return x_;
-                };
+                }
+                ;
                 IEnumerable<CqlDateTime> f_ = context.Operators.Select<Procedure, CqlDateTime>(d_, e_);
                 IEnumerable<CqlDateTime> g_ = context.Operators.Distinct<CqlDateTime>(f_);
                 return g_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Procedure>> _Flexible_Sigmoidoscopy_Performed_Cached = new();
@@ -1419,10 +1515,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? v_ = context.Operators.And(r_, u_);
                     bool? w_ = context.Operators.And(g_, v_);
                     return w_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Procedure>> _Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Cached = new();
@@ -1456,10 +1554,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? w_ = context.Operators.And(s_, v_);
                     bool? x_ = context.Operators.And(h_, w_);
                     return x_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<CqlDateTime>> _Colonoscopy_Display_Date_Cached = new();
@@ -1488,18 +1588,21 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? u_ = context.Operators.Not((bool?)(t_ is null));
                     bool? v_ = context.Operators.And(r_, u_);
                     return v_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 CqlDateTime e_(Procedure Colonoscopy)
                 {
                     DataType w_ = Colonoscopy?.Performed;
                     CqlDateTime x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, w_);
                     return x_;
-                };
+                }
+                ;
                 IEnumerable<CqlDateTime> f_ = context.Operators.Select<Procedure, CqlDateTime>(d_, e_);
                 IEnumerable<CqlDateTime> g_ = context.Operators.Distinct<CqlDateTime>(f_);
                 return g_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Procedure>> _Colonoscopy_Performed_Cached = new();
@@ -1532,10 +1635,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? v_ = context.Operators.And(r_, u_);
                     bool? w_ = context.Operators.And(g_, v_);
                     return w_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Procedure>> _Colonoscopy_Performed_without_appropriate_status_Cached = new();
@@ -1569,10 +1674,12 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                     bool? w_ = context.Operators.And(s_, v_);
                     bool? x_ = context.Operators.And(h_, w_);
                     return x_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Numerator_Cached = new();
@@ -1598,7 +1705,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 bool? m_ = context.Operators.Exists<Observation>(l_);
                 bool? n_ = context.Operators.Or(k_, m_);
                 return n_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Final_Numerator_Population_Cached = new();
@@ -1618,7 +1726,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 bool? g_ = context.Operators.Not(f_);
                 bool? h_ = context.Operators.And(e_, g_);
                 return h_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions
@@ -1626,8 +1735,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV = new(
-      [typeof(CqlDateTime), typeof(IEnumerable<FhirString>), typeof(IEnumerable<string>), typeof(Code<ObservationStatus>)],
-      ["occultDate", "occultResult", "occultCategoryCode", "occultStatus"]);
+       [typeof(CqlDateTime), typeof(IEnumerable<FhirString>), typeof(IEnumerable<string>), typeof(Code<ObservationStatus>)],
+       ["occultDate", "occultResult", "occultCategoryCode", "occultStatus"]);
 
     #endregion CqlTupleMetadata Properties
 

@@ -223,8 +223,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-                bool? f_(object DiabetesDiagnosis)
-                {
+
+                bool? f_(object DiabetesDiagnosis) {
                     CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
                     CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
                     bool? k_ = context.Operators.OverlapsBefore(i_, j_, "day");
@@ -245,7 +245,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     bool? ab_ = context.Operators.Implies(n_, aa_);
                     bool? ac_ = context.Operators.And(k_, ab_);
                     return ac_;
-                };
+                }
+
                 IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
                 bool? h_ = context.Operators.Exists<object>(g_);
                 return h_;
@@ -280,8 +281,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 CqlValueSet r_ = this.Telephone_Visits(context);
                 IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
-                bool? u_(Encounter ValidEncounter)
-                {
+
+                bool? u_(Encounter ValidEncounter) {
                     CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
                     Period y_ = ValidEncounter?.Period;
                     CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
@@ -292,7 +293,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     bool? ae_ = context.Operators.Equal(ad_, "finished");
                     bool? af_ = context.Operators.And(aa_, ae_);
                     return af_;
-                };
+                }
+
                 IEnumerable<Encounter> v_ = context.Operators.Where<Encounter>(t_, u_);
                 bool? w_ = context.Operators.Exists<Encounter>(v_);
                 return w_;
@@ -355,8 +357,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> j_ = context.Operators.Union<object>(g_ as IEnumerable<object>, i_ as IEnumerable<object>);
                 IEnumerable<object> k_ = context.Operators.Union<object>(e_, j_);
-                bool? l_(object CKDOrESRD)
-                {
+
+                bool? l_(object CKDOrESRD) {
                     CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, CKDOrESRD);
                     CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                     bool? q_ = context.Operators.Overlaps(o_, p_, "day");
@@ -377,7 +379,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     bool? ah_ = context.Operators.Implies(t_, ag_);
                     bool? ai_ = context.Operators.And(q_, ah_);
                     return ai_;
-                };
+                }
+
                 IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
                 bool? n_ = context.Operators.Exists<object>(m_);
                 return n_;
@@ -411,8 +414,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             {
                 CqlValueSet a_ = this.Estimated_Glomerular_Filtration_Rate(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
-                bool? c_(Observation eGFRTest)
-                {
+
+                bool? c_(Observation eGFRTest) {
                     CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
                     DataType g_ = eGFRTest?.Effective;
                     object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
@@ -433,7 +436,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
                     bool? t_ = context.Operators.And(n_, s_);
                     return t_;
-                };
+                }
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 bool? e_ = context.Operators.Exists<Observation>(d_);
                 return e_;
@@ -450,8 +454,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             {
                 CqlValueSet a_ = this.Urine_Albumin_Creatinine_Ratio(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
-                bool? c_(Observation uACRTest)
-                {
+
+                bool? c_(Observation uACRTest) {
                     CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
                     DataType g_ = uACRTest?.Effective;
                     object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
@@ -476,7 +480,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     bool? x_ = context.Operators.Or(s_ as bool?, w_);
                     bool? y_ = context.Operators.And(p_, x_);
                     return y_;
-                };
+                }
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 bool? e_ = context.Operators.Exists<Observation>(d_);
                 return e_;
@@ -493,8 +498,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             {
                 CqlValueSet a_ = this.Urine_Albumin(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
-                bool? c_(Observation AlbuminTest)
-                {
+
+                bool? c_(Observation AlbuminTest) {
                     CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
                     DataType f_ = AlbuminTest?.Effective;
                     object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
@@ -515,7 +520,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
                     bool? s_ = context.Operators.And(m_, r_);
                     return s_;
-                };
+                }
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
             });
@@ -531,8 +537,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             {
                 CqlValueSet a_ = this.Urine_Creatinine(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
-                bool? c_(Observation CreatinineTest)
-                {
+
+                bool? c_(Observation CreatinineTest) {
                     CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
                     DataType f_ = CreatinineTest?.Effective;
                     object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
@@ -553,7 +559,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
                     bool? s_ = context.Operators.And(m_, r_);
                     return s_;
-                };
+                }
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
             });
@@ -570,14 +577,15 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 IEnumerable<Observation> a_ = this.Urine_Albumin_Test_Performed_During_The_Measurement_Period(context);
                 IEnumerable<Observation> b_ = this.Urine_Creatinine_Test_Performed_During_The_Measurement_Period(context);
                 IEnumerable<ValueTuple<Observation, Observation>> c_ = context.Operators.CrossJoin<Observation, Observation>(a_, b_);
-                (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? d_(ValueTuple<Observation, Observation> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? d_(ValueTuple<Observation, Observation> _valueTuple) {
                     (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? l_ = (CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ, _valueTuple.Item1, _valueTuple.Item2);
                     return l_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?> e_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(c_, d_);
-                bool? f_((CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij)
-                {
+
+                bool? f_((CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij) {
                     DataType m_ = tuple_celfnsuejxkbgcpwlebsiij?.UrineCreatinineTest?.Effective;
                     object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
                     CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
@@ -594,13 +602,15 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                     CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.toInterval(context, aa_);
                     bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, ab_, default);
                     return ac_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?> g_ = context.Operators.Where<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(e_, f_);
-                (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? h_((CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij)
-                {
+
+                (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? h_((CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij) {
                     (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? ad_ = (CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ, tuple_celfnsuejxkbgcpwlebsiij?.UrineAlbuminTest, tuple_celfnsuejxkbgcpwlebsiij?.UrineCreatinineTest);
                     return ad_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?> i_ = context.Operators.Select<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?, (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(g_, h_);
                 IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?> j_ = context.Operators.Distinct<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(i_);
                 bool? k_ = context.Operators.Exists<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(j_);
@@ -643,8 +653,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ = new(
-      [typeof(Observation), typeof(Observation)],
-      ["UrineAlbuminTest", "UrineCreatinineTest"]);
+       [typeof(Observation), typeof(Observation)],
+       ["UrineAlbuminTest", "UrineCreatinineTest"]);
 
     #endregion CqlTupleMetadata Properties
 

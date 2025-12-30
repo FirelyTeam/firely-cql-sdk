@@ -236,7 +236,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             {
                 object a_ = context.ResolveParameter("FHIR347-0.1.021", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -254,7 +255,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<object>> _ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period_Cached = new();
@@ -287,7 +289,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     CqlDateTime ah_ = context.Operators.End(ag_);
                     bool? ai_ = context.Operators.Before(af_, ah_, default);
                     return ai_;
-                };
+                }
+                ;
                 IEnumerable<Condition> p_ = context.Operators.Where<Condition>(n_, o_);
                 CqlValueSet q_ = this.PCI(context);
                 IEnumerable<Procedure> r_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
@@ -313,11 +316,13 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     bool? ar_ = context.Operators.Equal(aq_, "completed");
                     bool? as_ = context.Operators.And(ao_, ar_);
                     return as_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> ac_ = context.Operators.Where<Procedure>(aa_, ab_);
                 IEnumerable<object> ad_ = context.Operators.Union<object>(p_ as IEnumerable<object>, ac_ as IEnumerable<object>);
                 return ad_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Qualifying_Encounter_during_Measurement_Period_Cached = new();
@@ -362,10 +367,12 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     bool? af_ = context.Operators.Equal(ae_, "finished");
                     bool? ag_ = context.Operators.And(ac_, af_);
                     return ag_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
                 return y_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Initial_Population_1_Cached = new();
@@ -382,7 +389,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 bool? d_ = context.Operators.Exists<Encounter>(c_);
                 bool? e_ = context.Operators.And(b_, d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_1_Cached = new();
@@ -395,7 +403,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             {
                 bool? a_ = this.Initial_Population_1(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Patients_Age_20_or_Older_at_Start_of_Measurement_Period_Cached = new();
@@ -415,7 +424,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
                 bool? h_ = context.Operators.GreaterOrEqual(g_, 20);
                 return h_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _LDL_Result_Greater_Than_or_Equal_To_190_Cached = new();
@@ -452,10 +462,12 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
                     bool? t_ = context.Operators.And(o_, s_);
                     return t_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Condition>> _Hypercholesterolemia_Diagnosis_Cached = new();
@@ -476,10 +488,12 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     CqlDateTime h_ = context.Operators.End(g_);
                     bool? i_ = context.Operators.Before(f_, h_, default);
                     return i_;
-                };
+                }
+                ;
                 IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD_Cached = new();
@@ -501,7 +515,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 bool? i_ = context.Operators.Not(h_);
                 bool? j_ = context.Operators.And(f_, i_);
                 return j_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Initial_Population_2_Cached = new();
@@ -517,7 +532,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 bool? c_ = context.Operators.Exists<Encounter>(b_);
                 bool? d_ = context.Operators.And(a_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_2_Cached = new();
@@ -530,7 +546,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             {
                 bool? a_ = this.Initial_Population_2(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Has_Diabetes_Diagnosis_Cached = new();
@@ -549,11 +566,13 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
                     bool? h_ = context.Operators.Overlaps(f_, g_, default);
                     return h_;
-                };
+                }
+                ;
                 IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
                 bool? e_ = context.Operators.Exists<Condition>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia_Cached = new();
@@ -588,7 +607,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 bool? v_ = context.Operators.Not(u_);
                 bool? w_ = context.Operators.And(s_, v_);
                 return w_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Initial_Population_3_Cached = new();
@@ -604,7 +624,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 bool? c_ = context.Operators.Exists<Encounter>(b_);
                 bool? d_ = context.Operators.And(a_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_3_Cached = new();
@@ -617,7 +638,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             {
                 bool? a_ = this.Initial_Population_3(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
@@ -630,7 +652,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
@@ -643,7 +666,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             {
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
@@ -656,7 +680,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<CqlCode> _SDE_Sex_Cached = new();
@@ -669,7 +694,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             {
                 CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Has_Allergy_to_Statin_Cached = new();
@@ -691,11 +717,13 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     CqlDateTime j_ = context.Operators.End(i_);
                     bool? k_ = context.Operators.Before(h_, j_, default);
                     return k_;
-                };
+                }
+                ;
                 IEnumerable<AllergyIntolerance> d_ = context.Operators.Where<AllergyIntolerance>(b_, c_);
                 bool? e_ = context.Operators.Exists<AllergyIntolerance>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care_Cached = new();
@@ -732,7 +760,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     bool? ak_ = context.Operators.Equal(aj_, "order");
                     bool? al_ = context.Operators.And(ah_, ak_);
                     return al_;
-                };
+                }
+                ;
                 IEnumerable<ServiceRequest> g_ = context.Operators.Where<ServiceRequest>(e_, f_);
                 bool? h_ = context.Operators.Exists<ServiceRequest>(g_);
                 IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
@@ -751,7 +780,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     bool? au_ = context.Operators.Equal(at_, "completed");
                     bool? av_ = context.Operators.And(ar_, au_);
                     return av_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> o_ = context.Operators.Where<Procedure>(m_, n_);
                 bool? p_ = context.Operators.Exists<Procedure>(o_);
                 bool? q_ = context.Operators.Or(h_, p_);
@@ -771,12 +801,14 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     bool? be_ = context.Operators.Equal(bd_, "finished");
                     bool? bf_ = context.Operators.And(bb_, be_);
                     return bf_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> v_ = context.Operators.Where<Encounter>(t_, u_);
                 bool? w_ = context.Operators.Exists<Encounter>(v_);
                 bool? x_ = context.Operators.Or(q_, w_);
                 return x_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Has_Hepatitis_or_Liver_Disease_Diagnosis_Cached = new();
@@ -801,11 +833,13 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
                     bool? n_ = context.Operators.Overlaps(l_, m_, default);
                     return n_;
-                };
+                }
+                ;
                 IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
                 bool? k_ = context.Operators.Exists<Condition>(j_);
                 return k_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Has_Statin_Associated_Muscle_Symptoms_Cached = new();
@@ -826,11 +860,13 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     CqlDateTime i_ = context.Operators.End(h_);
                     bool? j_ = context.Operators.Before(g_, i_, default);
                     return j_;
-                };
+                }
+                ;
                 IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
                 bool? e_ = context.Operators.Exists<Condition>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Has_ESRD_Diagnosis_Cached = new();
@@ -849,11 +885,13 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
                     bool? h_ = context.Operators.Overlaps(f_, g_, default);
                     return h_;
-                };
+                }
+                ;
                 IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
                 bool? e_ = context.Operators.Exists<Condition>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Has_Adverse_Reaction_to_Statin_Cached = new();
@@ -873,11 +911,13 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
                     bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, default);
                     return i_;
-                };
+                }
+                ;
                 IEnumerable<AdverseEvent> d_ = context.Operators.Where<AdverseEvent>(b_, c_);
                 bool? e_ = context.Operators.Exists<AdverseEvent>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_Exceptions_Cached = new();
@@ -900,7 +940,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 bool? j_ = this.Has_Adverse_Reaction_to_Statin(context);
                 bool? k_ = context.Operators.Or(i_, j_);
                 return k_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_Exclusions_Cached = new();
@@ -925,11 +966,13 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
                     bool? n_ = context.Operators.Overlaps(l_, m_, default);
                     return n_;
-                };
+                }
+                ;
                 IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
                 bool? k_ = context.Operators.Exists<Condition>(j_);
                 return k_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<MedicationRequest>> _Statin_Therapy_Ordered_during_Measurement_Period_Cached = new();
@@ -961,13 +1004,15 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                         bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
                         bool? am_ = context.Operators.And(ah_, al_);
                         return am_;
-                    };
+                    }
+                    ;
                     IEnumerable<Medication> y_ = context.Operators.Where<Medication>(w_, x_);
                     MedicationRequest z_(Medication M) =>
                     MR;
                     IEnumerable<MedicationRequest> aa_ = context.Operators.Select<Medication, MedicationRequest>(y_, z_);
                     return aa_;
-                };
+                }
+                ;
                 IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
                 IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
                 CqlValueSet g_ = this.Moderate_Intensity_Statin_Therapy(context);
@@ -990,13 +1035,15 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                         bool? bc_ = context.Operators.ConceptInValueSet(ba_, bb_);
                         bool? bd_ = context.Operators.And(ay_, bc_);
                         return bd_;
-                    };
+                    }
+                    ;
                     IEnumerable<Medication> ap_ = context.Operators.Where<Medication>(an_, ao_);
                     MedicationRequest aq_(Medication M) =>
                     MR;
                     IEnumerable<MedicationRequest> ar_ = context.Operators.Select<Medication, MedicationRequest>(ap_, aq_);
                     return ar_;
-                };
+                }
+                ;
                 IEnumerable<MedicationRequest> k_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, j_);
                 IEnumerable<MedicationRequest> l_ = context.Operators.Union<MedicationRequest>(h_, k_);
                 IEnumerable<MedicationRequest> m_ = context.Operators.Union<MedicationRequest>(f_, l_);
@@ -1020,13 +1067,15 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                         bool? bt_ = context.Operators.ConceptInValueSet(br_, bs_);
                         bool? bu_ = context.Operators.And(bp_, bt_);
                         return bu_;
-                    };
+                    }
+                    ;
                     IEnumerable<Medication> bg_ = context.Operators.Where<Medication>(be_, bf_);
                     MedicationRequest bh_(Medication M) =>
                     MR;
                     IEnumerable<MedicationRequest> bi_ = context.Operators.Select<Medication, MedicationRequest>(bg_, bh_);
                     return bi_;
-                };
+                }
+                ;
                 IEnumerable<MedicationRequest> r_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, q_);
                 IEnumerable<MedicationRequest> s_ = context.Operators.Union<MedicationRequest>(o_, r_);
                 IEnumerable<MedicationRequest> t_ = context.Operators.Union<MedicationRequest>(m_, s_);
@@ -1049,10 +1098,12 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     bool? cg_ = context.Operators.Equal(cf_, "order");
                     bool? ch_ = context.Operators.And(cd_, cg_);
                     return ch_;
-                };
+                }
+                ;
                 IEnumerable<MedicationRequest> v_ = context.Operators.Where<MedicationRequest>(t_, u_);
                 return v_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<MedicationRequest>> _Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period_Cached = new();
@@ -1084,13 +1135,15 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                         bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
                         bool? am_ = context.Operators.And(ah_, al_);
                         return am_;
-                    };
+                    }
+                    ;
                     IEnumerable<Medication> y_ = context.Operators.Where<Medication>(w_, x_);
                     MedicationRequest z_(Medication M) =>
                     MR;
                     IEnumerable<MedicationRequest> aa_ = context.Operators.Select<Medication, MedicationRequest>(y_, z_);
                     return aa_;
-                };
+                }
+                ;
                 IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
                 IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
                 CqlValueSet g_ = this.Moderate_Intensity_Statin_Therapy(context);
@@ -1113,13 +1166,15 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                         bool? bc_ = context.Operators.ConceptInValueSet(ba_, bb_);
                         bool? bd_ = context.Operators.And(ay_, bc_);
                         return bd_;
-                    };
+                    }
+                    ;
                     IEnumerable<Medication> ap_ = context.Operators.Where<Medication>(an_, ao_);
                     MedicationRequest aq_(Medication M) =>
                     MR;
                     IEnumerable<MedicationRequest> ar_ = context.Operators.Select<Medication, MedicationRequest>(ap_, aq_);
                     return ar_;
-                };
+                }
+                ;
                 IEnumerable<MedicationRequest> k_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, j_);
                 IEnumerable<MedicationRequest> l_ = context.Operators.Union<MedicationRequest>(h_, k_);
                 IEnumerable<MedicationRequest> m_ = context.Operators.Union<MedicationRequest>(f_, l_);
@@ -1143,13 +1198,15 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                         bool? bt_ = context.Operators.ConceptInValueSet(br_, bs_);
                         bool? bu_ = context.Operators.And(bp_, bt_);
                         return bu_;
-                    };
+                    }
+                    ;
                     IEnumerable<Medication> bg_ = context.Operators.Where<Medication>(be_, bf_);
                     MedicationRequest bh_(Medication M) =>
                     MR;
                     IEnumerable<MedicationRequest> bi_ = context.Operators.Select<Medication, MedicationRequest>(bg_, bh_);
                     return bi_;
-                };
+                }
+                ;
                 IEnumerable<MedicationRequest> r_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, q_);
                 IEnumerable<MedicationRequest> s_ = context.Operators.Union<MedicationRequest>(o_, r_);
                 IEnumerable<MedicationRequest> t_ = context.Operators.Union<MedicationRequest>(m_, s_);
@@ -1161,13 +1218,15 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                         Timing ci_ = @this?.Timing;
                         bool? cj_ = context.Operators.Not((bool?)(ci_ is null));
                         return cj_;
-                    };
+                    }
+                    ;
                     IEnumerable<Dosage> bx_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)bv_, bw_);
                     Timing by_(Dosage @this)
                     {
                         Timing ck_ = @this?.Timing;
                         return ck_;
-                    };
+                    }
+                    ;
                     IEnumerable<Timing> bz_ = context.Operators.Select<Dosage, Timing>(bx_, by_);
                     bool? ca_(Timing T)
                     {
@@ -1179,36 +1238,42 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                                 DataType cs_ = cr_?.Bounds;
                                 bool ct_ = cs_ is Range;
                                 return ct_;
-                            };
+                            }
+                            ;
                             bool cq_()
                             {
                                 Timing.RepeatComponent cu_ = T?.Repeat;
                                 DataType cv_ = cu_?.Bounds;
                                 bool cw_ = cv_ is Period;
                                 return cw_;
-                            };
+                            }
+                            ;
                             if (cp_())
                             {
                                 Timing.RepeatComponent cx_ = T?.Repeat;
                                 DataType cy_ = cx_?.Bounds;
                                 return (cy_ as Range) as object;
                             }
+
                             else if (cq_())
                             {
                                 Timing.RepeatComponent cz_ = T?.Repeat;
                                 DataType da_ = cz_?.Bounds;
                                 return (da_ as Period) as object;
                             }
+
                             else
                             {
                                 return null;
                             }
-                        };
+                        }
+                        ;
                         CqlInterval<CqlDateTime> cm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, cl_());
                         CqlInterval<CqlDateTime> cn_ = this.Measurement_Period(context);
                         bool? co_ = context.Operators.Overlaps(cm_, cn_, default);
                         return co_;
-                    };
+                    }
+                    ;
                     IEnumerable<Timing> cb_ = context.Operators.Where<Timing>(bz_, ca_);
                     bool? cc_ = context.Operators.Exists<Timing>(cb_);
                     Code<MedicationRequest.MedicationrequestStatus> cd_ = ActiveStatin?.StatusElement;
@@ -1220,10 +1285,12 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                     bool? cg_ = context.Operators.In<string>(ce_, (IEnumerable<string>)cf_);
                     bool? ch_ = context.Operators.And(cc_, cg_);
                     return ch_;
-                };
+                }
+                ;
                 IEnumerable<MedicationRequest> v_ = context.Operators.Where<MedicationRequest>(t_, u_);
                 return v_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Numerator_Cached = new();
@@ -1240,7 +1307,8 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 bool? d_ = context.Operators.Exists<MedicationRequest>(c_);
                 bool? e_ = context.Operators.Or(b_, d_);
                 return e_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions

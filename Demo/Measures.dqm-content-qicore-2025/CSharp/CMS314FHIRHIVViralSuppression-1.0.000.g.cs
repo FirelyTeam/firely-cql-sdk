@@ -216,8 +216,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-                bool? f_(object HIVDx)
-                {
+
+                bool? f_(object HIVDx) {
                     CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDx);
                     CqlDateTime j_ = context.Operators.Start(i_);
                     CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
@@ -228,7 +228,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                     bool? p_ = this.isVerified(context, HIVDx);
                     bool? q_ = context.Operators.And(o_, p_);
                     return q_;
-                };
+                }
+
                 IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
                 bool? h_ = context.Operators.Exists<object>(g_);
                 return h_;
@@ -275,8 +276,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 CqlValueSet ad_ = this.Preventive_Care_Services_Other(context);
                 IEnumerable<Encounter> ae_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> af_ = context.Operators.Union<Encounter>(ac_, ae_);
-                bool? ag_(Encounter QualifyingEncounter)
-                {
+
+                bool? ag_(Encounter QualifyingEncounter) {
                     CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
                     CqlDateTime ak_ = context.Operators.Start(aj_);
                     CqlDateTime am_ = context.Operators.Start(aj_);
@@ -292,7 +293,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                     bool? aw_ = context.Operators.Equal(av_, "finished");
                     bool? ax_ = context.Operators.And(as_, aw_);
                     return ax_;
-                };
+                }
+
                 IEnumerable<Encounter> ah_ = context.Operators.Where<Encounter>(af_, ag_);
                 bool? ai_ = context.Operators.Exists<Encounter>(ah_);
                 return ai_;
@@ -337,8 +339,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             {
                 CqlValueSet a_ = this.HIV_Viral_Load_Tests(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
-                bool? c_(Observation ViralLoad)
-                {
+
+                bool? c_(Observation ViralLoad) {
                     Code<ObservationStatus> h_ = ViralLoad?.StatusElement;
                     ObservationStatus? i_ = h_?.Value;
                     string j_ = context.Operators.Convert<string>(i_);
@@ -348,29 +350,32 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                         "corrected",
                     ];
                     bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
-                    object m_()
-                    {
-                        bool r_()
-                        {
+
+                    object m_() {
+
+                        bool r_() {
                             DataType u_ = ViralLoad?.Effective;
                             object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                             bool w_ = v_ is CqlDateTime;
                             return w_;
-                        };
-                        bool s_()
-                        {
+                        }
+
+
+                        bool s_() {
                             DataType x_ = ViralLoad?.Effective;
                             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                             bool z_ = y_ is CqlInterval<CqlDateTime>;
                             return z_;
-                        };
-                        bool t_()
-                        {
+                        }
+
+
+                        bool t_() {
                             DataType aa_ = ViralLoad?.Effective;
                             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                             bool ac_ = ab_ is CqlDateTime;
                             return ac_;
-                        };
+                        }
+
                         if (r_())
                         {
                             DataType ad_ = ViralLoad?.Effective;
@@ -392,40 +397,45 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                         else
                         {
                             return null;
-                        }
-                    };
+                        };
+                    }
+
                     CqlDateTime n_ = QICoreCommon_4_0_000.Instance.latest(context, m_());
                     CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
                     bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, "day");
                     bool? q_ = context.Operators.And(l_, p_);
                     return q_;
-                };
+                }
+
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-                object e_(Observation @this)
-                {
-                    object aj_()
-                    {
-                        bool al_()
-                        {
+
+                object e_(Observation @this) {
+
+                    object aj_() {
+
+                        bool al_() {
                             DataType ao_ = @this?.Effective;
                             object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
                             bool aq_ = ap_ is CqlDateTime;
                             return aq_;
-                        };
-                        bool am_()
-                        {
+                        }
+
+
+                        bool am_() {
                             DataType ar_ = @this?.Effective;
                             object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
                             bool at_ = as_ is CqlInterval<CqlDateTime>;
                             return at_;
-                        };
-                        bool an_()
-                        {
+                        }
+
+
+                        bool an_() {
                             DataType au_ = @this?.Effective;
                             object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
                             bool aw_ = av_ is CqlDateTime;
                             return aw_;
-                        };
+                        }
+
                         if (al_())
                         {
                             DataType ax_ = @this?.Effective;
@@ -447,11 +457,13 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                         else
                         {
                             return null;
-                        }
-                    };
+                        };
+                    }
+
                     CqlDateTime ak_ = QICoreCommon_4_0_000.Instance.earliest(context, aj_());
                     return ak_;
-                };
+                }
+
                 IEnumerable<Observation> f_ = context.Operators.SortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
                 Observation g_ = context.Operators.Last<Observation>(f_);
                 return g_;

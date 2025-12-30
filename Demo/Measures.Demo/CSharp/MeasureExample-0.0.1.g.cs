@@ -75,7 +75,8 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Initial_population_Cached = new();
@@ -124,7 +125,8 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
                 bool? c_ = context.Operators.Not(b_);
                 bool? d_ = context.Operators.And(a_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Numerator_1_Cached = new();

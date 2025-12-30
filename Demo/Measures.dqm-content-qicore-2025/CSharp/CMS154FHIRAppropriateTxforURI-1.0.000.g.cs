@@ -291,32 +291,35 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 CqlValueSet aj_ = this.Virtual_Encounter(context);
                 IEnumerable<Encounter> ak_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> al_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? am_(Encounter E)
-                {
+
+                bool? am_(Encounter E) {
                     List<CodeableConcept> at_ = E?.Type;
-                    CqlConcept au_(CodeableConcept @this)
-                    {
+
+                    CqlConcept au_(CodeableConcept @this) {
                         CqlConcept az_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                         return az_;
-                    };
+                    }
+
                     IEnumerable<CqlConcept> av_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)at_, au_);
-                    bool? aw_(CqlConcept T)
-                    {
+
+                    bool? aw_(CqlConcept T) {
                         CqlCode ba_ = this.Unlisted_preventive_medicine_service(context);
                         CqlConcept bb_ = context.Operators.ConvertCodeToConcept(ba_);
                         bool? bc_ = context.Operators.Equivalent(T, bb_);
                         return bc_;
-                    };
+                    }
+
                     IEnumerable<CqlConcept> ax_ = context.Operators.Where<CqlConcept>(av_, aw_);
                     bool? ay_ = context.Operators.Exists<CqlConcept>(ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<Encounter> an_ = context.Operators.Where<Encounter>(al_, am_);
                 IEnumerable<Encounter> ao_ = context.Operators.Union<Encounter>(ak_, an_);
                 IEnumerable<Encounter> ap_ = context.Operators.Union<Encounter>(ai_, ao_);
                 IEnumerable<Encounter> aq_ = Status_1_15_000.Instance.isEncounterPerformed(context, ap_);
-                bool? ar_(Encounter ValidEncounter)
-                {
+
+                bool? ar_(Encounter ValidEncounter) {
                     Period bd_ = ValidEncounter?.Period;
                     CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bd_);
                     CqlDateTime bf_ = context.Operators.End(be_);
@@ -328,7 +331,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> bm_ = context.Operators.Interval(bh_, bl_, true, true);
                     bool? bn_ = context.Operators.In<CqlDateTime>(bf_, bm_, "day");
                     return bn_;
-                };
+                }
+
                 IEnumerable<Encounter> as_ = context.Operators.Where<Encounter>(aq_, ar_);
                 return as_;
             });
@@ -345,19 +349,19 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 CqlValueSet b_ = this.Upper_Respiratory_Infection(context);
                 IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-                object d_(Condition X) =>
-                X as object;
+                object d_(Condition X) => X as object;
                 IEnumerable<object> e_ = context.Operators.Select<Condition, object>(c_, d_);
                 IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
                 IEnumerable<ValueTuple<Encounter, object>> g_ = context.Operators.CrossJoin<Encounter, object>(a_, f_);
-                (CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? h_(ValueTuple<Encounter, object> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? h_(ValueTuple<Encounter, object> _valueTuple) {
                     (CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? o_ = (CqlTupleMetadata_EVVfJAIMBNEGYhKEHLiZLhEGQ, _valueTuple.Item1, _valueTuple.Item2);
                     return o_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?> i_ = context.Operators.Select<ValueTuple<Encounter, object>, (CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?>(g_, h_);
-                bool? j_((CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? tuple_evvfjaimbnegyhkehlizlhegq)
-                {
+
+                bool? j_((CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? tuple_evvfjaimbnegyhkehlizlhegq) {
                     CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, tuple_evvfjaimbnegyhkehlizlhegq?.URI);
                     CqlDateTime q_ = context.Operators.Start(p_);
                     Period r_ = tuple_evvfjaimbnegyhkehlizlhegq?.QualifyingEncounters?.Period;
@@ -367,10 +371,10 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     bool? x_ = context.Operators.OverlapsBefore(p_, w_, default);
                     bool? y_ = context.Operators.Or(t_, x_);
                     return y_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?> k_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?>(i_, j_);
-                Encounter l_((CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? tuple_evvfjaimbnegyhkehlizlhegq) =>
-                tuple_evvfjaimbnegyhkehlizlhegq?.QualifyingEncounters;
+                Encounter l_((CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? tuple_evvfjaimbnegyhkehlizlhegq) => tuple_evvfjaimbnegyhkehlizlhegq?.QualifyingEncounters;
                 IEnumerable<Encounter> m_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?, Encounter>(k_, l_);
                 IEnumerable<Encounter> n_ = context.Operators.Distinct<Encounter>(m_);
                 return n_;
@@ -386,8 +390,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_with_Upper_Respiratory_Infection(context);
-                bool? b_(Encounter EncounterWithURI)
-                {
+
+                bool? b_(Encounter EncounterWithURI) {
                     Patient g_ = this.Patient(context);
                     Date h_ = g_?.BirthDateElement;
                     string i_ = h_?.Value;
@@ -398,10 +402,10 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     int? n_ = context.Operators.CalculateAgeAt(j_, m_, "month");
                     bool? o_ = context.Operators.GreaterOrEqual(n_, 3);
                     return o_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                Encounter d_(Encounter EncounterWithURI) =>
-                EncounterWithURI;
+                Encounter d_(Encounter EncounterWithURI) => EncounterWithURI;
                 IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
                 IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
                 return f_;
@@ -417,11 +421,12 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Initial_Population(context);
-                bool? b_(Encounter EligibleEncounters)
-                {
+
+                bool? b_(Encounter EligibleEncounters) {
                     bool? d_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
                     return d_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -452,23 +457,21 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 IEnumerable<Encounter> b_ = this.Encounter_with_Upper_Respiratory_Infection(context);
                 CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-                object e_(Condition X) =>
-                X as object;
+                object e_(Condition X) => X as object;
                 IEnumerable<object> f_ = context.Operators.Select<Condition, object>(d_, e_);
                 IEnumerable<object> g_ = Status_1_15_000.Instance.verified(context, f_);
-                Condition h_(object X) =>
-                X as Condition;
+                Condition h_(object X) => X as Condition;
                 IEnumerable<Condition> i_ = context.Operators.Select<object, Condition>(g_, h_);
                 IEnumerable<Encounter> j_ = Antibiotic_1_11_000.Instance.Encounter_with_Comorbid_Condition_History(context, b_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(a_, j_);
                 CqlValueSet m_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
                 IEnumerable<MedicationRequest> n_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
                 IEnumerable<MedicationRequest> o_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-                IEnumerable<MedicationRequest> p_(MedicationRequest MR)
-                {
+
+                IEnumerable<MedicationRequest> p_(MedicationRequest MR) {
                     IEnumerable<Medication> al_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                    bool? am_(Medication M)
-                    {
+
+                    bool? am_(Medication M) {
                         object aq_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                         object ar_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                         IEnumerable<string> as_ = context.Operators.Split((string)ar_, "/");
@@ -480,13 +483,14 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                         bool? ay_ = context.Operators.ConceptInValueSet(aw_, ax_);
                         bool? az_ = context.Operators.And(au_, ay_);
                         return az_;
-                    };
+                    }
+
                     IEnumerable<Medication> an_ = context.Operators.Where<Medication>(al_, am_);
-                    MedicationRequest ao_(Medication M) =>
-                    MR;
+                    MedicationRequest ao_(Medication M) => MR;
                     IEnumerable<MedicationRequest> ap_ = context.Operators.Select<Medication, MedicationRequest>(an_, ao_);
                     return ap_;
-                };
+                }
+
                 IEnumerable<MedicationRequest> q_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(o_, p_);
                 IEnumerable<MedicationRequest> r_ = context.Operators.Union<MedicationRequest>(n_, q_);
                 IEnumerable<MedicationRequest> s_ = Status_1_15_000.Instance.isMedicationActive(context, r_);
@@ -518,16 +522,16 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_with_Upper_Respiratory_Infection(context);
-                IEnumerable<Encounter> c_(Encounter EncounterWithURI)
-                {
+
+                IEnumerable<Encounter> c_(Encounter EncounterWithURI) {
                     CqlValueSet i_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
                     IEnumerable<MedicationRequest> j_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
                     IEnumerable<MedicationRequest> k_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-                    IEnumerable<MedicationRequest> l_(MedicationRequest MR)
-                    {
+
+                    IEnumerable<MedicationRequest> l_(MedicationRequest MR) {
                         IEnumerable<Medication> t_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                        bool? u_(Medication M)
-                        {
+
+                        bool? u_(Medication M) {
                             object y_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                             object z_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                             IEnumerable<string> aa_ = context.Operators.Split((string)z_, "/");
@@ -539,18 +543,19 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                             bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
                             bool? ah_ = context.Operators.And(ac_, ag_);
                             return ah_;
-                        };
+                        }
+
                         IEnumerable<Medication> v_ = context.Operators.Where<Medication>(t_, u_);
-                        MedicationRequest w_(Medication M) =>
-                        MR;
+                        MedicationRequest w_(Medication M) => MR;
                         IEnumerable<MedicationRequest> x_ = context.Operators.Select<Medication, MedicationRequest>(v_, w_);
                         return x_;
-                    };
+                    }
+
                     IEnumerable<MedicationRequest> m_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(k_, l_);
                     IEnumerable<MedicationRequest> n_ = context.Operators.Union<MedicationRequest>(j_, m_);
                     IEnumerable<MedicationRequest> o_ = Status_1_15_000.Instance.isMedicationOrder(context, n_);
-                    bool? p_(MedicationRequest OrderedAntibiotic)
-                    {
+
+                    bool? p_(MedicationRequest OrderedAntibiotic) {
                         FhirDateTime ai_ = OrderedAntibiotic?.AuthoredOnElement;
                         CqlDateTime aj_ = context.Operators.Convert<CqlDateTime>(ai_);
                         Period ak_ = EncounterWithURI?.Period;
@@ -567,17 +572,17 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                         bool? ax_ = context.Operators.Not((bool?)(aw_ is null));
                         bool? ay_ = context.Operators.And(at_, ax_);
                         return ay_;
-                    };
+                    }
+
                     IEnumerable<MedicationRequest> q_ = context.Operators.Where<MedicationRequest>(o_, p_);
-                    Encounter r_(MedicationRequest OrderedAntibiotic) =>
-                    EncounterWithURI;
+                    Encounter r_(MedicationRequest OrderedAntibiotic) => EncounterWithURI;
                     IEnumerable<Encounter> s_ = context.Operators.Select<MedicationRequest, Encounter>(q_, r_);
                     return s_;
-                };
+                }
+
                 IEnumerable<Encounter> d_ = context.Operators.SelectMany<Encounter, Encounter>(a_, c_);
                 IEnumerable<Encounter> e_ = context.Operators.Except<Encounter>(a_, d_);
-                Encounter f_(Encounter EncounterWithURI) =>
-                EncounterWithURI;
+                Encounter f_(Encounter EncounterWithURI) => EncounterWithURI;
                 IEnumerable<Encounter> g_ = context.Operators.Select<Encounter, Encounter>(e_, f_);
                 IEnumerable<Encounter> h_ = context.Operators.Distinct<Encounter>(g_);
                 return h_;
@@ -593,8 +598,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_with_Upper_Respiratory_Infection(context);
-                bool? b_(Encounter EncounterWithURI)
-                {
+
+                bool? b_(Encounter EncounterWithURI) {
                     Patient g_ = this.Patient(context);
                     Date h_ = g_?.BirthDateElement;
                     string i_ = h_?.Value;
@@ -613,10 +618,10 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     bool? x_ = context.Operators.LessOrEqual(w_, 17);
                     bool? y_ = context.Operators.And(o_, x_);
                     return y_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                Encounter d_(Encounter EncounterWithURI) =>
-                EncounterWithURI;
+                Encounter d_(Encounter EncounterWithURI) => EncounterWithURI;
                 IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
                 IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
                 return f_;
@@ -632,8 +637,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_with_Upper_Respiratory_Infection(context);
-                bool? b_(Encounter EncounterWithURI)
-                {
+
+                bool? b_(Encounter EncounterWithURI) {
                     Patient g_ = this.Patient(context);
                     Date h_ = g_?.BirthDateElement;
                     string i_ = h_?.Value;
@@ -645,10 +650,10 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     CqlInterval<int?> o_ = context.Operators.Interval(18, 64, true, true);
                     bool? p_ = context.Operators.In<int?>(n_, o_, default);
                     return p_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                Encounter d_(Encounter EncounterWithURI) =>
-                EncounterWithURI;
+                Encounter d_(Encounter EncounterWithURI) => EncounterWithURI;
                 IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
                 IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
                 return f_;
@@ -664,8 +669,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_with_Upper_Respiratory_Infection(context);
-                bool? b_(Encounter EncounterWithURI)
-                {
+
+                bool? b_(Encounter EncounterWithURI) {
                     Patient g_ = this.Patient(context);
                     Date h_ = g_?.BirthDateElement;
                     string i_ = h_?.Value;
@@ -676,10 +681,10 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
                     bool? o_ = context.Operators.GreaterOrEqual(n_, 65);
                     return o_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                Encounter d_(Encounter EncounterWithURI) =>
-                EncounterWithURI;
+                Encounter d_(Encounter EncounterWithURI) => EncounterWithURI;
                 IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
                 IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
                 return f_;
@@ -691,8 +696,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_EVVfJAIMBNEGYhKEHLiZLhEGQ = new(
-      [typeof(Encounter), typeof(object)],
-      ["QualifyingEncounters", "URI"]);
+       [typeof(Encounter), typeof(object)],
+       ["QualifyingEncounters", "URI"]);
 
     #endregion CqlTupleMetadata Properties
 

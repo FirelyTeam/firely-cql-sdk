@@ -355,14 +355,15 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 CqlCode b_ = this.EMER(context);
                 IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
                 IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(a_, default, c_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? e_(Encounter EDEncounter)
-                {
+
+                bool? e_(Encounter EDEncounter) {
                     List<CodeableConcept> g_ = EDEncounter?.Type;
-                    CqlConcept h_(CodeableConcept @this)
-                    {
+
+                    CqlConcept h_(CodeableConcept @this) {
                         CqlConcept ah_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                         return ah_;
-                    };
+                    }
+
                     IEnumerable<CqlConcept> i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_, h_);
                     CqlValueSet j_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
                     bool? k_ = context.Operators.ConceptsInValueSet(i_, j_);
@@ -388,7 +389,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool? af_ = context.Operators.GreaterOrEqual(ae_, 18);
                     bool? ag_ = context.Operators.And(v_, af_);
                     return ag_;
-                };
+                }
+
                 IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
                 return f_;
             });
@@ -403,14 +405,15 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_During_MP(context);
-                bool? b_(Encounter EDEncounterinMP)
-                {
+
+                bool? b_(Encounter EDEncounterinMP) {
                     List<CodeableConcept> d_ = EDEncounterinMP?.ReasonCode;
-                    CqlConcept e_(CodeableConcept @this)
-                    {
+
+                    CqlConcept e_(CodeableConcept @this) {
                         CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                         return s_;
-                    };
+                    }
+
                     IEnumerable<CqlConcept> f_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)d_, e_);
                     CqlValueSet g_ = this.STEMI(context);
                     bool? h_ = context.Operators.ConceptsInValueSet(f_, g_);
@@ -418,23 +421,25 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                     IEnumerable<object> m_ = context.Operators.Union<object>(j_ as IEnumerable<object>, l_ as IEnumerable<object>);
                     IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
-                    bool? o_(object DxSTEMI)
-                    {
+
+                    bool? o_(object DxSTEMI) {
                         IEnumerable<object> t_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, EDEncounterinMP);
-                        bool? u_(object @this)
-                        {
+
+                        bool? u_(object @this) {
                             object ag_ = context.Operators.LateBoundProperty<object>(@this, "code");
                             CqlConcept ah_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ag_ as CodeableConcept);
                             bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
                             return ai_;
-                        };
+                        }
+
                         IEnumerable<object> v_ = context.Operators.Where<object>(t_, u_);
-                        CqlConcept w_(object @this)
-                        {
+
+                        CqlConcept w_(object @this) {
                             object aj_ = context.Operators.LateBoundProperty<object>(@this, "code");
                             CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aj_ as CodeableConcept);
                             return ak_;
-                        };
+                        }
+
                         IEnumerable<CqlConcept> x_ = context.Operators.Select<object, CqlConcept>(v_, w_);
                         CqlValueSet y_ = this.STEMI(context);
                         bool? z_ = context.Operators.ConceptsInValueSet(x_, y_);
@@ -445,12 +450,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? ae_ = context.Operators.In<CqlDateTime>(ab_, ad_, default);
                         bool? af_ = context.Operators.Or(z_, ae_);
                         return af_;
-                    };
+                    }
+
                     IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
                     bool? q_ = context.Operators.Exists<object>(p_);
                     bool? r_ = context.Operators.Or(h_, q_);
                     return r_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -491,12 +498,12 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
                     CqlValueSet d_ = this.Thrombolytic_medications(context);
                     IEnumerable<AllergyIntolerance> e_ = context.Operators.Retrieve<AllergyIntolerance>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance"));
-                    bool? f_(AllergyIntolerance ThrombolyticAllergy)
-                    {
+
+                    bool? f_(AllergyIntolerance ThrombolyticAllergy) {
                         CodeableConcept j_ = ThrombolyticAllergy?.ClinicalStatus;
                         CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
                         CqlCode l_ = QICoreCommon_4_0_000.Instance.allergy_active(context);
@@ -529,13 +536,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? aq_ = context.Operators.Or(aj_, ap_);
                         bool? ar_ = context.Operators.And(ad_, aq_);
                         return ar_;
-                    };
+                    }
+
                     IEnumerable<AllergyIntolerance> g_ = context.Operators.Where<AllergyIntolerance>(e_, f_);
-                    Encounter h_(AllergyIntolerance ThrombolyticAllergy) =>
-                    EDwSTEMI;
+                    Encounter h_(AllergyIntolerance ThrombolyticAllergy) => EDwSTEMI;
                     IEnumerable<Encounter> i_ = context.Operators.Select<AllergyIntolerance, Encounter>(g_, h_);
                     return i_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -550,12 +558,12 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
                     CqlValueSet d_ = this.Thrombolytics_Adverse_Event(context);
                     IEnumerable<AdverseEvent> e_ = context.Operators.Retrieve<AdverseEvent>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-adverseevent"));
-                    bool? f_(AdverseEvent ThrombolyticAdverseEvent)
-                    {
+
+                    bool? f_(AdverseEvent ThrombolyticAdverseEvent) {
                         FhirDateTime j_ = ThrombolyticAdverseEvent?.DateElement;
                         CqlDateTime k_ = context.Operators.Convert<CqlDateTime>(j_);
                         FhirDateTime l_ = ThrombolyticAdverseEvent?.DetectedElement;
@@ -572,13 +580,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? w_ = context.Operators.Equal(v_, "actual");
                         bool? x_ = context.Operators.And(s_, w_);
                         return x_;
-                    };
+                    }
+
                     IEnumerable<AdverseEvent> g_ = context.Operators.Where<AdverseEvent>(e_, f_);
-                    Encounter h_(AdverseEvent ThrombolyticAdverseEvent) =>
-                    EDwSTEMI;
+                    Encounter h_(AdverseEvent ThrombolyticAdverseEvent) => EDwSTEMI;
                     IEnumerable<Encounter> i_ = context.Operators.Select<AdverseEvent, Encounter>(g_, h_);
                     return i_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -593,8 +602,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
                     CqlValueSet d_ = this.Active_Bleeding_or_Bleeding_Diathesis__Excluding_Menses(context);
                     IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                     CqlValueSet f_ = this.Malignant_Intracranial_Neoplasm_Group(context);
@@ -612,24 +621,24 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     IEnumerable<Condition> r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                     IEnumerable<Condition> s_ = context.Operators.Union<Condition>(p_, r_);
                     IEnumerable<Condition> t_ = context.Operators.Union<Condition>(n_, s_);
-                    object u_(Condition X) =>
-                    X as object;
+                    object u_(Condition X) => X as object;
                     IEnumerable<object> v_ = context.Operators.Select<Condition, object>(t_, u_);
                     IEnumerable<object> w_ = Status_1_15_000.Instance.verified(context, v_);
-                    bool? x_(object ActiveExclusionDx)
-                    {
+
+                    bool? x_(object ActiveExclusionDx) {
                         CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveExclusionDx);
                         Period ac_ = EDwithSTEMI?.Period;
                         CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ac_);
                         bool? ae_ = context.Operators.OverlapsBefore(ab_, ad_, default);
                         return ae_;
-                    };
+                    }
+
                     IEnumerable<object> y_ = context.Operators.Where<object>(w_, x_);
-                    Encounter z_(object ActiveExclusionDx) =>
-                    EDwithSTEMI;
+                    Encounter z_(object ActiveExclusionDx) => EDwithSTEMI;
                     IEnumerable<Encounter> aa_ = context.Operators.Select<object, Encounter>(y_, z_);
                     return aa_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -644,16 +653,16 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
                     CqlValueSet d_ = this.Oral_Anticoagulant_Medications(context);
                     IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
                     IEnumerable<MedicationRequest> f_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-                    IEnumerable<MedicationRequest> g_(MedicationRequest MR)
-                    {
+
+                    IEnumerable<MedicationRequest> g_(MedicationRequest MR) {
                         IEnumerable<Medication> n_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                        bool? o_(Medication M)
-                        {
+
+                        bool? o_(Medication M) {
                             object s_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                             object t_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                             IEnumerable<string> u_ = context.Operators.Split((string)t_, "/");
@@ -665,17 +674,18 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
                             bool? ab_ = context.Operators.And(w_, aa_);
                             return ab_;
-                        };
+                        }
+
                         IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
-                        MedicationRequest q_(Medication M) =>
-                        MR;
+                        MedicationRequest q_(Medication M) => MR;
                         IEnumerable<MedicationRequest> r_ = context.Operators.Select<Medication, MedicationRequest>(p_, q_);
                         return r_;
-                    };
+                    }
+
                     IEnumerable<MedicationRequest> h_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(f_, g_);
                     IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(e_, h_);
-                    bool? j_(MedicationRequest OralAnticoagulant)
-                    {
+
+                    bool? j_(MedicationRequest OralAnticoagulant) {
                         Code<MedicationRequest.MedicationrequestStatus> ac_ = OralAnticoagulant?.StatusElement;
                         MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;
                         string ae_ = context.Operators.Convert<string>(ad_);
@@ -706,13 +716,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? bc_ = context.Operators.And(ax_, bb_);
                         bool? bd_ = context.Operators.And(al_, bc_);
                         return bd_;
-                    };
+                    }
+
                     IEnumerable<MedicationRequest> k_ = context.Operators.Where<MedicationRequest>(i_, j_);
-                    Encounter l_(MedicationRequest OralAnticoagulant) =>
-                    EDwithSTEMI;
+                    Encounter l_(MedicationRequest OralAnticoagulant) => EDwithSTEMI;
                     IEnumerable<Encounter> m_ = context.Operators.Select<MedicationRequest, Encounter>(k_, l_);
                     return m_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -727,8 +738,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
                     CqlCode d_ = this.Long_term__current__use_of_anticoagulants(context);
                     IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
                     IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -736,8 +747,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                     IEnumerable<object> j_ = context.Operators.Union<object>(f_ as IEnumerable<object>, i_ as IEnumerable<object>);
                     IEnumerable<object> k_ = Status_1_15_000.Instance.verified(context, j_);
-                    bool? l_(object LongTermAnticoagulant)
-                    {
+
+                    bool? l_(object LongTermAnticoagulant) {
                         CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LongTermAnticoagulant);
                         CqlDateTime q_ = context.Operators.Start(p_);
                         Period r_ = EDwithSTEMI?.Period;
@@ -750,13 +761,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? aa_ = context.Operators.SameOrAfter(w_, z_, default);
                         bool? ab_ = context.Operators.And(u_, aa_);
                         return ab_;
-                    };
+                    }
+
                     IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
-                    Encounter n_(object LongTermAnticoagulant) =>
-                    EDwithSTEMI;
+                    Encounter n_(object LongTermAnticoagulant) => EDwithSTEMI;
                     IEnumerable<Encounter> o_ = context.Operators.Select<object, Encounter>(m_, n_);
                     return o_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -786,8 +798,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
                     CqlValueSet d_ = this.Aortic_Dissection_or_Ruptured_Aortic_Aneurysm(context);
                     IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                     CqlValueSet f_ = this.Neurologic_impairment(context);
@@ -816,12 +828,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     IEnumerable<Condition> ac_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                     IEnumerable<Condition> ad_ = context.Operators.Union<Condition>(aa_, ac_);
                     IEnumerable<Condition> ae_ = context.Operators.Union<Condition>(x_, ad_);
-                    object af_(Condition X) =>
-                    X as object;
+                    object af_(Condition X) => X as object;
                     IEnumerable<object> ag_ = context.Operators.Select<Condition, object>(ae_, af_);
                     IEnumerable<object> ah_ = Status_1_15_000.Instance.verified(context, ag_);
-                    bool? ai_(object ExclusionDiagnosis)
-                    {
+
+                    bool? ai_(object ExclusionDiagnosis) {
                         CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ExclusionDiagnosis);
                         CqlDateTime an_ = context.Operators.Start(am_);
                         Period ao_ = EDwithSTEMI?.Period;
@@ -842,13 +853,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? bh_ = context.Operators.And(bc_, bg_);
                         bool? bi_ = context.Operators.Or(aq_, bh_);
                         return bi_;
-                    };
+                    }
+
                     IEnumerable<object> aj_ = context.Operators.Where<object>(ah_, ai_);
-                    Encounter ak_(object ExclusionDiagnosis) =>
-                    EDwithSTEMI;
+                    Encounter ak_(object ExclusionDiagnosis) => EDwithSTEMI;
                     IEnumerable<Encounter> al_ = context.Operators.Select<object, Encounter>(aj_, ak_);
                     return al_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -863,42 +875,46 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
                     CqlValueSet d_ = this.Major_Surgical_Procedure(context);
                     IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-                    bool? f_(Procedure MajorSurgery)
-                    {
-                        object j_()
-                        {
-                            bool an_()
-                            {
+
+                    bool? f_(Procedure MajorSurgery) {
+
+                        object j_() {
+
+                            bool an_() {
                                 DataType ar_ = MajorSurgery?.Performed;
                                 object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
                                 bool at_ = as_ is CqlDateTime;
                                 return at_;
-                            };
-                            bool ao_()
-                            {
+                            }
+
+
+                            bool ao_() {
                                 DataType au_ = MajorSurgery?.Performed;
                                 object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
                                 bool aw_ = av_ is CqlInterval<CqlDateTime>;
                                 return aw_;
-                            };
-                            bool ap_()
-                            {
+                            }
+
+
+                            bool ap_() {
                                 DataType ax_ = MajorSurgery?.Performed;
                                 object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
                                 bool az_ = ay_ is CqlQuantity;
                                 return az_;
-                            };
-                            bool aq_()
-                            {
+                            }
+
+
+                            bool aq_() {
                                 DataType ba_ = MajorSurgery?.Performed;
                                 object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
                                 bool bc_ = bb_ is CqlInterval<CqlQuantity>;
                                 return bc_;
-                            };
+                            }
+
                             if (an_())
                             {
                                 DataType bd_ = MajorSurgery?.Performed;
@@ -926,8 +942,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             else
                             {
                                 return null;
-                            }
-                        };
+                            };
+                        }
+
                         CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_());
                         CqlDateTime l_ = context.Operators.Start(k_);
                         Period m_ = EDwithSTEMI?.Period;
@@ -943,36 +960,40 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         CqlDateTime y_ = context.Operators.Start(x_);
                         bool? z_ = context.Operators.Not((bool?)(y_ is null));
                         bool? aa_ = context.Operators.And(v_, z_);
-                        object ab_()
-                        {
-                            bool bl_()
-                            {
+
+                        object ab_() {
+
+                            bool bl_() {
                                 DataType bp_ = MajorSurgery?.Performed;
                                 object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
                                 bool br_ = bq_ is CqlDateTime;
                                 return br_;
-                            };
-                            bool bm_()
-                            {
+                            }
+
+
+                            bool bm_() {
                                 DataType bs_ = MajorSurgery?.Performed;
                                 object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
                                 bool bu_ = bt_ is CqlInterval<CqlDateTime>;
                                 return bu_;
-                            };
-                            bool bn_()
-                            {
+                            }
+
+
+                            bool bn_() {
                                 DataType bv_ = MajorSurgery?.Performed;
                                 object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
                                 bool bx_ = bw_ is CqlQuantity;
                                 return bx_;
-                            };
-                            bool bo_()
-                            {
+                            }
+
+
+                            bool bo_() {
                                 DataType by_ = MajorSurgery?.Performed;
                                 object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
                                 bool ca_ = bz_ is CqlInterval<CqlQuantity>;
                                 return ca_;
-                            };
+                            }
+
                             if (bl_())
                             {
                                 DataType cb_ = MajorSurgery?.Performed;
@@ -1000,8 +1021,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             else
                             {
                                 return null;
-                            }
-                        };
+                            };
+                        }
+
                         CqlInterval<CqlDateTime> ac_ = QICoreCommon_4_0_000.Instance.toInterval(context, ab_());
                         CqlDateTime ad_ = context.Operators.Start(ac_);
                         CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
@@ -1013,13 +1035,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? al_ = context.Operators.Equal(ak_, "completed");
                         bool? am_ = context.Operators.And(ah_, al_);
                         return am_;
-                    };
+                    }
+
                     IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
-                    Encounter h_(Procedure MajorSurgery) =>
-                    EDwithSTEMI;
+                    Encounter h_(Procedure MajorSurgery) => EDwithSTEMI;
                     IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
                     return i_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -1034,45 +1057,49 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
                     CqlValueSet d_ = this.Endotracheal_Intubation(context);
                     IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                     CqlValueSet f_ = this.Mechanical_Circulatory_Assist_Device(context);
                     IEnumerable<Procedure> g_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                     IEnumerable<Procedure> h_ = context.Operators.Union<Procedure>(e_, g_);
-                    bool? i_(Procedure AirwayProcedure)
-                    {
-                        object m_()
-                        {
-                            bool aq_()
-                            {
+
+                    bool? i_(Procedure AirwayProcedure) {
+
+                        object m_() {
+
+                            bool aq_() {
                                 DataType au_ = AirwayProcedure?.Performed;
                                 object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
                                 bool aw_ = av_ is CqlDateTime;
                                 return aw_;
-                            };
-                            bool ar_()
-                            {
+                            }
+
+
+                            bool ar_() {
                                 DataType ax_ = AirwayProcedure?.Performed;
                                 object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
                                 bool az_ = ay_ is CqlInterval<CqlDateTime>;
                                 return az_;
-                            };
-                            bool as_()
-                            {
+                            }
+
+
+                            bool as_() {
                                 DataType ba_ = AirwayProcedure?.Performed;
                                 object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
                                 bool bc_ = bb_ is CqlQuantity;
                                 return bc_;
-                            };
-                            bool at_()
-                            {
+                            }
+
+
+                            bool at_() {
                                 DataType bd_ = AirwayProcedure?.Performed;
                                 object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
                                 bool bf_ = be_ is CqlInterval<CqlQuantity>;
                                 return bf_;
-                            };
+                            }
+
                             if (aq_())
                             {
                                 DataType bg_ = AirwayProcedure?.Performed;
@@ -1100,43 +1127,48 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             else
                             {
                                 return null;
-                            }
-                        };
+                            };
+                        }
+
                         CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_());
                         CqlDateTime o_ = context.Operators.Start(n_);
                         Period p_ = EDwithSTEMI?.Period;
                         CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                         bool? r_ = context.Operators.In<CqlDateTime>(o_, q_, default);
-                        object s_()
-                        {
-                            bool bo_()
-                            {
+
+                        object s_() {
+
+                            bool bo_() {
                                 DataType bs_ = AirwayProcedure?.Performed;
                                 object bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
                                 bool bu_ = bt_ is CqlDateTime;
                                 return bu_;
-                            };
-                            bool bp_()
-                            {
+                            }
+
+
+                            bool bp_() {
                                 DataType bv_ = AirwayProcedure?.Performed;
                                 object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
                                 bool bx_ = bw_ is CqlInterval<CqlDateTime>;
                                 return bx_;
-                            };
-                            bool bq_()
-                            {
+                            }
+
+
+                            bool bq_() {
                                 DataType by_ = AirwayProcedure?.Performed;
                                 object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
                                 bool ca_ = bz_ is CqlQuantity;
                                 return ca_;
-                            };
-                            bool br_()
-                            {
+                            }
+
+
+                            bool br_() {
                                 DataType cb_ = AirwayProcedure?.Performed;
                                 object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
                                 bool cd_ = cc_ is CqlInterval<CqlQuantity>;
                                 return cd_;
-                            };
+                            }
+
                             if (bo_())
                             {
                                 DataType ce_ = AirwayProcedure?.Performed;
@@ -1164,8 +1196,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             else
                             {
                                 return null;
-                            }
-                        };
+                            };
+                        }
+
                         CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.toInterval(context, s_());
                         CqlDateTime u_ = context.Operators.Start(t_);
                         CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
@@ -1187,13 +1220,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? ao_ = context.Operators.Equal(an_, "completed");
                         bool? ap_ = context.Operators.And(ak_, ao_);
                         return ap_;
-                    };
+                    }
+
                     IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
-                    Encounter k_(Procedure AirwayProcedure) =>
-                    EDwithSTEMI;
+                    Encounter k_(Procedure AirwayProcedure) => EDwithSTEMI;
                     IEnumerable<Encounter> l_ = context.Operators.Select<Procedure, Encounter>(j_, k_);
                     return l_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -1208,8 +1242,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
                     CqlValueSet d_ = this.Ischemic_Stroke(context);
                     IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                     CqlValueSet f_ = this.Closed_Head_and_Facial_Trauma(context);
@@ -1218,12 +1252,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlValueSet i_ = this.Active_Peptic_Ulcer(context);
                     IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                     IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_, j_);
-                    object l_(Condition X) =>
-                    X as object;
+                    object l_(Condition X) => X as object;
                     IEnumerable<object> m_ = context.Operators.Select<Condition, object>(k_, l_);
                     IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
-                    bool? o_(object ExclusionCondition)
-                    {
+
+                    bool? o_(object ExclusionCondition) {
                         CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ExclusionCondition);
                         CqlDateTime t_ = context.Operators.Start(s_);
                         Period u_ = EDwSTEMI?.Period;
@@ -1236,13 +1269,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(y_, ab_, true, true);
                         bool? ad_ = context.Operators.In<CqlDateTime>(t_, ac_, default);
                         return ad_;
-                    };
+                    }
+
                     IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
-                    Encounter q_(object ExclusionCondition) =>
-                    EDwSTEMI;
+                    Encounter q_(object ExclusionCondition) => EDwSTEMI;
                     IEnumerable<Encounter> r_ = context.Operators.Select<object, Encounter>(p_, q_);
                     return r_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -1257,42 +1291,46 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
                     CqlValueSet d_ = this.Intracranial_or_Intraspinal_surgery(context);
                     IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-                    bool? f_(Procedure CranialorSpinalSurgery)
-                    {
-                        object j_()
-                        {
-                            bool ag_()
-                            {
+
+                    bool? f_(Procedure CranialorSpinalSurgery) {
+
+                        object j_() {
+
+                            bool ag_() {
                                 DataType ak_ = CranialorSpinalSurgery?.Performed;
                                 object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                                 bool am_ = al_ is CqlDateTime;
                                 return am_;
-                            };
-                            bool ah_()
-                            {
+                            }
+
+
+                            bool ah_() {
                                 DataType an_ = CranialorSpinalSurgery?.Performed;
                                 object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
                                 bool ap_ = ao_ is CqlInterval<CqlDateTime>;
                                 return ap_;
-                            };
-                            bool ai_()
-                            {
+                            }
+
+
+                            bool ai_() {
                                 DataType aq_ = CranialorSpinalSurgery?.Performed;
                                 object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
                                 bool as_ = ar_ is CqlQuantity;
                                 return as_;
-                            };
-                            bool aj_()
-                            {
+                            }
+
+
+                            bool aj_() {
                                 DataType at_ = CranialorSpinalSurgery?.Performed;
                                 object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
                                 bool av_ = au_ is CqlInterval<CqlQuantity>;
                                 return av_;
-                            };
+                            }
+
                             if (ag_())
                             {
                                 DataType aw_ = CranialorSpinalSurgery?.Performed;
@@ -1320,8 +1358,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             else
                             {
                                 return null;
-                            }
-                        };
+                            };
+                        }
+
                         CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_());
                         CqlDateTime l_ = context.Operators.Start(k_);
                         Period m_ = EDwithSTEMI?.Period;
@@ -1343,13 +1382,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? ae_ = context.Operators.Equal(ad_, "completed");
                         bool? af_ = context.Operators.And(aa_, ae_);
                         return af_;
-                    };
+                    }
+
                     IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
-                    Encounter h_(Procedure CranialorSpinalSurgery) =>
-                    EDwithSTEMI;
+                    Encounter h_(Procedure CranialorSpinalSurgery) => EDwithSTEMI;
                     IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
                     return i_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -1364,15 +1404,16 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                bool? b_(Encounter EDwithSTEMI)
-                {
+
+                bool? b_(Encounter EDwithSTEMI) {
                     Encounter.HospitalizationComponent d_ = EDwithSTEMI?.Hospitalization;
                     CodeableConcept e_ = d_?.DischargeDisposition;
                     CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
                     CqlValueSet g_ = this.Patient_Expired(context);
                     bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1387,15 +1428,16 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                bool? b_(Encounter EDwSTEMI)
-                {
+
+                bool? b_(Encounter EDwSTEMI) {
                     Encounter.HospitalizationComponent d_ = EDwSTEMI?.Hospitalization;
                     CodeableConcept e_ = d_?.DischargeDisposition;
                     CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
                     CqlValueSet g_ = this.Left_Against_Medical_Advice(context);
                     bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1410,13 +1452,13 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                bool? b_(Encounter EDwSTEMI)
-                {
+
+                bool? b_(Encounter EDwSTEMI) {
                     CqlValueSet d_ = this.Encounter_Inpatient(context);
                     IEnumerable<Encounter> e_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                     IEnumerable<Encounter> f_ = Status_1_15_000.Instance.isEncounterPerformed(context, e_);
-                    bool? g_(Encounter InpatientEncounter)
-                    {
+
+                    bool? g_(Encounter InpatientEncounter) {
                         Encounter.HospitalizationComponent av_ = InpatientEncounter?.Hospitalization;
                         CodeableConcept aw_ = av_?.DischargeDisposition;
                         CqlConcept ax_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aw_);
@@ -1448,14 +1490,15 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? cb_ = context.Operators.Overlaps(br_, ca_, "day");
                         bool? cc_ = context.Operators.And(bp_, cb_);
                         return cc_;
-                    };
+                    }
+
                     IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
                     bool? i_ = context.Operators.Exists<Encounter>(h_);
                     CqlValueSet j_ = this.Hospice_Encounter(context);
                     IEnumerable<Encounter> k_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                     IEnumerable<Encounter> l_ = Status_1_15_000.Instance.isEncounterPerformed(context, k_);
-                    bool? m_(Encounter HospiceEncounter)
-                    {
+
+                    bool? m_(Encounter HospiceEncounter) {
                         Period cd_ = HospiceEncounter?.Period;
                         CqlInterval<CqlDateTime> ce_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cd_);
                         CqlDateTime cf_ = context.Operators.Start(ce_);
@@ -1474,7 +1517,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? cv_ = context.Operators.Overlaps(cl_, cu_, "day");
                         bool? cw_ = context.Operators.And(cj_, cv_);
                         return cw_;
-                    };
+                    }
+
                     IEnumerable<Encounter> n_ = context.Operators.Where<Encounter>(l_, m_);
                     bool? o_ = context.Operators.Exists<Encounter>(n_);
                     bool? p_ = context.Operators.Or(i_, o_);
@@ -1482,8 +1526,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     IEnumerable<CqlCode> r_ = context.Operators.ToList<CqlCode>(q_);
                     IEnumerable<Observation> s_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, r_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                     IEnumerable<Observation> t_ = Status_1_15_000.Instance.isAssessmentPerformed(context, s_);
-                    bool? u_(Observation HospiceAssessment)
-                    {
+
+                    bool? u_(Observation HospiceAssessment) {
                         DataType cx_ = (HospiceAssessment as Observation)?.Value;
                         object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
                         CqlCode cz_ = this.Yes__qualifier_value_(context);
@@ -1510,15 +1554,16 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? dx_ = context.Operators.Overlaps(dn_, dw_, "day");
                         bool? dy_ = context.Operators.And(dk_, dx_);
                         return dy_;
-                    };
+                    }
+
                     IEnumerable<Observation> v_ = context.Operators.Where<Observation>(t_, u_);
                     bool? w_ = context.Operators.Exists<Observation>(v_);
                     bool? x_ = context.Operators.Or(p_, w_);
                     CqlValueSet y_ = this.Hospice_Care_Ambulatory(context);
                     IEnumerable<ServiceRequest> z_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
                     IEnumerable<ServiceRequest> aa_ = Status_1_15_000.Instance.isInterventionOrder(context, z_);
-                    bool? ab_(ServiceRequest HospiceOrder)
-                    {
+
+                    bool? ab_(ServiceRequest HospiceOrder) {
                         FhirDateTime dz_ = HospiceOrder?.AuthoredOnElement;
                         CqlDateTime ea_ = context.Operators.Convert<CqlDateTime>(dz_);
                         Period eb_ = EDwSTEMI?.Period;
@@ -1535,44 +1580,49 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? eo_ = context.Operators.Not((bool?)(en_ is null));
                         bool? ep_ = context.Operators.And(ek_, eo_);
                         return ep_;
-                    };
+                    }
+
                     IEnumerable<ServiceRequest> ac_ = context.Operators.Where<ServiceRequest>(aa_, ab_);
                     bool? ad_ = context.Operators.Exists<ServiceRequest>(ac_);
                     bool? ae_ = context.Operators.Or(x_, ad_);
                     IEnumerable<Procedure> ag_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                     IEnumerable<Procedure> ah_ = Status_1_15_000.Instance.isInterventionPerformed(context, ag_);
-                    bool? ai_(Procedure HospicePerformed)
-                    {
-                        object eq_()
-                        {
-                            bool fk_()
-                            {
+
+                    bool? ai_(Procedure HospicePerformed) {
+
+                        object eq_() {
+
+                            bool fk_() {
                                 DataType fo_ = HospicePerformed?.Performed;
                                 object fp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fo_);
                                 bool fq_ = fp_ is CqlDateTime;
                                 return fq_;
-                            };
-                            bool fl_()
-                            {
+                            }
+
+
+                            bool fl_() {
                                 DataType fr_ = HospicePerformed?.Performed;
                                 object fs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fr_);
                                 bool ft_ = fs_ is CqlInterval<CqlDateTime>;
                                 return ft_;
-                            };
-                            bool fm_()
-                            {
+                            }
+
+
+                            bool fm_() {
                                 DataType fu_ = HospicePerformed?.Performed;
                                 object fv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fu_);
                                 bool fw_ = fv_ is CqlQuantity;
                                 return fw_;
-                            };
-                            bool fn_()
-                            {
+                            }
+
+
+                            bool fn_() {
                                 DataType fx_ = HospicePerformed?.Performed;
                                 object fy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fx_);
                                 bool fz_ = fy_ is CqlInterval<CqlQuantity>;
                                 return fz_;
-                            };
+                            }
+
                             if (fk_())
                             {
                                 DataType ga_ = HospicePerformed?.Performed;
@@ -1600,44 +1650,49 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             else
                             {
                                 return null;
-                            }
-                        };
+                            };
+                        }
+
                         CqlInterval<CqlDateTime> er_ = QICoreCommon_4_0_000.Instance.toInterval(context, eq_());
                         CqlDateTime es_ = context.Operators.Start(er_);
                         Period et_ = EDwSTEMI?.Period;
                         CqlInterval<CqlDateTime> eu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, et_);
                         CqlDateTime ev_ = context.Operators.Start(eu_);
                         bool? ew_ = context.Operators.SameOrBefore(es_, ev_, default);
-                        object ex_()
-                        {
-                            bool gi_()
-                            {
+
+                        object ex_() {
+
+                            bool gi_() {
                                 DataType gm_ = HospicePerformed?.Performed;
                                 object gn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gm_);
                                 bool go_ = gn_ is CqlDateTime;
                                 return go_;
-                            };
-                            bool gj_()
-                            {
+                            }
+
+
+                            bool gj_() {
                                 DataType gp_ = HospicePerformed?.Performed;
                                 object gq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gp_);
                                 bool gr_ = gq_ is CqlInterval<CqlDateTime>;
                                 return gr_;
-                            };
-                            bool gk_()
-                            {
+                            }
+
+
+                            bool gk_() {
                                 DataType gs_ = HospicePerformed?.Performed;
                                 object gt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gs_);
                                 bool gu_ = gt_ is CqlQuantity;
                                 return gu_;
-                            };
-                            bool gl_()
-                            {
+                            }
+
+
+                            bool gl_() {
                                 DataType gv_ = HospicePerformed?.Performed;
                                 object gw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gv_);
                                 bool gx_ = gw_ is CqlInterval<CqlQuantity>;
                                 return gx_;
-                            };
+                            }
+
                             if (gi_())
                             {
                                 DataType gy_ = HospicePerformed?.Performed;
@@ -1665,8 +1720,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             else
                             {
                                 return null;
-                            }
-                        };
+                            };
+                        }
+
                         CqlInterval<CqlDateTime> ey_ = QICoreCommon_4_0_000.Instance.toInterval(context, ex_());
                         CqlInterval<CqlDateTime> fa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, et_);
                         CqlDateTime fb_ = context.Operators.Start(fa_);
@@ -1678,18 +1734,18 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? fi_ = context.Operators.Overlaps(ey_, fh_, "day");
                         bool? fj_ = context.Operators.And(ew_, fi_);
                         return fj_;
-                    };
+                    }
+
                     IEnumerable<Procedure> aj_ = context.Operators.Where<Procedure>(ah_, ai_);
                     bool? ak_ = context.Operators.Exists<Procedure>(aj_);
                     bool? al_ = context.Operators.Or(ae_, ak_);
                     CqlValueSet am_ = this.Hospice_Diagnosis(context);
                     IEnumerable<Condition> an_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-                    object ao_(Condition X) =>
-                    X as object;
+                    object ao_(Condition X) => X as object;
                     IEnumerable<object> ap_ = context.Operators.Select<Condition, object>(an_, ao_);
                     IEnumerable<object> aq_ = Status_1_15_000.Instance.verified(context, ap_);
-                    bool? ar_(object HospiceCareDiagnosis)
-                    {
+
+                    bool? ar_(object HospiceCareDiagnosis) {
                         CqlInterval<CqlDateTime> hg_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
                         CqlDateTime hh_ = context.Operators.End(hg_);
                         Period hi_ = EDwSTEMI?.Period;
@@ -1697,12 +1753,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         CqlDateTime hk_ = context.Operators.Start(hj_);
                         bool? hl_ = context.Operators.SameOrAfter(hh_, hk_, default);
                         return hl_;
-                    };
+                    }
+
                     IEnumerable<object> as_ = context.Operators.Where<object>(aq_, ar_);
                     bool? at_ = context.Operators.Exists<object>(as_);
                     bool? au_ = context.Operators.Or(al_, at_);
                     return au_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1717,11 +1775,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
                     IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-pregnancystatus"));
-                    bool? e_(Observation PregStatus)
-                    {
+
+                    bool? e_(Observation PregStatus) {
                         Code<ObservationStatus> i_ = PregStatus?.StatusElement;
                         ObservationStatus? j_ = i_?.Value;
                         Code<ObservationStatus> k_ = context.Operators.Convert<Code<ObservationStatus>>(j_);
@@ -1738,13 +1796,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? v_ = context.Operators.In<CqlDateTime>(s_, u_, default);
                         bool? w_ = context.Operators.And(q_, v_);
                         return w_;
-                    };
+                    }
+
                     IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-                    Encounter g_(Observation PregStatus) =>
-                    EDwSTEMI;
+                    Encounter g_(Observation PregStatus) => EDwSTEMI;
                     IEnumerable<Encounter> h_ = context.Operators.Select<Observation, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -1796,8 +1855,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
                     CqlCode d_ = this.Status_post_administration_of_tPA__rtPA__in_a_different_facility_within_the_last_24_hours_prior_to_admission_to_current_facility(context);
                     IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
                     IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -1805,21 +1864,22 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                     IEnumerable<object> j_ = context.Operators.Union<object>(f_ as IEnumerable<object>, i_ as IEnumerable<object>);
                     IEnumerable<object> k_ = Status_1_15_000.Instance.verified(context, j_);
-                    bool? l_(object TPA)
-                    {
+
+                    bool? l_(object TPA) {
                         CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, TPA);
                         CqlDateTime q_ = context.Operators.Start(p_);
                         Period r_ = EDwithSTEMI?.Period;
                         CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                         bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
                         return t_;
-                    };
+                    }
+
                     IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
-                    Encounter n_(object TPA) =>
-                    EDwithSTEMI;
+                    Encounter n_(object TPA) => EDwithSTEMI;
                     IEnumerable<Encounter> o_ = context.Operators.Select<object, Encounter>(m_, n_);
                     return o_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -1834,14 +1894,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
                     CqlValueSet d_ = this.Percutaneous_Coronary_Intervention(context);
                     IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
                     IEnumerable<Procedure> g_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
                     IEnumerable<Procedure> h_ = context.Operators.Union<Procedure>(e_, g_);
-                    bool? i_(Procedure PCINotDone)
-                    {
+
+                    bool? i_(Procedure PCINotDone) {
                         CodeableConcept m_ = PCINotDone?.StatusReason;
                         CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
                         CqlValueSet o_ = this.Patient_Refusal(context);
@@ -1850,22 +1910,24 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         CqlValueSet s_ = this.Procedure_Not_Indicated_Contraindicated(context);
                         bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
                         bool? u_ = context.Operators.Or(p_, t_);
-                        bool? v_(Extension @this)
-                        {
+
+                        bool? v_(Extension @this) {
                             FhirUri ag_ = @this?.UrlElement;
                             FhirString ah_ = context.Operators.Convert<FhirString>(ag_);
                             string ai_ = FHIRHelpers_4_4_000.Instance.ToString(context, ah_);
                             bool? aj_ = context.Operators.Equal(ai_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
                             return aj_;
-                        };
+                        }
+
                         IEnumerable<Extension> w_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(PCINotDone is DomainResource
                             ? (PCINotDone as DomainResource).Extension
                             : default), v_);
-                        DataType x_(Extension @this)
-                        {
+
+                        DataType x_(Extension @this) {
                             DataType ak_ = @this?.Value;
                             return ak_;
-                        };
+                        }
+
                         IEnumerable<DataType> y_ = context.Operators.Select<Extension, DataType>(w_, x_);
                         DataType z_ = context.Operators.SingletonFrom<DataType>(y_);
                         FhirDateTime aa_ = context.Operators.Convert<FhirDateTime>(z_);
@@ -1875,13 +1937,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? ae_ = context.Operators.In<CqlDateTime>(ab_, ad_, default);
                         bool? af_ = context.Operators.And(u_, ae_);
                         return af_;
-                    };
+                    }
+
                     IEnumerable<Procedure> j_ = context.Operators.Where<Procedure>(h_, i_);
-                    Encounter k_(Procedure PCINotDone) =>
-                    EDwSTEMI;
+                    Encounter k_(Procedure PCINotDone) => EDwSTEMI;
                     IEnumerable<Encounter> l_ = context.Operators.Select<Procedure, Encounter>(j_, k_);
                     return l_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -1896,48 +1959,52 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
                     CqlValueSet d_ = this.Fibrinolytic_Therapy(context);
                     IEnumerable<MedicationAdministration> e_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministrationnotdone"));
                     IEnumerable<MedicationAdministration> g_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministrationnotdone"));
                     IEnumerable<MedicationAdministration> h_ = context.Operators.Union<MedicationAdministration>(e_, g_);
-                    bool? i_(MedicationAdministration FibrinolyticNoMed)
-                    {
+
+                    bool? i_(MedicationAdministration FibrinolyticNoMed) {
                         List<CodeableConcept> m_ = FibrinolyticNoMed?.StatusReason;
-                        CqlConcept n_(CodeableConcept @this)
-                        {
+
+                        CqlConcept n_(CodeableConcept @this) {
                             CqlConcept ai_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                             return ai_;
-                        };
+                        }
+
                         IEnumerable<CqlConcept> o_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)m_, n_);
                         CqlValueSet p_ = this.Patient_Refusal(context);
                         bool? q_ = context.Operators.ConceptsInValueSet(o_, p_);
-                        CqlConcept s_(CodeableConcept @this)
-                        {
+
+                        CqlConcept s_(CodeableConcept @this) {
                             CqlConcept aj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                             return aj_;
-                        };
+                        }
+
                         IEnumerable<CqlConcept> t_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)m_, s_);
                         CqlValueSet u_ = this.Drug_Intervention_Not_Indicated_Contraindicated(context);
                         bool? v_ = context.Operators.ConceptsInValueSet(t_, u_);
                         bool? w_ = context.Operators.Or(q_, v_);
-                        bool? x_(Extension @this)
-                        {
+
+                        bool? x_(Extension @this) {
                             FhirUri ak_ = @this?.UrlElement;
                             FhirString al_ = context.Operators.Convert<FhirString>(ak_);
                             string am_ = FHIRHelpers_4_4_000.Instance.ToString(context, al_);
                             bool? an_ = context.Operators.Equal(am_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
                             return an_;
-                        };
+                        }
+
                         IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(FibrinolyticNoMed is DomainResource
                             ? (FibrinolyticNoMed as DomainResource).Extension
                             : default), x_);
-                        DataType z_(Extension @this)
-                        {
+
+                        DataType z_(Extension @this) {
                             DataType ao_ = @this?.Value;
                             return ao_;
-                        };
+                        }
+
                         IEnumerable<DataType> aa_ = context.Operators.Select<Extension, DataType>(y_, z_);
                         DataType ab_ = context.Operators.SingletonFrom<DataType>(aa_);
                         FhirDateTime ac_ = context.Operators.Convert<FhirDateTime>(ab_);
@@ -1947,13 +2014,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? ag_ = context.Operators.In<CqlDateTime>(ad_, af_, default);
                         bool? ah_ = context.Operators.And(w_, ag_);
                         return ah_;
-                    };
+                    }
+
                     IEnumerable<MedicationAdministration> j_ = context.Operators.Where<MedicationAdministration>(h_, i_);
-                    Encounter k_(MedicationAdministration FibrinolyticNoMed) =>
-                    EDwSTEMI;
+                    Encounter k_(MedicationAdministration FibrinolyticNoMed) => EDwSTEMI;
                     IEnumerable<Encounter> l_ = context.Operators.Select<MedicationAdministration, Encounter>(j_, k_);
                     return l_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -1980,19 +2048,20 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
     public CqlDateTime currentemergencyDepartmentArrivalTime(CqlContext context, Encounter EDEncounter)
     {
         List<Encounter.LocationComponent> a_ = EDEncounter?.Location;
-        bool? b_(Encounter.LocationComponent EDLocation)
-        {
+
+        bool? b_(Encounter.LocationComponent EDLocation) {
             ResourceReference i_ = EDLocation?.Location;
             Location j_ = CQMCommon_4_1_000.Instance.getLocation(context, i_);
             List<CodeableConcept> k_ = j_?.Type;
-            CqlConcept l_(CodeableConcept @this)
-            {
+
+            CqlConcept l_(CodeableConcept @this) {
                 CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return q_;
-            };
+            }
+
             IEnumerable<CqlConcept> m_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)k_, l_);
-            bool? n_(CqlConcept LocationType)
-            {
+
+            bool? n_(CqlConcept LocationType) {
                 CqlValueSet r_ = this.Emergency_Department_Visit(context);
                 bool? s_ = context.Operators.ConceptInValueSet(LocationType, r_);
                 CqlCode t_ = this.Emergency_room(context);
@@ -2009,19 +2078,22 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
                 bool? af_ = context.Operators.And(aa_, ae_);
                 return af_;
-            };
+            }
+
             IEnumerable<CqlConcept> o_ = context.Operators.Where<CqlConcept>(m_, n_);
             bool? p_ = context.Operators.Exists<CqlConcept>(o_);
             return p_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
-        CqlDateTime d_(Encounter.LocationComponent EDLocation)
-        {
+
+        CqlDateTime d_(Encounter.LocationComponent EDLocation) {
             Period ag_ = EDLocation?.Period;
             CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ag_);
             CqlDateTime ai_ = context.Operators.Start(ah_);
             return ai_;
-        };
+        }
+
         IEnumerable<CqlDateTime> e_ = context.Operators.Select<Encounter.LocationComponent, CqlDateTime>(c_, d_);
         IEnumerable<CqlDateTime> f_ = context.Operators.Distinct<CqlDateTime>(e_);
         IEnumerable<CqlDateTime> g_ = context.Operators.ListSort<CqlDateTime>(f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -2039,16 +2111,16 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
                     CqlValueSet d_ = this.Fibrinolytic_Therapy(context);
                     IEnumerable<MedicationAdministration> e_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
                     IEnumerable<MedicationAdministration> f_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
-                    IEnumerable<MedicationAdministration> g_(MedicationAdministration MR)
-                    {
+
+                    IEnumerable<MedicationAdministration> g_(MedicationAdministration MR) {
                         IEnumerable<Medication> n_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                        bool? o_(Medication M)
-                        {
+
+                        bool? o_(Medication M) {
                             object s_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                             object t_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                             IEnumerable<string> u_ = context.Operators.Split((string)t_, "/");
@@ -2060,17 +2132,18 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
                             bool? ab_ = context.Operators.And(w_, aa_);
                             return ab_;
-                        };
+                        }
+
                         IEnumerable<Medication> p_ = context.Operators.Where<Medication>(n_, o_);
-                        MedicationAdministration q_(Medication M) =>
-                        MR;
+                        MedicationAdministration q_(Medication M) => MR;
                         IEnumerable<MedicationAdministration> r_ = context.Operators.Select<Medication, MedicationAdministration>(p_, q_);
                         return r_;
-                    };
+                    }
+
                     IEnumerable<MedicationAdministration> h_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(f_, g_);
                     IEnumerable<MedicationAdministration> i_ = context.Operators.Union<MedicationAdministration>(e_, h_);
-                    bool? j_(MedicationAdministration Fibrinolytic)
-                    {
+
+                    bool? j_(MedicationAdministration Fibrinolytic) {
                         Code<MedicationAdministration.MedicationAdministrationStatusCodes> ac_ = Fibrinolytic?.StatusElement;
                         MedicationAdministration.MedicationAdministrationStatusCodes? ad_ = ac_?.Value;
                         string ae_ = context.Operators.Convert<string>(ad_);
@@ -2088,13 +2161,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? as_ = context.Operators.And(ap_, ar_);
                         bool? at_ = context.Operators.And(af_, as_);
                         return at_;
-                    };
+                    }
+
                     IEnumerable<MedicationAdministration> k_ = context.Operators.Where<MedicationAdministration>(i_, j_);
-                    Encounter l_(MedicationAdministration Fibrinolytic) =>
-                    EDwithSTEMI;
+                    Encounter l_(MedicationAdministration Fibrinolytic) => EDwithSTEMI;
                     IEnumerable<Encounter> m_ = context.Operators.Select<MedicationAdministration, Encounter>(k_, l_);
                     return m_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -2109,42 +2183,46 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
                     CqlValueSet d_ = this.Percutaneous_Coronary_Intervention(context);
                     IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-                    bool? f_(Procedure PCI)
-                    {
-                        object j_()
-                        {
-                            bool aa_()
-                            {
+
+                    bool? f_(Procedure PCI) {
+
+                        object j_() {
+
+                            bool aa_() {
                                 DataType ae_ = PCI?.Performed;
                                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
                                 bool ag_ = af_ is CqlDateTime;
                                 return ag_;
-                            };
-                            bool ab_()
-                            {
+                            }
+
+
+                            bool ab_() {
                                 DataType ah_ = PCI?.Performed;
                                 object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
                                 bool aj_ = ai_ is CqlInterval<CqlDateTime>;
                                 return aj_;
-                            };
-                            bool ac_()
-                            {
+                            }
+
+
+                            bool ac_() {
                                 DataType ak_ = PCI?.Performed;
                                 object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                                 bool am_ = al_ is CqlQuantity;
                                 return am_;
-                            };
-                            bool ad_()
-                            {
+                            }
+
+
+                            bool ad_() {
                                 DataType an_ = PCI?.Performed;
                                 object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
                                 bool ap_ = ao_ is CqlInterval<CqlQuantity>;
                                 return ap_;
-                            };
+                            }
+
                             if (aa_())
                             {
                                 DataType aq_ = PCI?.Performed;
@@ -2172,8 +2250,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             else
                             {
                                 return null;
-                            }
-                        };
+                            };
+                        }
+
                         CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_());
                         CqlDateTime l_ = context.Operators.Start(k_);
                         CqlDateTime m_ = this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
@@ -2189,13 +2268,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         bool? y_ = context.Operators.Equal(x_, "completed");
                         bool? z_ = context.Operators.And(u_, y_);
                         return z_;
-                    };
+                    }
+
                     IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
-                    Encounter h_(Procedure PCI) =>
-                    EDwithSTEMI;
+                    Encounter h_(Procedure PCI) => EDwithSTEMI;
                     IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
                     return i_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -2205,19 +2285,20 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
     public CqlDateTime currentemergencyDepartmentDepartTime(CqlContext context, Encounter EDEncounter)
     {
         List<Encounter.LocationComponent> a_ = EDEncounter?.Location;
-        bool? b_(Encounter.LocationComponent EDLocation)
-        {
+
+        bool? b_(Encounter.LocationComponent EDLocation) {
             ResourceReference i_ = EDLocation?.Location;
             Location j_ = CQMCommon_4_1_000.Instance.getLocation(context, i_);
             List<CodeableConcept> k_ = j_?.Type;
-            CqlConcept l_(CodeableConcept @this)
-            {
+
+            CqlConcept l_(CodeableConcept @this) {
                 CqlConcept q_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return q_;
-            };
+            }
+
             IEnumerable<CqlConcept> m_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)k_, l_);
-            bool? n_(CqlConcept LocationType)
-            {
+
+            bool? n_(CqlConcept LocationType) {
                 CqlValueSet r_ = this.Emergency_Department_Visit(context);
                 bool? s_ = context.Operators.ConceptInValueSet(LocationType, r_);
                 CqlCode t_ = this.Emergency_room(context);
@@ -2234,19 +2315,22 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
                 bool? af_ = context.Operators.And(aa_, ae_);
                 return af_;
-            };
+            }
+
             IEnumerable<CqlConcept> o_ = context.Operators.Where<CqlConcept>(m_, n_);
             bool? p_ = context.Operators.Exists<CqlConcept>(o_);
             return p_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
-        CqlDateTime d_(Encounter.LocationComponent EDLocation)
-        {
+
+        CqlDateTime d_(Encounter.LocationComponent EDLocation) {
             Period ag_ = EDLocation?.Period;
             CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ag_);
             CqlDateTime ai_ = context.Operators.End(ah_);
             return ai_;
-        };
+        }
+
         IEnumerable<CqlDateTime> e_ = context.Operators.Select<Encounter.LocationComponent, CqlDateTime>(c_, d_);
         IEnumerable<CqlDateTime> f_ = context.Operators.Distinct<CqlDateTime>(e_);
         IEnumerable<CqlDateTime> g_ = context.Operators.ListSort<CqlDateTime>(f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -2264,8 +2348,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
-                bool? b_(Encounter EDwithSTEMI)
-                {
+
+                bool? b_(Encounter EDwithSTEMI) {
                     CqlDateTime d_ = this.currentemergencyDepartmentDepartTime(context, EDwithSTEMI);
                     CqlDateTime e_ = this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
                     CqlQuantity g_ = context.Operators.Quantity(45m, "minutes");
@@ -2281,7 +2365,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     bool? r_ = context.Operators.ConceptInValueSet(p_, q_);
                     bool? s_ = context.Operators.And(m_, r_);
                     return s_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });

@@ -181,8 +181,8 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                 CqlCode a_ = this.CT_dose_and_image_quality_category(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-                bool? d_(Observation CTScanResult)
-                {
+
+                bool? d_(Observation CTScanResult) {
                     Code<ObservationStatus> f_ = CTScanResult?.StatusElement;
                     ObservationStatus? g_ = f_?.Value;
                     string h_ = context.Operators.Convert<string>(g_);
@@ -209,7 +209,8 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                     bool? z_ = context.Operators.GreaterOrEqual(y_, 18);
                     bool? aa_ = context.Operators.And(q_, z_);
                     return aa_;
-                };
+                }
+
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 return e_;
             });
@@ -224,8 +225,8 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
             () =>
             {
                 IEnumerable<Observation> a_ = this.Patients_with_Qualifying_CTScan(context);
-                bool? b_(Observation CTScan)
-                {
+
+                bool? b_(Observation CTScan) {
                     decimal? d_ = AlaraCommonFunctions_1_10_000.Instance.globalNoiseValue(context, CTScan);
                     bool? e_ = context.Operators.Not((bool?)(d_ is null));
                     decimal? f_ = AlaraCommonFunctions_1_10_000.Instance.sizeAdjustedValue(context, CTScan);
@@ -236,7 +237,8 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                     bool? k_ = context.Operators.Not((bool?)(j_ is null));
                     bool? l_ = context.Operators.And(h_, k_);
                     return l_;
-                };
+                }
+
                 IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
                 return c_;
             });
@@ -279,15 +281,16 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
             () =>
             {
                 IEnumerable<Observation> a_ = this.Patients_with_Qualifying_CTScan_with_Values(context);
-                bool? b_(Observation CTScanWithValues)
-                {
+
+                bool? b_(Observation CTScanWithValues) {
                     DataType e_ = CTScanWithValues?.Value;
                     object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
                     IReadOnlyList<CqlCode> g_ = (f_ as CqlConcept)?.codes;
                     CqlCode h_ = this.Full_Body(context);
                     bool? i_ = context.Operators.Contains<CqlCode>((IEnumerable<CqlCode>)g_, h_);
                     return i_;
-                };
+                }
+
                 IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
                 bool? d_ = context.Operators.Exists<Observation>(c_);
                 return d_;
@@ -303,11 +306,12 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
             () =>
             {
                 IEnumerable<Observation> a_ = this.Patients_with_Qualifying_CTScan_with_Values(context);
-                bool? b_(Observation CTScanWithValues)
-                {
+
+                bool? b_(Observation CTScanWithValues) {
                     bool? e_ = AlaraCommonFunctions_1_10_000.Instance.ctScanQualifies(context, CTScanWithValues);
                     return e_;
-                };
+                }
+
                 IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
                 bool? d_ = context.Operators.Exists<Observation>(c_);
                 return d_;

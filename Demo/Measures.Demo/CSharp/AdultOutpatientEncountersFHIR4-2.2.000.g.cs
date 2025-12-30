@@ -98,7 +98,8 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
             {
                 object a_ = context.ResolveParameter("AdultOutpatientEncountersFHIR4-2.2.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -116,7 +117,8 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
@@ -152,10 +154,12 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
                     bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, default);
                     bool? x_ = context.Operators.And(s_, w_);
                     return x_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
                 return p_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions

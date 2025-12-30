@@ -86,7 +86,8 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
             {
                 object a_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -104,7 +105,8 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Hospice_Intervention_or_Encounter_Cached = new();
@@ -125,7 +127,8 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
                     CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                     bool? q_ = context.Operators.Overlaps(o_, p_, default);
                     return q_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
                 bool? f_ = context.Operators.Exists<Procedure>(e_);
                 CqlValueSet g_ = this.Hospice_Encounter(context);
@@ -138,12 +141,14 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
                     bool? u_ = context.Operators.Overlaps(s_, t_, default);
                     return u_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
                 bool? m_ = context.Operators.Or(f_, l_);
                 return m_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions

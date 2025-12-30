@@ -118,7 +118,8 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     [CqlFunctionDefinition("Final Survey Observation")]
@@ -141,7 +142,8 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
                 return p_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
             bool? l_(CqlConcept ObservationCategory)
             {
@@ -149,15 +151,18 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
                 return s_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isAssessmentPerformed")]
@@ -180,7 +185,8 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
                 return p_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
             bool? l_(CqlConcept ObservationCategory)
             {
@@ -188,15 +194,18 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
                 return s_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Active Condition")]
@@ -210,10 +219,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
             bool? g_ = context.Operators.Equivalent(d_, f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isActiveOnly")]
@@ -227,10 +238,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
             bool? g_ = context.Operators.Equivalent(d_, f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Completed or Ongoing Device Request")]
@@ -253,10 +266,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
             return m_;
-        };
+        }
+        ;
         IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isDeviceOrder")]
@@ -279,10 +294,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
             return m_;
-        };
+        }
+        ;
         IEnumerable<DeviceRequest> b_ = context.Operators.Where<DeviceRequest>(DeviceRequest, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Completed or Ongoing Service Request")]
@@ -305,10 +322,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
             return m_;
-        };
+        }
+        ;
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isDiagnosticStudyOrder")]
@@ -331,10 +350,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
             return m_;
-        };
+        }
+        ;
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isInterventionOrder")]
@@ -357,10 +378,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
             return m_;
-        };
+        }
+        ;
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isLaboratoryTestOrder")]
@@ -383,10 +406,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             bool? l_ = context.Operators.Equal(k_, "order");
             bool? m_ = context.Operators.And(h_, l_);
             return m_;
-        };
+        }
+        ;
         IEnumerable<ServiceRequest> b_ = context.Operators.Where<ServiceRequest>(ServiceRequest, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Final Observation")]
@@ -405,10 +430,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             return h_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isDiagnosticStudyPerformed")]
@@ -427,10 +454,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             return h_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Finished Encounter")]
@@ -451,10 +480,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             return h_;
-        };
+        }
+        ;
         IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isEncounterPerformed")]
@@ -475,10 +506,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             return h_;
-        };
+        }
+        ;
         IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Completed Immunization")]
@@ -491,10 +524,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
             return f_;
-        };
+        }
+        ;
         IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isImmunizationAdministered")]
@@ -507,10 +542,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
             return f_;
-        };
+        }
+        ;
         IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Completed Procedure")]
@@ -523,10 +560,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
             return f_;
-        };
+        }
+        ;
         IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isInterventionPerformed")]
@@ -539,10 +578,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
             return f_;
-        };
+        }
+        ;
         IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isProcedurePerformed")]
@@ -555,10 +596,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             string e_ = context.Operators.Convert<string>(d_);
             bool? f_ = context.Operators.Equivalent(e_, "completed");
             return f_;
-        };
+        }
+        ;
         IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Final Lab Observation")]
@@ -581,7 +624,8 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
                 return p_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
             bool? l_(CqlConcept ObservationCategory)
             {
@@ -589,15 +633,18 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
                 return s_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isLaboratoryTestPerformed")]
@@ -620,7 +667,8 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
                 return p_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
             bool? l_(CqlConcept ObservationCategory)
             {
@@ -628,15 +676,18 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
                 return s_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Active Medication")]
@@ -654,10 +705,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             bool? j_ = context.Operators.Equal(i_, "order");
             bool? k_ = context.Operators.And(f_, j_);
             return k_;
-        };
+        }
+        ;
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isMedicationActive")]
@@ -675,10 +728,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             bool? j_ = context.Operators.Equal(i_, "order");
             bool? k_ = context.Operators.And(f_, j_);
             return k_;
-        };
+        }
+        ;
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Dispensed Medication")]
@@ -697,10 +752,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             return h_;
-        };
+        }
+        ;
         IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isMedicationDispensed")]
@@ -719,10 +776,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             return h_;
-        };
+        }
+        ;
         IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Active or Completed Medication Request")]
@@ -744,10 +803,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             bool? k_ = context.Operators.Equal(j_, "order");
             bool? l_ = context.Operators.And(g_, k_);
             return l_;
-        };
+        }
+        ;
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isMedicationOrder")]
@@ -769,10 +830,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             bool? k_ = context.Operators.Equal(j_, "order");
             bool? l_ = context.Operators.And(g_, k_);
             return l_;
-        };
+        }
+        ;
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(MedicationRequest, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Final Exam Observation")]
@@ -795,7 +858,8 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
                 return p_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
             bool? l_(CqlConcept ObservationCategory)
             {
@@ -803,15 +867,18 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
                 return s_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isPhysicalExamPerformed")]
@@ -834,7 +901,8 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             {
                 CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
                 return p_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
             bool? l_(CqlConcept ObservationCategory)
             {
@@ -842,15 +910,18 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
                 bool? s_ = context.Operators.Equivalent(ObservationCategory, r_);
                 return s_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> m_ = context.Operators.Where<CqlConcept>(k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("BloodPressure")]
@@ -868,10 +939,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("BodyHeight")]
@@ -889,10 +962,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("BodyWeight")]
@@ -910,10 +985,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("BMI")]
@@ -931,10 +1008,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isObservationBP")]
@@ -952,10 +1031,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isObservationBodyHeight")]
@@ -973,10 +1054,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isObservationBodyWeight")]
@@ -994,10 +1077,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isObservationBMI")]
@@ -1015,10 +1100,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Initial or Final Observation")]
@@ -1038,10 +1125,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             return h_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("isSymptom")]
@@ -1061,10 +1150,12 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
             ];
             bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
             return h_;
-        };
+        }
+        ;
         IEnumerable<Observation> b_ = context.Operators.Where<Observation>(Obs, a_);
         return b_;
     }
+
 
 
     #endregion Functions and Expressions

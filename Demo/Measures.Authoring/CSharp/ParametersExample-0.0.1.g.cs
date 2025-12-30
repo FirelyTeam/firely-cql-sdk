@@ -82,7 +82,8 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             {
                 object a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
                 return (int?)a_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -100,7 +101,8 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<CqlDate> _CurrentDate_Cached = new();
@@ -113,7 +115,8 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             {
                 CqlDate a_ = context.Operators.Today();
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<Patient> _Patient_Filter_Cached = new();
@@ -147,11 +150,13 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
                     bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
                     bool? u_ = context.Operators.And(p_, t_);
                     return u_;
-                };
+                }
+                ;
                 IEnumerable<Patient> d_ = context.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);
                 Patient e_ = context.Operators.SingletonFrom<Patient>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<Date> _Patient_Birthdate_Cached = new();
@@ -165,7 +170,8 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
                 Patient a_ = this.Patient_Filter(context);
                 Date b_ = a_?.BirthDateElement;
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<int?> _Patient_Age_in_Years_Cached = new();
@@ -181,7 +187,8 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
                 CqlDate c_ = this.CurrentDate(context);
                 int? d_ = context.Operators.DurationBetween(b_, c_, "year");
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Patient_Older_Than_AgeThreshold_Cached = new();
@@ -196,7 +203,8 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
                 int? b_ = this.AgeThreshold(context);
                 bool? c_ = context.Operators.Greater(a_, b_);
                 return c_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions

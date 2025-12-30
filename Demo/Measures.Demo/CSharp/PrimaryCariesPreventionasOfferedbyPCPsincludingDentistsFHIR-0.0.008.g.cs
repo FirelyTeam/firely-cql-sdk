@@ -132,7 +132,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             {
                 object a_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR-0.0.008", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -150,7 +151,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
@@ -163,7 +165,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
@@ -176,7 +179,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             {
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
@@ -189,7 +193,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<CqlCode> _SDE_Sex_Cached = new();
@@ -202,7 +207,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             {
                 CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
@@ -247,10 +253,12 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                     bool? af_ = context.Operators.Equal(ae_, "finished");
                     bool? ag_ = context.Operators.And(ac_, af_);
                     return ag_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
                 return y_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Initial_Population_Cached = new();
@@ -282,7 +290,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 bool? u_ = context.Operators.Exists<Encounter>(t_);
                 bool? v_ = context.Operators.And(s_, u_);
                 return v_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_Cached = new();
@@ -295,7 +304,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             {
                 bool? a_ = this.Initial_Population(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_Exclusions_Cached = new();
@@ -308,7 +318,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             {
                 bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Stratification_1_Cached = new();
@@ -337,7 +348,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 bool? r_ = context.Operators.LessOrEqual(q_, 4);
                 bool? s_ = context.Operators.And(i_, r_);
                 return s_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Stratification_2_Cached = new();
@@ -359,7 +371,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 CqlInterval<int?> i_ = context.Operators.Interval(5, 11, true, true);
                 bool? j_ = context.Operators.In<int?>(h_, i_, default);
                 return j_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Stratification_3_Cached = new();
@@ -381,7 +394,8 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 CqlInterval<int?> i_ = context.Operators.Interval(12, 20, true, false);
                 bool? j_ = context.Operators.In<int?>(h_, i_, default);
                 return j_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Numerator_Cached = new();
@@ -405,11 +419,13 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                     bool? l_ = context.Operators.Equal(k_, "completed");
                     bool? m_ = context.Operators.And(i_, l_);
                     return m_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 bool? e_ = context.Operators.Exists<Procedure>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions

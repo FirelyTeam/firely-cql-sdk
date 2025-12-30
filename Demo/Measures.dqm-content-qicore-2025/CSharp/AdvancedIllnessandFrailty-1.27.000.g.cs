@@ -169,23 +169,24 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                 IEnumerable<DeviceRequest> d_ = context.Operators.Retrieve<DeviceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-devicerequest"));
                 IEnumerable<DeviceRequest> e_ = context.Operators.Union<DeviceRequest>(b_, d_);
                 IEnumerable<DeviceRequest> f_ = Status_1_15_000.Instance.isDeviceOrderPersonalUseDevices(context, e_);
-                bool? g_(DeviceRequest FrailtyDeviceOrder)
-                {
+
+                bool? g_(DeviceRequest FrailtyDeviceOrder) {
                     CqlInterval<CqlDateTime> ap_ = this.Measurement_Period(context);
                     FhirDateTime aq_ = FrailtyDeviceOrder?.AuthoredOnElement;
                     CqlDateTime ar_ = context.Operators.Convert<CqlDateTime>(aq_);
                     CqlInterval<CqlDateTime> as_ = QICoreCommon_4_0_000.Instance.toInterval(context, ar_ as object);
                     bool? at_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, as_, "day");
                     return at_;
-                };
+                }
+
                 IEnumerable<DeviceRequest> h_ = context.Operators.Where<DeviceRequest>(f_, g_);
                 bool? i_ = context.Operators.Exists<DeviceRequest>(h_);
                 CqlCode j_ = this.Medical_equipment_used(context);
                 IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(j_);
                 IEnumerable<Observation> l_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, k_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> m_ = Status_1_15_000.Instance.isAssessmentPerformed(context, l_);
-                bool? n_(Observation EquipmentUsed)
-                {
+
+                bool? n_(Observation EquipmentUsed) {
                     DataType au_ = EquipmentUsed?.Value;
                     object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
                     CqlValueSet aw_ = this.Frailty_Device(context);
@@ -198,7 +199,8 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                     bool? bd_ = context.Operators.In<CqlDateTime>(bb_, bc_, "day");
                     bool? be_ = context.Operators.And(ax_, bd_);
                     return be_;
-                };
+                }
+
                 IEnumerable<Observation> o_ = context.Operators.Where<Observation>(m_, n_);
                 bool? p_ = context.Operators.Exists<Observation>(o_);
                 bool? q_ = context.Operators.Or(i_, p_);
@@ -207,42 +209,45 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                 IEnumerable<Condition> u_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> v_ = context.Operators.Union<object>(s_ as IEnumerable<object>, u_ as IEnumerable<object>);
                 IEnumerable<object> w_ = Status_1_15_000.Instance.verified(context, v_);
-                bool? x_(object FrailtyDiagnosis)
-                {
+
+                bool? x_(object FrailtyDiagnosis) {
                     CqlInterval<CqlDateTime> bf_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, FrailtyDiagnosis);
                     CqlInterval<CqlDateTime> bg_ = this.Measurement_Period(context);
                     bool? bh_ = context.Operators.Overlaps(bf_, bg_, "day");
                     return bh_;
-                };
+                }
+
                 IEnumerable<object> y_ = context.Operators.Where<object>(w_, x_);
                 bool? z_ = context.Operators.Exists<object>(y_);
                 bool? aa_ = context.Operators.Or(q_, z_);
                 CqlValueSet ab_ = this.Frailty_Encounter(context);
                 IEnumerable<Encounter> ac_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> ad_ = Status_1_15_000.Instance.isEncounterPerformed(context, ac_);
-                bool? ae_(Encounter FrailtyEncounter)
-                {
+
+                bool? ae_(Encounter FrailtyEncounter) {
                     Period bi_ = FrailtyEncounter?.Period;
                     CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bi_);
                     CqlInterval<CqlDateTime> bk_ = this.Measurement_Period(context);
                     bool? bl_ = context.Operators.Overlaps(bj_, bk_, "day");
                     return bl_;
-                };
+                }
+
                 IEnumerable<Encounter> af_ = context.Operators.Where<Encounter>(ad_, ae_);
                 bool? ag_ = context.Operators.Exists<Encounter>(af_);
                 bool? ah_ = context.Operators.Or(aa_, ag_);
                 CqlValueSet ai_ = this.Frailty_Symptom(context);
                 IEnumerable<Observation> aj_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
                 IEnumerable<Observation> ak_ = Status_1_15_000.Instance.isSymptom(context, aj_);
-                bool? al_(Observation FrailtySymptom)
-                {
+
+                bool? al_(Observation FrailtySymptom) {
                     DataType bm_ = FrailtySymptom?.Effective;
                     object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
                     CqlInterval<CqlDateTime> bo_ = QICoreCommon_4_0_000.Instance.toInterval(context, bn_);
                     CqlInterval<CqlDateTime> bp_ = this.Measurement_Period(context);
                     bool? bq_ = context.Operators.Overlaps(bo_, bp_, "day");
                     return bq_;
-                };
+                }
+
                 IEnumerable<Observation> am_ = context.Operators.Where<Observation>(ak_, al_);
                 bool? an_ = context.Operators.Exists<Observation>(am_);
                 bool? ao_ = context.Operators.Or(ah_, an_);
@@ -263,8 +268,8 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
                 IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
-                bool? g_(object AdvancedIllnessDiagnosis)
-                {
+
+                bool? g_(object AdvancedIllnessDiagnosis) {
                     CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, AdvancedIllnessDiagnosis);
                     CqlDateTime k_ = context.Operators.Start(j_);
                     CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
@@ -275,7 +280,8 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                     CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
                     bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, "day");
                     return s_;
-                };
+                }
+
                 IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
                 bool? i_ = context.Operators.Exists<object>(h_);
                 return i_;
@@ -293,11 +299,11 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                 CqlValueSet a_ = this.Dementia_Medications(context);
                 IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
                 IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-                IEnumerable<MedicationRequest> d_(MedicationRequest MR)
-                {
+
+                IEnumerable<MedicationRequest> d_(MedicationRequest MR) {
                     IEnumerable<Medication> k_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                    bool? l_(Medication M)
-                    {
+
+                    bool? l_(Medication M) {
                         object p_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                         object q_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                         IEnumerable<string> r_ = context.Operators.Split((string)q_, "/");
@@ -309,18 +315,19 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                         bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
                         bool? y_ = context.Operators.And(t_, x_);
                         return y_;
-                    };
+                    }
+
                     IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
-                    MedicationRequest n_(Medication M) =>
-                    MR;
+                    MedicationRequest n_(Medication M) => MR;
                     IEnumerable<MedicationRequest> o_ = context.Operators.Select<Medication, MedicationRequest>(m_, n_);
                     return o_;
-                };
+                }
+
                 IEnumerable<MedicationRequest> e_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(c_, d_);
                 IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
                 IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationActive(context, f_);
-                bool? h_(MedicationRequest DementiaMedication)
-                {
+
+                bool? h_(MedicationRequest DementiaMedication) {
                     CqlInterval<CqlDate> z_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DementiaMedication);
                     CqlDate aa_ = z_?.low;
                     CqlDateTime ab_ = context.Operators.ConvertDateToDateTime(aa_);
@@ -337,7 +344,8 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                     CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(an_, ap_, true, true);
                     bool? ar_ = context.Operators.Overlaps(aj_, aq_, "day");
                     return ar_;
-                };
+                }
+
                 IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(g_, h_);
                 bool? j_ = context.Operators.Exists<MedicationRequest>(i_);
                 return j_;
@@ -429,8 +437,8 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                 IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(j_);
                 IEnumerable<Observation> l_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, k_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> m_ = Status_1_15_000.Instance.isAssessmentPerformed(context, l_);
-                bool? n_(Observation HousingStatus)
-                {
+
+                bool? n_(Observation HousingStatus) {
                     DataType y_ = HousingStatus?.Effective;
                     object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
                     CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_);
@@ -439,30 +447,33 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                     CqlDateTime ad_ = context.Operators.End(ac_);
                     bool? ae_ = context.Operators.SameOrBefore(ab_, ad_, "day");
                     return ae_;
-                };
+                }
+
                 IEnumerable<Observation> o_ = context.Operators.Where<Observation>(m_, n_);
-                object p_(Observation @this)
-                {
+
+                object p_(Observation @this) {
                     DataType af_ = @this?.Effective;
                     object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
                     CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.toInterval(context, ag_);
                     CqlDateTime ai_ = context.Operators.End(ah_);
                     return ai_;
-                };
+                }
+
                 IEnumerable<Observation> q_ = context.Operators.SortBy<Observation>(o_, p_, System.ComponentModel.ListSortDirection.Ascending);
                 Observation r_ = context.Operators.Last<Observation>(q_);
                 Observation[] s_ = [
                     r_,
                 ];
-                bool? t_(Observation LastHousingStatus)
-                {
+
+                bool? t_(Observation LastHousingStatus) {
                     DataType aj_ = LastHousingStatus?.Value;
                     object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
                     CqlCode al_ = this.Lives_in_nursing_home__finding_(context);
                     CqlConcept am_ = context.Operators.ConvertCodeToConcept(al_);
                     bool? an_ = context.Operators.Equivalent(ak_ as CqlConcept, am_);
                     return an_;
-                };
+                }
+
                 IEnumerable<Observation> u_ = context.Operators.Where<Observation>((IEnumerable<Observation>)s_, t_);
                 Observation v_ = context.Operators.SingletonFrom<Observation>(u_);
                 bool? w_ = context.Operators.Not((bool?)(v_ is null));

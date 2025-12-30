@@ -95,7 +95,8 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
@@ -113,30 +114,35 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                         Patient n_ = this.Patient(context);
                         bool o_ = n_ is DomainResource;
                         return o_;
-                    };
+                    }
+                    ;
                     if (m_())
                     {
                         Patient p_ = this.Patient(context);
                         return (IEnumerable<Extension>)((p_ as DomainResource).Extension);
                     }
+
                     else
                     {
                         return default;
                     }
-                };
+                }
+                ;
                 bool? b_(Extension Extension)
                 {
                     FhirUri q_ = Extension?.UrlElement;
                     string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
                     bool? s_ = context.Operators.Equal(r_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
                     return s_;
-                };
+                }
+                ;
                 IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_(), b_);
                 IEnumerable<Extension> d_(Extension Extension)
                 {
                     List<Extension> t_ = Extension?.Extension;
                     return (IEnumerable<Extension>)t_;
-                };
+                }
+                ;
                 IEnumerable<IEnumerable<Extension>> e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
                 IEnumerable<IEnumerable<Extension>> f_ = context.Operators.Distinct<IEnumerable<Extension>>(e_);
                 IEnumerable<Extension> g_ = context.Operators.Flatten<Extension>(f_);
@@ -149,17 +155,20 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                     bool? z_ = context.Operators.Equal(y_, "detailed");
                     bool? aa_ = context.Operators.Or(w_, z_);
                     return aa_;
-                };
+                }
+                ;
                 IEnumerable<Extension> i_ = context.Operators.Where<Extension>(g_, h_);
                 Coding j_(Extension E)
                 {
                     DataType ab_ = E?.Value;
                     return ab_ as Coding;
-                };
+                }
+                ;
                 IEnumerable<Coding> k_ = context.Operators.Select<Extension, Coding>(i_, j_);
                 IEnumerable<Coding> l_ = context.Operators.Distinct<Coding>(k_);
                 return l_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
@@ -178,11 +187,13 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                     Period g_ = Payer?.Period;
                     (CqlTupleMetadata, CodeableConcept code, Period period)? h_ = (CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO, f_, g_);
                     return h_;
-                };
+                }
+                ;
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> d_ = context.Operators.Select<Coverage, (CqlTupleMetadata, CodeableConcept code, Period period)?>(b_, c_);
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> e_ = context.Operators.Distinct<(CqlTupleMetadata, CodeableConcept code, Period period)?>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
@@ -200,30 +211,35 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                         Patient n_ = this.Patient(context);
                         bool o_ = n_ is DomainResource;
                         return o_;
-                    };
+                    }
+                    ;
                     if (m_())
                     {
                         Patient p_ = this.Patient(context);
                         return (IEnumerable<Extension>)((p_ as DomainResource).Extension);
                     }
+
                     else
                     {
                         return default;
                     }
-                };
+                }
+                ;
                 bool? b_(Extension Extension)
                 {
                     FhirUri q_ = Extension?.UrlElement;
                     string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
                     bool? s_ = context.Operators.Equal(r_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
                     return s_;
-                };
+                }
+                ;
                 IEnumerable<Extension> c_ = context.Operators.Where<Extension>(a_(), b_);
                 IEnumerable<Extension> d_(Extension Extension)
                 {
                     List<Extension> t_ = Extension?.Extension;
                     return (IEnumerable<Extension>)t_;
-                };
+                }
+                ;
                 IEnumerable<IEnumerable<Extension>> e_ = context.Operators.Select<Extension, IEnumerable<Extension>>(c_, d_);
                 IEnumerable<IEnumerable<Extension>> f_ = context.Operators.Distinct<IEnumerable<Extension>>(e_);
                 IEnumerable<Extension> g_ = context.Operators.Flatten<Extension>(f_);
@@ -236,17 +252,20 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                     bool? z_ = context.Operators.Equal(y_, "detailed");
                     bool? aa_ = context.Operators.Or(w_, z_);
                     return aa_;
-                };
+                }
+                ;
                 IEnumerable<Extension> i_ = context.Operators.Where<Extension>(g_, h_);
                 Coding j_(Extension E)
                 {
                     DataType ab_ = E?.Value;
                     return ab_ as Coding;
-                };
+                }
+                ;
                 IEnumerable<Coding> k_ = context.Operators.Select<Extension, Coding>(i_, j_);
                 IEnumerable<Coding> l_ = context.Operators.Distinct<Coding>(k_);
                 return l_;
-            });
+            }
+            );
 
 
     private Cached<CqlCode> _SDE_Sex_Cached = new();
@@ -266,7 +285,8 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                         string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
                         bool? g_ = context.Operators.Equal(f_, "male");
                         return g_ ?? false;
-                    };
+                    }
+                    ;
                     bool c_()
                     {
                         Patient h_ = this.Patient(context);
@@ -274,7 +294,8 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                         string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
                         bool? k_ = context.Operators.Equal(j_, "female");
                         return k_ ?? false;
-                    };
+                    }
+                    ;
                     if (b_())
                     {
                         return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Male");
@@ -287,9 +308,11 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
                     {
                         return default;
                     }
-                };
+                }
+                ;
                 return a_();
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions
@@ -297,8 +320,8 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new(
-      [typeof(CodeableConcept), typeof(Period)],
-      ["code", "period"]);
+       [typeof(CodeableConcept), typeof(Period)],
+       ["code", "period"]);
 
     #endregion CqlTupleMetadata Properties
 

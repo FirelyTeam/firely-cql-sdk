@@ -207,8 +207,8 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             {
                 CqlValueSet a_ = this.Encounter_Inpatient(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? c_(Encounter InpatientEncounter)
-                {
+
+                bool? c_(Encounter InpatientEncounter) {
                     Patient e_ = this.Patient(context);
                     Date f_ = e_?.BirthDateElement;
                     string g_ = f_?.Value;
@@ -230,7 +230,8 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                     bool? x_ = context.Operators.Equal(w_, "finished");
                     bool? y_ = context.Operators.And(t_, x_);
                     return y_;
-                };
+                }
+
                 IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
                 return d_;
             });
@@ -271,13 +272,14 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-                bool? b_(Encounter InpatientHospitalization)
-                {
+
+                bool? b_(Encounter InpatientHospitalization) {
                     CqlValueSet d_ = this.Pressure_Injury_Deep_Tissue_Diagnoses(context);
                     CqlValueSet e_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
                     bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
                     return f_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -300,8 +302,8 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
         CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
         bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, default);
         bool? j_ = context.Operators.And(d_, i_);
-        bool? k_()
-        {
+
+        bool? k_() {
             if (observation is Observation)
             {
                 DataType m_ = (observation as Observation)?.Value;
@@ -319,8 +321,9 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             else
             {
                 return default;
-            }
-        };
+            };
+        }
+
         bool? l_ = context.Operators.And(j_, k_());
         return l_;
     }
@@ -337,12 +340,13 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                 CqlCode a_ = this.Physical_findings_of_Skin(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-                bool? d_(Observation ClinicalSkinExam)
-                {
+
+                bool? d_(Observation ClinicalSkinExam) {
                     CqlValueSet f_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable(context);
                     bool? g_ = this.isIn(context, ClinicalSkinExam as object, f_);
                     return g_;
-                };
+                }
+
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 return e_;
             });
@@ -359,12 +363,13 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                 CqlCode a_ = this.Physical_findings_of_Skin(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
-                bool? d_(Observation ObsSkinExam)
-                {
+
+                bool? d_(Observation ObsSkinExam) {
                     CqlValueSet f_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable(context);
                     bool? g_ = this.isIn(context, ObsSkinExam as object, f_);
                     return g_;
-                };
+                }
+
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 return e_;
             });
@@ -394,11 +399,11 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-                IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
-                {
+
+                IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
                     IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
-                    bool? e_(object SkinExam)
-                    {
+
+                    bool? e_(object SkinExam) {
                         object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
                         object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
                         CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
@@ -411,13 +416,14 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                         CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
                         bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
                         return t_;
-                    };
+                    }
+
                     IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-                    Encounter g_(object SkinExam) =>
-                    InpatientHospitalization;
+                    Encounter g_(object SkinExam) => InpatientHospitalization;
                     IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -447,13 +453,14 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-                bool? b_(Encounter InpatientHospitalization)
-                {
+
+                bool? b_(Encounter InpatientHospitalization) {
                     CqlValueSet d_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses(context);
                     CqlValueSet e_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
                     bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
                     return f_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -468,11 +475,11 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-                IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
-                {
+
+                IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
                     IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
-                    bool? e_(object SkinExam)
-                    {
+
+                    bool? e_(object SkinExam) {
                         object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
                         object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
                         CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
@@ -485,13 +492,14 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                         CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
                         bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
                         return t_;
-                    };
+                    }
+
                     IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-                    Encounter g_(object SkinExam) =>
-                    InpatientHospitalization;
+                    Encounter g_(object SkinExam) => InpatientHospitalization;
                     IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -536,13 +544,14 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-                bool? b_(Encounter InpatientHospitalization)
-                {
+
+                bool? b_(Encounter InpatientHospitalization) {
                     CqlValueSet d_ = this.Pressure_Injury_Deep_Tissue_Diagnoses(context);
                     CqlValueSet e_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
                     bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
                     return f_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -557,11 +566,11 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-                IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
-                {
+
+                IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
                     IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
-                    bool? e_(object SkinExam)
-                    {
+
+                    bool? e_(object SkinExam) {
                         object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
                         object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
                         CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
@@ -574,13 +583,14 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                         CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
                         bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
                         return t_;
-                    };
+                    }
+
                     IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-                    Encounter g_(object SkinExam) =>
-                    InpatientHospitalization;
+                    Encounter g_(object SkinExam) => InpatientHospitalization;
                     IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -610,13 +620,14 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-                bool? b_(Encounter InpatientHospitalization)
-                {
+
+                bool? b_(Encounter InpatientHospitalization) {
                     CqlValueSet d_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses(context);
                     CqlValueSet e_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
                     bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
                     return f_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -631,11 +642,11 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-                IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
-                {
+
+                IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
                     IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
-                    bool? e_(object SkinExam)
-                    {
+
+                    bool? e_(object SkinExam) {
                         object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
                         object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
                         CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
@@ -648,13 +659,14 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                         CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
                         bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
                         return t_;
-                    };
+                    }
+
                     IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-                    Encounter g_(object SkinExam) =>
-                    InpatientHospitalization;
+                    Encounter g_(object SkinExam) => InpatientHospitalization;
                     IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });

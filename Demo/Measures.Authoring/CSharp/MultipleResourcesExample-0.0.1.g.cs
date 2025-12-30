@@ -105,7 +105,8 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Observation>> _Smoking_status_observation_Cached = new();
@@ -129,10 +130,12 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
                     ];
                     bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
                     return i_;
-                };
+                }
+                ;
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Condition>> _Lung_cancer_diagnosis_Cached = new();
@@ -152,10 +155,12 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
                     CqlValueSet g_ = this.Condition_Clinical_Status(context);
                     bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
                     return h_;
-                };
+                }
+                ;
                 IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions

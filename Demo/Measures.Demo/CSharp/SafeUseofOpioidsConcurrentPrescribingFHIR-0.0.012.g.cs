@@ -128,7 +128,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             {
                 object a_ = context.ResolveParameter("SafeUseofOpioidsConcurrentPrescribingFHIR-0.0.012", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -146,7 +147,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18_Cached = new();
@@ -175,10 +177,12 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     bool? p_ = context.Operators.Equal(o_, "finished");
                     bool? q_ = context.Operators.And(m_, p_);
                     return q_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
@@ -213,13 +217,15 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                             bool? al_ = context.Operators.ConceptInValueSet(aj_, ak_);
                             bool? am_ = context.Operators.And(ah_, al_);
                             return am_;
-                        };
+                        }
+                        ;
                         IEnumerable<Medication> y_ = context.Operators.Where<Medication>(w_, x_);
                         MedicationRequest z_(Medication M) =>
                         MR;
                         IEnumerable<MedicationRequest> aa_ = context.Operators.Select<Medication, MedicationRequest>(y_, z_);
                         return aa_;
-                    };
+                    }
+                    ;
                     IEnumerable<MedicationRequest> h_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(f_, g_);
                     IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(e_, h_);
                     CqlValueSet j_ = this.Schedule_IV_Benzodiazepines(context);
@@ -242,13 +248,15 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                             bool? bc_ = context.Operators.ConceptInValueSet(ba_, bb_);
                             bool? bd_ = context.Operators.And(ay_, bc_);
                             return bd_;
-                        };
+                        }
+                        ;
                         IEnumerable<Medication> ap_ = context.Operators.Where<Medication>(an_, ao_);
                         MedicationRequest aq_(Medication M) =>
                         MR;
                         IEnumerable<MedicationRequest> ar_ = context.Operators.Select<Medication, MedicationRequest>(ap_, aq_);
                         return ar_;
-                    };
+                    }
+                    ;
                     IEnumerable<MedicationRequest> n_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(f_, m_);
                     IEnumerable<MedicationRequest> o_ = context.Operators.Union<MedicationRequest>(k_, n_);
                     bool? p_(MedicationRequest Medications)
@@ -261,11 +269,13 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                             CqlConcept bk_ = context.Operators.ConvertCodeToConcept(bj_);
                             bool? bl_ = context.Operators.Equivalent(bi_, bk_);
                             return bl_;
-                        };
+                        }
+                        ;
                         IEnumerable<CodeableConcept> bg_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)be_, bf_);
                         bool? bh_ = context.Operators.Exists<CodeableConcept>(bg_);
                         return bh_;
-                    };
+                    }
+                    ;
                     IEnumerable<MedicationRequest> q_ = context.Operators.Where<MedicationRequest>(o_, p_);
                     IEnumerable<MedicationRequest> r_ = context.Operators.Union<MedicationRequest>(i_, q_);
                     bool? s_(MedicationRequest OpioidOrBenzodiazepineDischargeMedication)
@@ -284,16 +294,19 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         bool? bx_ = context.Operators.Equal(bw_, "plan");
                         bool? by_ = context.Operators.And(bu_, bx_);
                         return by_;
-                    };
+                    }
+                    ;
                     IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(r_, s_);
                     Encounter u_(MedicationRequest OpioidOrBenzodiazepineDischargeMedication) =>
                     InpatientEncounter;
                     IEnumerable<Encounter> v_ = context.Operators.Select<MedicationRequest, Encounter>(t_, u_);
                     return v_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
@@ -306,7 +319,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             {
                 IEnumerable<Encounter> a_ = this.Initial_Population(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
@@ -319,7 +333,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
@@ -332,7 +347,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             {
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
@@ -345,7 +361,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<CqlCode> _SDE_Sex_Cached = new();
@@ -358,7 +375,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             {
                 CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
@@ -382,19 +400,22 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
                         bool? w_ = context.Operators.In<CqlDateTime>(t_, v_, default);
                         return w_;
-                    };
+                    }
+                    ;
                     IEnumerable<MedicationRequest> m_ = context.Operators.Where<MedicationRequest>(k_, l_);
                     object n_(MedicationRequest Opioids)
                     {
                         DataType x_ = Opioids?.Medication;
                         return x_;
-                    };
+                    }
+                    ;
                     IEnumerable<object> o_ = context.Operators.Select<MedicationRequest, object>(m_, n_);
                     IEnumerable<object> p_ = context.Operators.Distinct<object>(o_);
                     int? q_ = context.Operators.Count<object>(p_);
                     bool? r_ = context.Operators.GreaterOrEqual(q_, 2);
                     return r_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 IEnumerable<Encounter> e_(Encounter InpatientEncounter)
                 {
@@ -408,13 +429,15 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ag_);
                         bool? ai_ = context.Operators.In<CqlDateTime>(af_, ah_, default);
                         return ai_;
-                    };
+                    }
+                    ;
                     IEnumerable<MedicationRequest> ab_ = context.Operators.Where<MedicationRequest>(z_, aa_);
                     Encounter ac_(MedicationRequest OpioidsDischarge) =>
                     InpatientEncounter;
                     IEnumerable<Encounter> ad_ = context.Operators.Select<MedicationRequest, Encounter>(ab_, ac_);
                     return ad_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
                 IEnumerable<Encounter> g_(Encounter InpatientEncounter)
                 {
@@ -428,17 +451,20 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ar_);
                         bool? at_ = context.Operators.In<CqlDateTime>(aq_, as_, default);
                         return at_;
-                    };
+                    }
+                    ;
                     IEnumerable<MedicationRequest> am_ = context.Operators.Where<MedicationRequest>(ak_, al_);
                     Encounter an_(MedicationRequest BenzodiazepinesDischarge) =>
                     InpatientEncounter;
                     IEnumerable<Encounter> ao_ = context.Operators.Select<MedicationRequest, Encounter>(am_, an_);
                     return ao_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> h_ = context.Operators.SelectMany<Encounter, Encounter>(f_, g_);
                 IEnumerable<Encounter> i_ = context.Operators.Union<Encounter>(c_, h_);
                 return i_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Denominator_Exclusion_Cached = new();
@@ -461,7 +487,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ad_);
                         bool? af_ = context.Operators.Overlaps(ac_, ae_, default);
                         return af_;
-                    };
+                    }
+                    ;
                     IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
                     bool? k_ = context.Operators.Exists<Condition>(j_);
                     CqlValueSet l_ = this.Palliative_or_Hospice_Care(context);
@@ -478,7 +505,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         bool? an_ = context.Operators.Equal(am_, "order");
                         bool? ao_ = context.Operators.And(ak_, an_);
                         return ao_;
-                    };
+                    }
+                    ;
                     IEnumerable<ServiceRequest> o_ = context.Operators.Where<ServiceRequest>(m_, n_);
                     bool? p_ = context.Operators.Exists<ServiceRequest>(o_);
                     bool? q_ = context.Operators.Or(k_, p_);
@@ -491,7 +519,8 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ar_);
                         bool? at_ = context.Operators.Overlaps(aq_, as_, default);
                         return at_;
-                    };
+                    }
+                    ;
                     IEnumerable<Procedure> u_ = context.Operators.Where<Procedure>(s_, t_);
                     bool? v_ = context.Operators.Exists<Procedure>(u_);
                     bool? w_ = context.Operators.Or(q_, v_);
@@ -514,19 +543,22 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                         bool? bj_ = context.Operators.ConceptInValueSet(bh_, bi_);
                         bool? bk_ = context.Operators.Or(be_, bj_);
                         return bk_;
-                    };
+                    }
+                    ;
                     IEnumerable<Encounter> z_ = context.Operators.Where<Encounter>(x_, y_);
                     bool? aa_ = context.Operators.Exists<Encounter>(z_);
                     bool? ab_ = context.Operators.Or(w_, aa_);
                     return ab_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 Encounter d_(Encounter InpatientEncounter) =>
                 InpatientEncounter;
                 IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
                 IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
                 return f_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions

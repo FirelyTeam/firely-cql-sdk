@@ -75,7 +75,8 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     [CqlFunctionDefinition("Active Allergy")]
@@ -89,10 +90,12 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
             bool? g_ = context.Operators.Equal(d_, f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<AllergyIntolerance> b_ = context.Operators.Where<AllergyIntolerance>(Allergy, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Active Condition")]
@@ -106,10 +109,12 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
             bool? g_ = context.Operators.Equal(d_, f_);
             return g_;
-        };
+        }
+        ;
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Finished Encounter")]
@@ -121,10 +126,12 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             string d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             bool? e_ = context.Operators.Equal(d_, "finished");
             return e_;
-        };
+        }
+        ;
         IEnumerable<Encounter> b_ = context.Operators.Where<Encounter>(Enc, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Completed Immunization")]
@@ -136,10 +143,12 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             string d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             bool? e_ = context.Operators.Equal(d_, "completed");
             return e_;
-        };
+        }
+        ;
         IEnumerable<Immunization> b_ = context.Operators.Where<Immunization>(Immunization, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Dispensed Medication")]
@@ -151,10 +160,12 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             string d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             bool? e_ = context.Operators.Equal(d_, "completed");
             return e_;
-        };
+        }
+        ;
         IEnumerable<MedicationDispense> b_ = context.Operators.Where<MedicationDispense>(Med, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Active Medication")]
@@ -169,10 +180,12 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             ];
             bool? f_ = context.Operators.In<string>(d_, (IEnumerable<string>)e_);
             return f_;
-        };
+        }
+        ;
         IEnumerable<MedicationRequest> b_ = context.Operators.Where<MedicationRequest>(Med, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Completed Procedure")]
@@ -184,10 +197,12 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             string d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             bool? e_ = context.Operators.Equal(d_, "completed");
             return e_;
-        };
+        }
+        ;
         IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("Completed or Ongoing Procedure")]
@@ -203,10 +218,12 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
             ];
             bool? f_ = context.Operators.In<string>(d_, (IEnumerable<string>)e_);
             return f_;
-        };
+        }
+        ;
         IEnumerable<Procedure> b_ = context.Operators.Where<Procedure>(Proc, a_);
         return b_;
     }
+
 
 
     #endregion Functions and Expressions

@@ -167,8 +167,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                 CqlValueSet l_ = this.Office_Visit(context);
                 IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
-                bool? o_(Encounter Encounter)
-                {
+
+                bool? o_(Encounter Encounter) {
                     CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
                     Period r_ = Encounter?.Period;
                     CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
@@ -179,7 +179,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                     bool? x_ = context.Operators.Equal(w_, "finished");
                     bool? y_ = context.Operators.And(t_, x_);
                     return y_;
-                };
+                }
+
                 IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
                 return p_;
             });
@@ -237,8 +238,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                 IEnumerable<CqlCode> d_ = context.Operators.ToList<CqlCode>(c_);
                 IEnumerable<Observation> e_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, d_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
                 IEnumerable<Observation> f_ = context.Operators.Union<Observation>(b_, e_);
-                bool? g_(Observation HIVTest)
-                {
+
+                bool? g_(Observation HIVTest) {
                     DataType j_ = HIVTest?.Value;
                     object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
                     bool? l_ = context.Operators.Not((bool?)(k_ is null));
@@ -276,7 +277,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                     bool? au_ = context.Operators.Or(ap_, at_);
                     bool? av_ = context.Operators.And(ag_, au_);
                     return av_;
-                };
+                }
+
                 IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
                 bool? i_ = context.Operators.Exists<Observation>(h_);
                 return i_;
@@ -339,8 +341,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-                bool? f_(object HIVDiagnosis)
-                {
+
+                bool? f_(object HIVDiagnosis) {
                     CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDiagnosis);
                     CqlDateTime j_ = context.Operators.Start(i_);
                     CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
@@ -349,7 +351,8 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                     bool? n_ = this.isVerified(context, HIVDiagnosis);
                     bool? o_ = context.Operators.And(m_, n_);
                     return o_;
-                };
+                }
+
                 IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
                 bool? h_ = context.Operators.Exists<object>(g_);
                 return h_;

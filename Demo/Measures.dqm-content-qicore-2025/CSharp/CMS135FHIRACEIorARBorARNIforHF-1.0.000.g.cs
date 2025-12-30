@@ -222,11 +222,12 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
             {
                 CqlValueSet a_ = this.ACE_Inhibitor_or_ARB_or_ARNI(context);
                 IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-                bool? c_(MedicationRequest ACEIOrARBOrARNIOrdered)
-                {
+
+                bool? c_(MedicationRequest ACEIOrARBOrARNIOrdered) {
                     bool? f_ = AHAOverall_4_1_000.Instance.isOrderedDuringHeartFailureOutpatientEncounter(context, ACEIOrARBOrARNIOrdered);
                     return f_;
-                };
+                }
+
                 IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
                 bool? e_ = context.Operators.Exists<MedicationRequest>(d_);
                 return e_;
@@ -243,11 +244,12 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
             {
                 CqlValueSet a_ = this.ACE_Inhibitor_or_ARB_or_ARNI(context);
                 IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-                bool? c_(MedicationRequest ActiveACEIOrARBOrARNI)
-                {
+
+                bool? c_(MedicationRequest ActiveACEIOrARBOrARNI) {
                     bool? f_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveACEIOrARBOrARNI);
                     return f_;
-                };
+                }
+
                 IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
                 bool? e_ = context.Operators.Exists<MedicationRequest>(d_);
                 return e_;
@@ -279,39 +281,43 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
             {
                 CqlValueSet a_ = this.ACE_Inhibitor_or_ARB_or_ARNI(context);
                 IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-                bool? c_(MedicationRequest NoACEIOrARBOrARNIOrdered)
-                {
+
+                bool? c_(MedicationRequest NoACEIOrARBOrARNIOrdered) {
                     bool? f_ = AHAOverall_4_1_000.Instance.isMedicationNotRequestedOrderedDuringHeartFailureOutpatientEncounter(context, NoACEIOrARBOrARNIOrdered);
                     List<CodeableConcept> g_ = NoACEIOrARBOrARNIOrdered?.ReasonCode;
-                    CqlConcept h_(CodeableConcept @this)
-                    {
+
+                    CqlConcept h_(CodeableConcept @this) {
                         CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                         return y_;
-                    };
+                    }
+
                     IEnumerable<CqlConcept> i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_, h_);
                     CqlValueSet j_ = this.Medical_Reason(context);
                     bool? k_ = context.Operators.ConceptsInValueSet(i_, j_);
-                    CqlConcept m_(CodeableConcept @this)
-                    {
+
+                    CqlConcept m_(CodeableConcept @this) {
                         CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                         return z_;
-                    };
+                    }
+
                     IEnumerable<CqlConcept> n_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_, m_);
                     CqlValueSet o_ = this.Patient_Reason(context);
                     bool? p_ = context.Operators.ConceptsInValueSet(n_, o_);
                     bool? q_ = context.Operators.Or(k_, p_);
-                    CqlConcept s_(CodeableConcept @this)
-                    {
+
+                    CqlConcept s_(CodeableConcept @this) {
                         CqlConcept aa_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                         return aa_;
-                    };
+                    }
+
                     IEnumerable<CqlConcept> t_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_, s_);
                     CqlValueSet u_ = this.Patient_Reason_for_ACE_Inhibitor_or_ARB_Decline(context);
                     bool? v_ = context.Operators.ConceptsInValueSet(t_, u_);
                     bool? w_ = context.Operators.Or(q_, v_);
                     bool? x_ = context.Operators.And(f_, w_);
                     return x_;
-                };
+                }
+
                 IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
                 bool? e_ = context.Operators.Exists<MedicationRequest>(d_);
                 return e_;
@@ -340,11 +346,12 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                 IEnumerable<AllergyIntolerance> l_ = context.Operators.Retrieve<AllergyIntolerance>(new RetrieveParameters(default, default, k_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance"));
                 IEnumerable<AllergyIntolerance> m_ = context.Operators.Union<AllergyIntolerance>(i_, l_);
                 IEnumerable<AllergyIntolerance> n_ = context.Operators.Union<AllergyIntolerance>(f_, m_);
-                bool? o_(AllergyIntolerance ACEIOrARBOrARNIAllergyIntolerance)
-                {
+
+                bool? o_(AllergyIntolerance ACEIOrARBOrARNIAllergyIntolerance) {
                     bool? r_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ACEIOrARBOrARNIAllergyIntolerance);
                     return r_;
-                };
+                }
+
                 IEnumerable<AllergyIntolerance> p_ = context.Operators.Where<AllergyIntolerance>(n_, o_);
                 bool? q_ = context.Operators.Exists<AllergyIntolerance>(p_);
                 return q_;
@@ -368,11 +375,12 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                 IEnumerable<object> h_ = context.Operators.Union<object>(e_ as IEnumerable<object>, g_ as IEnumerable<object>);
                 IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> k_ = context.Operators.Union<object>(h_ as IEnumerable<object>, j_ as IEnumerable<object>);
-                bool? l_(object ACEIOrARBAllergyOrIntoleranceDiagnosis)
-                {
+
+                bool? l_(object ACEIOrARBAllergyOrIntoleranceDiagnosis) {
                     bool? o_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ACEIOrARBAllergyOrIntoleranceDiagnosis);
                     return o_;
-                };
+                }
+
                 IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
                 bool? n_ = context.Operators.Exists<object>(m_);
                 return n_;
@@ -391,11 +399,11 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-                IEnumerable<object> f_(object PregnancyDiagnosis)
-                {
+
+                IEnumerable<object> f_(object PregnancyDiagnosis) {
                     IEnumerable<Encounter> n_ = AHAOverall_4_1_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
-                    bool? o_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
-                    {
+
+                    bool? o_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) {
                         CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDiagnosis);
                         CqlDateTime t_ = context.Operators.Start(s_);
                         Period u_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
@@ -414,21 +422,22 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                         bool? aj_ = AHAOverall_4_1_000.Instance.isVerified(context, PregnancyDiagnosis);
                         bool? ak_ = context.Operators.And(ai_, aj_);
                         return ak_;
-                    };
+                    }
+
                     IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
-                    object q_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
-                    PregnancyDiagnosis;
+                    object q_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => PregnancyDiagnosis;
                     IEnumerable<object> r_ = context.Operators.Select<Encounter, object>(p_, q_);
                     return r_;
-                };
+                }
+
                 IEnumerable<object> g_ = context.Operators.SelectMany<object, object>(e_, f_);
                 bool? h_ = context.Operators.Exists<object>(g_);
                 IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-pregnancystatus"));
-                IEnumerable<Observation> j_(Observation PregnantObservation)
-                {
+
+                IEnumerable<Observation> j_(Observation PregnantObservation) {
                     IEnumerable<Encounter> al_ = AHAOverall_4_1_000.Instance.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
-                    bool? am_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter)
-                    {
+
+                    bool? am_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) {
                         DataType aq_ = PregnantObservation?.Effective;
                         CqlDateTime ar_ = context.Operators.LateBoundProperty<CqlDateTime>(aq_, "value");
                         CqlInterval<CqlDateTime> as_ = QICoreCommon_4_0_000.Instance.toInterval(context, ar_ as object);
@@ -463,13 +472,14 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                         bool? bt_ = context.Operators.And(bm_, bs_);
                         bool? bu_ = context.Operators.And(bi_, bt_);
                         return bu_;
-                    };
+                    }
+
                     IEnumerable<Encounter> an_ = context.Operators.Where<Encounter>(al_, am_);
-                    Observation ao_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
-                    PregnantObservation;
+                    Observation ao_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => PregnantObservation;
                     IEnumerable<Observation> ap_ = context.Operators.Select<Encounter, Observation>(an_, ao_);
                     return ap_;
-                };
+                }
+
                 IEnumerable<Observation> k_ = context.Operators.SelectMany<Observation, Observation>(i_, j_);
                 bool? l_ = context.Operators.Exists<Observation>(k_);
                 bool? m_ = context.Operators.Or(h_, l_);
@@ -491,11 +501,12 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                 IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-                bool? h_(object RenalFailureDueToACEI)
-                {
+
+                bool? h_(object RenalFailureDueToACEI) {
                     bool? k_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, RenalFailureDueToACEI);
                     return k_;
-                };
+                }
+
                 IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
                 bool? j_ = context.Operators.Exists<object>(i_);
                 return j_;

@@ -69,8 +69,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("comment", "If the start value of the given period is unspecified, the starting\nboundary of the resulting interval will be open (meaning the start of the interval\nis unknown, as opposed to interpreted as the beginning of time).")]
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, Period period)
     {
-        CqlInterval<CqlDateTime> a_()
-        {
+
+        CqlInterval<CqlDateTime> a_() {
             if (period is null)
             {
                 return null as CqlInterval<CqlDateTime>;
@@ -92,8 +92,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                 CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
                 CqlInterval<CqlDateTime> k_ = context.Operators.Interval(h_, j_, true, true);
                 return k_;
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -103,48 +104,52 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("comment", "If the given quantity has a comparator, it is used to construct an interval based on the value of the comparator. If the comparator\nis less than, the resulting interval will start with a null closed boundary and end with an open boundary on the quantity. If the comparator\nis less than or equal, the resulting interval will start with a null closed boundary and end with a closed boundary on the quantity. If the \ncomparator is greater or equal, the resulting interval will start with a closed boundary on the quantity and end with a closed null boundary.\nIf the comparator is greatter than, the resulting interval will start with an open boundary on the quantity and end with a closed null boundary.\nIf no comparator is specified, the resulting interval will start and end with a closed boundary on the quantity.")]
     public CqlInterval<CqlQuantity> ToInterval(CqlContext context, Quantity quantity)
     {
-        CqlInterval<CqlQuantity> a_()
-        {
+
+        CqlInterval<CqlQuantity> a_() {
             if (quantity is null)
             {
                 return null as CqlInterval<CqlQuantity>;
             }
             else
             {
-                CqlInterval<CqlQuantity> b_()
-                {
-                    bool c_()
-                    {
+
+                CqlInterval<CqlQuantity> b_() {
+
+                    bool c_() {
                         Code<Quantity.QuantityComparator> g_ = quantity?.ComparatorElement;
                         Quantity.QuantityComparator? h_ = g_?.Value;
                         string i_ = context.Operators.Convert<string>(h_);
                         bool? j_ = context.Operators.Equal(i_, "<");
                         return j_ ?? false;
-                    };
-                    bool d_()
-                    {
+                    }
+
+
+                    bool d_() {
                         Code<Quantity.QuantityComparator> k_ = quantity?.ComparatorElement;
                         Quantity.QuantityComparator? l_ = k_?.Value;
                         string m_ = context.Operators.Convert<string>(l_);
                         bool? n_ = context.Operators.Equal(m_, "<=");
                         return n_ ?? false;
-                    };
-                    bool e_()
-                    {
+                    }
+
+
+                    bool e_() {
                         Code<Quantity.QuantityComparator> o_ = quantity?.ComparatorElement;
                         Quantity.QuantityComparator? p_ = o_?.Value;
                         string q_ = context.Operators.Convert<string>(p_);
                         bool? r_ = context.Operators.Equal(q_, ">=");
                         return r_ ?? false;
-                    };
-                    bool f_()
-                    {
+                    }
+
+
+                    bool f_() {
                         Code<Quantity.QuantityComparator> s_ = quantity?.ComparatorElement;
                         Quantity.QuantityComparator? t_ = s_?.Value;
                         string u_ = context.Operators.Convert<string>(t_);
                         bool? v_ = context.Operators.Equal(u_, ">");
                         return v_ ?? false;
-                    };
+                    }
+
                     if (c_())
                     {
                         CqlQuantity w_ = this.ToQuantityIgnoringComparator(context, quantity);
@@ -174,11 +179,13 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                         CqlQuantity ae_ = this.ToQuantity(context, quantity);
                         CqlInterval<CqlQuantity> ag_ = context.Operators.Interval(ae_, ae_, true, true);
                         return ag_;
-                    }
-                };
+                    };
+                }
+
                 return b_();
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -187,8 +194,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("description", "Converts the given FHIR [Range](https://hl7.org/fhir/datatypes.html#Range) value to a CQL Interval of Quantity")]
     public CqlInterval<CqlQuantity> ToInterval(CqlContext context, Range range)
     {
-        CqlInterval<CqlQuantity> a_()
-        {
+
+        CqlInterval<CqlQuantity> a_() {
             if (range is null)
             {
                 return null as CqlInterval<CqlQuantity>;
@@ -201,8 +208,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                 CqlQuantity e_ = this.ToQuantity(context, d_);
                 CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
                 return f_;
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -212,8 +220,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("comment", "Note that for durations above days (or weeks), the conversion is understood to be approximate")]
     public string ToCalendarUnit(CqlContext context, string unit)
     {
-        string a_()
-        {
+
+        string a_() {
             if ((context.Operators.Equal(unit, "ms")) ?? false)
             {
                 return "millisecond";
@@ -249,8 +257,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             else
             {
                 return unit;
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -261,16 +270,17 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("seealso", "ToCalendarUnit")]
     public CqlQuantity ToQuantity(CqlContext context, Quantity quantity)
     {
-        CqlQuantity a_()
-        {
-            bool b_()
-            {
+
+        CqlQuantity a_() {
+
+            bool b_() {
                 Code<Quantity.QuantityComparator> d_ = quantity?.ComparatorElement;
                 bool? e_ = context.Operators.Not((bool?)(d_ is null));
                 return e_ ?? false;
-            };
-            bool c_()
-            {
+            }
+
+
+            bool c_() {
                 FhirUri f_ = quantity?.SystemElement;
                 string h_ = f_?.Value;
                 bool? i_ = context.Operators.Equal(h_, "http://unitsofmeasure.org");
@@ -279,7 +289,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                 bool? m_ = context.Operators.Equal(l_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
                 bool? n_ = context.Operators.Or(j_, m_);
                 return n_ ?? false;
-            };
+            }
+
             if (quantity is null)
             {
                 return default;
@@ -320,8 +331,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                 string ah_ = context.Operators.Concatenate(ag_ ?? "", ")");
                 object ai_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ah_);
                 return ai_ as CqlQuantity;
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -332,10 +344,10 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("seealso", "ToCalendarUnit")]
     public CqlQuantity ToQuantityIgnoringComparator(CqlContext context, Quantity quantity)
     {
-        CqlQuantity a_()
-        {
-            bool b_()
-            {
+
+        CqlQuantity a_() {
+
+            bool b_() {
                 FhirUri c_ = quantity?.SystemElement;
                 string e_ = c_?.Value;
                 bool? f_ = context.Operators.Equal(e_, "http://unitsofmeasure.org");
@@ -344,7 +356,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                 bool? j_ = context.Operators.Equal(i_, "http://hl7.org/fhirpath/CodeSystem/calendar-units");
                 bool? k_ = context.Operators.Or(g_, j_);
                 return k_ ?? false;
-            };
+            }
+
             if (quantity is null)
             {
                 return default;
@@ -380,8 +393,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                 string ad_ = context.Operators.Concatenate(ac_ ?? "", ")");
                 object ae_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ad_);
                 return ae_ as CqlQuantity;
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -390,8 +404,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("description", "Converts the given FHIR [Ratio](https://hl7.org/fhir/datatypes.html#Ratio) value to a CQL Ratio.")]
     public CqlRatio ToRatio(CqlContext context, Ratio ratio)
     {
-        CqlRatio a_()
-        {
+
+        CqlRatio a_() {
             if (ratio is null)
             {
                 return default;
@@ -403,8 +417,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                 Quantity d_ = ratio?.Denominator;
                 CqlQuantity e_ = this.ToQuantity(context, d_);
                 return new CqlRatio(c_, e_);
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -413,8 +428,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("description", "Converts the given FHIR [Coding](https://hl7.org/fhir/datatypes.html#Coding) value to a CQL Code.")]
     public CqlCode ToCode(CqlContext context, Coding coding)
     {
-        CqlCode a_()
-        {
+
+        CqlCode a_() {
             if (coding is null)
             {
                 return default;
@@ -430,8 +445,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                 FhirString h_ = coding?.DisplayElement;
                 string i_ = h_?.Value;
                 return new CqlCode(c_, e_, g_, i_);
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -440,8 +456,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("description", "Converts the given FHIR [CodeableConcept](https://hl7.org/fhir/datatypes.html#CodeableConcept) value to a CQL Concept.")]
     public CqlConcept ToConcept(CqlContext context, CodeableConcept concept)
     {
-        CqlConcept a_()
-        {
+
+        CqlConcept a_() {
             if (concept is null)
             {
                 return default;
@@ -449,18 +465,20 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             else
             {
                 List<Coding> b_ = concept?.Coding;
-                CqlCode c_(Coding C)
-                {
+
+                CqlCode c_(Coding C) {
                     CqlCode h_ = this.ToCode(context, C);
                     return h_;
-                };
+                }
+
                 IEnumerable<CqlCode> d_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)b_, c_);
                 IEnumerable<CqlCode> e_ = context.Operators.Distinct<CqlCode>(d_);
                 FhirString f_ = concept?.TextElement;
                 string g_ = f_?.Value;
                 return new CqlConcept(e_, g_);
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -477,8 +495,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("description", "Constructs a FHIR [Reference](https://hl7.org/fhir/datatypes.html#Reference) from the given reference (assumed to be a FHIR resource URL)")]
     public ResourceReference reference(CqlContext context, string reference)
     {
-        ResourceReference a_()
-        {
+
+        ResourceReference a_() {
             if (reference is null)
             {
                 return default;
@@ -490,8 +508,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
                     ReferenceElement = new FhirString(reference),
                 };
                 return b_;
-            }
-        };
+            };
+        }
+
         return a_();
     }
 
@@ -506,8 +525,8 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlTag("comment", "TODO: document conversion")]
     public object ToValue(CqlContext context, object value)
     {
-        object a_()
-        {
+
+        object a_() {
             if (value is Base64Binary)
             {
                 byte[] b_ = (value as Base64Binary)?.Value;
@@ -660,8 +679,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             else
             {
                 return value as object;
-            }
-        };
+            };
+        }
+
         return a_();
     }
 

@@ -109,7 +109,8 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
             {
                 object a_ = context.ResolveParameter("HospiceFHIR4-2.3.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -127,7 +128,8 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Has_Hospice_Cached = new();
@@ -165,7 +167,8 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     bool? am_ = context.Operators.In<CqlDateTime>(ak_, al_, default);
                     bool? an_ = context.Operators.And(ah_, am_);
                     return an_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
                 bool? e_ = context.Operators.Exists<Encounter>(d_);
                 CqlValueSet f_ = this.Hospice_care_ambulatory(context);
@@ -189,7 +192,8 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, ay_, default);
                     bool? ba_ = context.Operators.And(av_, az_);
                     return ba_;
-                };
+                }
+                ;
                 IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
                 bool? j_ = context.Operators.Exists<ServiceRequest>(i_);
                 bool? k_ = context.Operators.Or(e_, j_);
@@ -205,12 +209,14 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                     bool? bh_ = context.Operators.Overlaps(bf_, bg_, default);
                     bool? bi_ = context.Operators.And(bd_, bh_);
                     return bi_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> o_ = context.Operators.Where<Procedure>(m_, n_);
                 bool? p_ = context.Operators.Exists<Procedure>(o_);
                 bool? q_ = context.Operators.Or(k_, p_);
                 return q_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions

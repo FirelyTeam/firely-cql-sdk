@@ -230,15 +230,16 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
                 IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
-                bool? g_(object ColorectalCancer)
-                {
+
+                bool? g_(object ColorectalCancer) {
                     CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ColorectalCancer);
                     CqlDateTime j_ = context.Operators.Start(i_);
                     CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                     CqlDateTime l_ = context.Operators.End(k_);
                     bool? m_ = context.Operators.SameOrBefore(j_, l_, "day");
                     return m_;
-                };
+                }
+
                 IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
                 return h_;
             });
@@ -255,38 +256,42 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 CqlValueSet a_ = this.Total_Colectomy(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                 IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
-                bool? d_(Procedure Colectomy)
-                {
-                    object f_()
-                    {
-                        bool l_()
-                        {
+
+                bool? d_(Procedure Colectomy) {
+
+                    object f_() {
+
+                        bool l_() {
                             DataType p_ = Colectomy?.Performed;
                             object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                             bool r_ = q_ is CqlDateTime;
                             return r_;
-                        };
-                        bool m_()
-                        {
+                        }
+
+
+                        bool m_() {
                             DataType s_ = Colectomy?.Performed;
                             object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
                             bool u_ = t_ is CqlInterval<CqlDateTime>;
                             return u_;
-                        };
-                        bool n_()
-                        {
+                        }
+
+
+                        bool n_() {
                             DataType v_ = Colectomy?.Performed;
                             object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                             bool x_ = w_ is CqlQuantity;
                             return x_;
-                        };
-                        bool o_()
-                        {
+                        }
+
+
+                        bool o_() {
                             DataType y_ = Colectomy?.Performed;
                             object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
                             bool aa_ = z_ is CqlInterval<CqlQuantity>;
                             return aa_;
-                        };
+                        }
+
                         if (l_())
                         {
                             DataType ab_ = Colectomy?.Performed;
@@ -314,15 +319,17 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                         else
                         {
                             return null;
-                        }
-                    };
+                        };
+                    }
+
                     CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_());
                     CqlDateTime h_ = context.Operators.End(g_);
                     CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
                     CqlDateTime j_ = context.Operators.End(i_);
                     bool? k_ = context.Operators.SameOrBefore(h_, j_, "day");
                     return k_;
-                };
+                }
+
                 IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
                 return e_;
             });
@@ -364,34 +371,37 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
                 IEnumerable<Observation> c_ = Status_1_15_000.Instance.isLaboratoryTestPerformed(context, b_);
-                bool? d_(Observation FecalOccultResult)
-                {
+
+                bool? d_(Observation FecalOccultResult) {
                     DataType f_ = FecalOccultResult?.Value;
                     object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
                     bool? h_ = context.Operators.Not((bool?)(g_ is null));
-                    object i_()
-                    {
-                        bool n_()
-                        {
+
+                    object i_() {
+
+                        bool n_() {
                             DataType q_ = FecalOccultResult?.Effective;
                             object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                             bool s_ = r_ is CqlDateTime;
                             return s_;
-                        };
-                        bool o_()
-                        {
+                        }
+
+
+                        bool o_() {
                             DataType t_ = FecalOccultResult?.Effective;
                             object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                             bool v_ = u_ is CqlInterval<CqlDateTime>;
                             return v_;
-                        };
-                        bool p_()
-                        {
+                        }
+
+
+                        bool p_() {
                             DataType w_ = FecalOccultResult?.Effective;
                             object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
                             bool y_ = x_ is CqlDateTime;
                             return y_;
-                        };
+                        }
+
                         if (n_())
                         {
                             DataType z_ = FecalOccultResult?.Effective;
@@ -413,14 +423,16 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                         else
                         {
                             return null;
-                        }
-                    };
+                        };
+                    }
+
                     CqlDateTime j_ = QICoreCommon_4_0_000.Instance.latest(context, i_());
                     CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                     bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
                     bool? m_ = context.Operators.And(h_, l_);
                     return m_;
-                };
+                }
+
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 return e_;
             });
@@ -437,34 +449,37 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 CqlValueSet a_ = this.sDNA_FIT_Test(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
                 IEnumerable<Observation> c_ = Status_1_15_000.Instance.isLaboratoryTestPerformed(context, b_);
-                bool? d_(Observation sDNATest)
-                {
+
+                bool? d_(Observation sDNATest) {
                     DataType f_ = sDNATest?.Value;
                     object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
                     bool? h_ = context.Operators.Not((bool?)(g_ is null));
-                    object i_()
-                    {
-                        bool t_()
-                        {
+
+                    object i_() {
+
+                        bool t_() {
                             DataType w_ = sDNATest?.Effective;
                             object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
                             bool y_ = x_ is CqlDateTime;
                             return y_;
-                        };
-                        bool u_()
-                        {
+                        }
+
+
+                        bool u_() {
                             DataType z_ = sDNATest?.Effective;
                             object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
                             bool ab_ = aa_ is CqlInterval<CqlDateTime>;
                             return ab_;
-                        };
-                        bool v_()
-                        {
+                        }
+
+
+                        bool v_() {
                             DataType ac_ = sDNATest?.Effective;
                             object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
                             bool ae_ = ad_ is CqlDateTime;
                             return ae_;
-                        };
+                        }
+
                         if (t_())
                         {
                             DataType af_ = sDNATest?.Effective;
@@ -486,8 +501,9 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                         else
                         {
                             return null;
-                        }
-                    };
+                        };
+                    }
+
                     CqlDateTime j_ = QICoreCommon_4_0_000.Instance.latest(context, i_());
                     CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                     CqlDateTime l_ = context.Operators.Start(k_);
@@ -498,7 +514,8 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, "day");
                     bool? s_ = context.Operators.And(h_, r_);
                     return s_;
-                };
+                }
+
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 return e_;
             });
@@ -515,38 +532,42 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 CqlValueSet a_ = this.Flexible_Sigmoidoscopy(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                 IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
-                bool? d_(Procedure FlexibleSigmoidoscopy)
-                {
-                    object f_()
-                    {
-                        bool q_()
-                        {
+
+                bool? d_(Procedure FlexibleSigmoidoscopy) {
+
+                    object f_() {
+
+                        bool q_() {
                             DataType u_ = FlexibleSigmoidoscopy?.Performed;
                             object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                             bool w_ = v_ is CqlDateTime;
                             return w_;
-                        };
-                        bool r_()
-                        {
+                        }
+
+
+                        bool r_() {
                             DataType x_ = FlexibleSigmoidoscopy?.Performed;
                             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                             bool z_ = y_ is CqlInterval<CqlDateTime>;
                             return z_;
-                        };
-                        bool s_()
-                        {
+                        }
+
+
+                        bool s_() {
                             DataType aa_ = FlexibleSigmoidoscopy?.Performed;
                             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                             bool ac_ = ab_ is CqlQuantity;
                             return ac_;
-                        };
-                        bool t_()
-                        {
+                        }
+
+
+                        bool t_() {
                             DataType ad_ = FlexibleSigmoidoscopy?.Performed;
                             object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
                             bool af_ = ae_ is CqlInterval<CqlQuantity>;
                             return af_;
-                        };
+                        }
+
                         if (q_())
                         {
                             DataType ag_ = FlexibleSigmoidoscopy?.Performed;
@@ -574,8 +595,9 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                         else
                         {
                             return null;
-                        }
-                    };
+                        };
+                    }
+
                     CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_());
                     CqlDateTime h_ = context.Operators.End(g_);
                     CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
@@ -586,7 +608,8 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     CqlInterval<CqlDateTime> o_ = context.Operators.Interval(l_, n_, true, true);
                     bool? p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
                     return p_;
-                };
+                }
+
                 IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
                 return e_;
             });
@@ -603,8 +626,8 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 CqlValueSet a_ = this.CT_Colonography(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
                 IEnumerable<Observation> c_ = Status_1_15_000.Instance.isDiagnosticStudyPerformed(context, b_);
-                bool? d_(Observation Colonography)
-                {
+
+                bool? d_(Observation Colonography) {
                     DataType f_ = Colonography?.Effective;
                     object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
                     CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
@@ -617,7 +640,8 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
                     bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, "day");
                     return q_;
-                };
+                }
+
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 return e_;
             });
@@ -634,38 +658,42 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 CqlValueSet a_ = this.Colonoscopy(context);
                 IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                 IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
-                bool? d_(Procedure ColonoscopyProcedure)
-                {
-                    object f_()
-                    {
-                        bool q_()
-                        {
+
+                bool? d_(Procedure ColonoscopyProcedure) {
+
+                    object f_() {
+
+                        bool q_() {
                             DataType u_ = ColonoscopyProcedure?.Performed;
                             object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                             bool w_ = v_ is CqlDateTime;
                             return w_;
-                        };
-                        bool r_()
-                        {
+                        }
+
+
+                        bool r_() {
                             DataType x_ = ColonoscopyProcedure?.Performed;
                             object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                             bool z_ = y_ is CqlInterval<CqlDateTime>;
                             return z_;
-                        };
-                        bool s_()
-                        {
+                        }
+
+
+                        bool s_() {
                             DataType aa_ = ColonoscopyProcedure?.Performed;
                             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                             bool ac_ = ab_ is CqlQuantity;
                             return ac_;
-                        };
-                        bool t_()
-                        {
+                        }
+
+
+                        bool t_() {
                             DataType ad_ = ColonoscopyProcedure?.Performed;
                             object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
                             bool af_ = ae_ is CqlInterval<CqlQuantity>;
                             return af_;
-                        };
+                        }
+
                         if (q_())
                         {
                             DataType ag_ = ColonoscopyProcedure?.Performed;
@@ -693,8 +721,9 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                         else
                         {
                             return null;
-                        }
-                    };
+                        };
+                    }
+
                     CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_());
                     CqlDateTime h_ = context.Operators.End(g_);
                     CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
@@ -705,7 +734,8 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     CqlInterval<CqlDateTime> o_ = context.Operators.Interval(l_, n_, true, true);
                     bool? p_ = context.Operators.In<CqlDateTime>(h_, o_, "day");
                     return p_;
-                };
+                }
+
                 IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
                 return e_;
             });

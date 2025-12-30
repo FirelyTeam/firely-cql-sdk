@@ -202,8 +202,8 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
                 IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-                bool? r_(Encounter ValidEncounter)
-                {
+
+                bool? r_(Encounter ValidEncounter) {
                     Code<Encounter.EncounterStatus> u_ = ValidEncounter?.StatusElement;
                     Encounter.EncounterStatus? v_ = u_?.Value;
                     Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
@@ -214,7 +214,8 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     bool? ab_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, aa_, "day");
                     bool? ac_ = context.Operators.And(x_, ab_);
                     return ac_;
-                };
+                }
+
                 IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
                 bool? t_ = context.Operators.Exists<Encounter>(s_);
                 return t_;
@@ -255,39 +256,43 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 IEnumerable<Procedure> x_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, w_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
                 IEnumerable<Procedure> y_ = context.Operators.Union<Procedure>(u_, x_);
                 IEnumerable<Procedure> z_ = Status_1_15_000.Instance.isProcedurePerformed(context, y_);
-                bool? aa_(Procedure ValidIntervention)
-                {
+
+                bool? aa_(Procedure ValidIntervention) {
                     CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
-                    object ae_()
-                    {
-                        bool ah_()
-                        {
+
+                    object ae_() {
+
+                        bool ah_() {
                             DataType al_ = ValidIntervention?.Performed;
                             object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
                             bool an_ = am_ is CqlDateTime;
                             return an_;
-                        };
-                        bool ai_()
-                        {
+                        }
+
+
+                        bool ai_() {
                             DataType ao_ = ValidIntervention?.Performed;
                             object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
                             bool aq_ = ap_ is CqlInterval<CqlDateTime>;
                             return aq_;
-                        };
-                        bool aj_()
-                        {
+                        }
+
+
+                        bool aj_() {
                             DataType ar_ = ValidIntervention?.Performed;
                             object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
                             bool at_ = as_ is CqlQuantity;
                             return at_;
-                        };
-                        bool ak_()
-                        {
+                        }
+
+
+                        bool ak_() {
                             DataType au_ = ValidIntervention?.Performed;
                             object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
                             bool aw_ = av_ is CqlInterval<CqlQuantity>;
                             return aw_;
-                        };
+                        }
+
                         if (ah_())
                         {
                             DataType ax_ = ValidIntervention?.Performed;
@@ -315,12 +320,14 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                         else
                         {
                             return null;
-                        }
-                    };
+                        };
+                    }
+
                     CqlInterval<CqlDateTime> af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_());
                     bool? ag_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ad_, af_, "day");
                     return ag_;
-                };
+                }
+
                 IEnumerable<Procedure> ab_ = context.Operators.Where<Procedure>(z_, aa_);
                 bool? ac_ = context.Operators.Exists<Procedure>(ab_);
                 return ac_;
@@ -337,8 +344,8 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             {
                 CqlValueSet a_ = this.Referral(context);
                 IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-                bool? c_(ServiceRequest ReferralOrder)
-                {
+
+                bool? c_(ServiceRequest ReferralOrder) {
                     Code<RequestStatus> h_ = ReferralOrder?.StatusElement;
                     RequestStatus? i_ = h_?.Value;
                     Code<RequestStatus> j_ = context.Operators.Convert<Code<RequestStatus>>(i_);
@@ -365,14 +372,16 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     bool? ac_ = context.Operators.In<CqlDateTime>(t_, ab_, "day");
                     bool? ad_ = context.Operators.And(r_, ac_);
                     return ad_;
-                };
+                }
+
                 IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
-                object e_(ServiceRequest @this)
-                {
+
+                object e_(ServiceRequest @this) {
                     FhirDateTime ae_ = @this?.AuthoredOnElement;
                     CqlDateTime af_ = context.Operators.Convert<CqlDateTime>(ae_);
                     return af_;
-                };
+                }
+
                 IEnumerable<ServiceRequest> f_ = context.Operators.SortBy<ServiceRequest>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
                 ServiceRequest g_ = context.Operators.First<ServiceRequest>(f_);
                 return g_;
@@ -473,14 +482,14 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 CqlCode a_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Task> c_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-task"));
-                IEnumerable<Task> d_(Task ConsultantReportObtained)
-                {
+
+                IEnumerable<Task> d_(Task ConsultantReportObtained) {
                     ServiceRequest g_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
                     ServiceRequest[] h_ = [
                         g_,
                     ];
-                    bool? i_(ServiceRequest FirstReferral)
-                    {
+
+                    bool? i_(ServiceRequest FirstReferral) {
                         ResourceReference m_ = ConsultantReportObtained?.Focus;
                         bool? n_ = QICoreCommon_4_0_000.Instance.references(context, m_, FirstReferral);
                         List<ResourceReference> o_ = ConsultantReportObtained?.BasedOn;
@@ -509,13 +518,14 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                         bool? am_ = context.Operators.ConceptInValueSet(ak_, al_);
                         bool? an_ = context.Operators.And(ai_, am_);
                         return an_;
-                    };
+                    }
+
                     IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>((IEnumerable<ServiceRequest>)h_, i_);
-                    Task k_(ServiceRequest FirstReferral) =>
-                    ConsultantReportObtained;
+                    Task k_(ServiceRequest FirstReferral) => ConsultantReportObtained;
                     IEnumerable<Task> l_ = context.Operators.Select<ServiceRequest, Task>(j_, k_);
                     return l_;
-                };
+                }
+
                 IEnumerable<Task> e_ = context.Operators.SelectMany<Task, Task>(c_, d_);
                 bool? f_ = context.Operators.Exists<Task>(e_);
                 return f_;

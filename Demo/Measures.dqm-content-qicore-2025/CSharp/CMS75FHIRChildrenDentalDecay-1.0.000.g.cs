@@ -118,14 +118,15 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
                 CqlValueSet a_ = this.Clinical_Oral_Evaluation(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> c_ = Status_1_15_000.Instance.isEncounterPerformed(context, b_);
-                bool? d_(Encounter ValidEncounter)
-                {
+
+                bool? d_(Encounter ValidEncounter) {
                     CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
                     Period g_ = ValidEncounter?.Period;
                     CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
                     bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, "day");
                     return i_;
-                };
+                }
+
                 IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
                 return e_;
             });
@@ -194,13 +195,14 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-                bool? f_(object DentalCaries)
-                {
+
+                bool? f_(object DentalCaries) {
                     CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DentalCaries);
                     CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
                     bool? k_ = context.Operators.Overlaps(i_, j_, "day");
                     return k_;
-                };
+                }
+
                 IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
                 bool? h_ = context.Operators.Exists<object>(g_);
                 return h_;

@@ -129,7 +129,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
                 object d_ = context.ResolveParameter("BreastCancerScreeningsFHIR-0.0.009", "Measurement Period", c_);
                 return (CqlInterval<CqlDateTime>)d_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -147,7 +148,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
@@ -160,7 +162,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
@@ -173,7 +176,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             {
                 IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
@@ -186,7 +190,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             {
                 IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<CqlCode> _SDE_Sex_Cached = new();
@@ -199,7 +204,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             {
                 CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Telehealth_Services_Cached = new();
@@ -226,10 +232,12 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
                     bool? o_ = context.Operators.And(j_, n_);
                     return o_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
                 return g_;
-            });
+            }
+            );
 
 
     private Cached<int?> _Age_at_start_of_Measurement_Period_Cached = new();
@@ -249,7 +257,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDate g_ = context.Operators.DateFrom(f_);
                 int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
                 return h_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Initial_Population_Cached = new();
@@ -280,7 +289,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 bool? s_ = context.Operators.Exists<Encounter>(r_);
                 bool? t_ = context.Operators.And(o_, s_);
                 return t_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_Cached = new();
@@ -293,7 +303,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             {
                 bool? a_ = this.Initial_Population(context);
                 return a_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Condition>> _Right_Mastectomy_Diagnosis_Cached = new();
@@ -315,12 +326,14 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     {
                         CqlConcept o_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
                         return o_;
-                    };
+                    }
+                    ;
                     IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
                     CqlValueSet m_ = this.Right(context);
                     bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
                     return n_;
-                };
+                }
+                ;
                 IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
                 IEnumerable<Condition> g_ = context.Operators.Union<Condition>(b_, f_);
                 bool? h_(Condition RightMastectomy)
@@ -331,10 +344,12 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     CqlDateTime s_ = context.Operators.End(r_);
                     bool? t_ = context.Operators.SameOrBefore(q_, s_, default);
                     return t_;
-                };
+                }
+                ;
                 IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
                 return i_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Procedure>> _Right_Mastectomy_Procedure_Cached = new();
@@ -360,10 +375,12 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     bool? m_ = context.Operators.SameOrBefore(j_, l_, default);
                     bool? n_ = context.Operators.And(g_, m_);
                     return n_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Condition>> _Left_Mastectomy_Diagnosis_Cached = new();
@@ -385,12 +402,14 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     {
                         CqlConcept o_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
                         return o_;
-                    };
+                    }
+                    ;
                     IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
                     CqlValueSet m_ = this.Left(context);
                     bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
                     return n_;
-                };
+                }
+                ;
                 IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
                 IEnumerable<Condition> g_ = context.Operators.Union<Condition>(b_, f_);
                 bool? h_(Condition LeftMastectomy)
@@ -401,10 +420,12 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     CqlDateTime s_ = context.Operators.End(r_);
                     bool? t_ = context.Operators.SameOrBefore(q_, s_, default);
                     return t_;
-                };
+                }
+                ;
                 IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
                 return i_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Procedure>> _Left_Mastectomy_Procedure_Cached = new();
@@ -430,10 +451,12 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     bool? m_ = context.Operators.SameOrBefore(j_, l_, default);
                     bool? n_ = context.Operators.And(g_, m_);
                     return n_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Condition>> _Bilateral_Mastectomy_Diagnosis_Cached = new();
@@ -454,10 +477,12 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     CqlDateTime h_ = context.Operators.End(g_);
                     bool? i_ = context.Operators.SameOrBefore(f_, h_, default);
                     return i_;
-                };
+                }
+                ;
                 IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Procedure>> _Bilateral_Mastectomy_Procedure_Cached = new();
@@ -483,10 +508,12 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     bool? m_ = context.Operators.SameOrBefore(j_, l_, default);
                     bool? n_ = context.Operators.And(g_, m_);
                     return n_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Denominator_Exclusions_Cached = new();
@@ -533,7 +560,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 bool? ah_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
                 bool? ai_ = context.Operators.Or(ag_, ah_);
                 return ai_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Observation_with_status_Cached = new();
@@ -572,11 +600,13 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     bool? x_ = context.Operators.And(t_, w_);
                     bool? y_ = context.Operators.And(i_, x_);
                     return y_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 bool? e_ = context.Operators.Exists<Observation>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Diagnostic_Report_with_status_Cached = new();
@@ -615,11 +645,13 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     bool? x_ = context.Operators.And(t_, w_);
                     bool? y_ = context.Operators.And(i_, x_);
                     return y_;
-                };
+                }
+                ;
                 IEnumerable<DiagnosticReport> d_ = context.Operators.Where<DiagnosticReport>(b_, c_);
                 bool? e_ = context.Operators.Exists<DiagnosticReport>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Numerator_Cached = new();
@@ -634,7 +666,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 bool? b_ = this.Diagnostic_Report_with_status(context);
                 bool? c_ = context.Operators.Or(a_, b_);
                 return c_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Final_Numerator_Population_Cached = new();
@@ -654,7 +687,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 bool? g_ = context.Operators.Not(f_);
                 bool? h_ = context.Operators.And(e_, g_);
                 return h_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Observation_without_appropriate_status_Cached = new();
@@ -694,11 +728,13 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     bool? y_ = context.Operators.And(u_, x_);
                     bool? z_ = context.Operators.And(j_, y_);
                     return z_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 bool? e_ = context.Operators.Exists<Observation>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Diagnostic_Report_without_appropriate_status_Cached = new();
@@ -738,11 +774,13 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                     bool? y_ = context.Operators.And(u_, x_);
                     bool? z_ = context.Operators.And(j_, y_);
                     return z_;
-                };
+                }
+                ;
                 IEnumerable<DiagnosticReport> d_ = context.Operators.Where<DiagnosticReport>(b_, c_);
                 bool? e_ = context.Operators.Exists<DiagnosticReport>(d_);
                 return e_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions

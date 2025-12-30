@@ -117,36 +117,40 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
         Encounter[] a_ = [
             TheEncounter,
         ];
-        bool? b_(Encounter E)
-        {
+
+        bool? b_(Encounter E) {
             IEnumerable<object> f_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, E);
-            bool? g_(object @this)
-            {
+
+            bool? g_(object @this) {
                 object q_ = context.Operators.LateBoundProperty<object>(@this, "code");
                 CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_ as CodeableConcept);
                 bool? s_ = context.Operators.Not((bool?)(r_ is null));
                 return s_;
-            };
+            }
+
             IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
-            CqlConcept i_(object @this)
-            {
+
+            CqlConcept i_(object @this) {
                 object t_ = context.Operators.LateBoundProperty<object>(@this, "code");
                 CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_ as CodeableConcept);
                 return u_;
-            };
+            }
+
             IEnumerable<CqlConcept> j_ = context.Operators.Select<object, CqlConcept>(h_, i_);
             bool? k_ = context.Operators.ConceptsInValueSet(j_, DiagnosisValueSet);
             List<CodeableConcept> l_ = E?.ReasonCode;
-            CqlConcept m_(CodeableConcept @this)
-            {
+
+            CqlConcept m_(CodeableConcept @this) {
                 CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return v_;
-            };
+            }
+
             IEnumerable<CqlConcept> n_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)l_, m_);
             bool? o_ = context.Operators.ConceptsInValueSet(n_, DiagnosisValueSet);
             bool? p_ = context.Operators.Or(k_, o_);
             return p_;
-        };
+        }
+
         IEnumerable<bool?> c_ = context.Operators.Select<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<bool?> d_ = context.Operators.Distinct<bool?>(c_);
         bool? e_ = context.Operators.SingletonFrom<bool?>(d_);
@@ -163,8 +167,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
             () =>
             {
                 IEnumerable<Encounter> a_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
-                bool? b_(Encounter InpatientEncounter)
-                {
+
+                bool? b_(Encounter InpatientEncounter) {
                     CqlValueSet d_ = this.Obstetrical_or_Pregnancy_Related_Conditions(context);
                     bool? e_ = this.hasEncDiagnosisOf(context, InpatientEncounter, d_);
                     CqlValueSet f_ = this.Venous_Thromboembolism(context);
@@ -175,7 +179,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                     bool? k_ = context.Operators.Or(h_, j_);
                     bool? l_ = context.Operators.Not(k_);
                     return l_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -190,8 +195,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Admission_Without_VTE_Or_Obstetrical_Conditions(context);
-                bool? b_(Encounter EncounterWithoutConditions)
-                {
+
+                bool? b_(Encounter EncounterWithoutConditions) {
                     Patient d_ = this.Patient(context);
                     Date e_ = d_?.BirthDateElement;
                     string f_ = e_?.Value;
@@ -203,7 +208,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                     int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
                     bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
                     return m_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -245,15 +251,15 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
         Encounter[] a_ = [
             TheEncounter,
         ];
-        bool? b_(Encounter E)
-        {
+
+        bool? b_(Encounter E) {
             Claim.ProcedureComponent f_ = CQMCommon_4_1_000.Instance.principalProcedure(context, E);
             DataType g_ = f_?.Procedure;
             object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             bool? i_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, DiagnosisValueSet);
             IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-            bool? k_(Procedure P)
-            {
+
+            bool? k_(Procedure P) {
                 Claim.ProcedureComponent r_ = CQMCommon_4_1_000.Instance.principalProcedure(context, E);
                 DataType s_ = r_?.Procedure;
                 object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
@@ -261,7 +267,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                 string v_ = u_?.Value;
                 bool? w_ = QICoreCommon_4_0_000.Instance.references(context, t_ as ResourceReference, v_);
                 return w_;
-            };
+            }
+
             IEnumerable<Procedure> l_ = context.Operators.Where<Procedure>(j_, k_);
             Procedure m_ = context.Operators.SingletonFrom<Procedure>(l_);
             CodeableConcept n_ = m_?.Code;
@@ -269,7 +276,8 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
             bool? p_ = context.Operators.ConceptInValueSet(o_, DiagnosisValueSet);
             bool? q_ = context.Operators.Or(i_, p_);
             return q_;
-        };
+        }
+
         IEnumerable<bool?> c_ = context.Operators.Select<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<bool?> d_ = context.Operators.Distinct<bool?>(c_);
         bool? e_ = context.Operators.SingletonFrom<bool?>(d_);

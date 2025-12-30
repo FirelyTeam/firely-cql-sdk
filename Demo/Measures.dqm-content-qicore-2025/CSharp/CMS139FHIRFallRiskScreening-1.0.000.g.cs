@@ -268,14 +268,15 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> aq_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ap_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> ar_ = context.Operators.Union<Encounter>(ao_, aq_);
                 IEnumerable<Encounter> as_ = Status_1_15_000.Instance.isEncounterPerformed(context, ar_);
-                bool? at_(Encounter ValidEncounter)
-                {
+
+                bool? at_(Encounter ValidEncounter) {
                     CqlInterval<CqlDateTime> av_ = this.Measurement_Period(context);
                     Period aw_ = ValidEncounter?.Period;
                     CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aw_);
                     bool? ay_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(av_, ax_, "day");
                     return ay_;
-                };
+                }
+
                 IEnumerable<Encounter> au_ = context.Operators.Where<Encounter>(as_, at_);
                 return au_;
             });
@@ -342,15 +343,16 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ISingleton<
                 CqlValueSet a_ = this.Falls_Screening(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> c_ = Status_1_15_000.Instance.isAssessmentPerformed(context, b_);
-                bool? d_(Observation FallsScreening)
-                {
+
+                bool? d_(Observation FallsScreening) {
                     CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
                     DataType h_ = FallsScreening?.Effective;
                     object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
                     CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
                     bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
                     return k_;
-                };
+                }
+
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 bool? f_ = context.Operators.Exists<Observation>(e_);
                 return f_;

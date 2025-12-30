@@ -151,7 +151,8 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                 CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
                 object d_ = context.ResolveParameter("TJCOverallFHIR-1.8.000", "Measurement Period", c_);
                 return (CqlInterval<CqlDateTime>)d_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -169,7 +170,8 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Non_Elective_Inpatient_Encounter_Cached = new();
@@ -194,10 +196,12 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                     bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
                     bool? n_ = context.Operators.And(h_, m_);
                     return n_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
                 return d_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _All_Stroke_Encounter_Cached = new();
@@ -222,10 +226,12 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                     bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
                     bool? n_ = context.Operators.Or(h_, m_);
                     return n_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Encounter_with_Principal_Diagnosis_and_Age_Cached = new();
@@ -252,16 +258,19 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                         int? p_ = context.Operators.CalculateAgeAt(l_, o_, "year");
                         bool? q_ = context.Operators.GreaterOrEqual(p_, 18);
                         return q_;
-                    };
+                    }
+                    ;
                     IEnumerable<Patient> f_ = context.Operators.Where<Patient>(d_, e_);
                     Encounter g_(Patient BirthDate) =>
                     AllStrokeEncounter;
                     IEnumerable<Encounter> h_ = context.Operators.Select<Patient, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Ischemic_Stroke_Encounter_Cached = new();
@@ -281,10 +290,12 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                     CqlValueSet g_ = this.Ischemic_Stroke(context);
                     bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
                     return h_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Ischemic_Stroke_Encounters_with_Discharge_Disposition_Cached = new();
@@ -324,10 +335,12 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                     bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
                     bool? af_ = context.Operators.Or(z_, ae_);
                     return af_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<object>> _Intervention_Comfort_Measures_Cached = new();
@@ -346,7 +359,8 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                     string k_ = FHIRHelpers_4_0_001.Instance.ToString(context, j_);
                     bool? l_ = context.Operators.Equal(k_, "order");
                     return l_;
-                };
+                }
+                ;
                 IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
                 IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
                 bool? g_(Procedure InterventionPerformed)
@@ -359,11 +373,13 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                     ];
                     bool? p_ = context.Operators.In<string>(n_, (IEnumerable<string>)o_);
                     return p_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
                 IEnumerable<object> i_ = context.Operators.Union<object>(d_ as IEnumerable<object>, h_ as IEnumerable<object>);
                 return i_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Comfort_Measures_during_Hospitalization_Cached = new();
@@ -386,16 +402,19 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                         CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
                         bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);
                         return m_;
-                    };
+                    }
+                    ;
                     IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
                     Encounter g_(object ComfortMeasure) =>
                     IschemicStrokeEncounter;
                     IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<Encounter>> _Encounter_with_Comfort_Measures_during_Hospitalization_Cached = new();
@@ -420,16 +439,19 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                         CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
                         bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, default);
                         return o_;
-                    };
+                    }
+                    ;
                     IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
                     Encounter g_(object ComfortMeasure) =>
                     IschemicStrokeEncounter;
                     IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
-            });
+            }
+            );
 
 
     [CqlFunctionDefinition("CalendarDayOfOrDayAfter")]
@@ -442,6 +464,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
         CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, true, true);
         return e_;
     }
+
 
 
     #endregion Functions and Expressions

@@ -448,7 +448,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     [CqlFunctionDefinition("isActive")]
@@ -474,6 +475,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+
     [CqlFunctionDefinition("hasCategory")]
     [CqlTag("description", "Returns true if the given condition has the given category")]
     public bool? hasCategory(CqlContext context, Condition condition, CqlCode category)
@@ -483,18 +485,21 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(category);
             bool? i_ = context.Operators.Equivalent(C, h_);
             return i_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("hasCategory")]
@@ -506,18 +511,21 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
             CqlConcept h_ = context.Operators.ConvertCodeToConcept(category);
             bool? i_ = context.Operators.Equivalent(C, h_);
             return i_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isProblemListItem")]
@@ -529,7 +537,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -537,11 +546,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isEncounterDiagnosis")]
@@ -553,7 +564,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -561,11 +573,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isHealthConcern")]
@@ -577,7 +591,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -585,11 +600,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isSocialHistory")]
@@ -601,7 +618,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -609,11 +627,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isVitalSign")]
@@ -625,7 +645,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -633,11 +654,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isImaging")]
@@ -649,7 +672,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -657,11 +681,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isLaboratory")]
@@ -673,7 +699,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -681,11 +708,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isProcedure")]
@@ -697,7 +726,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -705,11 +735,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isSurvey")]
@@ -721,7 +753,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -729,11 +762,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isExam")]
@@ -745,7 +780,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -753,11 +789,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isTherapy")]
@@ -769,7 +807,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -777,11 +816,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isActivity")]
@@ -793,7 +834,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -801,11 +843,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isClinicalTest")]
@@ -817,7 +861,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -825,11 +870,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isCommunity")]
@@ -841,7 +888,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -849,11 +897,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("isDischarge")]
@@ -865,7 +915,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             CqlConcept g_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
             return g_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
         bool? d_(CqlConcept C)
         {
@@ -873,11 +924,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
-        };
+        }
+        ;
         IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
         bool? f_ = context.Operators.Exists<CqlConcept>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("doNotPerform")]
@@ -891,7 +944,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             string i_ = h_?.Value;
             bool? j_ = context.Operators.Equal(i_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
             return j_;
-        };
+        }
+        ;
         IEnumerable<Extension> b_ = context.Operators.Where<Extension>((deviceRequest is DomainResource
             ? (IEnumerable<Extension>)((deviceRequest as DomainResource).ModifierExtension)
             : default), a_);
@@ -900,12 +954,14 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             DataType k_ = E?.Value;
             object l_ = FHIRHelpers_4_3_000.Instance.ToValue(context, k_);
             return l_ as bool?;
-        };
+        }
+        ;
         IEnumerable<bool?> d_ = context.Operators.Select<Extension, bool?>(b_, c_);
         IEnumerable<bool?> e_ = context.Operators.Distinct<bool?>(d_);
         bool? f_ = context.Operators.SingletonFrom<bool?>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("ToInterval")]
@@ -921,6 +977,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> b_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, true, true);
                 return b_;
             }
+
             else if (choice is CqlInterval<CqlDateTime>)
             {
                 return choice as CqlInterval<CqlDateTime>;
@@ -978,6 +1035,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> bi_ = context.Operators.Interval(q_, af_, at_, bh_);
                 return bi_;
             }
+
             else if (choice is CqlInterval<CqlQuantity>)
             {
                 Patient bj_ = this.Patient(context);
@@ -1033,18 +1091,22 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> dx_ = context.Operators.Interval(bz_, cq_, dg_, dw_);
                 return dx_;
             }
+
             else if (choice is Timing)
             {
                 object dy_ = context.Operators.Message<object>(null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
                 return dy_ as CqlInterval<CqlDateTime>;
             }
+
             else
             {
                 return null as CqlInterval<CqlDateTime>;
             }
-        };
+        }
+        ;
         return a_();
     }
+
 
 
     [CqlFunctionDefinition("toInterval")]
@@ -1059,6 +1121,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> b_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, true, true);
                 return b_;
             }
+
             else if (choice is CqlInterval<CqlDateTime>)
             {
                 return choice as CqlInterval<CqlDateTime>;
@@ -1116,6 +1179,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> bi_ = context.Operators.Interval(q_, af_, at_, bh_);
                 return bi_;
             }
+
             else if (choice is CqlInterval<CqlQuantity>)
             {
                 Patient bj_ = this.Patient(context);
@@ -1171,18 +1235,22 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> dx_ = context.Operators.Interval(bz_, cq_, dg_, dw_);
                 return dx_;
             }
+
             else if (choice is Timing)
             {
                 object dy_ = context.Operators.Message<object>(null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
                 return dy_ as CqlInterval<CqlDateTime>;
             }
+
             else
             {
                 return null as CqlInterval<CqlDateTime>;
             }
-        };
+        }
+        ;
         return a_();
     }
+
 
 
     [CqlFunctionDefinition("ToAbatementInterval")]
@@ -1199,28 +1267,32 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
                 bool h_ = g_ is CqlDateTime;
                 return h_;
-            };
+            }
+            ;
             bool c_()
             {
                 DataType i_ = condition?.Abatement;
                 object j_ = FHIRHelpers_4_3_000.Instance.ToValue(context, i_);
                 bool k_ = j_ is CqlQuantity;
                 return k_;
-            };
+            }
+            ;
             bool d_()
             {
                 DataType l_ = condition?.Abatement;
                 object m_ = FHIRHelpers_4_3_000.Instance.ToValue(context, l_);
                 bool n_ = m_ is CqlInterval<CqlQuantity>;
                 return n_;
-            };
+            }
+            ;
             bool e_()
             {
                 DataType o_ = condition?.Abatement;
                 object p_ = FHIRHelpers_4_3_000.Instance.ToValue(context, o_);
                 bool q_ = p_ is CqlInterval<CqlDateTime>;
                 return q_;
-            };
+            }
+            ;
             if (b_())
             {
                 DataType r_ = condition?.Abatement;
@@ -1229,6 +1301,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, true, true);
                 return v_;
             }
+
             else if (c_())
             {
                 Patient w_ = this.Patient(context);
@@ -1291,6 +1364,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> cs_ = context.Operators.Interval(ao_, bh_, bz_, cr_);
                 return cs_;
             }
+
             else if (d_())
             {
                 Patient ct_ = this.Patient(context);
@@ -1361,6 +1435,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> fx_ = context.Operators.Interval(dn_, ei_, fc_, fw_);
                 return fx_;
             }
+
             else if (e_())
             {
                 DataType fy_ = condition?.Abatement;
@@ -1371,13 +1446,16 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> ge_ = context.Operators.Interval(ga_ as CqlDateTime, gd_ as CqlDateTime, true, false);
                 return ge_;
             }
+
             else
             {
                 return null as CqlInterval<CqlDateTime>;
             }
-        };
+        }
+        ;
         return a_();
     }
+
 
 
     [CqlFunctionDefinition("abatementInterval")]
@@ -1393,28 +1471,32 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
                 bool h_ = g_ is CqlDateTime;
                 return h_;
-            };
+            }
+            ;
             bool c_()
             {
                 DataType i_ = condition?.Abatement;
                 object j_ = FHIRHelpers_4_3_000.Instance.ToValue(context, i_);
                 bool k_ = j_ is CqlQuantity;
                 return k_;
-            };
+            }
+            ;
             bool d_()
             {
                 DataType l_ = condition?.Abatement;
                 object m_ = FHIRHelpers_4_3_000.Instance.ToValue(context, l_);
                 bool n_ = m_ is CqlInterval<CqlQuantity>;
                 return n_;
-            };
+            }
+            ;
             bool e_()
             {
                 DataType o_ = condition?.Abatement;
                 object p_ = FHIRHelpers_4_3_000.Instance.ToValue(context, o_);
                 bool q_ = p_ is CqlInterval<CqlDateTime>;
                 return q_;
-            };
+            }
+            ;
             if (b_())
             {
                 DataType r_ = condition?.Abatement;
@@ -1423,6 +1505,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, true, true);
                 return v_;
             }
+
             else if (c_())
             {
                 Patient w_ = this.Patient(context);
@@ -1485,6 +1568,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> cs_ = context.Operators.Interval(ao_, bh_, bz_, cr_);
                 return cs_;
             }
+
             else if (d_())
             {
                 Patient ct_ = this.Patient(context);
@@ -1555,6 +1639,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> fx_ = context.Operators.Interval(dn_, ei_, fc_, fw_);
                 return fx_;
             }
+
             else if (e_())
             {
                 DataType fy_ = condition?.Abatement;
@@ -1565,13 +1650,16 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> ge_ = context.Operators.Interval(ga_ as CqlDateTime, gd_ as CqlDateTime, true, false);
                 return ge_;
             }
+
             else
             {
                 return null as CqlInterval<CqlDateTime>;
             }
-        };
+        }
+        ;
         return a_();
     }
+
 
 
     [CqlFunctionDefinition("ToPrevalenceInterval")]
@@ -1600,7 +1688,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 bool? r_ = context.Operators.Equivalent(o_, q_);
                 bool? s_ = context.Operators.Or(m_, r_);
                 return s_ ?? false;
-            };
+            }
+            ;
             if (b_())
             {
                 DataType t_ = condition?.Onset;
@@ -1612,6 +1701,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, true, true);
                 return z_;
             }
+
             else
             {
                 CqlInterval<CqlDateTime> aa_ = this.ToAbatementInterval(context, condition);
@@ -1632,6 +1722,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                             CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, abatementDate, true, false);
                             return am_;
                         }
+
                         else
                         {
                             DataType an_ = condition?.Onset;
@@ -1641,17 +1732,23 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                             CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(aq_, abatementDate, true, true);
                             return ar_;
                         }
-                    };
+
+                    }
+                    ;
                     return ah_();
-                };
+                }
+                ;
                 IEnumerable<CqlInterval<CqlDateTime>> ae_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)ac_, ad_);
                 IEnumerable<CqlInterval<CqlDateTime>> af_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(ae_);
                 CqlInterval<CqlDateTime> ag_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(af_);
                 return ag_;
             }
-        };
+
+        }
+        ;
         return a_();
     }
+
 
 
     [CqlFunctionDefinition("prevalenceInterval")]
@@ -1679,7 +1776,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 bool? r_ = context.Operators.Equivalent(o_, q_);
                 bool? s_ = context.Operators.Or(m_, r_);
                 return s_ ?? false;
-            };
+            }
+            ;
             if (b_())
             {
                 DataType t_ = condition?.Onset;
@@ -1691,6 +1789,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, true, true);
                 return z_;
             }
+
             else
             {
                 CqlInterval<CqlDateTime> aa_ = this.ToAbatementInterval(context, condition);
@@ -1711,6 +1810,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                             CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, abatementDate, true, false);
                             return am_;
                         }
+
                         else
                         {
                             DataType an_ = condition?.Onset;
@@ -1720,17 +1820,23 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                             CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(aq_, abatementDate, true, true);
                             return ar_;
                         }
-                    };
+
+                    }
+                    ;
                     return ah_();
-                };
+                }
+                ;
                 IEnumerable<CqlInterval<CqlDateTime>> ae_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)ac_, ad_);
                 IEnumerable<CqlInterval<CqlDateTime>> af_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(ae_);
                 CqlInterval<CqlDateTime> ag_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(af_);
                 return ag_;
             }
-        };
+
+        }
+        ;
         return a_();
     }
+
 
 
     [CqlFunctionDefinition("GetId")]
@@ -1745,6 +1851,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+
     [CqlFunctionDefinition("getId")]
     [CqlTag("description", "Returns the tail of the given uri (i.e. everything after the last slash in the URI).")]
     [CqlTag("comment", "This function can be used to determine the logical id of a given resource. It can be used in\na single-server environment to trace references. However, this function does not attempt to resolve\nor distinguish the base of the given url, and so cannot be used safely in multi-server environments.")]
@@ -1754,6 +1861,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         string b_ = context.Operators.Last<string>(a_);
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("HasStart")]
@@ -1770,6 +1878,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+
     [CqlFunctionDefinition("hasStart")]
     [CqlTag("description", "Given an interval, return true if the interval has a starting boundary specified\n(i.e. the start of the interval is not null and not the minimum DateTime value)")]
     public bool? hasStart(CqlContext context, CqlInterval<CqlDateTime> period)
@@ -1781,6 +1890,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? f_ = context.Operators.Not(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("HasEnd")]
@@ -1797,6 +1907,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+
     [CqlFunctionDefinition("hasEnd")]
     [CqlTag("description", "Given an interval, returns true if the interval has an ending boundary specified\n(i.e. the end of the interval is not null and not the maximum DateTime value)")]
     public bool? hasEnd(CqlContext context, CqlInterval<CqlDateTime> period)
@@ -1808,6 +1919,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         bool? f_ = context.Operators.Not(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("Latest")]
@@ -1828,19 +1940,24 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                     CqlDateTime h_ = context.Operators.End(period);
                     return h_;
                 }
+
                 else
                 {
                     CqlDateTime i_ = context.Operators.Start(period);
                     return i_;
                 }
-            };
+
+            }
+            ;
             return g_();
-        };
+        }
+        ;
         IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
         IEnumerable<CqlDateTime> e_ = context.Operators.Distinct<CqlDateTime>(d_);
         CqlDateTime f_ = context.Operators.SingletonFrom<CqlDateTime>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("latest")]
@@ -1860,19 +1977,24 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                     CqlDateTime h_ = context.Operators.End(period);
                     return h_;
                 }
+
                 else
                 {
                     CqlDateTime i_ = context.Operators.Start(period);
                     return i_;
                 }
-            };
+
+            }
+            ;
             return g_();
-        };
+        }
+        ;
         IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
         IEnumerable<CqlDateTime> e_ = context.Operators.Distinct<CqlDateTime>(d_);
         CqlDateTime f_ = context.Operators.SingletonFrom<CqlDateTime>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("Earliest")]
@@ -1893,19 +2015,24 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                     CqlDateTime h_ = context.Operators.Start(period);
                     return h_;
                 }
+
                 else
                 {
                     CqlDateTime i_ = context.Operators.End(period);
                     return i_;
                 }
-            };
+
+            }
+            ;
             return g_();
-        };
+        }
+        ;
         IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
         IEnumerable<CqlDateTime> e_ = context.Operators.Distinct<CqlDateTime>(d_);
         CqlDateTime f_ = context.Operators.SingletonFrom<CqlDateTime>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("earliest")]
@@ -1925,19 +2052,24 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                     CqlDateTime h_ = context.Operators.Start(period);
                     return h_;
                 }
+
                 else
                 {
                     CqlDateTime i_ = context.Operators.End(period);
                     return i_;
                 }
-            };
+
+            }
+            ;
             return g_();
-        };
+        }
+        ;
         IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
         IEnumerable<CqlDateTime> e_ = context.Operators.Distinct<CqlDateTime>(d_);
         CqlDateTime f_ = context.Operators.SingletonFrom<CqlDateTime>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("Interval To Day Numbers")]
@@ -1957,11 +2089,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             int? j_ = context.Operators.End(DayNumber);
             return j_;
-        };
+        }
+        ;
         IEnumerable<int?> h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
         IEnumerable<int?> i_ = context.Operators.Distinct<int?>(h_);
         return i_;
     }
+
 
 
     [CqlFunctionDefinition("toDayNumbers")]
@@ -1980,11 +2114,13 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         {
             int? j_ = context.Operators.End(DayNumber);
             return j_;
-        };
+        }
+        ;
         IEnumerable<int?> h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
         IEnumerable<int?> i_ = context.Operators.Distinct<int?>(h_);
         return i_;
     }
+
 
 
     [CqlFunctionDefinition("Days In Period")]
@@ -2015,7 +2151,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                     int? v_ = context.Operators.DurationBetween(t_, u_, "hour");
                     bool? w_ = context.Operators.Less(v_, 24);
                     return w_ ?? false;
-                };
+                }
+                ;
                 if (n_())
                 {
                     CqlDateTime x_ = context.Operators.Start(Period);
@@ -2026,6 +2163,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                     CqlDateTime ac_ = context.Operators.Add(x_, ab_);
                     return ac_;
                 }
+
                 else
                 {
                     CqlDateTime ad_ = context.Operators.Start(Period);
@@ -2035,15 +2173,19 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                     CqlDateTime ah_ = context.Operators.Add(ad_, ag_);
                     return ah_;
                 }
-            };
+
+            }
+            ;
             CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_(), true, false);
             (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? m_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, l_);
             return m_;
-        };
+        }
+        ;
         IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> c_ = context.Operators.Select<int?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(a_, b_);
         IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(c_);
         return d_;
     }
+
 
 
     [CqlFunctionDefinition("daysInPeriod")]
@@ -2073,7 +2215,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                     int? v_ = context.Operators.DurationBetween(t_, u_, "hour");
                     bool? w_ = context.Operators.Less(v_, 24);
                     return w_ ?? false;
-                };
+                }
+                ;
                 if (n_())
                 {
                     CqlDateTime x_ = context.Operators.Start(Period);
@@ -2084,6 +2227,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                     CqlDateTime ac_ = context.Operators.Add(x_, ab_);
                     return ac_;
                 }
+
                 else
                 {
                     CqlDateTime ad_ = context.Operators.Start(Period);
@@ -2093,15 +2237,19 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                     CqlDateTime ah_ = context.Operators.Add(ad_, ag_);
                     return ah_;
                 }
-            };
+
+            }
+            ;
             CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_(), true, false);
             (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? m_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, l_);
             return m_;
-        };
+        }
+        ;
         IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> c_ = context.Operators.Select<int?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(a_, b_);
         IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(c_);
         return d_;
     }
+
 
 
     #endregion Functions and Expressions
@@ -2109,8 +2257,8 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-      [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-      ["dayIndex", "dayPeriod"]);
+       [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+       ["dayIndex", "dayPeriod"]);
 
     #endregion CqlTupleMetadata Properties
 

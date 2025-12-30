@@ -130,7 +130,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             {
                 object a_ = context.ResolveParameter("NCQAAdvancedIllnessandFrailty-1.0.0", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -148,7 +149,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Has_Criteria_Indicating_Frailty_Cached = new();
@@ -168,7 +170,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
                     bool? ac_ = context.Operators.Overlaps(aa_, ab_, default);
                     return ac_;
-                };
+                }
+                ;
                 IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
                 bool? e_ = context.Operators.Exists<Observation>(d_);
                 CqlValueSet f_ = this.Frailty_Diagnosis(context);
@@ -180,7 +183,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
                     bool? af_ = context.Operators.Overlaps(ad_, ae_, default);
                     return af_;
-                };
+                }
+                ;
                 IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
                 bool? k_ = context.Operators.Exists<Condition>(j_);
                 bool? l_ = context.Operators.Or(e_, k_);
@@ -194,7 +198,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     CqlInterval<CqlDateTime> ai_ = this.Measurement_Period(context);
                     bool? aj_ = context.Operators.Overlaps(ah_, ai_, default);
                     return aj_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> q_ = context.Operators.Where<Encounter>(o_, p_);
                 bool? r_ = context.Operators.Exists<Encounter>(q_);
                 bool? s_ = context.Operators.Or(l_, r_);
@@ -207,12 +212,14 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     CqlInterval<CqlDateTime> am_ = this.Measurement_Period(context);
                     bool? an_ = context.Operators.Overlaps(al_, am_, default);
                     return an_;
-                };
+                }
+                ;
                 IEnumerable<Observation> w_ = context.Operators.Where<Observation>(u_, v_);
                 bool? x_ = context.Operators.Exists<Observation>(w_);
                 bool? y_ = context.Operators.Or(s_, x_);
                 return y_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<CqlDate>> _Outpatient_Encounters_with_Advanced_Illness_Cached = new();
@@ -261,7 +268,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     bool? an_ = context.Operators.In<CqlDate>(ad_, am_, default);
                     bool? ao_ = context.Operators.And(z_, an_);
                     return ao_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> t_ = context.Operators.Where<Encounter>(r_, s_);
                 CqlDate u_(Encounter EncounterWithDiagnosis)
                 {
@@ -270,11 +278,13 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     CqlDateTime ar_ = context.Operators.End(aq_);
                     CqlDate as_ = context.Operators.DateFrom(ar_);
                     return as_;
-                };
+                }
+                ;
                 IEnumerable<CqlDate> v_ = context.Operators.Select<Encounter, CqlDate>(t_, u_);
                 IEnumerable<CqlDate> w_ = context.Operators.Distinct<CqlDate>(v_);
                 return w_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<CqlDate>> _Nonacute_Inpatient_Discharge_with_Advanced_Illness_Cached = new();
@@ -306,18 +316,21 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     CqlInterval<CqlDate> w_ = context.Operators.Interval(s_, v_, true, true);
                     bool? x_ = context.Operators.In<CqlDate>(n_, w_, default);
                     return x_;
-                };
+                }
+                ;
                 IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Where<CqlInterval<CqlDateTime>>(g_, h_);
                 CqlDate j_(CqlInterval<CqlDateTime> InpatientDischarge)
                 {
                     CqlDateTime y_ = context.Operators.End(InpatientDischarge);
                     CqlDate z_ = context.Operators.DateFrom(y_);
                     return z_;
-                };
+                }
+                ;
                 IEnumerable<CqlDate> k_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDate>(i_, j_);
                 IEnumerable<CqlDate> l_ = context.Operators.Distinct<CqlDate>(k_);
                 return l_;
-            });
+            }
+            );
 
 
     private Cached<IEnumerable<CqlDate>> _Outpatient_Encounters_or_Discharges_with_Advanced_Illness_Cached = new();
@@ -337,7 +350,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                         IEnumerable<CqlDate> e_ = context.Operators.Union<CqlDate>(c_, d_);
                         bool? f_ = context.Operators.Not((bool?)(e_ is null));
                         return f_ ?? false;
-                    };
+                    }
+                    ;
                     if (b_())
                     {
                         IEnumerable<CqlDate> g_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
@@ -345,23 +359,28 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                         IEnumerable<CqlDate> i_ = context.Operators.Union<CqlDate>(g_, h_);
                         return i_;
                     }
+
                     else if ((this.Outpatient_Encounters_with_Advanced_Illness(context)) is null)
                     {
                         IEnumerable<CqlDate> j_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
                         return j_;
                     }
+
                     else if ((this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context)) is null)
                     {
                         IEnumerable<CqlDate> k_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
                         return k_;
                     }
+
                     else
                     {
                         return null as IEnumerable<CqlDate>;
                     }
-                };
+                }
+                ;
                 return a_();
-            });
+            }
+            );
 
 
     private Cached<bool?> _Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service_Cached = new();
@@ -378,7 +397,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 {
                     (CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? l_ = (CqlTupleMetadata_CMSeRgTJgKISKSQUcNZWKegGV, _valueTuple.Item1, _valueTuple.Item2);
                     return l_;
-                };
+                }
+                ;
                 IEnumerable<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?> e_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?>(c_, d_);
                 bool? f_((CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv)
                 {
@@ -386,7 +406,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     CqlDate n_ = context.Operators.Add(tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit1, m_);
                     bool? o_ = context.Operators.SameOrAfter(tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit2, n_, default);
                     return o_;
-                };
+                }
+                ;
                 IEnumerable<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?> g_ = context.Operators.Where<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?>(e_, f_);
                 CqlDate h_((CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv) =>
                 tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit1;
@@ -394,7 +415,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 IEnumerable<CqlDate> j_ = context.Operators.Distinct<CqlDate>(i_);
                 bool? k_ = context.Operators.Exists<CqlDate>(j_);
                 return k_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Acute_Inpatient_Encounter_with_Advanced_Illness_Cached = new();
@@ -428,11 +450,13 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     bool? w_ = context.Operators.In<CqlDate>(m_, v_, default);
                     bool? x_ = context.Operators.And(i_, w_);
                     return x_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
                 bool? f_ = context.Operators.Exists<Encounter>(e_);
                 return f_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Acute_Inpatient_Discharge_with_Advanced_Illness_Cached = new();
@@ -464,11 +488,13 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     CqlInterval<CqlDate> u_ = context.Operators.Interval(q_, t_, true, true);
                     bool? v_ = context.Operators.In<CqlDate>(l_, u_, default);
                     return v_;
-                };
+                }
+                ;
                 IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Where<CqlInterval<CqlDateTime>>(g_, h_);
                 bool? j_ = context.Operators.Exists<CqlInterval<CqlDateTime>>(i_);
                 return j_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Cached = new();
@@ -500,13 +526,15 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                         bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
                         bool? aa_ = context.Operators.And(v_, z_);
                         return aa_;
-                    };
+                    }
+                    ;
                     IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
                     MedicationDispense n_(Medication M) =>
                     MR;
                     IEnumerable<MedicationDispense> o_ = context.Operators.Select<Medication, MedicationDispense>(m_, n_);
                     return o_;
-                };
+                }
+                ;
                 IEnumerable<MedicationDispense> e_ = context.Operators.SelectMany<MedicationDispense, MedicationDispense>(c_, d_);
                 IEnumerable<MedicationDispense> f_ = context.Operators.Union<MedicationDispense>(b_, e_);
                 IEnumerable<MedicationDispense> g_ = NCQAStatus_1_0_0.Instance.Dispensed_Medication(context, f_);
@@ -526,11 +554,13 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                     CqlInterval<CqlDate> an_ = context.Operators.Interval(aj_, am_, true, true);
                     bool? ao_ = context.Operators.In<CqlDate>(ae_, an_, default);
                     return ao_;
-                };
+                }
+                ;
                 IEnumerable<MedicationDispense> i_ = context.Operators.Where<MedicationDispense>(g_, h_);
                 bool? j_ = context.Operators.Exists<MedicationDispense>(i_);
                 return j_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Cached = new();
@@ -571,7 +601,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 bool? ae_ = context.Operators.And(ac_, k_);
                 bool? af_ = context.Operators.Or(t_, ae_);
                 return af_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Cached = new();
@@ -602,7 +633,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
                 bool? r_ = context.Operators.Or(p_, q_);
                 bool? s_ = context.Operators.And(k_, r_);
                 return s_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions
@@ -610,8 +642,8 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CMSeRgTJgKISKSQUcNZWKegGV = new(
-      [typeof(CqlDate), typeof(CqlDate)],
-      ["OutpatientVisit1", "OutpatientVisit2"]);
+       [typeof(CqlDate), typeof(CqlDate)],
+       ["OutpatientVisit1", "OutpatientVisit2"]);
 
     #endregion CqlTupleMetadata Properties
 

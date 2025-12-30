@@ -156,14 +156,15 @@ public partial class AdultOutpatientEncounters_4_19_000 : ILibrary, ISingleton<A
                 IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
                 IEnumerable<Encounter> u_ = Status_1_15_000.Instance.isEncounterPerformed(context, t_);
-                bool? v_(Encounter ValidEncounter)
-                {
+
+                bool? v_(Encounter ValidEncounter) {
                     CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
                     Period y_ = ValidEncounter?.Period;
                     CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                     bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
                     return aa_;
-                };
+                }
+
                 IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(u_, v_);
                 return w_;
             });

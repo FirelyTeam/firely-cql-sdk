@@ -208,11 +208,11 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlValueSet a_ = this.Antidepressant_Medication(context);
                 IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
                 IEnumerable<MedicationDispense> c_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
-                IEnumerable<MedicationDispense> d_(MedicationDispense MR)
-                {
+
+                IEnumerable<MedicationDispense> d_(MedicationDispense MR) {
                     IEnumerable<Medication> q_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                    bool? r_(Medication M)
-                    {
+
+                    bool? r_(Medication M) {
                         object v_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                         object w_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                         IEnumerable<string> x_ = context.Operators.Split((string)w_, "/");
@@ -224,42 +224,46 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                         bool? ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
                         bool? ae_ = context.Operators.And(z_, ad_);
                         return ae_;
-                    };
+                    }
+
                     IEnumerable<Medication> s_ = context.Operators.Where<Medication>(q_, r_);
-                    MedicationDispense t_(Medication M) =>
-                    MR;
+                    MedicationDispense t_(Medication M) => MR;
                     IEnumerable<MedicationDispense> u_ = context.Operators.Select<Medication, MedicationDispense>(s_, t_);
                     return u_;
-                };
+                }
+
                 IEnumerable<MedicationDispense> e_ = context.Operators.SelectMany<MedicationDispense, MedicationDispense>(c_, d_);
                 IEnumerable<MedicationDispense> f_ = context.Operators.Union<MedicationDispense>(b_, e_);
                 IEnumerable<MedicationDispense> g_ = Status_1_15_000.Instance.isMedicationDispensed(context, f_);
-                bool? h_(MedicationDispense Antidepressant)
-                {
+
+                bool? h_(MedicationDispense Antidepressant) {
                     CqlInterval<CqlDate> af_ = CumulativeMedicationDuration_6_0_000.Instance.medicationDispensePeriod(context, Antidepressant);
                     CqlDate ag_ = context.Operators.Start(af_);
                     CqlDateTime ah_ = context.Operators.ConvertDateToDateTime(ag_);
                     CqlInterval<CqlDateTime> ai_ = this.Intake_Period(context);
                     bool? aj_ = context.Operators.In<CqlDateTime>(ah_, ai_, "day");
                     return aj_;
-                };
+                }
+
                 IEnumerable<MedicationDispense> i_ = context.Operators.Where<MedicationDispense>(g_, h_);
-                (CqlTupleMetadata, CqlDate AntidepressantDate)? j_(MedicationDispense Antidepressant)
-                {
+
+                (CqlTupleMetadata, CqlDate AntidepressantDate)? j_(MedicationDispense Antidepressant) {
                     CqlInterval<CqlDate> ak_ = CumulativeMedicationDuration_6_0_000.Instance.medicationDispensePeriod(context, Antidepressant);
                     CqlDate al_ = context.Operators.Start(ak_);
                     CqlDateTime am_ = context.Operators.ConvertDateToDateTime(al_);
                     CqlDate an_ = context.Operators.DateFrom(am_);
                     (CqlTupleMetadata, CqlDate AntidepressantDate)? ao_ = (CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL, an_);
                     return ao_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> k_ = context.Operators.Select<MedicationDispense, (CqlTupleMetadata, CqlDate AntidepressantDate)?>(i_, j_);
                 IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> l_ = context.Operators.Distinct<(CqlTupleMetadata, CqlDate AntidepressantDate)?>(k_);
-                object m_((CqlTupleMetadata, CqlDate AntidepressantDate)? @this)
-                {
+
+                object m_((CqlTupleMetadata, CqlDate AntidepressantDate)? @this) {
                     CqlDate ap_ = @this?.AntidepressantDate;
                     return ap_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> n_ = context.Operators.SortBy<(CqlTupleMetadata, CqlDate AntidepressantDate)?>(l_, m_, System.ComponentModel.ListSortDirection.Ascending);
                 (CqlTupleMetadata, CqlDate AntidepressantDate)? o_ = context.Operators.First<(CqlTupleMetadata, CqlDate AntidepressantDate)?>(n_);
                 CqlDate p_ = o_?.AntidepressantDate;
@@ -280,8 +284,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
                 IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
-                bool? g_(object MajorDepression)
-                {
+
+                bool? g_(object MajorDepression) {
                     CqlDate j_ = this.IPSD(context);
                     bool? k_ = context.Operators.Not((bool?)(j_ is null));
                     CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MajorDepression);
@@ -296,7 +300,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     bool? y_ = context.Operators.And(v_, x_);
                     bool? z_ = context.Operators.And(k_, y_);
                     return z_;
-                };
+                }
+
                 IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
                 bool? i_ = context.Operators.Exists<object>(h_);
                 return i_;
@@ -341,8 +346,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 IEnumerable<Encounter> ab_ = context.Operators.Union<Encounter>(y_, aa_);
                 IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(w_, ab_);
                 IEnumerable<Encounter> ad_ = Status_1_15_000.Instance.isEncounterPerformed(context, ac_);
-                bool? ae_(Encounter ValidEncounter)
-                {
+
+                bool? ae_(Encounter ValidEncounter) {
                     Period ag_ = ValidEncounter?.Period;
                     CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ag_);
                     CqlDateTime ai_ = context.Operators.Start(ah_);
@@ -356,7 +361,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     bool? at_ = context.Operators.Not((bool?)(ak_ is null));
                     bool? au_ = context.Operators.And(ar_, at_);
                     return au_;
-                };
+                }
+
                 IEnumerable<Encounter> af_ = context.Operators.Where<Encounter>(ad_, ae_);
                 return af_;
             });
@@ -413,11 +419,11 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlValueSet b_ = this.Antidepressant_Medication(context);
                 IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
                 IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-                IEnumerable<MedicationRequest> e_(MedicationRequest MR)
-                {
+
+                IEnumerable<MedicationRequest> e_(MedicationRequest MR) {
                     IEnumerable<Medication> m_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                    bool? n_(Medication M)
-                    {
+
+                    bool? n_(Medication M) {
                         object r_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                         object s_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                         IEnumerable<string> t_ = context.Operators.Split((string)s_, "/");
@@ -429,18 +435,19 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                         bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
                         bool? aa_ = context.Operators.And(v_, z_);
                         return aa_;
-                    };
+                    }
+
                     IEnumerable<Medication> o_ = context.Operators.Where<Medication>(m_, n_);
-                    MedicationRequest p_(Medication M) =>
-                    MR;
+                    MedicationRequest p_(Medication M) => MR;
                     IEnumerable<MedicationRequest> q_ = context.Operators.Select<Medication, MedicationRequest>(o_, p_);
                     return q_;
-                };
+                }
+
                 IEnumerable<MedicationRequest> f_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(d_, e_);
                 IEnumerable<MedicationRequest> g_ = context.Operators.Union<MedicationRequest>(c_, f_);
                 IEnumerable<MedicationRequest> h_ = Status_1_15_000.Instance.isMedicationActive(context, g_);
-                bool? i_(MedicationRequest ActiveAntidepressant)
-                {
+
+                bool? i_(MedicationRequest ActiveAntidepressant) {
                     CqlDate ab_ = this.IPSD(context);
                     bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
                     CqlInterval<CqlDate> ad_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ActiveAntidepressant);
@@ -458,7 +465,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     bool? au_ = context.Operators.Overlaps(ao_, at_, default);
                     bool? av_ = context.Operators.And(ac_, au_);
                     return av_;
-                };
+                }
+
                 IEnumerable<MedicationRequest> j_ = context.Operators.Where<MedicationRequest>(h_, i_);
                 bool? k_ = context.Operators.Exists<MedicationRequest>(j_);
                 bool? l_ = context.Operators.Or(a_, k_);
@@ -477,11 +485,11 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlValueSet a_ = this.Antidepressant_Medication(context);
                 IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
                 IEnumerable<MedicationDispense> c_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
-                IEnumerable<MedicationDispense> d_(MedicationDispense MR)
-                {
+
+                IEnumerable<MedicationDispense> d_(MedicationDispense MR) {
                     IEnumerable<Medication> k_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                    bool? l_(Medication M)
-                    {
+
+                    bool? l_(Medication M) {
                         object p_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                         object q_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                         IEnumerable<string> r_ = context.Operators.Split((string)q_, "/");
@@ -493,18 +501,19 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                         bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
                         bool? y_ = context.Operators.And(t_, x_);
                         return y_;
-                    };
+                    }
+
                     IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
-                    MedicationDispense n_(Medication M) =>
-                    MR;
+                    MedicationDispense n_(Medication M) => MR;
                     IEnumerable<MedicationDispense> o_ = context.Operators.Select<Medication, MedicationDispense>(m_, n_);
                     return o_;
-                };
+                }
+
                 IEnumerable<MedicationDispense> e_ = context.Operators.SelectMany<MedicationDispense, MedicationDispense>(c_, d_);
                 IEnumerable<MedicationDispense> f_ = context.Operators.Union<MedicationDispense>(b_, e_);
                 IEnumerable<MedicationDispense> g_ = Status_1_15_000.Instance.isMedicationDispensed(context, f_);
-                CqlInterval<CqlDate> h_(MedicationDispense Antidepressant)
-                {
+
+                CqlInterval<CqlDate> h_(MedicationDispense Antidepressant) {
                     CqlInterval<CqlDate> z_ = CumulativeMedicationDuration_6_0_000.Instance.medicationDispensePeriod(context, Antidepressant);
                     CqlDate aa_ = this.IPSD(context);
                     CqlQuantity ac_ = context.Operators.Quantity(114m, "days");
@@ -512,7 +521,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     CqlInterval<CqlDate> ae_ = context.Operators.Interval(aa_, ad_, true, true);
                     CqlInterval<CqlDate> af_ = context.Operators.Intersect<CqlDate>(z_, ae_);
                     return af_;
-                };
+                }
+
                 IEnumerable<CqlInterval<CqlDate>> i_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(g_, h_);
                 IEnumerable<CqlInterval<CqlDate>> j_ = context.Operators.Distinct<CqlInterval<CqlDate>>(i_);
                 return j_;
@@ -558,11 +568,11 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlValueSet a_ = this.Antidepressant_Medication(context);
                 IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
                 IEnumerable<MedicationDispense> c_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
-                IEnumerable<MedicationDispense> d_(MedicationDispense MR)
-                {
+
+                IEnumerable<MedicationDispense> d_(MedicationDispense MR) {
                     IEnumerable<Medication> k_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                    bool? l_(Medication M)
-                    {
+
+                    bool? l_(Medication M) {
                         object p_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                         object q_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
                         IEnumerable<string> r_ = context.Operators.Split((string)q_, "/");
@@ -574,18 +584,19 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                         bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
                         bool? y_ = context.Operators.And(t_, x_);
                         return y_;
-                    };
+                    }
+
                     IEnumerable<Medication> m_ = context.Operators.Where<Medication>(k_, l_);
-                    MedicationDispense n_(Medication M) =>
-                    MR;
+                    MedicationDispense n_(Medication M) => MR;
                     IEnumerable<MedicationDispense> o_ = context.Operators.Select<Medication, MedicationDispense>(m_, n_);
                     return o_;
-                };
+                }
+
                 IEnumerable<MedicationDispense> e_ = context.Operators.SelectMany<MedicationDispense, MedicationDispense>(c_, d_);
                 IEnumerable<MedicationDispense> f_ = context.Operators.Union<MedicationDispense>(b_, e_);
                 IEnumerable<MedicationDispense> g_ = Status_1_15_000.Instance.isMedicationDispensed(context, f_);
-                CqlInterval<CqlDate> h_(MedicationDispense Antidepressant)
-                {
+
+                CqlInterval<CqlDate> h_(MedicationDispense Antidepressant) {
                     CqlInterval<CqlDate> z_ = CumulativeMedicationDuration_6_0_000.Instance.medicationDispensePeriod(context, Antidepressant);
                     CqlDate aa_ = this.IPSD(context);
                     CqlQuantity ac_ = context.Operators.Quantity(231m, "days");
@@ -593,7 +604,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                     CqlInterval<CqlDate> ae_ = context.Operators.Interval(aa_, ad_, true, true);
                     CqlInterval<CqlDate> af_ = context.Operators.Intersect<CqlDate>(z_, ae_);
                     return af_;
-                };
+                }
+
                 IEnumerable<CqlInterval<CqlDate>> i_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(g_, h_);
                 IEnumerable<CqlInterval<CqlDate>> j_ = context.Operators.Distinct<CqlInterval<CqlDate>>(i_);
                 return j_;
@@ -685,8 +697,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
-      [typeof(CqlDate)],
-      ["AntidepressantDate"]);
+       [typeof(CqlDate)],
+       ["AntidepressantDate"]);
 
     #endregion CqlTupleMetadata Properties
 

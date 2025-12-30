@@ -187,8 +187,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             {
                 CqlValueSet a_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? c_(Encounter EDEvalManagementVisit)
-                {
+
+                bool? c_(Encounter EDEvalManagementVisit) {
                     Period e_ = EDEvalManagementVisit?.Period;
                     CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
                     CqlDateTime g_ = context.Operators.End(f_);
@@ -200,7 +200,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     bool? m_ = context.Operators.Equal(l_, "finished");
                     bool? n_ = context.Operators.And(i_, m_);
                     return n_;
-                };
+                }
+
                 IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
                 return d_;
             });
@@ -216,8 +217,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             {
                 CqlValueSet a_ = this.Triage(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? c_(Encounter EDTriage)
-                {
+
+                bool? c_(Encounter EDTriage) {
                     Period e_ = EDTriage?.Period;
                     CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
                     CqlDateTime g_ = context.Operators.End(f_);
@@ -234,7 +235,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
                     bool? p_ = context.Operators.And(i_, o_);
                     return p_;
-                };
+                }
+
                 IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
                 return d_;
             });
@@ -249,11 +251,11 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Triage(context);
-                bool? b_(Encounter EDTriageinMP)
-                {
+
+                bool? b_(Encounter EDTriageinMP) {
                     IEnumerable<Encounter> d_ = this.ED_Evaluation_and_Management(context);
-                    bool? e_(Encounter EDEvalManagementInMP)
-                    {
+
+                    bool? e_(Encounter EDEvalManagementInMP) {
                         Period i_ = EDTriageinMP?.Period;
                         CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
                         Period k_ = EDEvalManagementInMP?.Period;
@@ -283,12 +285,14 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                         bool? aq_ = context.Operators.And(al_, ap_);
                         bool? ar_ = context.Operators.Or(y_, aq_);
                         return ar_;
-                    };
+                    }
+
                     IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
                     bool? g_ = context.Operators.Exists<Encounter>(f_);
                     bool? h_ = context.Operators.Not(g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -326,33 +330,36 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public CqlDateTime edArrivalTime(CqlContext context, Encounter EDEncounter)
     {
         IEnumerable<Encounter> a_ = this.ED_Triage_and_Evaluation_Management(context);
-        bool? b_(Encounter @this)
-        {
+
+        bool? b_(Encounter @this) {
             List<Encounter.LocationComponent> n_ = @this?.Location;
             bool? o_ = context.Operators.Not((bool?)(n_ is null));
             return o_;
-        };
+        }
+
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        List<Encounter.LocationComponent> d_(Encounter @this)
-        {
+
+        List<Encounter.LocationComponent> d_(Encounter @this) {
             List<Encounter.LocationComponent> p_ = @this?.Location;
             return p_;
-        };
+        }
+
         IEnumerable<List<Encounter.LocationComponent>> e_ = context.Operators.Select<Encounter, List<Encounter.LocationComponent>>(c_, d_);
         IEnumerable<Encounter.LocationComponent> f_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)e_);
-        bool? g_(Encounter.LocationComponent Location)
-        {
+
+        bool? g_(Encounter.LocationComponent Location) {
             ResourceReference q_ = Location?.Location;
             Location r_ = CQMCommon_4_1_000.Instance.getLocation(context, q_);
             List<CodeableConcept> s_ = r_?.Type;
-            CqlConcept t_(CodeableConcept @this)
-            {
+
+            CqlConcept t_(CodeableConcept @this) {
                 CqlConcept bq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return bq_;
-            };
+            }
+
             IEnumerable<CqlConcept> u_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)s_, t_);
-            bool? v_(CqlConcept LocationType)
-            {
+
+            bool? v_(CqlConcept LocationType) {
                 CqlValueSet br_ = this.Emergency_Department_Location(context);
                 bool? bs_ = context.Operators.ConceptInValueSet(LocationType, br_);
                 CqlCode bt_ = this.Emergency_room(context);
@@ -364,7 +371,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 bool? bz_ = context.Operators.Equivalent(LocationType, by_);
                 bool? ca_ = context.Operators.Or(bw_, bz_);
                 return ca_;
-            };
+            }
+
             IEnumerable<CqlConcept> w_ = context.Operators.Where<CqlConcept>(u_, v_);
             bool? x_ = context.Operators.Exists<CqlConcept>(w_);
             Period y_ = Location?.Period;
@@ -403,15 +411,17 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             bool? bo_ = context.Operators.Or(bg_, bn_);
             bool? bp_ = context.Operators.And(ac_, bo_);
             return bp_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> h_ = context.Operators.Where<Encounter.LocationComponent>(f_, g_);
-        CqlDateTime i_(Encounter.LocationComponent Location)
-        {
+
+        CqlDateTime i_(Encounter.LocationComponent Location) {
             Period cb_ = Location?.Period;
             CqlInterval<CqlDateTime> cc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cb_);
             CqlDateTime cd_ = context.Operators.Start(cc_);
             return cd_;
-        };
+        }
+
         IEnumerable<CqlDateTime> j_ = context.Operators.Select<Encounter.LocationComponent, CqlDateTime>(h_, i_);
         IEnumerable<CqlDateTime> k_ = context.Operators.Distinct<CqlDateTime>(j_);
         IEnumerable<CqlDateTime> l_ = context.Operators.ListSort<CqlDateTime>(k_, System.ComponentModel.ListSortDirection.Ascending);
@@ -429,11 +439,11 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Triage(context);
-                IEnumerable<Encounter> b_(Encounter EDTriageinMP)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDTriageinMP) {
                     IEnumerable<Encounter> d_ = this.Denominator(context);
-                    bool? e_(Encounter EDEncounter)
-                    {
+
+                    bool? e_(Encounter EDEncounter) {
                         Period i_ = EDTriageinMP?.Period;
                         CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
                         Period k_ = EDEncounter?.Period;
@@ -463,13 +473,14 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                         bool? aq_ = context.Operators.And(al_, ap_);
                         bool? ar_ = context.Operators.Or(y_, aq_);
                         return ar_;
-                    };
+                    }
+
                     IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-                    Encounter g_(Encounter EDEncounter) =>
-                    EDTriageinMP;
+                    Encounter g_(Encounter EDEncounter) => EDTriageinMP;
                     IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -494,16 +505,17 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public CqlDateTime edTreatmentRoomTimeArrivalTime(CqlContext context, Encounter EDEncounter)
     {
         List<Encounter.LocationComponent> a_ = EDEncounter?.Location;
-        bool? b_(Encounter.LocationComponent Location)
-        {
+
+        bool? b_(Encounter.LocationComponent Location) {
             ResourceReference i_ = Location?.Location;
             Location j_ = CQMCommon_4_1_000.Instance.getLocation(context, i_);
             List<CodeableConcept> k_ = j_?.Type;
-            CqlConcept l_(CodeableConcept @this)
-            {
+
+            CqlConcept l_(CodeableConcept @this) {
                 CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return u_;
-            };
+            }
+
             IEnumerable<CqlConcept> m_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)k_, l_);
             CqlValueSet n_ = this.Emergency_Department_Treatment_Location(context);
             bool? o_ = context.Operators.ConceptsInValueSet(m_, n_);
@@ -513,15 +525,17 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             bool? s_ = context.Operators.Not((bool?)(r_ is null));
             bool? t_ = context.Operators.And(o_, s_);
             return t_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
-        CqlDateTime d_(Encounter.LocationComponent Location)
-        {
+
+        CqlDateTime d_(Encounter.LocationComponent Location) {
             Period v_ = Location?.Period;
             CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, v_);
             CqlDateTime x_ = context.Operators.Start(w_);
             return x_;
-        };
+        }
+
         IEnumerable<CqlDateTime> e_ = context.Operators.Select<Encounter.LocationComponent, CqlDateTime>(c_, d_);
         IEnumerable<CqlDateTime> f_ = context.Operators.Distinct<CqlDateTime>(e_);
         IEnumerable<CqlDateTime> g_ = context.Operators.ListSort<CqlDateTime>(f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -539,15 +553,16 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Evaluation_and_Management(context);
-                bool? b_(Encounter EDEvalManagementInMP)
-                {
+
+                bool? b_(Encounter EDEvalManagementInMP) {
                     CqlDateTime d_ = this.edArrivalTime(context, EDEvalManagementInMP);
                     CqlDateTime e_ = this.edTreatmentRoomTimeArrivalTime(context, EDEvalManagementInMP);
                     CqlQuantity f_ = context.Operators.Quantity(61m, "minutes");
                     CqlDateTime g_ = context.Operators.Subtract(e_, f_);
                     bool? h_ = context.Operators.SameOrBefore(d_, g_, default);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -562,8 +577,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Denominator(context);
-                bool? b_(Encounter EDEncounter)
-                {
+
+                bool? b_(Encounter EDEncounter) {
                     Encounter.HospitalizationComponent d_ = EDEncounter?.Hospitalization;
                     CodeableConcept e_ = d_?.DischargeDisposition;
                     CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
@@ -571,7 +586,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
                     bool? i_ = context.Operators.Equivalent(f_, h_);
                     return i_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -581,8 +597,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public CqlDateTime admitDecisionUsingEncounterOrder(CqlContext context, Encounter EncounterInpatient)
     {
         IEnumerable<ServiceRequest> a_ = this.ED_To_Inpatient_Order(context);
-        bool? b_(ServiceRequest AdmitOrder)
-        {
+
+        bool? b_(ServiceRequest AdmitOrder) {
             FhirDateTime i_ = AdmitOrder?.AuthoredOnElement;
             CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
             Encounter k_ = this.lastEDEncounter(context, EncounterInpatient);
@@ -595,14 +611,16 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             bool? r_ = context.Operators.Equivalent(q_, "order");
             bool? s_ = context.Operators.And(n_, r_);
             return s_;
-        };
+        }
+
         IEnumerable<ServiceRequest> c_ = context.Operators.Where<ServiceRequest>(a_, b_);
-        CqlDateTime d_(ServiceRequest AdmitOrder)
-        {
+
+        CqlDateTime d_(ServiceRequest AdmitOrder) {
             FhirDateTime t_ = AdmitOrder?.AuthoredOnElement;
             CqlDateTime u_ = context.Operators.Convert<CqlDateTime>(t_);
             return u_;
-        };
+        }
+
         IEnumerable<CqlDateTime> e_ = context.Operators.Select<ServiceRequest, CqlDateTime>(c_, d_);
         IEnumerable<CqlDateTime> f_ = context.Operators.Distinct<CqlDateTime>(e_);
         IEnumerable<CqlDateTime> g_ = context.Operators.ListSort<CqlDateTime>(f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -621,8 +639,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             {
                 CqlValueSet a_ = this.Decision_to_Admit_to_Hospital_Inpatient(context);
                 IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-                bool? c_(ServiceRequest AdmitIPOrder)
-                {
+
+                bool? c_(ServiceRequest AdmitIPOrder) {
                     Code<RequestStatus> e_ = AdmitIPOrder?.StatusElement;
                     RequestStatus? f_ = e_?.Value;
                     Code<RequestStatus> g_ = context.Operators.Convert<Code<RequestStatus>>(f_);
@@ -633,7 +651,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     ];
                     bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
                     return j_;
-                };
+                }
+
                 IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
                 return d_;
             });
@@ -643,8 +662,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public Encounter lastEDEncounter(CqlContext context, Encounter EncounterInpatient)
     {
         IEnumerable<Encounter> a_ = this.ED_Evaluation_and_Management(context);
-        bool? b_(Encounter EDEvalManagementInMP)
-        {
+
+        bool? b_(Encounter EDEvalManagementInMP) {
             Period g_ = EDEvalManagementInMP?.Period;
             CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
             CqlDateTime i_ = context.Operators.Start(h_);
@@ -677,15 +696,17 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             bool? ao_ = context.Operators.Equal(an_, "finished");
             bool? ap_ = context.Operators.And(ak_, ao_);
             return ap_;
-        };
+        }
+
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        object d_(Encounter @this)
-        {
+
+        object d_(Encounter @this) {
             Period aq_ = @this?.Period;
             CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aq_);
             CqlDateTime as_ = context.Operators.End(ar_);
             return as_;
-        };
+        }
+
         IEnumerable<Encounter> e_ = context.Operators.SortBy<Encounter>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter f_ = context.Operators.Last<Encounter>(e_);
         return f_;
@@ -696,33 +717,36 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public CqlDateTime edDepartureTime(CqlContext context, Encounter EDEncounter)
     {
         IEnumerable<Encounter> a_ = this.ED_Triage_and_Evaluation_Management(context);
-        bool? b_(Encounter @this)
-        {
+
+        bool? b_(Encounter @this) {
             List<Encounter.LocationComponent> n_ = @this?.Location;
             bool? o_ = context.Operators.Not((bool?)(n_ is null));
             return o_;
-        };
+        }
+
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        List<Encounter.LocationComponent> d_(Encounter @this)
-        {
+
+        List<Encounter.LocationComponent> d_(Encounter @this) {
             List<Encounter.LocationComponent> p_ = @this?.Location;
             return p_;
-        };
+        }
+
         IEnumerable<List<Encounter.LocationComponent>> e_ = context.Operators.Select<Encounter, List<Encounter.LocationComponent>>(c_, d_);
         IEnumerable<Encounter.LocationComponent> f_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)e_);
-        bool? g_(Encounter.LocationComponent Location)
-        {
+
+        bool? g_(Encounter.LocationComponent Location) {
             ResourceReference q_ = Location?.Location;
             Location r_ = CQMCommon_4_1_000.Instance.getLocation(context, q_);
             List<CodeableConcept> s_ = r_?.Type;
-            CqlConcept t_(CodeableConcept @this)
-            {
+
+            CqlConcept t_(CodeableConcept @this) {
                 CqlConcept bq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return bq_;
-            };
+            }
+
             IEnumerable<CqlConcept> u_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)s_, t_);
-            bool? v_(CqlConcept LocationType)
-            {
+
+            bool? v_(CqlConcept LocationType) {
                 CqlValueSet br_ = this.Emergency_Department_Location(context);
                 bool? bs_ = context.Operators.ConceptInValueSet(LocationType, br_);
                 CqlCode bt_ = this.Emergency_room(context);
@@ -734,7 +758,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 bool? bz_ = context.Operators.Equivalent(LocationType, by_);
                 bool? ca_ = context.Operators.Or(bw_, bz_);
                 return ca_;
-            };
+            }
+
             IEnumerable<CqlConcept> w_ = context.Operators.Where<CqlConcept>(u_, v_);
             bool? x_ = context.Operators.Exists<CqlConcept>(w_);
             Period y_ = Location?.Period;
@@ -773,15 +798,17 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             bool? bo_ = context.Operators.Or(bg_, bn_);
             bool? bp_ = context.Operators.And(ac_, bo_);
             return bp_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> h_ = context.Operators.Where<Encounter.LocationComponent>(f_, g_);
-        CqlDateTime i_(Encounter.LocationComponent Location)
-        {
+
+        CqlDateTime i_(Encounter.LocationComponent Location) {
             Period cb_ = Location?.Period;
             CqlInterval<CqlDateTime> cc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cb_);
             CqlDateTime cd_ = context.Operators.End(cc_);
             return cd_;
-        };
+        }
+
         IEnumerable<CqlDateTime> j_ = context.Operators.Select<Encounter.LocationComponent, CqlDateTime>(h_, i_);
         IEnumerable<CqlDateTime> k_ = context.Operators.Distinct<CqlDateTime>(j_);
         IEnumerable<CqlDateTime> l_ = context.Operators.ListSort<CqlDateTime>(k_, System.ComponentModel.ListSortDirection.Ascending);
@@ -799,24 +826,25 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Denominator(context);
-                IEnumerable<Encounter> b_(Encounter EDEncounter)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDEncounter) {
                     IEnumerable<Encounter> d_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
-                    bool? e_(Encounter EncounterInpatient)
-                    {
+
+                    bool? e_(Encounter EncounterInpatient) {
                         CqlDateTime i_ = this.admitDecisionUsingEncounterOrder(context, EncounterInpatient);
                         CqlDateTime j_ = this.edDepartureTime(context, EDEncounter);
                         CqlQuantity k_ = context.Operators.Quantity(241m, "minutes");
                         CqlDateTime l_ = context.Operators.Subtract(j_, k_);
                         bool? m_ = context.Operators.SameOrBefore(i_, l_, default);
                         return m_;
-                    };
+                    }
+
                     IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-                    Encounter g_(Encounter EncounterInpatient) =>
-                    EDEncounter;
+                    Encounter g_(Encounter EncounterInpatient) => EDEncounter;
                     IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -826,8 +854,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public CqlDateTime admitDecisionUsingAssessment(CqlContext context, Encounter EncounterInpatient)
     {
         IEnumerable<object> a_ = this.Assessment_In_ED(context);
-        bool? b_(object EDEvaluation)
-        {
+
+        bool? b_(object EDEvaluation) {
             object i_ = context.Operators.LateBoundProperty<object>(EDEvaluation, "effective");
             object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
@@ -846,16 +874,18 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
             bool? u_ = context.Operators.And(p_, t_);
             return u_;
-        };
+        }
+
         IEnumerable<object> c_ = context.Operators.Where<object>(a_, b_);
-        CqlDateTime d_(object EDEvaluation)
-        {
+
+        CqlDateTime d_(object EDEvaluation) {
             object v_ = context.Operators.LateBoundProperty<object>(EDEvaluation, "effective");
             object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
             CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
             CqlDateTime y_ = context.Operators.Start(x_);
             return y_;
-        };
+        }
+
         IEnumerable<CqlDateTime> e_ = context.Operators.Select<object, CqlDateTime>(c_, d_);
         IEnumerable<CqlDateTime> f_ = context.Operators.Distinct<CqlDateTime>(e_);
         IEnumerable<CqlDateTime> g_ = context.Operators.ListSort<CqlDateTime>(f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -875,14 +905,15 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 CqlValueSet a_ = this.Emergency_Department_Evaluation(context);
                 IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
                 IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
-                bool? e_(Observation ObsInED)
-                {
+
+                bool? e_(Observation ObsInED) {
                     DataType h_ = ObsInED?.Value;
                     object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
                     CqlValueSet j_ = this.Admit_Inpatient(context);
                     bool? k_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, j_);
                     return k_;
-                };
+                }
+
                 IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
                 IEnumerable<object> g_ = context.Operators.Union<object>(b_ as IEnumerable<object>, f_ as IEnumerable<object>);
                 return g_;
@@ -898,24 +929,25 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Denominator(context);
-                IEnumerable<Encounter> b_(Encounter EDEncounter)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDEncounter) {
                     IEnumerable<Encounter> d_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
-                    bool? e_(Encounter EncounterInpatient)
-                    {
+
+                    bool? e_(Encounter EncounterInpatient) {
                         CqlDateTime i_ = this.admitDecisionUsingAssessment(context, EncounterInpatient);
                         CqlDateTime j_ = this.edDepartureTime(context, EDEncounter);
                         CqlQuantity k_ = context.Operators.Quantity(241m, "minutes");
                         CqlDateTime l_ = context.Operators.Subtract(j_, k_);
                         bool? m_ = context.Operators.SameOrBefore(i_, l_, default);
                         return m_;
-                    };
+                    }
+
                     IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-                    Encounter g_(Encounter EncounterInpatient) =>
-                    EDEncounter;
+                    Encounter g_(Encounter EncounterInpatient) => EDEncounter;
                     IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -925,8 +957,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public CqlDateTime admitInpatientOrBedAssignmentEncounterOrder(CqlContext context, Encounter Encounter)
     {
         IEnumerable<ServiceRequest> a_ = this.Inpatient_Or_Bed_Assignment_Encounter_Order(context);
-        bool? b_(ServiceRequest AdmitInpatientOrder)
-        {
+
+        bool? b_(ServiceRequest AdmitInpatientOrder) {
             FhirDateTime i_ = AdmitInpatientOrder?.AuthoredOnElement;
             CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
             Encounter k_ = this.lastEDEncounter(context, Encounter);
@@ -934,14 +966,16 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
             bool? n_ = context.Operators.In<CqlDateTime>(j_, m_, default);
             return n_;
-        };
+        }
+
         IEnumerable<ServiceRequest> c_ = context.Operators.Where<ServiceRequest>(a_, b_);
-        CqlDateTime d_(ServiceRequest AdmitInpatientOrder)
-        {
+
+        CqlDateTime d_(ServiceRequest AdmitInpatientOrder) {
             FhirDateTime o_ = AdmitInpatientOrder?.AuthoredOnElement;
             CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(o_);
             return p_;
-        };
+        }
+
         IEnumerable<CqlDateTime> e_ = context.Operators.Select<ServiceRequest, CqlDateTime>(c_, d_);
         IEnumerable<CqlDateTime> f_ = context.Operators.Distinct<CqlDateTime>(e_);
         IEnumerable<CqlDateTime> g_ = context.Operators.ListSort<CqlDateTime>(f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -964,8 +998,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 IEnumerable<CqlCode> d_ = context.Operators.ToList<CqlCode>(c_);
                 IEnumerable<ServiceRequest> e_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, d_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
                 IEnumerable<ServiceRequest> f_ = context.Operators.Union<ServiceRequest>(b_, e_);
-                bool? g_(ServiceRequest IPRequest)
-                {
+
+                bool? g_(ServiceRequest IPRequest) {
                     Code<RequestStatus> i_ = IPRequest?.StatusElement;
                     RequestStatus? j_ = i_?.Value;
                     Code<RequestStatus> k_ = context.Operators.Convert<Code<RequestStatus>>(j_);
@@ -976,7 +1010,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     ];
                     bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
                     return n_;
-                };
+                }
+
                 IEnumerable<ServiceRequest> h_ = context.Operators.Where<ServiceRequest>(f_, g_);
                 return h_;
             });
@@ -991,24 +1026,25 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Denominator(context);
-                IEnumerable<Encounter> b_(Encounter EDEncounter)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDEncounter) {
                     IEnumerable<Encounter> d_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
-                    bool? e_(Encounter InpatientEncounter)
-                    {
+
+                    bool? e_(Encounter InpatientEncounter) {
                         CqlDateTime i_ = this.admitInpatientOrBedAssignmentEncounterOrder(context, InpatientEncounter);
                         CqlDateTime j_ = this.edDepartureTime(context, EDEncounter);
                         CqlQuantity k_ = context.Operators.Quantity(241m, "minutes");
                         CqlDateTime l_ = context.Operators.Subtract(j_, k_);
                         bool? m_ = context.Operators.SameOrBefore(i_, l_, default);
                         return m_;
-                    };
+                    }
+
                     IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-                    Encounter g_(Encounter InpatientEncounter) =>
-                    EDEncounter;
+                    Encounter g_(Encounter InpatientEncounter) => EDEncounter;
                     IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -1018,8 +1054,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public CqlDateTime holdingInEDAfterAdmission(CqlContext context, Encounter InpatientEncounter)
     {
         IEnumerable<Encounter> a_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
-        bool? b_(Encounter AdmittedInpatient)
-        {
+
+        bool? b_(Encounter AdmittedInpatient) {
             Period i_ = AdmittedInpatient?.Period;
             CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
             CqlDateTime k_ = context.Operators.Start(j_);
@@ -1028,15 +1064,17 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
             bool? o_ = context.Operators.In<CqlDateTime>(k_, n_, default);
             return o_;
-        };
+        }
+
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        CqlDateTime d_(Encounter AdmittedInpatient)
-        {
+
+        CqlDateTime d_(Encounter AdmittedInpatient) {
             Period p_ = AdmittedInpatient?.Period;
             CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
             CqlDateTime r_ = context.Operators.Start(q_);
             return r_;
-        };
+        }
+
         IEnumerable<CqlDateTime> e_ = context.Operators.Select<Encounter, CqlDateTime>(c_, d_);
         IEnumerable<CqlDateTime> f_ = context.Operators.Distinct<CqlDateTime>(e_);
         IEnumerable<CqlDateTime> g_ = context.Operators.ListSort<CqlDateTime>(f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -1054,24 +1092,25 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Denominator(context);
-                IEnumerable<Encounter> b_(Encounter EDEncounter)
-                {
+
+                IEnumerable<Encounter> b_(Encounter EDEncounter) {
                     IEnumerable<Encounter> d_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
-                    bool? e_(Encounter Inpatient)
-                    {
+
+                    bool? e_(Encounter Inpatient) {
                         CqlDateTime i_ = this.holdingInEDAfterAdmission(context, Inpatient);
                         CqlDateTime j_ = this.edDepartureTime(context, EDEncounter);
                         CqlQuantity k_ = context.Operators.Quantity(241m, "minutes");
                         CqlDateTime l_ = context.Operators.Subtract(j_, k_);
                         bool? m_ = context.Operators.SameOrBefore(i_, l_, default);
                         return m_;
-                    };
+                    }
+
                     IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-                    Encounter g_(Encounter Inpatient) =>
-                    EDEncounter;
+                    Encounter g_(Encounter Inpatient) => EDEncounter;
                     IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -1106,11 +1145,11 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             {
                 CqlValueSet a_ = this.Observation_Services(context);
                 IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                IEnumerable<Encounter> c_(Encounter EDObsEncounter)
-                {
+
+                IEnumerable<Encounter> c_(Encounter EDObsEncounter) {
                     IEnumerable<Encounter> e_ = this.Denominator(context);
-                    bool? f_(Encounter EDEncounter)
-                    {
+
+                    bool? f_(Encounter EDEncounter) {
                         Period j_ = EDEncounter?.Period;
                         CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
                         Period l_ = EDObsEncounter?.Period;
@@ -1122,13 +1161,14 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                         bool? r_ = context.Operators.Equal(q_, "finished");
                         bool? s_ = context.Operators.And(n_, r_);
                         return s_;
-                    };
+                    }
+
                     IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
-                    Encounter h_(Encounter EDEncounter) =>
-                    EDObsEncounter;
+                    Encounter h_(Encounter EDEncounter) => EDObsEncounter;
                     IEnumerable<Encounter> i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
                     return i_;
-                };
+                }
+
                 IEnumerable<Encounter> d_ = context.Operators.SelectMany<Encounter, Encounter>(b_, c_);
                 return d_;
             });
@@ -1143,23 +1183,25 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Boarded_Time_Greater_Than_240_Minutes(context);
-                bool? b_(Encounter Boarding)
-                {
+
+                bool? b_(Encounter Boarding) {
                     IEnumerable<Encounter> d_ = this.ED_Observation_Status(context);
-                    bool? e_(Encounter EDObs)
-                    {
+
+                    bool? e_(Encounter EDObs) {
                         Period i_ = Boarding?.Period;
                         CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
                         Period k_ = EDObs?.Period;
                         CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
                         bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, default);
                         return m_;
-                    };
+                    }
+
                     IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
                     bool? g_ = context.Operators.Exists<Encounter>(f_);
                     bool? h_ = context.Operators.Not(g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1174,15 +1216,16 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Denominator(context);
-                bool? b_(Encounter EDEncounter)
-                {
+
+                bool? b_(Encounter EDEncounter) {
                     CqlDateTime d_ = this.edArrivalTime(context, EDEncounter);
                     CqlDateTime e_ = this.edDepartureTime(context, EDEncounter);
                     CqlQuantity f_ = context.Operators.Quantity(481m, "minutes");
                     CqlDateTime g_ = context.Operators.Subtract(e_, f_);
                     bool? h_ = context.Operators.SameOrBefore(d_, g_, default);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1197,23 +1240,25 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Length_of_Stay_Greater_Than_480_Minutes(context);
-                bool? b_(Encounter EDStay)
-                {
+
+                bool? b_(Encounter EDStay) {
                     IEnumerable<Encounter> d_ = this.ED_Observation_Status(context);
-                    bool? e_(Encounter EDObs)
-                    {
+
+                    bool? e_(Encounter EDObs) {
                         Period i_ = EDStay?.Period;
                         CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
                         Period k_ = EDObs?.Period;
                         CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
                         bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, default);
                         return m_;
-                    };
+                    }
+
                     IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
                     bool? g_ = context.Operators.Exists<Encounter>(f_);
                     bool? h_ = context.Operators.Not(g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1247,8 +1292,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Denominator(context);
-                bool? b_(Encounter EDEncounter)
-                {
+
+                bool? b_(Encounter EDEncounter) {
                     Patient d_ = this.Patient(context);
                     Date e_ = d_?.BirthDateElement;
                     string f_ = e_?.Value;
@@ -1259,7 +1304,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     int? k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
                     bool? l_ = context.Operators.Less(k_, 18);
                     return l_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1274,13 +1320,14 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(context);
-                bool? b_(Encounter PediatricEDEncounters)
-                {
+
+                bool? b_(Encounter PediatricEDEncounters) {
                     CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
                     bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, PediatricEDEncounters, d_);
                     bool? f_ = context.Operators.Not(e_);
                     return f_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1295,8 +1342,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Denominator(context);
-                bool? b_(Encounter EDEncounter)
-                {
+
+                bool? b_(Encounter EDEncounter) {
                     Patient d_ = this.Patient(context);
                     Date e_ = d_?.BirthDateElement;
                     string f_ = e_?.Value;
@@ -1307,7 +1354,8 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                     int? k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
                     bool? l_ = context.Operators.GreaterOrEqual(k_, 18);
                     return l_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1322,13 +1370,14 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(context);
-                bool? b_(Encounter AdultEDEncounters)
-                {
+
+                bool? b_(Encounter AdultEDEncounters) {
                     CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
                     bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, AdultEDEncounters, d_);
                     bool? f_ = context.Operators.Not(e_);
                     return f_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1343,12 +1392,13 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(context);
-                bool? b_(Encounter PediatricEDEncounters)
-                {
+
+                bool? b_(Encounter PediatricEDEncounters) {
                     CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
                     bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, PediatricEDEncounters, d_);
                     return e_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });
@@ -1363,12 +1413,13 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             () =>
             {
                 IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(context);
-                bool? b_(Encounter AdultEDEncounters)
-                {
+
+                bool? b_(Encounter AdultEDEncounters) {
                     CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
                     bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, AdultEDEncounters, d_);
                     return e_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
                 return c_;
             });

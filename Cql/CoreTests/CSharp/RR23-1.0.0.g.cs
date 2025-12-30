@@ -152,8 +152,8 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             {
                 CqlValueSet a_ = this.Injury_due_to_falling_rock(context);
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-                bool? c_(Condition C)
-                {
+
+                bool? c_(Condition C) {
                     DataType e_ = C?.Onset;
                     object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
                     object g_ = this.Measurement_Period(context);
@@ -166,7 +166,9 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     CqlInterval<CqlDateTime> q_ = context.Operators.Interval(i_, l_, n_, p_);
                     bool? r_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, q_, default);
                     return r_;
-                };
+                }
+                ;
+
                 IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
                 return d_;
             });
@@ -181,12 +183,14 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             () =>
             {
                 IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
-                object b_(Condition @this)
-                {
+
+                object b_(Condition @this) {
                     DataType e_ = @this?.Onset;
                     object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
                     return f_ as CqlDateTime;
-                };
+                }
+                ;
+
                 IEnumerable<Condition> c_ = context.Operators.SortBy<Condition>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
                 Condition d_ = context.Operators.Last<Condition>(c_);
                 return d_;
@@ -206,8 +210,8 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             () =>
             {
                 IEnumerable<SupplyDelivery> a_ = context.Operators.Retrieve<SupplyDelivery>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/SupplyDelivery"));
-                bool? b_(SupplyDelivery SD)
-                {
+
+                bool? b_(SupplyDelivery SD) {
                     SupplyDelivery.SuppliedItemComponent d_ = SD?.SuppliedItem;
                     DataType e_ = d_?.Item;
                     CqlConcept f_ = FHIRHelpers_4_0_1.Instance.ToConcept(context, e_ as CodeableConcept);
@@ -218,8 +222,8 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     Condition[] k_ = [
                         j_,
                     ];
-                    bool? l_(Condition C)
-                    {
+
+                    bool? l_(Condition C) {
                         DataType q_ = C?.Onset;
                         object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
                         DataType s_ = SD?.Occurrence;
@@ -233,13 +237,17 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                         bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
                         bool? ad_ = context.Operators.And(z_, ac_);
                         return ad_;
-                    };
+                    }
+                    ;
+
                     IEnumerable<Condition> m_ = context.Operators.Where<Condition>((IEnumerable<Condition>)k_, l_);
                     Condition n_ = context.Operators.SingletonFrom<Condition>(m_);
                     bool? o_ = context.Operators.Not((bool?)(n_ is null));
                     bool? p_ = context.Operators.And(i_, o_);
                     return p_;
-                };
+                }
+                ;
+
                 IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);
                 return c_;
             });

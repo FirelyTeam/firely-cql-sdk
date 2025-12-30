@@ -347,14 +347,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
                 IEnumerable<Encounter> h_ = context.Operators.Union<Encounter>(e_, g_);
                 IEnumerable<Encounter> i_ = Status_1_15_000.Instance.isEncounterPerformed(context, h_);
-                bool? j_(Encounter ValidEncounter)
-                {
+
+                bool? j_(Encounter ValidEncounter) {
                     CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                     Period m_ = ValidEncounter?.Period;
                     CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                     bool? o_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, n_, "day");
                     return o_;
-                };
+                }
+
                 IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(i_, j_);
                 return k_;
             });
@@ -369,11 +370,11 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             () =>
             {
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
-                IEnumerable<Encounter> b_(Encounter OfficeVisit1)
-                {
+
+                IEnumerable<Encounter> b_(Encounter OfficeVisit1) {
                     IEnumerable<Encounter> d_ = this.Qualifying_Encounters(context);
-                    bool? e_(Encounter OfficeVisit2)
-                    {
+
+                    bool? e_(Encounter OfficeVisit2) {
                         Period i_ = OfficeVisit2?.Period;
                         CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
                         CqlDateTime k_ = context.Operators.Start(j_);
@@ -384,13 +385,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                         CqlDateTime p_ = context.Operators.Add(n_, o_);
                         bool? q_ = context.Operators.SameOrAfter(k_, p_, "day");
                         return q_;
-                    };
+                    }
+
                     IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-                    Encounter g_(Encounter OfficeVisit2) =>
-                    OfficeVisit1;
+                    Encounter g_(Encounter OfficeVisit2) => OfficeVisit1;
                     IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
                     return h_;
-                };
+                }
+
                 IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
                 return c_;
             });
@@ -418,13 +420,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Condition> m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> n_ = context.Operators.Union<object>(k_ as IEnumerable<object>, m_ as IEnumerable<object>);
                 IEnumerable<object> o_ = Status_1_15_000.Instance.verified(context, n_);
-                bool? p_(object HeartFailure)
-                {
+
+                bool? p_(object HeartFailure) {
                     CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HeartFailure);
                     CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
                     bool? y_ = context.Operators.OverlapsBefore(w_, x_, "day");
                     return y_;
-                };
+                }
+
                 IEnumerable<object> q_ = context.Operators.Where<object>(o_, p_);
                 bool? r_ = context.Operators.Exists<object>(q_);
                 bool? s_ = context.Operators.And(i_, r_);
@@ -464,13 +467,14 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
                 IEnumerable<object> h_ = context.Operators.Union<object>(d_ as IEnumerable<object>, g_ as IEnumerable<object>);
                 IEnumerable<object> i_ = Status_1_15_000.Instance.verified(context, h_);
-                bool? j_(object SevereCognitiveImpairment)
-                {
+
+                bool? j_(object SevereCognitiveImpairment) {
                     CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, SevereCognitiveImpairment);
                     CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
                     bool? p_ = context.Operators.Overlaps(n_, o_, "day");
                     return p_;
-                };
+                }
+
                 IEnumerable<object> k_ = context.Operators.Where<object>(i_, j_);
                 bool? l_ = context.Operators.Exists<object>(k_);
                 bool? m_ = context.Operators.Or(a_, l_);
@@ -495,14 +499,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> h_ = Status_1_15_000.Instance.isAssessmentPerformed(context, g_);
                 IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-                (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? j_(ValueTuple<Observation, Observation> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? j_(ValueTuple<Observation, Observation> _valueTuple) {
                     (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? q_ = (CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb, _valueTuple.Item1, _valueTuple.Item2);
                     return q_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(i_, j_);
-                bool? l_((CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? tuple_ddtaodcfiesjbggrllzpybgqb)
-                {
+
+                bool? l_((CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? tuple_ddtaodcfiesjbggrllzpybgqb) {
                     DataType r_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Effective;
                     object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                     CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.toInterval(context, s_);
@@ -523,17 +528,19 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
                     bool? aj_ = context.Operators.And(af_, ai_);
                     return aj_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(k_, l_);
-                CqlDate n_((CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? tuple_ddtaodcfiesjbggrllzpybgqb)
-                {
+
+                CqlDate n_((CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? tuple_ddtaodcfiesjbggrllzpybgqb) {
                     DataType ak_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Effective;
                     object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                     CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.toInterval(context, al_);
                     CqlDateTime an_ = context.Operators.Start(am_);
                     CqlDate ao_ = context.Operators.DateFrom(an_);
                     return ao_;
-                };
+                }
+
                 IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?, CqlDate>(m_, n_);
                 IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
                 return p_;
@@ -551,14 +558,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 IEnumerable<CqlDate> b_ = this.Date_PROMIS10_Total_Assessment_Completed(context);
                 IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple) {
                     (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? m_ = (CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
                     return m_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?>(d_, e_);
-                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? tuple_dzhwgxhmbfavmzfaszbeksohj)
-                {
+
+                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? tuple_dzhwgxhmbfavmzfaszbeksohj) {
                     Period n_ = tuple_dzhwgxhmbfavmzfaszbeksohj?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
@@ -592,10 +600,10 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ax_ = context.Operators.In<CqlDate>(an_, aw_, "day");
                     bool? ay_ = context.Operators.And(al_, ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?>(f_, g_);
-                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? tuple_dzhwgxhmbfavmzfaszbeksohj) =>
-                tuple_dzhwgxhmbfavmzfaszbeksohj?.ValidEncounters;
+                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? tuple_dzhwgxhmbfavmzfaszbeksohj) => tuple_dzhwgxhmbfavmzfaszbeksohj?.ValidEncounters;
                 IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?, Encounter>(h_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -640,14 +648,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Observation> aa_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> ab_ = Status_1_15_000.Instance.isAssessmentPerformed(context, aa_);
                 IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation>> ac_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_, ab_);
-                (CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? ad_(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? ad_(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple) {
                     (CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? ak_ = (CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6, _valueTuple.Item7);
                     return ak_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?> ae_ = context.Operators.Select<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation>, (CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?>(ac_, ad_);
-                bool? af_((CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? tuple_cbgpsarvwrsewlglehinjanim)
-                {
+
+                bool? af_((CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? tuple_cbgpsarvwrsewlglehinjanim) {
                     DataType al_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Sleep?.Effective;
                     object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
                     CqlInterval<CqlDateTime> an_ = QICoreCommon_4_0_000.Instance.toInterval(context, am_);
@@ -743,17 +752,19 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ee_ = context.Operators.Not((bool?)(ed_ is null));
                     bool? ef_ = context.Operators.And(eb_, ee_);
                     return ef_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?> ag_ = context.Operators.Where<(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?>(ae_, af_);
-                CqlDate ah_((CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? tuple_cbgpsarvwrsewlglehinjanim)
-                {
+
+                CqlDate ah_((CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? tuple_cbgpsarvwrsewlglehinjanim) {
                     DataType eg_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Sleep?.Effective;
                     object eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
                     CqlInterval<CqlDateTime> ei_ = QICoreCommon_4_0_000.Instance.toInterval(context, eh_);
                     CqlDateTime ej_ = context.Operators.Start(ei_);
                     CqlDate ek_ = context.Operators.DateFrom(ej_);
                     return ek_;
-                };
+                }
+
                 IEnumerable<CqlDate> ai_ = context.Operators.Select<(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?, CqlDate>(ag_, ah_);
                 IEnumerable<CqlDate> aj_ = context.Operators.Distinct<CqlDate>(ai_);
                 return aj_;
@@ -771,14 +782,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 IEnumerable<CqlDate> b_ = this.Date_PROMIS29_Total_Assessment_Completed(context);
                 IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple) {
                     (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? m_ = (CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
                     return m_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?>(d_, e_);
-                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? tuple_kmpntxjuhkpbcwgftqigieao)
-                {
+
+                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? tuple_kmpntxjuhkpbcwgftqigieao) {
                     Period n_ = tuple_kmpntxjuhkpbcwgftqigieao?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
@@ -812,10 +824,10 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ax_ = context.Operators.In<CqlDate>(an_, aw_, "day");
                     bool? ay_ = context.Operators.And(al_, ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?>(f_, g_);
-                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? tuple_kmpntxjuhkpbcwgftqigieao) =>
-                tuple_kmpntxjuhkpbcwgftqigieao?.ValidEncounters;
+                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? tuple_kmpntxjuhkpbcwgftqigieao) => tuple_kmpntxjuhkpbcwgftqigieao?.ValidEncounters;
                 IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?, Encounter>(h_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -840,14 +852,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> h_ = Status_1_15_000.Instance.isAssessmentPerformed(context, g_);
                 IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-                (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple) {
                     (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? q_ = (CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH, _valueTuple.Item1, _valueTuple.Item2);
                     return q_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_);
-                bool? l_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
-                {
+
+                bool? l_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh) {
                     DataType r_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
                     object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                     CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.toInterval(context, s_);
@@ -868,17 +881,19 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
                     bool? aj_ = context.Operators.And(af_, ai_);
                     return aj_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(k_, l_);
-                CqlDate n_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
-                {
+
+                CqlDate n_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh) {
                     DataType ak_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
                     object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                     CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.toInterval(context, al_);
                     CqlDateTime an_ = context.Operators.Start(am_);
                     CqlDate ao_ = context.Operators.DateFrom(an_);
                     return ao_;
-                };
+                }
+
                 IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?, CqlDate>(m_, n_);
                 IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
                 return p_;
@@ -896,14 +911,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 IEnumerable<CqlDate> b_ = this.Date_VR12_Oblique_Total_Assessment_Completed(context);
                 IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple) {
                     (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? m_ = (CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
                     return m_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?>(d_, e_);
-                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? tuple_fppktdiagiekhptnsbacpswh)
-                {
+
+                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? tuple_fppktdiagiekhptnsbacpswh) {
                     Period n_ = tuple_fppktdiagiekhptnsbacpswh?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
@@ -937,10 +953,10 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ax_ = context.Operators.In<CqlDate>(an_, aw_, "day");
                     bool? ay_ = context.Operators.And(al_, ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?>(f_, g_);
-                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? tuple_fppktdiagiekhptnsbacpswh) =>
-                tuple_fppktdiagiekhptnsbacpswh?.ValidEncounters;
+                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? tuple_fppktdiagiekhptnsbacpswh) => tuple_fppktdiagiekhptnsbacpswh?.ValidEncounters;
                 IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?, Encounter>(h_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -965,14 +981,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> h_ = Status_1_15_000.Instance.isAssessmentPerformed(context, g_);
                 IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-                (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple) {
                     (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? q_ = (CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH, _valueTuple.Item1, _valueTuple.Item2);
                     return q_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_);
-                bool? l_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
-                {
+
+                bool? l_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh) {
                     DataType r_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
                     object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                     CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.toInterval(context, s_);
@@ -993,17 +1010,19 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
                     bool? aj_ = context.Operators.And(af_, ai_);
                     return aj_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(k_, l_);
-                CqlDate n_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
-                {
+
+                CqlDate n_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh) {
                     DataType ak_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
                     object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                     CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.toInterval(context, al_);
                     CqlDateTime an_ = context.Operators.Start(am_);
                     CqlDate ao_ = context.Operators.DateFrom(an_);
                     return ao_;
-                };
+                }
+
                 IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?, CqlDate>(m_, n_);
                 IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
                 return p_;
@@ -1021,14 +1040,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 IEnumerable<CqlDate> b_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed(context);
                 IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple) {
                     (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? m_ = (CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
                     return m_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?>(d_, e_);
-                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? tuple_fansvmjaedmvsdoyrozxdlsai)
-                {
+
+                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? tuple_fansvmjaedmvsdoyrozxdlsai) {
                     Period n_ = tuple_fansvmjaedmvsdoyrozxdlsai?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
@@ -1062,10 +1082,10 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ax_ = context.Operators.In<CqlDate>(an_, aw_, "day");
                     bool? ay_ = context.Operators.And(al_, ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?>(f_, g_);
-                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? tuple_fansvmjaedmvsdoyrozxdlsai) =>
-                tuple_fansvmjaedmvsdoyrozxdlsai?.ValidEncounters;
+                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? tuple_fansvmjaedmvsdoyrozxdlsai) => tuple_fansvmjaedmvsdoyrozxdlsai?.ValidEncounters;
                 IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?, Encounter>(h_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -1090,14 +1110,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> h_ = Status_1_15_000.Instance.isAssessmentPerformed(context, g_);
                 IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-                (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple) {
                     (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? q_ = (CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK, _valueTuple.Item1, _valueTuple.Item2);
                     return q_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(i_, j_);
-                bool? l_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
-                {
+
+                bool? l_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk) {
                     DataType r_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
                     object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                     CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.toInterval(context, s_);
@@ -1118,17 +1139,19 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
                     bool? aj_ = context.Operators.And(af_, ai_);
                     return aj_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(k_, l_);
-                CqlDate n_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
-                {
+
+                CqlDate n_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk) {
                     DataType ak_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
                     object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                     CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.toInterval(context, al_);
                     CqlDateTime an_ = context.Operators.Start(am_);
                     CqlDate ao_ = context.Operators.DateFrom(an_);
                     return ao_;
-                };
+                }
+
                 IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?, CqlDate>(m_, n_);
                 IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
                 return p_;
@@ -1146,14 +1169,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 IEnumerable<CqlDate> b_ = this.Date_VR36_Oblique_Total_Assessment_Completed(context);
                 IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple) {
                     (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? m_ = (CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
                     return m_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?>(d_, e_);
-                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? tuple_elxicyhrdpyzpqyjphdifbiga)
-                {
+
+                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? tuple_elxicyhrdpyzpqyjphdifbiga) {
                     Period n_ = tuple_elxicyhrdpyzpqyjphdifbiga?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
@@ -1187,10 +1211,10 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ax_ = context.Operators.In<CqlDate>(an_, aw_, "day");
                     bool? ay_ = context.Operators.And(al_, ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?>(f_, g_);
-                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? tuple_elxicyhrdpyzpqyjphdifbiga) =>
-                tuple_elxicyhrdpyzpqyjphdifbiga?.ValidEncounters;
+                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? tuple_elxicyhrdpyzpqyjphdifbiga) => tuple_elxicyhrdpyzpqyjphdifbiga?.ValidEncounters;
                 IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?, Encounter>(h_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -1215,14 +1239,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> h_ = Status_1_15_000.Instance.isAssessmentPerformed(context, g_);
                 IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-                (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple) {
                     (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? q_ = (CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK, _valueTuple.Item1, _valueTuple.Item2);
                     return q_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(i_, j_);
-                bool? l_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
-                {
+
+                bool? l_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk) {
                     DataType r_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
                     object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                     CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.toInterval(context, s_);
@@ -1243,17 +1268,19 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
                     bool? aj_ = context.Operators.And(af_, ai_);
                     return aj_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(k_, l_);
-                CqlDate n_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
-                {
+
+                CqlDate n_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk) {
                     DataType ak_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
                     object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                     CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.toInterval(context, al_);
                     CqlDateTime an_ = context.Operators.Start(am_);
                     CqlDate ao_ = context.Operators.DateFrom(an_);
                     return ao_;
-                };
+                }
+
                 IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?, CqlDate>(m_, n_);
                 IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
                 return p_;
@@ -1271,14 +1298,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 IEnumerable<CqlDate> b_ = this.Date_VR36_Orthogonal_Total_Assessment_Completed(context);
                 IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple) {
                     (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? m_ = (CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
                     return m_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?>(d_, e_);
-                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? tuple_fucqujadjizabihdffformht)
-                {
+
+                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? tuple_fucqujadjizabihdffformht) {
                     Period n_ = tuple_fucqujadjizabihdffformht?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
@@ -1312,10 +1340,10 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ax_ = context.Operators.In<CqlDate>(an_, aw_, "day");
                     bool? ay_ = context.Operators.And(al_, ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?>(f_, g_);
-                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? tuple_fucqujadjizabihdffformht) =>
-                tuple_fucqujadjizabihdffformht?.ValidEncounters;
+                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? tuple_fucqujadjizabihdffformht) => tuple_fucqujadjizabihdffformht?.ValidEncounters;
                 IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?, Encounter>(h_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -1340,14 +1368,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> h_ = Status_1_15_000.Instance.isAssessmentPerformed(context, g_);
                 IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-                (CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? j_(ValueTuple<Observation, Observation> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? j_(ValueTuple<Observation, Observation> _valueTuple) {
                     (CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? q_ = (CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf, _valueTuple.Item1, _valueTuple.Item2);
                     return q_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?>(i_, j_);
-                bool? l_((CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? tuple_fnofxckadaeusjerhbdqfoshe)
-                {
+
+                bool? l_((CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? tuple_fnofxckadaeusjerhbdqfoshe) {
                     DataType r_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical?.Effective;
                     object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                     CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.toInterval(context, s_);
@@ -1368,17 +1397,19 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
                     bool? aj_ = context.Operators.And(af_, ai_);
                     return aj_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?>(k_, l_);
-                CqlDate n_((CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? tuple_fnofxckadaeusjerhbdqfoshe)
-                {
+
+                CqlDate n_((CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? tuple_fnofxckadaeusjerhbdqfoshe) {
                     DataType ak_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical?.Effective;
                     object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                     CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.toInterval(context, al_);
                     CqlDateTime an_ = context.Operators.Start(am_);
                     CqlDate ao_ = context.Operators.DateFrom(an_);
                     return ao_;
-                };
+                }
+
                 IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?, CqlDate>(m_, n_);
                 IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
                 return p_;
@@ -1396,14 +1427,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 IEnumerable<CqlDate> b_ = this.Date_MLHFQ_Total_Assessment_Completed(context);
                 IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple) {
                     (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? m_ = (CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
                     return m_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?>(d_, e_);
-                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? tuple_ncdawctnmbfmtibmihsfbaig)
-                {
+
+                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? tuple_ncdawctnmbfmtibmihsfbaig) {
                     Period n_ = tuple_ncdawctnmbfmtibmihsfbaig?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
@@ -1437,10 +1469,10 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ax_ = context.Operators.In<CqlDate>(an_, aw_, "day");
                     bool? ay_ = context.Operators.And(al_, ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?>(f_, g_);
-                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? tuple_ncdawctnmbfmtibmihsfbaig) =>
-                tuple_ncdawctnmbfmtibmihsfbaig?.ValidEncounters;
+                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? tuple_ncdawctnmbfmtibmihsfbaig) => tuple_ncdawctnmbfmtibmihsfbaig?.ValidEncounters;
                 IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?, Encounter>(h_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -1465,14 +1497,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> h_ = Status_1_15_000.Instance.isAssessmentPerformed(context, g_);
                 IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
-                (CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? j_(ValueTuple<Observation, Observation> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? j_(ValueTuple<Observation, Observation> _valueTuple) {
                     (CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? q_ = (CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj, _valueTuple.Item1, _valueTuple.Item2);
                     return q_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?>(i_, j_);
-                bool? l_((CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? tuple_dfkxorghhyafccusbqamfntdj)
-                {
+
+                bool? l_((CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? tuple_dfkxorghhyafccusbqamfntdj) {
                     DataType r_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item?.Effective;
                     object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                     CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.toInterval(context, s_);
@@ -1493,17 +1526,19 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
                     bool? aj_ = context.Operators.And(af_, ai_);
                     return aj_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?>(k_, l_);
-                CqlDate n_((CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? tuple_dfkxorghhyafccusbqamfntdj)
-                {
+
+                CqlDate n_((CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? tuple_dfkxorghhyafccusbqamfntdj) {
                     DataType ak_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item?.Effective;
                     object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                     CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.toInterval(context, al_);
                     CqlDateTime an_ = context.Operators.Start(am_);
                     CqlDate ao_ = context.Operators.DateFrom(an_);
                     return ao_;
-                };
+                }
+
                 IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?, CqlDate>(m_, n_);
                 IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
                 return p_;
@@ -1521,14 +1556,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 IEnumerable<CqlDate> b_ = this.Date_KCCQ12_Total_Assessment_Completed(context);
                 IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple) {
                     (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? m_ = (CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
                     return m_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?>(d_, e_);
-                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? tuple_eoahgtwwdfqijhcjzqnvidvuo)
-                {
+
+                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? tuple_eoahgtwwdfqijhcjzqnvidvuo) {
                     Period n_ = tuple_eoahgtwwdfqijhcjzqnvidvuo?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
@@ -1562,10 +1598,10 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ax_ = context.Operators.In<CqlDate>(an_, aw_, "day");
                     bool? ay_ = context.Operators.And(al_, ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?>(f_, g_);
-                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? tuple_eoahgtwwdfqijhcjzqnvidvuo) =>
-                tuple_eoahgtwwdfqijhcjzqnvidvuo?.ValidEncounters;
+                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? tuple_eoahgtwwdfqijhcjzqnvidvuo) => tuple_eoahgtwwdfqijhcjzqnvidvuo?.ValidEncounters;
                 IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?, Encounter>(h_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -1606,14 +1642,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Observation> w_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> x_ = Status_1_15_000.Instance.isAssessmentPerformed(context, w_);
                 IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation>> y_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_);
-                (CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? z_(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? z_(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple) {
                     (CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? ag_ = (CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6);
                     return ag_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?> aa_ = context.Operators.Select<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation>, (CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?>(y_, z_);
-                bool? ab_((CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? tuple_etfcawdpmcqfbnayqdmdqqsdn)
-                {
+
+                bool? ab_((CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? tuple_etfcawdpmcqfbnayqdmdqqsdn) {
                     DataType ah_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality?.Effective;
                     object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
                     CqlInterval<CqlDateTime> aj_ = QICoreCommon_4_0_000.Instance.toInterval(context, ai_);
@@ -1694,17 +1731,19 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? dk_ = context.Operators.Not((bool?)(dj_ is null));
                     bool? dl_ = context.Operators.And(dh_, dk_);
                     return dl_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?> ac_ = context.Operators.Where<(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?>(aa_, ab_);
-                CqlDate ad_((CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? tuple_etfcawdpmcqfbnayqdmdqqsdn)
-                {
+
+                CqlDate ad_((CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? tuple_etfcawdpmcqfbnayqdmdqqsdn) {
                     DataType dm_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality?.Effective;
                     object dn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dm_);
                     CqlInterval<CqlDateTime> do_ = QICoreCommon_4_0_000.Instance.toInterval(context, dn_);
                     CqlDateTime dp_ = context.Operators.Start(do_);
                     CqlDate dq_ = context.Operators.DateFrom(dp_);
                     return dq_;
-                };
+                }
+
                 IEnumerable<CqlDate> ae_ = context.Operators.Select<(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?, CqlDate>(ac_, ad_);
                 IEnumerable<CqlDate> af_ = context.Operators.Distinct<CqlDate>(ae_);
                 return af_;
@@ -1722,14 +1761,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 IEnumerable<CqlDate> b_ = this.Date_KCCQ_Domain_Assessment_Completed(context);
                 IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple) {
                     (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? m_ = (CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
                     return m_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?>(d_, e_);
-                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? tuple_hrluhbcfcsvnvrrnjajahdcea)
-                {
+
+                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? tuple_hrluhbcfcsvnvrrnjajahdcea) {
                     Period n_ = tuple_hrluhbcfcsvnvrrnjajahdcea?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
@@ -1763,10 +1803,10 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ax_ = context.Operators.In<CqlDate>(an_, aw_, "day");
                     bool? ay_ = context.Operators.And(al_, ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?>(f_, g_);
-                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? tuple_hrluhbcfcsvnvrrnjajahdcea) =>
-                tuple_hrluhbcfcsvnvrrnjajahdcea?.ValidEncounters;
+                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? tuple_hrluhbcfcsvnvrrnjajahdcea) => tuple_hrluhbcfcsvnvrrnjajahdcea?.ValidEncounters;
                 IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?, Encounter>(h_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -1786,23 +1826,25 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
                 IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
                 IEnumerable<Observation> d_ = Status_1_15_000.Instance.isAssessmentPerformed(context, c_);
-                bool? e_(Observation KCCQSummaryScore)
-                {
+
+                bool? e_(Observation KCCQSummaryScore) {
                     DataType j_ = (KCCQSummaryScore as Observation)?.Value;
                     object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
                     bool? l_ = context.Operators.Not((bool?)(k_ is null));
                     return l_;
-                };
+                }
+
                 IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-                CqlDate g_(Observation KCCQSummaryScore)
-                {
+
+                CqlDate g_(Observation KCCQSummaryScore) {
                     DataType m_ = KCCQSummaryScore?.Effective;
                     object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
                     CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
                     CqlDateTime p_ = context.Operators.Start(o_);
                     CqlDate q_ = context.Operators.DateFrom(p_);
                     return q_;
-                };
+                }
+
                 IEnumerable<CqlDate> h_ = context.Operators.Select<Observation, CqlDate>(f_, g_);
                 IEnumerable<CqlDate> i_ = context.Operators.Distinct<CqlDate>(h_);
                 return i_;
@@ -1820,14 +1862,15 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
                 IEnumerable<CqlDate> b_ = this.Date_KCCQ_Total_Assessment_Completed(context);
                 IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
-                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
-                {
+
+                (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple) {
                     (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? m_ = (CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
                     return m_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?>(d_, e_);
-                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? tuple_dgrojeekdvizsvyisepdjhjgj)
-                {
+
+                bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? tuple_dgrojeekdvizsvyisepdjhjgj) {
                     Period n_ = tuple_dgrojeekdvizsvyisepdjhjgj?.ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
@@ -1861,10 +1904,10 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                     bool? ax_ = context.Operators.In<CqlDate>(an_, aw_, "day");
                     bool? ay_ = context.Operators.And(al_, ax_);
                     return ay_;
-                };
+                }
+
                 IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?>(f_, g_);
-                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? tuple_dgrojeekdvizsvyisepdjhjgj) =>
-                tuple_dgrojeekdvizsvyisepdjhjgj?.ValidEncounters;
+                Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? tuple_dgrojeekdvizsvyisepdjhjgj) => tuple_dgrojeekdvizsvyisepdjhjgj?.ValidEncounters;
                 IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?, Encounter>(h_, i_);
                 IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
                 bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -1908,72 +1951,72 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL = new(
-      [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-      ["KCCQLifeQuality", "KCCQSymptomStability", "KCCQSelfEfficacy", "KCCQSymptoms", "KCCQPhysicalLimits", "KCCQSocialLimits"]);
+       [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+       ["KCCQLifeQuality", "KCCQSymptomStability", "KCCQSelfEfficacy", "KCCQSymptoms", "KCCQPhysicalLimits", "KCCQSocialLimits"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ = new(
-      [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-      ["ValidEncounters", "InitialVR36OrthogonalDate", "FollowupVR36OrthogonalDate"]);
+       [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+       ["ValidEncounters", "InitialVR36OrthogonalDate", "FollowupVR36OrthogonalDate"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj = new(
-      [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-      ["ValidEncounters", "InitialPROMIS10Date", "FollowupPROMIS10Date"]);
+       [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+       ["ValidEncounters", "InitialPROMIS10Date", "FollowupPROMIS10Date"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU = new(
-      [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-      ["ValidEncounters", "InitialMLHFQDate", "FollowupMLHFQDate"]);
+       [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+       ["ValidEncounters", "InitialMLHFQDate", "FollowupMLHFQDate"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX = new(
-      [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-      ["Promis29Sleep", "Promis29SocialRoles", "Promis29Physical", "Promis29Pain", "Promis29Fatigue", "Promis29Depression", "Promis29Anxiety"]);
+       [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+       ["Promis29Sleep", "Promis29SocialRoles", "Promis29Physical", "Promis29Pain", "Promis29Fatigue", "Promis29Depression", "Promis29Anxiety"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new(
-      [typeof(Observation), typeof(Observation)],
-      ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
+       [typeof(Observation), typeof(Observation)],
+       ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj = new(
-      [typeof(Observation), typeof(Observation)],
-      ["KCCQ12Item", "KCCQ12Summary"]);
+       [typeof(Observation), typeof(Observation)],
+       ["KCCQ12Item", "KCCQ12Summary"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR = new(
-      [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-      ["ValidEncounters", "InitialKCCQTotalScore", "FollowupKCCQTotalScore"]);
+       [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+       ["ValidEncounters", "InitialKCCQTotalScore", "FollowupKCCQTotalScore"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG = new(
-      [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-      ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
+       [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+       ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK = new(
-      [typeof(Observation), typeof(Observation)],
-      ["VR36MentalAssessment", "VR36PhysicalAssessment"]);
+       [typeof(Observation), typeof(Observation)],
+       ["VR36MentalAssessment", "VR36PhysicalAssessment"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf = new(
-      [typeof(Observation), typeof(Observation)],
-      ["MLHFQPhysical", "MLHFQEmotional"]);
+       [typeof(Observation), typeof(Observation)],
+       ["MLHFQPhysical", "MLHFQEmotional"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU = new(
-      [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-      ["ValidEncounters", "InitialKCCQ12Date", "FollowupKCCQ12Date"]);
+       [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+       ["ValidEncounters", "InitialKCCQ12Date", "FollowupKCCQ12Date"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT = new(
-      [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-      ["ValidEncounters", "InitialVR12ObliqueDate", "FollowupVR12ObliqueDate"]);
+       [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+       ["ValidEncounters", "InitialVR12ObliqueDate", "FollowupVR12ObliqueDate"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
-      [typeof(Observation), typeof(Observation)],
-      ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
+       [typeof(Observation), typeof(Observation)],
+       ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN = new(
-      [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-      ["ValidEncounters", "InitialKCCQAssessmentDate", "FollowupKCCQAssessmentDate"]);
+       [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+       ["ValidEncounters", "InitialKCCQAssessmentDate", "FollowupKCCQAssessmentDate"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ = new(
-      [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-      ["ValidEncounters", "InitialVR36ObliqueDate", "FollowupVR36ObliqueDate"]);
+       [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+       ["ValidEncounters", "InitialVR36ObliqueDate", "FollowupVR36ObliqueDate"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB = new(
-      [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-      ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
+       [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+       ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
 
     #endregion CqlTupleMetadata Properties
 

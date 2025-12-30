@@ -120,7 +120,8 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlInterval<CqlDate> ao_ = context.Operators.Interval(al_, an_, true, true);
             bool? ap_ = context.Operators.Overlaps(aj_, ao_, default);
             return ap_;
-        };
+        }
+        ;
         IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
         bool? e_ = context.Operators.Exists<Observation>(d_);
         CqlValueSet f_ = this.Palliative_Care_Encounter(context);
@@ -143,7 +144,8 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlInterval<CqlDate> bd_ = context.Operators.Interval(ba_, bc_, true, true);
             bool? be_ = context.Operators.Overlaps(ay_, bd_, default);
             return be_;
-        };
+        }
+        ;
         IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
         bool? k_ = context.Operators.Exists<Encounter>(j_);
         bool? l_ = context.Operators.Or(e_, k_);
@@ -167,7 +169,8 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlInterval<CqlDate> bs_ = context.Operators.Interval(bp_, br_, true, true);
             bool? bt_ = context.Operators.Overlaps(bn_, bs_, default);
             return bt_;
-        };
+        }
+        ;
         IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>(o_, p_);
         bool? r_ = context.Operators.Exists<Procedure>(q_);
         bool? s_ = context.Operators.Or(l_, r_);
@@ -190,12 +193,14 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlInterval<CqlDate> cf_ = context.Operators.Interval(cc_, ce_, true, true);
             bool? cg_ = context.Operators.Overlaps(ca_, cf_, default);
             return cg_;
-        };
+        }
+        ;
         IEnumerable<Condition> y_ = context.Operators.Where<Condition>(w_, x_);
         bool? z_ = context.Operators.Exists<Condition>(y_);
         bool? aa_ = context.Operators.Or(s_, z_);
         return aa_;
     }
+
 
 
     #endregion Functions and Expressions

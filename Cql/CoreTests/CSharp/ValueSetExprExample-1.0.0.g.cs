@@ -122,20 +122,24 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             context,
             () =>
             {
-                CqlValueSet a_()
-                {
-                    bool b_()
-                    {
+
+                CqlValueSet a_() {
+
+                    bool b_() {
                         string d_ = this.ChosenSubCategory(context);
                         bool? e_ = context.Operators.Equal(d_, "1");
                         return e_ ?? false;
-                    };
-                    bool c_()
-                    {
+                    }
+                    ;
+
+
+                    bool c_() {
                         string f_ = this.ChosenSubCategory(context);
                         bool? g_ = context.Operators.Equal(f_, "2");
                         return g_ ?? false;
-                    };
+                    }
+                    ;
+
                     if (b_())
                     {
                         CqlValueSet h_ = this.ValueSet_A_1(context);
@@ -149,8 +153,10 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
                     else
                     {
                         return default;
-                    }
-                };
+                    };
+                }
+                ;
+
                 return a_();
             });
 
@@ -163,20 +169,24 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             context,
             () =>
             {
-                CqlValueSet a_()
-                {
-                    bool b_()
-                    {
+
+                CqlValueSet a_() {
+
+                    bool b_() {
                         string d_ = this.ChosenSubCategory(context);
                         bool? e_ = context.Operators.Equal(d_, "1");
                         return e_ ?? false;
-                    };
-                    bool c_()
-                    {
+                    }
+                    ;
+
+
+                    bool c_() {
                         string f_ = this.ChosenSubCategory(context);
                         bool? g_ = context.Operators.Equal(f_, "2");
                         return g_ ?? false;
-                    };
+                    }
+                    ;
+
                     if (b_())
                     {
                         CqlValueSet h_ = this.ValueSet_B_1(context);
@@ -190,8 +200,10 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
                     else
                     {
                         return default;
-                    }
-                };
+                    };
+                }
+                ;
+
                 return a_();
             });
 
@@ -204,22 +216,26 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             context,
             () =>
             {
-                string a_()
-                {
-                    bool b_()
-                    {
+
+                string a_() {
+
+                    bool b_() {
                         CqlCode d_ = this.ChosenCode(context);
                         CqlValueSet e_ = this.ValueSetA(context);
                         bool? f_ = context.Operators.CodeInValueSet(d_, e_);
                         return f_ ?? false;
-                    };
-                    bool c_()
-                    {
+                    }
+                    ;
+
+
+                    bool c_() {
                         CqlCode g_ = this.ChosenCode(context);
                         CqlValueSet h_ = this.ValueSetB(context);
                         bool? i_ = context.Operators.CodeInValueSet(g_, h_);
                         return i_ ?? false;
-                    };
+                    }
+                    ;
+
                     if (b_())
                     {
                         return "a";
@@ -231,8 +247,10 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
                     else
                     {
                         return default;
-                    }
-                };
+                    };
+                }
+                ;
+
                 return a_();
             });
 

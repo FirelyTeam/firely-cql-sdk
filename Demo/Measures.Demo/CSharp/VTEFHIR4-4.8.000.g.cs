@@ -85,7 +85,8 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
                 CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
                 object d_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", c_);
                 return (CqlInterval<CqlDateTime>)d_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -103,7 +104,8 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     [CqlFunctionDefinition("StartOfFirstICU")]
@@ -116,6 +118,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     }
 
 
+
     [CqlFunctionDefinition("FirstICULocationPeriod")]
     public Period FirstICULocationPeriod(CqlContext context, Encounter Encounter)
     {
@@ -123,6 +126,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
         Period b_ = a_?.Period;
         return b_;
     }
+
 
 
     [CqlFunctionDefinition("FirstInpatientIntensiveCareUnit")]
@@ -138,7 +142,8 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
             {
                 CqlConcept t_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
                 return t_;
-            };
+            }
+            ;
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
             CqlValueSet l_ = this.Intensive_Care_Unit(context);
             bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
@@ -149,7 +154,8 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
             bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
             bool? s_ = context.Operators.And(m_, r_);
             return s_;
-        };
+        }
+        ;
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
         object d_(Encounter.LocationComponent @this)
         {
@@ -157,11 +163,13 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
             CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
             CqlDateTime w_ = context.Operators.Start(v_);
             return w_;
-        };
+        }
+        ;
         IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SortBy<Encounter.LocationComponent>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter.LocationComponent f_ = context.Operators.First<Encounter.LocationComponent>(e_);
         return f_;
     }
+
 
 
     [CqlFunctionDefinition("CalendarDayOfOrDayAfter")]
@@ -173,6 +181,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
         CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, true, true);
         return e_;
     }
+
 
 
     [CqlFunctionDefinition("FromDayOfStartOfHospitalizationToDayAfterAdmission")]
@@ -192,6 +201,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     }
 
 
+
     [CqlFunctionDefinition("FromDayOfStartOfHospitalizationToDayAfterFirstICU")]
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
     {
@@ -205,6 +215,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
         CqlInterval<CqlDate> h_ = context.Operators.Interval(c_, g_, true, true);
         return h_;
     }
+
 
 
     #endregion Functions and Expressions

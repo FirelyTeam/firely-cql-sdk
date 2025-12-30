@@ -70,8 +70,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Account[] a_ = [
             arg,
         ];
-        Account b_(Account a)
-        {
+
+        Account b_(Account a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Account.AccountStatus> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.Type;
@@ -98,7 +98,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 PartOf = p_,
             };
             return q_;
-        };
+        }
+        ;
+
         IEnumerable<Account> c_ = context.Operators.Select<Account, Account>((IEnumerable<Account>)a_, b_);
         IEnumerable<Account> d_ = context.Operators.Distinct<Account>(c_);
         Account e_ = context.Operators.SingletonFrom<Account>(d_);
@@ -112,8 +114,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ActivityDefinition[] a_ = [
             arg,
         ];
-        ActivityDefinition b_(ActivityDefinition a)
-        {
+
+        ActivityDefinition b_(ActivityDefinition a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -210,7 +212,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 DynamicValue = new List<ActivityDefinition.DynamicValueComponent>((IEnumerable<ActivityDefinition.DynamicValueComponent>)ay_),
             };
             return az_;
-        };
+        }
+        ;
+
         IEnumerable<ActivityDefinition> c_ = context.Operators.Select<ActivityDefinition, ActivityDefinition>((IEnumerable<ActivityDefinition>)a_, b_);
         IEnumerable<ActivityDefinition> d_ = context.Operators.Distinct<ActivityDefinition>(c_);
         ActivityDefinition e_ = context.Operators.SingletonFrom<ActivityDefinition>(d_);
@@ -224,8 +228,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         AdverseEvent[] a_ = [
             arg,
         ];
-        AdverseEvent b_(AdverseEvent a)
-        {
+
+        AdverseEvent b_(AdverseEvent a) {
             Identifier f_ = a?.Identifier;
             Code<AdverseEvent.AdverseEventActuality> g_ = a?.ActualityElement;
             List<CodeableConcept> h_ = a?.Category;
@@ -270,7 +274,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Study = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
             };
             return z_;
-        };
+        }
+        ;
+
         IEnumerable<AdverseEvent> c_ = context.Operators.Select<AdverseEvent, AdverseEvent>((IEnumerable<AdverseEvent>)a_, b_);
         IEnumerable<AdverseEvent> d_ = context.Operators.Distinct<AdverseEvent>(c_);
         AdverseEvent e_ = context.Operators.SingletonFrom<AdverseEvent>(d_);
@@ -284,8 +290,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         AllergyIntolerance[] a_ = [
             arg,
         ];
-        AllergyIntolerance b_(AllergyIntolerance a)
-        {
+
+        AllergyIntolerance b_(AllergyIntolerance a) {
             List<Identifier> f_ = a?.Identifier;
             CodeableConcept g_ = a?.ClinicalStatus;
             CodeableConcept h_ = a?.VerificationStatus;
@@ -322,7 +328,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Reaction = new List<AllergyIntolerance.ReactionComponent>((IEnumerable<AllergyIntolerance.ReactionComponent>)u_),
             };
             return v_;
-        };
+        }
+        ;
+
         IEnumerable<AllergyIntolerance> c_ = context.Operators.Select<AllergyIntolerance, AllergyIntolerance>((IEnumerable<AllergyIntolerance>)a_, b_);
         IEnumerable<AllergyIntolerance> d_ = context.Operators.Distinct<AllergyIntolerance>(c_);
         AllergyIntolerance e_ = context.Operators.SingletonFrom<AllergyIntolerance>(d_);
@@ -336,8 +344,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Appointment[] a_ = [
             arg,
         ];
-        Appointment b_(Appointment a)
-        {
+
+        Appointment b_(Appointment a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Appointment.AppointmentStatus> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.CancelationReason;
@@ -390,7 +398,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 RequestedPeriod = new List<Period>((IEnumerable<Period>)ae_),
             };
             return af_;
-        };
+        }
+        ;
+
         IEnumerable<Appointment> c_ = context.Operators.Select<Appointment, Appointment>((IEnumerable<Appointment>)a_, b_);
         IEnumerable<Appointment> d_ = context.Operators.Distinct<Appointment>(c_);
         Appointment e_ = context.Operators.SingletonFrom<Appointment>(d_);
@@ -404,8 +414,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         AppointmentResponse[] a_ = [
             arg,
         ];
-        AppointmentResponse b_(AppointmentResponse a)
-        {
+
+        AppointmentResponse b_(AppointmentResponse a) {
             List<Identifier> f_ = a?.Identifier;
             ResourceReference g_ = a?.Appointment;
             Instant h_ = a?.StartElement;
@@ -426,7 +436,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 CommentElement = m_,
             };
             return n_;
-        };
+        }
+        ;
+
         IEnumerable<AppointmentResponse> c_ = context.Operators.Select<AppointmentResponse, AppointmentResponse>((IEnumerable<AppointmentResponse>)a_, b_);
         IEnumerable<AppointmentResponse> d_ = context.Operators.Distinct<AppointmentResponse>(c_);
         AppointmentResponse e_ = context.Operators.SingletonFrom<AppointmentResponse>(d_);
@@ -440,8 +452,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         AuditEvent[] a_ = [
             arg,
         ];
-        AuditEvent b_(AuditEvent a)
-        {
+
+        AuditEvent b_(AuditEvent a) {
             Coding f_ = a?.Type;
             List<Coding> g_ = a?.Subtype;
             Code<AuditEvent.AuditEventAction> h_ = a?.ActionElement;
@@ -468,7 +480,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Entity = new List<AuditEvent.EntityComponent>((IEnumerable<AuditEvent.EntityComponent>)p_),
             };
             return q_;
-        };
+        }
+        ;
+
         IEnumerable<AuditEvent> c_ = context.Operators.Select<AuditEvent, AuditEvent>((IEnumerable<AuditEvent>)a_, b_);
         IEnumerable<AuditEvent> d_ = context.Operators.Distinct<AuditEvent>(c_);
         AuditEvent e_ = context.Operators.SingletonFrom<AuditEvent>(d_);
@@ -482,8 +496,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Basic[] a_ = [
             arg,
         ];
-        Basic b_(Basic a)
-        {
+
+        Basic b_(Basic a) {
             List<Identifier> f_ = a?.Identifier;
             CodeableConcept g_ = a?.Code;
             ResourceReference h_ = a?.Subject;
@@ -498,7 +512,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Author = j_,
             };
             return k_;
-        };
+        }
+        ;
+
         IEnumerable<Basic> c_ = context.Operators.Select<Basic, Basic>((IEnumerable<Basic>)a_, b_);
         IEnumerable<Basic> d_ = context.Operators.Distinct<Basic>(c_);
         Basic e_ = context.Operators.SingletonFrom<Basic>(d_);
@@ -512,8 +528,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         BiologicallyDerivedProduct[] a_ = [
             arg,
         ];
-        BiologicallyDerivedProduct b_(BiologicallyDerivedProduct a)
-        {
+
+        BiologicallyDerivedProduct b_(BiologicallyDerivedProduct a) {
             List<Identifier> f_ = a?.Identifier;
             Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> g_ = a?.ProductCategoryElement;
             CodeableConcept h_ = a?.ProductCode;
@@ -540,7 +556,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Storage = new List<BiologicallyDerivedProduct.StorageComponent>((IEnumerable<BiologicallyDerivedProduct.StorageComponent>)p_),
             };
             return q_;
-        };
+        }
+        ;
+
         IEnumerable<BiologicallyDerivedProduct> c_ = context.Operators.Select<BiologicallyDerivedProduct, BiologicallyDerivedProduct>((IEnumerable<BiologicallyDerivedProduct>)a_, b_);
         IEnumerable<BiologicallyDerivedProduct> d_ = context.Operators.Distinct<BiologicallyDerivedProduct>(c_);
         BiologicallyDerivedProduct e_ = context.Operators.SingletonFrom<BiologicallyDerivedProduct>(d_);
@@ -554,8 +572,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         BodyStructure[] a_ = [
             arg,
         ];
-        BodyStructure b_(BodyStructure a)
-        {
+
+        BodyStructure b_(BodyStructure a) {
             List<Identifier> f_ = a?.Identifier;
             FhirBoolean g_ = a?.ActiveElement;
             CodeableConcept h_ = a?.Morphology;
@@ -576,7 +594,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Patient = m_,
             };
             return n_;
-        };
+        }
+        ;
+
         IEnumerable<BodyStructure> c_ = context.Operators.Select<BodyStructure, BodyStructure>((IEnumerable<BodyStructure>)a_, b_);
         IEnumerable<BodyStructure> d_ = context.Operators.Distinct<BodyStructure>(c_);
         BodyStructure e_ = context.Operators.SingletonFrom<BodyStructure>(d_);
@@ -590,8 +610,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         CarePlan[] a_ = [
             arg,
         ];
-        CarePlan b_(CarePlan a)
-        {
+
+        CarePlan b_(CarePlan a) {
             List<Identifier> f_ = a?.Identifier;
             List<Canonical> g_ = a?.InstantiatesCanonicalElement;
             List<FhirUri> h_ = a?.InstantiatesUriElement;
@@ -642,7 +662,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)ab_),
             };
             return ac_;
-        };
+        }
+        ;
+
         IEnumerable<CarePlan> c_ = context.Operators.Select<CarePlan, CarePlan>((IEnumerable<CarePlan>)a_, b_);
         IEnumerable<CarePlan> d_ = context.Operators.Distinct<CarePlan>(c_);
         CarePlan e_ = context.Operators.SingletonFrom<CarePlan>(d_);
@@ -656,8 +678,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         CareTeam[] a_ = [
             arg,
         ];
-        CareTeam b_(CareTeam a)
-        {
+
+        CareTeam b_(CareTeam a) {
             List<Identifier> f_ = a?.Identifier;
             Code<CareTeam.CareTeamStatus> g_ = a?.StatusElement;
             List<CodeableConcept> h_ = a?.Category;
@@ -688,7 +710,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)r_),
             };
             return s_;
-        };
+        }
+        ;
+
         IEnumerable<CareTeam> c_ = context.Operators.Select<CareTeam, CareTeam>((IEnumerable<CareTeam>)a_, b_);
         IEnumerable<CareTeam> d_ = context.Operators.Distinct<CareTeam>(c_);
         CareTeam e_ = context.Operators.SingletonFrom<CareTeam>(d_);
@@ -702,8 +726,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         CatalogEntry[] a_ = [
             arg,
         ];
-        CatalogEntry b_(CatalogEntry a)
-        {
+
+        CatalogEntry b_(CatalogEntry a) {
             List<Identifier> f_ = a?.Identifier;
             CodeableConcept g_ = a?.Type;
             FhirBoolean h_ = a?.OrderableElement;
@@ -734,7 +758,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 RelatedEntry = new List<CatalogEntry.RelatedEntryComponent>((IEnumerable<CatalogEntry.RelatedEntryComponent>)r_),
             };
             return s_;
-        };
+        }
+        ;
+
         IEnumerable<CatalogEntry> c_ = context.Operators.Select<CatalogEntry, CatalogEntry>((IEnumerable<CatalogEntry>)a_, b_);
         IEnumerable<CatalogEntry> d_ = context.Operators.Distinct<CatalogEntry>(c_);
         CatalogEntry e_ = context.Operators.SingletonFrom<CatalogEntry>(d_);
@@ -748,8 +774,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ChargeItem[] a_ = [
             arg,
         ];
-        ChargeItem b_(ChargeItem a)
-        {
+
+        ChargeItem b_(ChargeItem a) {
             List<Identifier> f_ = a?.Identifier;
             List<FhirUri> g_ = a?.DefinitionUriElement;
             List<Canonical> h_ = a?.DefinitionCanonicalElement;
@@ -806,7 +832,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)ae_),
             };
             return af_;
-        };
+        }
+        ;
+
         IEnumerable<ChargeItem> c_ = context.Operators.Select<ChargeItem, ChargeItem>((IEnumerable<ChargeItem>)a_, b_);
         IEnumerable<ChargeItem> d_ = context.Operators.Distinct<ChargeItem>(c_);
         ChargeItem e_ = context.Operators.SingletonFrom<ChargeItem>(d_);
@@ -820,8 +848,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ChargeItemDefinition[] a_ = [
             arg,
         ];
-        ChargeItemDefinition b_(ChargeItemDefinition a)
-        {
+
+        ChargeItemDefinition b_(ChargeItemDefinition a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -872,7 +900,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 PropertyGroup = new List<ChargeItemDefinition.PropertyGroupComponent>((IEnumerable<ChargeItemDefinition.PropertyGroupComponent>)ab_),
             };
             return ac_;
-        };
+        }
+        ;
+
         IEnumerable<ChargeItemDefinition> c_ = context.Operators.Select<ChargeItemDefinition, ChargeItemDefinition>((IEnumerable<ChargeItemDefinition>)a_, b_);
         IEnumerable<ChargeItemDefinition> d_ = context.Operators.Distinct<ChargeItemDefinition>(c_);
         ChargeItemDefinition e_ = context.Operators.SingletonFrom<ChargeItemDefinition>(d_);
@@ -886,8 +916,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Claim[] a_ = [
             arg,
         ];
-        Claim b_(Claim a)
-        {
+
+        Claim b_(Claim a) {
             List<Identifier> f_ = a?.Identifier;
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.Type;
@@ -946,7 +976,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Total = af_,
             };
             return ag_;
-        };
+        }
+        ;
+
         IEnumerable<Claim> c_ = context.Operators.Select<Claim, Claim>((IEnumerable<Claim>)a_, b_);
         IEnumerable<Claim> d_ = context.Operators.Distinct<Claim>(c_);
         Claim e_ = context.Operators.SingletonFrom<Claim>(d_);
@@ -960,8 +992,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ClaimResponse[] a_ = [
             arg,
         ];
-        ClaimResponse b_(ClaimResponse a)
-        {
+
+        ClaimResponse b_(ClaimResponse a) {
             List<Identifier> f_ = a?.Identifier;
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.Type;
@@ -1020,7 +1052,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Error = new List<ClaimResponse.ErrorComponent>((IEnumerable<ClaimResponse.ErrorComponent>)af_),
             };
             return ag_;
-        };
+        }
+        ;
+
         IEnumerable<ClaimResponse> c_ = context.Operators.Select<ClaimResponse, ClaimResponse>((IEnumerable<ClaimResponse>)a_, b_);
         IEnumerable<ClaimResponse> d_ = context.Operators.Distinct<ClaimResponse>(c_);
         ClaimResponse e_ = context.Operators.SingletonFrom<ClaimResponse>(d_);
@@ -1034,8 +1068,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ClinicalImpression[] a_ = [
             arg,
         ];
-        ClinicalImpression b_(ClinicalImpression a)
-        {
+
+        ClinicalImpression b_(ClinicalImpression a) {
             List<Identifier> f_ = a?.Identifier;
             Code<ClinicalImpression.ClinicalImpressionStatus> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.StatusReason;
@@ -1080,7 +1114,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)y_),
             };
             return z_;
-        };
+        }
+        ;
+
         IEnumerable<ClinicalImpression> c_ = context.Operators.Select<ClinicalImpression, ClinicalImpression>((IEnumerable<ClinicalImpression>)a_, b_);
         IEnumerable<ClinicalImpression> d_ = context.Operators.Distinct<ClinicalImpression>(c_);
         ClinicalImpression e_ = context.Operators.SingletonFrom<ClinicalImpression>(d_);
@@ -1094,8 +1130,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         CodeSystem[] a_ = [
             arg,
         ];
-        CodeSystem b_(CodeSystem a)
-        {
+
+        CodeSystem b_(CodeSystem a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -1154,7 +1190,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Concept = new List<CodeSystem.ConceptDefinitionComponent>((IEnumerable<CodeSystem.ConceptDefinitionComponent>)ag_),
             };
             return ah_;
-        };
+        }
+        ;
+
         IEnumerable<CodeSystem> c_ = context.Operators.Select<CodeSystem, CodeSystem>((IEnumerable<CodeSystem>)a_, b_);
         IEnumerable<CodeSystem> d_ = context.Operators.Distinct<CodeSystem>(c_);
         CodeSystem e_ = context.Operators.SingletonFrom<CodeSystem>(d_);
@@ -1168,8 +1206,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Communication[] a_ = [
             arg,
         ];
-        Communication b_(Communication a)
-        {
+
+        Communication b_(Communication a) {
             List<Identifier> f_ = a?.Identifier;
             List<Canonical> g_ = a?.InstantiatesCanonicalElement;
             List<FhirUri> h_ = a?.InstantiatesUriElement;
@@ -1220,7 +1258,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)ab_),
             };
             return ac_;
-        };
+        }
+        ;
+
         IEnumerable<Communication> c_ = context.Operators.Select<Communication, Communication>((IEnumerable<Communication>)a_, b_);
         IEnumerable<Communication> d_ = context.Operators.Distinct<Communication>(c_);
         Communication e_ = context.Operators.SingletonFrom<Communication>(d_);
@@ -1234,8 +1274,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         CommunicationRequest[] a_ = [
             arg,
         ];
-        CommunicationRequest b_(CommunicationRequest a)
-        {
+
+        CommunicationRequest b_(CommunicationRequest a) {
             List<Identifier> f_ = a?.Identifier;
             List<ResourceReference> g_ = a?.BasedOn;
             List<ResourceReference> h_ = a?.Replaces;
@@ -1284,7 +1324,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)aa_),
             };
             return ab_;
-        };
+        }
+        ;
+
         IEnumerable<CommunicationRequest> c_ = context.Operators.Select<CommunicationRequest, CommunicationRequest>((IEnumerable<CommunicationRequest>)a_, b_);
         IEnumerable<CommunicationRequest> d_ = context.Operators.Distinct<CommunicationRequest>(c_);
         CommunicationRequest e_ = context.Operators.SingletonFrom<CommunicationRequest>(d_);
@@ -1298,8 +1340,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Composition[] a_ = [
             arg,
         ];
-        Composition b_(Composition a)
-        {
+
+        Composition b_(Composition a) {
             Identifier f_ = a?.Identifier;
             Code<CompositionStatus> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.Type;
@@ -1334,7 +1376,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Section = new List<Composition.SectionComponent>((IEnumerable<Composition.SectionComponent>)t_),
             };
             return u_;
-        };
+        }
+        ;
+
         IEnumerable<Composition> c_ = context.Operators.Select<Composition, Composition>((IEnumerable<Composition>)a_, b_);
         IEnumerable<Composition> d_ = context.Operators.Distinct<Composition>(c_);
         Composition e_ = context.Operators.SingletonFrom<Composition>(d_);
@@ -1348,8 +1392,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ConceptMap[] a_ = [
             arg,
         ];
-        ConceptMap b_(ConceptMap a)
-        {
+
+        ConceptMap b_(ConceptMap a) {
             FhirUri f_ = a?.UrlElement;
             Identifier g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -1390,7 +1434,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Group = new List<ConceptMap.GroupComponent>((IEnumerable<ConceptMap.GroupComponent>)w_),
             };
             return x_;
-        };
+        }
+        ;
+
         IEnumerable<ConceptMap> c_ = context.Operators.Select<ConceptMap, ConceptMap>((IEnumerable<ConceptMap>)a_, b_);
         IEnumerable<ConceptMap> d_ = context.Operators.Distinct<ConceptMap>(c_);
         ConceptMap e_ = context.Operators.SingletonFrom<ConceptMap>(d_);
@@ -1404,8 +1450,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Condition[] a_ = [
             arg,
         ];
-        Condition b_(Condition a)
-        {
+
+        Condition b_(Condition a) {
             List<Identifier> f_ = a?.Identifier;
             CodeableConcept g_ = a?.ClinicalStatus;
             CodeableConcept h_ = a?.VerificationStatus;
@@ -1444,7 +1490,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)v_),
             };
             return w_;
-        };
+        }
+        ;
+
         IEnumerable<Condition> c_ = context.Operators.Select<Condition, Condition>((IEnumerable<Condition>)a_, b_);
         IEnumerable<Condition> d_ = context.Operators.Distinct<Condition>(c_);
         Condition e_ = context.Operators.SingletonFrom<Condition>(d_);
@@ -1458,8 +1506,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Consent[] a_ = [
             arg,
         ];
-        Consent b_(Consent a)
-        {
+
+        Consent b_(Consent a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Consent.ConsentState> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.Scope;
@@ -1490,7 +1538,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Provision = r_,
             };
             return s_;
-        };
+        }
+        ;
+
         IEnumerable<Consent> c_ = context.Operators.Select<Consent, Consent>((IEnumerable<Consent>)a_, b_);
         IEnumerable<Consent> d_ = context.Operators.Distinct<Consent>(c_);
         Consent e_ = context.Operators.SingletonFrom<Consent>(d_);
@@ -1504,8 +1554,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Contract[] a_ = [
             arg,
         ];
-        Contract b_(Contract a)
-        {
+
+        Contract b_(Contract a) {
             List<Identifier> f_ = a?.Identifier;
             FhirUri g_ = a?.UrlElement;
             FhirString h_ = a?.VersionElement;
@@ -1576,7 +1626,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 LegallyBinding = (DataType)al_,
             };
             return am_;
-        };
+        }
+        ;
+
         IEnumerable<Contract> c_ = context.Operators.Select<Contract, Contract>((IEnumerable<Contract>)a_, b_);
         IEnumerable<Contract> d_ = context.Operators.Distinct<Contract>(c_);
         Contract e_ = context.Operators.SingletonFrom<Contract>(d_);
@@ -1590,8 +1642,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Coverage[] a_ = [
             arg,
         ];
-        Coverage b_(Coverage a)
-        {
+
+        Coverage b_(Coverage a) {
             List<Identifier> f_ = a?.Identifier;
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.Type;
@@ -1632,7 +1684,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Contract = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
             };
             return y_;
-        };
+        }
+        ;
+
         IEnumerable<Coverage> c_ = context.Operators.Select<Coverage, Coverage>((IEnumerable<Coverage>)a_, b_);
         IEnumerable<Coverage> d_ = context.Operators.Distinct<Coverage>(c_);
         Coverage e_ = context.Operators.SingletonFrom<Coverage>(d_);
@@ -1646,8 +1700,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         CoverageEligibilityRequest[] a_ = [
             arg,
         ];
-        CoverageEligibilityRequest b_(CoverageEligibilityRequest a)
-        {
+
+        CoverageEligibilityRequest b_(CoverageEligibilityRequest a) {
             List<Identifier> f_ = a?.Identifier;
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.Priority;
@@ -1680,7 +1734,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Item = new List<CoverageEligibilityRequest.DetailsComponent>((IEnumerable<CoverageEligibilityRequest.DetailsComponent>)s_),
             };
             return t_;
-        };
+        }
+        ;
+
         IEnumerable<CoverageEligibilityRequest> c_ = context.Operators.Select<CoverageEligibilityRequest, CoverageEligibilityRequest>((IEnumerable<CoverageEligibilityRequest>)a_, b_);
         IEnumerable<CoverageEligibilityRequest> d_ = context.Operators.Distinct<CoverageEligibilityRequest>(c_);
         CoverageEligibilityRequest e_ = context.Operators.SingletonFrom<CoverageEligibilityRequest>(d_);
@@ -1694,8 +1750,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         CoverageEligibilityResponse[] a_ = [
             arg,
         ];
-        CoverageEligibilityResponse b_(CoverageEligibilityResponse a)
-        {
+
+        CoverageEligibilityResponse b_(CoverageEligibilityResponse a) {
             List<Identifier> f_ = a?.Identifier;
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement;
             List<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>> h_ = a?.PurposeElement;
@@ -1730,7 +1786,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Error = new List<CoverageEligibilityResponse.ErrorsComponent>((IEnumerable<CoverageEligibilityResponse.ErrorsComponent>)t_),
             };
             return u_;
-        };
+        }
+        ;
+
         IEnumerable<CoverageEligibilityResponse> c_ = context.Operators.Select<CoverageEligibilityResponse, CoverageEligibilityResponse>((IEnumerable<CoverageEligibilityResponse>)a_, b_);
         IEnumerable<CoverageEligibilityResponse> d_ = context.Operators.Distinct<CoverageEligibilityResponse>(c_);
         CoverageEligibilityResponse e_ = context.Operators.SingletonFrom<CoverageEligibilityResponse>(d_);
@@ -1744,8 +1802,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         DetectedIssue[] a_ = [
             arg,
         ];
-        DetectedIssue b_(DetectedIssue a)
-        {
+
+        DetectedIssue b_(DetectedIssue a) {
             List<Identifier> f_ = a?.Identifier;
             Code<ObservationStatus> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.Code;
@@ -1774,7 +1832,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Mitigation = new List<DetectedIssue.MitigationComponent>((IEnumerable<DetectedIssue.MitigationComponent>)q_),
             };
             return r_;
-        };
+        }
+        ;
+
         IEnumerable<DetectedIssue> c_ = context.Operators.Select<DetectedIssue, DetectedIssue>((IEnumerable<DetectedIssue>)a_, b_);
         IEnumerable<DetectedIssue> d_ = context.Operators.Distinct<DetectedIssue>(c_);
         DetectedIssue e_ = context.Operators.SingletonFrom<DetectedIssue>(d_);
@@ -1788,8 +1848,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Device[] a_ = [
             arg,
         ];
-        Device b_(Device a)
-        {
+
+        Device b_(Device a) {
             List<Identifier> f_ = a?.Identifier;
             ResourceReference g_ = a?.Definition;
             List<Device.UdiCarrierComponent> h_ = a?.UdiCarrier;
@@ -1846,7 +1906,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Parent = ae_,
             };
             return af_;
-        };
+        }
+        ;
+
         IEnumerable<Device> c_ = context.Operators.Select<Device, Device>((IEnumerable<Device>)a_, b_);
         IEnumerable<Device> d_ = context.Operators.Distinct<Device>(c_);
         Device e_ = context.Operators.SingletonFrom<Device>(d_);
@@ -1860,8 +1922,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         DeviceDefinition[] a_ = [
             arg,
         ];
-        DeviceDefinition b_(DeviceDefinition a)
-        {
+
+        DeviceDefinition b_(DeviceDefinition a) {
             List<Identifier> f_ = a?.Identifier;
             List<DeviceDefinition.UdiDeviceIdentifierComponent> g_ = a?.UdiDeviceIdentifier;
             DataType h_ = a?.Manufacturer;
@@ -1910,7 +1972,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Material = new List<DeviceDefinition.MaterialComponent>((IEnumerable<DeviceDefinition.MaterialComponent>)aa_),
             };
             return ab_;
-        };
+        }
+        ;
+
         IEnumerable<DeviceDefinition> c_ = context.Operators.Select<DeviceDefinition, DeviceDefinition>((IEnumerable<DeviceDefinition>)a_, b_);
         IEnumerable<DeviceDefinition> d_ = context.Operators.Distinct<DeviceDefinition>(c_);
         DeviceDefinition e_ = context.Operators.SingletonFrom<DeviceDefinition>(d_);
@@ -1924,8 +1988,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         DeviceMetric[] a_ = [
             arg,
         ];
-        DeviceMetric b_(DeviceMetric a)
-        {
+
+        DeviceMetric b_(DeviceMetric a) {
             List<Identifier> f_ = a?.Identifier;
             CodeableConcept g_ = a?.Type;
             CodeableConcept h_ = a?.Unit;
@@ -1950,7 +2014,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Calibration = new List<DeviceMetric.CalibrationComponent>((IEnumerable<DeviceMetric.CalibrationComponent>)o_),
             };
             return p_;
-        };
+        }
+        ;
+
         IEnumerable<DeviceMetric> c_ = context.Operators.Select<DeviceMetric, DeviceMetric>((IEnumerable<DeviceMetric>)a_, b_);
         IEnumerable<DeviceMetric> d_ = context.Operators.Distinct<DeviceMetric>(c_);
         DeviceMetric e_ = context.Operators.SingletonFrom<DeviceMetric>(d_);
@@ -1964,8 +2030,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         DeviceRequest[] a_ = [
             arg,
         ];
-        DeviceRequest b_(DeviceRequest a)
-        {
+
+        DeviceRequest b_(DeviceRequest a) {
             List<Identifier> f_ = a?.Identifier;
             List<Canonical> g_ = a?.InstantiatesCanonicalElement;
             List<FhirUri> h_ = a?.InstantiatesUriElement;
@@ -2018,7 +2084,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ac_),
             };
             return ad_;
-        };
+        }
+        ;
+
         IEnumerable<DeviceRequest> c_ = context.Operators.Select<DeviceRequest, DeviceRequest>((IEnumerable<DeviceRequest>)a_, b_);
         IEnumerable<DeviceRequest> d_ = context.Operators.Distinct<DeviceRequest>(c_);
         DeviceRequest e_ = context.Operators.SingletonFrom<DeviceRequest>(d_);
@@ -2032,8 +2100,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         DeviceUseStatement[] a_ = [
             arg,
         ];
-        DeviceUseStatement b_(DeviceUseStatement a)
-        {
+
+        DeviceUseStatement b_(DeviceUseStatement a) {
             List<Identifier> f_ = a?.Identifier;
             List<ResourceReference> g_ = a?.BasedOn;
             Code<DeviceUseStatement.DeviceUseStatementStatus> h_ = a?.StatusElement;
@@ -2064,7 +2132,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)r_),
             };
             return s_;
-        };
+        }
+        ;
+
         IEnumerable<DeviceUseStatement> c_ = context.Operators.Select<DeviceUseStatement, DeviceUseStatement>((IEnumerable<DeviceUseStatement>)a_, b_);
         IEnumerable<DeviceUseStatement> d_ = context.Operators.Distinct<DeviceUseStatement>(c_);
         DeviceUseStatement e_ = context.Operators.SingletonFrom<DeviceUseStatement>(d_);
@@ -2078,8 +2148,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         DiagnosticReport[] a_ = [
             arg,
         ];
-        DiagnosticReport b_(DiagnosticReport a)
-        {
+
+        DiagnosticReport b_(DiagnosticReport a) {
             List<Identifier> f_ = a?.Identifier;
             List<ResourceReference> g_ = a?.BasedOn;
             Code<DiagnosticReport.DiagnosticReportStatus> h_ = a?.StatusElement;
@@ -2120,7 +2190,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 PresentedForm = new List<Attachment>((IEnumerable<Attachment>)w_),
             };
             return x_;
-        };
+        }
+        ;
+
         IEnumerable<DiagnosticReport> c_ = context.Operators.Select<DiagnosticReport, DiagnosticReport>((IEnumerable<DiagnosticReport>)a_, b_);
         IEnumerable<DiagnosticReport> d_ = context.Operators.Distinct<DiagnosticReport>(c_);
         DiagnosticReport e_ = context.Operators.SingletonFrom<DiagnosticReport>(d_);
@@ -2134,8 +2206,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         DocumentManifest[] a_ = [
             arg,
         ];
-        DocumentManifest b_(DocumentManifest a)
-        {
+
+        DocumentManifest b_(DocumentManifest a) {
             Identifier f_ = a?.MasterIdentifier;
             List<Identifier> g_ = a?.Identifier;
             Code<DocumentReferenceStatus> h_ = a?.StatusElement;
@@ -2164,7 +2236,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Related = new List<DocumentManifest.RelatedComponent>((IEnumerable<DocumentManifest.RelatedComponent>)q_),
             };
             return r_;
-        };
+        }
+        ;
+
         IEnumerable<DocumentManifest> c_ = context.Operators.Select<DocumentManifest, DocumentManifest>((IEnumerable<DocumentManifest>)a_, b_);
         IEnumerable<DocumentManifest> d_ = context.Operators.Distinct<DocumentManifest>(c_);
         DocumentManifest e_ = context.Operators.SingletonFrom<DocumentManifest>(d_);
@@ -2178,8 +2252,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         DocumentReference[] a_ = [
             arg,
         ];
-        DocumentReference b_(DocumentReference a)
-        {
+
+        DocumentReference b_(DocumentReference a) {
             Identifier f_ = a?.MasterIdentifier;
             List<Identifier> g_ = a?.Identifier;
             Code<DocumentReferenceStatus> h_ = a?.StatusElement;
@@ -2216,7 +2290,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Context = u_,
             };
             return v_;
-        };
+        }
+        ;
+
         IEnumerable<DocumentReference> c_ = context.Operators.Select<DocumentReference, DocumentReference>((IEnumerable<DocumentReference>)a_, b_);
         IEnumerable<DocumentReference> d_ = context.Operators.Distinct<DocumentReference>(c_);
         DocumentReference e_ = context.Operators.SingletonFrom<DocumentReference>(d_);
@@ -2230,8 +2306,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         EffectEvidenceSynthesis[] a_ = [
             arg,
         ];
-        EffectEvidenceSynthesis b_(EffectEvidenceSynthesis a)
-        {
+
+        EffectEvidenceSynthesis b_(EffectEvidenceSynthesis a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -2302,7 +2378,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Certainty = new List<EffectEvidenceSynthesis.CertaintyComponent>((IEnumerable<EffectEvidenceSynthesis.CertaintyComponent>)al_),
             };
             return am_;
-        };
+        }
+        ;
+
         IEnumerable<EffectEvidenceSynthesis> c_ = context.Operators.Select<EffectEvidenceSynthesis, EffectEvidenceSynthesis>((IEnumerable<EffectEvidenceSynthesis>)a_, b_);
         IEnumerable<EffectEvidenceSynthesis> d_ = context.Operators.Distinct<EffectEvidenceSynthesis>(c_);
         EffectEvidenceSynthesis e_ = context.Operators.SingletonFrom<EffectEvidenceSynthesis>(d_);
@@ -2316,8 +2394,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Encounter[] a_ = [
             arg,
         ];
-        Encounter b_(Encounter a)
-        {
+
+        Encounter b_(Encounter a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Encounter.EncounterStatus> g_ = a?.StatusElement;
             List<Encounter.StatusHistoryComponent> h_ = a?.StatusHistory;
@@ -2368,7 +2446,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 PartOf = ab_,
             };
             return ac_;
-        };
+        }
+        ;
+
         IEnumerable<Encounter> c_ = context.Operators.Select<Encounter, Encounter>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<Encounter> d_ = context.Operators.Distinct<Encounter>(c_);
         Encounter e_ = context.Operators.SingletonFrom<Encounter>(d_);
@@ -2382,8 +2462,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Endpoint[] a_ = [
             arg,
         ];
-        Endpoint b_(Endpoint a)
-        {
+
+        Endpoint b_(Endpoint a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Endpoint.EndpointStatus> g_ = a?.StatusElement;
             Coding h_ = a?.ConnectionType;
@@ -2410,7 +2490,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 HeaderElement = new List<FhirString>((IEnumerable<FhirString>)p_),
             };
             return q_;
-        };
+        }
+        ;
+
         IEnumerable<Endpoint> c_ = context.Operators.Select<Endpoint, Endpoint>((IEnumerable<Endpoint>)a_, b_);
         IEnumerable<Endpoint> d_ = context.Operators.Distinct<Endpoint>(c_);
         Endpoint e_ = context.Operators.SingletonFrom<Endpoint>(d_);
@@ -2424,8 +2506,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         EnrollmentRequest[] a_ = [
             arg,
         ];
-        EnrollmentRequest b_(EnrollmentRequest a)
-        {
+
+        EnrollmentRequest b_(EnrollmentRequest a) {
             List<Identifier> f_ = a?.Identifier;
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement;
             FhirDateTime h_ = a?.CreatedElement;
@@ -2444,7 +2526,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Coverage = l_,
             };
             return m_;
-        };
+        }
+        ;
+
         IEnumerable<EnrollmentRequest> c_ = context.Operators.Select<EnrollmentRequest, EnrollmentRequest>((IEnumerable<EnrollmentRequest>)a_, b_);
         IEnumerable<EnrollmentRequest> d_ = context.Operators.Distinct<EnrollmentRequest>(c_);
         EnrollmentRequest e_ = context.Operators.SingletonFrom<EnrollmentRequest>(d_);
@@ -2458,8 +2542,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         EnrollmentResponse[] a_ = [
             arg,
         ];
-        EnrollmentResponse b_(EnrollmentResponse a)
-        {
+
+        EnrollmentResponse b_(EnrollmentResponse a) {
             List<Identifier> f_ = a?.Identifier;
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement;
             ResourceReference h_ = a?.Request;
@@ -2480,7 +2564,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 RequestProvider = m_,
             };
             return n_;
-        };
+        }
+        ;
+
         IEnumerable<EnrollmentResponse> c_ = context.Operators.Select<EnrollmentResponse, EnrollmentResponse>((IEnumerable<EnrollmentResponse>)a_, b_);
         IEnumerable<EnrollmentResponse> d_ = context.Operators.Distinct<EnrollmentResponse>(c_);
         EnrollmentResponse e_ = context.Operators.SingletonFrom<EnrollmentResponse>(d_);
@@ -2494,8 +2580,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         EpisodeOfCare[] a_ = [
             arg,
         ];
-        EpisodeOfCare b_(EpisodeOfCare a)
-        {
+
+        EpisodeOfCare b_(EpisodeOfCare a) {
             List<Identifier> f_ = a?.Identifier;
             Code<EpisodeOfCare.EpisodeOfCareStatus> g_ = a?.StatusElement;
             List<EpisodeOfCare.StatusHistoryComponent> h_ = a?.StatusHistory;
@@ -2524,7 +2610,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Account = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
             };
             return r_;
-        };
+        }
+        ;
+
         IEnumerable<EpisodeOfCare> c_ = context.Operators.Select<EpisodeOfCare, EpisodeOfCare>((IEnumerable<EpisodeOfCare>)a_, b_);
         IEnumerable<EpisodeOfCare> d_ = context.Operators.Distinct<EpisodeOfCare>(c_);
         EpisodeOfCare e_ = context.Operators.SingletonFrom<EpisodeOfCare>(d_);
@@ -2538,8 +2626,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         EventDefinition[] a_ = [
             arg,
         ];
-        EventDefinition b_(EventDefinition a)
-        {
+
+        EventDefinition b_(EventDefinition a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -2600,7 +2688,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Trigger = new List<TriggerDefinition>((IEnumerable<TriggerDefinition>)ag_),
             };
             return ah_;
-        };
+        }
+        ;
+
         IEnumerable<EventDefinition> c_ = context.Operators.Select<EventDefinition, EventDefinition>((IEnumerable<EventDefinition>)a_, b_);
         IEnumerable<EventDefinition> d_ = context.Operators.Distinct<EventDefinition>(c_);
         EventDefinition e_ = context.Operators.SingletonFrom<EventDefinition>(d_);
@@ -2614,8 +2704,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Evidence[] a_ = [
             arg,
         ];
-        Evidence b_(Evidence a)
-        {
+
+        Evidence b_(Evidence a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -2676,7 +2766,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Outcome = new List<ResourceReference>((IEnumerable<ResourceReference>)ag_),
             };
             return ah_;
-        };
+        }
+        ;
+
         IEnumerable<Evidence> c_ = context.Operators.Select<Evidence, Evidence>((IEnumerable<Evidence>)a_, b_);
         IEnumerable<Evidence> d_ = context.Operators.Distinct<Evidence>(c_);
         Evidence e_ = context.Operators.SingletonFrom<Evidence>(d_);
@@ -2690,8 +2782,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         EvidenceVariable[] a_ = [
             arg,
         ];
-        EvidenceVariable b_(EvidenceVariable a)
-        {
+
+        EvidenceVariable b_(EvidenceVariable a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -2750,7 +2842,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Characteristic = new List<EvidenceVariable.CharacteristicComponent>((IEnumerable<EvidenceVariable.CharacteristicComponent>)af_),
             };
             return ag_;
-        };
+        }
+        ;
+
         IEnumerable<EvidenceVariable> c_ = context.Operators.Select<EvidenceVariable, EvidenceVariable>((IEnumerable<EvidenceVariable>)a_, b_);
         IEnumerable<EvidenceVariable> d_ = context.Operators.Distinct<EvidenceVariable>(c_);
         EvidenceVariable e_ = context.Operators.SingletonFrom<EvidenceVariable>(d_);
@@ -2764,8 +2858,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ExplanationOfBenefit[] a_ = [
             arg,
         ];
-        ExplanationOfBenefit b_(ExplanationOfBenefit a)
-        {
+
+        ExplanationOfBenefit b_(ExplanationOfBenefit a) {
             List<Identifier> f_ = a?.Identifier;
             Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.Type;
@@ -2858,7 +2952,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 BenefitBalance = new List<ExplanationOfBenefit.BenefitBalanceComponent>((IEnumerable<ExplanationOfBenefit.BenefitBalanceComponent>)ax_),
             };
             return ay_;
-        };
+        }
+        ;
+
         IEnumerable<ExplanationOfBenefit> c_ = context.Operators.Select<ExplanationOfBenefit, ExplanationOfBenefit>((IEnumerable<ExplanationOfBenefit>)a_, b_);
         IEnumerable<ExplanationOfBenefit> d_ = context.Operators.Distinct<ExplanationOfBenefit>(c_);
         ExplanationOfBenefit e_ = context.Operators.SingletonFrom<ExplanationOfBenefit>(d_);
@@ -2872,8 +2968,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         FamilyMemberHistory[] a_ = [
             arg,
         ];
-        FamilyMemberHistory b_(FamilyMemberHistory a)
-        {
+
+        FamilyMemberHistory b_(FamilyMemberHistory a) {
             List<Identifier> f_ = a?.Identifier;
             List<Canonical> g_ = a?.InstantiatesCanonicalElement;
             List<FhirUri> h_ = a?.InstantiatesUriElement;
@@ -2914,7 +3010,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Condition = new List<FamilyMemberHistory.ConditionComponent>((IEnumerable<FamilyMemberHistory.ConditionComponent>)w_),
             };
             return x_;
-        };
+        }
+        ;
+
         IEnumerable<FamilyMemberHistory> c_ = context.Operators.Select<FamilyMemberHistory, FamilyMemberHistory>((IEnumerable<FamilyMemberHistory>)a_, b_);
         IEnumerable<FamilyMemberHistory> d_ = context.Operators.Distinct<FamilyMemberHistory>(c_);
         FamilyMemberHistory e_ = context.Operators.SingletonFrom<FamilyMemberHistory>(d_);
@@ -2928,8 +3026,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Flag[] a_ = [
             arg,
         ];
-        Flag b_(Flag a)
-        {
+
+        Flag b_(Flag a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Flag.FlagStatus> g_ = a?.StatusElement;
             List<CodeableConcept> h_ = a?.Category;
@@ -2950,7 +3048,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Author = m_,
             };
             return n_;
-        };
+        }
+        ;
+
         IEnumerable<Flag> c_ = context.Operators.Select<Flag, Flag>((IEnumerable<Flag>)a_, b_);
         IEnumerable<Flag> d_ = context.Operators.Distinct<Flag>(c_);
         Flag e_ = context.Operators.SingletonFrom<Flag>(d_);
@@ -2964,8 +3064,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Goal[] a_ = [
             arg,
         ];
-        Goal b_(Goal a)
-        {
+
+        Goal b_(Goal a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Goal.GoalLifecycleStatus> g_ = a?.LifecycleStatusElement;
             CodeableConcept h_ = a?.AchievementStatus;
@@ -3002,7 +3102,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 OutcomeReference = new List<ResourceReference>((IEnumerable<ResourceReference>)u_),
             };
             return v_;
-        };
+        }
+        ;
+
         IEnumerable<Goal> c_ = context.Operators.Select<Goal, Goal>((IEnumerable<Goal>)a_, b_);
         IEnumerable<Goal> d_ = context.Operators.Distinct<Goal>(c_);
         Goal e_ = context.Operators.SingletonFrom<Goal>(d_);
@@ -3016,8 +3118,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Group[] a_ = [
             arg,
         ];
-        Group b_(Group a)
-        {
+
+        Group b_(Group a) {
             List<Identifier> f_ = a?.Identifier;
             FhirBoolean g_ = a?.ActiveElement;
             Code<Group.GroupType> h_ = a?.TypeElement;
@@ -3044,7 +3146,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Member = new List<Group.MemberComponent>((IEnumerable<Group.MemberComponent>)q_),
             };
             return r_;
-        };
+        }
+        ;
+
         IEnumerable<Group> c_ = context.Operators.Select<Group, Group>((IEnumerable<Group>)a_, b_);
         IEnumerable<Group> d_ = context.Operators.Distinct<Group>(c_);
         Group e_ = context.Operators.SingletonFrom<Group>(d_);
@@ -3058,8 +3162,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         GuidanceResponse[] a_ = [
             arg,
         ];
-        GuidanceResponse b_(GuidanceResponse a)
-        {
+
+        GuidanceResponse b_(GuidanceResponse a) {
             Identifier f_ = a?.RequestIdentifier;
             List<Identifier> g_ = a?.Identifier;
             DataType h_ = a?.Module;
@@ -3094,7 +3198,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 DataRequirement = new List<DataRequirement>((IEnumerable<DataRequirement>)t_),
             };
             return u_;
-        };
+        }
+        ;
+
         IEnumerable<GuidanceResponse> c_ = context.Operators.Select<GuidanceResponse, GuidanceResponse>((IEnumerable<GuidanceResponse>)a_, b_);
         IEnumerable<GuidanceResponse> d_ = context.Operators.Distinct<GuidanceResponse>(c_);
         GuidanceResponse e_ = context.Operators.SingletonFrom<GuidanceResponse>(d_);
@@ -3108,8 +3214,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         HealthcareService[] a_ = [
             arg,
         ];
-        HealthcareService b_(HealthcareService a)
-        {
+
+        HealthcareService b_(HealthcareService a) {
             List<Identifier> f_ = a?.Identifier;
             FhirBoolean g_ = a?.ActiveElement;
             ResourceReference h_ = a?.ProvidedBy;
@@ -3162,7 +3268,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)ac_),
             };
             return ad_;
-        };
+        }
+        ;
+
         IEnumerable<HealthcareService> c_ = context.Operators.Select<HealthcareService, HealthcareService>((IEnumerable<HealthcareService>)a_, b_);
         IEnumerable<HealthcareService> d_ = context.Operators.Distinct<HealthcareService>(c_);
         HealthcareService e_ = context.Operators.SingletonFrom<HealthcareService>(d_);
@@ -3176,8 +3284,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ImagingStudy[] a_ = [
             arg,
         ];
-        ImagingStudy b_(ImagingStudy a)
-        {
+
+        ImagingStudy b_(ImagingStudy a) {
             List<Identifier> f_ = a?.Identifier;
             Code<ImagingStudy.ImagingStudyStatus> g_ = a?.StatusElement;
             List<Coding> h_ = a?.Modality;
@@ -3226,7 +3334,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Series = new List<ImagingStudy.SeriesComponent>((IEnumerable<ImagingStudy.SeriesComponent>)ac_),
             };
             return ad_;
-        };
+        }
+        ;
+
         IEnumerable<ImagingStudy> c_ = context.Operators.Select<ImagingStudy, ImagingStudy>((IEnumerable<ImagingStudy>)a_, b_);
         IEnumerable<ImagingStudy> d_ = context.Operators.Distinct<ImagingStudy>(c_);
         ImagingStudy e_ = context.Operators.SingletonFrom<ImagingStudy>(d_);
@@ -3240,8 +3350,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Immunization[] a_ = [
             arg,
         ];
-        Immunization b_(Immunization a)
-        {
+
+        Immunization b_(Immunization a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Immunization.ImmunizationStatusCodes> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.StatusReason;
@@ -3302,7 +3412,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 ProtocolApplied = new List<Immunization.ProtocolAppliedComponent>((IEnumerable<Immunization.ProtocolAppliedComponent>)ag_),
             };
             return ah_;
-        };
+        }
+        ;
+
         IEnumerable<Immunization> c_ = context.Operators.Select<Immunization, Immunization>((IEnumerable<Immunization>)a_, b_);
         IEnumerable<Immunization> d_ = context.Operators.Distinct<Immunization>(c_);
         Immunization e_ = context.Operators.SingletonFrom<Immunization>(d_);
@@ -3316,8 +3428,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ImmunizationEvaluation[] a_ = [
             arg,
         ];
-        ImmunizationEvaluation b_(ImmunizationEvaluation a)
-        {
+
+        ImmunizationEvaluation b_(ImmunizationEvaluation a) {
             List<Identifier> f_ = a?.Identifier;
             Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> g_ = a?.StatusElement;
             ResourceReference h_ = a?.Patient;
@@ -3348,7 +3460,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 SeriesDoses = (DataType)r_,
             };
             return s_;
-        };
+        }
+        ;
+
         IEnumerable<ImmunizationEvaluation> c_ = context.Operators.Select<ImmunizationEvaluation, ImmunizationEvaluation>((IEnumerable<ImmunizationEvaluation>)a_, b_);
         IEnumerable<ImmunizationEvaluation> d_ = context.Operators.Distinct<ImmunizationEvaluation>(c_);
         ImmunizationEvaluation e_ = context.Operators.SingletonFrom<ImmunizationEvaluation>(d_);
@@ -3362,8 +3476,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ImmunizationRecommendation[] a_ = [
             arg,
         ];
-        ImmunizationRecommendation b_(ImmunizationRecommendation a)
-        {
+
+        ImmunizationRecommendation b_(ImmunizationRecommendation a) {
             List<Identifier> f_ = a?.Identifier;
             ResourceReference g_ = a?.Patient;
             FhirDateTime h_ = a?.DateElement;
@@ -3378,7 +3492,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Recommendation = new List<ImmunizationRecommendation.RecommendationComponent>((IEnumerable<ImmunizationRecommendation.RecommendationComponent>)j_),
             };
             return k_;
-        };
+        }
+        ;
+
         IEnumerable<ImmunizationRecommendation> c_ = context.Operators.Select<ImmunizationRecommendation, ImmunizationRecommendation>((IEnumerable<ImmunizationRecommendation>)a_, b_);
         IEnumerable<ImmunizationRecommendation> d_ = context.Operators.Distinct<ImmunizationRecommendation>(c_);
         ImmunizationRecommendation e_ = context.Operators.SingletonFrom<ImmunizationRecommendation>(d_);
@@ -3392,8 +3508,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         InsurancePlan[] a_ = [
             arg,
         ];
-        InsurancePlan b_(InsurancePlan a)
-        {
+
+        InsurancePlan b_(InsurancePlan a) {
             List<Identifier> f_ = a?.Identifier;
             Code<PublicationStatus> g_ = a?.StatusElement;
             List<CodeableConcept> h_ = a?.Type;
@@ -3426,7 +3542,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Plan = new List<InsurancePlan.PlanComponent>((IEnumerable<InsurancePlan.PlanComponent>)s_),
             };
             return t_;
-        };
+        }
+        ;
+
         IEnumerable<InsurancePlan> c_ = context.Operators.Select<InsurancePlan, InsurancePlan>((IEnumerable<InsurancePlan>)a_, b_);
         IEnumerable<InsurancePlan> d_ = context.Operators.Distinct<InsurancePlan>(c_);
         InsurancePlan e_ = context.Operators.SingletonFrom<InsurancePlan>(d_);
@@ -3440,8 +3558,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Invoice[] a_ = [
             arg,
         ];
-        Invoice b_(Invoice a)
-        {
+
+        Invoice b_(Invoice a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Invoice.InvoiceStatus> g_ = a?.StatusElement;
             FhirString h_ = a?.CancelledReasonElement;
@@ -3478,7 +3596,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)u_),
             };
             return v_;
-        };
+        }
+        ;
+
         IEnumerable<Invoice> c_ = context.Operators.Select<Invoice, Invoice>((IEnumerable<Invoice>)a_, b_);
         IEnumerable<Invoice> d_ = context.Operators.Distinct<Invoice>(c_);
         Invoice e_ = context.Operators.SingletonFrom<Invoice>(d_);
@@ -3492,8 +3612,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Library[] a_ = [
             arg,
         ];
-        Library b_(Library a)
-        {
+
+        Library b_(Library a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -3560,7 +3680,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Content = new List<Attachment>((IEnumerable<Attachment>)aj_),
             };
             return ak_;
-        };
+        }
+        ;
+
         IEnumerable<Library> c_ = context.Operators.Select<Library, Library>((IEnumerable<Library>)a_, b_);
         IEnumerable<Library> d_ = context.Operators.Distinct<Library>(c_);
         Library e_ = context.Operators.SingletonFrom<Library>(d_);
@@ -3574,8 +3696,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Linkage[] a_ = [
             arg,
         ];
-        Linkage b_(Linkage a)
-        {
+
+        Linkage b_(Linkage a) {
             FhirBoolean f_ = a?.ActiveElement;
             ResourceReference g_ = a?.Author;
             List<Linkage.ItemComponent> h_ = a?.Item;
@@ -3586,7 +3708,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Item = new List<Linkage.ItemComponent>((IEnumerable<Linkage.ItemComponent>)h_),
             };
             return i_;
-        };
+        }
+        ;
+
         IEnumerable<Linkage> c_ = context.Operators.Select<Linkage, Linkage>((IEnumerable<Linkage>)a_, b_);
         IEnumerable<Linkage> d_ = context.Operators.Distinct<Linkage>(c_);
         Linkage e_ = context.Operators.SingletonFrom<Linkage>(d_);
@@ -3600,8 +3724,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Location[] a_ = [
             arg,
         ];
-        Location b_(Location a)
-        {
+
+        Location b_(Location a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Location.LocationStatus> g_ = a?.StatusElement;
             Coding h_ = a?.OperationalStatus;
@@ -3640,7 +3764,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
             };
             return w_;
-        };
+        }
+        ;
+
         IEnumerable<Location> c_ = context.Operators.Select<Location, Location>((IEnumerable<Location>)a_, b_);
         IEnumerable<Location> d_ = context.Operators.Distinct<Location>(c_);
         Location e_ = context.Operators.SingletonFrom<Location>(d_);
@@ -3654,8 +3780,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Measure[] a_ = [
             arg,
         ];
-        Measure b_(Measure a)
-        {
+
+        Measure b_(Measure a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -3742,7 +3868,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 SupplementalData = new List<Measure.SupplementalDataComponent>((IEnumerable<Measure.SupplementalDataComponent>)at_),
             };
             return au_;
-        };
+        }
+        ;
+
         IEnumerable<Measure> c_ = context.Operators.Select<Measure, Measure>((IEnumerable<Measure>)a_, b_);
         IEnumerable<Measure> d_ = context.Operators.Distinct<Measure>(c_);
         Measure e_ = context.Operators.SingletonFrom<Measure>(d_);
@@ -3756,8 +3884,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MeasureReport[] a_ = [
             arg,
         ];
-        MeasureReport b_(MeasureReport a)
-        {
+
+        MeasureReport b_(MeasureReport a) {
             List<Identifier> f_ = a?.Identifier;
             Code<MeasureReport.MeasureReportStatus> g_ = a?.StatusElement;
             Code<MeasureReport.MeasureReportType> h_ = a?.TypeElement;
@@ -3784,7 +3912,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 EvaluatedResource = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
             };
             return q_;
-        };
+        }
+        ;
+
         IEnumerable<MeasureReport> c_ = context.Operators.Select<MeasureReport, MeasureReport>((IEnumerable<MeasureReport>)a_, b_);
         IEnumerable<MeasureReport> d_ = context.Operators.Distinct<MeasureReport>(c_);
         MeasureReport e_ = context.Operators.SingletonFrom<MeasureReport>(d_);
@@ -3798,8 +3928,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Medication[] a_ = [
             arg,
         ];
-        Medication b_(Medication a)
-        {
+
+        Medication b_(Medication a) {
             List<Identifier> f_ = a?.Identifier;
             CodeableConcept g_ = a?.Code;
             Code<Medication.MedicationStatusCodes> h_ = a?.StatusElement;
@@ -3820,7 +3950,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Batch = m_,
             };
             return n_;
-        };
+        }
+        ;
+
         IEnumerable<Medication> c_ = context.Operators.Select<Medication, Medication>((IEnumerable<Medication>)a_, b_);
         IEnumerable<Medication> d_ = context.Operators.Distinct<Medication>(c_);
         Medication e_ = context.Operators.SingletonFrom<Medication>(d_);
@@ -3834,8 +3966,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicationAdministration[] a_ = [
             arg,
         ];
-        MedicationAdministration b_(MedicationAdministration a)
-        {
+
+        MedicationAdministration b_(MedicationAdministration a) {
             List<Identifier> f_ = a?.Identifier;
             List<FhirUri> g_ = a?.InstantiatesElement;
             List<ResourceReference> h_ = a?.PartOf;
@@ -3878,7 +4010,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
             };
             return y_;
-        };
+        }
+        ;
+
         IEnumerable<MedicationAdministration> c_ = context.Operators.Select<MedicationAdministration, MedicationAdministration>((IEnumerable<MedicationAdministration>)a_, b_);
         IEnumerable<MedicationAdministration> d_ = context.Operators.Distinct<MedicationAdministration>(c_);
         MedicationAdministration e_ = context.Operators.SingletonFrom<MedicationAdministration>(d_);
@@ -3892,8 +4026,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicationDispense[] a_ = [
             arg,
         ];
-        MedicationDispense b_(MedicationDispense a)
-        {
+
+        MedicationDispense b_(MedicationDispense a) {
             List<Identifier> f_ = a?.Identifier;
             List<ResourceReference> g_ = a?.PartOf;
             Code<MedicationDispense.MedicationDispenseStatusCodes> h_ = a?.StatusElement;
@@ -3946,7 +4080,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ac_),
             };
             return ad_;
-        };
+        }
+        ;
+
         IEnumerable<MedicationDispense> c_ = context.Operators.Select<MedicationDispense, MedicationDispense>((IEnumerable<MedicationDispense>)a_, b_);
         IEnumerable<MedicationDispense> d_ = context.Operators.Distinct<MedicationDispense>(c_);
         MedicationDispense e_ = context.Operators.SingletonFrom<MedicationDispense>(d_);
@@ -3960,8 +4096,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicationKnowledge[] a_ = [
             arg,
         ];
-        MedicationKnowledge b_(MedicationKnowledge a)
-        {
+
+        MedicationKnowledge b_(MedicationKnowledge a) {
             CodeableConcept f_ = a?.Code;
             Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> g_ = a?.StatusElement;
             ResourceReference h_ = a?.Manufacturer;
@@ -4010,7 +4146,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Kinetics = new List<MedicationKnowledge.KineticsComponent>((IEnumerable<MedicationKnowledge.KineticsComponent>)aa_),
             };
             return ab_;
-        };
+        }
+        ;
+
         IEnumerable<MedicationKnowledge> c_ = context.Operators.Select<MedicationKnowledge, MedicationKnowledge>((IEnumerable<MedicationKnowledge>)a_, b_);
         IEnumerable<MedicationKnowledge> d_ = context.Operators.Distinct<MedicationKnowledge>(c_);
         MedicationKnowledge e_ = context.Operators.SingletonFrom<MedicationKnowledge>(d_);
@@ -4024,8 +4162,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicationRequest[] a_ = [
             arg,
         ];
-        MedicationRequest b_(MedicationRequest a)
-        {
+
+        MedicationRequest b_(MedicationRequest a) {
             List<Identifier> f_ = a?.Identifier;
             Code<MedicationRequest.MedicationrequestStatus> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.StatusReason;
@@ -4094,7 +4232,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ak_),
             };
             return al_;
-        };
+        }
+        ;
+
         IEnumerable<MedicationRequest> c_ = context.Operators.Select<MedicationRequest, MedicationRequest>((IEnumerable<MedicationRequest>)a_, b_);
         IEnumerable<MedicationRequest> d_ = context.Operators.Distinct<MedicationRequest>(c_);
         MedicationRequest e_ = context.Operators.SingletonFrom<MedicationRequest>(d_);
@@ -4108,8 +4248,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicationStatement[] a_ = [
             arg,
         ];
-        MedicationStatement b_(MedicationStatement a)
-        {
+
+        MedicationStatement b_(MedicationStatement a) {
             List<Identifier> f_ = a?.Identifier;
             List<ResourceReference> g_ = a?.BasedOn;
             List<ResourceReference> h_ = a?.PartOf;
@@ -4148,7 +4288,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Dosage = new List<Dosage>((IEnumerable<Dosage>)v_),
             };
             return w_;
-        };
+        }
+        ;
+
         IEnumerable<MedicationStatement> c_ = context.Operators.Select<MedicationStatement, MedicationStatement>((IEnumerable<MedicationStatement>)a_, b_);
         IEnumerable<MedicationStatement> d_ = context.Operators.Distinct<MedicationStatement>(c_);
         MedicationStatement e_ = context.Operators.SingletonFrom<MedicationStatement>(d_);
@@ -4162,8 +4304,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicinalProduct[] a_ = [
             arg,
         ];
-        MedicinalProduct b_(MedicinalProduct a)
-        {
+
+        MedicinalProduct b_(MedicinalProduct a) {
             List<Identifier> f_ = a?.Identifier;
             CodeableConcept g_ = a?.Type;
             Coding h_ = a?.Domain;
@@ -4208,7 +4350,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 SpecialDesignation = new List<MedicinalProduct.SpecialDesignationComponent>((IEnumerable<MedicinalProduct.SpecialDesignationComponent>)y_),
             };
             return z_;
-        };
+        }
+        ;
+
         IEnumerable<MedicinalProduct> c_ = context.Operators.Select<MedicinalProduct, MedicinalProduct>((IEnumerable<MedicinalProduct>)a_, b_);
         IEnumerable<MedicinalProduct> d_ = context.Operators.Distinct<MedicinalProduct>(c_);
         MedicinalProduct e_ = context.Operators.SingletonFrom<MedicinalProduct>(d_);
@@ -4222,8 +4366,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicinalProductAuthorization[] a_ = [
             arg,
         ];
-        MedicinalProductAuthorization b_(MedicinalProductAuthorization a)
-        {
+
+        MedicinalProductAuthorization b_(MedicinalProductAuthorization a) {
             List<Identifier> f_ = a?.Identifier;
             ResourceReference g_ = a?.Subject;
             List<CodeableConcept> h_ = a?.Country;
@@ -4260,7 +4404,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Procedure = u_,
             };
             return v_;
-        };
+        }
+        ;
+
         IEnumerable<MedicinalProductAuthorization> c_ = context.Operators.Select<MedicinalProductAuthorization, MedicinalProductAuthorization>((IEnumerable<MedicinalProductAuthorization>)a_, b_);
         IEnumerable<MedicinalProductAuthorization> d_ = context.Operators.Distinct<MedicinalProductAuthorization>(c_);
         MedicinalProductAuthorization e_ = context.Operators.SingletonFrom<MedicinalProductAuthorization>(d_);
@@ -4274,8 +4420,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicinalProductContraindication[] a_ = [
             arg,
         ];
-        MedicinalProductContraindication b_(MedicinalProductContraindication a)
-        {
+
+        MedicinalProductContraindication b_(MedicinalProductContraindication a) {
             List<ResourceReference> f_ = a?.Subject;
             CodeableConcept g_ = a?.Disease;
             CodeableConcept h_ = a?.DiseaseStatus;
@@ -4294,7 +4440,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Population = new List<Population>((IEnumerable<Population>)l_),
             };
             return m_;
-        };
+        }
+        ;
+
         IEnumerable<MedicinalProductContraindication> c_ = context.Operators.Select<MedicinalProductContraindication, MedicinalProductContraindication>((IEnumerable<MedicinalProductContraindication>)a_, b_);
         IEnumerable<MedicinalProductContraindication> d_ = context.Operators.Distinct<MedicinalProductContraindication>(c_);
         MedicinalProductContraindication e_ = context.Operators.SingletonFrom<MedicinalProductContraindication>(d_);
@@ -4308,8 +4456,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicinalProductIngredient[] a_ = [
             arg,
         ];
-        MedicinalProductIngredient b_(MedicinalProductIngredient a)
-        {
+
+        MedicinalProductIngredient b_(MedicinalProductIngredient a) {
             Identifier f_ = a?.Identifier;
             CodeableConcept g_ = a?.Role;
             FhirBoolean h_ = a?.AllergenicIndicatorElement;
@@ -4326,7 +4474,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Substance = k_,
             };
             return l_;
-        };
+        }
+        ;
+
         IEnumerable<MedicinalProductIngredient> c_ = context.Operators.Select<MedicinalProductIngredient, MedicinalProductIngredient>((IEnumerable<MedicinalProductIngredient>)a_, b_);
         IEnumerable<MedicinalProductIngredient> d_ = context.Operators.Distinct<MedicinalProductIngredient>(c_);
         MedicinalProductIngredient e_ = context.Operators.SingletonFrom<MedicinalProductIngredient>(d_);
@@ -4340,8 +4490,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicinalProductInteraction[] a_ = [
             arg,
         ];
-        MedicinalProductInteraction b_(MedicinalProductInteraction a)
-        {
+
+        MedicinalProductInteraction b_(MedicinalProductInteraction a) {
             List<ResourceReference> f_ = a?.Subject;
             FhirString g_ = a?.DescriptionElement;
             List<MedicinalProductInteraction.InteractantComponent> h_ = a?.Interactant;
@@ -4360,7 +4510,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Management = l_,
             };
             return m_;
-        };
+        }
+        ;
+
         IEnumerable<MedicinalProductInteraction> c_ = context.Operators.Select<MedicinalProductInteraction, MedicinalProductInteraction>((IEnumerable<MedicinalProductInteraction>)a_, b_);
         IEnumerable<MedicinalProductInteraction> d_ = context.Operators.Distinct<MedicinalProductInteraction>(c_);
         MedicinalProductInteraction e_ = context.Operators.SingletonFrom<MedicinalProductInteraction>(d_);
@@ -4374,8 +4526,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicinalProductManufactured[] a_ = [
             arg,
         ];
-        MedicinalProductManufactured b_(MedicinalProductManufactured a)
-        {
+
+        MedicinalProductManufactured b_(MedicinalProductManufactured a) {
             CodeableConcept f_ = a?.ManufacturedDoseForm;
             CodeableConcept g_ = a?.UnitOfPresentation;
             Quantity h_ = a?.Quantity;
@@ -4394,7 +4546,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 OtherCharacteristics = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
             };
             return m_;
-        };
+        }
+        ;
+
         IEnumerable<MedicinalProductManufactured> c_ = context.Operators.Select<MedicinalProductManufactured, MedicinalProductManufactured>((IEnumerable<MedicinalProductManufactured>)a_, b_);
         IEnumerable<MedicinalProductManufactured> d_ = context.Operators.Distinct<MedicinalProductManufactured>(c_);
         MedicinalProductManufactured e_ = context.Operators.SingletonFrom<MedicinalProductManufactured>(d_);
@@ -4408,8 +4562,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicinalProductPackaged[] a_ = [
             arg,
         ];
-        MedicinalProductPackaged b_(MedicinalProductPackaged a)
-        {
+
+        MedicinalProductPackaged b_(MedicinalProductPackaged a) {
             List<Identifier> f_ = a?.Identifier;
             List<ResourceReference> g_ = a?.Subject;
             FhirString h_ = a?.DescriptionElement;
@@ -4432,7 +4586,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 PackageItem = new List<MedicinalProductPackaged.PackageItemComponent>((IEnumerable<MedicinalProductPackaged.PackageItemComponent>)n_),
             };
             return o_;
-        };
+        }
+        ;
+
         IEnumerable<MedicinalProductPackaged> c_ = context.Operators.Select<MedicinalProductPackaged, MedicinalProductPackaged>((IEnumerable<MedicinalProductPackaged>)a_, b_);
         IEnumerable<MedicinalProductPackaged> d_ = context.Operators.Distinct<MedicinalProductPackaged>(c_);
         MedicinalProductPackaged e_ = context.Operators.SingletonFrom<MedicinalProductPackaged>(d_);
@@ -4446,8 +4602,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicinalProductPharmaceutical[] a_ = [
             arg,
         ];
-        MedicinalProductPharmaceutical b_(MedicinalProductPharmaceutical a)
-        {
+
+        MedicinalProductPharmaceutical b_(MedicinalProductPharmaceutical a) {
             List<Identifier> f_ = a?.Identifier;
             CodeableConcept g_ = a?.AdministrableDoseForm;
             CodeableConcept h_ = a?.UnitOfPresentation;
@@ -4466,7 +4622,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 RouteOfAdministration = new List<MedicinalProductPharmaceutical.RouteOfAdministrationComponent>((IEnumerable<MedicinalProductPharmaceutical.RouteOfAdministrationComponent>)l_),
             };
             return m_;
-        };
+        }
+        ;
+
         IEnumerable<MedicinalProductPharmaceutical> c_ = context.Operators.Select<MedicinalProductPharmaceutical, MedicinalProductPharmaceutical>((IEnumerable<MedicinalProductPharmaceutical>)a_, b_);
         IEnumerable<MedicinalProductPharmaceutical> d_ = context.Operators.Distinct<MedicinalProductPharmaceutical>(c_);
         MedicinalProductPharmaceutical e_ = context.Operators.SingletonFrom<MedicinalProductPharmaceutical>(d_);
@@ -4480,8 +4638,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MedicinalProductUndesirableEffect[] a_ = [
             arg,
         ];
-        MedicinalProductUndesirableEffect b_(MedicinalProductUndesirableEffect a)
-        {
+
+        MedicinalProductUndesirableEffect b_(MedicinalProductUndesirableEffect a) {
             List<ResourceReference> f_ = a?.Subject;
             CodeableConcept g_ = a?.SymptomConditionEffect;
             CodeableConcept h_ = a?.Classification;
@@ -4496,7 +4654,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Population = new List<Population>((IEnumerable<Population>)j_),
             };
             return k_;
-        };
+        }
+        ;
+
         IEnumerable<MedicinalProductUndesirableEffect> c_ = context.Operators.Select<MedicinalProductUndesirableEffect, MedicinalProductUndesirableEffect>((IEnumerable<MedicinalProductUndesirableEffect>)a_, b_);
         IEnumerable<MedicinalProductUndesirableEffect> d_ = context.Operators.Distinct<MedicinalProductUndesirableEffect>(c_);
         MedicinalProductUndesirableEffect e_ = context.Operators.SingletonFrom<MedicinalProductUndesirableEffect>(d_);
@@ -4510,8 +4670,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MessageHeader[] a_ = [
             arg,
         ];
-        MessageHeader b_(MessageHeader a)
-        {
+
+        MessageHeader b_(MessageHeader a) {
             DataType f_ = a?.Event;
             List<MessageHeader.MessageDestinationComponent> g_ = a?.Destination;
             ResourceReference h_ = a?.Sender;
@@ -4538,7 +4698,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 DefinitionElement = p_,
             };
             return q_;
-        };
+        }
+        ;
+
         IEnumerable<MessageHeader> c_ = context.Operators.Select<MessageHeader, MessageHeader>((IEnumerable<MessageHeader>)a_, b_);
         IEnumerable<MessageHeader> d_ = context.Operators.Distinct<MessageHeader>(c_);
         MessageHeader e_ = context.Operators.SingletonFrom<MessageHeader>(d_);
@@ -4552,8 +4714,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         MolecularSequence[] a_ = [
             arg,
         ];
-        MolecularSequence b_(MolecularSequence a)
-        {
+
+        MolecularSequence b_(MolecularSequence a) {
             List<Identifier> f_ = a?.Identifier;
             Code<MolecularSequence.SequenceType> g_ = a?.TypeElement;
             Integer h_ = a?.CoordinateSystemElement;
@@ -4590,7 +4752,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 StructureVariant = new List<MolecularSequence.StructureVariantComponent>((IEnumerable<MolecularSequence.StructureVariantComponent>)u_),
             };
             return v_;
-        };
+        }
+        ;
+
         IEnumerable<MolecularSequence> c_ = context.Operators.Select<MolecularSequence, MolecularSequence>((IEnumerable<MolecularSequence>)a_, b_);
         IEnumerable<MolecularSequence> d_ = context.Operators.Distinct<MolecularSequence>(c_);
         MolecularSequence e_ = context.Operators.SingletonFrom<MolecularSequence>(d_);
@@ -4604,8 +4768,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         NamingSystem[] a_ = [
             arg,
         ];
-        NamingSystem b_(NamingSystem a)
-        {
+
+        NamingSystem b_(NamingSystem a) {
             FhirString f_ = a?.NameElement;
             Code<PublicationStatus> g_ = a?.StatusElement;
             Code<NamingSystem.NamingSystemType> h_ = a?.KindElement;
@@ -4636,7 +4800,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 UniqueId = new List<NamingSystem.UniqueIdComponent>((IEnumerable<NamingSystem.UniqueIdComponent>)r_),
             };
             return s_;
-        };
+        }
+        ;
+
         IEnumerable<NamingSystem> c_ = context.Operators.Select<NamingSystem, NamingSystem>((IEnumerable<NamingSystem>)a_, b_);
         IEnumerable<NamingSystem> d_ = context.Operators.Distinct<NamingSystem>(c_);
         NamingSystem e_ = context.Operators.SingletonFrom<NamingSystem>(d_);
@@ -4650,8 +4816,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         NutritionOrder[] a_ = [
             arg,
         ];
-        NutritionOrder b_(NutritionOrder a)
-        {
+
+        NutritionOrder b_(NutritionOrder a) {
             List<Identifier> f_ = a?.Identifier;
             List<Canonical> g_ = a?.InstantiatesCanonicalElement;
             List<FhirUri> h_ = a?.InstantiatesUriElement;
@@ -4690,7 +4856,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)v_),
             };
             return w_;
-        };
+        }
+        ;
+
         IEnumerable<NutritionOrder> c_ = context.Operators.Select<NutritionOrder, NutritionOrder>((IEnumerable<NutritionOrder>)a_, b_);
         IEnumerable<NutritionOrder> d_ = context.Operators.Distinct<NutritionOrder>(c_);
         NutritionOrder e_ = context.Operators.SingletonFrom<NutritionOrder>(d_);
@@ -4704,8 +4872,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Observation[] a_ = [
             arg,
         ];
-        Observation b_(Observation a)
-        {
+
+        Observation b_(Observation a) {
             List<Identifier> f_ = a?.Identifier;
             List<ResourceReference> g_ = a?.BasedOn;
             List<ResourceReference> h_ = a?.PartOf;
@@ -4758,7 +4926,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Component = new List<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ac_),
             };
             return ad_;
-        };
+        }
+        ;
+
         IEnumerable<Observation> c_ = context.Operators.Select<Observation, Observation>((IEnumerable<Observation>)a_, b_);
         IEnumerable<Observation> d_ = context.Operators.Distinct<Observation>(c_);
         Observation e_ = context.Operators.SingletonFrom<Observation>(d_);
@@ -4772,8 +4942,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ObservationDefinition[] a_ = [
             arg,
         ];
-        ObservationDefinition b_(ObservationDefinition a)
-        {
+
+        ObservationDefinition b_(ObservationDefinition a) {
             List<CodeableConcept> f_ = a?.Category;
             CodeableConcept g_ = a?.Code;
             List<Identifier> h_ = a?.Identifier;
@@ -4804,7 +4974,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 CriticalCodedValueSet = r_,
             };
             return s_;
-        };
+        }
+        ;
+
         IEnumerable<ObservationDefinition> c_ = context.Operators.Select<ObservationDefinition, ObservationDefinition>((IEnumerable<ObservationDefinition>)a_, b_);
         IEnumerable<ObservationDefinition> d_ = context.Operators.Distinct<ObservationDefinition>(c_);
         ObservationDefinition e_ = context.Operators.SingletonFrom<ObservationDefinition>(d_);
@@ -4818,15 +4990,17 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         OperationOutcome[] a_ = [
             arg,
         ];
-        OperationOutcome b_(OperationOutcome a)
-        {
+
+        OperationOutcome b_(OperationOutcome a) {
             List<OperationOutcome.IssueComponent> f_ = a?.Issue;
             OperationOutcome g_ = new OperationOutcome
             {
                 Issue = new List<OperationOutcome.IssueComponent>((IEnumerable<OperationOutcome.IssueComponent>)f_),
             };
             return g_;
-        };
+        }
+        ;
+
         IEnumerable<OperationOutcome> c_ = context.Operators.Select<OperationOutcome, OperationOutcome>((IEnumerable<OperationOutcome>)a_, b_);
         IEnumerable<OperationOutcome> d_ = context.Operators.Distinct<OperationOutcome>(c_);
         OperationOutcome e_ = context.Operators.SingletonFrom<OperationOutcome>(d_);
@@ -4840,8 +5014,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Organization[] a_ = [
             arg,
         ];
-        Organization b_(Organization a)
-        {
+
+        Organization b_(Organization a) {
             List<Identifier> f_ = a?.Identifier;
             FhirBoolean g_ = a?.ActiveElement;
             List<CodeableConcept> h_ = a?.Type;
@@ -4866,7 +5040,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
             };
             return p_;
-        };
+        }
+        ;
+
         IEnumerable<Organization> c_ = context.Operators.Select<Organization, Organization>((IEnumerable<Organization>)a_, b_);
         IEnumerable<Organization> d_ = context.Operators.Distinct<Organization>(c_);
         Organization e_ = context.Operators.SingletonFrom<Organization>(d_);
@@ -4880,8 +5056,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         OrganizationAffiliation[] a_ = [
             arg,
         ];
-        OrganizationAffiliation b_(OrganizationAffiliation a)
-        {
+
+        OrganizationAffiliation b_(OrganizationAffiliation a) {
             List<Identifier> f_ = a?.Identifier;
             FhirBoolean g_ = a?.ActiveElement;
             Period h_ = a?.Period;
@@ -4910,7 +5086,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
             };
             return r_;
-        };
+        }
+        ;
+
         IEnumerable<OrganizationAffiliation> c_ = context.Operators.Select<OrganizationAffiliation, OrganizationAffiliation>((IEnumerable<OrganizationAffiliation>)a_, b_);
         IEnumerable<OrganizationAffiliation> d_ = context.Operators.Distinct<OrganizationAffiliation>(c_);
         OrganizationAffiliation e_ = context.Operators.SingletonFrom<OrganizationAffiliation>(d_);
@@ -4924,8 +5102,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Patient[] a_ = [
             arg,
         ];
-        Patient b_(Patient a)
-        {
+
+        Patient b_(Patient a) {
             List<Identifier> f_ = a?.Identifier;
             FhirBoolean g_ = a?.ActiveElement;
             List<HumanName> h_ = a?.Name;
@@ -4962,7 +5140,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Link = new List<Patient.LinkComponent>((IEnumerable<Patient.LinkComponent>)u_),
             };
             return v_;
-        };
+        }
+        ;
+
         IEnumerable<Patient> c_ = context.Operators.Select<Patient, Patient>((IEnumerable<Patient>)a_, b_);
         IEnumerable<Patient> d_ = context.Operators.Distinct<Patient>(c_);
         Patient e_ = context.Operators.SingletonFrom<Patient>(d_);
@@ -4976,8 +5156,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         PaymentNotice[] a_ = [
             arg,
         ];
-        PaymentNotice b_(PaymentNotice a)
-        {
+
+        PaymentNotice b_(PaymentNotice a) {
             List<Identifier> f_ = a?.Identifier;
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement;
             ResourceReference h_ = a?.Request;
@@ -5006,7 +5186,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 PaymentStatus = q_,
             };
             return r_;
-        };
+        }
+        ;
+
         IEnumerable<PaymentNotice> c_ = context.Operators.Select<PaymentNotice, PaymentNotice>((IEnumerable<PaymentNotice>)a_, b_);
         IEnumerable<PaymentNotice> d_ = context.Operators.Distinct<PaymentNotice>(c_);
         PaymentNotice e_ = context.Operators.SingletonFrom<PaymentNotice>(d_);
@@ -5020,8 +5202,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         PaymentReconciliation[] a_ = [
             arg,
         ];
-        PaymentReconciliation b_(PaymentReconciliation a)
-        {
+
+        PaymentReconciliation b_(PaymentReconciliation a) {
             List<Identifier> f_ = a?.Identifier;
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement;
             Period h_ = a?.Period;
@@ -5056,7 +5238,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 ProcessNote = new List<PaymentReconciliation.NotesComponent>((IEnumerable<PaymentReconciliation.NotesComponent>)t_),
             };
             return u_;
-        };
+        }
+        ;
+
         IEnumerable<PaymentReconciliation> c_ = context.Operators.Select<PaymentReconciliation, PaymentReconciliation>((IEnumerable<PaymentReconciliation>)a_, b_);
         IEnumerable<PaymentReconciliation> d_ = context.Operators.Distinct<PaymentReconciliation>(c_);
         PaymentReconciliation e_ = context.Operators.SingletonFrom<PaymentReconciliation>(d_);
@@ -5070,8 +5254,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Person[] a_ = [
             arg,
         ];
-        Person b_(Person a)
-        {
+
+        Person b_(Person a) {
             List<Identifier> f_ = a?.Identifier;
             List<HumanName> g_ = a?.Name;
             List<ContactPoint> h_ = a?.Telecom;
@@ -5096,7 +5280,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Link = new List<Person.LinkComponent>((IEnumerable<Person.LinkComponent>)o_),
             };
             return p_;
-        };
+        }
+        ;
+
         IEnumerable<Person> c_ = context.Operators.Select<Person, Person>((IEnumerable<Person>)a_, b_);
         IEnumerable<Person> d_ = context.Operators.Distinct<Person>(c_);
         Person e_ = context.Operators.SingletonFrom<Person>(d_);
@@ -5110,8 +5296,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         PlanDefinition[] a_ = [
             arg,
         ];
-        PlanDefinition b_(PlanDefinition a)
-        {
+
+        PlanDefinition b_(PlanDefinition a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -5178,7 +5364,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Action = new List<PlanDefinition.ActionComponent>((IEnumerable<PlanDefinition.ActionComponent>)aj_),
             };
             return ak_;
-        };
+        }
+        ;
+
         IEnumerable<PlanDefinition> c_ = context.Operators.Select<PlanDefinition, PlanDefinition>((IEnumerable<PlanDefinition>)a_, b_);
         IEnumerable<PlanDefinition> d_ = context.Operators.Distinct<PlanDefinition>(c_);
         PlanDefinition e_ = context.Operators.SingletonFrom<PlanDefinition>(d_);
@@ -5192,8 +5380,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Practitioner[] a_ = [
             arg,
         ];
-        Practitioner b_(Practitioner a)
-        {
+
+        Practitioner b_(Practitioner a) {
             List<Identifier> f_ = a?.Identifier;
             FhirBoolean g_ = a?.ActiveElement;
             List<HumanName> h_ = a?.Name;
@@ -5218,7 +5406,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Communication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)o_),
             };
             return p_;
-        };
+        }
+        ;
+
         IEnumerable<Practitioner> c_ = context.Operators.Select<Practitioner, Practitioner>((IEnumerable<Practitioner>)a_, b_);
         IEnumerable<Practitioner> d_ = context.Operators.Distinct<Practitioner>(c_);
         Practitioner e_ = context.Operators.SingletonFrom<Practitioner>(d_);
@@ -5232,8 +5422,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         PractitionerRole[] a_ = [
             arg,
         ];
-        PractitionerRole b_(PractitionerRole a)
-        {
+
+        PractitionerRole b_(PractitionerRole a) {
             List<Identifier> f_ = a?.Identifier;
             FhirBoolean g_ = a?.ActiveElement;
             Period h_ = a?.Period;
@@ -5266,7 +5456,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)s_),
             };
             return t_;
-        };
+        }
+        ;
+
         IEnumerable<PractitionerRole> c_ = context.Operators.Select<PractitionerRole, PractitionerRole>((IEnumerable<PractitionerRole>)a_, b_);
         IEnumerable<PractitionerRole> d_ = context.Operators.Distinct<PractitionerRole>(c_);
         PractitionerRole e_ = context.Operators.SingletonFrom<PractitionerRole>(d_);
@@ -5280,8 +5472,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Procedure[] a_ = [
             arg,
         ];
-        Procedure b_(Procedure a)
-        {
+
+        Procedure b_(Procedure a) {
             List<Identifier> f_ = a?.Identifier;
             List<Canonical> g_ = a?.InstantiatesCanonicalElement;
             List<FhirUri> h_ = a?.InstantiatesUriElement;
@@ -5342,7 +5534,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 UsedCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ag_),
             };
             return ah_;
-        };
+        }
+        ;
+
         IEnumerable<Procedure> c_ = context.Operators.Select<Procedure, Procedure>((IEnumerable<Procedure>)a_, b_);
         IEnumerable<Procedure> d_ = context.Operators.Distinct<Procedure>(c_);
         Procedure e_ = context.Operators.SingletonFrom<Procedure>(d_);
@@ -5356,8 +5550,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Provenance[] a_ = [
             arg,
         ];
-        Provenance b_(Provenance a)
-        {
+
+        Provenance b_(Provenance a) {
             List<ResourceReference> f_ = a?.Target;
             DataType g_ = a?.Occurred;
             Instant h_ = a?.RecordedElement;
@@ -5382,7 +5576,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Signature = new List<Signature>((IEnumerable<Signature>)o_),
             };
             return p_;
-        };
+        }
+        ;
+
         IEnumerable<Provenance> c_ = context.Operators.Select<Provenance, Provenance>((IEnumerable<Provenance>)a_, b_);
         IEnumerable<Provenance> d_ = context.Operators.Distinct<Provenance>(c_);
         Provenance e_ = context.Operators.SingletonFrom<Provenance>(d_);
@@ -5396,8 +5592,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         QuestionnaireResponse[] a_ = [
             arg,
         ];
-        QuestionnaireResponse b_(QuestionnaireResponse a)
-        {
+
+        QuestionnaireResponse b_(QuestionnaireResponse a) {
             Identifier f_ = a?.Identifier;
             List<ResourceReference> g_ = a?.BasedOn;
             List<ResourceReference> h_ = a?.PartOf;
@@ -5424,7 +5620,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Item = new List<QuestionnaireResponse.ItemComponent>((IEnumerable<QuestionnaireResponse.ItemComponent>)p_),
             };
             return q_;
-        };
+        }
+        ;
+
         IEnumerable<QuestionnaireResponse> c_ = context.Operators.Select<QuestionnaireResponse, QuestionnaireResponse>((IEnumerable<QuestionnaireResponse>)a_, b_);
         IEnumerable<QuestionnaireResponse> d_ = context.Operators.Distinct<QuestionnaireResponse>(c_);
         QuestionnaireResponse e_ = context.Operators.SingletonFrom<QuestionnaireResponse>(d_);
@@ -5438,8 +5636,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         RelatedPerson[] a_ = [
             arg,
         ];
-        RelatedPerson b_(RelatedPerson a)
-        {
+
+        RelatedPerson b_(RelatedPerson a) {
             List<Identifier> f_ = a?.Identifier;
             FhirBoolean g_ = a?.ActiveElement;
             ResourceReference h_ = a?.Patient;
@@ -5468,7 +5666,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Communication = new List<RelatedPerson.CommunicationComponent>((IEnumerable<RelatedPerson.CommunicationComponent>)q_),
             };
             return r_;
-        };
+        }
+        ;
+
         IEnumerable<RelatedPerson> c_ = context.Operators.Select<RelatedPerson, RelatedPerson>((IEnumerable<RelatedPerson>)a_, b_);
         IEnumerable<RelatedPerson> d_ = context.Operators.Distinct<RelatedPerson>(c_);
         RelatedPerson e_ = context.Operators.SingletonFrom<RelatedPerson>(d_);
@@ -5482,8 +5682,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         RequestGroup[] a_ = [
             arg,
         ];
-        RequestGroup b_(RequestGroup a)
-        {
+
+        RequestGroup b_(RequestGroup a) {
             List<Identifier> f_ = a?.Identifier;
             List<Canonical> g_ = a?.InstantiatesCanonicalElement;
             List<FhirUri> h_ = a?.InstantiatesUriElement;
@@ -5524,7 +5724,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Action = new List<RequestGroup.ActionComponent>((IEnumerable<RequestGroup.ActionComponent>)w_),
             };
             return x_;
-        };
+        }
+        ;
+
         IEnumerable<RequestGroup> c_ = context.Operators.Select<RequestGroup, RequestGroup>((IEnumerable<RequestGroup>)a_, b_);
         IEnumerable<RequestGroup> d_ = context.Operators.Distinct<RequestGroup>(c_);
         RequestGroup e_ = context.Operators.SingletonFrom<RequestGroup>(d_);
@@ -5538,8 +5740,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ResearchDefinition[] a_ = [
             arg,
         ];
-        ResearchDefinition b_(ResearchDefinition a)
-        {
+
+        ResearchDefinition b_(ResearchDefinition a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -5612,7 +5814,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Outcome = am_,
             };
             return an_;
-        };
+        }
+        ;
+
         IEnumerable<ResearchDefinition> c_ = context.Operators.Select<ResearchDefinition, ResearchDefinition>((IEnumerable<ResearchDefinition>)a_, b_);
         IEnumerable<ResearchDefinition> d_ = context.Operators.Distinct<ResearchDefinition>(c_);
         ResearchDefinition e_ = context.Operators.SingletonFrom<ResearchDefinition>(d_);
@@ -5626,8 +5830,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ResearchElementDefinition[] a_ = [
             arg,
         ];
-        ResearchElementDefinition b_(ResearchElementDefinition a)
-        {
+
+        ResearchElementDefinition b_(ResearchElementDefinition a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -5698,7 +5902,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Characteristic = new List<ResearchElementDefinition.CharacteristicComponent>((IEnumerable<ResearchElementDefinition.CharacteristicComponent>)al_),
             };
             return am_;
-        };
+        }
+        ;
+
         IEnumerable<ResearchElementDefinition> c_ = context.Operators.Select<ResearchElementDefinition, ResearchElementDefinition>((IEnumerable<ResearchElementDefinition>)a_, b_);
         IEnumerable<ResearchElementDefinition> d_ = context.Operators.Distinct<ResearchElementDefinition>(c_);
         ResearchElementDefinition e_ = context.Operators.SingletonFrom<ResearchElementDefinition>(d_);
@@ -5712,8 +5918,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ResearchStudy[] a_ = [
             arg,
         ];
-        ResearchStudy b_(ResearchStudy a)
-        {
+
+        ResearchStudy b_(ResearchStudy a) {
             List<Identifier> f_ = a?.Identifier;
             FhirString g_ = a?.TitleElement;
             List<ResourceReference> h_ = a?.Protocol;
@@ -5766,7 +5972,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Objective = new List<ResearchStudy.ObjectiveComponent>((IEnumerable<ResearchStudy.ObjectiveComponent>)ac_),
             };
             return ad_;
-        };
+        }
+        ;
+
         IEnumerable<ResearchStudy> c_ = context.Operators.Select<ResearchStudy, ResearchStudy>((IEnumerable<ResearchStudy>)a_, b_);
         IEnumerable<ResearchStudy> d_ = context.Operators.Distinct<ResearchStudy>(c_);
         ResearchStudy e_ = context.Operators.SingletonFrom<ResearchStudy>(d_);
@@ -5780,8 +5988,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ResearchSubject[] a_ = [
             arg,
         ];
-        ResearchSubject b_(ResearchSubject a)
-        {
+
+        ResearchSubject b_(ResearchSubject a) {
             List<Identifier> f_ = a?.Identifier;
             Code<ResearchSubject.ResearchSubjectStatus> g_ = a?.StatusElement;
             Period h_ = a?.Period;
@@ -5802,7 +6010,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Consent = m_,
             };
             return n_;
-        };
+        }
+        ;
+
         IEnumerable<ResearchSubject> c_ = context.Operators.Select<ResearchSubject, ResearchSubject>((IEnumerable<ResearchSubject>)a_, b_);
         IEnumerable<ResearchSubject> d_ = context.Operators.Distinct<ResearchSubject>(c_);
         ResearchSubject e_ = context.Operators.SingletonFrom<ResearchSubject>(d_);
@@ -5816,8 +6026,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         RiskAssessment[] a_ = [
             arg,
         ];
-        RiskAssessment b_(RiskAssessment a)
-        {
+
+        RiskAssessment b_(RiskAssessment a) {
             List<Identifier> f_ = a?.Identifier;
             ResourceReference g_ = a?.BasedOn;
             ResourceReference h_ = a?.Parent;
@@ -5856,7 +6066,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)v_),
             };
             return w_;
-        };
+        }
+        ;
+
         IEnumerable<RiskAssessment> c_ = context.Operators.Select<RiskAssessment, RiskAssessment>((IEnumerable<RiskAssessment>)a_, b_);
         IEnumerable<RiskAssessment> d_ = context.Operators.Distinct<RiskAssessment>(c_);
         RiskAssessment e_ = context.Operators.SingletonFrom<RiskAssessment>(d_);
@@ -5870,8 +6082,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         RiskEvidenceSynthesis[] a_ = [
             arg,
         ];
-        RiskEvidenceSynthesis b_(RiskEvidenceSynthesis a)
-        {
+
+        RiskEvidenceSynthesis b_(RiskEvidenceSynthesis a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -5938,7 +6150,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Certainty = new List<RiskEvidenceSynthesis.CertaintyComponent>((IEnumerable<RiskEvidenceSynthesis.CertaintyComponent>)aj_),
             };
             return ak_;
-        };
+        }
+        ;
+
         IEnumerable<RiskEvidenceSynthesis> c_ = context.Operators.Select<RiskEvidenceSynthesis, RiskEvidenceSynthesis>((IEnumerable<RiskEvidenceSynthesis>)a_, b_);
         IEnumerable<RiskEvidenceSynthesis> d_ = context.Operators.Distinct<RiskEvidenceSynthesis>(c_);
         RiskEvidenceSynthesis e_ = context.Operators.SingletonFrom<RiskEvidenceSynthesis>(d_);
@@ -5952,8 +6166,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Schedule[] a_ = [
             arg,
         ];
-        Schedule b_(Schedule a)
-        {
+
+        Schedule b_(Schedule a) {
             List<Identifier> f_ = a?.Identifier;
             FhirBoolean g_ = a?.ActiveElement;
             List<CodeableConcept> h_ = a?.ServiceCategory;
@@ -5974,7 +6188,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 CommentElement = m_,
             };
             return n_;
-        };
+        }
+        ;
+
         IEnumerable<Schedule> c_ = context.Operators.Select<Schedule, Schedule>((IEnumerable<Schedule>)a_, b_);
         IEnumerable<Schedule> d_ = context.Operators.Distinct<Schedule>(c_);
         Schedule e_ = context.Operators.SingletonFrom<Schedule>(d_);
@@ -5988,8 +6204,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ServiceRequest[] a_ = [
             arg,
         ];
-        ServiceRequest b_(ServiceRequest a)
-        {
+
+        ServiceRequest b_(ServiceRequest a) {
             List<Identifier> f_ = a?.Identifier;
             List<Canonical> g_ = a?.InstantiatesCanonicalElement;
             List<FhirUri> h_ = a?.InstantiatesUriElement;
@@ -6060,7 +6276,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)al_),
             };
             return am_;
-        };
+        }
+        ;
+
         IEnumerable<ServiceRequest> c_ = context.Operators.Select<ServiceRequest, ServiceRequest>((IEnumerable<ServiceRequest>)a_, b_);
         IEnumerable<ServiceRequest> d_ = context.Operators.Distinct<ServiceRequest>(c_);
         ServiceRequest e_ = context.Operators.SingletonFrom<ServiceRequest>(d_);
@@ -6074,8 +6292,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Slot[] a_ = [
             arg,
         ];
-        Slot b_(Slot a)
-        {
+
+        Slot b_(Slot a) {
             List<Identifier> f_ = a?.Identifier;
             List<CodeableConcept> g_ = a?.ServiceCategory;
             List<CodeableConcept> h_ = a?.ServiceType;
@@ -6102,7 +6320,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 CommentElement = p_,
             };
             return q_;
-        };
+        }
+        ;
+
         IEnumerable<Slot> c_ = context.Operators.Select<Slot, Slot>((IEnumerable<Slot>)a_, b_);
         IEnumerable<Slot> d_ = context.Operators.Distinct<Slot>(c_);
         Slot e_ = context.Operators.SingletonFrom<Slot>(d_);
@@ -6116,8 +6336,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Specimen[] a_ = [
             arg,
         ];
-        Specimen b_(Specimen a)
-        {
+
+        Specimen b_(Specimen a) {
             List<Identifier> f_ = a?.Identifier;
             Identifier g_ = a?.AccessionIdentifier;
             Code<Specimen.SpecimenStatus> h_ = a?.StatusElement;
@@ -6148,7 +6368,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Note = new List<Annotation>((IEnumerable<Annotation>)r_),
             };
             return s_;
-        };
+        }
+        ;
+
         IEnumerable<Specimen> c_ = context.Operators.Select<Specimen, Specimen>((IEnumerable<Specimen>)a_, b_);
         IEnumerable<Specimen> d_ = context.Operators.Distinct<Specimen>(c_);
         Specimen e_ = context.Operators.SingletonFrom<Specimen>(d_);
@@ -6162,8 +6384,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         SpecimenDefinition[] a_ = [
             arg,
         ];
-        SpecimenDefinition b_(SpecimenDefinition a)
-        {
+
+        SpecimenDefinition b_(SpecimenDefinition a) {
             Identifier f_ = a?.Identifier;
             CodeableConcept g_ = a?.TypeCollected;
             List<CodeableConcept> h_ = a?.PatientPreparation;
@@ -6180,7 +6402,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 TypeTested = new List<SpecimenDefinition.TypeTestedComponent>((IEnumerable<SpecimenDefinition.TypeTestedComponent>)k_),
             };
             return l_;
-        };
+        }
+        ;
+
         IEnumerable<SpecimenDefinition> c_ = context.Operators.Select<SpecimenDefinition, SpecimenDefinition>((IEnumerable<SpecimenDefinition>)a_, b_);
         IEnumerable<SpecimenDefinition> d_ = context.Operators.Distinct<SpecimenDefinition>(c_);
         SpecimenDefinition e_ = context.Operators.SingletonFrom<SpecimenDefinition>(d_);
@@ -6194,8 +6418,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         StructureDefinition[] a_ = [
             arg,
         ];
-        StructureDefinition b_(StructureDefinition a)
-        {
+
+        StructureDefinition b_(StructureDefinition a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -6254,7 +6478,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Differential = af_,
             };
             return ag_;
-        };
+        }
+        ;
+
         IEnumerable<StructureDefinition> c_ = context.Operators.Select<StructureDefinition, StructureDefinition>((IEnumerable<StructureDefinition>)a_, b_);
         IEnumerable<StructureDefinition> d_ = context.Operators.Distinct<StructureDefinition>(c_);
         StructureDefinition e_ = context.Operators.SingletonFrom<StructureDefinition>(d_);
@@ -6268,8 +6494,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         StructureMap[] a_ = [
             arg,
         ];
-        StructureMap b_(StructureMap a)
-        {
+
+        StructureMap b_(StructureMap a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -6310,7 +6536,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Group = new List<StructureMap.GroupComponent>((IEnumerable<StructureMap.GroupComponent>)w_),
             };
             return x_;
-        };
+        }
+        ;
+
         IEnumerable<StructureMap> c_ = context.Operators.Select<StructureMap, StructureMap>((IEnumerable<StructureMap>)a_, b_);
         IEnumerable<StructureMap> d_ = context.Operators.Distinct<StructureMap>(c_);
         StructureMap e_ = context.Operators.SingletonFrom<StructureMap>(d_);
@@ -6324,8 +6552,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Subscription[] a_ = [
             arg,
         ];
-        Subscription b_(Subscription a)
-        {
+
+        Subscription b_(Subscription a) {
             Code<Subscription.SubscriptionStatus> f_ = a?.StatusElement;
             List<ContactPoint> g_ = a?.Contact;
             Instant h_ = a?.EndElement;
@@ -6344,7 +6572,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Channel = l_,
             };
             return m_;
-        };
+        }
+        ;
+
         IEnumerable<Subscription> c_ = context.Operators.Select<Subscription, Subscription>((IEnumerable<Subscription>)a_, b_);
         IEnumerable<Subscription> d_ = context.Operators.Distinct<Subscription>(c_);
         Subscription e_ = context.Operators.SingletonFrom<Subscription>(d_);
@@ -6358,8 +6588,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Substance[] a_ = [
             arg,
         ];
-        Substance b_(Substance a)
-        {
+
+        Substance b_(Substance a) {
             List<Identifier> f_ = a?.Identifier;
             Code<Substance.FHIRSubstanceStatus> g_ = a?.StatusElement;
             List<CodeableConcept> h_ = a?.Category;
@@ -6378,7 +6608,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Ingredient = new List<Substance.IngredientComponent>((IEnumerable<Substance.IngredientComponent>)l_),
             };
             return m_;
-        };
+        }
+        ;
+
         IEnumerable<Substance> c_ = context.Operators.Select<Substance, Substance>((IEnumerable<Substance>)a_, b_);
         IEnumerable<Substance> d_ = context.Operators.Distinct<Substance>(c_);
         Substance e_ = context.Operators.SingletonFrom<Substance>(d_);
@@ -6392,8 +6624,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         SubstanceNucleicAcid[] a_ = [
             arg,
         ];
-        SubstanceNucleicAcid b_(SubstanceNucleicAcid a)
-        {
+
+        SubstanceNucleicAcid b_(SubstanceNucleicAcid a) {
             CodeableConcept f_ = a?.SequenceType;
             Integer g_ = a?.NumberOfSubunitsElement;
             FhirString h_ = a?.AreaOfHybridisationElement;
@@ -6408,7 +6640,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Subunit = new List<SubstanceNucleicAcid.SubunitComponent>((IEnumerable<SubstanceNucleicAcid.SubunitComponent>)j_),
             };
             return k_;
-        };
+        }
+        ;
+
         IEnumerable<SubstanceNucleicAcid> c_ = context.Operators.Select<SubstanceNucleicAcid, SubstanceNucleicAcid>((IEnumerable<SubstanceNucleicAcid>)a_, b_);
         IEnumerable<SubstanceNucleicAcid> d_ = context.Operators.Distinct<SubstanceNucleicAcid>(c_);
         SubstanceNucleicAcid e_ = context.Operators.SingletonFrom<SubstanceNucleicAcid>(d_);
@@ -6422,8 +6656,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         SubstancePolymer[] a_ = [
             arg,
         ];
-        SubstancePolymer b_(SubstancePolymer a)
-        {
+
+        SubstancePolymer b_(SubstancePolymer a) {
             CodeableConcept f_ = a?.Class;
             CodeableConcept g_ = a?.Geometry;
             List<CodeableConcept> h_ = a?.CopolymerConnectivity;
@@ -6440,7 +6674,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Repeat = new List<SubstancePolymer.RepeatComponent>((IEnumerable<SubstancePolymer.RepeatComponent>)k_),
             };
             return l_;
-        };
+        }
+        ;
+
         IEnumerable<SubstancePolymer> c_ = context.Operators.Select<SubstancePolymer, SubstancePolymer>((IEnumerable<SubstancePolymer>)a_, b_);
         IEnumerable<SubstancePolymer> d_ = context.Operators.Distinct<SubstancePolymer>(c_);
         SubstancePolymer e_ = context.Operators.SingletonFrom<SubstancePolymer>(d_);
@@ -6454,8 +6690,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         SubstanceProtein[] a_ = [
             arg,
         ];
-        SubstanceProtein b_(SubstanceProtein a)
-        {
+
+        SubstanceProtein b_(SubstanceProtein a) {
             CodeableConcept f_ = a?.SequenceType;
             Integer g_ = a?.NumberOfSubunitsElement;
             List<FhirString> h_ = a?.DisulfideLinkageElement;
@@ -6468,7 +6704,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Subunit = new List<SubstanceProtein.SubunitComponent>((IEnumerable<SubstanceProtein.SubunitComponent>)i_),
             };
             return j_;
-        };
+        }
+        ;
+
         IEnumerable<SubstanceProtein> c_ = context.Operators.Select<SubstanceProtein, SubstanceProtein>((IEnumerable<SubstanceProtein>)a_, b_);
         IEnumerable<SubstanceProtein> d_ = context.Operators.Distinct<SubstanceProtein>(c_);
         SubstanceProtein e_ = context.Operators.SingletonFrom<SubstanceProtein>(d_);
@@ -6482,8 +6720,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         SubstanceReferenceInformation[] a_ = [
             arg,
         ];
-        SubstanceReferenceInformation b_(SubstanceReferenceInformation a)
-        {
+
+        SubstanceReferenceInformation b_(SubstanceReferenceInformation a) {
             FhirString f_ = a?.CommentElement;
             List<SubstanceReferenceInformation.GeneComponent> g_ = a?.Gene;
             List<SubstanceReferenceInformation.GeneElementComponent> h_ = a?.GeneElement;
@@ -6498,7 +6736,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Target = new List<SubstanceReferenceInformation.TargetComponent>((IEnumerable<SubstanceReferenceInformation.TargetComponent>)j_),
             };
             return k_;
-        };
+        }
+        ;
+
         IEnumerable<SubstanceReferenceInformation> c_ = context.Operators.Select<SubstanceReferenceInformation, SubstanceReferenceInformation>((IEnumerable<SubstanceReferenceInformation>)a_, b_);
         IEnumerable<SubstanceReferenceInformation> d_ = context.Operators.Distinct<SubstanceReferenceInformation>(c_);
         SubstanceReferenceInformation e_ = context.Operators.SingletonFrom<SubstanceReferenceInformation>(d_);
@@ -6512,8 +6752,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         SubstanceSourceMaterial[] a_ = [
             arg,
         ];
-        SubstanceSourceMaterial b_(SubstanceSourceMaterial a)
-        {
+
+        SubstanceSourceMaterial b_(SubstanceSourceMaterial a) {
             CodeableConcept f_ = a?.SourceMaterialClass;
             CodeableConcept g_ = a?.SourceMaterialType;
             CodeableConcept h_ = a?.SourceMaterialState;
@@ -6544,7 +6784,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 PartDescription = new List<SubstanceSourceMaterial.PartDescriptionComponent>((IEnumerable<SubstanceSourceMaterial.PartDescriptionComponent>)r_),
             };
             return s_;
-        };
+        }
+        ;
+
         IEnumerable<SubstanceSourceMaterial> c_ = context.Operators.Select<SubstanceSourceMaterial, SubstanceSourceMaterial>((IEnumerable<SubstanceSourceMaterial>)a_, b_);
         IEnumerable<SubstanceSourceMaterial> d_ = context.Operators.Distinct<SubstanceSourceMaterial>(c_);
         SubstanceSourceMaterial e_ = context.Operators.SingletonFrom<SubstanceSourceMaterial>(d_);
@@ -6558,8 +6800,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         SubstanceSpecification[] a_ = [
             arg,
         ];
-        SubstanceSpecification b_(SubstanceSpecification a)
-        {
+
+        SubstanceSpecification b_(SubstanceSpecification a) {
             Identifier f_ = a?.Identifier;
             CodeableConcept g_ = a?.Type;
             CodeableConcept h_ = a?.Status;
@@ -6602,7 +6844,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 SourceMaterial = x_,
             };
             return y_;
-        };
+        }
+        ;
+
         IEnumerable<SubstanceSpecification> c_ = context.Operators.Select<SubstanceSpecification, SubstanceSpecification>((IEnumerable<SubstanceSpecification>)a_, b_);
         IEnumerable<SubstanceSpecification> d_ = context.Operators.Distinct<SubstanceSpecification>(c_);
         SubstanceSpecification e_ = context.Operators.SingletonFrom<SubstanceSpecification>(d_);
@@ -6616,8 +6860,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         SupplyDelivery[] a_ = [
             arg,
         ];
-        SupplyDelivery b_(SupplyDelivery a)
-        {
+
+        SupplyDelivery b_(SupplyDelivery a) {
             List<Identifier> f_ = a?.Identifier;
             List<ResourceReference> g_ = a?.BasedOn;
             List<ResourceReference> h_ = a?.PartOf;
@@ -6644,7 +6888,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Receiver = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
             };
             return q_;
-        };
+        }
+        ;
+
         IEnumerable<SupplyDelivery> c_ = context.Operators.Select<SupplyDelivery, SupplyDelivery>((IEnumerable<SupplyDelivery>)a_, b_);
         IEnumerable<SupplyDelivery> d_ = context.Operators.Distinct<SupplyDelivery>(c_);
         SupplyDelivery e_ = context.Operators.SingletonFrom<SupplyDelivery>(d_);
@@ -6658,8 +6904,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         SupplyRequest[] a_ = [
             arg,
         ];
-        SupplyRequest b_(SupplyRequest a)
-        {
+
+        SupplyRequest b_(SupplyRequest a) {
             List<Identifier> f_ = a?.Identifier;
             Code<SupplyRequest.SupplyRequestStatus> g_ = a?.StatusElement;
             CodeableConcept h_ = a?.Category;
@@ -6694,7 +6940,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 DeliverTo = t_,
             };
             return u_;
-        };
+        }
+        ;
+
         IEnumerable<SupplyRequest> c_ = context.Operators.Select<SupplyRequest, SupplyRequest>((IEnumerable<SupplyRequest>)a_, b_);
         IEnumerable<SupplyRequest> d_ = context.Operators.Distinct<SupplyRequest>(c_);
         SupplyRequest e_ = context.Operators.SingletonFrom<SupplyRequest>(d_);
@@ -6708,8 +6956,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         Task[] a_ = [
             arg,
         ];
-        Task b_(Task a)
-        {
+
+        Task b_(Task a) {
             List<Identifier> f_ = a?.Identifier;
             Canonical g_ = a?.InstantiatesCanonicalElement;
             FhirUri h_ = a?.InstantiatesUriElement;
@@ -6776,7 +7024,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Output = new List<Task.OutputComponent>((IEnumerable<Task.OutputComponent>)aj_),
             };
             return ak_;
-        };
+        }
+        ;
+
         IEnumerable<Task> c_ = context.Operators.Select<Task, Task>((IEnumerable<Task>)a_, b_);
         IEnumerable<Task> d_ = context.Operators.Distinct<Task>(c_);
         Task e_ = context.Operators.SingletonFrom<Task>(d_);
@@ -6790,8 +7040,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         TerminologyCapabilities[] a_ = [
             arg,
         ];
-        TerminologyCapabilities b_(TerminologyCapabilities a)
-        {
+
+        TerminologyCapabilities b_(TerminologyCapabilities a) {
             FhirUri f_ = a?.UrlElement;
             FhirString g_ = a?.VersionElement;
             FhirString h_ = a?.NameElement;
@@ -6844,7 +7094,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Closure = ac_,
             };
             return ad_;
-        };
+        }
+        ;
+
         IEnumerable<TerminologyCapabilities> c_ = context.Operators.Select<TerminologyCapabilities, TerminologyCapabilities>((IEnumerable<TerminologyCapabilities>)a_, b_);
         IEnumerable<TerminologyCapabilities> d_ = context.Operators.Distinct<TerminologyCapabilities>(c_);
         TerminologyCapabilities e_ = context.Operators.SingletonFrom<TerminologyCapabilities>(d_);
@@ -6858,8 +7110,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         TestReport[] a_ = [
             arg,
         ];
-        TestReport b_(TestReport a)
-        {
+
+        TestReport b_(TestReport a) {
             Identifier f_ = a?.Identifier;
             FhirString g_ = a?.NameElement;
             Code<TestReport.TestReportStatus> h_ = a?.StatusElement;
@@ -6888,7 +7140,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Teardown = q_,
             };
             return r_;
-        };
+        }
+        ;
+
         IEnumerable<TestReport> c_ = context.Operators.Select<TestReport, TestReport>((IEnumerable<TestReport>)a_, b_);
         IEnumerable<TestReport> d_ = context.Operators.Distinct<TestReport>(c_);
         TestReport e_ = context.Operators.SingletonFrom<TestReport>(d_);
@@ -6902,8 +7156,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         TestScript[] a_ = [
             arg,
         ];
-        TestScript b_(TestScript a)
-        {
+
+        TestScript b_(TestScript a) {
             FhirUri f_ = a?.UrlElement;
             Identifier g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -6956,7 +7210,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Teardown = ac_,
             };
             return ad_;
-        };
+        }
+        ;
+
         IEnumerable<TestScript> c_ = context.Operators.Select<TestScript, TestScript>((IEnumerable<TestScript>)a_, b_);
         IEnumerable<TestScript> d_ = context.Operators.Distinct<TestScript>(c_);
         TestScript e_ = context.Operators.SingletonFrom<TestScript>(d_);
@@ -6970,8 +7226,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ValueSet[] a_ = [
             arg,
         ];
-        ValueSet b_(ValueSet a)
-        {
+
+        ValueSet b_(ValueSet a) {
             FhirUri f_ = a?.UrlElement;
             List<Identifier> g_ = a?.Identifier;
             FhirString h_ = a?.VersionElement;
@@ -7012,7 +7268,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Expansion = w_,
             };
             return x_;
-        };
+        }
+        ;
+
         IEnumerable<ValueSet> c_ = context.Operators.Select<ValueSet, ValueSet>((IEnumerable<ValueSet>)a_, b_);
         IEnumerable<ValueSet> d_ = context.Operators.Distinct<ValueSet>(c_);
         ValueSet e_ = context.Operators.SingletonFrom<ValueSet>(d_);
@@ -7026,8 +7284,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         VerificationResult[] a_ = [
             arg,
         ];
-        VerificationResult b_(VerificationResult a)
-        {
+
+        VerificationResult b_(VerificationResult a) {
             List<ResourceReference> f_ = a?.Target;
             List<FhirString> g_ = a?.TargetLocationElement;
             CodeableConcept h_ = a?.Need;
@@ -7060,7 +7318,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Validator = new List<VerificationResult.ValidatorComponent>((IEnumerable<VerificationResult.ValidatorComponent>)s_),
             };
             return t_;
-        };
+        }
+        ;
+
         IEnumerable<VerificationResult> c_ = context.Operators.Select<VerificationResult, VerificationResult>((IEnumerable<VerificationResult>)a_, b_);
         IEnumerable<VerificationResult> d_ = context.Operators.Distinct<VerificationResult>(c_);
         VerificationResult e_ = context.Operators.SingletonFrom<VerificationResult>(d_);
@@ -7074,8 +7334,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         VisionPrescription[] a_ = [
             arg,
         ];
-        VisionPrescription b_(VisionPrescription a)
-        {
+
+        VisionPrescription b_(VisionPrescription a) {
             List<Identifier> f_ = a?.Identifier;
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement;
             FhirDateTime h_ = a?.CreatedElement;
@@ -7096,7 +7356,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 LensSpecification = new List<VisionPrescription.LensSpecificationComponent>((IEnumerable<VisionPrescription.LensSpecificationComponent>)m_),
             };
             return n_;
-        };
+        }
+        ;
+
         IEnumerable<VisionPrescription> c_ = context.Operators.Select<VisionPrescription, VisionPrescription>((IEnumerable<VisionPrescription>)a_, b_);
         IEnumerable<VisionPrescription> d_ = context.Operators.Distinct<VisionPrescription>(c_);
         VisionPrescription e_ = context.Operators.SingletonFrom<VisionPrescription>(d_);

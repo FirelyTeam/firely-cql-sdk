@@ -114,7 +114,8 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
             {
                 object a_ = context.ResolveParameter("PalliativeCareFHIR-0.6.000", "Measurement Period", null);
                 return (CqlInterval<CqlDateTime>)a_;
-            });
+            }
+            );
 
 
     #endregion Parameters
@@ -132,7 +133,8 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
-            });
+            }
+            );
 
 
     private Cached<bool?> _Palliative_Care_in_the_Measurement_Period_Cached = new();
@@ -164,7 +166,8 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                         IReadOnlyList<CqlCode> ai_ = ah_?.codes;
                         bool? aj_ = context.Operators.In<CqlCode>(ag_, (IEnumerable<CqlCode>)ai_);
                         return aj_;
-                    };
+                    }
+                    ;
                     IEnumerable<CodeableConcept> y_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)w_, x_);
                     bool? z_ = context.Operators.Exists<CodeableConcept>(y_);
                     bool? aa_ = context.Operators.And(v_, z_);
@@ -174,7 +177,8 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     bool? ae_ = context.Operators.Overlaps(ac_, ad_, default);
                     bool? af_ = context.Operators.And(aa_, ae_);
                     return af_;
-                };
+                }
+                ;
                 IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
                 bool? f_ = context.Operators.Exists<Observation>(e_);
                 CqlValueSet g_ = this.Palliative_Care_Encounter(context);
@@ -190,7 +194,8 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     bool? aq_ = context.Operators.Overlaps(ao_, ap_, default);
                     bool? ar_ = context.Operators.And(am_, aq_);
                     return ar_;
-                };
+                }
+                ;
                 IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
                 bool? k_ = context.Operators.Exists<Encounter>(j_);
                 bool? l_ = context.Operators.Or(f_, k_);
@@ -211,12 +216,14 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                     bool? az_ = context.Operators.Overlaps(ax_, ay_, default);
                     bool? ba_ = context.Operators.And(av_, az_);
                     return ba_;
-                };
+                }
+                ;
                 IEnumerable<Procedure> p_ = context.Operators.Where<Procedure>(n_, o_);
                 bool? q_ = context.Operators.Exists<Procedure>(p_);
                 bool? r_ = context.Operators.Or(l_, q_);
                 return r_;
-            });
+            }
+            );
 
 
     #endregion Functions and Expressions
