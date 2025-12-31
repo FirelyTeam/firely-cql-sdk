@@ -247,7 +247,7 @@ partial class LibrarySetCSharpCodeGenerator
                             return value;
                         }
 
-                        if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+                        if (CacheVersion == cqlContextCacheVersion)
                         {
                             // Cache hit
                             return CachedValue;
