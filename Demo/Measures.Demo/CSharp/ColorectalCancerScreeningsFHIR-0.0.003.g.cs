@@ -44,7 +44,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

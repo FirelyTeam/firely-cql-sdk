@@ -44,7 +44,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

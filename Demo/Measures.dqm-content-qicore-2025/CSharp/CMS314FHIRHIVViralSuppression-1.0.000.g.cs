@@ -44,7 +44,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

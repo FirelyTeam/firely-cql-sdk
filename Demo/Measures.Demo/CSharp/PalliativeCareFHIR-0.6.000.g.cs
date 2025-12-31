@@ -44,7 +44,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

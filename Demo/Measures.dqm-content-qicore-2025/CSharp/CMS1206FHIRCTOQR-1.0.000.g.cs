@@ -44,7 +44,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ISingleton<CMS1206FHIR
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

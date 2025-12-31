@@ -44,7 +44,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

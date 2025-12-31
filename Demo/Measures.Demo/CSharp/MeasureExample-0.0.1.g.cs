@@ -44,7 +44,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

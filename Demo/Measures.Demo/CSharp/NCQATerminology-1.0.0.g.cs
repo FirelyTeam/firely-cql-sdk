@@ -44,7 +44,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

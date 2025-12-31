@@ -44,7 +44,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

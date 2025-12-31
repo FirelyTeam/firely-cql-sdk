@@ -44,7 +44,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

@@ -44,7 +44,7 @@ public partial class AdultOutpatientEncounters_4_19_000 : ILibrary, ISingleton<A
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

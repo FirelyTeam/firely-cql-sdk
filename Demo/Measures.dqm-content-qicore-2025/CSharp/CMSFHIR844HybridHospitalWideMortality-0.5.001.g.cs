@@ -44,7 +44,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

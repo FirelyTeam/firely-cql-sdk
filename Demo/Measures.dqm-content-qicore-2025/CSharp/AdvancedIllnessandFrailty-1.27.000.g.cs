@@ -44,7 +44,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

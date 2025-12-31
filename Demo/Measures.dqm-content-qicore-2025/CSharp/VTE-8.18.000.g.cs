@@ -44,7 +44,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

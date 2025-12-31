@@ -44,7 +44,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

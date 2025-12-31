@@ -44,7 +44,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

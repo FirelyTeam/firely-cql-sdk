@@ -44,7 +44,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

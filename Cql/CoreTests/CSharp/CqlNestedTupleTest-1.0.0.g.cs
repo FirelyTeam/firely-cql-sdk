@@ -44,7 +44,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

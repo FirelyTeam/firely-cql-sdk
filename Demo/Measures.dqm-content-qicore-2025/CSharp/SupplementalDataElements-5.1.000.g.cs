@@ -44,7 +44,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

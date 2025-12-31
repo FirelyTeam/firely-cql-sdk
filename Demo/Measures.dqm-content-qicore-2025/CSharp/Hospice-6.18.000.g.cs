@@ -44,7 +44,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

@@ -44,7 +44,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;

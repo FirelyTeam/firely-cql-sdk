@@ -44,7 +44,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
                 return value;
             }
 
-            if (ReferenceEquals(CacheVersion, cqlContextCacheVersion))
+            if (CacheVersion == cqlContextCacheVersion)
             {
                 // Cache hit
                 return CachedValue;
