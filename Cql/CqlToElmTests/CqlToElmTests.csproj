@@ -4,6 +4,7 @@
 
 	<PropertyGroup>
 		<IsPackable>false</IsPackable>
+		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<RootNamespace>Hl7.Cql.CqlToElm.Test</RootNamespace>
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>

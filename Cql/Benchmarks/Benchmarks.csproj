@@ -1,33 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	
+
 	<Import Project="..\..\cql-base.props" />
 
 	<PropertyGroup>
-	    <OutputType>Exe</OutputType>
-	    <Configurations>Debug;Release</Configurations>
-	  </PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<Configurations>Debug;Release</Configurations>
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<DebugType>pdbonly</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<Optimize>true</Optimize>
+		<Configuration>Release</Configuration>
+		<IsPackable>false</IsPackable>
+		<NoWarn>$(NoWarn);CS1591</NoWarn>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <DebugSymbols>true</DebugSymbols>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <Configuration>Release</Configuration>
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
+	<ItemGroup>
+		<Compile Include="..\CoreTests\Shared.cs" Link="Shared.cs" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Include="..\CoreTests\Shared.cs" Link="Shared.cs" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
+		<PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.14.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
-    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.14.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
-    <ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
+		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+	</ItemGroup>
 </Project>

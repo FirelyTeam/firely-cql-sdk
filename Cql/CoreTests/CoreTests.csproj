@@ -4,13 +4,11 @@
 
 	<PropertyGroup>
 		<Configurations>Debug;Release</Configurations>
-	</PropertyGroup>
-
-	<PropertyGroup>
 		<IsPackable>false</IsPackable>
 		<Nullable>disable</Nullable>
+		<!-- AllowUnsafeBlocks: Unsafe needed in order to test CSharpFormatter on pointer types -->
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks> <!-- Unsafe needed in order to test CSharpFormatter on pointer types -->
 	</PropertyGroup>
 
 	<ItemGroup>
