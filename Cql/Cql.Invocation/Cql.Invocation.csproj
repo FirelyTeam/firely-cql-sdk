@@ -3,20 +3,11 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>Hl7.Cql.Invocation</AssemblyName>
 		<RootNamespace>Hl7.Cql.Invocation</RootNamespace>
 		<Product>CQL Library Invocation</Product>
 		<Description>Support package for Hl7.Cql. Contains functionality to invoke CQL from libraries.</Description>
 		<Configurations>Debug;Release</Configurations>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	</PropertyGroup>
 
 	<ItemGroup>

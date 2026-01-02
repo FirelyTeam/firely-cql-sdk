@@ -4,7 +4,6 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<ImplicitUsings>enable</ImplicitUsings>
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>cql-package</ToolCommandName>
 		<RootNamespace>Hl7.Cql.Packager</RootNamespace>

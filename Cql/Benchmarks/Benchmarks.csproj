@@ -3,10 +3,9 @@
 	<Import Project="..\..\cql-base.props" />
 
 	<PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <OutputType>Exe</OutputType>
-    <Configurations>Debug;Release</Configurations>
-  </PropertyGroup>
+	    <OutputType>Exe</OutputType>
+	    <Configurations>Debug;Release</Configurations>
+	  </PropertyGroup>
 
   <PropertyGroup>
     <PlatformTarget>AnyCPU</PlatformTarget>
