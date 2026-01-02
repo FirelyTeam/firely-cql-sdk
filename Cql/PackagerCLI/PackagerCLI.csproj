@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="..\..\cql-sdk.props" />
+	<Import Project="..\cql-sdk.props" />
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
