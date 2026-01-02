@@ -48,7 +48,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var generateCSharp =
                 elmToolkitServices
                     .GetLibrarySetCSharpCodeGenerator()
-                    .GenerateEachLibraryToCSharp(librarySet, definitions)
+                    .GenerateEachLibraryToCSharp(librarySet, definitions, @namespace: null)
                     .ToList();
 
             var compile =
