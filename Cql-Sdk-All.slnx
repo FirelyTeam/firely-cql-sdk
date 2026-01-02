@@ -3,8 +3,7 @@
     <Project Path="Cql/PackagerCLI/PackagerCLI.csproj" />
   </Folder>
   <Folder Name="/CQL SDK/">
-    <File Path=".editorconfig" />
-    <File Path="cql-sdk.props" />
+    <File Path="Cql/cql-sdk.props" />
     <Project Path="Cql/Cql/Cql.csproj" />
   </Folder>
   <Folder Name="/CQL SDK/00 Runtime/">
@@ -75,6 +74,117 @@
     <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj" />
   </Folder>
   <Folder Name="/submodules/Ncqa/" />
+  <Folder Name="/submodules/Ncqa/_NEW/">
+    <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/BuildArtifacts/BuildArtifacts.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/BuildTest/BuildTest.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/Cql/Cql.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/DeckTest/DeckTest.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/ElmTest/ElmTest.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/HedisPackagerCLI/HedisPackagerCLI.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/MeasureBundlerCLI/MeasureBundlerCLI.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/Measures/Measures.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/Test/Test.csproj" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/.gitignore" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/dqic.props" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/README.md" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Elm/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/AAB_Concepts-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/AAB_Details-2023.0.1.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/AAB_Reporting-2023.0.1.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Aggregates-1.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/AMR_Concepts-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/AMR_Details-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/AMR_Elements-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/AMR_Medication_Table-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/AMR_Reporting-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Antibiotic-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Antibiotics_Shared_Concepts-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Antibiotics_Shared_Elements-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Antibiotic_Concepts-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Certification_Payer_Reporting-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Claims-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Conditions-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Coverages-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/CQL_Common-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/CQL_Errors-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Encounters-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/ExplanationOfBenefits-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/FHIRHelpers-4.0.1.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/FHIR_Common-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/HEDIS-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/HEDIS_Concepts-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Hospice-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Hospice_Concepts-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Immunizations-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Intervals-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/LSC_Concepts-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/LSC_Details-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/LSC_Elements-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/LSC_Reporting-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/MedicationDispenses-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Medications-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Observations-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Patients-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/PractitionerRoles-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Procedures-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Respiratory-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Respiratory_Concepts-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Snippets-1.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Stratification-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Stratification_Concepts-2023.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Stratification_Reporting-2023.0.0.json" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Elm/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/AAB_Concepts-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/AAB_Details-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/AAB_Reporting-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Aggregates-1.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/AMR_Concepts-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/AMR_Details-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/AMR_Elements-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/AMR_Medication_Table-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/AMR_Reporting-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Antibiotic-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Antibiotics_Shared_Concepts-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Antibiotics_Shared_Elements-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Antibiotic_Concepts-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Certification_Payer_Reporting-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Claims-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Conditions-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Coverages-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/CQL_Common-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/CQL_Errors-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Encounters-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/ExplanationOfBenefits-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/FHIRHelpers-4.0.1.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/FHIR_Common-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/HEDIS-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/HEDIS_Concepts-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Hospice-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Hospice_Concepts-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Immunizations-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Intervals-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/LSC_Concepts-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/LSC_Details-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/LSC_Elements-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/LSC_Reporting-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/MedicationDispenses-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Medications-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Observations-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Patients-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/PractitionerRoles-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Procedures-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Respiratory-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Respiratory_Concepts-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Snippets-1.0.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Stratification-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Stratification_Concepts-2024.5.0.json" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Stratification_Reporting-2024.5.0.json" />
+  </Folder>
   <Folder Name="/submodules/Ncqa/_OLD/">
     <Project Path="submodules/Ncqa.DQIC/_OLD/BuildArtifacts/BuildArtifacts.csproj" />
     <Project Path="submodules/Ncqa.DQIC/_OLD/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj" />
@@ -91,12 +201,11 @@
     <File Path="build-elm.ps1" />
     <File Path="build-local-nuget.ps1" />
     <File Path="build-publicapi.ps1" />
+    <File Path="convert-slnx-to-sln.ps1" />
+    <File Path="convert-slnx-to-sln.sh" />
     <File Path="cql-base.props" />
     <File Path="LICENSE" />
     <File Path="NuGet.config" />
     <File Path="README.md" />
   </Folder>
-  <Properties Name="ExtensibilityGlobals" Scope="PostLoad">
-    <Property Name="FileExplorer" Value="build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\" />
-  </Properties>
 </Solution>

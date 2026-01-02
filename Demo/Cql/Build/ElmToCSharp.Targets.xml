@@ -44,6 +44,7 @@
 			<PackagerCLIArgs Condition="'$(ElmDirectory)'!=''">$(PackagerCLIArgs) --elm "$(ElmDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(CqlDirectory)'!=''">$(PackagerCLIArgs) --cql "$(CqlDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(CSharpDirectory)'!=''">$(PackagerCLIArgs) --cs "$(CSharpDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(CSharpNamespace)'!=''">$(PackagerCLIArgs) --cs-namespace "$(CSharpNamespace)"</PackagerCLIArgs>
 			<PackagerCliArgs Condition="'$(DllDirectory)'!=''">$(PackagerCLIArgs) --dll "$(DllDirectory)"</PackagerCliArgs>
 			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(JsonPretty)'!=''">$(PackagerCLIArgs) --json-pretty "$(JsonPretty)"</PackagerCLIArgs>
