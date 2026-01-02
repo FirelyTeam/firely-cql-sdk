@@ -8,6 +8,7 @@
 
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager.Options;
+using System.Xml.Linq;
 
 namespace Hl7.Cql.Packager.Commands.ElmToFhir;
 
@@ -22,6 +23,7 @@ internal record ElmToFhirCommand
     DirectoryInfo? Pdb,
     DirectoryInfo? Fhir,
     DateTimeOffset? OverrideUtcDateTime,
+    string? CsNamespace,
     string? CanonicalRootUrl,
     bool? JsonPretty,
     bool? ExitOnError,
@@ -86,6 +88,13 @@ internal record ElmToFhirCommand
             (Used with --fhir)
             """),
 
+        Option<string?>(
+            "--cs-namespace",
+            """
+            The namespace to use for generated C# code. If not specified, no namespace is used.
+            (Used with --cs)
+            """),
+
         Option<DateTimeOffset>(
             "--override-utc-date-time",
             """
@@ -123,6 +132,7 @@ internal record ElmToFhirCommand
         (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
         (Pdb, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
+        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),

@@ -14,6 +14,7 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
+using System.Xml.Linq;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 
@@ -129,6 +130,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         using var servicesScope = _services.CreateScopedState();
 
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
+        var cSharpNamespace = Config.CSharpNamespace;
         var debugInformationFormat = Config.DebugSymbolsFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
@@ -141,7 +143,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
             logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
         var librarySetDefinitions = BuildLibrarySetDefinitions(librarySetExpressionBuilderScoped, librarySet);
-        var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions);
+        var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions, cSharpNamespace);
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
         var entriesBuilder = _artifactsById.ToBuilder();
@@ -215,15 +217,18 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="cSharpCodeProcessor">The C# code processor to use.</param>
     /// <param name="librarySet">The set of libraries to generate code for.</param>
     /// <param name="librarySetDefinitions">The definitions for the library set.</param>
+    /// <param name="namespace">The namespace to use for the C# code, if <c>null</c> no namespace will be used.</param>
     /// <returns>The generated C# code.</returns>
     private IEnumerable<(ElmLibrary library, string cSharp)> GenerateCSharp(
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
         LibrarySet librarySet,
-        DefinitionDictionary<CqlDefinition> librarySetDefinitions) =>
+        DefinitionDictionary<CqlDefinition> librarySetDefinitions,
+        string? @namespace) =>
         cSharpCodeProcessor
             .GenerateEachLibraryToCSharp(
                 librarySet,
                 librarySetDefinitions,
+                @namespace,
                 errorStrategy => errorStrategy
                                  .SetContinuation(BatchProcessExceptionContinuation)
                                  .AddLoggerExceptionHandler(

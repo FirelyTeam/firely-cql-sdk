@@ -27,13 +27,19 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// When <see langword="true"/>, the generated C# code may contain syntax errors or other issues that prevent it from compiling,
 /// but may be useful for debugging or testing purposes.
 /// </param>
-/// <param name="LRUCacheSize">The size of the Least Recently Used (LRU) cache.</param>
+/// <param name="LRUCacheSize">
+/// The size of the Least Recently Used (LRU) cache.
+/// </param>
+/// <param name="CSharpNamespace">
+/// The namespace to use for the C# code, if <c>null</c> no namespace will be used.
+/// </param>
 public record ElmToolkitConfig(
     DebugSymbolsFormat DebugSymbolsFormat = DebugSymbolsFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,
     bool AllowInvalidCSharp = false,
-    int LRUCacheSize = 0)
+    int LRUCacheSize = 0,
+    string? CSharpNamespace = null)
 {
     /// <summary>
     /// Gets the default configuration settings.
@@ -76,6 +82,11 @@ public record ElmToolkitConfig(
     /// The default value is <see langword="true"/>.
     /// </summary>
     public bool AllowUnresolvedExternals { get; init; } = AllowUnresolvedExternals;
+
+    /// <summary>
+    /// The namespace to use for the C# code, if <c>null</c> no namespace will be used.
+    /// </summary>
+    public string? CSharpNamespace { get; init; } = CSharpNamespace;
 
     /// <summary>
     /// Converts the current configuration settings to <see cref="ExpressionBuilderSettings"/>.

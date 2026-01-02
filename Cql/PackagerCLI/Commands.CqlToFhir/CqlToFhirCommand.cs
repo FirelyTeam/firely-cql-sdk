@@ -22,6 +22,7 @@ public record CqlToFhirCommand
     DirectoryInfo? Pdb,
     DirectoryInfo? Fhir,
     DateTimeOffset? OverrideUtcDateTime,
+    string? CsNamespace,
     string? CanonicalRootUrl,
     bool? JsonPretty,
     bool? ExitOnError,
@@ -82,6 +83,13 @@ public record CqlToFhirCommand
             FHIR Resource output directory which contains the FHIR library files in JSON format "Library-*.json" and FHIR measures in JSON format "Measure-*.json".
             """),
 
+        Option<string?>(
+            "--cs-namespace",
+            """
+            The namespace to use for generated C# code. If not specified, no namespace is used.
+            (Used with --cs)
+            """),
+
         Option<string>(
             "--canonical-root-url",
             """
@@ -121,6 +129,7 @@ public record CqlToFhirCommand
         (Dll, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.DllOutDir)]),
         (Pdb, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.PdbOutDir)]),
         (Fhir, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FhirOutDir)]),
+        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),

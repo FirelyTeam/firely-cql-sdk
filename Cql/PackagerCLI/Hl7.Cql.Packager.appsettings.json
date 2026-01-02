@@ -25,7 +25,8 @@
     "SkipFiles": [
       // JSON Files that are skipped during the packaging process.
       // See the specific profile appsettings e.g. Hl7.Cql.Packager.appsettings.CMSMeasures.json
-    ]
+    ],
+    "CSharpNamespace": null // --cs-namespace
   },
   "Packaging": {
     "JsonPretty": false, // --json-pretty

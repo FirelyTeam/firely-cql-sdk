@@ -8,13 +8,14 @@ partial class LibrarySetCSharpCodeGenerator
     private class LibrarySetWriter(
         LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator,
         LibrarySet librarySet,
-        CqlDefinitionDictionary definitions)
+        CqlDefinitionDictionary definitions,
+        string? @namespace)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
         public TypeToCSharpConverter TypeToCSharpConverter => librarySetCSharpCodeGenerator._typeToCSharpConverter;
         public IReadOnlyList<(string alias, string type)> AliasedUsings => librarySetCSharpCodeGenerator._aliasedUsings;
         public HashSet<string> Usings => librarySetCSharpCodeGenerator._usings;
-        public string? Namespace { get; } = null; // Not used right now
+        public string? Namespace { get; } = @namespace;
         public LibrarySet LibrarySet { get; } = librarySet;
         public CqlDefinitionDictionary Definitions { get; } = definitions;
 
