@@ -75,6 +75,9 @@
   </Folder>
   <Folder Name="/submodules/Ncqa/" />
   <Folder Name="/submodules/Ncqa/_NEW/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/.gitignore" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/dqic.props" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/README.md" />
     <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/BuildArtifacts/BuildArtifacts.csproj" />
     <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/BuildTest/BuildTest.csproj" />
     <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/Cql/Cql.csproj" />
@@ -84,12 +87,67 @@
     <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/MeasureBundlerCLI/MeasureBundlerCLI.csproj" />
     <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/Measures/Measures.csproj" />
     <Project Path="submodules/Ncqa.DQIC/_NEW/DQIC/Test/Test.csproj" />
-    <File Path="submodules/Ncqa.DQIC/_NEW/.gitignore" />
-    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/dqic.props" />
-    <File Path="submodules/Ncqa.DQIC/_NEW/README.md" />
   </Folder>
   <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/" />
   <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/libs/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/libs/hedis/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/hedis/HEDIS-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/hedis/HEDIS_Concepts-2023.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/libs/measures/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/measures/Antibiotics_Shared_Concepts-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/measures/Antibiotics_Shared_Elements-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/measures/Certification_Payer_Reporting-2023.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/libs/resources/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/Claims-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/Conditions-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/Coverages-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/Encounters-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/ExplanationOfBenefits-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/Immunizations-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/MedicationDispenses-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/Medications-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/Observations-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/Patients-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/PractitionerRoles-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/resources/Procedures-2023.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/libs/test/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/test/Aggregates-1.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/libs/topical/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/libs/topical/Antibiotic/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/AAB/AAB_Concepts-2023.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/libs/topical/Hospice/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/topical/Hospice/Hospice-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/libs/topical/Hospice/Hospice_Concepts-2023.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/libs/topical/Respiratory/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/libs/topical/Stratification/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/measures/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/measures/AAB/">
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/AAB/AAB_Reporting-2023.0.1.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/AAB/AAB_Concepts-2023.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/AAB/AAB_Details-2023.0.1.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/measures/AMR/">
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/AMR/AMR_Concepts-2023.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/AMR/AMR_Details-2023.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/AMR/AMR_Elements-2023.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/AMR/AMR_Medication_Table-2023.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/AMR/AMR_Reporting-2023.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/measures/LSC/">
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/LSC/LSC_Concepts-2023.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/LSC/LSC_Details-2023.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/LSC/LSC_Elements-2023.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Cql/measures/LSC/LSC_Reporting-2023.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Cql/measures/Stratification/" />
   <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY23/Elm/">
     <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/AAB_Concepts-2023.0.0.json" />
     <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/AAB_Details-2023.0.1.json" />
@@ -138,6 +196,65 @@
     <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY23/Elm/Stratification_Reporting-2023.0.0.json" />
   </Folder>
   <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/libs/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/libs/hedis/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/hedis/HEDIS-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/hedis/HEDIS_Concepts-2024.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/libs/measures/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/measures/Antibiotics_Shared_Concepts-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/measures/Antibiotics_Shared_Elements-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/measures/Certification_Payer_Reporting-2024.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/libs/resources/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/Claims-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/Conditions-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/Coverages-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/Encounters-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/ExplanationOfBenefits-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/Immunizations-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/MedicationDispenses-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/Medications-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/Observations-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/Patients-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/PractitionerRoles-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/resources/Procedures-2024.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/libs/test/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/test/Aggregates-1.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/libs/topical/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/libs/topical/Antibiotic/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/AAB/AAB_Concepts-2024.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/libs/topical/Hospice/">
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/topical/Hospice/Hospice-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/libs/topical/Hospice/Hospice_Concepts-2024.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/libs/topical/Respiratory/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/libs/topical/Stratification/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/measures/" />
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/measures/AAB/">
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/AAB/AAB_Reporting-2024.0.1.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/AAB/AAB_Concepts-2024.0.0.cql" />
+    <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/AAB/AAB_Details-2024.0.1.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/measures/AMR/">
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/AMR/AMR_Concepts-2024.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/AMR/AMR_Details-2024.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/AMR/AMR_Elements-2024.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/AMR/AMR_Medication_Table-2024.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/AMR/AMR_Reporting-2024.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/measures/LSC/">
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/LSC/LSC_Concepts-2024.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/LSC/LSC_Details-2024.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/LSC/LSC_Elements-2024.0.0.cql" />
+    <File Path="C:/Dev/firely-cql-sdk/submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Cql/measures/LSC/LSC_Reporting-2024.0.0.cql" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Cql/measures/Stratification/" />
+
   <Folder Name="/submodules/Ncqa/_NEW/LibrarySets/MY24/Elm/">
     <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/AAB_Concepts-2024.5.0.json" />
     <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/AAB_Details-2024.5.0.json" />
@@ -186,11 +303,11 @@
     <File Path="submodules/Ncqa.DQIC/_NEW/DQIC/LibrarySets/MY24/Elm/Stratification_Reporting-2024.5.0.json" />
   </Folder>
   <Folder Name="/submodules/Ncqa/_OLD/">
+    <File Path="submodules/Ncqa.DQIC/_OLD/.gitignore" />
     <Project Path="submodules/Ncqa.DQIC/_OLD/BuildArtifacts/BuildArtifacts.csproj" />
     <Project Path="submodules/Ncqa.DQIC/_OLD/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj" />
     <Project Path="submodules/Ncqa.DQIC/_OLD/Ncqa.HT.Infrastructure/Ncqa.HT.Infrastructure.csproj" />
     <Project Path="submodules/Ncqa.DQIC/_OLD/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj" />
-    <File Path="submodules/Ncqa.DQIC/_OLD/.gitignore" />
   </Folder>
   <Folder Name="/_Solution Items/">
     <File Path=".editorconfig" />
