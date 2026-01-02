@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.3.11312.210 d18.3
+VisualStudioVersion = 18.3.11312.210
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elm", "Cql\Elm\Elm.csproj", "{78C3855A-EEE7-4283-BE5F-71F3E3677C11}"
 EndProject
@@ -36,7 +36,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CQL SDK", "CQL SDK", "{4B5D75F5-E2FC-4CCB-90EF-6DC4A0193032}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		cql-base.props = cql-base.props
 		cql-sdk.props = cql-sdk.props
 	EndProjectSection
 EndProject
@@ -88,14 +87,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationRunner", "submod
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ncqa", "Ncqa", "{1AF2E4B2-99C5-4678-B926-D224CC83A8F7}"
 	ProjectSection(SolutionItems) = preProject
-		submodules\Ncqa.DQIC\.gitignore = submodules\Ncqa.DQIC\.gitignore
+		submodules\Ncqa.DQIC\_OLD\.gitignore = submodules\Ncqa.DQIC\_OLD\.gitignore
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildArtifacts", "submodules\Ncqa.DQIC\BuildArtifacts\BuildArtifacts.csproj", "{B5BF0EDC-D95F-4368-A74B-B5794FB34F9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildArtifacts", "submodules\Ncqa.DQIC\_OLD\BuildArtifacts\BuildArtifacts.csproj", "{B5BF0EDC-D95F-4368-A74B-B5794FB34F9E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.DeckTests", "submodules\Ncqa.DQIC\Ncqa.HT.DeckTests\Ncqa.HT.DeckTests.csproj", "{C573B0CB-733A-4E22-9693-4581E683109C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.DeckTests", "submodules\Ncqa.DQIC\_OLD\Ncqa.HT.DeckTests\Ncqa.HT.DeckTests.csproj", "{C573B0CB-733A-4E22-9693-4581E683109C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.MeasuresTests", "submodules\Ncqa.DQIC\Ncqa.HT.MeasuresTests\Ncqa.HT.MeasuresTests.csproj", "{584116D7-4E88-401E-8089-BAA6A35DB591}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.MeasuresTests", "submodules\Ncqa.DQIC\_OLD\Ncqa.HT.MeasuresTests\Ncqa.HT.MeasuresTests.csproj", "{584116D7-4E88-401E-8089-BAA6A35DB591}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks", "Cql\Benchmarks\Benchmarks.csproj", "{B4C6C534-15E6-4364-A68C-286EB0EFAD50}"
 EndProject
@@ -111,7 +110,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "55 Library Invocation", "55
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Invocation", "Cql\Cql.Invocation\Cql.Invocation.csproj", "{50C55FF2-5362-454A-85B9-201E96A3C779}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ncqa.HT.Infrastructure", "submodules\Ncqa.DQIC\Ncqa.HT.Infrastructure\Ncqa.HT.Infrastructure.csproj", "{BAEF695A-5581-B3EE-B352-CBF447240E55}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ncqa.HT.Infrastructure", "submodules\Ncqa.DQIC\_OLD\Ncqa.HT.Infrastructure\Ncqa.HT.Infrastructure.csproj", "{BAEF695A-5581-B3EE-B352-CBF447240E55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{14ED22C5-F918-42DB-A301-04B3AED51EBC}"
 	ProjectSection(SolutionItems) = preProject
@@ -128,6 +127,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build-local-nuget.ps1 = build-local-nuget.ps1
 		build-publicapi.ps1 = build-publicapi.ps1
 		.github\copilot-instructions.md = .github\copilot-instructions.md
+		cql-base.props = cql-base.props
 		LICENSE = LICENSE
 		NuGet.config = NuGet.config
 		README.md = README.md
@@ -326,7 +326,7 @@ Global
 		{2862CCC5-65F5-45FB-885D-58F39908EAD3} = {B00E560D-AE0C-48E1-9013-57115AF05F41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 		FileExplorer = build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
+		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 	EndGlobalSection
 EndGlobal
