@@ -3,7 +3,28 @@
 	<PropertyGroup>
 		<!-- ## Compiler settings -->
 		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
 		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>12</LangVersion>
+		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<!-- ## Solution-wide properties for NuGet packaging (shared between cql-sdk and cql-demo) -->
+		<!-- ## Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases	-->
+		<VersionPrefix>2.3.1</VersionPrefix>
+		<!-- <VersionSuffix>rc.1</VersionSuffix> -->
+		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
+		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
+		<PackageProjectUrl>https://github.com/FirelyTeam/firely-cql-sdk</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/FirelyTeam/firely-cql-sdk</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageReleaseNotes>See https://github.com/FirelyTeam/firely-cql-sdk/releases</PackageReleaseNotes>
+		<PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -16,14 +37,18 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<!-- ## CQL-related properties (also in BuildArtifacts.csproj, cql-base.props, cql-demo.props)  -->
+		<!-- ## CQL-related properties (also in BuildArtifacts.csproj)  -->
 		<CqlSolutionDir>$(MSBuildThisFileDirectory)</CqlSolutionDir>
 		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable>
 		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' == 'Release'">false</EmbedDebugSymbolsEnable>
 		<JsonPretty>true</JsonPretty>
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
+
+		<!-- <CqlToElmEnabled Condition="'$(Configuration)' != 'Release'">false</CqlToElmEnabled> -->
+		<!-- <CqlToElmEnabled Condition="'$(Configuration)' == 'Release'">true</CqlToElmEnabled> -->
+		<!-- <CqlToElmEnabled>false</CqlToElmEnabled> -->
+
 		<!-- ## ElmToCSharpEnabled must be true in Release mode, for build pipeline to pass -->
-		<ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled>
+		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled> -->
 		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
 		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
 	</PropertyGroup>
@@ -44,6 +69,7 @@
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<LibraryPKHash>00240000048000009400000006020000002400005253413100040000010001006d866cf0363db3976082a2439c420bd942b78243c0ce6c289f3c07d6901ecf149c38bafc12167f6eba7618b288e5327a7e4ab554c9a294ae6c68d7455b6562f846455b6bfdde68542a7046a632f1730a1647f2d365f8a25f73860c14d1428e7319df673e2d3212fa535f310c52a7c7ec17de772cb49961f4ea195fa4ea601dcd</LibraryPKHash>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -2,38 +2,9 @@
 
 	<Import Project="$(MSBuildThisFileDirectory)..\cql-base.props" />
 
-	<PropertyGroup>
-		<!-- ## Solution-wide properties for NuGet packaging -->
-		<!--
-			## Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases
-			Keep this in sync between cql-sdk.props and cql-demo.props
-			-->
-		<VersionPrefix>2.3.1</VersionPrefix>
-		<!-- <VersionSuffix>rc.1</VersionSuffix> -->
-		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
-		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
-		<PackageProjectUrl>https://github.com/FirelyTeam/firely-cql-sdk</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/FirelyTeam/firely-cql-sdk</RepositoryUrl>
-		<RepositoryType>git</RepositoryType>
-		<PackageReleaseNotes>See https://github.com/FirelyTeam/firely-cql-sdk/releases</PackageReleaseNotes>
-		<PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-	</PropertyGroup>
-
 	<!-- ignore sdk warnings -->
 	<PropertyGroup>
-		<NoWarn>CS1591,CS0618</NoWarn>
-	</PropertyGroup>
-
-	<!-- Compiler settings -->
-	<PropertyGroup>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<LangVersion>12</LangVersion>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<NoWarn>$(NoWarn);CS1591,CS0618</NoWarn>
 	</PropertyGroup>
 
 </Project>

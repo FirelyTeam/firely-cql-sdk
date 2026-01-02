@@ -32,7 +32,6 @@ internal class Program
         string[] allArgs = new string[args.Length + newArgs.Length];
         args.CopyTo(allArgs, 0);
         newArgs.CopyTo(allArgs, args.Length);
-
         CLI.Program.Main(allArgs);
 
     }

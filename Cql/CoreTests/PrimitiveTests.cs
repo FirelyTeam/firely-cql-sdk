@@ -354,10 +354,10 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 4), true, true);
             List<CqlDate> expected =
             [
-                new CqlDate(2022, 1, 1),
-                new CqlDate(2022, 1, 2),
-                new CqlDate(2022, 1, 3),
-                new CqlDate(2022, 1, 4)
+                new(2022, 1, 1),
+                new(2022, 1, 2),
+                new(2022, 1, 3),
+                new(2022, 1, 4)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -376,8 +376,8 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, null), new CqlDate(2022, 2, 4), true, true);
             List<CqlDate> expected =
             [
-                new CqlDate(2022, 1, null),
-                new CqlDate(2022, 2, null)
+                new(2022, 1, null),
+                new(2022, 2, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -397,8 +397,8 @@ namespace CoreTests
             var quantity = new CqlQuantity(1, "month");
             List<CqlDate> expected =
             [
-                new CqlDate(2022, 1, null),
-                new CqlDate(2022, 2, null)
+                new(2022, 1, null),
+                new(2022, 2, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -418,10 +418,10 @@ namespace CoreTests
             var quantity = new CqlQuantity(1, "day");
             List<CqlDate> expected =
             [
-                new CqlDate(2022, 1, 1),
-                new CqlDate(2022, 1, 2),
-                new CqlDate(2022, 1, 3),
-                new CqlDate(2022, 1, 4)
+                new(2022, 1, 1),
+                new(2022, 1, 2),
+                new(2022, 1, 3),
+                new(2022, 1, 4)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -439,7 +439,7 @@ namespace CoreTests
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 1), true, true);
             var quantity = new CqlQuantity(3, "month");
-            List<CqlDate> expected = [new CqlDate(2022, 1, 1)];
+            List<CqlDate> expected = [new(2022, 1, 1)];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -458,8 +458,8 @@ namespace CoreTests
             var quantity = new CqlQuantity(2, "years");
             List<CqlDate> expected =
             [
-                new CqlDate(2022, 1, 1),
-                new CqlDate(2024, 1, 1)
+                new(2022, 1, 1),
+                new(2024, 1, 1)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -479,11 +479,11 @@ namespace CoreTests
             var quantity = new CqlQuantity(1, "week");
             List<CqlDate> expected =
             [
-                new CqlDate(2022, 1, 1),
-                new CqlDate(2022, 1, 8),
-                new CqlDate(2022, 1, 15),
-                new CqlDate(2022, 1, 22),
-                new CqlDate(2022, 1, 29)
+                new(2022, 1, 1),
+                new(2022, 1, 8),
+                new(2022, 1, 15),
+                new(2022, 1, 22),
+                new(2022, 1, 29)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -570,10 +570,10 @@ namespace CoreTests
             var quantity = new CqlQuantity(1, "month");
             List<CqlDate> expected =
             [
-                new CqlDate(2022, 1, null),
-                new CqlDate(2022, 2, null),
-                new CqlDate(2022, 3, null),
-                new CqlDate(2022, 4, null)
+                new(2022, 1, null),
+                new(2022, 2, null),
+                new(2022, 3, null),
+                new(2022, 4, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -635,12 +635,12 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 1, 0, 0),
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 2, 0, 0),
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 3, 0, 0),
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 4, 0, 0),
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 5, 0, 0)
+                new(2022, 1, 1, 12, 0, 0, 0, 0, 0),
+                new(2022, 1, 1, 12, 0, 0, 1, 0, 0),
+                new(2022, 1, 1, 12, 0, 0, 2, 0, 0),
+                new(2022, 1, 1, 12, 0, 0, 3, 0, 0),
+                new(2022, 1, 1, 12, 0, 0, 4, 0, 0),
+                new(2022, 1, 1, 12, 0, 0, 5, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -661,10 +661,10 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, null, null, null, null, null, null),
-                new CqlDateTime(2022, 1, 2, null, null, null, null, null, null),
-                new CqlDateTime(2022, 1, 3, null, null, null, null, null, null),
-                new CqlDateTime(2022, 1, 4, null, null, null, null, null, null)
+                new(2022, 1, 1, null, null, null, null, null, null),
+                new(2022, 1, 2, null, null, null, null, null, null),
+                new(2022, 1, 3, null, null, null, null, null, null),
+                new(2022, 1, 4, null, null, null, null, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -706,10 +706,10 @@ namespace CoreTests
             var quantity = new CqlQuantity(1, "day");
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 2, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 3, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 4, 12, 0, 0, 0, 0, 0)
+                new(2022, 1, 1, 12, 0, 0, 0, 0, 0),
+                new(2022, 1, 2, 12, 0, 0, 0, 0, 0),
+                new(2022, 1, 3, 12, 0, 0, 0, 0, 0),
+                new(2022, 1, 4, 12, 0, 0, 0, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -752,8 +752,8 @@ namespace CoreTests
             var quantity = new CqlQuantity(2, "years");
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2024, 1, 1, 12, 0, 0, 0, 0, 0)
+                new(2022, 1, 1, 12, 0, 0, 0, 0, 0),
+                new(2024, 1, 1, 12, 0, 0, 0, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -776,11 +776,11 @@ namespace CoreTests
             var quantity = new CqlQuantity(1, "week");
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 8, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 15, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 22, 12, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 29, 12, 0, 0, 0, 0, 0)
+                new(2022, 1, 1, 12, 0, 0, 0, 0, 0),
+                new(2022, 1, 8, 12, 0, 0, 0, 0, 0),
+                new(2022, 1, 15, 12, 0, 0, 0, 0, 0),
+                new(2022, 1, 22, 12, 0, 0, 0, 0, 0),
+                new(2022, 1, 29, 12, 0, 0, 0, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -803,9 +803,9 @@ namespace CoreTests
             var quantity = new CqlQuantity(2, "minutes");
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 2, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 4, 0, 0, 0, 0)
+                new(2022, 1, 1, 0, 0, 0, 0, 0, 0),
+                new(2022, 1, 1, 0, 2, 0, 0, 0, 0),
+                new(2022, 1, 1, 0, 4, 0, 0, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -828,10 +828,10 @@ namespace CoreTests
             var quantity = new CqlQuantity(2, "hours");
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 2, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 4, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 6, 0, 0, 0, 0, 0)
+                new(2022, 1, 1, 0, 0, 0, 0, 0, 0),
+                new(2022, 1, 1, 2, 0, 0, 0, 0, 0),
+                new(2022, 1, 1, 4, 0, 0, 0, 0, 0),
+                new(2022, 1, 1, 6, 0, 0, 0, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -854,9 +854,9 @@ namespace CoreTests
             var quantity = new CqlQuantity(3, "second");
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 3, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 6, 0, 0, 0)
+                new(2022, 1, 1, 0, 0, 0, 0, 0, 0),
+                new(2022, 1, 1, 0, 0, 3, 0, 0, 0),
+                new(2022, 1, 1, 0, 0, 6, 0, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -879,13 +879,13 @@ namespace CoreTests
             var quantity = new CqlQuantity(500, "milliseconds");
             List<CqlDateTime> expected =
             [
-                new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 0, 500, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 1, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 1, 500, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 2, 0, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 2, 500, 0, 0),
-                new CqlDateTime(2022, 1, 1, 0, 0, 3, 0, 0, 0)
+                new(2022, 1, 1, 0, 0, 0, 0, 0, 0),
+                new(2022, 1, 1, 0, 0, 0, 500, 0, 0),
+                new(2022, 1, 1, 0, 0, 1, 0, 0, 0),
+                new(2022, 1, 1, 0, 0, 1, 500, 0, 0),
+                new(2022, 1, 1, 0, 0, 2, 0, 0, 0),
+                new(2022, 1, 1, 0, 0, 2, 500, 0, 0),
+                new(2022, 1, 1, 0, 0, 3, 0, 0, 0)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -909,9 +909,9 @@ namespace CoreTests
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
             List<CqlTime> expected =
             [
-                new CqlTime(10, null, null, null, null, null),
-                new CqlTime(11, null, null, null, null, null),
-                new CqlTime(12, null, null, null, null, null)
+                new(10, null, null, null, null, null),
+                new(11, null, null, null, null, null),
+                new(12, null, null, null, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -933,8 +933,8 @@ namespace CoreTests
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
             List<CqlTime> expected =
             [
-                new CqlTime(10, null, null, null, null, null),
-                new CqlTime(11, null, null, null, null, null)
+                new(10, null, null, null, null, null),
+                new(11, null, null, null, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1052,11 +1052,11 @@ namespace CoreTests
             var quantity = new CqlQuantity(30, "minutes");
             List<CqlTime> expected =
             [
-                new CqlTime(10, 0, null, null, null, null),
-                new CqlTime(10, 30, null, null, null, null),
-                new CqlTime(11, 0, null, null, null, null),
-                new CqlTime(11, 30, null, null, null, null),
-                new CqlTime(12, 0, null, null, null, null)
+                new(10, 0, null, null, null, null),
+                new(10, 30, null, null, null, null),
+                new(11, 0, null, null, null, null),
+                new(11, 30, null, null, null, null),
+                new(12, 0, null, null, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1079,9 +1079,9 @@ namespace CoreTests
             var quantity = new CqlQuantity(1, "hour");
             List<CqlTime> expected =
             [
-                new CqlTime(10, null, null, null, null, null),
-                new CqlTime(11, null, null, null, null, null),
-                new CqlTime(12, null, null, null, null, null)
+                new(10, null, null, null, null, null),
+                new(11, null, null, null, null, null),
+                new(12, null, null, null, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1104,8 +1104,8 @@ namespace CoreTests
             var quantity = new CqlQuantity(5, "seconds");
             List<CqlTime> expected =
             [
-                new CqlTime(10, 0, 0, null, null, null),
-                new CqlTime(10, 0, 5, null, null, null)
+                new(10, 0, 0, null, null, null),
+                new(10, 0, 5, null, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1128,9 +1128,9 @@ namespace CoreTests
             var quantity = new CqlQuantity(5, "millisecond");
             List<CqlTime> expected =
             [
-                new CqlTime(10, 0, 0, 0, null, null),
-                new CqlTime(10, 0, 0, 5, null, null),
-                new CqlTime(10, 0, 0, 10, null, null)
+                new(10, 0, 0, 0, null, null),
+                new(10, 0, 0, 5, null, null),
+                new(10, 0, 0, 10, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1153,8 +1153,8 @@ namespace CoreTests
             var quantity = new CqlQuantity(1, "hour");
             List<CqlTime> expected =
             [
-                new CqlTime(10, null, null, null, null, null),
-                new CqlTime(11, null, null, null, null, null)
+                new(10, null, null, null, null, null),
+                new(11, null, null, null, null, null)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1175,30 +1175,31 @@ namespace CoreTests
         {
             CqlInterval<int?>[] interval =
             [
-                new CqlInterval<int?>(1, 10, true, true)
+                new(1, 10, true, true)
             ];
 
             CqlInterval<int>[] expected =
             [
-                new CqlInterval<int>(1,1, true, true),
-                new CqlInterval<int>(2,2, true, true),
-                new CqlInterval<int>(3,3, true, true),
-                new CqlInterval<int>(4,4, true, true),
-                new CqlInterval<int>(5,5, true, true),
-                new CqlInterval<int>(6,6, true, true),
-                new CqlInterval<int>(7,7, true, true),
-                new CqlInterval<int>(8,8, true, true),
-                new CqlInterval<int>(9,9, true, true),
-                new CqlInterval<int>(10,10, true, true)
+                new(1,1, true, true),
+                new(2,2, true, true),
+                new(3,3, true, true),
+                new(4,4, true, true),
+                new(5,5, true, true),
+                new(6,6, true, true),
+                new(7,7, true, true),
+                new(8,8, true, true),
+                new(9,9, true, true),
+                new(10,10, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand(interval, null);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.IsTrue(actual.low == expect.low);
@@ -1212,24 +1213,25 @@ namespace CoreTests
         [TestMethod]
         public void ExpandList_Interval_Int()
         {
-            List<CqlInterval<int?>> interval = [new CqlInterval<int?>(1, 10, true, true)];
+            List<CqlInterval<int?>> interval = [new(1, 10, true, true)];
             var quantity = new CqlQuantity(2m, null);
             CqlInterval<int>[] expected =
             [
-                new CqlInterval<int>(1,2, true, true),
-                new CqlInterval<int>(3,4, true, true),
-                new CqlInterval<int>(5,6, true, true),
-                new CqlInterval<int>(7,8, true, true),
-                new CqlInterval<int>(9,10, true, true)
+                new(1,2, true, true),
+                new(3,4, true, true),
+                new(5,6, true, true),
+                new(7,8, true, true),
+                new(9,10, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand!.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.IsTrue(actual.low == expect.low);
@@ -1243,26 +1245,27 @@ namespace CoreTests
         [TestMethod]
         public void ExpandList_Interval_Decimal()
         {
-            List<CqlInterval<decimal?>> interval = [new CqlInterval<decimal?>(1, 10, true, true)];
+            List<CqlInterval<decimal?>> interval = [new(1, 10, true, true)];
             var quantity = new CqlQuantity(1.5m, null);
             CqlInterval<decimal>[] expected =
             [
-                new CqlInterval<decimal>(1,2.49999999m, true, true),
-                new CqlInterval<decimal>(2.5m, 3.99999999m, true, true),
-                new CqlInterval<decimal>(4,5.49999999m, true, true),
-                new CqlInterval<decimal>(5.5m, 6.99999999m, true, true),
-                new CqlInterval<decimal>(7,8.49999999m, true, true),
-                new CqlInterval<decimal>(8.5m, 9.99999999m, true, true),
-                new CqlInterval<decimal>(10,11.49999999m, true, true)
+                new(1,2.49999999m, true, true),
+                new(2.5m, 3.99999999m, true, true),
+                new(4,5.49999999m, true, true),
+                new(5.5m, 6.99999999m, true, true),
+                new(7,8.49999999m, true, true),
+                new(8.5m, 9.99999999m, true, true),
+                new(10,11.49999999m, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand!.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.IsTrue(actual.low == expect.low);
@@ -1276,21 +1279,22 @@ namespace CoreTests
         [TestMethod]
         public void ExpandList_Interval_Long()
         {
-            List<CqlInterval<long?>> interval = [new CqlInterval<long?>(1, 10, true, true)];
+            List<CqlInterval<long?>> interval = [new(1, 10, true, true)];
             var quantity = new CqlQuantity(4m, null);
             CqlInterval<decimal>[] expected =
             [
-                new CqlInterval<decimal>(1,4, true, true),
-                new CqlInterval<decimal>(5,8, true, true),
-                new CqlInterval<decimal>(9,12, true, true)
+                new(1,4, true, true),
+                new(5,8, true, true),
+                new(9,12, true, true)
             ];
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand!.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.IsTrue(actual.low == expect.low);
@@ -1304,7 +1308,7 @@ namespace CoreTests
         [TestMethod]
         public void ExpandList_Interval_Decimal_Quantity_Day()
         {
-            List<CqlInterval<decimal?>> interval = [new CqlInterval<decimal?>(1, 10, true, true)];
+            List<CqlInterval<decimal?>> interval = [new(1, 10, true, true)];
             var quantity = new CqlQuantity(1, "day");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1320,29 +1324,30 @@ namespace CoreTests
         [TestMethod]
         public void ExpandList_Interval_Decimal_Quantity_Integer()
         {
-            List<CqlInterval<decimal?>> interval = [new CqlInterval<decimal?>(1, 10, true, true)];
+            List<CqlInterval<decimal?>> interval = [new(1, 10, true, true)];
             var quantity = new CqlQuantity(1, "1");
             List<CqlInterval<decimal>> expected =
             [
-                new CqlInterval<decimal>(1, 1.99999999m, true, true),
-                new CqlInterval<decimal>(2, 2.99999999m, true, true),
-                new CqlInterval<decimal>(3, 3.99999999m, true, true),
-                new CqlInterval<decimal>(4, 4.99999999m, true, true),
-                new CqlInterval<decimal>(5, 5.99999999m, true, true),
-                new CqlInterval<decimal>(6, 6.99999999m, true, true),
-                new CqlInterval<decimal>(7, 7.99999999m, true, true),
-                new CqlInterval<decimal>(8, 8.99999999m, true, true),
-                new CqlInterval<decimal>(9, 9.99999999m, true, true),
-                new CqlInterval<decimal>(10, 10.99999999m, true, true)
+                new(1, 1.99999999m, true, true),
+                new(2, 2.99999999m, true, true),
+                new(3, 3.99999999m, true, true),
+                new(4, 4.99999999m, true, true),
+                new(5, 5.99999999m, true, true),
+                new(6, 6.99999999m, true, true),
+                new(7, 7.99999999m, true, true),
+                new(8, 8.99999999m, true, true),
+                new(9, 9.99999999m, true, true),
+                new(10, 10.99999999m, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand!.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.IsTrue(actual.low == expect.low);
@@ -1356,7 +1361,7 @@ namespace CoreTests
         [TestMethod]
         public void ExpandList_Interval_Int_Quantity_Day()
         {
-            List<CqlInterval<int?>> interval = [new CqlInterval<int?>(1, 10, true, true)];
+            List<CqlInterval<int?>> interval = [new(1, 10, true, true)];
             var quantity = new CqlQuantity(1, "day");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1372,29 +1377,30 @@ namespace CoreTests
         [TestMethod]
         public void ExpandList_Interval_Int_Quantity_Integer()
         {
-            List<CqlInterval<int?>> interval = [new CqlInterval<int?>(1, 10, true, true)];
+            List<CqlInterval<int?>> interval = [new(1, 10, true, true)];
             var quantity = new CqlQuantity(1, "1");
             CqlInterval<int>[] expected =
             [
-                new CqlInterval<int>(1,1, true, true),
-                new CqlInterval<int>(2,2, true, true),
-                new CqlInterval<int>(3,3, true, true),
-                new CqlInterval<int>(4,4, true, true),
-                new CqlInterval<int>(5,5, true, true),
-                new CqlInterval<int>(6,6, true, true),
-                new CqlInterval<int>(7,7, true, true),
-                new CqlInterval<int>(8,8, true, true),
-                new CqlInterval<int>(9,9, true, true),
-                new CqlInterval<int>(10,10, true, true)
+                new(1,1, true, true),
+                new(2,2, true, true),
+                new(3,3, true, true),
+                new(4,4, true, true),
+                new(5,5, true, true),
+                new(6,6, true, true),
+                new(7,7, true, true),
+                new(8,8, true, true),
+                new(9,9, true, true),
+                new(10,10, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.IsTrue(actual.low == expect.low);
@@ -1408,7 +1414,7 @@ namespace CoreTests
         [TestMethod]
         public void ExpandList_Interval_Long_Quantity_Day()
         {
-            List<CqlInterval<long?>> interval = [new CqlInterval<long?>(1, 10, true, true)];
+            List<CqlInterval<long?>> interval = [new(1, 10, true, true)];
             var quantity = new CqlQuantity(1, "day");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1424,29 +1430,30 @@ namespace CoreTests
         [TestMethod]
         public void ExpandList_Interval_Long_Quantity_Integer()
         {
-            List<CqlInterval<long?>> interval = [new CqlInterval<long?>(1, 10, true, true)];
+            List<CqlInterval<long?>> interval = [new(1, 10, true, true)];
             var quantity = new CqlQuantity(1, "1");
-            CqlInterval<long>[] expected =
+            CqlInterval<long?>[] expected =
             [
-                new CqlInterval<long>(1,1, true, true),
-                new CqlInterval<long>(2,2, true, true),
-                new CqlInterval<long>(3,3, true, true),
-                new CqlInterval<long>(4,4, true, true),
-                new CqlInterval<long>(5,5, true, true),
-                new CqlInterval<long>(6,6, true, true),
-                new CqlInterval<long>(7,7, true, true),
-                new CqlInterval<long>(8,8, true, true),
-                new CqlInterval<long>(9,9, true, true),
-                new CqlInterval<long>(10,10, true, true)
+                new(1,1, true, true),
+                new(2,2, true, true),
+                new(3,3, true, true),
+                new(4,4, true, true),
+                new(5,5, true, true),
+                new(6,6, true, true),
+                new(7,7, true, true),
+                new(8,8, true, true),
+                new(9,9, true, true),
+                new(10,10, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand!.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.IsTrue(actual.low == expect.low);
@@ -1462,31 +1469,32 @@ namespace CoreTests
         {
             List<CqlInterval<int?>> interval =
             [
-                new CqlInterval<int?>(1, 5, true, true),
-                new CqlInterval<int?>(5, 10, true, true)
+                new(1, 5, true, true),
+                new(5, 10, true, true)
             ];
             var quantity = new CqlQuantity(1, "1");
             CqlInterval<int>[] expected =
             [
-                new CqlInterval<int>(1,1, true, true),
-                new CqlInterval<int>(2,2, true, true),
-                new CqlInterval<int>(3,3, true, true),
-                new CqlInterval<int>(4,4, true, true),
-                new CqlInterval<int>(5,5, true, true),
-                new CqlInterval<int>(6,6, true, true),
-                new CqlInterval<int>(7,7, true, true),
-                new CqlInterval<int>(8,8, true, true),
-                new CqlInterval<int>(9,9, true, true),
-                new CqlInterval<int>(10,10, true, true)
+                new(1,1, true, true),
+                new(2,2, true, true),
+                new(3,3, true, true),
+                new(4,4, true, true),
+                new(5,5, true, true),
+                new(6,6, true, true),
+                new(7,7, true, true),
+                new(8,8, true, true),
+                new(9,9, true, true),
+                new(10,10, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1502,31 +1510,32 @@ namespace CoreTests
         {
             List<CqlInterval<decimal?>> interval =
             [
-                new CqlInterval<decimal?>(1, 5, true, true),
-                new CqlInterval<decimal?>(5, 10, true, true)
+                new(1, 5, true, true),
+                new(5, 10, true, true)
             ];
             var quantity = new CqlQuantity(1, "1");
-            CqlInterval<decimal>[] expected =
+            CqlInterval<decimal?>[] expected =
             [
-                new CqlInterval<decimal>(1,1.99999999m, true, true),
-                new CqlInterval<decimal>(2,2.99999999m, true, true),
-                new CqlInterval<decimal>(3,3.99999999m, true, true),
-                new CqlInterval<decimal>(4,4.99999999m, true, true),
-                new CqlInterval<decimal>(5,5.99999999m, true, true),
-                new CqlInterval<decimal>(6,6.99999999m, true, true),
-                new CqlInterval<decimal>(7,7.99999999m, true, true),
-                new CqlInterval<decimal>(8,8.99999999m, true, true),
-                new CqlInterval<decimal>(9,9.99999999m, true, true),
-                new CqlInterval<decimal>(10,10.99999999m, true, true)
+                new(1,1.99999999m, true, true),
+                new(2,2.99999999m, true, true),
+                new(3,3.99999999m, true, true),
+                new(4,4.99999999m, true, true),
+                new(5,5.99999999m, true, true),
+                new(6,6.99999999m, true, true),
+                new(7,7.99999999m, true, true),
+                new(8,8.99999999m, true, true),
+                new(9,9.99999999m, true, true),
+                new(10,10.99999999m, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand!.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1542,31 +1551,32 @@ namespace CoreTests
         {
             List<CqlInterval<long?>> interval =
             [
-                new CqlInterval<long?>(1, 5, true, true),
-                new CqlInterval<long?>(5, 10, true, true)
+                new(1, 5, true, true),
+                new(5, 10, true, true)
             ];
             var quantity = new CqlQuantity(1, "1");
             CqlInterval<long>[] expected =
             [
-                new CqlInterval<long>(1,1, true, true),
-                new CqlInterval<long>(2,2, true, true),
-                new CqlInterval<long>(3,3, true, true),
-                new CqlInterval<long>(4,4, true, true),
-                new CqlInterval<long>(5,5, true, true),
-                new CqlInterval<long>(6,6, true, true),
-                new CqlInterval<long>(7,7, true, true),
-                new CqlInterval<long>(8,8, true, true),
-                new CqlInterval<long>(9,9, true, true),
-                new CqlInterval<long>(10,10, true, true)
+                new(1,1, true, true),
+                new(2,2, true, true),
+                new(3,3, true, true),
+                new(4,4, true, true),
+                new(5,5, true, true),
+                new(6,6, true, true),
+                new(7,7, true, true),
+                new(8,8, true, true),
+                new(9,9, true, true),
+                new(10,10, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1582,30 +1592,31 @@ namespace CoreTests
         {
             List<CqlInterval<int?>> interval =
             [
-                new CqlInterval<int?>(1, 5, true, true),
-                new CqlInterval<int?>(7, 10, true, true)
+                new(1, 5, true, true),
+                new(7, 10, true, true)
             ];
             var quantity = new CqlQuantity(1, "1");
-            CqlInterval<int>[] expected =
+            CqlInterval<int?>[] expected =
             [
-                new CqlInterval<int>(1,1, true, true),
-                new CqlInterval<int>(2,2, true, true),
-                new CqlInterval<int>(3,3, true, true),
-                new CqlInterval<int>(4,4, true, true),
-                new CqlInterval<int>(5,5, true, true),
-                new CqlInterval<int>(7,7, true, true),
-                new CqlInterval<int>(8,8, true, true),
-                new CqlInterval<int>(9,9, true, true),
-                new CqlInterval<int>(10,10, true, true)
+                new(1,1, true, true),
+                new(2,2, true, true),
+                new(3,3, true, true),
+                new(4,4, true, true),
+                new(5,5, true, true),
+                new(7,7, true, true),
+                new(8,8, true, true),
+                new(9,9, true, true),
+                new(10,10, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand!.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1621,30 +1632,31 @@ namespace CoreTests
         {
             List<CqlInterval<decimal?>> interval =
             [
-                new CqlInterval<decimal?>(1, 5, true, true),
-                new CqlInterval<decimal?>(7, 10, true, true)
+                new(1, 5, true, true),
+                new(7, 10, true, true)
             ];
             var quantity = new CqlQuantity(1, "1");
             CqlInterval<decimal>[] expected =
             [
-                new CqlInterval<decimal>(1,1.99999999m, true, true),
-                new CqlInterval<decimal>(2,2.99999999m, true, true),
-                new CqlInterval<decimal>(3,3.99999999m, true, true),
-                new CqlInterval<decimal>(4,4.99999999m, true, true),
-                new CqlInterval<decimal>(5,5.99999999m, true, true),
-                new CqlInterval<decimal>(7,7.99999999m, true, true),
-                new CqlInterval<decimal>(8,8.99999999m, true, true),
-                new CqlInterval<decimal>(9,9.99999999m, true, true),
-                new CqlInterval<decimal>(10,10.99999999m, true, true)
+                new(1,1.99999999m, true, true),
+                new(2,2.99999999m, true, true),
+                new(3,3.99999999m, true, true),
+                new(4,4.99999999m, true, true),
+                new(5,5.99999999m, true, true),
+                new(7,7.99999999m, true, true),
+                new(8,8.99999999m, true, true),
+                new(9,9.99999999m, true, true),
+                new(10,10.99999999m, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1660,30 +1672,31 @@ namespace CoreTests
         {
             List<CqlInterval<long?>> interval =
             [
-                new CqlInterval<long?>(1, 5, true, true),
-                new CqlInterval<long?>(7, 10, true, true)
+                new(1, 5, true, true),
+                new(7, 10, true, true)
             ];
             var quantity = new CqlQuantity(1, "1");
             CqlInterval<long>[] expected =
             [
-                new CqlInterval<long>(1,1, true, true),
-                new CqlInterval<long>(2,2, true, true),
-                new CqlInterval<long>(3,3, true, true),
-                new CqlInterval<long>(4,4, true, true),
-                new CqlInterval<long>(5,5, true, true),
-                new CqlInterval<long>(7,7, true, true),
-                new CqlInterval<long>(8,8, true, true),
-                new CqlInterval<long>(9,9, true, true),
-                new CqlInterval<long>(10,10, true, true)
+                new(1,1, true, true),
+                new(2,2, true, true),
+                new(3,3, true, true),
+                new(4,4, true, true),
+                new(5,5, true, true),
+                new(7,7, true, true),
+                new(8,8, true, true),
+                new(9,9, true, true),
+                new(10,10, true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1700,24 +1713,25 @@ namespace CoreTests
         [TestMethod]
         public void Expand_List_Interval_Date_Null_Quantity()
         {
-            List<CqlInterval<CqlDate>> interval =
-                [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 4), true, true)];
+            List<CqlInterval<CqlDate?>> interval =
+                [new(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 4), true, true)];
 
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 1), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 2), new CqlDate(2022, 1, 2), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 3), new CqlDate(2022, 1, 3), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 4), new CqlDate(2022, 1, 4), true, true)
+                new(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 1), true, true),
+                new(new CqlDate(2022, 1, 2), new CqlDate(2022, 1, 2), true, true),
+                new(new CqlDate(2022, 1, 3), new CqlDate(2022, 1, 3), true, true),
+                new(new CqlDate(2022, 1, 4), new CqlDate(2022, 1, 4), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand(interval, null);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1731,24 +1745,25 @@ namespace CoreTests
         [TestMethod]
         public void Expand_List_Interval_Date_MonthPrecison_Null_Quantity()
         {
-            List<CqlInterval<CqlDate>> interval =
-                [new CqlInterval<CqlDate>(new CqlDate(2022, 1, null), new CqlDate(2022, 4, 1), true, true)];
+            List<CqlInterval<CqlDate?>> interval =
+                [new(new CqlDate(2022, 1, null), new CqlDate(2022, 4, 1), true, true)];
 
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, null), new CqlDate(2022, 1, null), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 2, null), new CqlDate(2022, 2, null), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 3, null), new CqlDate(2022, 3, null), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 4, null), new CqlDate(2022, 4, null), true, true)
+                new(new CqlDate(2022, 1, null), new CqlDate(2022, 1, null), true, true),
+                new(new CqlDate(2022, 2, null), new CqlDate(2022, 2, null), true, true),
+                new(new CqlDate(2022, 3, null), new CqlDate(2022, 3, null), true, true),
+                new(new CqlDate(2022, 4, null), new CqlDate(2022, 4, null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand(interval, null);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1762,25 +1777,26 @@ namespace CoreTests
         [TestMethod]
         public void Expand_List_Interval_Date_Day()
         {
-            List<CqlInterval<CqlDate>> interval =
-                [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 4), true, true)];
+            List<CqlInterval<CqlDate?>> interval =
+                [new(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 4), true, true)];
             var quantity = new CqlQuantity(1, "day");
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 1), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 2), new CqlDate(2022, 1, 2), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 3), new CqlDate(2022, 1, 3), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 4), new CqlDate(2022, 1, 4), true, true)
+                new(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 1), true, true),
+                new(new CqlDate(2022, 1, 2), new CqlDate(2022, 1, 2), true, true),
+                new(new CqlDate(2022, 1, 3), new CqlDate(2022, 1, 3), true, true),
+                new(new CqlDate(2022, 1, 4), new CqlDate(2022, 1, 4), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1794,22 +1810,23 @@ namespace CoreTests
         [TestMethod]
         public void Expand_List_Interval_Date_Month()
         {
-            List<CqlInterval<CqlDate>> interval =
-                [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 1), true, true)];
+            List<CqlInterval<CqlDate?>> interval =
+                [new(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 1), true, true)];
             var quantity = new CqlQuantity(3, "month");
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 31), true, true)
+                new(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 31), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1823,23 +1840,24 @@ namespace CoreTests
         [TestMethod]
         public void Expand_List_Interval_Date_Year()
         {
-            List<CqlInterval<CqlDate>> interval =
-                [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
+            List<CqlInterval<CqlDate?>> interval =
+                [new(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
             var quantity = new CqlQuantity(2, "years");
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2023, 12, 31), true, true),
-                 new CqlInterval<CqlDate>(new CqlDate(2024, 1, 1), new CqlDate(2025, 12, 31), true, true)
+                new(new CqlDate(2022, 1, 1), new CqlDate(2023, 12, 31), true, true),
+                 new(new CqlDate(2024, 1, 1), new CqlDate(2025, 12, 31), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1853,26 +1871,27 @@ namespace CoreTests
         [TestMethod]
         public void Expand_List_Interval_Date_Week()
         {
-            List<CqlInterval<CqlDate>> interval =
-                [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 2, 1), true, true)];
+            List<CqlInterval<CqlDate?>> interval =
+                [new(new CqlDate(2022, 1, 1), new CqlDate(2022, 2, 1), true, true)];
             var quantity = new CqlQuantity(1, "week");
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 7), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 8), new CqlDate(2022, 1, 14), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 15), new CqlDate(2022, 1, 21), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 22), new CqlDate(2022, 1, 28), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, 29), new CqlDate(2022, 2, 4), true, true)
+                new(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 7), true, true),
+                new(new CqlDate(2022, 1, 8), new CqlDate(2022, 1, 14), true, true),
+                new(new CqlDate(2022, 1, 15), new CqlDate(2022, 1, 21), true, true),
+                new(new CqlDate(2022, 1, 22), new CqlDate(2022, 1, 28), true, true),
+                new(new CqlDate(2022, 1, 29), new CqlDate(2022, 2, 4), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1886,15 +1905,15 @@ namespace CoreTests
         [TestMethod]
         public void Expand_List_Interval_Date_Minute()
         {
-            List<CqlInterval<CqlDate>> interval =
-                [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
+            List<CqlInterval<CqlDate?>> interval =
+                [new(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
             var quantity = new CqlQuantity(1, "minute");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expand.Count() == 0);
+            Assert.IsTrue(expand!.Count() == 0);
         }
 
         /// <summary>
@@ -1903,15 +1922,15 @@ namespace CoreTests
         [TestMethod]
         public void Expand_List_Interval_Date_Hour()
         {
-            List<CqlInterval<CqlDate>> interval =
-                [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
+            List<CqlInterval<CqlDate?>> interval =
+                [new(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
             var quantity = new CqlQuantity(1, "hour");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expand.Count() == 0);
+            Assert.IsTrue(expand!.Count() == 0);
         }
 
         /// <summary>
@@ -1920,8 +1939,8 @@ namespace CoreTests
         [TestMethod]
         public void Expand_List_Interval_Date_Second()
         {
-            List<CqlInterval<CqlDate>> interval =
-                [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
+            List<CqlInterval<CqlDate?>> interval =
+                [new(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
             var quantity = new CqlQuantity(1, "second");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1937,8 +1956,8 @@ namespace CoreTests
         [TestMethod]
         public void Expand_List_Interval_Date_Millisecond()
         {
-            List<CqlInterval<CqlDate>> interval =
-                [new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
+            List<CqlInterval<CqlDate?>> interval =
+                [new(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)];
             var quantity = new CqlQuantity(1, "millisecond");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -1957,24 +1976,25 @@ namespace CoreTests
             var start = new CqlDate(2022, 1, null);
             var end = new CqlDate(2022, 4, null);
 
-            List<CqlInterval<CqlDate>> interval = [new CqlInterval<CqlDate>(start, end, true, true)];
+            List<CqlInterval<CqlDate?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(1, "month");
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022, 1, null), new CqlDate(2022, 1, null), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 2, null), new CqlDate(2022, 2, null), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 3, null), new CqlDate(2022, 3, null), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022, 4, null), new CqlDate(2022, 4, null), true, true)
+                new(new CqlDate(2022, 1, null), new CqlDate(2022, 1, null), true, true),
+                new(new CqlDate(2022, 2, null), new CqlDate(2022, 2, null), true, true),
+                new(new CqlDate(2022, 3, null), new CqlDate(2022, 3, null), true, true),
+                new(new CqlDate(2022, 4, null), new CqlDate(2022, 4, null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -1991,7 +2011,7 @@ namespace CoreTests
             var start = new CqlDate(2022, 1, null);
             var end = new CqlDate(2022, 4, null);
 
-            List<CqlInterval<CqlDate>> interval = [new CqlInterval<CqlDate>(start, end, true, true)];
+            List<CqlInterval<CqlDate?>> interval = [new(start, end, true, true)];
 
             var quantity = new CqlQuantity(1, "day");
 
@@ -1999,7 +2019,7 @@ namespace CoreTests
 
             var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expand.Count() == 0);
+            Assert.IsTrue(expand!.Count() == 0);
         }
 
         /// <summary>
@@ -2011,14 +2031,14 @@ namespace CoreTests
             var start = new CqlDate(2022, null, null);
             var end = new CqlDate(2023, null, null);
 
-            List<CqlInterval<CqlDate>> interval = [new CqlInterval<CqlDate>(start, end, true, true)];
+            List<CqlInterval<CqlDate?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(1, "day");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expand.Count() == 0);
+            Assert.IsTrue(expand!.Count() == 0);
         }
 
         /// <summary>
@@ -2033,36 +2053,37 @@ namespace CoreTests
             var bStart = new CqlDate(2022, 6, 1);
             var bEnd = new CqlDate(2022, 12, 1);
 
-            List<CqlInterval<CqlDate>> interval =
+            List<CqlInterval<CqlDate?>> interval =
             [
-                new CqlInterval<CqlDate>(aStart, aEnd, true, true),
-                new CqlInterval<CqlDate>(bStart, bEnd, true, true)
+                new(aStart, aEnd, true, true),
+                new(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "month");
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,2,1),new CqlDate(2022,2,28), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,3,1),new CqlDate(2022,3,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,4,1),new CqlDate(2022,4,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,5,1),new CqlDate(2022,5,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,6,1),new CqlDate(2022,6,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,7,1),new CqlDate(2022,7,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,8,1),new CqlDate(2022,8,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,9,1),new CqlDate(2022,9,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,10,1),new CqlDate(2022,10,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,11,1),new CqlDate(2022,11,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,12,1),new CqlDate(2022,12,31), true, true)
+                new(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
+                new(new CqlDate(2022,2,1),new CqlDate(2022,2,28), true, true),
+                new(new CqlDate(2022,3,1),new CqlDate(2022,3,31), true, true),
+                new(new CqlDate(2022,4,1),new CqlDate(2022,4,30), true, true),
+                new(new CqlDate(2022,5,1),new CqlDate(2022,5,31), true, true),
+                new(new CqlDate(2022,6,1),new CqlDate(2022,6,30), true, true),
+                new(new CqlDate(2022,7,1),new CqlDate(2022,7,31), true, true),
+                new(new CqlDate(2022,8,1),new CqlDate(2022,8,31), true, true),
+                new(new CqlDate(2022,9,1),new CqlDate(2022,9,30), true, true),
+                new(new CqlDate(2022,10,1),new CqlDate(2022,10,31), true, true),
+                new(new CqlDate(2022,11,1),new CqlDate(2022,11,30), true, true),
+                new(new CqlDate(2022,12,1),new CqlDate(2022,12,31), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2082,35 +2103,36 @@ namespace CoreTests
             var bStart = new CqlDate(2022, 7, 1);
             var bEnd = new CqlDate(2022, 12, 1);
 
-            List<CqlInterval<CqlDate>> interval =
+            List<CqlInterval<CqlDate?>> interval =
             [
-                new CqlInterval<CqlDate>(aStart, aEnd, true, true),
-                new CqlInterval<CqlDate>(bStart, bEnd, true, true)
+                new(aStart, aEnd, true, true),
+                new(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "month");
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,2,1),new CqlDate(2022,2,28), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,3,1),new CqlDate(2022,3,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,4,1),new CqlDate(2022,4,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,5,1),new CqlDate(2022,5,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,7,1),new CqlDate(2022,7,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,8,1),new CqlDate(2022,8,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,9,1),new CqlDate(2022,9,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,10,1),new CqlDate(2022,10,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,11,1),new CqlDate(2022,11,30), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,12,1),new CqlDate(2022,12,31), true, true)
+                new(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
+                new(new CqlDate(2022,2,1),new CqlDate(2022,2,28), true, true),
+                new(new CqlDate(2022,3,1),new CqlDate(2022,3,31), true, true),
+                new(new CqlDate(2022,4,1),new CqlDate(2022,4,30), true, true),
+                new(new CqlDate(2022,5,1),new CqlDate(2022,5,31), true, true),
+                new(new CqlDate(2022,7,1),new CqlDate(2022,7,31), true, true),
+                new(new CqlDate(2022,8,1),new CqlDate(2022,8,31), true, true),
+                new(new CqlDate(2022,9,1),new CqlDate(2022,9,30), true, true),
+                new(new CqlDate(2022,10,1),new CqlDate(2022,10,31), true, true),
+                new(new CqlDate(2022,11,1),new CqlDate(2022,11,30), true, true),
+                new(new CqlDate(2022,12,1),new CqlDate(2022,12,31), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand!.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2127,32 +2149,33 @@ namespace CoreTests
             var aStart = new CqlDate(2022, 1, 1);
             var aEnd = new CqlDate(2022, 12, 31);
 
-            List<CqlInterval<CqlDate>> interval = [new CqlInterval<CqlDate>(aStart, aEnd, true, true)];
+            List<CqlInterval<CqlDate?>> interval = [new(aStart, aEnd, true, true)];
             var quantity = new CqlQuantity(31, "days");
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,2,1),new CqlDate(2022,3,3), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,3,4),new CqlDate(2022,4,3), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,4,4),new CqlDate(2022,5,4), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,5,5),new CqlDate(2022,6,4), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,6,5),new CqlDate(2022,7,5), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,7,6),new CqlDate(2022,8,5), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,8,6),new CqlDate(2022,9,5), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,9,6),new CqlDate(2022,10,6), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,10,7),new CqlDate(2022,11,6), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,11,7),new CqlDate(2022,12,7), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2022,12,8),new CqlDate(2023,1,7), true, true)
+                new(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
+                new(new CqlDate(2022,2,1),new CqlDate(2022,3,3), true, true),
+                new(new CqlDate(2022,3,4),new CqlDate(2022,4,3), true, true),
+                new(new CqlDate(2022,4,4),new CqlDate(2022,5,4), true, true),
+                new(new CqlDate(2022,5,5),new CqlDate(2022,6,4), true, true),
+                new(new CqlDate(2022,6,5),new CqlDate(2022,7,5), true, true),
+                new(new CqlDate(2022,7,6),new CqlDate(2022,8,5), true, true),
+                new(new CqlDate(2022,8,6),new CqlDate(2022,9,5), true, true),
+                new(new CqlDate(2022,9,6),new CqlDate(2022,10,6), true, true),
+                new(new CqlDate(2022,10,7),new CqlDate(2022,11,6), true, true),
+                new(new CqlDate(2022,11,7),new CqlDate(2022,12,7), true, true),
+                new(new CqlDate(2022,12,8),new CqlDate(2023,1,7), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2172,25 +2195,26 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0);
             var end = new CqlDateTime(2022, 1, 1, 12, 0, 0, 5, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
-            CqlInterval<CqlDateTime>[] expected =
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0), new CqlDateTime(2022,1,1,12,0,0,0,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,1,0,0), new CqlDateTime(2022,1,1,12,0,0,1,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,2,0,0), new CqlDateTime(2022,1,1,12,0,0,2,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,3,0,0), new CqlDateTime(2022,1,1,12,0,0,3,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,4,0,0), new CqlDateTime(2022,1,1,12,0,0,4,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,5,0,0), new CqlDateTime(2022,1,1,12,0,0,5,0,0), true, true)
+                new(new CqlDateTime(2022,1,1,12,0,0,0,0,0), new CqlDateTime(2022,1,1,12,0,0,0,0,0), true, true),
+                new(new CqlDateTime(2022,1,1,12,0,0,1,0,0), new CqlDateTime(2022,1,1,12,0,0,1,0,0), true, true),
+                new(new CqlDateTime(2022,1,1,12,0,0,2,0,0), new CqlDateTime(2022,1,1,12,0,0,2,0,0), true, true),
+                new(new CqlDateTime(2022,1,1,12,0,0,3,0,0), new CqlDateTime(2022,1,1,12,0,0,3,0,0), true, true),
+                new(new CqlDateTime(2022,1,1,12,0,0,4,0,0), new CqlDateTime(2022,1,1,12,0,0,4,0,0), true, true),
+                new(new CqlDateTime(2022,1,1,12,0,0,5,0,0), new CqlDateTime(2022,1,1,12,0,0,5,0,0), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2207,23 +2231,24 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, null, null, null, null, null, null);
             var end = new CqlDateTime(2022, 1, 4, 12, 0, 0, 5, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
-            CqlInterval<CqlDateTime>[] expected =
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,null, null, null, null, null, null), new CqlDateTime(2022,1,1,null, null, null, null, null, null), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,2,null, null, null, null, null, null), new CqlDateTime(2022,1,2,null, null, null, null, null, null), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,3,null, null, null, null, null, null), new CqlDateTime(2022,1,3,null, null, null, null, null, null), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,4,null, null, null, null, null, null), new CqlDateTime(2022,1,4,null, null, null, null, null, null), true, true)
+                new(new CqlDateTime(2022,1,1,null, null, null, null, null, null), new CqlDateTime(2022,1,1,null, null, null, null, null, null), true, true),
+                new(new CqlDateTime(2022,1,2,null, null, null, null, null, null), new CqlDateTime(2022,1,2,null, null, null, null, null, null), true, true),
+                new(new CqlDateTime(2022,1,3,null, null, null, null, null, null), new CqlDateTime(2022,1,3,null, null, null, null, null, null), true, true),
+                new(new CqlDateTime(2022,1,4,null, null, null, null, null, null), new CqlDateTime(2022,1,4,null, null, null, null, null, null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2240,7 +2265,7 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, 12, null, null, null, null, null);
             var end = new CqlDateTime(2022, 1, 1, 12, null, null, null, null, null);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(1, "minute");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
@@ -2259,24 +2284,25 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0);
             var end = new CqlDateTime(2022, 1, 4, 12, 0, 0, 0, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(1, "day");
-            CqlInterval<CqlDateTime>[] expected =
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,1,2,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,2,12,0,0,0,0,0),new CqlDateTime(2022,1,3,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,3,12,0,0,0,0,0),new CqlDateTime(2022,1,4,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,4,12,0,0,0,0,0),new CqlDateTime(2022,1,5,11,59,59,999,0,0),true,true)
+                new(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,1,2,11,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,2,12,0,0,0,0,0),new CqlDateTime(2022,1,3,11,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,3,12,0,0,0,0,0),new CqlDateTime(2022,1,4,11,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,4,12,0,0,0,0,0),new CqlDateTime(2022,1,5,11,59,59,999,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2293,21 +2319,22 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0);
             var end = new CqlDateTime(2022, 3, 1, 0, 0, 0, 0, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(3, "month");
-            CqlInterval<CqlDateTime>[] expected =
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,4,1,11,59,59,999,0,0),true,true)
+                new(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,4,1,11,59,59,999,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand!.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2324,22 +2351,23 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0);
             var end = new CqlDateTime(2024, 3, 1, 0, 0, 0, 0, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(2, "years");
-            CqlInterval<CqlDateTime>[] expected =
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2024,1,1,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2024,1,1,12,0,0,0,0,0),new CqlDateTime(2026,1,1,11,59,59,999,0,0),true,true)
+                new(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2024,1,1,11,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2024,1,1,12,0,0,0,0,0),new CqlDateTime(2026,1,1,11,59,59,999,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2356,25 +2384,26 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0);
             var end = new CqlDateTime(2022, 2, 1, 0, 0, 0, 0, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(1, "week");
-            CqlInterval<CqlDateTime>[] expected =
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,1,8,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,8,12,0,0,0,0,0),new CqlDateTime(2022,1,15,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,15,12,0,0,0,0,0),new CqlDateTime(2022,1,22,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,22,12,0,0,0,0,0),new CqlDateTime(2022,1,29,11,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,29,12,0,0,0,0,0),new CqlDateTime(2022,2,5,11,59,59,999,0,0),true,true)
+                new(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,1,8,11,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,8,12,0,0,0,0,0),new CqlDateTime(2022,1,15,11,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,15,12,0,0,0,0,0),new CqlDateTime(2022,1,22,11,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,22,12,0,0,0,0,0),new CqlDateTime(2022,1,29,11,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,29,12,0,0,0,0,0),new CqlDateTime(2022,2,5,11,59,59,999,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2391,23 +2420,24 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0);
             var end = new CqlDateTime(2022, 1, 1, 0, 5, 0, 0, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(2, "minutes");
-            CqlInterval<CqlDateTime>[] expected =
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,1,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,2,0,0,0,0),new CqlDateTime(2022,1,1,0,3,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,4,0,0,0,0),new CqlDateTime(2022,1,1,0,5,59,999,0,0),true,true)
+                new(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,1,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,0,2,0,0,0,0),new CqlDateTime(2022,1,1,0,3,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,0,4,0,0,0,0),new CqlDateTime(2022,1,1,0,5,59,999,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2424,24 +2454,25 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0);
             var end = new CqlDateTime(2022, 1, 1, 6, 0, 0, 0, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(2, "hours");
-            CqlInterval<CqlDateTime>[] expected =
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,1,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,2,0,0,0,0,0),new CqlDateTime(2022,1,1,3,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,4,0,0,0,0,0),new CqlDateTime(2022,1,1,5,59,59,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,6,0,0,0,0,0),new CqlDateTime(2022,1,1,7,59,59,999,0,0),true,true)
+                new(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,1,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,2,0,0,0,0,0),new CqlDateTime(2022,1,1,3,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,4,0,0,0,0,0),new CqlDateTime(2022,1,1,5,59,59,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,6,0,0,0,0,0),new CqlDateTime(2022,1,1,7,59,59,999,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2458,23 +2489,24 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0);
             var end = new CqlDateTime(2022, 1, 1, 0, 0, 6, 0, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(3, "seconds");
-            CqlInterval<CqlDateTime>[] expected =
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,0,2,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,3,0,0,0),new CqlDateTime(2022,1,1,0,0,5,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,6,0,0,0),new CqlDateTime(2022,1,1,0,0,8,999,0,0),true,true)
+                new(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,0,2,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,0,0,3,0,0,0),new CqlDateTime(2022,1,1,0,0,5,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,0,0,6,0,0,0),new CqlDateTime(2022,1,1,0,0,8,999,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2491,27 +2523,28 @@ namespace CoreTests
             var start = new CqlDateTime(2022, 1, 1, 0, 0, 0, 0, 0, 0);
             var end = new CqlDateTime(2022, 1, 1, 0, 0, 3, 0, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval = [new CqlInterval<CqlDateTime>(start, end, true, true)];
+            List<CqlInterval<CqlDateTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(500, "milliseconds");
-            CqlInterval<CqlDateTime>[] expected =
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,0,0,499,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,500,0,0),new CqlDateTime(2022,1,1,0,0,0,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,1,0,0,0),new CqlDateTime(2022,1,1,0,0,1,499,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,1,500,0,0),new CqlDateTime(2022,1,1,0,0,1,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,2,0,0,0),new CqlDateTime(2022,1,1,0,0,2,499,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,2,500,0,0),new CqlDateTime(2022,1,1,0,0,2,999,0,0),true,true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,3,0,0,0),new CqlDateTime(2022,1,1,0,0,3,499,0,0),true,true)
+                new(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,0,0,499,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,0,0,0,500,0,0),new CqlDateTime(2022,1,1,0,0,0,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,0,0,1,0,0,0),new CqlDateTime(2022,1,1,0,0,1,499,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,0,0,1,500,0,0),new CqlDateTime(2022,1,1,0,0,1,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,0,0,2,0,0,0),new CqlDateTime(2022,1,1,0,0,2,499,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,0,0,2,500,0,0),new CqlDateTime(2022,1,1,0,0,2,999,0,0),true,true),
+                new(new CqlDateTime(2022,1,1,0,0,3,0,0,0),new CqlDateTime(2022,1,1,0,0,3,499,0,0),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2531,36 +2564,37 @@ namespace CoreTests
             var bStart = new CqlDateTime(2022, 6, 1, 0, 0, 0, 0, 0, 0);
             var bEnd = new CqlDateTime(2022, 12, 1, 0, 0, 0, 0, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval =
+            List<CqlInterval<CqlDateTime?>> interval =
             [
-                new CqlInterval<CqlDateTime>(aStart, aEnd, true, true),
-                new CqlInterval<CqlDateTime>(bStart, bEnd, true, true)
+                new(aStart, aEnd, true, true),
+                new(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "month");
-            CqlInterval<CqlDateTime>[] expected =
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,2,1,0,0,0,0,0,0),new CqlDateTime(2022,2,28,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,3,1,0,0,0,0,0,0),new CqlDateTime(2022,3,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,4,1,0,0,0,0,0,0),new CqlDateTime(2022,4,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,5,1,0,0,0,0,0,0),new CqlDateTime(2022,5,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,6,1,0,0,0,0,0,0),new CqlDateTime(2022,6,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,7,1,0,0,0,0,0,0),new CqlDateTime(2022,7,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,8,1,0,0,0,0,0,0),new CqlDateTime(2022,8,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,9,1,0,0,0,0,0,0),new CqlDateTime(2022,9,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,10,1,0,0,0,0,0,0),new CqlDateTime(2022,10,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,11,1,0,0,0,0,0,0),new CqlDateTime(2022,11,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,12,1,0,0,0,0,0,0),new CqlDateTime(2022,12,31,23,59,59,999,0,0), true, true)
+                new(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,2,1,0,0,0,0,0,0),new CqlDateTime(2022,2,28,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,3,1,0,0,0,0,0,0),new CqlDateTime(2022,3,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,4,1,0,0,0,0,0,0),new CqlDateTime(2022,4,30,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,5,1,0,0,0,0,0,0),new CqlDateTime(2022,5,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,6,1,0,0,0,0,0,0),new CqlDateTime(2022,6,30,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,7,1,0,0,0,0,0,0),new CqlDateTime(2022,7,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,8,1,0,0,0,0,0,0),new CqlDateTime(2022,8,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,9,1,0,0,0,0,0,0),new CqlDateTime(2022,9,30,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,10,1,0,0,0,0,0,0),new CqlDateTime(2022,10,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,11,1,0,0,0,0,0,0),new CqlDateTime(2022,11,30,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,12,1,0,0,0,0,0,0),new CqlDateTime(2022,12,31,23,59,59,999,0,0), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2580,35 +2614,36 @@ namespace CoreTests
             var bStart = new CqlDateTime(2022, 7, 1, 0, 0, 0, 0, 0, 0);
             var bEnd = new CqlDateTime(2022, 12, 1, 0, 0, 0, 0, 0, 0);
 
-            List<CqlInterval<CqlDateTime>> interval =
+            List<CqlInterval<CqlDateTime?>> interval =
             [
-                new CqlInterval<CqlDateTime>(aStart, aEnd, true, true),
-                new CqlInterval<CqlDateTime>(bStart, bEnd, true, true)
+                new(aStart, aEnd, true, true),
+                new(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "month");
-            CqlInterval<CqlDateTime>[] expected =
+            CqlInterval<CqlDateTime?>[] expected =
             [
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,2,1,0,0,0,0,0,0),new CqlDateTime(2022,2,28,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,3,1,0,0,0,0,0,0),new CqlDateTime(2022,3,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,4,1,0,0,0,0,0,0),new CqlDateTime(2022,4,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,5,1,0,0,0,0,0,0),new CqlDateTime(2022,5,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,7,1,0,0,0,0,0,0),new CqlDateTime(2022,7,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,8,1,0,0,0,0,0,0),new CqlDateTime(2022,8,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,9,1,0,0,0,0,0,0),new CqlDateTime(2022,9,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,10,1,0,0,0,0,0,0),new CqlDateTime(2022,10,31,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,11,1,0,0,0,0,0,0),new CqlDateTime(2022,11,30,23,59,59,999,0,0), true, true),
-                new CqlInterval<CqlDateTime>(new CqlDateTime(2022,12,1,0,0,0,0,0,0),new CqlDateTime(2022,12,31,23,59,59,999,0,0), true, true)
+                new(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,2,1,0,0,0,0,0,0),new CqlDateTime(2022,2,28,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,3,1,0,0,0,0,0,0),new CqlDateTime(2022,3,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,4,1,0,0,0,0,0,0),new CqlDateTime(2022,4,30,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,5,1,0,0,0,0,0,0),new CqlDateTime(2022,5,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,7,1,0,0,0,0,0,0),new CqlDateTime(2022,7,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,8,1,0,0,0,0,0,0),new CqlDateTime(2022,8,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,9,1,0,0,0,0,0,0),new CqlDateTime(2022,9,30,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,10,1,0,0,0,0,0,0),new CqlDateTime(2022,10,31,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,11,1,0,0,0,0,0,0),new CqlDateTime(2022,11,30,23,59,59,999,0,0), true, true),
+                new(new CqlDateTime(2022,12,1,0,0,0,0,0,0),new CqlDateTime(2022,12,31,23,59,59,999,0,0), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2627,22 +2662,23 @@ namespace CoreTests
             var start = new CqlTime(10, null, null, null, null, null);
             var end = new CqlTime(12, null, null, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
-            CqlInterval<CqlTime>[] expected =
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
+            CqlInterval<CqlTime?>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(12,null,null,null,null,null),new CqlTime(12,null,null,null,null,null),true,true)
+                new(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null),true,true),
+                new(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null),true,true),
+                new(new CqlTime(12,null,null,null,null,null),new CqlTime(12,null,null,null,null,null),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2659,21 +2695,22 @@ namespace CoreTests
             var start = new CqlTime(10, null, null, null, null, null);
             var end = new CqlTime(11, 5, null, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
-            CqlInterval<CqlTime>[] expected =
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
+            CqlInterval<CqlTime?>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null),true,true)
+                new(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null),true,true),
+                new(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2690,22 +2727,23 @@ namespace CoreTests
             var start = new CqlTime(10, null, null, null, null, null);
             var end = new CqlTime(11, 5, null, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(1, "hour");
-            CqlInterval<CqlTime>[] expected =
+            CqlInterval<CqlTime?>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null),true,true)
+                new(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null),true,true),
+                new(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, null).ToArray();
+            var expand = fcq.Expand(interval, null);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expected.Length == expand.Length);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            Assert.IsTrue(expected.Length == expandArray.Length);
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2722,14 +2760,14 @@ namespace CoreTests
             var start = new CqlTime(10, null, null, null, null, null);
             var end = new CqlTime(12, null, null, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(1, "day");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expand.Count() == 0);
+            Assert.IsTrue(expand!.Count() == 0);
         }
 
         /// <summary>
@@ -2741,14 +2779,14 @@ namespace CoreTests
             var start = new CqlTime(10, null, null, null, null, null);
             var end = new CqlTime(12, null, null, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(3, "month");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expand.Count() == 0);
+            Assert.IsTrue(expand!.Count() == 0);
         }
 
         /// <summary>
@@ -2760,14 +2798,14 @@ namespace CoreTests
             var start = new CqlTime(10, null, null, null, null, null);
             var end = new CqlTime(12, null, null, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
             var perQuantity = new CqlQuantity(2, "year");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, perQuantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expand.Count() == 0);
+            Assert.IsTrue(expand!.Count() == 0);
         }
 
         /// <summary>
@@ -2779,14 +2817,14 @@ namespace CoreTests
             var start = new CqlTime(10, null, null, null, null, null);
             var end = new CqlTime(12, null, null, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(1, "week");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expand.Count() == 0);
+            Assert.IsTrue(expand!.Count() == 0);
         }
 
         /// <summary>
@@ -2798,14 +2836,14 @@ namespace CoreTests
             var start = new CqlTime(10, null, null, null, null, null);
             var end = new CqlTime(12, null, null, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(1, "minute");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            Assert.IsTrue(expand.Count() == 0);
+            Assert.IsTrue(expand!.Count() == 0);
         }
 
         /// <summary>
@@ -2817,25 +2855,26 @@ namespace CoreTests
             var start = new CqlTime(10, 0, null, null, null, null);
             var end = new CqlTime(12, 0, null, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(30, "minutes");
-            CqlInterval<CqlTime>[] expected =
+            CqlInterval<CqlTime?>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,0,null,null,null,null),new CqlTime(10,29,null,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(10,30,null,null,null,null),new CqlTime(10,59,null,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(11,0,null,null,null,null),new CqlTime(11,29,null,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(11,30,null,null,null,null),new CqlTime(11,59,null,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(12,0,null,null,null,null),new CqlTime(12,29,null,null,null,null),true,true)
+                new(new CqlTime(10,0,null,null,null,null),new CqlTime(10,29,null,null,null,null),true,true),
+                new(new CqlTime(10,30,null,null,null,null),new CqlTime(10,59,null,null,null,null),true,true),
+                new(new CqlTime(11,0,null,null,null,null),new CqlTime(11,29,null,null,null,null),true,true),
+                new(new CqlTime(11,30,null,null,null,null),new CqlTime(11,59,null,null,null,null),true,true),
+                new(new CqlTime(12,0,null,null,null,null),new CqlTime(12,29,null,null,null,null),true,true)
             ];
 
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2852,22 +2891,23 @@ namespace CoreTests
             var start = new CqlTime(10, null, null, null, null, null);
             var end = new CqlTime(12, null, null, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(1, "hour");
-            CqlInterval<CqlTime>[] expected =
+            CqlInterval<CqlTime?>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(12,null,null,null,null,null),new CqlTime(12,null,null,null,null,null),true,true)
+                new(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null),true,true),
+                new(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null),true,true),
+                new(new CqlTime(12,null,null,null,null,null),new CqlTime(12,null,null,null,null,null),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2884,21 +2924,22 @@ namespace CoreTests
             var start = new CqlTime(10, 0, 0, null, null, null);
             var end = new CqlTime(10, 0, 5, null, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(5, "seconds");
-            CqlInterval<CqlTime>[] expected =
+            CqlInterval<CqlTime?>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,0,0,null,null,null),new CqlTime(10,0,4,null,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(10,0,5,null,null,null),new CqlTime(10,0,9,null,null,null),true,true)
+                new(new CqlTime(10,0,0,null,null,null),new CqlTime(10,0,4,null,null,null),true,true),
+                new(new CqlTime(10,0,5,null,null,null),new CqlTime(10,0,9,null,null,null),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2915,22 +2956,23 @@ namespace CoreTests
             var start = new CqlTime(10, 0, 0, 0, null, null);
             var end = new CqlTime(10, 0, 0, 10, null, null);
 
-            List<CqlInterval<CqlTime>> interval = [new CqlInterval<CqlTime>(start, end, true, true)];
+            List<CqlInterval<CqlTime?>> interval = [new(start, end, true, true)];
             var quantity = new CqlQuantity(5, "millisecond");
-            CqlInterval<CqlTime>[] expected =
+            CqlInterval<CqlTime?>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,0,0,0,null,null),new CqlTime(10,0,0,4,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(10,0,0,5,null,null),new CqlTime(10,0,0,9,null,null),true,true),
-                new CqlInterval<CqlTime>(new CqlTime(10,0,0,10,null,null),new CqlTime(10,0,0,14,null,null),true,true)
+                new(new CqlTime(10,0,0,0,null,null),new CqlTime(10,0,0,4,null,null),true,true),
+                new(new CqlTime(10,0,0,5,null,null),new CqlTime(10,0,0,9,null,null),true,true),
+                new(new CqlTime(10,0,0,10,null,null),new CqlTime(10,0,0,14,null,null),true,true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2950,30 +2992,31 @@ namespace CoreTests
             var bStart = new CqlTime(12, 0, 0, 0, null, null);
             var bEnd = new CqlTime(16, 0, 0, 0, null, null);
 
-            List<CqlInterval<CqlTime>> interval =
+            List<CqlInterval<CqlTime?>> interval =
             [
-                new CqlInterval<CqlTime>(aStart, aEnd, true, true),
-                new CqlInterval<CqlTime>(bStart, bEnd, true, true)
+                new(aStart, aEnd, true, true),
+                new(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "hour");
-            CqlInterval<CqlTime>[] expected =
+            CqlInterval<CqlTime?>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,0,0,0,null,null),new CqlTime(10,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(11,0,0,0,null,null),new CqlTime(11,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(12,0,0,0,null,null),new CqlTime(12,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(13,0,0,0,null,null),new CqlTime(13,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(14,0,0,0,null,null),new CqlTime(14,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(15,0,0,0,null,null),new CqlTime(15,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(16,0,0,0,null,null),new CqlTime(16,59,59,999,null,null), true, true)
+                new(new CqlTime(10,0,0,0,null,null),new CqlTime(10,59,59,999,null,null), true, true),
+                new(new CqlTime(11,0,0,0,null,null),new CqlTime(11,59,59,999,null,null), true, true),
+                new(new CqlTime(12,0,0,0,null,null),new CqlTime(12,59,59,999,null,null), true, true),
+                new(new CqlTime(13,0,0,0,null,null),new CqlTime(13,59,59,999,null,null), true, true),
+                new(new CqlTime(14,0,0,0,null,null),new CqlTime(14,59,59,999,null,null), true, true),
+                new(new CqlTime(15,0,0,0,null,null),new CqlTime(15,59,59,999,null,null), true, true),
+                new(new CqlTime(16,0,0,0,null,null),new CqlTime(16,59,59,999,null,null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -2993,29 +3036,30 @@ namespace CoreTests
             var bStart = new CqlTime(14, 0, 0, 0, null, null);
             var bEnd = new CqlTime(16, 0, 0, 0, null, null);
 
-            List<CqlInterval<CqlTime>> interval =
+            List<CqlInterval<CqlTime?>> interval =
             [
-                new CqlInterval<CqlTime>(aStart, aEnd, true, true),
-                new CqlInterval<CqlTime>(bStart, bEnd, true, true)
+                new(aStart, aEnd, true, true),
+                new(bStart, bEnd, true, true)
             ];
             var quantity = new CqlQuantity(1, "hour");
-            CqlInterval<CqlTime>[] expected =
+            CqlInterval<CqlTime?>[] expected =
             [
-                new CqlInterval<CqlTime>(new CqlTime(10,0,0,0,null,null),new CqlTime(10,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(11,0,0,0,null,null),new CqlTime(11,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(12,0,0,0,null,null),new CqlTime(12,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(14,0,0,0,null,null),new CqlTime(14,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(15,0,0,0,null,null),new CqlTime(15,59,59,999,null,null), true, true),
-                new CqlInterval<CqlTime>(new CqlTime(16,0,0,0,null,null),new CqlTime(16,59,59,999,null,null), true, true)
+                new(new CqlTime(10,0,0,0,null,null),new CqlTime(10,59,59,999,null,null), true, true),
+                new(new CqlTime(11,0,0,0,null,null),new CqlTime(11,59,59,999,null,null), true, true),
+                new(new CqlTime(12,0,0,0,null,null),new CqlTime(12,59,59,999,null,null), true, true),
+                new(new CqlTime(14,0,0,0,null,null),new CqlTime(14,59,59,999,null,null), true, true),
+                new(new CqlTime(15,0,0,0,null,null),new CqlTime(15,59,59,999,null,null), true, true),
+                new(new CqlTime(16,0,0,0,null,null),new CqlTime(16,59,59,999,null,null), true, true)
             ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
-            for (var i = 0; i < expand.Length; i++)
+            var expandArray = expand.ToArray();
+            for (var i = 0; i < expandArray.Length; i++)
             {
-                var actual = expand[i];
+                var actual = expandArray[i];
                 var expect = expected[i];
 
                 Assert.AreEqual(actual.low, expect.low);
@@ -3029,15 +3073,17 @@ namespace CoreTests
             var aStart = new CqlTime(10, 0, 0, 0, null, null);
             var aEnd = new CqlTime(12, 30, 0, 0, null, null);
 
-            var interval = new List<CqlInterval<CqlTime>>
+            var interval = new List<CqlInterval<CqlTime?>>
             {
-                new CqlInterval<CqlTime>(aStart, aEnd, true, true),
+                new(aStart, aEnd, true, true),
             };
             var quantity = new CqlQuantity(1, "hour");
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
-            var expand = fcq.Expand(interval, quantity).ToArray();
+            var expand = fcq.Expand(interval, quantity);
+            Assert.IsNotNull(expand);
+            var expandArray = expand.ToArray();
         }
 
         #endregion
@@ -3049,8 +3095,8 @@ namespace CoreTests
         [TestMethod]
         public void Interval_Same_Or_Before_Overlapping()
         {
-            var thru2022 = new CqlInterval<CqlDate>(null, new CqlDate(2022, null, null), true, true);
-            var thru2023 = new CqlInterval<CqlDate>(null, new CqlDate(2023, null, null), true, true);
+            var thru2022 = new CqlInterval<CqlDate?>(null, new CqlDate(2022, null, null), true, true);
+            var thru2023 = new CqlInterval<CqlDate?>(null, new CqlDate(2023, null, null), true, true);
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -3065,8 +3111,8 @@ namespace CoreTests
         [TestMethod]
         public void Interval_Same_Or_Before()
         {
-            var thru2022 = new CqlInterval<CqlDate>(new CqlDate(2022, null, null), new CqlDate(2022, null, null), true, true);
-            var thru2023 = new CqlInterval<CqlDate>(new CqlDate(2023, null, null), new CqlDate(2023, null, null), true, true);
+            var thru2022 = new CqlInterval<CqlDate?>(new CqlDate(2022, null, null), new CqlDate(2022, null, null), true, true);
+            var thru2023 = new CqlInterval<CqlDate?>(new CqlDate(2023, null, null), new CqlDate(2023, null, null), true, true);
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
@@ -3084,47 +3130,51 @@ namespace CoreTests
             var rtx = GetNewContext();
             List<int?> items = [1, 2, null, 4, 5];
             var ascending = rtx.Operators
-                .ListSort(items, ListSortDirection.Ascending)
-                .ToArray();
-            Assert.AreEqual(null, ascending[0]);
-            Assert.AreEqual(1, ascending[1]);
-            Assert.AreEqual(2, ascending[2]);
-            Assert.AreEqual(4, ascending[3]);
-            Assert.AreEqual(5, ascending[4]);
+                .ListSort(items, ListSortDirection.Ascending);
+            Assert.IsNotNull(ascending);
+            var ascendingArray = ascending.ToArray();
+            Assert.AreEqual(null, ascendingArray[0]);
+            Assert.AreEqual(1, ascendingArray[1]);
+            Assert.AreEqual(2, ascendingArray[2]);
+            Assert.AreEqual(4, ascendingArray[3]);
+            Assert.AreEqual(5, ascendingArray[4]);
 
             var descending = rtx.Operators
-                .ListSort(items, ListSortDirection.Descending)
-                .ToArray();
-            Assert.AreEqual(5, descending[0]);
-            Assert.AreEqual(4, descending[1]);
-            Assert.AreEqual(2, descending[2]);
-            Assert.AreEqual(1, descending[3]);
-            Assert.AreEqual(null, descending[4]);
+                .ListSort(items, ListSortDirection.Descending);
+            Assert.IsNotNull(descending);
+            var descendingArray = descending.ToArray();
+            Assert.AreEqual(5, descendingArray[0]);
+            Assert.AreEqual(4, descendingArray[1]);
+            Assert.AreEqual(2, descendingArray[2]);
+            Assert.AreEqual(1, descendingArray[3]);
+            Assert.AreEqual(null, descendingArray[4]);
         }
 
         [TestMethod]
         public void Sort_Lists_Dates_Containing_Null()
         {
             var rtx = GetNewContext();
-            List<CqlDate> items =
+            List<CqlDate?> items =
             [
-                new CqlDate(2022, 12, 01),
+                new(2022, 12, 01),
                 null,
-                new CqlDate(2022, 05, 01)
+                new(2022, 05, 01)
             ];
             var ascending = rtx.Operators
-                .ListSort(items, ListSortDirection.Ascending)
-                .ToArray();
-            Assert.AreEqual(null, ascending[0]);
-            Assert.AreEqual(new CqlDate(2022, 05, 01), ascending[1]);
-            Assert.AreEqual(new CqlDate(2022, 12, 01), ascending[2]);
+                .ListSort(items, ListSortDirection.Ascending);
+            Assert.IsNotNull(ascending);
+            var ascendingArray = ascending.ToArray();
+            Assert.AreEqual(null, ascendingArray[0]);
+            Assert.AreEqual(new CqlDate(2022, 05, 01), ascendingArray[1]);
+            Assert.AreEqual(new CqlDate(2022, 12, 01), ascendingArray[2]);
 
             var descending = rtx.Operators
-                .ListSort(items, ListSortDirection.Descending)
-                .ToArray();
-            Assert.AreEqual(new CqlDate(2022, 12, 01), descending[0]);
-            Assert.AreEqual(new CqlDate(2022, 05, 01), descending[1]);
-            Assert.AreEqual(null, descending[2]);
+                .ListSort(items, ListSortDirection.Descending);
+            Assert.IsNotNull(descending);
+            var descendingArray = descending.ToArray();
+            Assert.AreEqual(new CqlDate(2022, 12, 01), descendingArray[0]);
+            Assert.AreEqual(new CqlDate(2022, 05, 01), descendingArray[1]);
+            Assert.AreEqual(null, descendingArray[2]);
         }
 
         [TestMethod]
@@ -3132,24 +3182,26 @@ namespace CoreTests
         {
             var rtx = GetNewContext();
 
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 20), new CqlDate(2023, 1, 28),true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 2, 18), new CqlDate(2023, 2, 28),true, true)
+                new(new CqlDate(2023, 1, 20), new CqlDate(2023, 1, 28),true, true),
+                new(new CqlDate(2023, 2, 18), new CqlDate(2023, 2, 28),true, true)
             ];
 
-            CqlInterval<CqlDate>[] intervals =
+            CqlInterval<CqlDate?>[] intervals =
             [
-                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 20), new CqlDate(2023, 1, 28), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 22), new CqlDate(2023, 1, 25), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 2, 20), new CqlDate(2023, 2, 25), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 2, 18), new CqlDate(2023, 2, 28), true, true)
+                new(new CqlDate(2023, 1, 20), new CqlDate(2023, 1, 28), true, true),
+                new(new CqlDate(2023, 1, 22), new CqlDate(2023, 1, 25), true, true),
+                new(new CqlDate(2023, 2, 20), new CqlDate(2023, 2, 25), true, true),
+                new(new CqlDate(2023, 2, 18), new CqlDate(2023, 2, 28), true, true)
             ];
 
-            var collapsed = rtx.Operators.Collapse(intervals, null).ToArray();
-            var result = rtx.Operators.Comparer.Compare(expected!, collapsed!, null);
+            var collapsed = rtx.Operators.Collapse(intervals, null);
+            Assert.IsNotNull(collapsed);
+            var collapsedArray = collapsed.ToArray();
+            var result = rtx.Operators.Comparer.Compare(expected!, collapsedArray!, null);
             if (result != 0)
-                throw new AssertFailedException($"Expected {expected}; actual {collapsed}");
+                throw new AssertFailedException($"Expected {expected}; actual {collapsedArray}");
         }
 
         [TestMethod]
@@ -3157,26 +3209,28 @@ namespace CoreTests
         {
             var rtx = GetNewContext();
 
-            CqlInterval<CqlDate>[] expected =
+            CqlInterval<CqlDate?>[] expected =
             [
-                new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 1),true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 1), new CqlDate(2023, 9, 1),true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 10, 2), null, true, true)
+                new(null, new CqlDate(2022, 12, 1),true, true),
+                new(new CqlDate(2023, 1, 1), new CqlDate(2023, 9, 1),true, true),
+                new(new CqlDate(2023, 10, 2), null, true, true)
             ];
 
-            CqlInterval<CqlDate>[] intervals =
+            CqlInterval<CqlDate?>[] intervals =
             [
-                new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 01), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 1), new CqlDate(2023, 4, 1), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 4, 1), new CqlDate(2023, 8, 1), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 7, 1), new CqlDate(2023, 9, 1), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 10, 2), null, true, true)
+                new(null, new CqlDate(2022, 12, 01), true, true),
+                new(new CqlDate(2023, 1, 1), new CqlDate(2023, 4, 1), true, true),
+                new(new CqlDate(2023, 4, 1), new CqlDate(2023, 8, 1), true, true),
+                new(new CqlDate(2023, 7, 1), new CqlDate(2023, 9, 1), true, true),
+                new(new CqlDate(2023, 10, 2), null, true, true)
             ];
 
-            var collapsed = rtx.Operators.Collapse(intervals, null).ToArray();
-            var result = rtx.Operators.Comparer.Compare(expected!, collapsed!, null);
+            var collapsed = rtx.Operators.Collapse(intervals, null);
+            Assert.IsNotNull(collapsed);
+            var collapsedArray = collapsed.ToArray();
+            var result = rtx.Operators.Comparer.Compare(expected!, collapsedArray!, null);
             if (result != 0)
-                throw new AssertFailedException($"Expected {expected}; actual {collapsed}");
+                throw new AssertFailedException($"Expected {expected}; actual {collapsedArray}");
         }
 
         [TestMethod]
@@ -3204,23 +3258,23 @@ namespace CoreTests
             var rtx = GetNewContext();
 
             var meets = rtx.Operators.Meets(
-                new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 1), new CqlDate(2023, 4, 1), true, true),
+                new CqlInterval<CqlDate?>(null, new CqlDate(2022, 12, 31), true, true),
+                new CqlInterval<CqlDate?>(new CqlDate(2023, 1, 1), new CqlDate(2023, 4, 1), true, true),
                 null);
             Assert.IsNotNull(meets);
             Assert.IsTrue(meets ?? false);
 
             meets = rtx.Operators.Meets(
-                new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 1), null, true, true),
+                new CqlInterval<CqlDate?>(null, new CqlDate(2022, 12, 31), true, true),
+                new CqlInterval<CqlDate?>(new CqlDate(2023, 1, 1), null, true, true),
                 null);
             Assert.IsNotNull(meets);
             Assert.IsTrue(meets ?? false);
 
             // Interval[null, 2022-12-31] meets Interval[2024-01-01, null] returns false
             meets = rtx.Operators.Meets(
-                new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),
-                new CqlInterval<CqlDate>(new CqlDate(2023, 7, 1), null, true, true),
+                new CqlInterval<CqlDate?>(null, new CqlDate(2022, 12, 31), true, true),
+                new CqlInterval<CqlDate?>(new CqlDate(2023, 7, 1), null, true, true),
                 null);
             Assert.IsNotNull(meets);
             Assert.IsFalse(meets ?? false);
@@ -3240,7 +3294,7 @@ namespace CoreTests
                 true,
                 true);
             var ops = GetNewContext().Operators;
-            var result = ops.IntervalIncludesInterval(lhs, rhs, null);
+            var result = ops.IntervalIncludesInterval(lhs, rhs, null!);
             Assert.IsNull(result);
         }
         [TestMethod]
@@ -3259,9 +3313,9 @@ namespace CoreTests
         {
             var list = new CqlTime[]
             {
-                new CqlTime(15,59,59, 999, null, null),
-                new CqlTime(20,59,59, 999, null, null),
-                new CqlTime(20,59,49, 999, null, null),
+                new(15,59,59, 999, null, null),
+                new(20,59,59, 999, null, null),
+                new(20,59,49, 999, null, null),
             };
             var element = new CqlTime(15, 59, 59, null, null, null);
             var ops = GetNewContext().Operators;
@@ -3273,8 +3327,8 @@ namespace CoreTests
         public void UnionListNullAndListNull()
         {
             var ops = GetNewContext().Operators;
-            var result = ops.Union<object>(new object[] { null }, new object[] { null });
-            var equal = ops.Equal(result, new object[] { null });
+            var result = ops.Union<object?>(new object?[] { null }, new object?[] { null });
+            var equal = ops.Equal(result, new object?[] { null });
             Assert.IsTrue(equal);
         }
 
@@ -3285,7 +3339,7 @@ namespace CoreTests
             var noon = new CqlTime(12, 0, 0, 0, null, null);
             var x = new CqlTime(21, 59, 59, 999, null, null);
             var interval = new CqlInterval<CqlTime>(noon, x, true, true);
-            var result = ops.IntervalProperlyIncludesElement(interval, noon, null);
+            var result = ops.IntervalProperlyIncludesElement(interval, noon, null!);
             Assert.IsFalse(result);
         }
 
@@ -3295,7 +3349,7 @@ namespace CoreTests
             var ops = GetNewContext().Operators;
             var lhs = new CqlInterval<int?>(null, null, true, true);
             var rhs = new CqlInterval<int?>(1, 10, true, true);
-            var result = ops.IntervalProperlyIncludedInInterval(lhs, rhs, null);
+            var result = ops.IntervalProperlyIncludedInInterval(lhs, rhs, null!);
             Assert.IsNull(result);
 
         }
@@ -3702,7 +3756,7 @@ namespace CoreTests
         {
             var rtx = GetNewContext();
             var inputList = null as List<int>;
-            var skippedList = rtx.Operators.ListSkip(inputList, 2);
+            var skippedList = rtx.Operators.ListSkip(inputList!, 2);
             Assert.IsNull(skippedList);
         }
 
@@ -3733,7 +3787,7 @@ namespace CoreTests
         {
             var rtx = GetNewContext();
             var inputList = null as List<int>;
-            var takenList = rtx.Operators.ListTake(inputList, 2);
+            var takenList = rtx.Operators.ListTake(inputList!, 2);
             Assert.IsNull(takenList);
         }
 

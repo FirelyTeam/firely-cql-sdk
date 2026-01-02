@@ -8,6 +8,7 @@
 
 #nullable enable
 
+using System.Globalization;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
@@ -97,8 +98,8 @@ namespace CoreTests
 
             mf.Count().Should().Be(9);  // b and B are the same, h should appear with and without description
 
-            mf.Count(c => c.code!.ToLower() == "b").Should().Be(1);
-            mf.Count(c => c.code!.ToLower() == "h").Should().Be(2);
+            mf.Count(c => c.code!.ToLowerInvariant() == "b").Should().Be(1);
+            mf.Count(c => c.code!.ToLowerInvariant() == "h").Should().Be(2);
             mf.Contains(new CqlCode("h", nu), comparer).Should().BeTrue();
             mf.Contains(new CqlCode("h", nu, display: letters), comparer).Should().BeTrue();
         }
