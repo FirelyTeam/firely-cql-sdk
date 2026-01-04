@@ -131,6 +131,7 @@ Use this header format with "Firely, NCQA":
 - **Executable extensions**: Windows uses `.exe`, Unix does not - handle conditionally
 - **Line endings**: Git should handle automatically, but be aware of CRLF (Windows) vs LF (Unix)
 - **Shell availability**: Use `pwsh` for PowerShell, `bash` for Bash - don't assume shell locations
+- **PowerShell non-interactive mode**: When running PowerShell commands via `run_command_in_terminal`, always use non-interactive mode by adding the `-NonInteractive` flag (e.g., `pwsh -NonInteractive -Command "..."`) to prevent commands from hanging waiting for user input
 - **File locking**: Use portable mechanisms (e.g., directory-based locking with `mkdir`) instead of platform-specific tools like `flock` (not available on macOS by default)
 
 ### Code Generation Version Management
