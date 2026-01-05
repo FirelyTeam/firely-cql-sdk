@@ -692,9 +692,13 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS146FHIRApproTestPharyngitis_1_0_000() {}
 
     public static CMS146FHIRApproTestPharyngitis_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

@@ -650,9 +650,13 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000() {}
 
     public static AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

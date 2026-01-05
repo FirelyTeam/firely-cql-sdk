@@ -123,9 +123,13 @@ public partial class AdultOutpatientEncounters_4_19_000 : ILibrary, ISingleton<A
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private AdultOutpatientEncounters_4_19_000() {}
 
     public static AdultOutpatientEncounters_4_19_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

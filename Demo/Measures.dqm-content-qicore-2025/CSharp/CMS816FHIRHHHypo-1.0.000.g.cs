@@ -1035,9 +1035,13 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS816FHIRHHHypo_1_0_000() {}
 
     public static CMS816FHIRHHHypo_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

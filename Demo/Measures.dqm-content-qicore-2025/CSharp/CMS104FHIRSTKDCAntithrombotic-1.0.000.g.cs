@@ -542,9 +542,13 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS104FHIRSTKDCAntithrombotic_1_0_000() {}
 
     public static CMS104FHIRSTKDCAntithrombotic_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

@@ -206,9 +206,13 @@ public partial class CMS75FHIRChildrenDentalDecay_1_0_000 : ILibrary, ISingleton
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS75FHIRChildrenDentalDecay_1_0_000() {}
 
     public static CMS75FHIRChildrenDentalDecay_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

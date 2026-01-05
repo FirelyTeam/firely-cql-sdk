@@ -184,9 +184,13 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private NCQAEncounter_1_0_0() {}
 
     public static NCQAEncounter_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

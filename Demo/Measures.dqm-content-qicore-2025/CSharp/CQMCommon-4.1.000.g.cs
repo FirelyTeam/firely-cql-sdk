@@ -3774,9 +3774,13 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CQMCommon_4_1_000() {}
 
     public static CQMCommon_4_1_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

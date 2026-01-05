@@ -219,9 +219,13 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private PalliativeCare_1_18_000() {}
 
     public static PalliativeCare_1_18_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

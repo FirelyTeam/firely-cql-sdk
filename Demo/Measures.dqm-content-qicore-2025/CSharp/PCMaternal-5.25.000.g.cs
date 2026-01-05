@@ -1044,9 +1044,13 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private PCMaternal_5_25_000() {}
 
     public static PCMaternal_5_25_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

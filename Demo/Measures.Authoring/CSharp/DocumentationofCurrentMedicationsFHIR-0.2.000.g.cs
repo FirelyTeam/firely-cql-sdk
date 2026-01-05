@@ -293,9 +293,13 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private DocumentationofCurrentMedicationsFHIR_0_2_000() {}
 
     public static DocumentationofCurrentMedicationsFHIR_0_2_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

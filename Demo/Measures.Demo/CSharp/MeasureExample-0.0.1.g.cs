@@ -101,9 +101,13 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private MeasureExample_0_0_1() {}
 
     public static MeasureExample_0_0_1 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

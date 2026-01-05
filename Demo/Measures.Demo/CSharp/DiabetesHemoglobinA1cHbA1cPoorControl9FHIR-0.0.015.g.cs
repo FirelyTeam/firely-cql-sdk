@@ -396,9 +396,13 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015() {}
 
     public static DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

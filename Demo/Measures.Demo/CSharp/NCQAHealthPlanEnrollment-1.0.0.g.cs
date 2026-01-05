@@ -450,9 +450,13 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private NCQAHealthPlanEnrollment_1_0_0() {}
 
     public static NCQAHealthPlanEnrollment_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

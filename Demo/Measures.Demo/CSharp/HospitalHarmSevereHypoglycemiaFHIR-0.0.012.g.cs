@@ -504,9 +504,13 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private HospitalHarmSevereHypoglycemiaFHIR_0_0_012() {}
 
     public static HospitalHarmSevereHypoglycemiaFHIR_0_0_012 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

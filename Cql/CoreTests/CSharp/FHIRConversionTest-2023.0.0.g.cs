@@ -7191,9 +7191,13 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private FHIRConversionTest_2023_0_0() {}
 
     public static FHIRConversionTest_2023_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

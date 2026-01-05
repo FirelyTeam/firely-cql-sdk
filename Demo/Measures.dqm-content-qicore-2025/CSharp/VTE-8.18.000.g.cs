@@ -236,9 +236,13 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private VTE_8_18_000() {}
 
     public static VTE_8_18_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

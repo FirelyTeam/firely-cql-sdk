@@ -430,9 +430,13 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private AdvancedIllnessandFrailty_1_27_000() {}
 
     public static AdvancedIllnessandFrailty_1_27_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

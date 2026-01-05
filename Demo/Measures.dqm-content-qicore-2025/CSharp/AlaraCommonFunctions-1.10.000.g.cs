@@ -526,9 +526,13 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private AlaraCommonFunctions_1_10_000() {}
 
     public static AlaraCommonFunctions_1_10_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

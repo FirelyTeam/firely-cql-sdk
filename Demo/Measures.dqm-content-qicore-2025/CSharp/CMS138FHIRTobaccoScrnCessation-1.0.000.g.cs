@@ -938,9 +938,13 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS138FHIRTobaccoScrnCessation_1_0_000() {}
 
     public static CMS138FHIRTobaccoScrnCessation_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

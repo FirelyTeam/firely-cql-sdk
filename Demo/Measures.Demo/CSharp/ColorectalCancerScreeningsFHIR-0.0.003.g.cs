@@ -1616,9 +1616,13 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private ColorectalCancerScreeningsFHIR_0_0_003() {}
 
     public static ColorectalCancerScreeningsFHIR_0_0_003 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

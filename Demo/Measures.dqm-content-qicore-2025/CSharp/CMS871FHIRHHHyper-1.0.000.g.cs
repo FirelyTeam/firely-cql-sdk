@@ -1748,9 +1748,13 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS871FHIRHHHyper_1_0_000() {}
 
     public static CMS871FHIRHHHyper_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

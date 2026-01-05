@@ -693,9 +693,13 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private BreastCancerScreeningsFHIR_0_0_009() {}
 
     public static BreastCancerScreeningsFHIR_0_0_009 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

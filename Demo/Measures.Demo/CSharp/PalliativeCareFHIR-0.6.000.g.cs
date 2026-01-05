@@ -176,9 +176,13 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private PalliativeCareFHIR_0_6_000() {}
 
     public static PalliativeCareFHIR_0_6_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

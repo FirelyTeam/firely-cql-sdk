@@ -220,9 +220,13 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private NHSNHelpers_0_1_000() {}
 
     public static NHSNHelpers_0_1_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

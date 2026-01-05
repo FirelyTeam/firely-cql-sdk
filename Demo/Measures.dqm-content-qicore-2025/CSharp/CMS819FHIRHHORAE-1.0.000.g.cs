@@ -469,9 +469,13 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS819FHIRHHORAE_1_0_000() {}
 
     public static CMS819FHIRHHORAE_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

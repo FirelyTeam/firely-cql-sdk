@@ -631,9 +631,13 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS154FHIRAppropriateTxforURI_1_0_000() {}
 
     public static CMS154FHIRAppropriateTxforURI_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

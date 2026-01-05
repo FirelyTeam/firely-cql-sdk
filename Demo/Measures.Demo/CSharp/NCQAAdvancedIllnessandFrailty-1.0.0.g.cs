@@ -564,9 +564,13 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private NCQAAdvancedIllnessandFrailty_1_0_0() {}
 
     public static NCQAAdvancedIllnessandFrailty_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

@@ -158,9 +158,13 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private NCQAPalliativeCare_1_0_0() {}
 
     public static NCQAPalliativeCare_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

@@ -760,9 +760,13 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006() {}
 
     public static HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

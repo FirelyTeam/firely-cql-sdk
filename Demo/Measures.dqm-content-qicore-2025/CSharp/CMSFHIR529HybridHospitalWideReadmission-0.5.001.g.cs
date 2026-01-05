@@ -2596,9 +2596,13 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMSFHIR529HybridHospitalWideReadmission_0_5_001() {}
 
     public static CMSFHIR529HybridHospitalWideReadmission_0_5_001 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

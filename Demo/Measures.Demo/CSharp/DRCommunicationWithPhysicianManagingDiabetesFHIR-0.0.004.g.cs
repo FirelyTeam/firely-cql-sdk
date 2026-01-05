@@ -862,9 +862,13 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004() {}
 
     public static DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

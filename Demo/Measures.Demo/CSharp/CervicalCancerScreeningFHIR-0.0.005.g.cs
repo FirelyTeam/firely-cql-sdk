@@ -578,9 +578,13 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CervicalCancerScreeningFHIR_0_0_005() {}
 
     public static CervicalCancerScreeningFHIR_0_0_005 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

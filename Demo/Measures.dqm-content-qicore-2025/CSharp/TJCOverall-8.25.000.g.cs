@@ -348,9 +348,13 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private TJCOverall_8_25_000() {}
 
     public static TJCOverall_8_25_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

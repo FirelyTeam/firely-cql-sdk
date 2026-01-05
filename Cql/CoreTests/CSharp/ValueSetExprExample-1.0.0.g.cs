@@ -197,9 +197,13 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private ValueSetExprExample_1_0_0() {}
 
     public static ValueSetExprExample_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

@@ -292,9 +292,13 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private Hospice_6_18_000() {}
 
     public static Hospice_6_18_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

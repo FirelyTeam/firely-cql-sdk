@@ -1295,9 +1295,13 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private NCQAFHIRBase_1_0_0() {}
 
     public static NCQAFHIRBase_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

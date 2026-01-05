@@ -33,9 +33,13 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CqlBooleanTest_1_0_000() {}
 
     public static CqlBooleanTest_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

@@ -489,9 +489,13 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012() {}
 
     public static SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

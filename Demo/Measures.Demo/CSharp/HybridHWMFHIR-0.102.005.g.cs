@@ -813,9 +813,13 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private HybridHWMFHIR_0_102_005() {}
 
     public static HybridHWMFHIR_0_102_005 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

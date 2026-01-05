@@ -693,9 +693,13 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private Exam125FHIR_0_0_009() {}
 
     public static Exam125FHIR_0_0_009 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

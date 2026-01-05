@@ -782,9 +782,13 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS142FHIRCommWithDrManagingDiab_1_0_000() {}
 
     public static CMS142FHIRCommWithDrManagingDiab_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

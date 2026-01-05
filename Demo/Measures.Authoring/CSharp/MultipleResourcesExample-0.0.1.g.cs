@@ -113,9 +113,13 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private MultipleResourcesExample_0_0_1() {}
 
     public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

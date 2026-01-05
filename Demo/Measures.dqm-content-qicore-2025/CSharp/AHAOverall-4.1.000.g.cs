@@ -1248,9 +1248,13 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private AHAOverall_4_1_000() {}
 
     public static AHAOverall_4_1_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

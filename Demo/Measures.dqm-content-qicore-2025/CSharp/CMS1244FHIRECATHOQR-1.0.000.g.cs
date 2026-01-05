@@ -1447,9 +1447,13 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS1244FHIRECATHOQR_1_0_000() {}
 
     public static CMS1244FHIRECATHOQR_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

@@ -169,9 +169,13 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private HospiceFHIR4_2_3_000() {}
 
     public static HospiceFHIR4_2_3_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

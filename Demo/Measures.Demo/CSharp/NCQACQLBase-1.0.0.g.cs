@@ -1351,9 +1351,13 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private NCQACQLBase_1_0_0() {}
 
     public static NCQACQLBase_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

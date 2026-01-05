@@ -596,9 +596,13 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private BCSEHEDISMY2022_1_0_0() {}
 
     public static BCSEHEDISMY2022_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

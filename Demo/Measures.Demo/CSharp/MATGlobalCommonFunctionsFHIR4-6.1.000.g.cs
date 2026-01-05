@@ -1459,9 +1459,13 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private MATGlobalCommonFunctionsFHIR4_6_1_000() {}
 
     public static MATGlobalCommonFunctionsFHIR4_6_1_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

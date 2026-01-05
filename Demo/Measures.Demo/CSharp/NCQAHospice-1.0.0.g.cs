@@ -101,9 +101,13 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private NCQAHospice_1_0_0() {}
 
     public static NCQAHospice_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

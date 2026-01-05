@@ -311,9 +311,13 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS1074FHIRCTIQR_1_0_000() {}
 
     public static CMS1074FHIRCTIQR_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

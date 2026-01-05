@@ -822,9 +822,13 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS157FHIRPainIntensityQuantified_1_0_000() {}
 
     public static CMS157FHIRPainIntensityQuantified_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

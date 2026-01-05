@@ -399,9 +399,13 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private TJCOverallFHIR_1_8_000() {}
 
     public static TJCOverallFHIR_1_8_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

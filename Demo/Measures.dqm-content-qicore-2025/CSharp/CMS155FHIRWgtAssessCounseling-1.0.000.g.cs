@@ -580,9 +580,13 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS155FHIRWgtAssessCounseling_1_0_000() {}
 
     public static CMS155FHIRWgtAssessCounseling_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

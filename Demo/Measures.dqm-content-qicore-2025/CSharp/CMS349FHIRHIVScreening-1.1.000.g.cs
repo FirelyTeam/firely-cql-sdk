@@ -384,9 +384,13 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS349FHIRHIVScreening_1_1_000() {}
 
     public static CMS349FHIRHIVScreening_1_1_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

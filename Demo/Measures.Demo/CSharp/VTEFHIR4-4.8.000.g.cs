@@ -164,9 +164,13 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private VTEFHIR4_4_8_000() {}
 
     public static VTEFHIR4_4_8_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

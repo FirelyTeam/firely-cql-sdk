@@ -44,9 +44,13 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private ParameterNameTest_1_0_0() {}
 
     public static ParameterNameTest_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

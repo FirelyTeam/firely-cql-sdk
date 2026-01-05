@@ -1197,9 +1197,13 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private FHIR347_0_1_021() {}
 
     public static FHIR347_0_1_021 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

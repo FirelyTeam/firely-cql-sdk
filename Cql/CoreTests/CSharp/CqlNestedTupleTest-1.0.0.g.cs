@@ -33,9 +33,13 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CqlNestedTupleTest_1_0_0() {}
 
     public static CqlNestedTupleTest_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

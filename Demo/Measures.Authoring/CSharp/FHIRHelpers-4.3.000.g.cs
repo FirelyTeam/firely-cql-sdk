@@ -2780,9 +2780,13 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private FHIRHelpers_4_3_000() {}
 
     public static FHIRHelpers_4_3_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

@@ -481,9 +481,13 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private DischargedonAntithromboticTherapyFHIR_0_0_010() {}
 
     public static DischargedonAntithromboticTherapyFHIR_0_0_010 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

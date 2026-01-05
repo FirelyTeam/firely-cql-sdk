@@ -651,9 +651,13 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS131FHIRDiabetesEyeExam_1_0_000() {}
 
     public static CMS131FHIRDiabetesEyeExam_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

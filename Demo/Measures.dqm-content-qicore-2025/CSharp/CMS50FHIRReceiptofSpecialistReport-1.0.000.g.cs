@@ -488,9 +488,13 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS50FHIRReceiptofSpecialistReport_1_0_000() {}
 
     public static CMS50FHIRReceiptofSpecialistReport_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

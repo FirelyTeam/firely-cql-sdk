@@ -2271,9 +2271,13 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private QICoreCommon_4_0_000() {}
 
     public static QICoreCommon_4_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

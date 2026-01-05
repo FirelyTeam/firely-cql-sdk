@@ -1647,9 +1647,13 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS986FHIRMalnutritionScore_1_0_000() {}
 
     public static CMS986FHIRMalnutritionScore_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

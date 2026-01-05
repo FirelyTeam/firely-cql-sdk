@@ -149,9 +149,13 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private ParametersExample_0_0_1() {}
 
     public static ParametersExample_0_0_1 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

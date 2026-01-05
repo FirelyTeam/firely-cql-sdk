@@ -86,9 +86,13 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private ConceptDefTest_1_0_0() {}
 
     public static ConceptDefTest_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

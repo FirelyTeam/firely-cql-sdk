@@ -2203,9 +2203,13 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMSFHIR844HybridHospitalWideMortality_0_5_001() {}
 
     public static CMSFHIR844HybridHospitalWideMortality_0_5_001 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

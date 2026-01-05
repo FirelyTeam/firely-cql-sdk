@@ -2602,9 +2602,13 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CumulativeMedicationDuration_6_0_000() {}
 
     public static CumulativeMedicationDuration_6_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

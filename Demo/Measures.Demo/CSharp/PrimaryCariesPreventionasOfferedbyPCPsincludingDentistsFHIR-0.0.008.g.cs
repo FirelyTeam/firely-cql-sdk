@@ -356,9 +356,13 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008() {}
 
     public static PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

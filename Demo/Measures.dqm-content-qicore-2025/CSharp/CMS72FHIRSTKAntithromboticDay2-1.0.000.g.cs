@@ -1175,9 +1175,13 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS72FHIRSTKAntithromboticDay2_1_0_000() {}
 
     public static CMS72FHIRSTKAntithromboticDay2_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

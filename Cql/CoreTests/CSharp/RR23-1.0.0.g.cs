@@ -200,9 +200,13 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private RR23_1_0_0() {}
 
     public static RR23_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

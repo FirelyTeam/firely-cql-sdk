@@ -428,9 +428,13 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS68FHIRDocumentationCurrentMeds_1_0_000() {}
 
     public static CMS68FHIRDocumentationCurrentMeds_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

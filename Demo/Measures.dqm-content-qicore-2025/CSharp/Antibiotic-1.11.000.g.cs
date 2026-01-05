@@ -161,9 +161,13 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private Antibiotic_1_11_000() {}
 
     public static Antibiotic_1_11_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

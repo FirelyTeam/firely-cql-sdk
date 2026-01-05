@@ -172,9 +172,13 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private NCQAStatus_1_0_0() {}
 
     public static NCQAStatus_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

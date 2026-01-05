@@ -1073,9 +1073,13 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private Status_1_6_000() {}
 
     public static Status_1_6_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

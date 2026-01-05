@@ -1144,9 +1144,13 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS159FHIRDepRemissionat12Months_1_0_000() {}
 
     public static CMS159FHIRDepRemissionat12Months_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

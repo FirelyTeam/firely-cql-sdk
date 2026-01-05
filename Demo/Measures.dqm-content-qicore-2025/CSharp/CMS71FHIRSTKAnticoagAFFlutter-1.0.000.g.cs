@@ -926,9 +926,13 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS71FHIRSTKAnticoagAFFlutter_1_0_000() {}
 
     public static CMS71FHIRSTKAnticoagAFFlutter_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

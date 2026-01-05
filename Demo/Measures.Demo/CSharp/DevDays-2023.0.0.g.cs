@@ -168,9 +168,13 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private DevDays_2023_0_0() {}
 
     public static DevDays_2023_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

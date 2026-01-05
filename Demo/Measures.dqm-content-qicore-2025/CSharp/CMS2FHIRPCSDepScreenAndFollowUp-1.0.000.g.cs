@@ -1647,9 +1647,13 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS2FHIRPCSDepScreenAndFollowUp_1_0_000() {}
 
     public static CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

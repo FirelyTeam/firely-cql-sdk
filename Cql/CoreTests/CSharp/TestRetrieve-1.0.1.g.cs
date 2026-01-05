@@ -146,9 +146,13 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private TestRetrieve_1_0_1() {}
 
     public static TestRetrieve_1_0_1 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

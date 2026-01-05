@@ -1135,9 +1135,13 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS771FHIRUrinarySymptomScoreBPH_1_0_000() {}
 
     public static CMS771FHIRUrinarySymptomScoreBPH_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

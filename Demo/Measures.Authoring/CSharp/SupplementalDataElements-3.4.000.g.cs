@@ -379,9 +379,13 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private SupplementalDataElements_3_4_000() {}
 
     public static SupplementalDataElements_3_4_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

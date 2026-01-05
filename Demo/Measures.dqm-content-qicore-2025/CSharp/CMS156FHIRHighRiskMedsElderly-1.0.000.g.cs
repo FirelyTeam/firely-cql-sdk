@@ -2037,9 +2037,13 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS156FHIRHighRiskMedsElderly_1_0_000() {}
 
     public static CMS156FHIRHighRiskMedsElderly_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

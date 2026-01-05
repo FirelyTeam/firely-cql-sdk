@@ -60,9 +60,13 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private TestRetrieveInclude_1_0_1() {}
 
     public static TestRetrieveInclude_1_0_1 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

@@ -1033,9 +1033,13 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CumulativeMedicationDurationFHIR4_1_0_000() {}
 
     public static CumulativeMedicationDurationFHIR4_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

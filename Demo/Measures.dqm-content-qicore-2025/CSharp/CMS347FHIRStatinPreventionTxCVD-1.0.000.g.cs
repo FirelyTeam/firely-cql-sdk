@@ -1371,9 +1371,13 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS347FHIRStatinPreventionTxCVD_1_0_000() {}
 
     public static CMS347FHIRStatinPreventionTxCVD_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

@@ -2363,9 +2363,13 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS996FHIRAptTxforSTEMI_2_0_000() {}
 
     public static CMS996FHIRAptTxforSTEMI_2_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

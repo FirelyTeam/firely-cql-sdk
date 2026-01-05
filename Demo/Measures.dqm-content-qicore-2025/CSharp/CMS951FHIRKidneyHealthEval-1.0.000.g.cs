@@ -585,9 +585,13 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private CMS951FHIRKidneyHealthEval_1_0_000() {}
 
     public static CMS951FHIRKidneyHealthEval_1_0_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

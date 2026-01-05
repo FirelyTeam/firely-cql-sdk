@@ -349,9 +349,13 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
 
     #endregion CodeSystems
 
+    #region Singleton Lifetime Members
+
     private NCQATerminology_1_0_0() {}
 
     public static NCQATerminology_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 

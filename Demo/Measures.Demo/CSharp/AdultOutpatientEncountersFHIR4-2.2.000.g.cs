@@ -112,9 +112,13 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
     private AdultOutpatientEncountersFHIR4_2_2_000() {}
 
     public static AdultOutpatientEncountersFHIR4_2_2_000 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 
