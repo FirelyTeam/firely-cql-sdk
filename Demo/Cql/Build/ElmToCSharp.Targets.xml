@@ -32,7 +32,7 @@
 	        BeforeTargets="PreBuildEvent">
 
 		<PropertyGroup>
-			<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
+			<CSharpDirectory Condition="'$(CSharpDirectory)'==''">$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 
 			<!-- Comment out these if you don't need them -->
 			<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
