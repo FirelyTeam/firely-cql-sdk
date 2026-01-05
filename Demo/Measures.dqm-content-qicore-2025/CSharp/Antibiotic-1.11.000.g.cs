@@ -30,15 +30,15 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
 
     #region Nested Type - Cached<T>
 
-    private struct Cached<T>(object CacheVersion, T CachedValue)
+    private struct Cached<T>(long CacheVersion, T CachedValue)
     {
         public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
         {
             var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
+            if (cqlContextCacheVersion is 0)
             {
                 // No caching, clear out previous values
-                CacheVersion = null;
+                CacheVersion = 0;
                 CachedValue = default;
                 var value = factory();
                 return value;
