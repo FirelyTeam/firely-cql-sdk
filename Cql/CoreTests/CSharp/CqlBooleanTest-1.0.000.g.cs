@@ -16,30 +16,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CqlBooleanTest", "1.0.000")]
 public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTest_1_0_000>
 {
-    #region Functions and Expressions
-
-    private readonly Cached<bool?> _SomethingTrueEqualsTrue_Cached = new();
-
-    [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
-    public bool? SomethingTrueEqualsTrue(CqlContext context) =>
-        _SomethingTrueEqualsTrue_Cached.GetOrReplace(
-            context,
-            () => {
-                bool? a_ = context.Operators.Equal(1, 1);
-                bool? b_ = context.Operators.Equal(a_, true);
-                return b_;
-            });
-
-
-    #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
     private CqlBooleanTest_1_0_000() {}
 
     public static CqlBooleanTest_1_0_000 Instance { get; } = new();
-
-    #endregion
 
     #region ILibrary Implementation
 
@@ -51,15 +30,15 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     #region Nested Type - Cached<T>
 
-    private struct Cached<T>(long CacheVersion, T CachedValue)
+    private struct Cached<T>(object CacheVersion, T CachedValue)
     {
         public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
         {
             var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
+            if (cqlContextCacheVersion is null)
             {
                 // No caching, clear out previous values
-                CacheVersion = 0;
+                CacheVersion = null;
                 CachedValue = default;
                 var value = factory();
                 return value;
@@ -82,5 +61,22 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
     }
 
     #endregion
+
+    #region Functions and Expressions
+
+    private Cached<bool?> _SomethingTrueEqualsTrue_Cached = new();
+
+    [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
+    public bool? SomethingTrueEqualsTrue(CqlContext context) =>
+        _SomethingTrueEqualsTrue_Cached.GetOrReplace(
+            context,
+            () => {
+                bool? a_ = context.Operators.Equal(1, 1);
+                bool? b_ = context.Operators.Equal(a_, true);
+                return b_;
+            });
+
+
+    #endregion Functions and Expressions
 
 }

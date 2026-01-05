@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ParametersExample", "0.0.1")]
 public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersExample_0_0_1>
 {
+    private ParametersExample_0_0_1() {}
+
+    public static ParametersExample_0_0_1 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "ParametersExample";
+    public string Version => "0.0.1";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Marital Status", valueSetId: "http://hl7.org/fhir/ValueSet/marital-status", valueSetVersion: null)]
@@ -26,7 +72,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     #region Parameters
 
-    private readonly Cached<int?> _AgeThreshold_Cached = new();
+    private Cached<int?> _AgeThreshold_Cached = new();
 
     [CqlParameterDefinition("AgeThreshold")]
     public int? AgeThreshold(CqlContext context) =>
@@ -42,7 +88,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -55,7 +101,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             });
 
 
-    private readonly Cached<CqlDate> _CurrentDate_Cached = new();
+    private Cached<CqlDate> _CurrentDate_Cached = new();
 
     [CqlExpressionDefinition("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context) =>
@@ -67,7 +113,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             });
 
 
-    private readonly Cached<Patient> _Patient_Filter_Cached = new();
+    private Cached<Patient> _Patient_Filter_Cached = new();
 
     [CqlExpressionDefinition("Patient Filter")]
     public Patient Patient_Filter(CqlContext context) =>
@@ -105,7 +151,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             });
 
 
-    private readonly Cached<Date> _Patient_Birthdate_Cached = new();
+    private Cached<Date> _Patient_Birthdate_Cached = new();
 
     [CqlExpressionDefinition("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context) =>
@@ -118,7 +164,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             });
 
 
-    private readonly Cached<int?> _Patient_Age_in_Years_Cached = new();
+    private Cached<int?> _Patient_Age_in_Years_Cached = new();
 
     [CqlExpressionDefinition("Patient Age in Years")]
     public int? Patient_Age_in_Years(CqlContext context) =>
@@ -133,7 +179,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             });
 
 
-    private readonly Cached<bool?> _Patient_Older_Than_AgeThreshold_Cached = new();
+    private Cached<bool?> _Patient_Older_Than_AgeThreshold_Cached = new();
 
     [CqlExpressionDefinition("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context) =>
@@ -148,55 +194,5 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
 
     #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
-    private ParametersExample_0_0_1() {}
-
-    public static ParametersExample_0_0_1 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "ParametersExample";
-    public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

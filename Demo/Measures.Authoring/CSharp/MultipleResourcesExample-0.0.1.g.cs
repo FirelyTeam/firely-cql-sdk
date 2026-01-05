@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>
 {
+    private MultipleResourcesExample_0_0_1() {}
+
+    public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "MultipleResourcesExample";
+    public string Version => "0.0.1";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Lung Cancer", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", valueSetVersion: null)]
@@ -48,7 +94,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -61,7 +107,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _Smoking_status_observation_Cached = new();
+    private Cached<IEnumerable<Observation>> _Smoking_status_observation_Cached = new();
 
     [CqlExpressionDefinition("Smoking status observation")]
     public IEnumerable<Observation> Smoking_status_observation(CqlContext context) =>
@@ -88,7 +134,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
             });
 
 
-    private readonly Cached<IEnumerable<Condition>> _Lung_cancer_diagnosis_Cached = new();
+    private Cached<IEnumerable<Condition>> _Lung_cancer_diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Lung cancer diagnosis")]
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context) =>
@@ -112,55 +158,5 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
 
     #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
-    private MultipleResourcesExample_0_0_1() {}
-
-    public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "MultipleResourcesExample";
-    public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ColorectalCancerScreeningsFHIR", "0.0.003")]
 public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISingleton<ColorectalCancerScreeningsFHIR_0_0_003>
 {
+    private ColorectalCancerScreeningsFHIR_0_0_003() {}
+
+    public static ColorectalCancerScreeningsFHIR_0_0_003 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "ColorectalCancerScreeningsFHIR";
+    public string Version => "0.0.003";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, AdultOutpatientEncountersFHIR4_2_2_000.Instance, HospiceFHIR4_2_3_000.Instance, AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance, PalliativeCareFHIR_0_6_000.Instance, CumulativeMedicationDurationFHIR4_1_0_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Acute Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", valueSetVersion: null)]
@@ -164,7 +210,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -183,7 +229,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -196,7 +242,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
+    private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
@@ -208,7 +254,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
@@ -220,7 +266,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
+    private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
@@ -232,7 +278,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
+    private Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -244,7 +290,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Telehealth_Services_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Telehealth_Services_Cached = new();
 
     [CqlExpressionDefinition("Telehealth Services")]
     public IEnumerable<Encounter> Telehealth_Services(CqlContext context) =>
@@ -274,7 +320,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<int?> _Age_at_start_of_Measurement_Period_Cached = new();
+    private Cached<int?> _Age_at_start_of_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Age at start of Measurement Period")]
     public int? Age_at_start_of_Measurement_Period(CqlContext context) =>
@@ -293,7 +339,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<bool?> _Initial_Population_Cached = new();
+    private Cached<bool?> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
@@ -319,7 +365,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<bool?> _Denominator_Cached = new();
+    private Cached<bool?> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
@@ -331,7 +377,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Condition>> _Malignant_Neoplasm_Cached = new();
+    private Cached<IEnumerable<Condition>> _Malignant_Neoplasm_Cached = new();
 
     [CqlExpressionDefinition("Malignant Neoplasm")]
     public IEnumerable<Condition> Malignant_Neoplasm(CqlContext context) =>
@@ -355,7 +401,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Procedure>> _Total_Colectomy_Performed_Cached = new();
+    private Cached<IEnumerable<Procedure>> _Total_Colectomy_Performed_Cached = new();
 
     [CqlExpressionDefinition("Total Colectomy Performed")]
     public IEnumerable<Procedure> Total_Colectomy_Performed(CqlContext context) =>
@@ -384,7 +430,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Condition>> _Total_Colectomy_Condition_Cached = new();
+    private Cached<IEnumerable<Condition>> _Total_Colectomy_Condition_Cached = new();
 
     [CqlExpressionDefinition("Total Colectomy Condition")]
     public IEnumerable<Condition> Total_Colectomy_Condition(CqlContext context) =>
@@ -408,7 +454,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<bool?> _Denominator_Exclusions_Cached = new();
+    private Cached<bool?> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
@@ -445,7 +491,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>> _Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>> _Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Cached = new();
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Display Date, Result, Category, Status")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status(CqlContext context) =>
@@ -548,7 +594,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed_Cached = new();
+    private Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed_Cached = new();
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed(CqlContext context) =>
@@ -627,7 +673,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Cached = new();
+    private Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Cached = new();
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset(CqlContext context) =>
@@ -706,7 +752,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Cached = new();
+    private Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Cached = new();
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed without appropriate category, ignore status, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset(CqlContext context) =>
@@ -777,7 +823,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Cached = new();
+    private Cached<IEnumerable<Observation>> _Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Cached = new();
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed without appropriate status, ignore category, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset(CqlContext context) =>
@@ -813,7 +859,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>> _Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>> _Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Cached = new();
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Display Date, Result, Category, Status")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status(CqlContext context) =>
@@ -919,7 +965,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed_Cached = new();
+    private Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed_Cached = new();
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed(CqlContext context) =>
@@ -1006,7 +1052,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Cached = new();
+    private Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Cached = new();
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset(CqlContext context) =>
@@ -1093,7 +1139,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Cached = new();
+    private Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Cached = new();
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed without appropriate category, ignore status, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset(CqlContext context) =>
@@ -1172,7 +1218,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Cached = new();
+    private Cached<IEnumerable<Observation>> _Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Cached = new();
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed without appropriate status, ignore category, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset(CqlContext context) =>
@@ -1216,7 +1262,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<CqlDateTime>> _CT_Colonography_Display_Date_Cached = new();
+    private Cached<IEnumerable<CqlDateTime>> _CT_Colonography_Display_Date_Cached = new();
 
     [CqlExpressionDefinition("CT Colonography Display Date")]
     public IEnumerable<CqlDateTime> CT_Colonography_Display_Date(CqlContext context) =>
@@ -1257,7 +1303,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _CT_Colonography_Performed_Cached = new();
+    private Cached<IEnumerable<Observation>> _CT_Colonography_Performed_Cached = new();
 
     [CqlExpressionDefinition("CT Colonography Performed")]
     public IEnumerable<Observation> CT_Colonography_Performed(CqlContext context) =>
@@ -1299,7 +1345,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Observation>> _CT_Colonography_Performed_without_appropriate_status_Cached = new();
+    private Cached<IEnumerable<Observation>> _CT_Colonography_Performed_without_appropriate_status_Cached = new();
 
     [CqlExpressionDefinition("CT Colonography Performed without appropriate status")]
     public IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status(CqlContext context) =>
@@ -1342,7 +1388,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<CqlDateTime>> _Flexible_Sigmoidoscopy_Display_Date_Cached = new();
+    private Cached<IEnumerable<CqlDateTime>> _Flexible_Sigmoidoscopy_Display_Date_Cached = new();
 
     [CqlExpressionDefinition("Flexible Sigmoidoscopy Display Date")]
     public IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date(CqlContext context) =>
@@ -1383,7 +1429,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Procedure>> _Flexible_Sigmoidoscopy_Performed_Cached = new();
+    private Cached<IEnumerable<Procedure>> _Flexible_Sigmoidoscopy_Performed_Cached = new();
 
     [CqlExpressionDefinition("Flexible Sigmoidoscopy Performed")]
     public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed(CqlContext context) =>
@@ -1419,7 +1465,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Procedure>> _Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Cached = new();
+    private Cached<IEnumerable<Procedure>> _Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Cached = new();
 
     [CqlExpressionDefinition("Flexible Sigmoidoscopy Performed without appropriate status")]
     public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status(CqlContext context) =>
@@ -1456,7 +1502,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<CqlDateTime>> _Colonoscopy_Display_Date_Cached = new();
+    private Cached<IEnumerable<CqlDateTime>> _Colonoscopy_Display_Date_Cached = new();
 
     [CqlExpressionDefinition("Colonoscopy Display Date")]
     public IEnumerable<CqlDateTime> Colonoscopy_Display_Date(CqlContext context) =>
@@ -1497,7 +1543,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Procedure>> _Colonoscopy_Performed_Cached = new();
+    private Cached<IEnumerable<Procedure>> _Colonoscopy_Performed_Cached = new();
 
     [CqlExpressionDefinition("Colonoscopy Performed")]
     public IEnumerable<Procedure> Colonoscopy_Performed(CqlContext context) =>
@@ -1533,7 +1579,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Procedure>> _Colonoscopy_Performed_without_appropriate_status_Cached = new();
+    private Cached<IEnumerable<Procedure>> _Colonoscopy_Performed_without_appropriate_status_Cached = new();
 
     [CqlExpressionDefinition("Colonoscopy Performed without appropriate status")]
     public IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status(CqlContext context) =>
@@ -1570,7 +1616,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<bool?> _Numerator_Cached = new();
+    private Cached<bool?> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
@@ -1595,7 +1641,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<bool?> _Final_Numerator_Population_Cached = new();
+    private Cached<bool?> _Final_Numerator_Population_Cached = new();
 
     [CqlExpressionDefinition("Final Numerator Population")]
     public bool? Final_Numerator_Population(CqlContext context) =>
@@ -1616,22 +1662,6 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
 
     #endregion Functions and Expressions
 
-    #region Singleton Lifetime Members
-
-    private ColorectalCancerScreeningsFHIR_0_0_003() {}
-
-    public static ColorectalCancerScreeningsFHIR_0_0_003 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "ColorectalCancerScreeningsFHIR";
-    public string Version => "0.0.003";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, AdultOutpatientEncountersFHIR4_2_2_000.Instance, HospiceFHIR4_2_3_000.Instance, AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance, PalliativeCareFHIR_0_6_000.Instance, CumulativeMedicationDurationFHIR4_1_0_000.Instance];
-
-    #endregion ILibrary Implementation
-
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV = new(
@@ -1639,39 +1669,5 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
        ["occultDate", "occultResult", "occultCategoryCode", "occultStatus"]);
 
     #endregion CqlTupleMetadata Properties
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

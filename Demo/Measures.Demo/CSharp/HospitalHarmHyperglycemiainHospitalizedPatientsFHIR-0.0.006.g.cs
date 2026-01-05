@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR", "0.0.006")]
 public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006 : ILibrary, ISingleton<HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006>
 {
+    private HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006() {}
+
+    public static HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "HospitalHarmHyperglycemiainHospitalizedPatientsFHIR";
+    public string Version => "0.0.006";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("birth date", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4", valueSetVersion: null)]
@@ -60,7 +106,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -76,7 +122,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -89,7 +135,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
+    private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
@@ -101,7 +147,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
@@ -113,7 +159,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
+    private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
@@ -125,7 +171,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
+    private Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -137,7 +183,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Inpatient_Encounter_During_Measurement_Period_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Inpatient_Encounter_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Inpatient Encounter During Measurement Period")]
     public IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period(CqlContext context) =>
@@ -150,7 +196,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
@@ -176,7 +222,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>> _Qualifying_Encounters_With_Hospitalization_Period_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>> _Qualifying_Encounters_With_Hospitalization_Period_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters With Hospitalization Period")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> Qualifying_Encounters_With_Hospitalization_Period(CqlContext context) =>
@@ -197,7 +243,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_With_Existing_Diabetes_Diagnosis_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_With_Existing_Diabetes_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters With Existing Diabetes Diagnosis")]
     public IEnumerable<Encounter> Qualifying_Encounters_With_Existing_Diabetes_Diagnosis(CqlContext context) =>
@@ -244,7 +290,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_With_Hypoglycemic_Medication_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_With_Hypoglycemic_Medication_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters With Hypoglycemic Medication")]
     public IEnumerable<Encounter> Qualifying_Encounters_With_Hypoglycemic_Medication(CqlContext context) =>
@@ -317,7 +363,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters With Elevated Blood Glucose Lab")]
     public IEnumerable<Encounter> Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab(CqlContext context) =>
@@ -366,7 +412,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
@@ -382,7 +428,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
@@ -494,7 +540,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     }
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?>> _Pertinent_Encounters_With_Days_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?>> _Pertinent_Encounters_With_Days_Cached = new();
 
     [CqlExpressionDefinition("Pertinent Encounters With Days")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> Pertinent_Encounters_With_Days(CqlContext context) =>
@@ -518,7 +564,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?>> _Pertinent_Encounters_With_Glucose_Result_Days_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?>> _Pertinent_Encounters_With_Glucose_Result_Days_Cached = new();
 
     [CqlExpressionDefinition("Pertinent Encounters With Glucose Result Days")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?> Pertinent_Encounters_With_Glucose_Result_Days(CqlContext context) =>
@@ -611,7 +657,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>> _Pertinent_Encounters_With_Hyperglycemic_Event_Days_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>> _Pertinent_Encounters_With_Hyperglycemic_Event_Days_Cached = new();
 
     [CqlExpressionDefinition("Pertinent Encounters With Hyperglycemic Event Days")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> Pertinent_Encounters_With_Hyperglycemic_Event_Days(CqlContext context) =>
@@ -664,7 +710,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
@@ -760,22 +806,6 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
     #endregion Functions and Expressions
 
-    #region Singleton Lifetime Members
-
-    private HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006() {}
-
-    public static HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "HospitalHarmHyperglycemiainHospitalizedPatientsFHIR";
-    public string Version => "0.0.006";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
-
-    #endregion ILibrary Implementation
-
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BEJFJZgXEOCibEHSLPSMaRGGM = new(
@@ -811,39 +841,5 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
        ["encounter", "hospitalizationPeriod"]);
 
     #endregion CqlTupleMetadata Properties
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

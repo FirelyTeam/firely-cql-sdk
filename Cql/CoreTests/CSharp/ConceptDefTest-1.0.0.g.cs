@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ConceptDefTest", "1.0.0")]
 public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_1_0_0>
 {
+    private ConceptDefTest_1_0_0() {}
+
+    public static ConceptDefTest_1_0_0 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "ConceptDefTest";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Codes
 
     [CqlCodeDefinition("Diabetes Mellitus", codeId: "44054006", codeSystem: "http://snomed.info/sct")]
@@ -71,7 +117,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -85,55 +131,5 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
 
     #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
-    private ConceptDefTest_1_0_0() {}
-
-    public static ConceptDefTest_1_0_0 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "ConceptDefTest";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

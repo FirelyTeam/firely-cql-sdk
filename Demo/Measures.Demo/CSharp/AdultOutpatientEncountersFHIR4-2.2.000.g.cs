@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISingleton<AdultOutpatientEncountersFHIR4_2_2_000>
 {
+    private AdultOutpatientEncountersFHIR4_2_2_000() {}
+
+    public static AdultOutpatientEncountersFHIR4_2_2_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "AdultOutpatientEncountersFHIR4";
+    public string Version => "2.2.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Annual Wellness Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", valueSetVersion: null)]
@@ -42,7 +88,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -58,7 +104,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -71,7 +117,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
@@ -111,55 +157,5 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
 
 
     #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
-    private AdultOutpatientEncountersFHIR4_2_2_000() {}
-
-    public static AdultOutpatientEncountersFHIR4_2_2_000 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "AdultOutpatientEncountersFHIR4";
-    public string Version => "2.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

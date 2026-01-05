@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CumulativeMedicationDurationFHIR4", "1.0.000")]
 public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISingleton<CumulativeMedicationDurationFHIR4_1_0_000>
 {
+    private CumulativeMedicationDurationFHIR4_1_0_000() {}
+
+    public static CumulativeMedicationDurationFHIR4_1_0_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "CumulativeMedicationDurationFHIR4";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Codes
 
     [CqlCodeDefinition("AC", codeId: "AC", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
@@ -166,7 +212,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
     #region Parameters
 
-    private readonly Cached<string> _ErrorLevel_Cached = new();
+    private Cached<string> _ErrorLevel_Cached = new();
 
     [CqlParameterDefinition("ErrorLevel")]
     public string ErrorLevel(CqlContext context) =>
@@ -182,7 +228,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -1032,55 +1078,5 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
 
     #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
-    private CumulativeMedicationDurationFHIR4_1_0_000() {}
-
-    public static CumulativeMedicationDurationFHIR4_1_0_000 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "CumulativeMedicationDurationFHIR4";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

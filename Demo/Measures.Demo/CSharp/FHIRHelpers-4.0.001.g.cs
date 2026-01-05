@@ -16,9 +16,55 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("FHIRHelpers", "4.0.001")]
 public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_001>
 {
+    private FHIRHelpers_4_0_001() {}
+
+    public static FHIRHelpers_4_0_001 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "FHIRHelpers";
+    public string Version => "4.0.001";
+    public ILibrary[] Dependencies => [];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -2199,55 +2245,5 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
 
 
     #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
-    private FHIRHelpers_4_0_001() {}
-
-    public static FHIRHelpers_4_0_001 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "FHIRHelpers";
-    public string Version => "4.0.001";
-    public ILibrary[] Dependencies => [];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

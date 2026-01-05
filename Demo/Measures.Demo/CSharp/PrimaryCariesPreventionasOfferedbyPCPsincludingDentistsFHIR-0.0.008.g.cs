@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR", "0.0.008")]
 public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 : ILibrary, ISingleton<PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008>
 {
+    private PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008() {}
+
+    public static PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR";
+    public string Version => "0.0.008";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, HospiceFHIR4_2_3_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Clinical Oral Evaluation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", valueSetVersion: null)]
@@ -76,7 +122,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -92,7 +138,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -105,7 +151,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
+    private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
@@ -117,7 +163,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
@@ -129,7 +175,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
+    private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
@@ -141,7 +187,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
+    private Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -153,7 +199,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
@@ -201,7 +247,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<bool?> _Initial_Population_Cached = new();
+    private Cached<bool?> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
@@ -232,7 +278,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<bool?> _Denominator_Cached = new();
+    private Cached<bool?> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
@@ -244,7 +290,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<bool?> _Denominator_Exclusions_Cached = new();
+    private Cached<bool?> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
@@ -256,7 +302,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<bool?> _Stratification_1_Cached = new();
+    private Cached<bool?> _Stratification_1_Cached = new();
 
     [CqlExpressionDefinition("Stratification 1")]
     public bool? Stratification_1(CqlContext context) =>
@@ -284,7 +330,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<bool?> _Stratification_2_Cached = new();
+    private Cached<bool?> _Stratification_2_Cached = new();
 
     [CqlExpressionDefinition("Stratification 2")]
     public bool? Stratification_2(CqlContext context) =>
@@ -305,7 +351,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<bool?> _Stratification_3_Cached = new();
+    private Cached<bool?> _Stratification_3_Cached = new();
 
     [CqlExpressionDefinition("Stratification 3")]
     public bool? Stratification_3(CqlContext context) =>
@@ -326,7 +372,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             });
 
 
-    private readonly Cached<bool?> _Numerator_Cached = new();
+    private Cached<bool?> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
@@ -355,55 +401,5 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
 
     #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
-    private PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008() {}
-
-    public static PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR";
-    public string Version => "0.0.008";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, HospiceFHIR4_2_3_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

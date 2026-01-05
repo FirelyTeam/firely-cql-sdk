@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("DocumentationofCurrentMedicationsFHIR", "0.2.000")]
 public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, ISingleton<DocumentationofCurrentMedicationsFHIR_0_2_000>
 {
+    private DocumentationofCurrentMedicationsFHIR_0_2_000() {}
+
+    public static DocumentationofCurrentMedicationsFHIR_0_2_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "DocumentationofCurrentMedicationsFHIR";
+    public string Version => "0.2.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Encounter to Document Medications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834", valueSetVersion: null)]
@@ -48,7 +94,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -67,7 +113,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -80,7 +126,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             });
 
 
-    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -92,7 +138,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             });
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -104,7 +150,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             });
 
 
-    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -116,7 +162,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             });
 
 
-    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
+    private Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -128,7 +174,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounter_during_day_of_Measurement_Period_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Qualifying_Encounter_during_day_of_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounter during day of Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_during_day_of_Measurement_Period(CqlContext context) =>
@@ -156,7 +202,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
@@ -168,7 +214,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
@@ -180,7 +226,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
@@ -221,7 +267,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             });
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Denominator_Exceptions_Cached = new();
+    private Cached<IEnumerable<Encounter>> _Denominator_Exceptions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
@@ -292,55 +338,5 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
 
     #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
-    private DocumentationofCurrentMedicationsFHIR_0_2_000() {}
-
-    public static DocumentationofCurrentMedicationsFHIR_0_2_000 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "DocumentationofCurrentMedicationsFHIR";
-    public string Version => "0.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

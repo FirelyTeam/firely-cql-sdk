@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
 public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<NCQAAdvancedIllnessandFrailty_1_0_0>
 {
+    private NCQAAdvancedIllnessandFrailty_1_0_0() {}
+
+    public static NCQAAdvancedIllnessandFrailty_1_0_0 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "NCQAAdvancedIllnessandFrailty";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQAEncounter_1_0_0.Instance, NCQAClaims_1_0_0.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Acute Inpatient", valueSetId: "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810", valueSetVersion: null)]
@@ -74,7 +120,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -90,7 +136,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -103,7 +149,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             });
 
 
-    private readonly Cached<bool?> _Has_Criteria_Indicating_Frailty_Cached = new();
+    private Cached<bool?> _Has_Criteria_Indicating_Frailty_Cached = new();
 
     [CqlExpressionDefinition("Has Criteria Indicating Frailty")]
     public bool? Has_Criteria_Indicating_Frailty(CqlContext context) =>
@@ -170,7 +216,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             });
 
 
-    private readonly Cached<IEnumerable<CqlDate>> _Outpatient_Encounters_with_Advanced_Illness_Cached = new();
+    private Cached<IEnumerable<CqlDate>> _Outpatient_Encounters_with_Advanced_Illness_Cached = new();
 
     [CqlExpressionDefinition("Outpatient Encounters with Advanced Illness")]
     public IEnumerable<CqlDate> Outpatient_Encounters_with_Advanced_Illness(CqlContext context) =>
@@ -233,7 +279,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             });
 
 
-    private readonly Cached<IEnumerable<CqlDate>> _Nonacute_Inpatient_Discharge_with_Advanced_Illness_Cached = new();
+    private Cached<IEnumerable<CqlDate>> _Nonacute_Inpatient_Discharge_with_Advanced_Illness_Cached = new();
 
     [CqlExpressionDefinition("Nonacute Inpatient Discharge with Advanced Illness")]
     public IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context) =>
@@ -277,7 +323,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             });
 
 
-    private readonly Cached<IEnumerable<CqlDate>> _Outpatient_Encounters_or_Discharges_with_Advanced_Illness_Cached = new();
+    private Cached<IEnumerable<CqlDate>> _Outpatient_Encounters_or_Discharges_with_Advanced_Illness_Cached = new();
 
     [CqlExpressionDefinition("Outpatient Encounters or Discharges with Advanced Illness")]
     public IEnumerable<CqlDate> Outpatient_Encounters_or_Discharges_with_Advanced_Illness(CqlContext context) =>
@@ -322,7 +368,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             });
 
 
-    private readonly Cached<bool?> _Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service_Cached = new();
+    private Cached<bool?> _Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service_Cached = new();
 
     [CqlExpressionDefinition("Two Outpatient Visits with Advanced Illness on Different Dates of Service")]
     public bool? Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(CqlContext context) =>
@@ -355,7 +401,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             });
 
 
-    private readonly Cached<bool?> _Acute_Inpatient_Encounter_with_Advanced_Illness_Cached = new();
+    private Cached<bool?> _Acute_Inpatient_Encounter_with_Advanced_Illness_Cached = new();
 
     [CqlExpressionDefinition("Acute Inpatient Encounter with Advanced Illness")]
     public bool? Acute_Inpatient_Encounter_with_Advanced_Illness(CqlContext context) =>
@@ -393,7 +439,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             });
 
 
-    private readonly Cached<bool?> _Acute_Inpatient_Discharge_with_Advanced_Illness_Cached = new();
+    private Cached<bool?> _Acute_Inpatient_Discharge_with_Advanced_Illness_Cached = new();
 
     [CqlExpressionDefinition("Acute Inpatient Discharge with Advanced Illness")]
     public bool? Acute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context) =>
@@ -429,7 +475,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             });
 
 
-    private readonly Cached<bool?> _Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Cached = new();
+    private Cached<bool?> _Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Dementia Medications In Year Before or During Measurement Period")]
     public bool? Dementia_Medications_In_Year_Before_or_During_Measurement_Period(CqlContext context) =>
@@ -492,7 +538,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             });
 
 
-    private readonly Cached<bool?> _Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Cached = new();
+    private Cached<bool?> _Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Cached = new();
 
     [CqlExpressionDefinition("Advanced Illness and Frailty Exclusion Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80(CqlContext context) =>
@@ -532,7 +578,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             });
 
 
-    private readonly Cached<bool?> _Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Cached = new();
+    private Cached<bool?> _Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Cached = new();
 
     [CqlExpressionDefinition("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(CqlContext context) =>
@@ -564,22 +610,6 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     #endregion Functions and Expressions
 
-    #region Singleton Lifetime Members
-
-    private NCQAAdvancedIllnessandFrailty_1_0_0() {}
-
-    public static NCQAAdvancedIllnessandFrailty_1_0_0 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "NCQAAdvancedIllnessandFrailty";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQAEncounter_1_0_0.Instance, NCQAClaims_1_0_0.Instance];
-
-    #endregion ILibrary Implementation
-
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CMSeRgTJgKISKSQUcNZWKegGV = new(
@@ -587,39 +617,5 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
        ["OutpatientVisit1", "OutpatientVisit2"]);
 
     #endregion CqlTupleMetadata Properties
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

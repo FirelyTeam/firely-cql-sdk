@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleton<SupplementalDataElementsFHIR4_2_0_000>
 {
+    private SupplementalDataElementsFHIR4_2_0_000() {}
+
+    public static SupplementalDataElementsFHIR4_2_0_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "SupplementalDataElementsFHIR4";
+    public string Version => "2.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Ethnicity", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", valueSetVersion: null)]
@@ -38,7 +84,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
+    private Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -51,7 +97,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             });
 
 
-    private readonly Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
+    private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
@@ -120,7 +166,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             });
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
+    private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
@@ -143,7 +189,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             });
 
 
-    private readonly Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
+    private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
@@ -212,7 +258,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             });
 
 
-    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
+    private Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -259,22 +305,6 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
     #endregion Functions and Expressions
 
-    #region Singleton Lifetime Members
-
-    private SupplementalDataElementsFHIR4_2_0_000() {}
-
-    public static SupplementalDataElementsFHIR4_2_0_000 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "SupplementalDataElementsFHIR4";
-    public string Version => "2.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
-
-    #endregion ILibrary Implementation
-
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new(
@@ -282,39 +312,5 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
        ["code", "period"]);
 
     #endregion CqlTupleMetadata Properties
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

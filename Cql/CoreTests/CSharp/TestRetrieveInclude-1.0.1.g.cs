@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
 public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_1_0_1>
 {
+    private TestRetrieveInclude_1_0_1() {}
+
+    public static TestRetrieveInclude_1_0_1 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "TestRetrieveInclude";
+    public string Version => "1.0.1";
+    public ILibrary[] Dependencies => [];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region ValueSets
 
     [CqlValueSetDefinition("Female Administrative Sex", valueSetId: "2.16.840.1.113883.3.560.100.2", valueSetVersion: null)]
@@ -46,7 +92,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #region Functions and Expressions
 
-    private readonly Cached<IEnumerable<Observation>> _InDemographic_Cached = new();
+    private Cached<IEnumerable<Observation>> _InDemographic_Cached = new();
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Observation> InDemographic(CqlContext context) =>
@@ -59,55 +105,5 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
 
     #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
-    private TestRetrieveInclude_1_0_1() {}
-
-    public static TestRetrieveInclude_1_0_1 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "TestRetrieveInclude";
-    public string Version => "1.0.1";
-    public ILibrary[] Dependencies => [];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

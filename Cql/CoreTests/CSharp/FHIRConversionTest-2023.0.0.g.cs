@@ -16,6 +16,52 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
 public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConversionTest_2023_0_0>
 {
+    private FHIRConversionTest_2023_0_0() {}
+
+    public static FHIRConversionTest_2023_0_0 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "FHIRConversionTest";
+    public string Version => "2023.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(object CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is null)
+            {
+                // No caching, clear out previous values
+                CacheVersion = null;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
+
     #region Functions and Expressions
 
     [CqlFunctionDefinition("AccountResource")]
@@ -7190,55 +7236,5 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 
 
     #endregion Functions and Expressions
-
-    #region Singleton Lifetime Members
-
-    private FHIRConversionTest_2023_0_0() {}
-
-    public static FHIRConversionTest_2023_0_0 Instance { get; } = new();
-
-    #endregion
-
-    #region ILibrary Implementation
-
-    public string Name => "FHIRConversionTest";
-    public string Version => "2023.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }
