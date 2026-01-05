@@ -32,20 +32,6 @@ Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitArtifacts.LibraryIdentifier.get -> 
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitArtifacts.Results.get -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitResultArtifacts?
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitArtifacts.Results.init -> void
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitArtifacts.WithResultArtifacts(string! cSharpSourceCode, byte[]? assemblyBinary, byte[]? debugSymbols) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitArtifacts
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowInvalidCSharp.get -> bool
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowInvalidCSharp.init -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowScopeRedefinition.get -> bool
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowScopeRedefinition.init -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowUnresolvedExternals.get -> bool
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowUnresolvedExternals.init -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.DebugSymbolsFormat.get -> Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.DebugSymbolsFormat.init -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Deconstruct(out Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat, out bool AllowScopeRedefinition, out bool AllowUnresolvedExternals, out bool AllowInvalidCSharp, out int LRUCacheSize) -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat = Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat.None, bool AllowScopeRedefinition = true, bool AllowUnresolvedExternals = true, bool AllowInvalidCSharp = false, int LRUCacheSize = 0) -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig! original) -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.LRUCacheSize.get -> int
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.LRUCacheSize.init -> void
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitResultArtifacts
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitResultArtifacts.AssemblyBinary.get -> byte[]?
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitResultArtifacts.AssemblyBinary.init -> void
