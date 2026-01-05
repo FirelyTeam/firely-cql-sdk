@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS156FHIRHighRiskMedsElderly", "1.0.000")]
 public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleton<CMS156FHIRHighRiskMedsElderly_1_0_000>
 {
-    private CMS156FHIRHighRiskMedsElderly_1_0_000() {}
-
-    public static CMS156FHIRHighRiskMedsElderly_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS156FHIRHighRiskMedsElderly";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, CQMCommon_4_1_000.Instance, Hospice_6_18_000.Instance, PalliativeCare_1_18_000.Instance, CumulativeMedicationDuration_6_0_000.Instance, QICoreCommon_4_0_000.Instance, Status_1_15_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Alcohol Withdrawal", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1209", valueSetVersion: null)]
@@ -331,7 +285,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -347,7 +301,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -360,7 +314,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
@@ -440,7 +394,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<bool?> _Initial_Population_Cached = new();
+    private readonly Cached<bool?> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
@@ -463,7 +417,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<bool?> _Denominator_Cached = new();
+    private readonly Cached<bool?> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
@@ -475,7 +429,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<bool?> _Denominator_Exclusions_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
@@ -566,7 +520,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     }
 
 
-    private Cached<IEnumerable<MedicationRequest>> _Same_High_Risk_Medications_Ordered_on_Different_Days_Cached = new();
+    private readonly Cached<IEnumerable<MedicationRequest>> _Same_High_Risk_Medications_Ordered_on_Different_Days_Cached = new();
 
     [CqlExpressionDefinition("Same High Risk Medications Ordered on Different Days")]
     public IEnumerable<MedicationRequest> Same_High_Risk_Medications_Ordered_on_Different_Days(CqlContext context) =>
@@ -1208,7 +1162,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     }
 
 
-    private Cached<bool?> _Two_High_Risk_Medications_with_Prolonged_Duration_Cached = new();
+    private readonly Cached<bool?> _Two_High_Risk_Medications_with_Prolonged_Duration_Cached = new();
 
     [CqlExpressionDefinition("Two High Risk Medications with Prolonged Duration")]
     public bool? Two_High_Risk_Medications_with_Prolonged_Duration(CqlContext context) =>
@@ -1529,7 +1483,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     }
 
 
-    private Cached<bool?> _High_Risk_Medications_with_Average_Daily_Dose_Criteria_Cached = new();
+    private readonly Cached<bool?> _High_Risk_Medications_with_Average_Daily_Dose_Criteria_Cached = new();
 
     [CqlExpressionDefinition("High Risk Medications with Average Daily Dose Criteria")]
     public bool? High_Risk_Medications_with_Average_Daily_Dose_Criteria(CqlContext context) =>
@@ -1620,7 +1574,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<bool?> _Numerator_1_Cached = new();
+    private readonly Cached<bool?> _Numerator_1_Cached = new();
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
@@ -1637,7 +1591,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<bool?> _More_than_One_Antipsychotic_Order_Cached = new();
+    private readonly Cached<bool?> _More_than_One_Antipsychotic_Order_Cached = new();
 
     [CqlExpressionDefinition("More than One Antipsychotic Order")]
     public bool? More_than_One_Antipsychotic_Order(CqlContext context) =>
@@ -1679,7 +1633,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<IEnumerable<object>> _Schizophrenia_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Schizophrenia_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Schizophrenia Diagnosis")]
     public IEnumerable<object> Schizophrenia_Diagnosis(CqlContext context) =>
@@ -1695,7 +1649,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<IEnumerable<object>> _Bipolar_Disorder_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Bipolar_Disorder_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Bipolar Disorder Diagnosis")]
     public IEnumerable<object> Bipolar_Disorder_Diagnosis(CqlContext context) =>
@@ -1711,7 +1665,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<CqlDateTime> _Antipsychotic_Index_Prescription_Start_Date_Cached = new();
+    private readonly Cached<CqlDateTime> _Antipsychotic_Index_Prescription_Start_Date_Cached = new();
 
     [CqlExpressionDefinition("Antipsychotic Index Prescription Start Date")]
     public CqlDateTime Antipsychotic_Index_Prescription_Start_Date(CqlContext context) =>
@@ -1773,7 +1727,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<bool?> _More_than_One_Benzodiazepine_Order_Cached = new();
+    private readonly Cached<bool?> _More_than_One_Benzodiazepine_Order_Cached = new();
 
     [CqlExpressionDefinition("More than One Benzodiazepine Order")]
     public bool? More_than_One_Benzodiazepine_Order(CqlContext context) =>
@@ -1815,7 +1769,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<IEnumerable<object>> _Seizure_Disorder_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Seizure_Disorder_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Seizure Disorder Diagnosis")]
     public IEnumerable<object> Seizure_Disorder_Diagnosis(CqlContext context) =>
@@ -1831,7 +1785,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<IEnumerable<object>> _REM_Sleep_Behavior_Disorder_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<object>> _REM_Sleep_Behavior_Disorder_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("REM Sleep Behavior Disorder Diagnosis")]
     public IEnumerable<object> REM_Sleep_Behavior_Disorder_Diagnosis(CqlContext context) =>
@@ -1847,7 +1801,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<IEnumerable<object>> _Benzodiazepine_Withdrawal_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Benzodiazepine_Withdrawal_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Benzodiazepine Withdrawal Diagnosis")]
     public IEnumerable<object> Benzodiazepine_Withdrawal_Diagnosis(CqlContext context) =>
@@ -1863,7 +1817,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<IEnumerable<object>> _Alcohol_Withdrawal_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Alcohol_Withdrawal_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Alcohol Withdrawal Diagnosis")]
     public IEnumerable<object> Alcohol_Withdrawal_Diagnosis(CqlContext context) =>
@@ -1879,7 +1833,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<IEnumerable<object>> _Generalized_Anxiety_Disorder_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Generalized_Anxiety_Disorder_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Generalized Anxiety Disorder Diagnosis")]
     public IEnumerable<object> Generalized_Anxiety_Disorder_Diagnosis(CqlContext context) =>
@@ -1895,7 +1849,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<CqlDateTime> _Benzodiazepine_Index_Prescription_Start_Date_Cached = new();
+    private readonly Cached<CqlDateTime> _Benzodiazepine_Index_Prescription_Start_Date_Cached = new();
 
     [CqlExpressionDefinition("Benzodiazepine Index Prescription Start Date")]
     public CqlDateTime Benzodiazepine_Index_Prescription_Start_Date(CqlContext context) =>
@@ -1957,7 +1911,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<bool?> _Numerator_2_Cached = new();
+    private readonly Cached<bool?> _Numerator_2_Cached = new();
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
@@ -2017,7 +1971,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<bool?> _Numerator_3_Cached = new();
+    private readonly Cached<bool?> _Numerator_3_Cached = new();
 
     [CqlExpressionDefinition("Numerator 3")]
     public bool? Numerator_3(CqlContext context) =>
@@ -2033,7 +1987,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -2045,7 +1999,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -2057,7 +2011,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -2069,7 +2023,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -2082,5 +2036,55 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private CMS156FHIRHighRiskMedsElderly_1_0_000() {}
+
+    public static CMS156FHIRHighRiskMedsElderly_1_0_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS156FHIRHighRiskMedsElderly";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, CQMCommon_4_1_000.Instance, Hospice_6_18_000.Instance, PalliativeCare_1_18_000.Instance, CumulativeMedicationDuration_6_0_000.Instance, QICoreCommon_4_0_000.Instance, Status_1_15_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

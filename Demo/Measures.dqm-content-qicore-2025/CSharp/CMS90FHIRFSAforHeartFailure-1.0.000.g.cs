@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS90FHIRFSAforHeartFailure", "1.0.000")]
 public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<CMS90FHIRFSAforHeartFailure_1_0_000>
 {
-    private CMS90FHIRFSAforHeartFailure_1_0_000() {}
-
-    public static CMS90FHIRFSAforHeartFailure_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS90FHIRFSAforHeartFailure";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance, SupplementalDataElements_5_1_000.Instance, Hospice_6_18_000.Instance, Status_1_15_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Heart Failure", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", valueSetVersion: null)]
@@ -247,7 +201,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -263,7 +217,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -276,7 +230,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -288,7 +242,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -300,7 +254,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -312,7 +266,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -324,7 +278,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
@@ -354,7 +308,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Outpatient Encounters with at least one subsequent Outpatient Encounter during Measurement Period")]
     public IEnumerable<Encounter> Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period(CqlContext context) =>
@@ -390,7 +344,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Initial_Population_Cached = new();
+    private readonly Cached<bool?> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
@@ -429,7 +383,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Denominator_Cached = new();
+    private readonly Cached<bool?> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
@@ -441,7 +395,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Denominator_Exclusions_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
@@ -471,7 +425,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Date_PROMIS10_Total_Assessment_Completed_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Date_PROMIS10_Total_Assessment_Completed_Cached = new();
 
     [CqlExpressionDefinition("Date PROMIS10 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed(CqlContext context) =>
@@ -535,7 +489,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments_Cached = new();
+    private readonly Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments_Cached = new();
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up PROMIS10 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments(CqlContext context) =>
@@ -598,7 +552,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Date_PROMIS29_Total_Assessment_Completed_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Date_PROMIS29_Total_Assessment_Completed_Cached = new();
 
     [CqlExpressionDefinition("Date PROMIS29 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_PROMIS29_Total_Assessment_Completed(CqlContext context) =>
@@ -757,7 +711,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments_Cached = new();
+    private readonly Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments_Cached = new();
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up PROMIS29 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments(CqlContext context) =>
@@ -820,7 +774,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Date_VR12_Oblique_Total_Assessment_Completed_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Date_VR12_Oblique_Total_Assessment_Completed_Cached = new();
 
     [CqlExpressionDefinition("Date VR12 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed(CqlContext context) =>
@@ -884,7 +838,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Cached = new();
+    private readonly Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Cached = new();
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR12 Oblique Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(CqlContext context) =>
@@ -947,7 +901,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Date_VR12_Orthogonal_Total_Assessment_Completed_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Date_VR12_Orthogonal_Total_Assessment_Completed_Cached = new();
 
     [CqlExpressionDefinition("Date VR12 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed(CqlContext context) =>
@@ -1011,7 +965,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Cached = new();
+    private readonly Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Cached = new();
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR12 Orthogonal Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(CqlContext context) =>
@@ -1074,7 +1028,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Date_VR36_Oblique_Total_Assessment_Completed_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Date_VR36_Oblique_Total_Assessment_Completed_Cached = new();
 
     [CqlExpressionDefinition("Date VR36 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR36_Oblique_Total_Assessment_Completed(CqlContext context) =>
@@ -1138,7 +1092,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments_Cached = new();
+    private readonly Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments_Cached = new();
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR36 Oblique Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments(CqlContext context) =>
@@ -1201,7 +1155,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Date_VR36_Orthogonal_Total_Assessment_Completed_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Date_VR36_Orthogonal_Total_Assessment_Completed_Cached = new();
 
     [CqlExpressionDefinition("Date VR36 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR36_Orthogonal_Total_Assessment_Completed(CqlContext context) =>
@@ -1265,7 +1219,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments_Cached = new();
+    private readonly Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments_Cached = new();
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR36 Orthogonal Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments(CqlContext context) =>
@@ -1328,7 +1282,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Date_MLHFQ_Total_Assessment_Completed_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Date_MLHFQ_Total_Assessment_Completed_Cached = new();
 
     [CqlExpressionDefinition("Date MLHFQ Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_MLHFQ_Total_Assessment_Completed(CqlContext context) =>
@@ -1392,7 +1346,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments_Cached = new();
+    private readonly Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments_Cached = new();
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up MLHFQ Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments(CqlContext context) =>
@@ -1455,7 +1409,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Date_KCCQ12_Total_Assessment_Completed_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Date_KCCQ12_Total_Assessment_Completed_Cached = new();
 
     [CqlExpressionDefinition("Date KCCQ12 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ12_Total_Assessment_Completed(CqlContext context) =>
@@ -1519,7 +1473,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments_Cached = new();
+    private readonly Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments_Cached = new();
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up KCCQ12 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments(CqlContext context) =>
@@ -1582,7 +1536,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Date_KCCQ_Domain_Assessment_Completed_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Date_KCCQ_Domain_Assessment_Completed_Cached = new();
 
     [CqlExpressionDefinition("Date KCCQ Domain Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ_Domain_Assessment_Completed(CqlContext context) =>
@@ -1722,7 +1676,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments_Cached = new();
+    private readonly Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments_Cached = new();
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up KCCQ Domain Score Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments(CqlContext context) =>
@@ -1785,7 +1739,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Date_KCCQ_Total_Assessment_Completed_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Date_KCCQ_Total_Assessment_Completed_Cached = new();
 
     [CqlExpressionDefinition("Date KCCQ Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ_Total_Assessment_Completed(CqlContext context) =>
@@ -1821,7 +1775,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments_Cached = new();
+    private readonly Cached<bool?> _Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments_Cached = new();
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up KCCQ Total Score Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments(CqlContext context) =>
@@ -1884,7 +1838,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<bool?> _Numerator_Cached = new();
+    private readonly Cached<bool?> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
@@ -1915,6 +1869,22 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private CMS90FHIRFSAforHeartFailure_1_0_000() {}
+
+    public static CMS90FHIRFSAforHeartFailure_1_0_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS90FHIRFSAforHeartFailure";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance, SupplementalDataElements_5_1_000.Instance, Hospice_6_18_000.Instance, Status_1_15_000.Instance];
+
+    #endregion ILibrary Implementation
 
     #region CqlTupleMetadata Properties
 
@@ -1987,5 +1957,39 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
        ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
 
     #endregion CqlTupleMetadata Properties
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

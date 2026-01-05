@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS136FHIRChildADHDMedFollowUp", "1.0.000")]
 public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISingleton<CMS136FHIRChildADHDMedFollowUp_1_0_000>
 {
-    private CMS136FHIRChildADHDMedFollowUp_1_0_000() {}
-
-    public static CMS136FHIRChildADHDMedFollowUp_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS136FHIRChildADHDMedFollowUp";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance, CQMCommon_4_1_000.Instance, Hospice_6_18_000.Instance, CumulativeMedicationDuration_6_0_000.Instance, Status_1_15_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Ambulatory", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1003", valueSetVersion: null)]
@@ -186,7 +140,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -202,7 +156,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -215,7 +169,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<CqlDateTime> _March_1_of_Year_Prior_to_Measurement_Period_Cached = new();
+    private readonly Cached<CqlDateTime> _March_1_of_Year_Prior_to_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("March 1 of Year Prior to Measurement Period")]
     public CqlDateTime March_1_of_Year_Prior_to_Measurement_Period(CqlContext context) =>
@@ -232,7 +186,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<CqlDateTime> _Last_Calendar_Day_of_February_of_Measurement_Period_Cached = new();
+    private readonly Cached<CqlDateTime> _Last_Calendar_Day_of_February_of_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Last Calendar Day of February of Measurement Period")]
     public CqlDateTime Last_Calendar_Day_of_February_of_Measurement_Period(CqlContext context) =>
@@ -250,7 +204,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<CqlInterval<CqlDateTime>> _Intake_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Intake_Period_Cached = new();
 
     [CqlExpressionDefinition("Intake Period")]
     public CqlInterval<CqlDateTime> Intake_Period(CqlContext context) =>
@@ -264,7 +218,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlDate startDate)?>> _ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlDate startDate)?>> _ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Cached = new();
 
     [CqlExpressionDefinition("ADHD Medication Prescribed During Intake Period and Not Previously on ADHD Medication")]
     public IEnumerable<(CqlTupleMetadata, CqlDate startDate)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication(CqlContext context) =>
@@ -1122,7 +1076,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<CqlDate> _First_ADHD_Medication_Prescribed_During_Intake_Period_Cached = new();
+    private readonly Cached<CqlDate> _First_ADHD_Medication_Prescribed_During_Intake_Period_Cached = new();
 
     [CqlExpressionDefinition("First ADHD Medication Prescribed During Intake Period")]
     public CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period(CqlContext context) =>
@@ -1150,7 +1104,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<CqlDate> _IPSD_Cached = new();
+    private readonly Cached<CqlDate> _IPSD_Cached = new();
 
     [CqlExpressionDefinition("IPSD")]
     public CqlDate IPSD(CqlContext context) =>
@@ -1162,7 +1116,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
@@ -1199,7 +1153,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Inpatient_Stay_with_Qualifying_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Inpatient_Stay_with_Qualifying_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Inpatient Stay with Qualifying Diagnosis")]
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis(CqlContext context) =>
@@ -1221,7 +1175,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase_Cached = new();
 
     [CqlExpressionDefinition("Inpatient Stay with Qualifying Diagnosis During Initiation Phase")]
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase(CqlContext context) =>
@@ -1250,7 +1204,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<bool?> _Initial_Population_1_Cached = new();
+    private readonly Cached<bool?> _Initial_Population_1_Cached = new();
 
     [CqlExpressionDefinition("Initial Population 1")]
     public bool? Initial_Population_1(CqlContext context) =>
@@ -1288,7 +1242,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<bool?> _Denominator_1_Cached = new();
+    private readonly Cached<bool?> _Denominator_1_Cached = new();
 
     [CqlExpressionDefinition("Denominator 1")]
     public bool? Denominator_1(CqlContext context) =>
@@ -1300,7 +1254,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<object>> _Narcolepsy_Exclusion_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Narcolepsy_Exclusion_Cached = new();
 
     [CqlExpressionDefinition("Narcolepsy Exclusion")]
     public IEnumerable<object> Narcolepsy_Exclusion(CqlContext context) =>
@@ -1327,7 +1281,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<bool?> _Denominator_Exclusions_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
@@ -1342,7 +1296,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_Numerator_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Numerator_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Numerator Encounter")]
     public IEnumerable<Encounter> Qualifying_Numerator_Encounter(CqlContext context) =>
@@ -1414,7 +1368,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_During_Initiation_Phase_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_During_Initiation_Phase_Cached = new();
 
     [CqlExpressionDefinition("Encounter During Initiation Phase")]
     public IEnumerable<Encounter> Encounter_During_Initiation_Phase(CqlContext context) =>
@@ -1444,7 +1398,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<bool?> _Numerator_1_Cached = new();
+    private readonly Cached<bool?> _Numerator_1_Cached = new();
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
@@ -1457,7 +1411,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<CqlInterval<CqlDate>>> _ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Cached = new();
+    private readonly Cached<IEnumerable<CqlInterval<CqlDate>>> _ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Cached = new();
 
     [CqlExpressionDefinition("ADHD Medications Taken on IPSD or During Continuation and Maintenance Phase")]
     public IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase(CqlContext context) =>
@@ -2039,7 +1993,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<int?> _ADHD_Cumulative_Medication_Duration_Cached = new();
+    private readonly Cached<int?> _ADHD_Cumulative_Medication_Duration_Cached = new();
 
     [CqlExpressionDefinition("ADHD Cumulative Medication Duration")]
     public int? ADHD_Cumulative_Medication_Duration(CqlContext context) =>
@@ -2052,7 +2006,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<bool?> _Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days_Cached = new();
+    private readonly Cached<bool?> _Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days_Cached = new();
 
     [CqlExpressionDefinition("Has ADHD Cumulative Medication Duration Greater Than or Equal to 210 Days")]
     public bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(CqlContext context) =>
@@ -2065,7 +2019,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase_Cached = new();
 
     [CqlExpressionDefinition("Inpatient Stay with Qualifying Diagnosis During Continuation and Maintenance Phase")]
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase(CqlContext context) =>
@@ -2094,7 +2048,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<bool?> _Initial_Population_2_Cached = new();
+    private readonly Cached<bool?> _Initial_Population_2_Cached = new();
 
     [CqlExpressionDefinition("Initial Population 2")]
     public bool? Initial_Population_2(CqlContext context) =>
@@ -2134,7 +2088,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<bool?> _Denominator_2_Cached = new();
+    private readonly Cached<bool?> _Denominator_2_Cached = new();
 
     [CqlExpressionDefinition("Denominator 2")]
     public bool? Denominator_2(CqlContext context) =>
@@ -2146,7 +2100,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Cached = new();
 
     [CqlExpressionDefinition("Encounter 31 to 300 Days into Continuation and Maintenance Phase")]
     public IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
@@ -2187,7 +2141,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<bool?> _Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Cached = new();
+    private readonly Cached<bool?> _Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Cached = new();
 
     [CqlExpressionDefinition("Two or More Encounters 31 to 300 Days into Continuation and Maintenance Phase")]
     public bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
@@ -2201,7 +2155,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Cached = new();
 
     [CqlExpressionDefinition("Virtual Encounter 31 to 300 Days into Continuation and Maintenance Phase")]
     public IEnumerable<CqlDate> Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
@@ -2243,7 +2197,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<bool?> _Numerator_2_Cached = new();
+    private readonly Cached<bool?> _Numerator_2_Cached = new();
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
@@ -2282,7 +2236,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -2294,7 +2248,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -2306,7 +2260,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -2318,7 +2272,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -2332,6 +2286,22 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
+    private CMS136FHIRChildADHDMedFollowUp_1_0_000() {}
+
+    public static CMS136FHIRChildADHDMedFollowUp_1_0_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS136FHIRChildADHDMedFollowUp";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance, CQMCommon_4_1_000.Instance, Hospice_6_18_000.Instance, CumulativeMedicationDuration_6_0_000.Instance, Status_1_15_000.Instance];
+
+    #endregion ILibrary Implementation
+
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
@@ -2343,5 +2313,39 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
        ["period", "periodStart"]);
 
     #endregion CqlTupleMetadata Properties
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

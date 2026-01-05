@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS145FHIRCADBBlockerTPMIorLVSD", "1.0.000")]
 public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingleton<CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000>
 {
-    private CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000() {}
-
-    public static CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS145FHIRCADBBlockerTPMIorLVSD";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance, AHAOverall_4_1_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Allergy to Beta Blocker Therapy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1177", valueSetVersion: null)]
@@ -198,7 +152,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -214,7 +168,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -227,7 +181,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_Encounter_During_Measurement_Period_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounter_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
@@ -270,7 +224,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Outpatient_Encounter_During_Measurement_Period_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Outpatient_Encounter_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Outpatient Encounter During Measurement Period")]
     public IEnumerable<Encounter> Outpatient_Encounter_During_Measurement_Period(CqlContext context) =>
@@ -355,7 +309,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     }
 
 
-    private Cached<IEnumerable<Encounter>> _Coronary_Artery_Disease_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Coronary_Artery_Disease_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Coronary Artery Disease Encounter")]
     public IEnumerable<Encounter> Coronary_Artery_Disease_Encounter(CqlContext context) =>
@@ -386,7 +340,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Encounter>> _History_of_Cardiac_Surgery_Prior_to_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _History_of_Cardiac_Surgery_Prior_to_Encounter_Cached = new();
 
     [CqlExpressionDefinition("History of Cardiac Surgery Prior to Encounter")]
     public IEnumerable<Encounter> History_of_Cardiac_Surgery_Prior_to_Encounter(CqlContext context) =>
@@ -489,7 +443,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_CAD_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_CAD_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Qualifying CAD Encounter")]
     public IEnumerable<Encounter> Qualifying_CAD_Encounter(CqlContext context) =>
@@ -503,7 +457,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Initial_Population_Cached = new();
+    private readonly Cached<bool?> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
@@ -550,7 +504,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Qualifying CAD Encounter and Prior MI")]
     public IEnumerable<Encounter> Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
@@ -601,7 +555,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Denominator_2_Cached = new();
+    private readonly Cached<bool?> _Denominator_2_Cached = new();
 
     [CqlExpressionDefinition("Denominator 2")]
     public bool? Denominator_2(CqlContext context) =>
@@ -616,7 +570,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<bool?> _Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
@@ -638,7 +592,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<bool?> _Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Has Diagnosis of Cardiac Pacer in Situ with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
@@ -660,7 +614,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<bool?> _Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Has Cardiac Pacer Device Implanted with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
@@ -764,7 +718,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer_Cached = new();
+    private readonly Cached<bool?> _Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer_Cached = new();
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and Prior MI without Cardiac Pacer")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer(CqlContext context) =>
@@ -782,7 +736,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<bool?> _Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Has Consecutive Heart Rates Less than 50 with Qualifying CAD Encounter and Prior MI")]
     [CqlTag("code", "Heart rate - 8867-4")]
@@ -886,7 +840,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public IEnumerable<Encounter> Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
@@ -998,7 +952,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     }
 
 
-    private Cached<bool?> _Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Cached = new();
+    private readonly Cached<bool?> _Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Cached = new();
 
     [CqlExpressionDefinition("Has Beta Blocker Therapy for LVSD Ordered")]
     public bool? Has_Beta_Blocker_Therapy_for_LVSD_Ordered(CqlContext context) =>
@@ -1020,7 +974,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Cached = new();
+    private readonly Cached<bool?> _Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Is Currently Taking Beta Blocker Therapy for LVSD")]
     public bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(CqlContext context) =>
@@ -1143,7 +1097,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Numerator_1_Cached = new();
+    private readonly Cached<bool?> _Numerator_1_Cached = new();
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
@@ -1157,7 +1111,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Beta_Blocker_Therapy_Ordered_Cached = new();
+    private readonly Cached<bool?> _Has_Beta_Blocker_Therapy_Ordered_Cached = new();
 
     [CqlExpressionDefinition("Has Beta Blocker Therapy Ordered")]
     public bool? Has_Beta_Blocker_Therapy_Ordered(CqlContext context) =>
@@ -1179,7 +1133,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Is_Currently_Taking_Beta_Blocker_Therapy_Cached = new();
+    private readonly Cached<bool?> _Is_Currently_Taking_Beta_Blocker_Therapy_Cached = new();
 
     [CqlExpressionDefinition("Is Currently Taking Beta Blocker Therapy")]
     public bool? Is_Currently_Taking_Beta_Blocker_Therapy(CqlContext context) =>
@@ -1302,7 +1256,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Numerator_2_Cached = new();
+    private readonly Cached<bool?> _Numerator_2_Cached = new();
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
@@ -1316,7 +1270,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -1328,7 +1282,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -1340,7 +1294,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -1352,7 +1306,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -1364,7 +1318,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Denominator_1_Cached = new();
+    private readonly Cached<bool?> _Denominator_1_Cached = new();
 
     [CqlExpressionDefinition("Denominator 1")]
     public bool? Denominator_1(CqlContext context) =>
@@ -1379,7 +1333,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
@@ -1401,7 +1355,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Diagnosis of Cardiac Pacer in Situ with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
@@ -1423,7 +1377,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Cardiac Pacer Device Implanted with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
@@ -1522,7 +1476,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer_Cached = new();
+    private readonly Cached<bool?> _Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer_Cached = new();
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and History of Moderate or Severe LVSD without Cardiac Pacer")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer(CqlContext context) =>
@@ -1540,7 +1494,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Consecutive Heart Rates Less than 50 with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     [CqlTag("code", "Heart rate - 8867-4")]
@@ -1707,7 +1661,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     }
 
 
-    private Cached<bool?> _Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<bool?> _Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Has Allergy or Intolerance to Beta Blocker Therapy Ingredient with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
@@ -1733,7 +1687,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Arrhythmia with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
@@ -1755,7 +1709,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<bool?> _Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Has Arrhythmia with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
@@ -1777,7 +1731,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Asthma with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
@@ -1799,7 +1753,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<bool?> _Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Has Asthma with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
@@ -1821,7 +1775,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Bradycardia with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
@@ -1843,7 +1797,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<bool?> _Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Has Bradycardia with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
@@ -1865,7 +1819,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
@@ -1890,7 +1844,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<bool?> _Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
@@ -1915,7 +1869,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Hypotension with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
@@ -1937,7 +1891,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
+    private readonly Cached<bool?> _Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI_Cached = new();
 
     [CqlExpressionDefinition("Has Hypotension with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
@@ -1961,7 +1915,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Allergy or Intolerance to Beta Blocker Therapy Ingredient with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
@@ -1987,7 +1941,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Cached = new();
+    private readonly Cached<bool?> _Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Cached = new();
 
     [CqlExpressionDefinition("Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD")]
     public bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(CqlContext context) =>
@@ -2068,7 +2022,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Denominator_Exceptions_1_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exceptions_1_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exceptions 1")]
     public bool? Denominator_Exceptions_1(CqlContext context) =>
@@ -2096,7 +2050,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy_Cached = new();
+    private readonly Cached<bool?> _Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy_Cached = new();
 
     [CqlExpressionDefinition("Has Medical or Patient Reason for Not Ordering Beta Blocker Therapy")]
     public bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy(CqlContext context) =>
@@ -2177,7 +2131,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Denominator_Exceptions_2_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exceptions_2_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exceptions 2")]
     public bool? Denominator_Exceptions_2(CqlContext context) =>
@@ -2207,6 +2161,22 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
+    private CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000() {}
+
+    public static CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS145FHIRCADBBlockerTPMIorLVSD";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance, AHAOverall_4_1_000.Instance];
+
+    #endregion ILibrary Implementation
+
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_EWMjLSaIFCaWRZLQBiUcVjDES = new(
@@ -2218,5 +2188,39 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
        ["HeartRateExam", "CADEncounterMI"]);
 
     #endregion CqlTupleMetadata Properties
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

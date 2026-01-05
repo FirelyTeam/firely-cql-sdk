@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS1244FHIRECATHOQR", "1.0.000")]
 public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244FHIRECATHOQR_1_0_000>
 {
-    private CMS1244FHIRECATHOQR_1_0_000() {}
-
-    public static CMS1244FHIRECATHOQR_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS1244FHIRECATHOQR";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [CQMCommon_4_1_000.Instance, FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance, SupplementalDataElements_5_1_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Admit Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.164", valueSetVersion: null)]
@@ -146,7 +100,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -162,7 +116,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -175,7 +129,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Evaluation_and_Management_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Evaluation_and_Management_Cached = new();
 
     [CqlExpressionDefinition("ED Evaluation and Management")]
     public IEnumerable<Encounter> ED_Evaluation_and_Management(CqlContext context) =>
@@ -204,7 +158,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Triage_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Triage_Cached = new();
 
     [CqlExpressionDefinition("ED Triage")]
     public IEnumerable<Encounter> ED_Triage(CqlContext context) =>
@@ -238,7 +192,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Cached = new();
 
     [CqlExpressionDefinition("ED Triage Excluding Those Prior To ED Encounters")]
     public IEnumerable<Encounter> ED_Triage_Excluding_Those_Prior_To_ED_Encounters(CqlContext context) =>
@@ -293,7 +247,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
@@ -307,7 +261,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
@@ -423,7 +377,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     }
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Triage_Before_Evaluation_Management_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Triage_Before_Evaluation_Management_Cached = new();
 
     [CqlExpressionDefinition("ED Triage Before Evaluation Management")]
     public IEnumerable<Encounter> ED_Triage_Before_Evaluation_Management(CqlContext context) =>
@@ -478,7 +432,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Triage_and_Evaluation_Management_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Triage_and_Evaluation_Management_Cached = new();
 
     [CqlExpressionDefinition("ED Triage and Evaluation Management")]
     public IEnumerable<Encounter> ED_Triage_and_Evaluation_Management(CqlContext context) =>
@@ -535,7 +489,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     }
 
 
-    private Cached<IEnumerable<Encounter>> _Time_to_Treatment_Room_Greater_Than_60_Minutes_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Time_to_Treatment_Room_Greater_Than_60_Minutes_Cached = new();
 
     [CqlExpressionDefinition("Time to Treatment Room Greater Than 60 Minutes")]
     public IEnumerable<Encounter> Time_to_Treatment_Room_Greater_Than_60_Minutes(CqlContext context) =>
@@ -558,7 +512,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Arrival_Left_Without_Being_Seen_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Arrival_Left_Without_Being_Seen_Cached = new();
 
     [CqlExpressionDefinition("ED Arrival Left Without Being Seen")]
     public IEnumerable<Encounter> ED_Arrival_Left_Without_Being_Seen(CqlContext context) =>
@@ -618,7 +572,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     }
 
 
-    private Cached<IEnumerable<ServiceRequest>> _ED_To_Inpatient_Order_Cached = new();
+    private readonly Cached<IEnumerable<ServiceRequest>> _ED_To_Inpatient_Order_Cached = new();
 
     [CqlExpressionDefinition("ED To Inpatient Order")]
     public IEnumerable<ServiceRequest> ED_To_Inpatient_Order(CqlContext context) =>
@@ -805,7 +759,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     }
 
 
-    private Cached<IEnumerable<Encounter>> _Decision_to_Admit_Encounter_Order_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Decision_to_Admit_Encounter_Order_Cached = new();
 
     [CqlExpressionDefinition("Decision to Admit Encounter Order")]
     public IEnumerable<Encounter> Decision_to_Admit_Encounter_Order(CqlContext context) =>
@@ -881,7 +835,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     }
 
 
-    private Cached<IEnumerable<object>> _Assessment_In_ED_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Assessment_In_ED_Cached = new();
 
     [CqlExpressionDefinition("Assessment In ED")]
     public IEnumerable<object> Assessment_In_ED(CqlContext context) =>
@@ -906,7 +860,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Decision_to_Admit_Using_Assessment_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Decision_to_Admit_Using_Assessment_Cached = new();
 
     [CqlExpressionDefinition("Decision to Admit Using Assessment")]
     public IEnumerable<Encounter> Decision_to_Admit_Using_Assessment(CqlContext context) =>
@@ -969,7 +923,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     }
 
 
-    private Cached<IEnumerable<ServiceRequest>> _Inpatient_Or_Bed_Assignment_Encounter_Order_Cached = new();
+    private readonly Cached<IEnumerable<ServiceRequest>> _Inpatient_Or_Bed_Assignment_Encounter_Order_Cached = new();
 
     [CqlExpressionDefinition("Inpatient Or Bed Assignment Encounter Order")]
     public IEnumerable<ServiceRequest> Inpatient_Or_Bed_Assignment_Encounter_Order(CqlContext context) =>
@@ -1001,7 +955,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes_Cached = new();
 
     [CqlExpressionDefinition("Time of Admit Order Or Bed Assignment to Departure Greater Than 241 Minutes")]
     public IEnumerable<Encounter> Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes(CqlContext context) =>
@@ -1066,7 +1020,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     }
 
 
-    private Cached<IEnumerable<Encounter>> _Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure_Cached = new();
 
     [CqlExpressionDefinition("Admitted to Inpatient 241 Minutes or More Before Departure")]
     public IEnumerable<Encounter> Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure(CqlContext context) =>
@@ -1098,7 +1052,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Boarded_Time_Greater_Than_240_Minutes_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Boarded_Time_Greater_Than_240_Minutes_Cached = new();
 
     [CqlExpressionDefinition("Boarded Time Greater Than 240 Minutes")]
     public IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes(CqlContext context) =>
@@ -1116,7 +1070,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Observation_Status_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Observation_Status_Cached = new();
 
     [CqlExpressionDefinition("ED Observation Status")]
     public IEnumerable<Encounter> ED_Observation_Status(CqlContext context) =>
@@ -1154,7 +1108,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Cached = new();
 
     [CqlExpressionDefinition("Boarded Time Greater Than 240 Minutes and No Observation Stay")]
     public IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay(CqlContext context) =>
@@ -1186,7 +1140,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Length_of_Stay_Greater_Than_480_Minutes_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Length_of_Stay_Greater_Than_480_Minutes_Cached = new();
 
     [CqlExpressionDefinition("ED Length of Stay Greater Than 480 Minutes")]
     public IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes(CqlContext context) =>
@@ -1209,7 +1163,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Cached = new();
 
     [CqlExpressionDefinition("ED Length of Stay Greater Than 480 Minutes and No Observation Stay")]
     public IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay(CqlContext context) =>
@@ -1241,7 +1195,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
@@ -1259,7 +1213,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter or Triage of Patients Less Than 18 Years")]
     public IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(CqlContext context) =>
@@ -1286,7 +1240,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Pediatric_With_No_Mental_Health_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Pediatric_With_No_Mental_Health_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Pediatric With No Mental Health Diagnosis")]
     public IEnumerable<Encounter> Pediatric_With_No_Mental_Health_Diagnosis(CqlContext context) =>
@@ -1307,7 +1261,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter or Triage of Patients 18 Years and Older")]
     public IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(CqlContext context) =>
@@ -1334,7 +1288,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Adult_With_No_Mental_Health_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Adult_With_No_Mental_Health_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Adult With No Mental Health Diagnosis")]
     public IEnumerable<Encounter> Adult_With_No_Mental_Health_Diagnosis(CqlContext context) =>
@@ -1355,7 +1309,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Pediatric_With_Mental_Health_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Pediatric_With_Mental_Health_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Pediatric With Mental Health Diagnosis")]
     public IEnumerable<Encounter> Pediatric_With_Mental_Health_Diagnosis(CqlContext context) =>
@@ -1375,7 +1329,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Adult_With_Mental_Health_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Adult_With_Mental_Health_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Adult With Mental Health Diagnosis")]
     public IEnumerable<Encounter> Adult_With_Mental_Health_Diagnosis(CqlContext context) =>
@@ -1395,7 +1349,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Stratification_1_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Stratification_1_Cached = new();
 
     [CqlExpressionDefinition("Stratification 1")]
     public IEnumerable<Encounter> Stratification_1(CqlContext context) =>
@@ -1407,7 +1361,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Stratification_2_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Stratification_2_Cached = new();
 
     [CqlExpressionDefinition("Stratification 2")]
     public IEnumerable<Encounter> Stratification_2(CqlContext context) =>
@@ -1419,7 +1373,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Stratification_3_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Stratification_3_Cached = new();
 
     [CqlExpressionDefinition("Stratification 3")]
     public IEnumerable<Encounter> Stratification_3(CqlContext context) =>
@@ -1431,7 +1385,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Stratification_4_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Stratification_4_Cached = new();
 
     [CqlExpressionDefinition("Stratification 4")]
     public IEnumerable<Encounter> Stratification_4(CqlContext context) =>
@@ -1443,7 +1397,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -1455,7 +1409,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -1467,7 +1421,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -1479,7 +1433,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -1492,5 +1446,55 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private CMS1244FHIRECATHOQR_1_0_000() {}
+
+    public static CMS1244FHIRECATHOQR_1_0_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS1244FHIRECATHOQR";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [CQMCommon_4_1_000.Instance, FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance, SupplementalDataElements_5_1_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

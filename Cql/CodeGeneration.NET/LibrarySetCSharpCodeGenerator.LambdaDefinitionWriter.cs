@@ -41,7 +41,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                 cacheFieldName = $"{cacheFieldName}_Cached";
                 ISB.AppendLine(
                     $"""
-                     private Cached<{returnType}> {cacheFieldName} = new();
+                     private readonly Cached<{returnType}> {cacheFieldName} = new();
 
                      """);
             }

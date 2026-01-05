@@ -1,5 +1,7 @@
 ﻿#nullable enable
 
+using System.Threading;
+
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
@@ -17,12 +19,14 @@ public interface ICqlContextInternals
     /// When this value changes, it indicates that the cache was invalidated, and cached data should be refreshed on next access.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public object? CacheVersion { get; }
+    public long CacheVersion { get; }
 }
 
 partial class CqlContext : ICqlContextInternals
 {
-    private object? _cacheVersion;
+    private static long _globalCacheVersion = 0;
+
+    private long _cacheVersion;
 
     /// <summary>
     /// Invalidates the current cache, forcing subsequent operations to use fresh data.
@@ -30,14 +34,14 @@ partial class CqlContext : ICqlContextInternals
     /// <remarks>Call this method to clear any cached data and ensure that future operations do not use stale
     /// information. This is useful when the underlying data source has changed and the cache needs to be
     /// refreshed. This does not clear out existing cache data maintained in CQL libraries.</remarks>
-    public void UseNewCache() => _cacheVersion = new();
+    public void UseNewCache() => _cacheVersion = Interlocked.Increment(ref _globalCacheVersion);
 
     /// <summary>
     /// Disables caching for subsequent operations by resetting the cache state.
     /// </summary>
     /// <remarks>Call this method to ensure that future operations do not use any previously cached data. This
     /// may impact performance if caching is typically used to improve efficiency.</remarks>
-    public void DontUseCaching() => _cacheVersion = null;
+    public void DontUseCaching() => _cacheVersion = 0;
 
-    object? ICqlContextInternals.CacheVersion => _cacheVersion;
+    long ICqlContextInternals.CacheVersion => _cacheVersion;
 }

@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS72FHIRSTKAntithromboticDay2", "1.0.000")]
 public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISingleton<CMS72FHIRSTKAntithromboticDay2_1_0_000>
 {
-    private CMS72FHIRSTKAntithromboticDay2_1_0_000() {}
-
-    public static CMS72FHIRSTKAntithromboticDay2_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS72FHIRSTKAntithromboticDay2";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [CQMCommon_4_1_000.Instance, QICoreCommon_4_0_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, TJCOverall_8_25_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Antithrombotic Therapy for Ischemic Stroke", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62", valueSetVersion: null)]
@@ -100,7 +54,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -116,7 +70,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -129,7 +83,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
@@ -141,7 +95,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
@@ -153,7 +107,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_Less_Than_Two_Days_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_Less_Than_Two_Days_Cached = new();
 
     [CqlExpressionDefinition("Encounter Less Than Two Days")]
     public IEnumerable<Encounter> Encounter_Less_Than_Two_Days(CqlContext context) =>
@@ -174,7 +128,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Comfort Measures During Day Of Or Day After Arrival")]
     public IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival(CqlContext context) =>
@@ -286,7 +240,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<object>> _Thrombolytic_Therapy_Medication_Or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Thrombolytic_Therapy_Medication_Or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Thrombolytic Therapy Medication Or Procedures")]
     public IEnumerable<object> Thrombolytic_Therapy_Medication_Or_Procedures(CqlContext context) =>
@@ -377,7 +331,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Thrombolytic Therapy Medication Or Procedures")]
     public IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures(CqlContext context) =>
@@ -493,7 +447,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Thrombolytic Therapy Prior To Arrival")]
     public IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival(CqlContext context) =>
@@ -523,7 +477,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Thrombolytic Therapy Documented As Already Given")]
     public IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given(CqlContext context) =>
@@ -589,7 +543,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Thrombolytic Therapy Given Prior To Arrival Or During Hospitalization")]
     public IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization(CqlContext context) =>
@@ -605,7 +559,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Exclusions_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
@@ -621,7 +575,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Antithrombotic_Therapy_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Antithrombotic_Therapy_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Antithrombotic Therapy")]
     public IEnumerable<Encounter> Encounter_With_Antithrombotic_Therapy(CqlContext context) =>
@@ -706,7 +660,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
@@ -718,7 +672,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>> _Reason_For_Not_Ordering_Antithrombotic_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>> _Reason_For_Not_Ordering_Antithrombotic_Cached = new();
 
     [CqlExpressionDefinition("Reason For Not Ordering Antithrombotic")]
     public IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> Reason_For_Not_Ordering_Antithrombotic(CqlContext context) =>
@@ -874,7 +828,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?>> _Reason_For_Not_Administering_Antithrombotic_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?>> _Reason_For_Not_Administering_Antithrombotic_Cached = new();
 
     [CqlExpressionDefinition("Reason For Not Administering Antithrombotic")]
     public IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> Reason_For_Not_Administering_Antithrombotic(CqlContext context) =>
@@ -946,7 +900,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>> _Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>> _Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Cached = new();
 
     [CqlExpressionDefinition("Documented Reason For No Antithrombotic Ordered Or Administered")]
     public IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered(CqlContext context) =>
@@ -962,7 +916,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Documented Reason For No Antithrombotic Ordered Or Administered Day Of Or Day After Hospital Arrival")]
     public IEnumerable<Encounter> Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival(CqlContext context) =>
@@ -1007,7 +961,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Pharmacological Contraindications For Antithrombotic Therapy Given Day Of Or Day After Hospital Arrival")]
     public IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival(CqlContext context) =>
@@ -1092,7 +1046,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_An_INR_Greater_Than_3_5_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_An_INR_Greater_Than_3_5_Cached = new();
 
     [CqlExpressionDefinition("Encounter With An INR Greater Than 3.5")]
     public IEnumerable<Encounter> Encounter_With_An_INR_Greater_Than_3_5(CqlContext context) =>
@@ -1155,7 +1109,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Exceptions_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Exceptions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
@@ -1171,7 +1125,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -1183,7 +1137,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -1195,7 +1149,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -1207,7 +1161,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -1220,6 +1174,22 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private CMS72FHIRSTKAntithromboticDay2_1_0_000() {}
+
+    public static CMS72FHIRSTKAntithromboticDay2_1_0_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS72FHIRSTKAntithromboticDay2";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [CQMCommon_4_1_000.Instance, QICoreCommon_4_0_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, TJCOverall_8_25_000.Instance];
+
+    #endregion ILibrary Implementation
 
     #region CqlTupleMetadata Properties
 
@@ -1236,5 +1206,39 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
        ["id", "authoredOn"]);
 
     #endregion CqlTupleMetadata Properties
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

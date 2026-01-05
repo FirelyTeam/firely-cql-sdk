@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS1028FHIRPCSevereOBComps", "1.0.000")]
 public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<CMS1028FHIRPCSevereOBComps_1_0_000>
 {
-    private CMS1028FHIRPCSevereOBComps_1_0_000() {}
-
-    public static CMS1028FHIRPCSevereOBComps_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS1028FHIRPCSevereOBComps";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [CQMCommon_4_1_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, PCMaternal_5_25_000.Instance, QICoreCommon_4_0_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("20 to 42 Plus Weeks Gestation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67", valueSetVersion: null)]
@@ -355,7 +309,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -371,7 +325,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -384,7 +338,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
@@ -396,7 +350,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -408,7 +362,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -420,7 +374,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -432,7 +386,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -444,7 +398,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Calculated Gestational Age Greater Than Or Equal To 20 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks(CqlContext context) =>
@@ -464,7 +418,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Estimated Gestational Age Assessment Greater Than Or Equal To 20 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks(CqlContext context) =>
@@ -487,7 +441,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Gestational Age Greater Than Or Equal To 20 Weeks Based On Coding")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding(CqlContext context) =>
@@ -539,7 +493,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters At Greater Than Or Equal To 20 Weeks Gestation")]
     public IEnumerable<Encounter> Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(CqlContext context) =>
@@ -555,7 +509,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications Diagnosis Or Procedure Excluding Blood Transfusion")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion(CqlContext context) =>
@@ -659,7 +613,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Expiration_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Expiration_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Expiration")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Expiration(CqlContext context) =>
@@ -682,7 +636,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Blood_Transfusion_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Blood_Transfusion_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Blood Transfusion")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Blood_Transfusion(CqlContext context) =>
@@ -783,7 +737,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Severe_Obstetric_Complications_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Severe_Obstetric_Complications_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications(CqlContext context) =>
@@ -799,7 +753,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Hysterectomy_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Hysterectomy_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Hysterectomy")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Hysterectomy(CqlContext context) =>
@@ -900,7 +854,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Procedure>> _Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<Procedure>> _Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Cardiac Conversion, Tracheostomy Or Ventilation Procedures")]
     public IEnumerable<Procedure> Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures(CqlContext context) =>
@@ -919,7 +873,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Cardiac Conversion, Tracheostomy Or Ventilation Procedures")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures(CqlContext context) =>
@@ -1019,7 +973,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Cached = new();
 
     [CqlExpressionDefinition("SOC With Hysterectomy Or Blood Transfusion With Placenta Increta Or Placenta Percreta Without Additional SOC")]
     public IEnumerable<Encounter> SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(CqlContext context) =>
@@ -1087,7 +1041,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("SDE Delivery Encounters With Severe Obstetric Complication Diagnosis")]
     public IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis(CqlContext context) =>
@@ -1110,7 +1064,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures_Cached = new();
 
     [CqlExpressionDefinition("SDE Delivery Encounters With Severe Obstetric Complication Procedures")]
     public IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures(CqlContext context) =>
@@ -1444,7 +1398,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     }
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?>> _SDE_SOC_Diagnoses_Detail_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?>> _SDE_SOC_Diagnoses_Detail_Cached = new();
 
     [CqlExpressionDefinition("SDE SOC Diagnoses Detail")]
     public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?> SDE_SOC_Diagnoses_Detail(CqlContext context) =>
@@ -1668,7 +1622,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     }
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?>> _SDE_SOC_Procedure_Detail_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?>> _SDE_SOC_Procedure_Detail_Cached = new();
 
     [CqlExpressionDefinition("SDE SOC Procedure Detail")]
     public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?> SDE_SOC_Procedure_Detail(CqlContext context) =>
@@ -1708,7 +1662,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Numerator_Exclusions_1_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_Exclusions_1_Cached = new();
 
     [CqlExpressionDefinition("Numerator Exclusions 1")]
     public IEnumerable<Encounter> Numerator_Exclusions_1(CqlContext context) =>
@@ -1720,7 +1674,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications Excluding Blood Transfusions")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(CqlContext context) =>
@@ -1734,7 +1688,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Numerator_1_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_1_Cached = new();
 
     [CqlExpressionDefinition("Numerator 1")]
     public IEnumerable<Encounter> Numerator_1(CqlContext context) =>
@@ -1746,7 +1700,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>> _SDE_Variable_Calculated_Gestational_Age_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>> _SDE_Variable_Calculated_Gestational_Age_Cached = new();
 
     [CqlExpressionDefinition("SDE Variable Calculated Gestational Age")]
     public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> SDE_Variable_Calculated_Gestational_Age(CqlContext context) =>
@@ -1758,7 +1712,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
@@ -1770,7 +1724,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only_Cached = new();
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications Excluding Blood Transfusions Only")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only(CqlContext context) =>
@@ -1784,7 +1738,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Numerator_2_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_2_Cached = new();
 
     [CqlExpressionDefinition("Numerator 2")]
     public IEnumerable<Encounter> Numerator_2(CqlContext context) =>
@@ -1796,7 +1750,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Cached = new();
 
     [CqlExpressionDefinition("SOC Excluding Blood Transfusions Only With Hysterectomy Or Blood Transfusion With Placenta Increta Or Placenta Percreta Without Additional SOC")]
     public IEnumerable<Encounter> SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(CqlContext context) =>
@@ -1864,7 +1818,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Numerator_Exclusions_2_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_Exclusions_2_Cached = new();
 
     [CqlExpressionDefinition("Numerator Exclusions 2")]
     public IEnumerable<Encounter> Numerator_Exclusions_2(CqlContext context) =>
@@ -1876,7 +1830,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Anemia_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Anemia_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Anemia")]
     public IEnumerable<Encounter> Risk_Variable_Anemia(CqlContext context) =>
@@ -1897,7 +1851,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Asthma_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Asthma_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Asthma")]
     public IEnumerable<Encounter> Risk_Variable_Asthma(CqlContext context) =>
@@ -1918,7 +1872,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Autoimmune_Disease_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Autoimmune_Disease_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Autoimmune Disease")]
     public IEnumerable<Encounter> Risk_Variable_Autoimmune_Disease(CqlContext context) =>
@@ -1939,7 +1893,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Bariatric_Surgery_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Bariatric_Surgery_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Bariatric Surgery")]
     public IEnumerable<Encounter> Risk_Variable_Bariatric_Surgery(CqlContext context) =>
@@ -1960,7 +1914,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Bleeding_Disorder_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Bleeding_Disorder_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Bleeding Disorder")]
     public IEnumerable<Encounter> Risk_Variable_Bleeding_Disorder(CqlContext context) =>
@@ -1981,7 +1935,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Cardiac_Disease_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Cardiac_Disease_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Cardiac Disease")]
     public IEnumerable<Encounter> Risk_Variable_Cardiac_Disease(CqlContext context) =>
@@ -2002,7 +1956,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Economic_Housing_Instability_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Economic_Housing_Instability_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Economic Housing Instability")]
     public IEnumerable<Encounter> Risk_Variable_Economic_Housing_Instability(CqlContext context) =>
@@ -2023,7 +1977,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Gastrointestinal_Disease_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Gastrointestinal_Disease_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Gastrointestinal Disease")]
     public IEnumerable<Encounter> Risk_Variable_Gastrointestinal_Disease(CqlContext context) =>
@@ -2044,7 +1998,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Gestational_Diabetes_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Gestational_Diabetes_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Gestational Diabetes")]
     public IEnumerable<Encounter> Risk_Variable_Gestational_Diabetes(CqlContext context) =>
@@ -2065,7 +2019,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_HIV_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_HIV_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable HIV")]
     public IEnumerable<Encounter> Risk_Variable_HIV(CqlContext context) =>
@@ -2086,7 +2040,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Hypertension_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Hypertension_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Hypertension")]
     public IEnumerable<Encounter> Risk_Variable_Hypertension(CqlContext context) =>
@@ -2107,7 +2061,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Long_Term_Anticoagulant_Use_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Long_Term_Anticoagulant_Use_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Long Term Anticoagulant Use")]
     public IEnumerable<Encounter> Risk_Variable_Long_Term_Anticoagulant_Use(CqlContext context) =>
@@ -2128,7 +2082,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<IEnumerable<object>>> _Risk_Variable_Maternal_Age_Cached = new();
+    private readonly Cached<IEnumerable<IEnumerable<object>>> _Risk_Variable_Maternal_Age_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Maternal Age")]
     public IEnumerable<IEnumerable<object>> Risk_Variable_Maternal_Age(CqlContext context) =>
@@ -2160,7 +2114,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Mental_Health_Disorder_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Mental_Health_Disorder_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Mental Health Disorder")]
     public IEnumerable<Encounter> Risk_Variable_Mental_Health_Disorder(CqlContext context) =>
@@ -2181,7 +2135,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Morbid_Obesity_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Morbid_Obesity_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Morbid Obesity")]
     public IEnumerable<Encounter> Risk_Variable_Morbid_Obesity(CqlContext context) =>
@@ -2202,7 +2156,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Multiple_Pregnancy_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Multiple_Pregnancy_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Multiple Pregnancy")]
     public IEnumerable<Encounter> Risk_Variable_Multiple_Pregnancy(CqlContext context) =>
@@ -2223,7 +2177,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Neuromuscular_Disease_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Neuromuscular_Disease_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Neuromuscular Disease")]
     public IEnumerable<Encounter> Risk_Variable_Neuromuscular_Disease(CqlContext context) =>
@@ -2244,7 +2198,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Obstetrical_VTE_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Obstetrical_VTE_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Obstetrical VTE")]
     public IEnumerable<Encounter> Risk_Variable_Obstetrical_VTE(CqlContext context) =>
@@ -2265,7 +2219,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Other_Preeclampsia_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Other_Preeclampsia_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Other Preeclampsia")]
     public IEnumerable<Encounter> Risk_Variable_Other_Preeclampsia(CqlContext context) =>
@@ -2286,7 +2240,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Placenta_Previa_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Placenta_Previa_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Placenta Previa")]
     public IEnumerable<Encounter> Risk_Variable_Placenta_Previa(CqlContext context) =>
@@ -2307,7 +2261,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Placental_Abruption_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Placental_Abruption_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Placental Abruption")]
     public IEnumerable<Encounter> Risk_Variable_Placental_Abruption(CqlContext context) =>
@@ -2328,7 +2282,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Placental_Accreta_Spectrum_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Placental_Accreta_Spectrum_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Placental Accreta Spectrum")]
     public IEnumerable<Encounter> Risk_Variable_Placental_Accreta_Spectrum(CqlContext context) =>
@@ -2352,7 +2306,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Preexisting_Diabetes_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Preexisting_Diabetes_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Preexisting Diabetes")]
     public IEnumerable<Encounter> Risk_Variable_Preexisting_Diabetes(CqlContext context) =>
@@ -2373,7 +2327,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Previous_Cesarean_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Previous_Cesarean_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Previous Cesarean")]
     public IEnumerable<Encounter> Risk_Variable_Previous_Cesarean(CqlContext context) =>
@@ -2394,7 +2348,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Pulmonary_Hypertension_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Pulmonary_Hypertension_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Pulmonary Hypertension")]
     public IEnumerable<Encounter> Risk_Variable_Pulmonary_Hypertension(CqlContext context) =>
@@ -2415,7 +2369,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Renal_Disease_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Renal_Disease_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Renal Disease")]
     public IEnumerable<Encounter> Risk_Variable_Renal_Disease(CqlContext context) =>
@@ -2436,7 +2390,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Severe_Preeclampsia_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Severe_Preeclampsia_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Severe Preeclampsia")]
     public IEnumerable<Encounter> Risk_Variable_Severe_Preeclampsia(CqlContext context) =>
@@ -2457,7 +2411,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Substance_Abuse_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Substance_Abuse_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Substance Abuse")]
     public IEnumerable<Encounter> Risk_Variable_Substance_Abuse(CqlContext context) =>
@@ -2478,7 +2432,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Thyrotoxicosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Thyrotoxicosis_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Thyrotoxicosis")]
     public IEnumerable<Encounter> Risk_Variable_Thyrotoxicosis(CqlContext context) =>
@@ -2499,7 +2453,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Risk_Variable_Preterm_Birth_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Risk_Variable_Preterm_Birth_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Preterm Birth")]
     public IEnumerable<Encounter> Risk_Variable_Preterm_Birth(CqlContext context) =>
@@ -2552,7 +2506,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>> _Risk_Variable_First_Hematocrit_Lab_Test_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>> _Risk_Variable_First_Hematocrit_Lab_Test_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable First Hematocrit Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Risk_Variable_First_Hematocrit_Lab_Test(CqlContext context) =>
@@ -2664,7 +2618,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?>> _Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?>> _Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable First White Blood Cell Count Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test(CqlContext context) =>
@@ -2776,7 +2730,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?>> _Risk_Variable_Heart_Rate_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?>> _Risk_Variable_Heart_Rate_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Heart Rate")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?> Risk_Variable_Heart_Rate(CqlContext context) =>
@@ -2876,7 +2830,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?>> _Risk_Variable_Systolic_Blood_Pressure_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?>> _Risk_Variable_Systolic_Blood_Pressure_Cached = new();
 
     [CqlExpressionDefinition("Risk Variable Systolic Blood Pressure")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?> Risk_Variable_Systolic_Blood_Pressure(CqlContext context) =>
@@ -3038,6 +2992,22 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
+    private CMS1028FHIRPCSevereOBComps_1_0_000() {}
+
+    public static CMS1028FHIRPCSevereOBComps_1_0_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS1028FHIRPCSevereOBComps";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [CQMCommon_4_1_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, PCMaternal_5_25_000.Instance, QICoreCommon_4_0_000.Instance];
+
+    #endregion ILibrary Implementation
+
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new(
@@ -3073,5 +3043,39 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
        ["EncounterId", "FirstHRResult", "Timing"]);
 
     #endregion CqlTupleMetadata Properties
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

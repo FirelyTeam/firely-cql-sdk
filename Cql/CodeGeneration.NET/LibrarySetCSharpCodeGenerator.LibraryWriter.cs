@@ -216,12 +216,14 @@ partial class LibrarySetCSharpCodeGenerator
 
             using (ISB.Indent())
             {
-                AppendClassConstructor();
-                AppendSingletonInstanceProperty();
-                AppendLibraryInterfaceImplementation();
-                AppendNestedTypeCached();
+                // Put logic first
                 AppendMethods();
+
+                // These are all boilerplate
+                AppendSingletonLifetimeMembers();
+                AppendLibraryInterfaceImplementation();
                 AppendCqlTupleMetadataProperties();
+                AppendNestedTypeCached();
             }
 
             ISB.AppendLine("}");
@@ -233,15 +235,15 @@ partial class LibrarySetCSharpCodeGenerator
                 """
                 #region Nested Type - Cached<T>
 
-                private struct Cached<T>(object CacheVersion, T CachedValue)
+                private struct Cached<T>(long CacheVersion, T CachedValue)
                 {
                     public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
                     {
                         var cqlContextCacheVersion = cqlContext.CacheVersion;
-                        if (cqlContextCacheVersion is null)
+                        if (cqlContextCacheVersion is 0)
                         {
                             // No caching, clear out previous values
-                            CacheVersion = null;
+                            CacheVersion = 0;
                             CachedValue = default;
                             var value = factory();
                             return value;
@@ -268,20 +270,17 @@ partial class LibrarySetCSharpCodeGenerator
                 """);
         }
 
-        private void AppendSingletonInstanceProperty()
+        private void AppendSingletonLifetimeMembers()
         {
             ISB.AppendLine(
                 $$"""
+                  #region Singleton Lifetime Members
+
+                  private {{_className}}() {}
+
                   public static {{_className}} Instance { get; } = new();
 
-                  """);
-        }
-
-        private void AppendClassConstructor()
-        {
-            ISB.AppendLine(
-                $$"""
-                  private {{_className}}() {}
+                  #endregion
 
                   """);
         }

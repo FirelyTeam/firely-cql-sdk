@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ParameterNameTest", "1.0.0")]
 public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNameTest_1_0_0>
 {
-    private ParameterNameTest_1_0_0() {}
-
-    public static ParameterNameTest_1_0_0 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "ParameterNameTest";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region Functions and Expressions
 
     [CqlFunctionDefinition("Test Function")]
@@ -89,5 +43,55 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private ParameterNameTest_1_0_0() {}
+
+    public static ParameterNameTest_1_0_0 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "ParameterNameTest";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

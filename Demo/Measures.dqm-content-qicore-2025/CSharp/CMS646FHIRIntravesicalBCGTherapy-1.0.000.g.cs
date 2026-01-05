@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS646FHIRIntravesicalBCGTherapy", "1.0.000")]
 public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingleton<CMS646FHIRIntravesicalBCGTherapy_1_0_000>
 {
-    private CMS646FHIRIntravesicalBCGTherapy_1_0_000() {}
-
-    public static CMS646FHIRIntravesicalBCGTherapy_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS646FHIRIntravesicalBCGTherapy";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Bacillus Calmette Guerin for Urology Care", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.353", valueSetVersion: null)]
@@ -170,7 +124,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -186,7 +140,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -261,7 +215,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     }
 
 
-    private Cached<IEnumerable<object>> _Bladder_Cancer_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Bladder_Cancer_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Bladder Cancer Diagnosis")]
     public IEnumerable<object> Bladder_Cancer_Diagnosis(CqlContext context) =>
@@ -317,7 +271,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<Procedure> _First_Bladder_Cancer_Staging_Procedure_Cached = new();
+    private readonly Cached<Procedure> _First_Bladder_Cancer_Staging_Procedure_Cached = new();
 
     [CqlExpressionDefinition("First Bladder Cancer Staging Procedure")]
     public Procedure First_Bladder_Cancer_Staging_Procedure(CqlContext context) =>
@@ -498,7 +452,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<CqlDate> _July_1_of_Year_Prior_to_the_Measurement_Period_Cached = new();
+    private readonly Cached<CqlDate> _July_1_of_Year_Prior_to_the_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("July 1 of Year Prior to the Measurement Period")]
     public CqlDate July_1_of_Year_Prior_to_the_Measurement_Period(CqlContext context) =>
@@ -514,7 +468,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<CqlDate> _June_30_of_the_Measurement_Period_Cached = new();
+    private readonly Cached<CqlDate> _June_30_of_the_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("June 30 of the Measurement Period")]
     public CqlDate June_30_of_the_Measurement_Period(CqlContext context) =>
@@ -529,7 +483,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<Procedure> _First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period_Cached = new();
+    private readonly Cached<Procedure> _First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("First Bladder Cancer Staging Procedure during 6 Months Prior to Measurement Period through the First 6 Months of Measurement Period")]
     public Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period(CqlContext context) =>
@@ -630,7 +584,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<bool?> _Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG_Cached = new();
+    private readonly Cached<bool?> _Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG_Cached = new();
 
     [CqlExpressionDefinition("Has Most Recent Bladder Cancer Tumor Staging is T1, Tis, Ta HG")]
     public bool? Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG(CqlContext context) =>
@@ -682,7 +636,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<bool?> _Has_Qualifying_Encounter_Cached = new();
+    private readonly Cached<bool?> _Has_Qualifying_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Has Qualifying Encounter")]
     public bool? Has_Qualifying_Encounter(CqlContext context) =>
@@ -717,7 +671,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<bool?> _Initial_Population_Cached = new();
+    private readonly Cached<bool?> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
@@ -731,7 +685,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<bool?> _Denominator_Cached = new();
+    private readonly Cached<bool?> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
@@ -743,7 +697,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<IEnumerable<object>> _Acute_Tuberculosis_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Acute_Tuberculosis_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Acute Tuberculosis Diagnosis")]
     public IEnumerable<object> Acute_Tuberculosis_Diagnosis(CqlContext context) =>
@@ -992,7 +946,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<IEnumerable<MedicationRequest>> _Immunosuppressive_Drugs_Cached = new();
+    private readonly Cached<IEnumerable<MedicationRequest>> _Immunosuppressive_Drugs_Cached = new();
 
     [CqlExpressionDefinition("Immunosuppressive Drugs")]
     public IEnumerable<MedicationRequest> Immunosuppressive_Drugs(CqlContext context) =>
@@ -1244,7 +1198,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<IEnumerable<Procedure>> _Cystectomy_Done_Cached = new();
+    private readonly Cached<IEnumerable<Procedure>> _Cystectomy_Done_Cached = new();
 
     [CqlExpressionDefinition("Cystectomy Done")]
     public IEnumerable<Procedure> Cystectomy_Done(CqlContext context) =>
@@ -1555,7 +1509,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<bool?> _Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging_Cached = new();
+    private readonly Cached<bool?> _Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging_Cached = new();
 
     [CqlExpressionDefinition("Has Excluding HIV, Immunocompromised Conditions or Mixed Histology Before Staging")]
     public bool? Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging(CqlContext context) =>
@@ -1747,7 +1701,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<bool?> _Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging_Cached = new();
+    private readonly Cached<bool?> _Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging_Cached = new();
 
     [CqlExpressionDefinition("Has Excluding Chemotherapy or Radiotherapy Procedure Before Staging")]
     public bool? Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging(CqlContext context) =>
@@ -2401,7 +2355,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<bool?> _Denominator_Exclusion_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exclusion_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusion")]
     public bool? Denominator_Exclusion(CqlContext context) =>
@@ -2424,7 +2378,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<IEnumerable<MedicationAdministration>> _BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging_Cached = new();
+    private readonly Cached<IEnumerable<MedicationAdministration>> _BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging_Cached = new();
 
     [CqlExpressionDefinition("BCG Not Available Within 6 Months After Bladder Cancer Staging")]
     public IEnumerable<MedicationAdministration> BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging(CqlContext context) =>
@@ -2699,7 +2653,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<bool?> _Denominator_Exception_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exception_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exception")]
     public bool? Denominator_Exception(CqlContext context) =>
@@ -2712,7 +2666,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<MedicationAdministration> _First_BCG_Administered_Cached = new();
+    private readonly Cached<MedicationAdministration> _First_BCG_Administered_Cached = new();
 
     [CqlExpressionDefinition("First BCG Administered")]
     public MedicationAdministration First_BCG_Administered(CqlContext context) =>
@@ -3009,7 +2963,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<bool?> _Numerator_Cached = new();
+    private readonly Cached<bool?> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
@@ -3022,7 +2976,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -3034,7 +2988,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -3046,7 +3000,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -3058,7 +3012,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -3071,5 +3025,55 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private CMS646FHIRIntravesicalBCGTherapy_1_0_000() {}
+
+    public static CMS646FHIRIntravesicalBCGTherapy_1_0_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS646FHIRIntravesicalBCGTherapy";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }
