@@ -20,7 +20,7 @@ internal static class StringExtensions
         return keyword == SyntaxKind.None ? symbol : $"@{symbol}";
     }
 
-    public static string IndentString(int indent) => new(' ', indent * TextWriterExtensions.SpacesPerIndentLevel);
+    public static string IndentString(int indent) => new(' ', indent * StringBuilderExtensions.SpacesPerIndentLevel);
 
 
     public static string ParenthesizeIfNeeded(this string term)

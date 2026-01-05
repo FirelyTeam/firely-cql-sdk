@@ -97,4 +97,7 @@ internal static class ReflectionUtility
         (MethodOf(fnToMethodCall, expression)
             ?.GetGenericMethodDefinition())
             ?? throw new InvalidOperationException($"Expression is not a generic method: '{expression}'.");
+
+    public static bool IsExtensionMethod(this MethodInfo info) =>
+        info.IsDefined(typeof(System.Runtime.CompilerServices.ExtensionAttribute), true);
 }

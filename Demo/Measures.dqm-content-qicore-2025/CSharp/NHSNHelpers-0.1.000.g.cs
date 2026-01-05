@@ -12,57 +12,45 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
 [CqlLibrary("NHSNHelpers", "0.1.000")]
 public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_000>
 {
-    private NHSNHelpers_0_1_000() {}
-
-    public static NHSNHelpers_0_1_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "NHSNHelpers";
-    public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance];
-
-    #endregion ILibrary Implementation
-
     #region Functions and Expressions
 
-    [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    private readonly Cached<Patient> _Patient_Cached = new();
 
-        return b_;
-    }
+    [CqlExpressionDefinition("Patient")]
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
 
     [CqlFunctionDefinition("Normalize Interval")]
     public CqlInterval<CqlDateTime> Normalize_Interval(CqlContext context, object choice)
     {
-        CqlInterval<CqlDateTime> a_()
-        {
+
+        CqlInterval<CqlDateTime> a_() {
             if (choice is FhirDateTime)
             {
                 CqlDateTime b_ = FHIRHelpers_4_4_000.Instance.ToDateTime(context, choice as FhirDateTime);
                 CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
-
                 return d_;
             }
             else if (choice is Period)
             {
                 CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, choice as Period);
-
                 return e_;
             }
             else if (choice is Instant)
             {
                 CqlDateTime f_ = FHIRHelpers_4_4_000.Instance.ToDateTime(context, choice as Instant);
                 CqlInterval<CqlDateTime> h_ = context.Operators.Interval(f_, f_, true, true);
-
                 return h_;
             }
             else if (choice is Age)
@@ -109,7 +97,6 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
                 CqlInterval<CqlDate> bm_ = context.Operators.Interval(be_, bl_, true, false);
                 bool? bn_ = bm_?.highClosed;
                 CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(w_, al_, az_, bn_);
-
                 return bo_;
             }
             else if (choice is Range)
@@ -165,26 +152,23 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
                 CqlInterval<CqlDate> eb_ = context.Operators.Interval(ds_, ea_, true, false);
                 bool? ec_ = eb_?.highClosed;
                 CqlInterval<CqlDateTime> ed_ = context.Operators.Interval(cf_, cw_, dm_, ec_);
-
                 return ed_;
             }
             else if (choice is Timing)
             {
                 CqlInterval<CqlDateTime> ee_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute a single interval from a Timing type");
-
                 return ee_;
             }
             else if (choice is FhirString)
             {
                 CqlInterval<CqlDateTime> ef_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
-
                 return ef_;
             }
             else
             {
                 return null as CqlInterval<CqlDateTime>;
-            }
-        };
+            };
+        }
 
         return a_();
     }
@@ -200,7 +184,6 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
         CqlDateTime e_ = FHIRHelpers_4_4_000.Instance.ToDateTime(context, d_);
         CqlDate f_ = context.Operators.DateFrom(e_);
         CqlInterval<CqlDate> g_ = context.Operators.Interval(c_, f_, true, true);
-
         return g_;
     }
 
@@ -209,20 +192,19 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
     public Location GetLocation(CqlContext context, ResourceReference reference)
     {
         IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Location"));
-        bool? b_(Location Locations)
-        {
+
+        bool? b_(Location Locations) {
             Id e_ = Locations?.IdElement;
             string f_ = FHIRHelpers_4_4_000.Instance.ToString(context, e_);
             FhirString g_ = reference?.ReferenceElement;
             string h_ = FHIRHelpers_4_4_000.Instance.ToString(context, g_);
             string i_ = this.GetId(context, h_);
             bool? j_ = context.Operators.Equal(f_, i_);
-
             return j_;
-        };
+        }
+
         IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
         Location d_ = context.Operators.SingletonFrom<Location>(c_);
-
         return d_;
     }
 
@@ -232,11 +214,60 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
     {
         IEnumerable<string> a_ = context.Operators.Split(uri, "/");
         string b_ = context.Operators.Last<string>(a_);
-
         return b_;
     }
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private NHSNHelpers_0_1_000() {}
+
+    public static NHSNHelpers_0_1_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "NHSNHelpers";
+    public string Version => "0.1.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

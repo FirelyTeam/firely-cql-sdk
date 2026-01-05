@@ -96,6 +96,7 @@ stages:
         **/*Tests/*Tests.csproj
         **/**/Test.Measures.Demo.csproj
         !**/Ncqa.HT.DeckTests.csproj
+        !**/Ncqa.HT.MeasuresTests.csproj
         submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj
       packageArtifacts: true
       restoreDependencies: true

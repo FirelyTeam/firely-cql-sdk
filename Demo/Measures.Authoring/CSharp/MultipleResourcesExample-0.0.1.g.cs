@@ -12,22 +12,10 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>
 {
-    private MultipleResourcesExample_0_0_1() {}
-
-    public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "MultipleResourcesExample";
-    public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
-
-    #endregion ILibrary Implementation
-
     #region ValueSets
 
     [CqlValueSetDefinition("Lung Cancer", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", valueSetVersion: null)]
@@ -60,60 +48,119 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     #region Functions and Expressions
 
+    private readonly Cached<Patient> _Patient_Cached = new();
+
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
-        return b_;
-    }
 
+    private readonly Cached<IEnumerable<Observation>> _Smoking_status_observation_Cached = new();
 
     [CqlExpressionDefinition("Smoking status observation")]
-    public IEnumerable<Observation> Smoking_status_observation(CqlContext context)
-    {
-        CqlCode a_ = this.Tobacco_Smoking_Status(context);
-        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
-        bool? d_(Observation O)
-        {
-            Code<ObservationStatus> f_ = O?.StatusElement;
-            string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
-            string[] h_ = [
-                "final",
-                "amended",
-            ];
-            bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
+    public IEnumerable<Observation> Smoking_status_observation(CqlContext context) =>
+        _Smoking_status_observation_Cached.GetOrReplace(
+            context,
+            () => {
+                CqlCode a_ = this.Tobacco_Smoking_Status(context);
+                IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+                IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
-            return i_;
-        };
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+                bool? d_(Observation O) {
+                    Code<ObservationStatus> f_ = O?.StatusElement;
+                    string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
+                    string[] h_ = [
+                        "final",
+                        "amended",
+                    ];
+                    bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
+                    return i_;
+                }
 
-        return e_;
-    }
+                IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+                return e_;
+            });
 
+
+    private readonly Cached<IEnumerable<Condition>> _Lung_cancer_diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Lung cancer diagnosis")]
-    public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context)
-    {
-        CqlValueSet a_ = this.Lung_Cancer(context);
-        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? c_(Condition C)
-        {
-            CodeableConcept e_ = C?.ClinicalStatus;
-            CqlConcept f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
-            CqlValueSet g_ = this.Condition_Clinical_Status(context);
-            bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
+    public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context) =>
+        _Lung_cancer_diagnosis_Cached.GetOrReplace(
+            context,
+            () => {
+                CqlValueSet a_ = this.Lung_Cancer(context);
+                IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
-            return h_;
-        };
-        IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
+                bool? c_(Condition C) {
+                    CodeableConcept e_ = C?.ClinicalStatus;
+                    CqlConcept f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
+                    CqlValueSet g_ = this.Condition_Clinical_Status(context);
+                    bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
+                    return h_;
+                }
 
-        return d_;
-    }
+                IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
+                return d_;
+            });
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private MultipleResourcesExample_0_0_1() {}
+
+    public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "MultipleResourcesExample";
+    public string Version => "0.0.1";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }
