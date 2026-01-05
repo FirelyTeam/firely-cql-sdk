@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("DevDays", "2023.0.0")]
 public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 {
-    private DevDays_2023_0_0() {}
-
-    public static DevDays_2023_0_0 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "DevDays";
-    public string Version => "2023.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region Codes
 
     [CqlCodeDefinition("Sucked into jet engine", codeId: "V97.33", codeSystem: "http://hl7.org/fhir/sid/icd-10")]
@@ -87,7 +41,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -103,7 +57,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -116,7 +70,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
             });
 
 
-    private Cached<IEnumerable<Condition>> _Jet_engine_conditions_Cached = new();
+    private readonly Cached<IEnumerable<Condition>> _Jet_engine_conditions_Cached = new();
 
     [CqlExpressionDefinition("Jet engine conditions")]
     public IEnumerable<Condition> Jet_engine_conditions(CqlContext context) =>
@@ -151,7 +105,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
             });
 
 
-    private Cached<IEnumerable<Condition>> _Subsequent_encounters_Cached = new();
+    private readonly Cached<IEnumerable<Condition>> _Subsequent_encounters_Cached = new();
 
     [CqlExpressionDefinition("Subsequent encounters")]
     public IEnumerable<Condition> Subsequent_encounters(CqlContext context) =>
@@ -186,7 +140,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
             });
 
 
-    private Cached<bool?> _Initial_population_Cached = new();
+    private readonly Cached<bool?> _Initial_population_Cached = new();
 
     [CqlExpressionDefinition("Initial population")]
     public bool? Initial_population(CqlContext context) =>
@@ -199,7 +153,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
             });
 
 
-    private Cached<bool?> _Numerator_Cached = new();
+    private readonly Cached<bool?> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
@@ -213,5 +167,55 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private DevDays_2023_0_0() {}
+
+    public static DevDays_2023_0_0 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "DevDays";
+    public string Version => "2023.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

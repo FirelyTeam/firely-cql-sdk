@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ValueSetExprExample", "1.0.0")]
 public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetExprExample_1_0_0>
 {
-    private ValueSetExprExample_1_0_0() {}
-
-    public static ValueSetExprExample_1_0_0 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "ValueSetExprExample";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("ValueSet-A-1", valueSetId: "http://fire.ly/ValueSet/ValueSet-A-1", valueSetVersion: null)]
@@ -84,7 +38,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     #region Parameters
 
-    private Cached<string> _ChosenSubCategory_Cached = new();
+    private readonly Cached<string> _ChosenSubCategory_Cached = new();
 
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context) =>
@@ -96,7 +50,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             });
 
 
-    private Cached<CqlCode> _ChosenCode_Cached = new();
+    private readonly Cached<CqlCode> _ChosenCode_Cached = new();
 
     [CqlParameterDefinition("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context) =>
@@ -112,7 +66,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     #region Functions and Expressions
 
-    private Cached<CqlValueSet> _ValueSetA_Cached = new();
+    private readonly Cached<CqlValueSet> _ValueSetA_Cached = new();
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context) =>
@@ -155,7 +109,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             });
 
 
-    private Cached<CqlValueSet> _ValueSetB_Cached = new();
+    private readonly Cached<CqlValueSet> _ValueSetB_Cached = new();
 
     [CqlExpressionDefinition("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context) =>
@@ -198,7 +152,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
             });
 
 
-    private Cached<string> _Result_Cached = new();
+    private readonly Cached<string> _Result_Cached = new();
 
     [CqlExpressionDefinition("Result")]
     public string Result(CqlContext context) =>
@@ -242,5 +196,55 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private ValueSetExprExample_1_0_0() {}
+
+    public static ValueSetExprExample_1_0_0 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "ValueSetExprExample";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

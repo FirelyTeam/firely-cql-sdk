@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("NCQACQLBase", "1.0.0")]
 public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 {
-    private NCQACQLBase_1_0_0() {}
-
-    public static NCQACQLBase_1_0_0 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "NCQACQLBase";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region Functions and Expressions
 
     [CqlFunctionDefinition("Sort Date Intervals")]
@@ -1397,6 +1351,22 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
     #endregion Functions and Expressions
 
+    #region Singleton Lifetime Members
+
+    private NCQACQLBase_1_0_0() {}
+
+    public static NCQACQLBase_1_0_0 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "NCQACQLBase";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [];
+
+    #endregion ILibrary Implementation
+
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg = new(
@@ -1464,5 +1434,39 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
 
     #endregion CqlTupleMetadata Properties
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

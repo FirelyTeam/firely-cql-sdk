@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
 public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, ISingleton<DischargedonAntithromboticTherapyFHIR_0_0_010>
 {
-    private DischargedonAntithromboticTherapyFHIR_0_0_010() {}
-
-    public static DischargedonAntithromboticTherapyFHIR_0_0_010 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "DischargedonAntithromboticTherapyFHIR";
-    public string Version => "0.0.010";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, TJCOverallFHIR_1_8_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(object CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is null)
-            {
-                // No caching, clear out previous values
-                CacheVersion = null;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Antithrombotic Therapy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201", valueSetVersion: null)]
@@ -124,7 +78,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -140,7 +94,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -153,7 +107,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
@@ -165,7 +119,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<MedicationRequest>> _Antithrombotic_Not_Given_at_Discharge_Cached = new();
+    private readonly Cached<IEnumerable<MedicationRequest>> _Antithrombotic_Not_Given_at_Discharge_Cached = new();
 
     [CqlExpressionDefinition("Antithrombotic Not Given at Discharge")]
     public IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge(CqlContext context) =>
@@ -237,7 +191,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_No_Antithrombotic_At_Discharge_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_No_Antithrombotic_At_Discharge_Cached = new();
 
     [CqlExpressionDefinition("Encounter With No Antithrombotic At Discharge")]
     public IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge(CqlContext context) =>
@@ -269,7 +223,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<MedicationRequest>> _Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Cached = new();
+    private readonly Cached<IEnumerable<MedicationRequest>> _Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Cached = new();
 
     [CqlExpressionDefinition("Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
@@ -321,7 +275,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
@@ -353,7 +307,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Exceptions_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Exceptions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
@@ -367,7 +321,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Exclusions_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
@@ -381,7 +335,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
@@ -393,7 +347,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<MedicationRequest>> _Antithrombotic_Therapy_at_Discharge_Cached = new();
+    private readonly Cached<IEnumerable<MedicationRequest>> _Antithrombotic_Therapy_at_Discharge_Cached = new();
 
     [CqlExpressionDefinition("Antithrombotic Therapy at Discharge")]
     public IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
@@ -445,7 +399,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
@@ -477,7 +431,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
@@ -489,7 +443,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
@@ -501,7 +455,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
+    private readonly Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
@@ -513,7 +467,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -526,5 +480,55 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private DischargedonAntithromboticTherapyFHIR_0_0_010() {}
+
+    public static DischargedonAntithromboticTherapyFHIR_0_0_010 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "DischargedonAntithromboticTherapyFHIR";
+    public string Version => "0.0.010";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, TJCOverallFHIR_1_8_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }
