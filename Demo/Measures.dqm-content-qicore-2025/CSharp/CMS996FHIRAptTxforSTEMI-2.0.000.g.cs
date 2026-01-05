@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS996FHIRAptTxforSTEMI", "2.0.000")]
 public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS996FHIRAptTxforSTEMI_2_0_000>
 {
-    private CMS996FHIRAptTxforSTEMI_2_0_000() {}
-
-    public static CMS996FHIRAptTxforSTEMI_2_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS996FHIRAptTxforSTEMI";
-    public string Version => "2.0.000";
-    public ILibrary[] Dependencies => [SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance, FHIRHelpers_4_4_000.Instance, CQMCommon_4_1_000.Instance, Status_1_15_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Active Bleeding or Bleeding Diathesis, Excluding Menses", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4036", valueSetVersion: null)]
@@ -312,7 +266,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -328,7 +282,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -341,7 +295,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Encounter_During_MP_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_During_MP_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter During MP")]
     public IEnumerable<Encounter> ED_Encounter_During_MP(CqlContext context) =>
@@ -393,7 +347,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Encounter_with_STEMI_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_with_STEMI_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter with STEMI Diagnosis")]
     public IEnumerable<Encounter> ED_Encounter_with_STEMI_Diagnosis(CqlContext context) =>
@@ -459,7 +413,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
@@ -471,7 +425,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
@@ -483,7 +437,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Allergy or Intolerance to Thrombolytic Medications Overlaps ED Encounter")]
     public IEnumerable<Encounter> Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(CqlContext context) =>
@@ -542,7 +496,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Adverse Effect to Thrombolytic Medications Before End of ED Encounter")]
     public IEnumerable<Encounter> Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(CqlContext context) =>
@@ -585,7 +539,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Active Exclusion Diagnosis at Start of ED Encounter")]
     public IEnumerable<Encounter> Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter(CqlContext context) =>
@@ -635,7 +589,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Active Oral Anticoagulant Medication at the Start of ED Encounter")]
     public IEnumerable<Encounter> Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter(CqlContext context) =>
@@ -719,7 +673,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Active_Long_Term_use_of_Anticoagulants_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Active_Long_Term_use_of_Anticoagulants_Cached = new();
 
     [CqlExpressionDefinition("Active Long Term use of Anticoagulants")]
     public IEnumerable<Encounter> Active_Long_Term_use_of_Anticoagulants(CqlContext context) =>
@@ -763,7 +717,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Active_use_of_Anticoagulants_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Active_use_of_Anticoagulants_Cached = new();
 
     [CqlExpressionDefinition("Active use of Anticoagulants")]
     public IEnumerable<Encounter> Active_use_of_Anticoagulants(CqlContext context) =>
@@ -777,7 +731,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Cached = new();
 
     [CqlExpressionDefinition("Exclusion Diagnosis During ED Encounter or Within 24 Hours of ED Encounter Start")]
     public IEnumerable<Encounter> Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context) =>
@@ -853,7 +807,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Major Surgical Procedure 21 Days or Less Before Start of or Starts During ED Encounter")]
     public IEnumerable<Encounter> Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter(CqlContext context) =>
@@ -1034,7 +988,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Cached = new();
 
     [CqlExpressionDefinition("Intubation or Mechanical Circulatory Assist Device Placement or Removal Procedure During ED Encounter or Within 24 Hours of ED Encounter Start")]
     public IEnumerable<Encounter> Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context) =>
@@ -1218,7 +1172,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Active Exclusion Diagnosis Within 90 Days Before or At the Start of ED Encounter")]
     public IEnumerable<Encounter> Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter(CqlContext context) =>
@@ -1266,7 +1220,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Intracranial or Intraspinal Procedure 90 Days or Less Before Start of ED Encounter")]
     public IEnumerable<Encounter> Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter(CqlContext context) =>
@@ -1378,7 +1332,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Encounter_with_Discharge_Disposition_as_Patient_Expired_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_with_Discharge_Disposition_as_Patient_Expired_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter with Discharge Disposition as Patient Expired")]
     public IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Patient_Expired(CqlContext context) =>
@@ -1401,7 +1355,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter with Discharge Disposition as Left Against Medical Advice")]
     public IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice(CqlContext context) =>
@@ -1424,7 +1378,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Encounter_with_Hospice_Services_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_with_Hospice_Services_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter with Hospice Services")]
     public IEnumerable<Encounter> ED_Encounter_with_Hospice_Services(CqlContext context) =>
@@ -1746,7 +1700,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Currently_Pregnant_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Currently_Pregnant_Cached = new();
 
     [CqlExpressionDefinition("Currently Pregnant")]
     public IEnumerable<Encounter> Currently_Pregnant(CqlContext context) =>
@@ -1788,7 +1742,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Exclusions_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
@@ -1824,7 +1778,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission_Cached = new();
 
     [CqlExpressionDefinition("Received tPA in Another Facility within 24 hours Prior to Admission")]
     public IEnumerable<Encounter> Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission(CqlContext context) =>
@@ -1862,7 +1816,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter with a Documented Reason for No PCI Performed")]
     public IEnumerable<Encounter> ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed(CqlContext context) =>
@@ -1926,7 +1880,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter with a Documented Reason for Not Administering Fibrinolytic Therapy")]
     public IEnumerable<Encounter> ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy(CqlContext context) =>
@@ -2002,7 +1956,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_Exceptions_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Exceptions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
@@ -2076,7 +2030,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
     }
 
 
-    private Cached<IEnumerable<Encounter>> _Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival_Cached = new();
 
     [CqlExpressionDefinition("Fibrinolytic Therapy Administration within 30 Minutes of Arrival")]
     public IEnumerable<Encounter> Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival(CqlContext context) =>
@@ -2147,7 +2101,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _PCI_within_90_Minutes_of_Arrival_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _PCI_within_90_Minutes_of_Arrival_Cached = new();
 
     [CqlExpressionDefinition("PCI within 90 Minutes of Arrival")]
     public IEnumerable<Encounter> PCI_within_90_Minutes_of_Arrival(CqlContext context) =>
@@ -2311,7 +2265,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
     }
 
 
-    private Cached<IEnumerable<Encounter>> _ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival_Cached = new();
 
     [CqlExpressionDefinition("ED Departure with Discharge to Acute Care Facility Within 45 Minutes Of Arrival")]
     public IEnumerable<Encounter> ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival(CqlContext context) =>
@@ -2343,7 +2297,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
@@ -2359,7 +2313,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -2371,7 +2325,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -2383,7 +2337,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -2395,7 +2349,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -2408,5 +2362,51 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
 
     #endregion Functions and Expressions
+
+    private CMS996FHIRAptTxforSTEMI_2_0_000() {}
+
+    public static CMS996FHIRAptTxforSTEMI_2_0_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS996FHIRAptTxforSTEMI";
+    public string Version => "2.0.000";
+    public ILibrary[] Dependencies => [SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance, FHIRHelpers_4_4_000.Instance, CQMCommon_4_1_000.Instance, Status_1_15_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

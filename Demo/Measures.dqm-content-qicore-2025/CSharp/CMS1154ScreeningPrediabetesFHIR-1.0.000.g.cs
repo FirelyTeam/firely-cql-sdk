@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS1154ScreeningPrediabetesFHIR", "1.0.000")]
 public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingleton<CMS1154ScreeningPrediabetesFHIR_1_0_000>
 {
-    private CMS1154ScreeningPrediabetesFHIR_1_0_000() {}
-
-    public static CMS1154ScreeningPrediabetesFHIR_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS1154ScreeningPrediabetesFHIR";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Advanced Illness", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", valueSetVersion: null)]
@@ -171,7 +125,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -187,7 +141,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -236,7 +190,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     }
 
 
-    private Cached<IEnumerable<object>> _Has_Advanced_Illness_or_Limited_Life_Expectancy_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Has_Advanced_Illness_or_Limited_Life_Expectancy_Cached = new();
 
     [CqlExpressionDefinition("Has Advanced Illness or Limited Life Expectancy")]
     public IEnumerable<object> Has_Advanced_Illness_or_Limited_Life_Expectancy(CqlContext context) =>
@@ -268,7 +222,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Preventive_Care_Outpatient_Visits_During_Measurement_Period_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Preventive_Care_Outpatient_Visits_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Preventive Care Outpatient Visits During Measurement Period")]
     public IEnumerable<Encounter> Preventive_Care_Outpatient_Visits_During_Measurement_Period(CqlContext context) =>
@@ -297,7 +251,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Office_Visit_During_the_Measurement_Period_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Office_Visit_During_the_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Office Visit During the Measurement Period")]
     public IEnumerable<Encounter> Office_Visit_During_the_Measurement_Period(CqlContext context) =>
@@ -325,7 +279,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Aged_35_to_70_at_Start_of_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Aged_35_to_70_at_Start_of_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Aged 35 to 70 at Start of Measurement Period")]
     public bool? Aged_35_to_70_at_Start_of_Measurement_Period(CqlContext context) =>
@@ -353,7 +307,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Patients Aged 35 to 70 with an Office Visit During the Measurement Period")]
     public bool? Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period(CqlContext context) =>
@@ -373,7 +327,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<Observation> _Most_Recent_BMI_Cached = new();
+    private readonly Cached<Observation> _Most_Recent_BMI_Cached = new();
 
     [CqlExpressionDefinition("Most Recent BMI")]
     public Observation Most_Recent_BMI(CqlContext context) =>
@@ -411,7 +365,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Patient_is_Asian_Cached = new();
+    private readonly Cached<bool?> _Patient_is_Asian_Cached = new();
 
     [CqlExpressionDefinition("Patient is Asian")]
     public bool? Patient_is_Asian(CqlContext context) =>
@@ -433,7 +387,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Patient_is_not_Asian_Cached = new();
+    private readonly Cached<bool?> _Patient_is_not_Asian_Cached = new();
 
     [CqlExpressionDefinition("Patient is not Asian")]
     public bool? Patient_is_not_Asian(CqlContext context) =>
@@ -446,7 +400,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian_Cached = new();
+    private readonly Cached<bool?> _Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian_Cached = new();
 
     [CqlExpressionDefinition("Most Recent BMI Equal to or Greater Than 25 and Is Not Asian")]
     public bool? Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian(CqlContext context) =>
@@ -464,7 +418,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian_Cached = new();
+    private readonly Cached<bool?> _Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian_Cached = new();
 
     [CqlExpressionDefinition("Most Recent BMI Equal to or Greater Than 23 and Is Asian")]
     public bool? Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian(CqlContext context) =>
@@ -482,7 +436,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Initial_Population_Cached = new();
+    private readonly Cached<bool?> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
@@ -498,7 +452,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Denominator_Cached = new();
+    private readonly Cached<bool?> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
@@ -510,7 +464,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Observation>> _Glycemic_Laboratory_Test_Performed_During_Measurement_Period_Cached = new();
+    private readonly Cached<IEnumerable<Observation>> _Glycemic_Laboratory_Test_Performed_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Glycemic Laboratory Test Performed During Measurement Period")]
     public IEnumerable<Observation> Glycemic_Laboratory_Test_Performed_During_Measurement_Period(CqlContext context) =>
@@ -544,7 +498,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Numerator_Cached = new();
+    private readonly Cached<bool?> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
@@ -557,7 +511,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Pregnancy_Observation_During_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Has_Pregnancy_Observation_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Has Pregnancy Observation During Measurement Period")]
     public bool? Has_Pregnancy_Observation_During_Measurement_Period(CqlContext context) =>
@@ -586,7 +540,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<object>> _Has_Pregnancy_Diagnosis_During_Measurement_Period_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Has_Pregnancy_Diagnosis_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Has Pregnancy Diagnosis During Measurement Period")]
     public IEnumerable<object> Has_Pregnancy_Diagnosis_During_Measurement_Period(CqlContext context) =>
@@ -611,7 +565,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<CqlInterval<CqlDateTime>> _Look_Back_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Look_Back_Period_Cached = new();
 
     [CqlExpressionDefinition("Look Back Period")]
     public CqlInterval<CqlDateTime> Look_Back_Period(CqlContext context) =>
@@ -628,7 +582,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<object>> _Prediabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Prediabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period_Cached = new();
 
     [CqlExpressionDefinition("Prediabetes Diagnosis Overlaps 2 Year Look Back Period")]
     public IEnumerable<object> Prediabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period(CqlContext context) =>
@@ -653,7 +607,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<object>> _Diabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Diabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period_Cached = new();
 
     [CqlExpressionDefinition("Diabetes Diagnosis Overlaps 2 Year Look Back Period")]
     public IEnumerable<object> Diabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period(CqlContext context) =>
@@ -678,7 +632,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period_Cached = new();
+    private readonly Cached<bool?> _Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period_Cached = new();
 
     [CqlExpressionDefinition("Has Glycemic Laboratory Test Performed During 2 Year Look Back Period")]
     public bool? Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period(CqlContext context) =>
@@ -713,7 +667,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Denominator_Exclusions_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
@@ -739,7 +693,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -751,7 +705,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -763,7 +717,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -775,7 +729,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -788,5 +742,51 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
 
     #endregion Functions and Expressions
+
+    private CMS1154ScreeningPrediabetesFHIR_1_0_000() {}
+
+    public static CMS1154ScreeningPrediabetesFHIR_1_0_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS1154ScreeningPrediabetesFHIR";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS157FHIRPainIntensityQuantified", "1.0.000")]
 public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISingleton<CMS157FHIRPainIntensityQuantified_1_0_000>
 {
-    private CMS157FHIRPainIntensityQuantified_1_0_000() {}
-
-    public static CMS157FHIRPainIntensityQuantified_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS157FHIRPainIntensityQuantified";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_4_1_000.Instance, QICoreCommon_4_0_000.Instance, SupplementalDataElements_5_1_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Audio Visual Telehealth Encounter", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.1444.5.215", valueSetVersion: null)]
@@ -110,7 +64,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -126,7 +80,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -139,7 +93,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<Procedure>> _Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period_Cached = new();
+    private readonly Cached<IEnumerable<Procedure>> _Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Chemotherapy Within 31 Days Prior and During Measurement Period")]
     public IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period(CqlContext context) =>
@@ -239,7 +193,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy_Cached = new();
 
     [CqlExpressionDefinition("Face to Face or Telehealth Encounter with Ongoing Chemotherapy")]
     public IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(CqlContext context) =>
@@ -580,7 +534,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Initial_Population_1_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_1_Cached = new();
 
     [CqlExpressionDefinition("Initial Population 1")]
     public IEnumerable<Encounter> Initial_Population_1(CqlContext context) =>
@@ -592,7 +546,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_1_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_1_Cached = new();
 
     [CqlExpressionDefinition("Denominator 1")]
     public IEnumerable<Encounter> Denominator_1(CqlContext context) =>
@@ -604,7 +558,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Radiation Treatment Management During Measurement Period with Cancer Diagnosis")]
     public IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(CqlContext context) =>
@@ -654,7 +608,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Initial_Population_2_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_2_Cached = new();
 
     [CqlExpressionDefinition("Initial Population 2")]
     public IEnumerable<Encounter> Initial_Population_2(CqlContext context) =>
@@ -666,7 +620,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Denominator_2_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_2_Cached = new();
 
     [CqlExpressionDefinition("Denominator 2")]
     public IEnumerable<Encounter> Denominator_2(CqlContext context) =>
@@ -678,7 +632,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<Observation>> _Standard_Pain_Assessment_with_Result_Cached = new();
+    private readonly Cached<IEnumerable<Observation>> _Standard_Pain_Assessment_with_Result_Cached = new();
 
     [CqlExpressionDefinition("Standard Pain Assessment with Result")]
     public IEnumerable<Observation> Standard_Pain_Assessment_with_Result(CqlContext context) =>
@@ -700,7 +654,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Numerator_1_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_1_Cached = new();
 
     [CqlExpressionDefinition("Numerator 1")]
     public IEnumerable<Encounter> Numerator_1(CqlContext context) =>
@@ -733,7 +687,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Numerator_2_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_2_Cached = new();
 
     [CqlExpressionDefinition("Numerator 2")]
     public IEnumerable<Encounter> Numerator_2(CqlContext context) =>
@@ -818,7 +772,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -830,7 +784,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -842,7 +796,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -854,7 +808,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -868,6 +822,18 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     #endregion Functions and Expressions
 
+    private CMS157FHIRPainIntensityQuantified_1_0_000() {}
+
+    public static CMS157FHIRPainIntensityQuantified_1_0_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS157FHIRPainIntensityQuantified";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_4_1_000.Instance, QICoreCommon_4_0_000.Instance, SupplementalDataElements_5_1_000.Instance];
+
+    #endregion ILibrary Implementation
+
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_HUZMaBjXYCAiGTiLLUTReObKb = new(
@@ -875,5 +841,39 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
        ["FaceToFaceOrTelehealthEncounter", "ChemoBeforeEncounter", "ChemoAfterEncounter", "CancerDx"]);
 
     #endregion CqlTupleMetadata Properties
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

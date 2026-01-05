@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS2FHIRPCSDepScreenAndFollowUp", "1.0.000")]
 public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS2FHIRPCSDepScreenAndFollowUp_1_0_000>
 {
-    private CMS2FHIRPCSDepScreenAndFollowUp_1_0_000() {}
-
-    public static CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS2FHIRPCSDepScreenAndFollowUp";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance, CumulativeMedicationDuration_6_0_000.Instance, SupplementalDataElements_5_1_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Adolescent Depression Medications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1567", valueSetVersion: null)]
@@ -155,7 +109,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -171,7 +125,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -184,7 +138,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Patient Age 12 Years or Older at Start of Measurement Period")]
     public bool? Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period(CqlContext context) =>
@@ -204,7 +158,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_Encounter_During_Measurement_Period_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounter_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
@@ -238,7 +192,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Initial_Population_Cached = new();
+    private readonly Cached<bool?> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
@@ -253,7 +207,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Denominator_Cached = new();
+    private readonly Cached<bool?> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
@@ -265,7 +219,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Condition>> _History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Condition>> _History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter_Cached = new();
 
     [CqlExpressionDefinition("History of Bipolar Diagnosis Before Qualifying Encounter")]
     public IEnumerable<Condition> History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter(CqlContext context) =>
@@ -299,7 +253,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Denominator_Exclusions_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
@@ -312,7 +266,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Patient Age 12 to 16 Years at Start of Measurement Period")]
     public bool? Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period(CqlContext context) =>
@@ -333,7 +287,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<Observation> _Most_Recent_Adolescent_Depression_Screening_Cached = new();
+    private readonly Cached<Observation> _Most_Recent_Adolescent_Depression_Screening_Cached = new();
 
     [CqlExpressionDefinition("Most Recent Adolescent Depression Screening")]
     public Observation Most_Recent_Adolescent_Depression_Screening(CqlContext context) =>
@@ -404,7 +358,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Most_Recent_Adolescent_Screening_Negative_Cached = new();
+    private readonly Cached<bool?> _Has_Most_Recent_Adolescent_Screening_Negative_Cached = new();
 
     [CqlExpressionDefinition("Has Most Recent Adolescent Screening Negative")]
     public bool? Has_Most_Recent_Adolescent_Screening_Negative(CqlContext context) =>
@@ -432,7 +386,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<object>> _Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening_Cached = new();
 
     [CqlExpressionDefinition("Follow Up Intervention for Positive Adolescent Depression Screening")]
     public IEnumerable<object> Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening(CqlContext context) =>
@@ -575,7 +529,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>> _Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>> _Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided_Cached = new();
 
     [CqlExpressionDefinition("Most Recent Adolescent Depression Screening Positive and Follow Up Provided")]
     public IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?> Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided(CqlContext context) =>
@@ -791,7 +745,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Patient_Age_17_Years_at_Start_of_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Patient_Age_17_Years_at_Start_of_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Patient Age 17 Years at Start of Measurement Period")]
     public bool? Patient_Age_17_Years_at_Start_of_Measurement_Period(CqlContext context) =>
@@ -811,7 +765,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<Observation> _Most_Recent_Adult_Depression_Screening_Cached = new();
+    private readonly Cached<Observation> _Most_Recent_Adult_Depression_Screening_Cached = new();
 
     [CqlExpressionDefinition("Most Recent Adult Depression Screening")]
     public Observation Most_Recent_Adult_Depression_Screening(CqlContext context) =>
@@ -882,7 +836,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Most_Recent_Adult_Screening_Negative_Cached = new();
+    private readonly Cached<bool?> _Has_Most_Recent_Adult_Screening_Negative_Cached = new();
 
     [CqlExpressionDefinition("Has Most Recent Adult Screening Negative")]
     public bool? Has_Most_Recent_Adult_Screening_Negative(CqlContext context) =>
@@ -910,7 +864,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<object>> _Follow_Up_Intervention_for_Positive_Adult_Depression_Screening_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Follow_Up_Intervention_for_Positive_Adult_Depression_Screening_Cached = new();
 
     [CqlExpressionDefinition("Follow Up Intervention for Positive Adult Depression Screening")]
     public IEnumerable<object> Follow_Up_Intervention_for_Positive_Adult_Depression_Screening(CqlContext context) =>
@@ -1053,7 +1007,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>> _Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>> _Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided_Cached = new();
 
     [CqlExpressionDefinition("Most Recent Adult Depression Screening Positive and Follow Up Provided")]
     public IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?> Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided(CqlContext context) =>
@@ -1269,7 +1223,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Patient Age 18 Years or Older at Start of Measurement Period")]
     public bool? Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period(CqlContext context) =>
@@ -1289,7 +1243,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Numerator_Cached = new();
+    private readonly Cached<bool?> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
@@ -1321,7 +1275,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Observation>> _Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression_Cached = new();
+    private readonly Cached<IEnumerable<Observation>> _Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression_Cached = new();
 
     [CqlExpressionDefinition("Medical or Patient Reason for Not Screening Adolescent for Depression")]
     public IEnumerable<Observation> Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression(CqlContext context) =>
@@ -1410,7 +1364,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Adolescent_Depression_Screening_Cached = new();
+    private readonly Cached<bool?> _Has_Adolescent_Depression_Screening_Cached = new();
 
     [CqlExpressionDefinition("Has Adolescent Depression Screening")]
     public bool? Has_Adolescent_Depression_Screening(CqlContext context) =>
@@ -1471,7 +1425,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<Observation>> _Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression_Cached = new();
+    private readonly Cached<IEnumerable<Observation>> _Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression_Cached = new();
 
     [CqlExpressionDefinition("Medical or Patient Reason for Not Screening Adult for Depression")]
     public IEnumerable<Observation> Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression(CqlContext context) =>
@@ -1560,7 +1514,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Has_Adult_Depression_Screening_Cached = new();
+    private readonly Cached<bool?> _Has_Adult_Depression_Screening_Cached = new();
 
     [CqlExpressionDefinition("Has Adult Depression Screening")]
     public bool? Has_Adult_Depression_Screening(CqlContext context) =>
@@ -1621,7 +1575,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<bool?> _Denominator_Exceptions_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exceptions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context) =>
@@ -1643,7 +1597,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -1655,7 +1609,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -1667,7 +1621,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -1679,7 +1633,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -1693,6 +1647,18 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
 
     #endregion Functions and Expressions
 
+    private CMS2FHIRPCSDepScreenAndFollowUp_1_0_000() {}
+
+    public static CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS2FHIRPCSDepScreenAndFollowUp";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance, CumulativeMedicationDuration_6_0_000.Instance, SupplementalDataElements_5_1_000.Instance];
+
+    #endregion ILibrary Implementation
+
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_ICeCVaggPeLLMJUWQdWMZROe = new(
@@ -1704,5 +1670,39 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
        ["LastAdolescentScreen", "FollowUpPositiveAdolescentScreen", "QualifyingEncounter"]);
 
     #endregion CqlTupleMetadata Properties
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

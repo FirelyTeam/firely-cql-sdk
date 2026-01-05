@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
-    private RR23_1_0_0() {}
-
-    public static RR23_1_0_0 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "RR23";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Injury due to falling rock", valueSetId: "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", valueSetVersion: null)]
@@ -104,7 +58,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #region Parameters
 
-    private Cached<object> _Measurement_Period_Cached = new();
+    private readonly Cached<object> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public object Measurement_Period(CqlContext context) =>
@@ -123,7 +77,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -136,7 +90,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             });
 
 
-    private Cached<IEnumerable<Condition>> _Injury_due_to_falling_rock_within_measurement_period_Cached = new();
+    private readonly Cached<IEnumerable<Condition>> _Injury_due_to_falling_rock_within_measurement_period_Cached = new();
 
     [CqlExpressionDefinition("Injury due to falling rock within measurement period")]
     [CqlTag("description", "Conditions of type 'Injury due to falling rock' within the measurement period")]
@@ -170,7 +124,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             });
 
 
-    private Cached<Condition> _Latest_injury_due_to_falling_rock_Cached = new();
+    private readonly Cached<Condition> _Latest_injury_due_to_falling_rock_Cached = new();
 
     [CqlExpressionDefinition("Latest injury due to falling rock")]
     public Condition Latest_injury_due_to_falling_rock(CqlContext context) =>
@@ -191,7 +145,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             });
 
 
-    private Cached<IEnumerable<SupplyDelivery>> _Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Cached = new();
+    private readonly Cached<IEnumerable<SupplyDelivery>> _Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Cached = new();
 
     [CqlExpressionDefinition("Tiny Umbrella Supply within 7 days after most recent injury due to falling rock")]
     [CqlTag("description", "\"recording of the (latest) rock fall condition within the measurement period\"")]
@@ -245,5 +199,51 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
 
     #endregion Functions and Expressions
+
+    private RR23_1_0_0() {}
+
+    public static RR23_1_0_0 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "RR23";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

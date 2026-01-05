@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
 public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHIR_1_8_000>
 {
-    private TJCOverallFHIR_1_8_000() {}
-
-    public static TJCOverallFHIR_1_8_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "TJCOverallFHIR";
-    public string Version => "1.8.000";
-    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Comfort Measures", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", valueSetVersion: null)]
@@ -138,7 +92,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -157,7 +111,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -170,7 +124,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Non_Elective_Inpatient_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Non_Elective_Inpatient_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Non Elective Inpatient Encounter")]
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter(CqlContext context) =>
@@ -198,7 +152,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             });
 
 
-    private Cached<IEnumerable<Encounter>> _All_Stroke_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _All_Stroke_Encounter_Cached = new();
 
     [CqlExpressionDefinition("All Stroke Encounter")]
     public IEnumerable<Encounter> All_Stroke_Encounter(CqlContext context) =>
@@ -226,7 +180,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_with_Principal_Diagnosis_and_Age_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_with_Principal_Diagnosis_and_Age_Cached = new();
 
     [CqlExpressionDefinition("Encounter with Principal Diagnosis and Age")]
     public IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age(CqlContext context) =>
@@ -262,7 +216,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Ischemic_Stroke_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Ischemic_Stroke_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Ischemic Stroke Encounter")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context) =>
@@ -285,7 +239,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Ischemic_Stroke_Encounters_with_Discharge_Disposition_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Ischemic_Stroke_Encounters_with_Discharge_Disposition_Cached = new();
 
     [CqlExpressionDefinition("Ischemic Stroke Encounters with Discharge Disposition")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition(CqlContext context) =>
@@ -328,7 +282,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             });
 
 
-    private Cached<IEnumerable<object>> _Intervention_Comfort_Measures_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Intervention_Comfort_Measures_Cached = new();
 
     [CqlExpressionDefinition("Intervention Comfort Measures")]
     public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context) =>
@@ -365,7 +319,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Comfort_Measures_during_Hospitalization_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Comfort_Measures_during_Hospitalization_Cached = new();
 
     [CqlExpressionDefinition("Comfort Measures during Hospitalization")]
     public IEnumerable<Encounter> Comfort_Measures_during_Hospitalization(CqlContext context) =>
@@ -397,7 +351,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_with_Comfort_Measures_during_Hospitalization_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_with_Comfort_Measures_during_Hospitalization_Cached = new();
 
     [CqlExpressionDefinition("Encounter with Comfort Measures during Hospitalization")]
     public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization(CqlContext context) =>
@@ -444,5 +398,51 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
 
 
     #endregion Functions and Expressions
+
+    private TJCOverallFHIR_1_8_000() {}
+
+    public static TJCOverallFHIR_1_8_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "TJCOverallFHIR";
+    public string Version => "1.8.000";
+    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

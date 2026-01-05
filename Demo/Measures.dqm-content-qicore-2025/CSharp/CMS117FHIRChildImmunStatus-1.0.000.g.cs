@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS117FHIRChildImmunStatus", "1.0.000")]
 public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<CMS117FHIRChildImmunStatus_1_0_000>
 {
-    private CMS117FHIRChildImmunStatus_1_0_000() {}
-
-    public static CMS117FHIRChildImmunStatus_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS117FHIRChildImmunStatus";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, Hospice_6_18_000.Instance, Status_1_15_000.Instance, QICoreCommon_4_0_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Anaphylactic Reaction to DTaP Vaccine", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1031", valueSetVersion: null)]
@@ -332,7 +286,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -348,7 +302,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -361,7 +315,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
@@ -426,7 +380,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Initial_Population_Cached = new();
+    private readonly Cached<bool?> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
@@ -449,7 +403,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Denominator_Cached = new();
+    private readonly Cached<bool?> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
@@ -461,7 +415,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<CqlDate> _Date_of_Second_Birthday_Cached = new();
+    private readonly Cached<CqlDate> _Date_of_Second_Birthday_Cached = new();
 
     [CqlExpressionDefinition("Date of Second Birthday")]
     public CqlDate Date_of_Second_Birthday(CqlContext context) =>
@@ -480,7 +434,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<CqlInterval<CqlDate>> _First_Two_Years_Cached = new();
+    private readonly Cached<CqlInterval<CqlDate>> _First_Two_Years_Cached = new();
 
     [CqlExpressionDefinition("First Two Years")]
     public CqlInterval<CqlDate> First_Two_Years(CqlContext context) =>
@@ -499,7 +453,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Has_Severe_Combined_Immunodeficiency_Cached = new();
+    private readonly Cached<bool?> _Has_Severe_Combined_Immunodeficiency_Cached = new();
 
     [CqlExpressionDefinition("Has Severe Combined Immunodeficiency")]
     public bool? Has_Severe_Combined_Immunodeficiency(CqlContext context) =>
@@ -527,7 +481,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Has_Immunodeficiency_Cached = new();
+    private readonly Cached<bool?> _Has_Immunodeficiency_Cached = new();
 
     [CqlExpressionDefinition("Has Immunodeficiency")]
     public bool? Has_Immunodeficiency(CqlContext context) =>
@@ -555,7 +509,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Has_HIV_Cached = new();
+    private readonly Cached<bool?> _Has_HIV_Cached = new();
 
     [CqlExpressionDefinition("Has HIV")]
     public bool? Has_HIV(CqlContext context) =>
@@ -583,7 +537,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Cached = new();
+    private readonly Cached<bool?> _Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Cached = new();
 
     [CqlExpressionDefinition("Has Lymphoreticular Cancer, Multiple Myeloma or Leukemia")]
     public bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia(CqlContext context) =>
@@ -611,7 +565,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Has_Intussusception_Cached = new();
+    private readonly Cached<bool?> _Has_Intussusception_Cached = new();
 
     [CqlExpressionDefinition("Has Intussusception")]
     public bool? Has_Intussusception(CqlContext context) =>
@@ -639,7 +593,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Denominator_Exclusions_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
@@ -661,7 +615,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<CqlInterval<CqlDate>> _Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Cached = new();
+    private readonly Cached<CqlInterval<CqlDate>> _Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Cached = new();
 
     [CqlExpressionDefinition("Vaccine Administration Interval - 42 Days up to 2 Years Old")]
     public CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(CqlContext context) =>
@@ -682,7 +636,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _DTaP_Immunizations_or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _DTaP_Immunizations_or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("DTaP Immunizations or Procedures")]
     public IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures(CqlContext context) =>
@@ -746,7 +700,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Four_DTaP_Vaccinations_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Four_DTaP_Vaccinations_Cached = new();
 
     [CqlExpressionDefinition("Four DTaP Vaccinations")]
     public IEnumerable<CqlDate> Four_DTaP_Vaccinations(CqlContext context) =>
@@ -799,7 +753,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _DTaP_Numerator_Inclusion_Conditions_Cached = new();
+    private readonly Cached<IEnumerable<object>> _DTaP_Numerator_Inclusion_Conditions_Cached = new();
 
     [CqlExpressionDefinition("DTaP Numerator Inclusion Conditions")]
     public IEnumerable<object> DTaP_Numerator_Inclusion_Conditions(CqlContext context) =>
@@ -831,7 +785,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Polio_Immunizations_or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Polio_Immunizations_or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Polio Immunizations or Procedures")]
     public IEnumerable<CqlDate> Polio_Immunizations_or_Procedures(CqlContext context) =>
@@ -895,7 +849,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Three_Polio_Vaccinations_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Three_Polio_Vaccinations_Cached = new();
 
     [CqlExpressionDefinition("Three Polio Vaccinations")]
     public IEnumerable<CqlDate> Three_Polio_Vaccinations(CqlContext context) =>
@@ -948,7 +902,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Polio_Numerator_Inclusion_Conditions_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Polio_Numerator_Inclusion_Conditions_Cached = new();
 
     [CqlExpressionDefinition("Polio Numerator Inclusion Conditions")]
     public IEnumerable<object> Polio_Numerator_Inclusion_Conditions(CqlContext context) =>
@@ -977,7 +931,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<CqlDate> _Date_of_First_Birthday_Cached = new();
+    private readonly Cached<CqlDate> _Date_of_First_Birthday_Cached = new();
 
     [CqlExpressionDefinition("Date of First Birthday")]
     public CqlDate Date_of_First_Birthday(CqlContext context) =>
@@ -996,7 +950,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<CqlInterval<CqlDate>> _Date_of_First_Birthday_to_Date_of_Second_Birthday_Cached = new();
+    private readonly Cached<CqlInterval<CqlDate>> _Date_of_First_Birthday_to_Date_of_Second_Birthday_Cached = new();
 
     [CqlExpressionDefinition("Date of First Birthday to Date of Second Birthday")]
     public CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday(CqlContext context) =>
@@ -1010,7 +964,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _One_MMR_Vaccination_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _One_MMR_Vaccination_Cached = new();
 
     [CqlExpressionDefinition("One MMR Vaccination")]
     public IEnumerable<CqlDate> One_MMR_Vaccination(CqlContext context) =>
@@ -1074,7 +1028,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _MMR_Numerator_Inclusion_Conditions_Cached = new();
+    private readonly Cached<IEnumerable<object>> _MMR_Numerator_Inclusion_Conditions_Cached = new();
 
     [CqlExpressionDefinition("MMR Numerator Inclusion Conditions")]
     public IEnumerable<object> MMR_Numerator_Inclusion_Conditions(CqlContext context) =>
@@ -1103,7 +1057,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Measles_Indicators_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Measles_Indicators_Cached = new();
 
     [CqlExpressionDefinition("Measles Indicators")]
     public IEnumerable<object> Measles_Indicators(CqlContext context) =>
@@ -1132,7 +1086,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Mumps_Indicators_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Mumps_Indicators_Cached = new();
 
     [CqlExpressionDefinition("Mumps Indicators")]
     public IEnumerable<object> Mumps_Indicators(CqlContext context) =>
@@ -1159,7 +1113,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Rubella_Indicators_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Rubella_Indicators_Cached = new();
 
     [CqlExpressionDefinition("Rubella Indicators")]
     public IEnumerable<object> Rubella_Indicators(CqlContext context) =>
@@ -1186,7 +1140,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Hib_3_Dose_Immunizations_or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Hib_3_Dose_Immunizations_or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Hib 3 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures(CqlContext context) =>
@@ -1250,7 +1204,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Hib_4_Dose_Immunizations_or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Hib_4_Dose_Immunizations_or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Hib 4 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures(CqlContext context) =>
@@ -1314,7 +1268,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Hib_3_or_4_Dose_Immunizations_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Hib_3_or_4_Dose_Immunizations_Cached = new();
 
     [CqlExpressionDefinition("Hib 3 or 4 Dose Immunizations")]
     public IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations(CqlContext context) =>
@@ -1328,7 +1282,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Has_Appropriate_Number_of_Hib_Immunizations_Cached = new();
+    private readonly Cached<bool?> _Has_Appropriate_Number_of_Hib_Immunizations_Cached = new();
 
     [CqlExpressionDefinition("Has Appropriate Number of Hib Immunizations")]
     public bool? Has_Appropriate_Number_of_Hib_Immunizations(CqlContext context) =>
@@ -1383,7 +1337,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Hib_Numerator_Inclusion_Conditions_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Hib_Numerator_Inclusion_Conditions_Cached = new();
 
     [CqlExpressionDefinition("Hib Numerator Inclusion Conditions")]
     public IEnumerable<object> Hib_Numerator_Inclusion_Conditions(CqlContext context) =>
@@ -1412,7 +1366,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Hepatitis_B_Immunizations_or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Hepatitis_B_Immunizations_or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Hepatitis B Immunizations or Procedures")]
     public IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures(CqlContext context) =>
@@ -1476,7 +1430,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Three_Hepatitis_B_Vaccinations_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Three_Hepatitis_B_Vaccinations_Cached = new();
 
     [CqlExpressionDefinition("Three Hepatitis B Vaccinations")]
     public IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations(CqlContext context) =>
@@ -1529,7 +1483,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _NewBorn_Vaccine_Requirement_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _NewBorn_Vaccine_Requirement_Cached = new();
 
     [CqlExpressionDefinition("NewBorn Vaccine Requirement")]
     public IEnumerable<CqlDate> NewBorn_Vaccine_Requirement(CqlContext context) =>
@@ -1580,7 +1534,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Meets_HepB_Vaccination_Requirement_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Meets_HepB_Vaccination_Requirement_Cached = new();
 
     [CqlExpressionDefinition("Meets HepB Vaccination Requirement")]
     public IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement(CqlContext context) =>
@@ -1641,7 +1595,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Hepatitis_B_Numerator_Inclusion_Conditions_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Hepatitis_B_Numerator_Inclusion_Conditions_Cached = new();
 
     [CqlExpressionDefinition("Hepatitis B Numerator Inclusion Conditions")]
     public IEnumerable<object> Hepatitis_B_Numerator_Inclusion_Conditions(CqlContext context) =>
@@ -1675,7 +1629,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _One_Chicken_Pox_Vaccination_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _One_Chicken_Pox_Vaccination_Cached = new();
 
     [CqlExpressionDefinition("One Chicken Pox Vaccination")]
     public IEnumerable<CqlDate> One_Chicken_Pox_Vaccination(CqlContext context) =>
@@ -1739,7 +1693,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Varicella_Zoster_Numerator_Inclusion_Conditions_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Varicella_Zoster_Numerator_Inclusion_Conditions_Cached = new();
 
     [CqlExpressionDefinition("Varicella Zoster Numerator Inclusion Conditions")]
     public IEnumerable<object> Varicella_Zoster_Numerator_Inclusion_Conditions(CqlContext context) =>
@@ -1773,7 +1727,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Pneumococcal_Conjugate_Immunizations_or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Pneumococcal_Conjugate_Immunizations_or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Pneumococcal Conjugate Immunizations or Procedures")]
     public IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures(CqlContext context) =>
@@ -1837,7 +1791,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Four_Pneumococcal_Conjugate_Vaccinations_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Four_Pneumococcal_Conjugate_Vaccinations_Cached = new();
 
     [CqlExpressionDefinition("Four Pneumococcal Conjugate Vaccinations")]
     public IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations(CqlContext context) =>
@@ -1898,7 +1852,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Cached = new();
 
     [CqlExpressionDefinition("Pneumococcal Conjugate Numerator Inclusion Conditions")]
     public IEnumerable<object> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions(CqlContext context) =>
@@ -1927,7 +1881,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _One_Hepatitis_A_Vaccinations_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _One_Hepatitis_A_Vaccinations_Cached = new();
 
     [CqlExpressionDefinition("One Hepatitis A Vaccinations")]
     public IEnumerable<CqlDate> One_Hepatitis_A_Vaccinations(CqlContext context) =>
@@ -1991,7 +1945,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Hepatitis_A_Numerator_Inclusion_Conditions_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Hepatitis_A_Numerator_Inclusion_Conditions_Cached = new();
 
     [CqlExpressionDefinition("Hepatitis A Numerator Inclusion Conditions")]
     public IEnumerable<object> Hepatitis_A_Numerator_Inclusion_Conditions(CqlContext context) =>
@@ -2025,7 +1979,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Rotavirus_2_Dose_Immunizations_or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Rotavirus_2_Dose_Immunizations_or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Rotavirus 2 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures(CqlContext context) =>
@@ -2090,7 +2044,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Rotavirus_3_Dose_Immunizations_or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Rotavirus_3_Dose_Immunizations_or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Rotavirus 3 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures(CqlContext context) =>
@@ -2154,7 +2108,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Rotavirus_2_or_3_Dose_Immunizations_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Rotavirus_2_or_3_Dose_Immunizations_Cached = new();
 
     [CqlExpressionDefinition("Rotavirus 2 or 3 Dose Immunizations")]
     public IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations(CqlContext context) =>
@@ -2168,7 +2122,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Has_Appropriate_Number_of_Rotavirus_Immunizations_Cached = new();
+    private readonly Cached<bool?> _Has_Appropriate_Number_of_Rotavirus_Immunizations_Cached = new();
 
     [CqlExpressionDefinition("Has Appropriate Number of Rotavirus Immunizations")]
     public bool? Has_Appropriate_Number_of_Rotavirus_Immunizations(CqlContext context) =>
@@ -2223,7 +2177,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Rotavirus_Numerator_Inclusion_Conditions_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Rotavirus_Numerator_Inclusion_Conditions_Cached = new();
 
     [CqlExpressionDefinition("Rotavirus Numerator Inclusion Conditions")]
     public IEnumerable<object> Rotavirus_Numerator_Inclusion_Conditions(CqlContext context) =>
@@ -2252,7 +2206,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<CqlInterval<CqlDate>> _Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Cached = new();
+    private readonly Cached<CqlInterval<CqlDate>> _Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Cached = new();
 
     [CqlExpressionDefinition("Vaccine Administration Interval - 180 Days up to 2 Years Old")]
     public CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old(CqlContext context) =>
@@ -2273,7 +2227,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Influenza_Immunizations_or_Procedures_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Influenza_Immunizations_or_Procedures_Cached = new();
 
     [CqlExpressionDefinition("Influenza Immunizations or Procedures")]
     public IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures(CqlContext context) =>
@@ -2337,7 +2291,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _Two_Influenza_Vaccinations_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _Two_Influenza_Vaccinations_Cached = new();
 
     [CqlExpressionDefinition("Two Influenza Vaccinations")]
     public IEnumerable<CqlDate> Two_Influenza_Vaccinations(CqlContext context) =>
@@ -2382,7 +2336,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<CqlDate>> _LAIV_Vaccinations_Cached = new();
+    private readonly Cached<IEnumerable<CqlDate>> _LAIV_Vaccinations_Cached = new();
 
     [CqlExpressionDefinition("LAIV Vaccinations")]
     public IEnumerable<CqlDate> LAIV_Vaccinations(CqlContext context) =>
@@ -2448,7 +2402,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Cached = new();
+    private readonly Cached<bool?> _Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Cached = new();
 
     [CqlExpressionDefinition("Two Influenza Vaccinations Including One LAIV Vaccination")]
     public bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination(CqlContext context) =>
@@ -2464,7 +2418,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<object>> _Influenza_Numerator_Inclusion_Conditions_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Influenza_Numerator_Inclusion_Conditions_Cached = new();
 
     [CqlExpressionDefinition("Influenza Numerator Inclusion Conditions")]
     public IEnumerable<object> Influenza_Numerator_Inclusion_Conditions(CqlContext context) =>
@@ -2493,7 +2447,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<bool?> _Numerator_Cached = new();
+    private readonly Cached<bool?> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
@@ -2575,7 +2529,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -2587,7 +2541,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -2599,7 +2553,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -2611,7 +2565,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -2624,6 +2578,18 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     #endregion Functions and Expressions
+
+    private CMS117FHIRChildImmunStatus_1_0_000() {}
+
+    public static CMS117FHIRChildImmunStatus_1_0_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS117FHIRChildImmunStatus";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, Hospice_6_18_000.Instance, Status_1_15_000.Instance, QICoreCommon_4_0_000.Instance];
+
+    #endregion ILibrary Implementation
 
     #region CqlTupleMetadata Properties
 
@@ -2652,5 +2618,39 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
 
     #endregion CqlTupleMetadata Properties
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

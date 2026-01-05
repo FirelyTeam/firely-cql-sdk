@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("TJCOverall", "8.25.000")]
 public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_000>
 {
-    private TJCOverall_8_25_000() {}
-
-    public static TJCOverall_8_25_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "TJCOverall";
-    public string Version => "8.25.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_4_1_000.Instance, QICoreCommon_4_0_000.Instance, SupplementalDataElements_5_1_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Comfort Measures", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", valueSetVersion: null)]
@@ -100,7 +54,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -116,7 +70,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -129,7 +83,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Non_Elective_Inpatient_Encounter_With_Age_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Non_Elective_Inpatient_Encounter_With_Age_Cached = new();
 
     [CqlExpressionDefinition("Non Elective Inpatient Encounter With Age")]
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_With_Age(CqlContext context) =>
@@ -163,7 +117,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Ischemic_Stroke_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Ischemic_Stroke_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Ischemic Stroke Encounter")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context) =>
@@ -183,7 +137,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Ischemic_Stroke_Encounters_With_Discharge_Disposition_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Ischemic_Stroke_Encounters_With_Discharge_Disposition_Cached = new();
 
     [CqlExpressionDefinition("Ischemic Stroke Encounters With Discharge Disposition")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounters_With_Discharge_Disposition(CqlContext context) =>
@@ -226,7 +180,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             });
 
 
-    private Cached<IEnumerable<object>> _Intervention_Comfort_Measures_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Intervention_Comfort_Measures_Cached = new();
 
     [CqlExpressionDefinition("Intervention Comfort Measures")]
     public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context) =>
@@ -284,7 +238,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Comfort_Measures_During_Hospitalization_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Comfort_Measures_During_Hospitalization_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Comfort Measures During Hospitalization")]
     public IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Hospitalization(CqlContext context) =>
@@ -393,5 +347,51 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
 
     #endregion Functions and Expressions
+
+    private TJCOverall_8_25_000() {}
+
+    public static TJCOverall_8_25_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "TJCOverall";
+    public string Version => "8.25.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_4_1_000.Instance, QICoreCommon_4_0_000.Instance, SupplementalDataElements_5_1_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

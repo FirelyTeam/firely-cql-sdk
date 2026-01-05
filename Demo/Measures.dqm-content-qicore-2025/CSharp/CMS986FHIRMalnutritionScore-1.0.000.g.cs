@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS986FHIRMalnutritionScore", "1.0.000")]
 public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<CMS986FHIRMalnutritionScore_1_0_000>
 {
-    private CMS986FHIRMalnutritionScore_1_0_000() {}
-
-    public static CMS986FHIRMalnutritionScore_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS986FHIRMalnutritionScore";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance, CQMCommon_4_1_000.Instance, Status_1_15_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
@@ -120,7 +74,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -136,7 +90,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -149,7 +103,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -161,7 +115,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Type_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Type_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer Type")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type(CqlContext context) =>
@@ -173,7 +127,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -185,7 +139,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -197,7 +151,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
@@ -243,7 +197,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Measure_Population_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Measure_Population_Cached = new();
 
     [CqlExpressionDefinition("Measure Population")]
     public IEnumerable<Encounter> Measure_Population(CqlContext context) =>
@@ -255,7 +209,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Discharge_for_Hospice_Care_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Discharge_for_Hospice_Care_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Discharge for Hospice Care")]
     public IEnumerable<Encounter> Encounters_with_Discharge_for_Hospice_Care(CqlContext context) =>
@@ -278,7 +232,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<object>> _Intervention_Hospice_Care_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Intervention_Hospice_Care_Cached = new();
 
     [CqlExpressionDefinition("Intervention Hospice Care")]
     public IEnumerable<object> Intervention_Hospice_Care(CqlContext context) =>
@@ -336,7 +290,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Hospice_during_Eligible_Encounter_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Hospice_during_Eligible_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Hospice during Eligible Encounter")]
     public IEnumerable<Encounter> Encounters_with_Hospice_during_Eligible_Encounter(CqlContext context) =>
@@ -433,7 +387,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Measure_Population_Exclusion_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Measure_Population_Exclusion_Cached = new();
 
     [CqlExpressionDefinition("Measure Population Exclusion")]
     public IEnumerable<Encounter> Measure_Population_Exclusion(CqlContext context) =>
@@ -447,7 +401,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<object>> _Intervention_Dietitian_Referral_Cached = new();
+    private readonly Cached<IEnumerable<object>> _Intervention_Dietitian_Referral_Cached = new();
 
     [CqlExpressionDefinition("Intervention Dietitian Referral")]
     public IEnumerable<object> Intervention_Dietitian_Referral(CqlContext context) =>
@@ -505,7 +459,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Dietitian_Referral_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Dietitian_Referral_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Dietitian Referral")]
     public IEnumerable<Encounter> Encounters_with_Dietitian_Referral(CqlContext context) =>
@@ -602,7 +556,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Malnutrition Risk Screening Not At Risk")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk(CqlContext context) =>
@@ -650,7 +604,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Risk_Screening_At_Risk_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Risk_Screening_At_Risk_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Malnutrition Risk Screening At Risk")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk(CqlContext context) =>
@@ -698,7 +652,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Risk_Screening_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Risk_Screening_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Malnutrition Risk Screening")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening(CqlContext context) =>
@@ -712,7 +666,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Malnutrition Risk Screening or with Dietitian Referral")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral(CqlContext context) =>
@@ -726,7 +680,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Malnutrition Not At Risk Screening and without Dietitian Referral")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral(CqlContext context) =>
@@ -740,7 +694,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Malnutrition Risk Screening At Risk or with Dietitian Referral")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral(CqlContext context) =>
@@ -782,7 +736,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     }
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, string HospEncId, CqlDateTime NutrAssessTimingLatest)?>> _Nutrition_Assessment_Performed_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, string HospEncId, CqlDateTime NutrAssessTimingLatest)?>> _Nutrition_Assessment_Performed_Cached = new();
 
     [CqlExpressionDefinition("Nutrition Assessment Performed")]
     public IEnumerable<(CqlTupleMetadata, string HospEncId, CqlDateTime NutrAssessTimingLatest)?> Nutrition_Assessment_Performed(CqlContext context) =>
@@ -890,7 +844,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Most Recent Nutrition Assessment And Identified Status")]
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status(CqlContext context) =>
@@ -1000,7 +954,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Most Recent Nutrition Assessment Status of Moderately Or Severely Malnourished")]
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished(CqlContext context) =>
@@ -1106,7 +1060,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Most Recent Nutrition Assessment Status of Not or Mildly Malnourished")]
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished(CqlContext context) =>
@@ -1238,7 +1192,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     }
 
 
-    private Cached<IEnumerable<Condition>> _Has_Malnutrition_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Condition>> _Has_Malnutrition_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Has Malnutrition Diagnosis")]
     public IEnumerable<Condition> Has_Malnutrition_Diagnosis(CqlContext context) =>
@@ -1262,7 +1216,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Encounters With Encounter Diagnosis Of Malnutrition Diagnosis")]
     public IEnumerable<Encounter> Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis(CqlContext context) =>
@@ -1311,7 +1265,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Diagnosis_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Malnutrition_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Malnutrition Diagnosis")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Diagnosis(CqlContext context) =>
@@ -1342,7 +1296,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Encounters_with_Nutrition_Care_Plan_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Encounters_with_Nutrition_Care_Plan_Cached = new();
 
     [CqlExpressionDefinition("Encounters with Nutrition Care Plan")]
     public IEnumerable<Encounter> Encounters_with_Nutrition_Care_Plan(CqlContext context) =>
@@ -1693,6 +1647,18 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
     #endregion Functions and Expressions
 
+    private CMS986FHIRMalnutritionScore_1_0_000() {}
+
+    public static CMS986FHIRMalnutritionScore_1_0_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS986FHIRMalnutritionScore";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance, CQMCommon_4_1_000.Instance, Status_1_15_000.Instance];
+
+    #endregion ILibrary Implementation
+
     #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_GeOicOcIReKdVDQYSSafdAGeK = new(
@@ -1704,5 +1670,39 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
        ["QualifyingEncounter", "NutritionAssessment"]);
 
     #endregion CqlTupleMetadata Properties
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

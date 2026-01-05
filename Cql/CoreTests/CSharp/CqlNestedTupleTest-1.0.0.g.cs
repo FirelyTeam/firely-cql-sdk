@@ -16,6 +16,23 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CqlNestedTupleTest", "1.0.0")]
 public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTupleTest_1_0_0>
 {
+    #region Functions and Expressions
+
+    private readonly Cached<(CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)?> _Result_Cached = new();
+
+    [CqlExpressionDefinition("Result")]
+    public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context) =>
+        _Result_Cached.GetOrReplace(
+            context,
+            () => {
+                (CqlTupleMetadata, string result1, string result2)? a_ = (CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ, "some first result", "some second result");
+                (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? b_ = (CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY, "success", a_);
+                return b_;
+            });
+
+
+    #endregion Functions and Expressions
+
     private CqlNestedTupleTest_1_0_0() {}
 
     public static CqlNestedTupleTest_1_0_0 Instance { get; } = new();
@@ -27,6 +44,18 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
     public ILibrary[] Dependencies => [];
 
     #endregion ILibrary Implementation
+
+    #region CqlTupleMetadata Properties
+
+    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
+       [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
+       ["status", "result"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
+       [typeof(string), typeof(string)],
+       ["result1", "result2"]);
+
+    #endregion CqlTupleMetadata Properties
 
     #region Nested Type - Cached<T>
 
@@ -61,34 +90,5 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
     }
 
     #endregion
-
-    #region Functions and Expressions
-
-    private Cached<(CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)?> _Result_Cached = new();
-
-    [CqlExpressionDefinition("Result")]
-    public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context) =>
-        _Result_Cached.GetOrReplace(
-            context,
-            () => {
-                (CqlTupleMetadata, string result1, string result2)? a_ = (CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ, "some first result", "some second result");
-                (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? b_ = (CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY, "success", a_);
-                return b_;
-            });
-
-
-    #endregion Functions and Expressions
-
-    #region CqlTupleMetadata Properties
-
-    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
-       [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
-       ["status", "result"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
-       [typeof(string), typeof(string)],
-       ["result1", "result2"]);
-
-    #endregion CqlTupleMetadata Properties
 
 }

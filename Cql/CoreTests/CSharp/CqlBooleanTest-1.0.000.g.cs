@@ -16,6 +16,23 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CqlBooleanTest", "1.0.000")]
 public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTest_1_0_000>
 {
+    #region Functions and Expressions
+
+    private readonly Cached<bool?> _SomethingTrueEqualsTrue_Cached = new();
+
+    [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
+    public bool? SomethingTrueEqualsTrue(CqlContext context) =>
+        _SomethingTrueEqualsTrue_Cached.GetOrReplace(
+            context,
+            () => {
+                bool? a_ = context.Operators.Equal(1, 1);
+                bool? b_ = context.Operators.Equal(a_, true);
+                return b_;
+            });
+
+
+    #endregion Functions and Expressions
+
     private CqlBooleanTest_1_0_000() {}
 
     public static CqlBooleanTest_1_0_000 Instance { get; } = new();
@@ -61,22 +78,5 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
     }
 
     #endregion
-
-    #region Functions and Expressions
-
-    private Cached<bool?> _SomethingTrueEqualsTrue_Cached = new();
-
-    [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
-    public bool? SomethingTrueEqualsTrue(CqlContext context) =>
-        _SomethingTrueEqualsTrue_Cached.GetOrReplace(
-            context,
-            () => {
-                bool? a_ = context.Operators.Equal(1, 1);
-                bool? b_ = context.Operators.Equal(a_, true);
-                return b_;
-            });
-
-
-    #endregion Functions and Expressions
 
 }

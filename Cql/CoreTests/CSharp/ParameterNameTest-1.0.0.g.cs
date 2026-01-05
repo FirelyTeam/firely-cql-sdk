@@ -16,6 +16,34 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ParameterNameTest", "1.0.0")]
 public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNameTest_1_0_0>
 {
+    #region Functions and Expressions
+
+    [CqlFunctionDefinition("Test Function")]
+    public int? Test_Function(CqlContext context, [CqlFunctionParameter("param with spaces")] int? param_with_spaces, string normalParam)
+    {
+        int? a_ = context.Operators.Add(param_with_spaces, 10);
+        return a_;
+    }
+
+
+    [CqlFunctionDefinition("Another Test")]
+    public decimal? Another_Test(CqlContext context, [CqlFunctionParameter("param-with-dashes")] decimal? param_with_dashes)
+    {
+        decimal? a_ = context.Operators.Multiply(param_with_dashes, 2.0m);
+        return a_;
+    }
+
+
+    [CqlFunctionDefinition("Keyword Test")]
+    public int? Keyword_Test(CqlContext context, int? @int, string @ref, bool? @class)
+    {
+        int? a_ = context.Operators.Add(@int, 5);
+        return a_;
+    }
+
+
+    #endregion Functions and Expressions
+
     private ParameterNameTest_1_0_0() {}
 
     public static ParameterNameTest_1_0_0 Instance { get; } = new();
@@ -61,33 +89,5 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
     }
 
     #endregion
-
-    #region Functions and Expressions
-
-    [CqlFunctionDefinition("Test Function")]
-    public int? Test_Function(CqlContext context, [CqlFunctionParameter("param with spaces")] int? param_with_spaces, string normalParam)
-    {
-        int? a_ = context.Operators.Add(param_with_spaces, 10);
-        return a_;
-    }
-
-
-    [CqlFunctionDefinition("Another Test")]
-    public decimal? Another_Test(CqlContext context, [CqlFunctionParameter("param-with-dashes")] decimal? param_with_dashes)
-    {
-        decimal? a_ = context.Operators.Multiply(param_with_dashes, 2.0m);
-        return a_;
-    }
-
-
-    [CqlFunctionDefinition("Keyword Test")]
-    public int? Keyword_Test(CqlContext context, int? @int, string @ref, bool? @class)
-    {
-        int? a_ = context.Operators.Add(@int, 5);
-        return a_;
-    }
-
-
-    #endregion Functions and Expressions
 
 }

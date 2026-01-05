@@ -16,52 +16,6 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CMS131FHIRDiabetesEyeExam", "1.0.000")]
 public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CMS131FHIRDiabetesEyeExam_1_0_000>
 {
-    private CMS131FHIRDiabetesEyeExam_1_0_000() {}
-
-    public static CMS131FHIRDiabetesEyeExam_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS131FHIRDiabetesEyeExam";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance, Hospice_6_18_000.Instance, Status_1_15_000.Instance, PalliativeCare_1_18_000.Instance, AdvancedIllnessandFrailty_1_27_000.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
-
     #region ValueSets
 
     [CqlValueSetDefinition("Annual Wellness Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", valueSetVersion: null)]
@@ -159,7 +113,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     #region Parameters
 
-    private Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
@@ -175,7 +129,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     #region Functions and Expressions
 
-    private Cached<Patient> _Patient_Cached = new();
+    private readonly Cached<Patient> _Patient_Cached = new();
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -188,7 +142,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
+    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
@@ -230,7 +184,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Initial_Population_Cached = new();
+    private readonly Cached<bool?> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
@@ -270,7 +224,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Denominator_Cached = new();
+    private readonly Cached<bool?> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
@@ -282,7 +236,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Bilateral_Absence_of_Eyes_Cached = new();
+    private readonly Cached<bool?> _Bilateral_Absence_of_Eyes_Cached = new();
 
     [CqlExpressionDefinition("Bilateral Absence of Eyes")]
     public bool? Bilateral_Absence_of_Eyes(CqlContext context) =>
@@ -312,7 +266,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Denominator_Exclusions_Cached = new();
+    private readonly Cached<bool?> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
@@ -332,7 +286,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Diabetic_Retinopathy_Overlapping_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Diabetic_Retinopathy_Overlapping_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Diabetic Retinopathy Overlapping Measurement Period")]
     public bool? Diabetic_Retinopathy_Overlapping_Measurement_Period(CqlContext context) =>
@@ -358,7 +312,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Retinal_Exam_in_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Retinal_Exam_in_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Retinal Exam in Measurement Period")]
     public bool? Retinal_Exam_in_Measurement_Period(CqlContext context) =>
@@ -384,7 +338,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Retinal_Exam_in_Measurement_Period_or_Year_Prior_Cached = new();
+    private readonly Cached<bool?> _Retinal_Exam_in_Measurement_Period_or_Year_Prior_Cached = new();
 
     [CqlExpressionDefinition("Retinal Exam in Measurement Period or Year Prior")]
     public bool? Retinal_Exam_in_Measurement_Period_or_Year_Prior(CqlContext context) =>
@@ -415,7 +369,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Autonomous_Eye_Exam_in_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Autonomous_Eye_Exam_in_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Autonomous Eye Exam in Measurement Period")]
     public bool? Autonomous_Eye_Exam_in_Measurement_Period(CqlContext context) =>
@@ -447,7 +401,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Has_Left_Eye_Retinopathy_Cached = new();
+    private readonly Cached<bool?> _Has_Left_Eye_Retinopathy_Cached = new();
 
     [CqlExpressionDefinition("Has Left Eye Retinopathy")]
     public bool? Has_Left_Eye_Retinopathy(CqlContext context) =>
@@ -479,7 +433,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Has_Right_Eye_Retinopathy_Cached = new();
+    private readonly Cached<bool?> _Has_Right_Eye_Retinopathy_Cached = new();
 
     [CqlExpressionDefinition("Has Right Eye Retinopathy")]
     public bool? Has_Right_Eye_Retinopathy(CqlContext context) =>
@@ -511,7 +465,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Has_Right_Eye_No_Retinopathy_in_Year_Prior_Cached = new();
+    private readonly Cached<bool?> _Has_Right_Eye_No_Retinopathy_in_Year_Prior_Cached = new();
 
     [CqlExpressionDefinition("Has Right Eye No Retinopathy in Year Prior")]
     public bool? Has_Right_Eye_No_Retinopathy_in_Year_Prior(CqlContext context) =>
@@ -550,7 +504,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Has_Left_Eye_No_Retinopathy_in_Year_Prior_Cached = new();
+    private readonly Cached<bool?> _Has_Left_Eye_No_Retinopathy_in_Year_Prior_Cached = new();
 
     [CqlExpressionDefinition("Has Left Eye No Retinopathy in Year Prior")]
     public bool? Has_Left_Eye_No_Retinopathy_in_Year_Prior(CqlContext context) =>
@@ -589,7 +543,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period_Cached = new();
+    private readonly Cached<bool?> _Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Retinal Exam Finding with Retinopathy Severity Level in Measurement Period")]
     public bool? Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(CqlContext context) =>
@@ -609,7 +563,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior_Cached = new();
+    private readonly Cached<bool?> _Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior_Cached = new();
 
     [CqlExpressionDefinition("Retinal Exam Finding with No Retinopathy Severity Level in Year Prior")]
     public bool? Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(CqlContext context) =>
@@ -623,7 +577,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<bool?> _Numerator_Cached = new();
+    private readonly Cached<bool?> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
@@ -647,7 +601,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
@@ -659,7 +613,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
@@ -671,7 +625,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
@@ -683,7 +637,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             });
 
 
-    private Cached<CqlCode> _SDE_Sex_Cached = new();
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
@@ -696,5 +650,51 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
 
     #endregion Functions and Expressions
+
+    private CMS131FHIRDiabetesEyeExam_1_0_000() {}
+
+    public static CMS131FHIRDiabetesEyeExam_1_0_000 Instance { get; } = new();
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS131FHIRDiabetesEyeExam";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, QICoreCommon_4_0_000.Instance, Hospice_6_18_000.Instance, Status_1_15_000.Instance, PalliativeCare_1_18_000.Instance, AdvancedIllnessandFrailty_1_27_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }
