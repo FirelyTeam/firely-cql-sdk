@@ -207,9 +207,6 @@ file static class MeasurePackager
                              select new { Group = g.value, Population = p.value };
                 foreach (var tuple in tuples)
                 {
-                    if (!int.TryParse(tuple.Group, out var groupNumber))
-                        throw new InvalidOperationException(
-                            $"Definition {def.name} has a @group annotation whose value is {tuple.Group}.  Groups must be positive integers.");
                     if (!Populations.ContainsKey(tuple.Population))
                         throw new InvalidOperationException(
                             $"Definition {def.name} has a @population annotation whose value is {tuple.Population}.  @population must be one of: {string.Join(", ", Populations.Keys)}");
