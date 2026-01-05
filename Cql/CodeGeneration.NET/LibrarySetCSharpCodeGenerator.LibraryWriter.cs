@@ -216,12 +216,15 @@ partial class LibrarySetCSharpCodeGenerator
 
             using (ISB.Indent())
             {
+                // Put logic first
+                AppendMethods();
+
+                // These are all boilerplate
                 AppendClassConstructor();
                 AppendSingletonInstanceProperty();
                 AppendLibraryInterfaceImplementation();
-                AppendNestedTypeCached();
-                AppendMethods();
                 AppendCqlTupleMetadataProperties();
+                AppendNestedTypeCached();
             }
 
             ISB.AppendLine("}");
