@@ -220,8 +220,7 @@ partial class LibrarySetCSharpCodeGenerator
                 AppendMethods();
 
                 // These are all boilerplate
-                AppendClassConstructor();
-                AppendSingletonInstanceProperty();
+                AppendSingletonLifetimeMembers();
                 AppendLibraryInterfaceImplementation();
                 AppendCqlTupleMetadataProperties();
                 AppendNestedTypeCached();
@@ -271,20 +270,17 @@ partial class LibrarySetCSharpCodeGenerator
                 """);
         }
 
-        private void AppendSingletonInstanceProperty()
+        private void AppendSingletonLifetimeMembers()
         {
             ISB.AppendLine(
                 $$"""
+                  #region Singleton Lifetime Members
+
+                  private {{_className}}() {}
+
                   public static {{_className}} Instance { get; } = new();
 
-                  """);
-        }
-
-        private void AppendClassConstructor()
-        {
-            ISB.AppendLine(
-                $$"""
-                  private {{_className}}() {}
+                  #endregion
 
                   """);
         }
