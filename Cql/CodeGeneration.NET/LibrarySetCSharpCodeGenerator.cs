@@ -87,10 +87,11 @@ internal partial class LibrarySetCSharpCodeGenerator
     public IEnumerable<(ElmLibrary library, string cSharp)> GenerateEachLibraryToCSharp(
         LibrarySet librarySet,
         CqlDefinitionDictionary definitions,
+        string? @namespace = null,
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onBeforeProcessLibrary = null)
     {
-        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
+        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, @namespace);
         return librarySetWriter.GenerateEachLibraryToCSharp(buildExceptionHandlingStrategy, onBeforeProcessLibrary);
     }
 
