@@ -23,7 +23,7 @@ public record CqlToFhirCommand
     DirectoryInfo? Fhir,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
-    string? CSharpNamespace,
+    string? CsNamespace,
     bool? JsonPretty,
     bool? ExitOnError,
     DebugSymbolsFormat? DebugSymbols)
@@ -114,7 +114,7 @@ public record CqlToFhirCommand
             """),
 
         Option<string>(
-            "--csharp-namespace",
+            "--cs-namespace",
             """
             The C# namespace to use for generated code.
             (Used with --cs or --dll)
@@ -130,7 +130,7 @@ public record CqlToFhirCommand
         (Pdb, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.PdbOutDir)]),
         (Fhir, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FhirOutDir)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
-        (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
+        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),

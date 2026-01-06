@@ -95,7 +95,7 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 - `--fhir <directory>` - FHIR Resource output directory for Library and Measure files in JSON format
 
 **Code Generation Options:**
-- `--csharp-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries")
+- `--cs-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries")
 
 **FHIR-specific Options:**
 - `--canonical-root-url <url>` - The root canonical URL output in FHIR library
@@ -184,7 +184,7 @@ cql-package elm --elm input/elm --fhir output/fhir --canonical-root-url https://
 6. Generate C# code with a custom namespace:
 
 ```shell
-cql-package elm --elm input/elm --cs output/csharp --csharp-namespace MyCompany.MyCqlLibraries
+cql-package elm --elm input/elm --cs output/csharp --cs-namespace MyCompany.MyCqlLibraries
 ```
 
 - Generates C# source code from ELM files.
