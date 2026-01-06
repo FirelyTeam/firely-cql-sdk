@@ -23,10 +23,10 @@ public record CqlToFhirCommand
     DirectoryInfo? Fhir,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
+    string? CSharpNamespace,
     bool? JsonPretty,
     bool? ExitOnError,
-    DebugSymbolsFormat? DebugSymbols,
-    string? CSharpNamespace)
+    DebugSymbolsFormat? DebugSymbols)
 {
     public const string Name =
         "cql";
