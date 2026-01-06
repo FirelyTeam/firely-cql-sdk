@@ -44,12 +44,7 @@ internal readonly record struct ElmToolkitServices(
         var expressionBuilderSettings = config.ToExpressionBuilderSettings();
         AddCqlCompilerServices(services, config.LRUCacheSize, expressionBuilderSettings);
         services.TryAddSingleton<TypeToCSharpConverter>();
-        services.TryAddSingleton(sp =>
-        {
-            var typeResolver = sp.GetRequiredService<TypeResolver>();
-            var typeToCSharpConverter = sp.GetRequiredService<TypeToCSharpConverter>();
-            return new LibrarySetCSharpCodeGenerator(typeResolver, typeToCSharpConverter, config.CSharpNamespace);
-        });
+        services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<AssemblyCompiler>();
     }
 

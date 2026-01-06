@@ -25,13 +25,11 @@ internal partial class LibrarySetCSharpCodeGenerator
     /// </summary>
     public LibrarySetCSharpCodeGenerator(
         TypeResolver typeResolver,
-        TypeToCSharpConverter typeToCSharpConverter,
-        string? csharpNamespace = null)
+        TypeToCSharpConverter typeToCSharpConverter)
     {
         _typeToCSharpConverter = typeToCSharpConverter;
         _usings = BuildUsings(typeResolver);
         _aliasedUsings = typeResolver.Aliases.ToList();
-        _csharpNamespace = csharpNamespace;
     }
 
     /// <summary>
@@ -41,11 +39,6 @@ internal partial class LibrarySetCSharpCodeGenerator
     private static string GeneratorToolName { get; } = GetGeneratorToolNameFromAssemblyProductName();
 
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
-
-    /// <summary>
-    /// Gets the C# namespace to use for generated code.
-    /// </summary>
-    private readonly string? _csharpNamespace;
 
     /// <summary>
     /// Gets the <see langword="using"/> statements to be included in the generated code.
@@ -94,10 +87,11 @@ internal partial class LibrarySetCSharpCodeGenerator
     public IEnumerable<(ElmLibrary library, string cSharp)> GenerateEachLibraryToCSharp(
         LibrarySet librarySet,
         CqlDefinitionDictionary definitions,
+        string? @namespace = null,
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onBeforeProcessLibrary = null)
     {
-        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
+        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, @namespace);
         return librarySetWriter.GenerateEachLibraryToCSharp(buildExceptionHandlingStrategy, onBeforeProcessLibrary);
     }
 
