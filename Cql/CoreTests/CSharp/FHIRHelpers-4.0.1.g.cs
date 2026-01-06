@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.1.0.0")]
 [CqlLibrary("FHIRHelpers", "4.0.1")]
 public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
 {
@@ -245,7 +245,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             }
             else if (b_())
             {
-                object o_ = context.Operators.Message<object>(null /* CQL: 105:9-105:12 */, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported" /* CQL: 34:33-34:87 */, "Error" /* CQL: 34:90-34:96 */, "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value." /* CQL: 34:99-34:188 */);
+                object o_ = context.Operators.Message<object>(null /* CQL: 35:10-35:13 */, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported" /* CQL: 34:33-34:87 */, "Error" /* CQL: 34:90-34:96 */, "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value." /* CQL: 34:99-34:188 */);
                 return o_ as CqlQuantity;
             }
             else if (c_())
@@ -273,7 +273,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 string af_ = ae_?.Value;
                 string ag_ = context.Operators.Concatenate(ad_ ?? "", af_ ?? "");
                 string ah_ = context.Operators.Concatenate(ag_ ?? "", ")" /* CQL: 39:202-39:204 */);
-                object ai_ = context.Operators.Message<object>(null /* CQL: 105:9-105:12 */, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity" /* CQL: 39:33-39:76 */, "Error" /* CQL: 39:79-39:85 */, ah_);
+                object ai_ = context.Operators.Message<object>(null /* CQL: 35:10-35:13 */, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity" /* CQL: 39:33-39:76 */, "Error" /* CQL: 39:79-39:85 */, ah_);
                 return ai_ as CqlQuantity;
             };
         }
@@ -332,7 +332,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 string ab_ = aa_?.Value;
                 string ac_ = context.Operators.Concatenate(z_ ?? "", ab_ ?? "");
                 string ad_ = context.Operators.Concatenate(ac_ ?? "", ")" /* CQL: 50:202-50:204 */);
-                object ae_ = context.Operators.Message<object>(null /* CQL: 105:9-105:12 */, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity" /* CQL: 50:33-50:76 */, "Error" /* CQL: 50:79-50:85 */, ad_);
+                object ae_ = context.Operators.Message<object>(null /* CQL: 35:10-35:13 */, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity" /* CQL: 50:33-50:76 */, "Error" /* CQL: 50:79-50:85 */, ad_);
                 return ae_ as CqlQuantity;
             };
         }
