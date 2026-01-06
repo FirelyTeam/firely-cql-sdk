@@ -129,6 +129,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         using var servicesScope = _services.CreateScopedState();
 
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
+        var cSharpNamespace = Config.CSharpNamespace;
         var debugInformationFormat = Config.DebugSymbolsFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
@@ -141,7 +142,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
             logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
         var librarySetDefinitions = BuildLibrarySetDefinitions(librarySetExpressionBuilderScoped, librarySet);
-        var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions, Config.CSharpNamespace);
+        var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions, cSharpNamespace);
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
         var entriesBuilder = _artifactsById.ToBuilder();
