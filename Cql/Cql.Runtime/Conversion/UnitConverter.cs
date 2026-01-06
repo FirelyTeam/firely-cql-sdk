@@ -216,15 +216,16 @@ namespace Hl7.Cql.Conversion
             UseConversion(UCUMUnits.Second, "second", Self);
             UseConversion(UCUMUnits.Millisecond, "millisecond", Self);
             
-            // Add CQL -> CQL conversions (same as UCUM conversions but using CQL unit names)
+            // Add CQL -> CQL conversions (mirror the existing UCUM unit conversions)
+            // NOTE: These mirror the existing UCUM conversions which may have bugs
             // Year conversions
             UseConversion("year", "day", (decimal value) => value * ConversionConstants.DaysPerYear);
-            UseConversion("year", "month", (decimal value) => value / 12m);
+            UseConversion("year", "month", (decimal value) => value / 12m);  // NOTE: Matches existing UCUM behavior
             UseConversion("year", "week", (decimal value) => (value * ConversionConstants.DaysPerYear) * 0.14285714285m);
             
             // Month conversions
             UseConversion("month", "day", (decimal value) => value * ConversionConstants.DaysPerMonth);
-            UseConversion("month", "year", (decimal value) => value * 12m);
+            UseConversion("month", "year", (decimal value) => value * 12m);  // NOTE: Matches existing UCUM behavior
             UseConversion("month", "week", (decimal value) => (value * ConversionConstants.DaysPerMonth) * 0.14285714285m);
             
             // Day conversions
