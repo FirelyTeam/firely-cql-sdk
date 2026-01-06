@@ -88,9 +88,10 @@ internal partial class LibrarySetCSharpCodeGenerator
         LibrarySet librarySet,
         CqlDefinitionDictionary definitions,
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
-        Action<ElmLibrary>? onBeforeProcessLibrary = null)
+        Action<ElmLibrary>? onBeforeProcessLibrary = null,
+        ExpressionLocatorMetadata? locatorMetadata = null)
     {
-        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
+        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, locatorMetadata);
         return librarySetWriter.GenerateEachLibraryToCSharp(buildExceptionHandlingStrategy, onBeforeProcessLibrary);
     }
 

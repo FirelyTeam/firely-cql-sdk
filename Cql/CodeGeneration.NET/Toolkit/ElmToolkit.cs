@@ -140,8 +140,8 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         foreach (var (id, _) in removedLibraries)
             logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
-        var librarySetDefinitions = BuildLibrarySetDefinitions(librarySetExpressionBuilderScoped, librarySet);
-        var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions);
+        var (librarySetDefinitions, locatorMetadata) = BuildLibrarySetDefinitionsWithMetadata(librarySetExpressionBuilderScoped, librarySet);
+        var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions, locatorMetadata);
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
         var entriesBuilder = _artifactsById.ToBuilder();
@@ -215,11 +215,13 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="cSharpCodeProcessor">The C# code processor to use.</param>
     /// <param name="librarySet">The set of libraries to generate code for.</param>
     /// <param name="librarySetDefinitions">The definitions for the library set.</param>
+    /// <param name="locatorMetadata">The CQL source locator metadata for expressions.</param>
     /// <returns>The generated C# code.</returns>
     private IEnumerable<(ElmLibrary library, string cSharp)> GenerateCSharp(
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
         LibrarySet librarySet,
-        DefinitionDictionary<CqlDefinition> librarySetDefinitions) =>
+        DefinitionDictionary<CqlDefinition> librarySetDefinitions,
+        ExpressionLocatorMetadata? locatorMetadata) =>
         cSharpCodeProcessor
             .GenerateEachLibraryToCSharp(
                 librarySet,
@@ -229,19 +231,22 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, log) => log("Could not generate definitions into C#: {lib}", library.VersionedLibraryIdentifier)),
-                library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.VersionedLibraryIdentifier));
+                library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.VersionedLibraryIdentifier),
+                locatorMetadata);
 
     /// <summary>
     /// Builds the library set definitions.
     /// </summary>
     /// <param name="librarySetExpressionBuilderScoped">The library set expression builder to use.</param>
     /// <param name="librarySet">The set of libraries to build definitions for.</param>
-    /// <returns>The dictionary of library set definitions.</returns>
-    private DefinitionDictionary<CqlDefinition> BuildLibrarySetDefinitions(
+    /// <returns>The dictionary of library set definitions and the locator metadata.</returns>
+    private (DefinitionDictionary<CqlDefinition> definitions, ExpressionLocatorMetadata? locatorMetadata) BuildLibrarySetDefinitionsWithMetadata(
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
         LibrarySet librarySet)
     {
         DefinitionDictionary<CqlDefinition> librarySetDefinitions = new();
+        ExpressionLocatorMetadata? locatorMetadata = null;
+
         librarySetExpressionBuilderScoped
             .BuildEachLibraryDefinitions(
                 librarySet,
@@ -252,8 +257,9 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                      _services.Logger,
                                      (library, logMessage) =>
                                          logMessage("Could not convert ELM into definitions for {id}", library.VersionedLibraryIdentifier)),
-                library => _services.Logger.LogInformation("Converting ELM Library into definitions for {id}", library.VersionedLibraryIdentifier))
+                library => _services.Logger.LogInformation("Converting ELM Library into definitions for {id}", library.VersionedLibraryIdentifier),
+                context => locatorMetadata = context.LocatorMetadata) // Capture the metadata
             .ForEach(); // Important to enumerate
-        return librarySetDefinitions;
+        return (librarySetDefinitions, locatorMetadata);
     }
 }

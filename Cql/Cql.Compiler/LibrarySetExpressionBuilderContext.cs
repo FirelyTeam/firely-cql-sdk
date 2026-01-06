@@ -27,6 +27,7 @@ internal partial class LibrarySetExpressionBuilderContext
         LibrarySet = librarySet;
         Preprocessor = libraryPreprocessorBuilder.Build(librarySet);
         DebuggerInfo = new BuilderContextDebuggerInfo("LibrarySet", Name: LibrarySet!.Name!);
+        LocatorMetadata = new ExpressionLocatorMetadata();
     }
 
     /// <summary>
@@ -41,14 +42,21 @@ internal partial class LibrarySetExpressionBuilderContext
 
     public LibraryPreprocessor Preprocessor { get; }
 
+    /// <summary>
+    /// Gets the metadata for storing CQL source locator information for expressions.
+    /// </summary>
+    public ExpressionLocatorMetadata LocatorMetadata { get; }
+
     public IEnumerable<(Library library, CqlDefinitionDictionary libraryDefinitions)> BuildEachLibraryDefinitions(
         BatchProcessExceptionHandlingStrategyBuilder<Library>? buildExceptionHandlingStrategy = null,
-        Action<Library>? prebuildLibraryHandler = null) =>
+        Action<Library>? prebuildLibraryHandler = null,
+        Action<LibrarySetExpressionBuilderContext>? contextCallback = null) =>
         LibrarySet
             .TrySelect(
                 library =>
                 {
                     prebuildLibraryHandler?.Invoke(library);
+                    contextCallback?.Invoke(this); // Invoke context callback to capture metadata
                     return this.CatchRethrowExpressionBuildingException(_ =>
                     {
                         var libraryDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);

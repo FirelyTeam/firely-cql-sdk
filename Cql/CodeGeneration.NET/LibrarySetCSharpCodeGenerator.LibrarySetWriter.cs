@@ -8,7 +8,8 @@ partial class LibrarySetCSharpCodeGenerator
     private class LibrarySetWriter(
         LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator,
         LibrarySet librarySet,
-        CqlDefinitionDictionary definitions)
+        CqlDefinitionDictionary definitions,
+        ExpressionLocatorMetadata? locatorMetadata = null)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
         public TypeToCSharpConverter TypeToCSharpConverter => librarySetCSharpCodeGenerator._typeToCSharpConverter;
@@ -17,6 +18,7 @@ partial class LibrarySetCSharpCodeGenerator
         public string? Namespace { get; } = null; // Not used right now
         public LibrarySet LibrarySet { get; } = librarySet;
         public CqlDefinitionDictionary Definitions { get; } = definitions;
+        public ExpressionLocatorMetadata? LocatorMetadata { get; } = locatorMetadata;
 
         public IEnumerable<(ElmLibrary library, string cSharp)> GenerateEachLibraryToCSharp(
             BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,

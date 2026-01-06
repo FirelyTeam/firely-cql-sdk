@@ -215,6 +215,13 @@ partial class ExpressionBuilderContext
                     expression = ConvertToResultType();
 
                 expression = Mutate(element, expression);
+
+                // Store locator information for this expression if available
+                if (expression is not null && !string.IsNullOrWhiteSpace(element.locator))
+                {
+                    _libraryContext.LibrarySetContext?.LocatorMetadata.SetLocator(expression, element.locator);
+                }
+
                 return expression!;
 
                 Expression ConvertToResultType()

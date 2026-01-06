@@ -65,8 +65,8 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         _Measurement_Period_Cached.GetOrReplace(
             context,
             () => {
-                CqlDate a_ = context.Operators.Date(2023, 1, 1);
-                CqlDate b_ = context.Operators.Date(2023, 12, 31);
+                CqlDate a_ = context.Operators.Date(2023, 1, 1) /* CQL: 23:49-23:59 */;
+                CqlDate b_ = context.Operators.Date(2023, 12, 31) /* CQL: 23:62-23:72 */;
                 CqlInterval<CqlDate> c_ = context.Operators.Interval(a_, b_, true, true);
                 object d_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", c_);
                 return d_;
@@ -84,7 +84,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         _Patient_Cached.GetOrReplace(
             context,
             () => {
-                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient")) /* CQL: 25:1-25:15 */;
                 Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
                 return b_;
             });
@@ -131,7 +131,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         _Latest_injury_due_to_falling_rock_Cached.GetOrReplace(
             context,
             () => {
-                IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
+                IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context) /* CQL: 38:13-38:66 */;
 
                 object b_(Condition @this) {
                     DataType e_ = @this?.Onset;
@@ -156,16 +156,16 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         _Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Cached.GetOrReplace(
             context,
             () => {
-                IEnumerable<SupplyDelivery> a_ = context.Operators.Retrieve<SupplyDelivery>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/SupplyDelivery"));
+                IEnumerable<SupplyDelivery> a_ = context.Operators.Retrieve<SupplyDelivery>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/SupplyDelivery")) /* CQL: 46:5-46:20 */;
 
                 bool? b_(SupplyDelivery SD) {
-                    SupplyDelivery.SuppliedItemComponent d_ = SD?.SuppliedItem;
+                    SupplyDelivery.SuppliedItemComponent d_ = SD?.SuppliedItem /* CQL: 47:14-47:28 */;
                     DataType e_ = d_?.Item;
                     CqlConcept f_ = FHIRHelpers_4_0_1.Instance.ToConcept(context, e_ as CodeableConcept);
-                    CqlCode g_ = this.Tiny_Umbrella(context);
+                    CqlCode g_ = this.Tiny_Umbrella(context) /* CQL: 47:37-47:51 */;
                     CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
                     bool? i_ = context.Operators.Equivalent(f_, h_);
-                    Condition j_ = this.Latest_injury_due_to_falling_rock(context);
+                    Condition j_ = this.Latest_injury_due_to_falling_rock(context) /* CQL: 48:14-48:48 */;
                     Condition[] k_ = [
                         j_,
                     ];
@@ -175,7 +175,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                         object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
                         DataType s_ = SD?.Occurrence;
                         CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-                        CqlQuantity u_ = context.Operators.Quantity(7m, "days");
+                        CqlQuantity u_ = context.Operators.Quantity(7m, "days") /* CQL: 48:86-48:91 */;
                         CqlDateTime v_ = context.Operators.Subtract(t_, u_);
                         CqlDateTime x_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
                         CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, false);

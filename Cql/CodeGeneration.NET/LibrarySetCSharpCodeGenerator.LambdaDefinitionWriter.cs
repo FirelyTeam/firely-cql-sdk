@@ -137,8 +137,15 @@ internal partial class LibrarySetCSharpCodeGenerator
                     ElmAsExpression ea => BuildExpression(ea.Reduce()),
                     _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
                 };
+
+                // Append locator comment if available
+                var locator = GetLocatorComment(expression);
+                if (!string.IsNullOrEmpty(locator))
+                {
+                    result = $"{result} {locator}";
+                }
+
                 return result;
-                //return $"{result} /* {expression.GetType().Name} */";
             }
             catch (Exception e)
             {
@@ -157,6 +164,16 @@ internal partial class LibrarySetCSharpCodeGenerator
                       */
                       """;
             }
+        }
+
+        private string? GetLocatorComment(Expression expression)
+        {
+            var locatorMetadata = LibraryWriter.LibrarySetWriter.LocatorMetadata;
+            if (locatorMetadata is null)
+                return null;
+
+            var locator = locatorMetadata.GetLocator(expression);
+            return locator is not null ? $"/* CQL: {locator} */" : null;
         }
 
         private string BuildDefinitionCallExpression(

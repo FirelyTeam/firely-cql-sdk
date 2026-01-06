@@ -45,7 +45,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         _ChosenSubCategory_Cached.GetOrReplace(
             context,
             () => {
-                object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
+                object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1" /* CQL: 10:46-10:48 */);
                 return (string)a_;
             });
 
@@ -57,7 +57,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         _ChosenCode_Cached.GetOrReplace(
             context,
             () => {
-                object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
+                object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A" /* CQL: 13:11-13:17 */, "http://fire.ly/CodeSystem/Test" /* CQL: 14:13-14:44 */, default, default) /* CQL: 12:37-15:1 */);
                 return (CqlCode)a_;
             });
 
@@ -77,26 +77,26 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
                 CqlValueSet a_() {
 
                     bool b_() {
-                        string d_ = this.ChosenSubCategory(context);
-                        bool? e_ = context.Operators.Equal(d_, "1");
+                        string d_ = this.ChosenSubCategory(context) /* CQL: 18:10-18:28 */;
+                        bool? e_ = context.Operators.Equal(d_, "1" /* CQL: 19:12-19:14 */);
                         return e_ ?? false;
                     }
 
 
                     bool c_() {
-                        string f_ = this.ChosenSubCategory(context);
-                        bool? g_ = context.Operators.Equal(f_, "2");
+                        string f_ = this.ChosenSubCategory(context) /* CQL: 18:10-18:28 */;
+                        bool? g_ = context.Operators.Equal(f_, "2" /* CQL: 20:12-20:14 */);
                         return g_ ?? false;
                     }
 
                     if (b_())
                     {
-                        CqlValueSet h_ = this.ValueSet_A_1(context);
+                        CqlValueSet h_ = this.ValueSet_A_1(context) /* CQL: 19:21-19:34 */;
                         return h_;
                     }
                     else if (c_())
                     {
-                        CqlValueSet i_ = this.ValueSet_A_2(context);
+                        CqlValueSet i_ = this.ValueSet_A_2(context) /* CQL: 20:21-20:34 */;
                         return i_;
                     }
                     else
@@ -120,26 +120,26 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
                 CqlValueSet a_() {
 
                     bool b_() {
-                        string d_ = this.ChosenSubCategory(context);
-                        bool? e_ = context.Operators.Equal(d_, "1");
+                        string d_ = this.ChosenSubCategory(context) /* CQL: 25:10-25:28 */;
+                        bool? e_ = context.Operators.Equal(d_, "1" /* CQL: 26:14-26:16 */);
                         return e_ ?? false;
                     }
 
 
                     bool c_() {
-                        string f_ = this.ChosenSubCategory(context);
-                        bool? g_ = context.Operators.Equal(f_, "2");
+                        string f_ = this.ChosenSubCategory(context) /* CQL: 25:10-25:28 */;
+                        bool? g_ = context.Operators.Equal(f_, "2" /* CQL: 27:14-27:16 */);
                         return g_ ?? false;
                     }
 
                     if (b_())
                     {
-                        CqlValueSet h_ = this.ValueSet_B_1(context);
+                        CqlValueSet h_ = this.ValueSet_B_1(context) /* CQL: 26:23-26:36 */;
                         return h_;
                     }
                     else if (c_())
                     {
-                        CqlValueSet i_ = this.ValueSet_B_2(context);
+                        CqlValueSet i_ = this.ValueSet_B_2(context) /* CQL: 27:23-27:36 */;
                         return i_;
                     }
                     else
@@ -163,27 +163,27 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
                 string a_() {
 
                     bool b_() {
-                        CqlCode d_ = this.ChosenCode(context);
-                        CqlValueSet e_ = this.ValueSetA(context);
+                        CqlCode d_ = this.ChosenCode(context) /* CQL: 33:14-33:25 */;
+                        CqlValueSet e_ = this.ValueSetA(context) /* CQL: 33:30-33:40 */;
                         bool? f_ = context.Operators.CodeInValueSet(d_, e_);
                         return f_ ?? false;
                     }
 
 
                     bool c_() {
-                        CqlCode g_ = this.ChosenCode(context);
-                        CqlValueSet h_ = this.ValueSetB(context);
+                        CqlCode g_ = this.ChosenCode(context) /* CQL: 34:14-34:25 */;
+                        CqlValueSet h_ = this.ValueSetB(context) /* CQL: 34:30-34:40 */;
                         bool? i_ = context.Operators.CodeInValueSet(g_, h_);
                         return i_ ?? false;
                     }
 
                     if (b_())
                     {
-                        return "a";
+                        return "a" /* CQL: 33:47-33:49 */;
                     }
                     else if (c_())
                     {
-                        return "b";
+                        return "b" /* CQL: 34:47-34:49 */;
                     }
                     else
                     {
