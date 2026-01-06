@@ -245,7 +245,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             }
             else if (b_())
             {
-                object o_ = context.Operators.Message<object>(null /* CQL: 35:10-35:13 */, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported" /* CQL: 34:33-34:87 */, "Error" /* CQL: 34:90-34:96 */, "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value." /* CQL: 34:99-34:188 */);
+                object o_ = context.Operators.Message<object>(null /* CQL: 105:9-105:12 */, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported" /* CQL: 34:33-34:87 */, "Error" /* CQL: 34:90-34:96 */, "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value." /* CQL: 34:99-34:188 */) /* CQL: 34:13-34:189 */;
                 return o_ as CqlQuantity;
             }
             else if (c_())
@@ -273,7 +273,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 string af_ = ae_?.Value;
                 string ag_ = context.Operators.Concatenate(ad_ ?? "", af_ ?? "");
                 string ah_ = context.Operators.Concatenate(ag_ ?? "", ")" /* CQL: 39:202-39:204 */);
-                object ai_ = context.Operators.Message<object>(null /* CQL: 35:10-35:13 */, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity" /* CQL: 39:33-39:76 */, "Error" /* CQL: 39:79-39:85 */, ah_);
+                object ai_ = context.Operators.Message<object>(null /* CQL: 105:9-105:12 */, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity" /* CQL: 39:33-39:76 */, "Error" /* CQL: 39:79-39:85 */, ah_);
                 return ai_ as CqlQuantity;
             };
         }
@@ -332,7 +332,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 string ab_ = aa_?.Value;
                 string ac_ = context.Operators.Concatenate(z_ ?? "", ab_ ?? "");
                 string ad_ = context.Operators.Concatenate(ac_ ?? "", ")" /* CQL: 50:202-50:204 */);
-                object ae_ = context.Operators.Message<object>(null /* CQL: 35:10-35:13 */, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity" /* CQL: 50:33-50:76 */, "Error" /* CQL: 50:79-50:85 */, ad_);
+                object ae_ = context.Operators.Message<object>(null /* CQL: 105:9-105:12 */, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity" /* CQL: 50:33-50:76 */, "Error" /* CQL: 50:79-50:85 */, ad_);
                 return ae_ as CqlQuantity;
             };
         }
@@ -1658,7 +1658,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     public string ToString(CqlContext context, Code value)
     {
         string a_ = (value /* CQL: 264:43-264:47 */)?.Value /* CQL: 264:43-264:53 */;
-        return a_;
+        return a_ /* CQL: 264:43-264:53 */;
     }
 
 
@@ -2350,7 +2350,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     public string ToString(CqlContext context, FhirString value)
     {
         string a_ = (value /* CQL: 367:41-367:45 */)?.Value /* CQL: 367:41-367:51 */;
-        return a_;
+        return a_ /* CQL: 367:41-367:51 */;
     }
 
 
@@ -2358,7 +2358,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     public string ToString(CqlContext context, FhirUri value)
     {
         string a_ = (value /* CQL: 369:38-369:42 */)?.Value /* CQL: 369:38-369:48 */;
-        return a_;
+        return a_ /* CQL: 369:38-369:48 */;
     }
 
 
@@ -2366,7 +2366,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     public string ToString(CqlContext context, XHtml value)
     {
         string a_ = (value /* CQL: 370:40-370:44 */)?.Value /* CQL: 370:40-370:50 */;
-        return a_;
+        return a_ /* CQL: 370:40-370:50 */;
     }
 
 
@@ -2374,7 +2374,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     public bool? ToBoolean(CqlContext context, FhirBoolean value)
     {
         bool? a_ = (value /* CQL: 361:43-361:47 */)?.Value /* CQL: 361:43-361:53 */;
-        return a_;
+        return a_ /* CQL: 361:43-361:53 */;
     }
 
 
@@ -2408,7 +2408,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     public decimal? ToDecimal(CqlContext context, FhirDecimal value)
     {
         decimal? a_ = (value /* CQL: 364:43-364:47 */)?.Value /* CQL: 364:43-364:53 */;
-        return a_;
+        return a_ /* CQL: 364:43-364:53 */;
     }
 
 
@@ -2416,7 +2416,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     public int? ToInteger(CqlContext context, Integer value)
     {
         int? a_ = (value /* CQL: 366:43-366:47 */)?.Value /* CQL: 366:43-366:53 */;
-        return a_;
+        return a_ /* CQL: 366:43-366:53 */;
     }
 
 

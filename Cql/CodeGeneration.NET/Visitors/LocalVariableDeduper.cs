@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler;
+
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     /// <summary>
@@ -14,9 +16,16 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
     /// <remarks>Note that it is not trivial to determine whether expressions are duplicates, so we
     /// turn the expressions into strings using the (internal) DebugView visitor provided by Microsoft.
     /// This requires a full reduction and visit of the tree, so is quite expensive.</remarks>
-    internal class LocalVariableDeduper(TypeToCSharpConverter typeToCSharpConverter) : ExpressionVisitor
+    internal class LocalVariableDeduper : LocatorPreservingExpressionVisitor
     {
+        private readonly TypeToCSharpConverter _typeToCSharpConverter;
         private readonly Stack<Dictionary<ParameterExpression, ParameterExpression>> _replacementStack = new();
+
+        public LocalVariableDeduper(TypeToCSharpConverter typeToCSharpConverter, ExpressionLocatorMetadata? locatorMetadata = null)
+            : base(locatorMetadata)
+        {
+            _typeToCSharpConverter = typeToCSharpConverter;
+        }
 
         protected override Expression VisitBlock(BlockExpression node)
         {
@@ -26,7 +35,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
             // Find assignments where the right side is exactly the same.
             var duplicateAssignments = localAssignments
-                .GroupBy(ass => $"{ass.Right.GetDebugView()}::{typeToCSharpConverter.ToCSharp(ass.Right.Type)}")
+                .GroupBy(ass => $"{ass.Right.GetDebugView()}::{_typeToCSharpConverter.ToCSharp(ass.Right.Type)}")
                 .Where(g => g.Count() > 1) // && !g.Key.Contains("Deeper")
                 .ToList();
 

@@ -67,7 +67,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             () => {
                 CqlDate a_ = context.Operators.Date(2023, 1, 1) /* CQL: 23:49-23:59 */;
                 CqlDate b_ = context.Operators.Date(2023, 12, 31) /* CQL: 23:62-23:72 */;
-                CqlInterval<CqlDate> c_ = context.Operators.Interval(a_, b_, true, true);
+                CqlInterval<CqlDate> c_ = context.Operators.Interval(a_ /* CQL: 23:49-23:59 */, b_ /* CQL: 23:62-23:72 */, true, true);
                 object d_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", c_);
                 return d_;
             });
@@ -85,7 +85,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             context,
             () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient")) /* CQL: 25:1-25:15 */;
-                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_ /* CQL: 25:1-25:15 */);
                 return b_;
             });
 
@@ -105,7 +105,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                 IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
                 bool? c_(Condition C) {
-                    DataType e_ = C?.Onset;
+                    DataType e_ = C?.Onset /* CQL: 35:15-35:21 */;
                     object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
                     object g_ = this.Measurement_Period(context);
                     CqlDate h_ = ((CqlInterval<CqlDate>)g_)?.low;
@@ -134,12 +134,12 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                 IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context) /* CQL: 38:13-38:66 */;
 
                 object b_(Condition @this) {
-                    DataType e_ = @this?.Onset;
+                    DataType e_ = @this?.Onset /* CQL: 38:79-38:83 */;
                     object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
                     return f_ as CqlDateTime;
                 }
 
-                IEnumerable<Condition> c_ = context.Operators.SortBy<Condition>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
+                IEnumerable<Condition> c_ = context.Operators.SortBy<Condition>(a_ /* CQL: 38:13-38:66 */, b_, System.ComponentModel.ListSortDirection.Ascending);
                 Condition d_ = context.Operators.Last<Condition>(c_);
                 return d_;
             });
@@ -171,9 +171,9 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     ];
 
                     bool? l_(Condition C) {
-                        DataType q_ = C?.Onset;
+                        DataType q_ = C?.Onset /* CQL: 48:59-48:65 */;
                         object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
-                        DataType s_ = SD?.Occurrence;
+                        DataType s_ = SD?.Occurrence /* CQL: 48:108-48:120 */;
                         CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
                         CqlQuantity u_ = context.Operators.Quantity(7m, "days") /* CQL: 48:86-48:91 */;
                         CqlDateTime v_ = context.Operators.Subtract(t_, u_);
@@ -193,7 +193,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     return p_;
                 }
 
-                IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);
+                IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_ /* CQL: 46:5-46:20 */, b_);
                 return c_;
             });
 

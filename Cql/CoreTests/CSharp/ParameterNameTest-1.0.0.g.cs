@@ -22,7 +22,7 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
     public int? Test_Function(CqlContext context, [CqlFunctionParameter("param with spaces")] int? param_with_spaces, string normalParam)
     {
         int? a_ = context.Operators.Add(param_with_spaces /* CQL: 5:3-5:21 */, 10 /* CQL: 5:25-5:26 */) /* CQL: 5:3-5:26 */;
-        return a_;
+        return a_ /* CQL: 5:3-5:26 */;
     }
 
 
@@ -30,7 +30,7 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
     public decimal? Another_Test(CqlContext context, [CqlFunctionParameter("param-with-dashes")] decimal? param_with_dashes)
     {
         decimal? a_ = context.Operators.Multiply(param_with_dashes /* CQL: 9:3-9:21 */, 2.0m /* CQL: 9:25-9:27 */) /* CQL: 9:3-9:27 */;
-        return a_;
+        return a_ /* CQL: 9:3-9:27 */;
     }
 
 
@@ -38,7 +38,7 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
     public int? Keyword_Test(CqlContext context, int? @int, string @ref, bool? @class)
     {
         int? a_ = context.Operators.Add(@int /* CQL: 13:3-13:7 */, 5 /* CQL: 13:11 */) /* CQL: 13:3-13:11 */;
-        return a_;
+        return a_ /* CQL: 13:3-13:11 */;
     }
 
 

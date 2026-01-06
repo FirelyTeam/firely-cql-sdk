@@ -93,7 +93,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
             () => {
                 CqlDateTime a_ = context.Operators.DateTime(2013 /* CQL: 26:55-26:58 */, 1 /* CQL: 26:61 */, 1 /* CQL: 26:64 */, 0 /* CQL: 26:67 */, 0 /* CQL: 26:70 */, 0 /* CQL: 26:73 */, 0 /* CQL: 26:76 */, default) /* CQL: 26:46-26:77 */;
                 CqlDateTime b_ = context.Operators.DateTime(2014 /* CQL: 26:89-26:92 */, 1 /* CQL: 26:95 */, 1 /* CQL: 26:98 */, 0 /* CQL: 26:101 */, 0 /* CQL: 26:104 */, 0 /* CQL: 26:107 */, 0 /* CQL: 26:110 */, default) /* CQL: 26:80-26:111 */;
-                CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+                CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_ /* CQL: 26:46-26:77 */, b_ /* CQL: 26:80-26:111 */, true, false);
                 object d_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", c_);
                 return d_;
             });
@@ -111,7 +111,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
             context,
             () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient")) /* CQL: 28:1-28:15 */;
-                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_ /* CQL: 28:1-28:15 */);
                 return b_;
             });
 
@@ -124,7 +124,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
             context,
             () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient")) /* CQL: 30:25-30:35 */;
-                return a_;
+                return a_ /* CQL: 30:25-30:35 */;
             });
 
 
@@ -136,9 +136,9 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
             context,
             () => {
                 IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition")) /* CQL: 33:12-33:26 */;
-                bool? b_ = context.Operators.Exists<Condition>(a_);
+                bool? b_ = context.Operators.Exists<Condition>(a_ /* CQL: 33:12-33:26 */);
                 IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest")) /* CQL: 33:38-33:57 */;
-                bool? d_ = context.Operators.Exists<ServiceRequest>(c_);
+                bool? d_ = context.Operators.Exists<ServiceRequest>(c_ /* CQL: 33:38-33:57 */);
                 bool? e_ = context.Operators.Or(b_, d_);
                 return e_;
             });

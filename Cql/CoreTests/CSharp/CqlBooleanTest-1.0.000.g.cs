@@ -26,7 +26,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
             context,
             () => {
                 bool? a_ = context.Operators.Equal(1, 1) /* CQL: 3:35-3:39 */;
-                bool? b_ = context.Operators.Equal(a_, true);
+                bool? b_ = context.Operators.Equal(a_ /* CQL: 3:35-3:39 */, true);
                 return b_;
             });
 

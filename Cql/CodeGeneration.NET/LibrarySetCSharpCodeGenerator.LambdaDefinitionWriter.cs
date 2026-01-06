@@ -23,12 +23,13 @@ internal partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(ld);
 
             var parameters = ld.LambdaExpression.Parameters.Skip(1).ToList(); // CqlContext is always first parameter, which we ignore here
+            var locatorMetadata = LibraryWriter.LibrarySetWriter.LocatorMetadata;
             var visitedBody = Transform(
                 ld.LambdaExpression.Body,
-                new RedundantCastsTransformer(),
-                new SimplifyExpressionsVisitor(),
-                new RenameVariablesVisitor(new([], postfix: "_")),
-                new LocalVariableDeduper(TypeToCSharpConverter)
+                new RedundantCastsTransformer(locatorMetadata),
+                new SimplifyExpressionsVisitor(locatorMetadata),
+                new RenameVariablesVisitor(new([], postfix: "_"), locatorMetadata),
+                new LocalVariableDeduper(TypeToCSharpConverter, locatorMetadata)
             );
             var transformedLambda = Expression.Lambda(visitedBody, parameters);
             var returnType = TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType);

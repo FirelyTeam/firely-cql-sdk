@@ -6,21 +6,29 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler;
+
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
-    internal class RedundantCastsTransformer : ExpressionVisitor
+    internal class RedundantCastsTransformer : LocatorPreservingExpressionVisitor
     {
+        public RedundantCastsTransformer(ExpressionLocatorMetadata? locatorMetadata = null)
+            : base(locatorMetadata)
+        {
+        }
         protected override Expression VisitConditional(ConditionalExpression node)
         {
             var condition = Visit(node.Test);
 
             // if(true,A,B) => A /  if(false,A,B) => B
-            return condition switch
+            Expression result = condition switch
             {
                 ConstantExpression { Value: true } => Visit(node.IfTrue),
                 ConstantExpression { Value: false } => Visit(node.IfFalse),
                 _ => node.Update(condition, Visit(node.IfTrue), Visit(node.IfFalse))
             };
+
+            return CopyLocatorOnUpdate(node, result);
         }
 
         protected override Expression VisitUnary(UnaryExpression node)
@@ -35,9 +43,15 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 {
                     var reducedOperandOfNestedConversion = Visit(nested.Operand);
                     if (reducedOperandOfNestedConversion.Type == node.Type)
+                    {
+                        CopyLocator(node, reducedOperandOfNestedConversion);
                         return reducedOperandOfNestedConversion;
+                    }
                     else
-                        return conversion.Update(nested.Update(reducedOperandOfNestedConversion));
+                    {
+                        var updated = conversion.Update(nested.Update(reducedOperandOfNestedConversion));
+                        return CopyLocatorOnUpdate(node, updated);
+                    }
                 }
 
                 bool removeCast = conversion.Type.IsAssignableFrom(conversion.Operand.Type);
@@ -73,10 +87,12 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
                 if (removeCast)
                 {
+                    CopyLocator(node, reducedOperand);
                     return reducedOperand;
                 }
 
-                return conversion.Update(reducedOperand);
+                var updatedConversion = conversion.Update(reducedOperand);
+                return CopyLocatorOnUpdate(node, updatedConversion);
             }
 
             return base.VisitUnary(node);
@@ -93,7 +109,9 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                  && Nullable.GetUnderlyingType(conversion.Type) == conversion.Operand.Type
                 )
             {
-                return Visit(conversion.Operand);
+                var result = Visit(conversion.Operand);
+                CopyLocator(node, result);
+                return result;
             }
             else if (node is { NodeType: ExpressionType.Coalesce } coalesce)
             {
@@ -102,14 +120,21 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
                 // a (not null) ?? x => a
                 if (left is ConstantExpression ce && ce.Value is not null)
+                {
+                    CopyLocator(node, left);
                     return left;
+                }
 
                 var isNullableType = !left.Type.IsValueType || Nullable.GetUnderlyingType(left.Type) is not null;
 
                 if (left is DefaultExpression && isNullableType)
+                {
+                    CopyLocator(node, right);
                     return right;
+                }
 
-                return coalesce.Update(left, coalesce.Conversion, right);
+                var updated = coalesce.Update(left, coalesce.Conversion, right);
+                return CopyLocatorOnUpdate(node, updated);
             }
 
             return base.VisitBinary(node);

@@ -77,7 +77,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             FhirString k_ = a?.SubtitleElement /* CQL: 31:16-31:25 */;
             Code<PublicationStatus> l_ = a?.StatusElement /* CQL: 32:14-32:21 */;
             FhirBoolean m_ = a?.ExperimentalElement /* CQL: 33:20-33:33 */;
-            DataType n_ = a?.Subject;
+            DataType n_ = a?.Subject /* CQL: 34:15-34:23 */;
             FhirDateTime o_ = a?.DateElement /* CQL: 35:12-35:17 */;
             FhirString p_ = a?.PublisherElement /* CQL: 36:17-36:27 */;
             List<ContactDetail> q_ = a?.Contact;
@@ -103,10 +103,10 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             Code<RequestIntent> ak_ = a?.IntentElement /* CQL: 57:14-57:21 */;
             Code<RequestPriority> al_ = a?.PriorityElement /* CQL: 58:16-58:25 */;
             FhirBoolean am_ = a?.DoNotPerformElement /* CQL: 59:20-59:33 */;
-            DataType an_ = a?.Timing;
+            DataType an_ = a?.Timing /* CQL: 60:14-60:21 */;
             ResourceReference ao_ = a?.Location /* CQL: 61:16-61:25 */;
             List<ActivityDefinition.ParticipantComponent> ap_ = a?.Participant;
-            DataType aq_ = a?.Product;
+            DataType aq_ = a?.Product /* CQL: 63:15-63:23 */;
             Quantity ar_ = a?.Quantity /* CQL: 64:16-64:25 */;
             List<Dosage> as_ = a?.Dosage;
             List<CodeableConcept> at_ = a?.BodySite;
@@ -252,7 +252,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept l_ = a?.Code /* CQL: 108:12-108:17 */;
             ResourceReference m_ = a?.Patient /* CQL: 109:15-109:23 */;
             ResourceReference n_ = a?.Encounter /* CQL: 110:17-110:27 */;
-            DataType o_ = a?.Onset;
+            DataType o_ = a?.Onset /* CQL: 111:13-111:19 */;
             FhirDateTime p_ = a?.RecordedDateElement /* CQL: 112:20-112:33 */;
             ResourceReference q_ = a?.Recorder /* CQL: 113:16-113:25 */;
             ResourceReference r_ = a?.Asserter /* CQL: 114:16-114:25 */;
@@ -725,7 +725,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept k_ = a?.Code /* CQL: 318:12-318:17 */;
             ResourceReference l_ = a?.Subject /* CQL: 319:15-319:23 */;
             ResourceReference m_ = a?.Context /* CQL: 320:15-320:23 */;
-            DataType n_ = a?.Occurrence;
+            DataType n_ = a?.Occurrence /* CQL: 321:18-321:29 */;
             List<ChargeItem.PerformerComponent> o_ = a?.Performer;
             ResourceReference p_ = a?.PerformingOrganization /* CQL: 323:30-323:53 */;
             ResourceReference q_ = a?.RequestingOrganization /* CQL: 324:30-324:53 */;
@@ -739,7 +739,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             FhirDateTime y_ = a?.EnteredDateElement /* CQL: 332:19-332:31 */;
             List<CodeableConcept> z_ = a?.Reason;
             List<ResourceReference> aa_ = a?.Service;
-            DataType ab_ = a?.Product;
+            DataType ab_ = a?.Product /* CQL: 335:15-335:23 */;
             List<ResourceReference> ac_ = a?.Account;
             List<Annotation> ad_ = a?.Note;
             List<ResourceReference> ae_ = a?.SupportingInformation;
@@ -1014,7 +1014,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             FhirString j_ = a?.DescriptionElement /* CQL: 440:19-440:31 */;
             ResourceReference k_ = a?.Subject /* CQL: 441:15-441:23 */;
             ResourceReference l_ = a?.Encounter /* CQL: 442:17-442:27 */;
-            DataType m_ = a?.Effective;
+            DataType m_ = a?.Effective /* CQL: 443:17-443:27 */;
             FhirDateTime n_ = a?.DateElement /* CQL: 444:12-444:17 */;
             ResourceReference o_ = a?.Assessor /* CQL: 445:16-445:25 */;
             ResourceReference p_ = a?.Previous /* CQL: 446:16-446:25 */;
@@ -1224,7 +1224,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<ResourceReference> q_ = a?.About;
             ResourceReference r_ = a?.Encounter /* CQL: 532:17-532:27 */;
             List<CommunicationRequest.PayloadComponent> s_ = a?.Payload;
-            DataType t_ = a?.Occurrence;
+            DataType t_ = a?.Occurrence /* CQL: 534:18-534:29 */;
             FhirDateTime u_ = a?.AuthoredOnElement /* CQL: 535:18-535:29 */;
             ResourceReference v_ = a?.Requester /* CQL: 536:17-536:27 */;
             List<ResourceReference> w_ = a?.Recipient;
@@ -1341,8 +1341,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<CodeableConcept> r_ = a?.Jurisdiction;
             Markdown s_ = a?.PurposeElement /* CQL: 599:15-599:23 */;
             Markdown t_ = a?.CopyrightElement /* CQL: 600:17-600:27 */;
-            DataType u_ = a?.Source;
-            DataType v_ = a?.Target;
+            DataType u_ = a?.Source /* CQL: 601:14-601:21 */;
+            DataType v_ = a?.Target /* CQL: 602:14-602:21 */;
             List<ConceptMap.GroupComponent> w_ = a?.Group;
             ConceptMap x_ = new ConceptMap
             {
@@ -1392,8 +1392,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<CodeableConcept> l_ = a?.BodySite;
             ResourceReference m_ = a?.Subject /* CQL: 616:15-616:23 */;
             ResourceReference n_ = a?.Encounter /* CQL: 617:17-617:27 */;
-            DataType o_ = a?.Onset;
-            DataType p_ = a?.Abatement;
+            DataType o_ = a?.Onset /* CQL: 618:13-618:19 */;
+            DataType p_ = a?.Abatement /* CQL: 619:17-619:27 */;
             FhirDateTime q_ = a?.RecordedDateElement /* CQL: 620:20-620:33 */;
             ResourceReference r_ = a?.Recorder /* CQL: 621:16-621:25 */;
             ResourceReference s_ = a?.Asserter /* CQL: 622:16-622:25 */;
@@ -1446,7 +1446,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             FhirDateTime k_ = a?.DateTimeElement /* CQL: 636:16-636:25 */;
             List<ResourceReference> l_ = a?.Performer;
             List<ResourceReference> m_ = a?.Organization;
-            DataType n_ = a?.Source;
+            DataType n_ = a?.Source /* CQL: 639:14-639:21 */;
             List<Consent.PolicyComponent> o_ = a?.Policy;
             CodeableConcept p_ = a?.PolicyRule /* CQL: 641:18-641:29 */;
             List<Consent.VerificationComponent> q_ = a?.Verification;
@@ -1506,7 +1506,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<FhirString> x_ = a?.AliasElement;
             ResourceReference y_ = a?.Author /* CQL: 668:14-668:21 */;
             CodeableConcept z_ = a?.Scope /* CQL: 669:13-669:19 */;
-            DataType aa_ = a?.Topic;
+            DataType aa_ = a?.Topic /* CQL: 670:13-670:19 */;
             CodeableConcept ab_ = a?.Type /* CQL: 671:12-671:17 */;
             List<CodeableConcept> ac_ = a?.SubType;
             Contract.ContentDefinitionComponent ad_ = a?.ContentDefinition /* CQL: 673:25-673:43 */;
@@ -1517,7 +1517,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<Contract.FriendlyLanguageComponent> ai_ = a?.Friendly;
             List<Contract.LegalLanguageComponent> aj_ = a?.Legal;
             List<Contract.ComputableLanguageComponent> ak_ = a?.Rule;
-            DataType al_ = a?.LegallyBinding;
+            DataType al_ = a?.LegallyBinding /* CQL: 681:22-681:37 */;
             Contract am_ = new Contract
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -1634,7 +1634,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept h_ = a?.Priority /* CQL: 711:16-711:25 */;
             List<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>> i_ = a?.PurposeElement;
             ResourceReference j_ = a?.Patient /* CQL: 713:15-713:23 */;
-            DataType k_ = a?.Serviced;
+            DataType k_ = a?.Serviced /* CQL: 714:16-714:25 */;
             FhirDateTime l_ = a?.CreatedElement /* CQL: 715:15-715:23 */;
             ResourceReference m_ = a?.Enterer /* CQL: 716:15-716:23 */;
             ResourceReference n_ = a?.Provider /* CQL: 717:16-717:25 */;
@@ -1682,7 +1682,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             Code<FinancialResourceStatusCodes> g_ = a?.StatusElement /* CQL: 729:14-729:21 */;
             List<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>> h_ = a?.PurposeElement;
             ResourceReference i_ = a?.Patient /* CQL: 731:15-731:23 */;
-            DataType j_ = a?.Serviced;
+            DataType j_ = a?.Serviced /* CQL: 732:16-732:25 */;
             FhirDateTime k_ = a?.CreatedElement /* CQL: 733:15-733:23 */;
             ResourceReference l_ = a?.Requestor /* CQL: 734:17-734:27 */;
             ResourceReference m_ = a?.Request /* CQL: 735:15-735:23 */;
@@ -1734,7 +1734,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept h_ = a?.Code /* CQL: 750:12-750:17 */;
             Code<DetectedIssue.DetectedIssueSeverity> i_ = a?.SeverityElement /* CQL: 751:16-751:25 */;
             ResourceReference j_ = a?.Patient /* CQL: 752:15-752:23 */;
-            DataType k_ = a?.Identified;
+            DataType k_ = a?.Identified /* CQL: 753:18-753:29 */;
             ResourceReference l_ = a?.Author /* CQL: 754:14-754:21 */;
             List<ResourceReference> m_ = a?.Implicated;
             List<DetectedIssue.EvidenceComponent> n_ = a?.Evidence;
@@ -1849,7 +1849,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         DeviceDefinition b_(DeviceDefinition a) {
             List<Identifier> f_ = a?.Identifier;
             List<DeviceDefinition.UdiDeviceIdentifierComponent> g_ = a?.UdiDeviceIdentifier;
-            DataType h_ = a?.Manufacturer;
+            DataType h_ = a?.Manufacturer /* CQL: 798:20-798:33 */;
             List<DeviceDefinition.DeviceNameComponent> i_ = a?.DeviceName;
             FhirString j_ = a?.ModelNumberElement /* CQL: 800:19-800:31 */;
             CodeableConcept k_ = a?.Type /* CQL: 801:12-801:17 */;
@@ -1962,11 +1962,11 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             Code<RequestStatus> l_ = a?.StatusElement /* CQL: 844:14-844:21 */;
             Code<RequestIntent> m_ = a?.IntentElement /* CQL: 845:14-845:21 */;
             Code<RequestPriority> n_ = a?.PriorityElement /* CQL: 846:16-846:25 */;
-            DataType o_ = a?.Code;
+            DataType o_ = a?.Code /* CQL: 847:12-847:17 */;
             List<DeviceRequest.ParameterComponent> p_ = a?.Parameter;
             ResourceReference q_ = a?.Subject /* CQL: 849:15-849:23 */;
             ResourceReference r_ = a?.Encounter /* CQL: 850:17-850:27 */;
-            DataType s_ = a?.Occurrence;
+            DataType s_ = a?.Occurrence /* CQL: 851:18-851:29 */;
             FhirDateTime t_ = a?.AuthoredOnElement /* CQL: 852:18-852:29 */;
             ResourceReference u_ = a?.Requester /* CQL: 853:17-853:27 */;
             CodeableConcept v_ = a?.PerformerType /* CQL: 854:21-854:35 */;
@@ -2027,7 +2027,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             Code<DeviceUseStatement.DeviceUseStatementStatus> h_ = a?.StatusElement /* CQL: 869:14-869:21 */;
             ResourceReference i_ = a?.Subject /* CQL: 870:15-870:23 */;
             List<ResourceReference> j_ = a?.DerivedFrom;
-            DataType k_ = a?.Timing;
+            DataType k_ = a?.Timing /* CQL: 872:14-872:21 */;
             FhirDateTime l_ = a?.RecordedOnElement /* CQL: 873:18-873:29 */;
             ResourceReference m_ = a?.Source /* CQL: 874:14-874:21 */;
             ResourceReference n_ = a?.Device /* CQL: 875:14-875:21 */;
@@ -2076,7 +2076,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept j_ = a?.Code /* CQL: 889:12-889:17 */;
             ResourceReference k_ = a?.Subject /* CQL: 890:15-890:23 */;
             ResourceReference l_ = a?.Encounter /* CQL: 891:17-891:27 */;
-            DataType m_ = a?.Effective;
+            DataType m_ = a?.Effective /* CQL: 892:17-892:27 */;
             Instant n_ = a?.IssuedElement /* CQL: 893:14-893:21 */;
             List<ResourceReference> o_ = a?.Performer;
             List<ResourceReference> p_ = a?.ResultsInterpreter;
@@ -2546,7 +2546,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             FhirString k_ = a?.SubtitleElement /* CQL: 1075:16-1075:25 */;
             Code<PublicationStatus> l_ = a?.StatusElement /* CQL: 1076:14-1076:21 */;
             FhirBoolean m_ = a?.ExperimentalElement /* CQL: 1077:20-1077:33 */;
-            DataType n_ = a?.Subject;
+            DataType n_ = a?.Subject /* CQL: 1078:15-1078:23 */;
             FhirDateTime o_ = a?.DateElement /* CQL: 1079:12-1079:17 */;
             FhirString p_ = a?.PublisherElement /* CQL: 1080:17-1080:27 */;
             List<ContactDetail> q_ = a?.Contact;
@@ -2886,10 +2886,10 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             FhirString m_ = a?.NameElement /* CQL: 1245:12-1245:17 */;
             CodeableConcept n_ = a?.Relationship /* CQL: 1246:20-1246:33 */;
             CodeableConcept o_ = a?.Sex /* CQL: 1247:11-1247:15 */;
-            DataType p_ = a?.Born;
-            DataType q_ = a?.Age;
+            DataType p_ = a?.Born /* CQL: 1248:12-1248:17 */;
+            DataType q_ = a?.Age /* CQL: 1249:11-1249:15 */;
             FhirBoolean r_ = a?.EstimatedAgeElement /* CQL: 1250:20-1250:33 */;
-            DataType s_ = a?.Deceased;
+            DataType s_ = a?.Deceased /* CQL: 1251:16-1251:25 */;
             List<CodeableConcept> t_ = a?.ReasonCode;
             List<ResourceReference> u_ = a?.ReasonReference;
             List<Annotation> v_ = a?.Note;
@@ -2977,7 +2977,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept j_ = a?.Priority /* CQL: 1278:16-1278:25 */;
             CodeableConcept k_ = a?.Description /* CQL: 1279:19-1279:31 */;
             ResourceReference l_ = a?.Subject /* CQL: 1280:15-1280:23 */;
-            DataType m_ = a?.Start;
+            DataType m_ = a?.Start /* CQL: 1281:13-1281:19 */;
             List<Goal.TargetComponent> n_ = a?.Target;
             Date o_ = a?.StatusDateElement /* CQL: 1283:18-1283:29 */;
             FhirString p_ = a?.StatusReasonElement /* CQL: 1284:20-1284:33 */;
@@ -3068,7 +3068,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         GuidanceResponse b_(GuidanceResponse a) {
             Identifier f_ = a?.RequestIdentifier /* CQL: 1330:25-1330:43 */;
             List<Identifier> g_ = a?.Identifier;
-            DataType h_ = a?.Module;
+            DataType h_ = a?.Module /* CQL: 1332:14-1332:21 */;
             Code<GuidanceResponse.GuidanceResponseStatus> i_ = a?.StatusElement /* CQL: 1333:14-1333:21 */;
             ResourceReference j_ = a?.Subject /* CQL: 1334:15-1334:23 */;
             ResourceReference k_ = a?.Encounter /* CQL: 1335:17-1335:27 */;
@@ -3257,7 +3257,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept i_ = a?.VaccineCode /* CQL: 1407:19-1407:31 */;
             ResourceReference j_ = a?.Patient /* CQL: 1408:15-1408:23 */;
             ResourceReference k_ = a?.Encounter /* CQL: 1409:17-1409:27 */;
-            DataType l_ = a?.Occurrence;
+            DataType l_ = a?.Occurrence /* CQL: 1410:18-1410:29 */;
             FhirDateTime m_ = a?.RecordedElement /* CQL: 1411:16-1411:25 */;
             FhirBoolean n_ = a?.PrimarySourceElement /* CQL: 1412:21-1412:35 */;
             CodeableConcept o_ = a?.ReportOrigin /* CQL: 1413:20-1413:33 */;
@@ -3339,8 +3339,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<CodeableConcept> n_ = a?.DoseStatusReason;
             FhirString o_ = a?.DescriptionElement /* CQL: 1446:19-1446:31 */;
             FhirString p_ = a?.SeriesElement /* CQL: 1447:14-1447:21 */;
-            DataType q_ = a?.DoseNumber;
-            DataType r_ = a?.SeriesDoses;
+            DataType q_ = a?.DoseNumber /* CQL: 1448:18-1448:29 */;
+            DataType r_ = a?.SeriesDoses /* CQL: 1449:19-1449:31 */;
             ImmunizationEvaluation s_ = new ImmunizationEvaluation
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -3517,7 +3517,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             Code<PublicationStatus> l_ = a?.StatusElement /* CQL: 1536:14-1536:21 */;
             FhirBoolean m_ = a?.ExperimentalElement /* CQL: 1537:20-1537:33 */;
             CodeableConcept n_ = a?.Type /* CQL: 1538:12-1538:17 */;
-            DataType o_ = a?.Subject;
+            DataType o_ = a?.Subject /* CQL: 1539:15-1539:23 */;
             FhirDateTime p_ = a?.DateElement /* CQL: 1540:12-1540:17 */;
             FhirString q_ = a?.PublisherElement /* CQL: 1541:17-1541:27 */;
             List<ContactDetail> r_ = a?.Contact;
@@ -3681,7 +3681,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             FhirString k_ = a?.SubtitleElement /* CQL: 1619:16-1619:25 */;
             Code<PublicationStatus> l_ = a?.StatusElement /* CQL: 1620:14-1620:21 */;
             FhirBoolean m_ = a?.ExperimentalElement /* CQL: 1621:20-1621:33 */;
-            DataType n_ = a?.Subject;
+            DataType n_ = a?.Subject /* CQL: 1622:15-1622:23 */;
             FhirDateTime o_ = a?.DateElement /* CQL: 1623:12-1623:17 */;
             FhirString p_ = a?.PublisherElement /* CQL: 1624:17-1624:27 */;
             List<ContactDetail> q_ = a?.Contact;
@@ -3862,11 +3862,11 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             Code<MedicationAdministration.MedicationAdministrationStatusCodes> i_ = a?.StatusElement /* CQL: 1719:14-1719:21 */;
             List<CodeableConcept> j_ = a?.StatusReason;
             CodeableConcept k_ = a?.Category /* CQL: 1721:16-1721:25 */;
-            DataType l_ = a?.Medication;
+            DataType l_ = a?.Medication /* CQL: 1722:18-1722:29 */;
             ResourceReference m_ = a?.Subject /* CQL: 1723:15-1723:23 */;
             ResourceReference n_ = a?.Context /* CQL: 1724:15-1724:23 */;
             List<ResourceReference> o_ = a?.SupportingInformation;
-            DataType p_ = a?.Effective;
+            DataType p_ = a?.Effective /* CQL: 1726:17-1726:27 */;
             List<MedicationAdministration.PerformerComponent> q_ = a?.Performer;
             List<CodeableConcept> r_ = a?.ReasonCode;
             List<ResourceReference> s_ = a?.ReasonReference;
@@ -3918,9 +3918,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<Identifier> f_ = a?.Identifier;
             List<ResourceReference> g_ = a?.PartOf;
             Code<MedicationDispense.MedicationDispenseStatusCodes> h_ = a?.StatusElement /* CQL: 1742:14-1742:21 */;
-            DataType i_ = a?.StatusReason;
+            DataType i_ = a?.StatusReason /* CQL: 1743:20-1743:33 */;
             CodeableConcept j_ = a?.Category /* CQL: 1744:16-1744:25 */;
-            DataType k_ = a?.Medication;
+            DataType k_ = a?.Medication /* CQL: 1745:18-1745:29 */;
             ResourceReference l_ = a?.Subject /* CQL: 1746:15-1746:23 */;
             ResourceReference m_ = a?.Context /* CQL: 1747:15-1747:23 */;
             List<ResourceReference> n_ = a?.SupportingInformation;
@@ -4056,8 +4056,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<CodeableConcept> j_ = a?.Category;
             Code<RequestPriority> k_ = a?.PriorityElement /* CQL: 1801:16-1801:25 */;
             FhirBoolean l_ = a?.DoNotPerformElement /* CQL: 1802:20-1802:33 */;
-            DataType m_ = a?.Reported;
-            DataType n_ = a?.Medication;
+            DataType m_ = a?.Reported /* CQL: 1803:16-1803:25 */;
+            DataType n_ = a?.Medication /* CQL: 1804:18-1804:29 */;
             ResourceReference o_ = a?.Subject /* CQL: 1805:15-1805:23 */;
             ResourceReference p_ = a?.Encounter /* CQL: 1806:17-1806:27 */;
             List<ResourceReference> q_ = a?.SupportingInformation;
@@ -4140,10 +4140,10 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             Code<MedicationStatement.MedicationStatusCodes> i_ = a?.StatusElement /* CQL: 1836:14-1836:21 */;
             List<CodeableConcept> j_ = a?.StatusReason;
             CodeableConcept k_ = a?.Category /* CQL: 1838:16-1838:25 */;
-            DataType l_ = a?.Medication;
+            DataType l_ = a?.Medication /* CQL: 1839:18-1839:29 */;
             ResourceReference m_ = a?.Subject /* CQL: 1840:15-1840:23 */;
             ResourceReference n_ = a?.Context /* CQL: 1841:15-1841:23 */;
-            DataType o_ = a?.Effective;
+            DataType o_ = a?.Effective /* CQL: 1842:17-1842:27 */;
             FhirDateTime p_ = a?.DateAssertedElement /* CQL: 1843:20-1843:33 */;
             ResourceReference q_ = a?.InformationSource /* CQL: 1844:25-1844:43 */;
             List<ResourceReference> r_ = a?.DerivedFrom;
@@ -4546,7 +4546,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         ];
 
         MessageHeader b_(MessageHeader a) {
-            DataType f_ = a?.Event;
+            DataType f_ = a?.Event /* CQL: 2027:13-2027:19 */;
             List<MessageHeader.MessageDestinationComponent> g_ = a?.Destination;
             ResourceReference h_ = a?.Sender /* CQL: 2029:14-2029:21 */;
             ResourceReference i_ = a?.Enterer /* CQL: 2030:15-2030:23 */;
@@ -4753,10 +4753,10 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             ResourceReference l_ = a?.Subject /* CQL: 2110:15-2110:23 */;
             List<ResourceReference> m_ = a?.Focus;
             ResourceReference n_ = a?.Encounter /* CQL: 2112:17-2112:27 */;
-            DataType o_ = a?.Effective;
+            DataType o_ = a?.Effective /* CQL: 2113:17-2113:27 */;
             Instant p_ = a?.IssuedElement /* CQL: 2114:14-2114:21 */;
             List<ResourceReference> q_ = a?.Performer;
-            DataType r_ = a?.Value;
+            DataType r_ = a?.Value /* CQL: 2116:13-2116:19 */;
             CodeableConcept s_ = a?.DataAbsentReason /* CQL: 2117:24-2117:41 */;
             List<CodeableConcept> t_ = a?.Interpretation;
             List<Annotation> u_ = a?.Note;
@@ -4975,10 +4975,10 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<ContactPoint> i_ = a?.Telecom;
             Code<AdministrativeGender> j_ = a?.GenderElement /* CQL: 2224:14-2224:21 */;
             Date k_ = a?.BirthDateElement /* CQL: 2225:17-2225:27 */;
-            DataType l_ = a?.Deceased;
+            DataType l_ = a?.Deceased /* CQL: 2226:16-2226:25 */;
             List<Address> m_ = a?.Address;
             CodeableConcept n_ = a?.MaritalStatus /* CQL: 2228:21-2228:35 */;
-            DataType o_ = a?.MultipleBirth;
+            DataType o_ = a?.MultipleBirth /* CQL: 2229:21-2229:35 */;
             List<Attachment> p_ = a?.Photo;
             List<Patient.ContactComponent> q_ = a?.Contact;
             List<Patient.CommunicationComponent> r_ = a?.Communication;
@@ -5168,7 +5168,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept l_ = a?.Type /* CQL: 2299:12-2299:17 */;
             Code<PublicationStatus> m_ = a?.StatusElement /* CQL: 2300:14-2300:21 */;
             FhirBoolean n_ = a?.ExperimentalElement /* CQL: 2301:20-2301:33 */;
-            DataType o_ = a?.Subject;
+            DataType o_ = a?.Subject /* CQL: 2302:15-2302:23 */;
             FhirDateTime p_ = a?.DateElement /* CQL: 2303:12-2303:17 */;
             FhirString q_ = a?.PublisherElement /* CQL: 2304:17-2304:27 */;
             List<ContactDetail> r_ = a?.Contact;
@@ -5343,7 +5343,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept n_ = a?.Code /* CQL: 2371:12-2371:17 */;
             ResourceReference o_ = a?.Subject /* CQL: 2372:15-2372:23 */;
             ResourceReference p_ = a?.Encounter /* CQL: 2373:17-2373:27 */;
-            DataType q_ = a?.Performed;
+            DataType q_ = a?.Performed /* CQL: 2374:17-2374:27 */;
             ResourceReference r_ = a?.Recorder /* CQL: 2375:16-2375:25 */;
             ResourceReference s_ = a?.Asserter /* CQL: 2376:16-2376:25 */;
             List<Procedure.PerformerComponent> t_ = a?.Performer;
@@ -5410,7 +5410,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 
         Provenance b_(Provenance a) {
             List<ResourceReference> f_ = a?.Target;
-            DataType g_ = a?.Occurred;
+            DataType g_ = a?.Occurred /* CQL: 2397:16-2397:25 */;
             Instant h_ = a?.RecordedElement /* CQL: 2398:16-2398:25 */;
             List<FhirUri> i_ = a?.PolicyElement;
             ResourceReference j_ = a?.Location /* CQL: 2400:16-2400:25 */;
@@ -5604,7 +5604,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             FhirString l_ = a?.SubtitleElement /* CQL: 2500:16-2500:25 */;
             Code<PublicationStatus> m_ = a?.StatusElement /* CQL: 2501:14-2501:21 */;
             FhirBoolean n_ = a?.ExperimentalElement /* CQL: 2502:20-2502:33 */;
-            DataType o_ = a?.Subject;
+            DataType o_ = a?.Subject /* CQL: 2503:15-2503:23 */;
             FhirDateTime p_ = a?.DateElement /* CQL: 2504:12-2504:17 */;
             FhirString q_ = a?.PublisherElement /* CQL: 2505:17-2505:27 */;
             List<ContactDetail> r_ = a?.Contact;
@@ -5693,7 +5693,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             FhirString l_ = a?.SubtitleElement /* CQL: 2539:16-2539:25 */;
             Code<PublicationStatus> m_ = a?.StatusElement /* CQL: 2540:14-2540:21 */;
             FhirBoolean n_ = a?.ExperimentalElement /* CQL: 2541:20-2541:33 */;
-            DataType o_ = a?.Subject;
+            DataType o_ = a?.Subject /* CQL: 2542:15-2542:23 */;
             FhirDateTime p_ = a?.DateElement /* CQL: 2543:12-2543:17 */;
             FhirString q_ = a?.PublisherElement /* CQL: 2544:17-2544:27 */;
             List<ContactDetail> r_ = a?.Contact;
@@ -5885,7 +5885,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept k_ = a?.Code /* CQL: 2618:12-2618:17 */;
             ResourceReference l_ = a?.Subject /* CQL: 2619:15-2619:23 */;
             ResourceReference m_ = a?.Encounter /* CQL: 2620:17-2620:27 */;
-            DataType n_ = a?.Occurrence;
+            DataType n_ = a?.Occurrence /* CQL: 2621:18-2621:29 */;
             ResourceReference o_ = a?.Condition /* CQL: 2622:17-2622:27 */;
             ResourceReference p_ = a?.Performer /* CQL: 2623:17-2623:27 */;
             List<CodeableConcept> q_ = a?.ReasonCode;
@@ -6065,11 +6065,11 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             FhirBoolean p_ = a?.DoNotPerformElement /* CQL: 2725:20-2725:33 */;
             CodeableConcept q_ = a?.Code /* CQL: 2726:12-2726:17 */;
             List<CodeableConcept> r_ = a?.OrderDetail;
-            DataType s_ = a?.Quantity;
+            DataType s_ = a?.Quantity /* CQL: 2728:16-2728:25 */;
             ResourceReference t_ = a?.Subject /* CQL: 2729:15-2729:23 */;
             ResourceReference u_ = a?.Encounter /* CQL: 2730:17-2730:27 */;
-            DataType v_ = a?.Occurrence;
-            DataType w_ = a?.AsNeeded;
+            DataType v_ = a?.Occurrence /* CQL: 2731:18-2731:29 */;
+            DataType w_ = a?.AsNeeded /* CQL: 2732:16-2732:25 */;
             FhirDateTime x_ = a?.AuthoredOnElement /* CQL: 2733:18-2733:29 */;
             ResourceReference y_ = a?.Requester /* CQL: 2734:17-2734:27 */;
             CodeableConcept z_ = a?.PerformerType /* CQL: 2735:21-2735:35 */;
@@ -6701,7 +6701,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             ResourceReference j_ = a?.Patient /* CQL: 2963:15-2963:23 */;
             CodeableConcept k_ = a?.Type /* CQL: 2964:12-2964:17 */;
             SupplyDelivery.SuppliedItemComponent l_ = a?.SuppliedItem /* CQL: 2965:20-2965:33 */;
-            DataType m_ = a?.Occurrence;
+            DataType m_ = a?.Occurrence /* CQL: 2966:18-2966:29 */;
             ResourceReference n_ = a?.Supplier /* CQL: 2967:16-2967:25 */;
             ResourceReference o_ = a?.Destination /* CQL: 2968:19-2968:31 */;
             List<ResourceReference> p_ = a?.Receiver;
@@ -6741,10 +6741,10 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             Code<SupplyRequest.SupplyRequestStatus> g_ = a?.StatusElement /* CQL: 2976:14-2976:21 */;
             CodeableConcept h_ = a?.Category /* CQL: 2977:16-2977:25 */;
             Code<RequestPriority> i_ = a?.PriorityElement /* CQL: 2978:16-2978:25 */;
-            DataType j_ = a?.Item;
+            DataType j_ = a?.Item /* CQL: 2979:12-2979:17 */;
             Quantity k_ = a?.Quantity /* CQL: 2980:16-2980:25 */;
             List<SupplyRequest.ParameterComponent> l_ = a?.Parameter;
-            DataType m_ = a?.Occurrence;
+            DataType m_ = a?.Occurrence /* CQL: 2982:18-2982:29 */;
             FhirDateTime n_ = a?.AuthoredOnElement /* CQL: 2983:18-2983:29 */;
             ResourceReference o_ = a?.Requester /* CQL: 2984:17-2984:27 */;
             List<ResourceReference> p_ = a?.Supplier;

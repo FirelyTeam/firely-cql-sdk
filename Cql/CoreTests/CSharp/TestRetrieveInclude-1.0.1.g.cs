@@ -54,7 +54,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
             context,
             () => {
                 IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation")) /* CQL: 12:25-12:39 */;
-                return a_;
+                return a_ /* CQL: 12:25-12:39 */;
             });
 
 

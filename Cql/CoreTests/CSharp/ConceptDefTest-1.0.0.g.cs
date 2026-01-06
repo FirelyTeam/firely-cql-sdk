@@ -79,7 +79,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
             context,
             () => {
                 IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient")) /* CQL: 32:1-32:15 */;
-                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_ /* CQL: 32:1-32:15 */);
                 return b_;
             });
 

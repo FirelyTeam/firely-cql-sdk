@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
@@ -22,10 +23,15 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
     ///     return a;
     /// </code>
     /// </summary>
-    internal class SimplifyExpressionsVisitor : ExpressionVisitor
+    internal class SimplifyExpressionsVisitor : LocatorPreservingExpressionVisitor
     {
         private readonly List<BinaryExpression> _assignments = [];
         private bool _atRoot = true;
+
+        public SimplifyExpressionsVisitor(ExpressionLocatorMetadata? locatorMetadata = null)
+            : base(locatorMetadata)
+        {
+        }
 
         public IReadOnlyCollection<BinaryExpression> Assignments => _assignments;
 
@@ -90,6 +96,10 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             var newLetVariable = Expression.Parameter(node.Type);
             var newAssign = Expression.Assign(newLetVariable, node);
             _assignments.Add(newAssign);
+
+            // Copy locator from the original expression to the assignment and the parameter
+            CopyLocator(node, newAssign);
+            CopyLocator(node, newLetVariable);
 
             return newLetVariable;
         }

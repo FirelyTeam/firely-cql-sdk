@@ -6,20 +6,23 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler;
+
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     /// <summary>
     /// This visitor finds the blocks in the expression tree which have variables
     /// with no names, and assigns them new names using a NameGenerator.
     /// </summary>
-    internal class RenameVariablesVisitor : ExpressionVisitor
+    internal class RenameVariablesVisitor : LocatorPreservingExpressionVisitor
     {
         private readonly VariableNameGenerator initialNameGenerator;
         private bool useInitialGenerator = true;
 
         private readonly Stack<Dictionary<ParameterExpression, ParameterExpression>> _replacementStack = new();
 
-        public RenameVariablesVisitor(VariableNameGenerator nameGenerator)
+        public RenameVariablesVisitor(VariableNameGenerator nameGenerator, ExpressionLocatorMetadata? locatorMetadata = null)
+            : base(locatorMetadata)
         {
             this.initialNameGenerator = nameGenerator;
         }
@@ -38,6 +41,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             {
                 var newName = localNameGenerator.Next();
                 var newParameter = Expression.Parameter(parameterToName.Type, newName);
+                // Copy locator from old parameter to new parameter
+                CopyLocator(parameterToName, newParameter);
                 replacementDictionary.Add(parameterToName, newParameter);
             }
 
