@@ -63,8 +63,9 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
 - `--pdb <directory>` - PDB output directory for portable debug symbol files "*.pdb"
 - `--fhir <directory>` - FHIR Resource output directory for Library and Measure files in JSON format
 
-**Code Generation Options:**
-- `--cs-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries")
+**C# Code Generation Options:**
+- `--cs-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries"). 
+  If ommitted, C# types will be generated without a namespace.
 
 **FHIR-specific Options:**
 - `--cql <directory>` - CQL input directory (REQUIRED with --fhir)
@@ -94,8 +95,9 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 - `--pdb <directory>` - PDB output directory for portable debug symbol files "*.pdb"
 - `--fhir <directory>` - FHIR Resource output directory for Library and Measure files in JSON format
 
-**Code Generation Options:**
-- `--cs-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries")
+**C# Code Generation Options:**
+- `--cs-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries"). 
+  If ommitted, C# types will be generated without a namespace.
 
 **FHIR-specific Options:**
 - `--canonical-root-url <url>` - The root canonical URL output in FHIR library
