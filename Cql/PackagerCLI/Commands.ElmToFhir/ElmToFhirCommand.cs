@@ -23,7 +23,7 @@ internal record ElmToFhirCommand
     DirectoryInfo? Fhir,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
-    string? CsNamespace,
+    string? CSharpNamespace,
     bool? JsonPretty,
     bool? ExitOnError,
     DebugSymbolsFormat? DebugSymbols)
@@ -132,7 +132,7 @@ internal record ElmToFhirCommand
         (Pdb, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
-        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
+        (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),

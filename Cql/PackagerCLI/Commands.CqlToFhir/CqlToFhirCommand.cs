@@ -23,7 +23,7 @@ public record CqlToFhirCommand
     DirectoryInfo? Fhir,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
-    string? CsNamespace,
+    string? CSharpNamespace,
     bool? JsonPretty,
     bool? ExitOnError,
     DebugSymbolsFormat? DebugSymbols)
@@ -130,7 +130,7 @@ public record CqlToFhirCommand
         (Pdb, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.PdbOutDir)]),
         (Fhir, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FhirOutDir)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
-        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
+        (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
