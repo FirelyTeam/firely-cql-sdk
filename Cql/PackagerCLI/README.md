@@ -64,7 +64,7 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
 - `--fhir <directory>` - FHIR Resource output directory for Library and Measure files in JSON format
 
 **Code Generation Options:**
-- `--csharp-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries")
+- `--cs-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries")
 
 **FHIR-specific Options:**
 - `--cql <directory>` - CQL input directory (REQUIRED with --fhir)
