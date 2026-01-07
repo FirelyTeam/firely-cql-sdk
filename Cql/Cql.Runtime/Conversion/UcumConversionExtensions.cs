@@ -33,7 +33,7 @@ namespace Hl7.Cql.Conversion
         /// <returns><c>true</c> when the conversion succeeded. Or <c>false</c> otherwise.</returns>
         public static bool TryCanonicalize(this CqlQuantity quantity, out CqlQuantity? canonicalizedQuantity)
         {
-            if (quantity.value is null || quantity.unit is null)
+            if (quantity is not { value: { } quantityValue, unit: { } quantityUnit })
             {
                 canonicalizedQuantity = null;
                 return false;
@@ -41,7 +41,7 @@ namespace Hl7.Cql.Conversion
 
             try
             {
-                M.Quantity metricsQuantity = quantity.value.Value.toUnitsOfMeasureQuantity(quantity.unit);
+                M.Quantity metricsQuantity = quantityValue.toUnitsOfMeasureQuantity(quantityUnit);
                 metricsQuantity = SYSTEM.Canonical(metricsQuantity);
                 canonicalizedQuantity = new(metricsQuantity.Value.ToDecimal(), metricsQuantity.Metric.ToString());
                 return true;
@@ -59,33 +59,32 @@ namespace Hl7.Cql.Conversion
         /// <remarks>
         /// This method implements special handling for FHIR calendar duration units, following the FHIRPath specification
         /// (https://hl7.org/fhirpath/N1/#time-valued-quantities and https://fhir.hl7.org/fhir/fhirpath.html#quantity).
-        /// 
+        ///
         /// When converting between CQL calendar duration units (year, month, week, day, hour, minute, second, millisecond)
         /// and their UCUM equivalents (a, mo, wk, d, h, min, s, ms), the conversion is performed as a 1-to-1 mapping
         /// without using the Fhir.Metrics SYSTEM conversion. This aligns with FHIR's simplification that these units
         /// are treated as equivalent for conversion purposes, even though semantically "1 a != 1 year" but "1 a ~ 1 year" in CQL.
-        /// 
+        ///
         /// For all other unit conversions, the standard UCUM conversion logic is applied.
         /// </remarks>
         /// <returns>false if the conversion was not possible, true otherwise.</returns>
         /// <exception cref="ArgumentException"></exception>
         public static bool TryConvert(this CqlQuantity quantity, string unit, out CqlQuantity? convertedQuantity)
         {
-            if (quantity.value is null) throw new ArgumentException("Quantity should have a value for UCUM conversion.", nameof(quantity));
-            if (quantity.unit is null) throw new ArgumentException("Quantity should have a unit for UCUM conversion.", nameof(quantity));
+            if (quantity.value is not {} quantityValue) throw new ArgumentException("Quantity should have a value for UCUM conversion.", nameof(quantity));
+            if (quantity.unit is not {} quantityUnit) throw new ArgumentException("Quantity should have a unit for UCUM conversion.", nameof(quantity));
 
             // Special handling for FHIR calendar duration units - perform 1-to-1 mapping
             // This follows FHIRPath's simplification for time-valued quantities
-            var mappedUnit = TryGetCalendarDurationMapping(quantity.unit, unit);
-            if (mappedUnit != null)
+            if (HasAssumedSameCalendarUnits(quantityUnit, unit))
             {
-                convertedQuantity = new(quantity.value.Value, mappedUnit);
+                convertedQuantity = new(quantityValue, unit);
                 return true;
             }
 
             try
             {
-                M.Quantity metricsQuantity = quantity.value.Value.toUnitsOfMeasureQuantity(quantity.unit);
+                M.Quantity metricsQuantity = quantityValue.toUnitsOfMeasureQuantity(quantityUnit);
                 metricsQuantity = SYSTEM.Convert(metricsQuantity, unit);
                 convertedQuantity = new(metricsQuantity.Value.ToDecimal(), metricsQuantity.Metric.ToString());
                 return true;
@@ -106,43 +105,42 @@ namespace Hl7.Cql.Conversion
         /// </summary>
         private static Dictionary<string, string> InitializeCalendarDurationMapping()
         {
-            var mapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var mapping = new Dictionary<string, string>(StringComparer.Ordinal);
 
             // Local method to add bidirectional mapping
-            void AddBidirectionalMapping(string cqlUnit, string ucumUnit)
-            {
-                mapping[cqlUnit] = ucumUnit;
-                mapping[ucumUnit] = cqlUnit;
-            }
+            void AddMapping(string cqlUnit, string ucumUnit) => mapping[cqlUnit] = ucumUnit;
 
             // Add all calendar duration unit mappings
             // Based on https://hl7.org/fhirpath/N1/#time-valued-quantities
-            AddBidirectionalMapping("year", "a");
-            AddBidirectionalMapping("month", "mo");
-            AddBidirectionalMapping("week", "wk");
-            AddBidirectionalMapping("day", "d");
-            AddBidirectionalMapping("hour", "h");
-            AddBidirectionalMapping("minute", "min");
-            AddBidirectionalMapping("second", "s");
-            AddBidirectionalMapping("millisecond", "ms");
+            AddMapping("year", "a");
+            AddMapping("month", "mo");
+            AddMapping("week", "wk");
+            AddMapping("day", "d");
+            AddMapping("hour", "h");
+            AddMapping("minute", "min");
+            AddMapping("second", "s");
+            AddMapping("millisecond", "ms");
 
             return mapping;
         }
 
         /// <summary>
-        /// Checks if the conversion is between CQL calendar duration units and their UCUM equivalents,
-        /// and returns the target unit if it's a valid 1-to-1 mapping, otherwise returns null.
+        /// Determines whether the specified CQL calendar unit and UCUM unit are assumed to represent the same calendar
+        /// duration.
         /// </summary>
-        private static string? TryGetCalendarDurationMapping(string fromUnit, string toUnit)
+        /// <remarks>This method checks for a known mapping between CQL calendar units and UCUM units,
+        /// using a case-insensitive comparison. Use this method to verify compatibility when converting or comparing
+        /// calendar-based durations between CQL and UCUM representations.</remarks>
+        /// <param name="fromCqlUnit">The calendar unit as defined in CQL to compare. Cannot be null.</param>
+        /// <param name="toUcumUnit">The UCUM unit to compare against the CQL calendar unit. Cannot be null.</param>
+        /// <returns>true if the CQL calendar unit and UCUM unit are assumed to represent the same calendar duration; otherwise,
+        /// false.</returns>
+        private static bool HasAssumedSameCalendarUnits(string fromCqlUnit, string toUcumUnit)
         {
-            // Check if this is a valid calendar duration mapping
-            if (CalendarDurationMapping.TryGetValue(fromUnit, out var expectedToUnit) &&
-                string.Equals(expectedToUnit, toUnit, StringComparison.OrdinalIgnoreCase))
-            {
-                return toUnit;
-            }
-
-            return null;
+            var isCalendarUnitsAssumedSame =
+                CalendarDurationMapping.TryGetValue(fromCqlUnit, out var expectedToUnit)
+                && string.Equals(expectedToUnit, toUcumUnit, StringComparison.OrdinalIgnoreCase);
+            return isCalendarUnitsAssumedSame;
         }
 
         private static M.Quantity toUnitsOfMeasureQuantity(this decimal value, string unit)
