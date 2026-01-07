@@ -123,6 +123,8 @@ namespace Hl7.Cql.Fhir
 
             Types["{http://hl7.org/fhir}SimpleQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
             Types["{http://hl7.org/fhir}MoneyQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
+
+            Types["{http://hl7.org/fhir}Id"] = typeof(Hl7.Fhir.Model.FhirString);
         }
 
         private void AddTypesFromInspector()
