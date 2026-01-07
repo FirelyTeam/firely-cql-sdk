@@ -16,6 +16,10 @@
       "commandName": "Project",
       "commandLineArgs": "221"
     },
+    "222 Load ELM from dir with C# namespace, Save C# to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "222"
+    },
     "230 Package CQL\u002BELM\u002BC#\u002BDLL from dirs, Save FHIR Resources to dir": {
       "commandName": "Project",
       "commandLineArgs": "230"

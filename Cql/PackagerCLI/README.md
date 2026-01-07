@@ -63,6 +63,10 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
 - `--pdb <directory>` - PDB output directory for portable debug symbol files "*.pdb"
 - `--fhir <directory>` - FHIR Resource output directory for Library and Measure files in JSON format
 
+**C# Code Generation Options:**
+- `--cs-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries"). 
+  If ommitted, C# types will be generated without a namespace.
+
 **FHIR-specific Options:**
 - `--cql <directory>` - CQL input directory (REQUIRED with --fhir)
 - `--canonical-root-url <url>` - The root canonical URL output in FHIR library
@@ -90,6 +94,10 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 - `--dll <directory>` - DLL output directory for .NET assembly libraries "*.dll"
 - `--pdb <directory>` - PDB output directory for portable debug symbol files "*.pdb"
 - `--fhir <directory>` - FHIR Resource output directory for Library and Measure files in JSON format
+
+**C# Code Generation Options:**
+- `--cs-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries"). 
+  If ommitted, C# types will be generated without a namespace.
 
 **FHIR-specific Options:**
 - `--canonical-root-url <url>` - The root canonical URL output in FHIR library
@@ -174,6 +182,16 @@ cql-package elm --elm input/elm --fhir output/fhir --canonical-root-url https://
 - Packages ELM into FHIR Library resources with a custom canonical root URL.
 - Overrides the date timestamp in the generated FHIR resources.
 - Outputs pretty-printed JSON.
+
+6. Generate C# code with a custom namespace:
+
+```shell
+cql-package elm --elm input/elm --cs output/csharp --cs-namespace MyCompany.MyCqlLibraries
+```
+
+- Generates C# source code from ELM files.
+- All generated C# classes will be in the `MyCompany.MyCqlLibraries` namespace.
+- This is useful for organizing generated code in larger projects or avoiding naming conflicts.
 
 ## Further Reading
 
