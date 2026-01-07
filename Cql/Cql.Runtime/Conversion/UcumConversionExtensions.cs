@@ -20,6 +20,12 @@ namespace Hl7.Cql.Conversion
         private static readonly M.SystemOfUnits SYSTEM = _system.Value;
 
         /// <summary>
+        /// Bidirectional mapping between CQL calendar duration units and their UCUM equivalents.
+        /// See https://github.com/FirelyTeam/firely-cql-sdk/issues/1084#issuecomment-3718899170
+        /// </summary>
+        private static readonly Dictionary<string, string> CalendarDurationMapping = InitializeCalendarDurationMapping();
+
+        /// <summary>
         /// Try to canonicalize the system type quantity to Umum base quantity. So a 1,000 cm will be 10 m. Or an inch will be converted to a meter.
         /// </summary>
         /// <param name="quantity">A system type Quantity of system Ucum</param>
@@ -93,35 +99,44 @@ namespace Hl7.Cql.Conversion
         }
 
         /// <summary>
+        /// Initializes the bidirectional mapping between CQL calendar duration units and UCUM units.
+        /// This implements the FHIR simplification where calendar duration units are treated as equivalent
+        /// for conversion purposes. See https://github.com/FirelyTeam/firely-cql-sdk/issues/1084#issuecomment-3718899170
+        /// for the specification of which units should be mapped.
+        /// </summary>
+        private static Dictionary<string, string> InitializeCalendarDurationMapping()
+        {
+            var mapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+            // Local method to add bidirectional mapping
+            void AddBidirectionalMapping(string cqlUnit, string ucumUnit)
+            {
+                mapping[cqlUnit] = ucumUnit;
+                mapping[ucumUnit] = cqlUnit;
+            }
+
+            // Add all calendar duration unit mappings
+            // Based on https://hl7.org/fhirpath/N1/#time-valued-quantities
+            AddBidirectionalMapping("year", "a");
+            AddBidirectionalMapping("month", "mo");
+            AddBidirectionalMapping("week", "wk");
+            AddBidirectionalMapping("day", "d");
+            AddBidirectionalMapping("hour", "h");
+            AddBidirectionalMapping("minute", "min");
+            AddBidirectionalMapping("second", "s");
+            AddBidirectionalMapping("millisecond", "ms");
+
+            return mapping;
+        }
+
+        /// <summary>
         /// Checks if the conversion is between CQL calendar duration units and their UCUM equivalents,
         /// and returns the target unit if it's a valid 1-to-1 mapping, otherwise returns null.
         /// </summary>
         private static string? TryGetCalendarDurationMapping(string fromUnit, string toUnit)
         {
-            // Define the bidirectional mapping between CQL calendar duration units and UCUM units
-            // Based on https://hl7.org/fhirpath/N1/#time-valued-quantities
-            var mapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "year", "a" },
-                { "a", "year" },
-                { "month", "mo" },
-                { "mo", "month" },
-                { "week", "wk" },
-                { "wk", "week" },
-                { "day", "d" },
-                { "d", "day" },
-                { "hour", "h" },
-                { "h", "hour" },
-                { "minute", "min" },
-                { "min", "minute" },
-                { "second", "s" },
-                { "s", "second" },
-                { "millisecond", "ms" },
-                { "ms", "millisecond" }
-            };
-
             // Check if this is a valid calendar duration mapping
-            if (mapping.TryGetValue(fromUnit, out var expectedToUnit) &&
+            if (CalendarDurationMapping.TryGetValue(fromUnit, out var expectedToUnit) &&
                 string.Equals(expectedToUnit, toUnit, StringComparison.OrdinalIgnoreCase))
             {
                 return toUnit;
