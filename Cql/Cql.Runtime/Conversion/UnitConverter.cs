@@ -112,7 +112,6 @@ namespace Hl7.Cql.Conversion
         {
             InitialzeDateConversions();
             InitializeLengthUnits();
-            InitializeCqlToUcumMappings();
         }
 
         private void InitialzeDateConversions()
@@ -191,53 +190,7 @@ namespace Hl7.Cql.Conversion
             Conversions.Add(UCUMUnits.Centimeter, centimeters);
         }
 
-        private void InitializeCqlToUcumMappings()
-        {
-            // Add bidirectional identity mappings between CQL units (e.g., "day") and UCUM units (e.g., "d")
-            // CQL uses human-readable unit names while UCUM uses standard codes
-            
-            // Time units: CQL -> UCUM (identity mappings)
-            UseConversion("year", UCUMUnits.Year, Self);
-            UseConversion("month", UCUMUnits.Month, Self);
-            UseConversion("day", UCUMUnits.Day, Self);
-            UseConversion("week", UCUMUnits.Week, Self);
-            UseConversion("hour", UCUMUnits.Hour, Self);
-            UseConversion("minute", UCUMUnits.Minute, Self);
-            UseConversion("second", UCUMUnits.Second, Self);
-            UseConversion("millisecond", UCUMUnits.Millisecond, Self);
-            
-            // Time units: UCUM -> CQL (identity mappings)
-            UseConversion(UCUMUnits.Year, "year", Self);
-            UseConversion(UCUMUnits.Month, "month", Self);
-            UseConversion(UCUMUnits.Day, "day", Self);
-            UseConversion(UCUMUnits.Week, "week", Self);
-            UseConversion(UCUMUnits.Hour, "hour", Self);
-            UseConversion(UCUMUnits.Minute, "minute", Self);
-            UseConversion(UCUMUnits.Second, "second", Self);
-            UseConversion(UCUMUnits.Millisecond, "millisecond", Self);
-            
-            // Add CQL -> CQL conversions (mirror the existing UCUM unit conversions)
-            // NOTE: These mirror the existing UCUM conversions which may have bugs
-            // Year conversions
-            UseConversion("year", "day", (decimal value) => value * ConversionConstants.DaysPerYear);
-            UseConversion("year", "month", (decimal value) => value / 12m);  // NOTE: Matches existing UCUM behavior
-            UseConversion("year", "week", (decimal value) => (value * ConversionConstants.DaysPerYear) * 0.14285714285m);
-            
-            // Month conversions
-            UseConversion("month", "day", (decimal value) => value * ConversionConstants.DaysPerMonth);
-            UseConversion("month", "year", (decimal value) => value * 12m);  // NOTE: Matches existing UCUM behavior
-            UseConversion("month", "week", (decimal value) => (value * ConversionConstants.DaysPerMonth) * 0.14285714285m);
-            
-            // Day conversions
-            UseConversion("day", "month", (decimal value) => value * ConversionConstants.MonthsPerDay);
-            UseConversion("day", "year", (decimal value) => value * ConversionConstants.YearsPerDay);
-            UseConversion("day", "week", (decimal value) => value * 0.14285714285m);
-            
-            // Week conversions
-            UseConversion("week", "day", (decimal value) => value * 7m);
-            UseConversion("week", "month", (decimal value) => value * 7m * ConversionConstants.MonthsPerDay);
-            UseConversion("week", "year", (decimal value) => value * 7m * ConversionConstants.YearsPerDay);
-        }
+
 
     }
 }
