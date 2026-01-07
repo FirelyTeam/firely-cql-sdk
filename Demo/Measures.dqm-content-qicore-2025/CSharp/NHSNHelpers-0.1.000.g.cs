@@ -212,13 +212,14 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
         bool? b_(Location Locations)
         {
             Id e_ = Locations?.IdElement;
-            string f_ = FHIRHelpers_4_4_000.Instance.ToString(context, e_);
-            FhirString g_ = reference?.ReferenceElement;
-            string h_ = FHIRHelpers_4_4_000.Instance.ToString(context, g_);
-            string i_ = this.GetId(context, h_);
-            bool? j_ = context.Operators.Equal(f_, i_);
+            FhirString f_ = context.Operators.Convert<FhirString>(e_);
+            string g_ = FHIRHelpers_4_4_000.Instance.ToString(context, f_);
+            FhirString h_ = reference?.ReferenceElement;
+            string i_ = FHIRHelpers_4_4_000.Instance.ToString(context, h_);
+            string j_ = this.GetId(context, i_);
+            bool? k_ = context.Operators.Equal(g_, j_);
 
-            return j_;
+            return k_;
         };
         IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
         Location d_ = context.Operators.SingletonFrom<Location>(c_);

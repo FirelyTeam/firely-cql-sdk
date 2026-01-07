@@ -554,9 +554,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
 
                 return j_;
             }
-            else if (value is Id)
+            else if (value is FhirString)
             {
-                string k_ = (value as Id)?.Value;
+                string k_ = (value as FhirString)?.Value;
 
                 return k_ as object;
             }
@@ -2987,15 +2987,6 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
 
     [CqlFunctionDefinition("ToString")]
     public string ToString(CqlContext context, XHtml value)
-    {
-        string a_ = value?.Value;
-
-        return a_;
-    }
-
-
-    [CqlFunctionDefinition("ToString")]
-    public string ToString(CqlContext context, Id value)
     {
         string a_ = value?.Value;
 
