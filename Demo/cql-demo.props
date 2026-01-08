@@ -38,6 +38,8 @@
 		<JsonPretty>true</JsonPretty>
 
 		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props -->
+		<CqlToElmEnabled Condition="'$(Configuration)' != 'Release'">false</CqlToElmEnabled>
+		<CqlToElmEnabled Condition="'$(Configuration)' == 'Release'">true</CqlToElmEnabled>
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
 
 		<!-- ElmToCSharpEnabled must be true here for build to pass -->
