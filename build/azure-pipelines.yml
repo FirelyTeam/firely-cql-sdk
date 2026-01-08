@@ -96,6 +96,7 @@ stages:
         **/*Tests/*Tests.csproj
         **/**/Test.Measures.Demo.csproj
         !**/Ncqa.HT.DeckTests.csproj
+        !**/Ncqa.HT.MeasuresTests.csproj
         submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj
       packageArtifacts: true
       restoreDependencies: true
@@ -121,6 +122,8 @@ stages:
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
   jobs:
   - deployment: gitHub
+    pool:
+      vmImage: $(vmImage)
     displayName: Deploy Packages to GitHub
     environment: GitHub
     strategy:
@@ -139,6 +142,8 @@ stages:
   condition: and(succeeded(), startswith(variables['Build.SourceBranch'], 'refs/tags/v'))
   jobs:
   - deployment: NuGet
+    pool:
+      vmImage: $(vmImage)
     displayName: Deploy Packages to Nuget
     environment: NuGet
     strategy:

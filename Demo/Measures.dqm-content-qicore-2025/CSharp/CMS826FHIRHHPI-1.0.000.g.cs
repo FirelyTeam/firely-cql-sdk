@@ -12,22 +12,10 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
 [CqlLibrary("CMS826FHIRHHPI", "1.0.000")]
 public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHPI_1_0_000>
 {
-    private CMS826FHIRHHPI_1_0_000() {}
-
-    public static CMS826FHIRHHPI_1_0_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CMS826FHIRHHPI";
-    public string Version => "1.0.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, CQMCommon_4_1_000.Instance, QICoreCommon_4_0_000.Instance];
-
-    #endregion ILibrary Implementation
-
     #region ValueSets
 
     [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
@@ -80,135 +68,165 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     #region Parameters
 
-    [CqlParameterDefinition("Measurement Period")]
-    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
-    {
-        object a_ = context.ResolveParameter("CMS826FHIRHHPI-1.0.000", "Measurement Period", null);
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
-        return (CqlInterval<CqlDateTime>)a_;
-    }
+    [CqlParameterDefinition("Measurement Period")]
+    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
+        _Measurement_Period_Cached.GetOrReplace(
+            context,
+            () => {
+                object a_ = context.ResolveParameter("CMS826FHIRHHPI-1.0.000", "Measurement Period", null);
+                return (CqlInterval<CqlDateTime>)a_;
+            });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
+    private readonly Cached<Patient> _Patient_Cached = new();
+
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
-        return b_;
-    }
 
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
-    {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+        _SDE_Ethnicity_Cached.GetOrReplace(
+            context,
+            () => {
+                (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
-    {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
+        _SDE_Payer_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
-    {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+        _SDE_Race_Cached.GetOrReplace(
+            context,
+            () => {
+                (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
-    public CqlCode SDE_Sex(CqlContext context)
-    {
-        CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
+    public CqlCode SDE_Sex(CqlContext context) =>
+        _SDE_Sex_Cached.GetOrReplace(
+            context,
+            () => {
+                CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Age_18_And_Older_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Age 18 And Older")]
-    public IEnumerable<Encounter> Encounter_With_Age_18_And_Older(CqlContext context)
-    {
-        CqlValueSet a_ = this.Encounter_Inpatient(context);
-        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        bool? c_(Encounter InpatientEncounter)
-        {
-            Patient e_ = this.Patient(context);
-            Date f_ = e_?.BirthDateElement;
-            string g_ = f_?.Value;
-            CqlDate h_ = context.Operators.ConvertStringToDate(g_);
-            Period i_ = InpatientEncounter?.Period;
-            CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-            CqlDateTime k_ = context.Operators.Start(j_);
-            CqlDate l_ = context.Operators.DateFrom(k_);
-            int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
-            bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
-            CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-            CqlDateTime q_ = context.Operators.End(p_);
-            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
-            bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
-            bool? t_ = context.Operators.And(n_, s_);
-            Code<Encounter.EncounterStatus> u_ = InpatientEncounter?.StatusElement;
-            Encounter.EncounterStatus? v_ = u_?.Value;
-            Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
-            bool? x_ = context.Operators.Equal(w_, "finished");
-            bool? y_ = context.Operators.And(t_, x_);
+    public IEnumerable<Encounter> Encounter_With_Age_18_And_Older(CqlContext context) =>
+        _Encounter_With_Age_18_And_Older_Cached.GetOrReplace(
+            context,
+            () => {
+                CqlValueSet a_ = this.Encounter_Inpatient(context);
+                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
-            return y_;
-        };
-        IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
+                bool? c_(Encounter InpatientEncounter) {
+                    Patient e_ = this.Patient(context);
+                    Date f_ = e_?.BirthDateElement;
+                    string g_ = f_?.Value;
+                    CqlDate h_ = context.Operators.ConvertStringToDate(g_);
+                    Period i_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    CqlDateTime k_ = context.Operators.Start(j_);
+                    CqlDate l_ = context.Operators.DateFrom(k_);
+                    int? m_ = context.Operators.CalculateAgeAt(h_, l_, "year");
+                    bool? n_ = context.Operators.GreaterOrEqual(m_, 18);
+                    CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    CqlDateTime q_ = context.Operators.End(p_);
+                    CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+                    bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
+                    bool? t_ = context.Operators.And(n_, s_);
+                    Code<Encounter.EncounterStatus> u_ = InpatientEncounter?.StatusElement;
+                    Encounter.EncounterStatus? v_ = u_?.Value;
+                    Code<Encounter.EncounterStatus> w_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(v_);
+                    bool? x_ = context.Operators.Equal(w_, "finished");
+                    bool? y_ = context.Operators.And(t_, x_);
+                    return y_;
+                }
 
-        return d_;
-    }
+                IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
+                return d_;
+            });
 
+
+    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
-    public IEnumerable<Encounter> Initial_Population(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
+    public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
+        _Initial_Population_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
-    public IEnumerable<Encounter> Denominator(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Initial_Population(context);
+    public IEnumerable<Encounter> Denominator(CqlContext context) =>
+        _Denominator_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Initial_Population(context);
+                return a_;
+            });
 
-        return a_;
-    }
 
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Deep Tissue Pressure Injury POA By Indicator")]
-    public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-        bool? b_(Encounter InpatientHospitalization)
-        {
-            CqlValueSet d_ = this.Pressure_Injury_Deep_Tissue_Diagnoses(context);
-            CqlValueSet e_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-            bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
+    public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator(CqlContext context) =>
+        _Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
-            return f_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                bool? b_(Encounter InpatientHospitalization) {
+                    CqlValueSet d_ = this.Pressure_Injury_Deep_Tissue_Diagnoses(context);
+                    CqlValueSet e_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                    bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
+                    return f_;
+                }
 
-        return c_;
-    }
+                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                return c_;
+            });
 
 
     [CqlFunctionDefinition("isIn")]
@@ -228,14 +246,13 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
         CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
         bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, default);
         bool? j_ = context.Operators.And(d_, i_);
-        bool? k_()
-        {
+
+        bool? k_() {
             if (observation is Observation)
             {
                 DataType m_ = (observation as Observation)?.Value;
                 object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
                 bool? o_ = context.Operators.ConceptInValueSet(n_ as CqlConcept, vset);
-
                 return o_;
             }
             else if (observation is Observation)
@@ -243,333 +260,426 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                 DataType p_ = (observation as Observation)?.Value;
                 object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                 bool? r_ = context.Operators.ConceptInValueSet(q_ as CqlConcept, vset);
-
                 return r_;
             }
             else
             {
                 return default;
-            }
-        };
-        bool? l_ = context.Operators.And(j_, k_());
+            };
+        }
 
+        bool? l_ = context.Operators.And(j_, k_());
         return l_;
     }
 
 
+    private readonly Cached<IEnumerable<Observation>> _Clinical_Skin_Exams_With_Pressure_Injury_Cached = new();
+
     [CqlExpressionDefinition("Clinical Skin Exams With Pressure Injury")]
-    public IEnumerable<Observation> Clinical_Skin_Exams_With_Pressure_Injury(CqlContext context)
-    {
-        CqlCode a_ = this.Physical_findings_of_Skin(context);
-        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-        bool? d_(Observation ClinicalSkinExam)
-        {
-            CqlValueSet f_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable(context);
-            bool? g_ = this.isIn(context, ClinicalSkinExam as object, f_);
+    public IEnumerable<Observation> Clinical_Skin_Exams_With_Pressure_Injury(CqlContext context) =>
+        _Clinical_Skin_Exams_With_Pressure_Injury_Cached.GetOrReplace(
+            context,
+            () => {
+                CqlCode a_ = this.Physical_findings_of_Skin(context);
+                IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+                IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
 
-            return g_;
-        };
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+                bool? d_(Observation ClinicalSkinExam) {
+                    CqlValueSet f_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable(context);
+                    bool? g_ = this.isIn(context, ClinicalSkinExam as object, f_);
+                    return g_;
+                }
 
-        return e_;
-    }
+                IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+                return e_;
+            });
 
+
+    private readonly Cached<IEnumerable<Observation>> _Simple_Skin_Exams_With_Pressure_Injury_Cached = new();
 
     [CqlExpressionDefinition("Simple Skin Exams With Pressure Injury")]
-    public IEnumerable<Observation> Simple_Skin_Exams_With_Pressure_Injury(CqlContext context)
-    {
-        CqlCode a_ = this.Physical_findings_of_Skin(context);
-        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
-        bool? d_(Observation ObsSkinExam)
-        {
-            CqlValueSet f_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable(context);
-            bool? g_ = this.isIn(context, ObsSkinExam as object, f_);
+    public IEnumerable<Observation> Simple_Skin_Exams_With_Pressure_Injury(CqlContext context) =>
+        _Simple_Skin_Exams_With_Pressure_Injury_Cached.GetOrReplace(
+            context,
+            () => {
+                CqlCode a_ = this.Physical_findings_of_Skin(context);
+                IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+                IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
 
-            return g_;
-        };
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+                bool? d_(Observation ObsSkinExam) {
+                    CqlValueSet f_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable(context);
+                    bool? g_ = this.isIn(context, ObsSkinExam as object, f_);
+                    return g_;
+                }
 
-        return e_;
-    }
+                IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+                return e_;
+            });
 
+
+    private readonly Cached<IEnumerable<object>> _Skin_Exams_With_Pressure_Injury_Cached = new();
 
     [CqlExpressionDefinition("Skin Exams With Pressure Injury")]
-    public IEnumerable<object> Skin_Exams_With_Pressure_Injury(CqlContext context)
-    {
-        IEnumerable<Observation> a_ = this.Clinical_Skin_Exams_With_Pressure_Injury(context);
-        IEnumerable<Observation> b_ = this.Simple_Skin_Exams_With_Pressure_Injury(context);
-        IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
+    public IEnumerable<object> Skin_Exams_With_Pressure_Injury(CqlContext context) =>
+        _Skin_Exams_With_Pressure_Injury_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Observation> a_ = this.Clinical_Skin_Exams_With_Pressure_Injury(context);
+                IEnumerable<Observation> b_ = this.Simple_Skin_Exams_With_Pressure_Injury(context);
+                IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
+                return c_;
+            });
 
-        return c_;
-    }
 
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Deep Tissue Pressure Injury POA By Skin Exam Within First 72 Hours")]
-    public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-        IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
-        {
-            IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
-            bool? e_(object SkinExam)
-            {
-                object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
-                object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
-                CqlDateTime l_ = context.Operators.Start(k_);
-                CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
-                CqlDateTime n_ = context.Operators.Start(m_);
-                CqlDateTime p_ = context.Operators.Start(m_);
-                CqlQuantity q_ = context.Operators.Quantity(72m, "hours");
-                CqlDateTime r_ = context.Operators.Add(p_, q_);
-                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
-                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+    public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours(CqlContext context) =>
+        _Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
-                return t_;
-            };
-            IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            Encounter g_(object SkinExam) =>
-                InpatientHospitalization;
-            IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
+                IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
+                    IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
 
-            return h_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+                    bool? e_(object SkinExam) {
+                        object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
+                        object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+                        CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
+                        CqlDateTime l_ = context.Operators.Start(k_);
+                        CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
+                        CqlDateTime n_ = context.Operators.Start(m_);
+                        CqlDateTime p_ = context.Operators.Start(m_);
+                        CqlQuantity q_ = context.Operators.Quantity(72m, "hours");
+                        CqlDateTime r_ = context.Operators.Add(p_, q_);
+                        CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
+                        bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                        return t_;
+                    }
 
-        return c_;
-    }
+                    IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
+                    Encounter g_(object SkinExam) => InpatientHospitalization;
+                    IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
+                    return h_;
+                }
 
+                IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+                return c_;
+            });
+
+
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Deep Tissue Pressure Injury POA By Indicator Or Skin Exam Within First 72 Hours")]
-    public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator(context);
-        IEnumerable<Encounter> b_ = this.Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours(context);
-        IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+    public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours(CqlContext context) =>
+        _Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator(context);
+                IEnumerable<Encounter> b_ = this.Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours(context);
+                IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+                return c_;
+            });
 
-        return c_;
-    }
 
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Stage 2, 3, 4, Or Unstageable Pressure Injury Present On Admission By POA Indicator")]
-    public IEnumerable<Encounter> Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-        bool? b_(Encounter InpatientHospitalization)
-        {
-            CqlValueSet d_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses(context);
-            CqlValueSet e_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
-            bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
+    public IEnumerable<Encounter> Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator(CqlContext context) =>
+        _Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
-            return f_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                bool? b_(Encounter InpatientHospitalization) {
+                    CqlValueSet d_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses(context);
+                    CqlValueSet e_ = this.Present_on_Admission_or_Clinically_Undetermined(context);
+                    bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
+                    return f_;
+                }
 
-        return c_;
-    }
+                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                return c_;
+            });
 
+
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Stage 2, 3, 4 Or Unstageable Pressure Injury POA By Skin Exam Within 24 Hours")]
-    public IEnumerable<Encounter> Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-        IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
-        {
-            IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
-            bool? e_(object SkinExam)
-            {
-                object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
-                object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
-                CqlDateTime l_ = context.Operators.Start(k_);
-                CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
-                CqlDateTime n_ = context.Operators.Start(m_);
-                CqlDateTime p_ = context.Operators.Start(m_);
-                CqlQuantity q_ = context.Operators.Quantity(24m, "hours");
-                CqlDateTime r_ = context.Operators.Add(p_, q_);
-                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
-                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+    public IEnumerable<Encounter> Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours(CqlContext context) =>
+        _Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
-                return t_;
-            };
-            IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            Encounter g_(object SkinExam) =>
-                InpatientHospitalization;
-            IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
+                IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
+                    IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
 
-            return h_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+                    bool? e_(object SkinExam) {
+                        object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
+                        object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+                        CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
+                        CqlDateTime l_ = context.Operators.Start(k_);
+                        CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
+                        CqlDateTime n_ = context.Operators.Start(m_);
+                        CqlDateTime p_ = context.Operators.Start(m_);
+                        CqlQuantity q_ = context.Operators.Quantity(24m, "hours");
+                        CqlDateTime r_ = context.Operators.Add(p_, q_);
+                        CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
+                        bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                        return t_;
+                    }
 
-        return c_;
-    }
+                    IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
+                    Encounter g_(object SkinExam) => InpatientHospitalization;
+                    IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
+                    return h_;
+                }
 
+                IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+                return c_;
+            });
+
+
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Stage 2, 3, 4 Or Unstageable Pressure Injury POA")]
-    public IEnumerable<Encounter> Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator(context);
-        IEnumerable<Encounter> b_ = this.Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours(context);
-        IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+    public IEnumerable<Encounter> Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA(CqlContext context) =>
+        _Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator(context);
+                IEnumerable<Encounter> b_ = this.Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours(context);
+                IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+                return c_;
+            });
 
-        return c_;
-    }
 
+    private readonly Cached<IEnumerable<Encounter>> _Denominator_Exclusions_Cached = new();
 
     [CqlExpressionDefinition("Denominator Exclusions")]
-    public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours(context);
-        IEnumerable<Encounter> b_ = this.Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA(context);
-        IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+    public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
+        _Denominator_Exclusions_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours(context);
+                IEnumerable<Encounter> b_ = this.Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA(context);
+                IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+                return c_;
+            });
 
-        return c_;
-    }
 
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator_Cached = new();
 
     [CqlExpressionDefinition("Encounter With New Deep Tissue Pressure Injury Not POA By Indicator")]
-    public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-        bool? b_(Encounter InpatientHospitalization)
-        {
-            CqlValueSet d_ = this.Pressure_Injury_Deep_Tissue_Diagnoses(context);
-            CqlValueSet e_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
-            bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
+    public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator(CqlContext context) =>
+        _Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
-            return f_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                bool? b_(Encounter InpatientHospitalization) {
+                    CqlValueSet d_ = this.Pressure_Injury_Deep_Tissue_Diagnoses(context);
+                    CqlValueSet e_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
+                    bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
+                    return f_;
+                }
 
-        return c_;
-    }
+                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                return c_;
+            });
 
+
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours_Cached = new();
 
     [CqlExpressionDefinition("Encounter With New Deep Tissue Pressure Injury By Skin Exam After First 72 Hours")]
-    public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-        IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
-        {
-            IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
-            bool? e_(object SkinExam)
-            {
-                object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
-                object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
-                CqlDateTime l_ = context.Operators.Start(k_);
-                CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
-                CqlDateTime n_ = context.Operators.Start(m_);
-                CqlQuantity o_ = context.Operators.Quantity(72m, "hours");
-                CqlDateTime p_ = context.Operators.Add(n_, o_);
-                CqlDateTime r_ = context.Operators.End(m_);
-                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+    public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours(CqlContext context) =>
+        _Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
-                return t_;
-            };
-            IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            Encounter g_(object SkinExam) =>
-                InpatientHospitalization;
-            IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
+                IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
+                    IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
 
-            return h_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+                    bool? e_(object SkinExam) {
+                        object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
+                        object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+                        CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
+                        CqlDateTime l_ = context.Operators.Start(k_);
+                        CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
+                        CqlDateTime n_ = context.Operators.Start(m_);
+                        CqlQuantity o_ = context.Operators.Quantity(72m, "hours");
+                        CqlDateTime p_ = context.Operators.Add(n_, o_);
+                        CqlDateTime r_ = context.Operators.End(m_);
+                        CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
+                        bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                        return t_;
+                    }
 
-        return c_;
-    }
+                    IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
+                    Encounter g_(object SkinExam) => InpatientHospitalization;
+                    IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
+                    return h_;
+                }
 
+                IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+                return c_;
+            });
+
+
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_New_Deep_Tissue_Pressure_Injury_Cached = new();
 
     [CqlExpressionDefinition("Encounter With New Deep Tissue Pressure Injury")]
-    public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator(context);
-        IEnumerable<Encounter> b_ = this.Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours(context);
-        IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+    public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury(CqlContext context) =>
+        _Encounter_With_New_Deep_Tissue_Pressure_Injury_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator(context);
+                IEnumerable<Encounter> b_ = this.Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours(context);
+                IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+                return c_;
+            });
 
-        return c_;
-    }
 
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator_Cached = new();
 
     [CqlExpressionDefinition("Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury Not POA By Indicator")]
-    public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-        bool? b_(Encounter InpatientHospitalization)
-        {
-            CqlValueSet d_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses(context);
-            CqlValueSet e_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
-            bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
+    public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator(CqlContext context) =>
+        _Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
-            return f_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                bool? b_(Encounter InpatientHospitalization) {
+                    CqlValueSet d_ = this.Pressure_Injury_Stage_2__3__4__or_Unstageable_Diagnoses(context);
+                    CqlValueSet e_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
+                    bool? f_ = CQMCommon_4_1_000.Instance.isDiagnosisPresentOnAdmission(context, InpatientHospitalization, d_, e_);
+                    return f_;
+                }
 
-        return c_;
-    }
+                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+                return c_;
+            });
 
+
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours_Cached = new();
 
     [CqlExpressionDefinition("Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury By Skin Exam After First 24 Hours")]
-    public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
-        IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
-        {
-            IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
-            bool? e_(object SkinExam)
-            {
-                object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
-                object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
-                CqlDateTime l_ = context.Operators.Start(k_);
-                CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
-                CqlDateTime n_ = context.Operators.Start(m_);
-                CqlQuantity o_ = context.Operators.Quantity(24m, "hours");
-                CqlDateTime p_ = context.Operators.Add(n_, o_);
-                CqlDateTime r_ = context.Operators.End(m_);
-                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+    public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours(CqlContext context) =>
+        _Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
-                return t_;
-            };
-            IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            Encounter g_(object SkinExam) =>
-                InpatientHospitalization;
-            IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
+                IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
+                    IEnumerable<object> d_ = this.Skin_Exams_With_Pressure_Injury(context);
 
-            return h_;
-        };
-        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+                    bool? e_(object SkinExam) {
+                        object i_ = context.Operators.LateBoundProperty<object>(SkinExam, "effective");
+                        object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+                        CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
+                        CqlDateTime l_ = context.Operators.Start(k_);
+                        CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
+                        CqlDateTime n_ = context.Operators.Start(m_);
+                        CqlQuantity o_ = context.Operators.Quantity(24m, "hours");
+                        CqlDateTime p_ = context.Operators.Add(n_, o_);
+                        CqlDateTime r_ = context.Operators.End(m_);
+                        CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
+                        bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                        return t_;
+                    }
 
-        return c_;
-    }
+                    IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
+                    Encounter g_(object SkinExam) => InpatientHospitalization;
+                    IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
+                    return h_;
+                }
 
+                IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+                return c_;
+            });
+
+
+    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Cached = new();
 
     [CqlExpressionDefinition("Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury")]
-    public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator(context);
-        IEnumerable<Encounter> b_ = this.Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours(context);
-        IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+    public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury(CqlContext context) =>
+        _Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator(context);
+                IEnumerable<Encounter> b_ = this.Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours(context);
+                IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+                return c_;
+            });
 
-        return c_;
-    }
 
+    private readonly Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
-    public IEnumerable<Encounter> Numerator(CqlContext context)
-    {
-        IEnumerable<Encounter> a_ = this.Encounter_With_New_Deep_Tissue_Pressure_Injury(context);
-        IEnumerable<Encounter> b_ = this.Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury(context);
-        IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
-
-        return c_;
-    }
+    public IEnumerable<Encounter> Numerator(CqlContext context) =>
+        _Numerator_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Encounter> a_ = this.Encounter_With_New_Deep_Tissue_Pressure_Injury(context);
+                IEnumerable<Encounter> b_ = this.Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury(context);
+                IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+                return c_;
+            });
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private CMS826FHIRHHPI_1_0_000() {}
+
+    public static CMS826FHIRHHPI_1_0_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "CMS826FHIRHHPI";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_5_1_000.Instance, CQMCommon_4_1_000.Instance, QICoreCommon_4_0_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

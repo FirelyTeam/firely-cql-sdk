@@ -39,5 +39,41 @@ namespace CoreTests
             converted.unit.Should().Be("g");
             converted.value.Should().Be(3.14M * 1000.0M * 1000.0M);
         }
+
+        #region Calendar Duration Unit Conversions (FHIR simplification)
+
+        [DataTestMethod]
+        [DataRow("year", "a")]
+        [DataRow("month", "mo")]
+        [DataRow("week", "wk")]
+        [DataRow("day", "d")]
+        [DataRow("hour", "h")]
+        [DataRow("minute", "min")]
+        [DataRow("second", "s")]
+        [DataRow("millisecond", "ms")]
+        public void ConvertCalendarDuration_CqlToUcum(string cqlUnit, string ucumUnit)
+        {
+            var q = new CqlQuantity(1m, cqlUnit);
+            var success = q.TryConvert(ucumUnit, out var converted);
+            success.Should().BeTrue();
+            converted.Should().NotBeNull();
+            converted!.value.Should().Be(1m);
+            converted.unit.Should().Be(ucumUnit);
+        }
+
+        [TestMethod]
+        public void ConvertInvalidCalendarDuration_ReturnsFalse()
+        {
+            // Test that converting from "day" to something that's not "d" doesn't use the calendar mapping
+            // and falls back to standard UCUM conversion (which would fail for this case)
+            var q = new CqlQuantity(1m, "day");
+            var success = q.TryConvert("hour", out var converted);
+
+            // This should fail because "day" is not a valid UCUM unit for the standard conversion path
+            success.Should().BeFalse();
+            converted.Should().BeNull();
+        }
+
+        #endregion
     }
 }

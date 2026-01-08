@@ -12,22 +12,10 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
 [CqlLibrary("CQMCommon", "4.1.000")]
 public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 {
-    private CQMCommon_4_1_000() {}
-
-    public static CQMCommon_4_1_000 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "CQMCommon";
-    public string Version => "4.1.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance];
-
-    #endregion ILibrary Implementation
-
     #region ValueSets
 
     [CqlValueSetDefinition("Emergency Department Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", valueSetVersion: null)]
@@ -181,53 +169,62 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
     #region Parameters
 
-    [CqlParameterDefinition("Measurement Period")]
-    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
-    {
-        object a_ = context.ResolveParameter("CQMCommon-4.1.000", "Measurement Period", null);
+    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
 
-        return (CqlInterval<CqlDateTime>)a_;
-    }
+    [CqlParameterDefinition("Measurement Period")]
+    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
+        _Measurement_Period_Cached.GetOrReplace(
+            context,
+            () => {
+                object a_ = context.ResolveParameter("CQMCommon-4.1.000", "Measurement Period", null);
+                return (CqlInterval<CqlDateTime>)a_;
+            });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
+    private readonly Cached<Patient> _Patient_Cached = new();
+
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
-        return b_;
-    }
 
+    private readonly Cached<IEnumerable<Encounter>> _Inpatient_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Inpatient Encounter")]
-    public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context)
-    {
-        CqlValueSet a_ = this.Encounter_Inpatient(context);
-        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        bool? c_(Encounter EncounterInpatient)
-        {
-            Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
-            Encounter.EncounterStatus? f_ = e_?.Value;
-            Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
-            bool? h_ = context.Operators.Equal(g_, "finished");
-            Period i_ = EncounterInpatient?.Period;
-            CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-            CqlDateTime k_ = context.Operators.End(j_);
-            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-            bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
-            bool? n_ = context.Operators.And(h_, m_);
+    public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context) =>
+        _Inpatient_Encounter_Cached.GetOrReplace(
+            context,
+            () => {
+                CqlValueSet a_ = this.Encounter_Inpatient(context);
+                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
-            return n_;
-        };
-        IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
+                bool? c_(Encounter EncounterInpatient) {
+                    Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
+                    Encounter.EncounterStatus? f_ = e_?.Value;
+                    Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
+                    bool? h_ = context.Operators.Equal(g_, "finished");
+                    Period i_ = EncounterInpatient?.Period;
+                    CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    CqlDateTime k_ = context.Operators.End(j_);
+                    CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                    bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
+                    bool? n_ = context.Operators.And(h_, m_);
+                    return n_;
+                }
 
-        return d_;
-    }
+                IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
+                return d_;
+            });
 
 
     [CqlFunctionDefinition("ToDateInterval")]
@@ -240,7 +237,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         CqlDateTime c_ = context.Operators.End(period);
         CqlDate d_ = context.Operators.DateFrom(c_);
         CqlInterval<CqlDate> e_ = context.Operators.Interval(b_, d_, true, true);
-
         return e_;
     }
 
@@ -253,7 +249,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         CqlDateTime a_ = context.Operators.Start(Value);
         CqlDateTime b_ = context.Operators.End(Value);
         int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
-
         return c_;
     }
 
@@ -265,7 +260,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         CqlDateTime a_ = context.Operators.Start(Value);
         CqlDateTime b_ = context.Operators.End(Value);
         int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
-
         return c_;
     }
 
@@ -277,8 +271,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         CqlValueSet a_ = this.Emergency_Department_Visit(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        bool? c_(Encounter EDVisit)
-        {
+
+        bool? c_(Encounter EDVisit) {
             Code<Encounter.EncounterStatus> h_ = EDVisit?.StatusElement;
             Encounter.EncounterStatus? i_ = h_?.Value;
             Code<Encounter.EncounterStatus> j_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(i_);
@@ -300,21 +294,20 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
             bool? ac_ = context.Operators.And(x_, ab_);
             bool? ad_ = context.Operators.And(k_, ac_);
-
             return ad_;
-        };
+        }
+
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
-        object e_(Encounter @this)
-        {
+
+        object e_(Encounter @this) {
             Period ae_ = @this?.Period;
             CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ae_);
             CqlDateTime ag_ = context.Operators.End(af_);
-
             return ag_;
-        };
+        }
+
         IEnumerable<Encounter> f_ = context.Operators.SortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter g_ = context.Operators.Last<Encounter>(f_);
-
         return g_;
     }
 
@@ -325,8 +318,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         CqlValueSet a_ = this.Emergency_Department_Visit(context);
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        bool? c_(Encounter EDVisit)
-        {
+
+        bool? c_(Encounter EDVisit) {
             Code<Encounter.EncounterStatus> h_ = EDVisit?.StatusElement;
             Encounter.EncounterStatus? i_ = h_?.Value;
             Code<Encounter.EncounterStatus> j_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(i_);
@@ -348,21 +341,20 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
             bool? ac_ = context.Operators.And(x_, ab_);
             bool? ad_ = context.Operators.And(k_, ac_);
-
             return ad_;
-        };
+        }
+
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
-        object e_(Encounter @this)
-        {
+
+        object e_(Encounter @this) {
             Period ae_ = @this?.Period;
             CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ae_);
             CqlDateTime ag_ = context.Operators.End(af_);
-
             return ag_;
-        };
+        }
+
         IEnumerable<Encounter> f_ = context.Operators.SortBy<Encounter>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter g_ = context.Operators.Last<Encounter>(f_);
-
         return g_;
     }
 
@@ -376,15 +368,14 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Encounter[] b_ = [
             a_,
         ];
-        CqlInterval<CqlDateTime> c_(Encounter X)
-        {
-            CqlInterval<CqlDateTime> g_()
-            {
+
+        CqlInterval<CqlDateTime> c_(Encounter X) {
+
+            CqlInterval<CqlDateTime> g_() {
                 if (X is null)
                 {
                     Period h_ = TheEncounter?.Period;
                     CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
-
                     return i_;
                 }
                 else
@@ -396,17 +387,16 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                     CqlDateTime o_ = context.Operators.End(n_);
                     CqlInterval<CqlDateTime> p_ = context.Operators.Interval(l_, o_, true, false);
-
                     return p_;
-                }
-            };
+                };
+            }
 
             return g_();
-        };
+        }
+
         IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)b_, c_);
         IEnumerable<CqlInterval<CqlDateTime>> e_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(d_);
         CqlInterval<CqlDateTime> f_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(e_);
-
         return f_;
     }
 
@@ -419,15 +409,14 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Encounter[] b_ = [
             a_,
         ];
-        CqlInterval<CqlDateTime> c_(Encounter X)
-        {
-            CqlInterval<CqlDateTime> g_()
-            {
+
+        CqlInterval<CqlDateTime> c_(Encounter X) {
+
+            CqlInterval<CqlDateTime> g_() {
                 if (X is null)
                 {
                     Period h_ = TheEncounter?.Period;
                     CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
-
                     return i_;
                 }
                 else
@@ -439,17 +428,16 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                     CqlDateTime o_ = context.Operators.End(n_);
                     CqlInterval<CqlDateTime> p_ = context.Operators.Interval(l_, o_, true, true);
-
                     return p_;
-                }
-            };
+                };
+            }
 
             return g_();
-        };
+        }
+
         IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)b_, c_);
         IEnumerable<CqlInterval<CqlDateTime>> e_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(d_);
         CqlInterval<CqlDateTime> f_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(e_);
-
         return f_;
     }
 
@@ -463,14 +451,13 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Encounter[] b_ = [
             a_,
         ];
-        IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
-        {
-            IEnumerable<Encounter.LocationComponent> g_()
-            {
+
+        IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter) {
+
+            IEnumerable<Encounter.LocationComponent> g_() {
                 if (EDEncounter is null)
                 {
                     List<Encounter.LocationComponent> h_ = TheEncounter?.Location;
-
                     return (IEnumerable<Encounter.LocationComponent>)h_;
                 }
                 else
@@ -482,17 +469,16 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         (IEnumerable<Encounter.LocationComponent>)j_,
                     ];
                     IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)k_);
-
                     return l_;
-                }
-            };
+                };
+            }
 
             return g_();
-        };
+        }
+
         IEnumerable<IEnumerable<Encounter.LocationComponent>> d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
         IEnumerable<IEnumerable<Encounter.LocationComponent>> e_ = context.Operators.Distinct<IEnumerable<Encounter.LocationComponent>>(d_);
         IEnumerable<Encounter.LocationComponent> f_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(e_);
-
         return f_;
     }
 
@@ -505,14 +491,13 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Encounter[] b_ = [
             a_,
         ];
-        IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
-        {
-            IEnumerable<Encounter.LocationComponent> g_()
-            {
+
+        IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter) {
+
+            IEnumerable<Encounter.LocationComponent> g_() {
                 if (EDEncounter is null)
                 {
                     List<Encounter.LocationComponent> h_ = TheEncounter?.Location;
-
                     return (IEnumerable<Encounter.LocationComponent>)h_;
                 }
                 else
@@ -524,17 +509,16 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         (IEnumerable<Encounter.LocationComponent>)j_,
                     ];
                     IEnumerable<Encounter.LocationComponent> l_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)k_);
-
                     return l_;
-                }
-            };
+                };
+            }
 
             return g_();
-        };
+        }
+
         IEnumerable<IEnumerable<Encounter.LocationComponent>> d_ = context.Operators.Select<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
         IEnumerable<IEnumerable<Encounter.LocationComponent>> e_ = context.Operators.Distinct<IEnumerable<Encounter.LocationComponent>>(d_);
         IEnumerable<Encounter.LocationComponent> f_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(e_);
-
         return f_;
     }
 
@@ -546,7 +530,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         CqlInterval<CqlDateTime> a_ = this.Hospitalization(context, TheEncounter);
         int? b_ = this.LengthInDays(context, a_);
-
         return b_;
     }
 
@@ -557,7 +540,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         CqlInterval<CqlDateTime> a_ = this.hospitalization(context, TheEncounter);
         int? b_ = this.lengthInDays(context, a_);
-
         return b_;
     }
 
@@ -569,7 +551,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         CqlInterval<CqlDateTime> a_ = this.Hospitalization(context, TheEncounter);
         CqlDateTime b_ = context.Operators.Start(a_);
-
         return b_;
     }
 
@@ -580,7 +561,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         CqlInterval<CqlDateTime> a_ = this.hospitalization(context, TheEncounter);
         CqlDateTime b_ = context.Operators.Start(a_);
-
         return b_;
     }
 
@@ -593,7 +573,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Period a_ = TheEncounter?.Period;
         CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, a_);
         CqlDateTime c_ = context.Operators.End(b_);
-
         return c_;
     }
 
@@ -605,7 +584,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Period a_ = TheEncounter?.Period;
         CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, a_);
         CqlDateTime c_ = context.Operators.End(b_);
-
         return c_;
     }
 
@@ -616,20 +594,19 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public CqlDateTime Hospital_Arrival_Time(CqlContext context, Encounter TheEncounter)
     {
         IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(context, TheEncounter);
-        object b_(Encounter.LocationComponent @this)
-        {
+
+        object b_(Encounter.LocationComponent @this) {
             Period h_ = @this?.Period;
             CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
             CqlDateTime j_ = context.Operators.Start(i_);
-
             return j_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter.LocationComponent d_ = context.Operators.First<Encounter.LocationComponent>(c_);
         Period e_ = d_?.Period;
         CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
         CqlDateTime g_ = context.Operators.Start(f_);
-
         return g_;
     }
 
@@ -639,20 +616,19 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public CqlDateTime hospitalArrivalTime(CqlContext context, Encounter TheEncounter)
     {
         IEnumerable<Encounter.LocationComponent> a_ = this.hospitalizationLocations(context, TheEncounter);
-        object b_(Encounter.LocationComponent @this)
-        {
+
+        object b_(Encounter.LocationComponent @this) {
             Period h_ = @this?.Period;
             CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
             CqlDateTime j_ = context.Operators.Start(i_);
-
             return j_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter.LocationComponent d_ = context.Operators.First<Encounter.LocationComponent>(c_);
         Period e_ = d_?.Period;
         CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
         CqlDateTime g_ = context.Operators.Start(f_);
-
         return g_;
     }
 
@@ -663,20 +639,19 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public CqlDateTime Hospital_Departure_Time(CqlContext context, Encounter TheEncounter)
     {
         IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(context, TheEncounter);
-        object b_(Encounter.LocationComponent @this)
-        {
+
+        object b_(Encounter.LocationComponent @this) {
             Period h_ = @this?.Period;
             CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
             CqlDateTime j_ = context.Operators.Start(i_);
-
             return j_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter.LocationComponent d_ = context.Operators.Last<Encounter.LocationComponent>(c_);
         Period e_ = d_?.Period;
         CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
         CqlDateTime g_ = context.Operators.End(f_);
-
         return g_;
     }
 
@@ -686,20 +661,19 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public CqlDateTime hospitalDepartureTime(CqlContext context, Encounter TheEncounter)
     {
         IEnumerable<Encounter.LocationComponent> a_ = this.hospitalizationLocations(context, TheEncounter);
-        object b_(Encounter.LocationComponent @this)
-        {
+
+        object b_(Encounter.LocationComponent @this) {
             Period h_ = @this?.Period;
             CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
             CqlDateTime j_ = context.Operators.Start(i_);
-
             return j_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.SortBy<Encounter.LocationComponent>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter.LocationComponent d_ = context.Operators.Last<Encounter.LocationComponent>(c_);
         Period e_ = d_?.Period;
         CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
         CqlDateTime g_ = context.Operators.End(f_);
-
         return g_;
     }
 
@@ -709,29 +683,28 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public CqlDateTime Emergency_Department_Arrival_Time(CqlContext context, Encounter TheEncounter)
     {
         IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(context, TheEncounter);
-        bool? b_(Encounter.LocationComponent HospitalLocation)
-        {
+
+        bool? b_(Encounter.LocationComponent HospitalLocation) {
             ResourceReference h_ = HospitalLocation?.Location;
             Location i_ = this.GetLocation(context, h_);
             List<CodeableConcept> j_ = i_?.Type;
-            CqlConcept k_(CodeableConcept @this)
-            {
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
+            CqlConcept k_(CodeableConcept @this) {
+                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return o_;
-            };
+            }
+
             IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
             CqlValueSet m_ = this.Emergency_Department_Visit(context);
             bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
-
             return n_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>(a_, b_);
         Encounter.LocationComponent d_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(c_);
         Period e_ = d_?.Period;
         CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
         CqlDateTime g_ = context.Operators.Start(f_);
-
         return g_;
     }
 
@@ -742,15 +715,14 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public Location GetLocation(CqlContext context, ResourceReference reference)
     {
         IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-location"));
-        bool? b_(Location L)
-        {
-            bool? e_ = QICoreCommon_4_0_000.Instance.references(context, reference, L);
 
+        bool? b_(Location L) {
+            bool? e_ = QICoreCommon_4_0_000.Instance.references(context, reference, L);
             return e_;
-        };
+        }
+
         IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
         Location d_ = context.Operators.SingletonFrom<Location>(c_);
-
         return d_;
     }
 
@@ -760,29 +732,28 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public CqlDateTime emergencyDepartmentArrivalTime(CqlContext context, Encounter TheEncounter)
     {
         IEnumerable<Encounter.LocationComponent> a_ = this.hospitalizationLocations(context, TheEncounter);
-        bool? b_(Encounter.LocationComponent HospitalLocation)
-        {
+
+        bool? b_(Encounter.LocationComponent HospitalLocation) {
             ResourceReference h_ = HospitalLocation?.Location;
             Location i_ = this.GetLocation(context, h_);
             List<CodeableConcept> j_ = i_?.Type;
-            CqlConcept k_(CodeableConcept @this)
-            {
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
+            CqlConcept k_(CodeableConcept @this) {
+                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return o_;
-            };
+            }
+
             IEnumerable<CqlConcept> l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
             CqlValueSet m_ = this.Emergency_Department_Visit(context);
             bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
-
             return n_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>(a_, b_);
         Encounter.LocationComponent d_ = context.Operators.SingletonFrom<Encounter.LocationComponent>(c_);
         Period e_ = d_?.Period;
         CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
         CqlDateTime g_ = context.Operators.Start(f_);
-
         return g_;
     }
 
@@ -795,19 +766,19 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Encounter[] a_ = [
             TheEncounter,
         ];
-        CqlInterval<CqlDateTime> b_(Encounter Visit)
-        {
+
+        CqlInterval<CqlDateTime> b_(Encounter Visit) {
             CqlValueSet f_ = this.Outpatient_Surgery_Service(context);
             IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            bool? h_(Encounter LastSurgeryOP)
-            {
+
+            bool? h_(Encounter LastSurgeryOP) {
                 Period aq_ = LastSurgeryOP?.Period;
                 CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aq_);
                 CqlDateTime as_ = context.Operators.End(ar_);
                 CqlValueSet at_ = this.Emergency_Department_Visit(context);
                 IEnumerable<Encounter> au_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, at_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? av_(Encounter LastED)
-                {
+
+                bool? av_(Encounter LastED) {
                     Code<Encounter.EncounterStatus> dq_ = LastED?.StatusElement;
                     Encounter.EncounterStatus? dr_ = dq_?.Value;
                     Code<Encounter.EncounterStatus> ds_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(dr_);
@@ -817,8 +788,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlDateTime dw_ = context.Operators.End(dv_);
                     CqlValueSet dx_ = this.Observation_Services(context);
                     IEnumerable<Encounter> dy_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? dz_(Encounter LastObs)
-                    {
+
+                    bool? dz_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> fr_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? fs_ = fr_?.Value;
                         Code<Encounter.EncounterStatus> ft_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(fs_);
@@ -840,18 +811,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? gl_ = context.Operators.Not((bool?)(gk_ is null));
                         bool? gm_ = context.Operators.And(gh_, gl_);
                         bool? gn_ = context.Operators.And(fu_, gm_);
-
                         return gn_;
-                    };
+                    }
+
                     IEnumerable<Encounter> ea_ = context.Operators.Where<Encounter>(dy_, dz_);
-                    object eb_(Encounter @this)
-                    {
+
+                    object eb_(Encounter @this) {
                         Period go_ = @this?.Period;
                         CqlInterval<CqlDateTime> gp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, go_);
                         CqlDateTime gq_ = context.Operators.End(gp_);
-
                         return gq_;
-                    };
+                    }
+
                     IEnumerable<Encounter> ec_ = context.Operators.SortBy<Encounter>(ea_, eb_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter ed_ = context.Operators.Last<Encounter>(ec_);
                     Period ee_ = ed_?.Period;
@@ -863,8 +834,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlQuantity ek_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime el_ = context.Operators.Subtract(eg_ ?? ej_, ek_);
                     IEnumerable<Encounter> en_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? eo_(Encounter LastObs)
-                    {
+
+                    bool? eo_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> gr_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? gs_ = gr_?.Value;
                         Code<Encounter.EncounterStatus> gt_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(gs_);
@@ -886,18 +857,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? hl_ = context.Operators.Not((bool?)(hk_ is null));
                         bool? hm_ = context.Operators.And(hh_, hl_);
                         bool? hn_ = context.Operators.And(gu_, hm_);
-
                         return hn_;
-                    };
+                    }
+
                     IEnumerable<Encounter> ep_ = context.Operators.Where<Encounter>(en_, eo_);
-                    object eq_(Encounter @this)
-                    {
+
+                    object eq_(Encounter @this) {
                         Period ho_ = @this?.Period;
                         CqlInterval<CqlDateTime> hp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ho_);
                         CqlDateTime hq_ = context.Operators.End(hp_);
-
                         return hq_;
-                    };
+                    }
+
                     IEnumerable<Encounter> er_ = context.Operators.SortBy<Encounter>(ep_, eq_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter es_ = context.Operators.Last<Encounter>(er_);
                     Period et_ = es_?.Period;
@@ -908,8 +879,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlInterval<CqlDateTime> ez_ = context.Operators.Interval(el_, ev_ ?? ey_, true, true);
                     bool? fa_ = context.Operators.In<CqlDateTime>(dw_, ez_, default);
                     IEnumerable<Encounter> fc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? fd_(Encounter LastObs)
-                    {
+
+                    bool? fd_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> hr_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? hs_ = hr_?.Value;
                         Code<Encounter.EncounterStatus> ht_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(hs_);
@@ -931,18 +902,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? il_ = context.Operators.Not((bool?)(ik_ is null));
                         bool? im_ = context.Operators.And(ih_, il_);
                         bool? in_ = context.Operators.And(hu_, im_);
-
                         return in_;
-                    };
+                    }
+
                     IEnumerable<Encounter> fe_ = context.Operators.Where<Encounter>(fc_, fd_);
-                    object ff_(Encounter @this)
-                    {
+
+                    object ff_(Encounter @this) {
                         Period io_ = @this?.Period;
                         CqlInterval<CqlDateTime> ip_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, io_);
                         CqlDateTime iq_ = context.Operators.End(ip_);
-
                         return iq_;
-                    };
+                    }
+
                     IEnumerable<Encounter> fg_ = context.Operators.SortBy<Encounter>(fe_, ff_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter fh_ = context.Operators.Last<Encounter>(fg_);
                     Period fi_ = fh_?.Period;
@@ -953,18 +924,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? fo_ = context.Operators.Not((bool?)((fk_ ?? fn_) is null));
                     bool? fp_ = context.Operators.And(fa_, fo_);
                     bool? fq_ = context.Operators.And(dt_, fp_);
-
                     return fq_;
-                };
+                }
+
                 IEnumerable<Encounter> aw_ = context.Operators.Where<Encounter>(au_, av_);
-                object ax_(Encounter @this)
-                {
+
+                object ax_(Encounter @this) {
                     Period ir_ = @this?.Period;
                     CqlInterval<CqlDateTime> is_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ir_);
                     CqlDateTime it_ = context.Operators.End(is_);
-
                     return it_;
-                };
+                }
+
                 IEnumerable<Encounter> ay_ = context.Operators.SortBy<Encounter>(aw_, ax_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter az_ = context.Operators.Last<Encounter>(ay_);
                 Period ba_ = az_?.Period;
@@ -972,8 +943,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlDateTime bc_ = context.Operators.Start(bb_);
                 CqlValueSet bd_ = this.Observation_Services(context);
                 IEnumerable<Encounter> be_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? bf_(Encounter LastObs)
-                {
+
+                bool? bf_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> iu_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? iv_ = iu_?.Value;
                     Code<Encounter.EncounterStatus> iw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(iv_);
@@ -995,18 +966,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? jo_ = context.Operators.Not((bool?)(jn_ is null));
                     bool? jp_ = context.Operators.And(jk_, jo_);
                     bool? jq_ = context.Operators.And(ix_, jp_);
-
                     return jq_;
-                };
+                }
+
                 IEnumerable<Encounter> bg_ = context.Operators.Where<Encounter>(be_, bf_);
-                object bh_(Encounter @this)
-                {
+
+                object bh_(Encounter @this) {
                     Period jr_ = @this?.Period;
                     CqlInterval<CqlDateTime> js_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, jr_);
                     CqlDateTime jt_ = context.Operators.End(js_);
-
                     return jt_;
-                };
+                }
+
                 IEnumerable<Encounter> bi_ = context.Operators.SortBy<Encounter>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter bj_ = context.Operators.Last<Encounter>(bi_);
                 Period bk_ = bj_?.Period;
@@ -1018,8 +989,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlQuantity bq_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime br_ = context.Operators.Subtract(bc_ ?? bm_ ?? bp_, bq_);
                 IEnumerable<Encounter> bt_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, at_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? bu_(Encounter LastED)
-                {
+
+                bool? bu_(Encounter LastED) {
                     Code<Encounter.EncounterStatus> ju_ = LastED?.StatusElement;
                     Encounter.EncounterStatus? jv_ = ju_?.Value;
                     Code<Encounter.EncounterStatus> jw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(jv_);
@@ -1029,8 +1000,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlDateTime ka_ = context.Operators.End(jz_);
                     CqlValueSet kb_ = this.Observation_Services(context);
                     IEnumerable<Encounter> kc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, kb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? kd_(Encounter LastObs)
-                    {
+
+                    bool? kd_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> lv_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? lw_ = lv_?.Value;
                         Code<Encounter.EncounterStatus> lx_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(lw_);
@@ -1052,18 +1023,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? mp_ = context.Operators.Not((bool?)(mo_ is null));
                         bool? mq_ = context.Operators.And(ml_, mp_);
                         bool? mr_ = context.Operators.And(ly_, mq_);
-
                         return mr_;
-                    };
+                    }
+
                     IEnumerable<Encounter> ke_ = context.Operators.Where<Encounter>(kc_, kd_);
-                    object kf_(Encounter @this)
-                    {
+
+                    object kf_(Encounter @this) {
                         Period ms_ = @this?.Period;
                         CqlInterval<CqlDateTime> mt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ms_);
                         CqlDateTime mu_ = context.Operators.End(mt_);
-
                         return mu_;
-                    };
+                    }
+
                     IEnumerable<Encounter> kg_ = context.Operators.SortBy<Encounter>(ke_, kf_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter kh_ = context.Operators.Last<Encounter>(kg_);
                     Period ki_ = kh_?.Period;
@@ -1075,8 +1046,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlQuantity ko_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime kp_ = context.Operators.Subtract(kk_ ?? kn_, ko_);
                     IEnumerable<Encounter> kr_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, kb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? ks_(Encounter LastObs)
-                    {
+
+                    bool? ks_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> mv_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? mw_ = mv_?.Value;
                         Code<Encounter.EncounterStatus> mx_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(mw_);
@@ -1098,18 +1069,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? np_ = context.Operators.Not((bool?)(no_ is null));
                         bool? nq_ = context.Operators.And(nl_, np_);
                         bool? nr_ = context.Operators.And(my_, nq_);
-
                         return nr_;
-                    };
+                    }
+
                     IEnumerable<Encounter> kt_ = context.Operators.Where<Encounter>(kr_, ks_);
-                    object ku_(Encounter @this)
-                    {
+
+                    object ku_(Encounter @this) {
                         Period ns_ = @this?.Period;
                         CqlInterval<CqlDateTime> nt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ns_);
                         CqlDateTime nu_ = context.Operators.End(nt_);
-
                         return nu_;
-                    };
+                    }
+
                     IEnumerable<Encounter> kv_ = context.Operators.SortBy<Encounter>(kt_, ku_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter kw_ = context.Operators.Last<Encounter>(kv_);
                     Period kx_ = kw_?.Period;
@@ -1120,8 +1091,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlInterval<CqlDateTime> ld_ = context.Operators.Interval(kp_, kz_ ?? lc_, true, true);
                     bool? le_ = context.Operators.In<CqlDateTime>(ka_, ld_, default);
                     IEnumerable<Encounter> lg_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, kb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? lh_(Encounter LastObs)
-                    {
+
+                    bool? lh_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> nv_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? nw_ = nv_?.Value;
                         Code<Encounter.EncounterStatus> nx_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(nw_);
@@ -1143,18 +1114,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? op_ = context.Operators.Not((bool?)(oo_ is null));
                         bool? oq_ = context.Operators.And(ol_, op_);
                         bool? or_ = context.Operators.And(ny_, oq_);
-
                         return or_;
-                    };
+                    }
+
                     IEnumerable<Encounter> li_ = context.Operators.Where<Encounter>(lg_, lh_);
-                    object lj_(Encounter @this)
-                    {
+
+                    object lj_(Encounter @this) {
                         Period os_ = @this?.Period;
                         CqlInterval<CqlDateTime> ot_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, os_);
                         CqlDateTime ou_ = context.Operators.End(ot_);
-
                         return ou_;
-                    };
+                    }
+
                     IEnumerable<Encounter> lk_ = context.Operators.SortBy<Encounter>(li_, lj_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter ll_ = context.Operators.Last<Encounter>(lk_);
                     Period lm_ = ll_?.Period;
@@ -1165,26 +1136,26 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? ls_ = context.Operators.Not((bool?)((lo_ ?? lr_) is null));
                     bool? lt_ = context.Operators.And(le_, ls_);
                     bool? lu_ = context.Operators.And(jx_, lt_);
-
                     return lu_;
-                };
+                }
+
                 IEnumerable<Encounter> bv_ = context.Operators.Where<Encounter>(bt_, bu_);
-                object bw_(Encounter @this)
-                {
+
+                object bw_(Encounter @this) {
                     Period ov_ = @this?.Period;
                     CqlInterval<CqlDateTime> ow_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ov_);
                     CqlDateTime ox_ = context.Operators.End(ow_);
-
                     return ox_;
-                };
+                }
+
                 IEnumerable<Encounter> bx_ = context.Operators.SortBy<Encounter>(bv_, bw_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter by_ = context.Operators.Last<Encounter>(bx_);
                 Period bz_ = by_?.Period;
                 CqlInterval<CqlDateTime> ca_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bz_);
                 CqlDateTime cb_ = context.Operators.Start(ca_);
                 IEnumerable<Encounter> cd_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? ce_(Encounter LastObs)
-                {
+
+                bool? ce_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> oy_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? oz_ = oy_?.Value;
                     Code<Encounter.EncounterStatus> pa_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(oz_);
@@ -1206,18 +1177,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? ps_ = context.Operators.Not((bool?)(pr_ is null));
                     bool? pt_ = context.Operators.And(po_, ps_);
                     bool? pu_ = context.Operators.And(pb_, pt_);
-
                     return pu_;
-                };
+                }
+
                 IEnumerable<Encounter> cf_ = context.Operators.Where<Encounter>(cd_, ce_);
-                object cg_(Encounter @this)
-                {
+
+                object cg_(Encounter @this) {
                     Period pv_ = @this?.Period;
                     CqlInterval<CqlDateTime> pw_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, pv_);
                     CqlDateTime px_ = context.Operators.End(pw_);
-
                     return px_;
-                };
+                }
+
                 IEnumerable<Encounter> ch_ = context.Operators.SortBy<Encounter>(cf_, cg_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter ci_ = context.Operators.Last<Encounter>(ch_);
                 Period cj_ = ci_?.Period;
@@ -1228,8 +1199,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlInterval<CqlDateTime> cp_ = context.Operators.Interval(br_, cb_ ?? cl_ ?? co_, true, true);
                 bool? cq_ = context.Operators.In<CqlDateTime>(as_, cp_, default);
                 IEnumerable<Encounter> cs_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, at_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? ct_(Encounter LastED)
-                {
+
+                bool? ct_(Encounter LastED) {
                     Code<Encounter.EncounterStatus> py_ = LastED?.StatusElement;
                     Encounter.EncounterStatus? pz_ = py_?.Value;
                     Code<Encounter.EncounterStatus> qa_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(pz_);
@@ -1239,8 +1210,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlDateTime qe_ = context.Operators.End(qd_);
                     CqlValueSet qf_ = this.Observation_Services(context);
                     IEnumerable<Encounter> qg_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? qh_(Encounter LastObs)
-                    {
+
+                    bool? qh_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> rz_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? sa_ = rz_?.Value;
                         Code<Encounter.EncounterStatus> sb_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(sa_);
@@ -1262,18 +1233,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? st_ = context.Operators.Not((bool?)(ss_ is null));
                         bool? su_ = context.Operators.And(sp_, st_);
                         bool? sv_ = context.Operators.And(sc_, su_);
-
                         return sv_;
-                    };
+                    }
+
                     IEnumerable<Encounter> qi_ = context.Operators.Where<Encounter>(qg_, qh_);
-                    object qj_(Encounter @this)
-                    {
+
+                    object qj_(Encounter @this) {
                         Period sw_ = @this?.Period;
                         CqlInterval<CqlDateTime> sx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, sw_);
                         CqlDateTime sy_ = context.Operators.End(sx_);
-
                         return sy_;
-                    };
+                    }
+
                     IEnumerable<Encounter> qk_ = context.Operators.SortBy<Encounter>(qi_, qj_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter ql_ = context.Operators.Last<Encounter>(qk_);
                     Period qm_ = ql_?.Period;
@@ -1285,8 +1256,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlQuantity qs_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime qt_ = context.Operators.Subtract(qo_ ?? qr_, qs_);
                     IEnumerable<Encounter> qv_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? qw_(Encounter LastObs)
-                    {
+
+                    bool? qw_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> sz_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? ta_ = sz_?.Value;
                         Code<Encounter.EncounterStatus> tb_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ta_);
@@ -1308,18 +1279,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? tt_ = context.Operators.Not((bool?)(ts_ is null));
                         bool? tu_ = context.Operators.And(tp_, tt_);
                         bool? tv_ = context.Operators.And(tc_, tu_);
-
                         return tv_;
-                    };
+                    }
+
                     IEnumerable<Encounter> qx_ = context.Operators.Where<Encounter>(qv_, qw_);
-                    object qy_(Encounter @this)
-                    {
+
+                    object qy_(Encounter @this) {
                         Period tw_ = @this?.Period;
                         CqlInterval<CqlDateTime> tx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, tw_);
                         CqlDateTime ty_ = context.Operators.End(tx_);
-
                         return ty_;
-                    };
+                    }
+
                     IEnumerable<Encounter> qz_ = context.Operators.SortBy<Encounter>(qx_, qy_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter ra_ = context.Operators.Last<Encounter>(qz_);
                     Period rb_ = ra_?.Period;
@@ -1330,8 +1301,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlInterval<CqlDateTime> rh_ = context.Operators.Interval(qt_, rd_ ?? rg_, true, true);
                     bool? ri_ = context.Operators.In<CqlDateTime>(qe_, rh_, default);
                     IEnumerable<Encounter> rk_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? rl_(Encounter LastObs)
-                    {
+
+                    bool? rl_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> tz_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? ua_ = tz_?.Value;
                         Code<Encounter.EncounterStatus> ub_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ua_);
@@ -1353,18 +1324,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? ut_ = context.Operators.Not((bool?)(us_ is null));
                         bool? uu_ = context.Operators.And(up_, ut_);
                         bool? uv_ = context.Operators.And(uc_, uu_);
-
                         return uv_;
-                    };
+                    }
+
                     IEnumerable<Encounter> rm_ = context.Operators.Where<Encounter>(rk_, rl_);
-                    object rn_(Encounter @this)
-                    {
+
+                    object rn_(Encounter @this) {
                         Period uw_ = @this?.Period;
                         CqlInterval<CqlDateTime> ux_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, uw_);
                         CqlDateTime uy_ = context.Operators.End(ux_);
-
                         return uy_;
-                    };
+                    }
+
                     IEnumerable<Encounter> ro_ = context.Operators.SortBy<Encounter>(rm_, rn_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter rp_ = context.Operators.Last<Encounter>(ro_);
                     Period rq_ = rp_?.Period;
@@ -1375,26 +1346,26 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? rw_ = context.Operators.Not((bool?)((rs_ ?? rv_) is null));
                     bool? rx_ = context.Operators.And(ri_, rw_);
                     bool? ry_ = context.Operators.And(qb_, rx_);
-
                     return ry_;
-                };
+                }
+
                 IEnumerable<Encounter> cu_ = context.Operators.Where<Encounter>(cs_, ct_);
-                object cv_(Encounter @this)
-                {
+
+                object cv_(Encounter @this) {
                     Period uz_ = @this?.Period;
                     CqlInterval<CqlDateTime> va_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, uz_);
                     CqlDateTime vb_ = context.Operators.End(va_);
-
                     return vb_;
-                };
+                }
+
                 IEnumerable<Encounter> cw_ = context.Operators.SortBy<Encounter>(cu_, cv_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter cx_ = context.Operators.Last<Encounter>(cw_);
                 Period cy_ = cx_?.Period;
                 CqlInterval<CqlDateTime> cz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cy_);
                 CqlDateTime da_ = context.Operators.Start(cz_);
                 IEnumerable<Encounter> dc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? dd_(Encounter LastObs)
-                {
+
+                bool? dd_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> vc_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? vd_ = vc_?.Value;
                     Code<Encounter.EncounterStatus> ve_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(vd_);
@@ -1416,18 +1387,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? vw_ = context.Operators.Not((bool?)(vv_ is null));
                     bool? vx_ = context.Operators.And(vs_, vw_);
                     bool? vy_ = context.Operators.And(vf_, vx_);
-
                     return vy_;
-                };
+                }
+
                 IEnumerable<Encounter> de_ = context.Operators.Where<Encounter>(dc_, dd_);
-                object df_(Encounter @this)
-                {
+
+                object df_(Encounter @this) {
                     Period vz_ = @this?.Period;
                     CqlInterval<CqlDateTime> wa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, vz_);
                     CqlDateTime wb_ = context.Operators.End(wa_);
-
                     return wb_;
-                };
+                }
+
                 IEnumerable<Encounter> dg_ = context.Operators.SortBy<Encounter>(de_, df_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter dh_ = context.Operators.Last<Encounter>(dg_);
                 Period di_ = dh_?.Period;
@@ -1437,18 +1408,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlDateTime dn_ = context.Operators.Start(dm_);
                 bool? do_ = context.Operators.Not((bool?)((da_ ?? dk_ ?? dn_) is null));
                 bool? dp_ = context.Operators.And(cq_, do_);
-
                 return dp_;
-            };
+            }
+
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-            object j_(Encounter @this)
-            {
+
+            object j_(Encounter @this) {
                 Period wc_ = @this?.Period;
                 CqlInterval<CqlDateTime> wd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, wc_);
                 CqlDateTime we_ = context.Operators.End(wd_);
-
                 return we_;
-            };
+            }
+
             IEnumerable<Encounter> k_ = context.Operators.SortBy<Encounter>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
             Encounter l_ = context.Operators.Last<Encounter>(k_);
             Period m_ = l_?.Period;
@@ -1456,8 +1427,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlDateTime o_ = context.Operators.Start(n_);
             CqlValueSet p_ = this.Emergency_Department_Visit(context);
             IEnumerable<Encounter> q_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            bool? r_(Encounter LastED)
-            {
+
+            bool? r_(Encounter LastED) {
                 Code<Encounter.EncounterStatus> wf_ = LastED?.StatusElement;
                 Encounter.EncounterStatus? wg_ = wf_?.Value;
                 Code<Encounter.EncounterStatus> wh_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(wg_);
@@ -1467,8 +1438,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlDateTime wl_ = context.Operators.End(wk_);
                 CqlValueSet wm_ = this.Observation_Services(context);
                 IEnumerable<Encounter> wn_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? wo_(Encounter LastObs)
-                {
+
+                bool? wo_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> yg_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? yh_ = yg_?.Value;
                     Code<Encounter.EncounterStatus> yi_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(yh_);
@@ -1490,18 +1461,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? za_ = context.Operators.Not((bool?)(yz_ is null));
                     bool? zb_ = context.Operators.And(yw_, za_);
                     bool? zc_ = context.Operators.And(yj_, zb_);
-
                     return zc_;
-                };
+                }
+
                 IEnumerable<Encounter> wp_ = context.Operators.Where<Encounter>(wn_, wo_);
-                object wq_(Encounter @this)
-                {
+
+                object wq_(Encounter @this) {
                     Period zd_ = @this?.Period;
                     CqlInterval<CqlDateTime> ze_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, zd_);
                     CqlDateTime zf_ = context.Operators.End(ze_);
-
                     return zf_;
-                };
+                }
+
                 IEnumerable<Encounter> wr_ = context.Operators.SortBy<Encounter>(wp_, wq_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter ws_ = context.Operators.Last<Encounter>(wr_);
                 Period wt_ = ws_?.Period;
@@ -1513,8 +1484,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlQuantity wz_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime xa_ = context.Operators.Subtract(wv_ ?? wy_, wz_);
                 IEnumerable<Encounter> xc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? xd_(Encounter LastObs)
-                {
+
+                bool? xd_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> zg_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? zh_ = zg_?.Value;
                     Code<Encounter.EncounterStatus> zi_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(zh_);
@@ -1536,18 +1507,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? aza_ = context.Operators.Not((bool?)(zz_ is null));
                     bool? azb_ = context.Operators.And(zw_, aza_);
                     bool? azc_ = context.Operators.And(zj_, azb_);
-
                     return azc_;
-                };
+                }
+
                 IEnumerable<Encounter> xe_ = context.Operators.Where<Encounter>(xc_, xd_);
-                object xf_(Encounter @this)
-                {
+
+                object xf_(Encounter @this) {
                     Period azd_ = @this?.Period;
                     CqlInterval<CqlDateTime> aze_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, azd_);
                     CqlDateTime azf_ = context.Operators.End(aze_);
-
                     return azf_;
-                };
+                }
+
                 IEnumerable<Encounter> xg_ = context.Operators.SortBy<Encounter>(xe_, xf_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter xh_ = context.Operators.Last<Encounter>(xg_);
                 Period xi_ = xh_?.Period;
@@ -1558,8 +1529,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlInterval<CqlDateTime> xo_ = context.Operators.Interval(xa_, xk_ ?? xn_, true, true);
                 bool? xp_ = context.Operators.In<CqlDateTime>(wl_, xo_, default);
                 IEnumerable<Encounter> xr_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? xs_(Encounter LastObs)
-                {
+
+                bool? xs_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> azg_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? azh_ = azg_?.Value;
                     Code<Encounter.EncounterStatus> azi_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(azh_);
@@ -1581,18 +1552,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? bza_ = context.Operators.Not((bool?)(azz_ is null));
                     bool? bzb_ = context.Operators.And(azw_, bza_);
                     bool? bzc_ = context.Operators.And(azj_, bzb_);
-
                     return bzc_;
-                };
+                }
+
                 IEnumerable<Encounter> xt_ = context.Operators.Where<Encounter>(xr_, xs_);
-                object xu_(Encounter @this)
-                {
+
+                object xu_(Encounter @this) {
                     Period bzd_ = @this?.Period;
                     CqlInterval<CqlDateTime> bze_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bzd_);
                     CqlDateTime bzf_ = context.Operators.End(bze_);
-
                     return bzf_;
-                };
+                }
+
                 IEnumerable<Encounter> xv_ = context.Operators.SortBy<Encounter>(xt_, xu_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter xw_ = context.Operators.Last<Encounter>(xv_);
                 Period xx_ = xw_?.Period;
@@ -1603,18 +1574,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 bool? yd_ = context.Operators.Not((bool?)((xz_ ?? yc_) is null));
                 bool? ye_ = context.Operators.And(xp_, yd_);
                 bool? yf_ = context.Operators.And(wi_, ye_);
-
                 return yf_;
-            };
+            }
+
             IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
-            object t_(Encounter @this)
-            {
+
+            object t_(Encounter @this) {
                 Period bzg_ = @this?.Period;
                 CqlInterval<CqlDateTime> bzh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bzg_);
                 CqlDateTime bzi_ = context.Operators.End(bzh_);
-
                 return bzi_;
-            };
+            }
+
             IEnumerable<Encounter> u_ = context.Operators.SortBy<Encounter>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
             Encounter v_ = context.Operators.Last<Encounter>(u_);
             Period w_ = v_?.Period;
@@ -1622,8 +1593,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlDateTime y_ = context.Operators.Start(x_);
             CqlValueSet z_ = this.Observation_Services(context);
             IEnumerable<Encounter> aa_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            bool? ab_(Encounter LastObs)
-            {
+
+            bool? ab_(Encounter LastObs) {
                 Code<Encounter.EncounterStatus> bzj_ = LastObs?.StatusElement;
                 Encounter.EncounterStatus? bzk_ = bzj_?.Value;
                 Code<Encounter.EncounterStatus> bzl_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(bzk_);
@@ -1645,18 +1616,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 bool? czd_ = context.Operators.Not((bool?)(czc_ is null));
                 bool? cze_ = context.Operators.And(bzz_, czd_);
                 bool? czf_ = context.Operators.And(bzm_, cze_);
-
                 return czf_;
-            };
+            }
+
             IEnumerable<Encounter> ac_ = context.Operators.Where<Encounter>(aa_, ab_);
-            object ad_(Encounter @this)
-            {
+
+            object ad_(Encounter @this) {
                 Period czg_ = @this?.Period;
                 CqlInterval<CqlDateTime> czh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, czg_);
                 CqlDateTime czi_ = context.Operators.End(czh_);
-
                 return czi_;
-            };
+            }
+
             IEnumerable<Encounter> ae_ = context.Operators.SortBy<Encounter>(ac_, ad_, System.ComponentModel.ListSortDirection.Ascending);
             Encounter af_ = context.Operators.Last<Encounter>(ae_);
             Period ag_ = af_?.Period;
@@ -1668,13 +1639,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
             CqlDateTime ao_ = context.Operators.End(an_);
             CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(o_ ?? y_ ?? ai_ ?? al_, ao_, true, true);
-
             return ap_;
-        };
+        }
+
         IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(c_);
         CqlInterval<CqlDateTime> e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
-
         return e_;
     }
 
@@ -1686,19 +1656,19 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Encounter[] a_ = [
             TheEncounter,
         ];
-        CqlInterval<CqlDateTime> b_(Encounter Visit)
-        {
+
+        CqlInterval<CqlDateTime> b_(Encounter Visit) {
             CqlValueSet f_ = this.Outpatient_Surgery_Service(context);
             IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            bool? h_(Encounter LastSurgeryOP)
-            {
+
+            bool? h_(Encounter LastSurgeryOP) {
                 Period aq_ = LastSurgeryOP?.Period;
                 CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aq_);
                 CqlDateTime as_ = context.Operators.End(ar_);
                 CqlValueSet at_ = this.Emergency_Department_Visit(context);
                 IEnumerable<Encounter> au_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, at_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? av_(Encounter LastED)
-                {
+
+                bool? av_(Encounter LastED) {
                     Code<Encounter.EncounterStatus> dq_ = LastED?.StatusElement;
                     Encounter.EncounterStatus? dr_ = dq_?.Value;
                     Code<Encounter.EncounterStatus> ds_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(dr_);
@@ -1708,8 +1678,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlDateTime dw_ = context.Operators.End(dv_);
                     CqlValueSet dx_ = this.Observation_Services(context);
                     IEnumerable<Encounter> dy_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? dz_(Encounter LastObs)
-                    {
+
+                    bool? dz_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> fr_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? fs_ = fr_?.Value;
                         Code<Encounter.EncounterStatus> ft_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(fs_);
@@ -1731,18 +1701,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? gl_ = context.Operators.Not((bool?)(gk_ is null));
                         bool? gm_ = context.Operators.And(gh_, gl_);
                         bool? gn_ = context.Operators.And(fu_, gm_);
-
                         return gn_;
-                    };
+                    }
+
                     IEnumerable<Encounter> ea_ = context.Operators.Where<Encounter>(dy_, dz_);
-                    object eb_(Encounter @this)
-                    {
+
+                    object eb_(Encounter @this) {
                         Period go_ = @this?.Period;
                         CqlInterval<CqlDateTime> gp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, go_);
                         CqlDateTime gq_ = context.Operators.End(gp_);
-
                         return gq_;
-                    };
+                    }
+
                     IEnumerable<Encounter> ec_ = context.Operators.SortBy<Encounter>(ea_, eb_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter ed_ = context.Operators.Last<Encounter>(ec_);
                     Period ee_ = ed_?.Period;
@@ -1754,8 +1724,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlQuantity ek_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime el_ = context.Operators.Subtract(eg_ ?? ej_, ek_);
                     IEnumerable<Encounter> en_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? eo_(Encounter LastObs)
-                    {
+
+                    bool? eo_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> gr_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? gs_ = gr_?.Value;
                         Code<Encounter.EncounterStatus> gt_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(gs_);
@@ -1777,18 +1747,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? hl_ = context.Operators.Not((bool?)(hk_ is null));
                         bool? hm_ = context.Operators.And(hh_, hl_);
                         bool? hn_ = context.Operators.And(gu_, hm_);
-
                         return hn_;
-                    };
+                    }
+
                     IEnumerable<Encounter> ep_ = context.Operators.Where<Encounter>(en_, eo_);
-                    object eq_(Encounter @this)
-                    {
+
+                    object eq_(Encounter @this) {
                         Period ho_ = @this?.Period;
                         CqlInterval<CqlDateTime> hp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ho_);
                         CqlDateTime hq_ = context.Operators.End(hp_);
-
                         return hq_;
-                    };
+                    }
+
                     IEnumerable<Encounter> er_ = context.Operators.SortBy<Encounter>(ep_, eq_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter es_ = context.Operators.Last<Encounter>(er_);
                     Period et_ = es_?.Period;
@@ -1799,8 +1769,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlInterval<CqlDateTime> ez_ = context.Operators.Interval(el_, ev_ ?? ey_, true, true);
                     bool? fa_ = context.Operators.In<CqlDateTime>(dw_, ez_, default);
                     IEnumerable<Encounter> fc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? fd_(Encounter LastObs)
-                    {
+
+                    bool? fd_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> hr_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? hs_ = hr_?.Value;
                         Code<Encounter.EncounterStatus> ht_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(hs_);
@@ -1822,18 +1792,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? il_ = context.Operators.Not((bool?)(ik_ is null));
                         bool? im_ = context.Operators.And(ih_, il_);
                         bool? in_ = context.Operators.And(hu_, im_);
-
                         return in_;
-                    };
+                    }
+
                     IEnumerable<Encounter> fe_ = context.Operators.Where<Encounter>(fc_, fd_);
-                    object ff_(Encounter @this)
-                    {
+
+                    object ff_(Encounter @this) {
                         Period io_ = @this?.Period;
                         CqlInterval<CqlDateTime> ip_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, io_);
                         CqlDateTime iq_ = context.Operators.End(ip_);
-
                         return iq_;
-                    };
+                    }
+
                     IEnumerable<Encounter> fg_ = context.Operators.SortBy<Encounter>(fe_, ff_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter fh_ = context.Operators.Last<Encounter>(fg_);
                     Period fi_ = fh_?.Period;
@@ -1844,18 +1814,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? fo_ = context.Operators.Not((bool?)((fk_ ?? fn_) is null));
                     bool? fp_ = context.Operators.And(fa_, fo_);
                     bool? fq_ = context.Operators.And(dt_, fp_);
-
                     return fq_;
-                };
+                }
+
                 IEnumerable<Encounter> aw_ = context.Operators.Where<Encounter>(au_, av_);
-                object ax_(Encounter @this)
-                {
+
+                object ax_(Encounter @this) {
                     Period ir_ = @this?.Period;
                     CqlInterval<CqlDateTime> is_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ir_);
                     CqlDateTime it_ = context.Operators.End(is_);
-
                     return it_;
-                };
+                }
+
                 IEnumerable<Encounter> ay_ = context.Operators.SortBy<Encounter>(aw_, ax_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter az_ = context.Operators.Last<Encounter>(ay_);
                 Period ba_ = az_?.Period;
@@ -1863,8 +1833,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlDateTime bc_ = context.Operators.Start(bb_);
                 CqlValueSet bd_ = this.Observation_Services(context);
                 IEnumerable<Encounter> be_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? bf_(Encounter LastObs)
-                {
+
+                bool? bf_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> iu_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? iv_ = iu_?.Value;
                     Code<Encounter.EncounterStatus> iw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(iv_);
@@ -1886,18 +1856,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? jo_ = context.Operators.Not((bool?)(jn_ is null));
                     bool? jp_ = context.Operators.And(jk_, jo_);
                     bool? jq_ = context.Operators.And(ix_, jp_);
-
                     return jq_;
-                };
+                }
+
                 IEnumerable<Encounter> bg_ = context.Operators.Where<Encounter>(be_, bf_);
-                object bh_(Encounter @this)
-                {
+
+                object bh_(Encounter @this) {
                     Period jr_ = @this?.Period;
                     CqlInterval<CqlDateTime> js_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, jr_);
                     CqlDateTime jt_ = context.Operators.End(js_);
-
                     return jt_;
-                };
+                }
+
                 IEnumerable<Encounter> bi_ = context.Operators.SortBy<Encounter>(bg_, bh_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter bj_ = context.Operators.Last<Encounter>(bi_);
                 Period bk_ = bj_?.Period;
@@ -1909,8 +1879,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlQuantity bq_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime br_ = context.Operators.Subtract(bc_ ?? bm_ ?? bp_, bq_);
                 IEnumerable<Encounter> bt_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, at_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? bu_(Encounter LastED)
-                {
+
+                bool? bu_(Encounter LastED) {
                     Code<Encounter.EncounterStatus> ju_ = LastED?.StatusElement;
                     Encounter.EncounterStatus? jv_ = ju_?.Value;
                     Code<Encounter.EncounterStatus> jw_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(jv_);
@@ -1920,8 +1890,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlDateTime ka_ = context.Operators.End(jz_);
                     CqlValueSet kb_ = this.Observation_Services(context);
                     IEnumerable<Encounter> kc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, kb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? kd_(Encounter LastObs)
-                    {
+
+                    bool? kd_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> lv_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? lw_ = lv_?.Value;
                         Code<Encounter.EncounterStatus> lx_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(lw_);
@@ -1943,18 +1913,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? mp_ = context.Operators.Not((bool?)(mo_ is null));
                         bool? mq_ = context.Operators.And(ml_, mp_);
                         bool? mr_ = context.Operators.And(ly_, mq_);
-
                         return mr_;
-                    };
+                    }
+
                     IEnumerable<Encounter> ke_ = context.Operators.Where<Encounter>(kc_, kd_);
-                    object kf_(Encounter @this)
-                    {
+
+                    object kf_(Encounter @this) {
                         Period ms_ = @this?.Period;
                         CqlInterval<CqlDateTime> mt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ms_);
                         CqlDateTime mu_ = context.Operators.End(mt_);
-
                         return mu_;
-                    };
+                    }
+
                     IEnumerable<Encounter> kg_ = context.Operators.SortBy<Encounter>(ke_, kf_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter kh_ = context.Operators.Last<Encounter>(kg_);
                     Period ki_ = kh_?.Period;
@@ -1966,8 +1936,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlQuantity ko_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime kp_ = context.Operators.Subtract(kk_ ?? kn_, ko_);
                     IEnumerable<Encounter> kr_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, kb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? ks_(Encounter LastObs)
-                    {
+
+                    bool? ks_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> mv_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? mw_ = mv_?.Value;
                         Code<Encounter.EncounterStatus> mx_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(mw_);
@@ -1989,18 +1959,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? np_ = context.Operators.Not((bool?)(no_ is null));
                         bool? nq_ = context.Operators.And(nl_, np_);
                         bool? nr_ = context.Operators.And(my_, nq_);
-
                         return nr_;
-                    };
+                    }
+
                     IEnumerable<Encounter> kt_ = context.Operators.Where<Encounter>(kr_, ks_);
-                    object ku_(Encounter @this)
-                    {
+
+                    object ku_(Encounter @this) {
                         Period ns_ = @this?.Period;
                         CqlInterval<CqlDateTime> nt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ns_);
                         CqlDateTime nu_ = context.Operators.End(nt_);
-
                         return nu_;
-                    };
+                    }
+
                     IEnumerable<Encounter> kv_ = context.Operators.SortBy<Encounter>(kt_, ku_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter kw_ = context.Operators.Last<Encounter>(kv_);
                     Period kx_ = kw_?.Period;
@@ -2011,8 +1981,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlInterval<CqlDateTime> ld_ = context.Operators.Interval(kp_, kz_ ?? lc_, true, true);
                     bool? le_ = context.Operators.In<CqlDateTime>(ka_, ld_, default);
                     IEnumerable<Encounter> lg_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, kb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? lh_(Encounter LastObs)
-                    {
+
+                    bool? lh_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> nv_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? nw_ = nv_?.Value;
                         Code<Encounter.EncounterStatus> nx_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(nw_);
@@ -2034,18 +2004,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? op_ = context.Operators.Not((bool?)(oo_ is null));
                         bool? oq_ = context.Operators.And(ol_, op_);
                         bool? or_ = context.Operators.And(ny_, oq_);
-
                         return or_;
-                    };
+                    }
+
                     IEnumerable<Encounter> li_ = context.Operators.Where<Encounter>(lg_, lh_);
-                    object lj_(Encounter @this)
-                    {
+
+                    object lj_(Encounter @this) {
                         Period os_ = @this?.Period;
                         CqlInterval<CqlDateTime> ot_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, os_);
                         CqlDateTime ou_ = context.Operators.End(ot_);
-
                         return ou_;
-                    };
+                    }
+
                     IEnumerable<Encounter> lk_ = context.Operators.SortBy<Encounter>(li_, lj_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter ll_ = context.Operators.Last<Encounter>(lk_);
                     Period lm_ = ll_?.Period;
@@ -2056,26 +2026,26 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? ls_ = context.Operators.Not((bool?)((lo_ ?? lr_) is null));
                     bool? lt_ = context.Operators.And(le_, ls_);
                     bool? lu_ = context.Operators.And(jx_, lt_);
-
                     return lu_;
-                };
+                }
+
                 IEnumerable<Encounter> bv_ = context.Operators.Where<Encounter>(bt_, bu_);
-                object bw_(Encounter @this)
-                {
+
+                object bw_(Encounter @this) {
                     Period ov_ = @this?.Period;
                     CqlInterval<CqlDateTime> ow_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ov_);
                     CqlDateTime ox_ = context.Operators.End(ow_);
-
                     return ox_;
-                };
+                }
+
                 IEnumerable<Encounter> bx_ = context.Operators.SortBy<Encounter>(bv_, bw_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter by_ = context.Operators.Last<Encounter>(bx_);
                 Period bz_ = by_?.Period;
                 CqlInterval<CqlDateTime> ca_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bz_);
                 CqlDateTime cb_ = context.Operators.Start(ca_);
                 IEnumerable<Encounter> cd_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? ce_(Encounter LastObs)
-                {
+
+                bool? ce_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> oy_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? oz_ = oy_?.Value;
                     Code<Encounter.EncounterStatus> pa_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(oz_);
@@ -2097,18 +2067,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? ps_ = context.Operators.Not((bool?)(pr_ is null));
                     bool? pt_ = context.Operators.And(po_, ps_);
                     bool? pu_ = context.Operators.And(pb_, pt_);
-
                     return pu_;
-                };
+                }
+
                 IEnumerable<Encounter> cf_ = context.Operators.Where<Encounter>(cd_, ce_);
-                object cg_(Encounter @this)
-                {
+
+                object cg_(Encounter @this) {
                     Period pv_ = @this?.Period;
                     CqlInterval<CqlDateTime> pw_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, pv_);
                     CqlDateTime px_ = context.Operators.End(pw_);
-
                     return px_;
-                };
+                }
+
                 IEnumerable<Encounter> ch_ = context.Operators.SortBy<Encounter>(cf_, cg_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter ci_ = context.Operators.Last<Encounter>(ch_);
                 Period cj_ = ci_?.Period;
@@ -2119,8 +2089,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlInterval<CqlDateTime> cp_ = context.Operators.Interval(br_, cb_ ?? cl_ ?? co_, true, true);
                 bool? cq_ = context.Operators.In<CqlDateTime>(as_, cp_, default);
                 IEnumerable<Encounter> cs_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, at_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? ct_(Encounter LastED)
-                {
+
+                bool? ct_(Encounter LastED) {
                     Code<Encounter.EncounterStatus> py_ = LastED?.StatusElement;
                     Encounter.EncounterStatus? pz_ = py_?.Value;
                     Code<Encounter.EncounterStatus> qa_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(pz_);
@@ -2130,8 +2100,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlDateTime qe_ = context.Operators.End(qd_);
                     CqlValueSet qf_ = this.Observation_Services(context);
                     IEnumerable<Encounter> qg_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? qh_(Encounter LastObs)
-                    {
+
+                    bool? qh_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> rz_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? sa_ = rz_?.Value;
                         Code<Encounter.EncounterStatus> sb_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(sa_);
@@ -2153,18 +2123,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? st_ = context.Operators.Not((bool?)(ss_ is null));
                         bool? su_ = context.Operators.And(sp_, st_);
                         bool? sv_ = context.Operators.And(sc_, su_);
-
                         return sv_;
-                    };
+                    }
+
                     IEnumerable<Encounter> qi_ = context.Operators.Where<Encounter>(qg_, qh_);
-                    object qj_(Encounter @this)
-                    {
+
+                    object qj_(Encounter @this) {
                         Period sw_ = @this?.Period;
                         CqlInterval<CqlDateTime> sx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, sw_);
                         CqlDateTime sy_ = context.Operators.End(sx_);
-
                         return sy_;
-                    };
+                    }
+
                     IEnumerable<Encounter> qk_ = context.Operators.SortBy<Encounter>(qi_, qj_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter ql_ = context.Operators.Last<Encounter>(qk_);
                     Period qm_ = ql_?.Period;
@@ -2176,8 +2146,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlQuantity qs_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime qt_ = context.Operators.Subtract(qo_ ?? qr_, qs_);
                     IEnumerable<Encounter> qv_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? qw_(Encounter LastObs)
-                    {
+
+                    bool? qw_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> sz_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? ta_ = sz_?.Value;
                         Code<Encounter.EncounterStatus> tb_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ta_);
@@ -2199,18 +2169,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? tt_ = context.Operators.Not((bool?)(ts_ is null));
                         bool? tu_ = context.Operators.And(tp_, tt_);
                         bool? tv_ = context.Operators.And(tc_, tu_);
-
                         return tv_;
-                    };
+                    }
+
                     IEnumerable<Encounter> qx_ = context.Operators.Where<Encounter>(qv_, qw_);
-                    object qy_(Encounter @this)
-                    {
+
+                    object qy_(Encounter @this) {
                         Period tw_ = @this?.Period;
                         CqlInterval<CqlDateTime> tx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, tw_);
                         CqlDateTime ty_ = context.Operators.End(tx_);
-
                         return ty_;
-                    };
+                    }
+
                     IEnumerable<Encounter> qz_ = context.Operators.SortBy<Encounter>(qx_, qy_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter ra_ = context.Operators.Last<Encounter>(qz_);
                     Period rb_ = ra_?.Period;
@@ -2221,8 +2191,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     CqlInterval<CqlDateTime> rh_ = context.Operators.Interval(qt_, rd_ ?? rg_, true, true);
                     bool? ri_ = context.Operators.In<CqlDateTime>(qe_, rh_, default);
                     IEnumerable<Encounter> rk_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                    bool? rl_(Encounter LastObs)
-                    {
+
+                    bool? rl_(Encounter LastObs) {
                         Code<Encounter.EncounterStatus> tz_ = LastObs?.StatusElement;
                         Encounter.EncounterStatus? ua_ = tz_?.Value;
                         Code<Encounter.EncounterStatus> ub_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ua_);
@@ -2244,18 +2214,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         bool? ut_ = context.Operators.Not((bool?)(us_ is null));
                         bool? uu_ = context.Operators.And(up_, ut_);
                         bool? uv_ = context.Operators.And(uc_, uu_);
-
                         return uv_;
-                    };
+                    }
+
                     IEnumerable<Encounter> rm_ = context.Operators.Where<Encounter>(rk_, rl_);
-                    object rn_(Encounter @this)
-                    {
+
+                    object rn_(Encounter @this) {
                         Period uw_ = @this?.Period;
                         CqlInterval<CqlDateTime> ux_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, uw_);
                         CqlDateTime uy_ = context.Operators.End(ux_);
-
                         return uy_;
-                    };
+                    }
+
                     IEnumerable<Encounter> ro_ = context.Operators.SortBy<Encounter>(rm_, rn_, System.ComponentModel.ListSortDirection.Ascending);
                     Encounter rp_ = context.Operators.Last<Encounter>(ro_);
                     Period rq_ = rp_?.Period;
@@ -2266,26 +2236,26 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? rw_ = context.Operators.Not((bool?)((rs_ ?? rv_) is null));
                     bool? rx_ = context.Operators.And(ri_, rw_);
                     bool? ry_ = context.Operators.And(qb_, rx_);
-
                     return ry_;
-                };
+                }
+
                 IEnumerable<Encounter> cu_ = context.Operators.Where<Encounter>(cs_, ct_);
-                object cv_(Encounter @this)
-                {
+
+                object cv_(Encounter @this) {
                     Period uz_ = @this?.Period;
                     CqlInterval<CqlDateTime> va_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, uz_);
                     CqlDateTime vb_ = context.Operators.End(va_);
-
                     return vb_;
-                };
+                }
+
                 IEnumerable<Encounter> cw_ = context.Operators.SortBy<Encounter>(cu_, cv_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter cx_ = context.Operators.Last<Encounter>(cw_);
                 Period cy_ = cx_?.Period;
                 CqlInterval<CqlDateTime> cz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cy_);
                 CqlDateTime da_ = context.Operators.Start(cz_);
                 IEnumerable<Encounter> dc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bd_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? dd_(Encounter LastObs)
-                {
+
+                bool? dd_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> vc_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? vd_ = vc_?.Value;
                     Code<Encounter.EncounterStatus> ve_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(vd_);
@@ -2307,18 +2277,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? vw_ = context.Operators.Not((bool?)(vv_ is null));
                     bool? vx_ = context.Operators.And(vs_, vw_);
                     bool? vy_ = context.Operators.And(vf_, vx_);
-
                     return vy_;
-                };
+                }
+
                 IEnumerable<Encounter> de_ = context.Operators.Where<Encounter>(dc_, dd_);
-                object df_(Encounter @this)
-                {
+
+                object df_(Encounter @this) {
                     Period vz_ = @this?.Period;
                     CqlInterval<CqlDateTime> wa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, vz_);
                     CqlDateTime wb_ = context.Operators.End(wa_);
-
                     return wb_;
-                };
+                }
+
                 IEnumerable<Encounter> dg_ = context.Operators.SortBy<Encounter>(de_, df_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter dh_ = context.Operators.Last<Encounter>(dg_);
                 Period di_ = dh_?.Period;
@@ -2328,18 +2298,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlDateTime dn_ = context.Operators.Start(dm_);
                 bool? do_ = context.Operators.Not((bool?)((da_ ?? dk_ ?? dn_) is null));
                 bool? dp_ = context.Operators.And(cq_, do_);
-
                 return dp_;
-            };
+            }
+
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-            object j_(Encounter @this)
-            {
+
+            object j_(Encounter @this) {
                 Period wc_ = @this?.Period;
                 CqlInterval<CqlDateTime> wd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, wc_);
                 CqlDateTime we_ = context.Operators.End(wd_);
-
                 return we_;
-            };
+            }
+
             IEnumerable<Encounter> k_ = context.Operators.SortBy<Encounter>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
             Encounter l_ = context.Operators.Last<Encounter>(k_);
             Period m_ = l_?.Period;
@@ -2347,8 +2317,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlDateTime o_ = context.Operators.Start(n_);
             CqlValueSet p_ = this.Emergency_Department_Visit(context);
             IEnumerable<Encounter> q_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            bool? r_(Encounter LastED)
-            {
+
+            bool? r_(Encounter LastED) {
                 Code<Encounter.EncounterStatus> wf_ = LastED?.StatusElement;
                 Encounter.EncounterStatus? wg_ = wf_?.Value;
                 Code<Encounter.EncounterStatus> wh_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(wg_);
@@ -2358,8 +2328,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlDateTime wl_ = context.Operators.End(wk_);
                 CqlValueSet wm_ = this.Observation_Services(context);
                 IEnumerable<Encounter> wn_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? wo_(Encounter LastObs)
-                {
+
+                bool? wo_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> yg_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? yh_ = yg_?.Value;
                     Code<Encounter.EncounterStatus> yi_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(yh_);
@@ -2381,18 +2351,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? za_ = context.Operators.Not((bool?)(yz_ is null));
                     bool? zb_ = context.Operators.And(yw_, za_);
                     bool? zc_ = context.Operators.And(yj_, zb_);
-
                     return zc_;
-                };
+                }
+
                 IEnumerable<Encounter> wp_ = context.Operators.Where<Encounter>(wn_, wo_);
-                object wq_(Encounter @this)
-                {
+
+                object wq_(Encounter @this) {
                     Period zd_ = @this?.Period;
                     CqlInterval<CqlDateTime> ze_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, zd_);
                     CqlDateTime zf_ = context.Operators.End(ze_);
-
                     return zf_;
-                };
+                }
+
                 IEnumerable<Encounter> wr_ = context.Operators.SortBy<Encounter>(wp_, wq_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter ws_ = context.Operators.Last<Encounter>(wr_);
                 Period wt_ = ws_?.Period;
@@ -2404,8 +2374,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlQuantity wz_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime xa_ = context.Operators.Subtract(wv_ ?? wy_, wz_);
                 IEnumerable<Encounter> xc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? xd_(Encounter LastObs)
-                {
+
+                bool? xd_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> zg_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? zh_ = zg_?.Value;
                     Code<Encounter.EncounterStatus> zi_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(zh_);
@@ -2427,18 +2397,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? aza_ = context.Operators.Not((bool?)(zz_ is null));
                     bool? azb_ = context.Operators.And(zw_, aza_);
                     bool? azc_ = context.Operators.And(zj_, azb_);
-
                     return azc_;
-                };
+                }
+
                 IEnumerable<Encounter> xe_ = context.Operators.Where<Encounter>(xc_, xd_);
-                object xf_(Encounter @this)
-                {
+
+                object xf_(Encounter @this) {
                     Period azd_ = @this?.Period;
                     CqlInterval<CqlDateTime> aze_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, azd_);
                     CqlDateTime azf_ = context.Operators.End(aze_);
-
                     return azf_;
-                };
+                }
+
                 IEnumerable<Encounter> xg_ = context.Operators.SortBy<Encounter>(xe_, xf_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter xh_ = context.Operators.Last<Encounter>(xg_);
                 Period xi_ = xh_?.Period;
@@ -2449,8 +2419,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlInterval<CqlDateTime> xo_ = context.Operators.Interval(xa_, xk_ ?? xn_, true, true);
                 bool? xp_ = context.Operators.In<CqlDateTime>(wl_, xo_, default);
                 IEnumerable<Encounter> xr_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wm_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? xs_(Encounter LastObs)
-                {
+
+                bool? xs_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> azg_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? azh_ = azg_?.Value;
                     Code<Encounter.EncounterStatus> azi_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(azh_);
@@ -2472,18 +2442,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? bza_ = context.Operators.Not((bool?)(azz_ is null));
                     bool? bzb_ = context.Operators.And(azw_, bza_);
                     bool? bzc_ = context.Operators.And(azj_, bzb_);
-
                     return bzc_;
-                };
+                }
+
                 IEnumerable<Encounter> xt_ = context.Operators.Where<Encounter>(xr_, xs_);
-                object xu_(Encounter @this)
-                {
+
+                object xu_(Encounter @this) {
                     Period bzd_ = @this?.Period;
                     CqlInterval<CqlDateTime> bze_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bzd_);
                     CqlDateTime bzf_ = context.Operators.End(bze_);
-
                     return bzf_;
-                };
+                }
+
                 IEnumerable<Encounter> xv_ = context.Operators.SortBy<Encounter>(xt_, xu_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter xw_ = context.Operators.Last<Encounter>(xv_);
                 Period xx_ = xw_?.Period;
@@ -2494,18 +2464,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 bool? yd_ = context.Operators.Not((bool?)((xz_ ?? yc_) is null));
                 bool? ye_ = context.Operators.And(xp_, yd_);
                 bool? yf_ = context.Operators.And(wi_, ye_);
-
                 return yf_;
-            };
+            }
+
             IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
-            object t_(Encounter @this)
-            {
+
+            object t_(Encounter @this) {
                 Period bzg_ = @this?.Period;
                 CqlInterval<CqlDateTime> bzh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bzg_);
                 CqlDateTime bzi_ = context.Operators.End(bzh_);
-
                 return bzi_;
-            };
+            }
+
             IEnumerable<Encounter> u_ = context.Operators.SortBy<Encounter>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
             Encounter v_ = context.Operators.Last<Encounter>(u_);
             Period w_ = v_?.Period;
@@ -2513,8 +2483,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlDateTime y_ = context.Operators.Start(x_);
             CqlValueSet z_ = this.Observation_Services(context);
             IEnumerable<Encounter> aa_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            bool? ab_(Encounter LastObs)
-            {
+
+            bool? ab_(Encounter LastObs) {
                 Code<Encounter.EncounterStatus> bzj_ = LastObs?.StatusElement;
                 Encounter.EncounterStatus? bzk_ = bzj_?.Value;
                 Code<Encounter.EncounterStatus> bzl_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(bzk_);
@@ -2536,18 +2506,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 bool? czd_ = context.Operators.Not((bool?)(czc_ is null));
                 bool? cze_ = context.Operators.And(bzz_, czd_);
                 bool? czf_ = context.Operators.And(bzm_, cze_);
-
                 return czf_;
-            };
+            }
+
             IEnumerable<Encounter> ac_ = context.Operators.Where<Encounter>(aa_, ab_);
-            object ad_(Encounter @this)
-            {
+
+            object ad_(Encounter @this) {
                 Period czg_ = @this?.Period;
                 CqlInterval<CqlDateTime> czh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, czg_);
                 CqlDateTime czi_ = context.Operators.End(czh_);
-
                 return czi_;
-            };
+            }
+
             IEnumerable<Encounter> ae_ = context.Operators.SortBy<Encounter>(ac_, ad_, System.ComponentModel.ListSortDirection.Ascending);
             Encounter af_ = context.Operators.Last<Encounter>(ae_);
             Period ag_ = af_?.Period;
@@ -2559,13 +2529,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
             CqlDateTime ao_ = context.Operators.End(an_);
             CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(o_ ?? y_ ?? ai_ ?? al_, ao_, true, true);
-
             return ap_;
-        };
+        }
+
         IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(c_);
         CqlInterval<CqlDateTime> e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
-
         return e_;
     }
 
@@ -2578,12 +2547,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Encounter[] a_ = [
             TheEncounter,
         ];
-        CqlInterval<CqlDateTime> b_(Encounter Visit)
-        {
+
+        CqlInterval<CqlDateTime> b_(Encounter Visit) {
             CqlValueSet f_ = this.Emergency_Department_Visit(context);
             IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            bool? h_(Encounter LastED)
-            {
+
+            bool? h_(Encounter LastED) {
                 Code<Encounter.EncounterStatus> ag_ = LastED?.StatusElement;
                 Encounter.EncounterStatus? ah_ = ag_?.Value;
                 Code<Encounter.EncounterStatus> ai_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ah_);
@@ -2593,8 +2562,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlDateTime am_ = context.Operators.End(al_);
                 CqlValueSet an_ = this.Observation_Services(context);
                 IEnumerable<Encounter> ao_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, an_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? ap_(Encounter LastObs)
-                {
+
+                bool? ap_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> ch_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? ci_ = ch_?.Value;
                     Code<Encounter.EncounterStatus> cj_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ci_);
@@ -2616,18 +2585,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? db_ = context.Operators.Not((bool?)(da_ is null));
                     bool? dc_ = context.Operators.And(cx_, db_);
                     bool? dd_ = context.Operators.And(ck_, dc_);
-
                     return dd_;
-                };
+                }
+
                 IEnumerable<Encounter> aq_ = context.Operators.Where<Encounter>(ao_, ap_);
-                object ar_(Encounter @this)
-                {
+
+                object ar_(Encounter @this) {
                     Period de_ = @this?.Period;
                     CqlInterval<CqlDateTime> df_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, de_);
                     CqlDateTime dg_ = context.Operators.End(df_);
-
                     return dg_;
-                };
+                }
+
                 IEnumerable<Encounter> as_ = context.Operators.SortBy<Encounter>(aq_, ar_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter at_ = context.Operators.Last<Encounter>(as_);
                 Period au_ = at_?.Period;
@@ -2639,8 +2608,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlQuantity ba_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime bb_ = context.Operators.Subtract(aw_ ?? az_, ba_);
                 IEnumerable<Encounter> bd_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, an_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? be_(Encounter LastObs)
-                {
+
+                bool? be_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> dh_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? di_ = dh_?.Value;
                     Code<Encounter.EncounterStatus> dj_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(di_);
@@ -2662,18 +2631,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? eb_ = context.Operators.Not((bool?)(ea_ is null));
                     bool? ec_ = context.Operators.And(dx_, eb_);
                     bool? ed_ = context.Operators.And(dk_, ec_);
-
                     return ed_;
-                };
+                }
+
                 IEnumerable<Encounter> bf_ = context.Operators.Where<Encounter>(bd_, be_);
-                object bg_(Encounter @this)
-                {
+
+                object bg_(Encounter @this) {
                     Period ee_ = @this?.Period;
                     CqlInterval<CqlDateTime> ef_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ee_);
                     CqlDateTime eg_ = context.Operators.End(ef_);
-
                     return eg_;
-                };
+                }
+
                 IEnumerable<Encounter> bh_ = context.Operators.SortBy<Encounter>(bf_, bg_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter bi_ = context.Operators.Last<Encounter>(bh_);
                 Period bj_ = bi_?.Period;
@@ -2684,8 +2653,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlInterval<CqlDateTime> bp_ = context.Operators.Interval(bb_, bl_ ?? bo_, true, true);
                 bool? bq_ = context.Operators.In<CqlDateTime>(am_, bp_, default);
                 IEnumerable<Encounter> bs_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, an_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? bt_(Encounter LastObs)
-                {
+
+                bool? bt_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> eh_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? ei_ = eh_?.Value;
                     Code<Encounter.EncounterStatus> ej_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ei_);
@@ -2707,18 +2676,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? fb_ = context.Operators.Not((bool?)(fa_ is null));
                     bool? fc_ = context.Operators.And(ex_, fb_);
                     bool? fd_ = context.Operators.And(ek_, fc_);
-
                     return fd_;
-                };
+                }
+
                 IEnumerable<Encounter> bu_ = context.Operators.Where<Encounter>(bs_, bt_);
-                object bv_(Encounter @this)
-                {
+
+                object bv_(Encounter @this) {
                     Period fe_ = @this?.Period;
                     CqlInterval<CqlDateTime> ff_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fe_);
                     CqlDateTime fg_ = context.Operators.End(ff_);
-
                     return fg_;
-                };
+                }
+
                 IEnumerable<Encounter> bw_ = context.Operators.SortBy<Encounter>(bu_, bv_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter bx_ = context.Operators.Last<Encounter>(bw_);
                 Period by_ = bx_?.Period;
@@ -2729,18 +2698,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 bool? ce_ = context.Operators.Not((bool?)((ca_ ?? cd_) is null));
                 bool? cf_ = context.Operators.And(bq_, ce_);
                 bool? cg_ = context.Operators.And(aj_, cf_);
-
                 return cg_;
-            };
+            }
+
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-            object j_(Encounter @this)
-            {
+
+            object j_(Encounter @this) {
                 Period fh_ = @this?.Period;
                 CqlInterval<CqlDateTime> fi_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fh_);
                 CqlDateTime fj_ = context.Operators.End(fi_);
-
                 return fj_;
-            };
+            }
+
             IEnumerable<Encounter> k_ = context.Operators.SortBy<Encounter>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
             Encounter l_ = context.Operators.Last<Encounter>(k_);
             Period m_ = l_?.Period;
@@ -2748,8 +2717,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlDateTime o_ = context.Operators.Start(n_);
             CqlValueSet p_ = this.Observation_Services(context);
             IEnumerable<Encounter> q_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            bool? r_(Encounter LastObs)
-            {
+
+            bool? r_(Encounter LastObs) {
                 Code<Encounter.EncounterStatus> fk_ = LastObs?.StatusElement;
                 Encounter.EncounterStatus? fl_ = fk_?.Value;
                 Code<Encounter.EncounterStatus> fm_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(fl_);
@@ -2771,18 +2740,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 bool? ge_ = context.Operators.Not((bool?)(gd_ is null));
                 bool? gf_ = context.Operators.And(ga_, ge_);
                 bool? gg_ = context.Operators.And(fn_, gf_);
-
                 return gg_;
-            };
+            }
+
             IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
-            object t_(Encounter @this)
-            {
+
+            object t_(Encounter @this) {
                 Period gh_ = @this?.Period;
                 CqlInterval<CqlDateTime> gi_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, gh_);
                 CqlDateTime gj_ = context.Operators.End(gi_);
-
                 return gj_;
-            };
+            }
+
             IEnumerable<Encounter> u_ = context.Operators.SortBy<Encounter>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
             Encounter v_ = context.Operators.Last<Encounter>(u_);
             Period w_ = v_?.Period;
@@ -2794,13 +2763,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
             CqlDateTime ae_ = context.Operators.End(ad_);
             CqlInterval<CqlDateTime> af_ = context.Operators.Interval(o_ ?? y_ ?? ab_, ae_, true, true);
-
             return af_;
-        };
+        }
+
         IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(c_);
         CqlInterval<CqlDateTime> e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
-
         return e_;
     }
 
@@ -2812,12 +2780,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Encounter[] a_ = [
             TheEncounter,
         ];
-        CqlInterval<CqlDateTime> b_(Encounter Visit)
-        {
+
+        CqlInterval<CqlDateTime> b_(Encounter Visit) {
             CqlValueSet f_ = this.Emergency_Department_Visit(context);
             IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            bool? h_(Encounter LastED)
-            {
+
+            bool? h_(Encounter LastED) {
                 Code<Encounter.EncounterStatus> ag_ = LastED?.StatusElement;
                 Encounter.EncounterStatus? ah_ = ag_?.Value;
                 Code<Encounter.EncounterStatus> ai_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ah_);
@@ -2827,8 +2795,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlDateTime am_ = context.Operators.End(al_);
                 CqlValueSet an_ = this.Observation_Services(context);
                 IEnumerable<Encounter> ao_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, an_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? ap_(Encounter LastObs)
-                {
+
+                bool? ap_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> ch_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? ci_ = ch_?.Value;
                     Code<Encounter.EncounterStatus> cj_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ci_);
@@ -2850,18 +2818,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? db_ = context.Operators.Not((bool?)(da_ is null));
                     bool? dc_ = context.Operators.And(cx_, db_);
                     bool? dd_ = context.Operators.And(ck_, dc_);
-
                     return dd_;
-                };
+                }
+
                 IEnumerable<Encounter> aq_ = context.Operators.Where<Encounter>(ao_, ap_);
-                object ar_(Encounter @this)
-                {
+
+                object ar_(Encounter @this) {
                     Period de_ = @this?.Period;
                     CqlInterval<CqlDateTime> df_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, de_);
                     CqlDateTime dg_ = context.Operators.End(df_);
-
                     return dg_;
-                };
+                }
+
                 IEnumerable<Encounter> as_ = context.Operators.SortBy<Encounter>(aq_, ar_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter at_ = context.Operators.Last<Encounter>(as_);
                 Period au_ = at_?.Period;
@@ -2873,8 +2841,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlQuantity ba_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime bb_ = context.Operators.Subtract(aw_ ?? az_, ba_);
                 IEnumerable<Encounter> bd_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, an_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? be_(Encounter LastObs)
-                {
+
+                bool? be_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> dh_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? di_ = dh_?.Value;
                     Code<Encounter.EncounterStatus> dj_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(di_);
@@ -2896,18 +2864,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? eb_ = context.Operators.Not((bool?)(ea_ is null));
                     bool? ec_ = context.Operators.And(dx_, eb_);
                     bool? ed_ = context.Operators.And(dk_, ec_);
-
                     return ed_;
-                };
+                }
+
                 IEnumerable<Encounter> bf_ = context.Operators.Where<Encounter>(bd_, be_);
-                object bg_(Encounter @this)
-                {
+
+                object bg_(Encounter @this) {
                     Period ee_ = @this?.Period;
                     CqlInterval<CqlDateTime> ef_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ee_);
                     CqlDateTime eg_ = context.Operators.End(ef_);
-
                     return eg_;
-                };
+                }
+
                 IEnumerable<Encounter> bh_ = context.Operators.SortBy<Encounter>(bf_, bg_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter bi_ = context.Operators.Last<Encounter>(bh_);
                 Period bj_ = bi_?.Period;
@@ -2918,8 +2886,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 CqlInterval<CqlDateTime> bp_ = context.Operators.Interval(bb_, bl_ ?? bo_, true, true);
                 bool? bq_ = context.Operators.In<CqlDateTime>(am_, bp_, default);
                 IEnumerable<Encounter> bs_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, an_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                bool? bt_(Encounter LastObs)
-                {
+
+                bool? bt_(Encounter LastObs) {
                     Code<Encounter.EncounterStatus> eh_ = LastObs?.StatusElement;
                     Encounter.EncounterStatus? ei_ = eh_?.Value;
                     Code<Encounter.EncounterStatus> ej_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ei_);
@@ -2941,18 +2909,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? fb_ = context.Operators.Not((bool?)(fa_ is null));
                     bool? fc_ = context.Operators.And(ex_, fb_);
                     bool? fd_ = context.Operators.And(ek_, fc_);
-
                     return fd_;
-                };
+                }
+
                 IEnumerable<Encounter> bu_ = context.Operators.Where<Encounter>(bs_, bt_);
-                object bv_(Encounter @this)
-                {
+
+                object bv_(Encounter @this) {
                     Period fe_ = @this?.Period;
                     CqlInterval<CqlDateTime> ff_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fe_);
                     CqlDateTime fg_ = context.Operators.End(ff_);
-
                     return fg_;
-                };
+                }
+
                 IEnumerable<Encounter> bw_ = context.Operators.SortBy<Encounter>(bu_, bv_, System.ComponentModel.ListSortDirection.Ascending);
                 Encounter bx_ = context.Operators.Last<Encounter>(bw_);
                 Period by_ = bx_?.Period;
@@ -2963,18 +2931,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 bool? ce_ = context.Operators.Not((bool?)((ca_ ?? cd_) is null));
                 bool? cf_ = context.Operators.And(bq_, ce_);
                 bool? cg_ = context.Operators.And(aj_, cf_);
-
                 return cg_;
-            };
+            }
+
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-            object j_(Encounter @this)
-            {
+
+            object j_(Encounter @this) {
                 Period fh_ = @this?.Period;
                 CqlInterval<CqlDateTime> fi_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fh_);
                 CqlDateTime fj_ = context.Operators.End(fi_);
-
                 return fj_;
-            };
+            }
+
             IEnumerable<Encounter> k_ = context.Operators.SortBy<Encounter>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
             Encounter l_ = context.Operators.Last<Encounter>(k_);
             Period m_ = l_?.Period;
@@ -2982,8 +2950,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlDateTime o_ = context.Operators.Start(n_);
             CqlValueSet p_ = this.Observation_Services(context);
             IEnumerable<Encounter> q_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            bool? r_(Encounter LastObs)
-            {
+
+            bool? r_(Encounter LastObs) {
                 Code<Encounter.EncounterStatus> fk_ = LastObs?.StatusElement;
                 Encounter.EncounterStatus? fl_ = fk_?.Value;
                 Code<Encounter.EncounterStatus> fm_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(fl_);
@@ -3005,18 +2973,18 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 bool? ge_ = context.Operators.Not((bool?)(gd_ is null));
                 bool? gf_ = context.Operators.And(ga_, ge_);
                 bool? gg_ = context.Operators.And(fn_, gf_);
-
                 return gg_;
-            };
+            }
+
             IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);
-            object t_(Encounter @this)
-            {
+
+            object t_(Encounter @this) {
                 Period gh_ = @this?.Period;
                 CqlInterval<CqlDateTime> gi_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, gh_);
                 CqlDateTime gj_ = context.Operators.End(gi_);
-
                 return gj_;
-            };
+            }
+
             IEnumerable<Encounter> u_ = context.Operators.SortBy<Encounter>(s_, t_, System.ComponentModel.ListSortDirection.Ascending);
             Encounter v_ = context.Operators.Last<Encounter>(u_);
             Period w_ = v_?.Period;
@@ -3028,13 +2996,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
             CqlDateTime ae_ = context.Operators.End(ad_);
             CqlInterval<CqlDateTime> af_ = context.Operators.Interval(o_ ?? y_ ?? ab_, ae_, true, true);
-
             return af_;
-        };
+        }
+
         IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Select<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(c_);
         CqlInterval<CqlDateTime> e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
-
         return e_;
     }
 
@@ -3046,7 +3013,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         CqlInterval<CqlDateTime> a_ = this.HospitalizationWithObservation(context, TheEncounter);
         int? b_ = this.LengthInDays(context, a_);
-
         return b_;
     }
 
@@ -3057,7 +3023,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         CqlInterval<CqlDateTime> a_ = this.hospitalizationWithObservation(context, TheEncounter);
         int? b_ = this.lengthInDays(context, a_);
-
         return b_;
     }
 
@@ -3068,17 +3033,17 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
     {
         List<Encounter.LocationComponent> a_ = Encounter?.Location;
-        bool? b_(Encounter.LocationComponent HospitalLocation)
-        {
+
+        bool? b_(Encounter.LocationComponent HospitalLocation) {
             ResourceReference g_ = HospitalLocation?.Location;
             Location h_ = this.GetLocation(context, g_);
             List<CodeableConcept> i_ = h_?.Type;
-            CqlConcept j_(CodeableConcept @this)
-            {
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
+            CqlConcept j_(CodeableConcept @this) {
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return t_;
-            };
+            }
+
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
             CqlValueSet l_ = this.Intensive_Care_Unit(context);
             bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
@@ -3088,21 +3053,20 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
             bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
             bool? s_ = context.Operators.And(m_, r_);
-
             return s_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
-        object d_(Encounter.LocationComponent @this)
-        {
+
+        object d_(Encounter.LocationComponent @this) {
             Period u_ = @this?.Period;
             CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
             CqlDateTime w_ = context.Operators.Start(v_);
-
             return w_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SortBy<Encounter.LocationComponent>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter.LocationComponent f_ = context.Operators.First<Encounter.LocationComponent>(e_);
-
         return f_;
     }
 
@@ -3112,17 +3076,17 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public Encounter.LocationComponent firstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
     {
         List<Encounter.LocationComponent> a_ = Encounter?.Location;
-        bool? b_(Encounter.LocationComponent HospitalLocation)
-        {
+
+        bool? b_(Encounter.LocationComponent HospitalLocation) {
             ResourceReference g_ = HospitalLocation?.Location;
             Location h_ = this.GetLocation(context, g_);
             List<CodeableConcept> i_ = h_?.Type;
-            CqlConcept j_(CodeableConcept @this)
-            {
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
+            CqlConcept j_(CodeableConcept @this) {
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return t_;
-            };
+            }
+
             IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
             CqlValueSet l_ = this.Intensive_Care_Unit(context);
             bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
@@ -3132,21 +3096,20 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
             bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
             bool? s_ = context.Operators.And(m_, r_);
-
             return s_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
-        object d_(Encounter.LocationComponent @this)
-        {
+
+        object d_(Encounter.LocationComponent @this) {
             Period u_ = @this?.Period;
             CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
             CqlDateTime w_ = context.Operators.Start(v_);
-
             return w_;
-        };
+        }
+
         IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SortBy<Encounter.LocationComponent>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
         Encounter.LocationComponent f_ = context.Operators.First<Encounter.LocationComponent>(e_);
-
         return f_;
     }
 
@@ -3157,28 +3120,27 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public IEnumerable<object> EncounterDiagnosis(CqlContext context, Encounter Encounter)
     {
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-        object b_(Encounter.DiagnosisComponent D)
-        {
+
+        object b_(Encounter.DiagnosisComponent D) {
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<object> g_ = context.Operators.Union<object>(e_ as IEnumerable<object>, f_ as IEnumerable<object>);
-            bool? h_(object C)
-            {
+
+            bool? h_(object C) {
                 ResourceReference k_ = D?.Condition;
                 object l_ = context.Operators.LateBoundProperty<object>(C, "id");
                 string m_ = context.Operators.LateBoundProperty<string>(l_, "value");
                 bool? n_ = QICoreCommon_4_0_000.Instance.references(context, k_, m_);
-
                 return n_;
-            };
+            }
+
             IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
             object j_ = context.Operators.SingletonFrom<object>(i_);
-
             return j_;
-        };
+        }
+
         IEnumerable<object> c_ = context.Operators.Select<Encounter.DiagnosisComponent, object>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
         IEnumerable<object> d_ = context.Operators.Distinct<object>(c_);
-
         return d_;
     }
 
@@ -3188,27 +3150,26 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public IEnumerable<object> encounterDiagnosis(CqlContext context, Encounter Encounter)
     {
         List<ResourceReference> a_ = Encounter?.ReasonReference;
-        object b_(ResourceReference D)
-        {
+
+        object b_(ResourceReference D) {
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<object> g_ = context.Operators.Union<object>(e_ as IEnumerable<object>, f_ as IEnumerable<object>);
-            bool? h_(object C)
-            {
+
+            bool? h_(object C) {
                 object k_ = context.Operators.LateBoundProperty<object>(C, "id");
                 string l_ = context.Operators.LateBoundProperty<string>(k_, "value");
                 bool? m_ = QICoreCommon_4_0_000.Instance.references(context, D, l_);
-
                 return m_;
-            };
+            }
+
             IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
             object j_ = context.Operators.SingletonFrom<object>(i_);
-
             return j_;
-        };
+        }
+
         IEnumerable<object> c_ = context.Operators.Select<ResourceReference, object>((IEnumerable<ResourceReference>)a_, b_);
         IEnumerable<object> d_ = context.Operators.Distinct<object>(c_);
-
         return d_;
     }
 
@@ -3221,17 +3182,16 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
-        bool? d_(object C)
-        {
+
+        bool? d_(object C) {
             object g_ = context.Operators.LateBoundProperty<object>(C, "id");
             string h_ = context.Operators.LateBoundProperty<string>(g_, "value");
             bool? i_ = QICoreCommon_4_0_000.Instance.references(context, reference, h_);
-
             return i_;
-        };
+        }
+
         IEnumerable<object> e_ = context.Operators.Where<object>(c_, d_);
         object f_ = context.Operators.SingletonFrom<object>(e_);
-
         return f_;
     }
 
@@ -3243,17 +3203,16 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
-        bool? d_(object C)
-        {
+
+        bool? d_(object C) {
             object g_ = context.Operators.LateBoundProperty<object>(C, "id");
             string h_ = context.Operators.LateBoundProperty<string>(g_, "value");
             bool? i_ = QICoreCommon_4_0_000.Instance.references(context, reference, h_);
-
             return i_;
-        };
+        }
+
         IEnumerable<object> e_ = context.Operators.Where<object>(c_, d_);
         object f_ = context.Operators.SingletonFrom<object>(e_);
-
         return f_;
     }
 
@@ -3264,8 +3223,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public object PrincipalDiagnosis(CqlContext context, Encounter Encounter)
     {
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-        bool? b_(Encounter.DiagnosisComponent D)
-        {
+
+        bool? b_(Encounter.DiagnosisComponent D) {
             PositiveInt h_ = D?.RankElement;
             int? i_ = h_?.Value;
             bool? j_ = context.Operators.Equal(i_, 1);
@@ -3275,33 +3234,32 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
             bool? o_ = context.Operators.Equivalent(l_, n_);
             bool? p_ = context.Operators.And(j_, o_);
-
             return p_;
-        };
+        }
+
         IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
-        object d_(Encounter.DiagnosisComponent PD)
-        {
+
+        object d_(Encounter.DiagnosisComponent PD) {
             IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<object> s_ = context.Operators.Union<object>(q_ as IEnumerable<object>, r_ as IEnumerable<object>);
-            bool? t_(object C)
-            {
+
+            bool? t_(object C) {
                 ResourceReference w_ = PD?.Condition;
                 object x_ = context.Operators.LateBoundProperty<object>(C, "id");
                 string y_ = context.Operators.LateBoundProperty<string>(x_, "value");
                 bool? z_ = QICoreCommon_4_0_000.Instance.references(context, w_, y_);
-
                 return z_;
-            };
+            }
+
             IEnumerable<object> u_ = context.Operators.Where<object>(s_, t_);
             object v_ = context.Operators.SingletonFrom<object>(u_);
-
             return v_;
-        };
+        }
+
         IEnumerable<object> e_ = context.Operators.Select<Encounter.DiagnosisComponent, object>(c_, d_);
         IEnumerable<object> f_ = context.Operators.Distinct<object>(e_);
         object g_ = context.Operators.SingletonFrom<object>(f_);
-
         return g_;
     }
 
@@ -3312,24 +3270,23 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public Claim.DiagnosisComponent principalDiagnosis(CqlContext context, Encounter encounter)
     {
         IEnumerable<Claim.DiagnosisComponent> a_ = this.claimDiagnosis(context, encounter);
-        bool? b_(Claim.DiagnosisComponent CD)
-        {
-            List<CodeableConcept> e_ = CD?.Type;
-            CqlConcept f_(CodeableConcept @this)
-            {
-                CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
+        bool? b_(Claim.DiagnosisComponent CD) {
+            List<CodeableConcept> e_ = CD?.Type;
+
+            CqlConcept f_(CodeableConcept @this) {
+                CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return j_;
-            };
+            }
+
             IEnumerable<CqlConcept> g_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)e_, f_);
             CqlCode h_ = this.Principal_Diagnosis(context);
             bool? i_ = QICoreCommon_4_0_000.Instance.includesCode(context, g_, h_);
-
             return i_;
-        };
+        }
+
         IEnumerable<Claim.DiagnosisComponent> c_ = context.Operators.Where<Claim.DiagnosisComponent>(a_, b_);
         Claim.DiagnosisComponent d_ = context.Operators.SingletonFrom<Claim.DiagnosisComponent>(c_);
-
         return d_;
     }
 
@@ -3342,11 +3299,11 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Encounter[] a_ = [
             encounter,
         ];
-        IEnumerable<Claim.DiagnosisComponent> b_(Encounter E)
-        {
+
+        IEnumerable<Claim.DiagnosisComponent> b_(Encounter E) {
             IEnumerable<Claim> f_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));
-            bool? g_(Claim C)
-            {
+
+            bool? g_(Claim C) {
                 Code<FinancialResourceStatusCodes> p_ = C?.StatusElement;
                 FinancialResourceStatusCodes? q_ = p_?.Value;
                 Code<FinancialResourceStatusCodes> r_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(q_);
@@ -3357,43 +3314,43 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 bool? w_ = context.Operators.Equal(v_, "claim");
                 bool? x_ = context.Operators.And(s_, w_);
                 List<Claim.ItemComponent> y_ = C?.Item;
-                bool? z_(Claim.ItemComponent I)
-                {
+
+                bool? z_(Claim.ItemComponent I) {
                     List<ResourceReference> ad_ = I?.Encounter;
                     bool? ae_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ad_, E);
-
                     return ae_;
-                };
+                }
+
                 IEnumerable<Claim.ItemComponent> aa_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)y_, z_);
                 bool? ab_ = context.Operators.Exists<Claim.ItemComponent>(aa_);
                 bool? ac_ = context.Operators.And(x_, ab_);
-
                 return ac_;
-            };
+            }
+
             IEnumerable<Claim> h_ = context.Operators.Where<Claim>(f_, g_);
-            bool? i_(Claim @this)
-            {
+
+            bool? i_(Claim @this) {
                 List<Claim.DiagnosisComponent> af_ = @this?.Diagnosis;
                 bool? ag_ = context.Operators.Not((bool?)(af_ is null));
-
                 return ag_;
-            };
-            IEnumerable<Claim> j_ = context.Operators.Where<Claim>(h_, i_);
-            List<Claim.DiagnosisComponent> k_(Claim @this)
-            {
-                List<Claim.DiagnosisComponent> ah_ = @this?.Diagnosis;
+            }
 
+            IEnumerable<Claim> j_ = context.Operators.Where<Claim>(h_, i_);
+
+            List<Claim.DiagnosisComponent> k_(Claim @this) {
+                List<Claim.DiagnosisComponent> ah_ = @this?.Diagnosis;
                 return ah_;
-            };
+            }
+
             IEnumerable<List<Claim.DiagnosisComponent>> l_ = context.Operators.Select<Claim, List<Claim.DiagnosisComponent>>(j_, k_);
             IEnumerable<Claim.DiagnosisComponent> m_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent>>)l_);
-            bool? n_(Claim.DiagnosisComponent D)
-            {
+
+            bool? n_(Claim.DiagnosisComponent D) {
                 PositiveInt ai_ = D?.SequenceElement;
                 int? aj_ = ai_?.Value;
                 IEnumerable<Claim> ak_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));
-                bool? al_(Claim C)
-                {
+
+                bool? al_(Claim C) {
                     Code<FinancialResourceStatusCodes> ba_ = C?.StatusElement;
                     FinancialResourceStatusCodes? bb_ = ba_?.Value;
                     Code<FinancialResourceStatusCodes> bc_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(bb_);
@@ -3404,86 +3361,85 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? bh_ = context.Operators.Equal(bg_, "claim");
                     bool? bi_ = context.Operators.And(bd_, bh_);
                     List<Claim.ItemComponent> bj_ = C?.Item;
-                    bool? bk_(Claim.ItemComponent I)
-                    {
+
+                    bool? bk_(Claim.ItemComponent I) {
                         List<ResourceReference> bo_ = I?.Encounter;
                         bool? bp_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bo_, E);
-
                         return bp_;
-                    };
+                    }
+
                     IEnumerable<Claim.ItemComponent> bl_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bj_, bk_);
                     bool? bm_ = context.Operators.Exists<Claim.ItemComponent>(bl_);
                     bool? bn_ = context.Operators.And(bi_, bm_);
-
                     return bn_;
-                };
+                }
+
                 IEnumerable<Claim> am_ = context.Operators.Where<Claim>(ak_, al_);
-                bool? an_(Claim @this)
-                {
+
+                bool? an_(Claim @this) {
                     List<Claim.ItemComponent> bq_ = @this?.Item;
                     bool? br_ = context.Operators.Not((bool?)(bq_ is null));
-
                     return br_;
-                };
-                IEnumerable<Claim> ao_ = context.Operators.Where<Claim>(am_, an_);
-                List<Claim.ItemComponent> ap_(Claim @this)
-                {
-                    List<Claim.ItemComponent> bs_ = @this?.Item;
+                }
 
+                IEnumerable<Claim> ao_ = context.Operators.Where<Claim>(am_, an_);
+
+                List<Claim.ItemComponent> ap_(Claim @this) {
+                    List<Claim.ItemComponent> bs_ = @this?.Item;
                     return bs_;
-                };
+                }
+
                 IEnumerable<List<Claim.ItemComponent>> aq_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(ao_, ap_);
                 IEnumerable<Claim.ItemComponent> ar_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)aq_);
-                bool? as_(Claim.ItemComponent I)
-                {
+
+                bool? as_(Claim.ItemComponent I) {
                     List<ResourceReference> bt_ = I?.Encounter;
                     bool? bu_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bt_, E);
-
                     return bu_;
-                };
-                IEnumerable<Claim.ItemComponent> at_ = context.Operators.Where<Claim.ItemComponent>(ar_, as_);
-                bool? au_(Claim.ItemComponent @this)
-                {
-                    List<PositiveInt> bv_ = @this?.DiagnosisSequenceElement;
-                    int? bw_(PositiveInt @this)
-                    {
-                        int? bz_ = @this?.Value;
+                }
 
+                IEnumerable<Claim.ItemComponent> at_ = context.Operators.Where<Claim.ItemComponent>(ar_, as_);
+
+                bool? au_(Claim.ItemComponent @this) {
+                    List<PositiveInt> bv_ = @this?.DiagnosisSequenceElement;
+
+                    int? bw_(PositiveInt @this) {
+                        int? bz_ = @this?.Value;
                         return bz_;
-                    };
+                    }
+
                     IEnumerable<int?> bx_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)bv_, bw_);
                     bool? by_ = context.Operators.Not((bool?)(bx_ is null));
-
                     return by_;
-                };
+                }
+
                 IEnumerable<Claim.ItemComponent> av_ = context.Operators.Where<Claim.ItemComponent>(at_, au_);
-                IEnumerable<int?> aw_(Claim.ItemComponent @this)
-                {
+
+                IEnumerable<int?> aw_(Claim.ItemComponent @this) {
                     List<PositiveInt> ca_ = @this?.DiagnosisSequenceElement;
-                    int? cb_(PositiveInt @this)
-                    {
+
+                    int? cb_(PositiveInt @this) {
                         int? cd_ = @this?.Value;
-
                         return cd_;
-                    };
-                    IEnumerable<int?> cc_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)ca_, cb_);
+                    }
 
+                    IEnumerable<int?> cc_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)ca_, cb_);
                     return cc_;
-                };
+                }
+
                 IEnumerable<IEnumerable<int?>> ax_ = context.Operators.Select<Claim.ItemComponent, IEnumerable<int?>>(av_, aw_);
                 IEnumerable<int?> ay_ = context.Operators.Flatten<int?>(ax_);
                 bool? az_ = context.Operators.In<int?>(aj_, ay_);
-
                 return az_;
-            };
-            IEnumerable<Claim.DiagnosisComponent> o_ = context.Operators.Where<Claim.DiagnosisComponent>(m_, n_);
+            }
 
+            IEnumerable<Claim.DiagnosisComponent> o_ = context.Operators.Where<Claim.DiagnosisComponent>(m_, n_);
             return o_;
-        };
+        }
+
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> c_ = context.Operators.Select<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<IEnumerable<Claim.DiagnosisComponent>> d_ = context.Operators.Distinct<IEnumerable<Claim.DiagnosisComponent>>(c_);
         IEnumerable<Claim.DiagnosisComponent> e_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(d_);
-
         return e_;
     }
 
@@ -3497,8 +3453,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Claim.DiagnosisComponent[] b_ = [
             a_,
         ];
-        bool? c_(Claim.DiagnosisComponent PD)
-        {
+
+        bool? c_(Claim.DiagnosisComponent PD) {
             DataType g_ = PD?.Diagnosis;
             object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             bool? i_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, valueSet);
@@ -3508,13 +3464,12 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_ as CodeableConcept);
             bool? o_ = context.Operators.ConceptInValueSet(n_, valueSet);
             bool? p_ = context.Operators.Or(i_, o_);
-
             return p_;
-        };
+        }
+
         IEnumerable<bool?> d_ = context.Operators.Select<Claim.DiagnosisComponent, bool?>((IEnumerable<Claim.DiagnosisComponent>)b_, c_);
         IEnumerable<bool?> e_ = context.Operators.Distinct<bool?>(d_);
         bool? f_ = context.Operators.SingletonFrom<bool?>(e_);
-
         return f_;
     }
 
@@ -3525,8 +3480,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public bool? isDiagnosisPresentOnAdmission(CqlContext context, Encounter encounter, CqlValueSet diagnosisValueSet, CqlValueSet poaValueSet)
     {
         IEnumerable<Claim.DiagnosisComponent> a_ = this.claimDiagnosis(context, encounter);
-        bool? b_(Claim.DiagnosisComponent CD)
-        {
+
+        bool? b_(Claim.DiagnosisComponent CD) {
             CodeableConcept e_ = CD?.OnAdmission;
             CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
             bool? g_ = context.Operators.ConceptInValueSet(f_, poaValueSet);
@@ -3540,12 +3495,11 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             bool? p_ = context.Operators.ConceptInValueSet(o_, diagnosisValueSet);
             bool? q_ = context.Operators.Or(j_, p_);
             bool? r_ = context.Operators.And(g_, q_);
-
             return r_;
-        };
+        }
+
         IEnumerable<Claim.DiagnosisComponent> c_ = context.Operators.Where<Claim.DiagnosisComponent>(a_, b_);
         bool? d_ = context.Operators.Exists<Claim.DiagnosisComponent>(c_);
-
         return d_;
     }
 
@@ -3555,15 +3509,14 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public Location getLocation(CqlContext context, ResourceReference reference)
     {
         IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-location"));
-        bool? b_(Location L)
-        {
-            bool? e_ = QICoreCommon_4_0_000.Instance.references(context, reference, L);
 
+        bool? b_(Location L) {
+            bool? e_ = QICoreCommon_4_0_000.Instance.references(context, reference, L);
             return e_;
-        };
+        }
+
         IEnumerable<Location> c_ = context.Operators.Where<Location>(a_, b_);
         Location d_ = context.Operators.SingletonFrom<Location>(c_);
-
         return d_;
     }
 
@@ -3573,42 +3526,40 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getMedicationCode()` instead.")]
     public CqlConcept GetMedicationCode(CqlContext context, MedicationRequest request)
     {
-        CqlConcept a_()
-        {
-            bool b_()
-            {
+
+        CqlConcept a_() {
+
+            bool b_() {
                 DataType c_ = request?.Medication;
                 object d_ = FHIRHelpers_4_4_000.Instance.ToValue(context, c_);
                 bool e_ = d_ is CqlConcept;
-
                 return e_;
-            };
+            }
+
             if (b_())
             {
                 DataType f_ = request?.Medication;
                 object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-
                 return g_ as CqlConcept;
             }
             else
             {
                 IEnumerable<Medication> h_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                bool? i_(Medication M)
-                {
+
+                bool? i_(Medication M) {
                     DataType n_ = request?.Medication;
                     object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
                     bool? p_ = QICoreCommon_4_0_000.Instance.references(context, o_ as ResourceReference, M);
-
                     return p_;
-                };
+                }
+
                 IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
                 Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
                 CodeableConcept l_ = k_?.Code;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
-
                 return m_;
-            }
-        };
+            };
+        }
 
         return a_();
     }
@@ -3618,42 +3569,40 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     [CqlTag("description", "Returns the medication code for the given MedicationRequest")]
     public CqlConcept getMedicationCode(CqlContext context, MedicationRequest request)
     {
-        CqlConcept a_()
-        {
-            bool b_()
-            {
+
+        CqlConcept a_() {
+
+            bool b_() {
                 DataType c_ = request?.Medication;
                 object d_ = FHIRHelpers_4_4_000.Instance.ToValue(context, c_);
                 bool e_ = d_ is CqlConcept;
-
                 return e_;
-            };
+            }
+
             if (b_())
             {
                 DataType f_ = request?.Medication;
                 object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-
                 return g_ as CqlConcept;
             }
             else
             {
                 IEnumerable<Medication> h_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-                bool? i_(Medication M)
-                {
+
+                bool? i_(Medication M) {
                     DataType n_ = request?.Medication;
                     object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
                     bool? p_ = QICoreCommon_4_0_000.Instance.references(context, o_ as ResourceReference, M);
-
                     return p_;
-                };
+                }
+
                 IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
                 Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
                 CodeableConcept l_ = k_?.Code;
                 CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
-
                 return m_;
-            }
-        };
+            };
+        }
 
         return a_();
     }
@@ -3666,11 +3615,11 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Encounter[] a_ = [
             encounter,
         ];
-        Claim.ProcedureComponent b_(Encounter E)
-        {
+
+        Claim.ProcedureComponent b_(Encounter E) {
             IEnumerable<Claim> f_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));
-            bool? g_(Claim C)
-            {
+
+            bool? g_(Claim C) {
                 Code<FinancialResourceStatusCodes> q_ = C?.StatusElement;
                 FinancialResourceStatusCodes? r_ = q_?.Value;
                 Code<FinancialResourceStatusCodes> s_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(r_);
@@ -3681,43 +3630,43 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 bool? x_ = context.Operators.Equal(w_, "claim");
                 bool? y_ = context.Operators.And(t_, x_);
                 List<Claim.ItemComponent> z_ = C?.Item;
-                bool? aa_(Claim.ItemComponent I)
-                {
+
+                bool? aa_(Claim.ItemComponent I) {
                     List<ResourceReference> ae_ = I?.Encounter;
                     bool? af_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ae_, E);
-
                     return af_;
-                };
+                }
+
                 IEnumerable<Claim.ItemComponent> ab_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)z_, aa_);
                 bool? ac_ = context.Operators.Exists<Claim.ItemComponent>(ab_);
                 bool? ad_ = context.Operators.And(y_, ac_);
-
                 return ad_;
-            };
+            }
+
             IEnumerable<Claim> h_ = context.Operators.Where<Claim>(f_, g_);
-            bool? i_(Claim @this)
-            {
+
+            bool? i_(Claim @this) {
                 List<Claim.ProcedureComponent> ag_ = @this?.Procedure;
                 bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-
                 return ah_;
-            };
-            IEnumerable<Claim> j_ = context.Operators.Where<Claim>(h_, i_);
-            List<Claim.ProcedureComponent> k_(Claim @this)
-            {
-                List<Claim.ProcedureComponent> ai_ = @this?.Procedure;
+            }
 
+            IEnumerable<Claim> j_ = context.Operators.Where<Claim>(h_, i_);
+
+            List<Claim.ProcedureComponent> k_(Claim @this) {
+                List<Claim.ProcedureComponent> ai_ = @this?.Procedure;
                 return ai_;
-            };
+            }
+
             IEnumerable<List<Claim.ProcedureComponent>> l_ = context.Operators.Select<Claim, List<Claim.ProcedureComponent>>(j_, k_);
             IEnumerable<Claim.ProcedureComponent> m_ = context.Operators.Flatten<Claim.ProcedureComponent>((IEnumerable<IEnumerable<Claim.ProcedureComponent>>)l_);
-            bool? n_(Claim.ProcedureComponent P)
-            {
+
+            bool? n_(Claim.ProcedureComponent P) {
                 PositiveInt aj_ = P?.SequenceElement;
                 int? ak_ = aj_?.Value;
                 IEnumerable<Claim> al_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));
-                bool? am_(Claim C)
-                {
+
+                bool? am_(Claim C) {
                     Code<FinancialResourceStatusCodes> bh_ = C?.StatusElement;
                     FinancialResourceStatusCodes? bi_ = bh_?.Value;
                     Code<FinancialResourceStatusCodes> bj_ = context.Operators.Convert<Code<FinancialResourceStatusCodes>>(bi_);
@@ -3728,102 +3677,151 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     bool? bo_ = context.Operators.Equal(bn_, "claim");
                     bool? bp_ = context.Operators.And(bk_, bo_);
                     List<Claim.ItemComponent> bq_ = C?.Item;
-                    bool? br_(Claim.ItemComponent I)
-                    {
+
+                    bool? br_(Claim.ItemComponent I) {
                         List<ResourceReference> bv_ = I?.Encounter;
                         bool? bw_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bv_, E);
-
                         return bw_;
-                    };
+                    }
+
                     IEnumerable<Claim.ItemComponent> bs_ = context.Operators.Where<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bq_, br_);
                     bool? bt_ = context.Operators.Exists<Claim.ItemComponent>(bs_);
                     bool? bu_ = context.Operators.And(bp_, bt_);
-
                     return bu_;
-                };
+                }
+
                 IEnumerable<Claim> an_ = context.Operators.Where<Claim>(al_, am_);
-                bool? ao_(Claim @this)
-                {
+
+                bool? ao_(Claim @this) {
                     List<Claim.ItemComponent> bx_ = @this?.Item;
                     bool? by_ = context.Operators.Not((bool?)(bx_ is null));
-
                     return by_;
-                };
-                IEnumerable<Claim> ap_ = context.Operators.Where<Claim>(an_, ao_);
-                List<Claim.ItemComponent> aq_(Claim @this)
-                {
-                    List<Claim.ItemComponent> bz_ = @this?.Item;
+                }
 
+                IEnumerable<Claim> ap_ = context.Operators.Where<Claim>(an_, ao_);
+
+                List<Claim.ItemComponent> aq_(Claim @this) {
+                    List<Claim.ItemComponent> bz_ = @this?.Item;
                     return bz_;
-                };
+                }
+
                 IEnumerable<List<Claim.ItemComponent>> ar_ = context.Operators.Select<Claim, List<Claim.ItemComponent>>(ap_, aq_);
                 IEnumerable<Claim.ItemComponent> as_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)ar_);
-                bool? at_(Claim.ItemComponent I)
-                {
+
+                bool? at_(Claim.ItemComponent I) {
                     List<ResourceReference> ca_ = I?.Encounter;
                     bool? cb_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ca_, E);
-
                     return cb_;
-                };
-                IEnumerable<Claim.ItemComponent> au_ = context.Operators.Where<Claim.ItemComponent>(as_, at_);
-                bool? av_(Claim.ItemComponent @this)
-                {
-                    List<PositiveInt> cc_ = @this?.ProcedureSequenceElement;
-                    int? cd_(PositiveInt @this)
-                    {
-                        int? cg_ = @this?.Value;
+                }
 
+                IEnumerable<Claim.ItemComponent> au_ = context.Operators.Where<Claim.ItemComponent>(as_, at_);
+
+                bool? av_(Claim.ItemComponent @this) {
+                    List<PositiveInt> cc_ = @this?.ProcedureSequenceElement;
+
+                    int? cd_(PositiveInt @this) {
+                        int? cg_ = @this?.Value;
                         return cg_;
-                    };
+                    }
+
                     IEnumerable<int?> ce_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)cc_, cd_);
                     bool? cf_ = context.Operators.Not((bool?)(ce_ is null));
-
                     return cf_;
-                };
+                }
+
                 IEnumerable<Claim.ItemComponent> aw_ = context.Operators.Where<Claim.ItemComponent>(au_, av_);
-                IEnumerable<int?> ax_(Claim.ItemComponent @this)
-                {
+
+                IEnumerable<int?> ax_(Claim.ItemComponent @this) {
                     List<PositiveInt> ch_ = @this?.ProcedureSequenceElement;
-                    int? ci_(PositiveInt @this)
-                    {
+
+                    int? ci_(PositiveInt @this) {
                         int? ck_ = @this?.Value;
-
                         return ck_;
-                    };
-                    IEnumerable<int?> cj_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)ch_, ci_);
+                    }
 
+                    IEnumerable<int?> cj_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)ch_, ci_);
                     return cj_;
-                };
+                }
+
                 IEnumerable<IEnumerable<int?>> ay_ = context.Operators.Select<Claim.ItemComponent, IEnumerable<int?>>(aw_, ax_);
                 IEnumerable<int?> az_ = context.Operators.Flatten<int?>(ay_);
                 bool? ba_ = context.Operators.In<int?>(ak_, az_);
                 List<CodeableConcept> bb_ = P?.Type;
-                CqlConcept bc_(CodeableConcept @this)
-                {
-                    CqlConcept cl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
 
+                CqlConcept bc_(CodeableConcept @this) {
+                    CqlConcept cl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                     return cl_;
-                };
+                }
+
                 IEnumerable<CqlConcept> bd_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)bb_, bc_);
                 CqlCode be_ = this.Primary_procedure(context);
                 bool? bf_ = QICoreCommon_4_0_000.Instance.includesCode(context, bd_, be_);
                 bool? bg_ = context.Operators.And(ba_, bf_);
-
                 return bg_;
-            };
+            }
+
             IEnumerable<Claim.ProcedureComponent> o_ = context.Operators.Where<Claim.ProcedureComponent>(m_, n_);
             Claim.ProcedureComponent p_ = context.Operators.SingletonFrom<Claim.ProcedureComponent>(o_);
-
             return p_;
-        };
+        }
+
         IEnumerable<Claim.ProcedureComponent> c_ = context.Operators.Select<Encounter, Claim.ProcedureComponent>((IEnumerable<Encounter>)a_, b_);
         IEnumerable<Claim.ProcedureComponent> d_ = context.Operators.Distinct<Claim.ProcedureComponent>(c_);
         Claim.ProcedureComponent e_ = context.Operators.SingletonFrom<Claim.ProcedureComponent>(d_);
-
         return e_;
     }
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private CQMCommon_4_1_000() {}
+
+    public static CQMCommon_4_1_000 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "CQMCommon";
+    public string Version => "4.1.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

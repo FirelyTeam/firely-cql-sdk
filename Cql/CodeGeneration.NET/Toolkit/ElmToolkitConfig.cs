@@ -28,12 +28,14 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// but may be useful for debugging or testing purposes.
 /// </param>
 /// <param name="LRUCacheSize">The size of the Least Recently Used (LRU) cache.</param>
+/// <param name="CSharpNamespace">The C# namespace to use for generated code. If <see langword="null"/> or empty, no namespace is generated.</param>
 public record ElmToolkitConfig(
     DebugSymbolsFormat DebugSymbolsFormat = DebugSymbolsFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,
     bool AllowInvalidCSharp = false,
-    int LRUCacheSize = 0)
+    int LRUCacheSize = 0,
+    string? CSharpNamespace = null)
 {
     /// <summary>
     /// Gets the default configuration settings.

@@ -12,22 +12,10 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
 public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_1_0_1>
 {
-    private TestRetrieveInclude_1_0_1() {}
-
-    public static TestRetrieveInclude_1_0_1 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "TestRetrieveInclude";
-    public string Version => "1.0.1";
-    public ILibrary[] Dependencies => [];
-
-    #endregion ILibrary Implementation
-
     #region ValueSets
 
     [CqlValueSetDefinition("Female Administrative Sex", valueSetId: "2.16.840.1.113883.3.560.100.2", valueSetVersion: null)]
@@ -58,15 +46,68 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #region Functions and Expressions
 
-    [CqlExpressionDefinition("InDemographic")]
-    public IEnumerable<Observation> InDemographic(CqlContext context)
-    {
-        IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+    private readonly Cached<IEnumerable<Observation>> _InDemographic_Cached = new();
 
-        return a_;
-    }
+    [CqlExpressionDefinition("InDemographic")]
+    public IEnumerable<Observation> InDemographic(CqlContext context) =>
+        _InDemographic_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+                return a_;
+            });
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private TestRetrieveInclude_1_0_1() {}
+
+    public static TestRetrieveInclude_1_0_1 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "TestRetrieveInclude";
+    public string Version => "1.0.1";
+    public ILibrary[] Dependencies => [];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }
