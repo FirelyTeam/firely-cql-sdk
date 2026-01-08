@@ -33,17 +33,15 @@
 		<!-- ## CQL-related properties (also in BuildArtifacts.csproj, cql-base.props, cql-demo.props)  -->
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<CqlSolutionDir>$(MSBuildThisFileDirectory)/../</CqlSolutionDir>
-		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable>
+		<EmbedDebugSymbolsEnable>true</EmbedDebugSymbolsEnable>
 		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' == 'Release'">false</EmbedDebugSymbolsEnable>
 		<JsonPretty>true</JsonPretty>
 
 		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props -->
-		<CqlToElmEnabled Condition="'$(Configuration)' != 'Release'">false</CqlToElmEnabled>
 		<CqlToElmEnabled Condition="'$(Configuration)' == 'Release'">true</CqlToElmEnabled>
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
 
 		<!-- ElmToCSharpEnabled must be true here for build to pass -->
-		<ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled>
 		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
 		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
 	</PropertyGroup>
