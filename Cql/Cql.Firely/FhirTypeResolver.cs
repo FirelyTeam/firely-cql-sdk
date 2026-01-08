@@ -25,7 +25,7 @@ namespace Hl7.Cql.Fhir
 
             AddTypesFromInspector();
             // Fix lack of inheritance in the SDK
-            adjust();
+            Adjust();
         }
 
         internal override bool IsListType(Type type)
@@ -116,15 +116,12 @@ namespace Hl7.Cql.Fhir
 
         internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
 
-        private void adjust()
+        private void Adjust()
         {
             Types["{http://hl7.org/fhir}positiveInt"] = typeof(Hl7.Fhir.Model.Integer);
             Types["{http://hl7.org/fhir}unsignedInt"] = typeof(Hl7.Fhir.Model.Integer);
-
             Types["{http://hl7.org/fhir}SimpleQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
             Types["{http://hl7.org/fhir}MoneyQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
-
-            Types["{http://hl7.org/fhir}Id"] = typeof(Hl7.Fhir.Model.FhirString);
         }
 
         private void AddTypesFromInspector()
