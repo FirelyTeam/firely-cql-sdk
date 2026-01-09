@@ -80,14 +80,6 @@ partial class ExpressionBuilderContext
                 }
                 if (sourceType != null)
                 {
-                    // This is a temporary fix for the issue where the type of the Extension.url in the Firely
-                    // model is different from the type of the url in the CQL model. Since GetProperty() cannot
-                    // properly correct for this, we'll return the "correct" type here, so that in the end
-                    // a cast from string->FhirString is generated and the code compiles.
-                    // Task https://github.com/FirelyTeam/firely-cql-sdk/issues/493 will clean this up.
-                    if(sourceType == typeof(Extension) && propertyExpression.path == "url")
-                        return typeof(FhirString);
-
                     var property = _typeResolver.GetProperty(sourceType, propertyExpression.path);
 
                     // This is a temporary fix for the issue where the type the Firely SDK uses for a choice
