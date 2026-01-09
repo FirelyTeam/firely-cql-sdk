@@ -8,7 +8,7 @@
 
 	<PropertyGroup>
 		<!--
-			Keep FirelySdkVersion in sync between cql-base.props and cql-demo.props
+			Keep FirelySdkVersion in sync between cql-base.props and cql-demo.props and README.md
 			The version must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/src/Vonk.props
 			-->
 		<FirelySdkVersion>6.0.1</FirelySdkVersion>
