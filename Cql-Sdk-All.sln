@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.3.11312.210 d18.3
+VisualStudioVersion = 18.3.11312.210
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elm", "Cql\Elm\Elm.csproj", "{78C3855A-EEE7-4283-BE5F-71F3E3677C11}"
 EndProject
@@ -133,6 +133,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE = LICENSE
 		NuGet.config = NuGet.config
 		packaging-tooling.props = packaging-tooling.props
+		packaging-tooling.Targets.xml = packaging-tooling.Targets.xml
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -323,7 +324,7 @@ Global
 		{632001E4-FF3B-41BC-A3BE-15B65DF5EC37} = {85401759-2C64-414D-9882-4DB1EA41C2ED}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 		FileExplorer = build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
+		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 	EndGlobalSection
 EndGlobal

@@ -677,17 +677,16 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
                 bool? l_(Extension @this) {
                     FhirUri an_ = @this?.UrlElement;
-                    FhirString ao_ = context.Operators.Convert<FhirString>(an_);
-                    string ap_ = FHIRHelpers_4_4_000.Instance.ToString(context, ao_);
-                    bool? aq_ = context.Operators.Equal(ap_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-                    return aq_;
+                    string ao_ = FHIRHelpers_4_4_000.Instance.ToString(context, an_);
+                    bool? ap_ = context.Operators.Equal(ao_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+                    return ap_;
                 }
 
                 IEnumerable<Extension> m_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(k_()), l_);
 
                 DataType n_(Extension @this) {
-                    DataType ar_ = @this?.Value;
-                    return ar_;
+                    DataType aq_ = @this?.Value;
+                    return aq_;
                 }
 
                 IEnumerable<DataType> o_ = context.Operators.Select<Extension, DataType>(m_, n_);

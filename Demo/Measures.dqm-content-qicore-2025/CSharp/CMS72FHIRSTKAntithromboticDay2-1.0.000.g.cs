@@ -872,10 +872,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
 
                     bool? z_(Extension @this) {
                         FhirUri ag_ = @this?.UrlElement;
-                        FhirString ah_ = context.Operators.Convert<FhirString>(ag_);
-                        string ai_ = FHIRHelpers_4_4_000.Instance.ToString(context, ah_);
-                        bool? aj_ = context.Operators.Equal(ai_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
-                        return aj_;
+                        string ah_ = FHIRHelpers_4_4_000.Instance.ToString(context, ag_);
+                        bool? ai_ = context.Operators.Equal(ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                        return ai_;
                     }
 
                     IEnumerable<Extension> aa_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MedicationAdm is DomainResource
@@ -883,8 +882,8 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                         : default), z_);
 
                     DataType ab_(Extension @this) {
-                        DataType ak_ = @this?.Value;
-                        return ak_;
+                        DataType aj_ = @this?.Value;
+                        return aj_;
                     }
 
                     IEnumerable<DataType> ac_ = context.Operators.Select<Extension, DataType>(aa_, ab_);

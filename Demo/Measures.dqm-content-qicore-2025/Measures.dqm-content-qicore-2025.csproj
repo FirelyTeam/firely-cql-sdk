@@ -29,6 +29,8 @@
 	<!--
 	Packaging tooling properties. Put these last
 	-->
+	<Import Project="..\..\packaging-tooling.props" />
+
 	<PropertyGroup>
 		<LibrarySet>dqm-content-qicore-2025</LibrarySet>
 		<Profile>dqm-content-qicore-2025</Profile>
@@ -36,6 +38,7 @@
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
+		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 		<!-- <ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory> -->
 		<ResourcesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</ResourcesDirectory>
 	</PropertyGroup>
@@ -59,5 +62,6 @@
 		</Content>
 	</ItemGroup>
 
-	<Import Project="..\..\packaging-tooling.props" />
+	<Import Project="..\..\packaging-tooling.Targets.xml" />
+
 </Project>

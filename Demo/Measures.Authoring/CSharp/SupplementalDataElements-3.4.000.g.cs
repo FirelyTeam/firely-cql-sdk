@@ -112,7 +112,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 
                     IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
                     object u_ = context.Operators.SingletonFrom<object>(t_);
-                    CqlCode v_ = FHIRHelpers_4_3_000.Instance.ToCode(context, u_);
+                    CqlCode v_ = FHIRHelpers_4_3_000.Instance.ToCode(context, u_ as Coding);
                     CqlCode[] w_ = [
                         v_,
                     ];
@@ -136,7 +136,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                     IEnumerable<object> aa_ = context.Operators.Select<Extension, object>(y_, z_);
 
                     CqlCode ab_(object @this) {
-                        CqlCode at_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this);
+                        CqlCode at_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
                         return at_;
                     }
 
@@ -260,7 +260,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                     IEnumerable<object> t_ = context.Operators.Select<Extension, object>(r_, s_);
 
                     CqlCode u_(object @this) {
-                        CqlCode ao_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this);
+                        CqlCode ao_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
                         return ao_;
                     }
 
@@ -285,7 +285,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                     IEnumerable<object> z_ = context.Operators.Select<Extension, object>(x_, y_);
 
                     CqlCode aa_(object @this) {
-                        CqlCode at_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this);
+                        CqlCode at_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
                         return at_;
                     }
 

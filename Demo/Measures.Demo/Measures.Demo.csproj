@@ -34,12 +34,15 @@
 	<!--
 	Packaging tooling properties. Put these last
 	-->
+	<Import Project="..\..\packaging-tooling.props" />
+
 	<PropertyGroup>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<LibrarySet>Demo</LibrarySet>
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
+		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
 	</PropertyGroup>
 
@@ -62,6 +65,6 @@
 		</Content>
 	</ItemGroup>
 
-	<Import Project="..\..\packaging-tooling.props" />
+	<Import Project="..\..\packaging-tooling.Targets.xml" />
 
 </Project>

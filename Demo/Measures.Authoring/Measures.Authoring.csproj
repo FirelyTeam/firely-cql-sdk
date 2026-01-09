@@ -50,6 +50,8 @@
 	<!--
 	Packaging tooling properties. Put these last
 	-->
+	<Import Project="..\..\packaging-tooling.props" />
+
 	<PropertyGroup>
 		<LibrarySet>Measures.Authoring</LibrarySet>
 		<CqlDirectory>$(MSBuildProjectDirectory)/Input/cql</CqlDirectory>
@@ -57,6 +59,7 @@
 		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 		<ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory>
 	</PropertyGroup>
-	<Import Project="..\..\packaging-tooling.props" />
+
+	<Import Project="..\..\packaging-tooling.Targets.xml" />
 
 </Project>
