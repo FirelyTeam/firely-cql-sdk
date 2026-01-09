@@ -15,6 +15,20 @@
 		<ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />
 	</ItemGroup>
 
+  <ItemGroup>
+    <Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="input/**">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+		<Content Remove="input/tests/results" />
+	</ItemGroup>
+
+	<!--
+	Packaging tooling properties. Put these last
+	-->
 	<PropertyGroup>
 		<LibrarySet>dqm-content-qicore-2025</LibrarySet>
 		<Profile>dqm-content-qicore-2025</Profile>
@@ -25,13 +39,6 @@
 		<!-- <ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory> -->
 		<ResourcesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</ResourcesDirectory>
 	</PropertyGroup>
-
-	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />
-	<Import Project="../Cql/Build/ElmToCSharp.Targets.xml" />
-
-  <ItemGroup>
-    <Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
-  </ItemGroup>
 
 	<ItemGroup>
 		<Content Include="$(CqlDirectory)/*">
@@ -52,10 +59,5 @@
 		</Content>
 	</ItemGroup>
 
-	<ItemGroup>
-		<Content Include="input/**">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Content>
-		<Content Remove="input/tests/results" />
-	</ItemGroup>
+	<Import Project="..\..\packaging-tooling.props" />
 </Project>

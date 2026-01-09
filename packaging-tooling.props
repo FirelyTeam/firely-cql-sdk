@@ -1,0 +1,33 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<!--
+	CQL-tooling properties used by CqlToElm.Targets.xml and ElmToCSharp.Targets.xml
+	Include this file in your project when importing those targets, to ensure these properties are defined.
+	-->
+
+	<PropertyGroup>
+		<CqlSolutionDir>$(MSBuildThisFileDirectory)</CqlSolutionDir>
+		<CqlToolingTargetsDir>$(CqlSolutionDir)/Demo/Cql/Build/</CqlToolingTargetsDir>
+
+		<JsonPretty>true</JsonPretty>
+
+		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable>
+		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' == 'Release'">false</EmbedDebugSymbolsEnable>
+
+		<EmbedDebugSymbolsEnable>false</EmbedDebugSymbolsEnable>
+		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable>
+
+		<CqlToElmEnabled>false</CqlToElmEnabled>
+		<CqlToElmEnabled Condition="'$(Configuration)' == 'Release'">true</CqlToElmEnabled>
+
+		<ElmToCSharpEnabled>false</ElmToCSharpEnabled>
+		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
+
+		<Box> __________________________________________________________________________________________&#10;/&#10;{Text}&#10;\</Box>
+
+	</PropertyGroup>
+
+	<Import Project="$(CqlToolingTargetsDir)CqlToElm.Targets.xml" />
+	<Import Project="$(CqlToolingTargetsDir)ElmToCSharp.Targets.xml" />
+
+</Project>

@@ -41,20 +41,6 @@
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 	</ItemGroup>
 
-	<PropertyGroup>
-		<LibrarySet>CoreTests.HL7</LibrarySet>
-		<CqlDirectory>$(MSBuildProjectDirectory)/Input/ELM/HL7</CqlDirectory>
-		<ElmDirectory>$(MSBuildProjectDirectory)/Input/ELM/HL7</ElmDirectory>
-		<!-- <DllDirectory>$(MSBuildProjectDirectory)/Dlls</DllDirectory> -->
-		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
-		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/Input/tests/results</TestResultsDirectory> -->
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
-	</PropertyGroup>
-
-	<Import Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
-	<Import Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\ElmToCSharp.Targets.xml" />
-
 	<ItemGroup>
 		<None Include="Input\ELM\HL7\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -72,5 +58,22 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
+
+	<!--
+	Packaging tooling properties. Put these last
+	-->
+
+	<PropertyGroup>
+		<LibrarySet>CoreTests.HL7</LibrarySet>
+		<CqlDirectory>$(MSBuildProjectDirectory)/Input/ELM/HL7</CqlDirectory>
+		<ElmDirectory>$(MSBuildProjectDirectory)/Input/ELM/HL7</ElmDirectory>
+		<!-- <DllDirectory>$(MSBuildProjectDirectory)/Dlls</DllDirectory> -->
+		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
+		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/Input/tests/results</TestResultsDirectory> -->
+		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
+		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
+	</PropertyGroup>
+
+	<Import Project="..\..\packaging-tooling.props" />
 
 </Project>
