@@ -22,19 +22,20 @@ namespace Hl7.Cql.Fhir
     public static class FhirTypeConverter
     {
         internal static bool DisableReuseForBenchmarks = false;
-
         internal const int DefaultCacheSize = 10_000;
         private static readonly LRUCache<CqlDateTime> DefaultDateTimesCache = new(DefaultCacheSize);
+        private static readonly Lazy<TypeConverter> DefaultLazy = new(() => CreateImpl(M.ModelInfo.ModelInspector));
+        private static readonly Lazy<TypeConverter> DefaultWithCacheLazy = new(() => CreateImpl(M.ModelInfo.ModelInspector, DefaultCacheSize));
 
         /// <summary>
         /// Singleton for the default configuration of this TypeConverter
         /// </summary>
-        public static readonly TypeConverter Default = CreateImpl(M.ModelInfo.ModelInspector);
+        public static TypeConverter Default => DefaultLazy.Value;
 
         /// <summary>
         /// Singleton for the default configuration of this TypeConverter with an LRU cache of 10000
         /// </summary>
-        internal static readonly TypeConverter DefaultWithCache = CreateImpl(M.ModelInfo.ModelInspector, DefaultCacheSize);
+        internal static TypeConverter DefaultWithCache => DefaultWithCacheLazy.Value;
 
         private static readonly ConcurrentDictionary<(ModelInspector, int?), WeakReference<TypeConverter>> ConverterCache = new ();
 
@@ -282,14 +283,14 @@ namespace Hl7.Cql.Fhir
                 else
                 {
                     var range = new M.Range();
-                    if (interval.low is not null && interval.low.value.HasValue)
+                    if (interval.low is { value: { } low })
                     {
-                        range.Low = new M.Quantity(interval.low.value.Value, interval.low.unit ?? "1");
+                        range.Low = new M.Quantity(low, "1");
                     }
-                    if (interval.high is not null && interval.high.value.HasValue)
-                    {
-                        range.High = new M.Quantity(interval.high.value.Value, interval.high.unit ?? "1");
 
+                    if (interval.high is { value: { } high })
+                    {
+                        range.High = new M.Quantity(high, "1");
                     }
                     return range;
                 }
@@ -301,13 +302,14 @@ namespace Hl7.Cql.Fhir
                 else
                 {
                     var range = new M.Range();
-                    if (interval.low is not null && interval.low.HasValue)
+                    if (interval.low is { } low)
                     {
-                        range.Low = new M.Quantity(interval.low.Value, "1");
+                        range.Low = new M.Quantity(low, "1");
                     }
-                    if (interval.high is not null && interval.high.HasValue)
+
+                    if (interval.high is { } high)
                     {
-                        range.High = new M.Quantity(interval.high.Value, "1");
+                        range.High = new M.Quantity(high, "1");
                     }
                     return range;
                 }
@@ -319,13 +321,14 @@ namespace Hl7.Cql.Fhir
                 else
                 {
                     var range = new M.Range();
-                    if (interval.low is not null && interval.low.HasValue)
+                    if (interval.low is { } low)
                     {
-                        range.Low = new M.Quantity(interval.low.Value, "1");
+                        range.Low = new M.Quantity(low, "1");
                     }
-                    if (interval.high is not null && interval.high.HasValue)
+
+                    if (interval.high is { } high)
                     {
-                        range.High = new M.Quantity(interval.high.Value, "1");
+                        range.High = new M.Quantity(high, "1");
                     }
                     return range;
                 }
@@ -337,14 +340,14 @@ namespace Hl7.Cql.Fhir
                 else
                 {
                     var period = new M.Period();
-                    if (interval.low is not null && interval.low is not null)
+                    if (interval.low is { } low)
                     {
-                        period.Start = interval.low.ToString();
+                        period.Start = low.ToString();
                     }
-                    if (interval.high is not null && interval.high is not null)
-                    {
-                        period.End = interval.high.ToString();
 
+                    if (interval.high is { } high)
+                    {
+                        period.End = high.ToString();
                     }
                     return period;
                 }
@@ -356,14 +359,14 @@ namespace Hl7.Cql.Fhir
                 else
                 {
                     var period = new M.Period();
-                    if (interval.low is not null && interval.low is not null)
+                    if (interval.low is { } low)
                     {
-                        period.Start = interval.low.ToString();
+                        period.Start = low.ToString();
                     }
-                    if (interval.high is not null && interval.high is not null)
-                    {
-                        period.End = interval.high.ToString();
 
+                    if (interval.high is { } high)
+                    {
+                        period.End = high.ToString();
                     }
                     return period;
                 }
@@ -378,6 +381,7 @@ namespace Hl7.Cql.Fhir
         {
             converter.AddConversion<byte[], string>(binary => Encoding.UTF8.GetString(binary));
             converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
+
             // TODO: this is a performance problem
             converter.AddConversion<string, CqlDate?>(str =>
             {
@@ -438,7 +442,6 @@ namespace Hl7.Cql.Fhir
                     var systemAndCode = ((ICoded)code).ToCodings().Single();
                     return systemAndCode.Code!;
                 });
-
 
                 converter.AddConversion(nullableEnumType, codeOfEnumType, enumValue => Activator.CreateInstance(codeOfEnumType, enumValue)!);
                 converter.AddConversion(nullableEnumType, typeof(string), (@enum) => Enum.GetName(nullableEnumType, @enum) ?? throw new InvalidOperationException($"Did not find enum member {@enum} on type {nullableEnumType}."));
