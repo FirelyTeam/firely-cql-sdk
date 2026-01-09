@@ -457,6 +457,7 @@ namespace Hl7.Cql.Fhir
         internal static TypeConverter ConvertSubtypeRelationships(this TypeConverter converter)
         {
             converter.AddConversion<M.Id, M.FhirString>(id => new M.FhirString(id.Value));
+            converter.AddConversion<M.Code, M.FhirString>(id => new M.FhirString(id.Value));
             return converter;
         }
     }

@@ -3,6 +3,7 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
+		<CqlSolutionDir>$(MSBuildThisFileDirectory)../../</CqlSolutionDir>
 		<OutputType>Exe</OutputType>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackAsTool>true</PackAsTool>
