@@ -1177,31 +1177,26 @@ partial class ExpressionBuilderContext
         var functionCallExpression = new FunctionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, convertedArguments, definitionType);
         return functionCallExpression;
 
-        // // This function will handle the cases where the normal C# invocation is insufficient to represent the CQL function call:
-        // // the argument is of a choice type, and the parameter is of a specific type (or for now, also a choice type).
-        // // In this case we need to insert a conversion from the choice type to the specific type of the argument. Presumably, the
-        // // cql2elm compiler has already checked that the call is valid, but we do need to cast the choice type (in C# represented by
-        // // object/DataType) to the actual type to make this a valid C# call. CQL semantics state that the result may be null if the
-        // // choice is not compatible with the parameter, so we'll use an As in C#.
-        // Expression convertChoice(Expression argument, TypeSpecifier? targetTypeSpecifier)
-        // {
-        //     if (argument.Type == typeof(object))
-        //     {
-        //         if (targetTypeSpecifier != null && targetTypeSpecifier is not ChoiceTypeSpecifier)
-        //         {
-        //             var changeType = ChangeType(argument, targetTypeSpecifier, considerSafeUpcast: true);
-        //             return changeType;
-        //         }
-        //     }
-        //
-        //     return argument;
-        // }
-
         Expression ConvertArgumentTargetType(
             Expression argument,
             TypeSpecifier? targetTypeSpecifier,
             int argumentIndex)
         {
+            // This function will handle the cases where the normal C# invocation is insufficient to represent the CQL function call:
+            // the argument is of a choice type, and the parameter is of a specific type (or for now, also a choice type).
+            // In this case we need to insert a conversion from the choice type to the specific type of the argument. Presumably, the
+            // cql2elm compiler has already checked that the call is valid, but we do need to cast the choice type (in C# represented by
+            // object/DataType) to the actual type to make this a valid C# call. CQL semantics state that the result may be null if the
+            // choice is not compatible with the parameter, so we'll use an As in C#.
+            if (argument.Type == typeof(object))
+            {
+                if (targetTypeSpecifier != null && targetTypeSpecifier is not ChoiceTypeSpecifier)
+                {
+                    var changeType = ChangeType(argument, targetTypeSpecifier, considerSafeUpcast: true);
+                    return changeType;
+                }
+            }
+
             /*
              * **Background**
              *
