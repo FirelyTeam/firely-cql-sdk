@@ -239,10 +239,9 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
                         bool? k_(Extension @this) {
                             FhirUri af_ = @this?.UrlElement;
-                            FhirString ag_ = context.Operators.Convert<FhirString>(af_);
-                            string ah_ = FHIRHelpers_4_3_000.Instance.ToString(context, ag_);
-                            bool? ai_ = context.Operators.Equal(ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
-                            return ai_;
+                            string ag_ = FHIRHelpers_4_3_000.Instance.ToString(context, af_);
+                            bool? ah_ = context.Operators.Equal(ag_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                            return ah_;
                         }
 
                         IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MedicationsNotDocumented is DomainResource
@@ -250,8 +249,8 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                             : default), k_);
 
                         DataType m_(Extension @this) {
-                            DataType aj_ = @this?.Value;
-                            return aj_;
+                            DataType ai_ = @this?.Value;
+                            return ai_;
                         }
 
                         IEnumerable<DataType> n_ = context.Operators.Select<Extension, DataType>(l_, m_);
@@ -269,8 +268,8 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                         List<CodeableConcept> z_ = MedicationsNotDocumented?.ReasonCode;
 
                         CqlConcept aa_(CodeableConcept @this) {
-                            CqlConcept ak_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
-                            return ak_;
+                            CqlConcept aj_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
+                            return aj_;
                         }
 
                         IEnumerable<CqlConcept> ab_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)z_, aa_);

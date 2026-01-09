@@ -874,10 +874,9 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
 
         bool? a_(Extension E) {
             FhirUri g_ = E?.UrlElement;
-            FhirString h_ = context.Operators.Convert<FhirString>(g_);
-            string i_ = h_?.Value;
-            bool? j_ = context.Operators.Equal(i_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
-            return j_;
+            string h_ = g_?.Value;
+            bool? i_ = context.Operators.Equal(h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
+            return i_;
         }
 
         IEnumerable<Extension> b_ = context.Operators.Where<Extension>((deviceRequest is DomainResource
@@ -885,9 +884,9 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             : default), a_);
 
         bool? c_(Extension E) {
-            DataType k_ = E?.Value;
-            object l_ = FHIRHelpers_4_3_000.Instance.ToValue(context, k_);
-            return l_ as bool?;
+            DataType j_ = E?.Value;
+            object k_ = FHIRHelpers_4_3_000.Instance.ToValue(context, j_);
+            return k_ as bool?;
         }
 
         IEnumerable<bool?> d_ = context.Operators.Select<Extension, bool?>(b_, c_);

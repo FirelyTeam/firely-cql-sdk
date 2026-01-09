@@ -67,11 +67,9 @@
 		<LibrarySet>CoreTests.HL7</LibrarySet>
 		<CqlDirectory>$(MSBuildProjectDirectory)/Input/ELM/HL7</CqlDirectory>
 		<ElmDirectory>$(MSBuildProjectDirectory)/Input/ELM/HL7</ElmDirectory>
+		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 		<!-- <DllDirectory>$(MSBuildProjectDirectory)/Dlls</DllDirectory> -->
 		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
-		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/Input/tests/results</TestResultsDirectory> -->
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<Import Project="..\..\packaging-tooling.props" />
