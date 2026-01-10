@@ -21,8 +21,9 @@ namespace Hl7.Cql.Fhir
     /// </summary>
     public static class FhirTypeConverter
     {
-        internal static bool DisableReuseForBenchmarks = false;
         internal const int DefaultCacheSize = 10_000;
+
+        internal static bool DisableReuseForBenchmarks = false;
         private static readonly LRUCache<CqlDateTime> DefaultDateTimesCache = new(DefaultCacheSize);
         private static readonly Lazy<TypeConverter> DefaultLazy = new(() => CreateImpl(M.ModelInfo.ModelInspector));
         private static readonly Lazy<TypeConverter> DefaultWithCacheLazy = new(() => CreateImpl(M.ModelInfo.ModelInspector, DefaultCacheSize));
@@ -457,7 +458,7 @@ namespace Hl7.Cql.Fhir
         internal static TypeConverter ConvertSubtypeRelationships(this TypeConverter converter)
         {
             converter.AddConversion<M.Id, M.FhirString>(id => new M.FhirString(id.Value));
-            converter.AddConversion<M.Code, M.FhirString>(id => new M.FhirString(id.Value));
+            converter.AddConversion<M.Code, M.FhirString>(code => new M.FhirString(code.Value));
             return converter;
         }
     }

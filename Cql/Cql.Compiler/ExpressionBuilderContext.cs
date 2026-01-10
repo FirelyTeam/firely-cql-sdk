@@ -1168,7 +1168,6 @@ partial class ExpressionBuilderContext
 
         var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
         var convertedArguments = arguments
-                                 // .Select((a, i) => convertChoice(a, signature?[i]))
                                  .Select((a, i) => ConvertArgumentTargetType(a, signature?[i], i))
                                  .Prepend(CqlExpressions.ParameterExpression)
                                  .ToArray();
@@ -1182,15 +1181,17 @@ partial class ExpressionBuilderContext
             TypeSpecifier? targetTypeSpecifier,
             int argumentIndex)
         {
-            // This function will handle the cases where the normal C# invocation is insufficient to represent the CQL function call:
-            // the argument is of a choice type, and the parameter is of a specific type (or for now, also a choice type).
-            // In this case we need to insert a conversion from the choice type to the specific type of the argument. Presumably, the
-            // cql2elm compiler has already checked that the call is valid, but we do need to cast the choice type (in C# represented by
-            // object/DataType) to the actual type to make this a valid C# call. CQL semantics state that the result may be null if the
-            // choice is not compatible with the parameter, so we'll use an As in C#.
+            /*
+                This function will handle the cases where the normal C# invocation is insufficient to represent the CQL function call:
+                the argument is of a choice type, and the parameter is of a specific type (or for now, also a choice type).
+                In this case we need to insert a conversion from the choice type to the specific type of the argument. Presumably, the
+                cql2elm compiler has already checked that the call is valid, but we do need to cast the choice type (in C# represented by
+                object/DataType) to the actual type to make this a valid C# call. CQL semantics state that the result may be null if the
+                choice is not compatible with the parameter, so we'll use an As in C#.
+            */
             if (argument.Type == typeof(object))
             {
-                if (targetTypeSpecifier != null && targetTypeSpecifier is not ChoiceTypeSpecifier)
+                if (targetTypeSpecifier is not null and not ChoiceTypeSpecifier)
                 {
                     var changeType = ChangeType(argument, targetTypeSpecifier, considerSafeUpcast: true);
                     return changeType;
@@ -1198,32 +1199,32 @@ partial class ExpressionBuilderContext
             }
 
             /*
-             * **Background**
-             *
-             * FHIRHelpers 4.0.1 removed this line `define function ToString(value FHIR.id): value.value`
-             *  with the mistaken assumption that a FHIR Id inherits from FHIR String (from the diagram in 'FHIR Primitive Types'
-             *  referenced below)
-             *
-             * **Solution**
-             *
-             * So, whe have to convert a FHIR Id to a FHIR String at runtime, before passing it to
-             *  FHIRHelpers.ToString(value FHIR.string) function.
-             *
-             * A conversion for this is added in FhirTypeConverter.AddSubtypeConversions.
-             *
-             * So, this convert method was added to ensure that the argument can be converted to the parameter type.
-             *
-             * This seems like overkill for just this one case. An alternative solution could be to preprocess the Library
-             *  in LibraryPreprocessor.PreprocessLibrary, but since that is a non-FHIR specific class, it would require
-             *  more work to open it up for FHIR-specific processing.
-             *
-             * **Note**
-             *
-             * This new convert method makes the convertChoice (commented out) obsolete. We will keep it there for now.
-             *
-             * **References**
-             * - FHIRHelpers 4.0.1:  https://github.com/cqframework/clinical_quality_language/blame/master/Src/java/quick/src/main/resources/org/hl7/fhir/FHIRHelpers-4.0.1.cql
-             * - FHIR Primitive Types:  https://hl7.org/fhir/datatypes.html#:~:text=Standards%20Status%20Colors-,Primitive%20Types,-PrimitiveType
+               **Background**
+
+               FHIRHelpers 4.0.1 removed this line `define function ToString(value FHIR.id): value.value`
+                with the mistaken assumption that a FHIR Id inherits from FHIR String (from the diagram in 'FHIR Primitive Types'
+                referenced below)
+
+               **Solution**
+
+               So, we have to convert a FHIR Id to a FHIR String at runtime, before passing it to
+                FHIRHelpers.ToString(value FHIR.string) function.
+
+               A conversion for this is added in FhirTypeConverter.AddSubtypeConversions.
+
+               So, this convert method was added to ensure that the argument can be converted to the parameter type.
+
+               This seems like overkill for just this one case. An alternative solution could be to preprocess the Library
+                in LibraryPreprocessor.PreprocessLibrary, but since that is a non-FHIR specific class, it would require
+                more work to open it up for FHIR-specific processing.
+
+               **Note**
+
+               This new convert method makes the convertChoice (commented out) obsolete. We will keep it there for now.
+
+               **References**
+               - FHIRHelpers 4.0.1:  https://github.com/cqframework/clinical_quality_language/blame/master/Src/java/quick/src/main/resources/org/hl7/fhir/FHIRHelpers-4.0.1.cql
+               - FHIR Primitive Types:  https://hl7.org/fhir/datatypes.html#:~:text=Standards%20Status%20Colors-,Primitive%20Types,-PrimitiveType
              */
 
             var parameterType = TypeFor(targetTypeSpecifier, false);
