@@ -283,14 +283,14 @@ namespace Hl7.Cql.Fhir
                 else
                 {
                     var range = new M.Range();
-                    if (interval.low is { value: { } low })
+                    if (interval.low is { value: { } low, unit: var lowUnit })
                     {
-                        range.Low = new M.Quantity(low, "1");
+                        range.Low = new M.Quantity(low, lowUnit ?? "1");
                     }
 
-                    if (interval.high is { value: { } high })
+                    if (interval.high is { value: { } high, unit: var highUnit })
                     {
-                        range.High = new M.Quantity(high, "1");
+                        range.High = new M.Quantity(high, highUnit ?? "1");
                     }
                     return range;
                 }
