@@ -33,12 +33,12 @@ public interface ICqlContextInternals
     /// the factory function is called without caching the result.
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public T GetOrCompute<T>(string cacheKey, Func<T> factory);
+    public T GetOrCompute<T>(long cacheKey, Func<T> factory);
 }
 
 partial class CqlContext : ICqlContextInternals
 {
-    private Dictionary<string, object?> _cache = [];
+    private Dictionary<long, object?>? _cache;
 
     /// <summary>
     /// Invalidates the current cache, forcing subsequent operations to use fresh data.
@@ -58,13 +58,19 @@ partial class CqlContext : ICqlContextInternals
     /// may impact performance if caching is typically used to improve efficiency.</remarks>
     public void DontUseCaching()
     {
-        _cache = [];
+        _cache = null;
     }
 
-    long ICqlContextInternals.CacheVersion => _cache.GetHashCode();
+    long ICqlContextInternals.CacheVersion => _cache?.GetHashCode() ?? 0;
 
-    T ICqlContextInternals.GetOrCompute<T>(string cacheKey, Func<T> factory)
+    T ICqlContextInternals.GetOrCompute<T>(long cacheKey, Func<T> factory)
     {
+        if (_cache is null)
+        {
+            // Caching disabled
+            return factory();
+        }
+
         if (_cache.TryGetValue(cacheKey, out var cachedValue))
         {
             // Cache hit

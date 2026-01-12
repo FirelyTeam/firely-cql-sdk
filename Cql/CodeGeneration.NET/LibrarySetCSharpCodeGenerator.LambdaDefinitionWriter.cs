@@ -65,12 +65,17 @@ internal partial class LibrarySetCSharpCodeGenerator
             {
                 // Generate cache key from library identifier and definition name
                 var libraryVersionedIdentifier = LibraryWriter.LibraryName.ToString();
-                var cacheKey = $"{libraryVersionedIdentifier}.{quotedName}";
+                var definitionName = ld.Name;
+                var cacheKeyString = $"{libraryVersionedIdentifier}.{definitionName}";
+                
+                // Generate a deterministic Snowflake-like ID at compile time
+                // Using FNV-1a hash for better distribution than GetHashCode
+                var cacheKey = GenerateSnowflakeId(cacheKeyString);
                 
                 ISB.AppendLine($"{lambdaParameters} =>");
                 using (ISB.Indent())
                 {
-                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute({cacheKey}, () => {lambdaBody});");
+                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute({cacheKey}L, () => {lambdaBody});");
                 }
                 ISB.AppendLine();
             }
@@ -724,5 +729,26 @@ internal partial class LibrarySetCSharpCodeGenerator
             ExpressionType.TypeIs => "is",
             _ => throw new NotSupportedException($"Don't know how to convert operator {nodeType} into C#."),
         };
+
+        /// <summary>
+        /// Generates a Snowflake-like ID for cache keys using a deterministic hash algorithm.
+        /// Uses FNV-1a 64-bit hash for better distribution than GetHashCode.
+        /// </summary>
+        private static long GenerateSnowflakeId(string input)
+        {
+            // FNV-1a 64-bit hash constants
+            const ulong FnvOffsetBasis = 14695981039346656037;
+            const ulong FnvPrime = 1099511628211;
+
+            ulong hash = FnvOffsetBasis;
+            foreach (char c in input)
+            {
+                hash ^= c;
+                hash *= FnvPrime;
+            }
+
+            // Return as signed long (cast from unsigned hash)
+            return unchecked((long)hash);
+        }
     }
 }
