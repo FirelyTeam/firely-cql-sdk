@@ -29,8 +29,8 @@ public interface ICqlContextInternals
     /// <param name="factory">A function to compute the value if it's not in the cache.</param>
     /// <returns>The cached or newly computed value.</returns>
     /// <remarks>
-    /// This method provides thread-safe access to the cache. If caching is disabled (CacheVersion is 0),
-    /// the factory function is called without caching the result.
+    /// This method is thread-safe and can be called concurrently from multiple threads.
+    /// If caching is disabled (cache is null), the factory function is called without caching the result.
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public T GetOrCompute<T>(long cacheKey, Func<T> factory);
@@ -39,6 +39,7 @@ public interface ICqlContextInternals
 partial class CqlContext : ICqlContextInternals
 {
     private Dictionary<long, object?>? _cache;
+    private readonly object _cacheLock = new();
 
     /// <summary>
     /// Invalidates the current cache, forcing subsequent operations to use fresh data.
@@ -48,7 +49,10 @@ partial class CqlContext : ICqlContextInternals
     /// refreshed.</remarks>
     public void UseNewCache()
     {
-        _cache = [];
+        lock (_cacheLock)
+        {
+            _cache = [];
+        }
     }
 
     /// <summary>
@@ -58,28 +62,34 @@ partial class CqlContext : ICqlContextInternals
     /// may impact performance if caching is typically used to improve efficiency.</remarks>
     public void DontUseCaching()
     {
-        _cache = null;
+        lock (_cacheLock)
+        {
+            _cache = null;
+        }
     }
 
-    long ICqlContextInternals.CacheVersion => _cache?.GetHashCode() ?? 0;
+    long ICqlContextInternals.CacheVersion => _cache is not null ? 1 : 0;
 
     T ICqlContextInternals.GetOrCompute<T>(long cacheKey, Func<T> factory)
     {
-        if (_cache is null)
+        lock (_cacheLock)
         {
-            // Caching disabled
-            return factory();
-        }
+            if (_cache is null)
+            {
+                // Caching disabled
+                return factory();
+            }
 
-        if (_cache.TryGetValue(cacheKey, out var cachedValue))
-        {
-            // Cache hit
-            return (T)cachedValue!;
-        }
+            if (_cache.TryGetValue(cacheKey, out var cachedValue))
+            {
+                // Cache hit - handle null values properly
+                return cachedValue is null ? default! : (T)cachedValue;
+            }
 
-        // Cache miss, compute and store
-        var result = factory();
-        _cache[cacheKey] = result;
-        return result;
+            // Cache miss, compute and store
+            var result = factory();
+            _cache[cacheKey] = result;
+            return result;
+        }
     }
 }
