@@ -35,7 +35,6 @@ internal interface ICacheKeyGenerator
 internal sealed class SnowflakeAlgorithmCacheKeyGenerator : ICacheKeyGenerator
 {
     private static readonly DateTime Epoch = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-    private static readonly DateTime GenerationTime = DateTime.UtcNow;
     private readonly Dictionary<long, int> _sequenceCounters = new();
     
     /// <inheritdoc />
@@ -47,18 +46,15 @@ internal sealed class SnowflakeAlgorithmCacheKeyGenerator : ICacheKeyGenerator
 
     /// <summary>
     /// Generates a unique cache key combining timestamp, FNV-1a hash, and sequence counter.
-    /// Uses the generation time captured at class initialization for deterministic builds.
-    /// If the sequence counter overflows (>3), waits one second to get a new timestamp and retries.
+    /// Uses the current UTC time for uniqueness. If the sequence counter overflows (>3), 
+    /// waits one second to get a new timestamp and retries.
     /// </summary>
     private long GenerateUniqueId(string input)
     {
-        // Start with the static generation time for deterministic builds
-        var timestamp = GenerationTime;
-        
         while (true)
         {
             // Calculate seconds since epoch (30 bits - supports dates until ~2054)
-            var secondsSinceEpoch = (uint)(timestamp - Epoch).TotalSeconds;
+            var secondsSinceEpoch = (uint)(DateTime.UtcNow - Epoch).TotalSeconds;
             
             // Generate FNV-1a 32-bit hash for the input
             var hash = GenerateFnv1aHash32(input);
@@ -96,9 +92,8 @@ internal sealed class SnowflakeAlgorithmCacheKeyGenerator : ICacheKeyGenerator
             }
             
             // Only reached if sequence > 3
-            // Wait 1 second and use current time for next iteration
+            // Wait 1 second to get a new timestamp for next iteration
             Thread.Sleep(1000);
-            timestamp = DateTime.UtcNow;
         }
     }
 
