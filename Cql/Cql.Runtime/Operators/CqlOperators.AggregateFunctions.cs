@@ -665,14 +665,14 @@ namespace Hl7.Cql.Operators
         {
             if (values == null)
                 return null;
-
+        
             var nonNull = values
                           .Where(q => q is { value: not null })
                           .ToArray();
-
+        
             if (nonNull.Length == 0)
                 return null;
-
+        
             decimal? sum = 0;
             string? unit = null;
             foreach (var v in nonNull)
