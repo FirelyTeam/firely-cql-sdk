@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
 [CqlLibrary("HybridHWMFHIR", "0.102.005")]
 public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHIR_0_102_005>
 {
@@ -115,84 +115,60 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
-
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _Measurement_Period_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-                CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
-                CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-                object d_ = context.ResolveParameter("HybridHWMFHIR-0.102.005", "Measurement Period", c_);
-                return (CqlInterval<CqlDateTime>)d_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385352901271768L, () => {
+            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            object d_ = context.ResolveParameter("HybridHWMFHIR-0.102.005", "Measurement Period", c_);
+            return (CqlInterval<CqlDateTime>)d_;
+        });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
-
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _Patient_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-                return b_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385351655164800L, () => {
+            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+            return b_;
+        });
 
-
-    private readonly Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        _SDE_Ethnicity_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385350166852968L, () => {
+            IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
+            return a_;
+        });
 
-
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        _SDE_Payer_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(3271385363131145928L, () => {
+            IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
+            return a_;
+        });
 
-
-    private readonly Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        _SDE_Race_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385359700455584L, () => {
+            IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
+            return a_;
+        });
 
-
-    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _SDE_Sex_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385356207709148L, () => {
+            CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
+            return a_;
+        });
 
 
     [CqlFunctionDefinition("LengthInDays")]
@@ -205,72 +181,64 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Inpatient_Encounters_Cached = new();
-
     [CqlExpressionDefinition("Inpatient Encounters")]
     public IEnumerable<Encounter> Inpatient_Encounters(CqlContext context) =>
-        _Inpatient_Encounters_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlValueSet a_ = this.Encounter_Inpatient(context);
-                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-                CqlValueSet c_ = this.Medicare_payer(context);
-                IEnumerable<Coverage> d_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Coverage"));
-                IEnumerable<ValueTuple<Encounter, Coverage>> e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385348079809396L, () => {
+            CqlValueSet a_ = this.Encounter_Inpatient(context);
+            IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+            CqlValueSet c_ = this.Medicare_payer(context);
+            IEnumerable<Coverage> d_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Coverage"));
+            IEnumerable<ValueTuple<Encounter, Coverage>> e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
 
-                (CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? f_(ValueTuple<Encounter, Coverage> _valueTuple) {
-                    (CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? m_ = (CqlTupleMetadata_EFSKhGUTUCLEXZENTURVLjeND, _valueTuple.Item1, _valueTuple.Item2);
-                    return m_;
-                }
+            (CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? f_(ValueTuple<Encounter, Coverage> _valueTuple) {
+                (CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? m_ = (CqlTupleMetadata_EFSKhGUTUCLEXZENTURVLjeND, _valueTuple.Item1, _valueTuple.Item2);
+                return m_;
+            }
 
-                IEnumerable<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?> g_ = context.Operators.Select<ValueTuple<Encounter, Coverage>, (CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?>(e_, f_);
+            IEnumerable<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?> g_ = context.Operators.Select<ValueTuple<Encounter, Coverage>, (CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?>(e_, f_);
 
-                bool? h_((CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? tuple_efskhgutuclexzenturvljend) {
-                    Code<Encounter.EncounterStatus> n_ = tuple_efskhgutuclexzenturvljend?.InpatientEncounter?.StatusElement;
-                    string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
-                    bool? p_ = context.Operators.Equal(o_, "finished");
-                    CqlInterval<CqlDateTime> q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, tuple_efskhgutuclexzenturvljend?.InpatientEncounter);
-                    int? r_ = this.LengthInDays(context, q_);
-                    bool? s_ = context.Operators.Less(r_, 365);
-                    bool? t_ = context.Operators.And(p_, s_);
-                    Period u_ = tuple_efskhgutuclexzenturvljend?.InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
-                    CqlDateTime w_ = context.Operators.End(v_);
-                    CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-                    bool? y_ = context.Operators.In<CqlDateTime>(w_, x_, "day");
-                    bool? z_ = context.Operators.And(t_, y_);
-                    Patient aa_ = this.Patient(context);
-                    Date ab_ = aa_?.BirthDateElement;
-                    string ac_ = ab_?.Value;
-                    CqlDate ad_ = context.Operators.ConvertStringToDate(ac_);
-                    CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
-                    CqlDateTime ag_ = context.Operators.Start(af_);
-                    CqlDate ah_ = context.Operators.DateFrom(ag_);
-                    int? ai_ = context.Operators.CalculateAgeAt(ad_, ah_, "year");
-                    CqlInterval<int?> aj_ = context.Operators.Interval(65, 94, true, true);
-                    bool? ak_ = context.Operators.In<int?>(ai_, aj_, default);
-                    bool? al_ = context.Operators.And(z_, ak_);
-                    return al_;
-                }
+            bool? h_((CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? tuple_efskhgutuclexzenturvljend) {
+                Code<Encounter.EncounterStatus> n_ = tuple_efskhgutuclexzenturvljend?.InpatientEncounter?.StatusElement;
+                string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
+                bool? p_ = context.Operators.Equal(o_, "finished");
+                CqlInterval<CqlDateTime> q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, tuple_efskhgutuclexzenturvljend?.InpatientEncounter);
+                int? r_ = this.LengthInDays(context, q_);
+                bool? s_ = context.Operators.Less(r_, 365);
+                bool? t_ = context.Operators.And(p_, s_);
+                Period u_ = tuple_efskhgutuclexzenturvljend?.InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
+                CqlDateTime w_ = context.Operators.End(v_);
+                CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+                bool? y_ = context.Operators.In<CqlDateTime>(w_, x_, "day");
+                bool? z_ = context.Operators.And(t_, y_);
+                Patient aa_ = this.Patient(context);
+                Date ab_ = aa_?.BirthDateElement;
+                string ac_ = ab_?.Value;
+                CqlDate ad_ = context.Operators.ConvertStringToDate(ac_);
+                CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
+                CqlDateTime ag_ = context.Operators.Start(af_);
+                CqlDate ah_ = context.Operators.DateFrom(ag_);
+                int? ai_ = context.Operators.CalculateAgeAt(ad_, ah_, "year");
+                CqlInterval<int?> aj_ = context.Operators.Interval(65, 94, true, true);
+                bool? ak_ = context.Operators.In<int?>(ai_, aj_, default);
+                bool? al_ = context.Operators.And(z_, ak_);
+                return al_;
+            }
 
-                IEnumerable<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?> i_ = context.Operators.Where<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?>(g_, h_);
-                Encounter j_((CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? tuple_efskhgutuclexzenturvljend) => tuple_efskhgutuclexzenturvljend?.InpatientEncounter;
-                IEnumerable<Encounter> k_ = context.Operators.Select<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?, Encounter>(i_, j_);
-                IEnumerable<Encounter> l_ = context.Operators.Distinct<Encounter>(k_);
-                return l_;
-            });
+            IEnumerable<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?> i_ = context.Operators.Where<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?>(g_, h_);
+            Encounter j_((CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? tuple_efskhgutuclexzenturvljend) => tuple_efskhgutuclexzenturvljend?.InpatientEncounter;
+            IEnumerable<Encounter> k_ = context.Operators.Select<(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)?, Encounter>(i_, j_);
+            IEnumerable<Encounter> l_ = context.Operators.Distinct<Encounter>(k_);
+            return l_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        _Initial_Population_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385360865284480L, () => {
+            IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
+            return a_;
+        });
 
 
     [CqlFunctionDefinition("FirstPhysicalExamWithEncounterId")]
@@ -506,61 +474,57 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     }
 
 
-    private readonly Cached<IEnumerable<string>> _Results_Cached = new();
-
     [CqlExpressionDefinition("Results")]
     public IEnumerable<string> Results(CqlContext context) =>
-        _Results_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlCode a_ = this.Heart_rate(context);
-                IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-                IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                IEnumerable<string> d_ = this.FirstPhysicalExamWithEncounterId(context, c_, "FirstHeartRate");
-                CqlCode e_ = this.Systolic_blood_pressure(context);
-                IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-                IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                IEnumerable<string> h_ = this.FirstPhysicalExamWithEncounterId(context, g_, "FirstSystolicBP");
-                CqlValueSet i_ = this.Body_temperature(context);
-                IEnumerable<Observation> j_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                IEnumerable<string> k_ = this.FirstPhysicalExamWithEncounterId(context, j_, "FirstTemperature");
-                CqlCode l_ = this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry(context);
-                IEnumerable<CqlCode> m_ = context.Operators.ToList<CqlCode>(l_);
-                IEnumerable<Observation> n_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, m_, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                IEnumerable<string> o_ = this.FirstPhysicalExamWithEncounterId(context, n_, "FirstO2Saturation");
-                CqlValueSet p_ = this.Hematocrit_lab_test(context);
-                IEnumerable<Observation> q_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                IEnumerable<string> r_ = this.FirstLabTestWithEncounterId(context, q_, "FirstHematocrit");
-                CqlValueSet s_ = this.Platelet_count_lab_test(context);
-                IEnumerable<Observation> t_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                IEnumerable<string> u_ = this.FirstLabTestWithEncounterId(context, t_, "FirstPlateletCount");
-                CqlValueSet v_ = this.White_blood_cells_count_lab_test(context);
-                IEnumerable<Observation> w_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                IEnumerable<string> x_ = this.FirstLabTestWithEncounterId(context, w_, "FirstWhiteBloodCell");
-                CqlValueSet y_ = this.Sodium_lab_test(context);
-                IEnumerable<Observation> z_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                IEnumerable<string> aa_ = this.FirstLabTestWithEncounterId(context, z_, "FirstSodium");
-                CqlValueSet ab_ = this.Bicarbonate_lab_test(context);
-                IEnumerable<Observation> ac_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                IEnumerable<string> ad_ = this.FirstLabTestWithEncounterId(context, ac_, "FirstBicarbonate");
-                CqlValueSet ae_ = this.Creatinine_lab_test(context);
-                IEnumerable<Observation> af_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-                IEnumerable<string> ag_ = this.FirstLabTestWithEncounterId(context, af_, "FirstCreatinine");
-                IEnumerable<string>[] ah_ = [
-                    d_,
-                    h_,
-                    k_,
-                    o_,
-                    r_,
-                    u_,
-                    x_,
-                    aa_,
-                    ad_,
-                    ag_,
-                ];
-                IEnumerable<string> ai_ = context.Operators.Flatten<string>((IEnumerable<IEnumerable<string>>)ah_);
-                return ai_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<string>>(3271385352317661788L, () => {
+            CqlCode a_ = this.Heart_rate(context);
+            IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+            IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<string> d_ = this.FirstPhysicalExamWithEncounterId(context, c_, "FirstHeartRate");
+            CqlCode e_ = this.Systolic_blood_pressure(context);
+            IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
+            IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<string> h_ = this.FirstPhysicalExamWithEncounterId(context, g_, "FirstSystolicBP");
+            CqlValueSet i_ = this.Body_temperature(context);
+            IEnumerable<Observation> j_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<string> k_ = this.FirstPhysicalExamWithEncounterId(context, j_, "FirstTemperature");
+            CqlCode l_ = this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry(context);
+            IEnumerable<CqlCode> m_ = context.Operators.ToList<CqlCode>(l_);
+            IEnumerable<Observation> n_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, m_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<string> o_ = this.FirstPhysicalExamWithEncounterId(context, n_, "FirstO2Saturation");
+            CqlValueSet p_ = this.Hematocrit_lab_test(context);
+            IEnumerable<Observation> q_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<string> r_ = this.FirstLabTestWithEncounterId(context, q_, "FirstHematocrit");
+            CqlValueSet s_ = this.Platelet_count_lab_test(context);
+            IEnumerable<Observation> t_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<string> u_ = this.FirstLabTestWithEncounterId(context, t_, "FirstPlateletCount");
+            CqlValueSet v_ = this.White_blood_cells_count_lab_test(context);
+            IEnumerable<Observation> w_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<string> x_ = this.FirstLabTestWithEncounterId(context, w_, "FirstWhiteBloodCell");
+            CqlValueSet y_ = this.Sodium_lab_test(context);
+            IEnumerable<Observation> z_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<string> aa_ = this.FirstLabTestWithEncounterId(context, z_, "FirstSodium");
+            CqlValueSet ab_ = this.Bicarbonate_lab_test(context);
+            IEnumerable<Observation> ac_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<string> ad_ = this.FirstLabTestWithEncounterId(context, ac_, "FirstBicarbonate");
+            CqlValueSet ae_ = this.Creatinine_lab_test(context);
+            IEnumerable<Observation> af_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<string> ag_ = this.FirstLabTestWithEncounterId(context, af_, "FirstCreatinine");
+            IEnumerable<string>[] ah_ = [
+                d_,
+                h_,
+                k_,
+                o_,
+                r_,
+                u_,
+                x_,
+                aa_,
+                ad_,
+                ag_,
+            ];
+            IEnumerable<string> ai_ = context.Operators.Flatten<string>((IEnumerable<IEnumerable<string>>)ah_);
+            return ai_;
+        });
 
 
     [CqlFunctionDefinition("CalendarAgeInYearsAt")]
@@ -836,39 +800,5 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
        ["InpatientEncounter", "Payer"]);
 
     #endregion CqlTupleMetadata Properties
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
 [CqlLibrary("AdultOutpatientEncounters", "4.19.000")]
 public partial class AdultOutpatientEncounters_4_19_000 : ILibrary, ISingleton<AdultOutpatientEncounters_4_19_000>
 {
@@ -50,75 +50,63 @@ public partial class AdultOutpatientEncounters_4_19_000 : ILibrary, ISingleton<A
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
-
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _Measurement_Period_Cached.GetOrReplace(
-            context,
-            () => {
-                object a_ = context.ResolveParameter("AdultOutpatientEncounters-4.19.000", "Measurement Period", null);
-                return (CqlInterval<CqlDateTime>)a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385445199873328L, () => {
+            object a_ = context.ResolveParameter("AdultOutpatientEncounters-4.19.000", "Measurement Period", null);
+            return (CqlInterval<CqlDateTime>)a_;
+        });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
-
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _Patient_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-                return b_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385438574034792L, () => {
+            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+            return b_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        _Qualifying_Encounters_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlValueSet a_ = this.Office_Visit(context);
-                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                CqlValueSet c_ = this.Annual_Wellness_Visit(context);
-                IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-                CqlValueSet f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
-                IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                CqlValueSet h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
-                IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
-                IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-                CqlValueSet l_ = this.Home_Healthcare_Services(context);
-                IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                CqlValueSet n_ = this.Virtual_Encounter(context);
-                IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
-                IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-                CqlValueSet r_ = this.Telephone_Visits(context);
-                IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-                IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
-                IEnumerable<Encounter> u_ = Status_1_15_000.Instance.isEncounterPerformed(context, t_);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443897309496L, () => {
+            CqlValueSet a_ = this.Office_Visit(context);
+            IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+            CqlValueSet c_ = this.Annual_Wellness_Visit(context);
+            IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+            IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
+            CqlValueSet f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
+            IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+            CqlValueSet h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
+            IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+            IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+            IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
+            CqlValueSet l_ = this.Home_Healthcare_Services(context);
+            IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+            CqlValueSet n_ = this.Virtual_Encounter(context);
+            IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+            IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
+            IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
+            CqlValueSet r_ = this.Telephone_Visits(context);
+            IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+            IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
+            IEnumerable<Encounter> u_ = Status_1_15_000.Instance.isEncounterPerformed(context, t_);
 
-                bool? v_(Encounter ValidEncounter) {
-                    CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-                    Period y_ = ValidEncounter?.Period;
-                    CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-                    bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
-                    return aa_;
-                }
+            bool? v_(Encounter ValidEncounter) {
+                CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+                Period y_ = ValidEncounter?.Period;
+                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+                bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
+                return aa_;
+            }
 
-                IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(u_, v_);
-                return w_;
-            });
+            IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(u_, v_);
+            return w_;
+        });
 
 
     #endregion Functions and Expressions
@@ -138,39 +126,5 @@ public partial class AdultOutpatientEncounters_4_19_000 : ILibrary, ISingleton<A
     public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance, Status_1_15_000.Instance];
 
     #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

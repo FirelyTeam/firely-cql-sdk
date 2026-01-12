@@ -60,7 +60,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     [CqlParameterDefinition("Measurement Period")]
     public object Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<object>(6542735336829802232L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<object>(3271385329320422268L, () => {
             CqlDate a_ = context.Operators.Date(2023, 1, 1);
             CqlDate b_ = context.Operators.Date(2023, 12, 31);
             CqlInterval<CqlDate> c_ = context.Operators.Interval(a_, b_, true, true);
@@ -75,7 +75,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(6542735320780785912L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385321295914108L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -88,7 +88,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     [CqlTag("datarequirement", "\"code\",\"onset.ofType(DateTime)\",\"subject.ofType(Patient)\"]")]
     [CqlTag("coderequirement", "Condition.code http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
     public IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(6542735321582921344L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(3271385321696981824L, () => {
             CqlValueSet a_ = this.Injury_due_to_falling_rock(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
@@ -114,7 +114,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     [CqlExpressionDefinition("Latest injury due to falling rock")]
     public Condition Latest_injury_due_to_falling_rock(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Condition>(6542735304411283144L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Condition>(3271385313111162724L, () => {
             IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
 
             object b_(Condition @this) {
@@ -135,7 +135,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     [CqlTag("datarequirement", "\"suppliedItem.item.ofType(CodeableConcept)\",\"occurrenceDateTime\",\"patient\"]")]
     [CqlTag("coderequirement", "SupplyDelivery.item.orfType(CodeableConcept) http://acme.org/product-catalog|U707")]
     public IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<SupplyDelivery>>(6542735333793925856L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<SupplyDelivery>>(3271385327802484080L, () => {
             IEnumerable<SupplyDelivery> a_ = context.Operators.Retrieve<SupplyDelivery>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/SupplyDelivery"));
 
             bool? b_(SupplyDelivery SD) {

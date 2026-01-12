@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
 [CqlLibrary("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR", "0.0.006")]
 public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006 : ILibrary, ISingleton<HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006>
 {
@@ -60,338 +60,282 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
-
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _Measurement_Period_Cached.GetOrReplace(
-            context,
-            () => {
-                object a_ = context.ResolveParameter("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006", "Measurement Period", null);
-                return (CqlInterval<CqlDateTime>)a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385360671631008L, () => {
+            object a_ = context.ResolveParameter("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006", "Measurement Period", null);
+            return (CqlInterval<CqlDateTime>)a_;
+        });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
-
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _Patient_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-                return b_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385348437458776L, () => {
+            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+            return b_;
+        });
 
-
-    private readonly Cached<IEnumerable<Coding>> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        _SDE_Ethnicity_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385361086465856L, () => {
+            IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
+            return a_;
+        });
 
-
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        _SDE_Payer_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(3271385361466507792L, () => {
+            IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
+            return a_;
+        });
 
-
-    private readonly Cached<IEnumerable<Coding>> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        _SDE_Race_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385354563721192L, () => {
+            IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
+            return a_;
+        });
 
-
-    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _SDE_Sex_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385348635898148L, () => {
+            CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
+            return a_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Inpatient_Encounter_During_Measurement_Period_Cached = new();
 
     [CqlExpressionDefinition("Inpatient Encounter During Measurement Period")]
     public IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period(CqlContext context) =>
-        _Inpatient_Encounter_During_Measurement_Period_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlValueSet a_ = this.Encounter_Inpatient(context);
-                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
-                return b_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385362443201792L, () => {
+            CqlValueSet a_ = this.Encounter_Inpatient(context);
+            IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+            return b_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        _Qualifying_Encounters_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Inpatient_Encounter_During_Measurement_Period(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385351029484264L, () => {
+            IEnumerable<Encounter> a_ = this.Inpatient_Encounter_During_Measurement_Period(context);
 
-                bool? b_(Encounter InpatientEncounter) {
-                    Patient d_ = this.Patient(context);
-                    Date e_ = d_?.BirthDateElement;
-                    string f_ = e_?.Value;
-                    CqlDateTime g_ = context.Operators.ConvertStringToDateTime(f_);
-                    CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
-                    CqlDateTime i_ = context.Operators.Start(h_);
-                    int? j_ = context.Operators.CalculateAgeAt(g_, i_, "year");
-                    bool? k_ = context.Operators.GreaterOrEqual(j_, 18);
-                    return k_;
-                }
+            bool? b_(Encounter InpatientEncounter) {
+                Patient d_ = this.Patient(context);
+                Date e_ = d_?.BirthDateElement;
+                string f_ = e_?.Value;
+                CqlDateTime g_ = context.Operators.ConvertStringToDateTime(f_);
+                CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
+                CqlDateTime i_ = context.Operators.Start(h_);
+                int? j_ = context.Operators.CalculateAgeAt(g_, i_, "year");
+                bool? k_ = context.Operators.GreaterOrEqual(j_, 18);
+                return k_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>> _Qualifying_Encounters_With_Hospitalization_Period_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters With Hospitalization Period")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> Qualifying_Encounters_With_Hospitalization_Period(CqlContext context) =>
-        _Qualifying_Encounters_With_Hospitalization_Period_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>>(3271385355669152724L, () => {
+            IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
 
-                (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? b_(Encounter QualifyingEncounter) {
-                    CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                    (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? f_ = (CqlTupleMetadata_GPLfQTPONQabPZigKbYFERDVQ, QualifyingEncounter, e_);
-                    return f_;
-                }
+            (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? b_(Encounter QualifyingEncounter) {
+                CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
+                (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? f_ = (CqlTupleMetadata_GPLfQTPONQabPZigKbYFERDVQ, QualifyingEncounter, e_);
+                return f_;
+            }
 
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> c_ = context.Operators.Select<Encounter, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(a_, b_);
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(c_);
-                return d_;
-            });
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> c_ = context.Operators.Select<Encounter, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(a_, b_);
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(c_);
+            return d_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_With_Existing_Diabetes_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters With Existing Diabetes Diagnosis")]
     public IEnumerable<Encounter> Qualifying_Encounters_With_Existing_Diabetes_Diagnosis(CqlContext context) =>
-        _Qualifying_Encounters_With_Existing_Diabetes_Diagnosis_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> a_ = this.Qualifying_Encounters_With_Hospitalization_Period(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385361572552788L, () => {
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> a_ = this.Qualifying_Encounters_With_Hospitalization_Period(context);
 
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> b_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization) {
-                    CqlValueSet g_ = this.Diabetes(context);
-                    IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> b_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization) {
+                CqlValueSet g_ = this.Diabetes(context);
+                IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
-                    bool? i_(Condition DiabetesDiagnosis) {
-                        CodeableConcept m_ = DiabetesDiagnosis?.VerificationStatus;
-                        CqlConcept n_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, m_);
-                        CqlCode o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.confirmed(context);
-                        CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
-                        bool? q_ = context.Operators.Equivalent(n_, p_);
-                        CqlInterval<CqlDateTime> r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, DiabetesDiagnosis);
-                        CqlDateTime s_ = context.Operators.Start(r_);
-                        CqlInterval<CqlDateTime> t_ = EncounterWithHospitalization?.hospitalizationPeriod;
-                        CqlDateTime u_ = context.Operators.End(t_);
-                        bool? v_ = context.Operators.Before(s_, u_, default);
-                        bool? w_ = context.Operators.And(q_, v_);
-                        return w_;
-                    }
-
-                    IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
-                    (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? k_(Condition DiabetesDiagnosis) => EncounterWithHospitalization;
-                    IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> l_ = context.Operators.Select<Condition, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(j_, k_);
-                    return l_;
+                bool? i_(Condition DiabetesDiagnosis) {
+                    CodeableConcept m_ = DiabetesDiagnosis?.VerificationStatus;
+                    CqlConcept n_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, m_);
+                    CqlCode o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.confirmed(context);
+                    CqlConcept p_ = context.Operators.ConvertCodeToConcept(o_);
+                    bool? q_ = context.Operators.Equivalent(n_, p_);
+                    CqlInterval<CqlDateTime> r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, DiabetesDiagnosis);
+                    CqlDateTime s_ = context.Operators.Start(r_);
+                    CqlInterval<CqlDateTime> t_ = EncounterWithHospitalization?.hospitalizationPeriod;
+                    CqlDateTime u_ = context.Operators.End(t_);
+                    bool? v_ = context.Operators.Before(s_, u_, default);
+                    bool? w_ = context.Operators.And(q_, v_);
+                    return w_;
                 }
 
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> c_ = context.Operators.SelectMany<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(a_, b_);
+                IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
+                (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? k_(Condition DiabetesDiagnosis) => EncounterWithHospitalization;
+                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> l_ = context.Operators.Select<Condition, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(j_, k_);
+                return l_;
+            }
 
-                Encounter d_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization) {
-                    Encounter x_ = EncounterWithHospitalization?.encounter;
-                    return x_;
-                }
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> c_ = context.Operators.SelectMany<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(a_, b_);
 
-                IEnumerable<Encounter> e_ = context.Operators.Select<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, Encounter>(c_, d_);
-                IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
-                return f_;
-            });
+            Encounter d_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization) {
+                Encounter x_ = EncounterWithHospitalization?.encounter;
+                return x_;
+            }
 
+            IEnumerable<Encounter> e_ = context.Operators.Select<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, Encounter>(c_, d_);
+            IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
+            return f_;
+        });
 
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_With_Hypoglycemic_Medication_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters With Hypoglycemic Medication")]
     public IEnumerable<Encounter> Qualifying_Encounters_With_Hypoglycemic_Medication(CqlContext context) =>
-        _Qualifying_Encounters_With_Hypoglycemic_Medication_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> a_ = this.Qualifying_Encounters_With_Hospitalization_Period(context);
-                CqlValueSet b_ = this.Hypoglycemics_Treatment_Medications(context);
-                IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
-                IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385353271613664L, () => {
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> a_ = this.Qualifying_Encounters_With_Hospitalization_Period(context);
+            CqlValueSet b_ = this.Hypoglycemics_Treatment_Medications(context);
+            IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
+            IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
 
-                IEnumerable<MedicationAdministration> e_(MedicationAdministration MR) {
-                    IEnumerable<Medication> p_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
+            IEnumerable<MedicationAdministration> e_(MedicationAdministration MR) {
+                IEnumerable<Medication> p_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
 
-                    bool? q_(Medication M) {
-                        Id u_ = M?.IdElement;
-                        string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
-                        object w_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
-                        string x_ = FHIRHelpers_4_0_001.Instance.ToString(context, w_ as FhirString);
-                        IEnumerable<string> y_ = context.Operators.Split(x_, "/");
-                        string z_ = context.Operators.Last<string>(y_);
-                        bool? aa_ = context.Operators.Equal(v_, z_);
-                        CodeableConcept ab_ = M?.Code;
-                        CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ab_);
-                        CqlValueSet ad_ = this.Hypoglycemics_Treatment_Medications(context);
-                        bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
-                        bool? af_ = context.Operators.And(aa_, ae_);
-                        return af_;
-                    }
-
-                    IEnumerable<Medication> r_ = context.Operators.Where<Medication>(p_, q_);
-                    MedicationAdministration s_(Medication M) => MR;
-                    IEnumerable<MedicationAdministration> t_ = context.Operators.Select<Medication, MedicationAdministration>(r_, s_);
-                    return t_;
+                bool? q_(Medication M) {
+                    Id u_ = M?.IdElement;
+                    string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
+                    object w_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference");
+                    string x_ = FHIRHelpers_4_0_001.Instance.ToString(context, w_ as FhirString);
+                    IEnumerable<string> y_ = context.Operators.Split(x_, "/");
+                    string z_ = context.Operators.Last<string>(y_);
+                    bool? aa_ = context.Operators.Equal(v_, z_);
+                    CodeableConcept ab_ = M?.Code;
+                    CqlConcept ac_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ab_);
+                    CqlValueSet ad_ = this.Hypoglycemics_Treatment_Medications(context);
+                    bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
+                    bool? af_ = context.Operators.And(aa_, ae_);
+                    return af_;
                 }
 
-                IEnumerable<MedicationAdministration> f_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(d_, e_);
-                IEnumerable<MedicationAdministration> g_ = context.Operators.Union<MedicationAdministration>(c_, f_);
-                IEnumerable<ValueTuple<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration>> h_ = context.Operators.CrossJoin<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration>(a_, g_);
+                IEnumerable<Medication> r_ = context.Operators.Where<Medication>(p_, q_);
+                MedicationAdministration s_(Medication M) => MR;
+                IEnumerable<MedicationAdministration> t_ = context.Operators.Select<Medication, MedicationAdministration>(r_, s_);
+                return t_;
+            }
 
-                (CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)? i_(ValueTuple<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration> _valueTuple) {
-                    (CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)? ag_ = (CqlTupleMetadata_CLXCRdeeSPOVHRdOZOXQZeIEB, _valueTuple.Item1, _valueTuple.Item2);
-                    return ag_;
-                }
+            IEnumerable<MedicationAdministration> f_ = context.Operators.SelectMany<MedicationAdministration, MedicationAdministration>(d_, e_);
+            IEnumerable<MedicationAdministration> g_ = context.Operators.Union<MedicationAdministration>(c_, f_);
+            IEnumerable<ValueTuple<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration>> h_ = context.Operators.CrossJoin<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration>(a_, g_);
 
-                IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?> j_ = context.Operators.Select<ValueTuple<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration>, (CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?>(h_, i_);
+            (CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)? i_(ValueTuple<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration> _valueTuple) {
+                (CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)? ag_ = (CqlTupleMetadata_CLXCRdeeSPOVHRdOZOXQZeIEB, _valueTuple.Item1, _valueTuple.Item2);
+                return ag_;
+            }
 
-                bool? k_((CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)? tuple_clxcrdeespovhrdozoxqzeieb) {
-                    Code<MedicationAdministration.MedicationAdministrationStatusCodes> ah_ = tuple_clxcrdeespovhrdozoxqzeieb?.HypoglycemicMedication?.StatusElement;
-                    string ai_ = FHIRHelpers_4_0_001.Instance.ToString(context, ah_);
-                    bool? aj_ = context.Operators.Equal(ai_, "completed");
-                    CqlInterval<CqlDateTime> ak_ = tuple_clxcrdeespovhrdozoxqzeieb?.EncounterWithHospitalization?.hospitalizationPeriod;
-                    DataType al_ = tuple_clxcrdeespovhrdozoxqzeieb?.HypoglycemicMedication?.Effective;
-                    CqlInterval<CqlDateTime> am_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, al_);
-                    bool? an_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ak_, am_, default);
-                    bool? ao_ = context.Operators.And(aj_, an_);
-                    return ao_;
-                }
+            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?> j_ = context.Operators.Select<ValueTuple<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, MedicationAdministration>, (CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?>(h_, i_);
 
-                IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?> l_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?>(j_, k_);
+            bool? k_((CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)? tuple_clxcrdeespovhrdozoxqzeieb) {
+                Code<MedicationAdministration.MedicationAdministrationStatusCodes> ah_ = tuple_clxcrdeespovhrdozoxqzeieb?.HypoglycemicMedication?.StatusElement;
+                string ai_ = FHIRHelpers_4_0_001.Instance.ToString(context, ah_);
+                bool? aj_ = context.Operators.Equal(ai_, "completed");
+                CqlInterval<CqlDateTime> ak_ = tuple_clxcrdeespovhrdozoxqzeieb?.EncounterWithHospitalization?.hospitalizationPeriod;
+                DataType al_ = tuple_clxcrdeespovhrdozoxqzeieb?.HypoglycemicMedication?.Effective;
+                CqlInterval<CqlDateTime> am_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, al_);
+                bool? an_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ak_, am_, default);
+                bool? ao_ = context.Operators.And(aj_, an_);
+                return ao_;
+            }
 
-                Encounter m_((CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)? tuple_clxcrdeespovhrdozoxqzeieb) {
-                    Encounter ap_ = tuple_clxcrdeespovhrdozoxqzeieb?.EncounterWithHospitalization?.encounter;
-                    return ap_;
-                }
+            IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?> l_ = context.Operators.Where<(CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?>(j_, k_);
 
-                IEnumerable<Encounter> n_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?, Encounter>(l_, m_);
-                IEnumerable<Encounter> o_ = context.Operators.Distinct<Encounter>(n_);
-                return o_;
-            });
+            Encounter m_((CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)? tuple_clxcrdeespovhrdozoxqzeieb) {
+                Encounter ap_ = tuple_clxcrdeespovhrdozoxqzeieb?.EncounterWithHospitalization?.encounter;
+                return ap_;
+            }
 
+            IEnumerable<Encounter> n_ = context.Operators.Select<(CqlTupleMetadata, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization, MedicationAdministration HypoglycemicMedication)?, Encounter>(l_, m_);
+            IEnumerable<Encounter> o_ = context.Operators.Distinct<Encounter>(n_);
+            return o_;
+        });
 
-    private readonly Cached<IEnumerable<Encounter>> _Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab_Cached = new();
 
     [CqlExpressionDefinition("Qualifying Encounters With Elevated Blood Glucose Lab")]
     public IEnumerable<Encounter> Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab(CqlContext context) =>
-        _Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> a_ = this.Qualifying_Encounters_With_Hospitalization_Period(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385358341879660L, () => {
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> a_ = this.Qualifying_Encounters_With_Hospitalization_Period(context);
 
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> b_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization) {
-                    CqlValueSet g_ = this.Glucose_lab_test(context);
-                    IEnumerable<Observation> h_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> b_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization) {
+                CqlValueSet g_ = this.Glucose_lab_test(context);
+                IEnumerable<Observation> h_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
-                    bool? i_(Observation BloodGlucoseLab) {
-                        DataType m_ = BloodGlucoseLab?.Effective;
-                        CqlDateTime n_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, m_ as FhirDateTime);
-                        CqlInterval<CqlDateTime> o_ = EncounterWithHospitalization?.hospitalizationPeriod;
-                        bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, default);
-                        Code<ObservationStatus> q_ = BloodGlucoseLab?.StatusElement;
-                        string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
-                        bool? s_ = context.Operators.Equal(r_, "final");
-                        bool? t_ = context.Operators.And(p_, s_);
-                        DataType u_ = BloodGlucoseLab?.Value;
-                        CqlQuantity v_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, u_ as Quantity);
-                        CqlQuantity w_ = context.Operators.Quantity(200m, "mg/dL");
-                        bool? x_ = context.Operators.GreaterOrEqual(v_, w_);
-                        bool? y_ = context.Operators.And(t_, x_);
-                        return y_;
-                    }
-
-                    IEnumerable<Observation> j_ = context.Operators.Where<Observation>(h_, i_);
-                    (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? k_(Observation BloodGlucoseLab) => EncounterWithHospitalization;
-                    IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> l_ = context.Operators.Select<Observation, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(j_, k_);
-                    return l_;
+                bool? i_(Observation BloodGlucoseLab) {
+                    DataType m_ = BloodGlucoseLab?.Effective;
+                    CqlDateTime n_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, m_ as FhirDateTime);
+                    CqlInterval<CqlDateTime> o_ = EncounterWithHospitalization?.hospitalizationPeriod;
+                    bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, default);
+                    Code<ObservationStatus> q_ = BloodGlucoseLab?.StatusElement;
+                    string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
+                    bool? s_ = context.Operators.Equal(r_, "final");
+                    bool? t_ = context.Operators.And(p_, s_);
+                    DataType u_ = BloodGlucoseLab?.Value;
+                    CqlQuantity v_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, u_ as Quantity);
+                    CqlQuantity w_ = context.Operators.Quantity(200m, "mg/dL");
+                    bool? x_ = context.Operators.GreaterOrEqual(v_, w_);
+                    bool? y_ = context.Operators.And(t_, x_);
+                    return y_;
                 }
 
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> c_ = context.Operators.SelectMany<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(a_, b_);
+                IEnumerable<Observation> j_ = context.Operators.Where<Observation>(h_, i_);
+                (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? k_(Observation BloodGlucoseLab) => EncounterWithHospitalization;
+                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> l_ = context.Operators.Select<Observation, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(j_, k_);
+                return l_;
+            }
 
-                Encounter d_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization) {
-                    Encounter z_ = EncounterWithHospitalization?.encounter;
-                    return z_;
-                }
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> c_ = context.Operators.SelectMany<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(a_, b_);
 
-                IEnumerable<Encounter> e_ = context.Operators.Select<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, Encounter>(c_, d_);
-                IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
-                return f_;
-            });
+            Encounter d_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? EncounterWithHospitalization) {
+                Encounter z_ = EncounterWithHospitalization?.encounter;
+                return z_;
+            }
 
+            IEnumerable<Encounter> e_ = context.Operators.Select<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?, Encounter>(c_, d_);
+            IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
+            return f_;
+        });
 
-    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        _Initial_Population_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Qualifying_Encounters_With_Existing_Diabetes_Diagnosis(context);
-                IEnumerable<Encounter> b_ = this.Qualifying_Encounters_With_Hypoglycemic_Medication(context);
-                IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
-                IEnumerable<Encounter> d_ = this.Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab(context);
-                IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(c_, d_);
-                return e_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385349594134648L, () => {
+            IEnumerable<Encounter> a_ = this.Qualifying_Encounters_With_Existing_Diabetes_Diagnosis(context);
+            IEnumerable<Encounter> b_ = this.Qualifying_Encounters_With_Hypoglycemic_Medication(context);
+            IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+            IEnumerable<Encounter> d_ = this.Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab(context);
+            IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(c_, d_);
+            return e_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        _Denominator_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Initial_Population(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385361579346412L, () => {
+            IEnumerable<Encounter> a_ = this.Initial_Population(context);
+            return a_;
+        });
 
 
     [CqlFunctionDefinition("Crop Interval to 10 Days")]
@@ -494,209 +438,193 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     }
 
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?>> _Pertinent_Encounters_With_Days_Cached = new();
-
     [CqlExpressionDefinition("Pertinent Encounters With Days")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> Pertinent_Encounters_With_Days(CqlContext context) =>
-        _Pertinent_Encounters_With_Days_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Initial_Population(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?>>(3271385354347718724L, () => {
+            IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
-                (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)? b_(Encounter PertinentEncounter) {
-                    CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, PertinentEncounter);
-                    CqlInterval<CqlDateTime> g_ = this.Crop_Interval_to_10_Days(context, e_);
-                    CqlInterval<CqlDateTime> i_ = this.Crop_Interval_to_10_Days(context, e_);
-                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> j_ = this.Days_In_Period(context, i_);
-                    (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)? k_ = (CqlTupleMetadata_GPAhHPfDKIJRYDEIWbaMLZGHU, PertinentEncounter, e_, g_, j_);
-                    return k_;
-                }
+            (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)? b_(Encounter PertinentEncounter) {
+                CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, PertinentEncounter);
+                CqlInterval<CqlDateTime> g_ = this.Crop_Interval_to_10_Days(context, e_);
+                CqlInterval<CqlDateTime> i_ = this.Crop_Interval_to_10_Days(context, e_);
+                IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> j_ = this.Days_In_Period(context, i_);
+                (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)? k_ = (CqlTupleMetadata_GPAhHPfDKIJRYDEIWbaMLZGHU, PertinentEncounter, e_, g_, j_);
+                return k_;
+            }
 
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> c_ = context.Operators.Select<Encounter, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?>(a_, b_);
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?>(c_);
-                return d_;
-            });
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> c_ = context.Operators.Select<Encounter, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?>(a_, b_);
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?>(c_);
+            return d_;
+        });
 
-
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?>> _Pertinent_Encounters_With_Glucose_Result_Days_Cached = new();
 
     [CqlExpressionDefinition("Pertinent Encounters With Glucose Result Days")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?> Pertinent_Encounters_With_Glucose_Result_Days(CqlContext context) =>
-        _Pertinent_Encounters_With_Glucose_Result_Days_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> a_ = this.Pertinent_Encounters_With_Days(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?>>(3271385348275034520L, () => {
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> a_ = this.Pertinent_Encounters_With_Days(context);
 
-                (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)? b_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)? PertinentEncounterDays) {
-                    Encounter e_ = PertinentEncounterDays?.encounter;
-                    CqlInterval<CqlDateTime> f_ = PertinentEncounterDays?.relevantPeriod;
-                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> g_ = PertinentEncounterDays?.relevantDays;
+            (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)? b_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)? PertinentEncounterDays) {
+                Encounter e_ = PertinentEncounterDays?.encounter;
+                CqlInterval<CqlDateTime> f_ = PertinentEncounterDays?.relevantPeriod;
+                IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> g_ = PertinentEncounterDays?.relevantDays;
 
-                    (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? h_((CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? EncounterDay) {
-                        int? l_ = EncounterDay?.dayIndex;
-                        CqlInterval<CqlDateTime> m_ = EncounterDay?.dayPeriod;
-                        CqlValueSet n_ = this.Glucose_lab_test(context);
-                        IEnumerable<Observation> o_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+                (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? h_((CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? EncounterDay) {
+                    int? l_ = EncounterDay?.dayIndex;
+                    CqlInterval<CqlDateTime> m_ = EncounterDay?.dayPeriod;
+                    CqlValueSet n_ = this.Glucose_lab_test(context);
+                    IEnumerable<Observation> o_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
-                        bool? p_(Observation BloodGlucoseLab1) {
-                            Code<ObservationStatus> ae_ = BloodGlucoseLab1?.StatusElement;
-                            string af_ = FHIRHelpers_4_0_001.Instance.ToString(context, ae_);
-                            bool? ag_ = context.Operators.Equal(af_, "final");
-                            DataType ah_ = BloodGlucoseLab1?.Value;
-                            CqlQuantity ai_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ah_ as Quantity);
-                            CqlQuantity aj_ = context.Operators.Quantity(300m, "mg/dL");
-                            bool? ak_ = context.Operators.Greater(ai_, aj_);
-                            bool? al_ = context.Operators.And(ag_, ak_);
-                            DataType am_ = BloodGlucoseLab1?.Effective;
-                            CqlDateTime an_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, am_ as FhirDateTime);
-                            CqlInterval<CqlDateTime> ao_ = EncounterDay?.dayPeriod;
-                            bool? ap_ = context.Operators.In<CqlDateTime>(an_, ao_, default);
-                            bool? aq_ = context.Operators.And(al_, ap_);
-                            return aq_;
-                        }
-
-                        IEnumerable<Observation> q_ = context.Operators.Where<Observation>(o_, p_);
-                        bool? r_ = context.Operators.Exists<Observation>(q_);
-                        IEnumerable<Observation> t_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-
-                        bool? u_(Observation BloodGlucoseLab2) {
-                            Code<ObservationStatus> ar_ = BloodGlucoseLab2?.StatusElement;
-                            string as_ = FHIRHelpers_4_0_001.Instance.ToString(context, ar_);
-                            bool? at_ = context.Operators.Equal(as_, "final");
-                            DataType au_ = BloodGlucoseLab2?.Value;
-                            CqlQuantity av_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, au_ as Quantity);
-                            CqlQuantity aw_ = context.Operators.Quantity(200m, "mg/dL");
-                            bool? ax_ = context.Operators.GreaterOrEqual(av_, aw_);
-                            bool? ay_ = context.Operators.And(at_, ax_);
-                            DataType az_ = BloodGlucoseLab2?.Effective;
-                            CqlDateTime ba_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, az_ as FhirDateTime);
-                            CqlInterval<CqlDateTime> bb_ = EncounterDay?.dayPeriod;
-                            bool? bc_ = context.Operators.In<CqlDateTime>(ba_, bb_, default);
-                            bool? bd_ = context.Operators.And(ay_, bc_);
-                            return bd_;
-                        }
-
-                        IEnumerable<Observation> v_ = context.Operators.Where<Observation>(t_, u_);
-                        bool? w_ = context.Operators.Exists<Observation>(v_);
-                        IEnumerable<Observation> y_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-
-                        bool? z_(Observation BloodGlucoseLab3) {
-                            Code<ObservationStatus> be_ = BloodGlucoseLab3?.StatusElement;
-                            string bf_ = FHIRHelpers_4_0_001.Instance.ToString(context, be_);
-                            bool? bg_ = context.Operators.Equal(bf_, "final");
-                            DataType bh_ = BloodGlucoseLab3?.Effective;
-                            CqlDateTime bi_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, bh_ as FhirDateTime);
-                            CqlInterval<CqlDateTime> bj_ = EncounterDay?.dayPeriod;
-                            bool? bk_ = context.Operators.In<CqlDateTime>(bi_, bj_, default);
-                            bool? bl_ = context.Operators.And(bg_, bk_);
-                            return bl_;
-                        }
-
-                        IEnumerable<Observation> aa_ = context.Operators.Where<Observation>(y_, z_);
-                        bool? ab_ = context.Operators.Exists<Observation>(aa_);
-                        bool? ac_ = context.Operators.Not(ab_);
-                        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? ad_ = (CqlTupleMetadata_DRKKGhBGYfEMJaNePAIEJiGe, l_, m_, r_, w_, ac_);
-                        return ad_;
+                    bool? p_(Observation BloodGlucoseLab1) {
+                        Code<ObservationStatus> ae_ = BloodGlucoseLab1?.StatusElement;
+                        string af_ = FHIRHelpers_4_0_001.Instance.ToString(context, ae_);
+                        bool? ag_ = context.Operators.Equal(af_, "final");
+                        DataType ah_ = BloodGlucoseLab1?.Value;
+                        CqlQuantity ai_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ah_ as Quantity);
+                        CqlQuantity aj_ = context.Operators.Quantity(300m, "mg/dL");
+                        bool? ak_ = context.Operators.Greater(ai_, aj_);
+                        bool? al_ = context.Operators.And(ag_, ak_);
+                        DataType am_ = BloodGlucoseLab1?.Effective;
+                        CqlDateTime an_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, am_ as FhirDateTime);
+                        CqlInterval<CqlDateTime> ao_ = EncounterDay?.dayPeriod;
+                        bool? ap_ = context.Operators.In<CqlDateTime>(an_, ao_, default);
+                        bool? aq_ = context.Operators.And(al_, ap_);
+                        return aq_;
                     }
 
-                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> i_ = context.Operators.Select<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(g_, h_);
-                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> j_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(i_);
-                    (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)? k_ = (CqlTupleMetadata_BEJFJZgXEOCibEHSLPSMaRGGM, e_, f_, j_);
-                    return k_;
+                    IEnumerable<Observation> q_ = context.Operators.Where<Observation>(o_, p_);
+                    bool? r_ = context.Operators.Exists<Observation>(q_);
+                    IEnumerable<Observation> t_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+
+                    bool? u_(Observation BloodGlucoseLab2) {
+                        Code<ObservationStatus> ar_ = BloodGlucoseLab2?.StatusElement;
+                        string as_ = FHIRHelpers_4_0_001.Instance.ToString(context, ar_);
+                        bool? at_ = context.Operators.Equal(as_, "final");
+                        DataType au_ = BloodGlucoseLab2?.Value;
+                        CqlQuantity av_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, au_ as Quantity);
+                        CqlQuantity aw_ = context.Operators.Quantity(200m, "mg/dL");
+                        bool? ax_ = context.Operators.GreaterOrEqual(av_, aw_);
+                        bool? ay_ = context.Operators.And(at_, ax_);
+                        DataType az_ = BloodGlucoseLab2?.Effective;
+                        CqlDateTime ba_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, az_ as FhirDateTime);
+                        CqlInterval<CqlDateTime> bb_ = EncounterDay?.dayPeriod;
+                        bool? bc_ = context.Operators.In<CqlDateTime>(ba_, bb_, default);
+                        bool? bd_ = context.Operators.And(ay_, bc_);
+                        return bd_;
+                    }
+
+                    IEnumerable<Observation> v_ = context.Operators.Where<Observation>(t_, u_);
+                    bool? w_ = context.Operators.Exists<Observation>(v_);
+                    IEnumerable<Observation> y_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+
+                    bool? z_(Observation BloodGlucoseLab3) {
+                        Code<ObservationStatus> be_ = BloodGlucoseLab3?.StatusElement;
+                        string bf_ = FHIRHelpers_4_0_001.Instance.ToString(context, be_);
+                        bool? bg_ = context.Operators.Equal(bf_, "final");
+                        DataType bh_ = BloodGlucoseLab3?.Effective;
+                        CqlDateTime bi_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, bh_ as FhirDateTime);
+                        CqlInterval<CqlDateTime> bj_ = EncounterDay?.dayPeriod;
+                        bool? bk_ = context.Operators.In<CqlDateTime>(bi_, bj_, default);
+                        bool? bl_ = context.Operators.And(bg_, bk_);
+                        return bl_;
+                    }
+
+                    IEnumerable<Observation> aa_ = context.Operators.Where<Observation>(y_, z_);
+                    bool? ab_ = context.Operators.Exists<Observation>(aa_);
+                    bool? ac_ = context.Operators.Not(ab_);
+                    (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? ad_ = (CqlTupleMetadata_DRKKGhBGYfEMJaNePAIEJiGe, l_, m_, r_, w_, ac_);
+                    return ad_;
                 }
 
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?> c_ = context.Operators.Select<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?>(a_, b_);
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?>(c_);
-                return d_;
-            });
+                IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> i_ = context.Operators.Select<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(g_, h_);
+                IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> j_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(i_);
+                (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)? k_ = (CqlTupleMetadata_BEJFJZgXEOCibEHSLPSMaRGGM, e_, f_, j_);
+                return k_;
+            }
 
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?> c_ = context.Operators.Select<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?>(a_, b_);
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?>(c_);
+            return d_;
+        });
 
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>> _Pertinent_Encounters_With_Hyperglycemic_Event_Days_Cached = new();
 
     [CqlExpressionDefinition("Pertinent Encounters With Hyperglycemic Event Days")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> Pertinent_Encounters_With_Hyperglycemic_Event_Days(CqlContext context) =>
-        _Pertinent_Encounters_With_Hyperglycemic_Event_Days_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?> a_ = this.Pertinent_Encounters_With_Glucose_Result_Days(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>>(3271385363637658176L, () => {
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?> a_ = this.Pertinent_Encounters_With_Glucose_Result_Days(context);
 
-                (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)? b_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)? EncounterWithResultDays) {
-                    Encounter e_ = EncounterWithResultDays?.encounter;
-                    CqlInterval<CqlDateTime> f_ = EncounterWithResultDays?.relevantPeriod;
-                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> g_ = EncounterWithResultDays?.relevantDays;
+            (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)? b_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)? EncounterWithResultDays) {
+                Encounter e_ = EncounterWithResultDays?.encounter;
+                CqlInterval<CqlDateTime> f_ = EncounterWithResultDays?.relevantPeriod;
+                IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> g_ = EncounterWithResultDays?.relevantDays;
 
-                    bool? h_((CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? EncounterDay) {
-                        int? n_ = EncounterDay?.dayIndex;
-                        bool? o_ = context.Operators.Greater(n_, 1);
-                        return o_;
-                    }
-
-                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> i_ = context.Operators.Where<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(g_, h_);
-
-                    (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)? j_((CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? EncounterDay) {
-                        int? p_ = EncounterDay?.dayIndex;
-                        CqlInterval<CqlDateTime> q_ = EncounterDay?.dayPeriod;
-                        bool? r_ = EncounterDay?.hasSevereResult;
-                        bool? s_ = EncounterDay?.hasNoResult;
-                        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> t_ = EncounterWithResultDays?.relevantDays;
-                        int? v_ = context.Operators.Subtract(p_, 2);
-                        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? w_ = context.Operators.Indexer<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(t_, v_);
-                        bool? x_ = w_?.hasElevatedResult;
-                        bool? y_ = context.Operators.And(s_, x_);
-                        int? ab_ = context.Operators.Subtract(p_, 3);
-                        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? ac_ = context.Operators.Indexer<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(t_, ab_);
-                        bool? ad_ = ac_?.hasElevatedResult;
-                        bool? ae_ = context.Operators.And(y_, ad_);
-                        bool? af_ = context.Operators.Or(r_, ae_);
-                        (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)? ag_ = (CqlTupleMetadata_FNeERNKXWKJeEjWXREHDLePdY, p_, q_, af_);
-                        return ag_;
-                    }
-
-                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> k_ = context.Operators.Select<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>(i_, j_);
-                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> l_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>(k_);
-                    (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)? m_ = (CqlTupleMetadata_GJFejXJaZWjRVYgMbQUZgIPjK, e_, f_, l_);
-                    return m_;
+                bool? h_((CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? EncounterDay) {
+                    int? n_ = EncounterDay?.dayIndex;
+                    bool? o_ = context.Operators.Greater(n_, 1);
+                    return o_;
                 }
 
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> c_ = context.Operators.Select<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>(a_, b_);
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>(c_);
-                return d_;
-            });
+                IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> i_ = context.Operators.Where<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(g_, h_);
 
+                (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)? j_((CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? EncounterDay) {
+                    int? p_ = EncounterDay?.dayIndex;
+                    CqlInterval<CqlDateTime> q_ = EncounterDay?.dayPeriod;
+                    bool? r_ = EncounterDay?.hasSevereResult;
+                    bool? s_ = EncounterDay?.hasNoResult;
+                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> t_ = EncounterWithResultDays?.relevantDays;
+                    int? v_ = context.Operators.Subtract(p_, 2);
+                    (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? w_ = context.Operators.Indexer<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(t_, v_);
+                    bool? x_ = w_?.hasElevatedResult;
+                    bool? y_ = context.Operators.And(s_, x_);
+                    int? ab_ = context.Operators.Subtract(p_, 3);
+                    (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? ac_ = context.Operators.Indexer<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(t_, ab_);
+                    bool? ad_ = ac_?.hasElevatedResult;
+                    bool? ae_ = context.Operators.And(y_, ad_);
+                    bool? af_ = context.Operators.Or(r_, ae_);
+                    (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)? ag_ = (CqlTupleMetadata_FNeERNKXWKJeEjWXREHDLePdY, p_, q_, af_);
+                    return ag_;
+                }
 
-    private readonly Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
+                IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> k_ = context.Operators.Select<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>(i_, j_);
+                IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> l_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>(k_);
+                (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)? m_ = (CqlTupleMetadata_GJFejXJaZWjRVYgMbQUZgIPjK, e_, f_, l_);
+                return m_;
+            }
+
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> c_ = context.Operators.Select<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>(a_, b_);
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>(c_);
+            return d_;
+        });
+
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        _Numerator_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> a_ = this.Pertinent_Encounters_With_Hyperglycemic_Event_Days(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385347146311024L, () => {
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> a_ = this.Pertinent_Encounters_With_Hyperglycemic_Event_Days(context);
 
-                bool? b_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)? EncounterWithEventDays) {
-                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> g_ = EncounterWithEventDays?.eligibleEventDays;
+            bool? b_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)? EncounterWithEventDays) {
+                IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> g_ = EncounterWithEventDays?.eligibleEventDays;
 
-                    bool? h_((CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)? EligibleEventDay) {
-                        bool? k_ = EligibleEventDay?.hasHyperglycemicEvent;
-                        return k_;
-                    }
-
-                    IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> i_ = context.Operators.Where<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>(g_, h_);
-                    bool? j_ = context.Operators.Exists<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>(i_);
-                    return j_;
+                bool? h_((CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)? EligibleEventDay) {
+                    bool? k_ = EligibleEventDay?.hasHyperglycemicEvent;
+                    return k_;
                 }
 
-                IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> c_ = context.Operators.Where<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>(a_, b_);
+                IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> i_ = context.Operators.Where<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>(g_, h_);
+                bool? j_ = context.Operators.Exists<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>(i_);
+                return j_;
+            }
 
-                Encounter d_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)? EncounterWithEventDays) {
-                    Encounter l_ = EncounterWithEventDays?.encounter;
-                    return l_;
-                }
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> c_ = context.Operators.Where<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>(a_, b_);
 
-                IEnumerable<Encounter> e_ = context.Operators.Select<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?, Encounter>(c_, d_);
-                IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
-                return f_;
-            });
+            Encounter d_((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)? EncounterWithEventDays) {
+                Encounter l_ = EncounterWithEventDays?.encounter;
+                return l_;
+            }
+
+            IEnumerable<Encounter> e_ = context.Operators.Select<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?, Encounter>(c_, d_);
+            IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
+            return f_;
+        });
 
 
     [CqlFunctionDefinition("Denominator Observations")]
@@ -811,39 +739,5 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
        ["encounter", "hospitalizationPeriod"]);
 
     #endregion CqlTupleMetadata Properties
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

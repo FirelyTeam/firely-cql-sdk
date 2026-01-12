@@ -40,7 +40,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(6542735316349801256L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<string>(3271385319080421780L, () => {
             object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
             return (string)a_;
         });
@@ -48,7 +48,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlParameterDefinition("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(6542735333663349376L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385327737195840L, () => {
             object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
             return (CqlCode)a_;
         });
@@ -60,7 +60,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(6542735335405875800L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(3271385328608459052L, () => {
 
             CqlValueSet a_() {
 
@@ -99,7 +99,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlExpressionDefinition("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(6542735335540096752L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(3271385328675569528L, () => {
 
             CqlValueSet a_() {
 
@@ -138,7 +138,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlExpressionDefinition("Result")]
     public string Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(6542735321280780304L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<string>(3271385321545911304L, () => {
 
             string a_() {
 

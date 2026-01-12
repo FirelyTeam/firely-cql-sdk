@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
 [CqlLibrary("CQMCommon", "4.1.000")]
 public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 {
@@ -169,62 +169,50 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
-
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _Measurement_Period_Cached.GetOrReplace(
-            context,
-            () => {
-                object a_ = context.ResolveParameter("CQMCommon-4.1.000", "Measurement Period", null);
-                return (CqlInterval<CqlDateTime>)a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385435962429624L, () => {
+            object a_ = context.ResolveParameter("CQMCommon-4.1.000", "Measurement Period", null);
+            return (CqlInterval<CqlDateTime>)a_;
+        });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
-
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _Patient_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-                return b_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385444153600864L, () => {
+            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+            return b_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Inpatient_Encounter_Cached = new();
 
     [CqlExpressionDefinition("Inpatient Encounter")]
     public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context) =>
-        _Inpatient_Encounter_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlValueSet a_ = this.Encounter_Inpatient(context);
-                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385440529549968L, () => {
+            CqlValueSet a_ = this.Encounter_Inpatient(context);
+            IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
-                bool? c_(Encounter EncounterInpatient) {
-                    Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
-                    Encounter.EncounterStatus? f_ = e_?.Value;
-                    Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
-                    bool? h_ = context.Operators.Equal(g_, "finished");
-                    Period i_ = EncounterInpatient?.Period;
-                    CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                    CqlDateTime k_ = context.Operators.End(j_);
-                    CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-                    bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
-                    bool? n_ = context.Operators.And(h_, m_);
-                    return n_;
-                }
+            bool? c_(Encounter EncounterInpatient) {
+                Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
+                Encounter.EncounterStatus? f_ = e_?.Value;
+                Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
+                bool? h_ = context.Operators.Equal(g_, "finished");
+                Period i_ = EncounterInpatient?.Period;
+                CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                CqlDateTime k_ = context.Operators.End(j_);
+                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+                bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
+                bool? n_ = context.Operators.And(h_, m_);
+                return n_;
+            }
 
-                IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
-                return d_;
-            });
+            IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
+            return d_;
+        });
 
 
     [CqlFunctionDefinition("ToDateInterval")]
@@ -3789,39 +3777,5 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance];
 
     #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }
