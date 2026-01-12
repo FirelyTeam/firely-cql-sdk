@@ -23,38 +23,38 @@ public class CqlContextOperatorTests
     #region Equal
 
     [TestMethod]
-	public void Equal_FhirCodeAndString_MustEqual()
-	{
+    public void Equal_FhirCodeAndString_MustEqual()
+    {
         // Arrange
         var cqlOperators = Sut();
 
         var enumVal = Encounter.EncounterStatus.Finished;
-		var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
-		const string stringVal = "finished"; // EnumLiteral[xxx]
+        var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
+        const string stringVal = "finished"; // EnumLiteral[xxx]
 
-		// Act
+        // Act
         var isEqual = cqlOperators.Equal(codeVal, stringVal);
 
-		// Assert
-		isEqual.Should().BeTrue();
-	}
+        // Assert
+        isEqual.Should().BeTrue();
+    }
 
-	[TestMethod]
-	public void Equal_StringAndFhirCode_MustEqual()
-	{
+    [TestMethod]
+    public void Equal_StringAndFhirCode_MustEqual()
+    {
         // Arrange
         var cqlOperators = Sut();
 
         var enumVal = Encounter.EncounterStatus.Finished;
-		var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
-		const string stringVal = "finished"; // EnumLiteral[xxx]
+        var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
+        const string stringVal = "finished"; // EnumLiteral[xxx]
 
-		// Act
-		var isEqual = cqlOperators.Equal(stringVal, codeVal);
+        // Act
+        var isEqual = cqlOperators.Equal(stringVal, codeVal);
 
-		// Assert
-		isEqual.Should().BeTrue();
-	}
+        // Assert
+        isEqual.Should().BeTrue();
+    }
 
     [TestMethod]
     public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
@@ -95,7 +95,7 @@ public class CqlContextOperatorTests
 
         CqlCode?[] divorcedCodes =
         [
-			null,
+            null,
             new CqlCode("X", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null)
         ];
 
@@ -104,7 +104,7 @@ public class CqlContextOperatorTests
         CqlCode?[] notMarriedCodes =
         [
             new CqlCode("Y", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null),
-			null,
+            null,
             new CqlCode("Z", "http://terminology.hl7.org/CodeSystem/v3-MaritalStatus", null, null)
         ];
 
@@ -125,74 +125,74 @@ public class CqlContextOperatorTests
     #region Convert
 
     [TestMethod]
-	public void Convert_FhirCodeToString_MustReturnValueFromEnumLiteral()
-	{
+    public void Convert_FhirCodeToString_MustReturnValueFromEnumLiteral()
+    {
         // Arrange
         var cqlOperators = Sut();
 
         var enumVal = Encounter.EncounterStatus.Finished;
-		var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
-		const string stringVal = "finished"; // EnumLiteral[xxx]
+        var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
+        const string stringVal = "finished"; // EnumLiteral[xxx]
 
-		// Act
-		var stringValConverted = cqlOperators.Convert<string>(codeVal);
+        // Act
+        var stringValConverted = cqlOperators.Convert<string>(codeVal);
 
-		// Assert
-		Assert.AreEqual(stringVal, stringValConverted);
-	}
+        // Assert
+        Assert.AreEqual(stringVal, stringValConverted);
+    }
 
-	[TestMethod]
-	public void Convert_StringToFhirCode_ThrowNoConversionIsDefined()
-	{
+    [TestMethod]
+    public void Convert_StringToFhirCode_ThrowNoConversionIsDefined()
+    {
         // Arrange
         var cqlOperators = Sut();
         const string stringVal = "finished"; // EnumLiteral[xxx]
 
-		// Act
-		Action act = () => cqlOperators.Convert<Code<Encounter.EncounterStatus>>(stringVal);
+        // Act
+        Action act = () => cqlOperators.Convert<Code<Encounter.EncounterStatus>>(stringVal);
 
-		// Assert
-		act.Should().Throw<InvalidOperationException>()
-		   .WithMessage("No conversion from * to * is defined.");
-	}
+        // Assert
+        act.Should().Throw<InvalidOperationException>()
+           .WithMessage("No conversion from * to * is defined.");
+    }
 
-	#endregion
+    #endregion
 
-	#region Equivalent
+    #region Equivalent
 
-	[TestMethod]
-	public void Equivalent_FhirCodeAndCqlCode_MustBeEquivalent()
-	{
+    [TestMethod]
+    public void Equivalent_FhirCodeAndCqlCode_MustBeEquivalent()
+    {
         // Arrange
         var cqlOperators = Sut();
 
         var enumVal = Encounter.EncounterStatus.Cancelled;
-		var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
-		var cqlCode = new CqlCode("cancelled", null, null, null); // This represents the string "CancelledObservationStatus" converted to CqlCode
+        var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
+        var cqlCode = new CqlCode("cancelled", null, null, null); // This represents the string "CancelledObservationStatus" converted to CqlCode
 
-		// Act
-		var isEquivalent = cqlOperators.Equivalent(fhirCode, cqlCode);
+        // Act
+        var isEquivalent = cqlOperators.Equivalent(fhirCode, cqlCode);
 
-		// Assert
-		isEquivalent.Should().BeTrue("FHIR Code and equivalent CqlCode should be equivalent");
-	}
+        // Assert
+        isEquivalent.Should().BeTrue("FHIR Code and equivalent CqlCode should be equivalent");
+    }
 
-	[TestMethod]
-	public void Equivalent_CqlCodeAndFhirCode_MustBeEquivalent()
-	{
+    [TestMethod]
+    public void Equivalent_CqlCodeAndFhirCode_MustBeEquivalent()
+    {
         // Arrange
         var cqlOperators = Sut();
 
         var enumVal = Encounter.EncounterStatus.Cancelled;
-		var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
-		var cqlCode = new CqlCode("cancelled", null, null, null);
+        var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
+        var cqlCode = new CqlCode("cancelled", null, null, null);
 
-		// Act
-		var isEquivalent = cqlOperators.Equivalent(cqlCode, fhirCode);
+        // Act
+        var isEquivalent = cqlOperators.Equivalent(cqlCode, fhirCode);
 
-		// Assert
-		isEquivalent.Should().BeTrue("CqlCode and equivalent FHIR Code should be equivalent");
-	}
+        // Assert
+        isEquivalent.Should().BeTrue("CqlCode and equivalent FHIR Code should be equivalent");
+    }
 
     #endregion
 
@@ -273,6 +273,27 @@ public class CqlContextOperatorTests
 
         // Assert
         computedValue.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Sum_QuantityWithNullUnits_MustSumValuesWithDefaultUnit()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        List<CqlQuantity?> inputSource =
+        [
+            new(value: 1, unit: null),
+            new(value: 2, unit: null)
+        ];
+        CqlQuantity expectedValue = new(value: 3, unit: "1");
+
+        // Act
+        var computedValue = cqlOperators.Sum(inputSource);
+
+        // Assert
+        bool? areEqual = cqlOperators.Equal(expectedValue, computedValue);
+        Assert.IsTrue(areEqual);
     }
 
     #endregion
