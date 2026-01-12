@@ -9,6 +9,7 @@
 #nullable enable
 
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
@@ -19,22 +20,22 @@ namespace CoreTests;
 public class CqlContextOperatorTests
 {
 	private static CqlContext GetNewContext() => FhirCqlContext.WithDataSource();
+	private static ICqlOperators GetNewOperators() => GetNewContext().Operators;
 
+    #region Equal
 
-	#region Equal
-
-	[TestMethod]
+    [TestMethod]
 	public void Equal_FhirCodeAndString_MustEqual()
 	{
-		// Arrange
-		var rtx = GetNewContext();
+        // Arrange
+        var cqlOperators = GetNewOperators();
 
-		var enumVal = Encounter.EncounterStatus.Finished;
+        var enumVal = Encounter.EncounterStatus.Finished;
 		var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
 		const string stringVal = "finished"; // EnumLiteral[xxx]
 
 		// Act
-		var isEqual = rtx.Operators.Equal(codeVal, stringVal);
+        var isEqual = cqlOperators.Equal(codeVal, stringVal);
 
 		// Assert
 		isEqual.Should().BeTrue();
@@ -43,15 +44,15 @@ public class CqlContextOperatorTests
 	[TestMethod]
 	public void Equal_StringAndFhirCode_MustEqual()
 	{
-		// Arrange
-		var rtx = GetNewContext();
+        // Arrange
+        var cqlOperators = GetNewOperators();
 
-		var enumVal = Encounter.EncounterStatus.Finished;
+        var enumVal = Encounter.EncounterStatus.Finished;
 		var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
 		const string stringVal = "finished"; // EnumLiteral[xxx]
 
 		// Act
-		var isEqual = rtx.Operators.Equal(stringVal, codeVal);
+		var isEqual = cqlOperators.Equal(stringVal, codeVal);
 
 		// Assert
 		isEqual.Should().BeTrue();
@@ -61,7 +62,7 @@ public class CqlContextOperatorTests
     public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
     {
         // Arrange
-        CqlContext rtx = GetNewContext();
+        var cqlOperators = GetNewOperators();
 
         CqlCode[] divorcedCodes =
         [
@@ -80,8 +81,8 @@ public class CqlContextOperatorTests
 
 
         // Act
-        bool? isEqualLessOnLeftConcept = rtx.Operators.Equivalent(divorcedConcept, notMarriedConcept);
-        bool? isEqualLessOnRightConcept = rtx.Operators.Equivalent(notMarriedConcept, divorcedConcept);
+        bool? isEqualLessOnLeftConcept = cqlOperators.Equivalent(divorcedConcept, notMarriedConcept);
+        bool? isEqualLessOnRightConcept = cqlOperators.Equivalent(notMarriedConcept, divorcedConcept);
 
         // Assert
         isEqualLessOnLeftConcept.Should().BeTrue();
@@ -92,7 +93,7 @@ public class CqlContextOperatorTests
     public void Equivalent_ConceptAtLeastOneCodeEquivalentOnNull_MustBeEquivalent()
     {
         // Arrange
-        CqlContext rtx = GetNewContext();
+        var cqlOperators = GetNewOperators();
 
         CqlCode?[] divorcedCodes =
         [
@@ -113,8 +114,8 @@ public class CqlContextOperatorTests
 
 
         // Act
-        bool? isEqualLessOnLeftConcept = rtx.Operators.Equivalent(divorcedConcept, notMarriedConcept);
-        bool? isEqualLessOnRightConcept = rtx.Operators.Equivalent(notMarriedConcept, divorcedConcept);
+        bool? isEqualLessOnLeftConcept = cqlOperators.Equivalent(divorcedConcept, notMarriedConcept);
+        bool? isEqualLessOnRightConcept = cqlOperators.Equivalent(notMarriedConcept, divorcedConcept);
 
         // Assert
         isEqualLessOnLeftConcept.Should().BeTrue();
@@ -128,15 +129,15 @@ public class CqlContextOperatorTests
     [TestMethod]
 	public void Convert_FhirCodeToString_MustReturnValueFromEnumLiteral()
 	{
-		// Arrange
-		var rtx = GetNewContext();
+        // Arrange
+        var cqlOperators = GetNewOperators();
 
-		var enumVal = Encounter.EncounterStatus.Finished;
+        var enumVal = Encounter.EncounterStatus.Finished;
 		var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
 		const string stringVal = "finished"; // EnumLiteral[xxx]
 
 		// Act
-		var stringValConverted = rtx.Operators.Convert<string>(codeVal);
+		var stringValConverted = cqlOperators.Convert<string>(codeVal);
 
 		// Assert
 		Assert.AreEqual(stringVal, stringValConverted);
@@ -145,12 +146,12 @@ public class CqlContextOperatorTests
 	[TestMethod]
 	public void Convert_StringToFhirCode_ThrowNoConversionIsDefined()
 	{
-		// Arrange
-		var rtx = GetNewContext();
-		const string stringVal = "finished"; // EnumLiteral[xxx]
+        // Arrange
+        var cqlOperators = GetNewOperators();
+        const string stringVal = "finished"; // EnumLiteral[xxx]
 
 		// Act
-		Action act = () => rtx.Operators.Convert<Code<Encounter.EncounterStatus>>(stringVal);
+		Action act = () => cqlOperators.Convert<Code<Encounter.EncounterStatus>>(stringVal);
 
 		// Assert
 		act.Should().Throw<InvalidOperationException>()
@@ -164,15 +165,15 @@ public class CqlContextOperatorTests
 	[TestMethod]
 	public void Equivalent_FhirCodeAndCqlCode_MustBeEquivalent()
 	{
-		// Arrange
-		var rtx = GetNewContext();
+        // Arrange
+        var cqlOperators = GetNewOperators();
 
-		var enumVal = Encounter.EncounterStatus.Cancelled;
+        var enumVal = Encounter.EncounterStatus.Cancelled;
 		var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
 		var cqlCode = new CqlCode("cancelled", null, null, null); // This represents the string "CancelledObservationStatus" converted to CqlCode
 
 		// Act
-		var isEquivalent = rtx.Operators.Equivalent(fhirCode, cqlCode);
+		var isEquivalent = cqlOperators.Equivalent(fhirCode, cqlCode);
 
 		// Assert
 		isEquivalent.Should().BeTrue("FHIR Code and equivalent CqlCode should be equivalent");
@@ -181,19 +182,44 @@ public class CqlContextOperatorTests
 	[TestMethod]
 	public void Equivalent_CqlCodeAndFhirCode_MustBeEquivalent()
 	{
-		// Arrange
-		var rtx = GetNewContext();
+        // Arrange
+        var cqlOperators = GetNewOperators();
 
-		var enumVal = Encounter.EncounterStatus.Cancelled;
+        var enumVal = Encounter.EncounterStatus.Cancelled;
 		var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
 		var cqlCode = new CqlCode("cancelled", null, null, null);
 
 		// Act
-		var isEquivalent = rtx.Operators.Equivalent(cqlCode, fhirCode);
+		var isEquivalent = cqlOperators.Equivalent(cqlCode, fhirCode);
 
 		// Assert
 		isEquivalent.Should().BeTrue("CqlCode and equivalent FHIR Code should be equivalent");
 	}
 
 	#endregion
+
+    #region Sum
+
+    [TestMethod]
+    public void Sum_QuantityOfSameUnits_MustSumValuesWithSameUnit()
+    {
+        // Arrange
+        var cqlOperators = GetNewOperators();
+
+        List<CqlQuantity?> inputSource =
+        [
+            new(value: 1, unit: "day"),
+            new(value: 5, unit: "day")
+        ];
+        CqlQuantity expectedValue = new CqlQuantity(value: 6, unit: "day");
+
+        // Act
+        var computedValue = cqlOperators.Sum(inputSource);
+
+        // Assert
+        bool? areEqual = cqlOperators.Equal(expectedValue, computedValue); // NOTE: Cannot call Equal directly on CqlQuantity!
+        Assert.IsTrue(areEqual);
+    }
+
+    #endregion
 }

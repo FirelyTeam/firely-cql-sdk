@@ -7,7 +7,10 @@
  */
 
 #nullable enable
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 
 namespace CoreTests;
 
@@ -76,4 +79,5 @@ public class CqlQuantityTests
 
         Assert.IsNull(negated);
     }
+
 }
