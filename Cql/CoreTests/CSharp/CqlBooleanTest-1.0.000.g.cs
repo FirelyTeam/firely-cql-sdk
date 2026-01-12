@@ -20,7 +20,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(-8987157624786383112L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6542735325044295872L, () => {
             bool? a_ = context.Operators.Equal(1, 1);
             bool? b_ = context.Operators.Equal(a_, true);
             return b_;

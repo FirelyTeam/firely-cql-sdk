@@ -20,7 +20,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
 
     [CqlExpressionDefinition("Result")]
     public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(5746251765047349327L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)?>(6542735321319862136L, () => {
             (CqlTupleMetadata, string result1, string result2)? a_ = (CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ, "some first result", "some second result");
             (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? b_ = (CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY, "success", a_);
             return b_;

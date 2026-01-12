@@ -48,7 +48,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Observation> InDemographic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(-9134741546563468136L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(6542735336163457472L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
             return a_;
         });

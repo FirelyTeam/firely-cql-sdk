@@ -23,35 +23,84 @@ internal interface ICacheKeyGenerator
 }
 
 /// <summary>
-/// Default implementation of cache key generator using FNV-1a hash algorithm.
+/// Default implementation of cache key generator using a combination of timestamp, hash, and sequence.
 /// </summary>
+/// <remarks>
+/// The cache key is a 64-bit signed long structured as follows:
+/// - Bits 63-34 (30 bits): Seconds since 2020-01-01 00:00:00 UTC (allows dates up to ~2054)
+/// - Bits 33-2 (32 bits): FNV-1a hash of the library and definition identifier
+/// - Bits 1-0 (2 bits): Sequence counter for collision handling (0-3)
+/// This ensures uniqueness by combining temporal, content-based, and sequential components.
+/// </remarks>
 internal sealed class FnvCacheKeyGenerator : ICacheKeyGenerator
 {
+    private static readonly DateTime Epoch = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    private static readonly DateTime GenerationTime = DateTime.UtcNow;
+    private readonly Dictionary<long, int> _sequenceCounters = new();
+    
     /// <inheritdoc />
     public long GenerateCacheKey(string libraryIdentifier, string definitionName)
     {
         var cacheKeyString = $"{libraryIdentifier}.{definitionName}";
-        return GenerateSnowflakeId(cacheKeyString);
+        return GenerateUniqueId(cacheKeyString);
     }
 
     /// <summary>
-    /// Generates a deterministic cache key using FNV-1a hash algorithm.
-    /// Uses FNV-1a 64-bit hash for better distribution than GetHashCode.
+    /// Generates a unique cache key combining timestamp, FNV-1a hash, and sequence counter.
+    /// The timestamp is captured at class initialization to ensure deterministic keys
+    /// within a single code generation session. The sequence counter handles collisions.
     /// </summary>
-    private static long GenerateSnowflakeId(string input)
+    private long GenerateUniqueId(string input)
     {
-        // FNV-1a 64-bit hash constants
-        const ulong FnvOffsetBasis = 14695981039346656037;
-        const ulong FnvPrime = 1099511628211;
+        // Calculate seconds since epoch (30 bits - supports dates until ~2054)
+        var secondsSinceEpoch = (uint)(GenerationTime - Epoch).TotalSeconds;
+        
+        // Generate FNV-1a 32-bit hash for the input
+        var hash = GenerateFnv1aHash32(input);
+        
+        // Create base key (without sequence)
+        var baseKey = (((long)secondsSinceEpoch & 0x3FFFFFFFL) << 34) | (((long)hash & 0xFFFFFFFFL) << 2);
+        
+        // Handle collisions with sequence counter
+        lock (_sequenceCounters)
+        {
+            if (!_sequenceCounters.TryGetValue(baseKey, out var sequence))
+            {
+                sequence = 0;
+            }
+            else
+            {
+                sequence++;
+                if (sequence > 3)
+                {
+                    throw new InvalidOperationException(
+                        $"Collision sequence overflow for key '{input}'. More than 4 definitions mapped to the same base key.");
+                }
+            }
+            
+            _sequenceCounters[baseKey] = sequence;
+            
+            // Combine: high 30 bits = timestamp, middle 32 bits = hash, low 2 bits = sequence
+            return baseKey | (long)sequence;
+        }
+    }
 
-        ulong hash = FnvOffsetBasis;
+    /// <summary>
+    /// Generates a 32-bit FNV-1a hash for better distribution than GetHashCode.
+    /// </summary>
+    private static uint GenerateFnv1aHash32(string input)
+    {
+        // FNV-1a 32-bit hash constants
+        const uint FnvOffsetBasis = 2166136261;
+        const uint FnvPrime = 16777619;
+
+        uint hash = FnvOffsetBasis;
         foreach (char c in input)
         {
             hash ^= c;
             hash *= FnvPrime;
         }
 
-        // Return as signed long (cast from unsigned hash)
-        return unchecked((long)hash);
+        return hash;
     }
 }

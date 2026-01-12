@@ -1,7 +1,5 @@
 ﻿#nullable enable
 
-using System.Collections.Concurrent;
-
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
