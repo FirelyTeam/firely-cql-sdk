@@ -223,51 +223,9 @@ partial class LibrarySetCSharpCodeGenerator
                 AppendSingletonLifetimeMembers();
                 AppendLibraryInterfaceImplementation();
                 AppendCqlTupleMetadataProperties();
-                AppendNestedTypeCached();
             }
 
             ISB.AppendLine("}");
-        }
-
-        private void AppendNestedTypeCached()
-        {
-            ISB.AppendLine(
-                """
-                #region Nested Type - Cached<T>
-
-                private struct Cached<T>(long CacheVersion, T CachedValue)
-                {
-                    public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-                    {
-                        var cqlContextCacheVersion = cqlContext.CacheVersion;
-                        if (cqlContextCacheVersion is 0)
-                        {
-                            // No caching, clear out previous values
-                            CacheVersion = 0;
-                            CachedValue = default;
-                            var value = factory();
-                            return value;
-                        }
-
-                        if (CacheVersion == cqlContextCacheVersion)
-                        {
-                            // Cache hit
-                            return CachedValue;
-                        }
-                        else
-                        {
-                            // Cache miss, refresh and store
-                            var value = factory();
-                            CachedValue = value;
-                            CacheVersion = cqlContextCacheVersion;
-                            return value;
-                        }
-                    }
-                }
-
-                #endregion
-
-                """);
         }
 
         private void AppendSingletonLifetimeMembers()
