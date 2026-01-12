@@ -1,6 +1,6 @@
 ﻿#nullable enable
 
-using System.Threading;
+using System.Collections.Concurrent;
 
 namespace Hl7.Cql.Runtime;
 
@@ -30,8 +30,7 @@ public interface ICqlContextInternals
 
 partial class CqlContext : ICqlContextInternals
 {
-    private Dictionary<long, object?>? _cache;
-    private readonly object _cacheLock = new();
+    private ConcurrentDictionary<long, object?>? _cache;
 
     /// <summary>
     /// Invalidates the current cache, forcing subsequent operations to use fresh data.
@@ -41,10 +40,7 @@ partial class CqlContext : ICqlContextInternals
     /// refreshed.</remarks>
     public void UseNewCache()
     {
-        lock (_cacheLock)
-        {
-            _cache = [];
-        }
+        _cache = new ConcurrentDictionary<long, object?>();
     }
 
     /// <summary>
@@ -54,32 +50,22 @@ partial class CqlContext : ICqlContextInternals
     /// may impact performance if caching is typically used to improve efficiency.</remarks>
     public void DontUseCaching()
     {
-        lock (_cacheLock)
-        {
-            _cache = null;
-        }
+        _cache = null;
     }
 
     T ICqlContextInternals.GetOrCompute<T>(long cacheKey, Func<T> factory)
     {
-        lock (_cacheLock)
+        var cache = _cache;
+        if (cache is null)
         {
-            if (_cache is null)
-            {
-                // Caching disabled
-                return factory();
-            }
-
-            if (_cache.TryGetValue(cacheKey, out var cachedValue))
-            {
-                // Cache hit - handle null values properly
-                return cachedValue is null ? default! : (T)cachedValue;
-            }
-
-            // Cache miss, compute and store
-            var result = factory();
-            _cache[cacheKey] = result;
-            return result;
+            // Caching disabled
+            return factory();
         }
+
+        // Use GetOrAdd for lock-free read and atomic add
+        var cachedValue = cache.GetOrAdd(cacheKey, _ => factory());
+        
+        // Handle null values properly
+        return cachedValue is null ? default! : (T)cachedValue;
     }
 }
