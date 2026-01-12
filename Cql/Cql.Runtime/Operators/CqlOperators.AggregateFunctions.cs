@@ -661,30 +661,6 @@ namespace Hl7.Cql.Operators
             }
         }
 
-        public CqlQuantity? Sum2(IEnumerable<CqlQuantity?>? values)
-        {
-            if (values == null)
-                return null;
-        
-            var nonNull = values
-                          .Where(q => q is { value: not null })
-                          .ToArray();
-        
-            if (nonNull.Length == 0)
-                return null;
-        
-            decimal? sum = 0;
-            string? unit = null;
-            foreach (var v in nonNull)
-            {
-                unit ??= (v!.unit ?? "1");
-                if (unit != v!.unit)
-                    throw new NotSupportedException("Unlike units are not supported.");
-                sum += v.value!.Value;
-            }
-            return new CqlQuantity(sum, unit ?? "1");
-        }
-
         public CqlQuantity? Sum(IEnumerable<CqlQuantity?>? values)
         {
             string? unit = null;
