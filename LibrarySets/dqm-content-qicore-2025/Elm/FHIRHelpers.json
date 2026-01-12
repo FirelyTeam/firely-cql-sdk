@@ -32227,39 +32227,6 @@
                   "annotation" : [ ]
                }
             } ]
-         }, {
-            "locator" : "712:1-712:52",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "name" : "ToString",
-            "context" : "Unfiltered",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "annotation" : [ ],
-            "expression" : {
-               "locator" : "712:42-712:52",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-               "path" : "value",
-               "type" : "Property",
-               "annotation" : [ ],
-               "source" : {
-                  "locator" : "712:42-712:46",
-                  "resultTypeName" : "{http://hl7.org/fhir}id",
-                  "name" : "value",
-                  "type" : "OperandRef",
-                  "annotation" : [ ]
-               }
-            },
-            "operand" : [ {
-               "name" : "value",
-               "annotation" : [ ],
-               "operandTypeSpecifier" : {
-                  "locator" : "712:32-712:38",
-                  "resultTypeName" : "{http://hl7.org/fhir}id",
-                  "name" : "{http://hl7.org/fhir}id",
-                  "type" : "NamedTypeSpecifier",
-                  "annotation" : [ ]
-               }
-            } ]
          } ]
       }
    }

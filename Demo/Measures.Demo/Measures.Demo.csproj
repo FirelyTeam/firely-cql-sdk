@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
 	<Import Project="..\cql-demo.props" />
 
 	<PropertyGroup>
@@ -15,22 +16,35 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<LibrarySet>Demo</LibrarySet>
-		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
-		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
-		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
-		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
-		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 		<OutputType>Exe</OutputType>
 	</PropertyGroup>
 
-	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />
-	<Import Project="../Cql/Build/ElmToCSharp.Targets.xml" />
-
   <ItemGroup>
     <Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="input/**">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+		<Content Remove="input/tests/results" />
+	</ItemGroup>
+
+	<!--
+	Packaging tooling properties. Put these last
+	-->
+	<Import Project="..\..\packaging-tooling.props" />
+
+	<PropertyGroup>
+		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
+		<LibrarySet>Demo</LibrarySet>
+		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
+		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
+		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
+		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
+		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<Content Include="$(CqlDirectory)/*">
@@ -51,10 +65,6 @@
 		</Content>
 	</ItemGroup>
 
-	<ItemGroup>
-		<Content Include="input/**">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Content>
-		<Content Remove="input/tests/results" />
-	</ItemGroup>
+	<Import Project="..\..\packaging-tooling.Targets.xml" />
+
 </Project>

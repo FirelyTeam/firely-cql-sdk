@@ -1311,10 +1311,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
 
                     bool? s_(Extension @this) {
                         FhirUri ak_ = @this?.UrlElement;
-                        FhirString al_ = context.Operators.Convert<FhirString>(ak_);
-                        string am_ = FHIRHelpers_4_4_000.Instance.ToString(context, al_);
-                        bool? an_ = context.Operators.Equal(am_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                        return an_;
+                        string al_ = FHIRHelpers_4_4_000.Instance.ToString(context, ak_);
+                        bool? am_ = context.Operators.Equal(al_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                        return am_;
                     }
 
                     IEnumerable<Extension> t_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoAdolescentScreen is DomainResource
@@ -1322,8 +1321,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         : default), s_);
 
                     object u_(Extension @this) {
-                        DataType ao_ = @this?.Value;
-                        return ao_;
+                        DataType an_ = @this?.Value;
+                        return an_;
                     }
 
                     IEnumerable<object> v_ = context.Operators.Select<Extension, object>(t_, u_);
@@ -1334,11 +1333,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     bool? aa_ = context.Operators.Equivalent(x_, z_);
 
                     bool? ab_(Extension @this) {
-                        FhirUri ap_ = @this?.UrlElement;
-                        FhirString aq_ = context.Operators.Convert<FhirString>(ap_);
-                        string ar_ = FHIRHelpers_4_4_000.Instance.ToString(context, aq_);
-                        bool? as_ = context.Operators.Equal(ar_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                        return as_;
+                        FhirUri ao_ = @this?.UrlElement;
+                        string ap_ = FHIRHelpers_4_4_000.Instance.ToString(context, ao_);
+                        bool? aq_ = context.Operators.Equal(ap_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                        return aq_;
                     }
 
                     IEnumerable<Extension> ac_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoAdolescentScreen is DomainResource
@@ -1346,8 +1344,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         : default), ab_);
 
                     object ad_(Extension @this) {
-                        DataType at_ = @this?.Value;
-                        return at_;
+                        DataType ar_ = @this?.Value;
+                        return ar_;
                     }
 
                     IEnumerable<object> ae_ = context.Operators.Select<Extension, object>(ac_, ad_);
@@ -1461,10 +1459,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
 
                     bool? s_(Extension @this) {
                         FhirUri ak_ = @this?.UrlElement;
-                        FhirString al_ = context.Operators.Convert<FhirString>(ak_);
-                        string am_ = FHIRHelpers_4_4_000.Instance.ToString(context, al_);
-                        bool? an_ = context.Operators.Equal(am_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                        return an_;
+                        string al_ = FHIRHelpers_4_4_000.Instance.ToString(context, ak_);
+                        bool? am_ = context.Operators.Equal(al_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                        return am_;
                     }
 
                     IEnumerable<Extension> t_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoAdultScreen is DomainResource
@@ -1472,8 +1469,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         : default), s_);
 
                     object u_(Extension @this) {
-                        DataType ao_ = @this?.Value;
-                        return ao_;
+                        DataType an_ = @this?.Value;
+                        return an_;
                     }
 
                     IEnumerable<object> v_ = context.Operators.Select<Extension, object>(t_, u_);
@@ -1484,11 +1481,10 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     bool? aa_ = context.Operators.Equivalent(x_, z_);
 
                     bool? ab_(Extension @this) {
-                        FhirUri ap_ = @this?.UrlElement;
-                        FhirString aq_ = context.Operators.Convert<FhirString>(ap_);
-                        string ar_ = FHIRHelpers_4_4_000.Instance.ToString(context, aq_);
-                        bool? as_ = context.Operators.Equal(ar_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                        return as_;
+                        FhirUri ao_ = @this?.UrlElement;
+                        string ap_ = FHIRHelpers_4_4_000.Instance.ToString(context, ao_);
+                        bool? aq_ = context.Operators.Equal(ap_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                        return aq_;
                     }
 
                     IEnumerable<Extension> ac_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoAdultScreen is DomainResource
@@ -1496,8 +1492,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         : default), ab_);
 
                     object ad_(Extension @this) {
-                        DataType at_ = @this?.Value;
-                        return at_;
+                        DataType ar_ = @this?.Value;
+                        return ar_;
                     }
 
                     IEnumerable<object> ae_ = context.Operators.Select<Extension, object>(ac_, ad_);

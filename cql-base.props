@@ -8,7 +8,7 @@
 
 	<PropertyGroup>
 		<!--
-			Keep FirelySdkVersion in sync between cql-base.props and cql-demo.props
+			Keep FirelySdkVersion in sync between cql-base.props and cql-demo.props and README.md
 			The version must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/src/Vonk.props
 			-->
 		<FirelySdkVersion>6.0.1</FirelySdkVersion>
@@ -16,19 +16,6 @@
 		<!-- https://hl7.org/fhir/R4/ -->
 		<FhirRelease>R4</FhirRelease>
 		<DefineConstants Condition="'$(FhirRelease)'!=''">$(DefineConstants);FhirRelease$(FhirRelease)</DefineConstants>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<!-- ## CQL-related properties (also in BuildArtifacts.csproj, cql-base.props, cql-demo.props)  -->
-		<CqlSolutionDir>$(MSBuildThisFileDirectory)</CqlSolutionDir>
-		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable>
-		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' == 'Release'">false</EmbedDebugSymbolsEnable>
-		<JsonPretty>true</JsonPretty>
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-		<!-- ## ElmToCSharpEnabled must be true in Release mode, for build pipeline to pass -->
-		<ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled>
-		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
-		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -62,9 +49,5 @@
 		-->
 		<PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
 	</ItemGroup>
-
-	<PropertyGroup>
-		<Box> __________________________________________________________________________________________&#10;/&#10;{Text}&#10;\</Box>
-	</PropertyGroup>
 
 </Project>

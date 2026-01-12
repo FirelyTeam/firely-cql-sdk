@@ -2719,14 +2719,6 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     }
 
 
-    [CqlFunctionDefinition("ToString")]
-    public string ToString(CqlContext context, Id value)
-    {
-        string a_ = value?.Value;
-        return a_;
-    }
-
-
     [CqlFunctionDefinition("ToBoolean")]
     public bool? ToBoolean(CqlContext context, FhirBoolean value)
     {

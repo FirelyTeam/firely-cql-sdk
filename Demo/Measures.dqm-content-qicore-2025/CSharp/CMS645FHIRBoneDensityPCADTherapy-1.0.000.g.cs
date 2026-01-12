@@ -943,10 +943,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
                         bool? aa_(Extension @this) {
                             FhirUri aj_ = @this?.UrlElement;
-                            FhirString ak_ = context.Operators.Convert<FhirString>(aj_);
-                            string al_ = FHIRHelpers_4_4_000.Instance.ToString(context, ak_);
-                            bool? am_ = context.Operators.Equal(al_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
-                            return am_;
+                            string ak_ = FHIRHelpers_4_4_000.Instance.ToString(context, aj_);
+                            bool? al_ = context.Operators.Equal(ak_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
+                            return al_;
                         }
 
                         IEnumerable<Extension> ab_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(DEXANotOrdered is DomainResource
@@ -954,8 +953,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                             : default), aa_);
 
                         object ac_(Extension @this) {
-                            DataType an_ = @this?.Value;
-                            return an_;
+                            DataType am_ = @this?.Value;
+                            return am_;
                         }
 
                         IEnumerable<object> ad_ = context.Operators.Select<Extension, object>(ab_, ac_);
@@ -1010,10 +1009,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
                         bool? ab_(Extension @this) {
                             FhirUri ak_ = @this?.UrlElement;
-                            FhirString al_ = context.Operators.Convert<FhirString>(ak_);
-                            string am_ = FHIRHelpers_4_4_000.Instance.ToString(context, al_);
-                            bool? an_ = context.Operators.Equal(am_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                            return an_;
+                            string al_ = FHIRHelpers_4_4_000.Instance.ToString(context, ak_);
+                            bool? am_ = context.Operators.Equal(al_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                            return am_;
                         }
 
                         IEnumerable<Extension> ac_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(DEXANotPerformed is DomainResource
@@ -1021,8 +1019,8 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                             : default), ab_);
 
                         object ad_(Extension @this) {
-                            DataType ao_ = @this?.Value;
-                            return ao_;
+                            DataType an_ = @this?.Value;
+                            return an_;
                         }
 
                         IEnumerable<object> ae_ = context.Operators.Select<Extension, object>(ac_, ad_);

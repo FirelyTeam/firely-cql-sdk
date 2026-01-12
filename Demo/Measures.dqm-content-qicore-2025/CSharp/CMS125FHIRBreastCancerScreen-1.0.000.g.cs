@@ -146,17 +146,16 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
 
                 bool? l_(Extension @this) {
                     FhirUri z_ = @this?.UrlElement;
-                    FhirString aa_ = context.Operators.Convert<FhirString>(z_);
-                    string ab_ = FHIRHelpers_4_4_000.Instance.ToString(context, aa_);
-                    bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-                    return ac_;
+                    string aa_ = FHIRHelpers_4_4_000.Instance.ToString(context, z_);
+                    bool? ab_ = context.Operators.Equal(aa_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+                    return ab_;
                 }
 
                 IEnumerable<Extension> m_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(k_()), l_);
 
                 DataType n_(Extension @this) {
-                    DataType ad_ = @this?.Value;
-                    return ad_;
+                    DataType ac_ = @this?.Value;
+                    return ac_;
                 }
 
                 IEnumerable<DataType> o_ = context.Operators.Select<Extension, DataType>(m_, n_);

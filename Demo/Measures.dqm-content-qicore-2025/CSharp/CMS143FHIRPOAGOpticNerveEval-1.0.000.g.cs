@@ -337,10 +337,9 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
                     bool? u_(Extension @this) {
                         FhirUri ac_ = @this?.UrlElement;
-                        FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
-                        string ae_ = FHIRHelpers_4_4_000.Instance.ToString(context, ad_);
-                        bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                        return af_;
+                        string ad_ = FHIRHelpers_4_4_000.Instance.ToString(context, ac_);
+                        bool? ae_ = context.Operators.Equal(ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                        return ae_;
                     }
 
                     IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(CupToDiscExamNotPerformed is DomainResource
@@ -348,8 +347,8 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                         : default), u_);
 
                     object w_(Extension @this) {
-                        DataType ag_ = @this?.Value;
-                        return ag_;
+                        DataType af_ = @this?.Value;
+                        return af_;
                     }
 
                     IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);
@@ -402,10 +401,9 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
                     bool? u_(Extension @this) {
                         FhirUri ac_ = @this?.UrlElement;
-                        FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
-                        string ae_ = FHIRHelpers_4_4_000.Instance.ToString(context, ad_);
-                        bool? af_ = context.Operators.Equal(ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                        return af_;
+                        string ad_ = FHIRHelpers_4_4_000.Instance.ToString(context, ac_);
+                        bool? ae_ = context.Operators.Equal(ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
+                        return ae_;
                     }
 
                     IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(OpticDiscExamNotPerformed is DomainResource
@@ -413,8 +411,8 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                         : default), u_);
 
                     object w_(Extension @this) {
-                        DataType ag_ = @this?.Value;
-                        return ag_;
+                        DataType af_ = @this?.Value;
+                        return af_;
                     }
 
                     IEnumerable<object> x_ = context.Operators.Select<Extension, object>(v_, w_);

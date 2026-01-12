@@ -1843,10 +1843,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
                         bool? v_(Extension @this) {
                             FhirUri ag_ = @this?.UrlElement;
-                            FhirString ah_ = context.Operators.Convert<FhirString>(ag_);
-                            string ai_ = FHIRHelpers_4_4_000.Instance.ToString(context, ah_);
-                            bool? aj_ = context.Operators.Equal(ai_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
-                            return aj_;
+                            string ah_ = FHIRHelpers_4_4_000.Instance.ToString(context, ag_);
+                            bool? ai_ = context.Operators.Equal(ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                            return ai_;
                         }
 
                         IEnumerable<Extension> w_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(PCINotDone is DomainResource
@@ -1854,8 +1853,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             : default), v_);
 
                         DataType x_(Extension @this) {
-                            DataType ak_ = @this?.Value;
-                            return ak_;
+                            DataType aj_ = @this?.Value;
+                            return aj_;
                         }
 
                         IEnumerable<DataType> y_ = context.Operators.Select<Extension, DataType>(w_, x_);
@@ -1919,10 +1918,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
                         bool? x_(Extension @this) {
                             FhirUri ak_ = @this?.UrlElement;
-                            FhirString al_ = context.Operators.Convert<FhirString>(ak_);
-                            string am_ = FHIRHelpers_4_4_000.Instance.ToString(context, al_);
-                            bool? an_ = context.Operators.Equal(am_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
-                            return an_;
+                            string al_ = FHIRHelpers_4_4_000.Instance.ToString(context, ak_);
+                            bool? am_ = context.Operators.Equal(al_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                            return am_;
                         }
 
                         IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(FibrinolyticNoMed is DomainResource
@@ -1930,8 +1928,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             : default), x_);
 
                         DataType z_(Extension @this) {
-                            DataType ao_ = @this?.Value;
-                            return ao_;
+                            DataType an_ = @this?.Value;
+                            return an_;
                         }
 
                         IEnumerable<DataType> aa_ = context.Operators.Select<Extension, DataType>(y_, z_);

@@ -3597,7 +3597,7 @@
                         "type" : "FunctionRef",
                         "annotation" : [ ],
                         "signature" : [ {
-                           "name" : "{http://hl7.org/fhir}id",
+                           "name" : "{http://hl7.org/fhir}string",
                            "type" : "NamedTypeSpecifier",
                            "annotation" : [ ]
                         } ],

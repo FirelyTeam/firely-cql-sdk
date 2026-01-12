@@ -1,1 +1,2 @@
 #nullable enable
+static Hl7.Cql.Fhir.FhirTypeConverter.Default.get -> Hl7.Cql.Conversion.TypeConverter!
