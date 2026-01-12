@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.10.34607.79
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11312.210
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elm", "Cql\Elm\Elm.csproj", "{78C3855A-EEE7-4283-BE5F-71F3E3677C11}"
 EndProject
@@ -36,7 +36,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CQL SDK", "CQL SDK", "{4B5D75F5-E2FC-4CCB-90EF-6DC4A0193032}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		cql-base.props = cql-base.props
 		cql-sdk.props = cql-sdk.props
 	EndProjectSection
 EndProject
@@ -130,8 +129,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build-local-nuget.ps1 = build-local-nuget.ps1
 		build-publicapi.ps1 = build-publicapi.ps1
 		.github\copilot-instructions.md = .github\copilot-instructions.md
+		cql-base.props = cql-base.props
 		LICENSE = LICENSE
 		NuGet.config = NuGet.config
+		packaging-tooling.props = packaging-tooling.props
+		packaging-tooling.Targets.xml = packaging-tooling.Targets.xml
 		README.md = README.md
 	EndProjectSection
 EndProject

@@ -12,33 +12,26 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
 [CqlLibrary("MeasureExample", "0.0.1")]
 public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_0_0_1>
 {
-    private MeasureExample_0_0_1() {}
-
-    public static MeasureExample_0_0_1 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "MeasureExample";
-    public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [];
-
-    #endregion ILibrary Implementation
-
     #region Functions and Expressions
 
+    private readonly Cached<Patient> _Patient_Cached = new();
+
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    public Patient Patient(CqlContext context) =>
+        _Patient_Cached.GetOrReplace(
+            context,
+            () => {
+                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+                return b_;
+            });
 
-        return b_;
-    }
 
+    private readonly Cached<bool?> _Initial_population_Cached = new();
 
     [CqlExpressionDefinition("Initial population")]
     [CqlTag("measure", "Measure Resource Example")]
@@ -49,46 +42,113 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("population", "initial-population")]
     [CqlTag("description", "Patients in the IP")]
     public bool? Initial_population(CqlContext context) =>
-        true;
+        _Initial_population_Cached.GetOrReplace(
+            context,
+            () => true);
 
+
+    private readonly Cached<bool?> _Exclusion_Cached = new();
 
     [CqlExpressionDefinition("Exclusion")]
     [CqlTag("group", "1")]
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator-exclusion")]
     public bool? Exclusion(CqlContext context) =>
-        false;
+        _Exclusion_Cached.GetOrReplace(
+            context,
+            () => false);
 
+
+    private readonly Cached<bool?> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     [CqlTag("group", "1")]
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator")]
-    public bool? Denominator(CqlContext context)
-    {
-        bool? a_ = this.Initial_population(context);
-        bool? b_ = this.Exclusion(context);
-        bool? c_ = context.Operators.Not(b_);
-        bool? d_ = context.Operators.And(a_, c_);
+    public bool? Denominator(CqlContext context) =>
+        _Denominator_Cached.GetOrReplace(
+            context,
+            () => {
+                bool? a_ = this.Initial_population(context);
+                bool? b_ = this.Exclusion(context);
+                bool? c_ = context.Operators.Not(b_);
+                bool? d_ = context.Operators.And(a_, c_);
+                return d_;
+            });
 
-        return d_;
-    }
 
+    private readonly Cached<bool?> _Numerator_1_Cached = new();
 
     [CqlExpressionDefinition("Numerator 1")]
     [CqlTag("group", "1")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_1(CqlContext context) =>
-        true;
+        _Numerator_1_Cached.GetOrReplace(
+            context,
+            () => true);
 
+
+    private readonly Cached<bool?> _Numerator_2_Cached = new();
 
     [CqlExpressionDefinition("Numerator 2")]
     [CqlTag("group", "2")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
-        false;
+        _Numerator_2_Cached.GetOrReplace(
+            context,
+            () => false);
 
 
     #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private MeasureExample_0_0_1() {}
+
+    public static MeasureExample_0_0_1 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "MeasureExample";
+    public string Version => "0.0.1";
+    public ILibrary[] Dependencies => [];
+
+    #endregion ILibrary Implementation
+
+    #region Nested Type - Cached<T>
+
+    private struct Cached<T>(long CacheVersion, T CachedValue)
+    {
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
+
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
+    }
+
+    #endregion
 
 }

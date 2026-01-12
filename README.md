@@ -61,7 +61,7 @@ This SDK consists of the following packages:
 The SDK depends on the following key external packages:
 
 ### FHIR Support
-- **Hl7.Fhir.Base**: Version 5.12.0 - Base classes and utilities for FHIR support
+- **Hl7.Fhir.Base**: Version 6.0.1 - Base classes and utilities for FHIR support
 - **Hl7.Fhir.R4**: Firely SDK version - FHIR R4 POCOs and serialization support
 - **Fhir.Metrics**: Version 1.3.0 - FHIR units and metrics support
 

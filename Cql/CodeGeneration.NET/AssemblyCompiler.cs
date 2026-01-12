@@ -8,7 +8,6 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -73,12 +72,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileEachLibraryToAssemblies(
-            IEnumerable<(Library library, string csharp)> librariesWithCSharp,
+        public IEnumerable<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileEachLibraryToAssemblies(
+            IEnumerable<(ElmLibrary library, string csharp)> librariesWithCSharp,
             LibrarySet librarySet,
             DebugSymbolsFormat debugSymbolsFormat = DebugSymbolsFormat.None,
             bool allowInvalidCSharp = false,
-            BatchProcessExceptionHandlingStrategyBuilder<(Library library, string csharp)>? buildExceptionHandlingStrategy = null)
+            BatchProcessExceptionHandlingStrategyBuilder<(ElmLibrary library, string csharp)>? buildExceptionHandlingStrategy = null)
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
@@ -94,8 +93,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                     buildExceptionHandlingStrategy,
                     allowInvalidCSharp ? YieldWithoutAssemblyBinary : null);
 
-            ShouldYieldValue<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> YieldWithoutAssemblyBinary(
-                (Library library, string csharp) t) =>
+            ShouldYieldValue<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> YieldWithoutAssemblyBinary(
+                (ElmLibrary library, string csharp) t) =>
                 (
                     t.library,
                     assemblyBinaryWithSourceCode: new AssemblyBinaryWithSourceCode(
@@ -118,7 +117,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             string librarySourceString,
             Dictionary<string, AssemblyBinaryWithSourceCode> assemblies,
             LibrarySet librarySet,
-            Library library,
+            ElmLibrary library,
             IEnumerable<Assembly> assemblyReferences,
             DebugSymbolsFormat debugSymbolsFormat)
         {
@@ -222,7 +221,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             return syntaxTree;
         }
 
-        private static string CreateAssemblyInfoSourceString(Library library)
+        private static string CreateAssemblyInfoSourceString(ElmLibrary library)
         {
             var (name, version) = library.VersionedLibraryIdentifier;
 

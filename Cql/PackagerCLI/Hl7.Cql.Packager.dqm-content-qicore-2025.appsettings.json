@@ -18,12 +18,13 @@
       "CMS69FHIRPCSBMIScreenAndFollowUp.json",
 
       // Duplicate property name CrLabObsCategory in tuple. (Parameter 'tupleProps')
-      "CMS832FHIRHHAKI.json",
+      "CMS832FHIRHHAKI.json"
 
       // Packaging Error: Cannot resolve CodeSystemRef with name TaskCodeSystem. Library Identifier: 'CMS50FHIRReceiptofSpecialistReport-1.0.000'.
       // "CMS50FHIRReceiptofSpecialistReport.json"
 
-    ]
+    ],
+    // "DebugSymbolsFormat": "Embedded"
   },
   "Packaging": {
     "ExitOnError": false

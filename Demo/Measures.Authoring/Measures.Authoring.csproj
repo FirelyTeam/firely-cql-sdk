@@ -1,9 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
 	<Import Project="..\cql-demo.props" />
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<Configurations>Debug;Release</Configurations>
+		<TestResultsDirectory>$(MSBuildProjectDirectory)/Input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -15,26 +17,15 @@
 		<ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />
 	</ItemGroup>
 
-	<PropertyGroup>
-		<LibrarySet>Measures.Authoring</LibrarySet>
-		<CqlDirectory>$(MSBuildProjectDirectory)/input/cql</CqlDirectory>
-		<ElmDirectory>$(MSBuildProjectDirectory)/Elm</ElmDirectory>
-		<ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory>
-		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
-	</PropertyGroup>
-
-	<Import Project="../Cql/Build/CqlToElm.Targets.xml" />
-	<Import Project="../Cql/Build/ElmToCSharp.Targets.xml" />
-
 	<ItemGroup>
 		<Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="input/**">
+		<Content Include="Input/**">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Content>
-		<Content Remove="input/tests/results" />
+		<Content Remove="Input/tests/results" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -55,5 +46,20 @@
 	  <Folder Include="Elm\" />
 	  <Folder Include="Input\cql\" />
 	</ItemGroup>
+
+	<!--
+	Packaging tooling properties. Put these last
+	-->
+	<Import Project="..\..\packaging-tooling.props" />
+
+	<PropertyGroup>
+		<LibrarySet>Measures.Authoring</LibrarySet>
+		<CqlDirectory>$(MSBuildProjectDirectory)/Input/cql</CqlDirectory>
+		<ElmDirectory>$(MSBuildProjectDirectory)/Elm</ElmDirectory>
+		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
+		<ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory>
+	</PropertyGroup>
+
+	<Import Project="..\..\packaging-tooling.Targets.xml" />
 
 </Project>

@@ -7,6 +7,7 @@
  */
 
 #nullable enable
+
 using Hl7.Cql.Primitives;
 
 namespace CoreTests;
@@ -76,4 +77,5 @@ public class CqlQuantityTests
 
         Assert.IsNull(negated);
     }
+
 }

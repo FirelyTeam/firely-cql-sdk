@@ -6,7 +6,7 @@
 	<PropertyGroup>
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
 		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
-		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
+		<TargetDependencies>$(MSBuildThisFileDirectory)/target/dependency</TargetDependencies>
 		<BoxHeader></BoxHeader>
 		<BoxFooter>LibrarySet='$(LibrarySet)', Configuration='$(Configuration)'</BoxFooter>
 		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
@@ -15,8 +15,16 @@
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
 		<JsonPretty>true</JsonPretty>
-		<!-- This PackagerCLI reference can remain relative to the is file. -->
-		<PackagerCLI>$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+	</PropertyGroup>
+
+	<!-- Windows: Use .exe extension -->
+	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+		<PackagerCLI>$(CqlSolutionDir)/Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+	</PropertyGroup>
+
+	<!-- Unix: No .exe extension -->
+	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+		<PackagerCLI>$(CqlSolutionDir)/Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager</PackagerCLI>
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"

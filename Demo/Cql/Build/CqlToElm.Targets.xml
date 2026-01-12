@@ -4,9 +4,19 @@
 	<!-- #### Download Java Tooling Dependencies -->
 
 	<PropertyGroup>
-		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
-		<CleanJavaDependenciesScript>$(MSBuildThisFileDirectory)Java-Dependencies-Clean.ps1</CleanJavaDependenciesScript>
-		<DownloadJavaDependenciesScript>$(MSBuildThisFileDirectory)Java-Dependencies-Download.ps1</DownloadJavaDependenciesScript>
+		<TargetDependencies>$(MSBuildThisFileDirectory)/target/dependency</TargetDependencies>
+	</PropertyGroup>
+
+	<!-- Windows: Use PowerShell scripts -->
+	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+		<CleanJavaDependenciesScript>pwsh -File "$(MSBuildThisFileDirectory)/Java-Dependencies-Clean.ps1"</CleanJavaDependenciesScript>
+		<DownloadJavaDependenciesScript>pwsh -File "$(MSBuildThisFileDirectory)/Java-Dependencies-Download.ps1"</DownloadJavaDependenciesScript>
+	</PropertyGroup>
+
+	<!-- Unix: Use Bash scripts -->
+	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
+		<CleanJavaDependenciesScript>bash "$(MSBuildThisFileDirectory)/Java-Dependencies-Clean.sh"</CleanJavaDependenciesScript>
+		<DownloadJavaDependenciesScript>bash "$(MSBuildThisFileDirectory)/Java-Dependencies-Download.sh"</DownloadJavaDependenciesScript>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -16,7 +26,7 @@
 	<Target
 		Name="Download CQL to ELM CLI"
 		BeforeTargets="PreBuildEvent">
-		<Exec Command="pwsh -File &quot;$(DownloadJavaDependenciesScript)&quot;" ContinueOnError="false" />
+		<Exec Command="$(DownloadJavaDependenciesScript)" ContinueOnError="false" />
 	</Target>
 
 	<ItemGroup>
@@ -26,7 +36,7 @@
 	<Target
 		Name="Delete JAR Dependencies"
 		AfterTargets="Clean">
-		<Exec Command="pwsh -File &quot;$(CleanJavaDependenciesScript)&quot;" />
+		<Exec Command="$(CleanJavaDependenciesScript)" />
 	</Target>
 
 	<!-- #### CQL to ELM Target -->

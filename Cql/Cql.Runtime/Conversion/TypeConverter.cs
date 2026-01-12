@@ -78,11 +78,13 @@ namespace Hl7.Cql.Conversion
                 return true;
             }
 
-            if (_converters.TryGetValue(from, out var toDictionary) &&
-                toDictionary.TryGetValue(to, out _))
+            if (_converters.TryGetValue(from, out var toDictionary))
             {
-                _conversionsUsed.Add(TypesToString((from, to)));
-                return true;
+                if (toDictionary.TryGetValue(to, out _))
+                {
+                    _conversionsUsed.Add(TypesToString((from, to)));
+                    return true;
+                }
             }
 
             return false;

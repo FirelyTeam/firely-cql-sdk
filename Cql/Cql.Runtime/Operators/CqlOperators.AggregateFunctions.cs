@@ -670,7 +670,8 @@ namespace Hl7.Cql.Operators
                 switch (quantity)
                 {
                     case { value: { } v, unit: var u }:
-                        u ??= "1";
+                        u ??= "1"; // default unit if none specified
+                        unit ??= u; // set the unit once, if not already set
                         if (unit != u)
                             throw new NotSupportedException("Inconsistent units are not supported.");
 

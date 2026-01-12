@@ -12,13 +12,45 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
 [CqlLibrary("ParameterNameTest", "1.0.0")]
 public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNameTest_1_0_0>
 {
+    #region Functions and Expressions
+
+    [CqlFunctionDefinition("Test Function")]
+    public int? Test_Function(CqlContext context, [CqlFunctionParameter("param with spaces")] int? param_with_spaces, string normalParam)
+    {
+        int? a_ = context.Operators.Add(param_with_spaces, 10);
+        return a_;
+    }
+
+
+    [CqlFunctionDefinition("Another Test")]
+    public decimal? Another_Test(CqlContext context, [CqlFunctionParameter("param-with-dashes")] decimal? param_with_dashes)
+    {
+        decimal? a_ = context.Operators.Multiply(param_with_dashes, 2.0m);
+        return a_;
+    }
+
+
+    [CqlFunctionDefinition("Keyword Test")]
+    public int? Keyword_Test(CqlContext context, int? @int, string @ref, bool? @class)
+    {
+        int? a_ = context.Operators.Add(@int, 5);
+        return a_;
+    }
+
+
+    #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
     private ParameterNameTest_1_0_0() {}
 
     public static ParameterNameTest_1_0_0 Instance { get; } = new();
+
+    #endregion
 
     #region ILibrary Implementation
 
@@ -28,35 +60,38 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
 
     #endregion ILibrary Implementation
 
-    #region Functions and Expressions
+    #region Nested Type - Cached<T>
 
-    [CqlFunctionDefinition("Test Function")]
-    public int? Test_Function(CqlContext context, [CqlFunctionParameter("param with spaces")] int? param_with_spaces, string normalParam)
+    private struct Cached<T>(long CacheVersion, T CachedValue)
     {
-        int? a_ = context.Operators.Add(param_with_spaces, 10);
+        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
+        {
+            var cqlContextCacheVersion = cqlContext.CacheVersion;
+            if (cqlContextCacheVersion is 0)
+            {
+                // No caching, clear out previous values
+                CacheVersion = 0;
+                CachedValue = default;
+                var value = factory();
+                return value;
+            }
 
-        return a_;
+            if (CacheVersion == cqlContextCacheVersion)
+            {
+                // Cache hit
+                return CachedValue;
+            }
+            else
+            {
+                // Cache miss, refresh and store
+                var value = factory();
+                CachedValue = value;
+                CacheVersion = cqlContextCacheVersion;
+                return value;
+            }
+        }
     }
 
-
-    [CqlFunctionDefinition("Another Test")]
-    public decimal? Another_Test(CqlContext context, [CqlFunctionParameter("param-with-dashes")] decimal? param_with_dashes)
-    {
-        decimal? a_ = context.Operators.Multiply(param_with_dashes, 2.0m);
-
-        return a_;
-    }
-
-
-    [CqlFunctionDefinition("Keyword Test")]
-    public int? Keyword_Test(CqlContext context, int? @int, string @ref, bool? @class)
-    {
-        int? a_ = context.Operators.Add(@int, 5);
-
-        return a_;
-    }
-
-
-    #endregion Functions and Expressions
+    #endregion
 
 }
