@@ -35,7 +35,7 @@ internal sealed class FnvCacheKeyGenerator : ICacheKeyGenerator
     }
 
     /// <summary>
-    /// Generates a Snowflake-like ID using a deterministic hash algorithm.
+    /// Generates a deterministic cache key using FNV-1a hash algorithm.
     /// Uses FNV-1a 64-bit hash for better distribution than GetHashCode.
     /// </summary>
     private static long GenerateSnowflakeId(string input)

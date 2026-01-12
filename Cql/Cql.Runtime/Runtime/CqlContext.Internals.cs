@@ -63,9 +63,9 @@ partial class CqlContext : ICqlContextInternals
         }
 
         // Use GetOrAdd for lock-free read and atomic add
-        var cachedValue = cache.GetOrAdd(cacheKey, _ => factory());
+        // Note: We box the result, so null values are preserved correctly
+        var cachedValue = cache.GetOrAdd(cacheKey, _ => factory()!);
         
-        // Handle null values properly
-        return cachedValue is null ? default! : (T)cachedValue;
+        return (T)cachedValue!;
     }
 }
