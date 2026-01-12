@@ -102,8 +102,10 @@ stages:
       restoreDependencies: true
       nuGetServiceConnections: GitHubPackageGetFeed
       nuGetSources: --source https://nuget.pkg.github.com/FirelyTeam/index.json
-      codeSignerCertificate: $(FirelyCodeSignerCertificate)
-      codeSignerPassword: $(CodeSigningPassword)
+      azureServiceConnectionForSigning: 'AzureTrustedSigningPrincipal'
+      trustedSigningAccountEndpoint: 'https://weu.codesigning.azure.net/'
+      trustedSigningAccountName: 'FirelyCodeSigning'
+      certificateProfileName: 'FirelyCodeSigning'
       signingKeyFileName: 'cql-sdk.snk'
       filesForSigning: >-
         $(Build.SourcesDirectory)\Cql\*\bin\Release\*\Hl7.Cql*.dll,
