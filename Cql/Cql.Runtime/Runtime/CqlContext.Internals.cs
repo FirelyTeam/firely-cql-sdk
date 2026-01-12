@@ -24,6 +24,31 @@ public interface ICqlContextInternals
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public T GetOrCompute<T>(long cacheKey, Func<T> factory);
+
+    /// <summary>
+    /// Gets the total number of calls to GetOrCompute.
+    /// </summary>
+    /// <remarks>
+    /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
+    /// </remarks>
+    long CacheCallCount { get; }
+
+    /// <summary>
+    /// Gets the number of times the factory function was invoked (cache misses).
+    /// </summary>
+    /// <remarks>
+    /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
+    /// </remarks>
+    long CacheMisses { get; }
+
+    /// <summary>
+    /// Gets the number of cache hits (calls where a cached value was returned).
+    /// </summary>
+    /// <remarks>
+    /// Cache hits = Total calls to GetOrCompute - Factory invocations (cache misses).
+    /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
+    /// </remarks>
+    long CacheHits { get; }
 }
 
 partial class CqlContext : ICqlContextInternals
@@ -38,7 +63,7 @@ partial class CqlContext : ICqlContextInternals
     /// <remarks>
     /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
     /// </remarks>
-    internal long CacheCallCount => _cacheCallCount;
+    long ICqlContextInternals.CacheCallCount => _cacheCallCount;
 
     /// <summary>
     /// Gets the number of times the factory function was invoked (cache misses).
@@ -46,7 +71,7 @@ partial class CqlContext : ICqlContextInternals
     /// <remarks>
     /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
     /// </remarks>
-    internal long CacheMisses => _cacheFactoryInvocations;
+    long ICqlContextInternals.CacheMisses => _cacheFactoryInvocations;
 
     /// <summary>
     /// Gets the number of cache hits (calls where a cached value was returned).
@@ -55,7 +80,7 @@ partial class CqlContext : ICqlContextInternals
     /// Cache hits = Total calls to GetOrCompute - Factory invocations (cache misses).
     /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
     /// </remarks>
-    internal long CacheHits => _cacheCallCount - _cacheFactoryInvocations;
+    long ICqlContextInternals.CacheHits => _cacheCallCount - _cacheFactoryInvocations;
 
     /// <summary>
     /// Invalidates the current cache, forcing subsequent operations to use fresh data.
@@ -101,7 +126,7 @@ partial class CqlContext : ICqlContextInternals
             Interlocked.Increment(ref _cacheFactoryInvocations);
             return factory()!;
         });
-        
+
         return (T)cachedValue!;
     }
 }
