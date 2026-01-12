@@ -75,7 +75,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                 ISB.AppendLine($"{lambdaParameters} =>");
                 using (ISB.Indent())
                 {
-                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute({cacheKey}L, () => {lambdaBody});");
+                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute<{returnType}>({cacheKey}L, () => {lambdaBody});");
                 }
                 ISB.AppendLine();
             }
