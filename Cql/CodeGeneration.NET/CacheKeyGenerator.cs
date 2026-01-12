@@ -47,41 +47,58 @@ internal sealed class SnowflakeAlgorithmCacheKeyGenerator : ICacheKeyGenerator
 
     /// <summary>
     /// Generates a unique cache key combining timestamp, FNV-1a hash, and sequence counter.
-    /// The timestamp is captured at class initialization to ensure deterministic keys
-    /// within a single code generation session. The sequence counter handles collisions.
+    /// Uses the generation time captured at class initialization for deterministic builds.
+    /// If the sequence counter overflows (>3), waits one second to get a new timestamp and retries.
     /// </summary>
     private long GenerateUniqueId(string input)
     {
-        // Calculate seconds since epoch (30 bits - supports dates until ~2054)
-        var secondsSinceEpoch = (uint)(GenerationTime - Epoch).TotalSeconds;
+        // Start with the static generation time for deterministic builds
+        var timestamp = GenerationTime;
         
-        // Generate FNV-1a 32-bit hash for the input
-        var hash = GenerateFnv1aHash32(input);
-        
-        // Create base key (without sequence)
-        var baseKey = (((long)secondsSinceEpoch & 0x3FFFFFFFL) << 34) | (((long)hash & 0xFFFFFFFFL) << 2);
-        
-        // Handle collisions with sequence counter
-        lock (_sequenceCounters)
+        while (true)
         {
-            if (!_sequenceCounters.TryGetValue(baseKey, out var sequence))
+            // Calculate seconds since epoch (30 bits - supports dates until ~2054)
+            var secondsSinceEpoch = (uint)(timestamp - Epoch).TotalSeconds;
+            
+            // Generate FNV-1a 32-bit hash for the input
+            var hash = GenerateFnv1aHash32(input);
+            
+            // Create base key (without sequence)
+            var baseKey = (((long)secondsSinceEpoch & 0x3FFFFFFFL) << 34) | (((long)hash & 0xFFFFFFFFL) << 2);
+            
+            // Handle collisions with sequence counter
+            lock (_sequenceCounters)
             {
-                sequence = 0;
-            }
-            else
-            {
-                sequence++;
-                if (sequence > 3)
+                if (!_sequenceCounters.TryGetValue(baseKey, out var sequence))
                 {
-                    throw new InvalidOperationException(
-                        $"Collision sequence overflow for key '{input}'. More than 4 definitions mapped to the same base key.");
+                    sequence = 0;
+                    _sequenceCounters[baseKey] = sequence;
+                    
+                    // Combine: high 30 bits = timestamp, middle 32 bits = hash, low 2 bits = sequence
+                    return baseKey | (long)sequence;
+                }
+                else
+                {
+                    sequence++;
+                    if (sequence > 3)
+                    {
+                        // Sequence overflow - we'll wait 1 second and use a new timestamp
+                        // Continue outside the lock to avoid holding it during sleep
+                    }
+                    else
+                    {
+                        _sequenceCounters[baseKey] = sequence;
+                        
+                        // Combine: high 30 bits = timestamp, middle 32 bits = hash, low 2 bits = sequence
+                        return baseKey | (long)sequence;
+                    }
                 }
             }
             
-            _sequenceCounters[baseKey] = sequence;
-            
-            // Combine: high 30 bits = timestamp, middle 32 bits = hash, low 2 bits = sequence
-            return baseKey | (long)sequence;
+            // Only reached if sequence > 3
+            // Wait 1 second and use current time for next iteration
+            Thread.Sleep(1000);
+            timestamp = DateTime.UtcNow;
         }
     }
 

@@ -29,6 +29,33 @@ public interface ICqlContextInternals
 partial class CqlContext : ICqlContextInternals
 {
     private ConcurrentDictionary<long, object?>? _cache;
+    private long _cacheCallCount;
+    private long _cacheFactoryInvocations;
+
+    /// <summary>
+    /// Gets the total number of calls to GetOrCompute.
+    /// </summary>
+    /// <remarks>
+    /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
+    /// </remarks>
+    internal long CacheCallCount => _cacheCallCount;
+
+    /// <summary>
+    /// Gets the number of times the factory function was invoked (cache misses).
+    /// </summary>
+    /// <remarks>
+    /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
+    /// </remarks>
+    internal long CacheMisses => _cacheFactoryInvocations;
+
+    /// <summary>
+    /// Gets the number of cache hits (calls where a cached value was returned).
+    /// </summary>
+    /// <remarks>
+    /// Cache hits = Total calls to GetOrCompute - Factory invocations (cache misses).
+    /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
+    /// </remarks>
+    internal long CacheHits => _cacheCallCount - _cacheFactoryInvocations;
 
     /// <summary>
     /// Invalidates the current cache, forcing subsequent operations to use fresh data.
@@ -39,6 +66,8 @@ partial class CqlContext : ICqlContextInternals
     public void UseNewCache()
     {
         _cache = new ConcurrentDictionary<long, object?>();
+        _cacheCallCount = 0;
+        _cacheFactoryInvocations = 0;
     }
 
     /// <summary>
@@ -49,20 +78,29 @@ partial class CqlContext : ICqlContextInternals
     public void DontUseCaching()
     {
         _cache = null;
+        _cacheCallCount = 0;
+        _cacheFactoryInvocations = 0;
     }
 
     T ICqlContextInternals.GetOrCompute<T>(long cacheKey, Func<T> factory)
     {
+        Interlocked.Increment(ref _cacheCallCount);
+
         var cache = _cache;
         if (cache is null)
         {
             // Caching disabled
+            Interlocked.Increment(ref _cacheFactoryInvocations);
             return factory();
         }
 
         // Use GetOrAdd for lock-free read and atomic add
         // Note: We box the result, so null values are preserved correctly
-        var cachedValue = cache.GetOrAdd(cacheKey, _ => factory()!);
+        var cachedValue = cache.GetOrAdd(cacheKey, _ =>
+        {
+            Interlocked.Increment(ref _cacheFactoryInvocations);
+            return factory()!;
+        });
         
         return (T)cachedValue!;
     }
