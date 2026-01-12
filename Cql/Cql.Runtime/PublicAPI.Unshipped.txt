@@ -1,5 +1,4 @@
-#nullable enable
 Hl7.Cql.Runtime.CqlContext.DontUseCaching() -> void
 Hl7.Cql.Runtime.CqlContext.UseNewCache() -> void
 Hl7.Cql.Runtime.ICqlContextInternals
-Hl7.Cql.Runtime.ICqlContextInternals.GetOrCompute<T>(long cacheKey, System.Func<T> factory) -> T
+Hl7.Cql.Runtime.ICqlContextInternals.GetOrCompute<T>(long cacheKey, System.Func<T>! factory) -> T
