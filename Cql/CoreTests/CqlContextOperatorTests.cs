@@ -11,6 +11,7 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 
 namespace CoreTests;
@@ -18,7 +19,8 @@ namespace CoreTests;
 [TestClass]
 public class CqlContextOperatorTests
 {
-    private static ICqlOperators Sut() => FhirCqlContext.WithDataSource().Operators; // Service under test
+    private static ICqlOperators SutForFhir() =>
+        FhirCqlContext.WithDataSource().Operators; // Service under test
 
     #region Equal
 
@@ -26,7 +28,7 @@ public class CqlContextOperatorTests
     public void Equal_FhirCodeAndString_MustEqual()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         var enumVal = Encounter.EncounterStatus.Finished;
         var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
@@ -43,7 +45,7 @@ public class CqlContextOperatorTests
     public void Equal_StringAndFhirCode_MustEqual()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         var enumVal = Encounter.EncounterStatus.Finished;
         var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
@@ -60,7 +62,7 @@ public class CqlContextOperatorTests
     public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         CqlCode[] divorcedCodes =
         [
@@ -91,7 +93,7 @@ public class CqlContextOperatorTests
     public void Equivalent_ConceptAtLeastOneCodeEquivalentOnNull_MustBeEquivalent()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         CqlCode?[] divorcedCodes =
         [
@@ -128,7 +130,7 @@ public class CqlContextOperatorTests
     public void Convert_FhirCodeToString_MustReturnValueFromEnumLiteral()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         var enumVal = Encounter.EncounterStatus.Finished;
         var codeVal = new Code<Encounter.EncounterStatus>(enumVal);
@@ -145,7 +147,7 @@ public class CqlContextOperatorTests
     public void Convert_StringToFhirCode_ThrowNoConversionIsDefined()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
         const string stringVal = "finished"; // EnumLiteral[xxx]
 
         // Act
@@ -164,7 +166,7 @@ public class CqlContextOperatorTests
     public void Equivalent_FhirCodeAndCqlCode_MustBeEquivalent()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         var enumVal = Encounter.EncounterStatus.Cancelled;
         var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
@@ -181,7 +183,7 @@ public class CqlContextOperatorTests
     public void Equivalent_CqlCodeAndFhirCode_MustBeEquivalent()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         var enumVal = Encounter.EncounterStatus.Cancelled;
         var fhirCode = new Code<Encounter.EncounterStatus>(enumVal);
@@ -202,7 +204,7 @@ public class CqlContextOperatorTests
     public void Sum_QuantityOfSameUnits_MustSumValuesWithSameUnit()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         List<CqlQuantity?> inputSource =
         [
@@ -223,7 +225,7 @@ public class CqlContextOperatorTests
     public void Sum_QuantityNullSource_ReturnsNull()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         IEnumerable<CqlQuantity?>? inputSource = null;
 
@@ -238,7 +240,7 @@ public class CqlContextOperatorTests
     public void Sum_QuantityIgnoresNullEntries_MustSumNonNullValues()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         List<CqlQuantity?> inputSource =
         [
@@ -260,7 +262,7 @@ public class CqlContextOperatorTests
     public void Sum_QuantityWithInconsistentUnits_ReturnsNull()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         List<CqlQuantity?> inputSource =
         [
@@ -279,7 +281,7 @@ public class CqlContextOperatorTests
     public void Sum_QuantityWithNullUnits_MustSumValuesWithDefaultUnit()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         List<CqlQuantity?> inputSource =
         [
@@ -304,7 +306,7 @@ public class CqlContextOperatorTests
     public void Sum_IntegerNullSource_ReturnsNull()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         IEnumerable<int?>? inputSource = null;
 
@@ -319,7 +321,7 @@ public class CqlContextOperatorTests
     public void Sum_IntegerEmpty_ReturnsNull()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
         int?[] inputSource = [];
 
         // Act
@@ -333,7 +335,7 @@ public class CqlContextOperatorTests
     public void Sum_IntegerIgnoresNullEntries_MustSumNonNullValues()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
         int?[] inputSource = [1, null, 4];
 
         // Act
@@ -347,7 +349,7 @@ public class CqlContextOperatorTests
     public void Sum_IntegerOverflow_ReturnsNull()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlOperators = SutForFhir();
 
         int?[] inputSource = [int.MaxValue, 1];
 
