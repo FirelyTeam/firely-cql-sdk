@@ -122,6 +122,34 @@ public class CacheTest
     }
 
     [TestMethod]
+    public void Cache_ParallelExecutionSameContext_ShouldBeThreadSafe()
+    {
+        // Arrange - Shared context to test thread safety for same cache key
+        var ctx = FhirCqlContext.ForBundle();
+        ctx.UseNewCache();
+        var lib = CqlNestedTupleTest_1_0_0.Instance;
+        var results = new System.Collections.Concurrent.ConcurrentBag<object?>();
+
+        // Act - Multiple threads accessing the same context and cache key simultaneously
+        var parallelResult = Parallel.For(0, 20, i =>
+        {
+            var result = lib.Result(ctx);
+            results.Add(result);
+        });
+
+        // Assert - All threads should get the same cached instance
+        Assert.IsTrue(parallelResult.IsCompleted);
+        Assert.AreEqual(20, results.Count);
+        
+        // All results should be equal (cached value)
+        var firstResult = results.First();
+        foreach (var result in results)
+        {
+            Assert.AreEqual(firstResult, result);
+        }
+    }
+
+    [TestMethod]
     public void Cache_UseNewCacheInvalidates_ShouldCreateNewCache()
     {
         // Arrange

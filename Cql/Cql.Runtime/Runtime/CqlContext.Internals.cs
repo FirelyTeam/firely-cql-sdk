@@ -14,14 +14,6 @@ namespace Hl7.Cql.Runtime;
 public interface ICqlContextInternals
 {
     /// <summary>
-    /// Gets an object representing the current cache version.
-    /// When caching is disabled, this value is <see langword="null"/>.
-    /// When this value changes, it indicates that the cache was invalidated, and cached data should be refreshed on next access.
-    /// </summary>
-    [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public long CacheVersion { get; }
-
-    /// <summary>
     /// Gets or computes a cached value for the specified cache key.
     /// </summary>
     /// <typeparam name="T">The type of the cached value.</typeparam>
@@ -67,8 +59,6 @@ partial class CqlContext : ICqlContextInternals
             _cache = null;
         }
     }
-
-    long ICqlContextInternals.CacheVersion => _cache is not null ? 1 : 0;
 
     T ICqlContextInternals.GetOrCompute<T>(long cacheKey, Func<T> factory)
     {
