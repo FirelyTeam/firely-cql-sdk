@@ -23,7 +23,7 @@ internal interface ICacheKeyGenerator
 }
 
 /// <summary>
-/// Default implementation of cache key generator using a combination of timestamp, hash, and sequence.
+/// Default implementation of cache key generator using a Snowflake-like algorithm.
 /// </summary>
 /// <remarks>
 /// The cache key is a 64-bit signed long structured as follows:
@@ -32,7 +32,7 @@ internal interface ICacheKeyGenerator
 /// - Bits 1-0 (2 bits): Sequence counter for collision handling (0-3)
 /// This ensures uniqueness by combining temporal, content-based, and sequential components.
 /// </remarks>
-internal sealed class FnvCacheKeyGenerator : ICacheKeyGenerator
+internal sealed class SnowflakeAlgorithmCacheKeyGenerator : ICacheKeyGenerator
 {
     private static readonly DateTime Epoch = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc);
     private static readonly DateTime GenerationTime = DateTime.UtcNow;

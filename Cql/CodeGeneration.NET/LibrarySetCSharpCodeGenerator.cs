@@ -91,7 +91,7 @@ internal partial class LibrarySetCSharpCodeGenerator
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onBeforeProcessLibrary = null)
     {
-        var cacheKeyGenerator = new FnvCacheKeyGenerator();
+        var cacheKeyGenerator = new SnowflakeAlgorithmCacheKeyGenerator();
         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, cacheKeyGenerator, @namespace);
         return librarySetWriter.GenerateEachLibraryToCSharp(buildExceptionHandlingStrategy, onBeforeProcessLibrary);
     }
