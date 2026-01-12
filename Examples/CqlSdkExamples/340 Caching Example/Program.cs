@@ -14,6 +14,7 @@ using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
 namespace CqlSdkExamples;
 
@@ -28,10 +29,10 @@ partial class Program
         var cql = (CqlLibraryString)"""
                                     library CachingExample version '1.0.0'
 
-                                    define "ExpensiveComputation" : 
+                                    define "ExpensiveComputation" :
                                         Sum({1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 
-                                    define "AnotherExpression" : 
+                                    define "AnotherExpression" :
                                         'This is also cached'
                                     """;
 
