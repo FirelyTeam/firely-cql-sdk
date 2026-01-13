@@ -203,7 +203,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385438010732952L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-650903179446011642L, () => {
             object a_ = context.ResolveParameter("CMS90FHIRFSAforHeartFailure-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -215,7 +215,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385434744033088L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-1669321019754182478L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -224,7 +224,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385434279436200L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(84564949379321772L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -232,7 +232,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385441937326600L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(8582605658905008518L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -240,7 +240,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385437925863264L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(365259754375553276L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -248,7 +248,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385442859224220L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-4531448496698277885L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -256,7 +256,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449183528976L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8160197854541943299L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Telephone_Visits(context);
@@ -282,7 +282,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Outpatient Encounters with at least one subsequent Outpatient Encounter during Measurement Period")]
     public IEnumerable<Encounter> Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441303609092L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3299355288199571478L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
 
             IEnumerable<Encounter> b_(Encounter OfficeVisit1) {
@@ -314,7 +314,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437739372992L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5068561849240932665L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -349,7 +349,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385447840370196L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6741930247475943811L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -357,7 +357,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443691900120L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4543796399844502819L, () => {
             bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             CqlCode b_ = this.Severe_cognitive_impairment__finding_(context);
             IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
@@ -383,7 +383,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Date PROMIS10 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385444519510716L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3566032284114220134L, () => {
             CqlCode a_ = this.PROMIS_10_Global_Mental_Health__GMH__score_T_score(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -443,7 +443,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up PROMIS10 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446199693332L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7119418943023617715L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
             IEnumerable<CqlDate> b_ = this.Date_PROMIS10_Total_Assessment_Completed(context);
             IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
@@ -502,7 +502,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Date PROMIS29 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_PROMIS29_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385449086375692L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-7228807294603665886L, () => {
             CqlCode a_ = this.PROMIS_29_Sleep_disturbance_score_T_score(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -657,7 +657,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up PROMIS29 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446236642724L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8148014470304297646L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
             IEnumerable<CqlDate> b_ = this.Date_PROMIS29_Total_Assessment_Completed(context);
             IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
@@ -716,7 +716,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Date VR12 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385440734878648L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(5285028890419299069L, () => {
             CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___oblique_method_T_score(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -776,7 +776,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR12 Oblique Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448790183368L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-9101247183797375897L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
             IEnumerable<CqlDate> b_ = this.Date_VR12_Oblique_Total_Assessment_Completed(context);
             IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
@@ -835,7 +835,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Date VR12 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385436086905288L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-4308956976409684029L, () => {
             CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -895,7 +895,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR12 Orthogonal Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434767485144L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3523837020378714173L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
             IEnumerable<CqlDate> b_ = this.Date_VR12_Orthogonal_Total_Assessment_Completed(context);
             IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
@@ -954,7 +954,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Date VR36 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR36_Oblique_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385433995348272L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(156742284346193099L, () => {
             CqlCode a_ = this.VR_36_Mental_component_summary__MCS__score___oblique_method_T_score(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -1014,7 +1014,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR36 Oblique Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443092635664L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4830229598614441452L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
             IEnumerable<CqlDate> b_ = this.Date_VR36_Oblique_Total_Assessment_Completed(context);
             IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
@@ -1073,7 +1073,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Date VR36 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR36_Orthogonal_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385437724079536L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-6950216527866873198L, () => {
             CqlCode a_ = this.VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -1133,7 +1133,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR36 Orthogonal Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439909695376L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6268914066794038861L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
             IEnumerable<CqlDate> b_ = this.Date_VR36_Orthogonal_Total_Assessment_Completed(context);
             IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
@@ -1192,7 +1192,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Date MLHFQ Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_MLHFQ_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385435503657848L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(7426662041656437075L, () => {
             CqlCode a_ = this.Physical_score__MLHFQ_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -1252,7 +1252,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up MLHFQ Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448593850600L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2626207006591928399L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
             IEnumerable<CqlDate> b_ = this.Date_MLHFQ_Total_Assessment_Completed(context);
             IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
@@ -1311,7 +1311,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Date KCCQ12 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ12_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385447311693652L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-213750493608688425L, () => {
             CqlCode a_ = this.Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -1371,7 +1371,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up KCCQ12 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436944980476L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6010909731121068185L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
             IEnumerable<CqlDate> b_ = this.Date_KCCQ12_Total_Assessment_Completed(context);
             IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
@@ -1430,7 +1430,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Date KCCQ Domain Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ_Domain_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385446786302352L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-2182281870167914021L, () => {
             CqlCode a_ = this.Quality_of_life_score__KCCQ_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -1566,7 +1566,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up KCCQ Domain Score Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435300124736L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2096359522954143043L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
             IEnumerable<CqlDate> b_ = this.Date_KCCQ_Domain_Assessment_Completed(context);
             IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
@@ -1625,7 +1625,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Date KCCQ Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385444423786464L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(6106274396873857332L, () => {
             CqlCode a_ = this.Overall_summary_score__KCCQ_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -1657,7 +1657,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up KCCQ Total Score Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448162998640L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6324806271972964859L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
             IEnumerable<CqlDate> b_ = this.Date_KCCQ_Total_Assessment_Completed(context);
             IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
@@ -1716,7 +1716,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449793591240L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(2652104320779056033L, () => {
             bool? a_ = this.Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments(context);
             bool? b_ = this.Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments(context);
             bool? c_ = context.Operators.Or(a_, b_);

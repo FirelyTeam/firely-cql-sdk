@@ -130,7 +130,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385360639169184L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-5116339458294690597L, () => {
             CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
             CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
@@ -145,7 +145,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385361202692952L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(6978520332954750863L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -154,7 +154,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385350781971264L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3863893702232154208L, () => {
             IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -162,7 +162,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(3271385352490149392L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(4334872870767342449L, () => {
             IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -170,7 +170,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385362172208104L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(-2623361780825266308L, () => {
             IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -178,7 +178,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385361401132324L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-5266470640062806604L, () => {
             CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -403,7 +403,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     [CqlExpressionDefinition("Inpatient Encounters")]
     public IEnumerable<Encounter> Inpatient_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385362485836524L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6130767509005028317L, () => {
             CqlValueSet a_ = this.Encounter_Inpatient(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             CqlValueSet c_ = this.Medicare_payer(context);
@@ -454,7 +454,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385349561672824L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5576653315478341361L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
             return a_;
         });
@@ -816,7 +816,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     [CqlExpressionDefinition("Results")]
     public IEnumerable<string> Results(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<string>>(3271385361035133428L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<string>>(-389831831665564238L, () => {
             CqlCode a_ = this.Heart_rate(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));

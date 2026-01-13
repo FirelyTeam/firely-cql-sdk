@@ -82,7 +82,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385354944260040L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(8660301701421196239L, () => {
             CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
             CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
@@ -97,7 +97,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385362997308528L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(6460207783038373143L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -106,7 +106,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385356569695384L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(-4228820258741890893L, () => {
             IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -114,7 +114,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(3271385350411022296L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(1584917916709233563L, () => {
             IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -122,7 +122,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385358213662608L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(-6862290277348299381L, () => {
             IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -130,7 +130,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385358841677932L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(2129325612513154633L, () => {
             CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -138,7 +138,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385355252299584L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3765407320961297160L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             CqlValueSet c_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up(context);
@@ -176,7 +176,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385357384060272L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5134058747012552026L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -200,7 +200,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385348548237892L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8156524090055450919L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -208,7 +208,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Absence of Cervix")]
     public IEnumerable<object> Absence_of_Cervix(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385363041343744L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(1980255415960729348L, () => {
             CqlValueSet a_ = this.Hysterectomy_with_No_Residual_Cervix(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 
@@ -247,7 +247,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385349044000840L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8218631691522785080L, () => {
             bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
             IEnumerable<object> b_ = this.Absence_of_Cervix(context);
             bool? c_ = context.Operators.Exists<object>(b_);
@@ -260,7 +260,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Cervical Cytology Within 3 Years")]
     public IEnumerable<Observation> Cervical_Cytology_Within_3_Years(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385353259138728L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-2656079809272880242L, () => {
             CqlValueSet a_ = this.Pap_Test(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
@@ -312,7 +312,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("HPV Test Within 5 Years for Women Age 30 and Older")]
     public IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385360922644100L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(1212710686634371765L, () => {
             CqlValueSet a_ = this.HPV_Test(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
@@ -374,7 +374,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385352782548216L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6987695886046933308L, () => {
             IEnumerable<Observation> a_ = this.Cervical_Cytology_Within_3_Years(context);
             bool? b_ = context.Operators.Exists<Observation>(a_);
             IEnumerable<Observation> c_ = this.HPV_Test_Within_5_Years_for_Women_Age_30_and_Older(context);
@@ -428,7 +428,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Cervical Cytology Within 3 Years (2)")]
     public IEnumerable<Observation> Cervical_Cytology_Within_3_Years__2_(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385347808422764L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-1395539976685561539L, () => {
             CqlValueSet a_ = this.Pap_Test(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
@@ -470,7 +470,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("HPV Test Within 5 Years for Women Age 30 and Older (2)")]
     public IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older__2_(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385350824341504L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-8527355444227531163L, () => {
             CqlValueSet a_ = this.HPV_Test(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 

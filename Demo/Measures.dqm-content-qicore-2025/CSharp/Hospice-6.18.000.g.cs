@@ -78,7 +78,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385440499645684L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(2116253259980977327L, () => {
             object a_ = context.ResolveParameter("Hospice-6.18.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -90,7 +90,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385448891897284L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-5253891409149354845L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -99,7 +99,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 
     [CqlExpressionDefinition("Has Hospice Services")]
     public bool? Has_Hospice_Services(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433015484716L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-926256737360152106L, () => {
             CqlValueSet a_ = this.Encounter_Inpatient(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             IEnumerable<Encounter> c_ = Status_1_15_000.Instance.isEncounterPerformed(context, b_);

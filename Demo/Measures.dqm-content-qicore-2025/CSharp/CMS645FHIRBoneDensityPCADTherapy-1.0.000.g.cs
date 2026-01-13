@@ -62,7 +62,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385439971019544L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-734786439587116816L, () => {
             object a_ = context.ResolveParameter("CMS645FHIRBoneDensityPCADTherapy-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -74,7 +74,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385446679997376L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-8229489559334500711L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -83,7 +83,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Has Qualifying Encounter")]
     public bool? Has_Qualifying_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434505432028L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(9066402021790216149L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -108,7 +108,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Androgen Deprivation Therapy for Urology Care Medication Active Start Dates")]
     public IEnumerable<CqlDateTime> Androgen_Deprivation_Therapy_for_Urology_Care_Medication_Active_Start_Dates(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDateTime>>(3271385442247459064L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDateTime>>(1519890029288935373L, () => {
             CqlValueSet a_ = this.Androgen_Deprivation_Therapy_for_Urology_Care(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -355,7 +355,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Androgen Deprivation Therapy for Urology Care Medication Order Start Dates")]
     public IEnumerable<CqlDateTime> Androgen_Deprivation_Therapy_for_Urology_Care_Medication_Order_Start_Dates(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDateTime>>(3271385439100297112L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDateTime>>(-824991662083256949L, () => {
             CqlValueSet a_ = this.Androgen_Deprivation_Therapy_for_Urology_Care(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -594,7 +594,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Prostate Cancer Diagnosis")]
     public IEnumerable<object> Prostate_Cancer_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385435973787376L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(7940642882909434117L, () => {
             CqlValueSet a_ = this.Prostate_Cancer(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -616,7 +616,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("First ADT in 3 Months Before to 9 Months After Start of Measurement Period")]
     public CqlDateTime First_ADT_in_3_Months_Before_to_9_Months_After_Start_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(3271385436017102404L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(6162761711183070057L, () => {
             IEnumerable<CqlDateTime> a_ = this.Androgen_Deprivation_Therapy_for_Urology_Care_Medication_Active_Start_Dates(context);
             IEnumerable<CqlDateTime> b_ = this.Androgen_Deprivation_Therapy_for_Urology_Care_Medication_Order_Start_Dates(context);
             IEnumerable<CqlDateTime> c_ = context.Operators.Union<CqlDateTime>(a_, b_);
@@ -655,7 +655,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Order for 12 Months of ADT in 3 Months Before to 9 Months After Start of Measurement Period")]
     public IEnumerable<ServiceRequest> Order_for_12_Months_of_ADT_in_3_Months_Before_to_9_Months_After_Start_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<ServiceRequest>>(3271385438089422012L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<ServiceRequest>>(-4992427232410550119L, () => {
             CqlCode a_ = this.Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
@@ -712,7 +712,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442606605632L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8108627335331730539L, () => {
             bool? a_ = this.Has_Qualifying_Encounter(context);
             IEnumerable<ServiceRequest> b_ = this.Order_for_12_Months_of_ADT_in_3_Months_Before_to_9_Months_After_Start_of_Measurement_Period(context);
             bool? c_ = context.Operators.Exists<ServiceRequest>(b_);
@@ -723,7 +723,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434624863892L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7675616901970093677L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -731,7 +731,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Has Baseline DEXA Scan Two Years Prior to the Start of or Less than Three Months After the Start of ADT")]
     public bool? Has_Baseline_DEXA_Scan_Two_Years_Prior_to_the_Start_of_or_Less_than_Three_Months_After_the_Start_of_ADT(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449824291324L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2102955111071554229L, () => {
             CqlValueSet a_ = this.DEXA_Bone_Density_for_Urology_Care(context);
             IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 
@@ -858,7 +858,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435081342024L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8957501733843970185L, () => {
             bool? a_ = this.Has_Baseline_DEXA_Scan_Two_Years_Prior_to_the_Start_of_or_Less_than_Three_Months_After_the_Start_of_ADT(context);
             return a_;
         });
@@ -866,7 +866,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("No Bone Density Scan Ordered Due to Patient Refusal")]
     public IEnumerable<ServiceRequest> No_Bone_Density_Scan_Ordered_Due_to_Patient_Refusal(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<ServiceRequest>>(3271385442789540016L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<ServiceRequest>>(6622458788790457350L, () => {
             CqlValueSet a_ = this.DEXA_Bone_Density_for_Urology_Care(context);
             IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
             IEnumerable<ServiceRequest> d_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
@@ -927,7 +927,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("No Bone Density Scan Performed Due to Patient Refusal")]
     public IEnumerable<Observation> No_Bone_Density_Scan_Performed_Due_to_Patient_Refusal(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385447542173148L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-3751061519719478956L, () => {
             CqlValueSet a_ = this.DEXA_Bone_Density_for_Urology_Care(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationcancelled"));
             IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationcancelled"));
@@ -989,7 +989,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Denominator Exception")]
     public bool? Denominator_Exception(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445562684448L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7408022328034518701L, () => {
             IEnumerable<ServiceRequest> a_ = this.No_Bone_Density_Scan_Ordered_Due_to_Patient_Refusal(context);
             bool? b_ = context.Operators.Exists<ServiceRequest>(a_);
             IEnumerable<Observation> c_ = this.No_Bone_Density_Scan_Performed_Due_to_Patient_Refusal(context);
@@ -1001,7 +1001,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385434518728488L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-897900695652524114L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -1009,7 +1009,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385437672061320L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-7384445363689136194L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -1017,7 +1017,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385445562026208L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-136145099253049696L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -1025,7 +1025,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385438013029404L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(5984134809747202532L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

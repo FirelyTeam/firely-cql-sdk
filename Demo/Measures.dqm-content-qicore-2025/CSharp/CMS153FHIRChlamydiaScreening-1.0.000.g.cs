@@ -141,7 +141,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385441296916116L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1345411175383824253L, () => {
             object a_ = context.ResolveParameter("CMS153FHIRChlamydiaScreening-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -153,7 +153,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385444457440100L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-3673209837379419933L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -162,7 +162,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385446180923596L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-838269432678333816L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -170,7 +170,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385437643020876L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-6881693602031443699L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -178,7 +178,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385434206068092L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(2266474229895085448L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -186,7 +186,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385443306663288L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(510276223678970139L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -194,7 +194,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449628051492L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3867250165514011721L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
@@ -235,7 +235,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Assessments Identifying Sexual Activity")]
     public bool? Has_Assessments_Identifying_Sexual_Activity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449883615904L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(2115328169786990818L, () => {
             CqlCode a_ = this.Have_you_ever_had_vaginal_intercourse__PhenX_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -286,7 +286,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Diagnoses Identifying Sexual Activity")]
     public bool? Has_Diagnoses_Identifying_Sexual_Activity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448151029480L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(2632990418126780023L, () => {
             CqlValueSet a_ = this.Diagnoses_Used_to_Indicate_Sexual_Activity(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -318,7 +318,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Active Contraceptive Medications")]
     public bool? Has_Active_Contraceptive_Medications(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449371385356L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3164491970648369952L, () => {
             CqlValueSet a_ = this.Contraceptive_Medications(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -372,7 +372,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Ordered Contraceptive Medications")]
     public bool? Has_Ordered_Contraceptive_Medications(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439909028592L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6685451883001229759L, () => {
             CqlValueSet a_ = this.Contraceptive_Medications(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -421,7 +421,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Laboratory Tests Identifying Sexual Activity But Not Pregnancy")]
     public bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449761472600L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2561976657898182732L, () => {
             CqlValueSet a_ = this.Pap_Test(context);
             IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
             CqlValueSet c_ = this.Lab_Tests_During_Pregnancy(context);
@@ -449,7 +449,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Laboratory Tests Identifying Sexual Activity")]
     public bool? Has_Laboratory_Tests_Identifying_Sexual_Activity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436023092476L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(379598359555302312L, () => {
             CqlValueSet a_ = this.Pregnancy_Test(context);
             IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
             IEnumerable<ServiceRequest> c_ = Status_1_15_000.Instance.isLaboratoryTestOrder(context, b_);
@@ -473,7 +473,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Diagnostic Studies Identifying Sexual Activity")]
     public bool? Has_Diagnostic_Studies_Identifying_Sexual_Activity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433855645076L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5539533142023325111L, () => {
             CqlValueSet a_ = this.Diagnostic_Studies_During_Pregnancy(context);
             IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
             IEnumerable<ServiceRequest> c_ = Status_1_15_000.Instance.isDiagnosticStudyOrder(context, b_);
@@ -495,7 +495,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Procedures Identifying Sexual Activity")]
     public bool? Has_Procedures_Identifying_Sexual_Activity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443245630148L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6254113099437797292L, () => {
             CqlValueSet a_ = this.Procedures_Used_to_Indicate_Sexual_Activity(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
             IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
@@ -579,7 +579,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437408040876L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(9135200379284452517L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -652,7 +652,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385450086442944L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2228011371027617572L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -660,7 +660,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Pregnancy Test Exclusion")]
     public bool? Has_Pregnancy_Test_Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444774775348L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1820798381545666754L, () => {
             CqlValueSet a_ = this.Pregnancy_Test(context);
             IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
             IEnumerable<ServiceRequest> c_ = Status_1_15_000.Instance.isLaboratoryTestOrder(context, b_);
@@ -797,7 +797,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440687939476L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3697874071608603199L, () => {
             bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             bool? b_ = this.Has_Pregnancy_Test_Exclusion(context);
             bool? c_ = this.Has_Assessments_Identifying_Sexual_Activity(context);
@@ -828,7 +828,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434157556348L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7679949648353288652L, () => {
             CqlValueSet a_ = this.Chlamydia_Screening(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
             IEnumerable<Observation> c_ = Status_1_15_000.Instance.isLaboratoryTestPerformed(context, b_);
@@ -902,7 +902,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Stratification 1")]
     public bool? Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446161055908L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5101421012347047082L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -919,7 +919,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Stratification 2")]
     public bool? Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445959724480L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3239130432549093830L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;

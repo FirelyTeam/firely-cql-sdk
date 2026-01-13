@@ -40,7 +40,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385448160716604L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-30370437313442716L, () => {
             object a_ = context.ResolveParameter("CMS816FHIRHHHypo-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -52,7 +52,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385433433790524L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(3721271333023754874L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -61,7 +61,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385439872142264L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5387382680659324825L, () => {
             CqlValueSet a_ = this.Encounter_Inpatient(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -96,7 +96,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Hypoglycemic Medication Administration")]
     public IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationAdministration>>(3271385447361262392L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationAdministration>>(617262154471677908L, () => {
             CqlValueSet a_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
             IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
             IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
@@ -142,7 +142,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Encounter With Hypoglycemic Medication Administration")]
     public IEnumerable<Encounter> Encounter_With_Hypoglycemic_Medication_Administration(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385434340647932L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8534030923976848893L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
@@ -171,7 +171,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437864929380L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1931642883968411427L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Hypoglycemic_Medication_Administration(context);
             return a_;
         });
@@ -179,7 +179,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436632724536L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2819473113825001791L, () => {
             IEnumerable<Encounter> a_ = this.Initial_Population(context);
             return a_;
         });
@@ -187,7 +187,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Glucose Test With Result Less Than 40")]
     public IEnumerable<Observation> Glucose_Test_With_Result_Less_Than_40(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385446851108772L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(8244496803727797683L, () => {
             IEnumerable<Encounter> a_ = this.Denominator(context);
             IEnumerable<MedicationAdministration> b_ = this.Hypoglycemic_Medication_Administration(context);
             CqlValueSet c_ = this.Glucose_Lab_Test_Mass_Per_Volume(context);
@@ -447,7 +447,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Low Glucose Test Followed By Glucose Test Result Greater Than 80")]
     public IEnumerable<Observation> Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385433957779100L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(8421351106002975650L, () => {
             IEnumerable<Encounter> a_ = this.Denominator(context);
             IEnumerable<Observation> b_ = this.Glucose_Test_With_Result_Less_Than_40(context);
             CqlValueSet c_ = this.Glucose_Lab_Test_Mass_Per_Volume(context);
@@ -814,7 +814,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Severe Hypoglycemic Harm Event")]
     public IEnumerable<Observation> Severe_Hypoglycemic_Harm_Event(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385444492976420L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(8409537978980512486L, () => {
             IEnumerable<Observation> a_ = this.Glucose_Test_With_Result_Less_Than_40(context);
 
             bool? b_(Observation LowGlucoseTest) {
@@ -852,7 +852,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Encounter With Severe Hypoglycemic Harm Event")]
     public IEnumerable<Encounter> Encounter_With_Severe_Hypoglycemic_Harm_Event(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437875451840L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4606868389057612456L, () => {
             IEnumerable<Encounter> a_ = this.Denominator(context);
             IEnumerable<Observation> b_ = this.Severe_Hypoglycemic_Harm_Event(context);
             IEnumerable<ValueTuple<Encounter, Observation>> c_ = context.Operators.CrossJoin<Encounter, Observation>(a_, b_);
@@ -931,7 +931,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436177679812L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-573871386757981486L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Severe_Hypoglycemic_Harm_Event(context);
             return a_;
         });
@@ -939,7 +939,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385441166585764L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-5075599977893582226L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -947,7 +947,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385446582265876L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(8003583007331791521L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -955,7 +955,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385445533770404L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-4550559775519135247L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -963,7 +963,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385448129415232L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(7055837076345808661L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

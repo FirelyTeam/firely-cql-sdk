@@ -70,7 +70,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385439026988356L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(2317102387341060639L, () => {
             object a_ = context.ResolveParameter("CMS826FHIRHHPI-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -82,7 +82,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385433222813140L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-6346933923748629508L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -91,7 +91,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385438334310076L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(2571141115465897964L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -99,7 +99,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385445725832476L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(4542203258087567110L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -107,7 +107,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385435424729068L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(916331710562642310L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -115,7 +115,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385449197728520L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-4357180558056656651L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -123,7 +123,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With Age 18 And Older")]
     public IEnumerable<Encounter> Encounter_With_Age_18_And_Older(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436857545416L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6169017664680275999L, () => {
             CqlValueSet a_ = this.Encounter_Inpatient(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -158,7 +158,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437314200860L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-449283199020342393L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
             return a_;
         });
@@ -166,7 +166,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444320283952L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4359915985773488282L, () => {
             IEnumerable<Encounter> a_ = this.Initial_Population(context);
             return a_;
         });
@@ -174,7 +174,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With Deep Tissue Pressure Injury POA By Indicator")]
     public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446683092016L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4239474303649750716L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
             bool? b_(Encounter InpatientHospitalization) {
@@ -235,7 +235,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Clinical Skin Exams With Pressure Injury")]
     public IEnumerable<Observation> Clinical_Skin_Exams_With_Pressure_Injury(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385447463501600L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-5876015133709045265L, () => {
             CqlCode a_ = this.Physical_findings_of_Skin(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
@@ -253,7 +253,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Simple Skin Exams With Pressure Injury")]
     public IEnumerable<Observation> Simple_Skin_Exams_With_Pressure_Injury(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385437351021900L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-7016031869166170929L, () => {
             CqlCode a_ = this.Physical_findings_of_Skin(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
@@ -271,7 +271,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Skin Exams With Pressure Injury")]
     public IEnumerable<object> Skin_Exams_With_Pressure_Injury(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385446312129956L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(8086493818571836473L, () => {
             IEnumerable<Observation> a_ = this.Clinical_Skin_Exams_With_Pressure_Injury(context);
             IEnumerable<Observation> b_ = this.Simple_Skin_Exams_With_Pressure_Injury(context);
             IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
@@ -281,7 +281,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With Deep Tissue Pressure Injury POA By Skin Exam Within First 72 Hours")]
     public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441151221824L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5043614029930533099L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
@@ -315,7 +315,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With Deep Tissue Pressure Injury POA By Indicator Or Skin Exam Within First 72 Hours")]
     public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438457752752L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3850884323497267267L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -325,7 +325,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With Stage 2, 3, 4, Or Unstageable Pressure Injury Present On Admission By POA Indicator")]
     public IEnumerable<Encounter> Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448279758188L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6152202812380421187L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
             bool? b_(Encounter InpatientHospitalization) {
@@ -342,7 +342,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With Stage 2, 3, 4 Or Unstageable Pressure Injury POA By Skin Exam Within 24 Hours")]
     public IEnumerable<Encounter> Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435606188212L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5278639121058776597L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
@@ -376,7 +376,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With Stage 2, 3, 4 Or Unstageable Pressure Injury POA")]
     public IEnumerable<Encounter> Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436333154336L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6588617838832343877L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -386,7 +386,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445864576196L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3156263698685668797L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -396,7 +396,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With New Deep Tissue Pressure Injury Not POA By Indicator")]
     public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385439340645268L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4407821689885354987L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
             bool? b_(Encounter InpatientHospitalization) {
@@ -413,7 +413,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With New Deep Tissue Pressure Injury By Skin Exam After First 72 Hours")]
     public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433075880220L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-7554246963882016003L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
@@ -447,7 +447,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With New Deep Tissue Pressure Injury")]
     public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448795031816L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1777515951725356205L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -457,7 +457,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury Not POA By Indicator")]
     public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441478568740L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4328292310400368312L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
             bool? b_(Encounter InpatientHospitalization) {
@@ -474,7 +474,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury By Skin Exam After First 24 Hours")]
     public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435072189504L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1070787627883960698L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_18_And_Older(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientHospitalization) {
@@ -508,7 +508,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury")]
     public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446725528120L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1951425826462199341L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -518,7 +518,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441692702508L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-7282528919652117368L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_New_Deep_Tissue_Pressure_Injury(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);

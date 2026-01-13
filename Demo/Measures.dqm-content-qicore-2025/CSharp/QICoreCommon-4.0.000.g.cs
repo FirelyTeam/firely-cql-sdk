@@ -398,7 +398,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385443765535932L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-4143263978380686161L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;

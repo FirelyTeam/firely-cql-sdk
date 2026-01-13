@@ -268,7 +268,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385440265928060L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1830887859865804800L, () => {
             object a_ = context.ResolveParameter("CMS996FHIRAptTxforSTEMI-2.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -280,7 +280,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385447622859388L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(9042567821391586271L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -289,7 +289,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("ED Encounter During MP")]
     public IEnumerable<Encounter> ED_Encounter_During_MP(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385434053847744L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5306044393397104968L, () => {
             PropertyInfo a_ = typeof(Encounter).GetProperty("Class");
             CqlCode b_ = this.EMER(context);
             IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
@@ -337,7 +337,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("ED Encounter with STEMI Diagnosis")]
     public IEnumerable<Encounter> ED_Encounter_with_STEMI_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446933320860L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2834645475702299712L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_During_MP(context);
 
             bool? b_(Encounter EDEncounterinMP) {
@@ -399,7 +399,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445939257380L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2152524893633359082L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
             return a_;
         });
@@ -407,7 +407,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385440012553208L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3055380145274978900L, () => {
             IEnumerable<Encounter> a_ = this.Initial_Population(context);
             return a_;
         });
@@ -415,7 +415,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Allergy or Intolerance to Thrombolytic Medications Overlaps ED Encounter")]
     public IEnumerable<Encounter> Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385434418079088L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(502537557117955598L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
@@ -470,7 +470,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Adverse Effect to Thrombolytic Medications Before End of ED Encounter")]
     public IEnumerable<Encounter> Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449852327812L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-2540394215636061597L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
@@ -509,7 +509,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Active Exclusion Diagnosis at Start of ED Encounter")]
     public IEnumerable<Encounter> Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436261480676L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6244540683477294420L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
@@ -555,7 +555,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Active Oral Anticoagulant Medication at the Start of ED Encounter")]
     public IEnumerable<Encounter> Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385442559234416L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2002931957464647766L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
@@ -635,7 +635,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Active Long Term use of Anticoagulants")]
     public IEnumerable<Encounter> Active_Long_Term_use_of_Anticoagulants(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449443329028L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6249883915813703985L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
@@ -675,7 +675,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Active use of Anticoagulants")]
     public IEnumerable<Encounter> Active_use_of_Anticoagulants(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433545775812L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6407732073469548509L, () => {
             IEnumerable<Encounter> a_ = this.Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter(context);
             IEnumerable<Encounter> b_ = this.Active_Long_Term_use_of_Anticoagulants(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -685,7 +685,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Exclusion Diagnosis During ED Encounter or Within 24 Hours of ED Encounter Start")]
     public IEnumerable<Encounter> Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441115367640L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5358861958155102662L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
@@ -757,7 +757,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Major Surgical Procedure 21 Days or Less Before Start of or Starts During ED Encounter")]
     public IEnumerable<Encounter> Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385434214816228L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3071350002189155271L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
@@ -934,7 +934,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Intubation or Mechanical Circulatory Assist Device Placement or Removal Procedure During ED Encounter or Within 24 Hours of ED Encounter Start")]
     public IEnumerable<Encounter> Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441527514188L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-780558220455665998L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
@@ -1114,7 +1114,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Active Exclusion Diagnosis Within 90 Days Before or At the Start of ED Encounter")]
     public IEnumerable<Encounter> Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385440733659492L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1408893699383217546L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
@@ -1158,7 +1158,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Intracranial or Intraspinal Procedure 90 Days or Less Before Start of ED Encounter")]
     public IEnumerable<Encounter> Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438734527308L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6569882930745692123L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
@@ -1266,7 +1266,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("ED Encounter with Discharge Disposition as Patient Expired")]
     public IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Patient_Expired(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438730469756L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5706805016315765911L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             bool? b_(Encounter EDwithSTEMI) {
@@ -1285,7 +1285,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("ED Encounter with Discharge Disposition as Left Against Medical Advice")]
     public IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446489384768L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-731904171393251097L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             bool? b_(Encounter EDwSTEMI) {
@@ -1304,7 +1304,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("ED Encounter with Hospice Services")]
     public IEnumerable<Encounter> ED_Encounter_with_Hospice_Services(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438897138372L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4226681865471752242L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             bool? b_(Encounter EDwSTEMI) {
@@ -1622,7 +1622,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Currently Pregnant")]
     public IEnumerable<Encounter> Currently_Pregnant(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448611066772L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4224761559664591920L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
@@ -1660,7 +1660,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436753678764L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1489138186020577646L, () => {
             IEnumerable<Encounter> a_ = this.Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(context);
             IEnumerable<Encounter> b_ = this.Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -1692,7 +1692,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Received tPA in Another Facility within 24 hours Prior to Admission")]
     public IEnumerable<Encounter> Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385447475458708L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5761351899677059903L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
@@ -1726,7 +1726,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("ED Encounter with a Documented Reason for No PCI Performed")]
     public IEnumerable<Encounter> ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435046108084L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4861476912755213235L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
@@ -1785,7 +1785,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("ED Encounter with a Documented Reason for Not Administering Fibrinolytic Therapy")]
     public IEnumerable<Encounter> ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444319738808L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2696627271993019511L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwSTEMI) {
@@ -1856,7 +1856,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448358908160L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6308283377563653028L, () => {
             IEnumerable<Encounter> a_ = this.Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission(context);
             IEnumerable<Encounter> b_ = this.ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -1926,7 +1926,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Fibrinolytic Therapy Administration within 30 Minutes of Arrival")]
     public IEnumerable<Encounter> Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385447209745424L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-7313533688387407620L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
@@ -1993,7 +1993,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("PCI within 90 Minutes of Arrival")]
     public IEnumerable<Encounter> PCI_within_90_Minutes_of_Arrival(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437216455908L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5463400308575938821L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter EDwithSTEMI) {
@@ -2153,7 +2153,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("ED Departure with Discharge to Acute Care Facility Within 45 Minutes Of Arrival")]
     public IEnumerable<Encounter> ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433530259252L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8151977692912060192L, () => {
             IEnumerable<Encounter> a_ = this.ED_Encounter_with_STEMI_Diagnosis(context);
 
             bool? b_(Encounter EDwithSTEMI) {
@@ -2181,7 +2181,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433962518916L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1584714117989118305L, () => {
             IEnumerable<Encounter> a_ = this.Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival(context);
             IEnumerable<Encounter> b_ = this.PCI_within_90_Minutes_of_Arrival(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -2193,7 +2193,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385434240177252L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(965101041482449971L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -2201,7 +2201,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385438232978388L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-3876543663401552806L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -2209,7 +2209,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385437848077796L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-5966982971653611671L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -2217,7 +2217,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385447490856576L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-8295183991178300754L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

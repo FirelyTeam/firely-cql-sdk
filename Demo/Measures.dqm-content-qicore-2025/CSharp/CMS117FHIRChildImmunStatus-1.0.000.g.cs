@@ -288,7 +288,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385446576644172L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(4169139436206072456L, () => {
             object a_ = context.ResolveParameter("CMS117FHIRChildImmunStatus-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -300,7 +300,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385438099242060L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-3255434830720907340L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -309,7 +309,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437362137964L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3890715647931438728L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Home_Healthcare_Services(context);
@@ -370,7 +370,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437316777908L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1840103070889693489L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -389,7 +389,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433221276424L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6100922097112111507L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -397,7 +397,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Date of Second Birthday")]
     public CqlDate Date_of_Second_Birthday(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(3271385433675855976L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(-8905780261144196986L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -412,7 +412,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("First Two Years")]
     public CqlInterval<CqlDate> First_Two_Years(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(3271385433855862656L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(-5417161313911528722L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -427,7 +427,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Severe Combined Immunodeficiency")]
     public bool? Has_Severe_Combined_Immunodeficiency(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439735514372L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(9038569657881816316L, () => {
             CqlValueSet a_ = this.Severe_Combined_Immunodeficiency(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -451,7 +451,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Immunodeficiency")]
     public bool? Has_Immunodeficiency(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445734718112L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6514596558769833938L, () => {
             CqlValueSet a_ = this.Disorders_of_the_Immune_System(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -475,7 +475,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has HIV")]
     public bool? Has_HIV(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434815584116L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(2919788375854472653L, () => {
             CqlValueSet a_ = this.HIV(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -499,7 +499,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Lymphoreticular Cancer, Multiple Myeloma or Leukemia")]
     public bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446254398384L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8404119248587868221L, () => {
             CqlValueSet a_ = this.Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -523,7 +523,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Intussusception")]
     public bool? Has_Intussusception(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449724443000L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5536229043570992142L, () => {
             CqlValueSet a_ = this.Intussusception(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -547,7 +547,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436925025212L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4709410818624606766L, () => {
             bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             bool? b_ = this.Has_Severe_Combined_Immunodeficiency(context);
             bool? c_ = context.Operators.Or(a_, b_);
@@ -565,7 +565,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Vaccine Administration Interval - 42 Days up to 2 Years Old")]
     public CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(3271385448709680364L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(-2143539727822132663L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -582,7 +582,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("DTaP Immunizations or Procedures")]
     public IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385444498876980L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3604694627530575211L, () => {
             CqlValueSet a_ = this.DTaP_Vaccine(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -642,7 +642,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Four DTaP Vaccinations")]
     public IEnumerable<CqlDate> Four_DTaP_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385443878809164L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(6243834148034002710L, () => {
             IEnumerable<CqlDate> a_ = this.DTaP_Immunizations_or_Procedures(context);
             IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>> e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
 
@@ -691,7 +691,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("DTaP Numerator Inclusion Conditions")]
     public IEnumerable<object> DTaP_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385442565403872L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3639701423704147375L, () => {
             CqlValueSet a_ = this.Anaphylactic_Reaction_to_DTaP_Vaccine(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -719,7 +719,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Polio Immunizations or Procedures")]
     public IEnumerable<CqlDate> Polio_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385434342123724L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(417576683605254862L, () => {
             CqlValueSet a_ = this.Inactivated_Polio_Vaccine__IPV_(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -779,7 +779,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Three Polio Vaccinations")]
     public IEnumerable<CqlDate> Three_Polio_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385432989504420L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(4897392299194826373L, () => {
             IEnumerable<CqlDate> a_ = this.Polio_Immunizations_or_Procedures(context);
             IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
 
@@ -828,7 +828,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Polio Numerator Inclusion Conditions")]
     public IEnumerable<object> Polio_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385441998484856L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(7826064777224418101L, () => {
             CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -853,7 +853,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Date of First Birthday")]
     public CqlDate Date_of_First_Birthday(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(3271385445912114936L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(3716909235403770431L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -868,7 +868,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Date of First Birthday to Date of Second Birthday")]
     public CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(3271385441707193996L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(8282639147346491549L, () => {
             CqlDate a_ = this.Date_of_First_Birthday(context);
             CqlDate b_ = this.Date_of_Second_Birthday(context);
             CqlInterval<CqlDate> c_ = context.Operators.Interval(a_, b_, true, true);
@@ -878,7 +878,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("One MMR Vaccination")]
     public IEnumerable<CqlDate> One_MMR_Vaccination(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385440776363052L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(156261906265107921L, () => {
             CqlValueSet a_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -938,7 +938,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("MMR Numerator Inclusion Conditions")]
     public IEnumerable<object> MMR_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385445296148796L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-514019637682845694L, () => {
             CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -963,7 +963,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Measles Indicators")]
     public IEnumerable<object> Measles_Indicators(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385436092354008L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(8441168455424622173L, () => {
             CqlValueSet a_ = this.Measles(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -988,7 +988,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Mumps Indicators")]
     public IEnumerable<object> Mumps_Indicators(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385444862965952L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-5597829872438947286L, () => {
             CqlValueSet a_ = this.Mumps(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -1011,7 +1011,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Rubella Indicators")]
     public IEnumerable<object> Rubella_Indicators(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385441707467924L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-7817904464631049752L, () => {
             CqlValueSet a_ = this.Rubella(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -1034,7 +1034,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Hib 3 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385444453074492L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-2629041367058582986L, () => {
             CqlValueSet a_ = this.Hib_Vaccine__3_dose_schedule_(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -1094,7 +1094,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Hib 4 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385442111890464L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-4666232502681983773L, () => {
             CqlValueSet a_ = this.Hib_Vaccine__4_dose_schedule_(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -1154,7 +1154,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Hib 3 or 4 Dose Immunizations")]
     public IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385442601103204L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-674850233977361458L, () => {
             IEnumerable<CqlDate> a_ = this.Hib_3_Dose_Immunizations_or_Procedures(context);
             IEnumerable<CqlDate> b_ = this.Hib_4_Dose_Immunizations_or_Procedures(context);
             IEnumerable<CqlDate> c_ = context.Operators.Union<CqlDate>(a_, b_);
@@ -1164,7 +1164,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Appropriate Number of Hib Immunizations")]
     public bool? Has_Appropriate_Number_of_Hib_Immunizations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439686594188L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5542750103430990637L, () => {
             IEnumerable<CqlDate> a_ = this.Hib_3_or_4_Dose_Immunizations(context);
 
             bool? b_(CqlDate HibImmunization) {
@@ -1215,7 +1215,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Hib Numerator Inclusion Conditions")]
     public IEnumerable<object> Hib_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385437817546120L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(8608192977694466541L, () => {
             CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_only_Haemophilus_influenzae_type_b_antigen__disorder_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1240,7 +1240,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Hepatitis B Immunizations or Procedures")]
     public IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385441210113052L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(1973141662449076015L, () => {
             CqlValueSet a_ = this.Hepatitis_B_Vaccine(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -1300,7 +1300,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Three Hepatitis B Vaccinations")]
     public IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385448603501972L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(1495990690705974579L, () => {
             IEnumerable<CqlDate> a_ = this.Hepatitis_B_Immunizations_or_Procedures(context);
             IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, a_);
 
@@ -1349,7 +1349,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("NewBorn Vaccine Requirement")]
     public IEnumerable<CqlDate> NewBorn_Vaccine_Requirement(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385442711007628L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-5347679566276507507L, () => {
             CqlCode a_ = this.Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Procedure> c_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
@@ -1396,7 +1396,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Meets HepB Vaccination Requirement")]
     public IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385450036585748L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-1645875262351447058L, () => {
             IEnumerable<CqlDate> a_ = this.Hepatitis_B_Immunizations_or_Procedures(context);
             IEnumerable<CqlDate> c_ = this.NewBorn_Vaccine_Requirement(context);
             IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate>(a_, a_, c_);
@@ -1453,7 +1453,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Hepatitis B Numerator Inclusion Conditions")]
     public IEnumerable<object> Hepatitis_B_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385441976206056L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(7662563679654604977L, () => {
             CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_B_virus_antigen__disorder_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1483,7 +1483,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("One Chicken Pox Vaccination")]
     public IEnumerable<CqlDate> One_Chicken_Pox_Vaccination(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385449150543772L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-8423925841763101892L, () => {
             CqlValueSet a_ = this.Varicella_Zoster_Vaccine__VZV_(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -1543,7 +1543,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Varicella Zoster Numerator Inclusion Conditions")]
     public IEnumerable<object> Varicella_Zoster_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385440194743108L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-4280058124122922461L, () => {
             CqlValueSet a_ = this.Varicella_Zoster(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -1573,7 +1573,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Pneumococcal Conjugate Immunizations or Procedures")]
     public IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385435965050972L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(4378322687267757945L, () => {
             CqlValueSet a_ = this.Pneumococcal_Conjugate_Vaccine(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -1633,7 +1633,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Four Pneumococcal Conjugate Vaccinations")]
     public IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385444430751220L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-4797540516230867295L, () => {
             IEnumerable<CqlDate> a_ = this.Pneumococcal_Conjugate_Immunizations_or_Procedures(context);
             IEnumerable<ValueTuple<CqlDate, CqlDate, CqlDate, CqlDate>> e_ = context.Operators.CrossJoin<CqlDate, CqlDate, CqlDate, CqlDate>(a_, a_, a_, a_);
 
@@ -1690,7 +1690,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Pneumococcal Conjugate Numerator Inclusion Conditions")]
     public IEnumerable<object> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385446091533992L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-4666451470684867839L, () => {
             CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1715,7 +1715,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("One Hepatitis A Vaccinations")]
     public IEnumerable<CqlDate> One_Hepatitis_A_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385434354439576L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-8296023591192323560L, () => {
             CqlValueSet a_ = this.Hepatitis_A_Vaccine(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -1775,7 +1775,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Hepatitis A Numerator Inclusion Conditions")]
     public IEnumerable<object> Hepatitis_A_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385437353960276L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(8952629932293432625L, () => {
             CqlValueSet a_ = this.Hepatitis_A(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -1805,7 +1805,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Rotavirus 2 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385449684838816L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(7665404411040489453L, () => {
             CqlCode a_ = this.rotavirus__live__monovalent_vaccine(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Immunization> c_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
@@ -1866,7 +1866,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Rotavirus 3 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385436005571348L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-2704249126383813516L, () => {
             CqlValueSet a_ = this.Rotavirus_Vaccine__3_dose_schedule_(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -1926,7 +1926,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Rotavirus 2 or 3 Dose Immunizations")]
     public IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385434300534956L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(5526688681713129333L, () => {
             IEnumerable<CqlDate> a_ = this.Rotavirus_2_Dose_Immunizations_or_Procedures(context);
             IEnumerable<CqlDate> b_ = this.Rotavirus_3_Dose_Immunizations_or_Procedures(context);
             IEnumerable<CqlDate> c_ = context.Operators.Union<CqlDate>(a_, b_);
@@ -1936,7 +1936,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Appropriate Number of Rotavirus Immunizations")]
     public bool? Has_Appropriate_Number_of_Rotavirus_Immunizations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385438514359316L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5340818168674935883L, () => {
             IEnumerable<CqlDate> a_ = this.Rotavirus_2_or_3_Dose_Immunizations(context);
 
             bool? b_(CqlDate RotavirusImmunization) {
@@ -1987,7 +1987,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Rotavirus Numerator Inclusion Conditions")]
     public IEnumerable<object> Rotavirus_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385444945512448L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(5452965153709958714L, () => {
             CqlCode a_ = this.Anaphylaxis_caused_by_rotavirus_vaccine__disorder_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -2012,7 +2012,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Vaccine Administration Interval - 180 Days up to 2 Years Old")]
     public CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(3271385434099723080L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(6360531842329858811L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -2029,7 +2029,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Influenza Immunizations or Procedures")]
     public IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385433262310520L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(1828458576964917662L, () => {
             CqlValueSet a_ = this.Child_Influenza_Vaccine(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -2089,7 +2089,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Two Influenza Vaccinations")]
     public IEnumerable<CqlDate> Two_Influenza_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385433328401712L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-8964713766866174121L, () => {
             IEnumerable<CqlDate> a_ = this.Influenza_Immunizations_or_Procedures(context);
             IEnumerable<ValueTuple<CqlDate, CqlDate>> c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
 
@@ -2130,7 +2130,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("LAIV Vaccinations")]
     public IEnumerable<CqlDate> LAIV_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385444674380576L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-941360384475517972L, () => {
             CqlValueSet a_ = this.Influenza_Virus_LAIV_Vaccine(context);
             IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
             IEnumerable<Immunization> c_ = Status_1_15_000.Instance.isImmunizationAdministered(context, b_);
@@ -2192,7 +2192,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Two Influenza Vaccinations Including One LAIV Vaccination")]
     public bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443118502528L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5305512655750921341L, () => {
             IEnumerable<CqlDate> a_ = this.LAIV_Vaccinations(context);
             bool? b_ = context.Operators.Exists<CqlDate>(a_);
             IEnumerable<CqlDate> c_ = this.Influenza_Immunizations_or_Procedures(context);
@@ -2204,7 +2204,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Influenza Numerator Inclusion Conditions")]
     public IEnumerable<object> Influenza_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385442126418644L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(1126846549515768438L, () => {
             CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -2229,7 +2229,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443557760148L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1317748112751385423L, () => {
             IEnumerable<CqlDate> a_ = this.Four_DTaP_Vaccinations(context);
             bool? b_ = context.Operators.Exists<CqlDate>(a_);
             IEnumerable<object> c_ = this.DTaP_Numerator_Inclusion_Conditions(context);
@@ -2307,7 +2307,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385437284068788L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(524785351674798207L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -2315,7 +2315,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385439235399940L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-9208410771258428013L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -2323,7 +2323,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385444677862836L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(1692700376086300175L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -2331,7 +2331,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385450015357168L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(5331407242333771865L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

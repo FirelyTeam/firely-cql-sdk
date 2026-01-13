@@ -311,7 +311,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385446664344084L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3054133947653297271L, () => {
             object a_ = context.ResolveParameter("CMS1028FHIRPCSevereOBComps-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -323,7 +323,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385439961060324L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-5457495244187790411L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -332,7 +332,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435969567020L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5576198982135139213L, () => {
             IEnumerable<Encounter> a_ = PCMaternal_5_25_000.Instance.Delivery_Encounter_With_Age_Range(context);
             return a_;
         });
@@ -340,7 +340,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385449056355404L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-7145789266820812834L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -348,7 +348,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385445008675276L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-7165095462465786372L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -356,7 +356,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385449637110524L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3939123815481697149L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -364,7 +364,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385441169297656L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-8324784854847133132L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -372,7 +372,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Calculated Gestational Age Greater Than Or Equal To 20 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436339508296L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3825030991784224793L, () => {
             IEnumerable<Encounter> a_ = PCMaternal_5_25_000.Instance.Delivery_Encounter_With_Age_Range(context);
 
             bool? b_(Encounter DeliveryEncounter) {
@@ -388,7 +388,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Estimated Gestational Age Assessment Greater Than Or Equal To 20 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443965420216L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3284729660759741894L, () => {
             IEnumerable<Encounter> a_ = PCMaternal_5_25_000.Instance.Delivery_Encounter_With_Age_Range(context);
 
             bool? b_(Encounter DeliveryEncounter) {
@@ -407,7 +407,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Gestational Age Greater Than Or Equal To 20 Weeks Based On Coding")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448389195968L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7658504009465578179L, () => {
             IEnumerable<Encounter> a_ = PCMaternal_5_25_000.Instance.Delivery_Encounter_With_Age_Range(context);
 
             bool? b_(Encounter DeliveryEncounter) {
@@ -455,7 +455,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters At Greater Than Or Equal To 20 Weeks Gestation")]
     public IEnumerable<Encounter> Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445716702468L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3347643640353888106L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks(context);
             IEnumerable<Encounter> b_ = this.Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -467,7 +467,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications Diagnosis Or Procedure Excluding Blood Transfusion")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446194020920L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8753301857394103144L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -567,7 +567,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Expiration")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Expiration(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444192376316L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-2794498871676819460L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -586,7 +586,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Blood Transfusion")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Blood_Transfusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385439818813184L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4889528417638675949L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             IEnumerable<Encounter> b_(Encounter TwentyWeeksPlusEncounter) {
@@ -683,7 +683,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385432993561816L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4447466805798696921L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion(context);
             IEnumerable<Encounter> b_ = this.Delivery_Encounters_With_Expiration(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -695,7 +695,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Hysterectomy")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Hysterectomy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385450085994168L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(275066854734087907L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             IEnumerable<Encounter> b_(Encounter TwentyWeeksPlusEncounter) {
@@ -792,7 +792,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Cardiac Conversion, Tracheostomy Or Ventilation Procedures")]
     public IEnumerable<Procedure> Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(3271385449121619100L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(6534466364735929020L, () => {
             CqlValueSet a_ = this.Conversion_of_Cardiac_Rhythm(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
             CqlValueSet c_ = this.Tracheostomy(context);
@@ -807,7 +807,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Cardiac Conversion, Tracheostomy Or Ventilation Procedures")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385434177600132L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1425442155955483845L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             IEnumerable<Encounter> b_(Encounter TwentyWeeksPlusEncounter) {
@@ -903,7 +903,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SOC With Hysterectomy Or Blood Transfusion With Placenta Increta Or Placenta Percreta Without Additional SOC")]
     public IEnumerable<Encounter> SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437707081532L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8875041619738305098L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_With_Severe_Obstetric_Complications(context);
 
             bool? b_(Encounter SOCEncounter) {
@@ -967,7 +967,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Delivery Encounters With Severe Obstetric Complication Diagnosis")]
     public IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385434660848168L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3618491577793208763L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_With_Severe_Obstetric_Complications(context);
             IEnumerable<Encounter> b_ = this.SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(context);
             IEnumerable<Encounter> c_ = context.Operators.Except<Encounter>(a_, b_);
@@ -986,7 +986,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Delivery Encounters With Severe Obstetric Complication Procedures")]
     public IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443446092556L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3788569516996412836L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_With_Severe_Obstetric_Complications(context);
             IEnumerable<Encounter> b_ = this.SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(context);
             IEnumerable<Encounter> c_ = context.Operators.Except<Encounter>(a_, b_);
@@ -1316,7 +1316,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE SOC Diagnoses Detail")]
     public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?> SDE_SOC_Diagnoses_Detail(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?>>(3271385445203213556L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?>>(4046600195098257904L, () => {
             IEnumerable<Encounter> a_ = this.SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis(context);
 
             (CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)? b_(Encounter Encounter) {
@@ -1536,7 +1536,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE SOC Procedure Detail")]
     public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?> SDE_SOC_Procedure_Detail(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?>>(3271385434813862388L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?>>(8235823818015250910L, () => {
             IEnumerable<Encounter> a_ = this.SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures(context);
 
             (CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)? b_(Encounter Encounter) {
@@ -1572,7 +1572,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Numerator Exclusions 1")]
     public IEnumerable<Encounter> Numerator_Exclusions_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436697012044L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4610162010644944656L, () => {
             IEnumerable<Encounter> a_ = this.SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(context);
             return a_;
         });
@@ -1580,7 +1580,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications Excluding Blood Transfusions")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443927008472L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1362199374808908541L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion(context);
             IEnumerable<Encounter> b_ = this.Delivery_Encounters_With_Expiration(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -1590,7 +1590,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Numerator 1")]
     public IEnumerable<Encounter> Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385447460631760L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2154861158412903177L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_With_Severe_Obstetric_Complications(context);
             return a_;
         });
@@ -1598,7 +1598,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Variable Calculated Gestational Age")]
     public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> SDE_Variable_Calculated_Gestational_Age(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>>(3271385446981643136L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>>(5206916030657376427L, () => {
             IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> a_ = PCMaternal_5_25_000.Instance.Variable_Calculated_Gestational_Age(context);
             return a_;
         });
@@ -1606,7 +1606,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438850839616L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3545937530845238352L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
             return a_;
         });
@@ -1614,7 +1614,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications Excluding Blood Transfusions Only")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448027182736L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6698400742453710905L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_With_Severe_Obstetric_Complications(context);
             IEnumerable<Encounter> b_ = this.Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(context);
             IEnumerable<Encounter> c_ = context.Operators.Intersect<Encounter>(a_, b_);
@@ -1624,7 +1624,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Numerator 2")]
     public IEnumerable<Encounter> Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385447661963188L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5124973891290010877L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only(context);
             return a_;
         });
@@ -1632,7 +1632,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SOC Excluding Blood Transfusions Only With Hysterectomy Or Blood Transfusion With Placenta Increta Or Placenta Percreta Without Additional SOC")]
     public IEnumerable<Encounter> SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444035582100L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(297141924601029635L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only(context);
 
             bool? b_(Encounter SOCExcludingTransfusion) {
@@ -1696,7 +1696,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Numerator Exclusions 2")]
     public IEnumerable<Encounter> Numerator_Exclusions_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436764122520L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(572767974419411069L, () => {
             IEnumerable<Encounter> a_ = this.SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(context);
             return a_;
         });
@@ -1704,7 +1704,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Anemia")]
     public IEnumerable<Encounter> Risk_Variable_Anemia(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449434538928L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-2083763165921546841L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1721,7 +1721,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Asthma")]
     public IEnumerable<Encounter> Risk_Variable_Asthma(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385439817742564L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5379207509324332143L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1738,7 +1738,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Autoimmune Disease")]
     public IEnumerable<Encounter> Risk_Variable_Autoimmune_Disease(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385442152084492L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5937282448078859714L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1755,7 +1755,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Bariatric Surgery")]
     public IEnumerable<Encounter> Risk_Variable_Bariatric_Surgery(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435083509916L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-2423664243366207310L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1772,7 +1772,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Bleeding Disorder")]
     public IEnumerable<Encounter> Risk_Variable_Bleeding_Disorder(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385434198463780L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8509688049165530264L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1789,7 +1789,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Cardiac Disease")]
     public IEnumerable<Encounter> Risk_Variable_Cardiac_Disease(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385440286943016L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8095896995695945254L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1806,7 +1806,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Economic Housing Instability")]
     public IEnumerable<Encounter> Risk_Variable_Economic_Housing_Instability(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445200227740L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6636764886588028803L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1823,7 +1823,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Gastrointestinal Disease")]
     public IEnumerable<Encounter> Risk_Variable_Gastrointestinal_Disease(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385450029368688L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3103034770768645482L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1840,7 +1840,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Gestational Diabetes")]
     public IEnumerable<Encounter> Risk_Variable_Gestational_Diabetes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437147405444L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(206032062126845318L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1857,7 +1857,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable HIV")]
     public IEnumerable<Encounter> Risk_Variable_HIV(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436354181928L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4069930958637116991L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1874,7 +1874,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Hypertension")]
     public IEnumerable<Encounter> Risk_Variable_Hypertension(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441284905196L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5731977825712945515L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1891,7 +1891,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Long Term Anticoagulant Use")]
     public IEnumerable<Encounter> Risk_Variable_Long_Term_Anticoagulant_Use(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433455953192L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-954649318659483405L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1908,7 +1908,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Maternal Age")]
     public IEnumerable<IEnumerable<object>> Risk_Variable_Maternal_Age(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<IEnumerable<object>>>(3271385438752553952L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<IEnumerable<object>>>(-8312435409408998474L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             IEnumerable<object> b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1936,7 +1936,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Mental Health Disorder")]
     public IEnumerable<Encounter> Risk_Variable_Mental_Health_Disorder(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438422257600L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1367857587353400870L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1953,7 +1953,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Morbid Obesity")]
     public IEnumerable<Encounter> Risk_Variable_Morbid_Obesity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445159689972L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5806686215926746319L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1970,7 +1970,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Multiple Pregnancy")]
     public IEnumerable<Encounter> Risk_Variable_Multiple_Pregnancy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438647844400L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4567379069071164473L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -1987,7 +1987,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Neuromuscular Disease")]
     public IEnumerable<Encounter> Risk_Variable_Neuromuscular_Disease(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385442318247800L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5155414161172668380L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2004,7 +2004,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Obstetrical VTE")]
     public IEnumerable<Encounter> Risk_Variable_Obstetrical_VTE(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441050802664L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8002780570606629712L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2021,7 +2021,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Other Preeclampsia")]
     public IEnumerable<Encounter> Risk_Variable_Other_Preeclampsia(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438562596172L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(400760625912716477L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2038,7 +2038,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Placenta Previa")]
     public IEnumerable<Encounter> Risk_Variable_Placenta_Previa(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437412146472L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5422546948143661752L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2055,7 +2055,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Placental Abruption")]
     public IEnumerable<Encounter> Risk_Variable_Placental_Abruption(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448542511348L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-2361396028848159868L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2072,7 +2072,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Placental Accreta Spectrum")]
     public IEnumerable<Encounter> Risk_Variable_Placental_Accreta_Spectrum(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438061268452L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8609058513657276022L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2092,7 +2092,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Preexisting Diabetes")]
     public IEnumerable<Encounter> Risk_Variable_Preexisting_Diabetes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444533729528L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2480635706309875362L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2109,7 +2109,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Previous Cesarean")]
     public IEnumerable<Encounter> Risk_Variable_Previous_Cesarean(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449324635008L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1169825321704637143L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2126,7 +2126,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Pulmonary Hypertension")]
     public IEnumerable<Encounter> Risk_Variable_Pulmonary_Hypertension(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435529800032L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3317765136302774959L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2143,7 +2143,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Renal Disease")]
     public IEnumerable<Encounter> Risk_Variable_Renal_Disease(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437588500060L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4691150063242294087L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2160,7 +2160,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Severe Preeclampsia")]
     public IEnumerable<Encounter> Risk_Variable_Severe_Preeclampsia(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385440595985772L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-2818804355851963914L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2177,7 +2177,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Substance Abuse")]
     public IEnumerable<Encounter> Risk_Variable_Substance_Abuse(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443794115556L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8129261552102530514L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2194,7 +2194,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Thyrotoxicosis")]
     public IEnumerable<Encounter> Risk_Variable_Thyrotoxicosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443810615624L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6827710231932231924L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             bool? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2211,7 +2211,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Preterm Birth")]
     public IEnumerable<Encounter> Risk_Variable_Preterm_Birth(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438173739132L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2797503933073693423L, () => {
             IEnumerable<Encounter> a_ = PCMaternal_5_25_000.Instance.Delivery_Encounter_With_Age_Range(context);
 
             bool? b_(Encounter DeliveryEncounter) {
@@ -2260,7 +2260,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable First Hematocrit Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Risk_Variable_First_Hematocrit_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>>(3271385433892053208L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>>(-6532381667130087125L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2368,7 +2368,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable First White Blood Cell Count Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?>>(3271385442026508568L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?>>(3288506537083407272L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2476,7 +2476,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Heart Rate")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?> Risk_Variable_Heart_Rate(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?>>(3271385448944776868L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?>>(-7231162851022711395L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter) {
@@ -2572,7 +2572,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Risk Variable Systolic Blood Pressure")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?> Risk_Variable_Systolic_Blood_Pressure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?>>(3271385448888594904L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?>>(4446916058428857482L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)? b_(Encounter TwentyWeeksPlusEncounter) {

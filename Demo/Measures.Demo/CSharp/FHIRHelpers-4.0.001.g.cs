@@ -20,7 +20,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385348816493840L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(651719980278808684L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;

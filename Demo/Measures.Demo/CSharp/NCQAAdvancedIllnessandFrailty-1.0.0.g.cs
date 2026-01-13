@@ -76,7 +76,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385361978316484L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8915744558003842889L, () => {
             object a_ = context.ResolveParameter("NCQAAdvancedIllnessandFrailty-1.0.0", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -88,7 +88,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385353946674772L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-910321882205837424L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -97,7 +97,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Has Criteria Indicating Frailty")]
     public bool? Has_Criteria_Indicating_Frailty(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385362315249912L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3620167446593460806L, () => {
             CqlValueSet a_ = this.Frailty_Device(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
@@ -160,7 +160,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Outpatient Encounters with Advanced Illness")]
     public IEnumerable<CqlDate> Outpatient_Encounters_with_Advanced_Illness(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385360592771452L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-2766277875631390399L, () => {
             CqlValueSet a_ = this.Outpatient(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             CqlValueSet c_ = this.Observation(context);
@@ -219,7 +219,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Nonacute Inpatient Discharge with Advanced Illness")]
     public IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385363454153932L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-1708232231082040117L, () => {
             IEnumerable<Claim> a_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Claim"));
             (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = NCQAClaims_1_0_0.Instance.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(context, a_);
             IEnumerable<Claim> c_ = b_?.NonacuteInpatientDischarge;
@@ -259,7 +259,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Outpatient Encounters or Discharges with Advanced Illness")]
     public IEnumerable<CqlDate> Outpatient_Encounters_or_Discharges_with_Advanced_Illness(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385355391384340L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(-7890521861787029028L, () => {
 
             IEnumerable<CqlDate> a_() {
 
@@ -300,7 +300,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Two Outpatient Visits with Advanced Illness on Different Dates of Service")]
     public bool? Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385356777041848L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2682727164653422667L, () => {
             IEnumerable<CqlDate> a_ = this.Outpatient_Encounters_or_Discharges_with_Advanced_Illness(context);
             IEnumerable<ValueTuple<CqlDate, CqlDate>> c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
 
@@ -329,7 +329,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Acute Inpatient Encounter with Advanced Illness")]
     public bool? Acute_Inpatient_Encounter_with_Advanced_Illness(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385356166407308L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7466754000505614877L, () => {
             CqlValueSet a_ = this.Acute_Inpatient(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             IEnumerable<Encounter> c_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, b_);
@@ -363,7 +363,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Acute Inpatient Discharge with Advanced Illness")]
     public bool? Acute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385363607860680L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-132452363031990196L, () => {
             IEnumerable<Claim> a_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Claim"));
             (CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = NCQAClaims_1_0_0.Instance.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(context, a_);
             IEnumerable<Claim> c_ = b_?.AcuteInpatientDischarge;
@@ -395,7 +395,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Dementia Medications In Year Before or During Measurement Period")]
     public bool? Dementia_Medications_In_Year_Before_or_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385348069266428L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6328015377898273548L, () => {
             CqlValueSet a_ = this.Dementia_Medications(context);
             IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationDispense"));
             IEnumerable<MedicationDispense> c_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/MedicationDispense"));
@@ -454,7 +454,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Advanced Illness and Frailty Exclusion Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385359097929224L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3948105317562077147L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -490,7 +490,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlExpressionDefinition("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385354869082508L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3586192422471449037L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;

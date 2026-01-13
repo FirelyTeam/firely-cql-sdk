@@ -106,7 +106,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385441801993440L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8140283047952446050L, () => {
             object a_ = context.ResolveParameter("CMS129FHIRProstCaBoneScanUse-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -118,7 +118,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385439090621848L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(4406994424031691662L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -127,7 +127,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385446169207808L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-3741220856752493112L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -135,7 +135,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385433796450768L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-2432525633866877819L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -143,7 +143,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385433037671720L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3157958782746268240L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -151,7 +151,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385444190357348L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(5879459535837422408L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -191,7 +191,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Prostate Cancer Diagnosis")]
     public IEnumerable<Condition> Prostate_Cancer_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(3271385439016804728L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(7069960912159893930L, () => {
             CqlValueSet a_ = this.Prostate_Cancer(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -211,7 +211,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436688500280L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6349217679780301784L, () => {
             IEnumerable<Condition> a_ = this.Prostate_Cancer_Diagnosis(context);
             bool? b_ = context.Operators.Exists<Condition>(a_);
             return b_;
@@ -220,7 +220,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("First Prostate Cancer Treatment during day of Measurement Period")]
     public Procedure First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Procedure>(3271385439168954392L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Procedure>(2835648534723621959L, () => {
             CqlValueSet a_ = this.Prostate_Cancer_Treatment(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -381,7 +381,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Most Recent Prostate Cancer Staging Tumor Size T1a to T2a")]
     public Observation Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Observation>(3271385433205163288L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Observation>(-4176122043776704687L, () => {
             CqlCode a_ = this.Tumor_staging__tumor_staging_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
@@ -531,7 +531,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Most Recent PSA Test Result is Low")]
     public bool? Most_Recent_PSA_Test_Result_is_Low(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435736960440L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7161242736514616586L, () => {
             CqlValueSet a_ = this.Prostate_Specific_Antigen_Test(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
@@ -627,7 +627,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Most Recent Gleason Score is Low")]
     public bool? Most_Recent_Gleason_Score_is_Low(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436890099320L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7358005442362079522L, () => {
             CqlCode a_ = this.Gleason_score_in_Specimen_Qualitative(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
@@ -761,7 +761,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433642369452L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1246872489746454659L, () => {
             bool? a_ = this.Initial_Population(context);
             Procedure b_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
             bool? c_ = context.Operators.Not((bool?)(b_ is null));
@@ -779,7 +779,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Bone Scan Study Performed")]
     public IEnumerable<Observation> Bone_Scan_Study_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385446259844260L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(288628587474938786L, () => {
             CqlValueSet a_ = this.Bone_Scan(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
 
@@ -832,7 +832,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435482916400L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7820927283973067551L, () => {
             IEnumerable<Observation> a_ = this.Bone_Scan_Study_Performed(context);
             bool? b_ = context.Operators.Exists<Observation>(a_);
             bool? c_ = context.Operators.Not(b_);
@@ -842,7 +842,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Diagnosis of Pain related to Prostate Cancer")]
     public bool? Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385438105741228L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1074005850507574754L, () => {
             CqlValueSet a_ = this.Pain_Warranting_Further_Investigation_for_Prostate_Cancer(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -876,7 +876,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Salvage Therapy Performed after Prostate Cancer Diagnosis")]
     public bool? Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446201120032L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(814682402894497576L, () => {
             CqlValueSet a_ = this.Salvage_Therapy(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -975,7 +975,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has Bone Scan Study Performed with Documented Reason")]
     public bool? Has_Bone_Scan_Study_Performed_with_Documented_Reason(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433825215116L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-57594536143353413L, () => {
             IEnumerable<Observation> a_ = this.Bone_Scan_Study_Performed(context);
 
             bool? b_(Observation BoneScanAfterDiagnosis) {
@@ -995,7 +995,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445268209164L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2111890706368566952L, () => {
             bool? a_ = this.Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(context);
             bool? b_ = this.Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(context);
             bool? c_ = context.Operators.Or(a_, b_);

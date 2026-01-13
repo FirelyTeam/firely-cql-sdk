@@ -78,7 +78,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385447555002424L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3156078639663484527L, () => {
             object a_ = context.ResolveParameter("CMS143FHIRPOAGOpticNerveEval-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -90,7 +90,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385439539466208L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-2745371545005072040L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -99,7 +99,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385435479399944L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-3609001054687520351L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -107,7 +107,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385437251708264L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-5396362845870841428L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -115,7 +115,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385439975184448L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3352052490417106842L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -123,7 +123,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385441256387068L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-1648616902433127686L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -131,7 +131,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438901388532L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6830064780870226235L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Ophthalmological_Services(context);
@@ -203,7 +203,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Primary Open Angle Glaucoma Encounter")]
     public IEnumerable<Encounter> Primary_Open_Angle_Glaucoma_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437046138808L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6161833203670885452L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter_During_Measurement_Period(context);
 
             IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter) {
@@ -235,7 +235,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436569543072L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2588812695149039481L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -254,7 +254,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385438527153844L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3030596775686952599L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -262,7 +262,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Medical Reason for Not Performing Cup to Disc Ratio")]
     public IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385438756725240L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-6092949193270100781L, () => {
             CqlValueSet a_ = this.Cup_to_Disc_Ratio(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationcancelled"));
             IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationcancelled"));
@@ -322,7 +322,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Medical Reason for Not Performing Optic Disc Exam")]
     public IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385443734205352L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(1941253965723847273L, () => {
             CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationcancelled"));
             IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationcancelled"));
@@ -382,7 +382,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434437679716L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8432168175917161390L, () => {
             IEnumerable<Observation> a_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio(context);
             bool? b_ = context.Operators.Exists<Observation>(a_);
             IEnumerable<Observation> c_ = this.Medical_Reason_for_Not_Performing_Optic_Disc_Exam(context);
@@ -394,7 +394,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Cup to Disc Ratio Performed with Result")]
     public IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385449808072516L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-1717978684055323427L, () => {
             CqlValueSet a_ = this.Cup_to_Disc_Ratio(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
 
@@ -443,7 +443,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Optic Disc Exam Performed with Result")]
     public IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385441645184308L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(4437523420981119735L, () => {
             CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
 
@@ -492,7 +492,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385438552312616L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2441993537604612007L, () => {
             IEnumerable<Observation> a_ = this.Cup_to_Disc_Ratio_Performed_with_Result(context);
             bool? b_ = context.Operators.Exists<Observation>(a_);
             IEnumerable<Observation> c_ = this.Optic_Disc_Exam_Performed_with_Result(context);

@@ -121,7 +121,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385349260712676L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(2299050010152453010L, () => {
             object a_ = context.ResolveParameter("DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -133,7 +133,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385352419768052L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-2934060612400956580L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -142,7 +142,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385362437523100L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(-6149379624920616075L, () => {
             IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -150,7 +150,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(3271385360308316284L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(2973477727710290925L, () => {
             IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -158,7 +158,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385359100952908L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(-1854590241274919068L, () => {
             IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -166,7 +166,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385359183914728L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-1804008870246239687L, () => {
             CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -174,7 +174,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385362490530344L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-7238938956640270872L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             CqlValueSet c_ = this.Ophthalmological_Services(context);
@@ -209,7 +209,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Diabetic Retinopathy Encounter")]
     public IEnumerable<Encounter> Diabetic_Retinopathy_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385354330650388L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4682493263808070969L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter_During_Measurement_Period(context);
 
             IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter) {
@@ -273,7 +273,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(3271385361074273020L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(-4896089256406335881L, () => {
             PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
             CqlValueSet b_ = this.Level_of_Severity_of_Retinopathy_Findings(context);
             IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
@@ -362,7 +362,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Medical or Patient Reason for Not Communicating Absence of Macular Edema")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(3271385349054256968L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(-3194015953203176546L, () => {
             PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
             CqlCode b_ = this.Macular_edema_absent__situation_(context);
             IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
@@ -452,7 +452,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Medical or Patient Reason for Not Communicating Presence of Macular Edema")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(3271385361057701432L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(2568311099187060350L, () => {
             PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
             CqlValueSet b_ = this.Macular_Edema_Findings_Present(context);
             IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
@@ -541,7 +541,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385349088851304L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6954175433017395973L, () => {
             IEnumerable<Communication> a_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(context);
             bool? b_ = context.Operators.Exists<Communication>(a_);
             IEnumerable<Communication> c_ = this.Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema(context);
@@ -556,7 +556,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385359095763964L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6971120082248542534L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -574,7 +574,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Macular Exam Performed")]
     public IEnumerable<Observation> Macular_Exam_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385355780898304L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(6692052034929260966L, () => {
             CqlValueSet a_ = this.Macular_Exam(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
@@ -620,7 +620,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385356438673872L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3149268625791439418L, () => {
             bool? a_ = this.Initial_Population(context);
             IEnumerable<Observation> b_ = this.Macular_Exam_Performed(context);
             bool? c_ = context.Operators.Exists<Observation>(b_);
@@ -631,7 +631,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Level of Severity of Retinopathy Findings Communicated")]
     public IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(3271385353033510284L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(8122295655089432951L, () => {
             PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
             CqlValueSet b_ = this.Level_of_Severity_of_Retinopathy_Findings(context);
             IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
@@ -671,7 +671,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Macular Edema Absence Communicated")]
     public IEnumerable<Communication> Macular_Edema_Absence_Communicated(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(3271385356791232140L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(-7171052550869229836L, () => {
             PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
             CqlCode b_ = this.Macular_edema_absent__situation_(context);
             IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
@@ -712,7 +712,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Macular Edema Presence Communicated")]
     public IEnumerable<Communication> Macular_Edema_Presence_Communicated(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(3271385362181267356L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(-1727020035896491417L, () => {
             PropertyInfo a_ = typeof(Communication).GetProperty("ReasonCode");
             CqlValueSet b_ = this.Macular_Edema_Findings_Present(context);
             IEnumerable<Communication> c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
@@ -752,7 +752,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Results of Dilated Macular or Fundus Exam Communicated")]
     public bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385351726981348L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5948642944193482956L, () => {
             IEnumerable<Communication> a_ = this.Level_of_Severity_of_Retinopathy_Findings_Communicated(context);
             bool? b_ = context.Operators.Exists<Communication>(a_);
             IEnumerable<Communication> c_ = this.Macular_Edema_Absence_Communicated(context);
@@ -767,7 +767,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385352212226060L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8004091241498353870L, () => {
             IEnumerable<Communication> a_ = this.Level_of_Severity_of_Retinopathy_Findings_Communicated(context);
             bool? b_ = context.Operators.Exists<Communication>(a_);
             IEnumerable<Communication> c_ = this.Macular_Edema_Absence_Communicated(context);

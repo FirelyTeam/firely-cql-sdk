@@ -66,7 +66,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385449102767904L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(5445798036144351774L, () => {
             object a_ = context.ResolveParameter("CMS157FHIRPainIntensityQuantified-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -78,7 +78,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385446424520408L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(669900998892653617L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -87,7 +87,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Chemotherapy Within 31 Days Prior and During Measurement Period")]
     public IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(3271385436142041716L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(-6279289550066187025L, () => {
             CqlValueSet a_ = this.Chemotherapy_Administration(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -183,7 +183,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Face to Face or Telehealth Encounter with Ongoing Chemotherapy")]
     public IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437572919448L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2050822187251213769L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Audio_Visual_Telehealth_Encounter(context);
@@ -520,7 +520,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Initial Population 1")]
     public IEnumerable<Encounter> Initial_Population_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449745714500L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6943285436870065662L, () => {
             IEnumerable<Encounter> a_ = this.Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(context);
             return a_;
         });
@@ -528,7 +528,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Denominator 1")]
     public IEnumerable<Encounter> Denominator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436177265344L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5218841999648045884L, () => {
             IEnumerable<Encounter> a_ = this.Initial_Population_1(context);
             return a_;
         });
@@ -536,7 +536,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Radiation Treatment Management During Measurement Period with Cancer Diagnosis")]
     public IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444671230848L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8751664804723539959L, () => {
             CqlValueSet a_ = this.Radiation_Treatment_Management(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -582,7 +582,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Initial Population 2")]
     public IEnumerable<Encounter> Initial_Population_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449544383072L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5292503655619133850L, () => {
             IEnumerable<Encounter> a_ = this.Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(context);
             return a_;
         });
@@ -590,7 +590,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Denominator 2")]
     public IEnumerable<Encounter> Denominator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436378596772L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8485148921491715243L, () => {
             IEnumerable<Encounter> a_ = this.Initial_Population_2(context);
             return a_;
         });
@@ -598,7 +598,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Standard Pain Assessment with Result")]
     public IEnumerable<Observation> Standard_Pain_Assessment_with_Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385436138833148L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-6362953295150502911L, () => {
             CqlValueSet a_ = this.Standardized_Pain_Assessment_Tool(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
 
@@ -616,7 +616,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Numerator 1")]
     public IEnumerable<Encounter> Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448134458620L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6851193730119213038L, () => {
             IEnumerable<Encounter> a_ = this.Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(context);
 
             IEnumerable<Encounter> b_(Encounter FaceToFaceOrTelehealthEncounterWithChemo) {
@@ -645,7 +645,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Numerator 2")]
     public IEnumerable<Encounter> Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448201569096L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3723168001165270308L, () => {
             IEnumerable<Encounter> a_ = this.Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(context);
 
             IEnumerable<Encounter> b_(Encounter RadiationManagementEncounter) {
@@ -726,7 +726,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385446498780096L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-4766569364205240576L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -734,7 +734,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385446782904976L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(9094594467394759244L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -742,7 +742,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385442108202600L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-7396799417959384540L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -750,7 +750,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385437784531364L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(5032108411701830267L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

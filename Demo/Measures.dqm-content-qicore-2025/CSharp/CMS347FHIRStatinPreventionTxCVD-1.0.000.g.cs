@@ -189,7 +189,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385447972817368L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-7207067547160678946L, () => {
             object a_ = context.ResolveParameter("CMS347FHIRStatinPreventionTxCVD-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -201,7 +201,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385441838122624L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-1637618704618923893L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -240,7 +240,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("ASCVD Diagnosis or Procedure before End of Measurement Period")]
     public IEnumerable<object> ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385449837433116L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(4164245924017961109L, () => {
             CqlValueSet a_ = this.Myocardial_Infarction(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             CqlCode c_ = this.Subsequent_non_ST_elevation__NSTEMI__myocardial_infarction(context);
@@ -370,7 +370,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Qualifying Encounter During Day of Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Day_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437517098272L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4982836334381235869L, () => {
             CqlValueSet a_ = this.Annual_Wellness_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Office_Visit(context);
@@ -418,7 +418,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Initial Population 1")]
     public bool? Initial_Population_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435616087692L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5589325867242629197L, () => {
             IEnumerable<object> a_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period(context);
             bool? b_ = context.Operators.Exists<object>(a_);
             IEnumerable<Encounter> c_ = this.Qualifying_Encounter_During_Day_of_Measurement_Period(context);
@@ -430,7 +430,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patients Aged 20 to 75 at Start of Measurement Period")]
     public bool? Patients_Aged_20_to_75_at_Start_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442628269048L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5090397957371956718L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -447,7 +447,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("LDL Result Greater Than or Equal To 190")]
     public IEnumerable<Observation> LDL_Result_Greater_Than_or_Equal_To_190(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385440566348556L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(7693972953396668631L, () => {
             CqlValueSet a_ = this.LDL_Cholesterol(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
@@ -485,7 +485,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Hypercholesterolemia Diagnosis")]
     public IEnumerable<Condition> Hypercholesterolemia_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(3271385435567285232L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(7380748297549208520L, () => {
             CqlValueSet a_ = this.Familial_Hypercholesterolemia(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -507,7 +507,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patients Aged 20 to 75 with LDL Cholesterol Result Greater than or Equal to 190 or Hypercholesterolemia without ASCVD")]
     public bool? Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436920834804L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7452783206447913949L, () => {
             bool? a_ = this.Patients_Aged_20_to_75_at_Start_of_Measurement_Period(context);
             IEnumerable<Observation> b_ = this.LDL_Result_Greater_Than_or_Equal_To_190(context);
             IEnumerable<Condition> c_ = this.Hypercholesterolemia_Diagnosis(context);
@@ -524,7 +524,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Initial Population 2")]
     public bool? Initial_Population_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435683198168L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7791455736897779744L, () => {
             bool? a_ = this.Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD(context);
             IEnumerable<Encounter> b_ = this.Qualifying_Encounter_During_Day_of_Measurement_Period(context);
             bool? c_ = context.Operators.Exists<Encounter>(b_);
@@ -535,7 +535,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Diabetes Diagnosis")]
     public bool? Has_Diabetes_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446450620748L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7228677731738464025L, () => {
             CqlValueSet a_ = this.Diabetes(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -556,7 +556,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patients Aged 40 to 75 Years with Diabetes without ASCVD or LDL Greater than 190 or Hypercholesterolemia")]
     public bool? Patients_Aged_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446081129968L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7748908522122343608L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -587,7 +587,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Initial Population 3")]
     public bool? Initial_Population_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435750308644L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5962631845156090878L, () => {
             bool? a_ = this.Patients_Aged_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia(context);
             IEnumerable<Encounter> b_ = this.Qualifying_Encounter_During_Day_of_Measurement_Period(context);
             bool? c_ = context.Operators.Exists<Encounter>(b_);
@@ -598,7 +598,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Ten Year CVD Risk is High")]
     public bool? Ten_Year_CVD_Risk_is_High(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437553368700L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1620907926587819717L, () => {
             CqlCode a_ = this.Cardiovascular_disease_10Y_risk__Likelihood_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
@@ -639,7 +639,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patients Age 40 to 75 Years and have a 10 Year CVD Risk of High without ASCVD and High LDL and Diabetes")]
     public bool? Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436248658856L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2486612621262715549L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -670,7 +670,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Initial Population 4")]
     public bool? Initial_Population_4(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435817419120L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4506315181127075026L, () => {
             bool? a_ = this.Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes(context);
             IEnumerable<Encounter> b_ = this.Qualifying_Encounter_During_Day_of_Measurement_Period(context);
             bool? c_ = context.Operators.Exists<Encounter>(b_);
@@ -681,7 +681,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator 1")]
     public bool? Denominator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444915941992L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4893874749146704577L, () => {
             bool? a_ = this.Initial_Population_1(context);
             return a_;
         });
@@ -689,7 +689,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator 2")]
     public bool? Denominator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444848831516L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7264294075618126345L, () => {
             bool? a_ = this.Initial_Population_2(context);
             return a_;
         });
@@ -697,7 +697,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator 3")]
     public bool? Denominator_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444781721040L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3579989683173250922L, () => {
             bool? a_ = this.Initial_Population_3(context);
             return a_;
         });
@@ -705,7 +705,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator 4")]
     public bool? Denominator_4(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444714610564L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8057960277412130980L, () => {
             bool? a_ = this.Initial_Population_4(context);
             return a_;
         });
@@ -713,7 +713,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385447471872536L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6138367636183201895L, () => {
             CqlValueSet a_ = this.Breastfeeding(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             CqlValueSet c_ = this.Rhabdomyolysis(context);
@@ -741,7 +741,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Allergy to Statin")]
     public bool? Has_Allergy_to_Statin(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434262950572L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7583771530994218922L, () => {
             CqlValueSet a_ = this.Statin_Allergen(context);
             IEnumerable<AllergyIntolerance> b_ = context.Operators.Retrieve<AllergyIntolerance>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance"));
 
@@ -768,7 +768,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Hepatitis or Liver Disease Diagnosis")]
     public bool? Has_Hepatitis_or_Liver_Disease_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435826970120L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4789068474233169409L, () => {
             CqlValueSet a_ = this.Hepatitis_A(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             CqlValueSet c_ = this.Hepatitis_B(context);
@@ -795,7 +795,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Statin Associated Muscle Symptoms")]
     public bool? Has_Statin_Associated_Muscle_Symptoms(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385441332786420L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5745765587194939659L, () => {
             CqlValueSet a_ = this.Statin_Associated_Muscle_Symptoms(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -816,7 +816,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has ESRD Diagnosis")]
     public bool? Has_ESRD_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442976283472L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5357553850084823202L, () => {
             CqlValueSet a_ = this.End_Stage_Renal_Disease(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -837,7 +837,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Adverse Reaction to Statin")]
     public bool? Has_Adverse_Reaction_to_Statin(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443763769280L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1649441142218493680L, () => {
             CqlValueSet a_ = this.Statin_Allergen(context);
             IEnumerable<AdverseEvent> b_ = context.Operators.Retrieve<AdverseEvent>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-adverseevent"));
 
@@ -859,7 +859,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Medical Reason for Not Ordering Statin Therapy")]
     public bool? Has_Medical_Reason_for_Not_Ordering_Statin_Therapy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437958169424L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2900473731418674548L, () => {
             CqlValueSet a_ = this.Low_Intensity_Statin_Therapy(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
             IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
@@ -921,7 +921,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437382832196L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8214109954115230834L, () => {
             bool? a_ = this.Has_Allergy_to_Statin(context);
             bool? b_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             bool? c_ = context.Operators.Or(a_, b_);
@@ -943,7 +943,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Statin Therapy Ordered during Measurement Period")]
     public IEnumerable<MedicationRequest> Statin_Therapy_Ordered_during_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(3271385439653179072L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-207764515466019993L, () => {
             CqlValueSet a_ = this.Low_Intensity_Statin_Therapy(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1068,7 +1068,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Medication Active during the Measurement Period")]
     public IEnumerable<MedicationRequest> Medication_Active_during_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(3271385438891763684L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-2813718820927620392L, () => {
             CqlValueSet a_ = this.Low_Intensity_Statin_Therapy(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1187,7 +1187,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437749762184L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7343972711925249427L, () => {
             IEnumerable<MedicationRequest> a_ = this.Statin_Therapy_Ordered_during_Measurement_Period(context);
             bool? b_ = context.Operators.Exists<MedicationRequest>(a_);
             IEnumerable<MedicationRequest> c_ = this.Medication_Active_during_the_Measurement_Period(context);
@@ -1199,7 +1199,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385436152103528L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-4265701889138765309L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -1207,7 +1207,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385433740241864L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(4981223420342236931L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -1215,7 +1215,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385439275279776L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(7829354466262601679L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -1223,7 +1223,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385433495394524L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-4537898652197643190L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

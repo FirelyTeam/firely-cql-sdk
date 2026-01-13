@@ -60,7 +60,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385355710573408L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-7635985198364237165L, () => {
             object a_ = context.ResolveParameter("PalliativeCareFHIR-0.6.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -72,7 +72,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385361851253528L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(7402591205230841493L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -81,7 +81,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
 
     [CqlExpressionDefinition("Palliative Care in the Measurement Period")]
     public bool? Palliative_Care_in_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385364249187304L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8977964396406550542L, () => {
             CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));

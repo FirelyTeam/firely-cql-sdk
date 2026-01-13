@@ -102,7 +102,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385439782787012L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8633000620496989027L, () => {
             object a_ = context.ResolveParameter("CMS50FHIRReceiptofSpecialistReport-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -114,7 +114,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385437868187988L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(993086970170150705L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -123,7 +123,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("Has Encounter during Measurement Period")]
     public bool? Has_Encounter_during_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444275024508L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6342340037644257345L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Ophthalmological_Services(context);
@@ -163,7 +163,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("Has Intervention during Measurement Period")]
     public bool? Has_Intervention_during_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446821604684L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1165576977205401652L, () => {
             CqlValueSet a_ = this.Behavioral_Neuropsych_Assessment(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
             CqlCode c_ = this.Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(context);
@@ -270,7 +270,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("First Referral during First 10 Months of Measurement Period")]
     public ServiceRequest First_Referral_during_First_10_Months_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<ServiceRequest>(3271385448916159600L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<ServiceRequest>(-6349200580831879765L, () => {
             CqlValueSet a_ = this.Referral(context);
             IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 
@@ -319,7 +319,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437734498716L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7184150108548928081L, () => {
             bool? a_ = this.Has_Encounter_during_Measurement_Period(context);
             bool? b_ = this.Has_Intervention_during_Measurement_Period(context);
             bool? c_ = context.Operators.Or(a_, b_);
@@ -332,7 +332,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442233800880L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5090247856032037412L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -340,7 +340,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385435507852092L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-3766651685399998887L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -348,7 +348,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385435964689820L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(2101280260375690497L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -356,7 +356,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385441309672044L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(4493470933035843420L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -364,7 +364,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385437963353992L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-7763885849007845267L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -372,7 +372,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("Referring Clinician Receives Consultant Report to Close Referral Loop")]
     public bool? Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445773114132L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(216167620418217975L, () => {
             CqlCode a_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Task> c_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-task"));
@@ -428,7 +428,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442027617964L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8962450575396821569L, () => {
             bool? a_ = this.Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop(context);
             return a_;
         });

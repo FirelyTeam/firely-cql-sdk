@@ -145,7 +145,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385438423950192L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(7239015735015004398L, () => {
             object a_ = context.ResolveParameter("CMS1017FHIRHHFI-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -157,7 +157,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385449576062376L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-2859982306975276846L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -166,7 +166,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444930092388L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6631354683532865594L, () => {
             IEnumerable<Encounter> a_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -194,7 +194,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443239013832L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8909640820178408265L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
             return a_;
         });
@@ -202,7 +202,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443117079868L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8325884910617275031L, () => {
             IEnumerable<Encounter> a_ = this.Initial_Population(context);
             return a_;
         });
@@ -238,7 +238,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Encounter With A Fall Diagnosis")]
     public IEnumerable<Encounter> Encounter_With_A_Fall_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446785560300L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4260035697956895772L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter QualifyingFall) {
@@ -282,7 +282,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Encounter With A Fall Event")]
     public IEnumerable<Encounter> Encounter_With_A_Fall_Event(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441054574216L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(867772196484577946L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientEncounter) {
@@ -312,7 +312,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Encounter Where A Fall Occurred")]
     public IEnumerable<Encounter> Encounter_Where_A_Fall_Occurred(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385434631980840L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(795907075661115072L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_A_Fall_Diagnosis(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_A_Fall_Event(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -404,7 +404,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Encounter With A Fall Not Present On Admission")]
     public IEnumerable<Encounter> Encounter_With_A_Fall_Not_Present_On_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444979376928L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6325763340603139774L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_Where_A_Fall_Occurred(context);
 
             bool? b_(Encounter EncounterFallDiagnosis) {
@@ -420,7 +420,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Encounter Where A Fall And Major Injury Occurred Not POA")]
     public IEnumerable<Encounter> Encounter_Where_A_Fall_And_Major_Injury_Occurred_Not_POA(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385447242249360L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4813225188493827856L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_A_Fall_Not_Present_On_Admission(context);
 
             bool? b_(Encounter FallOccurred) {
@@ -459,7 +459,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Encounter Where A Fall And Moderate Injury Occurred Not POA")]
     public IEnumerable<Encounter> Encounter_Where_A_Fall_And_Moderate_Injury_Occurred_Not_POA(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385439964860448L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(9037820097058256858L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_A_Fall_Not_Present_On_Admission(context);
 
             bool? b_(Encounter FallOccurred) {
@@ -498,7 +498,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437340227264L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(75500722536813452L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_Where_A_Fall_And_Major_Injury_Occurred_Not_POA(context);
             IEnumerable<Encounter> b_ = this.Encounter_Where_A_Fall_And_Moderate_Injury_Occurred_Not_POA(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -508,7 +508,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Encounter With A Fall Present On Admission")]
     public IEnumerable<Encounter> Encounter_With_A_Fall_Present_On_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445021439068L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6633124270615127096L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -525,7 +525,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385439186289536L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(9090268816274383848L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_A_Fall_Present_On_Admission(context);
             return a_;
         });
@@ -533,7 +533,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Numerator Exclusions")]
     public IEnumerable<Encounter> Numerator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445092892820L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7919091718784135074L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_A_Fall_Present_On_Admission(context);
             return a_;
         });
@@ -541,7 +541,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Body Mass Index (BMI)")]
     public IEnumerable<CqlQuantity> Risk_Variable_Body_Mass_Index__BMI_(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlQuantity>>(3271385433664753924L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlQuantity>>(-8832772703149002861L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-bmi"));
 
             IEnumerable<Observation> b_(Observation BMI) {
@@ -593,7 +593,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable All Encounter Diagnoses with Rank and POA Indication")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)?> Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)?>>(3271385440443338304L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)?>>(7202944664208919231L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             (CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)? b_(Encounter InpatientEncounter) {
@@ -769,7 +769,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Abnormal Weight Loss or Malnutrition Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Abnormal_Weight_Loss_or_Malnutrition_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435953427752L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1687786406611411202L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -789,7 +789,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Anticoagulant Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Anticoagulant_Active_at_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436470936220L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2537708922668979649L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientEncounter) {
@@ -898,7 +898,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Anticoagulant Administration During Encounter")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Anticoagulant_Administration_During_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444353436572L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5616865709202141790L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientEncounter) {
@@ -964,7 +964,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Antidepressant Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Antidepressant_Active_at_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385439703577464L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3270489974385968258L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientEncounter) {
@@ -1073,7 +1073,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Antihypertensive Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Antihypertensive_Active_at_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385447758157540L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(77730647164612247L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientEncounter) {
@@ -1182,7 +1182,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with CNS Depressant Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_CNS_Depressant_Active_at_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446499003008L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5774110077431550078L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientEncounter) {
@@ -1291,7 +1291,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Diuretic Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Diuretic_Active_at_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435989096032L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-101143292205297395L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientEncounter) {
@@ -1400,7 +1400,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Opioid Medication Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Opioid_Medication_Active_at_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446496522536L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2482244248561422898L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter InpatientEncounter) {
@@ -1509,7 +1509,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Coagulation Disorder Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Coagulation_Disorder_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444797574592L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1980631045349188772L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1526,7 +1526,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Delirium or Dementia or Other Psychosis Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Delirium_or_Dementia_or_Other_Psychosis_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385440654427684L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3816316150793516446L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1543,7 +1543,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Depression Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Depression_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438753232832L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4214772090319590937L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1560,7 +1560,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Epilepsy Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Epilepsy_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385450072092156L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7000000165091156417L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1577,7 +1577,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Leukemia or Lymphoma Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Leukemia_or_Lymphoma_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448792477084L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7398759844787738930L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1594,7 +1594,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Liver Disease Moderate to Severe Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Liver_Disease_Moderate_to_Severe_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441409727376L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3901620165660556613L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1611,7 +1611,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Malignant Bone Disease Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Malignant_Bone_Disease_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436580507924L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6519893641608176887L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1628,7 +1628,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Neurologic Disorder Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Neurologic_Disorder_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435977587300L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-7749071699323752421L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1645,7 +1645,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Obesity Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Obesity_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385447552946236L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1111109168538456667L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1662,7 +1662,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Osteoporosis Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Osteoporosis_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449273534556L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1864719601187372501L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1679,7 +1679,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Peripheral Neuropathy Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Peripheral_Neuropathy_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436083842732L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8941770802708293932L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1696,7 +1696,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Stroke Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Stroke_Present_on_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448842571296L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7549789774069722028L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1713,7 +1713,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("Risk Variable Encounter with Suicide Attempt")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Suicide_Attempt(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449212150240L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-9085156353756314203L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -1747,7 +1747,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385438774922512L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-7188146491602681279L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -1755,7 +1755,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385443178715072L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-6065141591157605130L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -1763,7 +1763,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385433806387896L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-2041073189866593713L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -1771,7 +1771,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385445166792020L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-8546165489307990724L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

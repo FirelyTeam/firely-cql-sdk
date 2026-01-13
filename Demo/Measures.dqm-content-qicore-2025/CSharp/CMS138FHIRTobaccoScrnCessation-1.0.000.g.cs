@@ -173,7 +173,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385446972785280L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-4959295622034925684L, () => {
             object a_ = context.ResolveParameter("CMS138FHIRTobaccoScrnCessation-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -185,7 +185,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385449748432568L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-7955012903259529784L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -194,7 +194,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Qualifying Visit During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Visit_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443833750052L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7177434960902520998L, () => {
             IEnumerable<Encounter> a_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
             bool? b_(Encounter E) {
@@ -295,7 +295,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Preventive Visit During Measurement Period")]
     public IEnumerable<Encounter> Preventive_Visit_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385440504629136L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5898871497816485333L, () => {
             CqlValueSet a_ = this.Annual_Wellness_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
@@ -387,7 +387,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385441342052888L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(2669612615395309907L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -410,7 +410,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Denominator 1")]
     public bool? Denominator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385438068518560L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3285180068082547925L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -418,7 +418,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Most Recent Tobacco Use Screening Indicates Tobacco User")]
     public Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Observation>(3271385437850920836L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Observation>(-2923731124351829025L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-smokingstatus"));
             IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationSmokingStatus(context, a_);
 
@@ -463,7 +463,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Denominator 2")]
     public bool? Denominator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385438269849988L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4662309398437711333L, () => {
             bool? a_ = this.Initial_Population(context);
             Observation b_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context);
             bool? c_ = context.Operators.Not((bool?)(b_ is null));
@@ -474,7 +474,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Denominator 3")]
     public bool? Denominator_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385438202739512L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3034990634367681347L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -482,7 +482,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Most Recent Tobacco Use Screening Indicates Tobacco Non User")]
     public Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Observation>(3271385447739847328L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Observation>(7185003250491743186L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-smokingstatus"));
             IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationSmokingStatus(context, a_);
 
@@ -527,7 +527,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448202865436L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4578886531463750730L, () => {
             Observation a_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(context);
             bool? b_ = context.Operators.Not((bool?)(a_ is null));
             Observation c_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context);
@@ -539,7 +539,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Tobacco Cessation Counseling Given")]
     public IEnumerable<object> Tobacco_Cessation_Counseling_Given(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385433149970116L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-1233005595140781584L, () => {
             CqlValueSet a_ = this.Tobacco_Use_Cessation_Counseling(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
             IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isInterventionPerformed(context, b_);
@@ -650,7 +650,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Tobacco Cessation Pharmacotherapy Ordered")]
     public IEnumerable<MedicationRequest> Tobacco_Cessation_Pharmacotherapy_Ordered(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(3271385444141265000L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-8673418154702639994L, () => {
             CqlValueSet a_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -720,7 +720,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Active Pharmacotherapy for Tobacco Cessation")]
     public IEnumerable<MedicationRequest> Active_Pharmacotherapy_for_Tobacco_Cessation(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(3271385437024734608L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-4580032638158646680L, () => {
             CqlValueSet a_ = this.Tobacco_Use_Cessation_Pharmacotherapy(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -778,7 +778,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448269975912L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8558024697869650102L, () => {
             IEnumerable<object> a_ = this.Tobacco_Cessation_Counseling_Given(context);
             bool? b_ = context.Operators.Exists<object>(a_);
             IEnumerable<MedicationRequest> c_ = this.Tobacco_Cessation_Pharmacotherapy_Ordered(context);
@@ -793,7 +793,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Numerator 3")]
     public bool? Numerator_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448337086388L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1812779733273017819L, () => {
             Observation a_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(context);
             bool? b_ = context.Operators.Not((bool?)(a_ is null));
             Observation c_ = this.Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(context);
@@ -814,7 +814,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433775930832L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6310344248357646308L, () => {
             bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             return a_;
         });
@@ -822,7 +822,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385435917497696L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-1836264205076716889L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -830,7 +830,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385436609884336L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-3692462481776107665L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -838,7 +838,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385439555515144L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(2422896220304669821L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -846,7 +846,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385437707668164L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(4364689585748560777L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

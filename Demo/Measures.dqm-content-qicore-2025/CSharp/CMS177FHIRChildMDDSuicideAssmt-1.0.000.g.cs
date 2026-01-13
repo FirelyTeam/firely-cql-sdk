@@ -78,7 +78,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385439457679728L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(8755168546983360421L, () => {
             object a_ = context.ResolveParameter("CMS177FHIRChildMDDSuicideAssmt-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -90,7 +90,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385447920254888L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(5323727449356102700L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -99,7 +99,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385443804634896L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-2001458593093813737L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -107,7 +107,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385441632733632L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-7256827302783747340L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -115,7 +115,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385445120803000L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-2246690249441990185L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -123,7 +123,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385443510984532L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(8732306134938989179L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -131,7 +131,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Encounter With Condition Major Depressive Disorder")]
     public IEnumerable<Encounter> Encounter_With_Condition_Major_Depressive_Disorder(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441967380120L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8107967900919985246L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Outpatient_Consultation(context);
@@ -198,7 +198,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Encounter With Reason Major Depressive Disorder")]
     public IEnumerable<Encounter> Encounter_With_Reason_Major_Depressive_Disorder(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443807572588L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(720527832511942766L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Outpatient_Consultation(context);
@@ -254,7 +254,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Major Depressive Disorder Encounter")]
     public IEnumerable<Encounter> Major_Depressive_Disorder_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448255689004L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3689749010899809839L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Condition_Major_Depressive_Disorder(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_Reason_Major_Depressive_Disorder(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -264,7 +264,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444272743368L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7797060179689319226L, () => {
             IEnumerable<Encounter> a_ = this.Major_Depressive_Disorder_Encounter(context);
 
             bool? b_(Encounter MDDEncounter) {
@@ -295,7 +295,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445605515068L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(572249356221058848L, () => {
             IEnumerable<Encounter> a_ = this.Initial_Population(context);
             return a_;
         });
@@ -303,7 +303,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Encounter With Procedure For Suicide Risk Assessment")]
     public IEnumerable<Encounter> Encounter_With_Procedure_For_Suicide_Risk_Assessment(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435830736812L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4638551457840909626L, () => {
             IEnumerable<Encounter> a_ = this.Major_Depressive_Disorder_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter MDDEncounter) {
@@ -401,7 +401,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Encounter With Observation For Suicide Risk Assessment")]
     public IEnumerable<Encounter> Encounter_With_Observation_For_Suicide_Risk_Assessment(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435632498240L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6020880057812522378L, () => {
             IEnumerable<Encounter> a_ = this.Major_Depressive_Disorder_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter MDDEncounter) {
@@ -444,7 +444,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435794245824L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3556269054093713636L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Procedure_For_Suicide_Risk_Assessment(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_Observation_For_Suicide_Risk_Assessment(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);

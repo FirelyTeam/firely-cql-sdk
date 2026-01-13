@@ -287,7 +287,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385447189975420L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3839642862747079336L, () => {
             object a_ = context.ResolveParameter("CMS156FHIRHighRiskMedsElderly-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -299,7 +299,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385437903722108L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-1712437477775746068L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -308,7 +308,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385436961736924L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1461678439183939324L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Ophthalmological_Services(context);
@@ -384,7 +384,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435683435556L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4399740766800447863L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -403,7 +403,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446808471544L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(474438247560395417L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -411,7 +411,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442263541164L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3566858140012574967L, () => {
             bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             bool? b_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
             bool? c_ = context.Operators.Or(a_, b_);
@@ -498,7 +498,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Same High Risk Medications Ordered on Different Days")]
     public IEnumerable<MedicationRequest> Same_High_Risk_Medications_Ordered_on_Different_Days(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(3271385444385300596L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(6848809231216479323L, () => {
             CqlValueSet a_ = this.Potentially_Harmful_Antihistamines_for_Older_Adults(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1136,7 +1136,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Two High Risk Medications with Prolonged Duration")]
     public bool? Two_High_Risk_Medications_with_Prolonged_Duration(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445999112268L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8402263243327309117L, () => {
             CqlValueSet a_ = this.Potentially_Harmful_Antiinfectives_for_Older_Adults(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1453,7 +1453,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("High Risk Medications with Average Daily Dose Criteria")]
     public bool? High_Risk_Medications_with_Average_Daily_Dose_Criteria(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436554195884L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4939737892995592945L, () => {
             CqlValueSet a_ = this.Digoxin_Medications(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1540,7 +1540,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445441799448L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6657473660832751437L, () => {
             IEnumerable<MedicationRequest> a_ = this.Same_High_Risk_Medications_Ordered_on_Different_Days(context);
             bool? b_ = context.Operators.Exists<MedicationRequest>(a_);
             bool? c_ = this.Two_High_Risk_Medications_with_Prolonged_Duration(context);
@@ -1553,7 +1553,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("More than One Antipsychotic Order")]
     public bool? More_than_One_Antipsychotic_Order(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433104797976L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5339672906553000170L, () => {
             CqlValueSet a_ = this.Potentially_Harmful_Antipsychotics_for_Older_Adults(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1591,7 +1591,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Schizophrenia Diagnosis")]
     public IEnumerable<object> Schizophrenia_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385440617739960L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(2608599169925942613L, () => {
             CqlValueSet a_ = this.Schizophrenia(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1603,7 +1603,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Bipolar Disorder Diagnosis")]
     public IEnumerable<object> Bipolar_Disorder_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385434906801128L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3459923094508400090L, () => {
             CqlValueSet a_ = this.Bipolar_Disorder(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1615,7 +1615,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Antipsychotic Index Prescription Start Date")]
     public CqlDateTime Antipsychotic_Index_Prescription_Start_Date(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(3271385445284268216L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(-2392062725737743630L, () => {
             CqlValueSet a_ = this.Potentially_Harmful_Antipsychotics_for_Older_Adults(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1673,7 +1673,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("More than One Benzodiazepine Order")]
     public bool? More_than_One_Benzodiazepine_Order(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385447272125124L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7787489465336773734L, () => {
             CqlValueSet a_ = this.Potentially_Harmful_Benzodiazepines_for_Older_Adults(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1711,7 +1711,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Seizure Disorder Diagnosis")]
     public IEnumerable<object> Seizure_Disorder_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385435055580568L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-1131365608370837245L, () => {
             CqlValueSet a_ = this.Seizure_Disorder(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1723,7 +1723,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("REM Sleep Behavior Disorder Diagnosis")]
     public IEnumerable<object> REM_Sleep_Behavior_Disorder_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385434287890088L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(1960016341670198298L, () => {
             CqlValueSet a_ = this.REM_Sleep_Behavior_Disorder(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1735,7 +1735,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Benzodiazepine Withdrawal Diagnosis")]
     public IEnumerable<object> Benzodiazepine_Withdrawal_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385444228334052L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(8657316729577408796L, () => {
             CqlValueSet a_ = this.Benzodiazepine_Withdrawal(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1747,7 +1747,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Alcohol Withdrawal Diagnosis")]
     public IEnumerable<object> Alcohol_Withdrawal_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385445494835848L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-4814865430801165110L, () => {
             CqlValueSet a_ = this.Alcohol_Withdrawal(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1759,7 +1759,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Generalized Anxiety Disorder Diagnosis")]
     public IEnumerable<object> Generalized_Anxiety_Disorder_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385436885635940L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-2199162515832252667L, () => {
             CqlValueSet a_ = this.Generalized_Anxiety_Disorder(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1771,7 +1771,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Benzodiazepine Index Prescription Start Date")]
     public CqlDateTime Benzodiazepine_Index_Prescription_Start_Date(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(3271385442720571284L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(-4082436594742457808L, () => {
             CqlValueSet a_ = this.Potentially_Harmful_Benzodiazepines_for_Older_Adults(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1829,7 +1829,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445374688972L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3712140800662252754L, () => {
             bool? a_ = this.More_than_One_Antipsychotic_Order(context);
             IEnumerable<object> b_ = this.Schizophrenia_Diagnosis(context);
             IEnumerable<object> c_ = this.Bipolar_Disorder_Diagnosis(context);
@@ -1885,7 +1885,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Numerator 3")]
     public bool? Numerator_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445307578496L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1791115892679114642L, () => {
             bool? a_ = this.Numerator_2(context);
             bool? b_ = this.Numerator_1(context);
             bool? d_ = context.Operators.Not(a_);
@@ -1897,7 +1897,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385449025351780L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(9018702827967443542L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -1905,7 +1905,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385449247096788L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(1955720262168920359L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -1913,7 +1913,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385438045927908L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(7680980797223397342L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -1921,7 +1921,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385437771719296L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-5152880206814246566L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

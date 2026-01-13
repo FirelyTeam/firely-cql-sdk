@@ -56,7 +56,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385435201577552L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(5065781295884409926L, () => {
             object a_ = context.ResolveParameter("TJCOverall-8.25.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -68,7 +68,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385448523893768L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-7914836517776615362L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -77,7 +77,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
     [CqlExpressionDefinition("Non Elective Inpatient Encounter With Age")]
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_With_Age(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438442353092L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5301151410846989508L, () => {
             CqlValueSet a_ = this.Nonelective_Inpatient_Encounter(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -107,7 +107,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
     [CqlExpressionDefinition("Ischemic Stroke Encounter")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445240996932L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6504890826907683419L, () => {
             IEnumerable<Encounter> a_ = this.Non_Elective_Inpatient_Encounter_With_Age(context);
 
             bool? b_(Encounter NonElectiveEncounterWithAge) {
@@ -123,7 +123,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
     [CqlExpressionDefinition("Ischemic Stroke Encounters With Discharge Disposition")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounters_With_Discharge_Disposition(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446226974692L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-504688316559473445L, () => {
             IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
 
             bool? b_(Encounter IschemicStrokeEncounter) {
@@ -162,7 +162,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
     [CqlExpressionDefinition("Intervention Comfort Measures")]
     public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385433186079764L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(8089168431957467543L, () => {
             CqlValueSet a_ = this.Comfort_Measures(context);
             IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 
@@ -216,7 +216,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
 
     [CqlExpressionDefinition("Encounter With Comfort Measures During Hospitalization")]
     public IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Hospitalization(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449478447896L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8391212529694341440L, () => {
             IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {

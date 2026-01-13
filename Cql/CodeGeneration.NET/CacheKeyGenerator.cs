@@ -6,9 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Security.Cryptography;
-using System.Text;
-
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
@@ -38,7 +35,7 @@ internal sealed class DeterministicIdGenerator : ICacheKeyGenerator
 {
     private readonly string _salt;
     private readonly Dictionary<string, byte> _collisionVersions = new();
-    
+
     /// <summary>
     /// Initializes a new instance of <see cref="DeterministicIdGenerator"/>.
     /// </summary>
@@ -47,12 +44,12 @@ internal sealed class DeterministicIdGenerator : ICacheKeyGenerator
     {
         _salt = salt ?? string.Empty;
     }
-    
+
     /// <inheritdoc />
     public long GenerateCacheKey(string libraryIdentifier, string definitionName)
     {
         var key = $"{libraryIdentifier}.{definitionName}";
-        
+
         lock (_collisionVersions)
         {
             if (!_collisionVersions.TryGetValue(key, out var version))
@@ -66,7 +63,7 @@ internal sealed class DeterministicIdGenerator : ICacheKeyGenerator
                 version++;
                 _collisionVersions[key] = version;
             }
-            
+
             return GenerateDeterministicId(libraryIdentifier, definitionName, version);
         }
     }
@@ -83,13 +80,13 @@ internal sealed class DeterministicIdGenerator : ICacheKeyGenerator
         // Combine all inputs: libraryIdentifier + definitionName + salt + version
         var input = $"{libraryIdentifier}.{definitionName}.{_salt}.{version}";
         var bytes = Encoding.UTF8.GetBytes(input);
-        
+
         // Compute SHA256 hash
         var hashBytes = SHA256.HashData(bytes);
-        
+
         // Take first 8 bytes and convert to long
         var id = BitConverter.ToInt64(hashBytes, 0);
-        
+
         return id;
     }
 }

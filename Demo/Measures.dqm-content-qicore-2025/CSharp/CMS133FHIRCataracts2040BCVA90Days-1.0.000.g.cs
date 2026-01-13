@@ -274,7 +274,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385437846248668L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1753348495276809643L, () => {
             object a_ = context.ResolveParameter("CMS133FHIRCataracts2040BCVA90Days-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -286,7 +286,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385434085534684L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-14077989710860312L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -295,7 +295,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Cataract Surgery Between January and September of Measurement Period")]
     public IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(3271385435375680872L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(-471982616688789783L, () => {
             CqlValueSet a_ = this.Cataract_Surgery(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -453,7 +453,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Procedure> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(3271385442157349700L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(156850899568859544L, () => {
             IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
 
             bool? b_(Procedure CataractSurgeryPerformed) {
@@ -476,7 +476,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Procedure> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(3271385441990639960L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(-7754270258949913857L, () => {
             IEnumerable<Procedure> a_ = this.Initial_Population(context);
             return a_;
         });
@@ -515,7 +515,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Cataract Surgeries in Patients with Significant Ocular Conditions Impacting the Visual Outcome of Surgery")]
     public IEnumerable<Procedure> Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(3271385444403860396L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(6166762621108457820L, () => {
             IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
 
             IEnumerable<Procedure> b_(Procedure CataractSurgeryPerformed) {
@@ -880,7 +880,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Procedure> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(3271385436537283596L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(-3599080278286777202L, () => {
             IEnumerable<Procedure> a_ = this.Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery(context);
             return a_;
         });
@@ -888,7 +888,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Procedure> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(3271385442532362148L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(8787873102356196514L, () => {
             IEnumerable<Procedure> a_ = this.Cataract_Surgery_Between_January_and_September_of_Measurement_Period(context);
 
             IEnumerable<Procedure> b_(Procedure CataractSurgeryPerformed) {
@@ -1139,7 +1139,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385440088462212L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(410851233763199253L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -1147,7 +1147,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385441749182324L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(8606949024631205076L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -1155,7 +1155,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385441958727556L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-2789265792709226923L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -1163,7 +1163,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385443316222624L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-5892648424074902819L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

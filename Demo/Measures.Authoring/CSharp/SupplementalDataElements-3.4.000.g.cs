@@ -40,7 +40,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385358072926676L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(4263348478441094468L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -49,7 +49,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385360573608636L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-5377255478558118731L, () => {
 
             List<Extension> a_() {
 
@@ -167,7 +167,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385350480797980L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(441587053582915267L, () => {
             CqlValueSet a_ = this.Payer_Type(context);
             IEnumerable<Coverage> b_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
 
@@ -188,7 +188,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385352230509548L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(611400612990559444L, () => {
 
             List<Extension> a_() {
 
@@ -308,7 +308,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385356867972872L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-4862447719526612531L, () => {
 
             CqlCode a_() {
 

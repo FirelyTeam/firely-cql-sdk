@@ -64,7 +64,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385437049319952L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(719764501864672615L, () => {
             object a_ = context.ResolveParameter("CMS155FHIRWgtAssessCounseling-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -76,7 +76,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385441163375560L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(2189845128463297569L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -85,7 +85,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385446858033264L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-6003790436015656796L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -93,7 +93,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385441061492256L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-4785729452146541078L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -101,7 +101,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385433935004312L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-1336836600272145395L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -109,7 +109,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385434005764532L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(1972549228661881347L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -117,7 +117,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385447010821656L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(328906296102285067L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Preventive_Care_Services_Individual_Counseling(context);
@@ -155,7 +155,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442269771304L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5606214897224660078L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -175,7 +175,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446455419100L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-711802206382753402L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -183,7 +183,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Pregnancy Diagnosis Which Overlaps Measurement Period")]
     public IEnumerable<object> Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385444758840500L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(8002013089842405493L, () => {
             CqlValueSet a_ = this.Pregnancy(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -204,7 +204,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437142606112L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1328021931932343539L, () => {
             bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             IEnumerable<object> b_ = this.Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(context);
             bool? c_ = context.Operators.Exists<object>(b_);
@@ -215,7 +215,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("BMI Percentile in Measurement Period")]
     public IEnumerable<Observation> BMI_Percentile_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385449821221592L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(7174644324396894712L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/pediatric-bmi-for-age"));
             IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationPediatricBMI(context, a_);
 
@@ -239,7 +239,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Height in Measurement Period")]
     public IEnumerable<Observation> Height_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385444865452568L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-5308286006825359213L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-height"));
             IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationBodyHeight(context, a_);
 
@@ -263,7 +263,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Weight in Measurement Period")]
     public IEnumerable<Observation> Weight_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385436749856548L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(282172865202226206L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-weight"));
             IEnumerable<Observation> b_ = Status_1_15_000.Instance.isObservationBodyWeight(context, a_);
 
@@ -287,7 +287,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434497564716L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7859477461501522855L, () => {
             IEnumerable<Observation> a_ = this.BMI_Percentile_in_Measurement_Period(context);
             bool? b_ = context.Operators.Exists<Observation>(a_);
             IEnumerable<Observation> c_ = this.Height_in_Measurement_Period(context);
@@ -302,7 +302,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434564675192L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6185469553368083075L, () => {
             CqlValueSet a_ = this.Counseling_for_Nutrition(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
             IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isInterventionPerformed(context, b_);
@@ -386,7 +386,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Numerator 3")]
     public bool? Numerator_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434631785668L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(2009784203490838187L, () => {
             CqlValueSet a_ = this.Counseling_for_Physical_Activity(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
             IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isInterventionPerformed(context, b_);
@@ -470,7 +470,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Stratification 1")]
     public bool? Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439024486000L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1520144116127633675L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -487,7 +487,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Stratification 2")]
     public bool? Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439225817428L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4851904811856659463L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;

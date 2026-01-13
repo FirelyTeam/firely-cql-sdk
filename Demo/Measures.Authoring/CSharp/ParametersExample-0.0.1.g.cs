@@ -28,7 +28,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     [CqlParameterDefinition("AgeThreshold")]
     public int? AgeThreshold(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<int?>(3271385347084170660L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<int?>(24614955827976076L, () => {
             object a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
             return (int?)a_;
         });
@@ -40,7 +40,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385349693884032L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-2419106794441990221L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -49,7 +49,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     [CqlExpressionDefinition("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(3271385361540245040L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(1522499957662536051L, () => {
             CqlDate a_ = context.Operators.Today();
             return a_;
         });
@@ -57,7 +57,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     [CqlExpressionDefinition("Patient Filter")]
     public Patient Patient_Filter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385357900627144L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(7766613094596543236L, () => {
             Patient a_ = this.Patient(context);
             Patient[] b_ = [
                 a_,
@@ -91,7 +91,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     [CqlExpressionDefinition("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Date>(3271385351297339604L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Date>(-274790349316496141L, () => {
             Patient a_ = this.Patient_Filter(context);
             Date b_ = a_?.BirthDateElement;
             return b_;
@@ -100,7 +100,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     [CqlExpressionDefinition("Patient Age in Years")]
     public int? Patient_Age_in_Years(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<int?>(3271385348809932576L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<int?>(5272699714539778757L, () => {
             Date a_ = this.Patient_Birthdate(context);
             CqlDate b_ = FHIRHelpers_4_3_000.Instance.ToDate(context, a_);
             CqlDate c_ = this.CurrentDate(context);
@@ -111,7 +111,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     [CqlExpressionDefinition("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385359621507732L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6736663683244303383L, () => {
             int? a_ = this.Patient_Age_in_Years(context);
             int? b_ = this.AgeThreshold(context);
             bool? c_ = context.Operators.Greater(a_, b_);

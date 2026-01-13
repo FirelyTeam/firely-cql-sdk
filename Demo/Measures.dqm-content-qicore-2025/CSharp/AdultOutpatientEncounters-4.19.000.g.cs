@@ -52,7 +52,7 @@ public partial class AdultOutpatientEncounters_4_19_000 : ILibrary, ISingleton<A
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385445199873328L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(4241500979845946323L, () => {
             object a_ = context.ResolveParameter("AdultOutpatientEncounters-4.19.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -64,7 +64,7 @@ public partial class AdultOutpatientEncounters_4_19_000 : ILibrary, ISingleton<A
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385438574034792L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-1615758985225569310L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -73,7 +73,7 @@ public partial class AdultOutpatientEncounters_4_19_000 : ILibrary, ISingleton<A
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443897309496L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1466634276875816026L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Annual_Wellness_Visit(context);

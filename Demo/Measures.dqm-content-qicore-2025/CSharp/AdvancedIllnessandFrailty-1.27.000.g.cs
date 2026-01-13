@@ -81,7 +81,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385443587799036L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-892027430157829280L, () => {
             object a_ = context.ResolveParameter("AdvancedIllnessandFrailty-1.27.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -93,7 +93,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385444297224700L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-632786785956096393L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -102,7 +102,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
     [CqlExpressionDefinition("Has Criteria Indicating Frailty")]
     public bool? Has_Criteria_Indicating_Frailty(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436886569840L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4145412945853810829L, () => {
             CqlValueSet a_ = this.Frailty_Device(context);
             IEnumerable<DeviceRequest> b_ = context.Operators.Retrieve<DeviceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-devicerequest"));
             IEnumerable<DeviceRequest> d_ = context.Operators.Retrieve<DeviceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-devicerequest"));
@@ -196,7 +196,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
     [CqlExpressionDefinition("Has Advanced Illness in Year Before or During Measurement Period")]
     public bool? Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446003140472L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4021845699547811445L, () => {
             CqlValueSet a_ = this.Advanced_Illness(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -224,7 +224,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
     [CqlExpressionDefinition("Has Dementia Medications in Year Before or During Measurement Period")]
     public bool? Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446589391684L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3830212988528037437L, () => {
             CqlValueSet a_ = this.Dementia_Medications(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -283,7 +283,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
     [CqlExpressionDefinition("Is Age 66 or Older with Advanced Illness and Frailty")]
     public bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385441837056240L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1656099928315620027L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -305,7 +305,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
     [CqlExpressionDefinition("Is Age 66 to 80 with Advanced Illness and Frailty or Is Age 81 or Older with Frailty")]
     public bool? Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385441975976388L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7309670936429856188L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -337,7 +337,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
     [CqlExpressionDefinition("Is Age 66 or Older Living Long Term in a Nursing Home")]
     public bool? Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385441449041320L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3190069561351145181L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;

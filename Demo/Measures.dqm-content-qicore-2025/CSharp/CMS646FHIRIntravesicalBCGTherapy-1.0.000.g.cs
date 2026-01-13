@@ -126,7 +126,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385449625156648L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8463204836362917612L, () => {
             object a_ = context.ResolveParameter("CMS646FHIRIntravesicalBCGTherapy-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -138,7 +138,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385442231890640L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-4290830187024678405L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -209,7 +209,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Bladder Cancer Diagnosis")]
     public IEnumerable<object> Bladder_Cancer_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385448403516048L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(1627099199367917222L, () => {
             CqlValueSet a_ = this.Bladder_Cancer_for_Urology_Care(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -261,7 +261,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("First Bladder Cancer Staging Procedure")]
     public Procedure First_Bladder_Cancer_Staging_Procedure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Procedure>(3271385444895056028L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Procedure>(-6479804162207901342L, () => {
             CqlCode a_ = this.Tumor_staging__tumor_staging_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Procedure> c_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
@@ -438,7 +438,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("July 1 of Year Prior to the Measurement Period")]
     public CqlDate July_1_of_Year_Prior_to_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(3271385442255958524L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(4355411619980945622L, () => {
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -450,7 +450,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("June 30 of the Measurement Period")]
     public CqlDate June_30_of_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(3271385443185740804L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(-1046525714915697033L, () => {
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -461,7 +461,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("First Bladder Cancer Staging Procedure during 6 Months Prior to Measurement Period through the First 6 Months of Measurement Period")]
     public Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Procedure>(3271385437364937640L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Procedure>(89116089794995532L, () => {
             Procedure a_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] b_ = [
                 a_,
@@ -558,7 +558,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Has Most Recent Bladder Cancer Tumor Staging is T1, Tis, Ta HG")]
     public bool? Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448786109880L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7659224977212191128L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
             bool? b_(Observation StagingObservation) {
@@ -606,7 +606,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Has Qualifying Encounter")]
     public bool? Has_Qualifying_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449704032268L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6803347589664215006L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -637,7 +637,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385447696922896L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1514878663221881824L, () => {
             bool? a_ = this.Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG(context);
             bool? b_ = this.Has_Qualifying_Encounter(context);
             bool? c_ = context.Operators.And(a_, b_);
@@ -647,7 +647,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440108000804L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7894348376586324006L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -655,7 +655,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Acute Tuberculosis Diagnosis")]
     public IEnumerable<object> Acute_Tuberculosis_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385446085033968L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(2327826037250116643L, () => {
             CqlValueSet a_ = this.Tuberculosis_for_Urology_Care(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -900,7 +900,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Immunosuppressive Drugs")]
     public IEnumerable<MedicationRequest> Immunosuppressive_Drugs(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(3271385436863249168L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-1231276537500245830L, () => {
             CqlValueSet a_ = this.Immunosuppressive_Drugs_for_Urology_Care(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1148,7 +1148,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Cystectomy Done")]
     public IEnumerable<Procedure> Cystectomy_Done(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(3271385433327272548L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(4990480937945600756L, () => {
             CqlValueSet a_ = this.Cystectomy_for_Urology_Care(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -1455,7 +1455,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Has Excluding HIV, Immunocompromised Conditions or Mixed Histology Before Staging")]
     public bool? Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445929599968L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2614027900018808318L, () => {
             CqlValueSet a_ = this.HIV(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1643,7 +1643,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Has Excluding Chemotherapy or Radiotherapy Procedure Before Staging")]
     public bool? Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440091076228L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(52129356822395367L, () => {
             CqlValueSet a_ = this.Chemotherapy_Agents_for_Advanced_Cancer(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -2293,7 +2293,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Denominator Exclusion")]
     public bool? Denominator_Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437521980148L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2497759738663303621L, () => {
             IEnumerable<object> a_ = this.Acute_Tuberculosis_Diagnosis(context);
             bool? b_ = context.Operators.Exists<object>(a_);
             IEnumerable<MedicationRequest> c_ = this.Immunosuppressive_Drugs(context);
@@ -2312,7 +2312,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("BCG Not Available Within 6 Months After Bladder Cancer Staging")]
     public IEnumerable<MedicationAdministration> BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationAdministration>>(3271385448535835056L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationAdministration>>(-4719968472254698824L, () => {
             CqlValueSet a_ = this.Bacillus_Calmette_Guerin_for_Urology_Care(context);
             IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministrationnotdone"));
             IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministrationnotdone"));
@@ -2582,7 +2582,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Denominator Exception")]
     public bool? Denominator_Exception(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436254200400L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8232522769382720446L, () => {
             IEnumerable<MedicationAdministration> a_ = this.BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging(context);
             bool? b_ = context.Operators.Exists<MedicationAdministration>(a_);
             return b_;
@@ -2591,7 +2591,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("First BCG Administered")]
     public MedicationAdministration First_BCG_Administered(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<MedicationAdministration>(3271385439841146072L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<MedicationAdministration>(5246817831198828715L, () => {
             CqlValueSet a_ = this.Bacillus_Calmette_Guerin_for_Urology_Care(context);
             IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
             IEnumerable<MedicationAdministration> c_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
@@ -2884,7 +2884,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445320522904L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5650740766836730728L, () => {
             MedicationAdministration a_ = this.First_BCG_Administered(context);
             bool? b_ = context.Operators.Not((bool?)(a_ is null));
             return b_;
@@ -2893,7 +2893,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385444641178424L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-3031213782846199448L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -2901,7 +2901,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385444921911288L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-2765886446978909849L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -2909,7 +2909,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385445378876592L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-2209043468229436943L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -2917,7 +2917,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385442497877260L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-4292175789313964661L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

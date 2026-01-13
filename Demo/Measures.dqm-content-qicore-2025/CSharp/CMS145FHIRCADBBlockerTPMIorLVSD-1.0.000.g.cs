@@ -154,7 +154,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385435161389520L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-3838999943742845946L, () => {
             object a_ = context.ResolveParameter("CMS145FHIRCADBBlockerTPMIorLVSD-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -166,7 +166,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385437855634056L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-4943327489850151171L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -175,7 +175,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438695147836L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-2871022325888111391L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Outpatient_Consultation(context);
@@ -214,7 +214,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Outpatient Encounter During Measurement Period")]
     public IEnumerable<Encounter> Outpatient_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441317335260L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4185720693783375476L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Outpatient_Consultation(context);
@@ -295,7 +295,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Coronary Artery Disease Encounter")]
     public IEnumerable<Encounter> Coronary_Artery_Disease_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385440608727400L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6894080970263121722L, () => {
             IEnumerable<Encounter> a_ = this.Outpatient_Encounter_During_Measurement_Period(context);
 
             IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter) {
@@ -322,7 +322,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("History of Cardiac Surgery Prior to Encounter")]
     public IEnumerable<Encounter> History_of_Cardiac_Surgery_Prior_to_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445282977496L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6248196608709177427L, () => {
             IEnumerable<Encounter> a_ = this.Outpatient_Encounter_During_Measurement_Period(context);
 
             IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter) {
@@ -421,7 +421,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Qualifying CAD Encounter")]
     public IEnumerable<Encounter> Qualifying_CAD_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385441468546900L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8366230998328308210L, () => {
             IEnumerable<Encounter> a_ = this.Coronary_Artery_Disease_Encounter(context);
             IEnumerable<Encounter> b_ = this.History_of_Cardiac_Surgery_Prior_to_Encounter(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -431,7 +431,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443131166056L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8015939987437211170L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -474,7 +474,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Qualifying CAD Encounter and Prior MI")]
     public IEnumerable<Encounter> Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385443098898488L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5145744575977972721L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_CAD_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter EncounterWithCADProxy) {
@@ -521,7 +521,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator 2")]
     public bool? Denominator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448782798036L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4261843835990479910L, () => {
             bool? a_ = this.Initial_Population(context);
             IEnumerable<Encounter> b_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
             bool? c_ = context.Operators.Exists<Encounter>(b_);
@@ -532,7 +532,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437861853212L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2639165688219748952L, () => {
             CqlValueSet a_ = this.Atrioventricular_Block(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -550,7 +550,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Diagnosis of Cardiac Pacer in Situ with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435441810416L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2301010253886131830L, () => {
             CqlValueSet a_ = this.Cardiac_Pacer_in_Situ(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -568,7 +568,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Cardiac Pacer Device Implanted with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445643329808L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4674704661872179046L, () => {
             CqlValueSet a_ = this.Cardiac_Pacer(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -668,7 +668,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and Prior MI without Cardiac Pacer")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385441115069156L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7924848715289777919L, () => {
             bool? a_ = this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
             bool? b_ = this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
             bool? c_ = context.Operators.Not(b_);
@@ -684,7 +684,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     [CqlTag("code", "Heart rate - 8867-4")]
     [CqlTag("profile", "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate")]
     public bool? Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435274093920L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1405931838525896459L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate"));
             IEnumerable<Encounter> b_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
             IEnumerable<ValueTuple<Observation, Encounter>> c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
@@ -782,7 +782,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public IEnumerable<Encounter> Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385439379676392L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-376240068842855892L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_CAD_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter EncounterWithCADProxy) {
@@ -890,7 +890,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Beta Blocker Therapy for LVSD Ordered")]
     public bool? Has_Beta_Blocker_Therapy_for_LVSD_Ordered(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448180146180L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5965564790916757780L, () => {
             CqlValueSet a_ = this.Beta_Blocker_Therapy_for_LVSD(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
@@ -908,7 +908,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Is Currently Taking Beta Blocker Therapy for LVSD")]
     public bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449683980600L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(2996237725122511548L, () => {
             CqlValueSet a_ = this.Beta_Blocker_Therapy_for_LVSD(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
@@ -1027,7 +1027,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437247291116L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6368735608539322040L, () => {
             bool? a_ = this.Has_Beta_Blocker_Therapy_for_LVSD_Ordered(context);
             bool? b_ = this.Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(context);
             bool? c_ = context.Operators.Or(a_, b_);
@@ -1037,7 +1037,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Beta Blocker Therapy Ordered")]
     public bool? Has_Beta_Blocker_Therapy_Ordered(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439822882308L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5499340533497537456L, () => {
             CqlValueSet a_ = this.Beta_Blocker_Therapy(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
@@ -1055,7 +1055,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Is Currently Taking Beta Blocker Therapy")]
     public bool? Is_Currently_Taking_Beta_Blocker_Therapy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443215505336L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5490054796664819259L, () => {
             CqlValueSet a_ = this.Beta_Blocker_Therapy(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
@@ -1174,7 +1174,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437314401592L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4548427469715059312L, () => {
             bool? a_ = this.Has_Beta_Blocker_Therapy_Ordered(context);
             bool? b_ = this.Is_Currently_Taking_Beta_Blocker_Therapy(context);
             bool? c_ = context.Operators.Or(a_, b_);
@@ -1184,7 +1184,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385432983236016L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-7423650110453256790L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -1192,7 +1192,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385449841792096L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(6388569736345981558L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -1200,7 +1200,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385436095532376L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(9040851014390617956L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -1208,7 +1208,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385449606592116L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-2799688591257334892L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -1216,7 +1216,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator 1")]
     public bool? Denominator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448581466608L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(933938835741446785L, () => {
             bool? a_ = this.Initial_Population(context);
             IEnumerable<Encounter> b_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
             bool? c_ = context.Operators.Exists<Encounter>(b_);
@@ -1227,7 +1227,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439118231132L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6207236433083765932L, () => {
             CqlValueSet a_ = this.Atrioventricular_Block(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -1245,7 +1245,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Diagnosis of Cardiac Pacer in Situ with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445219380592L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(611146825355432056L, () => {
             CqlValueSet a_ = this.Cardiac_Pacer_in_Situ(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -1263,7 +1263,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Cardiac Pacer Device Implanted with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436009327568L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5776210879261728691L, () => {
             CqlValueSet a_ = this.Cardiac_Pacer(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -1358,7 +1358,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and History of Moderate or Severe LVSD without Cardiac Pacer")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434011600292L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(599953581061905262L, () => {
             bool? a_ = this.Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
             bool? b_ = this.Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
             bool? c_ = context.Operators.Not(b_);
@@ -1374,7 +1374,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     [CqlTag("code", "Heart rate - 8867-4")]
     [CqlTag("profile", "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate")]
     public bool? Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444877763936L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5565858988664934775L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate"));
             IEnumerable<Encounter> b_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
             IEnumerable<ValueTuple<Observation, Encounter>> c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
@@ -1535,7 +1535,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Allergy or Intolerance to Beta Blocker Therapy Ingredient with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449970638448L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4012373805650300700L, () => {
             CqlValueSet a_ = this.Beta_Blocker_Therapy_Ingredient(context);
             IEnumerable<AllergyIntolerance> b_ = context.Operators.Retrieve<AllergyIntolerance>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance"));
             CqlCode c_ = this.Substance_with_beta_adrenergic_receptor_antagonist_mechanism_of_action__substance_(context);
@@ -1557,7 +1557,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Arrhythmia with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448585157060L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5223679050506082360L, () => {
             CqlValueSet a_ = this.Arrhythmia(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -1575,7 +1575,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Arrhythmia with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435371089876L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1244530858248924349L, () => {
             CqlValueSet a_ = this.Arrhythmia(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -1593,7 +1593,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Asthma with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442064563296L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(2985822784455938123L, () => {
             CqlValueSet a_ = this.Asthma(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -1611,7 +1611,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Asthma with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444650542176L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8978242064543891408L, () => {
             CqlValueSet a_ = this.Asthma(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -1629,7 +1629,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Bradycardia with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449142270976L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4922721093598094238L, () => {
             CqlValueSet a_ = this.Bradycardia(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -1647,7 +1647,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Bradycardia with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385441448282304L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7350147551858302813L, () => {
             CqlValueSet a_ = this.Bradycardia(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -1665,7 +1665,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443821417972L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5097226349740322634L, () => {
             CqlValueSet a_ = this.Allergy_to_Beta_Blocker_Therapy(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             CqlValueSet c_ = this.Intolerance_to_Beta_Blocker_Therapy(context);
@@ -1686,7 +1686,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439410519876L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1090306935350505599L, () => {
             CqlValueSet a_ = this.Allergy_to_Beta_Blocker_Therapy(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             CqlValueSet c_ = this.Intolerance_to_Beta_Blocker_Therapy(context);
@@ -1707,7 +1707,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Hypotension with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385438250277888L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3060424530178371983L, () => {
             CqlValueSet a_ = this.Hypotension(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
@@ -1725,7 +1725,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Hypotension with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440086075584L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5880257001685299859L, () => {
             CqlValueSet a_ = this.Hypotension(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1745,7 +1745,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Allergy or Intolerance to Beta Blocker Therapy Ingredient with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385438375235056L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7221263534210068778L, () => {
             CqlValueSet a_ = this.Beta_Blocker_Therapy_Ingredient(context);
             IEnumerable<AllergyIntolerance> b_ = context.Operators.Retrieve<AllergyIntolerance>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance"));
             CqlCode c_ = this.Substance_with_beta_adrenergic_receptor_antagonist_mechanism_of_action__substance_(context);
@@ -1767,7 +1767,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD")]
     public bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448021860152L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4668274905280302578L, () => {
             CqlValueSet a_ = this.Beta_Blocker_Therapy_for_LVSD(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
 
@@ -1844,7 +1844,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator Exceptions 1")]
     public bool? Denominator_Exceptions_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449805723984L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(9061963925225004876L, () => {
             bool? a_ = this.Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
             bool? b_ = this.Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
             bool? c_ = context.Operators.Or(a_, b_);
@@ -1868,7 +1868,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Medical or Patient Reason for Not Ordering Beta Blocker Therapy")]
     public bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444233887020L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(882942456773908318L, () => {
             CqlValueSet a_ = this.Beta_Blocker_Therapy_for_LVSD(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
 
@@ -1945,7 +1945,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator Exceptions 2")]
     public bool? Denominator_Exceptions_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385450007055412L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(805993342753520951L, () => {
             bool? a_ = this.Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
             bool? b_ = this.Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI(context);
             bool? c_ = context.Operators.Or(a_, b_);

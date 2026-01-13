@@ -256,7 +256,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
     [CqlParameterDefinition("ErrorLevel")]
     public string ErrorLevel(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(3271385439093088432L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<string>(772406137019326219L, () => {
             object a_ = context.ResolveParameter("CumulativeMedicationDuration-6.0.000", "ErrorLevel", "Warning");
             return (string)a_;
         });
@@ -268,7 +268,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385438007397444L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(4069894667121727423L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;

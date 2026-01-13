@@ -43,7 +43,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385359341887256L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(7096341437342020688L, () => {
             object a_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -55,7 +55,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385348994082752L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(9124584184355502557L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -64,7 +64,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     [CqlExpressionDefinition("Jet engine conditions")]
     public IEnumerable<Condition> Jet_engine_conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(3271385361639748456L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(2800937253784641656L, () => {
             IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
             bool? b_(Condition c) {
@@ -95,7 +95,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     [CqlExpressionDefinition("Subsequent encounters")]
     public IEnumerable<Condition> Subsequent_encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(3271385353138941728L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(33888561033543232L, () => {
             IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
             bool? b_(Condition c) {
@@ -126,7 +126,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     [CqlExpressionDefinition("Initial population")]
     public bool? Initial_population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385352809536704L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6175140352612506819L, () => {
             IEnumerable<Condition> a_ = this.Jet_engine_conditions(context);
             bool? b_ = context.Operators.Exists<Condition>(a_);
             return b_;
@@ -135,7 +135,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385354089306184L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1694005781377430274L, () => {
             IEnumerable<Condition> a_ = this.Subsequent_encounters(context);
             bool? b_ = context.Operators.Exists<Condition>(a_);
             return b_;

@@ -63,7 +63,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385361873126880L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(2429725487134773543L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;

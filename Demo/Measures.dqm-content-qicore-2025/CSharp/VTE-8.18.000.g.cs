@@ -36,7 +36,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385436797512492L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(8773371835216757249L, () => {
             object a_ = context.ResolveParameter("VTE-8.18.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -48,7 +48,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385445955126060L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-6064100381930538164L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -104,7 +104,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
     [CqlExpressionDefinition("Admission Without VTE Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433152262004L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1660812742436512091L, () => {
             IEnumerable<Encounter> a_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -127,7 +127,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
     [CqlExpressionDefinition("Encounter With Age Range And Without VTE Diagnosis Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444572359364L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8789342914136935360L, () => {
             IEnumerable<Encounter> a_ = this.Admission_Without_VTE_Or_Obstetrical_Conditions(context);
 
             bool? b_(Encounter EncounterWithoutConditions) {
@@ -151,7 +151,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385448522359124L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6262669387061031876L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(context);
             return a_;
         });

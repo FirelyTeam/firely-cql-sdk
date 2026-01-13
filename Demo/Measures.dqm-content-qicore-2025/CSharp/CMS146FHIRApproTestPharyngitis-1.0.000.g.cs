@@ -118,7 +118,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385435430924748L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-6776689049211967329L, () => {
             object a_ = context.ResolveParameter("CMS146FHIRApproTestPharyngitis-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -130,7 +130,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385438654734540L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(3030144396687509539L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -139,7 +139,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385439594857780L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(8061848602820824818L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -147,7 +147,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385436956439684L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-5350681135550590122L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -155,7 +155,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385439750075188L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(2114658340450479406L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -163,7 +163,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385439255054448L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(4663127546923731554L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -171,7 +171,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435721976556L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-9161728147981111079L, () => {
             CqlValueSet a_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Home_Healthcare_Services(context);
@@ -259,7 +259,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Encounter With Antibiotic Ordered Within Three Days")]
     public IEnumerable<Encounter> Encounter_With_Antibiotic_Ordered_Within_Three_Days(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446806287080L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5068032210244465453L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
 
             IEnumerable<Encounter> b_(Encounter EDOrAmbulatoryVisit) {
@@ -325,7 +325,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Pharyngitis or Tonsillitis")]
     public IEnumerable<object> Pharyngitis_or_Tonsillitis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385449475186252L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-2294604684325091505L, () => {
             CqlValueSet a_ = this.Acute_Pharyngitis(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             CqlValueSet c_ = this.Acute_Tonsillitis(context);
@@ -340,7 +340,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Encounter With Pharyngitis or Tonsillitis With Antibiotic")]
     public IEnumerable<Encounter> Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438796434384L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1361420039381642473L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Antibiotic_Ordered_Within_Three_Days(context);
             IEnumerable<object> b_ = this.Pharyngitis_or_Tonsillitis(context);
             IEnumerable<ValueTuple<Encounter, object>> c_ = context.Operators.CrossJoin<Encounter, object>(a_, b_);
@@ -371,7 +371,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438785238324L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-7344295049066052896L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
 
             bool? b_(Encounter EncounterWithPharyngitis) {
@@ -397,7 +397,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444792236936L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8474826842785951650L, () => {
             IEnumerable<Encounter> a_ = this.Initial_Population(context);
             return a_;
         });
@@ -405,7 +405,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Encounters and Assessments with Hospice Patient")]
     public IEnumerable<Encounter> Encounters_and_Assessments_with_Hospice_Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444686057960L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1591674743266285230L, () => {
             IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
             bool? b_(Encounter EligibleEncounters) {
@@ -420,7 +420,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446109962556L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(605034055821366566L, () => {
             IEnumerable<Encounter> a_ = this.Encounters_and_Assessments_with_Hospice_Patient(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
             CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
@@ -477,7 +477,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Group A Streptococcus Lab Test With Result")]
     public IEnumerable<Observation> Group_A_Streptococcus_Lab_Test_With_Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385444477855724L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(6710198913720266606L, () => {
             CqlValueSet a_ = this.Group_A_Streptococcus_Test(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
             IEnumerable<Observation> c_ = Status_1_15_000.Instance.isLaboratoryTestPerformed(context, b_);
@@ -496,7 +496,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444970381588L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3241845342339342232L, () => {
             IEnumerable<Observation> a_ = this.Group_A_Streptococcus_Lab_Test_With_Result(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
             IEnumerable<ValueTuple<Observation, Encounter>> c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
@@ -536,7 +536,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Stratification 1")]
     public IEnumerable<Encounter> Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433511783628L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3931302983264712514L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
 
             bool? b_(Encounter EncounterWithPharyngitis) {
@@ -563,7 +563,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Stratification 2")]
     public IEnumerable<Encounter> Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433578894104L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1170160420726039475L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
 
             bool? b_(Encounter EncounterWithPharyngitis) {
@@ -590,7 +590,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Stratification 3")]
     public IEnumerable<Encounter> Stratification_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433646004580L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1654598656286643211L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
 
             bool? b_(Encounter EncounterWithPharyngitis) {

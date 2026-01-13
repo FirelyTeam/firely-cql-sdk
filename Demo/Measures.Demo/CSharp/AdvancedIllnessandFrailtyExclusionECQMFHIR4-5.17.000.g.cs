@@ -76,7 +76,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385354808096668L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8608999970669603967L, () => {
             object a_ = context.ResolveParameter("AdvancedIllnessandFrailtyExclusionECQMFHIR4-5.17.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -88,7 +88,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385359603123612L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-5859119640024438432L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -97,7 +97,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Dementia Medications In Year Before or During Measurement Period")]
     public IEnumerable<MedicationRequest> Dementia_Medications_In_Year_Before_or_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(3271385360072725428L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-9005185825297618471L, () => {
             CqlValueSet a_ = this.Dementia_Medications(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
@@ -157,7 +157,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Long Term Care Periods During Measurement Period")]
     public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Periods_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDateTime>>>(3271385351656074348L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDateTime>>>(6704162323021068453L, () => {
             CqlValueSet a_ = this.Care_Services_in_Long_Term_Residential_Facility(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             CqlValueSet c_ = this.Nursing_Facility_Visit(context);
@@ -194,7 +194,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Outpatient Encounters with Advanced Illness")]
     public IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385361662548772L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1203071861351544790L, () => {
             CqlValueSet a_ = this.Outpatient(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             CqlValueSet c_ = this.Observation(context);
@@ -253,7 +253,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Two Outpatient Encounters with Advanced Illness on Different Dates of Service")]
     public IEnumerable<Encounter> Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385363521852104L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5677122492849480325L, () => {
             IEnumerable<Encounter> a_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
             IEnumerable<ValueTuple<Encounter, Encounter>> c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
 
@@ -287,7 +287,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Long Term Care Overlapping Periods")]
     public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Overlapping_Periods(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDateTime>>>(3271385363003990168L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDateTime>>>(-25046034067202445L, () => {
             IEnumerable<CqlInterval<CqlDateTime>> a_ = this.Long_Term_Care_Periods_During_Measurement_Period(context);
             IEnumerable<CqlInterval<CqlDateTime>> b_ = context.Operators.Collapse(a_, default);
             return b_;
@@ -296,7 +296,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Long Term Care Adjacent Periods")]
     public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Adjacent_Periods(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDateTime>>>(3271385348491232116L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDateTime>>>(4645789520322337496L, () => {
             IEnumerable<CqlInterval<CqlDateTime>> a_ = this.Long_Term_Care_Overlapping_Periods(context);
             IEnumerable<ValueTuple<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>> c_ = context.Operators.CrossJoin<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(a_, a_);
 
@@ -337,7 +337,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Max Long Term Care Period Length")]
     public int? Max_Long_Term_Care_Period_Length(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<int?>(3271385356079033992L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<int?>(-4265280958747828452L, () => {
             IEnumerable<CqlInterval<CqlDateTime>> a_ = this.Long_Term_Care_Overlapping_Periods(context);
             IEnumerable<CqlInterval<CqlDateTime>> b_ = this.Long_Term_Care_Adjacent_Periods(context);
             IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Union<CqlInterval<CqlDateTime>>(a_, b_);
@@ -359,7 +359,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Inpatient Encounter with Advanced Illness")]
     public IEnumerable<Encounter> Inpatient_Encounter_with_Advanced_Illness(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385350729902228L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6583149385975442652L, () => {
             CqlValueSet a_ = this.Acute_Inpatient(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
@@ -409,7 +409,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Has Criteria Indicating Frailty")]
     public bool? Has_Criteria_Indicating_Frailty(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385351035912272L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8009958552057876719L, () => {
             CqlValueSet a_ = this.Frailty_Device(context);
             IEnumerable<DeviceRequest> b_ = context.Operators.Retrieve<DeviceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/DeviceRequest"));
             IEnumerable<DeviceRequest> d_ = context.Operators.Retrieve<DeviceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/DeviceRequest"));
@@ -521,7 +521,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Advanced Illness and Frailty Exclusion Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385349666619360L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1176185432942245714L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -558,7 +558,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385358475326916L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8909740527187213041L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -585,7 +585,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Has Long Term Care Periods Longer Than 90 Consecutive Days")]
     public bool? Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385350472397452L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4455315533900385902L, () => {
             int? a_ = this.Max_Long_Term_Care_Period_Length(context);
             bool? b_ = context.Operators.Greater(a_, 90);
             return b_;

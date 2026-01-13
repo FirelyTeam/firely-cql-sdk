@@ -44,7 +44,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385434494694584L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3459411623385782866L, () => {
             object a_ = context.ResolveParameter("CMS74FHIRDentalCariesPrevention-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -56,7 +56,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385433813620576L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(5569230345433797234L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -65,7 +65,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385446409573040L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1335537517400099656L, () => {
             CqlValueSet a_ = this.Clinical_Oral_Evaluation(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             IEnumerable<Encounter> c_ = Status_1_15_000.Instance.isEncounterPerformed(context, b_);
@@ -85,7 +85,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434543811616L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3404065433003864595L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -105,7 +105,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434070297140L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(9163392405658072408L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -113,7 +113,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433178039800L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7868563991812526633L, () => {
             bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             return a_;
         });
@@ -121,7 +121,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444326539944L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8189944364767768999L, () => {
             CqlValueSet a_ = this.Fluoride_Varnish_Application_for_Children(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
             IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
@@ -281,7 +281,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Stratification 1")]
     public bool? Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440929366600L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6383227092078244640L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -298,7 +298,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Stratification 2")]
     public bool? Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440862256124L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7132016695278820787L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -315,7 +315,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Stratification 3")]
     public bool? Stratification_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440795145648L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6092906886529512472L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -332,7 +332,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385449035577480L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-3908866002830981138L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -340,7 +340,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385443614146536L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-7258492887071442421L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -348,7 +348,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385446696571072L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(8315400797531393439L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -356,7 +356,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385450081478780L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-7364382078820048309L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

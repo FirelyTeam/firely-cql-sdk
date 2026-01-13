@@ -84,7 +84,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385444883351548L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(6882228545884779471L, () => {
             object a_ = context.ResolveParameter("CMS951FHIRKidneyHealthEval-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -96,7 +96,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385437992772092L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-8450989434262156067L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -105,7 +105,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385445479423716L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(7472409706051213406L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -113,7 +113,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385449363727956L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3148642837823731225L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -121,7 +121,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385433443298916L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(2411070522859842048L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -129,7 +129,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385439658034432L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-4506924992633843455L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -137,7 +137,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Active Diabetes Overlaps Start Of Measurement Period")]
     public bool? Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433490087252L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4413285161491285925L, () => {
             CqlValueSet a_ = this.Diabetes(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -174,7 +174,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Outpatient Visit During Measurement Period")]
     public bool? Has_Outpatient_Visit_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446483519304L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8081576470686619857L, () => {
             CqlValueSet a_ = this.Annual_Wellness_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Home_Healthcare_Services(context);
@@ -217,7 +217,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442594860708L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4328991269781702988L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -238,7 +238,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435843148664L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3305269774394203605L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -246,7 +246,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has CKD Stage 5 Or ESRD Diagnosis Overlaps Measurement Period")]
     public bool? Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385441709894032L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6246371642167180446L, () => {
             CqlValueSet a_ = this.Chronic_Kidney_Disease__Stage_5(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -288,7 +288,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445107656748L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7824115192377706118L, () => {
             bool? a_ = this.Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period(context);
             bool? b_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             bool? c_ = context.Operators.Or(a_, b_);
@@ -300,7 +300,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Estimated Glomerular Filtration Rate Performed During Measurement Period")]
     public bool? Has_Estimated_Glomerular_Filtration_Rate_Performed_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443056334016L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6091572313026659366L, () => {
             CqlValueSet a_ = this.Estimated_Glomerular_Filtration_Rate(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
@@ -335,7 +335,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Urine Albumin Creatinine Ratio Test Performed During Measurement Period")]
     public bool? Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437953051832L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6651005342975886335L, () => {
             CqlValueSet a_ = this.Urine_Albumin_Creatinine_Ratio(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
@@ -374,7 +374,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Urine Albumin Test Performed During The Measurement Period")]
     public IEnumerable<Observation> Urine_Albumin_Test_Performed_During_The_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385445800121088L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(8799928069211774153L, () => {
             CqlValueSet a_ = this.Urine_Albumin(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
@@ -408,7 +408,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Urine Creatinine Test Performed During The Measurement Period")]
     public IEnumerable<Observation> Urine_Creatinine_Test_Performed_During_The_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385438737898792L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(28564471191613805L, () => {
             CqlValueSet a_ = this.Urine_Creatinine(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
@@ -442,7 +442,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Has Urine Albumin Test And Urine Creatine Test Less Than Or Equal To Four Days Apart")]
     public bool? Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433413688740L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7006324779853778799L, () => {
             IEnumerable<Observation> a_ = this.Urine_Albumin_Test_Performed_During_The_Measurement_Period(context);
             IEnumerable<Observation> b_ = this.Urine_Creatinine_Test_Performed_During_The_Measurement_Period(context);
             IEnumerable<ValueTuple<Observation, Observation>> c_ = context.Operators.CrossJoin<Observation, Observation>(a_, b_);
@@ -489,7 +489,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Kidney Panel Performed During Measurement Period")]
     public bool? Kidney_Panel_Performed_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385447292518632L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8084330152642717281L, () => {
             bool? a_ = this.Has_Estimated_Glomerular_Filtration_Rate_Performed_During_Measurement_Period(context);
             bool? b_ = this.Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period(context);
             bool? c_ = this.Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart(context);
@@ -501,7 +501,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448000562436L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8512118468873299101L, () => {
             bool? a_ = this.Kidney_Panel_Performed_During_Measurement_Period(context);
             return a_;
         });

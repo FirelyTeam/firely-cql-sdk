@@ -50,7 +50,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385356528947764L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(8337256495588297023L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -59,7 +59,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     [CqlExpressionDefinition("Smoking status observation")]
     public IEnumerable<Observation> Smoking_status_observation(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385350625974136L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(-4432068073053488285L, () => {
             CqlCode a_ = this.Tobacco_Smoking_Status(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
@@ -82,7 +82,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     [CqlExpressionDefinition("Lung cancer diagnosis")]
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(3271385351178198148L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(8408096397658502118L, () => {
             CqlValueSet a_ = this.Lung_Cancer(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 

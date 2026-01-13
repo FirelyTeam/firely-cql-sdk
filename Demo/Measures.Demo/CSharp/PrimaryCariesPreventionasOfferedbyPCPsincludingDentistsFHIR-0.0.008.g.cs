@@ -78,7 +78,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385357648098640L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-5232504333520421231L, () => {
             object a_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR-0.0.008", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -90,7 +90,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385363346601224L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(4190361726064702105L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -99,7 +99,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385353083636016L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(-6622296303304161156L, () => {
             IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -107,7 +107,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(3271385357706647520L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(-50476958257965485L, () => {
             IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -115,7 +115,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385363838282456L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(-6948817799037019688L, () => {
             IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -123,7 +123,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385362840539636L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-4983878855298530089L, () => {
             CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
             return a_;
         });
@@ -131,7 +131,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385359630534488L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4103331164239369877L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
             CqlValueSet c_ = this.Preventive_Care___Established_Office_Visit__0_to_17(context);
@@ -175,7 +175,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385362368347880L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7185471959036891163L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -202,7 +202,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385359360666524L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1484238347279104325L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -210,7 +210,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385354130952288L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4728281303266581468L, () => {
             bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
             return a_;
         });
@@ -218,7 +218,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Stratification 1")]
     public bool? Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385355595781552L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6122213997756509795L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -242,7 +242,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Stratification 2")]
     public bool? Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385355797112980L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7289994774689214165L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -259,7 +259,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Stratification 3")]
     public bool? Stratification_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385355730002504L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5150854429997070313L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -276,7 +276,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385358698436192L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-143491126941760825L, () => {
             CqlValueSet a_ = this.Fluoride_Varnish_Application_for_Children(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 

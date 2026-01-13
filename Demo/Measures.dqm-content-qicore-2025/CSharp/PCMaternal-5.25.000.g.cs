@@ -67,7 +67,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385441935353512L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(859669092182870447L, () => {
             object a_ = context.ResolveParameter("PCMaternal-5.25.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -79,7 +79,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385441330950224L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(3137100805743588519L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -88,7 +88,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
     [CqlExpressionDefinition("Encounter With Age Range")]
     public IEnumerable<Encounter> Encounter_With_Age_Range(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385444499975032L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1742568757353030109L, () => {
             IEnumerable<Encounter> a_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
 
             bool? b_(Encounter InpatientEncounter) {
@@ -345,7 +345,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
     [CqlExpressionDefinition("Delivery Encounter With Age Range")]
     public IEnumerable<Encounter> Delivery_Encounter_With_Age_Range(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437227193936L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6284105905977930602L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_Age_Range(context);
 
             IEnumerable<Encounter> b_(Encounter EncounterWithAge) {
@@ -748,7 +748,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
     [CqlExpressionDefinition("Variable Calculated Gestational Age")]
     public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>>(3271385442539994140L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>>(5194648618977956313L, () => {
             IEnumerable<Encounter> a_ = this.Delivery_Encounter_With_Age_Range(context);
 
             (CqlTupleMetadata, string EncounterID, int? CalculatedCGA)? b_(Encounter DeliveryEncounter) {

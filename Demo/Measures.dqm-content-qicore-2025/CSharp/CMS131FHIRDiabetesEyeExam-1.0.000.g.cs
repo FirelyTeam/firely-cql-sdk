@@ -115,7 +115,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385436109721672L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1372366969867876817L, () => {
             object a_ = context.ResolveParameter("CMS131FHIRDiabetesEyeExam-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -127,7 +127,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385444084382704L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(8754168965339112623L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -136,7 +136,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433597017536L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7474887545424351166L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Annual_Wellness_Visit(context);
@@ -174,7 +174,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443713662960L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6877642258673002907L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -210,7 +210,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385436886372804L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4946724370846126806L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -218,7 +218,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Bilateral Absence of Eyes")]
     public bool? Bilateral_Absence_of_Eyes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434710599260L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1524813797823961047L, () => {
             CqlCode a_ = this.Anophthalmos_of_bilateral_eyes__disorder_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
@@ -244,7 +244,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385449352609992L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6402464688092136939L, () => {
             bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             bool? b_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
             bool? c_ = context.Operators.Or(a_, b_);
@@ -260,7 +260,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Diabetic Retinopathy Overlapping Measurement Period")]
     public bool? Diabetic_Retinopathy_Overlapping_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437527374004L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1188348194717143934L, () => {
             CqlValueSet a_ = this.Diabetic_Retinopathy(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -282,7 +282,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Retinal Exam in Measurement Period")]
     public bool? Retinal_Exam_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385441826673532L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8451818952942615611L, () => {
             CqlValueSet a_ = this.Retinal_or_Dilated_Eye_Exam(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
             IEnumerable<Observation> c_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, b_);
@@ -304,7 +304,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Retinal Exam in Measurement Period or Year Prior")]
     public bool? Retinal_Exam_in_Measurement_Period_or_Year_Prior(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385441551261700L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4931343330646639316L, () => {
             CqlValueSet a_ = this.Retinal_or_Dilated_Eye_Exam(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
             IEnumerable<Observation> c_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, b_);
@@ -331,7 +331,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Autonomous Eye Exam in Measurement Period")]
     public bool? Autonomous_Eye_Exam_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439131341732L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3553745899802313510L, () => {
             CqlCode a_ = this.Eye_Diabetic_retinopathy_screening_Autonomous_artificial_intelligence(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
@@ -359,7 +359,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Has Left Eye Retinopathy")]
     public bool? Has_Left_Eye_Retinopathy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434738847736L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3611092800924631981L, () => {
             CqlCode a_ = this.Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
@@ -387,7 +387,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Has Right Eye Retinopathy")]
     public bool? Has_Right_Eye_Retinopathy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442494950620L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2867486777848299255L, () => {
             CqlCode a_ = this.Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
@@ -415,7 +415,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Has Right Eye No Retinopathy in Year Prior")]
     public bool? Has_Right_Eye_No_Retinopathy_in_Year_Prior(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440276276704L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1307124294398025800L, () => {
             CqlCode a_ = this.Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
@@ -450,7 +450,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Has Left Eye No Retinopathy in Year Prior")]
     public bool? Has_Left_Eye_No_Retinopathy_in_Year_Prior(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385446433329820L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7916633526503722236L, () => {
             CqlCode a_ = this.Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
@@ -485,7 +485,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Retinal Exam Finding with Retinopathy Severity Level in Measurement Period")]
     public bool? Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385447522353008L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8220918818850205263L, () => {
             bool? a_ = this.Has_Left_Eye_Retinopathy(context);
             bool? b_ = this.Has_Right_Eye_Retinopathy(context);
             bool? c_ = context.Operators.And(a_, b_);
@@ -501,7 +501,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Retinal Exam Finding with No Retinopathy Severity Level in Year Prior")]
     public bool? Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444345433220L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5641069459776211341L, () => {
             bool? a_ = this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
             bool? b_ = this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
             bool? c_ = context.Operators.And(a_, b_);
@@ -511,7 +511,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437844633720L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(1807750687989057360L, () => {
             bool? a_ = this.Diabetic_Retinopathy_Overlapping_Measurement_Period(context);
             bool? b_ = this.Retinal_Exam_in_Measurement_Period(context);
             bool? c_ = context.Operators.And(a_, b_);
@@ -531,7 +531,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385437758677784L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-2126485817556375875L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -539,7 +539,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385442976167512L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-8062047007454936636L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -547,7 +547,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385436883573776L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(8758770137911828662L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -555,7 +555,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385437672743660L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(8145108545693145561L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

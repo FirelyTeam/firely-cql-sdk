@@ -32,7 +32,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385349955495016L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-3851945183777304699L, () => {
             object a_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -44,7 +44,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385347450017040L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-8768318097955700668L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -53,7 +53,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
 
     [CqlExpressionDefinition("Hospice Intervention or Encounter")]
     public bool? Hospice_Intervention_or_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385361966805628L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4411369996558005077L, () => {
             CqlValueSet a_ = this.Hospice_Intervention(context);
             IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
             IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_or_Ongoing_Procedure(context, b_);

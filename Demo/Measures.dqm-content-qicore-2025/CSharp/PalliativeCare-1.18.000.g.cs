@@ -54,7 +54,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385449349524804L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-4886154237025043938L, () => {
             object a_ = context.ResolveParameter("PalliativeCare-1.18.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -66,7 +66,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385439652171220L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-4588885595111730164L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -75,7 +75,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
 
     [CqlExpressionDefinition("Has Palliative Care in the Measurement Period")]
     public bool? Has_Palliative_Care_in_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434608542660L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7555297037410945889L, () => {
             CqlCode a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(context);
             IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
             IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));

@@ -80,7 +80,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385352937910432L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1910573221940503362L, () => {
             object a_ = context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.0.010", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -92,7 +92,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385348351761752L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-4089929577116492787L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -101,7 +101,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385353061517292L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6108063201567256093L, () => {
             IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
             return a_;
         });
@@ -109,7 +109,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Antithrombotic Not Given at Discharge")]
     public IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(3271385363782355532L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-7841829350546192526L, () => {
             CqlValueSet a_ = this.Antithrombotic_Therapy(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 
@@ -177,7 +177,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Encounter With No Antithrombotic At Discharge")]
     public IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385352052982500L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3872100787539645286L, () => {
             IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
@@ -205,7 +205,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(3271385349689712388L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-1129270284953313235L, () => {
             CqlValueSet a_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 
@@ -253,7 +253,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385361131889904L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1426572148313240824L, () => {
             IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
@@ -281,7 +281,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385353692765132L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6673240317773714005L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_With_No_Antithrombotic_At_Discharge(context);
             IEnumerable<Encounter> b_ = this.Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -291,7 +291,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385347627469168L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8298600534596146791L, () => {
             IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounters_with_Discharge_Disposition(context);
             IEnumerable<Encounter> b_ = TJCOverallFHIR_1_8_000.Instance.Encounter_with_Comfort_Measures_during_Hospitalization(context);
             IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
@@ -301,7 +301,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385359040283256L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1154461465892404559L, () => {
             IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Encounter_with_Principal_Diagnosis_and_Age(context);
             return a_;
         });
@@ -309,7 +309,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Antithrombotic Therapy at Discharge")]
     public IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(3271385359528221344L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-8311745687764367551L, () => {
             CqlValueSet a_ = this.Antithrombotic_Therapy(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 
@@ -357,7 +357,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385362052248432L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(899507397485408094L, () => {
             IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
 
             IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
@@ -385,7 +385,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385363583219008L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(2387045540434942064L, () => {
             IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -393,7 +393,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(3271385359192576016L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(-8335395049973550212L, () => {
             IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -401,7 +401,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(3271385362977493480L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(-8392710765314873892L, () => {
             IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -409,7 +409,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385348550201124L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(418011448807512549L, () => {
             CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
             return a_;
         });

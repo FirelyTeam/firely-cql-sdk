@@ -142,7 +142,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385434179135676L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(4855730798156578906L, () => {
             object a_ = context.ResolveParameter("CMS136FHIRChildADHDMedFollowUp-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -154,7 +154,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385444541428412L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(4641227550436577792L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -163,7 +163,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("March 1 of Year Prior to Measurement Period")]
     public CqlDateTime March_1_of_Year_Prior_to_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(3271385444408068104L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(3709971840043392196L, () => {
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -176,7 +176,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Last Calendar Day of February of Measurement Period")]
     public CqlDateTime Last_Calendar_Day_of_February_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(3271385441391638980L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(-4226591970914106183L, () => {
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -190,7 +190,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Intake Period")]
     public CqlInterval<CqlDateTime> Intake_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385437307516732L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-706599413819521966L, () => {
             CqlDateTime a_ = this.March_1_of_Year_Prior_to_Measurement_Period(context);
             CqlDateTime b_ = this.Last_Calendar_Day_of_February_of_Measurement_Period(context);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
@@ -200,7 +200,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("ADHD Medication Prescribed During Intake Period and Not Previously on ADHD Medication")]
     public IEnumerable<(CqlTupleMetadata, CqlDate startDate)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlDate startDate)?>>(3271385447083530808L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlDate startDate)?>>(3223880368776900477L, () => {
             CqlValueSet a_ = this.Atomoxetine(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1054,7 +1054,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("First ADHD Medication Prescribed During Intake Period")]
     public CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(3271385434760066204L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(-4639298654653847318L, () => {
             IEnumerable<(CqlTupleMetadata, CqlDate startDate)?> a_ = this.ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication(context);
 
             bool? b_((CqlTupleMetadata, CqlDate startDate)? @this) {
@@ -1078,7 +1078,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("IPSD")]
     public CqlDate IPSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(3271385444627575488L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(2995733269230836253L, () => {
             CqlDate a_ = this.First_ADHD_Medication_Prescribed_During_Intake_Period(context);
             return a_;
         });
@@ -1086,7 +1086,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438191997752L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1279258466511628036L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Home_Healthcare_Services(context);
@@ -1119,7 +1119,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Inpatient Stay with Qualifying Diagnosis")]
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385439054561052L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7411720648034793077L, () => {
             CqlValueSet a_ = this.Encounter_Inpatient(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             IEnumerable<Encounter> c_ = Status_1_15_000.Instance.isEncounterPerformed(context, b_);
@@ -1137,7 +1137,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Inpatient Stay with Qualifying Diagnosis During Initiation Phase")]
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385449886895156L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8156220072775179379L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis(context);
 
             bool? b_(Encounter InpatientStay) {
@@ -1162,7 +1162,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Initial Population 1")]
     public bool? Initial_Population_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448963996280L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1620489078424121883L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -1196,7 +1196,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Denominator 1")]
     public bool? Denominator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435198655876L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8386680003894831035L, () => {
             bool? a_ = this.Initial_Population_1(context);
             return a_;
         });
@@ -1204,7 +1204,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Narcolepsy Exclusion")]
     public IEnumerable<object> Narcolepsy_Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385439032830168L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-3383504585349343618L, () => {
             CqlValueSet a_ = this.Narcolepsy(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -1227,7 +1227,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440349535468L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(4235625962082214445L, () => {
             bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             IEnumerable<object> b_ = this.Narcolepsy_Exclusion(context);
             bool? c_ = context.Operators.Exists<object>(b_);
@@ -1238,7 +1238,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Qualifying Numerator Encounter")]
     public IEnumerable<Encounter> Qualifying_Numerator_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438956068692L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(9160626202490665926L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Preventive_Care_Services_Group_Counseling(context);
@@ -1306,7 +1306,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Encounter During Initiation Phase")]
     public IEnumerable<Encounter> Encounter_During_Initiation_Phase(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385434279403972L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5455347647867241726L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter(context);
             IEnumerable<Encounter> b_ = Status_1_15_000.Instance.isEncounterPerformed(context, a_);
 
@@ -1332,7 +1332,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443634014552L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1892291096978746434L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_During_Initiation_Phase(context);
             bool? b_ = context.Operators.Exists<Encounter>(a_);
             return b_;
@@ -1341,7 +1341,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("ADHD Medications Taken on IPSD or During Continuation and Maintenance Phase")]
     public IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDate>>>(3271385438895156284L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDate>>>(-1527460206037085161L, () => {
             CqlValueSet a_ = this.Atomoxetine(context);
             IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -1919,7 +1919,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("ADHD Cumulative Medication Duration")]
     public int? ADHD_Cumulative_Medication_Duration(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<int?>(3271385444449799916L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<int?>(-3886580344192465847L, () => {
             IEnumerable<CqlInterval<CqlDate>> a_ = this.ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase(context);
             int? b_ = CumulativeMedicationDuration_6_0_000.Instance.cumulativeDuration(context, a_);
             return b_;
@@ -1928,7 +1928,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Has ADHD Cumulative Medication Duration Greater Than or Equal to 210 Days")]
     public bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385438422502832L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1384948008237186285L, () => {
             int? a_ = this.ADHD_Cumulative_Medication_Duration(context);
             bool? b_ = context.Operators.GreaterOrEqual(a_, 210);
             return b_;
@@ -1937,7 +1937,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Inpatient Stay with Qualifying Diagnosis During Continuation and Maintenance Phase")]
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435159123368L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-2133610025250707462L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Stay_with_Qualifying_Diagnosis(context);
 
             bool? b_(Encounter InpatientStay) {
@@ -1962,7 +1962,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Initial Population 2")]
     public bool? Initial_Population_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448896885804L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2621416679819002185L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -1998,7 +1998,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Denominator 2")]
     public bool? Denominator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434997324448L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-9201339036072555475L, () => {
             bool? a_ = this.Initial_Population_2(context);
             return a_;
         });
@@ -2006,7 +2006,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Encounter 31 to 300 Days into Continuation and Maintenance Phase")]
     public IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385434792236392L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(1910591399646290016L, () => {
             IEnumerable<Encounter> a_ = this.Qualifying_Numerator_Encounter(context);
             IEnumerable<Encounter> b_ = Status_1_15_000.Instance.isEncounterPerformed(context, a_);
 
@@ -2043,7 +2043,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Two or More Encounters 31 to 300 Days into Continuation and Maintenance Phase")]
     public bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439869012364L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(9168811075567996819L, () => {
             IEnumerable<CqlDate> a_ = this.Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(context);
             int? b_ = context.Operators.Count<CqlDate>(a_);
             bool? c_ = context.Operators.GreaterOrEqual(b_, 2);
@@ -2053,7 +2053,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Virtual Encounter 31 to 300 Days into Continuation and Maintenance Phase")]
     public IEnumerable<CqlDate> Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(3271385448930316044L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(4453205296495751162L, () => {
             CqlValueSet a_ = this.Virtual_Encounter(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             IEnumerable<Encounter> c_ = Status_1_15_000.Instance.isEncounterPerformed(context, b_);
@@ -2091,7 +2091,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443566904076L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2855501864183294304L, () => {
             IEnumerable<Encounter> a_ = this.Encounter_During_Initiation_Phase(context);
             bool? b_ = context.Operators.Exists<Encounter>(a_);
             bool? c_ = this.Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase(context);
@@ -2126,7 +2126,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385436483204388L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(7798486612078586507L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -2134,7 +2134,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385444322048404L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(7363118988704722449L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -2142,7 +2142,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385448421669412L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(2276067258728685427L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -2150,7 +2150,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385439669207488L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(5817697175571891270L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

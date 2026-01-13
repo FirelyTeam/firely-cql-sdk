@@ -72,7 +72,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385439117008260L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-3336974086985530416L, () => {
             object a_ = context.ResolveParameter("CMS128FHIRAntidepressantMgmt-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -84,7 +84,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385443274101268L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-2851133471298809693L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -93,7 +93,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("May 1 of the Year Prior to the Measurement Period")]
     public CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(3271385448126754152L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(2260567419969860535L, () => {
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -106,7 +106,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("April 30 of the Measurement Period")]
     public CqlDateTime April_30_of_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(3271385437082653088L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(274231522783341163L, () => {
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
@@ -118,7 +118,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Intake Period")]
     public CqlInterval<CqlDateTime> Intake_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385442828626660L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(5805669011297124889L, () => {
             CqlDateTime a_ = this.May_1_of_the_Year_Prior_to_the_Measurement_Period(context);
             CqlDateTime b_ = this.April_30_of_the_Measurement_Period(context);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
@@ -128,7 +128,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("IPSD")]
     public CqlDate IPSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(3271385437998866056L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(-1010214378857822330L, () => {
             CqlValueSet a_ = this.Antidepressant_Medication(context);
             IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
             IEnumerable<MedicationDispense> c_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
@@ -197,7 +197,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Has IPSD and Major Depression Diagnosis")]
     public bool? Has_IPSD_and_Major_Depression_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435535581532L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7846530698326160153L, () => {
             CqlValueSet a_ = this.Major_Depression(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -229,7 +229,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385438434687316L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5099802547552683180L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
@@ -284,7 +284,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442875457244L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8837015647708587567L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -305,7 +305,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442937018864L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(2673262951145358635L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -313,7 +313,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445564645892L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6056780603594220787L, () => {
             bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
             CqlValueSet b_ = this.Antidepressant_Medication(context);
             IEnumerable<MedicationRequest> c_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
@@ -375,7 +375,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Antidepressant Medication Period Between IPSD and 114 Days After IPSD")]
     public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDate>>>(3271385448321626916L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDate>>>(-7118600492049709655L, () => {
             CqlValueSet a_ = this.Antidepressant_Medication(context);
             IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
             IEnumerable<MedicationDispense> c_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
@@ -425,7 +425,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Cumulative Medication Duration Greater Than or Equal to 84 Days")]
     public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440310067448L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2653868503490197179L, () => {
             IEnumerable<CqlInterval<CqlDate>> a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD(context);
             int? b_ = CumulativeMedicationDuration_6_0_000.Instance.cumulativeDuration(context, a_);
             bool? c_ = context.Operators.GreaterOrEqual(b_, 84);
@@ -435,7 +435,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437080723264L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3518313745077296512L, () => {
             bool? a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days(context);
             return a_;
         });
@@ -443,7 +443,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Antidepressant Medication Period Between IPSD and 231 Days After IPSD")]
     public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDate>>>(3271385434651360692L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDate>>>(42974837852135066L, () => {
             CqlValueSet a_ = this.Antidepressant_Medication(context);
             IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
             IEnumerable<MedicationDispense> c_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
@@ -493,7 +493,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Cumulative Medication Duration Greater Than or Equal to 180 Days")]
     public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442403085812L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1810768940264149742L, () => {
             IEnumerable<CqlInterval<CqlDate>> a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD(context);
             int? b_ = CumulativeMedicationDuration_6_0_000.Instance.cumulativeDuration(context, a_);
             bool? c_ = context.Operators.GreaterOrEqual(b_, 180);
@@ -503,7 +503,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385437282054692L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(949383832859615730L, () => {
             bool? a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days(context);
             return a_;
         });
@@ -511,7 +511,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385443276833148L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-3720173879420837916L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -519,7 +519,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385440099757276L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(4996892276186901500L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -527,7 +527,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385446922356268L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-6643813119908974830L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -535,7 +535,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385446294096968L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(4969765333250476527L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

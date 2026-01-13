@@ -127,7 +127,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385445261043140L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-5866298817992680085L, () => {
             object a_ = context.ResolveParameter("CMS1154ScreeningPrediabetesFHIR-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -139,7 +139,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385435152681812L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-7421968764374336798L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -184,7 +184,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Advanced Illness or Limited Life Expectancy")]
     public IEnumerable<object> Has_Advanced_Illness_or_Limited_Life_Expectancy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385439905650740L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(1509290388530786869L, () => {
             CqlValueSet a_ = this.Advanced_Illness(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -212,7 +212,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Preventive Care Outpatient Visits During Measurement Period")]
     public IEnumerable<Encounter> Preventive_Care_Outpatient_Visits_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445638273024L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1867213146648226874L, () => {
             CqlValueSet a_ = this.Preventative_Clinical_Encounters(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -237,7 +237,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Office Visit During the Measurement Period")]
     public IEnumerable<Encounter> Office_Visit_During_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385437626620496L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-5330974653624701193L, () => {
             CqlValueSet a_ = this.Outpatient_Clinical_Encounters(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -261,7 +261,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Aged 35 to 70 at Start of Measurement Period")]
     public bool? Aged_35_to_70_at_Start_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434623417896L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(6123212858979409007L, () => {
             Patient a_ = this.Patient(context);
             Date b_ = a_?.BirthDateElement;
             string c_ = b_?.Value;
@@ -285,7 +285,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patients Aged 35 to 70 with an Office Visit During the Measurement Period")]
     public bool? Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385435658074936L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7763358644582279625L, () => {
             IEnumerable<Encounter> a_ = this.Preventive_Care_Outpatient_Visits_During_Measurement_Period(context);
             bool? b_ = context.Operators.Exists<Encounter>(a_);
             IEnumerable<Encounter> c_ = this.Office_Visit_During_the_Measurement_Period(context);
@@ -301,7 +301,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Most Recent BMI")]
     public Observation Most_Recent_BMI(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Observation>(3271385446714582808L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Observation>(6452276778631599383L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-bmi"));
 
             bool? b_(Observation BMI) {
@@ -335,7 +335,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patient is Asian")]
     public bool? Patient_is_Asian(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434727307004L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(7986858896242549351L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             IEnumerable<CqlCode> b_ = a_?.codes;
 
@@ -353,7 +353,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Patient is not Asian")]
     public bool? Patient_is_not_Asian(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385440313200888L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1757457377914612541L, () => {
             bool? a_ = this.Patient_is_Asian(context);
             bool? b_ = context.Operators.Not(a_);
             return b_;
@@ -362,7 +362,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Most Recent BMI Equal to or Greater Than 25 and Is Not Asian")]
     public bool? Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433920827536L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5419091062142640358L, () => {
             Observation a_ = this.Most_Recent_BMI(context);
             DataType b_ = a_?.Value;
             CqlQuantity c_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, b_ as Quantity);
@@ -376,7 +376,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Most Recent BMI Equal to or Greater Than 23 and Is Asian")]
     public bool? Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385447421900476L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2883356292628113588L, () => {
             Observation a_ = this.Most_Recent_BMI(context);
             DataType b_ = a_?.Value;
             CqlQuantity c_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, b_ as Quantity);
@@ -390,7 +390,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443212754844L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5820967484384018458L, () => {
             bool? a_ = this.Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period(context);
             bool? b_ = this.Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian(context);
             bool? c_ = this.Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian(context);
@@ -402,7 +402,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448647238320L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(709014718321169443L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -410,7 +410,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Glycemic Laboratory Test Performed During Measurement Period")]
     public IEnumerable<Observation> Glycemic_Laboratory_Test_Performed_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(3271385442721340080L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(4588430099918846418L, () => {
             CqlValueSet a_ = this.Glycemic_Screening_Tests(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
@@ -440,7 +440,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385443806902444L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(260898604472239881L, () => {
             IEnumerable<Observation> a_ = this.Glycemic_Laboratory_Test_Performed_During_Measurement_Period(context);
             bool? b_ = context.Operators.Exists<Observation>(a_);
             return b_;
@@ -449,7 +449,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Pregnancy Observation During Measurement Period")]
     public bool? Has_Pregnancy_Observation_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385444437157772L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3816791241199783336L, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-pregnancystatus"));
 
             bool? b_(Observation PregnantObservation) {
@@ -474,7 +474,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Pregnancy Diagnosis During Measurement Period")]
     public IEnumerable<object> Has_Pregnancy_Diagnosis_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385440765375408L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-3677172026540839592L, () => {
             CqlValueSet a_ = this.Pregnancy(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -495,7 +495,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Look Back Period")]
     public CqlInterval<CqlDateTime> Look_Back_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385445786776220L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(2077423446850315487L, () => {
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             CqlQuantity c_ = context.Operators.Quantity(2m, "years");
@@ -508,7 +508,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Prediabetes Diagnosis Overlaps 2 Year Look Back Period")]
     public IEnumerable<object> Prediabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385442294668564L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(2046368973321817443L, () => {
             CqlValueSet a_ = this.Prediabetes__Borderline_Diabetes_(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -529,7 +529,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Diabetes Diagnosis Overlaps 2 Year Look Back Period")]
     public IEnumerable<object> Diabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(3271385437726953688L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(-6618366694283717709L, () => {
             CqlValueSet a_ = this.Diabetes(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -550,7 +550,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Has Glycemic Laboratory Test Performed During 2 Year Look Back Period")]
     public bool? Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385434982832916L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5111289342832184703L, () => {
             CqlValueSet a_ = this.Glycemic_Screening_Tests(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
@@ -581,7 +581,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385442953149764L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7543466091754023904L, () => {
             bool? a_ = this.Has_Pregnancy_Observation_During_Measurement_Period(context);
             IEnumerable<object> b_ = this.Has_Pregnancy_Diagnosis_During_Measurement_Period(context);
             bool? c_ = context.Operators.Exists<object>(b_);
@@ -603,7 +603,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385437180288316L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(8978605305610805484L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -611,7 +611,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385437743974300L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-6630685495481277238L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -619,7 +619,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385437882376300L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(7698772050861812561L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -627,7 +627,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385435247847816L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-8717201137091475486L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

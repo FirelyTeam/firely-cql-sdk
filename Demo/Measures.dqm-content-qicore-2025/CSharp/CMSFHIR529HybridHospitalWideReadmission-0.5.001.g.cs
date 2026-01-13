@@ -94,7 +94,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385442873423960L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-3907925994018979793L, () => {
             object a_ = context.ResolveParameter("CMSFHIR529HybridHospitalWideReadmission-0.5.001", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -106,7 +106,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385437684046336L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(2363430323374039824L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -115,7 +115,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("Inpatient Encounters")]
     public IEnumerable<Encounter> Inpatient_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385445148339956L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1973778819883977319L, () => {
             CqlValueSet a_ = this.Encounter_Inpatient(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -167,7 +167,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385433202825984L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7214520858694362567L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
             return a_;
         });
@@ -175,7 +175,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Body Temperature")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Body_Temperature(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?>>(3271385438703643752L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?>>(-8666970491551489594L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -269,7 +269,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Heart Rate")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Heart_Rate(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?>>(3271385450087719528L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?>>(1290876252074881306L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -363,7 +363,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Oxygen Saturation")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Oxygen_Saturation(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?>>(3271385433051429936L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?>>(-7704303822154817864L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -459,7 +459,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Respiratory Rate")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Respiratory_Rate(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)?>>(3271385440324397848L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)?>>(-1971867522856708175L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -553,7 +553,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Systolic Blood Pressure")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Systolic_Blood_Pressure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?>>(3271385438286442156L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?>>(3660447906796988770L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -698,7 +698,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Bicarbonate Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Bicarbonate_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(3271385448441917204L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(-4393915463316232653L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -892,7 +892,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Creatinine Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Creatinine_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(3271385446862110884L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(5999590137683422991L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -1086,7 +1086,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Glucose Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Glucose_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(3271385433093787364L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(1194493558829699982L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -1280,7 +1280,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Hematocrit Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Hematocrit_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(3271385435108682372L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(6689886378393453582L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -1474,7 +1474,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Potassium Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Potassium_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(3271385450137278184L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(345924722915584638L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -1668,7 +1668,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Sodium Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Sodium_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(3271385440973641504L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(306946264291175126L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -1862,7 +1862,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First White Blood Cells Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?> SDE_Encounter_With_First_White_Blood_Cells_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(3271385438520400436L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(-7218658410531705995L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -2056,7 +2056,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With First Weight Recorded")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Weight_Recorded(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(3271385433913712576L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>>(-7805011766788080740L, () => {
             IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
             (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient) {
@@ -2150,7 +2150,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Encounter With Oxygen 60 Minutes Or Less Prior To ED Admission Or During ED")]
     public IEnumerable<Encounter> SDE_Encounter_With_Oxygen_60_Minutes_Or_Less_Prior_To_ED_Admission_Or_During_ED(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3271385435838228252L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6260288556939837424L, () => {
             IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
             bool? b_(Encounter EncounterInpatient) {
@@ -2476,7 +2476,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385446042811624L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-2927595819383839539L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -2484,7 +2484,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385435237023304L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(5718293540977132843L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -2492,7 +2492,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385441241086496L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-6422847655377928380L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -2500,7 +2500,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385444733967196L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-6432282191117057583L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });

@@ -20,7 +20,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385433472169920L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-2145052723438296680L, () => {
             object a_ = context.ResolveParameter("Antibiotic-1.11.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -32,7 +32,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385448347963128L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(620094810471492361L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;

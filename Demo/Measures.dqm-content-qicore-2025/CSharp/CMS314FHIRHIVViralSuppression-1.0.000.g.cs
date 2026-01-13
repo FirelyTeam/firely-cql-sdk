@@ -99,7 +99,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3271385439631470424L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-6927895824144681510L, () => {
             object a_ = context.ResolveParameter("CMS314FHIRHIVViralSuppression-1.0.000", "Measurement Period", null);
             return (CqlInterval<CqlDateTime>)a_;
         });
@@ -111,7 +111,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(3271385450046918400L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(1508344630371504510L, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -150,7 +150,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Has Active HIV Diagnosis Before or in First 90 Days of Measurement Period")]
     public bool? Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385448366622824L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(9084217600003640711L, () => {
             CqlValueSet a_ = this.HIV(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
@@ -177,7 +177,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Has Qualifying Encounter During First 240 Days of Measurement Period")]
     public bool? Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433093776724L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(5598016734118204379L, () => {
             CqlValueSet a_ = this.Office_Visit(context);
             IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
             CqlValueSet c_ = this.Outpatient_Consultation(context);
@@ -237,7 +237,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385445598250496L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-163170386306154998L, () => {
             bool? a_ = this.Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period(context);
             bool? b_ = this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(context);
             bool? c_ = context.Operators.And(a_, b_);
@@ -247,7 +247,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385439650612564L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(8675153568766099078L, () => {
             bool? a_ = this.Initial_Population(context);
             return a_;
         });
@@ -255,7 +255,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Most Recent Viral Load Test During Measurement Period")]
     public Observation Most_Recent_Viral_Load_Test_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Observation>(3271385448987246308L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Observation>(-2919481681531419562L, () => {
             CqlValueSet a_ = this.HIV_Viral_Load_Tests(context);
             IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
@@ -391,7 +391,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3271385433974076680L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1138962506797556328L, () => {
             Observation a_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period(context);
             DataType b_ = a_?.Value;
             object c_ = FHIRHelpers_4_4_000.Instance.ToValue(context, b_);
@@ -415,7 +415,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385449254601704L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(4660943779846174823L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
             return a_;
         });
@@ -423,7 +423,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(3271385441021562184L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-744218048430331554L, () => {
             IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
             return a_;
         });
@@ -431,7 +431,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3271385435652479264L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(3734889542787538106L, () => {
             (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
             return a_;
         });
@@ -439,7 +439,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(3271385440148450908L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-3747546672814054468L, () => {
             CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
             return a_;
         });
