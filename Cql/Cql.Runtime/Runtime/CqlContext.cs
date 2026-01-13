@@ -95,5 +95,30 @@ namespace Hl7.Cql.Runtime
 
             return defaultValue;
         }
+
+        /// <summary>
+        /// Invalidates the current cache, forcing subsequent operations to use fresh data.
+        /// </summary>
+        /// <remarks>Call this method to clear any cached data and ensure that future operations do not use stale
+        /// information. This is useful when the underlying data source has changed and the cache needs to be
+        /// refreshed.</remarks>
+        public void UseNewCache()
+        {
+            _cache = new ConcurrentDictionary<long, object?>();
+            _cacheCallCount = 0;
+            _cacheFactoryInvocations = 0;
+        }
+
+        /// <summary>
+        /// Disables caching for subsequent operations by resetting the cache state.
+        /// </summary>
+        /// <remarks>Call this method to ensure that future operations do not use any previously cached data. This
+        /// may impact performance if caching is typically used to improve efficiency.</remarks>
+        public void DontUseCaching()
+        {
+            _cache = null;
+            _cacheCallCount = 0;
+            _cacheFactoryInvocations = 0;
+        }
     }
 }

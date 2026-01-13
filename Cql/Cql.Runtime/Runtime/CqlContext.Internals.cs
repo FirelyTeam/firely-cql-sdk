@@ -1,4 +1,5 @@
-﻿#nullable enable
+﻿// We consider the content here as internal thus it won't be documented in the public API docs.
+#pragma warning disable RS0016 // Symbol 'x' is not part of the declared public API
 
 namespace Hl7.Cql.Runtime;
 
@@ -29,16 +30,18 @@ public interface ICqlContextInternals
     /// Gets the total number of calls to GetOrCompute.
     /// </summary>
     /// <remarks>
-    /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
+    /// This counter is reset when <see cref="CqlContext.UseNewCache"/> or <see cref="CqlContext.DontUseCaching"/> is called.
     /// </remarks>
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
     long CacheCallCount { get; }
 
     /// <summary>
     /// Gets the number of times the factory function was invoked (cache misses).
     /// </summary>
     /// <remarks>
-    /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
+    /// This counter is reset when <see cref="CqlContext.UseNewCache"/> or <see cref="CqlContext.DontUseCaching"/> is called.
     /// </remarks>
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
     long CacheMisses { get; }
 
     /// <summary>
@@ -46,8 +49,9 @@ public interface ICqlContextInternals
     /// </summary>
     /// <remarks>
     /// Cache hits = Total calls to GetOrCompute - Factory invocations (cache misses).
-    /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
+    /// This counter is reset when <see cref="CqlContext.UseNewCache"/> or <see cref="CqlContext.DontUseCaching"/> is called.
     /// </remarks>
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
     long CacheHits { get; }
 }
 
@@ -81,31 +85,6 @@ partial class CqlContext : ICqlContextInternals
     /// This counter is reset when <see cref="UseNewCache"/> or <see cref="DontUseCaching"/> is called.
     /// </remarks>
     long ICqlContextInternals.CacheHits => _cacheCallCount - _cacheFactoryInvocations;
-
-    /// <summary>
-    /// Invalidates the current cache, forcing subsequent operations to use fresh data.
-    /// </summary>
-    /// <remarks>Call this method to clear any cached data and ensure that future operations do not use stale
-    /// information. This is useful when the underlying data source has changed and the cache needs to be
-    /// refreshed.</remarks>
-    public void UseNewCache()
-    {
-        _cache = new ConcurrentDictionary<long, object?>();
-        _cacheCallCount = 0;
-        _cacheFactoryInvocations = 0;
-    }
-
-    /// <summary>
-    /// Disables caching for subsequent operations by resetting the cache state.
-    /// </summary>
-    /// <remarks>Call this method to ensure that future operations do not use any previously cached data. This
-    /// may impact performance if caching is typically used to improve efficiency.</remarks>
-    public void DontUseCaching()
-    {
-        _cache = null;
-        _cacheCallCount = 0;
-        _cacheFactoryInvocations = 0;
-    }
 
     T ICqlContextInternals.GetOrCompute<T>(long cacheKey, Func<T> factory)
     {
