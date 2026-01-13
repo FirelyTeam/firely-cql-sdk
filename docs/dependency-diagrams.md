@@ -40,7 +40,7 @@ classDiagram
         class LibrarySetCSharpCodeGenerator { }
         class AssemblyCompiler { }
         class ICacheKeyGenerator { }
-        class SnowflakeAlgorithmCacheKeyGenerator { }
+        class DeterministicIdGenerator { }
     }
 
     namespace Abstraction {
@@ -69,7 +69,7 @@ classDiagram
     %% Inheritance  
     BaseTypeResolver --> TypeResolver : inherits
     FhirTypeResolver --> BaseTypeResolver : inherits
-    SnowflakeAlgorithmCacheKeyGenerator --> ICacheKeyGenerator : implements
+    DeterministicIdGenerator --> ICacheKeyGenerator : implements
     
     %% Dependencies                                                 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected

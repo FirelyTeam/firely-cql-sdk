@@ -6,6 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Security.Cryptography;
+using System.Text;
+
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
@@ -23,96 +26,70 @@ internal interface ICacheKeyGenerator
 }
 
 /// <summary>
-/// Default implementation of cache key generator using a Snowflake-like algorithm.
+/// Default implementation of cache key generator using deterministic SHA256 hashing.
 /// </summary>
 /// <remarks>
-/// The cache key is a 64-bit signed long structured as follows:
-/// - Bits 63-34 (30 bits): Seconds since 2020-01-01 00:00:00 UTC (allows dates up to ~2054)
-/// - Bits 33-2 (32 bits): FNV-1a hash of the library and definition identifier
-/// - Bits 1-0 (2 bits): Sequence counter for collision handling (0-3)
-/// This ensures uniqueness by combining temporal, content-based, and sequential components.
+/// Generates deterministic 64-bit cache keys using SHA256 hash of the combined input:
+/// libraryIdentifier + definitionName + salt + version.
+/// The salt is derived from the library set name (or a random value if null).
+/// The version parameter (0-255) handles hash collisions by generating alternative keys.
 /// </remarks>
-internal sealed class SnowflakeAlgorithmCacheKeyGenerator : ICacheKeyGenerator
+internal sealed class DeterministicIdGenerator : ICacheKeyGenerator
 {
-    private static readonly DateTime Epoch = new DateTime(2020, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-    private readonly Dictionary<long, int> _sequenceCounters = new();
+    private readonly string _salt;
+    private readonly Dictionary<string, byte> _collisionVersions = new();
+    
+    /// <summary>
+    /// Initializes a new instance of <see cref="DeterministicIdGenerator"/>.
+    /// </summary>
+    /// <param name="salt">Salt string for key generation. If null or empty, uses empty string.</param>
+    public DeterministicIdGenerator(string? salt = null)
+    {
+        _salt = salt ?? string.Empty;
+    }
     
     /// <inheritdoc />
     public long GenerateCacheKey(string libraryIdentifier, string definitionName)
     {
-        var cacheKeyString = $"{libraryIdentifier}.{definitionName}";
-        return GenerateUniqueId(cacheKeyString);
-    }
-
-    /// <summary>
-    /// Generates a unique cache key combining timestamp, FNV-1a hash, and sequence counter.
-    /// Uses the current UTC time for uniqueness. If the sequence counter overflows (>3), 
-    /// waits one second to get a new timestamp and retries.
-    /// </summary>
-    private long GenerateUniqueId(string input)
-    {
-        while (true)
+        var key = $"{libraryIdentifier}.{definitionName}";
+        
+        lock (_collisionVersions)
         {
-            // Calculate seconds since epoch (30 bits - supports dates until ~2054)
-            var secondsSinceEpoch = (uint)(DateTime.UtcNow - Epoch).TotalSeconds;
-            
-            // Generate FNV-1a 32-bit hash for the input
-            var hash = GenerateFnv1aHash32(input);
-            
-            // Create base key (without sequence)
-            var baseKey = (((long)secondsSinceEpoch & 0x3FFFFFFFL) << 34) | (((long)hash & 0xFFFFFFFFL) << 2);
-            
-            // Handle collisions with sequence counter
-            lock (_sequenceCounters)
+            if (!_collisionVersions.TryGetValue(key, out var version))
             {
-                if (!_sequenceCounters.TryGetValue(baseKey, out var sequence))
-                {
-                    sequence = 0;
-                    _sequenceCounters[baseKey] = sequence;
-                    
-                    // Combine: high 30 bits = timestamp, middle 32 bits = hash, low 2 bits = sequence
-                    return baseKey | (long)sequence;
-                }
-                else
-                {
-                    sequence++;
-                    if (sequence > 3)
-                    {
-                        // Sequence overflow - we'll wait 1 second and use a new timestamp
-                        // Continue outside the lock to avoid holding it during sleep
-                    }
-                    else
-                    {
-                        _sequenceCounters[baseKey] = sequence;
-                        
-                        // Combine: high 30 bits = timestamp, middle 32 bits = hash, low 2 bits = sequence
-                        return baseKey | (long)sequence;
-                    }
-                }
+                version = 0;
+                _collisionVersions[key] = version;
+            }
+            else
+            {
+                // Increment version on subsequent calls (for collision handling)
+                version++;
+                _collisionVersions[key] = version;
             }
             
-            // Only reached if sequence > 3
-            // Wait 1 second to get a new timestamp for next iteration
-            Thread.Sleep(1000);
+            return GenerateDeterministicId(libraryIdentifier, definitionName, version);
         }
     }
 
     /// <summary>
-    /// Generates a 32-bit FNV-1a hash for better distribution than GetHashCode.
+    /// Generates a deterministic 64-bit ID using SHA256 hash.
     /// </summary>
-    private static uint GenerateFnv1aHash32(string input)
+    /// <param name="libraryIdentifier">The library identifier.</param>
+    /// <param name="definitionName">The definition name.</param>
+    /// <param name="version">Version byte for collision handling (0-255).</param>
+    /// <returns>A deterministic 64-bit signed long.</returns>
+    private long GenerateDeterministicId(string libraryIdentifier, string definitionName, byte version)
     {
-        // FNV-1a 32-bit hash constants
-        const uint FnvOffsetBasis = 2166136261;
-        const uint FnvPrime = 16777619;
-
-        uint hash = FnvOffsetBasis;
-        foreach (char c in input)
-        {
-            hash ^= c;
-            hash *= FnvPrime;
-        }
-
-        return hash;
+        // Combine all inputs: libraryIdentifier + definitionName + salt + version
+        var input = $"{libraryIdentifier}.{definitionName}.{_salt}.{version}";
+        var bytes = Encoding.UTF8.GetBytes(input);
+        
+        // Compute SHA256 hash
+        var hashBytes = SHA256.HashData(bytes);
+        
+        // Take first 8 bytes and convert to long
+        var id = BitConverter.ToInt64(hashBytes, 0);
+        
+        return id;
     }
 }
