@@ -21,6 +21,7 @@ global using System.Reflection;
 global using System.Runtime.Serialization;
 global using System.Security.Cryptography;
 global using System.Text;
+global using System.Threading;
 global using Microsoft.CodeAnalysis;
 global using Microsoft.CodeAnalysis.CSharp;
 global using Microsoft.CodeAnalysis.Emit;

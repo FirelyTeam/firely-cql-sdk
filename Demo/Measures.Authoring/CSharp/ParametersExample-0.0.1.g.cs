@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersExample_0_0_1>
 {
@@ -26,125 +26,97 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     #region Parameters
 
-    private readonly Cached<int?> _AgeThreshold_Cached = new();
-
     [CqlParameterDefinition("AgeThreshold")]
     public int? AgeThreshold(CqlContext context) =>
-        _AgeThreshold_Cached.GetOrReplace(
-            context,
-            () => {
-                object a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
-                return (int?)a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<int?>(24614955827976076L, () => {
+            object a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
+            return (int?)a_;
+        });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
-
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _Patient_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-                return b_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-2419106794441990221L, () => {
+            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+            return b_;
+        });
 
-
-    private readonly Cached<CqlDate> _CurrentDate_Cached = new();
 
     [CqlExpressionDefinition("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context) =>
-        _CurrentDate_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlDate a_ = context.Operators.Today();
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(1522499957662536051L, () => {
+            CqlDate a_ = context.Operators.Today();
+            return a_;
+        });
 
-
-    private readonly Cached<Patient> _Patient_Filter_Cached = new();
 
     [CqlExpressionDefinition("Patient Filter")]
     public Patient Patient_Filter(CqlContext context) =>
-        _Patient_Filter_Cached.GetOrReplace(
-            context,
-            () => {
-                Patient a_ = this.Patient(context);
-                Patient[] b_ = [
-                    a_,
-                ];
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(7766613094596543236L, () => {
+            Patient a_ = this.Patient(context);
+            Patient[] b_ = [
+                a_,
+            ];
 
-                bool? c_(Patient P) {
-                    Code<AdministrativeGender> f_ = P?.GenderElement;
-                    string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
-                    bool? h_ = context.Operators.Equal(g_, "male");
-                    FhirBoolean i_ = P?.ActiveElement;
-                    bool? j_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, i_);
-                    bool? k_ = context.Operators.IsTrue(j_);
-                    bool? l_ = context.Operators.And(h_, k_);
-                    DataType m_ = P?.Deceased;
-                    bool? n_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, m_ as FhirBoolean);
-                    bool? o_ = context.Operators.Not(n_);
-                    bool? p_ = context.Operators.And(l_, o_);
-                    CodeableConcept q_ = P?.MaritalStatus;
-                    CqlConcept r_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, q_);
-                    CqlValueSet s_ = this.Marital_Status(context);
-                    bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-                    bool? u_ = context.Operators.And(p_, t_);
-                    return u_;
-                }
+            bool? c_(Patient P) {
+                Code<AdministrativeGender> f_ = P?.GenderElement;
+                string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
+                bool? h_ = context.Operators.Equal(g_, "male");
+                FhirBoolean i_ = P?.ActiveElement;
+                bool? j_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, i_);
+                bool? k_ = context.Operators.IsTrue(j_);
+                bool? l_ = context.Operators.And(h_, k_);
+                DataType m_ = P?.Deceased;
+                bool? n_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, m_ as FhirBoolean);
+                bool? o_ = context.Operators.Not(n_);
+                bool? p_ = context.Operators.And(l_, o_);
+                CodeableConcept q_ = P?.MaritalStatus;
+                CqlConcept r_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, q_);
+                CqlValueSet s_ = this.Marital_Status(context);
+                bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
+                bool? u_ = context.Operators.And(p_, t_);
+                return u_;
+            }
 
-                IEnumerable<Patient> d_ = context.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);
-                Patient e_ = context.Operators.SingletonFrom<Patient>(d_);
-                return e_;
-            });
+            IEnumerable<Patient> d_ = context.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);
+            Patient e_ = context.Operators.SingletonFrom<Patient>(d_);
+            return e_;
+        });
 
-
-    private readonly Cached<Date> _Patient_Birthdate_Cached = new();
 
     [CqlExpressionDefinition("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context) =>
-        _Patient_Birthdate_Cached.GetOrReplace(
-            context,
-            () => {
-                Patient a_ = this.Patient_Filter(context);
-                Date b_ = a_?.BirthDateElement;
-                return b_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<Date>(-274790349316496141L, () => {
+            Patient a_ = this.Patient_Filter(context);
+            Date b_ = a_?.BirthDateElement;
+            return b_;
+        });
 
-
-    private readonly Cached<int?> _Patient_Age_in_Years_Cached = new();
 
     [CqlExpressionDefinition("Patient Age in Years")]
     public int? Patient_Age_in_Years(CqlContext context) =>
-        _Patient_Age_in_Years_Cached.GetOrReplace(
-            context,
-            () => {
-                Date a_ = this.Patient_Birthdate(context);
-                CqlDate b_ = FHIRHelpers_4_3_000.Instance.ToDate(context, a_);
-                CqlDate c_ = this.CurrentDate(context);
-                int? d_ = context.Operators.DurationBetween(b_, c_, "year");
-                return d_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<int?>(5272699714539778757L, () => {
+            Date a_ = this.Patient_Birthdate(context);
+            CqlDate b_ = FHIRHelpers_4_3_000.Instance.ToDate(context, a_);
+            CqlDate c_ = this.CurrentDate(context);
+            int? d_ = context.Operators.DurationBetween(b_, c_, "year");
+            return d_;
+        });
 
-
-    private readonly Cached<bool?> _Patient_Older_Than_AgeThreshold_Cached = new();
 
     [CqlExpressionDefinition("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context) =>
-        _Patient_Older_Than_AgeThreshold_Cached.GetOrReplace(
-            context,
-            () => {
-                int? a_ = this.Patient_Age_in_Years(context);
-                int? b_ = this.AgeThreshold(context);
-                bool? c_ = context.Operators.Greater(a_, b_);
-                return c_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6736663683244303383L, () => {
+            int? a_ = this.Patient_Age_in_Years(context);
+            int? b_ = this.AgeThreshold(context);
+            bool? c_ = context.Operators.Greater(a_, b_);
+            return c_;
+        });
 
 
     #endregion Functions and Expressions
@@ -164,39 +136,5 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
 
     #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

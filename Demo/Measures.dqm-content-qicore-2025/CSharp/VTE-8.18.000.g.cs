@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
 [CqlLibrary("VTE", "8.18.000")]
 public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 {
@@ -34,33 +34,25 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
-
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _Measurement_Period_Cached.GetOrReplace(
-            context,
-            () => {
-                object a_ = context.ResolveParameter("VTE-8.18.000", "Measurement Period", null);
-                return (CqlInterval<CqlDateTime>)a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(8773371835216757249L, () => {
+            object a_ = context.ResolveParameter("VTE-8.18.000", "Measurement Period", null);
+            return (CqlInterval<CqlDateTime>)a_;
+        });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
-
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _Patient_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-                return b_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(-6064100381930538164L, () => {
+            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+            return b_;
+        });
 
 
     [CqlFunctionDefinition("hasEncDiagnosisOf")]
@@ -110,71 +102,59 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     }
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Admission_Without_VTE_Or_Obstetrical_Conditions_Cached = new();
-
     [CqlExpressionDefinition("Admission Without VTE Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions(CqlContext context) =>
-        _Admission_Without_VTE_Or_Obstetrical_Conditions_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1660812742436512091L, () => {
+            IEnumerable<Encounter> a_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
 
-                bool? b_(Encounter InpatientEncounter) {
-                    CqlValueSet d_ = this.Obstetrical_or_Pregnancy_Related_Conditions(context);
-                    bool? e_ = this.hasEncDiagnosisOf(context, InpatientEncounter, d_);
-                    CqlValueSet f_ = this.Venous_Thromboembolism(context);
-                    bool? g_ = this.hasEncDiagnosisOf(context, InpatientEncounter, f_);
-                    bool? h_ = context.Operators.Or(e_, g_);
-                    CqlValueSet i_ = this.Obstetrics_VTE(context);
-                    bool? j_ = this.hasEncDiagnosisOf(context, InpatientEncounter, i_);
-                    bool? k_ = context.Operators.Or(h_, j_);
-                    bool? l_ = context.Operators.Not(k_);
-                    return l_;
-                }
+            bool? b_(Encounter InpatientEncounter) {
+                CqlValueSet d_ = this.Obstetrical_or_Pregnancy_Related_Conditions(context);
+                bool? e_ = this.hasEncDiagnosisOf(context, InpatientEncounter, d_);
+                CqlValueSet f_ = this.Venous_Thromboembolism(context);
+                bool? g_ = this.hasEncDiagnosisOf(context, InpatientEncounter, f_);
+                bool? h_ = context.Operators.Or(e_, g_);
+                CqlValueSet i_ = this.Obstetrics_VTE(context);
+                bool? j_ = this.hasEncDiagnosisOf(context, InpatientEncounter, i_);
+                bool? k_ = context.Operators.Or(h_, j_);
+                bool? l_ = context.Operators.Not(k_);
+                return l_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Cached = new();
 
     [CqlExpressionDefinition("Encounter With Age Range And Without VTE Diagnosis Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(CqlContext context) =>
-        _Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Admission_Without_VTE_Or_Obstetrical_Conditions(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8789342914136935360L, () => {
+            IEnumerable<Encounter> a_ = this.Admission_Without_VTE_Or_Obstetrical_Conditions(context);
 
-                bool? b_(Encounter EncounterWithoutConditions) {
-                    Patient d_ = this.Patient(context);
-                    Date e_ = d_?.BirthDateElement;
-                    string f_ = e_?.Value;
-                    CqlDate g_ = context.Operators.ConvertStringToDate(f_);
-                    Period h_ = EncounterWithoutConditions?.Period;
-                    CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
-                    CqlDateTime j_ = context.Operators.Start(i_);
-                    CqlDate k_ = context.Operators.DateFrom(j_);
-                    int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
-                    bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
-                    return m_;
-                }
+            bool? b_(Encounter EncounterWithoutConditions) {
+                Patient d_ = this.Patient(context);
+                Date e_ = d_?.BirthDateElement;
+                string f_ = e_?.Value;
+                CqlDate g_ = context.Operators.ConvertStringToDate(f_);
+                Period h_ = EncounterWithoutConditions?.Period;
+                CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
+                CqlDateTime j_ = context.Operators.Start(i_);
+                CqlDate k_ = context.Operators.DateFrom(j_);
+                int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
+                bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
+                return m_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        _Initial_Population_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6262669387061031876L, () => {
+            IEnumerable<Encounter> a_ = this.Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(context);
+            return a_;
+        });
 
 
     [CqlFunctionDefinition("fromDayOfStartOfHospitalizationToDayAfterAdmission")]
@@ -251,39 +231,5 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance, CQMCommon_4_1_000.Instance];
 
     #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

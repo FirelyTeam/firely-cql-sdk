@@ -39,6 +39,8 @@ classDiagram
         class TypeToCSharpConverter { }
         class LibrarySetCSharpCodeGenerator { }
         class AssemblyCompiler { }
+        class ICacheKeyGenerator { }
+        class DeterministicIdGenerator { }
     }
 
     namespace Abstraction {
@@ -67,6 +69,7 @@ classDiagram
     %% Inheritance  
     BaseTypeResolver --> TypeResolver : inherits
     FhirTypeResolver --> BaseTypeResolver : inherits
+    DeterministicIdGenerator --> ICacheKeyGenerator : implements
     
     %% Dependencies                                                 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
@@ -88,6 +91,7 @@ classDiagram
 
     TypeToCSharpConverter ..> LibrarySetCSharpCodeGenerator : injected
     TypeResolver ..> LibrarySetCSharpCodeGenerator : injected
+    ICacheKeyGenerator ..> LibrarySetCSharpCodeGenerator : created
 
     TypeResolver ..> AssemblyCompiler : injected
 ```

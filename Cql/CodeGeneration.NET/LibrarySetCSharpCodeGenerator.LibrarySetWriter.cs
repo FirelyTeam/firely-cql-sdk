@@ -9,6 +9,7 @@ partial class LibrarySetCSharpCodeGenerator
         LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator,
         LibrarySet librarySet,
         CqlDefinitionDictionary definitions,
+        ICacheKeyGenerator cacheKeyGenerator,
         string? @namespace = null)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
@@ -18,6 +19,7 @@ partial class LibrarySetCSharpCodeGenerator
         public string? Namespace { get; } = @namespace;
         public LibrarySet LibrarySet { get; } = librarySet;
         public CqlDefinitionDictionary Definitions { get; } = definitions;
+        public ICacheKeyGenerator CacheKeyGenerator { get; } = cacheKeyGenerator;
 
         public IEnumerable<(ElmLibrary library, string cSharp)> GenerateEachLibraryToCSharp(
             BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,

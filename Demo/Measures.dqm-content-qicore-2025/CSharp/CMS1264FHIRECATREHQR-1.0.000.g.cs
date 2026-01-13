@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "4.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
 [CqlLibrary("CMS1264FHIRECATREHQR", "1.0.000")]
 public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264FHIRECATREHQR_1_0_000>
 {
@@ -83,177 +83,149 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
 
     #region Parameters
 
-    private readonly Cached<CqlInterval<CqlDateTime>> _Measurement_Period_Cached = new();
-
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _Measurement_Period_Cached.GetOrReplace(
-            context,
-            () => {
-                object a_ = context.ResolveParameter("CMS1264FHIRECATREHQR-1.0.000", "Measurement Period", null);
-                return (CqlInterval<CqlDateTime>)a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3771323338948774042L, () => {
+            object a_ = context.ResolveParameter("CMS1264FHIRECATREHQR-1.0.000", "Measurement Period", null);
+            return (CqlInterval<CqlDateTime>)a_;
+        });
 
 
     #endregion Parameters
 
     #region Functions and Expressions
 
-    private readonly Cached<Patient> _Patient_Cached = new();
-
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _Patient_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-                Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-                return b_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(1014495218581176614L, () => {
+            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+            return b_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _ED_Evaluation_and_Management_Cached = new();
 
     [CqlExpressionDefinition("ED Evaluation and Management")]
     public IEnumerable<Encounter> ED_Evaluation_and_Management(CqlContext context) =>
-        _ED_Evaluation_and_Management_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlValueSet a_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
-                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3741547166926209002L, () => {
+            CqlValueSet a_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
+            IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
-                bool? c_(Encounter EDEvalManagementVisit) {
-                    Period e_ = EDEvalManagementVisit?.Period;
-                    CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
-                    CqlDateTime g_ = context.Operators.End(f_);
-                    CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
-                    bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
-                    Code<Encounter.EncounterStatus> j_ = EDEvalManagementVisit?.StatusElement;
-                    Encounter.EncounterStatus? k_ = j_?.Value;
-                    Code<Encounter.EncounterStatus> l_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(k_);
-                    bool? m_ = context.Operators.Equal(l_, "finished");
-                    bool? n_ = context.Operators.And(i_, m_);
-                    return n_;
-                }
+            bool? c_(Encounter EDEvalManagementVisit) {
+                Period e_ = EDEvalManagementVisit?.Period;
+                CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
+                CqlDateTime g_ = context.Operators.End(f_);
+                CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
+                bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
+                Code<Encounter.EncounterStatus> j_ = EDEvalManagementVisit?.StatusElement;
+                Encounter.EncounterStatus? k_ = j_?.Value;
+                Code<Encounter.EncounterStatus> l_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(k_);
+                bool? m_ = context.Operators.Equal(l_, "finished");
+                bool? n_ = context.Operators.And(i_, m_);
+                return n_;
+            }
 
-                IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
-                return d_;
-            });
+            IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
+            return d_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _ED_Triage_Cached = new();
 
     [CqlExpressionDefinition("ED Triage")]
     public IEnumerable<Encounter> ED_Triage(CqlContext context) =>
-        _ED_Triage_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlValueSet a_ = this.Triage(context);
-                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-2370023395528382226L, () => {
+            CqlValueSet a_ = this.Triage(context);
+            IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
-                bool? c_(Encounter EDTriage) {
-                    Period e_ = EDTriage?.Period;
-                    CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
-                    CqlDateTime g_ = context.Operators.End(f_);
-                    CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
-                    bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
-                    Code<Encounter.EncounterStatus> j_ = EDTriage?.StatusElement;
-                    Encounter.EncounterStatus? k_ = j_?.Value;
-                    Code<Encounter.EncounterStatus> l_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(k_);
-                    string m_ = context.Operators.Convert<string>(l_);
-                    string[] n_ = [
-                        "finished",
-                        "triaged",
-                    ];
-                    bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
-                    bool? p_ = context.Operators.And(i_, o_);
-                    return p_;
-                }
+            bool? c_(Encounter EDTriage) {
+                Period e_ = EDTriage?.Period;
+                CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
+                CqlDateTime g_ = context.Operators.End(f_);
+                CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
+                bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, "day");
+                Code<Encounter.EncounterStatus> j_ = EDTriage?.StatusElement;
+                Encounter.EncounterStatus? k_ = j_?.Value;
+                Code<Encounter.EncounterStatus> l_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(k_);
+                string m_ = context.Operators.Convert<string>(l_);
+                string[] n_ = [
+                    "finished",
+                    "triaged",
+                ];
+                bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
+                bool? p_ = context.Operators.And(i_, o_);
+                return p_;
+            }
 
-                IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
-                return d_;
-            });
+            IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
+            return d_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Cached = new();
 
     [CqlExpressionDefinition("ED Triage Excluding Those Prior To ED Encounters")]
     public IEnumerable<Encounter> ED_Triage_Excluding_Those_Prior_To_ED_Encounters(CqlContext context) =>
-        _ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.ED_Triage(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3996380737021184409L, () => {
+            IEnumerable<Encounter> a_ = this.ED_Triage(context);
 
-                bool? b_(Encounter EDTriageinMP) {
-                    IEnumerable<Encounter> d_ = this.ED_Evaluation_and_Management(context);
+            bool? b_(Encounter EDTriageinMP) {
+                IEnumerable<Encounter> d_ = this.ED_Evaluation_and_Management(context);
 
-                    bool? e_(Encounter EDEvalManagementinMP) {
-                        Period i_ = EDTriageinMP?.Period;
-                        CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                        Period k_ = EDEvalManagementinMP?.Period;
-                        CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        bool? m_ = context.Operators.OverlapsBefore(j_, l_, default);
-                        CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                        bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
-                        bool? s_ = context.Operators.Or(m_, r_);
-                        CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                        CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        bool? x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, default);
-                        bool? y_ = context.Operators.Or(s_, x_);
-                        CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                        CqlDateTime ab_ = context.Operators.End(aa_);
-                        CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        CqlDateTime ae_ = context.Operators.Start(ad_);
-                        CqlQuantity af_ = context.Operators.Quantity(120m, "minutes");
-                        CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
-                        CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        CqlDateTime aj_ = context.Operators.Start(ai_);
-                        CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ag_, aj_, true, false);
-                        bool? al_ = context.Operators.In<CqlDateTime>(ab_, ak_, default);
-                        CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        CqlDateTime ao_ = context.Operators.Start(an_);
-                        bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
-                        bool? aq_ = context.Operators.And(al_, ap_);
-                        bool? ar_ = context.Operators.Or(y_, aq_);
-                        return ar_;
-                    }
-
-                    IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-                    bool? g_ = context.Operators.Exists<Encounter>(f_);
-                    bool? h_ = context.Operators.Not(g_);
-                    return h_;
+                bool? e_(Encounter EDEvalManagementinMP) {
+                    Period i_ = EDTriageinMP?.Period;
+                    CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    Period k_ = EDEvalManagementinMP?.Period;
+                    CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    bool? m_ = context.Operators.OverlapsBefore(j_, l_, default);
+                    CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
+                    bool? s_ = context.Operators.Or(m_, r_);
+                    CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    bool? x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, default);
+                    bool? y_ = context.Operators.Or(s_, x_);
+                    CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    CqlDateTime ab_ = context.Operators.End(aa_);
+                    CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    CqlDateTime ae_ = context.Operators.Start(ad_);
+                    CqlQuantity af_ = context.Operators.Quantity(120m, "minutes");
+                    CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
+                    CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    CqlDateTime aj_ = context.Operators.Start(ai_);
+                    CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ag_, aj_, true, false);
+                    bool? al_ = context.Operators.In<CqlDateTime>(ab_, ak_, default);
+                    CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    CqlDateTime ao_ = context.Operators.Start(an_);
+                    bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
+                    bool? aq_ = context.Operators.And(al_, ap_);
+                    bool? ar_ = context.Operators.Or(y_, aq_);
+                    return ar_;
                 }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+                IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
+                bool? g_ = context.Operators.Exists<Encounter>(f_);
+                bool? h_ = context.Operators.Not(g_);
+                return h_;
+            }
 
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-    private readonly Cached<IEnumerable<Encounter>> _Initial_Population_Cached = new();
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        _Initial_Population_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.ED_Evaluation_and_Management(context);
-                IEnumerable<Encounter> b_ = this.ED_Triage_Excluding_Those_Prior_To_ED_Encounters(context);
-                IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
-                return c_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-7666571774031925247L, () => {
+            IEnumerable<Encounter> a_ = this.ED_Evaluation_and_Management(context);
+            IEnumerable<Encounter> b_ = this.ED_Triage_Excluding_Those_Prior_To_ED_Encounters(context);
+            IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Denominator_Cached = new();
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        _Denominator_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Initial_Population(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5243972692210139206L, () => {
+            IEnumerable<Encounter> a_ = this.Initial_Population(context);
+            return a_;
+        });
 
 
     [CqlFunctionDefinition("edArrivalTime")]
@@ -360,73 +332,65 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
     }
 
 
-    private readonly Cached<IEnumerable<Encounter>> _ED_Triage_Before_Evaluation_Management_Cached = new();
-
     [CqlExpressionDefinition("ED Triage Before Evaluation Management")]
     public IEnumerable<Encounter> ED_Triage_Before_Evaluation_Management(CqlContext context) =>
-        _ED_Triage_Before_Evaluation_Management_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.ED_Triage(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4085492043442645098L, () => {
+            IEnumerable<Encounter> a_ = this.ED_Triage(context);
 
-                IEnumerable<Encounter> b_(Encounter EDTriageinMP) {
-                    IEnumerable<Encounter> d_ = this.Denominator(context);
+            IEnumerable<Encounter> b_(Encounter EDTriageinMP) {
+                IEnumerable<Encounter> d_ = this.Denominator(context);
 
-                    bool? e_(Encounter EDEncounter) {
-                        Period i_ = EDTriageinMP?.Period;
-                        CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                        Period k_ = EDEncounter?.Period;
-                        CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        bool? m_ = context.Operators.OverlapsBefore(j_, l_, default);
-                        CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                        bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
-                        bool? s_ = context.Operators.Or(m_, r_);
-                        CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                        CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        bool? x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, default);
-                        bool? y_ = context.Operators.Or(s_, x_);
-                        CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                        CqlDateTime ab_ = context.Operators.End(aa_);
-                        CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        CqlDateTime ae_ = context.Operators.Start(ad_);
-                        CqlQuantity af_ = context.Operators.Quantity(120m, "minutes");
-                        CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
-                        CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        CqlDateTime aj_ = context.Operators.Start(ai_);
-                        CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ag_, aj_, true, false);
-                        bool? al_ = context.Operators.In<CqlDateTime>(ab_, ak_, default);
-                        CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        CqlDateTime ao_ = context.Operators.Start(an_);
-                        bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
-                        bool? aq_ = context.Operators.And(al_, ap_);
-                        bool? ar_ = context.Operators.Or(y_, aq_);
-                        return ar_;
-                    }
-
-                    IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-                    Encounter g_(Encounter EDEncounter) => EDTriageinMP;
-                    IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
-                    return h_;
+                bool? e_(Encounter EDEncounter) {
+                    Period i_ = EDTriageinMP?.Period;
+                    CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    Period k_ = EDEncounter?.Period;
+                    CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    bool? m_ = context.Operators.OverlapsBefore(j_, l_, default);
+                    CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
+                    bool? s_ = context.Operators.Or(m_, r_);
+                    CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    bool? x_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, w_, default);
+                    bool? y_ = context.Operators.Or(s_, x_);
+                    CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    CqlDateTime ab_ = context.Operators.End(aa_);
+                    CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    CqlDateTime ae_ = context.Operators.Start(ad_);
+                    CqlQuantity af_ = context.Operators.Quantity(120m, "minutes");
+                    CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
+                    CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    CqlDateTime aj_ = context.Operators.Start(ai_);
+                    CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ag_, aj_, true, false);
+                    bool? al_ = context.Operators.In<CqlDateTime>(ab_, ak_, default);
+                    CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    CqlDateTime ao_ = context.Operators.Start(an_);
+                    bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
+                    bool? aq_ = context.Operators.And(al_, ap_);
+                    bool? ar_ = context.Operators.Or(y_, aq_);
+                    return ar_;
                 }
 
-                IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
-                return c_;
-            });
+                IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
+                Encounter g_(Encounter EDEncounter) => EDTriageinMP;
+                IEnumerable<Encounter> h_ = context.Operators.Select<Encounter, Encounter>(f_, g_);
+                return h_;
+            }
 
+            IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+            return c_;
+        });
 
-    private readonly Cached<IEnumerable<Encounter>> _ED_Triage_and_Evaluation_Management_Cached = new();
 
     [CqlExpressionDefinition("ED Triage and Evaluation Management")]
     public IEnumerable<Encounter> ED_Triage_and_Evaluation_Management(CqlContext context) =>
-        _ED_Triage_and_Evaluation_Management_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Denominator(context);
-                IEnumerable<Encounter> b_ = this.ED_Triage_Before_Evaluation_Management(context);
-                IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
-                return c_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3748220850778708280L, () => {
+            IEnumerable<Encounter> a_ = this.Denominator(context);
+            IEnumerable<Encounter> b_ = this.ED_Triage_Before_Evaluation_Management(context);
+            IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+            return c_;
+        });
 
 
     [CqlFunctionDefinition("edTreatmentRoomTimeArrivalTime")]
@@ -472,51 +436,43 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
     }
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Time_to_Treatment_Room_Greater_Than_60_Minutes_Cached = new();
-
     [CqlExpressionDefinition("Time to Treatment Room Greater Than 60 Minutes")]
     public IEnumerable<Encounter> Time_to_Treatment_Room_Greater_Than_60_Minutes(CqlContext context) =>
-        _Time_to_Treatment_Room_Greater_Than_60_Minutes_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.ED_Evaluation_and_Management(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(635040179997437826L, () => {
+            IEnumerable<Encounter> a_ = this.ED_Evaluation_and_Management(context);
 
-                bool? b_(Encounter EDEvalManagementinMP) {
-                    CqlDateTime d_ = this.edArrivalTime(context, EDEvalManagementinMP);
-                    CqlDateTime e_ = this.edTreatmentRoomTimeArrivalTime(context, EDEvalManagementinMP);
-                    CqlQuantity f_ = context.Operators.Quantity(61m, "minutes");
-                    CqlDateTime g_ = context.Operators.Subtract(e_, f_);
-                    bool? h_ = context.Operators.SameOrBefore(d_, g_, default);
-                    return h_;
-                }
+            bool? b_(Encounter EDEvalManagementinMP) {
+                CqlDateTime d_ = this.edArrivalTime(context, EDEvalManagementinMP);
+                CqlDateTime e_ = this.edTreatmentRoomTimeArrivalTime(context, EDEvalManagementinMP);
+                CqlQuantity f_ = context.Operators.Quantity(61m, "minutes");
+                CqlDateTime g_ = context.Operators.Subtract(e_, f_);
+                bool? h_ = context.Operators.SameOrBefore(d_, g_, default);
+                return h_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _ED_Arrival_Left_Without_Being_Seen_Cached = new();
 
     [CqlExpressionDefinition("ED Arrival Left Without Being Seen")]
     public IEnumerable<Encounter> ED_Arrival_Left_Without_Being_Seen(CqlContext context) =>
-        _ED_Arrival_Left_Without_Being_Seen_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Denominator(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4285098943622379315L, () => {
+            IEnumerable<Encounter> a_ = this.Denominator(context);
 
-                bool? b_(Encounter EDEncounter) {
-                    Encounter.HospitalizationComponent d_ = EDEncounter?.Hospitalization;
-                    CodeableConcept e_ = d_?.DischargeDisposition;
-                    CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
-                    CqlCode g_ = this.Patient_left_without_being_seen__finding_(context);
-                    CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
-                    bool? i_ = context.Operators.Equivalent(f_, h_);
-                    return i_;
-                }
+            bool? b_(Encounter EDEncounter) {
+                Encounter.HospitalizationComponent d_ = EDEncounter?.Hospitalization;
+                CodeableConcept e_ = d_?.DischargeDisposition;
+                CqlConcept f_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, e_);
+                CqlCode g_ = this.Patient_left_without_being_seen__finding_(context);
+                CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
+                bool? i_ = context.Operators.Equivalent(f_, h_);
+                return i_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
 
     [CqlFunctionDefinition("TransferDecisionUsingOrder")]
@@ -669,404 +625,324 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
     }
 
 
-    private readonly Cached<IEnumerable<Encounter>> _Boarded_Time_Greater_Than_240_Minutes_Cached = new();
-
     [CqlExpressionDefinition("Boarded Time Greater Than 240 Minutes")]
     public IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes(CqlContext context) =>
-        _Boarded_Time_Greater_Than_240_Minutes_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Denominator(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4802016707100171808L, () => {
+            IEnumerable<Encounter> a_ = this.Denominator(context);
 
-                bool? b_(Encounter EDEncounter) {
-                    CqlDateTime d_ = this.TransferDecisionUsingOrder(context, EDEncounter);
-                    CqlDateTime e_ = this.edDepartureTime(context, EDEncounter);
-                    CqlQuantity f_ = context.Operators.Quantity(241m, "minutes");
-                    CqlDateTime g_ = context.Operators.Subtract(e_, f_);
-                    bool? h_ = context.Operators.SameOrBefore(d_, g_, default);
-                    return h_;
-                }
+            bool? b_(Encounter EDEncounter) {
+                CqlDateTime d_ = this.TransferDecisionUsingOrder(context, EDEncounter);
+                CqlDateTime e_ = this.edDepartureTime(context, EDEncounter);
+                CqlQuantity f_ = context.Operators.Quantity(241m, "minutes");
+                CqlDateTime g_ = context.Operators.Subtract(e_, f_);
+                bool? h_ = context.Operators.SameOrBefore(d_, g_, default);
+                return h_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _ED_Observation_Status_Cached = new();
 
     [CqlExpressionDefinition("ED Observation Status")]
     public IEnumerable<Encounter> ED_Observation_Status(CqlContext context) =>
-        _ED_Observation_Status_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlValueSet a_ = this.Observation_Services(context);
-                IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-3174661449234294770L, () => {
+            CqlValueSet a_ = this.Observation_Services(context);
+            IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
-                IEnumerable<Encounter> c_(Encounter EDObsEncounter) {
-                    IEnumerable<Encounter> e_ = this.Denominator(context);
+            IEnumerable<Encounter> c_(Encounter EDObsEncounter) {
+                IEnumerable<Encounter> e_ = this.Denominator(context);
 
-                    bool? f_(Encounter EDStay) {
-                        Period j_ = EDStay?.Period;
-                        CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
-                        Period l_ = EDObsEncounter?.Period;
-                        CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                        bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
-                        Code<Encounter.EncounterStatus> o_ = EDObsEncounter?.StatusElement;
-                        Encounter.EncounterStatus? p_ = o_?.Value;
-                        Code<Encounter.EncounterStatus> q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(p_);
-                        bool? r_ = context.Operators.Equal(q_, "finished");
-                        bool? s_ = context.Operators.And(n_, r_);
-                        return s_;
-                    }
-
-                    IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
-                    Encounter h_(Encounter EDStay) => EDObsEncounter;
-                    IEnumerable<Encounter> i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
-                    return i_;
+                bool? f_(Encounter EDStay) {
+                    Period j_ = EDStay?.Period;
+                    CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
+                    Period l_ = EDObsEncounter?.Period;
+                    CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
+                    bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
+                    Code<Encounter.EncounterStatus> o_ = EDObsEncounter?.StatusElement;
+                    Encounter.EncounterStatus? p_ = o_?.Value;
+                    Code<Encounter.EncounterStatus> q_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(p_);
+                    bool? r_ = context.Operators.Equal(q_, "finished");
+                    bool? s_ = context.Operators.And(n_, r_);
+                    return s_;
                 }
 
-                IEnumerable<Encounter> d_ = context.Operators.SelectMany<Encounter, Encounter>(b_, c_);
-                return d_;
-            });
+                IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
+                Encounter h_(Encounter EDStay) => EDObsEncounter;
+                IEnumerable<Encounter> i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
+                return i_;
+            }
 
+            IEnumerable<Encounter> d_ = context.Operators.SelectMany<Encounter, Encounter>(b_, c_);
+            return d_;
+        });
 
-    private readonly Cached<IEnumerable<Encounter>> _Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Cached = new();
 
     [CqlExpressionDefinition("Boarded Time Greater Than 240 Minutes and No Observation Stay")]
     public IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay(CqlContext context) =>
-        _Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Boarded_Time_Greater_Than_240_Minutes(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4226279180473333178L, () => {
+            IEnumerable<Encounter> a_ = this.Boarded_Time_Greater_Than_240_Minutes(context);
 
-                bool? b_(Encounter Boarding) {
-                    IEnumerable<Encounter> d_ = this.ED_Observation_Status(context);
+            bool? b_(Encounter Boarding) {
+                IEnumerable<Encounter> d_ = this.ED_Observation_Status(context);
 
-                    bool? e_(Encounter EDObs) {
-                        Period i_ = Boarding?.Period;
-                        CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                        Period k_ = EDObs?.Period;
-                        CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, default);
-                        return m_;
-                    }
-
-                    IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-                    bool? g_ = context.Operators.Exists<Encounter>(f_);
-                    bool? h_ = context.Operators.Not(g_);
-                    return h_;
+                bool? e_(Encounter EDObs) {
+                    Period i_ = Boarding?.Period;
+                    CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    Period k_ = EDObs?.Period;
+                    CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, default);
+                    return m_;
                 }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+                IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
+                bool? g_ = context.Operators.Exists<Encounter>(f_);
+                bool? h_ = context.Operators.Not(g_);
+                return h_;
+            }
 
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-    private readonly Cached<IEnumerable<Encounter>> _ED_Length_of_Stay_Greater_Than_480_Minutes_Cached = new();
 
     [CqlExpressionDefinition("ED Length of Stay Greater Than 480 Minutes")]
     public IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes(CqlContext context) =>
-        _ED_Length_of_Stay_Greater_Than_480_Minutes_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Denominator(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8869778249275384935L, () => {
+            IEnumerable<Encounter> a_ = this.Denominator(context);
 
-                bool? b_(Encounter EDEncounter) {
-                    CqlDateTime d_ = this.edArrivalTime(context, EDEncounter);
-                    CqlDateTime e_ = this.edDepartureTime(context, EDEncounter);
-                    CqlQuantity f_ = context.Operators.Quantity(481m, "minutes");
-                    CqlDateTime g_ = context.Operators.Subtract(e_, f_);
-                    bool? h_ = context.Operators.SameOrBefore(d_, g_, default);
-                    return h_;
-                }
+            bool? b_(Encounter EDEncounter) {
+                CqlDateTime d_ = this.edArrivalTime(context, EDEncounter);
+                CqlDateTime e_ = this.edDepartureTime(context, EDEncounter);
+                CqlQuantity f_ = context.Operators.Quantity(481m, "minutes");
+                CqlDateTime g_ = context.Operators.Subtract(e_, f_);
+                bool? h_ = context.Operators.SameOrBefore(d_, g_, default);
+                return h_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Cached = new();
 
     [CqlExpressionDefinition("ED Length of Stay Greater Than 480 Minutes and No Observation Stay")]
     public IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay(CqlContext context) =>
-        _ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.ED_Length_of_Stay_Greater_Than_480_Minutes(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2595766680658610855L, () => {
+            IEnumerable<Encounter> a_ = this.ED_Length_of_Stay_Greater_Than_480_Minutes(context);
 
-                bool? b_(Encounter EDStay) {
-                    IEnumerable<Encounter> d_ = this.ED_Observation_Status(context);
+            bool? b_(Encounter EDStay) {
+                IEnumerable<Encounter> d_ = this.ED_Observation_Status(context);
 
-                    bool? e_(Encounter EDObs) {
-                        Period i_ = EDStay?.Period;
-                        CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                        Period k_ = EDObs?.Period;
-                        CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                        bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, default);
-                        return m_;
-                    }
-
-                    IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
-                    bool? g_ = context.Operators.Exists<Encounter>(f_);
-                    bool? h_ = context.Operators.Not(g_);
-                    return h_;
+                bool? e_(Encounter EDObs) {
+                    Period i_ = EDStay?.Period;
+                    CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+                    Period k_ = EDObs?.Period;
+                    CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                    bool? m_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, default);
+                    return m_;
                 }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+                IEnumerable<Encounter> f_ = context.Operators.Where<Encounter>(d_, e_);
+                bool? g_ = context.Operators.Exists<Encounter>(f_);
+                bool? h_ = context.Operators.Not(g_);
+                return h_;
+            }
 
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-    private readonly Cached<IEnumerable<Encounter>> _Numerator_Cached = new();
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        _Numerator_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Time_to_Treatment_Room_Greater_Than_60_Minutes(context);
-                IEnumerable<Encounter> b_ = this.ED_Arrival_Left_Without_Being_Seen(context);
-                IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
-                IEnumerable<Encounter> d_ = this.Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay(context);
-                IEnumerable<Encounter> e_ = this.ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay(context);
-                IEnumerable<Encounter> f_ = context.Operators.Union<Encounter>(d_, e_);
-                IEnumerable<Encounter> g_ = context.Operators.Union<Encounter>(c_, f_);
-                return g_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6480006813910541237L, () => {
+            IEnumerable<Encounter> a_ = this.Time_to_Treatment_Room_Greater_Than_60_Minutes(context);
+            IEnumerable<Encounter> b_ = this.ED_Arrival_Left_Without_Being_Seen(context);
+            IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+            IEnumerable<Encounter> d_ = this.Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay(context);
+            IEnumerable<Encounter> e_ = this.ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay(context);
+            IEnumerable<Encounter> f_ = context.Operators.Union<Encounter>(d_, e_);
+            IEnumerable<Encounter> g_ = context.Operators.Union<Encounter>(c_, f_);
+            return g_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter or Triage of Patients Less Than 18 Years")]
     public IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(CqlContext context) =>
-        _ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Denominator(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-4066828078593406830L, () => {
+            IEnumerable<Encounter> a_ = this.Denominator(context);
 
-                bool? b_(Encounter EDEncounter) {
-                    Patient d_ = this.Patient(context);
-                    Date e_ = d_?.BirthDateElement;
-                    string f_ = e_?.Value;
-                    CqlDate g_ = context.Operators.ConvertStringToDate(f_);
-                    Period h_ = EDEncounter?.Period;
-                    CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
-                    CqlDateTime j_ = context.Operators.Start(i_);
-                    CqlDate k_ = context.Operators.DateFrom(j_);
-                    int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
-                    bool? m_ = context.Operators.Less(l_, 18);
-                    return m_;
-                }
+            bool? b_(Encounter EDEncounter) {
+                Patient d_ = this.Patient(context);
+                Date e_ = d_?.BirthDateElement;
+                string f_ = e_?.Value;
+                CqlDate g_ = context.Operators.ConvertStringToDate(f_);
+                Period h_ = EDEncounter?.Period;
+                CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
+                CqlDateTime j_ = context.Operators.Start(i_);
+                CqlDate k_ = context.Operators.DateFrom(j_);
+                int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
+                bool? m_ = context.Operators.Less(l_, 18);
+                return m_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Pediatric_With_No_Mental_Health_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Pediatric With No Mental Health Diagnosis")]
     public IEnumerable<Encounter> Pediatric_With_No_Mental_Health_Diagnosis(CqlContext context) =>
-        _Pediatric_With_No_Mental_Health_Diagnosis_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6925969516884632854L, () => {
+            IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(context);
 
-                bool? b_(Encounter PediatricEDEncounters) {
-                    CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
-                    bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, PediatricEDEncounters, d_);
-                    bool? f_ = context.Operators.Not(e_);
-                    return f_;
-                }
+            bool? b_(Encounter PediatricEDEncounters) {
+                CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
+                bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, PediatricEDEncounters, d_);
+                bool? f_ = context.Operators.Not(e_);
+                return f_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Cached = new();
 
     [CqlExpressionDefinition("ED Encounter or Triage of Patients 18 Years and Older")]
     public IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(CqlContext context) =>
-        _ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Denominator(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(2761135118601636291L, () => {
+            IEnumerable<Encounter> a_ = this.Denominator(context);
 
-                bool? b_(Encounter EDEncounter) {
-                    Patient d_ = this.Patient(context);
-                    Date e_ = d_?.BirthDateElement;
-                    string f_ = e_?.Value;
-                    CqlDate g_ = context.Operators.ConvertStringToDate(f_);
-                    Period h_ = EDEncounter?.Period;
-                    CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
-                    CqlDateTime j_ = context.Operators.Start(i_);
-                    CqlDate k_ = context.Operators.DateFrom(j_);
-                    int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
-                    bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
-                    return m_;
-                }
+            bool? b_(Encounter EDEncounter) {
+                Patient d_ = this.Patient(context);
+                Date e_ = d_?.BirthDateElement;
+                string f_ = e_?.Value;
+                CqlDate g_ = context.Operators.ConvertStringToDate(f_);
+                Period h_ = EDEncounter?.Period;
+                CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
+                CqlDateTime j_ = context.Operators.Start(i_);
+                CqlDate k_ = context.Operators.DateFrom(j_);
+                int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
+                bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
+                return m_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Adult_With_No_Mental_Health_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Adult With No Mental Health Diagnosis")]
     public IEnumerable<Encounter> Adult_With_No_Mental_Health_Diagnosis(CqlContext context) =>
-        _Adult_With_No_Mental_Health_Diagnosis_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1981226566269198758L, () => {
+            IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(context);
 
-                bool? b_(Encounter AdultEDEncounters) {
-                    CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
-                    bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, AdultEDEncounters, d_);
-                    bool? f_ = context.Operators.Not(e_);
-                    return f_;
-                }
+            bool? b_(Encounter AdultEDEncounters) {
+                CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
+                bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, AdultEDEncounters, d_);
+                bool? f_ = context.Operators.Not(e_);
+                return f_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Pediatric_With_Mental_Health_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Pediatric With Mental Health Diagnosis")]
     public IEnumerable<Encounter> Pediatric_With_Mental_Health_Diagnosis(CqlContext context) =>
-        _Pediatric_With_Mental_Health_Diagnosis_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5036533695592859252L, () => {
+            IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(context);
 
-                bool? b_(Encounter PediatricEDEncounters) {
-                    CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
-                    bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, PediatricEDEncounters, d_);
-                    return e_;
-                }
+            bool? b_(Encounter PediatricEDEncounters) {
+                CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
+                bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, PediatricEDEncounters, d_);
+                return e_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Adult_With_Mental_Health_Diagnosis_Cached = new();
 
     [CqlExpressionDefinition("Adult With Mental Health Diagnosis")]
     public IEnumerable<Encounter> Adult_With_Mental_Health_Diagnosis(CqlContext context) =>
-        _Adult_With_Mental_Health_Diagnosis_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(437003468821603595L, () => {
+            IEnumerable<Encounter> a_ = this.ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(context);
 
-                bool? b_(Encounter AdultEDEncounters) {
-                    CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
-                    bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, AdultEDEncounters, d_);
-                    return e_;
-                }
+            bool? b_(Encounter AdultEDEncounters) {
+                CqlValueSet d_ = this.Mental_Health_Diagnosis_without_Substance_Use_Disorders(context);
+                bool? e_ = CQMCommon_4_1_000.Instance.hasPrincipalDiagnosisOf(context, AdultEDEncounters, d_);
+                return e_;
+            }
 
-                IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-                return c_;
-            });
+            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+            return c_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Stratification_1_Cached = new();
 
     [CqlExpressionDefinition("Stratification 1")]
     public IEnumerable<Encounter> Stratification_1(CqlContext context) =>
-        _Stratification_1_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Pediatric_With_No_Mental_Health_Diagnosis(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(5651699758766434310L, () => {
+            IEnumerable<Encounter> a_ = this.Pediatric_With_No_Mental_Health_Diagnosis(context);
+            return a_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Stratification_2_Cached = new();
 
     [CqlExpressionDefinition("Stratification 2")]
     public IEnumerable<Encounter> Stratification_2(CqlContext context) =>
-        _Stratification_2_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Adult_With_No_Mental_Health_Diagnosis(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(1157011799875292337L, () => {
+            IEnumerable<Encounter> a_ = this.Adult_With_No_Mental_Health_Diagnosis(context);
+            return a_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Stratification_3_Cached = new();
 
     [CqlExpressionDefinition("Stratification 3")]
     public IEnumerable<Encounter> Stratification_3(CqlContext context) =>
-        _Stratification_3_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Pediatric_With_Mental_Health_Diagnosis(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(37973682128726921L, () => {
+            IEnumerable<Encounter> a_ = this.Pediatric_With_Mental_Health_Diagnosis(context);
+            return a_;
+        });
 
-
-    private readonly Cached<IEnumerable<Encounter>> _Stratification_4_Cached = new();
 
     [CqlExpressionDefinition("Stratification 4")]
     public IEnumerable<Encounter> Stratification_4(CqlContext context) =>
-        _Stratification_4_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<Encounter> a_ = this.Adult_With_Mental_Health_Diagnosis(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(4938437133017742234L, () => {
+            IEnumerable<Encounter> a_ = this.Adult_With_Mental_Health_Diagnosis(context);
+            return a_;
+        });
 
-
-    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Ethnicity_Cached = new();
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        _SDE_Ethnicity_Cached.GetOrReplace(
-            context,
-            () => {
-                (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-5452485751526775804L, () => {
+            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+            return a_;
+        });
 
-
-    private readonly Cached<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>> _SDE_Payer_Cached = new();
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        _SDE_Payer_Cached.GetOrReplace(
-            context,
-            () => {
-                IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-2152427511355141904L, () => {
+            IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+            return a_;
+        });
 
-
-    private readonly Cached<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> _SDE_Race_Cached = new();
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        _SDE_Race_Cached.GetOrReplace(
-            context,
-            () => {
-                (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-1270621774348447459L, () => {
+            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+            return a_;
+        });
 
-
-    private readonly Cached<CqlCode> _SDE_Sex_Cached = new();
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _SDE_Sex_Cached.GetOrReplace(
-            context,
-            () => {
-                CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
-                return a_;
-            });
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-1991679763806615112L, () => {
+            CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
+            return a_;
+        });
 
 
     #endregion Functions and Expressions
@@ -1086,39 +962,5 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ISingleton<CMS1264
     public ILibrary[] Dependencies => [CQMCommon_4_1_000.Instance, FHIRHelpers_4_4_000.Instance, QICoreCommon_4_0_000.Instance, SupplementalDataElements_5_1_000.Instance];
 
     #endregion ILibrary Implementation
-
-    #region Nested Type - Cached<T>
-
-    private struct Cached<T>(long CacheVersion, T CachedValue)
-    {
-        public T GetOrReplace(ICqlContextInternals cqlContext, Func<T> factory)
-        {
-            var cqlContextCacheVersion = cqlContext.CacheVersion;
-            if (cqlContextCacheVersion is 0)
-            {
-                // No caching, clear out previous values
-                CacheVersion = 0;
-                CachedValue = default;
-                var value = factory();
-                return value;
-            }
-
-            if (CacheVersion == cqlContextCacheVersion)
-            {
-                // Cache hit
-                return CachedValue;
-            }
-            else
-            {
-                // Cache miss, refresh and store
-                var value = factory();
-                CachedValue = value;
-                CacheVersion = cqlContextCacheVersion;
-                return value;
-            }
-        }
-    }
-
-    #endregion
 
 }

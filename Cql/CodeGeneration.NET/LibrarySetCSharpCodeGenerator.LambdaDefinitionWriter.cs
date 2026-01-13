@@ -34,17 +34,6 @@ internal partial class LibrarySetCSharpCodeGenerator
             var returnType = TypeToCSharpConverter.ToCSharp(transformedLambda.ReturnType);
 
             var useCache = parameters is not { Count: > 0 };
-            string? cacheFieldName = null;
-            if (useCache)
-            {
-                cacheFieldName = LibraryWriter.GetUniqueCacheFieldName(fieldName);
-                cacheFieldName = $"{cacheFieldName}_Cached";
-                ISB.AppendLine(
-                    $"""
-                     private readonly Cached<{returnType}> {cacheFieldName} = new();
-
-                     """);
-            }
 
             var definitionAttributeTypeName = ld.GetType().Name;
 
@@ -74,20 +63,17 @@ internal partial class LibrarySetCSharpCodeGenerator
 
             if (useCache)
             {
+                // Generate cache key from library identifier and definition name
+                var libraryVersionedIdentifier = LibraryWriter.LibraryName.ToString();
+                var definitionName = ld.Name;
+                var cacheKey = LibraryWriter.LibrarySetWriter.CacheKeyGenerator.GenerateCacheKey(libraryVersionedIdentifier, definitionName);
+                
                 ISB.AppendLine($"{lambdaParameters} =>");
                 using (ISB.Indent())
                 {
-                    ISB.AppendLine($"{cacheFieldName}.GetOrReplace(");
-                    using (ISB.Indent())
-                    {
-                        ISB.AppendLine(
-                            $"""
-                            context,
-                            () => {lambdaBody});
-
-                            """);
-                    }
+                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute<{returnType}>({cacheKey}L, () => {lambdaBody});");
                 }
+                ISB.AppendLine();
             }
             else
             {
