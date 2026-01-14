@@ -10,7 +10,9 @@ namespace Hl7.Cql.Elm.Serialization;
 
 internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 {
+#if NET10_0_OR_GREATER
     private readonly HashSet<Type> _processedTypes = [];
+#endif
 
     public PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = false)
     {
@@ -29,6 +31,7 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
     {
         JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
 
+#if NET10_0_OR_GREATER
         // .NET 10 System.Text.Json enforces that type discriminator property names cannot conflict
         // with existing property names. Remove the legacy "type" property from ChoiceTypeSpecifier 
         // and TupleElementDefinition before any polymorphism setup. These legacy properties are 
@@ -40,11 +43,13 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
             jsonTypeInfo.Properties.Remove(oldTypeProp);
             _processedTypes.Add(type);
         }
+#endif
 
         var derivedTypes = BuildDerivedTypes(type).ToList();
 
         if (!derivedTypes.Any()) return jsonTypeInfo;
 
+#if NET10_0_OR_GREATER
         // Pre-load JsonTypeInfo for problematic derived types to ensure property removal happens first
         if (!_processedTypes.Contains(type) && 
             (type == typeof(TypeSpecifier) || type == typeof(Element)))
@@ -59,6 +64,7 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
             }
             _processedTypes.Add(type);
         }
+#endif
 
         jsonTypeInfo.PolymorphismOptions = new JsonPolymorphismOptions
         {
