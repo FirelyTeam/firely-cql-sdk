@@ -50,19 +50,23 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
         if (!derivedTypes.Any()) return jsonTypeInfo;
 
 #if NET10_0_OR_GREATER
-        // Pre-load JsonTypeInfo for problematic derived types to ensure property removal happens first
-        if (!_processedTypes.Contains(type) && 
-            (type == typeof(TypeSpecifier) || type == typeof(Element)))
+        // .NET 10 has stricter validation for polymorphic type discriminators and cannot handle
+        // certain ELM type hierarchies. Skip polymorphism setup for these to avoid build-time errors.
+        // 
+        // Note: Skipping polymorphism for these base types means we rely on custom converters
+        // (Net10PolymorphicConverter) to handle deserialization for these hierarchies.
+        //
+        // Affected hierarchies that need to be skipped:
+        // - CqlToElmBase (annotations) - contains CqlToElmInfo, Locator, CqlToElmError
+        // - TypeSpecifier - contains ParameterTypeSpecifier, ChoiceTypeSpecifier with "type" properties
+        // - AliasedQuerySource/RelationshipClause - nested types have conflicts
+        //
+        // These types have "type" properties that conflict with the polymorphic discriminator name,
+        // or contain nested polymorphic types that have such conflicts.
+        if (type == typeof(CqlToElmBase) || type == typeof(Locator) || type == typeof(TypeSpecifier) ||
+            type == typeof(AliasedQuerySource) || type == typeof(RelationshipClause))
         {
-            foreach (var derivedType in derivedTypes.Select(dt => dt.DerivedType).Distinct())
-            {
-                if (derivedType == typeof(ChoiceTypeSpecifier) || derivedType == typeof(TupleElementDefinition))
-                {
-                    // Trigger GetTypeInfo to remove the property before we set up polymorphism
-                    _ = options.GetTypeInfo(derivedType);
-                }
-            }
-            _processedTypes.Add(type);
+            return jsonTypeInfo;
         }
 #endif
 
