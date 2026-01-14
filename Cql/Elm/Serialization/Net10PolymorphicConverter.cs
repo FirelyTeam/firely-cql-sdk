@@ -94,12 +94,27 @@ internal class Net10PolymorphicConverterFactory : JsonConverterFactory
         { "Without", typeof(Without) }
     };
 
+    private static readonly Dictionary<string, Type> _sortByItemTypes = new()
+    {
+        { "ByExpression", typeof(ByExpression) },
+        { "ByColumn", typeof(ByColumn) },
+        { "ByDirection", typeof(ByDirection) }
+    };
+
+    private static readonly Dictionary<string, Type> _propertyTypes = new()
+    {
+        { "Property", typeof(Property) },
+        { "Search", typeof(Search) }
+    };
+
     public override bool CanConvert(Type typeToConvert)
     {
         return typeToConvert == typeof(CqlToElmBase) || 
                typeToConvert == typeof(TypeSpecifier) ||
                typeToConvert == typeof(AliasedQuerySource) ||
-               typeToConvert == typeof(RelationshipClause);
+               typeToConvert == typeof(RelationshipClause) ||
+               typeToConvert == typeof(SortByItem) ||
+               typeToConvert == typeof(Property);
     }
 
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
@@ -119,6 +134,14 @@ internal class Net10PolymorphicConverterFactory : JsonConverterFactory
         else if (typeToConvert == typeof(RelationshipClause))
         {
             return new Net10PolymorphicConverter<RelationshipClause>(_relationshipClauseTypes);
+        }
+        else if (typeToConvert == typeof(SortByItem))
+        {
+            return new Net10PolymorphicConverter<SortByItem>(_sortByItemTypes);
+        }
+        else if (typeToConvert == typeof(Property))
+        {
+            return new Net10PolymorphicConverter<Property>(_propertyTypes);
         }
 
         return null;

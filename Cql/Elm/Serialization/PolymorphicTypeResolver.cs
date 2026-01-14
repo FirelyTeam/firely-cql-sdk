@@ -10,10 +10,6 @@ namespace Hl7.Cql.Elm.Serialization;
 
 internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 {
-#if NET10_0_OR_GREATER
-    private readonly HashSet<Type> _processedTypes = [];
-#endif
-
     public PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = false)
     {
         EmitConcreteBaseTypeDiscriminator = emitConcreteBaseTypeDiscriminator;
@@ -33,15 +29,11 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 
 #if NET10_0_OR_GREATER
         // .NET 10 System.Text.Json enforces that type discriminator property names cannot conflict
-        // with existing property names. Remove the legacy "type" property from ChoiceTypeSpecifier 
-        // and TupleElementDefinition before any polymorphism setup. These legacy properties are 
-        // replaced by the polymorphic type discriminator system.
-        if (!_processedTypes.Contains(type) &&
-            (type == typeof(ChoiceTypeSpecifier) || type == typeof(TupleElementDefinition)) &&
-            jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == "type") is { } oldTypeProp)
+        // with existing property names. Remove ANY "type" property from all types before polymorphism  
+        // setup to avoid conflicts. These properties are replaced by the polymorphic type discriminator.
+        if (jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == "type") is { } oldTypeProp)
         {
             jsonTypeInfo.Properties.Remove(oldTypeProp);
-            _processedTypes.Add(type);
         }
 #endif
 
@@ -51,20 +43,22 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 
 #if NET10_0_OR_GREATER
         // .NET 10 has stricter validation for polymorphic type discriminators and cannot handle
-        // certain ELM type hierarchies. Skip polymorphism setup for these to avoid build-time errors.
+        // certain ELM type hierarchies. Skip polymorphism setup for Expression and its key sub-hierarchies.
         // 
         // Note: Skipping polymorphism for these base types means we rely on custom converters
         // (Net10PolymorphicConverter) to handle deserialization for these hierarchies.
         //
-        // Affected hierarchies that need to be skipped:
-        // - CqlToElmBase (annotations) - contains CqlToElmInfo, Locator, CqlToElmError
-        // - TypeSpecifier - contains ParameterTypeSpecifier, ChoiceTypeSpecifier with "type" properties
-        // - AliasedQuerySource/RelationshipClause - nested types have conflicts
+        // Expression is the main polymorphic base type in ELM. Many of its derived types and nested
+        // types have "type" properties that conflict with the polymorphic discriminator name.
+        // Rather than enumerate all conflicts, we skip the entire Expression hierarchy and handle
+        // it with custom converters.
         //
-        // These types have "type" properties that conflict with the polymorphic discriminator name,
-        // or contain nested polymorphic types that have such conflicts.
-        if (type == typeof(CqlToElmBase) || type == typeof(Locator) || type == typeof(TypeSpecifier) ||
-            type == typeof(AliasedQuerySource) || type == typeof(RelationshipClause))
+        // Also skipped: CqlToElmBase (annotations), TypeSpecifier, AliasedQuerySource/RelationshipClause,
+        // SortByItem, Property - all have similar conflicts.
+        if (type == typeof(Expression) || 
+            type == typeof(CqlToElmBase) || type == typeof(Locator) || type == typeof(TypeSpecifier) ||
+            type == typeof(AliasedQuerySource) || type == typeof(RelationshipClause) || type == typeof(SortByItem) ||
+            type == typeof(Property))
         {
             return jsonTypeInfo;
         }
