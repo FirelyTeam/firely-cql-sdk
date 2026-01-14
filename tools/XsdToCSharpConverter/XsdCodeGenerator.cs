@@ -332,7 +332,7 @@ internal class XsdCodeGenerator
         }
 
         // Generate private field
-        var field = new CodeMemberField(propertyType, fieldName);
+        var field = new CodeMemberField(GetCodeTypeReference(propertyType), fieldName);
         field.Attributes = MemberAttributes.Private;
         codeType.Members.Add(field);
 
@@ -340,7 +340,7 @@ internal class XsdCodeGenerator
         var property = new CodeMemberProperty
         {
             Name = propertyName,
-            Type = new CodeTypeReference(propertyType),
+            Type = GetCodeTypeReference(propertyType),
             Attributes = MemberAttributes.Public | MemberAttributes.Final,
             HasGet = true,
             HasSet = true
@@ -373,7 +373,7 @@ internal class XsdCodeGenerator
         var propertyType = GetAttributeType(attribute);
 
         // Generate private field
-        var field = new CodeMemberField(propertyType, fieldName);
+        var field = new CodeMemberField(GetCodeTypeReference(propertyType), fieldName);
         field.Attributes = MemberAttributes.Private;
         codeType.Members.Add(field);
 
@@ -381,7 +381,7 @@ internal class XsdCodeGenerator
         var property = new CodeMemberProperty
         {
             Name = propertyName,
-            Type = new CodeTypeReference(propertyType),
+            Type = GetCodeTypeReference(propertyType),
             Attributes = MemberAttributes.Public | MemberAttributes.Final,
             HasGet = true,
             HasSet = true
@@ -605,5 +605,34 @@ internal class XsdCodeGenerator
         writer.WriteLine("//     the code is regenerated.");
         writer.WriteLine("// </auto-generated>");
         writer.WriteLine("//------------------------------------------------------------------------------");
+    }
+
+    private CodeTypeReference GetCodeTypeReference(string typeName)
+    {
+        // For built-in C# types, use typeof to avoid escaping keywords
+        return typeName switch
+        {
+            "string" => new CodeTypeReference(typeof(string)),
+            "int" => new CodeTypeReference(typeof(int)),
+            "long" => new CodeTypeReference(typeof(long)),
+            "short" => new CodeTypeReference(typeof(short)),
+            "byte" => new CodeTypeReference(typeof(byte)),
+            "bool" => new CodeTypeReference(typeof(bool)),
+            "decimal" => new CodeTypeReference(typeof(decimal)),
+            "float" => new CodeTypeReference(typeof(float)),
+            "double" => new CodeTypeReference(typeof(double)),
+            "object" => new CodeTypeReference(typeof(object)),
+            "string[]" => new CodeTypeReference(typeof(string[])),
+            "int[]" => new CodeTypeReference(typeof(int[])),
+            "long[]" => new CodeTypeReference(typeof(long[])),
+            "short[]" => new CodeTypeReference(typeof(short[])),
+            "byte[]" => new CodeTypeReference(typeof(byte[])),
+            "bool[]" => new CodeTypeReference(typeof(bool[])),
+            "decimal[]" => new CodeTypeReference(typeof(decimal[])),
+            "float[]" => new CodeTypeReference(typeof(float[])),
+            "double[]" => new CodeTypeReference(typeof(double[])),
+            "object[]" => new CodeTypeReference(typeof(object[])),
+            _ => new CodeTypeReference(typeName)
+        };
     }
 }
