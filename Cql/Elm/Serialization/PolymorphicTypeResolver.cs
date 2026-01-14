@@ -27,13 +27,15 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
     {
         JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
 
-        // Remove old "type" property if that is left on ChoiceTypeSpecifier and TupleElementDefinition,
-        // it is replaced by the new type discriminator in the current version of ELM.
-        // (note: the deserializer will rewrite any old-style type discriminators to the new format in its
-        // preprocessing phase).
-        if ((jsonTypeInfo.Type == typeof(ChoiceTypeSpecifier) || jsonTypeInfo.Type == typeof(TupleElementDefinition)) &&
+        // .NET 10 System.Text.Json enforces that type discriminator property names cannot conflict
+        // with existing property names. Remove the old "type" property if it exists on 
+        // ChoiceTypeSpecifier and TupleElementDefinition. These legacy properties are replaced 
+        // by the polymorphic type discriminator system.
+        if ((type == typeof(ChoiceTypeSpecifier) || type == typeof(TupleElementDefinition)) &&
             jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == "type") is { } oldTypeProp)
+        {
             jsonTypeInfo.Properties.Remove(oldTypeProp);
+        }
 
         var derivedTypes = BuildDerivedTypes(type).ToList();
 

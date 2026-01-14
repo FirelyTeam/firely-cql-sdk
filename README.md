@@ -5,6 +5,8 @@
 This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec] on the Microsoft .NET (dotnet) platform. It contains an engine for executing ELM,
 and/or turning the contents of an ELM file into a .NET assembly so it can be called statically.
 
+The SDK targets both .NET 8.0 (LTS) and .NET 10.0 (LTS), providing optimized binaries for each platform. The .NET 10 runtime includes significant performance improvements, especially in LINQ operations which are heavily utilized by the CQL SDK.
+
 The engine has been tested by running it against the current NCQA HEDIS measures and CMS measures.
 There is quite some variation in how CQL is written and interpreted, 
 so it is likely at this early stage that there will be deviations from other engines currently available.
