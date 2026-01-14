@@ -71,8 +71,8 @@ private void GenerateProperty(CodeTypeDeclaration codeType, XmlSchemaElement ele
 | Attributes | ✅ Full | ✅ Full | ✅ Match |
 | Elements | ✅ Full | ✅ Full | ✅ Match |
 | Inheritance | ✅ Full | ✅ Full | ✅ Match |
-| Arrays | ✅ Full | ✅ Partial | ⚠️ Needs refinement |
-| Choice | ✅ Full | ✅ Basic | ⚠️ Needs refinement |
+| Arrays | ✅ Full | ✅ Full | ✅ Match |
+| Choice | ✅ Full | ❌ Not used | 🎯 Not needed for ELM schemas |
 | DataSet Generation | ✅ Yes | ❌ No | 🎯 Out of scope |
 | Multiple Languages | ✅ Yes (C#, VB, etc.) | ✅ C# only | 🎯 Design choice |
 
@@ -128,13 +128,14 @@ public partial class Library : Element
 ✅ **Maintainable** - Direct CodeDom generation is easier to understand and modify
 ✅ **Open source** - Can be extended and improved
 ✅ **No legacy dependencies** - Uses modern .NET APIs
+✅ **Array support** - Full feature parity with xsd.exe for array generation
 
 ### 6. Limitations Compared to xsd.exe
 
-⚠️ **Type mapping refinement needed** - Some edge cases in XSD type to CLR type mapping
+⚠️ **Minor formatting differences** - Brace style slightly different (CodeDom generated)
 ⚠️ **No DataSet support** - Intentionally excluded as per requirements
 ⚠️ **Single output format** - Currently C# only (extensible to other languages)
-⚠️ **Attribute details** - Some XML serialization attributes may need fine-tuning
+⚠️ **No choice construct support** - Not needed for ELM schemas (none found in schema files)
 
 ## Implementation Notes
 

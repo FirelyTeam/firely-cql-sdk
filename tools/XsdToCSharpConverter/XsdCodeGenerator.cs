@@ -294,11 +294,37 @@ internal class XsdCodeGenerator
 
     private void GenerateProperty(CodeTypeDeclaration codeType, XmlSchemaElement element)
     {
-        var propertyName = MakeSafeMemberName(element.Name!);
+        // Use the element name as-is for the property (xsd.exe preserves casing)
+        var propertyName = element.Name!;
         var fieldName = MakeFieldName(propertyName);
         
-        var propertyType = GetElementType(element);
-        var isArray = element.MaxOccurs > 1 || element.MaxOccursString == "unbounded";
+        // Check if this is an array wrapper (element with anonymous complexType containing sequence with maxOccurs)
+        string? arrayItemName = null;
+        string? propertyType = null;
+        bool isArray = false;
+        
+        if (element.SchemaType is XmlSchemaComplexType complexType && 
+            complexType.Particle is XmlSchemaSequence sequence &&
+            sequence.Items.Count > 0)
+        {
+            // This might be an array wrapper pattern
+            var firstItem = sequence.Items[0];
+            if (firstItem is XmlSchemaElement innerElement &&
+                (innerElement.MaxOccurs > 1 || innerElement.MaxOccursString == "unbounded"))
+            {
+                // This is an array wrapper
+                isArray = true;
+                arrayItemName = innerElement.Name;
+                propertyType = GetElementType(innerElement);
+            }
+        }
+        
+        if (propertyType == null)
+        {
+            // Normal element or direct array
+            propertyType = GetElementType(element);
+            isArray = element.MaxOccurs > 1 || element.MaxOccursString == "unbounded";
+        }
         
         if (isArray)
         {
@@ -332,7 +358,7 @@ internal class XsdCodeGenerator
         ));
 
         // Add XML serialization attributes
-        AddPropertyAttributes(property, element, isArray);
+        AddPropertyAttributes(property, element, isArray, arrayItemName);
 
         // Add remarks comment
         property.Comments.Add(new CodeCommentStatement("<remarks/>", true));
@@ -417,15 +443,14 @@ internal class XsdCodeGenerator
         ));
     }
 
-    private void AddPropertyAttributes(CodeMemberProperty property, XmlSchemaElement element, bool isArray)
+    private void AddPropertyAttributes(CodeMemberProperty property, XmlSchemaElement element, bool isArray, string? arrayItemName = null)
     {
-        if (isArray)
+        if (isArray && arrayItemName != null)
         {
-            // Add XmlArrayItem attribute
-            var itemName = element.Name;
+            // Add XmlArrayItem attribute with the inner element name
             property.CustomAttributes.Add(new CodeAttributeDeclaration(
                 "System.Xml.Serialization.XmlArrayItemAttribute",
-                new CodeAttributeArgument(new CodePrimitiveExpression("def")),
+                new CodeAttributeArgument(new CodePrimitiveExpression(arrayItemName)),
                 new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(false))
             ));
         }
@@ -536,8 +561,9 @@ internal class XsdCodeGenerator
 
     private string MakeFieldName(string propertyName)
     {
-        // Convert to camelCase and add "Field" suffix
-        return char.ToLower(propertyName[0]) + propertyName.Substring(1) + "Field";
+        // Convert property name to field name: propertyName -> propertyNameField
+        // Preserve the original casing
+        return propertyName + "Field";
     }
 
     private void WriteOutput(CodeNamespace codeNamespace)
