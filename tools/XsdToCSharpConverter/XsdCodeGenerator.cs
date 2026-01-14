@@ -109,21 +109,12 @@ internal class XsdCodeGenerator
         var rootTypes = new List<CodeTypeDeclaration>();
         var otherTypes = new List<CodeTypeDeclaration>();
         
-        foreach (var schemaFile in _options.SchemaFiles)
+        // Process all schemas in the schema set (including imported ones)
+        foreach (XmlSchema currentSchema in _schemaSet.Schemas())
         {
-            // Find the corresponding schema object
-            XmlSchema? currentSchema = null;
-            foreach (XmlSchema schema in _schemaSet.Schemas())
-            {
-                // Match based on schema location or content
-                if (schema.SourceUri != null && schema.SourceUri.EndsWith(Path.GetFileName(schemaFile)))
-                {
-                    currentSchema = schema;
-                    break;
-                }
-            }
-            
-            if (currentSchema == null) continue;
+            // Skip schemas that are not in our main namespace (e.g., skip xsd namespace itself)
+            if (currentSchema.TargetNamespace == "http://www.w3.org/2001/XMLSchema")
+                continue;
 
             // Generate types from this schema in document order
             var schemaItems = currentSchema.Items;
@@ -195,6 +186,12 @@ internal class XsdCodeGenerator
             IsPartial = true,
             TypeAttributes = System.Reflection.TypeAttributes.Public
         };
+
+        // Mark as abstract if the XSD type is abstract
+        if (complexType.IsAbstract)
+        {
+            codeType.TypeAttributes |= System.Reflection.TypeAttributes.Abstract;
+        }
 
         _generatedTypes[qualifiedName] = codeType;
 
