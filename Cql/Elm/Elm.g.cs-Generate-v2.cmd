@@ -15,7 +15,7 @@ REM ============================================================================
 REM Note: Generated C# files must have file extension of .g.cs
 REM For more info regarding nullability on generated files, see: https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references
 
-SET in_file=expression.cs
+SET in_file=elm.g.cs
 SET temp_file=Elm.g.cs.tmp
 SET out_file=Elm.g.cs
 SET tool_path=..\..\tools\XsdToCSharpConverter\bin\Debug\net8.0\xsd2cs.dll
@@ -36,7 +36,7 @@ IF NOT EXIST "%tool_path%" (
 PUSHD Schema
 
 ECHO Generating C# from XSD files using xsd2cs tool...
-dotnet "%tool_path%" /c .\library.xsd .\clinicalexpression.xsd .\cqlannotations.xsd .\expression.xsd /o:.. /n:Hl7.Cql.Elm /q
+dotnet "%tool_path%" /c .\library.xsd .\clinicalexpression.xsd .\cqlannotations.xsd .\expression.xsd /o:.. /n:Hl7.Cql.Elm /out:elm.g.cs /q
 
 IF ERRORLEVEL 1 (
     POPD

@@ -229,6 +229,7 @@ namespace Hl7.Cql.Elm
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm:r1")]
+    [System.Xml.Serialization.XmlRootAttribute("library", Namespace="urn:hl7-org:elm:r1", IsNullable=false)]
     public partial class Library : Element
     {
         
@@ -2468,6 +2469,22 @@ namespace Hl7.Cql.Elm
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:cql-annotations:r1")]
     public partial class Narrative
     {
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text
+        {
+            get
+            {
+                return this.textField;
+            }
+            set
+            {
+                this.textField = value;
+            }
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]

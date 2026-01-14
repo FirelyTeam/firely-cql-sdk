@@ -21,6 +21,7 @@ internal class XsdCodeGenerator
 {
     private readonly CommandLineOptions _options;
     private readonly Dictionary<XmlQualifiedName, CodeTypeDeclaration> _generatedTypes = new();
+    private readonly Dictionary<string, (string elementName, string? targetNamespace)> _rootElements = new();
     private XmlSchemaSet? _schemaSet;
 
     public XsdCodeGenerator(CommandLineOptions options)
@@ -84,6 +85,23 @@ internal class XsdCodeGenerator
     {
         if (_schemaSet == null) return;
 
+        // First pass: Track global elements that reference named types for XmlRootAttribute
+        foreach (XmlSchema schema in _schemaSet.Schemas())
+        {
+            foreach (XmlSchemaElement element in schema.Elements.Values)
+            {
+                if (!string.IsNullOrEmpty(element.Name) && !element.SchemaTypeName.IsEmpty)
+                {
+                    var typeName = element.SchemaTypeName.Name;
+                    if (!string.IsNullOrEmpty(typeName))
+                    {
+                        _rootElements[typeName] = (element.Name, schema.TargetNamespace);
+                    }
+                }
+            }
+        }
+
+        // Second pass: Generate types
         foreach (XmlSchema schema in _schemaSet.Schemas())
         {
             // Generate classes from complex types
@@ -107,10 +125,10 @@ internal class XsdCodeGenerator
                 }
             }
 
-            // Generate classes from global elements
+            // Generate classes from global elements with anonymous types
             foreach (XmlSchemaElement element in schema.Elements.Values)
             {
-                if (element.SchemaType is XmlSchemaComplexType complexType)
+                if (!string.IsNullOrEmpty(element.Name) && element.SchemaType is XmlSchemaComplexType complexType)
                 {
                     var codeType = GenerateComplexType(complexType, schema.TargetNamespace, element.Name);
                     if (codeType != null)
@@ -164,6 +182,12 @@ internal class XsdCodeGenerator
 
         // Generate fields and properties
         GenerateMembers(codeType, complexType);
+
+        // Handle mixed content (text nodes)
+        if (complexType.IsMixed)
+        {
+            GenerateMixedContentProperty(codeType);
+        }
 
         return codeType;
     }
@@ -452,6 +476,49 @@ internal class XsdCodeGenerator
         }
     }
 
+    private void GenerateMixedContentProperty(CodeTypeDeclaration codeType)
+    {
+        // Generate a string[] property with XmlTextAttribute for mixed content
+        var fieldName = "textField";
+        var propertyName = "Text";
+        
+        // Add private field
+        var field = new CodeMemberField(new CodeTypeReference(typeof(string[])), fieldName)
+        {
+            Attributes = MemberAttributes.Private
+        };
+        codeType.Members.Add(field);
+
+        // Add public property
+        var property = new CodeMemberProperty
+        {
+            Name = propertyName,
+            Type = new CodeTypeReference(typeof(string[])),
+            Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            HasGet = true,
+            HasSet = true
+        };
+
+        // Add getter
+        property.GetStatements.Add(new CodeMethodReturnStatement(
+            new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName)
+        ));
+
+        // Add setter
+        property.SetStatements.Add(new CodeAssignStatement(
+            new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName),
+            new CodePropertySetValueReferenceExpression()
+        ));
+
+        // Add XmlText attribute
+        property.CustomAttributes.Add(new CodeAttributeDeclaration("System.Xml.Serialization.XmlTextAttribute"));
+
+        // Add remarks comment
+        property.Comments.Add(new CodeCommentStatement("<remarks/>", true));
+
+        codeType.Members.Add(property);
+    }
+
     private void AddTypeAttributes(CodeTypeDeclaration codeType, XmlSchemaComplexType complexType, string? targetNamespace)
     {
         // Add [GeneratedCode]
@@ -476,6 +543,23 @@ internal class XsdCodeGenerator
                 "System.Xml.Serialization.XmlTypeAttribute",
                 new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(targetNamespace))
             ));
+        }
+
+        // Add [XmlRoot] if this type is referenced by a global element
+        var typeName = complexType.Name;
+        if (!string.IsNullOrEmpty(typeName) && _rootElements.TryGetValue(typeName, out var rootInfo))
+        {
+            var xmlRootAttr = new CodeAttributeDeclaration("System.Xml.Serialization.XmlRootAttribute");
+            xmlRootAttr.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(rootInfo.elementName)));
+            
+            if (!string.IsNullOrEmpty(rootInfo.targetNamespace))
+            {
+                xmlRootAttr.Arguments.Add(new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(rootInfo.targetNamespace)));
+            }
+            
+            xmlRootAttr.Arguments.Add(new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(false)));
+            
+            codeType.CustomAttributes.Add(xmlRootAttr);
         }
     }
 
