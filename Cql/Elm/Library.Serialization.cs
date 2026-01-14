@@ -231,6 +231,11 @@ public partial class Library
         options.Converters.Add(new XmlQualifiedNameConverter());
         options.Converters.Add(new JsonStringEnumConverter());
 
+#if NET10_0_OR_GREATER
+        // .NET 10 requires custom converters for polymorphic types with "type" property conflicts
+        options.Converters.Add(new Net10PolymorphicConverterFactory());
+#endif
+
         options.TypeInfoResolver = new PolymorphicTypeResolver(allowOldStyleTypeDiscriminators)
                                    .WithAddedModifier(ModifyNarrative)
                                    .WithAddedModifier(DoNotSerializeDefaultValues)
