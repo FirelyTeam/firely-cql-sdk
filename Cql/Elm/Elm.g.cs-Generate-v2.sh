@@ -26,7 +26,7 @@ fi
 pushd Schema > /dev/null
 
 echo "Generating C# from XSD files using xsd2cs tool..."
-dotnet "$TOOL_PATH" /c ./library.xsd ./clinicalexpression.xsd ./cqlannotations.xsd ./expression.xsd /o:.. /n:Hl7.Cql.Elm /out:elm.g.cs /q
+dotnet "$TOOL_PATH" /c ./library.xsd ./clinicalexpression.xsd ./cqlannotations.xsd ./expression.xsd /o:.. /n:Hl7.Cql.Elm /out:Elm.g.cs /q
 
 if [ $? -ne 0 ]; then
     popd > /dev/null
