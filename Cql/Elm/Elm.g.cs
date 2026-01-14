@@ -13,7 +13,7 @@ namespace Hl7.Cql.Elm {
     using System.Xml.Serialization;
     
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -163,7 +163,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -210,7 +210,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -257,7 +257,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -317,7 +317,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -338,7 +338,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -410,7 +410,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -482,7 +482,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -541,7 +541,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -627,7 +627,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -926,7 +926,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -934,7 +934,7 @@ namespace Hl7.Cql.Elm {
     public partial class Search : Property {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -994,7 +994,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1066,7 +1066,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1138,7 +1138,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1197,7 +1197,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1231,7 +1231,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1291,7 +1291,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1325,7 +1325,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1359,7 +1359,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1405,7 +1405,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1438,7 +1438,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1482,7 +1482,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1526,7 +1526,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1570,7 +1570,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1614,7 +1614,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1622,7 +1622,7 @@ namespace Hl7.Cql.Elm {
     public partial class ExpandValueSet : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1630,7 +1630,7 @@ namespace Hl7.Cql.Elm {
     public partial class Subsumes : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1638,7 +1638,7 @@ namespace Hl7.Cql.Elm {
     public partial class SubsumedBy : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1685,7 +1685,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1717,7 +1717,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1751,7 +1751,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1785,7 +1785,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1796,7 +1796,7 @@ namespace Hl7.Cql.Elm {
     public abstract partial class CqlToElmBase {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1840,7 +1840,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1874,7 +1874,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2026,7 +2026,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2047,7 +2047,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:cql-annotations:r1")]
     public enum ErrorSeverity {
@@ -2059,7 +2059,7 @@ namespace Hl7.Cql.Elm {
         error,
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:cql-annotations:r1")]
     public enum ErrorType {
@@ -2075,7 +2075,7 @@ namespace Hl7.Cql.Elm {
         @internal,
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2174,7 +2174,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2221,7 +2221,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2317,7 +2317,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2331,7 +2331,7 @@ namespace Hl7.Cql.Elm {
     public abstract partial class TypeSpecifier : Element {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2352,7 +2352,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2372,7 +2372,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2392,7 +2392,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2437,7 +2437,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2457,7 +2457,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2489,7 +2489,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2510,7 +2510,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2554,7 +2554,7 @@ namespace Hl7.Cql.Elm {
     public abstract partial class Expression : Element {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2602,7 +2602,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2682,7 +2682,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2758,7 +2758,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2779,7 +2779,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2804,7 +2804,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm:r1")]
     public enum AccessModifier {
@@ -2814,7 +2814,7 @@ namespace Hl7.Cql.Elm {
         Private,
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2874,7 +2874,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2946,7 +2946,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2981,7 +2981,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3013,7 +3013,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3084,7 +3084,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3118,7 +3118,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3164,7 +3164,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3185,7 +3185,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3219,7 +3219,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3253,7 +3253,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3286,7 +3286,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3306,7 +3306,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3339,7 +3339,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3372,7 +3372,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3454,7 +3454,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3486,7 +3486,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3494,7 +3494,7 @@ namespace Hl7.Cql.Elm {
     public partial class And : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3502,7 +3502,7 @@ namespace Hl7.Cql.Elm {
     public partial class Or : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3510,7 +3510,7 @@ namespace Hl7.Cql.Elm {
     public partial class Xor : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3518,7 +3518,7 @@ namespace Hl7.Cql.Elm {
     public partial class Implies : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3526,7 +3526,7 @@ namespace Hl7.Cql.Elm {
     public partial class Not : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3570,7 +3570,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3602,7 +3602,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3646,7 +3646,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3667,7 +3667,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3675,7 +3675,7 @@ namespace Hl7.Cql.Elm {
     public partial class IsNull : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3683,7 +3683,7 @@ namespace Hl7.Cql.Elm {
     public partial class IsTrue : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3691,7 +3691,7 @@ namespace Hl7.Cql.Elm {
     public partial class IsFalse : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3699,7 +3699,7 @@ namespace Hl7.Cql.Elm {
     public partial class Coalesce : NaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3732,7 +3732,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3778,7 +3778,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3811,7 +3811,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3844,7 +3844,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3852,7 +3852,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToBoolean : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3860,7 +3860,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertsToBoolean : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3868,7 +3868,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToConcept : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3876,7 +3876,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertsToDate : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3884,7 +3884,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToDate : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3892,7 +3892,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertsToDateTime : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3900,7 +3900,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToDateTime : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3908,7 +3908,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertsToDecimal : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3916,7 +3916,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToDecimal : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3924,7 +3924,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertsToInteger : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3932,7 +3932,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToInteger : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3940,7 +3940,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertsToLong : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3948,7 +3948,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToLong : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3956,7 +3956,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertsToQuantity : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3964,7 +3964,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToQuantity : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3972,7 +3972,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertsToRatio : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3980,7 +3980,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToRatio : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3988,7 +3988,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToList : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -3996,7 +3996,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToChars : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4004,7 +4004,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertsToString : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4012,7 +4012,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToString : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4020,7 +4020,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertsToTime : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4028,7 +4028,7 @@ namespace Hl7.Cql.Elm {
     public partial class ToTime : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4036,7 +4036,7 @@ namespace Hl7.Cql.Elm {
     public partial class CanConvertQuantity : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4044,7 +4044,7 @@ namespace Hl7.Cql.Elm {
     public partial class ConvertQuantity : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4052,7 +4052,7 @@ namespace Hl7.Cql.Elm {
     public partial class Equal : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4060,7 +4060,7 @@ namespace Hl7.Cql.Elm {
     public partial class Equivalent : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4068,7 +4068,7 @@ namespace Hl7.Cql.Elm {
     public partial class NotEqual : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4076,7 +4076,7 @@ namespace Hl7.Cql.Elm {
     public partial class Less : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4084,7 +4084,7 @@ namespace Hl7.Cql.Elm {
     public partial class Greater : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4092,7 +4092,7 @@ namespace Hl7.Cql.Elm {
     public partial class LessOrEqual : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4100,7 +4100,7 @@ namespace Hl7.Cql.Elm {
     public partial class GreaterOrEqual : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4108,7 +4108,7 @@ namespace Hl7.Cql.Elm {
     public partial class Add : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4116,7 +4116,7 @@ namespace Hl7.Cql.Elm {
     public partial class Subtract : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4124,7 +4124,7 @@ namespace Hl7.Cql.Elm {
     public partial class Multiply : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4132,7 +4132,7 @@ namespace Hl7.Cql.Elm {
     public partial class Divide : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4140,7 +4140,7 @@ namespace Hl7.Cql.Elm {
     public partial class TruncatedDivide : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4148,7 +4148,7 @@ namespace Hl7.Cql.Elm {
     public partial class Modulo : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4156,7 +4156,7 @@ namespace Hl7.Cql.Elm {
     public partial class Ceiling : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4164,7 +4164,7 @@ namespace Hl7.Cql.Elm {
     public partial class Floor : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4172,7 +4172,7 @@ namespace Hl7.Cql.Elm {
     public partial class Truncate : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4180,7 +4180,7 @@ namespace Hl7.Cql.Elm {
     public partial class Abs : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4188,7 +4188,7 @@ namespace Hl7.Cql.Elm {
     public partial class Negate : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4220,7 +4220,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4228,7 +4228,7 @@ namespace Hl7.Cql.Elm {
     public partial class Ln : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4236,7 +4236,7 @@ namespace Hl7.Cql.Elm {
     public partial class Exp : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4244,7 +4244,7 @@ namespace Hl7.Cql.Elm {
     public partial class Log : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4252,7 +4252,7 @@ namespace Hl7.Cql.Elm {
     public partial class Power : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4260,7 +4260,7 @@ namespace Hl7.Cql.Elm {
     public partial class Successor : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4268,7 +4268,7 @@ namespace Hl7.Cql.Elm {
     public partial class Predecessor : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4289,7 +4289,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4310,7 +4310,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4318,7 +4318,7 @@ namespace Hl7.Cql.Elm {
     public partial class Precision : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4326,7 +4326,7 @@ namespace Hl7.Cql.Elm {
     public partial class LowBoundary : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4334,7 +4334,7 @@ namespace Hl7.Cql.Elm {
     public partial class HighBoundary : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4342,7 +4342,7 @@ namespace Hl7.Cql.Elm {
     public partial class Concatenate : NaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4374,7 +4374,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4406,7 +4406,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4438,7 +4438,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4446,7 +4446,7 @@ namespace Hl7.Cql.Elm {
     public partial class Length : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4454,7 +4454,7 @@ namespace Hl7.Cql.Elm {
     public partial class Upper : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4462,7 +4462,7 @@ namespace Hl7.Cql.Elm {
     public partial class Lower : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4470,7 +4470,7 @@ namespace Hl7.Cql.Elm {
     public partial class Indexer : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4502,7 +4502,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4534,7 +4534,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4578,7 +4578,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4586,7 +4586,7 @@ namespace Hl7.Cql.Elm {
     public partial class StartsWith : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4594,7 +4594,7 @@ namespace Hl7.Cql.Elm {
     public partial class EndsWith : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4602,7 +4602,7 @@ namespace Hl7.Cql.Elm {
     public partial class Matches : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4610,7 +4610,7 @@ namespace Hl7.Cql.Elm {
     public partial class ReplaceMatches : TernaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm:r1")]
     public enum DateTimePrecision {
@@ -4632,7 +4632,7 @@ namespace Hl7.Cql.Elm {
         Millisecond,
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4666,7 +4666,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4700,7 +4700,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4708,7 +4708,7 @@ namespace Hl7.Cql.Elm {
     public partial class DateFrom : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4716,7 +4716,7 @@ namespace Hl7.Cql.Elm {
     public partial class TimeFrom : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4724,7 +4724,7 @@ namespace Hl7.Cql.Elm {
     public partial class TimezoneFrom : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4732,7 +4732,7 @@ namespace Hl7.Cql.Elm {
     public partial class TimezoneOffsetFrom : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4766,7 +4766,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4774,7 +4774,7 @@ namespace Hl7.Cql.Elm {
     public partial class TimeOfDay : OperatorExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4782,7 +4782,7 @@ namespace Hl7.Cql.Elm {
     public partial class Today : OperatorExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4790,7 +4790,7 @@ namespace Hl7.Cql.Elm {
     public partial class Now : OperatorExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4834,7 +4834,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4938,7 +4938,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4994,7 +4994,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5028,7 +5028,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5062,7 +5062,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5096,7 +5096,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5104,7 +5104,7 @@ namespace Hl7.Cql.Elm {
     public partial class PointFrom : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5112,7 +5112,7 @@ namespace Hl7.Cql.Elm {
     public partial class Width : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5120,7 +5120,7 @@ namespace Hl7.Cql.Elm {
     public partial class Size : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5128,7 +5128,7 @@ namespace Hl7.Cql.Elm {
     public partial class Start : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5136,7 +5136,7 @@ namespace Hl7.Cql.Elm {
     public partial class End : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5170,7 +5170,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5204,7 +5204,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5238,7 +5238,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5272,7 +5272,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5306,7 +5306,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5340,7 +5340,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5374,7 +5374,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5408,7 +5408,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5442,7 +5442,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5476,7 +5476,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5510,7 +5510,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5544,7 +5544,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5578,7 +5578,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5612,7 +5612,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5646,7 +5646,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5680,7 +5680,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5714,7 +5714,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5748,7 +5748,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5756,7 +5756,7 @@ namespace Hl7.Cql.Elm {
     public partial class Collapse : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5764,7 +5764,7 @@ namespace Hl7.Cql.Elm {
     public partial class Expand : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5772,7 +5772,7 @@ namespace Hl7.Cql.Elm {
     public partial class Union : NaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5780,7 +5780,7 @@ namespace Hl7.Cql.Elm {
     public partial class Intersect : NaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5788,7 +5788,7 @@ namespace Hl7.Cql.Elm {
     public partial class Except : NaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5796,7 +5796,7 @@ namespace Hl7.Cql.Elm {
     public partial class Exists : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5804,7 +5804,7 @@ namespace Hl7.Cql.Elm {
     public partial class Times : BinaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5849,7 +5849,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5882,7 +5882,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5915,7 +5915,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5959,7 +5959,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5991,7 +5991,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -5999,7 +5999,7 @@ namespace Hl7.Cql.Elm {
     public partial class Flatten : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6031,7 +6031,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6076,7 +6076,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6121,7 +6121,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6129,7 +6129,7 @@ namespace Hl7.Cql.Elm {
     public partial class Distinct : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6150,7 +6150,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6171,7 +6171,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6192,7 +6192,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6200,7 +6200,7 @@ namespace Hl7.Cql.Elm {
     public partial class SingletonFrom : UnaryExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6261,7 +6261,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6293,7 +6293,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6301,7 +6301,7 @@ namespace Hl7.Cql.Elm {
     public partial class Count : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6309,7 +6309,7 @@ namespace Hl7.Cql.Elm {
     public partial class Sum : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6317,7 +6317,7 @@ namespace Hl7.Cql.Elm {
     public partial class Product : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6325,7 +6325,7 @@ namespace Hl7.Cql.Elm {
     public partial class Min : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6333,7 +6333,7 @@ namespace Hl7.Cql.Elm {
     public partial class Max : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6341,7 +6341,7 @@ namespace Hl7.Cql.Elm {
     public partial class Avg : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6349,7 +6349,7 @@ namespace Hl7.Cql.Elm {
     public partial class GeometricMean : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6357,7 +6357,7 @@ namespace Hl7.Cql.Elm {
     public partial class Median : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6365,7 +6365,7 @@ namespace Hl7.Cql.Elm {
     public partial class Mode : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6373,7 +6373,7 @@ namespace Hl7.Cql.Elm {
     public partial class Variance : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6381,7 +6381,7 @@ namespace Hl7.Cql.Elm {
     public partial class PopulationVariance : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6389,7 +6389,7 @@ namespace Hl7.Cql.Elm {
     public partial class StdDev : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6397,7 +6397,7 @@ namespace Hl7.Cql.Elm {
     public partial class PopulationStdDev : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6405,7 +6405,7 @@ namespace Hl7.Cql.Elm {
     public partial class AllTrue : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6413,7 +6413,7 @@ namespace Hl7.Cql.Elm {
     public partial class AnyTrue : AggregateExpression {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6460,7 +6460,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6494,7 +6494,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6527,7 +6527,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6549,7 +6549,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6557,7 +6557,7 @@ namespace Hl7.Cql.Elm {
     public partial class With : RelationshipClause {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6565,7 +6565,7 @@ namespace Hl7.Cql.Elm {
     public partial class Without : RelationshipClause {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm:r1")]
     public enum SortDirection {
@@ -6579,7 +6579,7 @@ namespace Hl7.Cql.Elm {
         descending,
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6616,7 +6616,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6624,7 +6624,7 @@ namespace Hl7.Cql.Elm {
     public partial class ByDirection : SortByItem {
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6645,7 +6645,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6665,7 +6665,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6685,7 +6685,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6718,7 +6718,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6776,7 +6776,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6868,7 +6868,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6889,7 +6889,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6910,7 +6910,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6930,7 +6930,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -6950,7 +6950,7 @@ namespace Hl7.Cql.Elm {
         }
     }
     
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd2cs", "1.0.0.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]

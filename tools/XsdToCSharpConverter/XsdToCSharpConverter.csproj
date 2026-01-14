@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AssemblyName>xsd2cs</AssemblyName>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -8,6 +8,7 @@
 
 using System.CodeDom;
 using System.CodeDom.Compiler;
+using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
@@ -24,10 +25,13 @@ internal class XsdCodeGenerator
     private readonly Dictionary<string, (string elementName, string? targetNamespace)> _rootElements = new();
     private readonly Dictionary<string, List<string>> _typeHierarchy = new(); // base type -> list of derived types
     private XmlSchemaSet? _schemaSet;
+    private readonly string _toolVersion;
 
     public XsdCodeGenerator(CommandLineOptions options)
     {
         _options = options;
+        // Get the assembly version for the GeneratedCodeAttribute
+        _toolVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0.0";
     }
 
     public void Generate()
@@ -630,8 +634,8 @@ internal class XsdCodeGenerator
     {
         codeType.CustomAttributes.Add(new CodeAttributeDeclaration(
             "System.CodeDom.Compiler.GeneratedCodeAttribute",
-            new CodeAttributeArgument(new CodePrimitiveExpression("xsd")),
-            new CodeAttributeArgument(new CodePrimitiveExpression("4.8.3928.0"))
+            new CodeAttributeArgument(new CodePrimitiveExpression("xsd2cs")),
+            new CodeAttributeArgument(new CodePrimitiveExpression(_toolVersion))
         ));
     }
 
