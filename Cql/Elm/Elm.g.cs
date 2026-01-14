@@ -7,9 +7,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-#pragma warning disable CS1591 // Missing XML comment for publicly visible constructors
-
 namespace Hl7.Cql.Elm
 {
     using System.Xml.Serialization;
