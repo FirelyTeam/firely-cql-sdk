@@ -58,6 +58,10 @@ class Program
             {
                 options.Namespace = arg.Substring(3);
             }
+            else if (argLower.StartsWith("/out:"))
+            {
+                options.OutputFile = arg.Substring(5);
+            }
             else if (!arg.StartsWith("/") && !arg.StartsWith("-"))
             {
                 // Schema file
@@ -83,14 +87,15 @@ class Program
     {
         Console.WriteLine("XSD to C# Converter");
         Console.WriteLine();
-        Console.WriteLine("Usage: xsd2cs /c [/o:<path>] [/n:<namespace>] schema1.xsd [schema2.xsd ...]");
+        Console.WriteLine("Usage: xsd2cs /c [/o:<path>] [/n:<namespace>] [/out:<filename>] schema1.xsd [schema2.xsd ...]");
         Console.WriteLine();
         Console.WriteLine("Options:");
-        Console.WriteLine("  /c              Generate classes");
-        Console.WriteLine("  /o:<path>       Output directory");
-        Console.WriteLine("  /n:<namespace>  Namespace for generated classes");
+        Console.WriteLine("  /c                Generate classes");
+        Console.WriteLine("  /o:<path>         Output directory");
+        Console.WriteLine("  /n:<namespace>    Namespace for generated classes");
+        Console.WriteLine("  /out:<filename>   Output filename (default: derived from first schema file)");
         Console.WriteLine();
         Console.WriteLine("Example:");
-        Console.WriteLine("  xsd2cs /c /o:.. /n:Hl7.Cql.Elm library.xsd expression.xsd");
+        Console.WriteLine("  xsd2cs /c /o:.. /n:Hl7.Cql.Elm /out:elmv2.g.cs library.xsd expression.xsd");
     }
 }

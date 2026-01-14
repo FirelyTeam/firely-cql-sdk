@@ -68,9 +68,7 @@ xsd2cs [options] schema1.xsd [schema2.xsd ...]
 - `/c` - Generate classes (default mode)
 - `/o:<path>` - Output directory for generated files
 - `/n:<namespace>` - Namespace for generated classes
-- `/q` - Suppress console output
-- `--modern, -m` - Generate modern C# with nullable annotations
-- `--verbose, -v` - Show detailed output including schema loading and validation messages
+- `/out:<filename>` - Output filename (default: derived from first schema file)
 
 ### Examples
 
@@ -79,19 +77,9 @@ xsd2cs [options] schema1.xsd [schema2.xsd ...]
 dotnet xsd2cs.dll /c /o:.. /n:Hl7.Cql.Elm library.xsd expression.xsd
 ```
 
-**Generate modern C# with nullable annotations:**
+**Generate with custom output filename:**
 ```bash
-dotnet xsd2cs.dll --modern /c /o:.. /n:Hl7.Cql.Elm library.xsd expression.xsd
-```
-
-**Suppress output messages:**
-```bash
-dotnet xsd2cs.dll /q /c /o:.. /n:Hl7.Cql.Elm schema.xsd
-```
-
-**Verbose mode for debugging:**
-```bash
-dotnet xsd2cs.dll --verbose /c /o:.. /n:Hl7.Cql.Elm schema.xsd
+dotnet xsd2cs.dll /c /o:.. /n:Hl7.Cql.Elm /out:elmv2.g.cs library.xsd expression.xsd
 ```
 
 ## How It Works
