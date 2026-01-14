@@ -176,9 +176,8 @@ internal class XsdCodeGenerator
             return null;
         }
 
-        // Check if this is an enum
-        if (simpleType.Content is XmlSchemaSimpleTypeRestriction restriction &&
-            restriction.BaseTypeName.Name == "string")
+        // Check if this is an enum (has enumeration facets)
+        if (simpleType.Content is XmlSchemaSimpleTypeRestriction restriction)
         {
             var hasEnumFacets = restriction.Facets.OfType<XmlSchemaEnumerationFacet>().Any();
             if (hasEnumFacets)
@@ -575,31 +574,32 @@ internal class XsdCodeGenerator
 
     private string MakeSafeEnumMemberName(string value)
     {
-        // Make a valid C# enum member name
+        // Preserve original casing from XSD (xsd.exe behavior)
         if (string.IsNullOrEmpty(value)) return value;
         
         var sb = new StringBuilder();
-        bool capitalizeNext = true;
 
         foreach (char c in value)
         {
-            if (char.IsLetterOrDigit(c))
+            if (char.IsLetterOrDigit(c) || c == '_')
             {
-                sb.Append(capitalizeNext ? char.ToUpper(c) : c);
-                capitalizeNext = false;
+                sb.Append(c);
             }
-            else
-            {
-                capitalizeNext = true;
-            }
+            // Skip non-alphanumeric characters except underscore
         }
 
         var result = sb.ToString();
         
         // Enum members can't start with a digit
-        if (char.IsDigit(result[0]))
+        if (result.Length > 0 && char.IsDigit(result[0]))
         {
             result = "Item" + result;
+        }
+
+        // If result is empty or all non-alphanumeric, return a safe default
+        if (string.IsNullOrEmpty(result))
+        {
+            result = "Item";
         }
 
         return result;
