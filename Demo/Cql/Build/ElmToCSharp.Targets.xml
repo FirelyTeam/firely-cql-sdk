@@ -27,8 +27,15 @@
 		<PackagerCLI>$(CqlSolutionDir)/Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager</PackagerCLI>
 	</PropertyGroup>
 
+	<!-- Determine if this is the last target framework in multi-targeting scenarios -->
+	<PropertyGroup>
+		<IsLastTargetFramework Condition="'$(TargetFrameworks)' != ''">false</IsLastTargetFramework>
+		<IsLastTargetFramework Condition="'$(TargetFrameworks)' != '' and $(TargetFrameworks.EndsWith('$(TargetFramework)'))">true</IsLastTargetFramework>
+		<IsLastTargetFramework Condition="'$(TargetFrameworks)' == ''">true</IsLastTargetFramework>
+	</PropertyGroup>
+
 	<Target Name="GenerateCSharp"
-	        Condition="'$(ElmToCSharpEnabled)'=='true' And Exists('$(PackagerCLI)')"
+	        Condition="'$(ElmToCSharpEnabled)'=='true' And '$(IsLastTargetFramework)'=='true' And Exists('$(PackagerCLI)')"
 	        BeforeTargets="PreBuildEvent">
 
 		<PropertyGroup>
@@ -93,7 +100,7 @@
 	</ItemGroup>
 
 	<Target Name="Delete CSharp"
-					Condition="'$(ElmToCSharpEnabled)'=='true'"
+					Condition="'$(ElmToCSharpEnabled)'=='true' And '$(IsLastTargetFramework)'=='true'"
 					AfterTargets="Clean">
 		<Message Text="$(Box.Replace({Text}, Deleting C# files))" Importance="High" />
 		<Delete Files="@(CSharpFiles)" />
@@ -104,7 +111,7 @@
 	</ItemGroup>
 
 	<Target Name="Delete Resources"
-					Condition="'$(ElmToCSharpEnabled)'=='true'"
+					Condition="'$(ElmToCSharpEnabled)'=='true' And '$(IsLastTargetFramework)'=='true'"
 					AfterTargets="Clean">
 		<Message Text="$(Box.Replace({Text}, Deleting Resource files))" Importance="High" />
 		<Delete Files="@(ResourceFiles)" />
@@ -119,7 +126,7 @@
 	</ItemGroup>
 
 	<Target Name="Delete Results"
-					Condition="'$(ElmToCSharpEnabled)'=='true'"
+					Condition="'$(ElmToCSharpEnabled)'=='true' And '$(IsLastTargetFramework)'=='true'"
 					AfterTargets="Clean">
 		<Message Text="$(Box.Replace({Text}, Deleting Test Results files))" Importance="High" />
 		<RemoveDir Directories="$(TestResultsDirectory)" />
