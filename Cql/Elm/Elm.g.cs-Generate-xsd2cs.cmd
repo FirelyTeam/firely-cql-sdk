@@ -7,13 +7,7 @@ REM ============================================================================
 REM This script uses the new xsd2cs tool to generate C# classes from XSD files.
 REM It replaces the direct xsd.exe call with a wrapped version that provides
 REM better tooling support and prepares for future enhancements.
-REM
-REM NOTE: This is a testing/validation version. After verification that the
-REM output matches the original, this can replace Elm.g.cs-Generate.cmd.
 REM ============================================================================
-
-REM Note: Generated C# files must have file extension of .g.cs
-REM For more info regarding nullability on generated files, see: https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references
 
 SET out_file=Elm.g.cs
 SET tool_path=..\..\tools\XsdToCSharpConverter\bin\Debug\net8.0\xsd2cs.dll
