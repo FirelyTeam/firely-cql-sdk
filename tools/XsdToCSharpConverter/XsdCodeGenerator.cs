@@ -378,6 +378,16 @@ internal class XsdCodeGenerator
         field.Attributes = MemberAttributes.Private;
         codeType.Members.Add(field);
 
+        // Check if we need a *Specified field for optional value types
+        bool needsSpecifiedField = IsOptionalValueType(attribute, propertyType);
+        if (needsSpecifiedField)
+        {
+            var specifiedFieldName = fieldName + "Specified";
+            var specifiedField = new CodeMemberField(typeof(bool), specifiedFieldName);
+            specifiedField.Attributes = MemberAttributes.Private;
+            codeType.Members.Add(specifiedField);
+        }
+
         // Generate public property
         var property = new CodeMemberProperty
         {
@@ -406,6 +416,41 @@ internal class XsdCodeGenerator
         property.Comments.Add(new CodeCommentStatement("<remarks/>", true));
 
         codeType.Members.Add(property);
+
+        // Generate *Specified property if needed
+        if (needsSpecifiedField)
+        {
+            var specifiedPropertyName = propertyName + "Specified";
+            var specifiedFieldName = fieldName + "Specified";
+            
+            var specifiedProperty = new CodeMemberProperty
+            {
+                Name = specifiedPropertyName,
+                Type = new CodeTypeReference(typeof(bool)),
+                Attributes = MemberAttributes.Public | MemberAttributes.Final,
+                HasGet = true,
+                HasSet = true
+            };
+
+            // Add getter
+            specifiedProperty.GetStatements.Add(new CodeMethodReturnStatement(
+                new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), specifiedFieldName)
+            ));
+
+            // Add setter
+            specifiedProperty.SetStatements.Add(new CodeAssignStatement(
+                new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), specifiedFieldName),
+                new CodePropertySetValueReferenceExpression()
+            ));
+
+            // Add XmlIgnore attribute
+            specifiedProperty.CustomAttributes.Add(new CodeAttributeDeclaration("System.Xml.Serialization.XmlIgnoreAttribute"));
+
+            // Add remarks comment
+            specifiedProperty.Comments.Add(new CodeCommentStatement("<remarks/>", true));
+
+            codeType.Members.Add(specifiedProperty);
+        }
     }
 
     private void AddTypeAttributes(CodeTypeDeclaration codeType, XmlSchemaComplexType complexType, string? targetNamespace)
@@ -606,6 +651,69 @@ internal class XsdCodeGenerator
         writer.WriteLine("//     the code is regenerated.");
         writer.WriteLine("// </auto-generated>");
         writer.WriteLine("//------------------------------------------------------------------------------");
+    }
+
+    private bool IsOptionalValueType(XmlSchemaAttribute attribute, string clrTypeName)
+    {
+        // Only optional attributes need the *Specified pattern
+        // Note: attributes without use="required" are optional (Use will be None or Optional)
+        if (attribute.Use == XmlSchemaUse.Required)
+            return false;
+
+        // Attributes with default values don't need *Specified
+        if (!string.IsNullOrEmpty(attribute.DefaultValue))
+            return false;
+
+        // Check if the CLR type is a value type that needs a *Specified field
+        // Reference types (string, QName, etc.) don't need this pattern
+        bool isBuiltInValueType = clrTypeName switch
+        {
+            "int" => true,
+            "long" => true,
+            "short" => true,
+            "byte" => true,
+            "bool" => true,
+            "decimal" => true,
+            "float" => true,
+            "double" => true,
+            "System.DateTime" => true,
+            "System.TimeSpan" => true,
+            _ => false
+        };
+
+        if (isBuiltInValueType)
+            return true;
+
+        // Check if the type is an enum (enums are value types in C#)
+        // Enums defined in the schema namespace will not be in the built-in list
+        // We need to check the schema type
+        if (attribute.SchemaTypeName != null && !attribute.SchemaTypeName.IsEmpty)
+        {
+            // If it's not an xs: (XML Schema) type, it might be a custom type
+            if (attribute.SchemaTypeName.Namespace != "http://www.w3.org/2001/XMLSchema")
+            {
+                // Check if this is an enum type by looking it up in the schema
+                if (_schemaSet.GlobalTypes.Contains(attribute.SchemaTypeName))
+                {
+                    var schemaType = _schemaSet.GlobalTypes[attribute.SchemaTypeName]!;
+                    if (schemaType is XmlSchemaSimpleType simpleType &&
+                        simpleType.Content is XmlSchemaSimpleTypeRestriction restriction &&
+                        restriction.Facets != null)
+                    {
+                        // Check if it has enumeration facets
+                        foreach (var facet in restriction.Facets)
+                        {
+                            if (facet is XmlSchemaEnumerationFacet)
+                            {
+                                return true; // This is an enum, needs *Specified
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     private CodeTypeReference GetCodeTypeReference(string typeName)

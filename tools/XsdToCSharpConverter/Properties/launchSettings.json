@@ -2,12 +2,7 @@
   "profiles": {
     "Generate Elm.g.cs": {
       "commandName": "Project",
-      "commandLineArgs": "/c /o:$(SolutionDir)Cql/Elm /n:Hl7.Cql.Elm /out:elmv2.g.cs $(SolutionDir)Cql/Elm/Schema/library.xsd $(SolutionDir)Cql/Elm/Schema/clinicalexpression.xsd $(SolutionDir)Cql/Elm/Schema/cqlannotations.xsd $(SolutionDir)Cql/Elm/Schema/expression.xsd",
-      "workingDirectory": "$(SolutionDir)Cql/Elm"
-    },
-    "Test Single Schema": {
-      "commandName": "Project",
-      "commandLineArgs": "/c /o:$(SolutionDir)Cql/Elm /n:Hl7.Cql.Elm /out:elmv2.g.cs $(SolutionDir)Cql/Elm/Schema/library.xsd",
+      "commandLineArgs": "/c /o:$(SolutionDir)Cql/Elm /n:Hl7.Cql.Elm /out:elm.g.cs $(SolutionDir)Cql/Elm/Schema/library.xsd $(SolutionDir)Cql/Elm/Schema/clinicalexpression.xsd $(SolutionDir)Cql/Elm/Schema/cqlannotations.xsd $(SolutionDir)Cql/Elm/Schema/expression.xsd",
       "workingDirectory": "$(SolutionDir)Cql/Elm"
     }
   }
