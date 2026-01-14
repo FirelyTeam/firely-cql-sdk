@@ -712,7 +712,7 @@ internal class XsdCodeGenerator
 
         var options = new CodeGeneratorOptions
         {
-            BracingStyle = "C",
+            BracingStyle = "Block",
             IndentString = "    ",
             BlankLinesBetweenMembers = true
         };
@@ -735,6 +735,8 @@ internal class XsdCodeGenerator
         writer.WriteLine("//     the code is regenerated.");
         writer.WriteLine("// </auto-generated>");
         writer.WriteLine("//------------------------------------------------------------------------------");
+        writer.WriteLine("#pragma warning disable CS1591 // Missing XML comment for publicly visible constructors");
+        writer.WriteLine();
     }
 
     private bool IsOptionalValueType(XmlSchemaAttribute attribute, string clrTypeName)
