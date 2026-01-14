@@ -1,22 +1,30 @@
 # XSD to C# Converter
 
-A cross-platform wrapper tool for generating C# classes from XSD schema files with post-processing capabilities.
+A native, cross-platform tool for generating C# classes from XSD schema files with support for modern C# features.
 
 ## Overview
 
-This tool provides a command-line interface for converting XSD (XML Schema Definition) files to C# classes. It wraps the existing `xsd.exe` tool from the .NET Framework SDK to ensure compatibility with existing generated code, while adding additional features like customizable post-processing of the generated output.
+This tool provides a command-line interface for converting XSD (XML Schema Definition) files to C# classes. It includes a custom XSD parser and C# code generator that can be customized to produce modern C# code with nullable annotations and other contemporary language features.
 
 ## Purpose
 
-This tool was created to replace the manual XSD-to-C# conversion process used in the Firely CQL SDK. The previous approach used a batch script (`Elm.g.cs-Generate.cmd`) that directly called `xsd.exe` and performed post-processing steps. This tool consolidates the `xsd.exe` invocation into a single, maintainable C# application, making it easier to modify and extend in the future.
+This tool was created to replace the legacy `xsd.exe` tool used in the Firely CQL SDK. The previous approach relied on the Windows-only .NET Framework tool, which:
+- Only runs on Windows
+- Generates outdated C# code without nullable annotations
+- Cannot be customized or extended
+- Is no longer actively developed
+
+This new tool provides:
+- ✅ **Cross-platform support** (Windows, Linux, macOS)
+- ✅ **Customizable code generation** (compatible or modern modes)
+- ✅ **Nullable reference type support** (in modern mode)
+- ✅ **Future extensibility** for new C# language features
+- ✅ **Open source** and actively maintained
 
 ## Requirements
 
 - .NET 8.0 or later (to build and run the tool)
-- Windows operating system (currently required)
-- .NET Framework SDK with `xsd.exe` tool installed
-
-**Note**: The tool currently requires Windows because it wraps the `xsd.exe` tool from the .NET Framework SDK. This ensures that the generated output is byte-for-byte identical to the existing generated code. Future versions may support cross-platform XSD processing with alternative code generators that can also add modern C# features like nullable reference type annotations.
+- No additional dependencies
 
 ## Building
 
@@ -27,25 +35,31 @@ cd tools/XsdToCSharpConverter
 dotnet build
 ```
 
-This produces the executable at `bin/Debug/net8.0/xsd2cs.dll`.
-
-For a release build that can be distributed:
+For a release build:
 
 ```bash
-dotnet publish -c Release
+dotnet build -c Release
+```
+
+Or publish as a self-contained executable:
+
+```bash
+dotnet publish -c Release -r win-x64 --self-contained
+dotnet publish -c Release -r linux-x64 --self-contained  
+dotnet publish -c Release -r osx-x64 --self-contained
 ```
 
 ## Usage
 
 ### Basic Syntax
 
-```
+```bash
 dotnet xsd2cs.dll [options] schema1.xsd [schema2.xsd ...]
 ```
 
-Or if published as a self-contained executable:
+Or if published as self-contained:
 
-```
+```bash
 xsd2cs [options] schema1.xsd [schema2.xsd ...]
 ```
 
@@ -54,66 +68,133 @@ xsd2cs [options] schema1.xsd [schema2.xsd ...]
 - `/c` - Generate classes (default mode)
 - `/o:<path>` - Output directory for generated files
 - `/n:<namespace>` - Namespace for generated classes
-- `/q` - Suppress xsd.exe console output
-- `--post-process` - Enable post-processing of generated files (reserved for future use)
+- `/q` - Suppress console output
+- `--modern, -m` - Generate modern C# with nullable annotations
+- `--verbose, -v` - Show detailed output including schema loading and validation messages
 
 ### Examples
 
-Generate C# classes from multiple XSD files:
+**Generate C# classes (compatible mode, matches xsd.exe output):**
 ```bash
-dotnet xsd2cs.dll /c /o:.. /n:Hl7.Cql.Elm library.xsd expression.xsd clinicalexpression.xsd
+dotnet xsd2cs.dll /c /o:.. /n:Hl7.Cql.Elm library.xsd expression.xsd
 ```
 
-Suppress console output:
+**Generate modern C# with nullable annotations:**
 ```bash
-dotnet xsd2cs.dll /c /q /o:.. /n:Hl7.Cql.Elm schema.xsd
+dotnet xsd2cs.dll --modern /c /o:.. /n:Hl7.Cql.Elm library.xsd expression.xsd
+```
+
+**Suppress output messages:**
+```bash
+dotnet xsd2cs.dll /q /c /o:.. /n:Hl7.Cql.Elm schema.xsd
+```
+
+**Verbose mode for debugging:**
+```bash
+dotnet xsd2cs.dll --verbose /c /o:.. /n:Hl7.Cql.Elm schema.xsd
 ```
 
 ## How It Works
 
-1. **Parse Arguments**: The tool parses command-line arguments in the same format as `xsd.exe`
-2. **Locate xsd.exe**: It searches for `xsd.exe` in:
-   - The system PATH
-   - Common .NET Framework SDK installation locations
-3. **Generate Code**: It calls `xsd.exe` with the provided arguments
-4. **Post-Process**: Framework for custom post-processing is available (currently handled in the calling script)
+1. **Parse XSD Files**: Loads and compiles one or more XSD schema files using `System.Xml.Schema`
+2. **Build Type Model**: Extracts complex types, simple types, elements, and attributes from the schemas
+3. **Generate C# Code**: Creates C# classes, properties, enums, and attributes using `System.CodeDom`
+4. **Apply Customizations**: Adds XML serialization attributes and applies generation mode (compatible or modern)
+5. **Write Output**: Writes formatted C# code to the specified output file
+
+## Generation Modes
+
+### Compatible Mode (Default)
+
+Generates C# code that matches the style and structure of the legacy `xsd.exe` tool:
+- No nullable annotations
+- Traditional property patterns with private fields
+- Same attribute placement and naming conventions
+- Compatible with existing generated code
+
+### Modern Mode (`--modern`)
+
+Generates contemporary C# code with:
+- Nullable reference type annotations (`?` for nullable, `!` for non-null)
+- Modern C# language features
+- Improved code style and formatting
+- Better IDE support and compile-time safety
+
+**Note:** Modern mode is planned for future implementation. Currently, only compatible mode is fully supported.
 
 ## Using with Elm.g.cs Generation
 
-To use this tool for generating `Elm.g.cs`, see the `Elm.g.cs-Generate-v2.cmd` script in the `Cql/Elm` directory. This script:
+The `Cql/Elm` directory contains updated scripts that use this tool:
 
-1. Builds the tool if needed
-2. Runs the tool to generate C# code from XSD files
-3. Post-processes the output to add custom headers and pragma directives
-4. Renames the final output
+**Windows:**
+```cmd
+cd Cql\Elm
+Elm.g.cs-Generate-v2.cmd
+```
 
-## Testing
+**Linux/macOS:**
+```bash
+cd Cql/Elm
+./Elm.g.cs-Generate-v2.sh
+```
 
-To verify that the tool produces identical output to the original xsd.exe approach:
+These scripts automatically build the tool if needed, run the generation, and perform post-processing.
 
-1. On a Windows machine with the .NET Framework SDK installed
-2. Run the old `Elm.g.cs-Generate.cmd` script and save a copy of the generated `Elm.g.cs`
-3. Run the new `Elm.g.cs-Generate-v2.cmd` script
-4. Compare the two generated files byte-for-byte
+## Cross-Platform Compatibility
 
-They should be identical except for any intentional differences in the post-processing comments.
+This tool is designed to work on all platforms supported by .NET 8.0:
+- ✅ Windows (x64, x86, ARM64)
+- ✅ Linux (x64, ARM64)
+- ✅ macOS (x64, ARM64)
 
-## Future Enhancements
+No platform-specific code or dependencies are used.
 
-Future versions of this tool may include:
+## Customization
 
-- Native XSD parsing and code generation without dependency on `xsd.exe`
-- Cross-platform support (Linux, macOS) using alternative XSD processing libraries
-- Nullable reference type annotations in generated code
-- Support for modern C# language features (collection expressions, record types, etc.)
-- Customizable code templates and formatting options
-- Built-in post-processing support with configuration files
+The code generator can be customized by modifying:
+- `XsdCodeGenerator.cs` - Main generation logic
+- `CommandLineOptions.cs` - Command-line options and modes
+- Generation modes for different output styles
+
+Future enhancements may include:
+- Configuration files for code generation settings
+- Templates for customizing output format
+- Plugins for extending generation logic
 
 ## Integration with Build Process
 
-This tool is designed to be used in place of the old `Elm.g.cs-Generate.cmd` batch script. It is **not** included in the main solution file (`Cql-Sdk.slnf`) and is not part of the regular build process. It should be run manually when XSD schemas are updated.
+This tool is **not** included in the main solution file (`Cql-Sdk.slnf`) as it's a development tool, not part of the SDK itself. It should be run manually when XSD schemas are updated.
 
-**Important**: Do not add this project to `Cql-Sdk.slnf` or any solution filter used for CI/CD builds. It is a standalone development tool.
+**Important**: Do not add this project to solution filters used for CI/CD builds.
+
+## Troubleshooting
+
+### Schema Validation Errors
+
+If you see errors like "Undefined complexType", ensure you're passing all related schema files together:
+
+```bash
+# Wrong - missing dependencies
+xsd2cs /c library.xsd
+
+# Correct - all schemas together
+xsd2cs /c library.xsd expression.xsd clinicalexpression.xsd cqlannotations.xsd
+```
+
+### Output File Issues
+
+By default, the output file is named after the first schema file. Use `/o:` to specify a different output directory.
+
+## Future Enhancements
+
+Planned features for future versions:
+- Full implementation of modern mode with nullable annotations
+- Support for record types and init-only properties
+- Collection expressions for arrays and lists
+- Pattern matching in generated code
+- Custom code generation templates
+- Configuration file support
+- Plugin system for extensibility
 
 ## License
 

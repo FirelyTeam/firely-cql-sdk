@@ -8,4 +8,8 @@
     <AssemblyName>xsd2cs</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.CodeDom" Version="8.0.0" />
+  </ItemGroup>
+
 </Project>
