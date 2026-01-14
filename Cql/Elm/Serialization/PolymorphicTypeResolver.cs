@@ -10,6 +10,8 @@ namespace Hl7.Cql.Elm.Serialization;
 
 internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 {
+    private readonly HashSet<Type> _processedTypes = [];
+
     public PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = false)
     {
         EmitConcreteBaseTypeDiscriminator = emitConcreteBaseTypeDiscriminator;
@@ -28,18 +30,35 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
         JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
 
         // .NET 10 System.Text.Json enforces that type discriminator property names cannot conflict
-        // with existing property names. Remove the old "type" property if it exists on 
-        // ChoiceTypeSpecifier and TupleElementDefinition. These legacy properties are replaced 
-        // by the polymorphic type discriminator system.
-        if ((type == typeof(ChoiceTypeSpecifier) || type == typeof(TupleElementDefinition)) &&
+        // with existing property names. Remove the legacy "type" property from ChoiceTypeSpecifier 
+        // and TupleElementDefinition before any polymorphism setup. These legacy properties are 
+        // replaced by the polymorphic type discriminator system.
+        if (!_processedTypes.Contains(type) &&
+            (type == typeof(ChoiceTypeSpecifier) || type == typeof(TupleElementDefinition)) &&
             jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == "type") is { } oldTypeProp)
         {
             jsonTypeInfo.Properties.Remove(oldTypeProp);
+            _processedTypes.Add(type);
         }
 
         var derivedTypes = BuildDerivedTypes(type).ToList();
 
         if (!derivedTypes.Any()) return jsonTypeInfo;
+
+        // Pre-load JsonTypeInfo for problematic derived types to ensure property removal happens first
+        if (!_processedTypes.Contains(type) && 
+            (type == typeof(TypeSpecifier) || type == typeof(Element)))
+        {
+            foreach (var derivedType in derivedTypes.Select(dt => dt.DerivedType).Distinct())
+            {
+                if (derivedType == typeof(ChoiceTypeSpecifier) || derivedType == typeof(TupleElementDefinition))
+                {
+                    // Trigger GetTypeInfo to remove the property before we set up polymorphism
+                    _ = options.GetTypeInfo(derivedType);
+                }
+            }
+            _processedTypes.Add(type);
+        }
 
         jsonTypeInfo.PolymorphismOptions = new JsonPolymorphismOptions
         {
