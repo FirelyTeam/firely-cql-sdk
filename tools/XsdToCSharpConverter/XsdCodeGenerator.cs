@@ -86,6 +86,8 @@ internal class XsdCodeGenerator
         if (_schemaSet == null) return;
 
         // First pass: Track global elements that reference named types for XmlRootAttribute
+        // Also build a list of type names referenced by global elements (for ordering)
+        var rootElementTypeNames = new HashSet<string>();
         foreach (XmlSchema schema in _schemaSet.Schemas())
         {
             foreach (XmlSchemaElement element in schema.Elements.Values)
@@ -96,47 +98,79 @@ internal class XsdCodeGenerator
                     if (!string.IsNullOrEmpty(typeName))
                     {
                         _rootElements[typeName] = (element.Name, schema.TargetNamespace);
+                        rootElementTypeNames.Add(typeName);
                     }
                 }
             }
         }
 
-        // Second pass: Generate types
-        foreach (XmlSchema schema in _schemaSet.Schemas())
+        // Second pass: Generate types in the same order as xsd.exe
+        // xsd.exe generates types referenced by global elements first, then other types in document order
+        var rootTypes = new List<CodeTypeDeclaration>();
+        var otherTypes = new List<CodeTypeDeclaration>();
+        
+        foreach (var schemaFile in _options.SchemaFiles)
         {
-            // Generate classes from complex types
-            foreach (XmlSchemaType schemaType in schema.SchemaTypes.Values)
+            // Find the corresponding schema object
+            XmlSchema? currentSchema = null;
+            foreach (XmlSchema schema in _schemaSet.Schemas())
             {
-                if (schemaType is XmlSchemaComplexType complexType)
+                // Match based on schema location or content
+                if (schema.SourceUri != null && schema.SourceUri.EndsWith(Path.GetFileName(schemaFile)))
                 {
-                    var codeType = GenerateComplexType(complexType, schema.TargetNamespace);
-                    if (codeType != null)
-                    {
-                        codeNamespace.Types.Add(codeType);
-                    }
-                }
-                else if (schemaType is XmlSchemaSimpleType simpleType)
-                {
-                    var codeType = GenerateSimpleType(simpleType, schema.TargetNamespace);
-                    if (codeType != null)
-                    {
-                        codeNamespace.Types.Add(codeType);
-                    }
+                    currentSchema = schema;
+                    break;
                 }
             }
+            
+            if (currentSchema == null) continue;
 
-            // Generate classes from global elements with anonymous types
-            foreach (XmlSchemaElement element in schema.Elements.Values)
+            // Generate types from this schema in document order
+            var schemaItems = currentSchema.Items;
+            foreach (XmlSchemaObject item in schemaItems)
             {
-                if (!string.IsNullOrEmpty(element.Name) && element.SchemaType is XmlSchemaComplexType complexType)
+                CodeTypeDeclaration? codeType = null;
+                string? typeName = null;
+                
+                if (item is XmlSchemaComplexType complexType && !string.IsNullOrEmpty(complexType.Name))
                 {
-                    var codeType = GenerateComplexType(complexType, schema.TargetNamespace, element.Name);
-                    if (codeType != null)
+                    typeName = complexType.Name;
+                    codeType = GenerateComplexType(complexType, currentSchema.TargetNamespace);
+                }
+                else if (item is XmlSchemaSimpleType simpleType && !string.IsNullOrEmpty(simpleType.Name))
+                {
+                    typeName = simpleType.Name;
+                    codeType = GenerateSimpleType(simpleType, currentSchema.TargetNamespace);
+                }
+                else if (item is XmlSchemaElement element && !string.IsNullOrEmpty(element.Name) && element.SchemaType is XmlSchemaComplexType elemComplexType)
+                {
+                    typeName = element.Name;
+                    codeType = GenerateComplexType(elemComplexType, currentSchema.TargetNamespace, element.Name);
+                }
+                
+                if (codeType != null && typeName != null)
+                {
+                    // Types referenced by global elements go first
+                    if (rootElementTypeNames.Contains(typeName))
                     {
-                        codeNamespace.Types.Add(codeType);
+                        rootTypes.Add(codeType);
+                    }
+                    else
+                    {
+                        otherTypes.Add(codeType);
                     }
                 }
             }
+        }
+
+        // Add root element types first, then other types
+        foreach (var type in rootTypes)
+        {
+            codeNamespace.Types.Add(type);
+        }
+        foreach (var type in otherTypes)
+        {
+            codeNamespace.Types.Add(type);
         }
     }
 
