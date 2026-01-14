@@ -22,6 +22,7 @@ internal class XsdCodeGenerator
     private readonly CommandLineOptions _options;
     private readonly Dictionary<XmlQualifiedName, CodeTypeDeclaration> _generatedTypes = new();
     private readonly Dictionary<string, (string elementName, string? targetNamespace)> _rootElements = new();
+    private readonly Dictionary<string, List<string>> _typeHierarchy = new(); // base type -> list of derived types
     private XmlSchemaSet? _schemaSet;
 
     public XsdCodeGenerator(CommandLineOptions options)
@@ -163,6 +164,30 @@ internal class XsdCodeGenerator
         {
             codeNamespace.Types.Add(type);
         }
+        
+        // Third pass: Add XmlIncludeAttribute for derived types
+        AddXmlIncludeAttributes();
+    }
+    
+    private void AddXmlIncludeAttributes()
+    {
+        // For each base type, add XmlIncludeAttribute for all derived types
+        foreach (var (baseTypeName, derivedTypes) in _typeHierarchy)
+        {
+            // Find the base type declaration
+            var baseType = _generatedTypes.Values.FirstOrDefault(t => t.Name == baseTypeName);
+            if (baseType == null) continue;
+            
+            // Add XmlIncludeAttribute for each derived type
+            foreach (var derivedTypeName in derivedTypes.OrderBy(n => n))
+            {
+                var xmlIncludeAttr = new CodeAttributeDeclaration(
+                    "System.Xml.Serialization.XmlIncludeAttribute",
+                    new CodeAttributeArgument(new CodeTypeOfExpression(derivedTypeName))
+                );
+                baseType.CustomAttributes.Add(xmlIncludeAttr);
+            }
+        }
     }
 
     private CodeTypeDeclaration? GenerateComplexType(XmlSchemaComplexType complexType, string? targetNamespace, string? elementName = null)
@@ -207,6 +232,13 @@ internal class XsdCodeGenerator
                 if (!string.IsNullOrEmpty(baseTypeName))
                 {
                     codeType.BaseTypes.Add(baseTypeName);
+                    
+                    // Track the type hierarchy for XmlIncludeAttribute generation
+                    if (!_typeHierarchy.ContainsKey(baseTypeName))
+                    {
+                        _typeHierarchy[baseTypeName] = new List<string>();
+                    }
+                    _typeHierarchy[baseTypeName].Add(typeName);
                 }
             }
         }
