@@ -1,0 +1,102 @@
+<Solution>
+  <Folder Name="/CQL Packaging CLI/">
+    <Project Path="Cql/PackagerCLI/PackagerCLI.csproj" />
+  </Folder>
+  <Folder Name="/CQL SDK/">
+    <File Path=".editorconfig" />
+    <File Path="cql-sdk.props" />
+    <Project Path="Cql/Cql/Cql.csproj" />
+  </Folder>
+  <Folder Name="/CQL SDK/00 Runtime/">
+    <Project Path="Cql/Cql.Abstractions/Cql.Abstractions.csproj" />
+    <Project Path="Cql/Cql.Runtime/Cql.Runtime.csproj" />
+    <Project Path="Cql/Iso8601/Iso8601.csproj" />
+  </Folder>
+  <Folder Name="/CQL SDK/10 Model/">
+    <Project Path="Cql/Cql.Firely/Cql.Firely.csproj" />
+    <Project Path="Cql/Cql.Model/Cql.Model.csproj" />
+  </Folder>
+  <Folder Name="/CQL SDK/20 Cql to Elm/">
+    <Project Path="Cql/Cql.CqlToElm/Cql.CqlToElm.csproj" />
+    <Project Path="Cql/Cql.Grammar/Cql.Grammar.csproj" />
+    <Project Path="Cql/Elm/Elm.csproj" />
+  </Folder>
+  <Folder Name="/CQL SDK/30 Elm to C#/">
+    <Project Path="Cql/CodeGeneration.NET/CodeGeneration.NET.csproj" />
+    <Project Path="Cql/Cql.Compiler/Cql.Compiler.csproj" />
+  </Folder>
+  <Folder Name="/CQL SDK/40 FHIR Resource Packaging/">
+    <Project Path="Cql/Cql.Packaging/Cql.Packaging.csproj" />
+  </Folder>
+  <Folder Name="/CQL SDK/55 Library Invocation/">
+    <Project Path="Cql/Cql.Invocation/Cql.Invocation.csproj" />
+  </Folder>
+  <Folder Name="/Demo/">
+    <File Path="Demo/cql-demo.props" />
+  </Folder>
+  <Folder Name="/Demo/00 MSBuild Tooling/">
+    <Project Path="Demo/Cql/Cql.csproj" />
+  </Folder>
+  <Folder Name="/Demo/10 Demo Projects/">
+    <Project Path="Demo/Measures.Authoring/Measures.Authoring.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+    </Project>
+    <Project Path="Demo/Measures.Demo/Measures.Demo.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+    </Project>
+    <Project Path="Demo/Measures.dqm-content-qicore-2025/Measures.dqm-content-qicore-2025.csproj" />
+  </Folder>
+  <Folder Name="/Demo/20 Demo CLI/">
+    <Project Path="Demo/CLI/CLI.csproj" />
+  </Folder>
+  <Folder Name="/Examples/">
+    <File Path="Examples/CqlSdkExamplesCodeGeneration.targets" />
+    <Project Path="Examples/CqlSdkExamples/CqlSdkExamples.csproj" />
+    <Project Path="Examples/CqlSdkExamplesPreview/CqlSdkExamplesPreview.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".github/copilot-instructions.md" />
+    <File Path=".gitignore" />
+    <File Path=".gitmodules" />
+    <File Path="build-elm.ps1" />
+    <File Path="build-local-nuget.ps1" />
+    <File Path="build-publicapi.ps1" />
+    <File Path="cql-base.props" />
+    <File Path="LICENSE" />
+    <File Path="NuGet.config" />
+    <File Path="packaging-tooling.props" />
+    <File Path="packaging-tooling.Targets.xml" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/submodules/" />
+  <Folder Name="/submodules/Firely.Cql.Sdk.Integration.Runner/">
+    <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/CodeGen/CodeGen.csproj" />
+    <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/">
+    <File Path="submodules/Ncqa.DQIC/.gitignore" />
+    <File Path="submodules/Ncqa.DQIC/ncqa.props" />
+    <Project Path="submodules/Ncqa.DQIC/BuildArtifacts/BuildArtifacts.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/Ncqa.HT.Infrastructure/Ncqa.HT.Infrastructure.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Cql/Benchmarks/Benchmarks.csproj" />
+    <Project Path="Cql/CoreTests/CoreTests.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+    </Project>
+    <Project Path="Cql/CqlToElmTests/CqlToElmTests.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+    </Project>
+    <Project Path="Demo/Test.Measures.Demo/Test.Measures.Demo.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+      <BuildDependency Project="Demo/Measures.Demo/Measures.Demo.csproj" />
+    </Project>
+  </Folder>
+  <Properties Name="ExtensibilityGlobals" Scope="PostLoad">
+    <Property Name="FileExplorer" Value="build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\" />
+  </Properties>
+</Solution>
