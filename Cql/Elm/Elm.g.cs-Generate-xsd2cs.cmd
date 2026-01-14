@@ -36,7 +36,7 @@ IF NOT EXIST "%tool_path%" (
 PUSHD Schema
 
 ECHO Generating C# from XSD files using xsd2cs tool...
-dotnet "%tool_path%" /c .\library.xsd .\clinicalexpression.xsd .\cqlannotations.xsd .\expression.xsd /o:.. /n:Hl7.Cql.Elm /out:Elm.g.cs /q
+dotnet "..\%tool_path%" /c .\library.xsd .\clinicalexpression.xsd .\cqlannotations.xsd .\expression.xsd /o:.. /n:Hl7.Cql.Elm /out:Elm.g.cs /q
 
 IF ERRORLEVEL 1 (
     POPD
@@ -45,6 +45,8 @@ IF ERRORLEVEL 1 (
 )
 
 POPD
+
+GOTO :EOF
 
 REM Post-process the generated file
 ECHO Post-processing generated file: '%in_file%' -^> '%out_file%'
