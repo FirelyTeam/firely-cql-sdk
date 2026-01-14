@@ -368,7 +368,8 @@ internal class XsdCodeGenerator
 
     private void GenerateAttributeProperty(CodeTypeDeclaration codeType, XmlSchemaAttribute attribute)
     {
-        var propertyName = MakeSafeMemberName(attribute.Name!);
+        // Preserve original casing from XSD (default behavior)
+        var propertyName = attribute.Name!;
         var fieldName = MakeFieldName(propertyName);
         var propertyType = GetAttributeType(attribute);
 

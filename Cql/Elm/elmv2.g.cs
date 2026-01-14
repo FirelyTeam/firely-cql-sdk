@@ -20,51 +20,51 @@ namespace Hl7.Cql.Elm
     public partial class VersionedIdentifier
     {
         
-        private string IdField;
+        private string idField;
         
-        private string SystemField;
+        private string systemField;
         
-        private string VersionField;
+        private string versionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id
+        public string id
         {
             get
             {
-                return this.IdField;
+                return this.idField;
             }
             set
             {
-                this.IdField = value;
+                this.idField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string System
+        public string system
         {
             get
             {
-                return this.SystemField;
+                return this.systemField;
             }
             set
             {
-                this.SystemField = value;
+                this.systemField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Version
+        public string version
         {
             get
             {
-                return this.VersionField;
+                return this.versionField;
             }
             set
             {
-                this.VersionField = value;
+                this.versionField = value;
             }
         }
     }
@@ -77,51 +77,51 @@ namespace Hl7.Cql.Elm
     public partial class UsingDef : Element
     {
         
-        private string LocalIdentifierField;
+        private string localIdentifierField;
         
-        private string UriField;
+        private string uriField;
         
-        private string VersionField;
+        private string versionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LocalIdentifier
+        public string localIdentifier
         {
             get
             {
-                return this.LocalIdentifierField;
+                return this.localIdentifierField;
             }
             set
             {
-                this.LocalIdentifierField = value;
+                this.localIdentifierField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Uri
+        public string uri
         {
             get
             {
-                return this.UriField;
+                return this.uriField;
             }
             set
             {
-                this.UriField = value;
+                this.uriField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Version
+        public string version
         {
             get
             {
-                return this.VersionField;
+                return this.versionField;
             }
             set
             {
-                this.VersionField = value;
+                this.versionField = value;
             }
         }
     }
@@ -134,67 +134,67 @@ namespace Hl7.Cql.Elm
     public partial class IncludeDef : Element
     {
         
-        private string LocalIdentifierField;
+        private string localIdentifierField;
         
-        private string MediaTypeField;
+        private string mediaTypeField;
         
-        private string PathField;
+        private string pathField;
         
-        private string VersionField;
+        private string versionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LocalIdentifier
+        public string localIdentifier
         {
             get
             {
-                return this.LocalIdentifierField;
+                return this.localIdentifierField;
             }
             set
             {
-                this.LocalIdentifierField = value;
+                this.localIdentifierField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string MediaType
+        public string mediaType
         {
             get
             {
-                return this.MediaTypeField;
+                return this.mediaTypeField;
             }
             set
             {
-                this.MediaTypeField = value;
+                this.mediaTypeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Path
+        public string path
         {
             get
             {
-                return this.PathField;
+                return this.pathField;
             }
             set
             {
-                this.PathField = value;
+                this.pathField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Version
+        public string version
         {
             get
             {
-                return this.VersionField;
+                return this.versionField;
             }
             set
             {
-                this.VersionField = value;
+                this.versionField = value;
             }
         }
     }
@@ -207,19 +207,19 @@ namespace Hl7.Cql.Elm
     public partial class ContextDef : Element
     {
         
-        private string NameField;
+        private string nameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
     }
@@ -417,13 +417,13 @@ namespace Hl7.Cql.Elm
         
         private Expression valueField;
         
-        private string PropertyField;
+        private string propertyField;
         
-        private string ValueSetPropertyField;
+        private string valueSetPropertyField;
         
-        private string SearchField;
+        private string searchField;
         
-        private string ComparatorField;
+        private string comparatorField;
         
         /// <remarks/>
         public Expression value
@@ -440,57 +440,57 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Property
+        public string property
         {
             get
             {
-                return this.PropertyField;
+                return this.propertyField;
             }
             set
             {
-                this.PropertyField = value;
+                this.propertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ValueSetProperty
+        public string valueSetProperty
         {
             get
             {
-                return this.ValueSetPropertyField;
+                return this.valueSetPropertyField;
             }
             set
             {
-                this.ValueSetPropertyField = value;
+                this.valueSetPropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Search
+        public string search
         {
             get
             {
-                return this.SearchField;
+                return this.searchField;
             }
             set
             {
-                this.SearchField = value;
+                this.searchField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Comparator
+        public string comparator
         {
             get
             {
-                return this.ComparatorField;
+                return this.comparatorField;
             }
             set
             {
-                this.ComparatorField = value;
+                this.comparatorField = value;
             }
         }
     }
@@ -505,13 +505,13 @@ namespace Hl7.Cql.Elm
         
         private Expression valueField;
         
-        private string PropertyField;
+        private string propertyField;
         
-        private string LowPropertyField;
+        private string lowPropertyField;
         
-        private string HighPropertyField;
+        private string highPropertyField;
         
-        private string SearchField;
+        private string searchField;
         
         /// <remarks/>
         public Expression value
@@ -528,57 +528,57 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Property
+        public string property
         {
             get
             {
-                return this.PropertyField;
+                return this.propertyField;
             }
             set
             {
-                this.PropertyField = value;
+                this.propertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LowProperty
+        public string lowProperty
         {
             get
             {
-                return this.LowPropertyField;
+                return this.lowPropertyField;
             }
             set
             {
-                this.LowPropertyField = value;
+                this.lowPropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string HighProperty
+        public string highProperty
         {
             get
             {
-                return this.HighPropertyField;
+                return this.highPropertyField;
             }
             set
             {
-                this.HighPropertyField = value;
+                this.highPropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Search
+        public string search
         {
             get
             {
-                return this.SearchField;
+                return this.searchField;
             }
             set
             {
-                this.SearchField = value;
+                this.searchField = value;
             }
         }
     }
@@ -593,11 +593,11 @@ namespace Hl7.Cql.Elm
         
         private Expression valueField;
         
-        private string PropertyField;
+        private string propertyField;
         
-        private string SearchField;
+        private string searchField;
         
-        private string ComparatorField;
+        private string comparatorField;
         
         /// <remarks/>
         public Expression value
@@ -614,43 +614,43 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Property
+        public string property
         {
             get
             {
-                return this.PropertyField;
+                return this.propertyField;
             }
             set
             {
-                this.PropertyField = value;
+                this.propertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Search
+        public string search
         {
             get
             {
-                return this.SearchField;
+                return this.searchField;
             }
             set
             {
-                this.SearchField = value;
+                this.searchField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Comparator
+        public string comparator
         {
             get
             {
-                return this.ComparatorField;
+                return this.comparatorField;
             }
             set
             {
-                this.ComparatorField = value;
+                this.comparatorField = value;
             }
         }
     }
@@ -663,83 +663,83 @@ namespace Hl7.Cql.Elm
     public partial class IncludeElement : Element
     {
         
-        private string IncludeFromField;
+        private string includeFromField;
         
-        private System.Xml.XmlQualifiedName RelatedDataTypeField;
+        private System.Xml.XmlQualifiedName relatedDataTypeField;
         
-        private string RelatedPropertyField;
+        private string relatedPropertyField;
         
-        private string RelatedSearchField;
+        private string relatedSearchField;
         
-        private bool IsReverseField;
+        private bool isReverseField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string IncludeFrom
+        public string includeFrom
         {
             get
             {
-                return this.IncludeFromField;
+                return this.includeFromField;
             }
             set
             {
-                this.IncludeFromField = value;
+                this.includeFromField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName RelatedDataType
+        public System.Xml.XmlQualifiedName relatedDataType
         {
             get
             {
-                return this.RelatedDataTypeField;
+                return this.relatedDataTypeField;
             }
             set
             {
-                this.RelatedDataTypeField = value;
+                this.relatedDataTypeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RelatedProperty
+        public string relatedProperty
         {
             get
             {
-                return this.RelatedPropertyField;
+                return this.relatedPropertyField;
             }
             set
             {
-                this.RelatedPropertyField = value;
+                this.relatedPropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string RelatedSearch
+        public string relatedSearch
         {
             get
             {
-                return this.RelatedSearchField;
+                return this.relatedSearchField;
             }
             set
             {
-                this.RelatedSearchField = value;
+                this.relatedSearchField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool IsReverse
+        public bool isReverse
         {
             get
             {
-                return this.IsReverseField;
+                return this.isReverseField;
             }
             set
             {
-                this.IsReverseField = value;
+                this.isReverseField = value;
             }
         }
     }
@@ -768,35 +768,35 @@ namespace Hl7.Cql.Elm
         
         private OtherFilterElement[] otherFilterField;
         
-        private System.Xml.XmlQualifiedName DataTypeField;
+        private System.Xml.XmlQualifiedName dataTypeField;
         
-        private string TemplateIdField;
+        private string templateIdField;
         
-        private string IdPropertyField;
+        private string idPropertyField;
         
-        private string IdSearchField;
+        private string idSearchField;
         
-        private string ContextPropertyField;
+        private string contextPropertyField;
         
-        private string ContextSearchField;
+        private string contextSearchField;
         
-        private string CodePropertyField;
+        private string codePropertyField;
         
-        private string CodeSearchField;
+        private string codeSearchField;
         
-        private string CodeComparatorField;
+        private string codeComparatorField;
         
-        private string ValueSetPropertyField;
+        private string valueSetPropertyField;
         
-        private string DatePropertyField;
+        private string datePropertyField;
         
-        private string DateLowPropertyField;
+        private string dateLowPropertyField;
         
-        private string DateHighPropertyField;
+        private string dateHighPropertyField;
         
-        private string DateSearchField;
+        private string dateSearchField;
         
-        private string IncludedInField;
+        private string includedInField;
         
         /// <remarks/>
         public Expression id
@@ -904,211 +904,211 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName DataType
+        public System.Xml.XmlQualifiedName dataType
         {
             get
             {
-                return this.DataTypeField;
+                return this.dataTypeField;
             }
             set
             {
-                this.DataTypeField = value;
+                this.dataTypeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TemplateId
+        public string templateId
         {
             get
             {
-                return this.TemplateIdField;
+                return this.templateIdField;
             }
             set
             {
-                this.TemplateIdField = value;
+                this.templateIdField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string IdProperty
+        public string idProperty
         {
             get
             {
-                return this.IdPropertyField;
+                return this.idPropertyField;
             }
             set
             {
-                this.IdPropertyField = value;
+                this.idPropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string IdSearch
+        public string idSearch
         {
             get
             {
-                return this.IdSearchField;
+                return this.idSearchField;
             }
             set
             {
-                this.IdSearchField = value;
+                this.idSearchField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ContextProperty
+        public string contextProperty
         {
             get
             {
-                return this.ContextPropertyField;
+                return this.contextPropertyField;
             }
             set
             {
-                this.ContextPropertyField = value;
+                this.contextPropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ContextSearch
+        public string contextSearch
         {
             get
             {
-                return this.ContextSearchField;
+                return this.contextSearchField;
             }
             set
             {
-                this.ContextSearchField = value;
+                this.contextSearchField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CodeProperty
+        public string codeProperty
         {
             get
             {
-                return this.CodePropertyField;
+                return this.codePropertyField;
             }
             set
             {
-                this.CodePropertyField = value;
+                this.codePropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CodeSearch
+        public string codeSearch
         {
             get
             {
-                return this.CodeSearchField;
+                return this.codeSearchField;
             }
             set
             {
-                this.CodeSearchField = value;
+                this.codeSearchField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string CodeComparator
+        public string codeComparator
         {
             get
             {
-                return this.CodeComparatorField;
+                return this.codeComparatorField;
             }
             set
             {
-                this.CodeComparatorField = value;
+                this.codeComparatorField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ValueSetProperty
+        public string valueSetProperty
         {
             get
             {
-                return this.ValueSetPropertyField;
+                return this.valueSetPropertyField;
             }
             set
             {
-                this.ValueSetPropertyField = value;
+                this.valueSetPropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string DateProperty
+        public string dateProperty
         {
             get
             {
-                return this.DatePropertyField;
+                return this.datePropertyField;
             }
             set
             {
-                this.DatePropertyField = value;
+                this.datePropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string DateLowProperty
+        public string dateLowProperty
         {
             get
             {
-                return this.DateLowPropertyField;
+                return this.dateLowPropertyField;
             }
             set
             {
-                this.DateLowPropertyField = value;
+                this.dateLowPropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string DateHighProperty
+        public string dateHighProperty
         {
             get
             {
-                return this.DateHighPropertyField;
+                return this.dateHighPropertyField;
             }
             set
             {
-                this.DateHighPropertyField = value;
+                this.dateHighPropertyField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string DateSearch
+        public string dateSearch
         {
             get
             {
-                return this.DateSearchField;
+                return this.dateSearchField;
             }
             set
             {
-                this.DateSearchField = value;
+                this.dateSearchField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string IncludedIn
+        public string includedIn
         {
             get
             {
-                return this.IncludedInField;
+                return this.includedInField;
             }
             set
             {
-                this.IncludedInField = value;
+                this.includedInField = value;
             }
         }
     }
@@ -1130,67 +1130,67 @@ namespace Hl7.Cql.Elm
     public partial class CodeSystemDef : Element
     {
         
-        private string NameField;
+        private string nameField;
         
-        private string IdField;
+        private string idField;
         
-        private string VersionField;
+        private string versionField;
         
-        private AccessModifier AccessLevelField;
+        private AccessModifier accessLevelField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id
+        public string id
         {
             get
             {
-                return this.IdField;
+                return this.idField;
             }
             set
             {
-                this.IdField = value;
+                this.idField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Version
+        public string version
         {
             get
             {
-                return this.VersionField;
+                return this.versionField;
             }
             set
             {
-                this.VersionField = value;
+                this.versionField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public AccessModifier AccessLevel
+        public AccessModifier accessLevel
         {
             get
             {
-                return this.AccessLevelField;
+                return this.accessLevelField;
             }
             set
             {
-                this.AccessLevelField = value;
+                this.accessLevelField = value;
             }
         }
     }
@@ -1205,13 +1205,13 @@ namespace Hl7.Cql.Elm
         
         private CodeSystemRef[] codeSystemField;
         
-        private string NameField;
+        private string nameField;
         
-        private string IdField;
+        private string idField;
         
-        private string VersionField;
+        private string versionField;
         
-        private AccessModifier AccessLevelField;
+        private AccessModifier accessLevelField;
         
         /// <remarks/>
         public CodeSystemRef[] codeSystem
@@ -1228,57 +1228,57 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id
+        public string id
         {
             get
             {
-                return this.IdField;
+                return this.idField;
             }
             set
             {
-                this.IdField = value;
+                this.idField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Version
+        public string version
         {
             get
             {
-                return this.VersionField;
+                return this.versionField;
             }
             set
             {
-                this.VersionField = value;
+                this.versionField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public AccessModifier AccessLevel
+        public AccessModifier accessLevel
         {
             get
             {
-                return this.AccessLevelField;
+                return this.accessLevelField;
             }
             set
             {
-                this.AccessLevelField = value;
+                this.accessLevelField = value;
             }
         }
     }
@@ -1293,13 +1293,13 @@ namespace Hl7.Cql.Elm
         
         private CodeSystemRef codeSystemField;
         
-        private string NameField;
+        private string nameField;
         
-        private string IdField;
+        private string idField;
         
-        private string DisplayField;
+        private string displayField;
         
-        private AccessModifier AccessLevelField;
+        private AccessModifier accessLevelField;
         
         /// <remarks/>
         public CodeSystemRef codeSystem
@@ -1316,57 +1316,57 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Id
+        public string id
         {
             get
             {
-                return this.IdField;
+                return this.idField;
             }
             set
             {
-                this.IdField = value;
+                this.idField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Display
+        public string display
         {
             get
             {
-                return this.DisplayField;
+                return this.displayField;
             }
             set
             {
-                this.DisplayField = value;
+                this.displayField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public AccessModifier AccessLevel
+        public AccessModifier accessLevel
         {
             get
             {
-                return this.AccessLevelField;
+                return this.accessLevelField;
             }
             set
             {
-                this.AccessLevelField = value;
+                this.accessLevelField = value;
             }
         }
     }
@@ -1381,11 +1381,11 @@ namespace Hl7.Cql.Elm
         
         private CodeRef[] codeField;
         
-        private string NameField;
+        private string nameField;
         
-        private string DisplayField;
+        private string displayField;
         
-        private AccessModifier AccessLevelField;
+        private AccessModifier accessLevelField;
         
         /// <remarks/>
         public CodeRef[] code
@@ -1402,43 +1402,43 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Display
+        public string display
         {
             get
             {
-                return this.DisplayField;
+                return this.displayField;
             }
             set
             {
-                this.DisplayField = value;
+                this.displayField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public AccessModifier AccessLevel
+        public AccessModifier accessLevel
         {
             get
             {
-                return this.AccessLevelField;
+                return this.accessLevelField;
             }
             set
             {
-                this.AccessLevelField = value;
+                this.accessLevelField = value;
             }
         }
     }
@@ -1451,35 +1451,35 @@ namespace Hl7.Cql.Elm
     public partial class CodeSystemRef : Expression
     {
         
-        private string NameField;
+        private string nameField;
         
-        private string LibraryNameField;
+        private string libraryNameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LibraryName
+        public string libraryName
         {
             get
             {
-                return this.LibraryNameField;
+                return this.libraryNameField;
             }
             set
             {
-                this.LibraryNameField = value;
+                this.libraryNameField = value;
             }
         }
     }
@@ -1492,51 +1492,51 @@ namespace Hl7.Cql.Elm
     public partial class ValueSetRef : Expression
     {
         
-        private string NameField;
+        private string nameField;
         
-        private string LibraryNameField;
+        private string libraryNameField;
         
-        private bool PreserveField;
+        private bool preserveField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LibraryName
+        public string libraryName
         {
             get
             {
-                return this.LibraryNameField;
+                return this.libraryNameField;
             }
             set
             {
-                this.LibraryNameField = value;
+                this.libraryNameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool Preserve
+        public bool preserve
         {
             get
             {
-                return this.PreserveField;
+                return this.preserveField;
             }
             set
             {
-                this.PreserveField = value;
+                this.preserveField = value;
             }
         }
     }
@@ -1549,35 +1549,35 @@ namespace Hl7.Cql.Elm
     public partial class CodeRef : Expression
     {
         
-        private string NameField;
+        private string nameField;
         
-        private string LibraryNameField;
+        private string libraryNameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LibraryName
+        public string libraryName
         {
             get
             {
-                return this.LibraryNameField;
+                return this.libraryNameField;
             }
             set
             {
-                this.LibraryNameField = value;
+                this.libraryNameField = value;
             }
         }
     }
@@ -1590,35 +1590,35 @@ namespace Hl7.Cql.Elm
     public partial class ConceptRef : Expression
     {
         
-        private string NameField;
+        private string nameField;
         
-        private string LibraryNameField;
+        private string libraryNameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LibraryName
+        public string libraryName
         {
             get
             {
-                return this.LibraryNameField;
+                return this.libraryNameField;
             }
             set
             {
-                this.LibraryNameField = value;
+                this.libraryNameField = value;
             }
         }
     }
@@ -1633,9 +1633,9 @@ namespace Hl7.Cql.Elm
         
         private CodeSystemRef systemField;
         
-        private string CodeField;
+        private string codeField;
         
-        private string DisplayField;
+        private string displayField;
         
         /// <remarks/>
         public CodeSystemRef system
@@ -1652,29 +1652,29 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Code
+        public string code
         {
             get
             {
-                return this.CodeField;
+                return this.codeField;
             }
             set
             {
-                this.CodeField = value;
+                this.codeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Display
+        public string display
         {
             get
             {
-                return this.DisplayField;
+                return this.displayField;
             }
             set
             {
-                this.DisplayField = value;
+                this.displayField = value;
             }
         }
     }
@@ -1689,7 +1689,7 @@ namespace Hl7.Cql.Elm
         
         private Code[] codeField;
         
-        private string DisplayField;
+        private string displayField;
         
         /// <remarks/>
         public Code[] code
@@ -1706,15 +1706,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Display
+        public string display
         {
             get
             {
-                return this.DisplayField;
+                return this.displayField;
             }
             set
             {
-                this.DisplayField = value;
+                this.displayField = value;
             }
         }
     }
@@ -1970,35 +1970,35 @@ namespace Hl7.Cql.Elm
     public partial class Quantity : Expression
     {
         
-        private decimal ValueField;
+        private decimal valueField;
         
-        private string UnitField;
+        private string unitField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public decimal Value
+        public decimal value
         {
             get
             {
-                return this.ValueField;
+                return this.valueField;
             }
             set
             {
-                this.ValueField = value;
+                this.valueField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Unit
+        public string unit
         {
             get
             {
-                return this.UnitField;
+                return this.unitField;
             }
             set
             {
-                this.UnitField = value;
+                this.unitField = value;
             }
         }
     }
@@ -2050,19 +2050,19 @@ namespace Hl7.Cql.Elm
     public partial class CalculateAge : UnaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -2075,19 +2075,19 @@ namespace Hl7.Cql.Elm
     public partial class CalculateAgeAt : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -2163,35 +2163,35 @@ namespace Hl7.Cql.Elm
     public partial class Tag
     {
         
-        private string NameField;
+        private string nameField;
         
-        private string ValueField;
+        private string valueField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Value
+        public string value
         {
             get
             {
-                return this.ValueField;
+                return this.valueField;
             }
             set
             {
-                this.ValueField = value;
+                this.valueField = value;
             }
         }
     }
@@ -2204,115 +2204,115 @@ namespace Hl7.Cql.Elm
     public partial class Locator : CqlToElmBase
     {
         
-        private string LibrarySystemField;
+        private string librarySystemField;
         
-        private string LibraryIdField;
+        private string libraryIdField;
         
-        private string LibraryVersionField;
+        private string libraryVersionField;
         
-        private int StartLineField;
+        private int startLineField;
         
-        private int StartCharField;
+        private int startCharField;
         
-        private int EndLineField;
+        private int endLineField;
         
-        private int EndCharField;
+        private int endCharField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LibrarySystem
+        public string librarySystem
         {
             get
             {
-                return this.LibrarySystemField;
+                return this.librarySystemField;
             }
             set
             {
-                this.LibrarySystemField = value;
+                this.librarySystemField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LibraryId
+        public string libraryId
         {
             get
             {
-                return this.LibraryIdField;
+                return this.libraryIdField;
             }
             set
             {
-                this.LibraryIdField = value;
+                this.libraryIdField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LibraryVersion
+        public string libraryVersion
         {
             get
             {
-                return this.LibraryVersionField;
+                return this.libraryVersionField;
             }
             set
             {
-                this.LibraryVersionField = value;
+                this.libraryVersionField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int StartLine
+        public int startLine
         {
             get
             {
-                return this.StartLineField;
+                return this.startLineField;
             }
             set
             {
-                this.StartLineField = value;
+                this.startLineField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int StartChar
+        public int startChar
         {
             get
             {
-                return this.StartCharField;
+                return this.startCharField;
             }
             set
             {
-                this.StartCharField = value;
+                this.startCharField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int EndLine
+        public int endLine
         {
             get
             {
-                return this.EndLineField;
+                return this.endLineField;
             }
             set
             {
-                this.EndLineField = value;
+                this.endLineField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public int EndChar
+        public int endChar
         {
             get
             {
-                return this.EndCharField;
+                return this.endCharField;
             }
             set
             {
-                this.EndCharField = value;
+                this.endCharField = value;
             }
         }
     }
@@ -2334,99 +2334,99 @@ namespace Hl7.Cql.Elm
     public partial class CqlToElmError : Locator
     {
         
-        private string MessageField;
+        private string messageField;
         
-        private ErrorType ErrorTypeField;
+        private ErrorType errorTypeField;
         
-        private ErrorSeverity ErrorSeverityField;
+        private ErrorSeverity errorSeverityField;
         
-        private string TargetIncludeLibrarySystemField;
+        private string targetIncludeLibrarySystemField;
         
-        private string TargetIncludeLibraryIdField;
+        private string targetIncludeLibraryIdField;
         
-        private string TargetIncludeLibraryVersionIdField;
+        private string targetIncludeLibraryVersionIdField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Message
+        public string message
         {
             get
             {
-                return this.MessageField;
+                return this.messageField;
             }
             set
             {
-                this.MessageField = value;
+                this.messageField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ErrorType ErrorType
+        public ErrorType errorType
         {
             get
             {
-                return this.ErrorTypeField;
+                return this.errorTypeField;
             }
             set
             {
-                this.ErrorTypeField = value;
+                this.errorTypeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public ErrorSeverity ErrorSeverity
+        public ErrorSeverity errorSeverity
         {
             get
             {
-                return this.ErrorSeverityField;
+                return this.errorSeverityField;
             }
             set
             {
-                this.ErrorSeverityField = value;
+                this.errorSeverityField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TargetIncludeLibrarySystem
+        public string targetIncludeLibrarySystem
         {
             get
             {
-                return this.TargetIncludeLibrarySystemField;
+                return this.targetIncludeLibrarySystemField;
             }
             set
             {
-                this.TargetIncludeLibrarySystemField = value;
+                this.targetIncludeLibrarySystemField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TargetIncludeLibraryId
+        public string targetIncludeLibraryId
         {
             get
             {
-                return this.TargetIncludeLibraryIdField;
+                return this.targetIncludeLibraryIdField;
             }
             set
             {
-                this.TargetIncludeLibraryIdField = value;
+                this.targetIncludeLibraryIdField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TargetIncludeLibraryVersionId
+        public string targetIncludeLibraryVersionId
         {
             get
             {
-                return this.TargetIncludeLibraryVersionIdField;
+                return this.targetIncludeLibraryVersionIdField;
             }
             set
             {
-                this.TargetIncludeLibraryVersionIdField = value;
+                this.targetIncludeLibraryVersionIdField = value;
             }
         }
     }
@@ -2439,51 +2439,51 @@ namespace Hl7.Cql.Elm
     public partial class CqlToElmInfo : CqlToElmBase
     {
         
-        private string TranslatorVersionField;
+        private string translatorVersionField;
         
-        private string TranslatorOptionsField;
+        private string translatorOptionsField;
         
-        private string SignatureLevelField;
+        private string signatureLevelField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TranslatorVersion
+        public string translatorVersion
         {
             get
             {
-                return this.TranslatorVersionField;
+                return this.translatorVersionField;
             }
             set
             {
-                this.TranslatorVersionField = value;
+                this.translatorVersionField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string TranslatorOptions
+        public string translatorOptions
         {
             get
             {
-                return this.TranslatorOptionsField;
+                return this.translatorOptionsField;
             }
             set
             {
-                this.TranslatorOptionsField = value;
+                this.translatorOptionsField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string SignatureLevel
+        public string signatureLevel
         {
             get
             {
-                return this.SignatureLevelField;
+                return this.signatureLevelField;
             }
             set
             {
-                this.SignatureLevelField = value;
+                this.signatureLevelField = value;
             }
         }
     }
@@ -2500,11 +2500,11 @@ namespace Hl7.Cql.Elm
         
         private TypeSpecifier resultTypeSpecifierField;
         
-        private string LocalIdField;
+        private string localIdField;
         
-        private string LocatorField;
+        private string locatorField;
         
-        private System.Xml.XmlQualifiedName ResultTypeNameField;
+        private System.Xml.XmlQualifiedName resultTypeNameField;
         
         /// <remarks/>
         public CqlToElmBase[] annotation
@@ -2534,43 +2534,43 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LocalId
+        public string localId
         {
             get
             {
-                return this.LocalIdField;
+                return this.localIdField;
             }
             set
             {
-                this.LocalIdField = value;
+                this.localIdField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Locator
+        public string locator
         {
             get
             {
-                return this.LocatorField;
+                return this.locatorField;
             }
             set
             {
-                this.LocatorField = value;
+                this.locatorField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName ResultTypeName
+        public System.Xml.XmlQualifiedName resultTypeName
         {
             get
             {
-                return this.ResultTypeNameField;
+                return this.resultTypeNameField;
             }
             set
             {
-                this.ResultTypeNameField = value;
+                this.resultTypeNameField = value;
             }
         }
     }
@@ -2592,19 +2592,19 @@ namespace Hl7.Cql.Elm
     public partial class NamedTypeSpecifier : TypeSpecifier
     {
         
-        private System.Xml.XmlQualifiedName NameField;
+        private System.Xml.XmlQualifiedName nameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName Name
+        public System.Xml.XmlQualifiedName name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
     }
@@ -2669,7 +2669,7 @@ namespace Hl7.Cql.Elm
         
         private TypeSpecifier elementTypeField;
         
-        private string NameField;
+        private string nameField;
         
         /// <remarks/>
         public TypeSpecifier type
@@ -2699,15 +2699,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
     }
@@ -2783,19 +2783,19 @@ namespace Hl7.Cql.Elm
     public partial class ParameterTypeSpecifier : TypeSpecifier
     {
         
-        private string ParameterNameField;
+        private string parameterNameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string ParameterName
+        public string parameterName
         {
             get
             {
-                return this.ParameterNameField;
+                return this.parameterNameField;
             }
             set
             {
-                this.ParameterNameField = value;
+                this.parameterNameField = value;
             }
         }
     }
@@ -2950,11 +2950,11 @@ namespace Hl7.Cql.Elm
         
         private Expression expressionField;
         
-        private string NameField;
+        private string nameField;
         
-        private string ContextField;
+        private string contextField;
         
-        private AccessModifier AccessLevelField;
+        private AccessModifier accessLevelField;
         
         /// <remarks/>
         public Expression expression
@@ -2971,43 +2971,43 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Context
+        public string context
         {
             get
             {
-                return this.ContextField;
+                return this.contextField;
             }
             set
             {
-                this.ContextField = value;
+                this.contextField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public AccessModifier AccessLevel
+        public AccessModifier accessLevel
         {
             get
             {
-                return this.AccessLevelField;
+                return this.accessLevelField;
             }
             set
             {
-                this.AccessLevelField = value;
+                this.accessLevelField = value;
             }
         }
     }
@@ -3022,9 +3022,9 @@ namespace Hl7.Cql.Elm
         
         private OperandDef[] operandField;
         
-        private bool ExternalField;
+        private bool externalField;
         
-        private bool FluentField;
+        private bool fluentField;
         
         /// <remarks/>
         public OperandDef[] operand
@@ -3041,29 +3041,29 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool External
+        public bool external
         {
             get
             {
-                return this.ExternalField;
+                return this.externalField;
             }
             set
             {
-                this.ExternalField = value;
+                this.externalField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool Fluent
+        public bool fluent
         {
             get
             {
-                return this.FluentField;
+                return this.fluentField;
             }
             set
             {
-                this.FluentField = value;
+                this.fluentField = value;
             }
         }
     }
@@ -3076,35 +3076,35 @@ namespace Hl7.Cql.Elm
     public partial class ExpressionRef : Expression
     {
         
-        private string NameField;
+        private string nameField;
         
-        private string LibraryNameField;
+        private string libraryNameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LibraryName
+        public string libraryName
         {
             get
             {
-                return this.LibraryNameField;
+                return this.libraryNameField;
             }
             set
             {
-                this.LibraryNameField = value;
+                this.libraryNameField = value;
             }
         }
     }
@@ -3160,11 +3160,11 @@ namespace Hl7.Cql.Elm
         
         private TypeSpecifier parameterTypeSpecifierField;
         
-        private string NameField;
+        private string nameField;
         
-        private System.Xml.XmlQualifiedName ParameterTypeField;
+        private System.Xml.XmlQualifiedName parameterTypeField;
         
-        private AccessModifier AccessLevelField;
+        private AccessModifier accessLevelField;
         
         /// <remarks/>
         public Expression @default
@@ -3194,43 +3194,43 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName ParameterType
+        public System.Xml.XmlQualifiedName parameterType
         {
             get
             {
-                return this.ParameterTypeField;
+                return this.parameterTypeField;
             }
             set
             {
-                this.ParameterTypeField = value;
+                this.parameterTypeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public AccessModifier AccessLevel
+        public AccessModifier accessLevel
         {
             get
             {
-                return this.AccessLevelField;
+                return this.accessLevelField;
             }
             set
             {
-                this.AccessLevelField = value;
+                this.accessLevelField = value;
             }
         }
     }
@@ -3243,35 +3243,35 @@ namespace Hl7.Cql.Elm
     public partial class ParameterRef : Expression
     {
         
-        private string NameField;
+        private string nameField;
         
-        private string LibraryNameField;
+        private string libraryNameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LibraryName
+        public string libraryName
         {
             get
             {
-                return this.LibraryNameField;
+                return this.libraryNameField;
             }
             set
             {
-                this.LibraryNameField = value;
+                this.libraryNameField = value;
             }
         }
     }
@@ -3286,9 +3286,9 @@ namespace Hl7.Cql.Elm
         
         private TypeSpecifier operandTypeSpecifierField;
         
-        private string NameField;
+        private string nameField;
         
-        private System.Xml.XmlQualifiedName OperandTypeField;
+        private System.Xml.XmlQualifiedName operandTypeField;
         
         /// <remarks/>
         public TypeSpecifier operandTypeSpecifier
@@ -3305,29 +3305,29 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName OperandType
+        public System.Xml.XmlQualifiedName operandType
         {
             get
             {
-                return this.OperandTypeField;
+                return this.operandTypeField;
             }
             set
             {
-                this.OperandTypeField = value;
+                this.operandTypeField = value;
             }
         }
     }
@@ -3340,19 +3340,19 @@ namespace Hl7.Cql.Elm
     public partial class OperandRef : Expression
     {
         
-        private string NameField;
+        private string nameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
     }
@@ -3365,35 +3365,35 @@ namespace Hl7.Cql.Elm
     public partial class IdentifierRef : Expression
     {
         
-        private string NameField;
+        private string nameField;
         
-        private string LibraryNameField;
+        private string libraryNameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string LibraryName
+        public string libraryName
         {
             get
             {
-                return this.LibraryNameField;
+                return this.libraryNameField;
             }
             set
             {
-                this.LibraryNameField = value;
+                this.libraryNameField = value;
             }
         }
     }
@@ -3406,35 +3406,35 @@ namespace Hl7.Cql.Elm
     public partial class Literal : Expression
     {
         
-        private System.Xml.XmlQualifiedName ValueTypeField;
+        private System.Xml.XmlQualifiedName valueTypeField;
         
-        private string ValueField;
+        private string valueField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName ValueType
+        public System.Xml.XmlQualifiedName valueType
         {
             get
             {
-                return this.ValueTypeField;
+                return this.valueTypeField;
             }
             set
             {
-                this.ValueTypeField = value;
+                this.valueTypeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Value
+        public string value
         {
             get
             {
-                return this.ValueField;
+                return this.valueField;
             }
             set
             {
-                this.ValueField = value;
+                this.valueField = value;
             }
         }
     }
@@ -3449,7 +3449,7 @@ namespace Hl7.Cql.Elm
         
         private Expression valueField;
         
-        private string NameField;
+        private string nameField;
         
         /// <remarks/>
         public Expression value
@@ -3466,15 +3466,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
     }
@@ -3513,7 +3513,7 @@ namespace Hl7.Cql.Elm
         
         private Expression valueField;
         
-        private string NameField;
+        private string nameField;
         
         /// <remarks/>
         public Expression value
@@ -3530,15 +3530,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
     }
@@ -3553,7 +3553,7 @@ namespace Hl7.Cql.Elm
         
         private InstanceElement[] elementField;
         
-        private System.Xml.XmlQualifiedName ClassTypeField;
+        private System.Xml.XmlQualifiedName classTypeField;
         
         /// <remarks/>
         public InstanceElement[] element
@@ -3570,15 +3570,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName ClassType
+        public System.Xml.XmlQualifiedName classType
         {
             get
             {
-                return this.ClassTypeField;
+                return this.classTypeField;
             }
             set
             {
-                this.ClassTypeField = value;
+                this.classTypeField = value;
             }
         }
     }
@@ -3599,9 +3599,9 @@ namespace Hl7.Cql.Elm
         
         private Expression highClosedExpressionField;
         
-        private bool LowClosedField;
+        private bool lowClosedField;
         
-        private bool HighClosedField;
+        private bool highClosedField;
         
         /// <remarks/>
         public Expression low
@@ -3657,29 +3657,29 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool LowClosed
+        public bool lowClosed
         {
             get
             {
-                return this.LowClosedField;
+                return this.lowClosedField;
             }
             set
             {
-                this.LowClosedField = value;
+                this.lowClosedField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool HighClosed
+        public bool highClosed
         {
             get
             {
-                return this.HighClosedField;
+                return this.highClosedField;
             }
             set
             {
-                this.HighClosedField = value;
+                this.highClosedField = value;
             }
         }
     }
@@ -3923,19 +3923,19 @@ namespace Hl7.Cql.Elm
     public partial class Null : Expression
     {
         
-        private System.Xml.XmlQualifiedName ValueTypeField;
+        private System.Xml.XmlQualifiedName valueTypeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName ValueType
+        public System.Xml.XmlQualifiedName valueType
         {
             get
             {
-                return this.ValueTypeField;
+                return this.valueTypeField;
             }
             set
             {
-                this.ValueTypeField = value;
+                this.valueTypeField = value;
             }
         }
     }
@@ -3986,7 +3986,7 @@ namespace Hl7.Cql.Elm
         
         private TypeSpecifier isTypeSpecifierField;
         
-        private System.Xml.XmlQualifiedName IsTypeField;
+        private System.Xml.XmlQualifiedName isTypeField;
         
         /// <remarks/>
         public TypeSpecifier isTypeSpecifier
@@ -4003,15 +4003,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName IsType
+        public System.Xml.XmlQualifiedName isType
         {
             get
             {
-                return this.IsTypeField;
+                return this.isTypeField;
             }
             set
             {
-                this.IsTypeField = value;
+                this.isTypeField = value;
             }
         }
     }
@@ -4026,9 +4026,9 @@ namespace Hl7.Cql.Elm
         
         private TypeSpecifier asTypeSpecifierField;
         
-        private System.Xml.XmlQualifiedName AsTypeField;
+        private System.Xml.XmlQualifiedName asTypeField;
         
-        private bool StrictField;
+        private bool strictField;
         
         /// <remarks/>
         public TypeSpecifier asTypeSpecifier
@@ -4045,29 +4045,29 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName AsType
+        public System.Xml.XmlQualifiedName asType
         {
             get
             {
-                return this.AsTypeField;
+                return this.asTypeField;
             }
             set
             {
-                this.AsTypeField = value;
+                this.asTypeField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool Strict
+        public bool strict
         {
             get
             {
-                return this.StrictField;
+                return this.strictField;
             }
             set
             {
-                this.StrictField = value;
+                this.strictField = value;
             }
         }
     }
@@ -4082,7 +4082,7 @@ namespace Hl7.Cql.Elm
         
         private TypeSpecifier toTypeSpecifierField;
         
-        private System.Xml.XmlQualifiedName ToTypeField;
+        private System.Xml.XmlQualifiedName toTypeField;
         
         /// <remarks/>
         public TypeSpecifier toTypeSpecifier
@@ -4099,15 +4099,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName ToType
+        public System.Xml.XmlQualifiedName toType
         {
             get
             {
-                return this.ToTypeField;
+                return this.toTypeField;
             }
             set
             {
-                this.ToTypeField = value;
+                this.toTypeField = value;
             }
         }
     }
@@ -4122,7 +4122,7 @@ namespace Hl7.Cql.Elm
         
         private TypeSpecifier toTypeSpecifierField;
         
-        private System.Xml.XmlQualifiedName ToTypeField;
+        private System.Xml.XmlQualifiedName toTypeField;
         
         /// <remarks/>
         public TypeSpecifier toTypeSpecifier
@@ -4139,15 +4139,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName ToType
+        public System.Xml.XmlQualifiedName toType
         {
             get
             {
-                return this.ToTypeField;
+                return this.toTypeField;
             }
             set
             {
-                this.ToTypeField = value;
+                this.toTypeField = value;
             }
         }
     }
@@ -4640,19 +4640,19 @@ namespace Hl7.Cql.Elm
     public partial class MinValue : Expression
     {
         
-        private System.Xml.XmlQualifiedName ValueTypeField;
+        private System.Xml.XmlQualifiedName valueTypeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName ValueType
+        public System.Xml.XmlQualifiedName valueType
         {
             get
             {
-                return this.ValueTypeField;
+                return this.valueTypeField;
             }
             set
             {
-                this.ValueTypeField = value;
+                this.valueTypeField = value;
             }
         }
     }
@@ -4665,19 +4665,19 @@ namespace Hl7.Cql.Elm
     public partial class MaxValue : Expression
     {
         
-        private System.Xml.XmlQualifiedName ValueTypeField;
+        private System.Xml.XmlQualifiedName valueTypeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public System.Xml.XmlQualifiedName ValueType
+        public System.Xml.XmlQualifiedName valueType
         {
             get
             {
-                return this.ValueTypeField;
+                return this.valueTypeField;
             }
             set
             {
-                this.ValueTypeField = value;
+                this.valueTypeField = value;
             }
         }
     }
@@ -5070,19 +5070,19 @@ namespace Hl7.Cql.Elm
     public partial class DurationBetween : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5095,19 +5095,19 @@ namespace Hl7.Cql.Elm
     public partial class DifferenceBetween : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5156,19 +5156,19 @@ namespace Hl7.Cql.Elm
     public partial class DateTimeComponentFrom : UnaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5460,19 +5460,19 @@ namespace Hl7.Cql.Elm
     public partial class SameAs : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5485,19 +5485,19 @@ namespace Hl7.Cql.Elm
     public partial class SameOrBefore : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5510,19 +5510,19 @@ namespace Hl7.Cql.Elm
     public partial class SameOrAfter : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5580,19 +5580,19 @@ namespace Hl7.Cql.Elm
     public partial class Contains : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5605,19 +5605,19 @@ namespace Hl7.Cql.Elm
     public partial class ProperContains : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5630,19 +5630,19 @@ namespace Hl7.Cql.Elm
     public partial class In : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5655,19 +5655,19 @@ namespace Hl7.Cql.Elm
     public partial class ProperIn : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5680,19 +5680,19 @@ namespace Hl7.Cql.Elm
     public partial class Includes : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5705,19 +5705,19 @@ namespace Hl7.Cql.Elm
     public partial class IncludedIn : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5730,19 +5730,19 @@ namespace Hl7.Cql.Elm
     public partial class ProperIncludes : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5755,19 +5755,19 @@ namespace Hl7.Cql.Elm
     public partial class ProperIncludedIn : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5780,19 +5780,19 @@ namespace Hl7.Cql.Elm
     public partial class Before : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5805,19 +5805,19 @@ namespace Hl7.Cql.Elm
     public partial class After : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5830,19 +5830,19 @@ namespace Hl7.Cql.Elm
     public partial class Meets : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5855,19 +5855,19 @@ namespace Hl7.Cql.Elm
     public partial class MeetsBefore : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5880,19 +5880,19 @@ namespace Hl7.Cql.Elm
     public partial class MeetsAfter : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5905,19 +5905,19 @@ namespace Hl7.Cql.Elm
     public partial class Overlaps : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5930,19 +5930,19 @@ namespace Hl7.Cql.Elm
     public partial class OverlapsBefore : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5955,19 +5955,19 @@ namespace Hl7.Cql.Elm
     public partial class OverlapsAfter : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -5980,19 +5980,19 @@ namespace Hl7.Cql.Elm
     public partial class Starts : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -6005,19 +6005,19 @@ namespace Hl7.Cql.Elm
     public partial class Ends : BinaryExpression
     {
         
-        private DateTimePrecision PrecisionField;
+        private DateTimePrecision precisionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public DateTimePrecision Precision
+        public DateTimePrecision precision
         {
             get
             {
-                return this.PrecisionField;
+                return this.precisionField;
             }
             set
             {
-                this.PrecisionField = value;
+                this.precisionField = value;
             }
         }
     }
@@ -6097,7 +6097,7 @@ namespace Hl7.Cql.Elm
         
         private Expression conditionField;
         
-        private string ScopeField;
+        private string scopeField;
         
         /// <remarks/>
         public Expression source
@@ -6127,15 +6127,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Scope
+        public string scope
         {
             get
             {
-                return this.ScopeField;
+                return this.scopeField;
             }
             set
             {
-                this.ScopeField = value;
+                this.scopeField = value;
             }
         }
     }
@@ -6150,7 +6150,7 @@ namespace Hl7.Cql.Elm
         
         private Expression sourceField;
         
-        private string OrderByField;
+        private string orderByField;
         
         /// <remarks/>
         public Expression source
@@ -6167,15 +6167,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string OrderBy
+        public string orderBy
         {
             get
             {
-                return this.OrderByField;
+                return this.orderByField;
             }
             set
             {
-                this.OrderByField = value;
+                this.orderByField = value;
             }
         }
     }
@@ -6190,7 +6190,7 @@ namespace Hl7.Cql.Elm
         
         private Expression sourceField;
         
-        private string OrderByField;
+        private string orderByField;
         
         /// <remarks/>
         public Expression source
@@ -6207,15 +6207,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string OrderBy
+        public string orderBy
         {
             get
             {
-                return this.OrderByField;
+                return this.orderByField;
             }
             set
             {
-                this.OrderByField = value;
+                this.orderByField = value;
             }
         }
     }
@@ -6373,7 +6373,7 @@ namespace Hl7.Cql.Elm
         
         private Expression elementField;
         
-        private string ScopeField;
+        private string scopeField;
         
         /// <remarks/>
         public Expression source
@@ -6403,15 +6403,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Scope
+        public string scope
         {
             get
             {
-                return this.ScopeField;
+                return this.scopeField;
             }
             set
             {
-                this.ScopeField = value;
+                this.scopeField = value;
             }
         }
     }
@@ -6428,7 +6428,7 @@ namespace Hl7.Cql.Elm
         
         private Expression elementField;
         
-        private string ScopeField;
+        private string scopeField;
         
         /// <remarks/>
         public Expression source
@@ -6458,15 +6458,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Scope
+        public string scope
         {
             get
             {
-                return this.ScopeField;
+                return this.scopeField;
             }
             set
             {
-                this.ScopeField = value;
+                this.scopeField = value;
             }
         }
     }
@@ -6488,19 +6488,19 @@ namespace Hl7.Cql.Elm
     public partial class Current : Expression
     {
         
-        private string ScopeField;
+        private string scopeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Scope
+        public string scope
         {
             get
             {
-                return this.ScopeField;
+                return this.scopeField;
             }
             set
             {
-                this.ScopeField = value;
+                this.scopeField = value;
             }
         }
     }
@@ -6513,19 +6513,19 @@ namespace Hl7.Cql.Elm
     public partial class Iteration : Expression
     {
         
-        private string ScopeField;
+        private string scopeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Scope
+        public string scope
         {
             get
             {
-                return this.ScopeField;
+                return this.scopeField;
             }
             set
             {
-                this.ScopeField = value;
+                this.scopeField = value;
             }
         }
     }
@@ -6538,19 +6538,19 @@ namespace Hl7.Cql.Elm
     public partial class Total : Expression
     {
         
-        private string ScopeField;
+        private string scopeField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Scope
+        public string scope
         {
             get
             {
-                return this.ScopeField;
+                return this.scopeField;
             }
             set
             {
-                this.ScopeField = value;
+                this.scopeField = value;
             }
         }
     }
@@ -6576,7 +6576,7 @@ namespace Hl7.Cql.Elm
         
         private Expression sourceField;
         
-        private string PathField;
+        private string pathField;
         
         /// <remarks/>
         public TypeSpecifier[] signature
@@ -6606,15 +6606,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Path
+        public string path
         {
             get
             {
-                return this.PathField;
+                return this.pathField;
             }
             set
             {
-                this.PathField = value;
+                this.pathField = value;
             }
         }
     }
@@ -6803,9 +6803,9 @@ namespace Hl7.Cql.Elm
         
         private Expression sourceField;
         
-        private string PathField;
+        private string pathField;
         
-        private string ScopeField;
+        private string scopeField;
         
         /// <remarks/>
         public Expression source
@@ -6822,29 +6822,29 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Path
+        public string path
         {
             get
             {
-                return this.PathField;
+                return this.pathField;
             }
             set
             {
-                this.PathField = value;
+                this.pathField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Scope
+        public string scope
         {
             get
             {
-                return this.ScopeField;
+                return this.scopeField;
             }
             set
             {
-                this.ScopeField = value;
+                this.scopeField = value;
             }
         }
     }
@@ -6859,7 +6859,7 @@ namespace Hl7.Cql.Elm
         
         private Expression expressionField;
         
-        private string AliasField;
+        private string aliasField;
         
         /// <remarks/>
         public Expression expression
@@ -6876,15 +6876,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Alias
+        public string alias
         {
             get
             {
-                return this.AliasField;
+                return this.aliasField;
             }
             set
             {
-                this.AliasField = value;
+                this.aliasField = value;
             }
         }
     }
@@ -6899,7 +6899,7 @@ namespace Hl7.Cql.Elm
         
         private Expression expressionField;
         
-        private string IdentifierField;
+        private string identifierField;
         
         /// <remarks/>
         public Expression expression
@@ -6916,15 +6916,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Identifier
+        public string identifier
         {
             get
             {
-                return this.IdentifierField;
+                return this.identifierField;
             }
             set
             {
-                this.IdentifierField = value;
+                this.identifierField = value;
             }
         }
     }
@@ -6998,19 +6998,19 @@ namespace Hl7.Cql.Elm
     public partial class SortByItem : Element
     {
         
-        private SortDirection DirectionField;
+        private SortDirection directionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public SortDirection Direction
+        public SortDirection direction
         {
             get
             {
-                return this.DirectionField;
+                return this.directionField;
             }
             set
             {
-                this.DirectionField = value;
+                this.directionField = value;
             }
         }
     }
@@ -7032,19 +7032,19 @@ namespace Hl7.Cql.Elm
     public partial class ByColumn : SortByItem
     {
         
-        private string PathField;
+        private string pathField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Path
+        public string path
         {
             get
             {
-                return this.PathField;
+                return this.pathField;
             }
             set
             {
-                this.PathField = value;
+                this.pathField = value;
             }
         }
     }
@@ -7107,7 +7107,7 @@ namespace Hl7.Cql.Elm
         
         private Expression expressionField;
         
-        private bool DistinctField;
+        private bool distinctField;
         
         /// <remarks/>
         public Expression expression
@@ -7124,15 +7124,15 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool Distinct
+        public bool distinct
         {
             get
             {
-                return this.DistinctField;
+                return this.distinctField;
             }
             set
             {
-                this.DistinctField = value;
+                this.distinctField = value;
             }
         }
     }
@@ -7149,9 +7149,9 @@ namespace Hl7.Cql.Elm
         
         private Expression startingField;
         
-        private string IdentifierField;
+        private string identifierField;
         
-        private bool DistinctField;
+        private bool distinctField;
         
         /// <remarks/>
         public Expression expression
@@ -7181,29 +7181,29 @@ namespace Hl7.Cql.Elm
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Identifier
+        public string identifier
         {
             get
             {
-                return this.IdentifierField;
+                return this.identifierField;
             }
             set
             {
-                this.IdentifierField = value;
+                this.identifierField = value;
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public bool Distinct
+        public bool distinct
         {
             get
             {
-                return this.DistinctField;
+                return this.distinctField;
             }
             set
             {
-                this.DistinctField = value;
+                this.distinctField = value;
             }
         }
     }
@@ -7330,19 +7330,19 @@ namespace Hl7.Cql.Elm
     public partial class AliasRef : Expression
     {
         
-        private string NameField;
+        private string nameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
     }
@@ -7355,19 +7355,19 @@ namespace Hl7.Cql.Elm
     public partial class QueryLetRef : Expression
     {
         
-        private string NameField;
+        private string nameField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
-        public string Name
+        public string name
         {
             get
             {
-                return this.NameField;
+                return this.nameField;
             }
             set
             {
-                this.NameField = value;
+                this.nameField = value;
             }
         }
     }
