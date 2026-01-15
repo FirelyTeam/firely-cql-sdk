@@ -16,10 +16,10 @@ codesystem "ConditionVerificationStatusCodes": 'http://terminology.hl7.org/CodeS
 codesystem "AllergyIntoleranceClinicalStatusCodes": 'http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical'
 codesystem "AllergyIntoleranceVerificationStatusCodes": 'http://terminology.hl7.org/CodeSystem/allergyintolerance-verification'
 codesystem "ObservationCategoryCodes": 'http://terminology.hl7.org/CodeSystem/observation-category'
-codesystem "USCoreObservationCategoryExtensionCodes": 'http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category'  
+codesystem "USCoreObservationCategoryExtensionCodes": 'http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category'
 codesystem "ConditionCategory": 'http://terminology.hl7.org/CodeSystem/condition-category'
 codesystem "USCoreConditionCategoryExtensionCodes": 'http://hl7.org/fhir/us/core/CodeSystem/condition-category'
-codesystem "TaskCodeSystem": 'http://hl7.org/fhir/CodeSystem/task-code' 
+codesystem "TaskCodeSystem": 'http://hl7.org/fhir/CodeSystem/task-code'
 
 
 
@@ -148,12 +148,12 @@ define fluent function isHealthConcern(condition Choice<"ConditionEncounterDiagn
 /*
 @description: Returns true if the given observation has the given category
 */
-define fluent function hasCategory(observation Choice<"SimpleObservation", 
+define fluent function hasCategory(observation Choice<"SimpleObservation",
 "ObservationCancelled",
 "NonPatientObservation",
 "LaboratoryResultObservation",
 "ObservationClinicalResult",
-"ObservationScreeningAssessment">, 
+"ObservationScreeningAssessment">,
 category Code):
   exists (observation.category C
     where C ~ category
@@ -162,7 +162,7 @@ category Code):
 /*
 @description: Returns true if the given observation is a social history observation
 */
-define fluent function isSocialHistory(observation Choice<"SimpleObservation", 
+define fluent function isSocialHistory(observation Choice<"SimpleObservation",
 "ObservationCancelled",
 "NonPatientObservation",
 "LaboratoryResultObservation",
@@ -175,7 +175,7 @@ define fluent function isSocialHistory(observation Choice<"SimpleObservation",
 /*
 @description: Returns true if the given observation is a vital sign
 */
-define fluent function isVitalSign(observation Choice<"SimpleObservation", 
+define fluent function isVitalSign(observation Choice<"SimpleObservation",
 "ObservationCancelled",
 "NonPatientObservation",
 "LaboratoryResultObservation",
@@ -188,7 +188,7 @@ define fluent function isVitalSign(observation Choice<"SimpleObservation",
 /*
 @description: Returns true if the given observation is an imaging observation
 */
-define fluent function isImaging(observation Choice<"SimpleObservation", 
+define fluent function isImaging(observation Choice<"SimpleObservation",
 "ObservationCancelled",
 "NonPatientObservation",
 "LaboratoryResultObservation",
@@ -201,7 +201,7 @@ define fluent function isImaging(observation Choice<"SimpleObservation",
 /*
 @description: Returns true if the given observation is a laboratory observation
 */
-define fluent function isLaboratory(observation Choice<"SimpleObservation", 
+define fluent function isLaboratory(observation Choice<"SimpleObservation",
 "ObservationCancelled",
 "NonPatientObservation",
 "LaboratoryResultObservation",
@@ -214,7 +214,7 @@ define fluent function isLaboratory(observation Choice<"SimpleObservation",
 /*
 @description: Returns true if the given observation is a procedure observation
 */
-define fluent function isProcedure(observation Choice<"SimpleObservation", 
+define fluent function isProcedure(observation Choice<"SimpleObservation",
 "ObservationCancelled",
 "NonPatientObservation",
 "LaboratoryResultObservation",
@@ -227,7 +227,7 @@ define fluent function isProcedure(observation Choice<"SimpleObservation",
 /*
 @description: Returns true if the given observation is a survey observation
 */
-define fluent function isSurvey(observation Choice<"SimpleObservation", 
+define fluent function isSurvey(observation Choice<"SimpleObservation",
 "ObservationCancelled",
 "NonPatientObservation",
 "LaboratoryResultObservation",
@@ -240,7 +240,7 @@ define fluent function isSurvey(observation Choice<"SimpleObservation",
 /*
 @description: Returns true if the given observation is an exam observation
 */
-define fluent function isExam(observation Choice<"SimpleObservation", 
+define fluent function isExam(observation Choice<"SimpleObservation",
 "ObservationCancelled",
 "NonPatientObservation",
 "LaboratoryResultObservation",
@@ -253,7 +253,7 @@ define fluent function isExam(observation Choice<"SimpleObservation",
 /*
 @description: Returns true if the given observation is a therapy observation
 */
-define fluent function isTherapy(observation Choice<"SimpleObservation", 
+define fluent function isTherapy(observation Choice<"SimpleObservation",
 "ObservationCancelled",
 "NonPatientObservation",
 "LaboratoryResultObservation",
@@ -266,7 +266,7 @@ define fluent function isTherapy(observation Choice<"SimpleObservation",
 /*
 @description: Returns true if the given observation is an activity observation
 */
-define fluent function isActivity(observation Choice<"SimpleObservation", 
+define fluent function isActivity(observation Choice<"SimpleObservation",
 "ObservationCancelled",
 "NonPatientObservation",
 "LaboratoryResultObservation",
@@ -398,7 +398,7 @@ define function ToAbatementInterval(condition Choice<"ConditionEncounterDiagnosi
 	  Interval[Patient.birthDate + (condition.abatement.low as Quantity),
 		  Patient.birthDate + (condition.abatement.high as Quantity) + 1 year)
 	else if condition.abatement is Interval<DateTime> then
-	  Interval[condition.abatement.low as DateTime, condition.abatement.high as DateTime)
+      Interval[condition.abatement.low as DateTime, condition.abatement.high as DateTime) // NOTE: Added 'as DateTime' to fix translator error
 	else null as Interval<DateTime>
 
 /*
@@ -421,13 +421,13 @@ define fluent function abatementInterval(condition Choice<"ConditionEncounterDia
 	  Interval[Patient.birthDate + (condition.abatement.low as Quantity),
 		  Patient.birthDate + (condition.abatement.high as Quantity) + 1 year)
 	else if condition.abatement is Interval<DateTime> then
-	  Interval[condition.abatement.low as DateTime, condition.abatement.high as DateTime)
+	  Interval[condition.abatement.low as DateTime, condition.abatement.high as DateTime) // NOTE: Added 'as DateTime' to fix translator error
 	else null as Interval<DateTime>
 
 /*
 @description: Returns an interval representing the normalized prevalence period of a given Condition.
 @comment: Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from
-onset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting 
+onset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting
 interval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.
 @deprecated: This function is deprecated. Use the `prevalenceInterval()` fluent function instead
 */
@@ -446,7 +446,7 @@ else
 /*
 @description: Returns an interval representing the normalized prevalence period of a given Condition.
 @comment: Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from
-onset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting 
+onset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting
 interval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.
 */
 define fluent function prevalenceInterval(condition Choice<"ConditionEncounterDiagnosis", "ConditionProblemsHealthConcerns">):
@@ -486,7 +486,7 @@ define fluent function getId(uri String):
 NOTE: This function assumes resources from the same source server.
 */
 define fluent function references(reference Reference, resource Resource):
-  resource.id = Last(Split(reference.reference, '/'))  
+  resource.id = Last(Split(reference.reference, '/'))
 
 /*
 @description: Returns true if the given reference is to the given resourceId
@@ -503,7 +503,7 @@ NOTE: This function assumes resources from the same source server.
 */
 define fluent function references(references List<Reference>, resource Resource):
   exists (references R where R.references(resource))
-  
+
 /*
 @description: Returns true if any of the given references are to the given resourceId
 @comment: Returns true if the `resourceId` parameter exactly equals the tail of any of the given references.

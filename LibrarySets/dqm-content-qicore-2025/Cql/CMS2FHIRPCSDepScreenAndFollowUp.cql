@@ -29,6 +29,7 @@ code "Depression screening negative (finding)": '428171000124102' from "SNOMEDCT
 code "Depression screening positive (finding)": '428181000124104' from "SNOMEDCT" display 'Depression screening positive (finding)'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 

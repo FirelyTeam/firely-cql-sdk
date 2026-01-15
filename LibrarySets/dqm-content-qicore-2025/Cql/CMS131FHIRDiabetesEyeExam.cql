@@ -33,6 +33,7 @@ code "No apparent retinopathy": 'LA18643-9' from "LOINC" display 'No apparent re
 code "Right eye Diabetic retinopathy severity level by Ophthalmoscopy": '71491-5' from "LOINC" display 'Right eye Diabetic retinopathy severity level by Ophthalmoscopy'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 

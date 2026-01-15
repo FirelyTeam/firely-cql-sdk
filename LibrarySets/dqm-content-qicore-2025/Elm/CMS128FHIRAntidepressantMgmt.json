@@ -73,7 +73,7 @@
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "26:1-26:49",
+            "locator" : "26:1-27:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "annotation" : [ ],
@@ -86,15 +86,141 @@
                   "annotation" : [ ]
                }
             },
+            "default" : {
+               "locator" : "27:11-27:72",
+               "lowClosed" : true,
+               "highClosed" : false,
+               "type" : "Interval",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "annotation" : [ ],
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "low" : {
+                  "locator" : "27:20-27:44",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2026",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  }
+               },
+               "high" : {
+                  "locator" : "27:47-27:71",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2027",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  }
+               }
+            },
             "parameterTypeSpecifier" : {
                "locator" : "26:32-26:49",
                "type" : "IntervalTypeSpecifier",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
-                  "localId" : "249",
+                  "localId" : "270",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "250",
+                     "localId" : "271",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -210,14 +336,14 @@
       },
       "contexts" : {
          "def" : [ {
-            "locator" : "28:1-28:15",
+            "locator" : "29:1-29:15",
             "name" : "Patient",
             "annotation" : [ ]
          } ]
       },
       "statements" : {
          "def" : [ {
-            "locator" : "28:1-28:15",
+            "locator" : "29:1-29:15",
             "name" : "Patient",
             "context" : "Patient",
             "annotation" : [ ],
@@ -226,7 +352,7 @@
                "annotation" : [ ],
                "signature" : [ ],
                "operand" : {
-                  "locator" : "28:1-28:15",
+                  "locator" : "29:1-29:15",
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
                   "type" : "Retrieve",
@@ -238,14 +364,14 @@
                }
             }
          }, {
-            "locator" : "58:1-59:78",
+            "locator" : "59:1-60:78",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "May 1 of the Year Prior to the Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "59:3-59:78",
+               "locator" : "60:3-60:78",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "DateTime",
                "annotation" : [ ],
@@ -283,7 +409,7 @@
                   "annotation" : [ ]
                } ],
                "year" : {
-                  "locator" : "59:12-59:56",
+                  "locator" : "60:12-60:56",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "Subtract",
                   "annotation" : [ ],
@@ -297,7 +423,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "59:13-59:51",
+                     "locator" : "60:13-60:51",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "precision" : "Year",
                      "type" : "DateTimeComponentFrom",
@@ -308,7 +434,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : {
-                        "locator" : "59:23-59:51",
+                        "locator" : "60:23-60:51",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
                         "annotation" : [ ],
@@ -322,7 +448,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "59:32-59:51",
+                           "locator" : "60:32-60:51",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "annotation" : [ ],
@@ -338,7 +464,7 @@
                         }
                      }
                   }, {
-                     "locator" : "59:55",
+                     "locator" : "60:55",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
@@ -347,7 +473,7 @@
                   } ]
                },
                "month" : {
-                  "locator" : "59:59",
+                  "locator" : "60:59",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
@@ -355,7 +481,7 @@
                   "annotation" : [ ]
                },
                "day" : {
-                  "locator" : "59:62",
+                  "locator" : "60:62",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
@@ -363,7 +489,7 @@
                   "annotation" : [ ]
                },
                "hour" : {
-                  "locator" : "59:65",
+                  "locator" : "60:65",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
@@ -371,7 +497,7 @@
                   "annotation" : [ ]
                },
                "minute" : {
-                  "locator" : "59:68",
+                  "locator" : "60:68",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
@@ -379,7 +505,7 @@
                   "annotation" : [ ]
                },
                "second" : {
-                  "locator" : "59:71",
+                  "locator" : "60:71",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
@@ -387,7 +513,7 @@
                   "annotation" : [ ]
                },
                "millisecond" : {
-                  "locator" : "59:74",
+                  "locator" : "60:74",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
@@ -403,7 +529,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : {
-                     "locator" : "59:77",
+                     "locator" : "60:77",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
@@ -413,14 +539,14 @@
                }
             }
          }, {
-            "locator" : "35:1-36:78",
+            "locator" : "36:1-37:78",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "April 30 of the Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "36:3-36:78",
+               "locator" : "37:3-37:78",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "DateTime",
                "annotation" : [ ],
@@ -458,7 +584,7 @@
                   "annotation" : [ ]
                } ],
                "year" : {
-                  "locator" : "36:12-36:52",
+                  "locator" : "37:12-37:52",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "precision" : "Year",
                   "type" : "DateTimeComponentFrom",
@@ -469,7 +595,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : {
-                     "locator" : "36:23-36:51",
+                     "locator" : "37:23-37:51",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "Start",
                      "annotation" : [ ],
@@ -483,7 +609,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "36:32-36:51",
+                        "locator" : "37:32-37:51",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -500,7 +626,7 @@
                   }
                },
                "month" : {
-                  "locator" : "36:55",
+                  "locator" : "37:55",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "4",
@@ -508,7 +634,7 @@
                   "annotation" : [ ]
                },
                "day" : {
-                  "locator" : "36:58-36:59",
+                  "locator" : "37:58-37:59",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "30",
@@ -516,7 +642,7 @@
                   "annotation" : [ ]
                },
                "hour" : {
-                  "locator" : "36:62-36:63",
+                  "locator" : "37:62-37:63",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "23",
@@ -524,7 +650,7 @@
                   "annotation" : [ ]
                },
                "minute" : {
-                  "locator" : "36:66-36:67",
+                  "locator" : "37:66-37:67",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "59",
@@ -532,7 +658,7 @@
                   "annotation" : [ ]
                },
                "second" : {
-                  "locator" : "36:70-36:71",
+                  "locator" : "37:70-37:71",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "59",
@@ -540,7 +666,7 @@
                   "annotation" : [ ]
                },
                "millisecond" : {
-                  "locator" : "36:74",
+                  "locator" : "37:74",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
@@ -556,7 +682,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : {
-                     "locator" : "36:77",
+                     "locator" : "37:77",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
@@ -566,7 +692,7 @@
                }
             }
          }, {
-            "locator" : "55:1-56:101",
+            "locator" : "56:1-57:101",
             "name" : "Intake Period",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -581,7 +707,7 @@
                }
             },
             "expression" : {
-               "locator" : "56:3-56:101",
+               "locator" : "57:3-57:101",
                "lowClosed" : true,
                "highClosed" : true,
                "type" : "Interval",
@@ -596,14 +722,14 @@
                   }
                },
                "low" : {
-                  "locator" : "56:12-56:62",
+                  "locator" : "57:12-57:62",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "name" : "May 1 of the Year Prior to the Measurement Period",
                   "type" : "ExpressionRef",
                   "annotation" : [ ]
                },
                "high" : {
-                  "locator" : "56:65-56:100",
+                  "locator" : "57:65-57:100",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "name" : "April 30 of the Measurement Period",
                   "type" : "ExpressionRef",
@@ -611,20 +737,20 @@
                }
             }
          }, {
-            "locator" : "46:1-53:22",
+            "locator" : "47:1-54:22",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "name" : "IPSD",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "47:3-53:22",
+               "locator" : "48:3-54:22",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                "path" : "AntidepressantDate",
                "type" : "Property",
                "annotation" : [ ],
                "source" : {
-                  "locator" : "47:3-53:3",
+                  "locator" : "48:3-54:3",
                   "type" : "First",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -658,7 +784,7 @@
                      }
                   } ],
                   "source" : {
-                     "locator" : "47:9-52:32",
+                     "locator" : "48:9-53:32",
                      "type" : "Query",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -679,7 +805,7 @@
                         }
                      },
                      "source" : [ {
-                        "locator" : "47:9-47:100",
+                        "locator" : "48:9-48:100",
                         "alias" : "Antidepressant",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -692,7 +818,7 @@
                            }
                         },
                         "expression" : {
-                           "locator" : "47:9-47:85",
+                           "locator" : "48:9-48:85",
                            "name" : "isMedicationDispensed",
                            "libraryName" : "Status",
                            "type" : "FunctionRef",
@@ -716,7 +842,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "47:10-47:60",
+                              "locator" : "48:10-48:60",
                               "type" : "Union",
                               "annotation" : [ ],
                               "resultTypeSpecifier" : {
@@ -753,7 +879,7 @@
                                  "type" : "Retrieve",
                                  "annotation" : [ ],
                                  "codes" : {
-                                    "locator" : "47:32-47:58",
+                                    "locator" : "48:32-48:58",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Antidepressant Medication",
                                     "preserve" : true,
@@ -765,7 +891,7 @@
                                  "dateFilter" : [ ],
                                  "otherFilter" : [ ]
                               }, {
-                                 "locator" : "47:11-47:59",
+                                 "locator" : "48:11-48:59",
                                  "type" : "Query",
                                  "annotation" : [ ],
                                  "resultTypeSpecifier" : {
@@ -778,7 +904,7 @@
                                     }
                                  },
                                  "source" : [ {
-                                    "locator" : "47:11-47:59",
+                                    "locator" : "48:11-48:59",
                                     "alias" : "MR",
                                     "annotation" : [ ],
                                     "expression" : {
@@ -794,7 +920,7 @@
                                  } ],
                                  "let" : [ ],
                                  "relationship" : [ {
-                                    "locator" : "47:11-47:59",
+                                    "locator" : "48:11-48:59",
                                     "alias" : "M",
                                     "type" : "With",
                                     "annotation" : [ ],
@@ -897,7 +1023,7 @@
                                              } ]
                                           },
                                           "valueset" : {
-                                             "locator" : "47:32-47:58",
+                                             "locator" : "48:32-48:58",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                              "name" : "Antidepressant Medication",
                                              "preserve" : true,
@@ -913,7 +1039,7 @@
                      "let" : [ ],
                      "relationship" : [ ],
                      "where" : {
-                        "locator" : "48:7-48:88",
+                        "locator" : "49:7-49:88",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "precision" : "Day",
                         "type" : "In",
@@ -940,7 +1066,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : {
-                              "locator" : "48:13-48:62",
+                              "locator" : "49:13-49:62",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "type" : "Start",
                               "annotation" : [ ],
@@ -954,7 +1080,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "48:22-48:62",
+                                 "locator" : "49:22-49:62",
                                  "name" : "medicationDispensePeriod",
                                  "libraryName" : "CMD",
                                  "type" : "FunctionRef",
@@ -974,7 +1100,7 @@
                                     "annotation" : [ ]
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "48:22-48:35",
+                                    "locator" : "49:22-49:35",
                                     "resultTypeName" : "{http://hl7.org/fhir}MedicationDispense",
                                     "name" : "Antidepressant",
                                     "type" : "AliasRef",
@@ -983,7 +1109,7 @@
                               }
                            }
                         }, {
-                           "locator" : "48:74-48:88",
+                           "locator" : "49:74-49:88",
                            "name" : "Intake Period",
                            "type" : "ExpressionRef",
                            "annotation" : [ ],
@@ -999,7 +1125,7 @@
                         } ]
                      },
                      "return" : {
-                        "locator" : "49:7-51:7",
+                        "locator" : "50:7-52:7",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -1019,7 +1145,7 @@
                            }
                         },
                         "expression" : {
-                           "locator" : "49:14-51:7",
+                           "locator" : "50:14-52:7",
                            "type" : "Tuple",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -1038,7 +1164,7 @@
                            "element" : [ {
                               "name" : "AntidepressantDate",
                               "value" : {
-                                 "locator" : "50:29-50:88",
+                                 "locator" : "51:29-51:88",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                  "type" : "DateFrom",
                                  "annotation" : [ ],
@@ -1056,7 +1182,7 @@
                                        "annotation" : [ ]
                                     } ],
                                     "operand" : {
-                                       "locator" : "50:39-50:88",
+                                       "locator" : "51:39-51:88",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                        "type" : "Start",
                                        "annotation" : [ ],
@@ -1070,7 +1196,7 @@
                                           }
                                        } ],
                                        "operand" : {
-                                          "locator" : "50:48-50:88",
+                                          "locator" : "51:48-51:88",
                                           "name" : "medicationDispensePeriod",
                                           "libraryName" : "CMD",
                                           "type" : "FunctionRef",
@@ -1090,7 +1216,7 @@
                                              "annotation" : [ ]
                                           } ],
                                           "operand" : [ {
-                                             "locator" : "50:48-50:61",
+                                             "locator" : "51:48-51:61",
                                              "resultTypeName" : "{http://hl7.org/fhir}MedicationDispense",
                                              "name" : "Antidepressant",
                                              "type" : "AliasRef",
@@ -1104,10 +1230,10 @@
                         }
                      },
                      "sort" : {
-                        "locator" : "52:7-52:32",
+                        "locator" : "53:7-53:32",
                         "annotation" : [ ],
                         "by" : [ {
-                           "locator" : "52:15-52:32",
+                           "locator" : "53:15-53:32",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                            "direction" : "asc",
                            "path" : "AntidepressantDate",
@@ -1119,14 +1245,14 @@
                }
             }
          }, {
-            "locator" : "38:1-44:3",
+            "locator" : "39:1-45:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has IPSD and Major Depression Diagnosis",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "39:3-44:3",
+               "locator" : "40:3-45:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -1148,7 +1274,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "39:10-44:3",
+                  "locator" : "40:10-45:3",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -1169,7 +1295,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "39:12-41:36",
+                     "locator" : "40:12-42:36",
                      "alias" : "MajorDepression",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -1190,7 +1316,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "39:12-41:20",
+                        "locator" : "40:12-42:20",
                         "name" : "verified",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -1230,7 +1356,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "39:14-41:5",
+                           "locator" : "40:14-42:5",
                            "type" : "Union",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -1288,7 +1414,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "39:16-39:68",
+                                 "locator" : "40:16-40:68",
                                  "dataType" : "{http://hl7.org/fhir}Condition",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns",
                                  "codeProperty" : "code",
@@ -1305,7 +1431,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "39:50-39:67",
+                                    "locator" : "40:50-40:67",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Major Depression",
                                     "preserve" : true,
@@ -1339,7 +1465,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "40:15-40:63",
+                                 "locator" : "41:15-41:63",
                                  "dataType" : "{http://hl7.org/fhir}Condition",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis",
                                  "codeProperty" : "code",
@@ -1356,7 +1482,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "40:45-40:62",
+                                    "locator" : "41:45-41:62",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Major Depression",
                                     "preserve" : true,
@@ -1392,7 +1518,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "42:7-43:94",
+                     "locator" : "43:7-44:94",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -1406,7 +1532,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "42:13-42:30",
+                        "locator" : "43:13-43:30",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Not",
                         "annotation" : [ ],
@@ -1416,7 +1542,7 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : {
-                           "locator" : "42:13-42:30",
+                           "locator" : "43:13-43:30",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "IsNull",
                            "annotation" : [ ],
@@ -1426,7 +1552,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : {
-                              "locator" : "42:13-42:18",
+                              "locator" : "43:13-43:18",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "name" : "IPSD",
                               "type" : "ExpressionRef",
@@ -1434,7 +1560,7 @@
                            }
                         }
                      }, {
-                        "locator" : "43:13-43:94",
+                        "locator" : "44:13-44:94",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "annotation" : [ ],
@@ -1464,7 +1590,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "43:13-43:69",
+                              "locator" : "44:13-44:69",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "type" : "DateFrom",
                               "annotation" : [ ],
@@ -1474,7 +1600,7 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : {
-                                 "locator" : "43:23-43:69",
+                                 "locator" : "44:23-44:69",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
                                  "annotation" : [ ],
@@ -1488,7 +1614,7 @@
                                     }
                                  } ],
                                  "operand" : {
-                                    "locator" : "43:32-43:69",
+                                    "locator" : "44:32-44:69",
                                     "name" : "prevalenceInterval",
                                     "libraryName" : "QICoreCommon",
                                     "type" : "FunctionRef",
@@ -1516,7 +1642,7 @@
                                        } ]
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "43:32-43:46",
+                                       "locator" : "44:32-44:46",
                                        "name" : "MajorDepression",
                                        "type" : "AliasRef",
                                        "annotation" : [ ],
@@ -1537,7 +1663,7 @@
                                  }
                               }
                            }, {
-                              "locator" : "43:78-43:84",
+                              "locator" : "44:78-44:84",
                               "lowClosed" : true,
                               "highClosed" : true,
                               "type" : "Interval",
@@ -1552,7 +1678,7 @@
                                  }
                               },
                               "low" : {
-                                 "locator" : "43:78-43:84",
+                                 "locator" : "44:78-44:84",
                                  "type" : "Subtract",
                                  "annotation" : [ ],
                                  "signature" : [ {
@@ -1565,13 +1691,13 @@
                                     "annotation" : [ ]
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "43:89-43:94",
+                                    "locator" : "44:89-44:94",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "name" : "IPSD",
                                     "type" : "ExpressionRef",
                                     "annotation" : [ ]
                                  }, {
-                                    "locator" : "43:78-43:84",
+                                    "locator" : "44:78-44:84",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                     "value" : 60,
                                     "unit" : "days",
@@ -1580,7 +1706,7 @@
                                  } ]
                               },
                               "high" : {
-                                 "locator" : "43:78-43:84",
+                                 "locator" : "44:78-44:84",
                                  "type" : "Add",
                                  "annotation" : [ ],
                                  "signature" : [ {
@@ -1593,13 +1719,13 @@
                                     "annotation" : [ ]
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "43:89-43:94",
+                                    "locator" : "44:89-44:94",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "name" : "IPSD",
                                     "type" : "ExpressionRef",
                                     "annotation" : [ ]
                                  }, {
-                                    "locator" : "43:78-43:84",
+                                    "locator" : "44:78-44:84",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                     "value" : 60,
                                     "unit" : "days",
@@ -1609,7 +1735,7 @@
                               }
                            } ]
                         }, {
-                           "locator" : "43:78-43:84",
+                           "locator" : "44:78-44:84",
                            "type" : "Not",
                            "annotation" : [ ],
                            "signature" : [ {
@@ -1618,7 +1744,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : {
-                              "locator" : "43:78-43:84",
+                              "locator" : "44:78-44:84",
                               "type" : "IsNull",
                               "annotation" : [ ],
                               "signature" : [ {
@@ -1627,7 +1753,7 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : {
-                                 "locator" : "43:89-43:94",
+                                 "locator" : "44:89-44:94",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                  "name" : "IPSD",
                                  "type" : "ExpressionRef",
@@ -1640,7 +1766,7 @@
                }
             }
          }, {
-            "locator" : "61:1-73:75",
+            "locator" : "62:1-74:75",
             "name" : "Qualifying Encounters",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1655,7 +1781,7 @@
                }
             },
             "expression" : {
-               "locator" : "62:3-73:75",
+               "locator" : "63:3-74:75",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -1668,7 +1794,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "62:3-72:45",
+                  "locator" : "63:3-73:45",
                   "alias" : "ValidEncounter",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -1681,7 +1807,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "62:3-72:30",
+                     "locator" : "63:3-73:30",
                      "name" : "isEncounterPerformed",
                      "libraryName" : "Status",
                      "type" : "FunctionRef",
@@ -1705,7 +1831,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "62:5-72:3",
+                        "locator" : "63:5-73:3",
                         "type" : "Union",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -1735,7 +1861,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "62:7-69:52",
+                           "locator" : "63:7-70:52",
                            "type" : "Union",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -1765,7 +1891,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "62:7-67:49",
+                              "locator" : "63:7-68:49",
                               "type" : "Union",
                               "annotation" : [ ],
                               "resultTypeSpecifier" : {
@@ -1795,7 +1921,7 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "locator" : "62:7-65:51",
+                                 "locator" : "63:7-66:51",
                                  "type" : "Union",
                                  "annotation" : [ ],
                                  "resultTypeSpecifier" : {
@@ -1825,7 +1951,7 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "62:7-63:87",
+                                    "locator" : "63:7-64:87",
                                     "type" : "Union",
                                     "annotation" : [ ],
                                     "resultTypeSpecifier" : {
@@ -1855,7 +1981,7 @@
                                        }
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "62:7-62:33",
+                                       "locator" : "63:7-63:33",
                                        "dataType" : "{http://hl7.org/fhir}Encounter",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                        "codeProperty" : "type",
@@ -1872,7 +1998,7 @@
                                           }
                                        },
                                        "codes" : {
-                                          "locator" : "62:19-62:32",
+                                          "locator" : "63:19-63:32",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Office Visit",
                                           "preserve" : true,
@@ -1884,7 +2010,7 @@
                                        "dateFilter" : [ ],
                                        "otherFilter" : [ ]
                                     }, {
-                                       "locator" : "63:13-63:87",
+                                       "locator" : "64:13-64:87",
                                        "dataType" : "{http://hl7.org/fhir}Encounter",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                        "codeProperty" : "type",
@@ -1901,7 +2027,7 @@
                                           }
                                        },
                                        "codes" : {
-                                          "locator" : "63:25-63:86",
+                                          "locator" : "64:25-64:86",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Preventive Care Services Established Office Visit, 18 and Up",
                                           "preserve" : true,
@@ -1934,7 +2060,7 @@
                                        }
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "64:13-64:83",
+                                       "locator" : "65:13-65:83",
                                        "dataType" : "{http://hl7.org/fhir}Encounter",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                        "codeProperty" : "type",
@@ -1951,7 +2077,7 @@
                                           }
                                        },
                                        "codes" : {
-                                          "locator" : "64:25-64:82",
+                                          "locator" : "65:25-65:82",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Preventive Care Services Initial Office Visit, 18 and Up",
                                           "preserve" : true,
@@ -1963,7 +2089,7 @@
                                        "dateFilter" : [ ],
                                        "otherFilter" : [ ]
                                     }, {
-                                       "locator" : "65:13-65:51",
+                                       "locator" : "66:13-66:51",
                                        "dataType" : "{http://hl7.org/fhir}Encounter",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                        "codeProperty" : "type",
@@ -1980,7 +2106,7 @@
                                           }
                                        },
                                        "codes" : {
-                                          "locator" : "65:25-65:50",
+                                          "locator" : "66:25-66:50",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Home Healthcare Services",
                                           "preserve" : true,
@@ -2014,7 +2140,7 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "66:13-66:48",
+                                    "locator" : "67:13-67:48",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
                                     "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                     "codeProperty" : "type",
@@ -2031,7 +2157,7 @@
                                        }
                                     },
                                     "codes" : {
-                                       "locator" : "66:25-66:47",
+                                       "locator" : "67:25-67:47",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Annual Wellness Visit",
                                        "preserve" : true,
@@ -2043,7 +2169,7 @@
                                     "dateFilter" : [ ],
                                     "otherFilter" : [ ]
                                  }, {
-                                    "locator" : "67:13-67:49",
+                                    "locator" : "68:13-68:49",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
                                     "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                     "codeProperty" : "type",
@@ -2060,7 +2186,7 @@
                                        }
                                     },
                                     "codes" : {
-                                       "locator" : "67:25-67:48",
+                                       "locator" : "68:25-68:48",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Nursing Facility Visit",
                                        "preserve" : true,
@@ -2094,7 +2220,7 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "locator" : "68:13-68:60",
+                                 "locator" : "69:13-69:60",
                                  "dataType" : "{http://hl7.org/fhir}Encounter",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                  "codeProperty" : "type",
@@ -2111,7 +2237,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "68:25-68:59",
+                                    "locator" : "69:25-69:59",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Psych Visit Diagnostic Evaluation",
                                     "preserve" : true,
@@ -2123,7 +2249,7 @@
                                  "dateFilter" : [ ],
                                  "otherFilter" : [ ]
                               }, {
-                                 "locator" : "69:13-69:52",
+                                 "locator" : "70:13-70:52",
                                  "dataType" : "{http://hl7.org/fhir}Encounter",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                  "codeProperty" : "type",
@@ -2140,7 +2266,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "69:25-69:51",
+                                    "locator" : "70:25-70:51",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Psych Visit Psychotherapy",
                                     "preserve" : true,
@@ -2174,7 +2300,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "70:13-70:43",
+                              "locator" : "71:13-71:43",
                               "dataType" : "{http://hl7.org/fhir}Encounter",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                               "codeProperty" : "type",
@@ -2191,7 +2317,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "70:25-70:42",
+                                 "locator" : "71:25-71:42",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Telephone Visits",
                                  "preserve" : true,
@@ -2203,7 +2329,7 @@
                               "dateFilter" : [ ],
                               "otherFilter" : [ ]
                            }, {
-                              "locator" : "71:13-71:44",
+                              "locator" : "72:13-72:44",
                               "dataType" : "{http://hl7.org/fhir}Encounter",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                               "codeProperty" : "type",
@@ -2220,7 +2346,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "71:25-71:43",
+                                 "locator" : "72:25-72:43",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Virtual Encounter",
                                  "preserve" : true,
@@ -2239,7 +2365,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "73:5-73:75",
+                  "locator" : "74:5-74:75",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "annotation" : [ ],
@@ -2269,7 +2395,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "73:11-73:50",
+                        "locator" : "74:11-74:50",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                         "type" : "DateFrom",
                         "annotation" : [ ],
@@ -2279,7 +2405,7 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : {
-                           "locator" : "73:21-73:50",
+                           "locator" : "74:21-74:50",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
                            "annotation" : [ ],
@@ -2293,7 +2419,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "73:30-73:50",
+                              "locator" : "74:30-74:50",
                               "name" : "ToInterval",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -2321,7 +2447,7 @@
                            }
                         }
                      }, {
-                        "locator" : "73:59-73:65",
+                        "locator" : "74:59-74:65",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -2336,7 +2462,7 @@
                            }
                         },
                         "low" : {
-                           "locator" : "73:59-73:65",
+                           "locator" : "74:59-74:65",
                            "type" : "Subtract",
                            "annotation" : [ ],
                            "signature" : [ {
@@ -2349,13 +2475,13 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "73:70-73:75",
+                              "locator" : "74:70-74:75",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "name" : "IPSD",
                               "type" : "ExpressionRef",
                               "annotation" : [ ]
                            }, {
-                              "locator" : "73:59-73:65",
+                              "locator" : "74:59-74:65",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 60,
                               "unit" : "days",
@@ -2364,7 +2490,7 @@
                            } ]
                         },
                         "high" : {
-                           "locator" : "73:59-73:65",
+                           "locator" : "74:59-74:65",
                            "type" : "Add",
                            "annotation" : [ ],
                            "signature" : [ {
@@ -2377,13 +2503,13 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "73:70-73:75",
+                              "locator" : "74:70-74:75",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "name" : "IPSD",
                               "type" : "ExpressionRef",
                               "annotation" : [ ]
                            }, {
-                              "locator" : "73:59-73:65",
+                              "locator" : "74:59-74:65",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 60,
                               "unit" : "days",
@@ -2393,7 +2519,7 @@
                         }
                      } ]
                   }, {
-                     "locator" : "73:59-73:65",
+                     "locator" : "74:59-74:65",
                      "type" : "Not",
                      "annotation" : [ ],
                      "signature" : [ {
@@ -2402,7 +2528,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : {
-                        "locator" : "73:59-73:65",
+                        "locator" : "74:59-74:65",
                         "type" : "IsNull",
                         "annotation" : [ ],
                         "signature" : [ {
@@ -2411,7 +2537,7 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : {
-                           "locator" : "73:70-73:75",
+                           "locator" : "74:70-74:75",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                            "name" : "IPSD",
                            "type" : "ExpressionRef",
@@ -2422,14 +2548,14 @@
                }
             }
          }, {
-            "locator" : "30:1-33:38",
+            "locator" : "31:1-34:38",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Initial Population",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "31:3-33:38",
+               "locator" : "32:3-34:38",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "annotation" : [ ],
@@ -2443,7 +2569,7 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "31:3-32:49",
+                  "locator" : "32:3-33:49",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "annotation" : [ ],
@@ -2457,7 +2583,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "31:3-31:38",
+                     "locator" : "32:3-32:38",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "GreaterOrEqual",
                      "annotation" : [ ],
@@ -2471,7 +2597,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "31:3-31:32",
+                        "locator" : "32:3-32:32",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "precision" : "Year",
                         "type" : "CalculateAgeAt",
@@ -2500,7 +2626,7 @@
                               }
                            }
                         }, {
-                           "locator" : "31:16-31:31",
+                           "locator" : "32:16-32:31",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                            "type" : "DateFrom",
                            "annotation" : [ ],
@@ -2518,7 +2644,7 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : {
-                                 "locator" : "31:26-31:31",
+                                 "locator" : "32:26-32:31",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                  "name" : "IPSD",
                                  "type" : "ExpressionRef",
@@ -2527,7 +2653,7 @@
                            }
                         } ]
                      }, {
-                        "locator" : "31:37-31:38",
+                        "locator" : "32:37-32:38",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "18",
@@ -2535,14 +2661,14 @@
                         "annotation" : [ ]
                      } ]
                   }, {
-                     "locator" : "32:9-32:49",
+                     "locator" : "33:9-33:49",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Has IPSD and Major Depression Diagnosis",
                      "type" : "ExpressionRef",
                      "annotation" : [ ]
                   } ]
                }, {
-                  "locator" : "33:9-33:38",
+                  "locator" : "34:9-34:38",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "annotation" : [ ],
@@ -2556,7 +2682,7 @@
                      }
                   } ],
                   "operand" : {
-                     "locator" : "33:16-33:38",
+                     "locator" : "34:16-34:38",
                      "name" : "Qualifying Encounters",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -2573,28 +2699,28 @@
                } ]
             }
          }, {
-            "locator" : "75:1-76:22",
+            "locator" : "76:1-77:22",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "76:3-76:22",
+               "locator" : "77:3-77:22",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "Initial Population",
                "type" : "ExpressionRef",
                "annotation" : [ ]
             }
          }, {
-            "locator" : "78:1-83:5",
+            "locator" : "79:1-84:5",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator Exclusions",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "79:3-83:5",
+               "locator" : "80:3-84:5",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "annotation" : [ ],
@@ -2608,14 +2734,14 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "79:3-79:32",
+                  "locator" : "80:3-80:32",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Has Hospice Services",
                   "libraryName" : "Hospice",
                   "type" : "ExpressionRef",
                   "annotation" : [ ]
                }, {
-                  "locator" : "80:8-83:5",
+                  "locator" : "81:8-84:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "annotation" : [ ],
@@ -2629,7 +2755,7 @@
                      }
                   } ],
                   "operand" : {
-                     "locator" : "80:15-83:5",
+                     "locator" : "81:15-84:5",
                      "type" : "Query",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -2642,7 +2768,7 @@
                         }
                      },
                      "source" : [ {
-                        "locator" : "80:17-80:116",
+                        "locator" : "81:17-81:116",
                         "alias" : "ActiveAntidepressant",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -2655,7 +2781,7 @@
                            }
                         },
                         "expression" : {
-                           "locator" : "80:17-80:95",
+                           "locator" : "81:17-81:95",
                            "name" : "isMedicationActive",
                            "libraryName" : "Status",
                            "type" : "FunctionRef",
@@ -2679,7 +2805,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "80:19-80:70",
+                              "locator" : "81:19-81:70",
                               "type" : "Union",
                               "annotation" : [ ],
                               "resultTypeSpecifier" : {
@@ -2716,7 +2842,7 @@
                                  "type" : "Retrieve",
                                  "annotation" : [ ],
                                  "codes" : {
-                                    "locator" : "80:41-80:67",
+                                    "locator" : "81:41-81:67",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Antidepressant Medication",
                                     "preserve" : true,
@@ -2728,7 +2854,7 @@
                                  "dateFilter" : [ ],
                                  "otherFilter" : [ ]
                               }, {
-                                 "locator" : "80:21-80:68",
+                                 "locator" : "81:21-81:68",
                                  "type" : "Query",
                                  "annotation" : [ ],
                                  "resultTypeSpecifier" : {
@@ -2741,7 +2867,7 @@
                                     }
                                  },
                                  "source" : [ {
-                                    "locator" : "80:21-80:68",
+                                    "locator" : "81:21-81:68",
                                     "alias" : "MR",
                                     "annotation" : [ ],
                                     "expression" : {
@@ -2757,7 +2883,7 @@
                                  } ],
                                  "let" : [ ],
                                  "relationship" : [ {
-                                    "locator" : "80:21-80:68",
+                                    "locator" : "81:21-81:68",
                                     "alias" : "M",
                                     "type" : "With",
                                     "annotation" : [ ],
@@ -2860,7 +2986,7 @@
                                              } ]
                                           },
                                           "valueset" : {
-                                             "locator" : "80:41-80:67",
+                                             "locator" : "81:41-81:67",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                              "name" : "Antidepressant Medication",
                                              "preserve" : true,
@@ -2876,7 +3002,7 @@
                      "let" : [ ],
                      "relationship" : [ ],
                      "where" : {
-                        "locator" : "81:9-82:137",
+                        "locator" : "82:9-83:137",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "annotation" : [ ],
@@ -2890,7 +3016,7 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : [ {
-                           "locator" : "81:15-81:32",
+                           "locator" : "82:15-82:32",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Not",
                            "annotation" : [ ],
@@ -2900,7 +3026,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : {
-                              "locator" : "81:15-81:32",
+                              "locator" : "82:15-82:32",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "IsNull",
                               "annotation" : [ ],
@@ -2910,7 +3036,7 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : {
-                                 "locator" : "81:15-81:20",
+                                 "locator" : "82:15-82:20",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                  "name" : "IPSD",
                                  "type" : "ExpressionRef",
@@ -2918,7 +3044,7 @@
                               }
                            }
                         }, {
-                           "locator" : "82:15-82:137",
+                           "locator" : "83:15-83:137",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Overlaps",
                            "annotation" : [ ],
@@ -2940,7 +3066,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "82:15-82:91",
+                              "locator" : "83:15-83:91",
                               "name" : "ToDateInterval",
                               "libraryName" : "CQMCommon",
                               "type" : "FunctionRef",
@@ -2979,7 +3105,7 @@
                                        "type" : "Property",
                                        "annotation" : [ ],
                                        "source" : {
-                                          "locator" : "82:42-82:89",
+                                          "locator" : "83:42-83:89",
                                           "name" : "medicationRequestPeriod",
                                           "libraryName" : "CMD",
                                           "type" : "FunctionRef",
@@ -2999,7 +3125,7 @@
                                              "annotation" : [ ]
                                           } ],
                                           "operand" : [ {
-                                             "locator" : "82:42-82:61",
+                                             "locator" : "83:42-83:61",
                                              "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
                                              "name" : "ActiveAntidepressant",
                                              "type" : "AliasRef",
@@ -3013,7 +3139,7 @@
                                     "type" : "Property",
                                     "annotation" : [ ],
                                     "source" : {
-                                       "locator" : "82:42-82:89",
+                                       "locator" : "83:42-83:89",
                                        "name" : "medicationRequestPeriod",
                                        "libraryName" : "CMD",
                                        "type" : "FunctionRef",
@@ -3033,7 +3159,7 @@
                                           "annotation" : [ ]
                                        } ],
                                        "operand" : [ {
-                                          "locator" : "82:42-82:61",
+                                          "locator" : "83:42-83:61",
                                           "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
                                           "name" : "ActiveAntidepressant",
                                           "type" : "AliasRef",
@@ -3054,7 +3180,7 @@
                                        "type" : "Property",
                                        "annotation" : [ ],
                                        "source" : {
-                                          "locator" : "82:42-82:89",
+                                          "locator" : "83:42-83:89",
                                           "name" : "medicationRequestPeriod",
                                           "libraryName" : "CMD",
                                           "type" : "FunctionRef",
@@ -3074,7 +3200,7 @@
                                              "annotation" : [ ]
                                           } ],
                                           "operand" : [ {
-                                             "locator" : "82:42-82:61",
+                                             "locator" : "83:42-83:61",
                                              "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
                                              "name" : "ActiveAntidepressant",
                                              "type" : "AliasRef",
@@ -3088,7 +3214,7 @@
                                     "type" : "Property",
                                     "annotation" : [ ],
                                     "source" : {
-                                       "locator" : "82:42-82:89",
+                                       "locator" : "83:42-83:89",
                                        "name" : "medicationRequestPeriod",
                                        "libraryName" : "CMD",
                                        "type" : "FunctionRef",
@@ -3108,7 +3234,7 @@
                                           "annotation" : [ ]
                                        } ],
                                        "operand" : [ {
-                                          "locator" : "82:42-82:61",
+                                          "locator" : "83:42-83:61",
                                           "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
                                           "name" : "ActiveAntidepressant",
                                           "type" : "AliasRef",
@@ -3118,7 +3244,7 @@
                                  }
                               } ]
                            }, {
-                              "locator" : "82:102-82:137",
+                              "locator" : "83:102-83:137",
                               "lowClosed" : true,
                               "highClosed" : false,
                               "type" : "Interval",
@@ -3133,7 +3259,7 @@
                                  }
                               },
                               "low" : {
-                                 "locator" : "82:111-82:127",
+                                 "locator" : "83:111-83:127",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                  "type" : "Subtract",
                                  "annotation" : [ ],
@@ -3147,13 +3273,13 @@
                                     "annotation" : [ ]
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "82:111-82:116",
+                                    "locator" : "83:111-83:116",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "name" : "IPSD",
                                     "type" : "ExpressionRef",
                                     "annotation" : [ ]
                                  }, {
-                                    "locator" : "82:120-82:127",
+                                    "locator" : "83:120-83:127",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                     "value" : 105,
                                     "unit" : "days",
@@ -3162,7 +3288,7 @@
                                  } ]
                               },
                               "high" : {
-                                 "locator" : "82:130-82:135",
+                                 "locator" : "83:130-83:135",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                  "name" : "IPSD",
                                  "type" : "ExpressionRef",
@@ -3175,7 +3301,7 @@
                } ]
             }
          }, {
-            "locator" : "91:1-95:51",
+            "locator" : "92:1-96:51",
             "name" : "Antidepressant Medication Period Between IPSD and 114 Days After IPSD",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3194,7 +3320,7 @@
                }
             },
             "expression" : {
-               "locator" : "92:3-95:51",
+               "locator" : "93:3-96:51",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -3211,7 +3337,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "92:3-92:100",
+                  "locator" : "93:3-93:100",
                   "alias" : "Antidepressant",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3224,7 +3350,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "92:3-92:85",
+                     "locator" : "93:3-93:85",
                      "name" : "isMedicationDispensed",
                      "libraryName" : "Status",
                      "type" : "FunctionRef",
@@ -3248,7 +3374,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "92:5-92:57",
+                        "locator" : "93:5-93:57",
                         "type" : "Union",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -3285,7 +3411,7 @@
                            "type" : "Retrieve",
                            "annotation" : [ ],
                            "codes" : {
-                              "locator" : "92:28-92:54",
+                              "locator" : "93:28-93:54",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Antidepressant Medication",
                               "preserve" : true,
@@ -3297,7 +3423,7 @@
                            "dateFilter" : [ ],
                            "otherFilter" : [ ]
                         }, {
-                           "locator" : "92:7-92:55",
+                           "locator" : "93:7-93:55",
                            "type" : "Query",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -3310,7 +3436,7 @@
                               }
                            },
                            "source" : [ {
-                              "locator" : "92:7-92:55",
+                              "locator" : "93:7-93:55",
                               "alias" : "MR",
                               "annotation" : [ ],
                               "expression" : {
@@ -3326,7 +3452,7 @@
                            } ],
                            "let" : [ ],
                            "relationship" : [ {
-                              "locator" : "92:7-92:55",
+                              "locator" : "93:7-93:55",
                               "alias" : "M",
                               "type" : "With",
                               "annotation" : [ ],
@@ -3429,7 +3555,7 @@
                                        } ]
                                     },
                                     "valueset" : {
-                                       "locator" : "92:28-92:54",
+                                       "locator" : "93:28-93:54",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Antidepressant Medication",
                                        "preserve" : true,
@@ -3443,7 +3569,7 @@
                   }
                } ],
                "let" : [ {
-                  "locator" : "93:9-93:69",
+                  "locator" : "94:9-94:69",
                   "identifier" : "MedicationPeriod",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3456,7 +3582,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "93:27-93:69",
+                     "locator" : "94:27-94:69",
                      "name" : "medicationDispensePeriod",
                      "libraryName" : "CMD",
                      "type" : "FunctionRef",
@@ -3476,7 +3602,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "93:27-93:40",
+                        "locator" : "94:27-94:40",
                         "resultTypeName" : "{http://hl7.org/fhir}MedicationDispense",
                         "name" : "Antidepressant",
                         "type" : "AliasRef",
@@ -3486,7 +3612,7 @@
                } ],
                "relationship" : [ ],
                "return" : {
-                  "locator" : "94:5-95:51",
+                  "locator" : "95:5-96:51",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -3502,7 +3628,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "94:12-95:51",
+                     "locator" : "95:12-96:51",
                      "type" : "Intersect",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -3532,7 +3658,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "94:12-94:27",
+                        "locator" : "95:12-95:27",
                         "name" : "MedicationPeriod",
                         "type" : "QueryLetRef",
                         "annotation" : [ ],
@@ -3546,7 +3672,7 @@
                            }
                         }
                      }, {
-                        "locator" : "95:17-95:51",
+                        "locator" : "96:17-96:51",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -3561,14 +3687,14 @@
                            }
                         },
                         "low" : {
-                           "locator" : "95:26-95:31",
+                           "locator" : "96:26-96:31",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                            "name" : "IPSD",
                            "type" : "ExpressionRef",
                            "annotation" : [ ]
                         },
                         "high" : {
-                           "locator" : "95:34-95:50",
+                           "locator" : "96:34-96:50",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                            "type" : "Add",
                            "annotation" : [ ],
@@ -3582,13 +3708,13 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "95:34-95:39",
+                              "locator" : "96:34-96:39",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "name" : "IPSD",
                               "type" : "ExpressionRef",
                               "annotation" : [ ]
                            }, {
-                              "locator" : "95:43-95:50",
+                              "locator" : "96:43-96:50",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 114,
                               "unit" : "days",
@@ -3601,14 +3727,14 @@
                }
             }
          }, {
-            "locator" : "88:1-89:106",
+            "locator" : "89:1-90:106",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Cumulative Medication Duration Greater Than or Equal to 84 Days",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "89:3-89:106",
+               "locator" : "90:3-90:106",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "GreaterOrEqual",
                "annotation" : [ ],
@@ -3622,7 +3748,7 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "89:3-89:100",
+                  "locator" : "90:3-90:100",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "cumulativeDuration",
                   "libraryName" : "CMD",
@@ -3642,7 +3768,7 @@
                      }
                   } ],
                   "operand" : [ {
-                     "locator" : "89:5-89:75",
+                     "locator" : "90:5-90:75",
                      "name" : "Antidepressant Medication Period Between IPSD and 114 Days After IPSD",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -3661,7 +3787,7 @@
                      }
                   } ]
                }, {
-                  "locator" : "89:105-89:106",
+                  "locator" : "90:105-90:106",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "84",
@@ -3670,21 +3796,21 @@
                } ]
             }
          }, {
-            "locator" : "85:1-86:67",
+            "locator" : "86:1-87:67",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Numerator 1",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "86:3-86:67",
+               "locator" : "87:3-87:67",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "Cumulative Medication Duration Greater Than or Equal to 84 Days",
                "type" : "ExpressionRef",
                "annotation" : [ ]
             }
          }, {
-            "locator" : "103:1-107:51",
+            "locator" : "104:1-108:51",
             "name" : "Antidepressant Medication Period Between IPSD and 231 Days After IPSD",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3703,7 +3829,7 @@
                }
             },
             "expression" : {
-               "locator" : "104:3-107:51",
+               "locator" : "105:3-108:51",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -3720,7 +3846,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "104:3-104:100",
+                  "locator" : "105:3-105:100",
                   "alias" : "Antidepressant",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3733,7 +3859,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "104:3-104:85",
+                     "locator" : "105:3-105:85",
                      "name" : "isMedicationDispensed",
                      "libraryName" : "Status",
                      "type" : "FunctionRef",
@@ -3757,7 +3883,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "104:5-104:57",
+                        "locator" : "105:5-105:57",
                         "type" : "Union",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -3794,7 +3920,7 @@
                            "type" : "Retrieve",
                            "annotation" : [ ],
                            "codes" : {
-                              "locator" : "104:28-104:54",
+                              "locator" : "105:28-105:54",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Antidepressant Medication",
                               "preserve" : true,
@@ -3806,7 +3932,7 @@
                            "dateFilter" : [ ],
                            "otherFilter" : [ ]
                         }, {
-                           "locator" : "104:7-104:55",
+                           "locator" : "105:7-105:55",
                            "type" : "Query",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -3819,7 +3945,7 @@
                               }
                            },
                            "source" : [ {
-                              "locator" : "104:7-104:55",
+                              "locator" : "105:7-105:55",
                               "alias" : "MR",
                               "annotation" : [ ],
                               "expression" : {
@@ -3835,7 +3961,7 @@
                            } ],
                            "let" : [ ],
                            "relationship" : [ {
-                              "locator" : "104:7-104:55",
+                              "locator" : "105:7-105:55",
                               "alias" : "M",
                               "type" : "With",
                               "annotation" : [ ],
@@ -3938,7 +4064,7 @@
                                        } ]
                                     },
                                     "valueset" : {
-                                       "locator" : "104:28-104:54",
+                                       "locator" : "105:28-105:54",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Antidepressant Medication",
                                        "preserve" : true,
@@ -3952,7 +4078,7 @@
                   }
                } ],
                "let" : [ {
-                  "locator" : "105:9-105:69",
+                  "locator" : "106:9-106:69",
                   "identifier" : "MedicationPeriod",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3965,7 +4091,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "105:27-105:69",
+                     "locator" : "106:27-106:69",
                      "name" : "medicationDispensePeriod",
                      "libraryName" : "CMD",
                      "type" : "FunctionRef",
@@ -3985,7 +4111,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "105:27-105:40",
+                        "locator" : "106:27-106:40",
                         "resultTypeName" : "{http://hl7.org/fhir}MedicationDispense",
                         "name" : "Antidepressant",
                         "type" : "AliasRef",
@@ -3995,7 +4121,7 @@
                } ],
                "relationship" : [ ],
                "return" : {
-                  "locator" : "106:5-107:51",
+                  "locator" : "107:5-108:51",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -4011,7 +4137,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "106:12-107:51",
+                     "locator" : "107:12-108:51",
                      "type" : "Intersect",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -4041,7 +4167,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "106:12-106:27",
+                        "locator" : "107:12-107:27",
                         "name" : "MedicationPeriod",
                         "type" : "QueryLetRef",
                         "annotation" : [ ],
@@ -4055,7 +4181,7 @@
                            }
                         }
                      }, {
-                        "locator" : "107:17-107:51",
+                        "locator" : "108:17-108:51",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -4070,14 +4196,14 @@
                            }
                         },
                         "low" : {
-                           "locator" : "107:26-107:31",
+                           "locator" : "108:26-108:31",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                            "name" : "IPSD",
                            "type" : "ExpressionRef",
                            "annotation" : [ ]
                         },
                         "high" : {
-                           "locator" : "107:34-107:50",
+                           "locator" : "108:34-108:50",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                            "type" : "Add",
                            "annotation" : [ ],
@@ -4091,13 +4217,13 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "107:34-107:39",
+                              "locator" : "108:34-108:39",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "name" : "IPSD",
                               "type" : "ExpressionRef",
                               "annotation" : [ ]
                            }, {
-                              "locator" : "107:43-107:50",
+                              "locator" : "108:43-108:50",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 231,
                               "unit" : "days",
@@ -4110,14 +4236,14 @@
                }
             }
          }, {
-            "locator" : "100:1-101:107",
+            "locator" : "101:1-102:107",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Cumulative Medication Duration Greater Than or Equal to 180 Days",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "101:3-101:107",
+               "locator" : "102:3-102:107",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "GreaterOrEqual",
                "annotation" : [ ],
@@ -4131,7 +4257,7 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "101:3-101:100",
+                  "locator" : "102:3-102:100",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "cumulativeDuration",
                   "libraryName" : "CMD",
@@ -4151,7 +4277,7 @@
                      }
                   } ],
                   "operand" : [ {
-                     "locator" : "101:5-101:75",
+                     "locator" : "102:5-102:75",
                      "name" : "Antidepressant Medication Period Between IPSD and 231 Days After IPSD",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -4170,7 +4296,7 @@
                      }
                   } ]
                }, {
-                  "locator" : "101:105-101:107",
+                  "locator" : "102:105-102:107",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "180",
@@ -4179,21 +4305,21 @@
                } ]
             }
          }, {
-            "locator" : "97:1-98:68",
+            "locator" : "98:1-99:68",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Numerator 2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "98:3-98:68",
+               "locator" : "99:3-99:68",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "Cumulative Medication Duration Greater Than or Equal to 180 Days",
                "type" : "ExpressionRef",
                "annotation" : [ ]
             }
          }, {
-            "locator" : "109:1-110:21",
+            "locator" : "110:1-111:21",
             "name" : "SDE Ethnicity",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4224,7 +4350,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "110:3-110:21",
+               "locator" : "111:3-111:21",
                "name" : "SDE Ethnicity",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -4256,7 +4382,7 @@
                }
             }
          }, {
-            "locator" : "112:1-113:17",
+            "locator" : "113:1-114:17",
             "name" : "SDE Payer",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4291,7 +4417,7 @@
                }
             },
             "expression" : {
-               "locator" : "113:3-113:17",
+               "locator" : "114:3-114:17",
                "name" : "SDE Payer",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -4327,7 +4453,7 @@
                }
             }
          }, {
-            "locator" : "115:1-116:16",
+            "locator" : "116:1-117:16",
             "name" : "SDE Race",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4358,7 +4484,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "116:3-116:16",
+               "locator" : "117:3-117:16",
                "name" : "SDE Race",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -4390,14 +4516,14 @@
                }
             }
          }, {
-            "locator" : "118:1-119:15",
+            "locator" : "119:1-120:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "SDE Sex",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "119:3-119:15",
+               "locator" : "120:3-120:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "SDE Sex",
                "libraryName" : "SDE",

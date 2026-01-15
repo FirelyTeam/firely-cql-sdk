@@ -12955,7 +12955,7 @@
                            }
                         },
                         "then" : {
-                           "locator" : "401:4-401:86",
+                           "locator" : "401:7-401:89",
                            "lowClosed" : true,
                            "highClosed" : false,
                            "type" : "Interval",
@@ -12970,14 +12970,14 @@
                               }
                            },
                            "low" : {
-                              "locator" : "401:13-401:47",
+                              "locator" : "401:16-401:50",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "strict" : false,
                               "type" : "As",
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "401:13-401:35",
+                                 "locator" : "401:16-401:38",
                                  "path" : "low",
                                  "type" : "Property",
                                  "annotation" : [ ],
@@ -12995,7 +12995,7 @@
                                     } ]
                                  },
                                  "source" : {
-                                    "locator" : "401:13-401:31",
+                                    "locator" : "401:16-401:34",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -13035,7 +13035,7 @@
                                        "type" : "Property",
                                        "annotation" : [ ],
                                        "source" : {
-                                          "locator" : "401:13-401:21",
+                                          "locator" : "401:16-401:24",
                                           "name" : "condition",
                                           "type" : "OperandRef",
                                           "annotation" : [ ],
@@ -13057,7 +13057,7 @@
                                  }
                               },
                               "asTypeSpecifier" : {
-                                 "locator" : "401:40-401:47",
+                                 "locator" : "401:43-401:50",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "NamedTypeSpecifier",
@@ -13065,14 +13065,14 @@
                               }
                            },
                            "high" : {
-                              "locator" : "401:50-401:85",
+                              "locator" : "401:53-401:88",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "strict" : false,
                               "type" : "As",
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "401:50-401:73",
+                                 "locator" : "401:53-401:76",
                                  "path" : "high",
                                  "type" : "Property",
                                  "annotation" : [ ],
@@ -13090,7 +13090,7 @@
                                     } ]
                                  },
                                  "source" : {
-                                    "locator" : "401:50-401:68",
+                                    "locator" : "401:53-401:71",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -13130,7 +13130,7 @@
                                        "type" : "Property",
                                        "annotation" : [ ],
                                        "source" : {
-                                          "locator" : "401:50-401:58",
+                                          "locator" : "401:53-401:61",
                                           "name" : "condition",
                                           "type" : "OperandRef",
                                           "annotation" : [ ],
@@ -13152,7 +13152,7 @@
                                  }
                               },
                               "asTypeSpecifier" : {
-                                 "locator" : "401:78-401:85",
+                                 "locator" : "401:81-401:88",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "NamedTypeSpecifier",
@@ -16401,7 +16401,7 @@
                   "value" : "Returns an interval representing the normalized prevalence period of a given Condition."
                }, {
                   "name" : "comment",
-                  "value" : "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from\nonset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting \ninterval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary."
+                  "value" : "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from\nonset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting\ninterval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary."
                }, {
                   "name" : "deprecated",
                   "value" : "This function is deprecated. Use the `prevalenceInterval()` fluent function instead"
@@ -17321,7 +17321,7 @@
                   "value" : "Returns an interval representing the normalized prevalence period of a given Condition."
                }, {
                   "name" : "comment",
-                  "value" : "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from\nonset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting \ninterval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary."
+                  "value" : "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from\nonset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting\ninterval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary."
                } ]
             } ],
             "resultTypeSpecifier" : {

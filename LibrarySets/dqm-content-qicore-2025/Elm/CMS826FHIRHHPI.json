@@ -55,7 +55,7 @@
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "22:1-22:49",
+            "locator" : "22:1-23:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "annotation" : [ ],
@@ -68,15 +68,141 @@
                   "annotation" : [ ]
                }
             },
+            "default" : {
+               "locator" : "23:11-23:72",
+               "lowClosed" : true,
+               "highClosed" : false,
+               "type" : "Interval",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "annotation" : [ ],
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "low" : {
+                  "locator" : "23:20-23:44",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2026",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  }
+               },
+               "high" : {
+                  "locator" : "23:47-23:71",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2027",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  }
+               }
+            },
             "parameterTypeSpecifier" : {
                "locator" : "22:32-22:49",
                "type" : "IntervalTypeSpecifier",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
-                  "localId" : "238",
+                  "localId" : "259",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "239",
+                     "localId" : "260",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -179,14 +305,14 @@
       },
       "contexts" : {
          "def" : [ {
-            "locator" : "24:1-24:15",
+            "locator" : "25:1-25:15",
             "name" : "Patient",
             "annotation" : [ ]
          } ]
       },
       "statements" : {
          "def" : [ {
-            "locator" : "24:1-24:15",
+            "locator" : "25:1-25:15",
             "name" : "Patient",
             "context" : "Patient",
             "annotation" : [ ],
@@ -195,7 +321,7 @@
                "annotation" : [ ],
                "signature" : [ ],
                "operand" : {
-                  "locator" : "24:1-24:15",
+                  "locator" : "25:1-25:15",
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
                   "type" : "Retrieve",
@@ -207,7 +333,7 @@
                }
             }
          }, {
-            "locator" : "26:1-27:21",
+            "locator" : "27:1-28:21",
             "name" : "SDE Ethnicity",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -238,7 +364,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "27:3-27:21",
+               "locator" : "28:3-28:21",
                "name" : "SDE Ethnicity",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -270,7 +396,7 @@
                }
             }
          }, {
-            "locator" : "29:1-30:17",
+            "locator" : "30:1-31:17",
             "name" : "SDE Payer",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -305,7 +431,7 @@
                }
             },
             "expression" : {
-               "locator" : "30:3-30:17",
+               "locator" : "31:3-31:17",
                "name" : "SDE Payer",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -341,7 +467,7 @@
                }
             }
          }, {
-            "locator" : "32:1-33:16",
+            "locator" : "33:1-34:16",
             "name" : "SDE Race",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -372,7 +498,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "33:3-33:16",
+               "locator" : "34:3-34:16",
                "name" : "SDE Race",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -404,14 +530,14 @@
                }
             }
          }, {
-            "locator" : "35:1-36:15",
+            "locator" : "36:1-37:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "SDE Sex",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "36:3-36:15",
+               "locator" : "37:3-37:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "SDE Sex",
                "libraryName" : "SDE",
@@ -419,7 +545,7 @@
                "annotation" : [ ]
             }
          }, {
-            "locator" : "52:1-56:48",
+            "locator" : "53:1-57:48",
             "name" : "Encounter With Age 18 And Older",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -434,7 +560,7 @@
                }
             },
             "expression" : {
-               "locator" : "53:3-56:48",
+               "locator" : "54:3-57:48",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -447,7 +573,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "53:3-53:57",
+                  "locator" : "54:3-54:57",
                   "alias" : "InpatientEncounter",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -460,7 +586,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "53:3-53:38",
+                     "locator" : "54:3-54:38",
                      "dataType" : "{http://hl7.org/fhir}Encounter",
                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                      "codeProperty" : "type",
@@ -477,7 +603,7 @@
                         }
                      },
                      "codes" : {
-                        "locator" : "53:17-53:37",
+                        "locator" : "54:17-54:37",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "Encounter Inpatient",
                         "preserve" : true,
@@ -493,7 +619,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "54:5-56:48",
+                  "locator" : "55:5-57:48",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "annotation" : [ ],
@@ -507,7 +633,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "54:11-55:75",
+                     "locator" : "55:11-56:75",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -521,7 +647,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "54:11-54:74",
+                        "locator" : "55:11-55:74",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "GreaterOrEqual",
                         "annotation" : [ ],
@@ -535,7 +661,7 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : [ {
-                           "locator" : "54:11-54:68",
+                           "locator" : "55:11-55:68",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "precision" : "Year",
                            "type" : "CalculateAgeAt",
@@ -564,7 +690,7 @@
                                  }
                               }
                            }, {
-                              "locator" : "54:24-54:67",
+                              "locator" : "55:24-55:67",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "type" : "DateFrom",
                               "annotation" : [ ],
@@ -574,7 +700,7 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : {
-                                 "locator" : "54:34-54:67",
+                                 "locator" : "55:34-55:67",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
                                  "annotation" : [ ],
@@ -588,7 +714,7 @@
                                     }
                                  } ],
                                  "operand" : {
-                                    "locator" : "54:43-54:67",
+                                    "locator" : "55:43-55:67",
                                     "name" : "ToInterval",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -617,7 +743,7 @@
                               }
                            } ]
                         }, {
-                           "locator" : "54:73-54:74",
+                           "locator" : "55:73-55:74",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "18",
@@ -625,7 +751,7 @@
                            "annotation" : [ ]
                         } ]
                      }, {
-                        "locator" : "55:11-55:75",
+                        "locator" : "56:11-56:75",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "precision" : "Day",
                         "type" : "In",
@@ -644,7 +770,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "55:37-55:40",
+                           "locator" : "56:37-56:40",
                            "type" : "End",
                            "annotation" : [ ],
                            "signature" : [ {
@@ -657,7 +783,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "55:11-55:35",
+                              "locator" : "56:11-56:35",
                               "name" : "ToInterval",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -684,7 +810,7 @@
                               } ]
                            }
                         }, {
-                           "locator" : "55:56-55:75",
+                           "locator" : "56:56-56:75",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "annotation" : [ ],
@@ -700,7 +826,7 @@
                         } ]
                      } ]
                   }, {
-                     "locator" : "56:11-56:48",
+                     "locator" : "57:11-57:48",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
                      "annotation" : [ ],
@@ -714,7 +840,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "56:11-56:35",
+                        "locator" : "57:11-57:35",
                         "resultTypeName" : "{http://hl7.org/fhir}EncounterStatus",
                         "path" : "value",
                         "type" : "Property",
@@ -726,7 +852,7 @@
                            "annotation" : [ ]
                         }
                      }, {
-                        "locator" : "56:39-56:48",
+                        "locator" : "57:39-57:48",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "finished",
@@ -737,7 +863,7 @@
                }
             }
          }, {
-            "locator" : "38:1-39:35",
+            "locator" : "39:1-40:35",
             "name" : "Initial Population",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -752,7 +878,7 @@
                }
             },
             "expression" : {
-               "locator" : "39:3-39:35",
+               "locator" : "40:3-40:35",
                "name" : "Encounter With Age 18 And Older",
                "type" : "ExpressionRef",
                "annotation" : [ ],
@@ -767,7 +893,7 @@
                }
             }
          }, {
-            "locator" : "41:1-42:22",
+            "locator" : "42:1-43:22",
             "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -782,7 +908,7 @@
                }
             },
             "expression" : {
-               "locator" : "42:3-42:22",
+               "locator" : "43:3-43:22",
                "name" : "Initial Population",
                "type" : "ExpressionRef",
                "annotation" : [ ],
@@ -797,7 +923,7 @@
                }
             }
          }, {
-            "locator" : "74:1-76:159",
+            "locator" : "75:1-77:159",
             "name" : "Encounter With Deep Tissue Pressure Injury POA By Indicator",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -812,7 +938,7 @@
                }
             },
             "expression" : {
-               "locator" : "75:3-76:159",
+               "locator" : "76:3-77:159",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -825,7 +951,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "75:3-75:60",
+                  "locator" : "76:3-76:60",
                   "alias" : "InpatientHospitalization",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -838,7 +964,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "75:3-75:35",
+                     "locator" : "76:3-76:35",
                      "name" : "Encounter With Age 18 And Older",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -856,7 +982,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "76:5-76:159",
+                  "locator" : "77:5-77:159",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "isDiagnosisPresentOnAdmission",
                   "libraryName" : "CQMCommon",
@@ -876,20 +1002,20 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "76:11-76:34",
+                     "locator" : "77:11-77:34",
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                      "name" : "InpatientHospitalization",
                      "type" : "AliasRef",
                      "annotation" : [ ]
                   }, {
-                     "locator" : "76:68-76:106",
+                     "locator" : "77:68-77:106",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Pressure Injury Deep Tissue Diagnoses",
                      "preserve" : true,
                      "type" : "ValueSetRef",
                      "annotation" : [ ]
                   }, {
-                     "locator" : "76:109-76:157",
+                     "locator" : "77:109-77:157",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Present on Admission or Clinically Undetermined",
                      "preserve" : true,
@@ -899,7 +1025,7 @@
                }
             }
          }, {
-            "locator" : "134:1-140:19",
+            "locator" : "135:1-141:19",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "isIn",
             "context" : "Patient",
@@ -908,7 +1034,7 @@
             "type" : "FunctionDef",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "135:3-140:19",
+               "locator" : "136:3-141:19",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "annotation" : [ ],
@@ -922,7 +1048,7 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "135:3-136:72",
+                  "locator" : "136:3-137:72",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "annotation" : [ ],
@@ -936,7 +1062,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "135:3-135:59",
+                     "locator" : "136:3-136:59",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "annotation" : [ ],
@@ -954,7 +1080,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "135:3-135:20",
+                        "locator" : "136:3-136:20",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "value",
                         "type" : "Property",
@@ -964,7 +1090,7 @@
                            "type" : "Property",
                            "annotation" : [ ],
                            "source" : {
-                              "locator" : "135:3-135:13",
+                              "locator" : "136:3-136:13",
                               "name" : "observation",
                               "type" : "OperandRef",
                               "annotation" : [ ],
@@ -984,7 +1110,7 @@
                            }
                         }
                      }, {
-                        "locator" : "135:25-135:59",
+                        "locator" : "136:25-136:59",
                         "type" : "List",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -997,21 +1123,21 @@
                            }
                         },
                         "element" : [ {
-                           "locator" : "135:27-135:33",
+                           "locator" : "136:27-136:33",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "final",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }, {
-                           "locator" : "135:36-135:44",
+                           "locator" : "136:36-136:44",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "amended",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }, {
-                           "locator" : "135:47-135:57",
+                           "locator" : "136:47-136:57",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "corrected",
@@ -1020,7 +1146,7 @@
                         } ]
                      } ]
                   }, {
-                     "locator" : "136:9-136:72",
+                     "locator" : "137:9-137:72",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IncludedIn",
                      "annotation" : [ ],
@@ -1042,7 +1168,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "136:9-136:44",
+                        "locator" : "137:9-137:44",
                         "name" : "toInterval",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
@@ -1090,7 +1216,7 @@
                            } ]
                         } ],
                         "operand" : [ {
-                           "locator" : "136:9-136:29",
+                           "locator" : "137:9-137:29",
                            "name" : "ToValue",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
@@ -1126,7 +1252,7 @@
                               "type" : "Property",
                               "annotation" : [ ],
                               "source" : {
-                                 "locator" : "136:9-136:19",
+                                 "locator" : "137:9-137:19",
                                  "name" : "observation",
                                  "type" : "OperandRef",
                                  "annotation" : [ ],
@@ -1147,7 +1273,7 @@
                            } ]
                         } ]
                      }, {
-                        "locator" : "136:53-136:72",
+                        "locator" : "137:53-137:72",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -1163,21 +1289,21 @@
                      } ]
                   } ]
                }, {
-                  "locator" : "137:9-140:19",
+                  "locator" : "138:9-141:19",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Case",
                   "annotation" : [ ],
                   "caseItem" : [ {
-                     "locator" : "138:7-138:110",
+                     "locator" : "139:7-139:110",
                      "annotation" : [ ],
                      "when" : {
-                        "locator" : "138:12-138:43",
+                        "locator" : "139:12-139:43",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Is",
                         "annotation" : [ ],
                         "signature" : [ ],
                         "operand" : {
-                           "locator" : "138:12-138:22",
+                           "locator" : "139:12-139:22",
                            "name" : "observation",
                            "type" : "OperandRef",
                            "annotation" : [ ],
@@ -1196,7 +1322,7 @@
                            }
                         },
                         "isTypeSpecifier" : {
-                           "locator" : "138:27-138:43",
+                           "locator" : "139:27-139:43",
                            "resultTypeName" : "{http://hl7.org/fhir}Observation",
                            "name" : "{http://hl7.org/fhir}Observation",
                            "type" : "NamedTypeSpecifier",
@@ -1204,7 +1330,7 @@
                         }
                      },
                      "then" : {
-                        "locator" : "138:50-138:110",
+                        "locator" : "139:50-139:110",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
                         "annotation" : [ ],
@@ -1218,14 +1344,14 @@
                            "annotation" : [ ]
                         } ],
                         "code" : {
-                           "locator" : "138:50-138:102",
+                           "locator" : "139:50-139:102",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                            "strict" : false,
                            "type" : "As",
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : {
-                              "locator" : "138:50-138:91",
+                              "locator" : "139:50-139:91",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -1293,14 +1419,14 @@
                                  "type" : "Property",
                                  "annotation" : [ ],
                                  "source" : {
-                                    "locator" : "138:50-138:85",
+                                    "locator" : "139:50-139:85",
                                     "resultTypeName" : "{http://hl7.org/fhir}Observation",
                                     "strict" : false,
                                     "type" : "As",
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "138:52-138:62",
+                                       "locator" : "139:52-139:62",
                                        "name" : "observation",
                                        "type" : "OperandRef",
                                        "annotation" : [ ],
@@ -1319,7 +1445,7 @@
                                        }
                                     },
                                     "asTypeSpecifier" : {
-                                       "locator" : "138:67-138:83",
+                                       "locator" : "139:67-139:83",
                                        "resultTypeName" : "{http://hl7.org/fhir}Observation",
                                        "name" : "{http://hl7.org/fhir}Observation",
                                        "type" : "NamedTypeSpecifier",
@@ -1329,7 +1455,7 @@
                               } ]
                            },
                            "asTypeSpecifier" : {
-                              "locator" : "138:96-138:102",
+                              "locator" : "139:96-139:102",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
                               "type" : "NamedTypeSpecifier",
@@ -1337,7 +1463,7 @@
                            }
                         },
                         "valuesetExpression" : {
-                           "locator" : "138:107-138:110",
+                           "locator" : "139:107-139:110",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "vset",
                            "type" : "OperandRef",
@@ -1345,16 +1471,16 @@
                         }
                      }
                   }, {
-                     "locator" : "139:7-139:126",
+                     "locator" : "140:7-140:126",
                      "annotation" : [ ],
                      "when" : {
-                        "locator" : "139:12-139:51",
+                        "locator" : "140:12-140:51",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Is",
                         "annotation" : [ ],
                         "signature" : [ ],
                         "operand" : {
-                           "locator" : "139:12-139:22",
+                           "locator" : "140:12-140:22",
                            "name" : "observation",
                            "type" : "OperandRef",
                            "annotation" : [ ],
@@ -1373,7 +1499,7 @@
                            }
                         },
                         "isTypeSpecifier" : {
-                           "locator" : "139:27-139:51",
+                           "locator" : "140:27-140:51",
                            "resultTypeName" : "{http://hl7.org/fhir}Observation",
                            "name" : "{http://hl7.org/fhir}Observation",
                            "type" : "NamedTypeSpecifier",
@@ -1381,7 +1507,7 @@
                         }
                      },
                      "then" : {
-                        "locator" : "139:58-139:126",
+                        "locator" : "140:58-140:126",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
                         "annotation" : [ ],
@@ -1395,14 +1521,14 @@
                            "annotation" : [ ]
                         } ],
                         "code" : {
-                           "locator" : "139:58-139:118",
+                           "locator" : "140:58-140:118",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                            "strict" : false,
                            "type" : "As",
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : {
-                              "locator" : "139:58-139:107",
+                              "locator" : "140:58-140:107",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -1466,14 +1592,14 @@
                                  "type" : "Property",
                                  "annotation" : [ ],
                                  "source" : {
-                                    "locator" : "139:58-139:101",
+                                    "locator" : "140:58-140:101",
                                     "resultTypeName" : "{http://hl7.org/fhir}Observation",
                                     "strict" : false,
                                     "type" : "As",
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "139:60-139:70",
+                                       "locator" : "140:60-140:70",
                                        "name" : "observation",
                                        "type" : "OperandRef",
                                        "annotation" : [ ],
@@ -1492,7 +1618,7 @@
                                        }
                                     },
                                     "asTypeSpecifier" : {
-                                       "locator" : "139:75-139:99",
+                                       "locator" : "140:75-140:99",
                                        "resultTypeName" : "{http://hl7.org/fhir}Observation",
                                        "name" : "{http://hl7.org/fhir}Observation",
                                        "type" : "NamedTypeSpecifier",
@@ -1502,7 +1628,7 @@
                               } ]
                            },
                            "asTypeSpecifier" : {
-                              "locator" : "139:112-139:118",
+                              "locator" : "140:112-140:118",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
                               "type" : "NamedTypeSpecifier",
@@ -1510,7 +1636,7 @@
                            }
                         },
                         "valuesetExpression" : {
-                           "locator" : "139:123-139:126",
+                           "locator" : "140:123-140:126",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "vset",
                            "type" : "OperandRef",
@@ -1524,7 +1650,7 @@
                      "annotation" : [ ],
                      "signature" : [ ],
                      "operand" : {
-                        "locator" : "140:12-140:15",
+                        "locator" : "141:12-141:15",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null",
                         "annotation" : [ ]
@@ -1536,30 +1662,30 @@
                "name" : "observation",
                "annotation" : [ ],
                "operandTypeSpecifier" : {
-                  "locator" : "134:41-134:96",
+                  "locator" : "135:41-135:96",
                   "type" : "ChoiceTypeSpecifier",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
-                     "localId" : "500",
+                     "localId" : "521",
                      "type" : "ChoiceTypeSpecifier",
                      "choice" : [ {
-                        "localId" : "501",
+                        "localId" : "522",
                         "name" : "{http://hl7.org/fhir}Observation",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "localId" : "502",
+                        "localId" : "523",
                         "name" : "{http://hl7.org/fhir}Observation",
                         "type" : "NamedTypeSpecifier"
                      } ]
                   },
                   "choice" : [ {
-                     "locator" : "134:48-134:66",
+                     "locator" : "135:48-135:66",
                      "resultTypeName" : "{http://hl7.org/fhir}Observation",
                      "name" : "{http://hl7.org/fhir}Observation",
                      "type" : "NamedTypeSpecifier",
                      "annotation" : [ ]
                   }, {
-                     "locator" : "134:69-134:95",
+                     "locator" : "135:69-135:95",
                      "resultTypeName" : "{http://hl7.org/fhir}Observation",
                      "name" : "{http://hl7.org/fhir}Observation",
                      "type" : "NamedTypeSpecifier",
@@ -1570,7 +1696,7 @@
                "name" : "vset",
                "annotation" : [ ],
                "operandTypeSpecifier" : {
-                  "locator" : "134:104-134:111",
+                  "locator" : "135:104-135:111",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier",
@@ -1578,7 +1704,7 @@
                }
             } ]
          }, {
-            "locator" : "114:1-116:82",
+            "locator" : "115:1-117:82",
             "name" : "Clinical Skin Exams With Pressure Injury",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1593,7 +1719,7 @@
                }
             },
             "expression" : {
-               "locator" : "115:3-116:82",
+               "locator" : "116:3-117:82",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -1606,7 +1732,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "115:3-115:77",
+                  "locator" : "116:3-116:77",
                   "alias" : "ClinicalSkinExam",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -1619,7 +1745,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "115:3-115:60",
+                     "locator" : "116:3-116:60",
                      "dataType" : "{http://hl7.org/fhir}Observation",
                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result",
                      "codeProperty" : "code",
@@ -1640,7 +1766,7 @@
                         "annotation" : [ ],
                         "signature" : [ ],
                         "operand" : {
-                           "locator" : "115:33-115:59",
+                           "locator" : "116:33-116:59",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                            "name" : "Physical findings of Skin",
                            "type" : "CodeRef",
@@ -1656,7 +1782,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "116:5-116:82",
+                  "locator" : "117:5-117:82",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "isIn",
                   "type" : "FunctionRef",
@@ -1683,7 +1809,7 @@
                      "annotation" : [ ],
                      "signature" : [ ],
                      "operand" : {
-                        "locator" : "116:11-116:26",
+                        "locator" : "117:11-117:26",
                         "resultTypeName" : "{http://hl7.org/fhir}Observation",
                         "name" : "ClinicalSkinExam",
                         "type" : "AliasRef",
@@ -1703,7 +1829,7 @@
                         } ]
                      }
                   }, {
-                     "locator" : "116:35-116:80",
+                     "locator" : "117:35-117:80",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Pressure Injury Stage 2, 3, 4 or Unstageable",
                      "preserve" : true,
@@ -1713,7 +1839,7 @@
                }
             }
          }, {
-            "locator" : "118:1-120:77",
+            "locator" : "119:1-121:77",
             "name" : "Simple Skin Exams With Pressure Injury",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1728,7 +1854,7 @@
                }
             },
             "expression" : {
-               "locator" : "119:3-120:77",
+               "locator" : "120:3-121:77",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -1741,7 +1867,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "119:3-119:64",
+                  "locator" : "120:3-120:64",
                   "alias" : "ObsSkinExam",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -1754,7 +1880,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "119:3-119:52",
+                     "locator" : "120:3-120:52",
                      "dataType" : "{http://hl7.org/fhir}Observation",
                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation",
                      "codeProperty" : "code",
@@ -1775,7 +1901,7 @@
                         "annotation" : [ ],
                         "signature" : [ ],
                         "operand" : {
-                           "locator" : "119:25-119:51",
+                           "locator" : "120:25-120:51",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                            "name" : "Physical findings of Skin",
                            "type" : "CodeRef",
@@ -1791,7 +1917,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "120:5-120:77",
+                  "locator" : "121:5-121:77",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "isIn",
                   "type" : "FunctionRef",
@@ -1818,7 +1944,7 @@
                      "annotation" : [ ],
                      "signature" : [ ],
                      "operand" : {
-                        "locator" : "120:11-120:21",
+                        "locator" : "121:11-121:21",
                         "resultTypeName" : "{http://hl7.org/fhir}Observation",
                         "name" : "ObsSkinExam",
                         "type" : "AliasRef",
@@ -1838,7 +1964,7 @@
                         } ]
                      }
                   }, {
-                     "locator" : "120:30-120:75",
+                     "locator" : "121:30-121:75",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Pressure Injury Stage 2, 3, 4 or Unstageable",
                      "preserve" : true,
@@ -1848,7 +1974,7 @@
                }
             }
          }, {
-            "locator" : "125:1-127:50",
+            "locator" : "126:1-128:50",
             "name" : "Skin Exams With Pressure Injury",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1871,7 +1997,7 @@
                }
             },
             "expression" : {
-               "locator" : "126:3-127:50",
+               "locator" : "127:3-128:50",
                "type" : "Union",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -1929,7 +2055,7 @@
                   "annotation" : [ ],
                   "signature" : [ ],
                   "operand" : {
-                     "locator" : "126:3-126:44",
+                     "locator" : "127:3-127:44",
                      "name" : "Clinical Skin Exams With Pressure Injury",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -1965,7 +2091,7 @@
                   "annotation" : [ ],
                   "signature" : [ ],
                   "operand" : {
-                     "locator" : "127:11-127:50",
+                     "locator" : "128:11-128:50",
                      "name" : "Simple Skin Exams With Pressure Injury",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -1999,7 +2125,7 @@
                } ]
             }
          }, {
-            "locator" : "78:1-82:147",
+            "locator" : "79:1-83:147",
             "name" : "Encounter With Deep Tissue Pressure Injury POA By Skin Exam Within First 72 Hours",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2014,7 +2140,7 @@
                }
             },
             "expression" : {
-               "locator" : "79:3-82:147",
+               "locator" : "80:3-83:147",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -2027,7 +2153,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "79:3-79:60",
+                  "locator" : "80:3-80:60",
                   "alias" : "InpatientHospitalization",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -2040,7 +2166,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "79:3-79:35",
+                     "locator" : "80:3-80:35",
                      "name" : "Encounter With Age 18 And Older",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -2056,7 +2182,7 @@
                   }
                } ],
                "let" : [ {
-                  "locator" : "80:9-80:90",
+                  "locator" : "81:9-81:90",
                   "identifier" : "hospitalizationPeriod",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -2069,7 +2195,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "80:32-80:90",
+                     "locator" : "81:32-81:90",
                      "name" : "hospitalizationWithObservation",
                      "libraryName" : "CQMCommon",
                      "type" : "FunctionRef",
@@ -2089,7 +2215,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "80:32-80:55",
+                        "locator" : "81:32-81:55",
                         "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                         "name" : "InpatientHospitalization",
                         "type" : "AliasRef",
@@ -2098,7 +2224,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "81:5-82:147",
+                  "locator" : "82:5-83:147",
                   "alias" : "SkinExam",
                   "type" : "With",
                   "annotation" : [ ],
@@ -2120,7 +2246,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "81:10-81:42",
+                     "locator" : "82:10-82:42",
                      "name" : "Skin Exams With Pressure Injury",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -2143,7 +2269,7 @@
                      }
                   },
                   "suchThat" : {
-                     "locator" : "82:17-82:147",
+                     "locator" : "83:17-83:147",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "annotation" : [ ],
@@ -2161,7 +2287,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "82:51-82:56",
+                        "locator" : "83:51-83:56",
                         "type" : "Start",
                         "annotation" : [ ],
                         "signature" : [ {
@@ -2174,7 +2300,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "82:17-82:49",
+                           "locator" : "83:17-83:49",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -2222,7 +2348,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "82:17-82:34",
+                              "locator" : "83:17-83:34",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -2262,7 +2388,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "82:65-82:147",
+                        "locator" : "83:65-83:147",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -2277,7 +2403,7 @@
                            }
                         },
                         "low" : {
-                           "locator" : "82:74-82:103",
+                           "locator" : "83:74-83:103",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
                            "annotation" : [ ],
@@ -2291,7 +2417,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "82:83-82:103",
+                              "locator" : "83:83-83:103",
                               "name" : "hospitalizationPeriod",
                               "type" : "QueryLetRef",
                               "annotation" : [ ],
@@ -2307,7 +2433,7 @@
                            }
                         },
                         "high" : {
-                           "locator" : "82:106-82:146",
+                           "locator" : "83:106-83:146",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Add",
                            "annotation" : [ ],
@@ -2321,7 +2447,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "82:106-82:135",
+                              "locator" : "83:106-83:135",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Start",
                               "annotation" : [ ],
@@ -2335,7 +2461,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "82:115-82:135",
+                                 "locator" : "83:115-83:135",
                                  "name" : "hospitalizationPeriod",
                                  "type" : "QueryLetRef",
                                  "annotation" : [ ],
@@ -2350,7 +2476,7 @@
                                  }
                               }
                            }, {
-                              "locator" : "82:139-82:146",
+                              "locator" : "83:139-83:146",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 72,
                               "unit" : "hours",
@@ -2363,7 +2489,7 @@
                } ]
             }
          }, {
-            "locator" : "58:1-60:93",
+            "locator" : "59:1-61:93",
             "name" : "Encounter With Deep Tissue Pressure Injury POA By Indicator Or Skin Exam Within First 72 Hours",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2378,7 +2504,7 @@
                }
             },
             "expression" : {
-               "locator" : "59:3-60:93",
+               "locator" : "60:3-61:93",
                "type" : "Union",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -2408,7 +2534,7 @@
                   }
                } ],
                "operand" : [ {
-                  "locator" : "59:3-59:63",
+                  "locator" : "60:3-60:63",
                   "name" : "Encounter With Deep Tissue Pressure Injury POA By Indicator",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -2422,7 +2548,7 @@
                      }
                   }
                }, {
-                  "locator" : "60:11-60:93",
+                  "locator" : "61:11-61:93",
                   "name" : "Encounter With Deep Tissue Pressure Injury POA By Skin Exam Within First 72 Hours",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -2438,7 +2564,7 @@
                } ]
             }
          }, {
-            "locator" : "84:1-86:177",
+            "locator" : "85:1-87:177",
             "name" : "Encounter With Stage 2, 3, 4, Or Unstageable Pressure Injury Present On Admission By POA Indicator",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2453,7 +2579,7 @@
                }
             },
             "expression" : {
-               "locator" : "85:3-86:177",
+               "locator" : "86:3-87:177",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -2466,7 +2592,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "85:3-85:60",
+                  "locator" : "86:3-86:60",
                   "alias" : "InpatientHospitalization",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -2479,7 +2605,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "85:3-85:35",
+                     "locator" : "86:3-86:35",
                      "name" : "Encounter With Age 18 And Older",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -2497,7 +2623,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "86:5-86:177",
+                  "locator" : "87:5-87:177",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "isDiagnosisPresentOnAdmission",
                   "libraryName" : "CQMCommon",
@@ -2517,20 +2643,20 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "86:11-86:34",
+                     "locator" : "87:11-87:34",
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                      "name" : "InpatientHospitalization",
                      "type" : "AliasRef",
                      "annotation" : [ ]
                   }, {
-                     "locator" : "86:68-86:124",
+                     "locator" : "87:68-87:124",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Pressure Injury Stage 2, 3, 4, or Unstageable Diagnoses",
                      "preserve" : true,
                      "type" : "ValueSetRef",
                      "annotation" : [ ]
                   }, {
-                     "locator" : "86:127-86:175",
+                     "locator" : "87:127-87:175",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Present on Admission or Clinically Undetermined",
                      "preserve" : true,
@@ -2540,7 +2666,7 @@
                }
             }
          }, {
-            "locator" : "88:1-92:147",
+            "locator" : "89:1-93:147",
             "name" : "Encounter With Stage 2, 3, 4 Or Unstageable Pressure Injury POA By Skin Exam Within 24 Hours",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2555,7 +2681,7 @@
                }
             },
             "expression" : {
-               "locator" : "89:3-92:147",
+               "locator" : "90:3-93:147",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -2568,7 +2694,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "89:3-89:60",
+                  "locator" : "90:3-90:60",
                   "alias" : "InpatientHospitalization",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -2581,7 +2707,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "89:3-89:35",
+                     "locator" : "90:3-90:35",
                      "name" : "Encounter With Age 18 And Older",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -2597,7 +2723,7 @@
                   }
                } ],
                "let" : [ {
-                  "locator" : "90:9-90:90",
+                  "locator" : "91:9-91:90",
                   "identifier" : "hospitalizationPeriod",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -2610,7 +2736,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "90:32-90:90",
+                     "locator" : "91:32-91:90",
                      "name" : "hospitalizationWithObservation",
                      "libraryName" : "CQMCommon",
                      "type" : "FunctionRef",
@@ -2630,7 +2756,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "90:32-90:55",
+                        "locator" : "91:32-91:55",
                         "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                         "name" : "InpatientHospitalization",
                         "type" : "AliasRef",
@@ -2639,7 +2765,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "91:5-92:147",
+                  "locator" : "92:5-93:147",
                   "alias" : "SkinExam",
                   "type" : "With",
                   "annotation" : [ ],
@@ -2661,7 +2787,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "91:10-91:42",
+                     "locator" : "92:10-92:42",
                      "name" : "Skin Exams With Pressure Injury",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -2684,7 +2810,7 @@
                      }
                   },
                   "suchThat" : {
-                     "locator" : "92:17-92:147",
+                     "locator" : "93:17-93:147",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "annotation" : [ ],
@@ -2702,7 +2828,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "92:51-92:56",
+                        "locator" : "93:51-93:56",
                         "type" : "Start",
                         "annotation" : [ ],
                         "signature" : [ {
@@ -2715,7 +2841,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "92:17-92:49",
+                           "locator" : "93:17-93:49",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -2763,7 +2889,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "92:17-92:34",
+                              "locator" : "93:17-93:34",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -2803,7 +2929,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "92:65-92:147",
+                        "locator" : "93:65-93:147",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -2818,7 +2944,7 @@
                            }
                         },
                         "low" : {
-                           "locator" : "92:74-92:103",
+                           "locator" : "93:74-93:103",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
                            "annotation" : [ ],
@@ -2832,7 +2958,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "92:83-92:103",
+                              "locator" : "93:83-93:103",
                               "name" : "hospitalizationPeriod",
                               "type" : "QueryLetRef",
                               "annotation" : [ ],
@@ -2848,7 +2974,7 @@
                            }
                         },
                         "high" : {
-                           "locator" : "92:106-92:146",
+                           "locator" : "93:106-93:146",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Add",
                            "annotation" : [ ],
@@ -2862,7 +2988,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "92:106-92:135",
+                              "locator" : "93:106-93:135",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Start",
                               "annotation" : [ ],
@@ -2876,7 +3002,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "92:115-92:135",
+                                 "locator" : "93:115-93:135",
                                  "name" : "hospitalizationPeriod",
                                  "type" : "QueryLetRef",
                                  "annotation" : [ ],
@@ -2891,7 +3017,7 @@
                                  }
                               }
                            }, {
-                              "locator" : "92:139-92:146",
+                              "locator" : "93:139-93:146",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 24,
                               "unit" : "hours",
@@ -2904,7 +3030,7 @@
                } ]
             }
          }, {
-            "locator" : "62:1-64:104",
+            "locator" : "63:1-65:104",
             "name" : "Encounter With Stage 2, 3, 4 Or Unstageable Pressure Injury POA",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2919,7 +3045,7 @@
                }
             },
             "expression" : {
-               "locator" : "63:3-64:104",
+               "locator" : "64:3-65:104",
                "type" : "Union",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -2949,7 +3075,7 @@
                   }
                } ],
                "operand" : [ {
-                  "locator" : "63:3-63:102",
+                  "locator" : "64:3-64:102",
                   "name" : "Encounter With Stage 2, 3, 4, Or Unstageable Pressure Injury Present On Admission By POA Indicator",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -2963,7 +3089,7 @@
                      }
                   }
                }, {
-                  "locator" : "64:11-64:104",
+                  "locator" : "65:11-65:104",
                   "name" : "Encounter With Stage 2, 3, 4 Or Unstageable Pressure Injury POA By Skin Exam Within 24 Hours",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -2979,7 +3105,7 @@
                } ]
             }
          }, {
-            "locator" : "44:1-46:75",
+            "locator" : "45:1-47:75",
             "name" : "Denominator Exclusions",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2994,7 +3120,7 @@
                }
             },
             "expression" : {
-               "locator" : "45:3-46:75",
+               "locator" : "46:3-47:75",
                "type" : "Union",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -3024,7 +3150,7 @@
                   }
                } ],
                "operand" : [ {
-                  "locator" : "45:3-45:98",
+                  "locator" : "46:3-46:98",
                   "name" : "Encounter With Deep Tissue Pressure Injury POA By Indicator Or Skin Exam Within First 72 Hours",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -3038,7 +3164,7 @@
                      }
                   }
                }, {
-                  "locator" : "46:11-46:75",
+                  "locator" : "47:11-47:75",
                   "name" : "Encounter With Stage 2, 3, 4 Or Unstageable Pressure Injury POA",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -3054,7 +3180,7 @@
                } ]
             }
          }, {
-            "locator" : "94:1-96:179",
+            "locator" : "95:1-97:179",
             "name" : "Encounter With New Deep Tissue Pressure Injury Not POA By Indicator",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3069,7 +3195,7 @@
                }
             },
             "expression" : {
-               "locator" : "95:3-96:179",
+               "locator" : "96:3-97:179",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -3082,7 +3208,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "95:3-95:60",
+                  "locator" : "96:3-96:60",
                   "alias" : "InpatientHospitalization",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3095,7 +3221,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "95:3-95:35",
+                     "locator" : "96:3-96:35",
                      "name" : "Encounter With Age 18 And Older",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -3113,7 +3239,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "96:5-96:179",
+                  "locator" : "97:5-97:179",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "isDiagnosisPresentOnAdmission",
                   "libraryName" : "CQMCommon",
@@ -3133,20 +3259,20 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "96:11-96:34",
+                     "locator" : "97:11-97:34",
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                      "name" : "InpatientHospitalization",
                      "type" : "AliasRef",
                      "annotation" : [ ]
                   }, {
-                     "locator" : "96:68-96:106",
+                     "locator" : "97:68-97:106",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Pressure Injury Deep Tissue Diagnoses",
                      "preserve" : true,
                      "type" : "ValueSetRef",
                      "annotation" : [ ]
                   }, {
-                     "locator" : "96:109-96:177",
+                     "locator" : "97:109-97:177",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Not Present On Admission or Documentation Insufficient to Determine",
                      "preserve" : true,
@@ -3156,7 +3282,7 @@
                }
             }
          }, {
-            "locator" : "98:1-102:145",
+            "locator" : "99:1-103:145",
             "name" : "Encounter With New Deep Tissue Pressure Injury By Skin Exam After First 72 Hours",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3171,7 +3297,7 @@
                }
             },
             "expression" : {
-               "locator" : "99:3-102:145",
+               "locator" : "100:3-103:145",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -3184,7 +3310,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "99:3-99:60",
+                  "locator" : "100:3-100:60",
                   "alias" : "InpatientHospitalization",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3197,7 +3323,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "99:3-99:35",
+                     "locator" : "100:3-100:35",
                      "name" : "Encounter With Age 18 And Older",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -3213,7 +3339,7 @@
                   }
                } ],
                "let" : [ {
-                  "locator" : "100:9-100:90",
+                  "locator" : "101:9-101:90",
                   "identifier" : "hospitalizationPeriod",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3226,7 +3352,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "100:32-100:90",
+                     "locator" : "101:32-101:90",
                      "name" : "hospitalizationWithObservation",
                      "libraryName" : "CQMCommon",
                      "type" : "FunctionRef",
@@ -3246,7 +3372,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "100:32-100:55",
+                        "locator" : "101:32-101:55",
                         "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                         "name" : "InpatientHospitalization",
                         "type" : "AliasRef",
@@ -3255,7 +3381,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "101:5-102:145",
+                  "locator" : "102:5-103:145",
                   "alias" : "SkinExam",
                   "type" : "With",
                   "annotation" : [ ],
@@ -3277,7 +3403,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "101:10-101:42",
+                     "locator" : "102:10-102:42",
                      "name" : "Skin Exams With Pressure Injury",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -3300,7 +3426,7 @@
                      }
                   },
                   "suchThat" : {
-                     "locator" : "102:17-102:145",
+                     "locator" : "103:17-103:145",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "annotation" : [ ],
@@ -3318,7 +3444,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "102:51-102:56",
+                        "locator" : "103:51-103:56",
                         "type" : "Start",
                         "annotation" : [ ],
                         "signature" : [ {
@@ -3331,7 +3457,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "102:17-102:49",
+                           "locator" : "103:17-103:49",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -3379,7 +3505,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "102:17-102:34",
+                              "locator" : "103:17-103:34",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -3419,7 +3545,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "102:65-102:145",
+                        "locator" : "103:65-103:145",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -3434,7 +3560,7 @@
                            }
                         },
                         "low" : {
-                           "locator" : "102:74-102:114",
+                           "locator" : "103:74-103:114",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Add",
                            "annotation" : [ ],
@@ -3448,7 +3574,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "102:74-102:103",
+                              "locator" : "103:74-103:103",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Start",
                               "annotation" : [ ],
@@ -3462,7 +3588,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "102:83-102:103",
+                                 "locator" : "103:83-103:103",
                                  "name" : "hospitalizationPeriod",
                                  "type" : "QueryLetRef",
                                  "annotation" : [ ],
@@ -3477,7 +3603,7 @@
                                  }
                               }
                            }, {
-                              "locator" : "102:107-102:114",
+                              "locator" : "103:107-103:114",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 72,
                               "unit" : "hours",
@@ -3486,7 +3612,7 @@
                            } ]
                         },
                         "high" : {
-                           "locator" : "102:117-102:144",
+                           "locator" : "103:117-103:144",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
                            "annotation" : [ ],
@@ -3500,7 +3626,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "102:124-102:144",
+                              "locator" : "103:124-103:144",
                               "name" : "hospitalizationPeriod",
                               "type" : "QueryLetRef",
                               "annotation" : [ ],
@@ -3520,7 +3646,7 @@
                } ]
             }
          }, {
-            "locator" : "66:1-68:92",
+            "locator" : "67:1-69:92",
             "name" : "Encounter With New Deep Tissue Pressure Injury",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3535,7 +3661,7 @@
                }
             },
             "expression" : {
-               "locator" : "67:3-68:92",
+               "locator" : "68:3-69:92",
                "type" : "Union",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -3565,7 +3691,7 @@
                   }
                } ],
                "operand" : [ {
-                  "locator" : "67:3-67:71",
+                  "locator" : "68:3-68:71",
                   "name" : "Encounter With New Deep Tissue Pressure Injury Not POA By Indicator",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -3579,7 +3705,7 @@
                      }
                   }
                }, {
-                  "locator" : "68:11-68:92",
+                  "locator" : "69:11-69:92",
                   "name" : "Encounter With New Deep Tissue Pressure Injury By Skin Exam After First 72 Hours",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -3595,7 +3721,7 @@
                } ]
             }
          }, {
-            "locator" : "104:1-106:197",
+            "locator" : "105:1-107:197",
             "name" : "Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury Not POA By Indicator",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3610,7 +3736,7 @@
                }
             },
             "expression" : {
-               "locator" : "105:3-106:197",
+               "locator" : "106:3-107:197",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -3623,7 +3749,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "105:3-105:60",
+                  "locator" : "106:3-106:60",
                   "alias" : "InpatientHospitalization",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3636,7 +3762,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "105:3-105:35",
+                     "locator" : "106:3-106:35",
                      "name" : "Encounter With Age 18 And Older",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -3654,7 +3780,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "106:5-106:197",
+                  "locator" : "107:5-107:197",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "isDiagnosisPresentOnAdmission",
                   "libraryName" : "CQMCommon",
@@ -3674,20 +3800,20 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "106:11-106:34",
+                     "locator" : "107:11-107:34",
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                      "name" : "InpatientHospitalization",
                      "type" : "AliasRef",
                      "annotation" : [ ]
                   }, {
-                     "locator" : "106:68-106:124",
+                     "locator" : "107:68-107:124",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Pressure Injury Stage 2, 3, 4, or Unstageable Diagnoses",
                      "preserve" : true,
                      "type" : "ValueSetRef",
                      "annotation" : [ ]
                   }, {
-                     "locator" : "106:127-106:195",
+                     "locator" : "107:127-107:195",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Not Present On Admission or Documentation Insufficient to Determine",
                      "preserve" : true,
@@ -3697,7 +3823,7 @@
                }
             }
          }, {
-            "locator" : "108:1-112:145",
+            "locator" : "109:1-113:145",
             "name" : "Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury By Skin Exam After First 24 Hours",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3712,7 +3838,7 @@
                }
             },
             "expression" : {
-               "locator" : "109:3-112:145",
+               "locator" : "110:3-113:145",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -3725,7 +3851,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "109:3-109:60",
+                  "locator" : "110:3-110:60",
                   "alias" : "InpatientHospitalization",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3738,7 +3864,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "109:3-109:35",
+                     "locator" : "110:3-110:35",
                      "name" : "Encounter With Age 18 And Older",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -3754,7 +3880,7 @@
                   }
                } ],
                "let" : [ {
-                  "locator" : "110:9-110:90",
+                  "locator" : "111:9-111:90",
                   "identifier" : "hospitalizationPeriod",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3767,7 +3893,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "110:32-110:90",
+                     "locator" : "111:32-111:90",
                      "name" : "hospitalizationWithObservation",
                      "libraryName" : "CQMCommon",
                      "type" : "FunctionRef",
@@ -3787,7 +3913,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "110:32-110:55",
+                        "locator" : "111:32-111:55",
                         "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                         "name" : "InpatientHospitalization",
                         "type" : "AliasRef",
@@ -3796,7 +3922,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "111:5-112:145",
+                  "locator" : "112:5-113:145",
                   "alias" : "SkinExam",
                   "type" : "With",
                   "annotation" : [ ],
@@ -3818,7 +3944,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "111:10-111:42",
+                     "locator" : "112:10-112:42",
                      "name" : "Skin Exams With Pressure Injury",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -3841,7 +3967,7 @@
                      }
                   },
                   "suchThat" : {
-                     "locator" : "112:17-112:145",
+                     "locator" : "113:17-113:145",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "annotation" : [ ],
@@ -3859,7 +3985,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "112:51-112:56",
+                        "locator" : "113:51-113:56",
                         "type" : "Start",
                         "annotation" : [ ],
                         "signature" : [ {
@@ -3872,7 +3998,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "112:17-112:49",
+                           "locator" : "113:17-113:49",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -3920,7 +4046,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "112:17-112:34",
+                              "locator" : "113:17-113:34",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -3960,7 +4086,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "112:65-112:145",
+                        "locator" : "113:65-113:145",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -3975,7 +4101,7 @@
                            }
                         },
                         "low" : {
-                           "locator" : "112:74-112:114",
+                           "locator" : "113:74-113:114",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Add",
                            "annotation" : [ ],
@@ -3989,7 +4115,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "112:74-112:103",
+                              "locator" : "113:74-113:103",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Start",
                               "annotation" : [ ],
@@ -4003,7 +4129,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "112:83-112:103",
+                                 "locator" : "113:83-113:103",
                                  "name" : "hospitalizationPeriod",
                                  "type" : "QueryLetRef",
                                  "annotation" : [ ],
@@ -4018,7 +4144,7 @@
                                  }
                               }
                            }, {
-                              "locator" : "112:107-112:114",
+                              "locator" : "113:107-113:114",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 24,
                               "unit" : "hours",
@@ -4027,7 +4153,7 @@
                            } ]
                         },
                         "high" : {
-                           "locator" : "112:117-112:144",
+                           "locator" : "113:117-113:144",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
                            "annotation" : [ ],
@@ -4041,7 +4167,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "112:124-112:144",
+                              "locator" : "113:124-113:144",
                               "name" : "hospitalizationPeriod",
                               "type" : "QueryLetRef",
                               "annotation" : [ ],
@@ -4061,7 +4187,7 @@
                } ]
             }
          }, {
-            "locator" : "70:1-72:109",
+            "locator" : "71:1-73:109",
             "name" : "Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4076,7 +4202,7 @@
                }
             },
             "expression" : {
-               "locator" : "71:3-72:109",
+               "locator" : "72:3-73:109",
                "type" : "Union",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -4106,7 +4232,7 @@
                   }
                } ],
                "operand" : [ {
-                  "locator" : "71:3-71:88",
+                  "locator" : "72:3-72:88",
                   "name" : "Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury Not POA By Indicator",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -4120,7 +4246,7 @@
                      }
                   }
                }, {
-                  "locator" : "72:11-72:109",
+                  "locator" : "73:11-73:109",
                   "name" : "Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury By Skin Exam After First 24 Hours",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -4136,7 +4262,7 @@
                } ]
             }
          }, {
-            "locator" : "48:1-50:75",
+            "locator" : "49:1-51:75",
             "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4151,7 +4277,7 @@
                }
             },
             "expression" : {
-               "locator" : "49:3-50:75",
+               "locator" : "50:3-51:75",
                "type" : "Union",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -4181,7 +4307,7 @@
                   }
                } ],
                "operand" : [ {
-                  "locator" : "49:3-49:50",
+                  "locator" : "50:3-50:50",
                   "name" : "Encounter With New Deep Tissue Pressure Injury",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
@@ -4195,7 +4321,7 @@
                      }
                   }
                }, {
-                  "locator" : "50:11-50:75",
+                  "locator" : "51:11-51:75",
                   "name" : "Encounter With New Stage 2, 3, 4 Or Unstageable Pressure Injury",
                   "type" : "ExpressionRef",
                   "annotation" : [ ],
