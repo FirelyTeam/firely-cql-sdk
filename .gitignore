@@ -417,3 +417,4 @@ global.json
 # remove lock files and directories
 *.lock
 *.lock.d/
+LibrarySets/Demo/ElmOut/

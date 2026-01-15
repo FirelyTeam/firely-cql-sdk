@@ -79,7 +79,7 @@
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "28:1-28:49",
+            "locator" : "28:1-29:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "annotation" : [ ],
@@ -92,15 +92,141 @@
                   "annotation" : [ ]
                }
             },
+            "default" : {
+               "locator" : "29:11-29:72",
+               "lowClosed" : true,
+               "highClosed" : false,
+               "type" : "Interval",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "annotation" : [ ],
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "low" : {
+                  "locator" : "29:20-29:44",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2026",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  }
+               },
+               "high" : {
+                  "locator" : "29:47-29:71",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2027",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  }
+               }
+            },
             "parameterTypeSpecifier" : {
                "locator" : "28:32-28:49",
                "type" : "IntervalTypeSpecifier",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
-                  "localId" : "251",
+                  "localId" : "272",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "252",
+                     "localId" : "273",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -225,14 +351,14 @@
       },
       "contexts" : {
          "def" : [ {
-            "locator" : "30:1-30:15",
+            "locator" : "31:1-31:15",
             "name" : "Patient",
             "annotation" : [ ]
          } ]
       },
       "statements" : {
          "def" : [ {
-            "locator" : "30:1-30:15",
+            "locator" : "31:1-31:15",
             "name" : "Patient",
             "context" : "Patient",
             "annotation" : [ ],
@@ -241,7 +367,7 @@
                "annotation" : [ ],
                "signature" : [ ],
                "operand" : {
-                  "locator" : "30:1-30:15",
+                  "locator" : "31:1-31:15",
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
                   "type" : "Retrieve",
@@ -253,14 +379,14 @@
                }
             }
          }, {
-            "locator" : "32:1-37:64",
+            "locator" : "33:1-38:64",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Initial Population",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "33:3-37:64",
+               "locator" : "34:3-38:64",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "annotation" : [ ],
@@ -274,7 +400,7 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "33:3-36:33",
+                  "locator" : "34:3-37:33",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "annotation" : [ ],
@@ -288,7 +414,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "33:3-35:23",
+                     "locator" : "34:3-36:23",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "annotation" : [ ],
@@ -306,7 +432,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "33:3-35:3",
+                        "locator" : "34:3-36:3",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "precision" : "Year",
                         "type" : "CalculateAgeAt",
@@ -335,7 +461,7 @@
                               }
                            }
                         }, {
-                           "locator" : "33:16-34:31",
+                           "locator" : "34:16-35:31",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                            "type" : "DateFrom",
                            "annotation" : [ ],
@@ -345,7 +471,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : {
-                              "locator" : "34:5-34:31",
+                              "locator" : "35:5-35:31",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "End",
                               "annotation" : [ ],
@@ -359,7 +485,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "34:12-34:31",
+                                 "locator" : "35:12-35:31",
                                  "name" : "Measurement Period",
                                  "type" : "ParameterRef",
                                  "annotation" : [ ],
@@ -376,7 +502,7 @@
                            }
                         } ]
                      }, {
-                        "locator" : "35:8-35:23",
+                        "locator" : "36:8-36:23",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -391,7 +517,7 @@
                            }
                         },
                         "low" : {
-                           "locator" : "35:17-35:18",
+                           "locator" : "36:17-36:18",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "42",
@@ -399,7 +525,7 @@
                            "annotation" : [ ]
                         },
                         "high" : {
-                           "locator" : "35:21-35:22",
+                           "locator" : "36:21-36:22",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "74",
@@ -408,7 +534,7 @@
                         }
                      } ]
                   }, {
-                     "locator" : "36:9-36:33",
+                     "locator" : "37:9-37:33",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
                      "annotation" : [ ],
@@ -422,7 +548,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "36:9-36:19",
+                        "locator" : "37:9-37:19",
                         "resultTypeName" : "{http://hl7.org/fhir}USCoreSexExtension",
                         "type" : "SingletonFrom",
                         "annotation" : [ ],
@@ -438,7 +564,7 @@
                                  "type" : "Property",
                                  "annotation" : [ ],
                                  "source" : {
-                                    "locator" : "36:9-36:15",
+                                    "locator" : "37:9-37:15",
                                     "resultTypeName" : "{http://hl7.org/fhir}Patient",
                                     "name" : "Patient",
                                     "type" : "ExpressionRef",
@@ -491,7 +617,7 @@
                            }
                         }
                      }, {
-                        "locator" : "36:23-36:33",
+                        "locator" : "37:23-37:33",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "248152002",
@@ -500,7 +626,7 @@
                      } ]
                   } ]
                }, {
-                  "locator" : "37:9-37:64",
+                  "locator" : "38:9-38:64",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "annotation" : [ ],
@@ -514,7 +640,7 @@
                      }
                   } ],
                   "operand" : {
-                     "locator" : "37:16-37:64",
+                     "locator" : "38:16-38:64",
                      "name" : "Qualifying Encounters",
                      "libraryName" : "AdultOutpatientEncounters",
                      "type" : "ExpressionRef",
@@ -532,21 +658,21 @@
                } ]
             }
          }, {
-            "locator" : "39:1-40:22",
+            "locator" : "40:1-41:22",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "40:3-40:22",
+               "locator" : "41:3-41:22",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "Initial Population",
                "type" : "ExpressionRef",
                "annotation" : [ ]
             }
          }, {
-            "locator" : "57:1-66:96",
+            "locator" : "58:1-67:96",
             "name" : "Right Mastectomy Diagnosis",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -569,7 +695,7 @@
                }
             },
             "expression" : {
-               "locator" : "58:3-66:96",
+               "locator" : "59:3-67:96",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -590,7 +716,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "58:3-65:34",
+                  "locator" : "59:3-66:34",
                   "alias" : "RightMastectomy",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -611,7 +737,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "58:3-65:18",
+                     "locator" : "59:3-66:18",
                      "name" : "verified",
                      "libraryName" : "Status",
                      "type" : "FunctionRef",
@@ -651,7 +777,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "58:5-65:3",
+                        "locator" : "59:5-66:3",
                         "type" : "Union",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -705,7 +831,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "58:7-59:104",
+                           "locator" : "59:7-60:104",
                            "type" : "Query",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -726,7 +852,7 @@
                               }
                            },
                            "source" : [ {
-                              "locator" : "58:7-59:104",
+                              "locator" : "59:7-60:104",
                               "alias" : "RightMastectomyProcedure",
                               "annotation" : [ ],
                               "resultTypeSpecifier" : {
@@ -747,7 +873,7 @@
                                  }
                               },
                               "expression" : {
-                                 "locator" : "58:7-59:79",
+                                 "locator" : "59:7-60:79",
                                  "type" : "Union",
                                  "annotation" : [ ],
                                  "resultTypeSpecifier" : {
@@ -805,7 +931,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "58:9-58:69",
+                                       "locator" : "59:9-59:69",
                                        "dataType" : "{http://hl7.org/fhir}Condition",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis",
                                        "codeProperty" : "code",
@@ -822,7 +948,7 @@
                                           }
                                        },
                                        "codes" : {
-                                          "locator" : "58:39-58:68",
+                                          "locator" : "59:39-59:68",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Status Post Right Mastectomy",
                                           "preserve" : true,
@@ -856,7 +982,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "59:13-59:77",
+                                       "locator" : "60:13-60:77",
                                        "dataType" : "{http://hl7.org/fhir}Condition",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns",
                                        "codeProperty" : "code",
@@ -873,7 +999,7 @@
                                           }
                                        },
                                        "codes" : {
-                                          "locator" : "59:47-59:76",
+                                          "locator" : "60:47-60:76",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Status Post Right Mastectomy",
                                           "preserve" : true,
@@ -908,7 +1034,7 @@
                            "let" : [ ],
                            "relationship" : [ ]
                         }, {
-                           "locator" : "60:13-64:7",
+                           "locator" : "61:13-65:7",
                            "type" : "Query",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -929,7 +1055,7 @@
                               }
                            },
                            "source" : [ {
-                              "locator" : "60:15-61:130",
+                              "locator" : "61:15-62:130",
                               "alias" : "UnilateralMastectomyDiagnosis",
                               "annotation" : [ ],
                               "resultTypeSpecifier" : {
@@ -950,7 +1076,7 @@
                                  }
                               },
                               "expression" : {
-                                 "locator" : "60:15-61:100",
+                                 "locator" : "61:15-62:100",
                                  "type" : "Union",
                                  "annotation" : [ ],
                                  "resultTypeSpecifier" : {
@@ -1008,7 +1134,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "60:17-60:94",
+                                       "locator" : "61:17-61:94",
                                        "dataType" : "{http://hl7.org/fhir}Condition",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis",
                                        "codeProperty" : "code",
@@ -1025,7 +1151,7 @@
                                           }
                                        },
                                        "codes" : {
-                                          "locator" : "60:47-60:93",
+                                          "locator" : "61:47-61:93",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Unilateral Mastectomy, Unspecified Laterality",
                                           "preserve" : true,
@@ -1059,7 +1185,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "61:17-61:98",
+                                       "locator" : "62:17-62:98",
                                        "dataType" : "{http://hl7.org/fhir}Condition",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns",
                                        "codeProperty" : "code",
@@ -1076,7 +1202,7 @@
                                           }
                                        },
                                        "codes" : {
-                                          "locator" : "61:51-61:97",
+                                          "locator" : "62:51-62:97",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Unilateral Mastectomy, Unspecified Laterality",
                                           "preserve" : true,
@@ -1111,7 +1237,7 @@
                            "let" : [ ],
                            "relationship" : [ ],
                            "where" : {
-                              "locator" : "62:11-63:47",
+                              "locator" : "63:11-64:47",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Exists",
                               "annotation" : [ ],
@@ -1125,7 +1251,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "62:24-63:47",
+                                 "locator" : "63:24-64:47",
                                  "type" : "Query",
                                  "annotation" : [ ],
                                  "resultTypeSpecifier" : {
@@ -1138,7 +1264,7 @@
                                     }
                                  },
                                  "source" : [ {
-                                    "locator" : "62:24-62:63",
+                                    "locator" : "63:24-63:63",
                                     "alias" : "S",
                                     "annotation" : [ ],
                                     "resultTypeSpecifier" : {
@@ -1151,7 +1277,7 @@
                                        }
                                     },
                                     "expression" : {
-                                       "locator" : "62:24-62:61",
+                                       "locator" : "63:24-63:61",
                                        "type" : "Query",
                                        "annotation" : [ ],
                                        "resultTypeSpecifier" : {
@@ -1196,7 +1322,7 @@
                                  "let" : [ ],
                                  "relationship" : [ ],
                                  "where" : {
-                                    "locator" : "63:13-63:47",
+                                    "locator" : "64:13-64:47",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "annotation" : [ ],
@@ -1210,7 +1336,7 @@
                                        "annotation" : [ ]
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "63:19",
+                                       "locator" : "64:19",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "S",
                                        "type" : "AliasRef",
@@ -1224,7 +1350,7 @@
                                           "annotation" : [ ]
                                        } ],
                                        "operand" : {
-                                          "locator" : "63:23-63:47",
+                                          "locator" : "64:23-64:47",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "Right (qualifier value)",
                                           "type" : "CodeRef",
@@ -1241,7 +1367,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "66:5-66:96",
+                  "locator" : "67:5-67:96",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "SameOrBefore",
                   "annotation" : [ ],
@@ -1255,7 +1381,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "66:50-66:55",
+                     "locator" : "67:50-67:55",
                      "type" : "Start",
                      "annotation" : [ ],
                      "signature" : [ {
@@ -1268,7 +1394,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "66:11-66:48",
+                        "locator" : "67:11-67:48",
                         "name" : "prevalenceInterval",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
@@ -1296,7 +1422,7 @@
                            } ]
                         } ],
                         "operand" : [ {
-                           "locator" : "66:11-66:25",
+                           "locator" : "67:11-67:25",
                            "name" : "RightMastectomy",
                            "type" : "AliasRef",
                            "annotation" : [ ],
@@ -1316,7 +1442,7 @@
                         } ]
                      }
                   }, {
-                     "locator" : "66:70-66:96",
+                     "locator" : "67:70-67:96",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "End",
                      "annotation" : [ ],
@@ -1330,7 +1456,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "66:77-66:96",
+                        "locator" : "67:77-67:96",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -1348,7 +1474,7 @@
                }
             }
          }, {
-            "locator" : "68:1-70:115",
+            "locator" : "69:1-71:115",
             "name" : "Right Mastectomy Procedure",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1363,7 +1489,7 @@
                }
             },
             "expression" : {
-               "locator" : "69:3-70:115",
+               "locator" : "70:3-71:115",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -1376,7 +1502,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "69:3-69:112",
+                  "locator" : "70:3-70:112",
                   "alias" : "UnilateralMastectomyRightPerformed",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -1389,7 +1515,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "69:3-69:77",
+                     "locator" : "70:3-70:77",
                      "name" : "isProcedurePerformed",
                      "libraryName" : "Status",
                      "type" : "FunctionRef",
@@ -1413,7 +1539,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "69:5-69:50",
+                        "locator" : "70:5-70:50",
                         "dataType" : "{http://hl7.org/fhir}Procedure",
                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure",
                         "codeProperty" : "code",
@@ -1430,7 +1556,7 @@
                            }
                         },
                         "codes" : {
-                           "locator" : "69:19-69:47",
+                           "locator" : "70:19-70:47",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Unilateral Mastectomy Right",
                            "preserve" : true,
@@ -1447,7 +1573,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "70:5-70:115",
+                  "locator" : "71:5-71:115",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "SameOrBefore",
                   "annotation" : [ ],
@@ -1461,7 +1587,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "70:71-70:74",
+                     "locator" : "71:71-71:74",
                      "type" : "End",
                      "annotation" : [ ],
                      "signature" : [ {
@@ -1474,7 +1600,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "70:11-70:69",
+                        "locator" : "71:11-71:69",
                         "name" : "toInterval",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
@@ -1532,7 +1658,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "70:11-70:54",
+                                    "locator" : "71:11-71:54",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -1589,7 +1715,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "70:11-70:54",
+                                       "locator" : "71:11-71:54",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -1677,7 +1803,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "70:11-70:54",
+                                    "locator" : "71:11-71:54",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -1742,7 +1868,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "70:11-70:54",
+                                       "locator" : "71:11-71:54",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -1840,7 +1966,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "70:11-70:54",
+                                    "locator" : "71:11-71:54",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -1897,7 +2023,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "70:11-70:54",
+                                       "locator" : "71:11-71:54",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -1985,7 +2111,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "70:11-70:54",
+                                    "locator" : "71:11-71:54",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -2050,7 +2176,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "70:11-70:54",
+                                       "locator" : "71:11-71:54",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -2181,7 +2307,7 @@
                         } ]
                      }
                   }, {
-                     "locator" : "70:89-70:115",
+                     "locator" : "71:89-71:115",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "End",
                      "annotation" : [ ],
@@ -2195,7 +2321,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "70:96-70:115",
+                        "locator" : "71:96-71:115",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -2213,7 +2339,7 @@
                }
             }
          }, {
-            "locator" : "72:1-82:95",
+            "locator" : "73:1-83:95",
             "name" : "Left Mastectomy Diagnosis",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2236,7 +2362,7 @@
                }
             },
             "expression" : {
-               "locator" : "73:3-82:95",
+               "locator" : "74:3-83:95",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -2257,7 +2383,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "73:3-81:33",
+                  "locator" : "74:3-82:33",
                   "alias" : "LeftMastectomy",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -2278,7 +2404,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "73:3-81:18",
+                     "locator" : "74:3-82:18",
                      "name" : "verified",
                      "libraryName" : "Status",
                      "type" : "FunctionRef",
@@ -2318,7 +2444,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "73:5-81:3",
+                        "locator" : "74:5-82:3",
                         "type" : "Union",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -2372,7 +2498,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "73:7-75:5",
+                           "locator" : "74:7-76:5",
                            "type" : "Union",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -2430,7 +2556,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "73:9-73:68",
+                                 "locator" : "74:9-74:68",
                                  "dataType" : "{http://hl7.org/fhir}Condition",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis",
                                  "codeProperty" : "code",
@@ -2447,7 +2573,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "73:39-73:67",
+                                    "locator" : "74:39-74:67",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Status Post Left Mastectomy",
                                     "preserve" : true,
@@ -2481,7 +2607,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "74:15-74:78",
+                                 "locator" : "75:15-75:78",
                                  "dataType" : "{http://hl7.org/fhir}Condition",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns",
                                  "codeProperty" : "code",
@@ -2498,7 +2624,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "74:49-74:77",
+                                    "locator" : "75:49-75:77",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Status Post Left Mastectomy",
                                     "preserve" : true,
@@ -2529,7 +2655,7 @@
                               }
                            } ]
                         }, {
-                           "locator" : "76:13-80:7",
+                           "locator" : "77:13-81:7",
                            "type" : "Query",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -2550,7 +2676,7 @@
                               }
                            },
                            "source" : [ {
-                              "locator" : "76:15-77:130",
+                              "locator" : "77:15-78:130",
                               "alias" : "UnilateralMastectomyDiagnosis",
                               "annotation" : [ ],
                               "resultTypeSpecifier" : {
@@ -2571,7 +2697,7 @@
                                  }
                               },
                               "expression" : {
-                                 "locator" : "76:15-77:100",
+                                 "locator" : "77:15-78:100",
                                  "type" : "Union",
                                  "annotation" : [ ],
                                  "resultTypeSpecifier" : {
@@ -2629,7 +2755,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "76:17-76:94",
+                                       "locator" : "77:17-77:94",
                                        "dataType" : "{http://hl7.org/fhir}Condition",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis",
                                        "codeProperty" : "code",
@@ -2646,7 +2772,7 @@
                                           }
                                        },
                                        "codes" : {
-                                          "locator" : "76:47-76:93",
+                                          "locator" : "77:47-77:93",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Unilateral Mastectomy, Unspecified Laterality",
                                           "preserve" : true,
@@ -2680,7 +2806,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "77:17-77:98",
+                                       "locator" : "78:17-78:98",
                                        "dataType" : "{http://hl7.org/fhir}Condition",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns",
                                        "codeProperty" : "code",
@@ -2697,7 +2823,7 @@
                                           }
                                        },
                                        "codes" : {
-                                          "locator" : "77:51-77:97",
+                                          "locator" : "78:51-78:97",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                           "name" : "Unilateral Mastectomy, Unspecified Laterality",
                                           "preserve" : true,
@@ -2732,7 +2858,7 @@
                            "let" : [ ],
                            "relationship" : [ ],
                            "where" : {
-                              "locator" : "78:11-79:46",
+                              "locator" : "79:11-80:46",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Exists",
                               "annotation" : [ ],
@@ -2746,7 +2872,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "78:24-79:46",
+                                 "locator" : "79:24-80:46",
                                  "type" : "Query",
                                  "annotation" : [ ],
                                  "resultTypeSpecifier" : {
@@ -2759,7 +2885,7 @@
                                     }
                                  },
                                  "source" : [ {
-                                    "locator" : "78:24-78:63",
+                                    "locator" : "79:24-79:63",
                                     "alias" : "S",
                                     "annotation" : [ ],
                                     "resultTypeSpecifier" : {
@@ -2772,7 +2898,7 @@
                                        }
                                     },
                                     "expression" : {
-                                       "locator" : "78:24-78:61",
+                                       "locator" : "79:24-79:61",
                                        "type" : "Query",
                                        "annotation" : [ ],
                                        "resultTypeSpecifier" : {
@@ -2817,7 +2943,7 @@
                                  "let" : [ ],
                                  "relationship" : [ ],
                                  "where" : {
-                                    "locator" : "79:13-79:46",
+                                    "locator" : "80:13-80:46",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "annotation" : [ ],
@@ -2831,7 +2957,7 @@
                                        "annotation" : [ ]
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "79:19",
+                                       "locator" : "80:19",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "S",
                                        "type" : "AliasRef",
@@ -2845,7 +2971,7 @@
                                           "annotation" : [ ]
                                        } ],
                                        "operand" : {
-                                          "locator" : "79:23-79:46",
+                                          "locator" : "80:23-80:46",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "Left (qualifier value)",
                                           "type" : "CodeRef",
@@ -2862,7 +2988,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "82:5-82:95",
+                  "locator" : "83:5-83:95",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "SameOrBefore",
                   "annotation" : [ ],
@@ -2876,7 +3002,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "82:49-82:54",
+                     "locator" : "83:49-83:54",
                      "type" : "Start",
                      "annotation" : [ ],
                      "signature" : [ {
@@ -2889,7 +3015,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "82:11-82:47",
+                        "locator" : "83:11-83:47",
                         "name" : "prevalenceInterval",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
@@ -2917,7 +3043,7 @@
                            } ]
                         } ],
                         "operand" : [ {
-                           "locator" : "82:11-82:24",
+                           "locator" : "83:11-83:24",
                            "name" : "LeftMastectomy",
                            "type" : "AliasRef",
                            "annotation" : [ ],
@@ -2937,7 +3063,7 @@
                         } ]
                      }
                   }, {
-                     "locator" : "82:69-82:95",
+                     "locator" : "83:69-83:95",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "End",
                      "annotation" : [ ],
@@ -2951,7 +3077,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "82:76-82:95",
+                        "locator" : "83:76-83:95",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -2969,7 +3095,7 @@
                }
             }
          }, {
-            "locator" : "84:1-86:114",
+            "locator" : "85:1-87:114",
             "name" : "Left Mastectomy Procedure",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2984,7 +3110,7 @@
                }
             },
             "expression" : {
-               "locator" : "85:3-86:114",
+               "locator" : "86:3-87:114",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -2997,7 +3123,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "85:3-85:110",
+                  "locator" : "86:3-86:110",
                   "alias" : "UnilateralMastectomyLeftPerformed",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3010,7 +3136,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "85:3-85:76",
+                     "locator" : "86:3-86:76",
                      "name" : "isProcedurePerformed",
                      "libraryName" : "Status",
                      "type" : "FunctionRef",
@@ -3034,7 +3160,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "85:5-85:49",
+                        "locator" : "86:5-86:49",
                         "dataType" : "{http://hl7.org/fhir}Procedure",
                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure",
                         "codeProperty" : "code",
@@ -3051,7 +3177,7 @@
                            }
                         },
                         "codes" : {
-                           "locator" : "85:19-85:46",
+                           "locator" : "86:19-86:46",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Unilateral Mastectomy Left",
                            "preserve" : true,
@@ -3068,7 +3194,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "86:5-86:114",
+                  "locator" : "87:5-87:114",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "SameOrBefore",
                   "annotation" : [ ],
@@ -3082,7 +3208,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "86:70-86:73",
+                     "locator" : "87:70-87:73",
                      "type" : "End",
                      "annotation" : [ ],
                      "signature" : [ {
@@ -3095,7 +3221,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "86:11-86:68",
+                        "locator" : "87:11-87:68",
                         "name" : "toInterval",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
@@ -3153,7 +3279,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "86:11-86:53",
+                                    "locator" : "87:11-87:53",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -3210,7 +3336,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "86:11-86:53",
+                                       "locator" : "87:11-87:53",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -3298,7 +3424,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "86:11-86:53",
+                                    "locator" : "87:11-87:53",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -3363,7 +3489,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "86:11-86:53",
+                                       "locator" : "87:11-87:53",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -3461,7 +3587,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "86:11-86:53",
+                                    "locator" : "87:11-87:53",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -3518,7 +3644,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "86:11-86:53",
+                                       "locator" : "87:11-87:53",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -3606,7 +3732,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "86:11-86:53",
+                                    "locator" : "87:11-87:53",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -3671,7 +3797,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "86:11-86:53",
+                                       "locator" : "87:11-87:53",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -3802,7 +3928,7 @@
                         } ]
                      }
                   }, {
-                     "locator" : "86:88-86:114",
+                     "locator" : "87:88-87:114",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "End",
                      "annotation" : [ ],
@@ -3816,7 +3942,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "86:95-86:114",
+                        "locator" : "87:95-87:114",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -3834,7 +3960,7 @@
                }
             }
          }, {
-            "locator" : "88:1-92:107",
+            "locator" : "89:1-93:107",
             "name" : "Bilateral Mastectomy Diagnosis",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3857,7 +3983,7 @@
                }
             },
             "expression" : {
-               "locator" : "89:3-92:107",
+               "locator" : "90:3-93:107",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -3878,7 +4004,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "89:3-91:45",
+                  "locator" : "90:3-92:45",
                   "alias" : "BilateralMastectomyHistory",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3899,7 +4025,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "89:3-91:18",
+                     "locator" : "90:3-92:18",
                      "name" : "verified",
                      "libraryName" : "Status",
                      "type" : "FunctionRef",
@@ -3939,7 +4065,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "89:5-91:3",
+                        "locator" : "90:5-92:3",
                         "type" : "Union",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -3997,7 +4123,7 @@
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : {
-                              "locator" : "89:7-89:70",
+                              "locator" : "90:7-90:70",
                               "dataType" : "{http://hl7.org/fhir}Condition",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis",
                               "codeProperty" : "code",
@@ -4014,7 +4140,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "89:37-89:69",
+                                 "locator" : "90:37-90:69",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "History of bilateral mastectomy",
                                  "preserve" : true,
@@ -4048,7 +4174,7 @@
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : {
-                              "locator" : "90:13-90:80",
+                              "locator" : "91:13-91:80",
                               "dataType" : "{http://hl7.org/fhir}Condition",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns",
                               "codeProperty" : "code",
@@ -4065,7 +4191,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "90:47-90:79",
+                                 "locator" : "91:47-91:79",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "History of bilateral mastectomy",
                                  "preserve" : true,
@@ -4101,7 +4227,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "92:5-92:107",
+                  "locator" : "93:5-93:107",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "SameOrBefore",
                   "annotation" : [ ],
@@ -4115,7 +4241,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "92:61-92:66",
+                     "locator" : "93:61-93:66",
                      "type" : "Start",
                      "annotation" : [ ],
                      "signature" : [ {
@@ -4128,7 +4254,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "92:11-92:59",
+                        "locator" : "93:11-93:59",
                         "name" : "prevalenceInterval",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
@@ -4156,7 +4282,7 @@
                            } ]
                         } ],
                         "operand" : [ {
-                           "locator" : "92:11-92:36",
+                           "locator" : "93:11-93:36",
                            "name" : "BilateralMastectomyHistory",
                            "type" : "AliasRef",
                            "annotation" : [ ],
@@ -4176,7 +4302,7 @@
                         } ]
                      }
                   }, {
-                     "locator" : "92:81-92:107",
+                     "locator" : "93:81-93:107",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "End",
                      "annotation" : [ ],
@@ -4190,7 +4316,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "92:88-92:107",
+                        "locator" : "93:88-93:107",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -4208,7 +4334,7 @@
                }
             }
          }, {
-            "locator" : "94:1-96:109",
+            "locator" : "95:1-97:109",
             "name" : "Bilateral Mastectomy Procedure",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4223,7 +4349,7 @@
                }
             },
             "expression" : {
-               "locator" : "95:3-96:109",
+               "locator" : "96:3-97:109",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -4236,7 +4362,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "95:3-95:99",
+                  "locator" : "96:3-96:99",
                   "alias" : "BilateralMastectomyPerformed",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -4249,7 +4375,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "95:3-95:70",
+                     "locator" : "96:3-96:70",
                      "name" : "isProcedurePerformed",
                      "libraryName" : "Status",
                      "type" : "FunctionRef",
@@ -4273,7 +4399,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "95:5-95:43",
+                        "locator" : "96:5-96:43",
                         "dataType" : "{http://hl7.org/fhir}Procedure",
                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure",
                         "codeProperty" : "code",
@@ -4290,7 +4416,7 @@
                            }
                         },
                         "codes" : {
-                           "locator" : "95:19-95:40",
+                           "locator" : "96:19-96:40",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Bilateral Mastectomy",
                            "preserve" : true,
@@ -4307,7 +4433,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "96:5-96:109",
+                  "locator" : "97:5-97:109",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "SameOrBefore",
                   "annotation" : [ ],
@@ -4321,7 +4447,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "96:65-96:68",
+                     "locator" : "97:65-97:68",
                      "type" : "End",
                      "annotation" : [ ],
                      "signature" : [ {
@@ -4334,7 +4460,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "96:11-96:63",
+                        "locator" : "97:11-97:63",
                         "name" : "toInterval",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
@@ -4392,7 +4518,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "96:11-96:48",
+                                    "locator" : "97:11-97:48",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -4449,7 +4575,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "96:11-96:48",
+                                       "locator" : "97:11-97:48",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -4537,7 +4663,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "96:11-96:48",
+                                    "locator" : "97:11-97:48",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -4602,7 +4728,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "96:11-96:48",
+                                       "locator" : "97:11-97:48",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -4700,7 +4826,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "96:11-96:48",
+                                    "locator" : "97:11-97:48",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -4757,7 +4883,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "96:11-96:48",
+                                       "locator" : "97:11-97:48",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -4845,7 +4971,7 @@
                                  "annotation" : [ ],
                                  "signature" : [ ],
                                  "operand" : {
-                                    "locator" : "96:11-96:48",
+                                    "locator" : "97:11-97:48",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -4910,7 +5036,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "96:11-96:48",
+                                       "locator" : "97:11-97:48",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -5041,7 +5167,7 @@
                         } ]
                      }
                   }, {
-                     "locator" : "96:83-96:109",
+                     "locator" : "97:83-97:109",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "End",
                      "annotation" : [ ],
@@ -5055,7 +5181,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "96:90-96:109",
+                        "locator" : "97:90-97:109",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -5073,14 +5199,14 @@
                }
             }
          }, {
-            "locator" : "42:1-55:69",
+            "locator" : "43:1-56:69",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator Exclusions",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "43:3-55:69",
+               "locator" : "44:3-56:69",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "annotation" : [ ],
@@ -5094,7 +5220,7 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "43:3-54:74",
+                  "locator" : "44:3-55:74",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "annotation" : [ ],
@@ -5108,7 +5234,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "43:3-53:73",
+                     "locator" : "44:3-54:73",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "annotation" : [ ],
@@ -5122,7 +5248,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "43:3-52:46",
+                        "locator" : "44:3-53:46",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Or",
                         "annotation" : [ ],
@@ -5136,7 +5262,7 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : [ {
-                           "locator" : "43:3-51:46",
+                           "locator" : "44:3-52:46",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Or",
                            "annotation" : [ ],
@@ -5150,7 +5276,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "43:3-50:5",
+                              "locator" : "44:3-51:5",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Or",
                               "annotation" : [ ],
@@ -5164,14 +5290,14 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : [ {
-                                 "locator" : "43:3-43:32",
+                                 "locator" : "44:3-44:32",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "name" : "Has Hospice Services",
                                  "libraryName" : "Hospice",
                                  "type" : "ExpressionRef",
                                  "annotation" : [ ]
                               }, {
-                                 "locator" : "44:8-50:5",
+                                 "locator" : "45:8-51:5",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "And",
                                  "annotation" : [ ],
@@ -5185,7 +5311,7 @@
                                     "annotation" : [ ]
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "44:10-46:7",
+                                    "locator" : "45:10-47:7",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Or",
                                     "annotation" : [ ],
@@ -5199,7 +5325,7 @@
                                        "annotation" : [ ]
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "44:12-44:50",
+                                       "locator" : "45:12-45:50",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Exists",
                                        "annotation" : [ ],
@@ -5221,7 +5347,7 @@
                                           }
                                        } ],
                                        "operand" : {
-                                          "locator" : "44:19-44:50",
+                                          "locator" : "45:19-45:50",
                                           "name" : "Right Mastectomy Diagnosis",
                                           "type" : "ExpressionRef",
                                           "annotation" : [ ],
@@ -5244,7 +5370,7 @@
                                           }
                                        }
                                     }, {
-                                       "locator" : "45:14-45:52",
+                                       "locator" : "46:14-46:52",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Exists",
                                        "annotation" : [ ],
@@ -5258,7 +5384,7 @@
                                           }
                                        } ],
                                        "operand" : {
-                                          "locator" : "45:21-45:52",
+                                          "locator" : "46:21-46:52",
                                           "name" : "Right Mastectomy Procedure",
                                           "type" : "ExpressionRef",
                                           "annotation" : [ ],
@@ -5274,7 +5400,7 @@
                                        }
                                     } ]
                                  }, {
-                                    "locator" : "47:13-49:9",
+                                    "locator" : "48:13-50:9",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Or",
                                     "annotation" : [ ],
@@ -5288,7 +5414,7 @@
                                        "annotation" : [ ]
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "47:15-47:52",
+                                       "locator" : "48:15-48:52",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Exists",
                                        "annotation" : [ ],
@@ -5310,7 +5436,7 @@
                                           }
                                        } ],
                                        "operand" : {
-                                          "locator" : "47:22-47:52",
+                                          "locator" : "48:22-48:52",
                                           "name" : "Left Mastectomy Diagnosis",
                                           "type" : "ExpressionRef",
                                           "annotation" : [ ],
@@ -5333,7 +5459,7 @@
                                           }
                                        }
                                     }, {
-                                       "locator" : "48:16-48:53",
+                                       "locator" : "49:16-49:53",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Exists",
                                        "annotation" : [ ],
@@ -5347,7 +5473,7 @@
                                           }
                                        } ],
                                        "operand" : {
-                                          "locator" : "48:23-48:53",
+                                          "locator" : "49:23-49:53",
                                           "name" : "Left Mastectomy Procedure",
                                           "type" : "ExpressionRef",
                                           "annotation" : [ ],
@@ -5365,7 +5491,7 @@
                                  } ]
                               } ]
                            }, {
-                              "locator" : "51:8-51:46",
+                              "locator" : "52:8-52:46",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Exists",
                               "annotation" : [ ],
@@ -5387,7 +5513,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "51:15-51:46",
+                                 "locator" : "52:15-52:46",
                                  "name" : "Bilateral Mastectomy Diagnosis",
                                  "type" : "ExpressionRef",
                                  "annotation" : [ ],
@@ -5411,7 +5537,7 @@
                               }
                            } ]
                         }, {
-                           "locator" : "52:8-52:46",
+                           "locator" : "53:8-53:46",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Exists",
                            "annotation" : [ ],
@@ -5425,7 +5551,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "52:15-52:46",
+                              "locator" : "53:15-53:46",
                               "name" : "Bilateral Mastectomy Procedure",
                               "type" : "ExpressionRef",
                               "annotation" : [ ],
@@ -5441,7 +5567,7 @@
                            }
                         } ]
                      }, {
-                        "locator" : "53:8-53:73",
+                        "locator" : "54:8-54:73",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Is Age 66 or Older with Advanced Illness and Frailty",
                         "libraryName" : "AIFrailLTCF",
@@ -5449,7 +5575,7 @@
                         "annotation" : [ ]
                      } ]
                   }, {
-                     "locator" : "54:8-54:74",
+                     "locator" : "55:8-55:74",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Is Age 66 or Older Living Long Term in a Nursing Home",
                      "libraryName" : "AIFrailLTCF",
@@ -5457,7 +5583,7 @@
                      "annotation" : [ ]
                   } ]
                }, {
-                  "locator" : "55:8-55:69",
+                  "locator" : "56:8-56:69",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Has Palliative Care in the Measurement Period",
                   "libraryName" : "PalliativeCare",
@@ -5466,14 +5592,14 @@
                } ]
             }
          }, {
-            "locator" : "102:1-103:79",
+            "locator" : "103:1-104:79",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "October 1 Two Years Prior to the Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "103:3-103:79",
+               "locator" : "104:3-104:79",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "DateTime",
                "annotation" : [ ],
@@ -5511,7 +5637,7 @@
                   "annotation" : [ ]
                } ],
                "year" : {
-                  "locator" : "103:12-103:56",
+                  "locator" : "104:12-104:56",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "Subtract",
                   "annotation" : [ ],
@@ -5525,7 +5651,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "103:13-103:51",
+                     "locator" : "104:13-104:51",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "precision" : "Year",
                      "type" : "DateTimeComponentFrom",
@@ -5536,7 +5662,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : {
-                        "locator" : "103:23-103:51",
+                        "locator" : "104:23-104:51",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
                         "annotation" : [ ],
@@ -5550,7 +5676,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "103:32-103:51",
+                           "locator" : "104:32-104:51",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "annotation" : [ ],
@@ -5566,7 +5692,7 @@
                         }
                      }
                   }, {
-                     "locator" : "103:55",
+                     "locator" : "104:55",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
@@ -5575,7 +5701,7 @@
                   } ]
                },
                "month" : {
-                  "locator" : "103:59-103:60",
+                  "locator" : "104:59-104:60",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "10",
@@ -5583,7 +5709,7 @@
                   "annotation" : [ ]
                },
                "day" : {
-                  "locator" : "103:63",
+                  "locator" : "104:63",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
@@ -5591,7 +5717,7 @@
                   "annotation" : [ ]
                },
                "hour" : {
-                  "locator" : "103:66",
+                  "locator" : "104:66",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
@@ -5599,7 +5725,7 @@
                   "annotation" : [ ]
                },
                "minute" : {
-                  "locator" : "103:69",
+                  "locator" : "104:69",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
@@ -5607,7 +5733,7 @@
                   "annotation" : [ ]
                },
                "second" : {
-                  "locator" : "103:72",
+                  "locator" : "104:72",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
@@ -5615,7 +5741,7 @@
                   "annotation" : [ ]
                },
                "millisecond" : {
-                  "locator" : "103:75",
+                  "locator" : "104:75",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
@@ -5631,7 +5757,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : {
-                     "locator" : "103:78",
+                     "locator" : "104:78",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
@@ -5641,14 +5767,14 @@
                }
             }
          }, {
-            "locator" : "98:1-100:156",
+            "locator" : "99:1-101:156",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "99:3-100:156",
+               "locator" : "100:3-101:156",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -5662,7 +5788,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "99:10-100:156",
+                  "locator" : "100:10-101:156",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -5675,7 +5801,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "99:10-99:100",
+                     "locator" : "100:10-100:100",
                      "alias" : "Mammogram",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -5688,7 +5814,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "99:10-99:90",
+                        "locator" : "100:10-100:90",
                         "name" : "isDiagnosticStudyPerformed",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -5712,7 +5838,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "99:12-99:57",
+                           "locator" : "100:12-100:57",
                            "dataType" : "{http://hl7.org/fhir}Observation",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result",
                            "codeProperty" : "code",
@@ -5729,7 +5855,7 @@
                               }
                            },
                            "codes" : {
-                              "locator" : "99:42-99:54",
+                              "locator" : "100:42-100:54",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Mammography",
                               "preserve" : true,
@@ -5746,7 +5872,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "100:5-100:156",
+                     "locator" : "101:5-101:156",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "In",
@@ -5765,7 +5891,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "100:46-100:49",
+                        "locator" : "101:46-101:49",
                         "type" : "End",
                         "annotation" : [ ],
                         "signature" : [ {
@@ -5778,7 +5904,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "100:11-100:44",
+                           "locator" : "101:11-101:44",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -5826,7 +5952,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "100:11-100:29",
+                              "locator" : "101:11-101:29",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -5866,7 +5992,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "100:65-100:156",
+                        "locator" : "101:65-101:156",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -5881,14 +6007,14 @@
                            }
                         },
                         "low" : {
-                           "locator" : "100:74-100:126",
+                           "locator" : "101:74-101:126",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "name" : "October 1 Two Years Prior to the Measurement Period",
                            "type" : "ExpressionRef",
                            "annotation" : [ ]
                         },
                         "high" : {
-                           "locator" : "100:129-100:155",
+                           "locator" : "101:129-101:155",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
                            "annotation" : [ ],
@@ -5902,7 +6028,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "100:136-100:155",
+                              "locator" : "101:136-101:155",
                               "name" : "Measurement Period",
                               "type" : "ParameterRef",
                               "annotation" : [ ],
@@ -5922,7 +6048,7 @@
                }
             }
          }, {
-            "locator" : "105:1-106:21",
+            "locator" : "106:1-107:21",
             "name" : "SDE Ethnicity",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -5953,7 +6079,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "106:3-106:21",
+               "locator" : "107:3-107:21",
                "name" : "SDE Ethnicity",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -5985,7 +6111,7 @@
                }
             }
          }, {
-            "locator" : "108:1-109:17",
+            "locator" : "109:1-110:17",
             "name" : "SDE Payer",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -6020,7 +6146,7 @@
                }
             },
             "expression" : {
-               "locator" : "109:3-109:17",
+               "locator" : "110:3-110:17",
                "name" : "SDE Payer",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -6056,7 +6182,7 @@
                }
             }
          }, {
-            "locator" : "111:1-112:16",
+            "locator" : "112:1-113:16",
             "name" : "SDE Race",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -6087,7 +6213,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "112:3-112:16",
+               "locator" : "113:3-113:16",
                "name" : "SDE Race",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -6119,14 +6245,14 @@
                }
             }
          }, {
-            "locator" : "114:1-115:15",
+            "locator" : "115:1-116:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "SDE Sex",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "115:3-115:15",
+               "locator" : "116:3-116:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "SDE Sex",
                "libraryName" : "SDE",
@@ -6134,14 +6260,14 @@
                "annotation" : [ ]
             }
          }, {
-            "locator" : "117:1-120:23",
+            "locator" : "118:1-121:23",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Stratification 1",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "118:3-120:23",
+               "locator" : "119:3-121:23",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "In",
                "annotation" : [ ],
@@ -6159,7 +6285,7 @@
                   }
                } ],
                "operand" : [ {
-                  "locator" : "118:3-120:3",
+                  "locator" : "119:3-121:3",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "precision" : "Year",
                   "type" : "CalculateAgeAt",
@@ -6188,7 +6314,7 @@
                         }
                      }
                   }, {
-                     "locator" : "118:16-119:31",
+                     "locator" : "119:16-120:31",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "DateFrom",
                      "annotation" : [ ],
@@ -6198,7 +6324,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : {
-                        "locator" : "119:5-119:31",
+                        "locator" : "120:5-120:31",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
                         "annotation" : [ ],
@@ -6212,7 +6338,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "119:12-119:31",
+                           "locator" : "120:12-120:31",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "annotation" : [ ],
@@ -6229,7 +6355,7 @@
                      }
                   } ]
                }, {
-                  "locator" : "120:8-120:23",
+                  "locator" : "121:8-121:23",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
@@ -6244,7 +6370,7 @@
                      }
                   },
                   "low" : {
-                     "locator" : "120:17-120:18",
+                     "locator" : "121:17-121:18",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "42",
@@ -6252,7 +6378,7 @@
                      "annotation" : [ ]
                   },
                   "high" : {
-                     "locator" : "120:21-120:22",
+                     "locator" : "121:21-121:22",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "51",
@@ -6262,14 +6388,14 @@
                } ]
             }
          }, {
-            "locator" : "122:1-125:23",
+            "locator" : "123:1-126:23",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Stratification 2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "123:3-125:23",
+               "locator" : "124:3-126:23",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "In",
                "annotation" : [ ],
@@ -6287,7 +6413,7 @@
                   }
                } ],
                "operand" : [ {
-                  "locator" : "123:3-125:3",
+                  "locator" : "124:3-126:3",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "precision" : "Year",
                   "type" : "CalculateAgeAt",
@@ -6316,7 +6442,7 @@
                         }
                      }
                   }, {
-                     "locator" : "123:16-124:31",
+                     "locator" : "124:16-125:31",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "DateFrom",
                      "annotation" : [ ],
@@ -6326,7 +6452,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : {
-                        "locator" : "124:5-124:31",
+                        "locator" : "125:5-125:31",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
                         "annotation" : [ ],
@@ -6340,7 +6466,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "124:12-124:31",
+                           "locator" : "125:12-125:31",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "annotation" : [ ],
@@ -6357,7 +6483,7 @@
                      }
                   } ]
                }, {
-                  "locator" : "125:8-125:23",
+                  "locator" : "126:8-126:23",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
@@ -6372,7 +6498,7 @@
                      }
                   },
                   "low" : {
-                     "locator" : "125:17-125:18",
+                     "locator" : "126:17-126:18",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "52",
@@ -6380,7 +6506,7 @@
                      "annotation" : [ ]
                   },
                   "high" : {
-                     "locator" : "125:21-125:22",
+                     "locator" : "126:21-126:22",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "74",

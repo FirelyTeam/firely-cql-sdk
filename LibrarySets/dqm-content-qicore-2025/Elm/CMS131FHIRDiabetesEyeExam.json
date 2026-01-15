@@ -73,7 +73,7 @@
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "35:1-35:49",
+            "locator" : "35:1-36:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "annotation" : [ ],
@@ -86,15 +86,141 @@
                   "annotation" : [ ]
                }
             },
+            "default" : {
+               "locator" : "36:11-36:72",
+               "lowClosed" : true,
+               "highClosed" : false,
+               "type" : "Interval",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "annotation" : [ ],
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "low" : {
+                  "locator" : "36:20-36:44",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2026",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  }
+               },
+               "high" : {
+                  "locator" : "36:47-36:71",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2027",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  }
+               }
+            },
             "parameterTypeSpecifier" : {
                "locator" : "35:32-35:49",
                "type" : "IntervalTypeSpecifier",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
-                  "localId" : "268",
+                  "localId" : "289",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "269",
+                     "localId" : "290",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -300,14 +426,14 @@
       },
       "contexts" : {
          "def" : [ {
-            "locator" : "37:1-37:15",
+            "locator" : "38:1-38:15",
             "name" : "Patient",
             "annotation" : [ ]
          } ]
       },
       "statements" : {
          "def" : [ {
-            "locator" : "37:1-37:15",
+            "locator" : "38:1-38:15",
             "name" : "Patient",
             "context" : "Patient",
             "annotation" : [ ],
@@ -316,7 +442,7 @@
                "annotation" : [ ],
                "signature" : [ ],
                "operand" : {
-                  "locator" : "37:1-37:15",
+                  "locator" : "38:1-38:15",
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
                   "type" : "Retrieve",
@@ -328,7 +454,7 @@
                }
             }
          }, {
-            "locator" : "48:1-57:67",
+            "locator" : "49:1-58:67",
             "name" : "Qualifying Encounters",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -343,7 +469,7 @@
                }
             },
             "expression" : {
-               "locator" : "49:3-57:67",
+               "locator" : "50:3-58:67",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -356,7 +482,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "49:3-56:46",
+                  "locator" : "50:3-57:46",
                   "alias" : "ValidEncounters",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -369,7 +495,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "49:3-56:30",
+                     "locator" : "50:3-57:30",
                      "name" : "isEncounterPerformed",
                      "libraryName" : "Status",
                      "type" : "FunctionRef",
@@ -393,7 +519,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "49:5-56:3",
+                        "locator" : "50:5-57:3",
                         "type" : "Union",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -423,7 +549,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "49:7-54:52",
+                           "locator" : "50:7-55:52",
                            "type" : "Union",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -453,7 +579,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "49:7-52:83",
+                              "locator" : "50:7-53:83",
                               "type" : "Union",
                               "annotation" : [ ],
                               "resultTypeSpecifier" : {
@@ -483,7 +609,7 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "locator" : "49:7-50:48",
+                                 "locator" : "50:7-51:48",
                                  "type" : "Union",
                                  "annotation" : [ ],
                                  "resultTypeSpecifier" : {
@@ -513,7 +639,7 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "49:7-49:33",
+                                    "locator" : "50:7-50:33",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
                                     "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                     "codeProperty" : "type",
@@ -530,7 +656,7 @@
                                        }
                                     },
                                     "codes" : {
-                                       "locator" : "49:19-49:32",
+                                       "locator" : "50:19-50:32",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Office Visit",
                                        "preserve" : true,
@@ -542,7 +668,7 @@
                                     "dateFilter" : [ ],
                                     "otherFilter" : [ ]
                                  }, {
-                                    "locator" : "50:13-50:48",
+                                    "locator" : "51:13-51:48",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
                                     "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                     "codeProperty" : "type",
@@ -559,7 +685,7 @@
                                        }
                                     },
                                     "codes" : {
-                                       "locator" : "50:25-50:47",
+                                       "locator" : "51:25-51:47",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Annual Wellness Visit",
                                        "preserve" : true,
@@ -592,7 +718,7 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "51:13-51:87",
+                                    "locator" : "52:13-52:87",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
                                     "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                     "codeProperty" : "type",
@@ -609,7 +735,7 @@
                                        }
                                     },
                                     "codes" : {
-                                       "locator" : "51:25-51:86",
+                                       "locator" : "52:25-52:86",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Preventive Care Services Established Office Visit, 18 and Up",
                                        "preserve" : true,
@@ -621,7 +747,7 @@
                                     "dateFilter" : [ ],
                                     "otherFilter" : [ ]
                                  }, {
-                                    "locator" : "52:13-52:83",
+                                    "locator" : "53:13-53:83",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
                                     "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                     "codeProperty" : "type",
@@ -638,7 +764,7 @@
                                        }
                                     },
                                     "codes" : {
-                                       "locator" : "52:25-52:82",
+                                       "locator" : "53:25-53:82",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Preventive Care Services Initial Office Visit, 18 and Up",
                                        "preserve" : true,
@@ -672,7 +798,7 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "locator" : "53:13-53:51",
+                                 "locator" : "54:13-54:51",
                                  "dataType" : "{http://hl7.org/fhir}Encounter",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                  "codeProperty" : "type",
@@ -689,7 +815,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "53:25-53:50",
+                                    "locator" : "54:25-54:50",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Home Healthcare Services",
                                     "preserve" : true,
@@ -701,7 +827,7 @@
                                  "dateFilter" : [ ],
                                  "otherFilter" : [ ]
                               }, {
-                                 "locator" : "54:13-54:52",
+                                 "locator" : "55:13-55:52",
                                  "dataType" : "{http://hl7.org/fhir}Encounter",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                  "codeProperty" : "type",
@@ -718,7 +844,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "54:25-54:51",
+                                    "locator" : "55:25-55:51",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Ophthalmological Services",
                                     "preserve" : true,
@@ -732,7 +858,7 @@
                               } ]
                            } ]
                         }, {
-                           "locator" : "55:13-55:43",
+                           "locator" : "56:13-56:43",
                            "dataType" : "{http://hl7.org/fhir}Encounter",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                            "codeProperty" : "type",
@@ -749,7 +875,7 @@
                               }
                            },
                            "codes" : {
-                              "locator" : "55:25-55:42",
+                              "locator" : "56:25-56:42",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Telephone Visits",
                               "preserve" : true,
@@ -767,7 +893,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "57:5-57:67",
+                  "locator" : "58:5-58:67",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "precision" : "Day",
                   "type" : "IncludedIn",
@@ -790,7 +916,7 @@
                      }
                   } ],
                   "operand" : [ {
-                     "locator" : "57:11-57:32",
+                     "locator" : "58:11-58:32",
                      "name" : "ToInterval",
                      "libraryName" : "FHIRHelpers",
                      "type" : "FunctionRef",
@@ -816,7 +942,7 @@
                         "annotation" : [ ]
                      } ]
                   }, {
-                     "locator" : "57:48-57:67",
+                     "locator" : "58:48-58:67",
                      "name" : "Measurement Period",
                      "type" : "ParameterRef",
                      "annotation" : [ ],
@@ -833,14 +959,14 @@
                }
             }
          }, {
-            "locator" : "39:1-46:5",
+            "locator" : "40:1-47:5",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Initial Population",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "40:3-46:5",
+               "locator" : "41:3-47:5",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "annotation" : [ ],
@@ -854,7 +980,7 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "40:3-43:42",
+                  "locator" : "41:3-44:42",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "annotation" : [ ],
@@ -868,7 +994,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "40:3-42:23",
+                     "locator" : "41:3-43:23",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "annotation" : [ ],
@@ -886,7 +1012,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "40:3-42:3",
+                        "locator" : "41:3-43:3",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "precision" : "Year",
                         "type" : "CalculateAgeAt",
@@ -915,7 +1041,7 @@
                               }
                            }
                         }, {
-                           "locator" : "40:16-41:31",
+                           "locator" : "41:16-42:31",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                            "type" : "DateFrom",
                            "annotation" : [ ],
@@ -925,7 +1051,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : {
-                              "locator" : "41:5-41:31",
+                              "locator" : "42:5-42:31",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "End",
                               "annotation" : [ ],
@@ -939,7 +1065,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "41:12-41:31",
+                                 "locator" : "42:12-42:31",
                                  "name" : "Measurement Period",
                                  "type" : "ParameterRef",
                                  "annotation" : [ ],
@@ -956,7 +1082,7 @@
                            }
                         } ]
                      }, {
-                        "locator" : "42:8-42:23",
+                        "locator" : "43:8-43:23",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -971,7 +1097,7 @@
                            }
                         },
                         "low" : {
-                           "locator" : "42:17-42:18",
+                           "locator" : "43:17-43:18",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "18",
@@ -979,7 +1105,7 @@
                            "annotation" : [ ]
                         },
                         "high" : {
-                           "locator" : "42:21-42:22",
+                           "locator" : "43:21-43:22",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "75",
@@ -988,7 +1114,7 @@
                         }
                      } ]
                   }, {
-                     "locator" : "43:9-43:42",
+                     "locator" : "44:9-44:42",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "annotation" : [ ],
@@ -1002,7 +1128,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "43:16-43:42",
+                        "locator" : "44:16-44:42",
                         "name" : "Qualifying Encounters",
                         "type" : "ExpressionRef",
                         "annotation" : [ ],
@@ -1018,7 +1144,7 @@
                      }
                   } ]
                }, {
-                  "locator" : "44:9-46:5",
+                  "locator" : "45:9-47:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "annotation" : [ ],
@@ -1040,7 +1166,7 @@
                      }
                   } ],
                   "operand" : {
-                     "locator" : "44:16-46:5",
+                     "locator" : "45:16-47:5",
                      "type" : "Query",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -1061,7 +1187,7 @@
                         }
                      },
                      "source" : [ {
-                        "locator" : "44:18-44:90",
+                        "locator" : "45:18-45:90",
                         "alias" : "DiabetesDx",
                         "annotation" : [ ],
                         "resultTypeSpecifier" : {
@@ -1082,7 +1208,7 @@
                            }
                         },
                         "expression" : {
-                           "locator" : "44:18-44:79",
+                           "locator" : "45:18-45:79",
                            "name" : "verified",
                            "libraryName" : "Status",
                            "type" : "FunctionRef",
@@ -1128,7 +1254,7 @@
                                  "alias" : "X",
                                  "annotation" : [ ],
                                  "expression" : {
-                                    "locator" : "44:20-44:64",
+                                    "locator" : "45:20-45:64",
                                     "dataType" : "{http://hl7.org/fhir}Condition",
                                     "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis",
                                     "codeProperty" : "code",
@@ -1145,7 +1271,7 @@
                                        }
                                     },
                                     "codes" : {
-                                       "locator" : "44:52-44:61",
+                                       "locator" : "45:52-45:61",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Diabetes",
                                        "preserve" : true,
@@ -1193,7 +1319,7 @@
                      "let" : [ ],
                      "relationship" : [ ],
                      "where" : {
-                        "locator" : "45:9-45:84",
+                        "locator" : "46:9-46:84",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "precision" : "Day",
                         "type" : "Overlaps",
@@ -1216,7 +1342,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "45:15-45:47",
+                           "locator" : "46:15-46:47",
                            "name" : "prevalenceInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -1244,7 +1370,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "45:15-45:24",
+                              "locator" : "46:15-46:24",
                               "name" : "DiabetesDx",
                               "type" : "AliasRef",
                               "annotation" : [ ],
@@ -1263,7 +1389,7 @@
                               }
                            } ]
                         }, {
-                           "locator" : "45:65-45:84",
+                           "locator" : "46:65-46:84",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "annotation" : [ ],
@@ -1282,28 +1408,28 @@
                } ]
             }
          }, {
-            "locator" : "59:1-60:22",
+            "locator" : "60:1-61:22",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "60:3-60:22",
+               "locator" : "61:3-61:22",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "Initial Population",
                "type" : "ExpressionRef",
                "annotation" : [ ]
             }
          }, {
-            "locator" : "85:1-89:108",
+            "locator" : "86:1-90:108",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Bilateral Absence of Eyes",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "86:3-89:108",
+               "locator" : "87:3-90:108",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -1325,7 +1451,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "86:10-89:108",
+                  "locator" : "87:10-90:108",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -1346,7 +1472,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "86:10-88:39",
+                     "locator" : "87:10-89:39",
                      "alias" : "BilateralAbsenceEyes",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -1367,7 +1493,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "86:10-88:18",
+                        "locator" : "87:10-89:18",
                         "name" : "verified",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -1407,7 +1533,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "86:12-88:3",
+                           "locator" : "87:12-89:3",
                            "type" : "Union",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -1465,7 +1591,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "86:14-86:91",
+                                 "locator" : "87:14-87:91",
                                  "dataType" : "{http://hl7.org/fhir}Condition",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns",
                                  "codeProperty" : "code",
@@ -1486,7 +1612,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "86:48-86:90",
+                                       "locator" : "87:48-87:90",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                        "name" : "Anophthalmos of bilateral eyes (disorder)",
                                        "type" : "CodeRef",
@@ -1520,7 +1646,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "87:13-87:86",
+                                 "locator" : "88:13-88:86",
                                  "dataType" : "{http://hl7.org/fhir}Condition",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis",
                                  "codeProperty" : "code",
@@ -1541,7 +1667,7 @@
                                     "annotation" : [ ],
                                     "signature" : [ ],
                                     "operand" : {
-                                       "locator" : "87:43-87:85",
+                                       "locator" : "88:43-88:85",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                        "name" : "Anophthalmos of bilateral eyes (disorder)",
                                        "type" : "CodeRef",
@@ -1577,7 +1703,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "89:5-89:108",
+                     "locator" : "90:5-90:108",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "SameOrBefore",
@@ -1592,7 +1718,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "89:55-89:60",
+                        "locator" : "90:55-90:60",
                         "type" : "Start",
                         "annotation" : [ ],
                         "signature" : [ {
@@ -1605,7 +1731,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "89:11-89:53",
+                           "locator" : "90:11-90:53",
                            "name" : "prevalenceInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -1633,7 +1759,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "89:11-89:30",
+                              "locator" : "90:11-90:30",
                               "name" : "BilateralAbsenceEyes",
                               "type" : "AliasRef",
                               "annotation" : [ ],
@@ -1653,7 +1779,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "89:82-89:108",
+                        "locator" : "90:82-90:108",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
                         "annotation" : [ ],
@@ -1667,7 +1793,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "89:89-89:108",
+                           "locator" : "90:89-90:108",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "annotation" : [ ],
@@ -1686,14 +1812,14 @@
                }
             }
          }, {
-            "locator" : "62:1-67:34",
+            "locator" : "63:1-68:34",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator Exclusions",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "63:3-67:34",
+               "locator" : "64:3-68:34",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "annotation" : [ ],
@@ -1707,7 +1833,7 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "63:3-66:69",
+                  "locator" : "64:3-67:69",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "annotation" : [ ],
@@ -1721,7 +1847,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "63:3-65:74",
+                     "locator" : "64:3-66:74",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "annotation" : [ ],
@@ -1735,7 +1861,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "63:3-64:73",
+                        "locator" : "64:3-65:73",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Or",
                         "annotation" : [ ],
@@ -1749,14 +1875,14 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : [ {
-                           "locator" : "63:3-63:32",
+                           "locator" : "64:3-64:32",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "name" : "Has Hospice Services",
                            "libraryName" : "Hospice",
                            "type" : "ExpressionRef",
                            "annotation" : [ ]
                         }, {
-                           "locator" : "64:8-64:73",
+                           "locator" : "65:8-65:73",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "name" : "Is Age 66 or Older with Advanced Illness and Frailty",
                            "libraryName" : "AIFrailLTCF",
@@ -1764,7 +1890,7 @@
                            "annotation" : [ ]
                         } ]
                      }, {
-                        "locator" : "65:8-65:74",
+                        "locator" : "66:8-66:74",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Is Age 66 or Older Living Long Term in a Nursing Home",
                         "libraryName" : "AIFrailLTCF",
@@ -1772,7 +1898,7 @@
                         "annotation" : [ ]
                      } ]
                   }, {
-                     "locator" : "66:8-66:69",
+                     "locator" : "67:8-67:69",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Has Palliative Care in the Measurement Period",
                      "libraryName" : "PalliativeCare",
@@ -1780,7 +1906,7 @@
                      "annotation" : [ ]
                   } ]
                }, {
-                  "locator" : "67:8-67:34",
+                  "locator" : "68:8-68:34",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Bilateral Absence of Eyes",
                   "type" : "ExpressionRef",
@@ -1788,14 +1914,14 @@
                } ]
             }
          }, {
-            "locator" : "99:1-103:81",
+            "locator" : "100:1-104:81",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Diabetic Retinopathy Overlapping Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "100:3-103:81",
+               "locator" : "101:3-104:81",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -1817,7 +1943,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "100:10-103:81",
+                  "locator" : "101:10-104:81",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -1838,7 +1964,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "100:10-102:30",
+                     "locator" : "101:10-103:30",
                      "alias" : "Retinopathy",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -1859,7 +1985,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "100:10-102:18",
+                        "locator" : "101:10-103:18",
                         "name" : "verified",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -1899,7 +2025,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "100:12-102:3",
+                           "locator" : "101:12-103:3",
                            "type" : "Union",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -1957,7 +2083,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "100:14-100:70",
+                                 "locator" : "101:14-101:70",
                                  "dataType" : "{http://hl7.org/fhir}Condition",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns",
                                  "codeProperty" : "code",
@@ -1974,7 +2100,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "100:48-100:69",
+                                    "locator" : "101:48-101:69",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Diabetic Retinopathy",
                                     "preserve" : true,
@@ -2008,7 +2134,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "101:13-101:65",
+                                 "locator" : "102:13-102:65",
                                  "dataType" : "{http://hl7.org/fhir}Condition",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis",
                                  "codeProperty" : "code",
@@ -2025,7 +2151,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "101:43-101:64",
+                                    "locator" : "102:43-102:64",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Diabetic Retinopathy",
                                     "preserve" : true,
@@ -2061,7 +2187,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "103:5-103:81",
+                     "locator" : "104:5-104:81",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "Overlaps",
@@ -2084,7 +2210,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "103:11-103:44",
+                        "locator" : "104:11-104:44",
                         "name" : "prevalenceInterval",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
@@ -2112,7 +2238,7 @@
                            } ]
                         } ],
                         "operand" : [ {
-                           "locator" : "103:11-103:21",
+                           "locator" : "104:11-104:21",
                            "name" : "Retinopathy",
                            "type" : "AliasRef",
                            "annotation" : [ ],
@@ -2131,7 +2257,7 @@
                            }
                         } ]
                      }, {
-                        "locator" : "103:62-103:81",
+                        "locator" : "104:62-104:81",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -2149,14 +2275,14 @@
                }
             }
          }, {
-            "locator" : "91:1-93:81",
+            "locator" : "92:1-94:81",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Retinal Exam in Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "92:3-93:81",
+               "locator" : "93:3-94:81",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -2170,7 +2296,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "92:10-93:81",
+                  "locator" : "93:10-94:81",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -2183,7 +2309,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "92:10-92:115",
+                     "locator" : "93:10-93:115",
                      "alias" : "RetinalExam",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -2196,7 +2322,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "92:10-92:103",
+                        "locator" : "93:10-93:103",
                         "name" : "isPhysicalExamPerformed",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -2220,7 +2346,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "92:12-92:73",
+                           "locator" : "93:12-93:73",
                            "dataType" : "{http://hl7.org/fhir}Observation",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result",
                            "codeProperty" : "code",
@@ -2237,7 +2363,7 @@
                               }
                            },
                            "codes" : {
-                              "locator" : "92:42-92:70",
+                              "locator" : "93:42-93:70",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Retinal or Dilated Eye Exam",
                               "preserve" : true,
@@ -2254,7 +2380,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "93:5-93:81",
+                     "locator" : "94:5-94:81",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "IncludedIn",
@@ -2277,7 +2403,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "93:11-93:46",
+                        "locator" : "94:11-94:46",
                         "name" : "toInterval",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
@@ -2325,7 +2451,7 @@
                            } ]
                         } ],
                         "operand" : [ {
-                           "locator" : "93:11-93:31",
+                           "locator" : "94:11-94:31",
                            "name" : "ToValue",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
@@ -2364,7 +2490,7 @@
                            } ]
                         } ]
                      }, {
-                        "locator" : "93:62-93:81",
+                        "locator" : "94:62-94:81",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -2382,14 +2508,14 @@
                }
             }
          }, {
-            "locator" : "95:1-97:138",
+            "locator" : "96:1-98:138",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Retinal Exam in Measurement Period or Year Prior",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "96:3-97:138",
+               "locator" : "97:3-98:138",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -2403,7 +2529,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "96:10-97:138",
+                  "locator" : "97:10-98:138",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -2416,7 +2542,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "96:10-96:115",
+                     "locator" : "97:10-97:115",
                      "alias" : "RetinalExam",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -2429,7 +2555,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "96:10-96:103",
+                        "locator" : "97:10-97:103",
                         "name" : "isPhysicalExamPerformed",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -2453,7 +2579,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "96:12-96:73",
+                           "locator" : "97:12-97:73",
                            "dataType" : "{http://hl7.org/fhir}Observation",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result",
                            "codeProperty" : "code",
@@ -2470,7 +2596,7 @@
                               }
                            },
                            "codes" : {
-                              "locator" : "96:42-96:70",
+                              "locator" : "97:42-97:70",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Retinal or Dilated Eye Exam",
                               "preserve" : true,
@@ -2487,7 +2613,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "97:5-97:138",
+                     "locator" : "98:5-98:138",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "IncludedIn",
@@ -2510,7 +2636,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "97:11-97:46",
+                        "locator" : "98:11-98:46",
                         "name" : "toInterval",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
@@ -2558,7 +2684,7 @@
                            } ]
                         } ],
                         "operand" : [ {
-                           "locator" : "97:11-97:31",
+                           "locator" : "98:11-98:31",
                            "name" : "ToValue",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
@@ -2597,7 +2723,7 @@
                            } ]
                         } ]
                      }, {
-                        "locator" : "97:62-97:138",
+                        "locator" : "98:62-98:138",
                         "lowClosed" : true,
                         "highClosed" : true,
                         "type" : "Interval",
@@ -2612,7 +2738,7 @@
                            }
                         },
                         "low" : {
-                           "locator" : "97:71-97:108",
+                           "locator" : "98:71-98:108",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Subtract",
                            "annotation" : [ ],
@@ -2626,7 +2752,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "97:71-97:99",
+                              "locator" : "98:71-98:99",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Start",
                               "annotation" : [ ],
@@ -2640,7 +2766,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "97:80-97:99",
+                                 "locator" : "98:80-98:99",
                                  "name" : "Measurement Period",
                                  "type" : "ParameterRef",
                                  "annotation" : [ ],
@@ -2655,7 +2781,7 @@
                                  }
                               }
                            }, {
-                              "locator" : "97:103-97:108",
+                              "locator" : "98:103-98:108",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 1,
                               "unit" : "year",
@@ -2664,7 +2790,7 @@
                            } ]
                         },
                         "high" : {
-                           "locator" : "97:111-97:137",
+                           "locator" : "98:111-98:137",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
                            "annotation" : [ ],
@@ -2678,7 +2804,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "97:118-97:137",
+                              "locator" : "98:118-98:137",
                               "name" : "Measurement Period",
                               "type" : "ParameterRef",
                               "annotation" : [ ],
@@ -2698,14 +2824,14 @@
                }
             }
          }, {
-            "locator" : "80:1-83:87",
+            "locator" : "81:1-84:87",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Autonomous Eye Exam in Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "81:3-83:87",
+               "locator" : "82:3-84:87",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -2719,7 +2845,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "81:10-83:87",
+                  "locator" : "82:10-84:87",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -2732,7 +2858,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "81:10-81:163",
+                     "locator" : "82:10-82:163",
                      "alias" : "AutonomousEyeExam",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -2745,7 +2871,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "81:10-81:145",
+                        "locator" : "82:10-82:145",
                         "name" : "isPhysicalExamPerformed",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -2769,7 +2895,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "81:12-81:115",
+                           "locator" : "82:12-82:115",
                            "dataType" : "{http://hl7.org/fhir}Observation",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result",
                            "codeProperty" : "code",
@@ -2790,7 +2916,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "81:42-81:112",
+                                 "locator" : "82:42-82:112",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                  "name" : "Eye Diabetic retinopathy screening Autonomous artificial intelligence",
                                  "type" : "CodeRef",
@@ -2807,7 +2933,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "82:5-83:87",
+                     "locator" : "83:5-84:87",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -2821,7 +2947,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "82:11-82:87",
+                        "locator" : "83:11-83:87",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
                         "annotation" : [ ],
@@ -2831,14 +2957,14 @@
                            "annotation" : [ ]
                         } ],
                         "code" : {
-                           "locator" : "82:11-82:44",
+                           "locator" : "83:11-83:44",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                            "strict" : false,
                            "type" : "As",
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : {
-                              "locator" : "82:11-82:33",
+                              "locator" : "83:11-83:33",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -2905,7 +3031,7 @@
                               } ]
                            },
                            "asTypeSpecifier" : {
-                              "locator" : "82:38-82:44",
+                              "locator" : "83:38-83:44",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
                               "type" : "NamedTypeSpecifier",
@@ -2913,14 +3039,14 @@
                            }
                         },
                         "valueset" : {
-                           "locator" : "82:49-82:87",
+                           "locator" : "83:49-83:87",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Autonomous Eye Exam Result or Finding",
                            "preserve" : true,
                            "annotation" : [ ]
                         }
                      }, {
-                        "locator" : "83:11-83:87",
+                        "locator" : "84:11-84:87",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "precision" : "Day",
                         "type" : "IncludedIn",
@@ -2943,7 +3069,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "83:11-83:52",
+                           "locator" : "84:11-84:52",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -2991,7 +3117,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "83:11-83:37",
+                              "locator" : "84:11-84:37",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -3030,7 +3156,7 @@
                               } ]
                            } ]
                         }, {
-                           "locator" : "83:68-83:87",
+                           "locator" : "84:68-84:87",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "annotation" : [ ],
@@ -3049,14 +3175,14 @@
                }
             }
          }, {
-            "locator" : "110:1-113:88",
+            "locator" : "111:1-114:88",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Left Eye Retinopathy",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "111:3-113:88",
+               "locator" : "112:3-114:88",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -3070,7 +3196,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "111:10-113:88",
+                  "locator" : "112:10-114:88",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3083,7 +3209,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "111:10-111:157",
+                     "locator" : "112:10-112:157",
                      "alias" : "LeftEyeRetinopathy",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -3096,7 +3222,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "111:10-111:138",
+                        "locator" : "112:10-112:138",
                         "name" : "isPhysicalExamPerformed",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -3120,7 +3246,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "111:12-111:108",
+                           "locator" : "112:12-112:108",
                            "dataType" : "{http://hl7.org/fhir}Observation",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result",
                            "codeProperty" : "code",
@@ -3141,7 +3267,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "111:42-111:105",
+                                 "locator" : "112:42-112:105",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                  "name" : "Left eye Diabetic retinopathy severity level by Ophthalmoscopy",
                                  "type" : "CodeRef",
@@ -3158,7 +3284,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "112:5-113:88",
+                     "locator" : "113:5-114:88",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -3172,7 +3298,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "112:11-112:86",
+                        "locator" : "113:11-113:86",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
                         "annotation" : [ ],
@@ -3182,14 +3308,14 @@
                            "annotation" : [ ]
                         } ],
                         "code" : {
-                           "locator" : "112:11-112:45",
+                           "locator" : "113:11-113:45",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                            "strict" : false,
                            "type" : "As",
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : {
-                              "locator" : "112:11-112:34",
+                              "locator" : "113:11-113:34",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -3256,7 +3382,7 @@
                               } ]
                            },
                            "asTypeSpecifier" : {
-                              "locator" : "112:39-112:45",
+                              "locator" : "113:39-113:45",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
                               "type" : "NamedTypeSpecifier",
@@ -3264,14 +3390,14 @@
                            }
                         },
                         "valueset" : {
-                           "locator" : "112:50-112:86",
+                           "locator" : "113:50-113:86",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Diabetic Retinopathy Severity Level",
                            "preserve" : true,
                            "annotation" : [ ]
                         }
                      }, {
-                        "locator" : "113:11-113:88",
+                        "locator" : "114:11-114:88",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "precision" : "Day",
                         "type" : "IncludedIn",
@@ -3294,7 +3420,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "113:11-113:53",
+                           "locator" : "114:11-114:53",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -3342,7 +3468,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "113:11-113:38",
+                              "locator" : "114:11-114:38",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -3381,7 +3507,7 @@
                               } ]
                            } ]
                         }, {
-                           "locator" : "113:69-113:88",
+                           "locator" : "114:69-114:88",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "annotation" : [ ],
@@ -3400,14 +3526,14 @@
                }
             }
          }, {
-            "locator" : "120:1-123:89",
+            "locator" : "121:1-124:89",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Right Eye Retinopathy",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "121:3-123:89",
+               "locator" : "122:3-124:89",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -3421,7 +3547,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "121:10-123:89",
+                  "locator" : "122:10-124:89",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3434,7 +3560,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "121:10-121:159",
+                     "locator" : "122:10-122:159",
                      "alias" : "RightEyeRetinopathy",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -3447,7 +3573,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "121:10-121:139",
+                        "locator" : "122:10-122:139",
                         "name" : "isPhysicalExamPerformed",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -3471,7 +3597,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "121:12-121:109",
+                           "locator" : "122:12-122:109",
                            "dataType" : "{http://hl7.org/fhir}Observation",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result",
                            "codeProperty" : "code",
@@ -3492,7 +3618,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "121:42-121:106",
+                                 "locator" : "122:42-122:106",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                  "name" : "Right eye Diabetic retinopathy severity level by Ophthalmoscopy",
                                  "type" : "CodeRef",
@@ -3509,7 +3635,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "122:5-123:89",
+                     "locator" : "123:5-124:89",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -3523,7 +3649,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "122:11-122:87",
+                        "locator" : "123:11-123:87",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
                         "annotation" : [ ],
@@ -3533,14 +3659,14 @@
                            "annotation" : [ ]
                         } ],
                         "code" : {
-                           "locator" : "122:11-122:46",
+                           "locator" : "123:11-123:46",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                            "strict" : false,
                            "type" : "As",
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : {
-                              "locator" : "122:11-122:35",
+                              "locator" : "123:11-123:35",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -3607,7 +3733,7 @@
                               } ]
                            },
                            "asTypeSpecifier" : {
-                              "locator" : "122:40-122:46",
+                              "locator" : "123:40-123:46",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
                               "type" : "NamedTypeSpecifier",
@@ -3615,14 +3741,14 @@
                            }
                         },
                         "valueset" : {
-                           "locator" : "122:51-122:87",
+                           "locator" : "123:51-123:87",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Diabetic Retinopathy Severity Level",
                            "preserve" : true,
                            "annotation" : [ ]
                         }
                      }, {
-                        "locator" : "123:11-123:89",
+                        "locator" : "124:11-124:89",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "precision" : "Day",
                         "type" : "IncludedIn",
@@ -3645,7 +3771,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "123:11-123:54",
+                           "locator" : "124:11-124:54",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -3693,7 +3819,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "123:11-123:39",
+                              "locator" : "124:11-124:39",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -3732,7 +3858,7 @@
                               } ]
                            } ]
                         }, {
-                           "locator" : "123:70-123:89",
+                           "locator" : "124:70-124:89",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "annotation" : [ ],
@@ -3751,14 +3877,14 @@
                }
             }
          }, {
-            "locator" : "115:1-118:157",
+            "locator" : "116:1-119:157",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Right Eye No Retinopathy in Year Prior",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "116:3-118:157",
+               "locator" : "117:3-119:157",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -3772,7 +3898,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "116:10-118:157",
+                  "locator" : "117:10-119:157",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -3785,7 +3911,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "116:10-116:161",
+                     "locator" : "117:10-117:161",
                      "alias" : "RightEyeNoRetinopathy",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -3798,7 +3924,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "116:10-116:139",
+                        "locator" : "117:10-117:139",
                         "name" : "isPhysicalExamPerformed",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -3822,7 +3948,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "116:12-116:109",
+                           "locator" : "117:12-117:109",
                            "dataType" : "{http://hl7.org/fhir}Observation",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result",
                            "codeProperty" : "code",
@@ -3843,7 +3969,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "116:42-116:106",
+                                 "locator" : "117:42-117:106",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                  "name" : "Right eye Diabetic retinopathy severity level by Ophthalmoscopy",
                                  "type" : "CodeRef",
@@ -3860,7 +3986,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "117:5-118:157",
+                     "locator" : "118:5-119:157",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -3874,7 +4000,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "117:11-117:65",
+                        "locator" : "118:11-118:65",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equivalent",
                         "annotation" : [ ],
@@ -3893,7 +4019,7 @@
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : {
-                              "locator" : "117:11-117:37",
+                              "locator" : "118:11-118:37",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -3968,7 +4094,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : {
-                              "locator" : "117:41-117:65",
+                              "locator" : "118:41-118:65",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                               "name" : "No apparent retinopathy",
                               "type" : "CodeRef",
@@ -3976,7 +4102,7 @@
                            }
                         } ]
                      }, {
-                        "locator" : "118:11-118:157",
+                        "locator" : "119:11-119:157",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "precision" : "Day",
                         "type" : "IncludedIn",
@@ -3999,7 +4125,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "118:11-118:56",
+                           "locator" : "119:11-119:56",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -4047,7 +4173,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "118:11-118:41",
+                              "locator" : "119:11-119:41",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -4086,7 +4212,7 @@
                               } ]
                            } ]
                         }, {
-                           "locator" : "118:72-118:157",
+                           "locator" : "119:72-119:157",
                            "lowClosed" : true,
                            "highClosed" : true,
                            "type" : "Interval",
@@ -4101,7 +4227,7 @@
                               }
                            },
                            "low" : {
-                              "locator" : "118:81-118:118",
+                              "locator" : "119:81-119:118",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Subtract",
                               "annotation" : [ ],
@@ -4115,7 +4241,7 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : [ {
-                                 "locator" : "118:81-118:109",
+                                 "locator" : "119:81-119:109",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
                                  "annotation" : [ ],
@@ -4129,7 +4255,7 @@
                                     }
                                  } ],
                                  "operand" : {
-                                    "locator" : "118:90-118:109",
+                                    "locator" : "119:90-119:109",
                                     "name" : "Measurement Period",
                                     "type" : "ParameterRef",
                                     "annotation" : [ ],
@@ -4144,7 +4270,7 @@
                                     }
                                  }
                               }, {
-                                 "locator" : "118:113-118:118",
+                                 "locator" : "119:113-119:118",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "value" : 1,
                                  "unit" : "year",
@@ -4153,7 +4279,7 @@
                               } ]
                            },
                            "high" : {
-                              "locator" : "118:121-118:156",
+                              "locator" : "119:121-119:156",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Subtract",
                               "annotation" : [ ],
@@ -4167,7 +4293,7 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : [ {
-                                 "locator" : "118:121-118:147",
+                                 "locator" : "119:121-119:147",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "End",
                                  "annotation" : [ ],
@@ -4181,7 +4307,7 @@
                                     }
                                  } ],
                                  "operand" : {
-                                    "locator" : "118:128-118:147",
+                                    "locator" : "119:128-119:147",
                                     "name" : "Measurement Period",
                                     "type" : "ParameterRef",
                                     "annotation" : [ ],
@@ -4196,7 +4322,7 @@
                                     }
                                  }
                               }, {
-                                 "locator" : "118:151-118:156",
+                                 "locator" : "119:151-119:156",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "value" : 1,
                                  "unit" : "year",
@@ -4210,14 +4336,14 @@
                }
             }
          }, {
-            "locator" : "105:1-108:156",
+            "locator" : "106:1-109:156",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Left Eye No Retinopathy in Year Prior",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "106:3-108:156",
+               "locator" : "107:3-109:156",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "annotation" : [ ],
@@ -4231,7 +4357,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "106:10-108:156",
+                  "locator" : "107:10-109:156",
                   "type" : "Query",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -4244,7 +4370,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "106:10-106:159",
+                     "locator" : "107:10-107:159",
                      "alias" : "LeftEyeNoRetinopathy",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
@@ -4257,7 +4383,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "106:10-106:138",
+                        "locator" : "107:10-107:138",
                         "name" : "isPhysicalExamPerformed",
                         "libraryName" : "Status",
                         "type" : "FunctionRef",
@@ -4281,7 +4407,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "106:12-106:108",
+                           "locator" : "107:12-107:108",
                            "dataType" : "{http://hl7.org/fhir}Observation",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result",
                            "codeProperty" : "code",
@@ -4302,7 +4428,7 @@
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
-                                 "locator" : "106:42-106:105",
+                                 "locator" : "107:42-107:105",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                  "name" : "Left eye Diabetic retinopathy severity level by Ophthalmoscopy",
                                  "type" : "CodeRef",
@@ -4319,7 +4445,7 @@
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "107:5-108:156",
+                     "locator" : "108:5-109:156",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -4333,7 +4459,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "107:11-107:64",
+                        "locator" : "108:11-108:64",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equivalent",
                         "annotation" : [ ],
@@ -4352,7 +4478,7 @@
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : {
-                              "locator" : "107:11-107:36",
+                              "locator" : "108:11-108:36",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -4427,7 +4553,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : {
-                              "locator" : "107:40-107:64",
+                              "locator" : "108:40-108:64",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                               "name" : "No apparent retinopathy",
                               "type" : "CodeRef",
@@ -4435,7 +4561,7 @@
                            }
                         } ]
                      }, {
-                        "locator" : "108:11-108:156",
+                        "locator" : "109:11-109:156",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "precision" : "Day",
                         "type" : "IncludedIn",
@@ -4458,7 +4584,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "108:11-108:55",
+                           "locator" : "109:11-109:55",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -4506,7 +4632,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "108:11-108:40",
+                              "locator" : "109:11-109:40",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -4545,7 +4671,7 @@
                               } ]
                            } ]
                         }, {
-                           "locator" : "108:71-108:156",
+                           "locator" : "109:71-109:156",
                            "lowClosed" : true,
                            "highClosed" : true,
                            "type" : "Interval",
@@ -4560,7 +4686,7 @@
                               }
                            },
                            "low" : {
-                              "locator" : "108:80-108:117",
+                              "locator" : "109:80-109:117",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Subtract",
                               "annotation" : [ ],
@@ -4574,7 +4700,7 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : [ {
-                                 "locator" : "108:80-108:108",
+                                 "locator" : "109:80-109:108",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
                                  "annotation" : [ ],
@@ -4588,7 +4714,7 @@
                                     }
                                  } ],
                                  "operand" : {
-                                    "locator" : "108:89-108:108",
+                                    "locator" : "109:89-109:108",
                                     "name" : "Measurement Period",
                                     "type" : "ParameterRef",
                                     "annotation" : [ ],
@@ -4603,7 +4729,7 @@
                                     }
                                  }
                               }, {
-                                 "locator" : "108:112-108:117",
+                                 "locator" : "109:112-109:117",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "value" : 1,
                                  "unit" : "year",
@@ -4612,7 +4738,7 @@
                               } ]
                            },
                            "high" : {
-                              "locator" : "108:120-108:155",
+                              "locator" : "109:120-109:155",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Subtract",
                               "annotation" : [ ],
@@ -4626,7 +4752,7 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : [ {
-                                 "locator" : "108:120-108:146",
+                                 "locator" : "109:120-109:146",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "End",
                                  "annotation" : [ ],
@@ -4640,7 +4766,7 @@
                                     }
                                  } ],
                                  "operand" : {
-                                    "locator" : "108:127-108:146",
+                                    "locator" : "109:127-109:146",
                                     "name" : "Measurement Period",
                                     "type" : "ParameterRef",
                                     "annotation" : [ ],
@@ -4655,7 +4781,7 @@
                                     }
                                  }
                               }, {
-                                 "locator" : "108:150-108:155",
+                                 "locator" : "109:150-109:155",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "value" : 1,
                                  "unit" : "year",
@@ -4669,14 +4795,14 @@
                }
             }
          }, {
-            "locator" : "130:1-139:5",
+            "locator" : "131:1-140:5",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Retinal Exam Finding with Retinopathy Severity Level in Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "131:3-139:5",
+               "locator" : "132:3-140:5",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "annotation" : [ ],
@@ -4690,7 +4816,7 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "131:3-136:5",
+                  "locator" : "132:3-137:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "annotation" : [ ],
@@ -4704,7 +4830,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "131:3-133:3",
+                     "locator" : "132:3-134:3",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -4718,20 +4844,20 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "131:5-131:30",
+                        "locator" : "132:5-132:30",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Has Left Eye Retinopathy",
                         "type" : "ExpressionRef",
                         "annotation" : [ ]
                      }, {
-                        "locator" : "132:11-132:37",
+                        "locator" : "133:11-133:37",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Has Right Eye Retinopathy",
                         "type" : "ExpressionRef",
                         "annotation" : [ ]
                      } ]
                   }, {
-                     "locator" : "134:8-136:5",
+                     "locator" : "135:8-137:5",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -4745,13 +4871,13 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "134:10-134:35",
+                        "locator" : "135:10-135:35",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Has Left Eye Retinopathy",
                         "type" : "ExpressionRef",
                         "annotation" : [ ]
                      }, {
-                        "locator" : "135:13-135:56",
+                        "locator" : "136:13-136:56",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Has Right Eye No Retinopathy in Year Prior",
                         "type" : "ExpressionRef",
@@ -4759,7 +4885,7 @@
                      } ]
                   } ]
                }, {
-                  "locator" : "137:8-139:5",
+                  "locator" : "138:8-140:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "annotation" : [ ],
@@ -4773,13 +4899,13 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "137:10-137:36",
+                     "locator" : "138:10-138:36",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Has Right Eye Retinopathy",
                      "type" : "ExpressionRef",
                      "annotation" : [ ]
                   }, {
-                     "locator" : "138:13-138:55",
+                     "locator" : "139:13-139:55",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Has Left Eye No Retinopathy in Year Prior",
                      "type" : "ExpressionRef",
@@ -4788,14 +4914,14 @@
                } ]
             }
          }, {
-            "locator" : "125:1-128:3",
+            "locator" : "126:1-129:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Retinal Exam Finding with No Retinopathy Severity Level in Year Prior",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "126:3-128:3",
+               "locator" : "127:3-129:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "annotation" : [ ],
@@ -4809,13 +4935,13 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "126:5-126:47",
+                  "locator" : "127:5-127:47",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Has Left Eye No Retinopathy in Year Prior",
                   "type" : "ExpressionRef",
                   "annotation" : [ ]
                }, {
-                  "locator" : "127:11-127:54",
+                  "locator" : "128:11-128:54",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Has Right Eye No Retinopathy in Year Prior",
                   "type" : "ExpressionRef",
@@ -4823,14 +4949,14 @@
                } ]
             }
          }, {
-            "locator" : "69:1-78:78",
+            "locator" : "70:1-79:78",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "70:3-78:78",
+               "locator" : "71:3-79:78",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "annotation" : [ ],
@@ -4844,7 +4970,7 @@
                   "annotation" : [ ]
                } ],
                "operand" : [ {
-                  "locator" : "70:3-77:83",
+                  "locator" : "71:3-78:83",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "annotation" : [ ],
@@ -4858,7 +4984,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "70:3-76:50",
+                     "locator" : "71:3-77:50",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "annotation" : [ ],
@@ -4872,7 +4998,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "70:3-75:5",
+                        "locator" : "71:3-76:5",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Or",
                         "annotation" : [ ],
@@ -4886,7 +5012,7 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : [ {
-                           "locator" : "70:3-72:3",
+                           "locator" : "71:3-73:3",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "annotation" : [ ],
@@ -4900,20 +5026,20 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "70:5-70:57",
+                              "locator" : "71:5-71:57",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "name" : "Diabetic Retinopathy Overlapping Measurement Period",
                               "type" : "ExpressionRef",
                               "annotation" : [ ]
                            }, {
-                              "locator" : "71:11-71:50",
+                              "locator" : "72:11-72:50",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "name" : "Retinal Exam in Measurement Period",
                               "type" : "ExpressionRef",
                               "annotation" : [ ]
                            } ]
                         }, {
-                           "locator" : "73:8-75:5",
+                           "locator" : "74:8-76:5",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "annotation" : [ ],
@@ -4927,7 +5053,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "73:10-73:70",
+                              "locator" : "74:10-74:70",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Not",
                               "annotation" : [ ],
@@ -4937,14 +5063,14 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : {
-                                 "locator" : "73:14-73:70",
+                                 "locator" : "74:14-74:70",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "name" : "Diabetic Retinopathy Overlapping Measurement Period",
                                  "type" : "ExpressionRef",
                                  "annotation" : [ ]
                               }
                            }, {
-                              "locator" : "74:13-74:66",
+                              "locator" : "75:13-75:66",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "name" : "Retinal Exam in Measurement Period or Year Prior",
                               "type" : "ExpressionRef",
@@ -4952,21 +5078,21 @@
                            } ]
                         } ]
                      }, {
-                        "locator" : "76:8-76:50",
+                        "locator" : "77:8-77:50",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Autonomous Eye Exam in Measurement Period",
                         "type" : "ExpressionRef",
                         "annotation" : [ ]
                      } ]
                   }, {
-                     "locator" : "77:8-77:83",
+                     "locator" : "78:8-78:83",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Retinal Exam Finding with Retinopathy Severity Level in Measurement Period",
                      "type" : "ExpressionRef",
                      "annotation" : [ ]
                   } ]
                }, {
-                  "locator" : "78:8-78:78",
+                  "locator" : "79:8-79:78",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Retinal Exam Finding with No Retinopathy Severity Level in Year Prior",
                   "type" : "ExpressionRef",
@@ -4974,7 +5100,7 @@
                } ]
             }
          }, {
-            "locator" : "141:1-142:21",
+            "locator" : "142:1-143:21",
             "name" : "SDE Ethnicity",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -5005,7 +5131,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "142:3-142:21",
+               "locator" : "143:3-143:21",
                "name" : "SDE Ethnicity",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -5037,7 +5163,7 @@
                }
             }
          }, {
-            "locator" : "144:1-145:17",
+            "locator" : "145:1-146:17",
             "name" : "SDE Payer",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -5072,7 +5198,7 @@
                }
             },
             "expression" : {
-               "locator" : "145:3-145:17",
+               "locator" : "146:3-146:17",
                "name" : "SDE Payer",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -5108,7 +5234,7 @@
                }
             }
          }, {
-            "locator" : "147:1-148:16",
+            "locator" : "148:1-149:16",
             "name" : "SDE Race",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -5139,7 +5265,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "148:3-148:16",
+               "locator" : "149:3-149:16",
                "name" : "SDE Race",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -5171,14 +5297,14 @@
                }
             }
          }, {
-            "locator" : "150:1-151:15",
+            "locator" : "151:1-152:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "SDE Sex",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "151:3-151:15",
+               "locator" : "152:3-152:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "SDE Sex",
                "libraryName" : "SDE",
