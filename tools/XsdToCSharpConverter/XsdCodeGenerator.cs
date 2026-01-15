@@ -329,6 +329,9 @@ internal class XsdCodeGenerator
 
     private void GenerateMembers(CodeTypeDeclaration codeType, XmlSchemaComplexType complexType)
     {
+        // Track attributes with default values for constructor initialization
+        var defaultValues = new List<(string fieldName, string defaultValue)>();
+
         var particle = complexType.Particle ?? complexType.ContentModel?.Content switch
         {
             XmlSchemaComplexContentExtension ext => ext.Particle,
@@ -377,8 +380,14 @@ internal class XsdCodeGenerator
         {
             if (attr is XmlSchemaAttribute attribute)
             {
-                GenerateAttributeProperty(codeType, attribute);
+                GenerateAttributeProperty(codeType, attribute, defaultValues);
             }
+        }
+
+        // Generate constructor if there are default values to initialize
+        if (defaultValues.Count > 0)
+        {
+            GenerateConstructor(codeType, defaultValues);
         }
     }
 
@@ -456,7 +465,7 @@ internal class XsdCodeGenerator
         codeType.Members.Add(property);
     }
 
-    private void GenerateAttributeProperty(CodeTypeDeclaration codeType, XmlSchemaAttribute attribute)
+    private void GenerateAttributeProperty(CodeTypeDeclaration codeType, XmlSchemaAttribute attribute, List<(string fieldName, string defaultValue)> defaultValues)
     {
         // Preserve original casing from XSD (default behavior)
         var propertyName = attribute.Name!;
@@ -467,6 +476,12 @@ internal class XsdCodeGenerator
         var field = new CodeMemberField(GetCodeTypeReference(propertyType), fieldName);
         field.Attributes = MemberAttributes.Private;
         codeType.Members.Add(field);
+
+        // Track default value for constructor initialization
+        if (!string.IsNullOrEmpty(attribute.DefaultValue))
+        {
+            defaultValues.Add((fieldName, attribute.DefaultValue));
+        }
 
         // Check if we need a *Specified field for optional value types
         bool needsSpecifiedField = IsOptionalValueType(attribute, propertyType);
@@ -499,8 +514,31 @@ internal class XsdCodeGenerator
             new CodePropertySetValueReferenceExpression()
         ));
 
-        // Add XML attribute
-        property.CustomAttributes.Add(new CodeAttributeDeclaration("System.Xml.Serialization.XmlAttributeAttribute"));
+        // Add XML attribute with DataType if needed
+        var xmlAttr = new CodeAttributeDeclaration("System.Xml.Serialization.XmlAttributeAttribute");
+        
+        // Add DataType parameter for specific XSD types
+        if (attribute.SchemaTypeName != null && !attribute.SchemaTypeName.IsEmpty)
+        {
+            var dataType = GetXmlDataType(attribute.SchemaTypeName);
+            if (!string.IsNullOrEmpty(dataType))
+            {
+                xmlAttr.Arguments.Add(new CodeAttributeArgument("DataType", 
+                    new CodePrimitiveExpression(dataType)));
+            }
+        }
+        
+        property.CustomAttributes.Add(xmlAttr);
+
+        // Add DefaultValueAttribute if there's a default value
+        if (!string.IsNullOrEmpty(attribute.DefaultValue))
+        {
+            var defaultValueAttr = CreateDefaultValueAttribute(attribute.DefaultValue, propertyType);
+            if (defaultValueAttr != null)
+            {
+                property.CustomAttributes.Add(defaultValueAttr);
+            }
+        }
 
         // Add remarks comment
         property.Comments.Add(new CodeCommentStatement("<remarks/>", true));
@@ -895,5 +933,158 @@ internal class XsdCodeGenerator
             "object[]" => new CodeTypeReference(typeof(object[])),
             _ => new CodeTypeReference(typeName)
         };
+    }
+
+    private void GenerateConstructor(CodeTypeDeclaration codeType, List<(string fieldName, string defaultValue)> defaultValues)
+    {
+        // Create parameterless constructor
+        var constructor = new CodeConstructor
+        {
+            Attributes = MemberAttributes.Public
+        };
+
+        // Initialize fields with default values
+        foreach (var (fieldName, defaultValue) in defaultValues)
+        {
+            // We need to find the field to get its type
+            var field = codeType.Members.OfType<CodeMemberField>()
+                .FirstOrDefault(f => f.Name == fieldName);
+            
+            if (field != null)
+            {
+                CodeExpression valueExpression;
+                var fieldType = field.Type.BaseType;
+
+                // Generate appropriate value expression based on type
+                if (fieldType == "System.Boolean" || fieldType == "bool")
+                {
+                    valueExpression = new CodePrimitiveExpression(bool.Parse(defaultValue));
+                }
+                else if (fieldType == "System.Int32" || fieldType == "int")
+                {
+                    valueExpression = new CodePrimitiveExpression(int.Parse(defaultValue));
+                }
+                else if (fieldType == "System.Int64" || fieldType == "long")
+                {
+                    valueExpression = new CodePrimitiveExpression(long.Parse(defaultValue));
+                }
+                else if (fieldType == "System.Decimal" || fieldType == "decimal")
+                {
+                    valueExpression = new CodePrimitiveExpression(decimal.Parse(defaultValue));
+                }
+                else if (fieldType == "System.Double" || fieldType == "double")
+                {
+                    valueExpression = new CodePrimitiveExpression(double.Parse(defaultValue));
+                }
+                else if (fieldType == "System.Single" || fieldType == "float")
+                {
+                    valueExpression = new CodePrimitiveExpression(float.Parse(defaultValue));
+                }
+                else if (fieldType == "System.String" || fieldType == "string")
+                {
+                    valueExpression = new CodePrimitiveExpression(defaultValue);
+                }
+                else
+                {
+                    // For enum types and other types, use EnumType.EnumValue syntax
+                    valueExpression = new CodeFieldReferenceExpression(
+                        new CodeTypeReferenceExpression(fieldType),
+                        defaultValue);
+                }
+
+                constructor.Statements.Add(new CodeAssignStatement(
+                    new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName),
+                    valueExpression
+                ));
+            }
+        }
+
+        codeType.Members.Add(constructor);
+    }
+
+    private string? GetXmlDataType(XmlQualifiedName typeName)
+    {
+        // Map XML Schema data types to their XmlAttributeAttribute DataType values
+        if (typeName.Namespace == "http://www.w3.org/2001/XMLSchema")
+        {
+            return typeName.Name switch
+            {
+                "anyURI" => "anyURI",
+                "base64Binary" => "base64Binary",
+                "date" => "date",
+                "dateTime" => "dateTime",
+                "duration" => "duration",
+                "ENTITIES" => "ENTITIES",
+                "ENTITY" => "ENTITY",
+                "gDay" => "gDay",
+                "gMonth" => "gMonth",
+                "gMonthDay" => "gMonthDay",
+                "gYear" => "gYear",
+                "gYearMonth" => "gYearMonth",
+                "hexBinary" => "hexBinary",
+                "ID" => "ID",
+                "IDREF" => "IDREF",
+                "IDREFS" => "IDREFS",
+                "language" => "language",
+                "Name" => "Name",
+                "NCName" => "NCName",
+                "negativeInteger" => "negativeInteger",
+                "NMTOKEN" => "NMTOKEN",
+                "NMTOKENS" => "NMTOKENS",
+                "nonNegativeInteger" => "nonNegativeInteger",
+                "nonPositiveInteger" => "nonPositiveInteger",
+                "normalizedString" => "normalizedString",
+                "NOTATION" => "NOTATION",
+                "positiveInteger" => "positiveInteger",
+                "QName" => "QName",
+                "time" => "time",
+                "token" => "token",
+                "unsignedByte" => "unsignedByte",
+                "unsignedInt" => "unsignedInt",
+                "unsignedLong" => "unsignedLong",
+                "unsignedShort" => "unsignedShort",
+                _ => null
+            };
+        }
+        return null;
+    }
+
+    private CodeAttributeDeclaration? CreateDefaultValueAttribute(string defaultValue, string propertyType)
+    {
+        // Create a DefaultValueAttribute with the appropriate type
+        var attr = new CodeAttributeDeclaration("System.ComponentModel.DefaultValueAttribute");
+
+        // For enum types, we need to use typeof(EnumType).Field syntax
+        // For built-in types, we can use primitive expressions
+        if (propertyType == "bool")
+        {
+            attr.Arguments.Add(new CodeAttributeArgument(
+                new CodePrimitiveExpression(bool.Parse(defaultValue))));
+        }
+        else if (propertyType == "int" || propertyType == "long" || propertyType == "short" || propertyType == "byte")
+        {
+            attr.Arguments.Add(new CodeAttributeArgument(
+                new CodePrimitiveExpression(int.Parse(defaultValue))));
+        }
+        else if (propertyType == "decimal" || propertyType == "float" || propertyType == "double")
+        {
+            attr.Arguments.Add(new CodeAttributeArgument(
+                new CodePrimitiveExpression(decimal.Parse(defaultValue))));
+        }
+        else if (propertyType == "string")
+        {
+            attr.Arguments.Add(new CodeAttributeArgument(
+                new CodePrimitiveExpression(defaultValue)));
+        }
+        else
+        {
+            // For enum types, use typeof(EnumType).EnumValue syntax
+            attr.Arguments.Add(new CodeAttributeArgument(
+                new CodeFieldReferenceExpression(
+                    new CodeTypeReferenceExpression(propertyType),
+                    defaultValue)));
+        }
+
+        return attr;
     }
 }
