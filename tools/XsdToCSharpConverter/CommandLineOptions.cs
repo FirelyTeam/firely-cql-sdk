@@ -11,7 +11,7 @@ namespace XsdToCSharpConverter;
 /// <summary>
 /// Command-line options for the XSD to C# converter.
 /// </summary>
-internal class CommandLineOptions
+internal sealed class CommandLineOptions
 {
     public List<string> SchemaFiles { get; set; } = [];
     public string OutputPath { get; set; } = string.Empty;

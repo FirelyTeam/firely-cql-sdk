@@ -8,14 +8,14 @@
 
 namespace XsdToCSharpConverter;
 
-class Program
+sealed class Program
 {
     static int Main(string[] args)
     {
         try
         {
             var options = ParseArguments(args);
-            if (options == null)
+            if (options is null)
             {
                 PrintUsage();
                 return 1;
@@ -41,31 +41,27 @@ class Program
         var options = new CommandLineOptions();
         var schemaFiles = new List<string>();
 
-        for (int i = 0; i < args.Length; i++)
+        foreach (var arg in args)
         {
-            var arg = args[i];
             var argLower = arg.ToLowerInvariant();
 
-            if (argLower == "/c")
+            switch (argLower)
             {
-                options.GenerateClasses = true;
-            }
-            else if (argLower.StartsWith("/o:"))
-            {
-                options.OutputPath = arg.Substring(3);
-            }
-            else if (argLower.StartsWith("/n:"))
-            {
-                options.Namespace = arg.Substring(3);
-            }
-            else if (argLower.StartsWith("/out:"))
-            {
-                options.OutputFile = arg.Substring(5);
-            }
-            else if (!arg.StartsWith("/") && !arg.StartsWith("-"))
-            {
-                // Schema file
-                schemaFiles.Add(arg);
+                case "/c":
+                    options.GenerateClasses = true;
+                    break;
+                case var _ when argLower.StartsWith("/o:"):
+                    options.OutputPath = arg[3..];
+                    break;
+                case var _ when argLower.StartsWith("/n:"):
+                    options.Namespace = arg[3..];
+                    break;
+                case var _ when argLower.StartsWith("/out:"):
+                    options.OutputFile = arg[5..];
+                    break;
+                case var _ when !arg.StartsWith('/') && !arg.StartsWith('-'):
+                    schemaFiles.Add(arg);
+                    break;
             }
         }
 

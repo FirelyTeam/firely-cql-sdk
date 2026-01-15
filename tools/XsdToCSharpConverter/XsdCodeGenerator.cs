@@ -18,21 +18,13 @@ namespace XsdToCSharpConverter;
 /// <summary>
 /// Native XSD to C# code generator that parses XSD files and generates C# classes.
 /// </summary>
-internal class XsdCodeGenerator
+internal sealed class XsdCodeGenerator(CommandLineOptions options)
 {
-    private readonly CommandLineOptions _options;
-    private readonly Dictionary<XmlQualifiedName, CodeTypeDeclaration> _generatedTypes = new();
-    private readonly Dictionary<string, (string elementName, string? targetNamespace)> _rootElements = new();
-    private readonly Dictionary<string, List<string>> _typeHierarchy = new(); // base type -> list of derived types
+    private readonly Dictionary<XmlQualifiedName, CodeTypeDeclaration> _generatedTypes = [];
+    private readonly Dictionary<string, (string elementName, string? targetNamespace)> _rootElements = [];
+    private readonly Dictionary<string, List<string>> _typeHierarchy = []; // base type -> list of derived types
     private XmlSchemaSet? _schemaSet;
-    private readonly string _toolVersion;
-
-    public XsdCodeGenerator(CommandLineOptions options)
-    {
-        _options = options;
-        // Get the assembly version for the GeneratedCodeAttribute
-        _toolVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0.0";
-    }
+    private readonly string _toolVersion = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0.0";
 
     public void Generate()
     {
@@ -40,7 +32,7 @@ internal class XsdCodeGenerator
         LoadSchemas();
 
         // Generate code namespace
-        var codeNamespace = new CodeNamespace(_options.Namespace);
+        var codeNamespace = new CodeNamespace(options.Namespace);
         AddImports(codeNamespace);
 
         // Generate types from schemas
@@ -55,40 +47,32 @@ internal class XsdCodeGenerator
         _schemaSet = new XmlSchemaSet();
         _schemaSet.ValidationEventHandler += OnValidationEvent;
 
-        foreach (var schemaFile in _options.SchemaFiles)
+        foreach (var schemaFile in options.SchemaFiles)
         {
             if (!File.Exists(schemaFile))
-            {
                 throw new FileNotFoundException($"Schema file not found: {schemaFile}");
-            }
 
             using var reader = XmlReader.Create(schemaFile);
             var schema = XmlSchema.Read(reader, OnValidationEvent);
-            if (schema != null)
-            {
+            if (schema is not null)
                 _schemaSet.Add(schema);
-            }
         }
 
         _schemaSet.Compile();
     }
 
-    private void OnValidationEvent(object? sender, ValidationEventArgs e)
+    private static void OnValidationEvent(object? sender, ValidationEventArgs e)
     {
-        if (e.Severity == XmlSeverityType.Error)
-        {
+        if (e.Severity is XmlSeverityType.Error)
             Console.Error.WriteLine($"Schema Error: {e.Message}");
-        }
     }
 
-    private void AddImports(CodeNamespace codeNamespace)
-    {
+    private static void AddImports(CodeNamespace codeNamespace) =>
         codeNamespace.Imports.Add(new CodeNamespaceImport("System.Xml.Serialization"));
-    }
 
     private void GenerateTypes(CodeNamespace codeNamespace)
     {
-        if (_schemaSet == null) return;
+        if (_schemaSet is null) return;
 
         // First pass: Track global elements that reference named types for XmlRootAttribute
         // Also build a list of type names referenced by global elements (for ordering)
@@ -180,10 +164,10 @@ internal class XsdCodeGenerator
         {
             // Find the base type declaration
             var baseType = _generatedTypes.Values.FirstOrDefault(t => t.Name == baseTypeName);
-            if (baseType == null) continue;
+            if (baseType is null) continue;
 
             // Add XmlIncludeAttribute for each derived type
-            foreach (var derivedTypeName in derivedTypes.OrderBy(n => n))
+            foreach (var derivedTypeName in derivedTypes.Order())
             {
                 var xmlIncludeAttr = new CodeAttributeDeclaration(
                     "System.Xml.Serialization.XmlIncludeAttribute",
@@ -198,16 +182,12 @@ internal class XsdCodeGenerator
     {
         var typeName = elementName ?? complexType.Name;
         if (string.IsNullOrEmpty(typeName))
-        {
             return null;
-        }
 
         // Check if already generated
         var qualifiedName = new XmlQualifiedName(typeName, targetNamespace ?? "");
         if (_generatedTypes.ContainsKey(qualifiedName))
-        {
             return null;
-        }
 
         var codeType = new CodeTypeDeclaration(MakeSafeTypeName(typeName))
         {
@@ -263,18 +243,14 @@ internal class XsdCodeGenerator
     {
         var typeName = simpleType.Name;
         if (string.IsNullOrEmpty(typeName))
-        {
             return null;
-        }
 
         // Check if this is an enum (has enumeration facets)
         if (simpleType.Content is XmlSchemaSimpleTypeRestriction restriction)
         {
             var hasEnumFacets = restriction.Facets.OfType<XmlSchemaEnumerationFacet>().Any();
             if (hasEnumFacets)
-            {
                 return GenerateEnum(simpleType, targetNamespace);
-            }
         }
 
         return null;
@@ -802,28 +778,24 @@ internal class XsdCodeGenerator
         return result;
     }
 
-    private string MakeFieldName(string propertyName)
-    {
+    private string MakeFieldName(string propertyName) =>
         // Convert property name to field name: propertyName -> propertyNameField
         // Preserve the original casing
-        return propertyName + "Field";
-    }
+        propertyName + "Field";
 
     private void WriteOutput(CodeNamespace codeNamespace)
     {
-        var outputFile = string.IsNullOrEmpty(_options.OutputPath)
-            ? _options.OutputFile
-            : Path.Combine(_options.OutputPath, _options.OutputFile);
+        var outputFile = string.IsNullOrEmpty(options.OutputPath)
+            ? options.OutputFile
+            : Path.Combine(options.OutputPath, options.OutputFile);
 
         if (string.IsNullOrEmpty(outputFile))
-        {
-            outputFile = Path.ChangeExtension(_options.SchemaFiles[0], ".cs");
-        }
+            outputFile = Path.ChangeExtension(options.SchemaFiles[0], ".cs");
 
         using var writer = new StreamWriter(outputFile, false, Encoding.UTF8);
         using var provider = CodeDomProvider.CreateProvider("CSharp");
 
-        var options = new CodeGeneratorOptions
+        var codeOptions = new CodeGeneratorOptions
         {
             BracingStyle = "Block",
             IndentString = "    ",
@@ -834,10 +806,10 @@ internal class XsdCodeGenerator
         WriteHeader(writer);
 
         // Generate code
-        provider.GenerateCodeFromNamespace(codeNamespace, writer, options);
+        provider.GenerateCodeFromNamespace(codeNamespace, writer, codeOptions);
     }
 
-    private void WriteHeader(StreamWriter writer)
+    private static void WriteHeader(StreamWriter writer)
     {
         writer.WriteLine("//------------------------------------------------------------------------------");
         writer.WriteLine("// <auto-generated>");
@@ -885,26 +857,24 @@ internal class XsdCodeGenerator
         // Check if the type is an enum (enums are value types in C#)
         // Enums defined in the schema namespace will not be in the built-in list
         // We need to check the schema type
-        if (attribute.SchemaTypeName != null && !attribute.SchemaTypeName.IsEmpty)
+        if (attribute.SchemaTypeName is not null && !attribute.SchemaTypeName.IsEmpty)
         {
             // If it's not an xs: (XML Schema) type, it might be a custom type
             if (attribute.SchemaTypeName.Namespace != "http://www.w3.org/2001/XMLSchema")
             {
                 // Check if this is an enum type by looking it up in the schema
-                if (_schemaSet.GlobalTypes.Contains(attribute.SchemaTypeName))
+                if (_schemaSet?.GlobalTypes.Contains(attribute.SchemaTypeName) == true)
                 {
                     var schemaType = _schemaSet.GlobalTypes[attribute.SchemaTypeName]!;
                     if (schemaType is XmlSchemaSimpleType simpleType &&
                         simpleType.Content is XmlSchemaSimpleTypeRestriction restriction &&
-                        restriction.Facets != null)
+                        restriction.Facets is not null)
                     {
                         // Check if it has enumeration facets
                         foreach (var facet in restriction.Facets)
                         {
                             if (facet is XmlSchemaEnumerationFacet)
-                            {
                                 return true; // This is an enum, needs *Specified
-                            }
                         }
                     }
                 }
