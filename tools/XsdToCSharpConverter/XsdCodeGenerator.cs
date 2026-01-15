@@ -681,11 +681,19 @@ internal class XsdCodeGenerator
     {
         if (isArray && arrayItemName != null)
         {
-            // Add XmlArrayItem attribute with the inner element name
+            // Add XmlArrayItem attribute with the inner element name (for array wrapper pattern)
             property.CustomAttributes.Add(new CodeAttributeDeclaration(
                 "System.Xml.Serialization.XmlArrayItemAttribute",
                 new CodeAttributeArgument(new CodePrimitiveExpression(arrayItemName)),
                 new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(false))
+            ));
+        }
+        else if (isArray)
+        {
+            // Add XmlElement attribute for direct array elements (e.g., annotation[], statement[])
+            property.CustomAttributes.Add(new CodeAttributeDeclaration(
+                "System.Xml.Serialization.XmlElementAttribute",
+                new CodeAttributeArgument(new CodePrimitiveExpression(element.Name))
             ));
         }
     }
