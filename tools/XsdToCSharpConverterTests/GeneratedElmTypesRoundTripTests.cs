@@ -8,14 +8,11 @@
 
 #nullable enable
 
-using Hl7.Cql.CodeGeneration.NET.Toolkit;
-using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Runtime;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace CoreTests;
+namespace XsdToCSharpConverterTests;
 
 /// <summary>
 /// Tests to validate that the generated ELM types (Elm.g.cs) can correctly load and save ELM JSON files.
@@ -24,42 +21,66 @@ namespace CoreTests;
 [TestClass]
 public class GeneratedElmTypesRoundTripTests
 {
-    private static readonly DirectoryInfo DemoLibrarySetElmDirectory = LibrarySetsDirs.Demo.ElmDir;
+    private static DirectoryInfo GetDemoElmDirectory()
+    {
+        // Find the Demo/Elm directory relative to the test project
+        var currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+        while (currentDir != null && !currentDir.Name.Equals("firely-cql-sdk", StringComparison.OrdinalIgnoreCase))
+        {
+            currentDir = currentDir.Parent;
+        }
+
+        if (currentDir == null)
+        {
+            throw new DirectoryNotFoundException("Could not find repository root directory");
+        }
+
+        var demoElmDir = Path.Combine(currentDir.FullName, "Demo", "Elm");
+        if (!Directory.Exists(demoElmDir))
+        {
+            throw new DirectoryNotFoundException($"Demo ELM directory not found at: {demoElmDir}");
+        }
+
+        return new DirectoryInfo(demoElmDir);
+    }
 
     [TestMethod]
     public void LoadAndSave_DemoLibrarySet_ProducesIdenticalJson()
     {
-        // Arrange: Load all ELM files from Demo LibrarySet
-        var elmToolkit = new ElmToolkit()
-            .AddElmFilesFromDirectory(DemoLibrarySetElmDirectory);
+        // Arrange: Load all ELM JSON files from Demo LibrarySet manually
+        var demoLibrarySetElmDirectory = GetDemoElmDirectory();
+        var elmFiles = demoLibrarySetElmDirectory.GetFiles("*.json");
+        Assert.IsTrue(elmFiles.Length > 0, "Should have at least one ELM file in Demo LibrarySet");
 
-        // Get the loaded libraries
-        var loadedLibraries = elmToolkit.ArtifactsById
-            .Select(kv => new
-            {
-                Identifier = kv.Key,
-                Library = kv.Value.InputElmLibrary
-            })
-            .ToList();
-
-        Assert.IsTrue(loadedLibraries.Count > 0, "Should have loaded at least one library from Demo LibrarySet");
-
-        // Act: Save libraries to a temporary directory and re-serialize manually
-        using var tempDir = new TemporaryDirectory();
-        var savedDir = new DirectoryInfo(Path.Combine(tempDir.Path, "SavedElm"));
-        savedDir.Create();
-
-        // Save each library to JSON manually
         var jsonOptions = new JsonSerializerOptions
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             WriteIndented = false
         };
 
-        foreach (var library in loadedLibraries)
+        var loadedLibraries = new List<(string FileName, Library Library)>();
+        
+        // Load each library directly from JSON
+        foreach (var elmFile in elmFiles)
         {
-            var json = JsonSerializer.Serialize(library.Library, jsonOptions);
-            var filePath = Path.Combine(savedDir.FullName, $"{library.Identifier}.json");
+            var json = File.ReadAllText(elmFile.FullName);
+            var library = JsonSerializer.Deserialize<Library>(json, jsonOptions);
+            
+            Assert.IsNotNull(library, $"Library should deserialize successfully from {elmFile.Name}");
+            Assert.IsNotNull(library.identifier, $"Library should have an identifier in {elmFile.Name}");
+            
+            loadedLibraries.Add((elmFile.Name, library));
+        }
+
+        // Act: Save libraries to a temporary directory
+        using var tempDir = new TemporaryDirectory();
+        var savedDir = new DirectoryInfo(Path.Combine(tempDir.Path, "SavedElm"));
+        savedDir.Create();
+
+        foreach (var (fileName, library) in loadedLibraries)
+        {
+            var json = JsonSerializer.Serialize(library, jsonOptions);
+            var filePath = Path.Combine(savedDir.FullName, fileName);
             File.WriteAllText(filePath, json);
         }
 
@@ -68,22 +89,13 @@ public class GeneratedElmTypesRoundTripTests
         Assert.AreEqual(loadedLibraries.Count, savedFiles.Length, "Should have saved same number of files as loaded");
 
         // Assert: Compare original and saved JSON for semantic equivalence
-        foreach (var library in loadedLibraries)
+        foreach (var (fileName, _) in loadedLibraries)
         {
-            var expectedFileName = $"{library.Identifier}.json";
-            var originalFile = DemoLibrarySetElmDirectory.GetFiles(expectedFileName).FirstOrDefault();
-            
-            // If file with version doesn't exist, try without version
-            if (originalFile == null || !originalFile.Exists)
-            {
-                var libraryNameOnly = library.Identifier.ToString().Split('-')[0];
-                originalFile = DemoLibrarySetElmDirectory.GetFiles($"{libraryNameOnly}.json").FirstOrDefault();
-            }
-            
-            var savedFile = new FileInfo(Path.Combine(savedDir.FullName, expectedFileName));
+            var originalFile = new FileInfo(Path.Combine(demoLibrarySetElmDirectory.FullName, fileName));
+            var savedFile = new FileInfo(Path.Combine(savedDir.FullName, fileName));
 
-            Assert.IsTrue(originalFile?.Exists ?? false, $"Original file should exist for: {library.Identifier}");
-            Assert.IsTrue(savedFile.Exists, $"Saved file should exist: {savedFile.FullName}");
+            Assert.IsTrue(originalFile.Exists, $"Original file should exist: {fileName}");
+            Assert.IsTrue(savedFile.Exists, $"Saved file should exist: {fileName}");
 
             // Read and compare JSON semantically (not byte-for-byte, as formatting may differ)
             var originalJson = File.ReadAllText(originalFile.FullName);
@@ -97,19 +109,26 @@ public class GeneratedElmTypesRoundTripTests
             var originalRoot = originalDoc.RootElement;
             var savedRoot = savedDoc.RootElement;
 
-            AssertJsonElementsEqual(originalRoot, savedRoot, library.Identifier.ToString());
+            AssertJsonElementsEqual(originalRoot, savedRoot, fileName);
         }
     }
 
     [TestMethod]
     public void LoadAndRoundTrip_SingleLibrary_PreservesStructure()
     {
-        // Arrange: Load a specific library (FHIRHelpers is a good simple example)
-        var libraryId = new CqlVersionedLibraryIdentifier("FHIRHelpers", "4.0.1");
-        var elmToolkit = new ElmToolkit()
-            .AddElmFileFromDirectory(DemoLibrarySetElmDirectory, libraryId);
+        // Arrange: Load a specific library manually (FHIRHelpers is a good simple example)
+        var demoLibrarySetElmDirectory = GetDemoElmDirectory();
+        var fhirHelpersFile = demoLibrarySetElmDirectory.GetFiles("FHIRHelpers*.json").FirstOrDefault();
+        Assert.IsNotNull(fhirHelpersFile, "FHIRHelpers ELM file should exist in Demo LibrarySet");
 
-        var library = elmToolkit.ArtifactsById[libraryId].InputElmLibrary;
+        var jsonOptions = new JsonSerializerOptions
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            WriteIndented = false
+        };
+
+        var json = File.ReadAllText(fhirHelpersFile.FullName);
+        var library = JsonSerializer.Deserialize<Library>(json, jsonOptions);
 
         // Assert library loaded correctly
         Assert.IsNotNull(library, "Library should be loaded");
@@ -117,13 +136,8 @@ public class GeneratedElmTypesRoundTripTests
         Assert.AreEqual("FHIRHelpers", library.identifier.id, "Library id should match");
 
         // Act: Serialize to JSON and deserialize back
-        var jsonOptions = new JsonSerializerOptions
-        {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            WriteIndented = false
-        };
-        var json = JsonSerializer.Serialize(library, jsonOptions);
-        var roundTrippedLibrary = JsonSerializer.Deserialize<Library>(json, jsonOptions);
+        var serializedJson = JsonSerializer.Serialize(library, jsonOptions);
+        var roundTrippedLibrary = JsonSerializer.Deserialize<Library>(serializedJson, jsonOptions);
 
         // Assert: Verify structure is preserved
         Assert.IsNotNull(roundTrippedLibrary, "Round-tripped library should not be null");
@@ -147,22 +161,35 @@ public class GeneratedElmTypesRoundTripTests
     public void LoadElmLibrary_WithDefaultValues_InitializesCorrectly()
     {
         // This test validates that DefaultValueAttribute and constructor initialization work correctly
-        // by loading a library that uses default values
+        // by loading libraries that use default values
 
-        // Arrange & Act: Load a library from Demo set
-        var elmToolkit = new ElmToolkit()
-            .AddElmFilesFromDirectory(DemoLibrarySetElmDirectory);
+        // Arrange & Act: Load all libraries manually from Demo set
+        var demoLibrarySetElmDirectory = GetDemoElmDirectory();
+        var elmFiles = demoLibrarySetElmDirectory.GetFiles("*.json");
+        Assert.IsTrue(elmFiles.Length > 0, "Should have ELM files in Demo LibrarySet");
 
-        // Assert: Verify at least one library loaded successfully
-        Assert.IsTrue(elmToolkit.ArtifactsById.Count > 0, "Should have loaded libraries");
-
-        // All libraries should have valid identifiers (proving deserialization worked)
-        foreach (var artifact in elmToolkit.ArtifactsById.Values)
+        var jsonOptions = new JsonSerializerOptions
         {
-            Assert.IsNotNull(artifact.InputElmLibrary, "Library should not be null");
-            Assert.IsNotNull(artifact.InputElmLibrary.identifier, "Library identifier should not be null");
-            Assert.IsFalse(string.IsNullOrEmpty(artifact.InputElmLibrary.identifier.id), "Library id should not be empty");
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            WriteIndented = false
+        };
+
+        var loadedCount = 0;
+        
+        foreach (var elmFile in elmFiles)
+        {
+            var json = File.ReadAllText(elmFile.FullName);
+            var library = JsonSerializer.Deserialize<Library>(json, jsonOptions);
+            
+            // Assert: Verify library loaded successfully
+            Assert.IsNotNull(library, $"Library should not be null for {elmFile.Name}");
+            Assert.IsNotNull(library.identifier, $"Library identifier should not be null for {elmFile.Name}");
+            Assert.IsFalse(string.IsNullOrEmpty(library.identifier.id), $"Library id should not be empty for {elmFile.Name}");
+            
+            loadedCount++;
         }
+
+        Assert.IsTrue(loadedCount > 0, "Should have loaded at least one library successfully");
     }
 
     /// <summary>
