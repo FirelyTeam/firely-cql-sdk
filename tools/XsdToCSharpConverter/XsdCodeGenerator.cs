@@ -113,7 +113,7 @@ internal class XsdCodeGenerator
         // xsd.exe generates types referenced by global elements first, then other types in document order
         var rootTypes = new List<CodeTypeDeclaration>();
         var otherTypes = new List<CodeTypeDeclaration>();
-        
+
         // Process all schemas in the schema set (including imported ones)
         foreach (XmlSchema currentSchema in _schemaSet.Schemas())
         {
@@ -127,7 +127,7 @@ internal class XsdCodeGenerator
             {
                 CodeTypeDeclaration? codeType = null;
                 string? typeName = null;
-                
+
                 if (item is XmlSchemaComplexType complexType && !string.IsNullOrEmpty(complexType.Name))
                 {
                     typeName = complexType.Name;
@@ -143,7 +143,7 @@ internal class XsdCodeGenerator
                     typeName = element.Name;
                     codeType = GenerateComplexType(elemComplexType, currentSchema.TargetNamespace, element.Name);
                 }
-                
+
                 if (codeType != null && typeName != null)
                 {
                     // Types referenced by global elements go first
@@ -168,11 +168,11 @@ internal class XsdCodeGenerator
         {
             codeNamespace.Types.Add(type);
         }
-        
+
         // Third pass: Add XmlIncludeAttribute for derived types
         AddXmlIncludeAttributes();
     }
-    
+
     private void AddXmlIncludeAttributes()
     {
         // For each base type, add XmlIncludeAttribute for all derived types
@@ -181,7 +181,7 @@ internal class XsdCodeGenerator
             // Find the base type declaration
             var baseType = _generatedTypes.Values.FirstOrDefault(t => t.Name == baseTypeName);
             if (baseType == null) continue;
-            
+
             // Add XmlIncludeAttribute for each derived type
             foreach (var derivedTypeName in derivedTypes.OrderBy(n => n))
             {
@@ -236,7 +236,7 @@ internal class XsdCodeGenerator
                 if (!string.IsNullOrEmpty(baseTypeName))
                 {
                     codeType.BaseTypes.Add(baseTypeName);
-                    
+
                     // Track the type hierarchy for XmlIncludeAttribute generation
                     if (!_typeHierarchy.ContainsKey(baseTypeName))
                     {
@@ -307,7 +307,7 @@ internal class XsdCodeGenerator
             {
                 if (string.IsNullOrEmpty(facet.Value))
                     continue;
-                    
+
                 var memberName = MakeSafeEnumMemberName(facet.Value);
                 var member = new CodeMemberField(enumType.Name, memberName);
 
@@ -387,13 +387,13 @@ internal class XsdCodeGenerator
         // Use the element name as-is for the property (xsd.exe preserves casing)
         var propertyName = element.Name!;
         var fieldName = MakeFieldName(propertyName);
-        
+
         // Check if this is an array wrapper (element with anonymous complexType containing sequence with maxOccurs)
         string? arrayItemName = null;
         string? propertyType = null;
         bool isArray = false;
-        
-        if (element.SchemaType is XmlSchemaComplexType complexType && 
+
+        if (element.SchemaType is XmlSchemaComplexType complexType &&
             complexType.Particle is XmlSchemaSequence sequence &&
             sequence.Items.Count > 0)
         {
@@ -408,14 +408,14 @@ internal class XsdCodeGenerator
                 propertyType = GetElementType(innerElement);
             }
         }
-        
+
         if (propertyType == null)
         {
             // Normal element or direct array
             propertyType = GetElementType(element);
             isArray = element.MaxOccurs > 1 || element.MaxOccursString == "unbounded";
         }
-        
+
         if (isArray)
         {
             propertyType += "[]";
@@ -512,7 +512,7 @@ internal class XsdCodeGenerator
         {
             var specifiedPropertyName = propertyName + "Specified";
             var specifiedFieldName = fieldName + "Specified";
-            
+
             var specifiedProperty = new CodeMemberProperty
             {
                 Name = specifiedPropertyName,
@@ -548,7 +548,7 @@ internal class XsdCodeGenerator
         // Generate a string[] property with XmlTextAttribute for mixed content
         var fieldName = "textField";
         var propertyName = "Text";
-        
+
         // Add private field
         var field = new CodeMemberField(new CodeTypeReference(typeof(string[])), fieldName)
         {
@@ -618,14 +618,14 @@ internal class XsdCodeGenerator
         {
             var xmlRootAttr = new CodeAttributeDeclaration("System.Xml.Serialization.XmlRootAttribute");
             xmlRootAttr.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(rootInfo.elementName)));
-            
+
             if (!string.IsNullOrEmpty(rootInfo.targetNamespace))
             {
                 xmlRootAttr.Arguments.Add(new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(rootInfo.targetNamespace)));
             }
-            
+
             xmlRootAttr.Arguments.Add(new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(false)));
-            
+
             codeType.CustomAttributes.Add(xmlRootAttr);
         }
     }
@@ -727,7 +727,7 @@ internal class XsdCodeGenerator
     {
         // Preserve original casing from XSD (xsd.exe behavior)
         if (string.IsNullOrEmpty(value)) return value;
-        
+
         var sb = new StringBuilder();
 
         foreach (char c in value)
@@ -740,7 +740,7 @@ internal class XsdCodeGenerator
         }
 
         var result = sb.ToString();
-        
+
         // Enum members can't start with a digit
         if (result.Length > 0 && char.IsDigit(result[0]))
         {
@@ -802,7 +802,6 @@ internal class XsdCodeGenerator
         writer.WriteLine("//     the code is regenerated.");
         writer.WriteLine("// </auto-generated>");
         writer.WriteLine("//------------------------------------------------------------------------------");
-        writer.WriteLine("#pragma warning disable CS1591 // Missing XML comment for publicly visible constructors");
         writer.WriteLine();
     }
 

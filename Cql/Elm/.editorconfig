@@ -1,0 +1,3 @@
+[*.g.cs]
+# Suppress missing XML documentation for generated files
+dotnet_diagnostic.CS1591.severity = none
