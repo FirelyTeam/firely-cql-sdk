@@ -13,6 +13,7 @@ using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
+using Hl7.Cql.Packager.Reporting;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
 using Hl7.Cql.Runtime.IO;
@@ -46,6 +47,7 @@ public class CqlToFhirProgram
     public int Run()
     {
         StringBuilder sbSummary = new StringBuilder();
+        var tracker = new LibraryProcessingTracker();
         try
         {
             var opt = cqlToElmOptions.Value;
@@ -77,6 +79,13 @@ public class CqlToFhirProgram
                 logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
                 return ExitCode.NoCqlLibsInDir;
             }
+
+            // Track loaded CQL libraries
+            foreach (var (libraryId, artifacts) in cqlToolkit.ArtifactsById)
+            {
+                tracker.RecordStatus(libraryId, LibraryProcessingStage.Cql, LibraryStageStatus.Loaded(".cql"));
+            }
+
             sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.ArtifactsById.Count} CQL libraries from directory {opt.CqlInDir}."));
 
             var cqlToolkitResults = cqlToolkit.TranslateToElm()
@@ -89,12 +98,33 @@ public class CqlToFhirProgram
                 return ExitCode.NoElmLibsCompiled;
             }
 
+            // Track ELM translation results
+            var successfulElmLibraries = new HashSet<Runtime.CqlVersionedLibraryIdentifier>(cqlToolkitResults.Select(r => r.libraryIdentifier));
+            foreach (var (libraryId, artifacts) in cqlToolkit.ArtifactsById)
+            {
+                if (successfulElmLibraries.Contains(libraryId))
+                {
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.Elm, LibraryStageStatus.Ok());
+                }
+                else
+                {
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.Elm, LibraryStageStatus.Failed());
+                }
+            }
+
             if (opt.ElmOutDir is not null)
             {
                 cqlToolkit.SaveElmFilesToDirectory(
                     opt.ElmOutDir,
                     writeIndented: packOpt.JsonPretty,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
+
+                // Update status to "saved" for ELM
+                foreach (var libraryId in successfulElmLibraries)
+                {
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.Elm, LibraryStageStatus.Saved(".json"));
+                }
+
                 sbSummary.AppendLine(Invariant($"Saved {cqlToolkitResults.Count} ELM files to directory {opt.ElmOutDir}."));
             }
 
@@ -116,12 +146,34 @@ public class CqlToFhirProgram
                 return ExitCode.NoElmLibsCompiled;
             }
 
+            // Track C# and .NET results
+            var successfulCompilations = new HashSet<Runtime.CqlVersionedLibraryIdentifier>(elmToolkitResults.Select(r => r.libraryIdentifier));
+            foreach (var libraryId in successfulElmLibraries)
+            {
+                if (successfulCompilations.Contains(libraryId))
+                {
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.CSharp, LibraryStageStatus.Ok());
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.DotNet, LibraryStageStatus.Ok());
+                }
+                else
+                {
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.CSharp, LibraryStageStatus.Failed());
+                }
+            }
+
             if (opt.CSharpOutDir is not null)
             {
                 elmToolkit
                     .SaveCSharpFilesToDirectory(
                         opt.CSharpOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
+
+                // Update status to "saved" for C#
+                foreach (var libraryId in successfulCompilations)
+                {
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.CSharp, LibraryStageStatus.Saved(".g.cs"));
+                }
+
                 sbSummary.AppendLine(Invariant($"Saved {elmToolkitResults.Count} C# files (*.g.cs) to directory {opt.CSharpOutDir}."));
             }
 
@@ -134,6 +186,13 @@ public class CqlToFhirProgram
                         opt.PdbOutDir ?? opt.DllOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
+
+                // Update status to "saved" for .NET
+                var extensions = opt.PdbOutDir is not null ? new[] { ".dll", ".pdb" } : new[] { ".dll" };
+                foreach (var libraryId in successfulCompilations)
+                {
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.DotNet, LibraryStageStatus.Saved(extensions));
+                }
 
                 sbSummary.AppendLine(Invariant($"Saved {elmToolkitResults.Count} .NET Assembly files (*.dll) to directory {opt.DllOutDir}."));
                 if (opt.PdbOutDir is not null)
@@ -162,6 +221,18 @@ public class CqlToFhirProgram
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;
                 var measuresCount = packagingResults.Count(r => r.resultArtifacts.FhirMeasure is { });
+
+                // Track FHIR resource generation
+                foreach (var (libraryId, resultArtifacts) in packagingResults)
+                {
+                    var extensions = new List<string> { "Library-*.json" };
+                    if (resultArtifacts.FhirMeasure is not null)
+                    {
+                        extensions.Add("Measure-*.json");
+                    }
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.FhirResource, LibraryStageStatus.Saved([.. extensions]));
+                }
+
                 sbSummary.AppendLine(Invariant($"Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
             }
 
@@ -174,6 +245,13 @@ public class CqlToFhirProgram
                 sbSummary.Insert(0, Environment.NewLine);
                 sbSummary.Insert(0, "Summary:");
                 logger.LogInformation(sbSummary.ToString());
+            }
+
+            // Log detailed report
+            var detailedReport = MarkdownReportFormatter.FormatReport(tracker);
+            if (!string.IsNullOrEmpty(detailedReport))
+            {
+                logger.LogInformation(detailedReport);
             }
         }
     }

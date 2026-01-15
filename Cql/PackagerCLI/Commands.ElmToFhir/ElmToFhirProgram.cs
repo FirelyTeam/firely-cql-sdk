@@ -13,6 +13,7 @@ using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
+using Hl7.Cql.Packager.Reporting;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
 using Hl7.Cql.Runtime.IO;
@@ -33,6 +34,7 @@ internal sealed class ElmToFhirProgram
     public int Run()
     {
         StringBuilder sbSummary = new StringBuilder();
+        var tracker = new LibraryProcessingTracker();
         try
         {
             var opt = elmToFhirOptions.Value;
@@ -69,6 +71,13 @@ internal sealed class ElmToFhirProgram
                 logger.LogInformation($"Exiting. No ELM libraries found in directory {opt.ElmInDir}.");
                 return ExitCode.NoElmLibsInDir;
             }
+
+            // Track loaded ELM libraries
+            foreach (var (libraryId, artifacts) in elmToolkit.ArtifactsById)
+            {
+                tracker.RecordStatus(libraryId, LibraryProcessingStage.Elm, LibraryStageStatus.Loaded(".json"));
+            }
+
             sbSummary.AppendLine(Invariant($"Loaded {elmToolkit.ArtifactsById.Count} ELM libraries from directory {opt.ElmInDir}."));
 
             var elmToolkitResults = elmToolkit
@@ -81,12 +90,36 @@ internal sealed class ElmToFhirProgram
                 return ExitCode.NoElmLibsCompiled;
             }
 
+            // Track C# and .NET results - check which libraries have successful results
+            var successfulLibraries = new HashSet<Runtime.CqlVersionedLibraryIdentifier>(elmToolkitResults.Select(r => r.libraryIdentifier));
+            foreach (var (libraryId, artifacts) in elmToolkit.ArtifactsById)
+            {
+                if (successfulLibraries.Contains(libraryId))
+                {
+                    // Successfully compiled to C# and assemblies
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.CSharp, LibraryStageStatus.Ok());
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.DotNet, LibraryStageStatus.Ok());
+                }
+                else
+                {
+                    // Failed to compile
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.CSharp, LibraryStageStatus.Failed());
+                }
+            }
+
             if (opt.CSharpOutDir is not null)
             {
                 elmToolkit
                     .SaveCSharpFilesToDirectory(
                         opt.CSharpOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
+
+                // Update status to "saved" for C#
+                foreach (var libraryId in successfulLibraries)
+                {
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.CSharp, LibraryStageStatus.Saved(".g.cs"));
+                }
+
                 sbSummary.AppendLine(Invariant($"Saved {elmToolkitResults.Count} C# files (*.g.cs) to directory {opt.CSharpOutDir}."));
             }
 
@@ -98,6 +131,13 @@ internal sealed class ElmToFhirProgram
                         opt.PdbOutDir ?? opt.DllOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
+
+                // Update status to "saved" for .NET
+                var extensions = opt.PdbOutDir is not null ? new[] { ".dll", ".pdb" } : new[] { ".dll" };
+                foreach (var libraryId in successfulLibraries)
+                {
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.DotNet, LibraryStageStatus.Saved(extensions));
+                }
 
                 sbSummary.AppendLine(Invariant($"Saved {elmToolkitResults.Count} .NET Assembly files (*.dll) to directory {opt.DllOutDir}."));
                 if (opt.PdbOutDir is not null)
@@ -115,6 +155,13 @@ internal sealed class ElmToFhirProgram
                     logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
                     return ExitCode.NoCqlLibsInDir;
                 }
+
+                // Track loaded CQL libraries
+                foreach (var (libraryId, artifacts) in cqlToolkit.ArtifactsById)
+                {
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.Cql, LibraryStageStatus.Loaded(".cql"));
+                }
+
                 sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.ArtifactsById.Count} CQL libraries from directory {opt.CqlInDir}."));
 
                 var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
@@ -137,6 +184,18 @@ internal sealed class ElmToFhirProgram
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;
                 var measuresCount = packagingResults.Count(r => r.resultArtifacts.FhirMeasure is { });
+
+                // Track FHIR resource generation
+                foreach (var (libraryId, resultArtifacts) in packagingResults)
+                {
+                    var extensions = new List<string> { "Library-*.json" };
+                    if (resultArtifacts.FhirMeasure is not null)
+                    {
+                        extensions.Add("Measure-*.json");
+                    }
+                    tracker.RecordStatus(libraryId, LibraryProcessingStage.FhirResource, LibraryStageStatus.Saved([.. extensions]));
+                }
+
                 sbSummary.AppendLine(Invariant($"Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
             }
 
@@ -149,6 +208,13 @@ internal sealed class ElmToFhirProgram
                 sbSummary.Insert(0, Environment.NewLine);
                 sbSummary.Insert(0, "Summary:");
                 logger.LogInformation(sbSummary.ToString());
+            }
+
+            // Log detailed report
+            var detailedReport = MarkdownReportFormatter.FormatReport(tracker);
+            if (!string.IsNullOrEmpty(detailedReport))
+            {
+                logger.LogInformation(detailedReport);
             }
         }
     }
