@@ -35,9 +35,11 @@ internal static class LibrarySetsDirs
             return new DirectoryInfo(Path.Combine(paths));
         }
 
-        var solDir = new DirectoryInfo(Directory.GetCurrentDirectory())
-                         .FindParentDirectoryContaining("*.sln")
-                     ?? throw new InvalidOperationException("Could not find an parent directory containing a solution file.");
+        var currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+        var solDir =
+            currentDir.FindParentDirectoryContaining("*.sln")
+            ?? currentDir.FindParentDirectoryContaining("*.slnx")
+            ?? throw new InvalidOperationException("Could not find an parent directory containing a solution file.");
         return solDir;
     }
 }

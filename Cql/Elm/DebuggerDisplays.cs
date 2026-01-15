@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible constructors
+
 namespace Hl7.Cql.Elm
 {
     [DebuggerDisplay("{message}")]
