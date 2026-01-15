@@ -72,10 +72,32 @@ internal static class MarkdownReportFormatter
         {
             sb.Append(CultureInfo.InvariantCulture, $"| {FormatLibraryName(libraryId)} ");
 
-            foreach (var stage in activeStages)
+            var statuses = activeStages.Select(stage => (stage, status: tracker.GetStatus(libraryId, stage))).ToList();
+
+            // Detect if we should mark a failure: if we have a Loaded/Ok/Saved followed by NotProcessed
+            bool hasProcessedStage = false;
+            bool hasFailureMarked = false;
+
+            for (int i = 0; i < statuses.Count; i++)
             {
-                var status = tracker.GetStatus(libraryId, stage);
-                sb.Append(CultureInfo.InvariantCulture, $"| {FormatStatus(status)} ");
+                var (stage, status) = statuses[i];
+
+                // Track if we've seen a processed stage
+                if (status.StatusType is LibraryStatusType.Loaded or LibraryStatusType.Ok or LibraryStatusType.Saved)
+                {
+                    hasProcessedStage = true;
+                }
+
+                // If we had a processed stage and now hit NotProcessed for the first time, mark as failure
+                if (hasProcessedStage && !hasFailureMarked && status.StatusType == LibraryStatusType.NotProcessed)
+                {
+                    sb.Append("| **FAIL** ");
+                    hasFailureMarked = true;
+                }
+                else
+                {
+                    sb.Append(CultureInfo.InvariantCulture, $"| {FormatStatus(status)} ");
+                }
             }
 
             sb.AppendLine("|");
