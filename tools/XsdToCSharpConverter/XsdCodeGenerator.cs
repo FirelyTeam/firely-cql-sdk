@@ -112,20 +112,20 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
                 CodeTypeDeclaration? codeType = null;
                 string? typeName = null;
 
-                if (item is XmlSchemaComplexType complexType && !string.IsNullOrEmpty(complexType.Name))
+                switch (item)
                 {
-                    typeName = complexType.Name;
-                    codeType = GenerateComplexType(complexType, currentSchema.TargetNamespace);
-                }
-                else if (item is XmlSchemaSimpleType simpleType && !string.IsNullOrEmpty(simpleType.Name))
-                {
-                    typeName = simpleType.Name;
-                    codeType = GenerateSimpleType(simpleType, currentSchema.TargetNamespace);
-                }
-                else if (item is XmlSchemaElement element && !string.IsNullOrEmpty(element.Name) && element.SchemaType is XmlSchemaComplexType elemComplexType)
-                {
-                    typeName = element.Name;
-                    codeType = GenerateComplexType(elemComplexType, currentSchema.TargetNamespace, element.Name);
+                    case XmlSchemaComplexType complexType when !string.IsNullOrEmpty(complexType.Name):
+                        typeName = complexType.Name;
+                        codeType = GenerateComplexType(complexType, currentSchema.TargetNamespace);
+                        break;
+                    case XmlSchemaSimpleType simpleType when !string.IsNullOrEmpty(simpleType.Name):
+                        typeName = simpleType.Name;
+                        codeType = GenerateSimpleType(simpleType, currentSchema.TargetNamespace);
+                        break;
+                    case XmlSchemaElement element when !string.IsNullOrEmpty(element.Name) && element.SchemaType is XmlSchemaComplexType elemComplexType:
+                        typeName = element.Name;
+                        codeType = GenerateComplexType(elemComplexType, currentSchema.TargetNamespace, element.Name);
+                        break;
                 }
 
                 if (codeType != null && typeName != null)
@@ -148,6 +148,7 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         {
             codeNamespace.Types.Add(type);
         }
+
         foreach (var type in otherTypes)
         {
             codeNamespace.Types.Add(type);
@@ -178,7 +179,10 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         }
     }
 
-    private CodeTypeDeclaration? GenerateComplexType(XmlSchemaComplexType complexType, string? targetNamespace, string? elementName = null)
+    private CodeTypeDeclaration? GenerateComplexType(
+        XmlSchemaComplexType complexType,
+        string? targetNamespace,
+        string? elementName = null)
     {
         var typeName = elementName ?? complexType.Name;
         if (string.IsNullOrEmpty(typeName))
@@ -193,13 +197,13 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         {
             IsClass = true,
             IsPartial = true,
-            TypeAttributes = System.Reflection.TypeAttributes.Public
+            TypeAttributes = TypeAttributes.Public
         };
 
         // Mark as abstract if the XSD type is abstract
         if (complexType.IsAbstract)
         {
-            codeType.TypeAttributes |= System.Reflection.TypeAttributes.Abstract;
+            codeType.TypeAttributes |= TypeAttributes.Abstract;
         }
 
         _generatedTypes[qualifiedName] = codeType;
@@ -222,6 +226,7 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
                     {
                         _typeHierarchy[baseTypeName] = new List<string>();
                     }
+
                     _typeHierarchy[baseTypeName].Add(typeName);
                 }
             }
@@ -261,7 +266,7 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         var enumType = new CodeTypeDeclaration(MakeSafeTypeName(simpleType.Name!))
         {
             IsEnum = true,
-            TypeAttributes = System.Reflection.TypeAttributes.Public
+            TypeAttributes = TypeAttributes.Public
         };
 
         // Add attributes
@@ -271,9 +276,9 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         if (!string.IsNullOrEmpty(targetNamespace))
         {
             enumType.CustomAttributes.Add(new CodeAttributeDeclaration(
-                "System.Xml.Serialization.XmlTypeAttribute",
-                new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(targetNamespace))
-            ));
+                                              "System.Xml.Serialization.XmlTypeAttribute",
+                                              new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(targetNamespace))
+                                          ));
         }
 
         // Add enum members
@@ -291,9 +296,9 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
                 {
                     // Add XmlEnum attribute if name was changed
                     member.CustomAttributes.Add(new CodeAttributeDeclaration(
-                        "System.Xml.Serialization.XmlEnumAttribute",
-                        new CodeAttributeArgument(new CodePrimitiveExpression(facet.Value))
-                    ));
+                                                    "System.Xml.Serialization.XmlEnumAttribute",
+                                                    new CodeAttributeArgument(new CodePrimitiveExpression(facet.Value))
+                                                ));
                 }
 
                 enumType.Members.Add(member);
@@ -311,37 +316,46 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         var particle = complexType.Particle ?? complexType.ContentModel?.Content switch
         {
             XmlSchemaComplexContentExtension ext => ext.Particle,
-            _ => null
+            _                                    => null
         };
 
-        if (particle is XmlSchemaSequence sequence)
+        switch (particle)
         {
-            foreach (var item in sequence.Items)
+            case XmlSchemaSequence sequence:
             {
-                if (item is XmlSchemaElement element)
+                foreach (var item in sequence.Items)
                 {
-                    GenerateProperty(codeType, element);
+                    if (item is XmlSchemaElement element)
+                    {
+                        GenerateProperty(codeType, element);
+                    }
                 }
+
+                break;
             }
-        }
-        else if (particle is XmlSchemaChoice choice)
-        {
-            foreach (var item in choice.Items)
+            case XmlSchemaChoice choice:
             {
-                if (item is XmlSchemaElement element)
+                foreach (var item in choice.Items)
                 {
-                    GenerateProperty(codeType, element);
+                    if (item is XmlSchemaElement element)
+                    {
+                        GenerateProperty(codeType, element);
+                    }
                 }
+
+                break;
             }
-        }
-        else if (particle is XmlSchemaAll all)
-        {
-            foreach (var item in all.Items)
+            case XmlSchemaAll all:
             {
-                if (item is XmlSchemaElement element)
+                foreach (var item in all.Items)
                 {
-                    GenerateProperty(codeType, element);
+                    if (item is XmlSchemaElement element)
+                    {
+                        GenerateProperty(codeType, element);
+                    }
                 }
+
+                break;
             }
         }
 
@@ -423,14 +437,14 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
 
         // Add getter
         property.GetStatements.Add(new CodeMethodReturnStatement(
-            new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName)
-        ));
+                                       new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName)
+                                   ));
 
         // Add setter
         property.SetStatements.Add(new CodeAssignStatement(
-            new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName),
-            new CodePropertySetValueReferenceExpression()
-        ));
+                                       new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName),
+                                       new CodePropertySetValueReferenceExpression()
+                                   ));
 
         // Add XML serialization attributes
         AddPropertyAttributes(property, element, isArray, arrayItemName);
@@ -441,7 +455,10 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         codeType.Members.Add(property);
     }
 
-    private void GenerateAttributeProperty(CodeTypeDeclaration codeType, XmlSchemaAttribute attribute, List<(string fieldName, string defaultValue)> defaultValues)
+    private void GenerateAttributeProperty(
+        CodeTypeDeclaration codeType,
+        XmlSchemaAttribute attribute,
+        List<(string fieldName, string defaultValue)> defaultValues)
     {
         // Preserve original casing from XSD (default behavior)
         var propertyName = attribute.Name!;
@@ -481,29 +498,29 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
 
         // Add getter
         property.GetStatements.Add(new CodeMethodReturnStatement(
-            new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName)
-        ));
+                                       new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName)
+                                   ));
 
         // Add setter
         property.SetStatements.Add(new CodeAssignStatement(
-            new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName),
-            new CodePropertySetValueReferenceExpression()
-        ));
+                                       new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName),
+                                       new CodePropertySetValueReferenceExpression()
+                                   ));
 
         // Add XML attribute with DataType if needed
         var xmlAttr = new CodeAttributeDeclaration("System.Xml.Serialization.XmlAttributeAttribute");
-        
+
         // Add DataType parameter for specific XSD types
         if (attribute.SchemaTypeName != null && !attribute.SchemaTypeName.IsEmpty)
         {
             var dataType = GetXmlDataType(attribute.SchemaTypeName);
             if (!string.IsNullOrEmpty(dataType))
             {
-                xmlAttr.Arguments.Add(new CodeAttributeArgument("DataType", 
-                    new CodePrimitiveExpression(dataType)));
+                xmlAttr.Arguments.Add(new CodeAttributeArgument("DataType",
+                                                                new CodePrimitiveExpression(dataType)));
             }
         }
-        
+
         property.CustomAttributes.Add(xmlAttr);
 
         // Add DefaultValueAttribute if there's a default value
@@ -538,14 +555,14 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
 
             // Add getter
             specifiedProperty.GetStatements.Add(new CodeMethodReturnStatement(
-                new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), specifiedFieldName)
-            ));
+                                                    new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), specifiedFieldName)
+                                                ));
 
             // Add setter
             specifiedProperty.SetStatements.Add(new CodeAssignStatement(
-                new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), specifiedFieldName),
-                new CodePropertySetValueReferenceExpression()
-            ));
+                                                    new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), specifiedFieldName),
+                                                    new CodePropertySetValueReferenceExpression()
+                                                ));
 
             // Add XmlIgnore attribute
             specifiedProperty.CustomAttributes.Add(new CodeAttributeDeclaration("System.Xml.Serialization.XmlIgnoreAttribute"));
@@ -582,14 +599,14 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
 
         // Add getter
         property.GetStatements.Add(new CodeMethodReturnStatement(
-            new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName)
-        ));
+                                       new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName)
+                                   ));
 
         // Add setter
         property.SetStatements.Add(new CodeAssignStatement(
-            new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName),
-            new CodePropertySetValueReferenceExpression()
-        ));
+                                       new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName),
+                                       new CodePropertySetValueReferenceExpression()
+                                   ));
 
         // Add XmlText attribute
         property.CustomAttributes.Add(new CodeAttributeDeclaration("System.Xml.Serialization.XmlTextAttribute"));
@@ -600,7 +617,10 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         codeType.Members.Add(property);
     }
 
-    private void AddTypeAttributes(CodeTypeDeclaration codeType, XmlSchemaComplexType complexType, string? targetNamespace)
+    private void AddTypeAttributes(
+        CodeTypeDeclaration codeType,
+        XmlSchemaComplexType complexType,
+        string? targetNamespace)
     {
         // Add [GeneratedCode]
         AddGeneratedCodeAttribute(codeType);
@@ -613,17 +633,17 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
 
         // Add [DesignerCategory("code")]
         codeType.CustomAttributes.Add(new CodeAttributeDeclaration(
-            "System.ComponentModel.DesignerCategoryAttribute",
-            new CodeAttributeArgument(new CodePrimitiveExpression("code"))
-        ));
+                                          "System.ComponentModel.DesignerCategoryAttribute",
+                                          new CodeAttributeArgument(new CodePrimitiveExpression("code"))
+                                      ));
 
         // Add [XmlType]
         if (!string.IsNullOrEmpty(targetNamespace))
         {
             codeType.CustomAttributes.Add(new CodeAttributeDeclaration(
-                "System.Xml.Serialization.XmlTypeAttribute",
-                new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(targetNamespace))
-            ));
+                                              "System.Xml.Serialization.XmlTypeAttribute",
+                                              new CodeAttributeArgument("Namespace", new CodePrimitiveExpression(targetNamespace))
+                                          ));
         }
 
         // Add [XmlRoot] if this type is referenced by a global element
@@ -647,36 +667,41 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
     private void AddGeneratedCodeAttribute(CodeTypeDeclaration codeType)
     {
         codeType.CustomAttributes.Add(new CodeAttributeDeclaration(
-            "System.CodeDom.Compiler.GeneratedCodeAttribute",
-            new CodeAttributeArgument(new CodePrimitiveExpression("xsd2cs")),
-            new CodeAttributeArgument(new CodePrimitiveExpression(_toolVersion))
-        ));
+                                          "System.CodeDom.Compiler.GeneratedCodeAttribute",
+                                          new CodeAttributeArgument(new CodePrimitiveExpression("xsd2cs")),
+                                          new CodeAttributeArgument(new CodePrimitiveExpression(_toolVersion))
+                                      ));
     }
 
-    private void AddPropertyAttributes(CodeMemberProperty property, XmlSchemaElement element, bool isArray, string? arrayItemName = null)
+    private void AddPropertyAttributes(
+        CodeMemberProperty property,
+        XmlSchemaElement element,
+        bool isArray,
+        string? arrayItemName = null)
     {
-        if (isArray && arrayItemName != null)
+        switch (isArray)
         {
-            // Add XmlArrayItem attribute with the inner element name (for array wrapper pattern)
-            property.CustomAttributes.Add(new CodeAttributeDeclaration(
-                "System.Xml.Serialization.XmlArrayItemAttribute",
-                new CodeAttributeArgument(new CodePrimitiveExpression(arrayItemName)),
-                new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(false))
-            ));
-        }
-        else if (isArray)
-        {
-            // Add XmlElement attribute for direct array elements (e.g., annotation[], statement[])
-            property.CustomAttributes.Add(new CodeAttributeDeclaration(
-                "System.Xml.Serialization.XmlElementAttribute",
-                new CodeAttributeArgument(new CodePrimitiveExpression(element.Name))
-            ));
+            case true when arrayItemName != null:
+                // Add XmlArrayItem attribute with the inner element name (for array wrapper pattern)
+                property.CustomAttributes.Add(new CodeAttributeDeclaration(
+                                                  "System.Xml.Serialization.XmlArrayItemAttribute",
+                                                  new CodeAttributeArgument(new CodePrimitiveExpression(arrayItemName)),
+                                                  new CodeAttributeArgument("IsNullable", new CodePrimitiveExpression(false))
+                                              ));
+                break;
+            case true:
+                // Add XmlElement attribute for direct array elements (e.g., annotation[], statement[])
+                property.CustomAttributes.Add(new CodeAttributeDeclaration(
+                                                  "System.Xml.Serialization.XmlElementAttribute",
+                                                  new CodeAttributeArgument(new CodePrimitiveExpression(element.Name))
+                                              ));
+                break;
         }
     }
 
     private string GetElementType(XmlSchemaElement element)
     {
-        if (element.SchemaTypeName != null && !element.SchemaTypeName.IsEmpty)
+        if (element.SchemaTypeName is { IsEmpty: false })
         {
             return GetClrTypeName(element.SchemaTypeName);
         }
@@ -691,7 +716,7 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
 
     private string GetAttributeType(XmlSchemaAttribute attribute)
     {
-        if (attribute.SchemaTypeName != null && !attribute.SchemaTypeName.IsEmpty)
+        if (attribute.SchemaTypeName is { IsEmpty: false })
         {
             return GetClrTypeName(attribute.SchemaTypeName);
         }
@@ -706,25 +731,25 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         {
             return xmlTypeName.Name switch
             {
-                "string" => "string",
-                "int" => "int",
-                "integer" => "int",
-                "long" => "long",
-                "short" => "short",
-                "byte" => "byte",
+                "string"       => "string",
+                "int"          => "int",
+                "integer"      => "int",
+                "long"         => "long",
+                "short"        => "short",
+                "byte"         => "byte",
                 "unsignedByte" => "byte",
-                "boolean" => "bool",
-                "decimal" => "decimal",
-                "float" => "float",
-                "double" => "double",
-                "dateTime" => "System.DateTime",
-                "date" => "System.DateTime",
-                "time" => "System.TimeSpan",
-                "duration" => "System.TimeSpan",
-                "anyURI" => "string",
-                "QName" => "System.Xml.XmlQualifiedName",
-                "anyType" => "object",
-                _ => "string"
+                "boolean"      => "bool",
+                "decimal"      => "decimal",
+                "float"        => "float",
+                "double"       => "double",
+                "dateTime"     => "System.DateTime",
+                "date"         => "System.DateTime",
+                "time"         => "System.TimeSpan",
+                "duration"     => "System.TimeSpan",
+                "anyURI"       => "string",
+                "QName"        => "System.Xml.XmlQualifiedName",
+                "anyType"      => "object",
+                _              => "string"
             };
         }
 
@@ -786,8 +811,8 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
     private void WriteOutput(CodeNamespace codeNamespace)
     {
         var outputFile = string.IsNullOrEmpty(options.OutputPath)
-            ? options.OutputFile
-            : Path.Combine(options.OutputPath, options.OutputFile);
+                             ? options.OutputFile
+                             : Path.Combine(options.OutputPath, options.OutputFile);
 
         if (string.IsNullOrEmpty(outputFile))
             outputFile = Path.ChangeExtension(options.SchemaFiles[0], ".cs");
@@ -838,17 +863,17 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         // Reference types (string, QName, etc.) don't need this pattern
         bool isBuiltInValueType = clrTypeName switch
         {
-            "int" => true,
-            "long" => true,
-            "short" => true,
-            "byte" => true,
-            "bool" => true,
-            "decimal" => true,
-            "float" => true,
-            "double" => true,
+            "int"             => true,
+            "long"            => true,
+            "short"           => true,
+            "byte"            => true,
+            "bool"            => true,
+            "decimal"         => true,
+            "float"           => true,
+            "double"          => true,
             "System.DateTime" => true,
             "System.TimeSpan" => true,
-            _ => false
+            _                 => false
         };
 
         if (isBuiltInValueType)
@@ -857,7 +882,7 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         // Check if the type is an enum (enums are value types in C#)
         // Enums defined in the schema namespace will not be in the built-in list
         // We need to check the schema type
-        if (attribute.SchemaTypeName is not null && !attribute.SchemaTypeName.IsEmpty)
+        if (attribute.SchemaTypeName is { IsEmpty: false })
         {
             // If it's not an xs: (XML Schema) type, it might be a custom type
             if (attribute.SchemaTypeName.Namespace != "http://www.w3.org/2001/XMLSchema")
@@ -866,9 +891,13 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
                 if (_schemaSet?.GlobalTypes.Contains(attribute.SchemaTypeName) == true)
                 {
                     var schemaType = _schemaSet.GlobalTypes[attribute.SchemaTypeName]!;
-                    if (schemaType is XmlSchemaSimpleType simpleType &&
-                        simpleType.Content is XmlSchemaSimpleTypeRestriction restriction &&
-                        restriction.Facets is not null)
+                    if (schemaType is XmlSchemaSimpleType
+                        {
+                            Content: XmlSchemaSimpleTypeRestriction
+                            {
+                                Facets: not null
+                            } restriction
+                        })
                     {
                         // Check if it has enumeration facets
                         foreach (var facet in restriction.Facets)
@@ -889,27 +918,27 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         // For built-in C# types, use typeof to avoid escaping keywords
         return typeName switch
         {
-            "string" => new CodeTypeReference(typeof(string)),
-            "int" => new CodeTypeReference(typeof(int)),
-            "long" => new CodeTypeReference(typeof(long)),
-            "short" => new CodeTypeReference(typeof(short)),
-            "byte" => new CodeTypeReference(typeof(byte)),
-            "bool" => new CodeTypeReference(typeof(bool)),
-            "decimal" => new CodeTypeReference(typeof(decimal)),
-            "float" => new CodeTypeReference(typeof(float)),
-            "double" => new CodeTypeReference(typeof(double)),
-            "object" => new CodeTypeReference(typeof(object)),
-            "string[]" => new CodeTypeReference(typeof(string[])),
-            "int[]" => new CodeTypeReference(typeof(int[])),
-            "long[]" => new CodeTypeReference(typeof(long[])),
-            "short[]" => new CodeTypeReference(typeof(short[])),
-            "byte[]" => new CodeTypeReference(typeof(byte[])),
-            "bool[]" => new CodeTypeReference(typeof(bool[])),
+            "string"    => new CodeTypeReference(typeof(string)),
+            "int"       => new CodeTypeReference(typeof(int)),
+            "long"      => new CodeTypeReference(typeof(long)),
+            "short"     => new CodeTypeReference(typeof(short)),
+            "byte"      => new CodeTypeReference(typeof(byte)),
+            "bool"      => new CodeTypeReference(typeof(bool)),
+            "decimal"   => new CodeTypeReference(typeof(decimal)),
+            "float"     => new CodeTypeReference(typeof(float)),
+            "double"    => new CodeTypeReference(typeof(double)),
+            "object"    => new CodeTypeReference(typeof(object)),
+            "string[]"  => new CodeTypeReference(typeof(string[])),
+            "int[]"     => new CodeTypeReference(typeof(int[])),
+            "long[]"    => new CodeTypeReference(typeof(long[])),
+            "short[]"   => new CodeTypeReference(typeof(short[])),
+            "byte[]"    => new CodeTypeReference(typeof(byte[])),
+            "bool[]"    => new CodeTypeReference(typeof(bool[])),
             "decimal[]" => new CodeTypeReference(typeof(decimal[])),
-            "float[]" => new CodeTypeReference(typeof(float[])),
-            "double[]" => new CodeTypeReference(typeof(double[])),
-            "object[]" => new CodeTypeReference(typeof(object[])),
-            _ => new CodeTypeReference(typeName)
+            "float[]"   => new CodeTypeReference(typeof(float[])),
+            "double[]"  => new CodeTypeReference(typeof(double[])),
+            "object[]"  => new CodeTypeReference(typeof(object[])),
+            _           => new CodeTypeReference(typeName)
         };
     }
 
@@ -926,54 +955,56 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         {
             // We need to find the field to get its type
             var field = codeType.Members.OfType<CodeMemberField>()
-                .FirstOrDefault(f => f.Name == fieldName);
-            
+                                .FirstOrDefault(f => f.Name == fieldName);
+
             if (field != null)
             {
                 CodeExpression valueExpression;
                 var fieldType = field.Type.BaseType;
 
-                // Generate appropriate value expression based on type
-                if (fieldType == "System.Boolean" || fieldType == "bool")
+                switch (fieldType)
                 {
-                    valueExpression = new CodePrimitiveExpression(bool.Parse(defaultValue));
-                }
-                else if (fieldType == "System.Int32" || fieldType == "int")
-                {
-                    valueExpression = new CodePrimitiveExpression(int.Parse(defaultValue));
-                }
-                else if (fieldType == "System.Int64" || fieldType == "long")
-                {
-                    valueExpression = new CodePrimitiveExpression(long.Parse(defaultValue));
-                }
-                else if (fieldType == "System.Decimal" || fieldType == "decimal")
-                {
-                    valueExpression = new CodePrimitiveExpression(decimal.Parse(defaultValue));
-                }
-                else if (fieldType == "System.Double" || fieldType == "double")
-                {
-                    valueExpression = new CodePrimitiveExpression(double.Parse(defaultValue));
-                }
-                else if (fieldType == "System.Single" || fieldType == "float")
-                {
-                    valueExpression = new CodePrimitiveExpression(float.Parse(defaultValue));
-                }
-                else if (fieldType == "System.String" || fieldType == "string")
-                {
-                    valueExpression = new CodePrimitiveExpression(defaultValue);
-                }
-                else
-                {
-                    // For enum types and other types, use EnumType.EnumValue syntax
-                    valueExpression = new CodeFieldReferenceExpression(
-                        new CodeTypeReferenceExpression(fieldType),
-                        defaultValue);
+                    // Generate appropriate value expression based on type
+                    case "System.Boolean":
+                    case "bool":
+                        valueExpression = new CodePrimitiveExpression(bool.Parse(defaultValue));
+                        break;
+                    case "System.Int32":
+                    case "int":
+                        valueExpression = new CodePrimitiveExpression(int.Parse(defaultValue));
+                        break;
+                    case "System.Int64":
+                    case "long":
+                        valueExpression = new CodePrimitiveExpression(long.Parse(defaultValue));
+                        break;
+                    case "System.Decimal":
+                    case "decimal":
+                        valueExpression = new CodePrimitiveExpression(decimal.Parse(defaultValue));
+                        break;
+                    case "System.Double":
+                    case "double":
+                        valueExpression = new CodePrimitiveExpression(double.Parse(defaultValue));
+                        break;
+                    case "System.Single":
+                    case "float":
+                        valueExpression = new CodePrimitiveExpression(float.Parse(defaultValue));
+                        break;
+                    case "System.String":
+                    case "string":
+                        valueExpression = new CodePrimitiveExpression(defaultValue);
+                        break;
+                    default:
+                        // For enum types and other types, use EnumType.EnumValue syntax
+                        valueExpression = new CodeFieldReferenceExpression(
+                            new CodeTypeReferenceExpression(fieldType),
+                            defaultValue);
+                        break;
                 }
 
                 constructor.Statements.Add(new CodeAssignStatement(
-                    new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName),
-                    valueExpression
-                ));
+                                               new CodeFieldReferenceExpression(new CodeThisReferenceExpression(), fieldName),
+                                               valueExpression
+                                           ));
             }
         }
 
@@ -987,80 +1018,84 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
         {
             return typeName.Name switch
             {
-                "anyURI" => "anyURI",
-                "base64Binary" => "base64Binary",
-                "date" => "date",
-                "dateTime" => "dateTime",
-                "duration" => "duration",
-                "ENTITIES" => "ENTITIES",
-                "ENTITY" => "ENTITY",
-                "gDay" => "gDay",
-                "gMonth" => "gMonth",
-                "gMonthDay" => "gMonthDay",
-                "gYear" => "gYear",
-                "gYearMonth" => "gYearMonth",
-                "hexBinary" => "hexBinary",
-                "ID" => "ID",
-                "IDREF" => "IDREF",
-                "IDREFS" => "IDREFS",
-                "language" => "language",
-                "Name" => "Name",
-                "NCName" => "NCName",
-                "negativeInteger" => "negativeInteger",
-                "NMTOKEN" => "NMTOKEN",
-                "NMTOKENS" => "NMTOKENS",
+                "anyURI"             => "anyURI",
+                "base64Binary"       => "base64Binary",
+                "date"               => "date",
+                "dateTime"           => "dateTime",
+                "duration"           => "duration",
+                "ENTITIES"           => "ENTITIES",
+                "ENTITY"             => "ENTITY",
+                "gDay"               => "gDay",
+                "gMonth"             => "gMonth",
+                "gMonthDay"          => "gMonthDay",
+                "gYear"              => "gYear",
+                "gYearMonth"         => "gYearMonth",
+                "hexBinary"          => "hexBinary",
+                "ID"                 => "ID",
+                "IDREF"              => "IDREF",
+                "IDREFS"             => "IDREFS",
+                "language"           => "language",
+                "Name"               => "Name",
+                "NCName"             => "NCName",
+                "negativeInteger"    => "negativeInteger",
+                "NMTOKEN"            => "NMTOKEN",
+                "NMTOKENS"           => "NMTOKENS",
                 "nonNegativeInteger" => "nonNegativeInteger",
                 "nonPositiveInteger" => "nonPositiveInteger",
-                "normalizedString" => "normalizedString",
-                "NOTATION" => "NOTATION",
-                "positiveInteger" => "positiveInteger",
-                "QName" => "QName",
-                "time" => "time",
-                "token" => "token",
-                "unsignedByte" => "unsignedByte",
-                "unsignedInt" => "unsignedInt",
-                "unsignedLong" => "unsignedLong",
-                "unsignedShort" => "unsignedShort",
-                _ => null
+                "normalizedString"   => "normalizedString",
+                "NOTATION"           => "NOTATION",
+                "positiveInteger"    => "positiveInteger",
+                "QName"              => "QName",
+                "time"               => "time",
+                "token"              => "token",
+                "unsignedByte"       => "unsignedByte",
+                "unsignedInt"        => "unsignedInt",
+                "unsignedLong"       => "unsignedLong",
+                "unsignedShort"      => "unsignedShort",
+                _                    => null
             };
         }
+
         return null;
     }
 
-    private CodeAttributeDeclaration? CreateDefaultValueAttribute(string defaultValue, string propertyType)
+    private CodeAttributeDeclaration CreateDefaultValueAttribute(string defaultValue, string propertyType)
     {
         // Create a DefaultValueAttribute with the appropriate type
         var attr = new CodeAttributeDeclaration("System.ComponentModel.DefaultValueAttribute");
 
-        // For enum types, we need to use typeof(EnumType).Field syntax
-        // For built-in types, we can use primitive expressions
-        if (propertyType == "bool")
+        switch (propertyType)
         {
-            attr.Arguments.Add(new CodeAttributeArgument(
-                new CodePrimitiveExpression(bool.Parse(defaultValue))));
-        }
-        else if (propertyType == "int" || propertyType == "long" || propertyType == "short" || propertyType == "byte")
-        {
-            attr.Arguments.Add(new CodeAttributeArgument(
-                new CodePrimitiveExpression(int.Parse(defaultValue))));
-        }
-        else if (propertyType == "decimal" || propertyType == "float" || propertyType == "double")
-        {
-            attr.Arguments.Add(new CodeAttributeArgument(
-                new CodePrimitiveExpression(decimal.Parse(defaultValue))));
-        }
-        else if (propertyType == "string")
-        {
-            attr.Arguments.Add(new CodeAttributeArgument(
-                new CodePrimitiveExpression(defaultValue)));
-        }
-        else
-        {
-            // For enum types, use typeof(EnumType).EnumValue syntax
-            attr.Arguments.Add(new CodeAttributeArgument(
-                new CodeFieldReferenceExpression(
-                    new CodeTypeReferenceExpression(propertyType),
-                    defaultValue)));
+            // For enum types, we need to use typeof(EnumType).Field syntax
+            // For built-in types, we can use primitive expressions
+            case "bool":
+                attr.Arguments.Add(new CodeAttributeArgument(
+                                       new CodePrimitiveExpression(bool.Parse(defaultValue))));
+                break;
+            case "int":
+            case "long":
+            case "short":
+            case "byte":
+                attr.Arguments.Add(new CodeAttributeArgument(
+                                       new CodePrimitiveExpression(int.Parse(defaultValue))));
+                break;
+            case "decimal":
+            case "float":
+            case "double":
+                attr.Arguments.Add(new CodeAttributeArgument(
+                                       new CodePrimitiveExpression(decimal.Parse(defaultValue))));
+                break;
+            case "string":
+                attr.Arguments.Add(new CodeAttributeArgument(
+                                       new CodePrimitiveExpression(defaultValue)));
+                break;
+            default:
+                // For enum types, use typeof(EnumType).EnumValue syntax
+                attr.Arguments.Add(new CodeAttributeArgument(
+                                       new CodeFieldReferenceExpression(
+                                           new CodeTypeReferenceExpression(propertyType),
+                                           defaultValue)));
+                break;
         }
 
         return attr;

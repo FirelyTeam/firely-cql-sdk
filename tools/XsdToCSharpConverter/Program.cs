@@ -23,7 +23,7 @@ sealed class Program
 
             var generator = new XsdCodeGenerator(options);
             generator.Generate();
-            
+
             return 0;
         }
         catch (Exception ex)
