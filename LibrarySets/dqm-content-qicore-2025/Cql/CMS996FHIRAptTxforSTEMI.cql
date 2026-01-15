@@ -66,6 +66,7 @@ code "Emergency room": 'ER' from "RoleCode" display 'Emergency room'
 code "Emergency trauma unit": 'ETU' from "RoleCode" display 'Emergency trauma unit'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 

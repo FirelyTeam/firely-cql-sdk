@@ -46,6 +46,7 @@ code "Unlisted preventive medicine service": '99429' from "CPT" display 'Unliste
 code "fulfill": 'fulfill' from "TaskCode" display 'Fulfill the focal request'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 

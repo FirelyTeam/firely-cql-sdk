@@ -49,7 +49,7 @@
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "16:1-16:49",
+            "locator" : "16:1-17:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "annotation" : [ ],
@@ -62,15 +62,141 @@
                   "annotation" : [ ]
                }
             },
+            "default" : {
+               "locator" : "17:11-17:72",
+               "lowClosed" : true,
+               "highClosed" : false,
+               "type" : "Interval",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "annotation" : [ ],
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "low" : {
+                  "locator" : "17:20-17:44",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2026",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  }
+               },
+               "high" : {
+                  "locator" : "17:47-17:71",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2027",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal",
+                     "annotation" : [ ]
+                  }
+               }
+            },
             "parameterTypeSpecifier" : {
                "locator" : "16:32-16:49",
                "type" : "IntervalTypeSpecifier",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
-                  "localId" : "227",
+                  "localId" : "248",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "228",
+                     "localId" : "249",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -139,14 +265,14 @@
       },
       "contexts" : {
          "def" : [ {
-            "locator" : "18:1-18:15",
+            "locator" : "19:1-19:15",
             "name" : "Patient",
             "annotation" : [ ]
          } ]
       },
       "statements" : {
          "def" : [ {
-            "locator" : "18:1-18:15",
+            "locator" : "19:1-19:15",
             "name" : "Patient",
             "context" : "Patient",
             "annotation" : [ ],
@@ -155,7 +281,7 @@
                "annotation" : [ ],
                "signature" : [ ],
                "operand" : {
-                  "locator" : "18:1-18:15",
+                  "locator" : "19:1-19:15",
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
                   "type" : "Retrieve",
@@ -167,7 +293,7 @@
                }
             }
          }, {
-            "locator" : "20:1-21:21",
+            "locator" : "21:1-22:21",
             "name" : "SDE Ethnicity",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -198,7 +324,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "21:3-21:21",
+               "locator" : "22:3-22:21",
                "name" : "SDE Ethnicity",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -230,7 +356,7 @@
                }
             }
          }, {
-            "locator" : "23:1-24:17",
+            "locator" : "24:1-25:17",
             "name" : "SDE Payer",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -265,7 +391,7 @@
                }
             },
             "expression" : {
-               "locator" : "24:3-24:17",
+               "locator" : "25:3-25:17",
                "name" : "SDE Payer",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -301,7 +427,7 @@
                }
             }
          }, {
-            "locator" : "26:1-27:16",
+            "locator" : "27:1-28:16",
             "name" : "SDE Race",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -332,7 +458,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "27:3-27:16",
+               "locator" : "28:3-28:16",
                "name" : "SDE Race",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -364,14 +490,14 @@
                }
             }
          }, {
-            "locator" : "29:1-30:15",
+            "locator" : "30:1-31:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "SDE Sex",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ ],
             "expression" : {
-               "locator" : "30:3-30:15",
+               "locator" : "31:3-31:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "SDE Sex",
                "libraryName" : "SDE",
@@ -379,7 +505,7 @@
                "annotation" : [ ]
             }
          }, {
-            "locator" : "35:1-38:66",
+            "locator" : "36:1-39:66",
             "name" : "Qualifying Encounter During Day of Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -394,7 +520,7 @@
                }
             },
             "expression" : {
-               "locator" : "36:3-38:66",
+               "locator" : "37:3-39:66",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -407,7 +533,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "36:3-36:67",
+                  "locator" : "37:3-37:67",
                   "alias" : "ValidEncounter",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -420,7 +546,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "36:3-36:52",
+                     "locator" : "37:3-37:52",
                      "dataType" : "{http://hl7.org/fhir}Encounter",
                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                      "codeProperty" : "type",
@@ -437,7 +563,7 @@
                         }
                      },
                      "codes" : {
-                        "locator" : "36:17-36:51",
+                        "locator" : "37:17-37:51",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "Encounter to Document Medications",
                         "preserve" : true,
@@ -453,7 +579,7 @@
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "37:5-38:66",
+                  "locator" : "38:5-39:66",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "annotation" : [ ],
@@ -467,7 +593,7 @@
                      "annotation" : [ ]
                   } ],
                   "operand" : [ {
-                     "locator" : "37:11-37:44",
+                     "locator" : "38:11-38:44",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
                      "annotation" : [ ],
@@ -481,7 +607,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "37:11-37:31",
+                        "locator" : "38:11-38:31",
                         "resultTypeName" : "{http://hl7.org/fhir}EncounterStatus",
                         "path" : "value",
                         "type" : "Property",
@@ -493,7 +619,7 @@
                            "annotation" : [ ]
                         }
                      }, {
-                        "locator" : "37:35-37:44",
+                        "locator" : "38:35-38:44",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "finished",
@@ -501,7 +627,7 @@
                         "annotation" : [ ]
                      } ]
                   }, {
-                     "locator" : "38:11-38:66",
+                     "locator" : "39:11-39:66",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "IncludedIn",
@@ -524,7 +650,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "38:11-38:31",
+                        "locator" : "39:11-39:31",
                         "name" : "ToInterval",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
@@ -550,7 +676,7 @@
                            "annotation" : [ ]
                         } ]
                      }, {
-                        "locator" : "38:47-38:66",
+                        "locator" : "39:47-39:66",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "annotation" : [ ],
@@ -568,7 +694,7 @@
                }
             }
          }, {
-            "locator" : "40:1-41:77",
+            "locator" : "41:1-42:77",
             "name" : "Initial Population",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -583,7 +709,7 @@
                }
             },
             "expression" : {
-               "locator" : "41:3-41:77",
+               "locator" : "42:3-42:77",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -596,7 +722,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "41:3-41:77",
+                  "locator" : "42:3-42:77",
                   "alias" : "QualifyingEncounter",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -609,7 +735,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "41:3-41:57",
+                     "locator" : "42:3-42:57",
                      "name" : "Qualifying Encounter During Day of Measurement Period",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -628,7 +754,7 @@
                "relationship" : [ ]
             }
          }, {
-            "locator" : "32:1-33:22",
+            "locator" : "33:1-34:22",
             "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -643,7 +769,7 @@
                }
             },
             "expression" : {
-               "locator" : "33:3-33:22",
+               "locator" : "34:3-34:22",
                "name" : "Initial Population",
                "type" : "ExpressionRef",
                "annotation" : [ ],
@@ -658,7 +784,7 @@
                }
             }
          }, {
-            "locator" : "43:1-48:54",
+            "locator" : "44:1-49:54",
             "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -673,7 +799,7 @@
                }
             },
             "expression" : {
-               "locator" : "44:3-48:54",
+               "locator" : "45:3-49:54",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -686,7 +812,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "44:3-44:77",
+                  "locator" : "45:3-45:77",
                   "alias" : "QualifyingEncounter",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -699,7 +825,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "44:3-44:57",
+                     "locator" : "45:3-45:57",
                      "name" : "Qualifying Encounter During Day of Measurement Period",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -716,7 +842,7 @@
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "locator" : "45:5-48:54",
+                  "locator" : "46:5-49:54",
                   "alias" : "MedicationsDocumented",
                   "type" : "With",
                   "annotation" : [ ],
@@ -730,7 +856,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "45:10-45:72",
+                     "locator" : "46:10-46:72",
                      "dataType" : "{http://hl7.org/fhir}Procedure",
                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure",
                      "codeProperty" : "code",
@@ -751,7 +877,7 @@
                         "annotation" : [ ],
                         "signature" : [ ],
                         "operand" : {
-                           "locator" : "45:22-45:71",
+                           "locator" : "46:22-46:71",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                            "name" : "Documentation of current medications (procedure)",
                            "type" : "CodeRef",
@@ -764,7 +890,7 @@
                      "otherFilter" : [ ]
                   },
                   "suchThat" : {
-                     "locator" : "46:17-48:54",
+                     "locator" : "47:17-49:54",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -778,7 +904,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "46:17-47:69",
+                        "locator" : "47:17-48:69",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "annotation" : [ ],
@@ -792,7 +918,7 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : [ {
-                           "locator" : "46:17-46:110",
+                           "locator" : "47:17-47:110",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "precision" : "Day",
                            "type" : "In",
@@ -811,7 +937,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "46:64-46:69",
+                              "locator" : "47:64-47:69",
                               "type" : "Start",
                               "annotation" : [ ],
                               "signature" : [ {
@@ -824,7 +950,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "46:17-46:62",
+                                 "locator" : "47:17-47:62",
                                  "name" : "toInterval",
                                  "libraryName" : "QICoreCommon",
                                  "type" : "FunctionRef",
@@ -882,7 +1008,7 @@
                                           "annotation" : [ ],
                                           "signature" : [ ],
                                           "operand" : {
-                                             "locator" : "46:17-46:47",
+                                             "locator" : "47:17-47:47",
                                              "name" : "ToValue",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
@@ -939,7 +1065,7 @@
                                              "annotation" : [ ],
                                              "signature" : [ ],
                                              "operand" : {
-                                                "locator" : "46:17-46:47",
+                                                "locator" : "47:17-47:47",
                                                 "name" : "ToValue",
                                                 "libraryName" : "FHIRHelpers",
                                                 "type" : "FunctionRef",
@@ -1027,7 +1153,7 @@
                                           "annotation" : [ ],
                                           "signature" : [ ],
                                           "operand" : {
-                                             "locator" : "46:17-46:47",
+                                             "locator" : "47:17-47:47",
                                              "name" : "ToValue",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
@@ -1092,7 +1218,7 @@
                                              "annotation" : [ ],
                                              "signature" : [ ],
                                              "operand" : {
-                                                "locator" : "46:17-46:47",
+                                                "locator" : "47:17-47:47",
                                                 "name" : "ToValue",
                                                 "libraryName" : "FHIRHelpers",
                                                 "type" : "FunctionRef",
@@ -1190,7 +1316,7 @@
                                           "annotation" : [ ],
                                           "signature" : [ ],
                                           "operand" : {
-                                             "locator" : "46:17-46:47",
+                                             "locator" : "47:17-47:47",
                                              "name" : "ToValue",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
@@ -1247,7 +1373,7 @@
                                              "annotation" : [ ],
                                              "signature" : [ ],
                                              "operand" : {
-                                                "locator" : "46:17-46:47",
+                                                "locator" : "47:17-47:47",
                                                 "name" : "ToValue",
                                                 "libraryName" : "FHIRHelpers",
                                                 "type" : "FunctionRef",
@@ -1335,7 +1461,7 @@
                                           "annotation" : [ ],
                                           "signature" : [ ],
                                           "operand" : {
-                                             "locator" : "46:17-46:47",
+                                             "locator" : "47:17-47:47",
                                              "name" : "ToValue",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
@@ -1400,7 +1526,7 @@
                                              "annotation" : [ ],
                                              "signature" : [ ],
                                              "operand" : {
-                                                "locator" : "46:17-46:47",
+                                                "locator" : "47:17-47:47",
                                                 "name" : "ToValue",
                                                 "libraryName" : "FHIRHelpers",
                                                 "type" : "FunctionRef",
@@ -1531,7 +1657,7 @@
                                  } ]
                               }
                            }, {
-                              "locator" : "46:85-46:110",
+                              "locator" : "47:85-47:110",
                               "name" : "ToInterval",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -1558,7 +1684,7 @@
                               } ]
                            } ]
                         }, {
-                           "locator" : "47:13-47:69",
+                           "locator" : "48:13-48:69",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "name" : "hasEnd",
                            "libraryName" : "QICoreCommon",
@@ -1574,7 +1700,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "47:13-47:58",
+                              "locator" : "48:13-48:58",
                               "name" : "toInterval",
                               "libraryName" : "QICoreCommon",
                               "type" : "FunctionRef",
@@ -1632,7 +1758,7 @@
                                        "annotation" : [ ],
                                        "signature" : [ ],
                                        "operand" : {
-                                          "locator" : "47:13-47:43",
+                                          "locator" : "48:13-48:43",
                                           "name" : "ToValue",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
@@ -1689,7 +1815,7 @@
                                           "annotation" : [ ],
                                           "signature" : [ ],
                                           "operand" : {
-                                             "locator" : "47:13-47:43",
+                                             "locator" : "48:13-48:43",
                                              "name" : "ToValue",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
@@ -1777,7 +1903,7 @@
                                        "annotation" : [ ],
                                        "signature" : [ ],
                                        "operand" : {
-                                          "locator" : "47:13-47:43",
+                                          "locator" : "48:13-48:43",
                                           "name" : "ToValue",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
@@ -1842,7 +1968,7 @@
                                           "annotation" : [ ],
                                           "signature" : [ ],
                                           "operand" : {
-                                             "locator" : "47:13-47:43",
+                                             "locator" : "48:13-48:43",
                                              "name" : "ToValue",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
@@ -1940,7 +2066,7 @@
                                        "annotation" : [ ],
                                        "signature" : [ ],
                                        "operand" : {
-                                          "locator" : "47:13-47:43",
+                                          "locator" : "48:13-48:43",
                                           "name" : "ToValue",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
@@ -1997,7 +2123,7 @@
                                           "annotation" : [ ],
                                           "signature" : [ ],
                                           "operand" : {
-                                             "locator" : "47:13-47:43",
+                                             "locator" : "48:13-48:43",
                                              "name" : "ToValue",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
@@ -2085,7 +2211,7 @@
                                        "annotation" : [ ],
                                        "signature" : [ ],
                                        "operand" : {
-                                          "locator" : "47:13-47:43",
+                                          "locator" : "48:13-48:43",
                                           "name" : "ToValue",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
@@ -2150,7 +2276,7 @@
                                           "annotation" : [ ],
                                           "signature" : [ ],
                                           "operand" : {
-                                             "locator" : "47:13-47:43",
+                                             "locator" : "48:13-48:43",
                                              "name" : "ToValue",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
@@ -2282,7 +2408,7 @@
                            } ]
                         } ]
                      }, {
-                        "locator" : "48:13-48:54",
+                        "locator" : "49:13-49:54",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equal",
                         "annotation" : [ ],
@@ -2296,7 +2422,7 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : [ {
-                           "locator" : "48:13-48:40",
+                           "locator" : "49:13-49:40",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "path" : "value",
                            "type" : "Property",
@@ -2308,7 +2434,7 @@
                               "annotation" : [ ]
                            }
                         }, {
-                           "locator" : "48:44-48:54",
+                           "locator" : "49:44-49:54",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "completed",
@@ -2320,7 +2446,7 @@
                } ]
             }
          }, {
-            "locator" : "50:1-57:9",
+            "locator" : "51:1-58:9",
             "name" : "Denominator Exceptions",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2335,7 +2461,7 @@
                }
             },
             "expression" : {
-               "locator" : "51:3-57:9",
+               "locator" : "52:3-58:9",
                "type" : "Query",
                "annotation" : [ ],
                "resultTypeSpecifier" : {
@@ -2348,7 +2474,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "51:3-51:77",
+                  "locator" : "52:3-52:77",
                   "alias" : "QualifyingEncounter",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -2361,7 +2487,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "51:3-51:57",
+                     "locator" : "52:3-52:57",
                      "name" : "Qualifying Encounter During Day of Measurement Period",
                      "type" : "ExpressionRef",
                      "annotation" : [ ],
@@ -2378,7 +2504,7 @@
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "locator" : "52:5-57:9",
+                  "locator" : "53:5-58:9",
                   "alias" : "MedicationsNotDocumented",
                   "type" : "With",
                   "annotation" : [ ],
@@ -2392,7 +2518,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "52:10-52:86",
+                     "locator" : "53:10-53:86",
                      "dataType" : "{http://hl7.org/fhir}Procedure",
                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone",
                      "codeProperty" : "code",
@@ -2413,7 +2539,7 @@
                         "annotation" : [ ],
                         "signature" : [ ],
                         "operand" : {
-                           "locator" : "52:36-52:85",
+                           "locator" : "53:36-53:85",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                            "name" : "Documentation of current medications (procedure)",
                            "type" : "CodeRef",
@@ -2426,7 +2552,7 @@
                      "otherFilter" : [ ]
                   },
                   "suchThat" : {
-                     "locator" : "53:17-57:9",
+                     "locator" : "54:17-58:9",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "annotation" : [ ],
@@ -2440,7 +2566,7 @@
                         "annotation" : [ ]
                      } ],
                      "operand" : [ {
-                        "locator" : "53:17-54:56",
+                        "locator" : "54:17-55:56",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "annotation" : [ ],
@@ -2454,7 +2580,7 @@
                            "annotation" : [ ]
                         } ],
                         "operand" : [ {
-                           "locator" : "53:17-53:90",
+                           "locator" : "54:17-54:90",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "precision" : "Day",
                            "type" : "In",
@@ -2473,7 +2599,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "53:17-53:49",
+                              "locator" : "54:17-54:49",
                               "resultTypeName" : "{http://hl7.org/fhir}NotDoneRecorded",
                               "type" : "SingletonFrom",
                               "annotation" : [ ],
@@ -2540,7 +2666,7 @@
                                  }
                               }
                            }, {
-                              "locator" : "53:65-53:90",
+                              "locator" : "54:65-54:90",
                               "name" : "ToInterval",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -2567,7 +2693,7 @@
                               } ]
                            } ]
                         }, {
-                           "locator" : "54:13-54:56",
+                           "locator" : "55:13-55:56",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Equal",
                            "annotation" : [ ],
@@ -2581,7 +2707,7 @@
                               "annotation" : [ ]
                            } ],
                            "operand" : [ {
-                              "locator" : "54:13-54:43",
+                              "locator" : "55:13-55:43",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "path" : "value",
                               "type" : "Property",
@@ -2593,7 +2719,7 @@
                                  "annotation" : [ ]
                               }
                            }, {
-                              "locator" : "54:47-54:56",
+                              "locator" : "55:47-55:56",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "not-done",
@@ -2602,7 +2728,7 @@
                            } ]
                         } ]
                      }, {
-                        "locator" : "55:13-57:9",
+                        "locator" : "56:13-58:9",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Exists",
                         "annotation" : [ ],
@@ -2616,7 +2742,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "55:20-57:9",
+                           "locator" : "56:20-58:9",
                            "type" : "Query",
                            "annotation" : [ ],
                            "resultTypeSpecifier" : {
@@ -2629,7 +2755,7 @@
                               }
                            },
                            "source" : [ {
-                              "locator" : "55:22-55:67",
+                              "locator" : "56:22-56:67",
                               "alias" : "reasonItem",
                               "annotation" : [ ],
                               "resultTypeSpecifier" : {
@@ -2642,7 +2768,7 @@
                                  }
                               },
                               "expression" : {
-                                 "locator" : "55:22-55:56",
+                                 "locator" : "56:22-56:56",
                                  "type" : "Query",
                                  "annotation" : [ ],
                                  "resultTypeSpecifier" : {
@@ -2687,7 +2813,7 @@
                            "let" : [ ],
                            "relationship" : [ ],
                            "where" : {
-                              "locator" : "56:13-56:62",
+                              "locator" : "57:13-57:62",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Equivalent",
                               "annotation" : [ ],
@@ -2701,7 +2827,7 @@
                                  "annotation" : [ ]
                               } ],
                               "operand" : [ {
-                                 "locator" : "56:19-56:28",
+                                 "locator" : "57:19-57:28",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                  "name" : "reasonItem",
                                  "type" : "AliasRef",
@@ -2715,7 +2841,7 @@
                                     "annotation" : [ ]
                                  } ],
                                  "operand" : {
-                                    "locator" : "56:32-56:62",
+                                    "locator" : "57:32-57:62",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                     "name" : "Acute health crisis (finding)",
                                     "type" : "CodeRef",

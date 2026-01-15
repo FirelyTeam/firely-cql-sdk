@@ -19,6 +19,7 @@ valueset "Standardized Pain Assessment Tool": 'http://cts.nlm.nih.gov/fhir/Value
 code "Radiation treatment management, 5 treatments": '77427' from "CPT" display 'Radiation treatment management, 5 treatments'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 
