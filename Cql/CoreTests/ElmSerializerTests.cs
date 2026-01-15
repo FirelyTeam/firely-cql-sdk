@@ -19,19 +19,22 @@ namespace CoreTests
         [TestMethod]
         public void Elm_Deserialize_TupleTypeSpecifier()
         {
-            var json = @"
-            {
-                ""type"" : ""ChoiceTypeSpecifier"",
-                ""choice"" : [ {
-                  ""type"" : ""NamedTypeSpecifier"",
-                  ""name"" : ""{http://hl7.org/fhir}CodeableConcept""  } ]
-            }";
+            var json =
+                """
+                {
+                    "type" : "ChoiceTypeSpecifier",
+                    "choice" : [ {
+                      "type" : "NamedTypeSpecifier",
+                      "name" : "{http://hl7.org/fhir}CodeableConcept"  } ]
+                }
+                """;
 
             var options = Library.BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
             var ts = JsonSerializer.Deserialize<ChoiceTypeSpecifier>(json, options);
             var cts = ts.Should().BeOfType<ChoiceTypeSpecifier>().Subject;
             cts.choice.Should().HaveCount(1);
         }
+
         private static readonly HashSet<string> AcceptableErrors = new()
         {
             // Although it seems enums are *always* serialized (even when they are set to the default
@@ -40,6 +43,7 @@ namespace CoreTests
             //now removing empty values due to JAVA ELM having many empty arrays in the output
             @"Expected key 'relationship' (value '[]') not found in actual object. At $.library.statements.def[6].expression.else.element[0].value."
         };
+
         [TestMethod]
         public void Elm_Deserialize_FhirHelpers()
         {
@@ -56,10 +60,8 @@ namespace CoreTests
 
             static bool acceptable(string s)
             {
-                
                 return AcceptableErrors.Any(s.Contains);
             }
-            
         }
 
         [TestMethod]
@@ -123,11 +125,11 @@ namespace CoreTests
         {
             return expected switch
             {
-                JsonObject expectedObj => CompareObject(actual, expectedObj),
+                JsonObject expectedObj  => CompareObject(actual, expectedObj),
                 JsonArray expectedArray => CompareArray(actual, expectedArray),
                 JsonValue expectedValue => CompareValue(actual, expectedValue),
                 _ => throw new NotSupportedException(
-                    $"Unexpected node type '{expected.GetType()}' at {actual.GetPath()}.")
+                         $"Unexpected node type '{expected.GetType()}' at {actual.GetPath()}.")
             };
         }
 
