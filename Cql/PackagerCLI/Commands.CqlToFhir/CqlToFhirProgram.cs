@@ -240,15 +240,11 @@ public class CqlToFhirProgram
         }
         finally
         {
-            if (sbSummary.Length > 0)
-            {
-                sbSummary.Insert(0, Environment.NewLine);
-                sbSummary.Insert(0, "Summary:");
-                logger.LogInformation(sbSummary.ToString());
-            }
+            // Build summary text
+            string summaryText = sbSummary.ToString();
 
-            // Log detailed report
-            var detailedReport = MarkdownReportFormatter.FormatReport(tracker);
+            // Log detailed report with embedded summary
+            var detailedReport = MarkdownReportFormatter.FormatReport(tracker, summaryText);
             if (!string.IsNullOrEmpty(detailedReport))
             {
                 logger.LogInformation(detailedReport);
