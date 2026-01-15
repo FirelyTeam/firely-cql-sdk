@@ -23,25 +23,40 @@ public class GeneratedElmTypesRoundTripTests
 {
     private static DirectoryInfo GetDemoElmDirectory()
     {
-        // Find the Demo/Elm directory relative to the test project
+        // Find the repository root by looking for a parent directory containing .sln or .slnx files
         var currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
-        while (currentDir != null && !currentDir.Name.Equals("firely-cql-sdk", StringComparison.OrdinalIgnoreCase))
+        var solutionDir = FindParentDirectoryContaining(currentDir, "*.sln")
+                       ?? FindParentDirectoryContaining(currentDir, "*.slnx");
+
+        if (solutionDir == null)
         {
-            currentDir = currentDir.Parent;
+            throw new DirectoryNotFoundException("Could not find repository root directory (no .sln or .slnx file found in parent directories)");
         }
 
-        if (currentDir == null)
-        {
-            throw new DirectoryNotFoundException("Could not find repository root directory");
-        }
-
-        var demoElmDir = Path.Combine(currentDir.FullName, "Demo", "Elm");
+        var demoElmDir = Path.Combine(solutionDir.FullName, "LibrarySets", "Demo", "Elm");
         if (!Directory.Exists(demoElmDir))
         {
             throw new DirectoryNotFoundException($"Demo ELM directory not found at: {demoElmDir}");
         }
 
         return new DirectoryInfo(demoElmDir);
+    }
+
+    /// <summary>
+    /// Finds a parent directory containing files matching the search pattern.
+    /// </summary>
+    private static DirectoryInfo? FindParentDirectoryContaining(DirectoryInfo dir, string searchPattern)
+    {
+        var current = dir;
+        while (current != null)
+        {
+            if (current.EnumerateFileSystemInfos(searchPattern, SearchOption.TopDirectoryOnly).Any())
+            {
+                return current;
+            }
+            current = current.Parent;
+        }
+        return null;
     }
 
     [TestMethod]
