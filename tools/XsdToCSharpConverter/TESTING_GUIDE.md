@@ -1,201 +1,406 @@
-# Testing Guide for XSD to C# Converter Tool
+# Testing Guide for XSD to C# Converter Tool (xsd2cs)
 
-This guide provides step-by-step instructions for testing the new XSD to C# converter tool on a Windows system.
+This guide provides comprehensive testing procedures for the xsd2cs tool, covering development testing, unit tests, and validation against xsd.exe output.
 
 ## Prerequisites
 
-- Windows operating system
 - .NET 8.0 SDK or later
-- .NET Framework SDK with xsd.exe tool (typically installed with Visual Studio)
 - Git (to clone the repository)
+- Optional: Microsoft xsd.exe tool for comparison testing (Windows only)
 
-## Testing Steps
+## Quick Start - Running All Tests
 
-### 1. Verify Tool Builds Successfully
+### 1. Build the Tool
 
-```cmd
-cd tools\XsdToCSharpConverter
+```bash
+cd tools/XsdToCSharpConverter
 dotnet build
 ```
 
 **Expected output:**
 - Build succeeds with no errors
-- Output: `XsdToCSharpConverter -> ...\bin\Debug\net8.0\xsd2cs.dll`
+- Output: `XsdToCSharpConverter -> .../bin/Debug/net8.0/xsd2cs.dll`
 
-### 2. Test Tool Directly
+### 2. Run Unit Tests
 
-Test that the tool can find xsd.exe and parse arguments:
+**XsdToCSharpConverterTests** (Round-trip serialization):
+```bash
+cd tools/XsdToCSharpConverterTests
+dotnet test
+```
 
-```cmd
-cd Cql\Elm\Schema
-dotnet ..\..\..\tools\XsdToCSharpConverter\bin\Debug\net8.0\xsd2cs.dll
+**ElmSerializerTests** (Comprehensive feature validation):
+```bash
+cd Cql/CoreTests
+dotnet test --filter "FullyQualifiedName~ElmSerializer"
 ```
 
 **Expected output:**
-- Usage information displayed
-- No crashes or exceptions
+- All 13+ tests pass
+- 0 failures
 
-### 3. Backup Current Generated File
+### 3. Generate Elm.g.cs and Validate
 
-Before testing generation, backup the current Elm.g.cs:
-
-```cmd
-cd Cql\Elm
-copy Elm.g.cs Elm.g.cs.backup
+**Linux/macOS:**
+```bash
+cd Cql/Elm
+./Elm.g.cs-Generate-xsd2cs.sh
 ```
 
-### 4. Test Original Script (Baseline)
-
-Generate with the original script to establish a baseline:
-
+**Windows:**
 ```cmd
 cd Cql\Elm
-Elm.g.cs-Generate.cmd
-copy Elm.g.cs Elm.g.cs.original
-```
-
-### 5. Test New Script
-
-Generate with the new script that uses the xsd2cs tool:
-
-```cmd
-cd Cql\Elm
-Elm.g.cs-Generate-v2.cmd
+Elm.g.cs-Generate-xsd2cs.cmd
 ```
 
 **Expected output:**
-- "Checking for XSD to C# converter tool..."
-- "Using xsd.exe from: [path]"
-- "Generating C# from XSD files using xsd2cs tool..."
-- "Post-processing generated file..."
-- "Successfully generated Elm.g.cs"
-- No errors
+- Tool builds automatically if needed
+- Generation completes successfully
+- Elm.g.cs created with ~7076 lines
 
-### 6. Compare Outputs
+## Comprehensive Testing Procedures
 
-Compare the two generated files byte-for-byte:
+### Test 1: Tool Compilation
 
-```cmd
-fc /b Elm.g.cs.original Elm.g.cs
+**Purpose**: Verify the tool builds successfully
+
+**Steps:**
+```bash
+cd tools/XsdToCSharpConverter
+dotnet clean
+dotnet build
 ```
 
-**Expected output:**
-- "FC: no differences encountered" (or equivalent)
-- If there are differences, they should only be in:
-  - Comments about which tool generated the file
-  - Whitespace (which should be identical anyway)
+**Success criteria:**
+- ✅ Build completes with 0 errors
+- ✅ Assembly version is 1.0.0
+- ✅ Output file xsd2cs.dll created
 
-### 7. Visual Inspection
+### Test 2: Command-Line Interface
 
-Open both files in a diff tool (e.g., WinMerge, Beyond Compare, or VS Code) and verify:
+**Purpose**: Validate command-line argument parsing
 
-```cmd
-code --diff Elm.g.cs.original Elm.g.cs
+**Test basic help:**
+```bash
+dotnet tools/XsdToCSharpConverter/bin/Debug/net8.0/xsd2cs.dll
 ```
 
-**What to check:**
-- Class structures are identical
-- Field names and types are identical
-- Attributes are identical
-- Only differences should be in generation comments (if any)
+**Expected**: Usage information displayed
 
-### 8. Verify Build Still Works
+**Test with schema files:**
+```bash
+cd Cql/Elm/Schema
+dotnet ../../../tools/XsdToCSharpConverter/bin/Debug/net8.0/xsd2cs.dll /c /o:.. /n:Hl7.Cql.Elm /out:TestElm.g.cs library.xsd expression.xsd clinicalexpression.xsd cqlannotations.xsd
+```
 
-Build the solution to ensure the generated code is valid:
+**Success criteria:**
+- ✅ No errors or exceptions
+- ✅ TestElm.g.cs created in Cql/Elm directory
+- ✅ File size ~7076 lines
 
-```cmd
-cd ..\..\..
+### Test 3: Generated Code Validation
+
+**Purpose**: Ensure generated code compiles and has correct structure
+
+**Steps:**
+1. Generate Elm.g.cs using the tool
+2. Build the solution
+
+```bash
+cd Cql/Elm
+./Elm.g.cs-Generate-xsd2cs.sh  # or .cmd on Windows
+cd ../..
 dotnet build Cql-Sdk.slnf
 ```
 
-**Expected output:**
-- Build succeeds with no errors
-- All projects build successfully
+**Success criteria:**
+- ✅ Generation succeeds
+- ✅ Build completes with 0 errors
+- ✅ 184 pre-existing warnings (unrelated to generation)
 
-### 9. Run Tests
+### Test 4: Unit Test Suite
 
-If there are tests that depend on the generated code:
+**Purpose**: Validate all features with comprehensive tests
 
-```cmd
-dotnet test Cql-Sdk.slnf
+**ElmSerializerTests (13 tests):**
+
+1. **Basic deserialization:**
+   - Test: `Elm_Deserialize_TupleTypeSpecifier`
+   - Validates: Basic XML/JSON deserialization
+
+2. **Full library round-trip:**
+   - Test: `Elm_Deserialize_FhirHelpers`
+   - Validates: Complete library serialization/deserialization
+
+3. ***Specified pattern:**
+   - Test: `DeserializeFieldSpecifiedElement`
+   - Validates: Optional value type boolean flags
+
+4. **Mixed content:**
+   - Test: `Elm_Deserialize_MixedXmlAnnotations`
+   - Validates: XML mixed content with annotations
+
+5. **DefaultValueAttribute (bool):**
+   - Test: `DefaultValueAttribute_ReturnClauseDistinct_InitializesToTrue`
+   - Validates: Bool default value and constructor initialization
+
+6. **DefaultValueAttribute (string):**
+   - Test: `DefaultValueAttribute_IncludeDefMediaType_InitializesToApplicationElmXml`
+   - Validates: String default with DataType attribute
+
+7. **DefaultValueAttribute (enum):**
+   - Test: `DefaultValueAttribute_EnumAccessLevel_InitializesToPublic`
+   - Validates: Enum default value with proper type casting
+
+8. **XmlElementAttribute:**
+   - Test: `XmlElementAttribute_AnnotationArray_GeneratesCorrectly`
+   - Validates: Direct array element attributes
+
+9. ***Specified serialization:**
+   - Test: `SpecifiedPattern_FluentAttribute_OnlySerializedWhenSpecified`
+   - Validates: Conditional serialization based on Specified flag
+
+10. **XmlIncludeAttribute:**
+    - Test: `XmlIncludeAttribute_ExpressionBaseClass_DeclaresAllDerivedTypes`
+    - Validates: Polymorphic type hierarchy declaration
+
+11. **Abstract types:**
+    - Test: `AbstractTypes_Element_IsAbstractClass`
+    - Validates: Abstract modifier on classes
+
+12. **Type ordering:**
+    - Test: `TypeOrdering_LibraryClass_IsFirstType`
+    - Validates: Root element types first, XmlRootAttribute present
+
+13. **Tool identification:**
+    - Test: `GeneratedCodeAttribute_HasCorrectToolNameAndVersion`
+    - Validates: GeneratedCodeAttribute with "xsd2cs" and version
+
+**Run all tests:**
+```bash
+cd Cql/CoreTests
+dotnet test --filter "FullyQualifiedName~ElmSerializer"
 ```
 
-**Expected output:**
-- All tests pass
-- No new failures compared to before regeneration
+**Success criteria:**
+- ✅ All 13 tests pass
+- ✅ 0 failures
+- ✅ All validations successful
+
+### Test 5: XsdToCSharpConverterTests
+
+**Purpose**: Validate round-trip serialization with real ELM libraries
+
+**Tests included:**
+1. LoadAndSave_DemoLibrarySet_ProducesIdenticalJson
+2. LoadAndRoundTrip_SingleLibrary_PreservesStructure
+3. LoadElmLibrary_WithDefaultValues_InitializesCorrectly
+
+**Run tests:**
+```bash
+cd tools/XsdToCSharpConverterTests
+dotnet test
+```
+
+**Success criteria:**
+- ✅ All tests pass
+- ✅ 37+ libraries load successfully
+- ✅ JSON serialization produces identical output
+- ✅ Round-trip preserves structure
+
+### Test 6: Comparison with xsd.exe (Optional, Windows Only)
+
+**Purpose**: Validate functional equivalence with Microsoft's xsd.exe
+
+**Prerequisites:**
+- Windows system
+- .NET Framework SDK with xsd.exe
+
+**Steps:**
+
+1. Generate with xsd.exe:
+```cmd
+cd Cql\Elm
+Elm.g.cs-Generate-xsd.cmd
+copy Elm.g.cs Elm.g.cs.old
+```
+
+2. Generate with xsd2cs:
+```cmd
+Elm.g.cs-Generate-xsd2cs.cmd
+```
+
+3. Compare outputs:
+```cmd
+fc Elm.g.cs.old Elm.g.cs
+```
+
+**Expected differences:**
+- GeneratedCodeAttribute tool name: "xsd" vs "xsd2cs"
+- GeneratedCodeAttribute version: xsd.exe version vs "1.0.0.0"
+- XmlIncludeAttribute count: 756 (xsd.exe transitive) vs 246 (xsd2cs direct)
+- Line count: 7898 vs 7076 (due to XmlInclude difference)
+
+**Functional equivalence:**
+- ✅ Same class structures
+- ✅ Same property names and types
+- ✅ Same XmlElement, XmlArray, XmlAttribute attributes
+- ✅ Same DefaultValueAttribute instances (12)
+- ✅ Same *Specified patterns (148)
+- ✅ Both compile successfully
+- ✅ Both serialize/deserialize identically
+
+### Test 7: Runtime Usage Validation
+
+**Purpose**: Ensure generated code works in real-world scenarios
+
+**Steps:**
+
+1. Run CqlSdkExamples:
+```bash
+cd Examples/CqlSdkExamples
+dotnet run
+```
+
+2. Verify ELM loading:
+```bash
+# Look for successful library loading messages
+# No deserialization errors should occur
+```
+
+**Success criteria:**
+- ✅ CqlSdkExamples runs without errors
+- ✅ ELM JSON files load successfully
+- ✅ No JSON deserialization exceptions
+- ✅ PolymorphicTypeResolver discovers type hierarchies
+
+### Test 8: Cross-Platform Validation
+
+**Purpose**: Verify tool works on all platforms
+
+**Linux:**
+```bash
+cd Cql/Elm
+chmod +x Elm.g.cs-Generate-xsd2cs.sh
+./Elm.g.cs-Generate-xsd2cs.sh
+```
+
+**macOS:**
+```bash
+cd Cql/Elm
+chmod +x Elm.g.cs-Generate-xsd2cs.sh
+./Elm.g.cs-Generate-xsd2cs.sh
+```
+
+**Windows:**
+```cmd
+cd Cql\Elm
+Elm.g.cs-Generate-xsd2cs.cmd
+```
+
+**Success criteria:**
+- ✅ Tool builds and runs on all platforms
+- ✅ Generated output identical across platforms
+- ✅ No platform-specific issues
 
 ## Troubleshooting
 
-### Issue: "xsd.exe not found"
+### Issue: Build Fails
 
-**Solution:** Install the .NET Framework SDK or Visual Studio with the Windows SDK components.
+**Symptom:** `dotnet build` fails with errors
 
-Common locations for xsd.exe:
-- `C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\`
-- `C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.7.2 Tools\`
+**Solutions:**
+1. Verify .NET 8.0 SDK installed: `dotnet --version`
+2. Clean and rebuild: `dotnet clean && dotnet build`
+3. Check for corrupted packages: `rm -rf bin obj && dotnet restore`
 
-### Issue: "Tool not found. Building XSD to C# converter..."
+### Issue: Unit Tests Fail
 
-**Solution:** This is normal. The script will build the tool automatically. Wait for the build to complete.
+**Symptom:** Test failures in ElmSerializerTests or XsdToCSharpConverterTests
 
-### Issue: Files differ unexpectedly
+**Solutions:**
+1. Regenerate Elm.g.cs: `cd Cql/Elm && ./Elm.g.cs-Generate-xsd2cs.sh`
+2. Rebuild solution: `dotnet build Cql-Sdk.slnf`
+3. Check test output for specific failure details
+4. Verify LibrarySets/Demo/Elm directory exists and contains files
 
-**Possible causes:**
-1. Different xsd.exe versions (check version with `xsd /?`)
-2. Line ending differences (CRLF vs LF)
-3. Timestamp in generated comments
+### Issue: Generated Code Doesn't Compile
 
-**Investigation:**
-- Check the xsd.exe version: `xsd /?`
-- Look at specific differences in a text editor
-- Verify file encodings are identical (UTF-8)
+**Symptom:** Build errors after generating Elm.g.cs
 
-## Success Criteria
+**Solutions:**
+1. Compare with known-good version (Elm.g.cs.old from xsd.exe)
+2. Check for schema file changes
+3. Verify all 4 schema files passed to tool (library.xsd, expression.xsd, clinicalexpression.xsd, cqlannotations.xsd)
+4. Review error messages for missing types or attributes
 
-✅ Tool builds without errors
-✅ Tool can locate xsd.exe automatically  
-✅ xsd2cs can parse command-line arguments correctly
-✅ Generation script completes without errors
-✅ Generated Elm.g.cs is byte-for-byte identical (or only differs in generation comments)
-✅ Solution still builds successfully
-✅ All existing tests still pass
+### Issue: JSON Deserialization Fails
 
-## After Successful Testing
+**Symptom:** Runtime errors when loading ELM JSON files
 
-Once all tests pass:
+**Solutions:**
+1. Verify XmlIncludeAttribute present on base classes (Expression, Element, etc.)
+2. Check XmlElementAttribute on array properties
+3. Verify type ordering (Library class should be first)
+4. Run ElmSerializerTests to isolate issue
 
-1. **Restore the backup if needed:**
-   ```cmd
-   copy Elm.g.cs.backup Elm.g.cs
-   ```
+## Validation Checklist
 
-2. **Consider replacing the original script:**
-   - Rename `Elm.g.cs-Generate.cmd` to `Elm.g.cs-Generate-old.cmd`
-   - Rename `Elm.g.cs-Generate-v2.cmd` to `Elm.g.cs-Generate.cmd`
+Use this checklist to ensure complete validation:
 
-3. **Update documentation** if needed to reference the new tool
+- [ ] Tool builds successfully (0 errors)
+- [ ] Command-line interface works correctly
+- [ ] Generated Elm.g.cs compiles (0 errors)
+- [ ] All 13 ElmSerializerTests pass
+- [ ] All XsdToCSharpConverterTests pass
+- [ ] CqlSdkExamples runs successfully
+- [ ] Cross-platform: Works on Linux
+- [ ] Cross-platform: Works on macOS
+- [ ] Cross-platform: Works on Windows
+- [ ] Optional: Compared with xsd.exe output
+- [ ] Optional: Verified functional equivalence
 
-4. **Commit the changes** (the generated file should not change, so no commit needed unless intentional)
+## Success Criteria Summary
 
-## Reporting Results
+✅ **Tool builds** with 0 errors on all platforms
+✅ **Generated code compiles** with 0 errors
+✅ **All unit tests pass** (13+ tests)
+✅ **Runtime usage works** (CqlSdkExamples)
+✅ **JSON serialization/deserialization** functions correctly
+✅ **XML serialization/deserialization** functions correctly
+✅ **Functional equivalence** with xsd.exe validated
+✅ **Cross-platform** compatibility confirmed
+
+## Reporting Test Results
 
 When reporting test results, please include:
 
-- Windows version
-- .NET Framework SDK version
-- xsd.exe version (`xsd /?`)
-- Whether files matched exactly
-- Any differences observed
-- Build and test results
+1. **Platform**: Windows/Linux/macOS, version
+2. **.NET SDK version**: `dotnet --version`
+3. **Build result**: Success/Failure, error count
+4. **Unit test results**: Pass/Fail count
+5. **Generated file size**: Line count of Elm.g.cs
+6. **Any differences** from expected results
+7. **Error messages** if any failures occurred
+
+## Continuous Testing
+
+For ongoing development:
+
+1. **Before commits**: Run unit tests
+2. **After schema changes**: Regenerate and validate
+3. **Before releases**: Full test suite including comparison with xsd.exe
+4. **Platform testing**: Validate on all target platforms
 
 ## Questions or Issues?
 
-If you encounter any issues during testing:
+If you encounter issues not covered in this guide:
 
-1. Check the IMPLEMENTATION_SUMMARY.md for design decisions
-2. Review the README.md for detailed tool documentation
-3. Open a GitHub issue with:
+1. Review IMPLEMENTATION_SUMMARY.md for design details
+2. Check REFERENCE_SOURCE_COMPARISON.md for xsd.exe comparison
+3. Review README.md for usage documentation
+4. Open a GitHub issue with:
    - Steps to reproduce
    - Expected vs actual behavior
-   - Error messages (if any)
-   - Environment details (OS, SDK versions, etc.)
+   - Test output and error messages
+   - Environment details (OS, .NET version)

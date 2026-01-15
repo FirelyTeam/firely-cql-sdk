@@ -1,24 +1,25 @@
-# XSD to C# Converter
+# XSD to C# Converter (xsd2cs)
 
-A native, cross-platform tool for generating C# classes from XSD schema files with support for modern C# features.
+A native, cross-platform tool for generating C# classes from XSD schema files, producing output functionally identical to Microsoft's legacy `xsd.exe` tool.
 
 ## Overview
 
-This tool provides a command-line interface for converting XSD (XML Schema Definition) files to C# classes. It includes a custom XSD parser and C# code generator that can be customized to produce modern C# code with nullable annotations and other contemporary language features.
+This tool provides a command-line interface for converting XSD (XML Schema Definition) files to C# classes. It uses `System.Xml.Schema` for parsing and `System.CodeDom` for code generation, ensuring cross-platform compatibility while maintaining backward compatibility with xsd.exe-generated code.
 
 ## Purpose
 
 This tool was created to replace the legacy `xsd.exe` tool used in the Firely CQL SDK. The previous approach relied on the Windows-only .NET Framework tool, which:
 - Only runs on Windows
-- Generates outdated C# code without nullable annotations
 - Cannot be customized or extended
 - Is no longer actively developed
+- Uses .NET Framework-only APIs (`XmlSchemaImporter`/`XmlCodeExporter`)
 
 This new tool provides:
 - ✅ **Cross-platform support** (Windows, Linux, macOS)
-- ✅ **Customizable code generation** (compatible or modern modes)
-- ✅ **Nullable reference type support** (in modern mode)
-- ✅ **Future extensibility** for new C# language features
+- ✅ **Backward compatibility** - generates functionally identical code to xsd.exe
+- ✅ **Complete feature parity** - arrays, inheritance, enums, attributes, abstract types
+- ✅ **Modern .NET APIs** - uses System.CodeDom available on all platforms
+- ✅ **Future extensibility** for nullable annotations and modern C# features
 - ✅ **Open source** and actively maintained
 
 ## Requirements
@@ -90,43 +91,45 @@ dotnet xsd2cs.dll /c /o:.. /n:Hl7.Cql.Elm /out:elmv2.g.cs library.xsd expression
 4. **Apply Customizations**: Adds XML serialization attributes and applies generation mode (compatible or modern)
 5. **Write Output**: Writes formatted C# code to the specified output file
 
-## Generation Modes
+## Features
 
-### Compatible Mode (Default)
+### Current Implementation (v1.0)
 
-Generates C# code that matches the style and structure of the legacy `xsd.exe` tool:
-- No nullable annotations
-- Traditional property patterns with private fields
-- Same attribute placement and naming conventions
-- Compatible with existing generated code
+Generates C# code that matches the output of the legacy `xsd.exe` tool:
+- ✅ **Full type support**: Complex types, simple types, enums, inheritance
+- ✅ **Complete attribute generation**: XmlElement, XmlArray, XmlArrayItem, XmlAttribute, XmlRoot, XmlInclude, DefaultValue
+- ✅ **Abstract types**: Properly marks abstract XSD types as abstract C# classes
+- ✅ **Array handling**: Both array wrapper patterns and direct array elements
+- ✅ **Default values**: Constructor initialization for fields with defaults
+- ✅ ***Specified pattern**: Boolean flags for optional value type attributes
+- ✅ **Mixed content**: Support for IsMixed complex types with Text property
+- ✅ **Type ordering**: Root element types first, then document order
+- ✅ **Exact formatting**: Block bracing style matching xsd.exe output
 
-### Modern Mode (`--modern`)
+### Future Enhancements
 
-Generates contemporary C# code with:
-- Nullable reference type annotations (`?` for nullable, `!` for non-null)
-- Modern C# language features
-- Improved code style and formatting
-- Better IDE support and compile-time safety
-
-**Note:** Modern mode is planned for future implementation. Currently, only compatible mode is fully supported.
+Potential features for future versions:
+- Nullable reference type annotations (Phase 2)
+- Modern C# features: record types, init properties, collection expressions (Phase 3)
+- Custom code generation templates (Phase 4)
 
 ## Using with Elm.g.cs Generation
 
-The `Cql/Elm` directory contains updated scripts that use this tool:
+The `Cql/Elm` directory contains scripts that use this tool:
 
 **Windows:**
 ```cmd
 cd Cql\Elm
-Elm.g.cs-Generate-v2.cmd
+Elm.g.cs-Generate-xsd2cs.cmd
 ```
 
 **Linux/macOS:**
 ```bash
 cd Cql/Elm
-./Elm.g.cs-Generate-v2.sh
+./Elm.g.cs-Generate-xsd2cs.sh
 ```
 
-These scripts automatically build the tool if needed, run the generation, and perform post-processing.
+These scripts automatically build the tool if needed, run the generation, and add the appropriate file header.
 
 ## Cross-Platform Compatibility
 
@@ -173,16 +176,24 @@ xsd2cs /c library.xsd expression.xsd clinicalexpression.xsd cqlannotations.xsd
 
 By default, the output file is named after the first schema file. Use `/o:` to specify a different output directory.
 
-## Future Enhancements
+## Testing
 
-Planned features for future versions:
-- Full implementation of modern mode with nullable annotations
-- Support for record types and init-only properties
-- Collection expressions for arrays and lists
-- Pattern matching in generated code
-- Custom code generation templates
-- Configuration file support
-- Plugin system for extensibility
+The tool includes comprehensive unit tests validating all features:
+
+**XsdToCSharpConverterTests** (`tools/XsdToCSharpConverterTests/`):
+- Round-trip JSON serialization/deserialization tests
+- Tests loading from LibrarySets/Demo/Elm directory
+- Validates default value initialization
+
+**ElmSerializerTests** (`Cql/CoreTests/`):
+- 13 comprehensive tests covering all quirks and features
+- DefaultValueAttribute with constructor initialization
+- *Specified pattern behavior
+- XmlElementAttribute for array elements
+- XmlIncludeAttribute for polymorphic types
+- Abstract type generation
+- Type ordering with XmlRootAttribute
+- Tool identification (GeneratedCodeAttribute)
 
 ## License
 
