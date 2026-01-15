@@ -21,6 +21,6 @@ Key structural change example from the `ToAbatementInterval` function:
 ## Source
 
 The CQL and ELM files in this library set are sourced from:
-- **Repository**: [cqframework/dqm-content-qicore-2025](https://github.com/cqframework/dqm-content-qicore-2025)
+- **Repository/Path**: [cqframework/dqm-content-qicore-2025/tree/master/input/cql](https://github.com/cqframework/dqm-content-qicore-2025[link text](https://github.com/cqframework/dqm-content-qicore-2025/tree/master/input/cql))
 - **Commit ID**: `c89ea1a7`
 - **Commit Date**: 2026-01-14
