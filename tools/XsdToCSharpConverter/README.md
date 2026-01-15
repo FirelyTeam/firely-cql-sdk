@@ -109,6 +109,7 @@ Generates C# code that matches the output of the legacy `xsd.exe` tool:
 ### Future Enhancements
 
 Potential features for future versions:
+- **.NET 10 serialization support** - Update generated code for .NET 10's enhanced serialization features
 - Nullable reference type annotations (Phase 2)
 - Modern C# features: record types, init properties, collection expressions (Phase 3)
 - Custom code generation templates (Phase 4)

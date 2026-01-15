@@ -213,18 +213,23 @@ The tool is designed with extensibility in mind:
    - Functionally identical output
    - Comprehensive test coverage
 
-🎯 Phase 2 (Planned): Nullable reference type annotations
+🎯 Phase 2 (Planned): .NET 10 serialization support
+   - Update for .NET 10's enhanced serialization features
+   - Optimize for new serialization APIs
+   - Maintain backward compatibility
+
+🎯 Phase 3 (Planned): Nullable reference type annotations
    - Add nullable annotations to reference types
    - Non-nullable annotations for required properties
    - Improve compile-time safety
 
-🎯 Phase 3 (Planned): Modern C# features
+🎯 Phase 4 (Future): Modern C# features
    - Record types for immutable data
    - Init-only properties
    - Collection expressions for arrays
    - Required members attribute
 
-🎯 Phase 4 (Future): Advanced customization
+🎯 Phase 5 (Future): Advanced customization
    - Configuration file support
    - Custom templates
    - Plugin system for extensibility
