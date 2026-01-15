@@ -25,6 +25,7 @@ code "[#] Pregnancies": '11996-6' from "LOINC" display '[#] Pregnancies'
 
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 

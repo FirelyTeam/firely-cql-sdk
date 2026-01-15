@@ -39,6 +39,7 @@ code "Have you ever had vaginal intercourse [PhenX]": '64728-9' from "LOINC" dis
 code "Yes (qualifier value)": '373066001' from "SNOMEDCT" display 'Yes (qualifier value)'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 

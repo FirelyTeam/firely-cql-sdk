@@ -23,6 +23,7 @@ valueset "Nutrition Assessment Status Finding of Severely Malnourished": 'http:/
 valueset "Nutrition Care Plan": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.93'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 
@@ -56,33 +57,74 @@ define "Encounters with Discharge for Hospice Care":
   "Measure Population" QualifyingEncounter
     where QualifyingEncounter.hospitalization.dischargeDisposition in "Hospice Care Referral or Admission"
 
+/*define "Intervention Hospice Care":
+    ( ["ServiceRequest": "Hospice Status"] HospiceStatusOrder
+    where HospiceStatusOrder.status in { 'active', 'completed', 'on-hold' }
+        and HospiceStatusOrder.intent in { 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order' }
+  )
+    union ( ["Procedure": "Hospice Status"] HospiceStatusPerformed
+            where HospiceStatusPerformed.status in { 'completed', 'in-progress' } 
+           )
+
+define "Encounters with Hospice during Eligible Encounter":
+    "Measure Population" QualifyingEncounter
+    with "Intervention Hospice Care" HospiceStatus
+            such that Coalesce (start of HospiceStatus.performed.toInterval(), HospiceStatus.authoredOn) during day of QualifyingEncounter.hospitalizationWithObservation ( )
+*/
+//Testing definitions based on Codev comment
+
+
+
 define "Intervention Hospice Care":
   ( ["ServiceRequest": "Hospice Status"] HospiceStatusOrder
       where HospiceStatusOrder.status in { 'active', 'completed', 'on-hold' }
         and HospiceStatusOrder.intent in { 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order' }
+      return HospiceStatusOrder.authoredOn
   )
     union ( ["Procedure": "Hospice Status"] HospiceStatusPerformed
         where HospiceStatusPerformed.status in { 'completed', 'in-progress' }
+        return start of HospiceStatusPerformed.performed.toInterval ( )
     )
 
 define "Encounters with Hospice during Eligible Encounter":
   "Measure Population" QualifyingEncounter
-    with "Intervention Hospice Care" HospiceStatus
-      such that Coalesce(start of HospiceStatus.performed.toInterval(), HospiceStatus.authoredOn) during day of QualifyingEncounter.hospitalizationWithObservation ( )
+    with "Intervention Hospice Care" HospiceStatusDate
+      such that HospiceStatusDate during day of QualifyingEncounter.hospitalizationWithObservation ( )
+
+/*define "Intervention Dietitian Referral":
+( ["ServiceRequest": "Dietitian Referral"] DietitianReferralOrder
+    where DietitianReferralOrder.status in { 'active', 'completed', 'on-hold' }
+        and DietitianReferralOrder.intent in { 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order' }
+  
+  )
+    union ( ["Procedure": "Dietitian Referral"] DietitianReferralPerformed
+            where DietitianReferralPerformed.status in { 'completed', 'in-progress' } 
+           )
+
+define "Encounters with Dietitian Referral":
+    "Measure Population" QualifyingEncounter
+    with "Intervention Dietitian Referral" DietitianReferral
+            such that Coalesce (start of DietitianReferral.performed.toInterval(), DietitianReferral.authoredOn) during day of QualifyingEncounter.hospitalizationWithObservation ( )
+*/
+//New definition from Codev comments
+
+
 
 define "Intervention Dietitian Referral":
   ( ["ServiceRequest": "Dietitian Referral"] DietitianReferralOrder
       where DietitianReferralOrder.status in { 'active', 'completed', 'on-hold' }
         and DietitianReferralOrder.intent in { 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order' }
+      return DietitianReferralOrder.authoredOn
   )
     union ( ["Procedure": "Dietitian Referral"] DietitianReferralPerformed
         where DietitianReferralPerformed.status in { 'completed', 'in-progress' }
+        return start of DietitianReferralPerformed.performed.toInterval ( )
     )
 
 define "Encounters with Dietitian Referral":
   "Measure Population" QualifyingEncounter
-    with "Intervention Dietitian Referral" DietitianReferral
-      such that Coalesce(start of DietitianReferral.performed.toInterval(), DietitianReferral.authoredOn) during day of QualifyingEncounter.hospitalizationWithObservation ( )
+    with "Intervention Dietitian Referral" DietitianReferralDate
+      such that DietitianReferralDate during day of QualifyingEncounter.hospitalizationWithObservation ( )
 
 define "Encounters with Malnutrition Risk Screening":
   "Encounters with Malnutrition Risk Screening Not At Risk"
@@ -113,24 +155,37 @@ define "Encounters with Malnutrition Risk Screening At Risk":
 define "Encounters with Malnutrition Risk Screening At Risk or with Dietitian Referral":
   "Encounters with Malnutrition Risk Screening At Risk"
     union "Encounters with Dietitian Referral"
+   
 
-define function "Last Nutrition Assessment Day During Encounter"(QualifyingEncounter Encounter):
+/*define function "Last Nutrition Assessment Day During Encounter"(QualifyingEncounter Encounter):
   Max("Nutrition Assessment Performed" NutritionAssessmentTuple
-      where NutritionAssessmentTuple.HospEncId = QualifyingEncounter.id
-      return NutritionAssessmentTuple.NutrAssessTimingLatest
+    where NutritionAssessmentTuple.HospEncId = QualifyingEncounter.id
+    return NutritionAssessmentTuple.NutrAssessTimingLatest
   )
 
 define "Nutrition Assessment Performed":
-  from
+    from
     "Measure Population" QualifyingEncounter,
     ["ObservationScreeningAssessment": "Nutrition Assessment"] NutritionAssessment
-    where NutritionAssessment.status in { 'final', 'amended', 'corrected' }
-      and NutritionAssessment.effective.toInterval ( ) during QualifyingEncounter.hospitalizationWithObservation ( )
-      and NutritionAssessment.value is not null
-    return Tuple {
-      HospEncId: QualifyingEncounter.id,
-      NutrAssessTimingLatest: NutritionAssessment.effective.latest ( )
-    }
+        where NutritionAssessment.status in { 'final', 'amended', 'corrected' }
+            and NutritionAssessment.effective.toInterval ( ) during QualifyingEncounter.hospitalizationWithObservation ( )
+            and NutritionAssessment.value is not null
+            return Tuple {
+        HospEncId: QualifyingEncounter.id,
+        NutrAssessTimingLatest: NutritionAssessment.effective.latest()
+        }
+*/
+//Test definition per CODev feedback
+
+
+
+define function "Last Nutrition Assessment Day During Encounter"(QualifyingEncounter Encounter):
+  Max(["ObservationScreeningAssessment": "Nutrition Assessment"] NutritionAssessment
+      where NutritionAssessment.status in { 'final', 'amended', 'corrected' }
+        and NutritionAssessment.effective.toInterval() during QualifyingEncounter.hospitalizationWithObservation()
+        and NutritionAssessment.value is not null
+      return NutritionAssessment.effective.latest()
+  )
 
 define "Encounter With Most Recent Nutrition Assessment And Identified Status":
   "Encounters with Malnutrition Risk Screening At Risk or with Dietitian Referral" QualifyingEncounter

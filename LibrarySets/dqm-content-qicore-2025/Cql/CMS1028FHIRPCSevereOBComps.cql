@@ -80,6 +80,7 @@ code "POA-Y": 'Y' from "Present On Admission Indicators"
 code "POA-1": '1' from "Present On Admission Indicators"
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 
