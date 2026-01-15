@@ -10,7 +10,7 @@ REM better tooling support and prepares for future enhancements.
 REM ============================================================================
 
 SET in_file=expression.cs
-SET out_file=Elm.g.cs.old
+SET out_file=Elm.g.cs
 SET tool_path=xsd.exe
 
 PUSHD Schema

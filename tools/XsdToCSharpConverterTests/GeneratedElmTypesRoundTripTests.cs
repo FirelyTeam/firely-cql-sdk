@@ -19,27 +19,25 @@ namespace XsdToCSharpConverterTests;
 /// This ensures the xsd2cs tool generates code that is functionally equivalent to the original xsd.exe output.
 /// </summary>
 [TestClass]
+[Ignore("We only need to run this test whenever we regenerate Elm.g.cs")]
 public class GeneratedElmTypesRoundTripTests
 {
-    private static DirectoryInfo GetDemoElmDirectory()
+    private static DirectoryInfo GetLibrarySetElmDirectory()
     {
         // Find the repository root by looking for a parent directory containing .sln or .slnx files
         var currentDir = new DirectoryInfo(Directory.GetCurrentDirectory());
         var solutionDir = FindParentDirectoryContaining(currentDir, "*.sln")
-                       ?? FindParentDirectoryContaining(currentDir, "*.slnx");
+                       ?? FindParentDirectoryContaining(currentDir, "*.slnx")
+                       ?? throw new DirectoryNotFoundException("Could not find repository root directory (no .sln or .slnx file found in parent directories)");
 
-        if (solutionDir == null)
+        var librarySet = "Demo";//"dqm-content-qicore-2025";
+        var librarySetElmDir = Path.Combine(solutionDir.FullName, "LibrarySets", librarySet, "Elm");
+        if (!Directory.Exists(librarySetElmDir))
         {
-            throw new DirectoryNotFoundException("Could not find repository root directory (no .sln or .slnx file found in parent directories)");
+            throw new DirectoryNotFoundException($"{librarySet} ELM directory not found at: {librarySetElmDir}");
         }
 
-        var demoElmDir = Path.Combine(solutionDir.FullName, "LibrarySets", "Demo", "Elm");
-        if (!Directory.Exists(demoElmDir))
-        {
-            throw new DirectoryNotFoundException($"Demo ELM directory not found at: {demoElmDir}");
-        }
-
-        return new DirectoryInfo(demoElmDir);
+        return new DirectoryInfo(librarySetElmDir);
     }
 
     /// <summary>
@@ -63,27 +61,20 @@ public class GeneratedElmTypesRoundTripTests
     public void LoadAndSave_DemoLibrarySet_ProducesIdenticalJson()
     {
         // Arrange: Load all ELM JSON files from Demo LibrarySet manually
-        var demoLibrarySetElmDirectory = GetDemoElmDirectory();
+        var demoLibrarySetElmDirectory = GetLibrarySetElmDirectory();
         var elmFiles = demoLibrarySetElmDirectory.GetFiles("*.json");
         Assert.IsTrue(elmFiles.Length > 0, "Should have at least one ELM file in Demo LibrarySet");
 
-        var jsonOptions = new JsonSerializerOptions
-        {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            WriteIndented = false
-        };
-
         var loadedLibraries = new List<(string FileName, Library Library)>();
-        
+
         // Load each library directly from JSON
         foreach (var elmFile in elmFiles)
         {
-            var json = File.ReadAllText(elmFile.FullName);
-            var library = JsonSerializer.Deserialize<Library>(json, jsonOptions);
-            
+            var library = Library.LoadFromJson(elmFile);
+
             Assert.IsNotNull(library, $"Library should deserialize successfully from {elmFile.Name}");
             Assert.IsNotNull(library.identifier, $"Library should have an identifier in {elmFile.Name}");
-            
+
             loadedLibraries.Add((elmFile.Name, library));
         }
 
@@ -94,7 +85,7 @@ public class GeneratedElmTypesRoundTripTests
 
         foreach (var (fileName, library) in loadedLibraries)
         {
-            var json = JsonSerializer.Serialize(library, jsonOptions);
+            var json = library.SerializeToJson(true);
             var filePath = Path.Combine(savedDir.FullName, fileName);
             File.WriteAllText(filePath, json);
         }
@@ -132,7 +123,7 @@ public class GeneratedElmTypesRoundTripTests
     public void LoadAndRoundTrip_SingleLibrary_PreservesStructure()
     {
         // Arrange: Load a specific library manually (FHIRHelpers is a good simple example)
-        var demoLibrarySetElmDirectory = GetDemoElmDirectory();
+        var demoLibrarySetElmDirectory = GetLibrarySetElmDirectory();
         var fhirHelpersFile = demoLibrarySetElmDirectory.GetFiles("FHIRHelpers*.json").FirstOrDefault();
         Assert.IsNotNull(fhirHelpersFile, "FHIRHelpers ELM file should exist in Demo LibrarySet");
 
@@ -159,13 +150,13 @@ public class GeneratedElmTypesRoundTripTests
         Assert.AreEqual(library.identifier.id, roundTrippedLibrary.identifier.id, "Library id should be preserved");
         Assert.AreEqual(library.identifier.version, roundTrippedLibrary.identifier.version, "Library version should be preserved");
 
-        if (library.usings != null && library.usings.Length > 0)
+        if (library.usings is { Length: > 0 })
         {
             Assert.IsNotNull(roundTrippedLibrary.usings, "Usings should be preserved");
             Assert.AreEqual(library.usings.Length, roundTrippedLibrary.usings.Length, "Usings count should match");
         }
 
-        if (library.statements != null && library.statements.Length > 0)
+        if (library.statements is { Length: > 0 })
         {
             Assert.IsNotNull(roundTrippedLibrary.statements, "Statements should be preserved");
             Assert.AreEqual(library.statements.Length, roundTrippedLibrary.statements.Length, "Statements count should match");
@@ -179,7 +170,7 @@ public class GeneratedElmTypesRoundTripTests
         // by loading libraries that use default values
 
         // Arrange & Act: Load all libraries manually from Demo set
-        var demoLibrarySetElmDirectory = GetDemoElmDirectory();
+        var demoLibrarySetElmDirectory = GetLibrarySetElmDirectory();
         var elmFiles = demoLibrarySetElmDirectory.GetFiles("*.json");
         Assert.IsTrue(elmFiles.Length > 0, "Should have ELM files in Demo LibrarySet");
 
@@ -190,17 +181,17 @@ public class GeneratedElmTypesRoundTripTests
         };
 
         var loadedCount = 0;
-        
+
         foreach (var elmFile in elmFiles)
         {
             var json = File.ReadAllText(elmFile.FullName);
             var library = JsonSerializer.Deserialize<Library>(json, jsonOptions);
-            
+
             // Assert: Verify library loaded successfully
             Assert.IsNotNull(library, $"Library should not be null for {elmFile.Name}");
             Assert.IsNotNull(library.identifier, $"Library identifier should not be null for {elmFile.Name}");
             Assert.IsFalse(string.IsNullOrEmpty(library.identifier.id), $"Library id should not be empty for {elmFile.Name}");
-            
+
             loadedCount++;
         }
 
