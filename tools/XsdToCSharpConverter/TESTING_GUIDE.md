@@ -41,12 +41,6 @@ dotnet test --filter "FullyQualifiedName~ElmSerializer"
 
 ### 3. Generate Elm.g.cs and Validate
 
-**Linux/macOS:**
-```bash
-cd Cql/Elm
-./Elm.g.cs-Generate-xsd2cs.sh
-```
-
 **Windows:**
 ```cmd
 cd Cql\Elm
@@ -106,10 +100,10 @@ dotnet ../../../tools/XsdToCSharpConverter/bin/Debug/net8.0/xsd2cs.dll /c /o:.. 
 1. Generate Elm.g.cs using the tool
 2. Build the solution
 
-```bash
-cd Cql/Elm
-./Elm.g.cs-Generate-xsd2cs.sh  # or .cmd on Windows
-cd ../..
+```cmd
+cd Cql\Elm
+Elm.g.cs-Generate-xsd2cs.cmd
+cd ..\..
 dotnet build Cql-Sdk.slnf
 ```
 
@@ -278,21 +272,11 @@ dotnet run
 
 **Purpose**: Verify tool works on all platforms
 
-**Linux:**
-```bash
-cd Cql/Elm
-chmod +x Elm.g.cs-Generate-xsd2cs.sh
-./Elm.g.cs-Generate-xsd2cs.sh
-```
-
-**macOS:**
-```bash
-cd Cql/Elm
-chmod +x Elm.g.cs-Generate-xsd2cs.sh
-./Elm.g.cs-Generate-xsd2cs.sh
-```
-
 **Windows:**
+```cmd
+cd Cql\Elm
+Elm.g.cs-Generate-xsd2cs.cmd
+```
 ```cmd
 cd Cql\Elm
 Elm.g.cs-Generate-xsd2cs.cmd
@@ -319,7 +303,7 @@ Elm.g.cs-Generate-xsd2cs.cmd
 **Symptom:** Test failures in ElmSerializerTests or XsdToCSharpConverterTests
 
 **Solutions:**
-1. Regenerate Elm.g.cs: `cd Cql/Elm && ./Elm.g.cs-Generate-xsd2cs.sh`
+1. Regenerate Elm.g.cs: `cd Cql\Elm && Elm.g.cs-Generate-xsd2cs.cmd`
 2. Rebuild solution: `dotnet build Cql-Sdk.slnf`
 3. Check test output for specific failure details
 4. Verify LibrarySets/Demo/Elm directory exists and contains files

@@ -16,8 +16,8 @@ This tool was created to replace the legacy `xsd.exe` tool used in the Firely CQ
 
 This new tool provides:
 - ✅ **Cross-platform support** (Windows, Linux, macOS)
-- ✅ **Backward compatibility** - generates functionally identical code to xsd.exe
-- ✅ **Complete feature parity** - arrays, inheritance, enums, attributes, abstract types
+- ✅ **Backward compatibility** - generates functionally identical code to xsd.exe for ELM schemas
+- ✅ **Feature parity for ELM needs** - arrays, inheritance, enums, attributes, abstract types
 - ✅ **Modern .NET APIs** - uses System.CodeDom available on all platforms
 - ✅ **Future extensibility** for nullable annotations and modern C# features
 - ✅ **Open source** and actively maintained
@@ -116,7 +116,7 @@ Potential features for future versions:
 
 ## Using with Elm.g.cs Generation
 
-The `Cql/Elm` directory contains scripts that use this tool:
+The `Cql/Elm` directory contains a script that uses this tool:
 
 **Windows:**
 ```cmd
@@ -124,13 +124,7 @@ cd Cql\Elm
 Elm.g.cs-Generate-xsd2cs.cmd
 ```
 
-**Linux/macOS:**
-```bash
-cd Cql/Elm
-./Elm.g.cs-Generate-xsd2cs.sh
-```
-
-These scripts automatically build the tool if needed, run the generation, and add the appropriate file header.
+This script automatically builds the tool if needed, runs the generation, and adds the appropriate file header.
 
 ## Cross-Platform Compatibility
 

@@ -28,7 +28,7 @@ Created a .NET 8.0 console application that implements XSD to C# code generation
 
 ### 2. Features Implemented
 
-#### Complete Feature Parity with xsd.exe
+#### Feature Support for ELM Schema Requirements
 
 ✅ **Complex Types** - Full support including nested types
 ✅ **Simple Types** - String, int, bool, decimal, etc.
@@ -37,6 +37,8 @@ Created a .NET 8.0 console application that implements XSD to C# code generation
 ✅ **Elements** - Single and array elements with proper attributes
 ✅ **Inheritance** - Base types and derived types with proper hierarchy
 ✅ **Abstract Types** - XSD abstract="true" generates C# abstract classes
+
+**Note**: This implementation provides all XSD features required for ELM schema generation. It does not implement all xsd.exe features (e.g., DataSet generation, choice constructs) as they are not needed for the ELM use case.
 
 #### Array Handling (Two Patterns)
 
@@ -90,14 +92,13 @@ Created a .NET 8.0 console application that implements XSD to C# code generation
 
 Updated scripts in `Cql/Elm` directory:
 
-**Cross-platform scripts:**
+**Current script:**
 - `Elm.g.cs-Generate-xsd2cs.cmd` (Windows)
-- `Elm.g.cs-Generate-xsd2cs.sh` (Linux/macOS)
-- Both scripts auto-build the tool if needed
-- Generate Elm.g.cs from XSD schemas
-- Add appropriate file header
+- Auto-builds the tool if needed
+- Generates Elm.g.cs from XSD schemas
+- Adds appropriate file header
 
-**Original xsd.exe scripts (for comparison):**
+**Original xsd.exe script (for comparison):**
 - `Elm.g.cs-Generate-xsd.cmd` - Generates Elm.g.cs.old using xsd.exe
 - Kept for validation and comparison purposes
 
@@ -208,9 +209,9 @@ Uses three passes to ensure proper attribute generation:
 The tool is designed with extensibility in mind:
 
 ```
-✅ Phase 1 (Current): Feature parity with xsd.exe
-   - Complete XSD support for ELM schemas
-   - Functionally identical output
+✅ Phase 1 (Current): XSD features for ELM schemas
+   - All XSD features required for ELM schema generation
+   - Functionally identical output for ELM use case
    - Comprehensive test coverage
 
 🎯 Phase 2 (Planned): .NET 10 serialization support
@@ -260,7 +261,7 @@ All documentation has been created and updated:
 
 ## Conclusion
 
-The xsd2cs tool successfully replaces Microsoft's legacy xsd.exe tool with a modern, cross-platform, maintainable solution. The implementation provides complete feature parity for all XSD constructs used in ELM schemas while laying the foundation for future enhancements like nullable annotations and modern C# features.
+The xsd2cs tool successfully replaces Microsoft's legacy xsd.exe tool with a modern, cross-platform, maintainable solution. The implementation provides all XSD features required for ELM schema generation while laying the foundation for future enhancements like nullable annotations and modern C# features.
 
 The tool has been thoroughly validated with:
 - 13 comprehensive unit tests covering all quirks and features

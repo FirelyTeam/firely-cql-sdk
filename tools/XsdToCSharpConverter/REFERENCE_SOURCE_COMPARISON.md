@@ -134,7 +134,7 @@ public abstract partial class Expression : Element {
 ✅ **Maintainable** - Direct CodeDom generation is easier to understand and modify
 ✅ **Open source** - Can be extended and improved by the community
 ✅ **No legacy dependencies** - Uses modern .NET APIs available on all platforms
-✅ **Complete feature parity** - All XSD constructs used by ELM schemas supported
+✅ **Feature support for ELM schemas** - All XSD constructs used by ELM schemas supported
 ✅ **Comprehensive tests** - 13+ unit tests validate all features and quirks
 ✅ **Efficient XmlInclude** - Direct derivations only (sufficient, more maintainable)
 
