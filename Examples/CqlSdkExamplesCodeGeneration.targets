@@ -179,7 +179,7 @@
 
 	<Target Name="ModifySources"
 	        BeforeTargets="CoreCompile"
-	        Condition="'$(MSBuildRuntimeType)' != 'Core'">
+	        Condition="'$(MSBuildRuntimeType)' != 'Core' And ('$(TargetFramework)' == 'net10.0' Or '$(TargetFramework)' == '')">
 		<UpdateCurrentDirectoryInSource />
 		<UpdateLaunchSettingsInSource />
 	</Target>
