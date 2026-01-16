@@ -112,6 +112,13 @@ internal static class LibraryJsonSerializer
             UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
         };
 
+        // Register custom converters for polymorphic types to work around System.Text.Json limitation
+        // with "type" property name conflicts
+        options.Converters.Add(new PolymorphicObjectJsonConverter<CqlToElmBase>(allowOldStyleTypeDiscriminators));
+        options.Converters.Add(new PolymorphicObjectJsonConverter<ExpressionDef>(allowOldStyleTypeDiscriminators));
+        options.Converters.Add(new PolymorphicObjectJsonConverter<Expression>(allowOldStyleTypeDiscriminators));
+        options.Converters.Add(new PolymorphicObjectJsonConverter<TypeSpecifier>(allowOldStyleTypeDiscriminators));
+
         options.Converters.Add(new TopLevelDefinitionConverterFactory(allowOldStyleTypeDiscriminators));
         options.Converters.Add(new XmlQualifiedNameConverter());
         options.Converters.Add(new JsonStringEnumConverter());
@@ -121,15 +128,28 @@ internal static class LibraryJsonSerializer
                       .WithAddedModifier(DoNotSerializeDefaultValues)
                       .WithAddedModifier(HandleSpecifiedProperties);
 
-        if(allowOldStyleTypeDiscriminators)
-            resolver = resolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
+            if(allowOldStyleTypeDiscriminators)
+                resolver = resolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
 
-        options.TypeInfoResolver = resolver;
+            options.TypeInfoResolver = resolver;
 
-        return options;
-    }
+            return options;
+        }
 
-    private static JsonDocumentOptions BuildJsonDocumentOptions()
+        /// <summary>
+        /// Builds a type resolver with only the modifiers (DoNotSerializeDefaultValues, HandleSpecifiedProperties, ModifyNarrative)
+        /// but without polymorphism configuration. This is used by PolymorphicObjectJsonConverter when deserializing
+        /// derived types to avoid "type" property conflicts while still applying the necessary serialization modifiers.
+        /// </summary>
+        internal static IJsonTypeInfoResolver BuildModifiersOnlyResolver()
+        {
+            return new DefaultJsonTypeInfoResolver()
+                .WithAddedModifier(ModifyNarrative)
+                .WithAddedModifier(DoNotSerializeDefaultValues)
+                .WithAddedModifier(HandleSpecifiedProperties);
+        }
+
+        private static JsonDocumentOptions BuildJsonDocumentOptions()
     {
         var options = new JsonDocumentOptions()
         {
@@ -235,6 +255,8 @@ internal static class LibraryJsonSerializer
             };
 
             // Only serialize the property if xxxSpecified is true.
+            // Preserve the existing ShouldSerialize logic (e.g., from DoNotSerializeDefaultValues).
+            var existingShouldSerialize = prop.valueProp.ShouldSerialize;
             prop.valueProp.ShouldSerialize = (obj, value) =>
             {
                 var shouldSerialize = (bool?)prop.valuePropSpecified.Get?.Invoke(obj) == true;
@@ -242,7 +264,11 @@ internal static class LibraryJsonSerializer
                     Debug.Fail($"Property '{prop.valueProp.Name}' is set to '{value}', but " +
                                $"the '{prop.valuePropSpecified.Name}' is false.");
 
-                return shouldSerialize;
+                // If the specified flag is false, don't serialize
+                if (!shouldSerialize) return false;
+
+                // Otherwise, defer to the existing ShouldSerialize logic
+                return existingShouldSerialize?.Invoke(obj, value) ?? true;
             };
 
             // The xxxSpecified prop should never be serialized itself.

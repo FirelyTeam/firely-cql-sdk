@@ -27,6 +27,23 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
     {
         JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
 
+        // Don't apply polymorphism if a custom converter is registered (JsonTypeInfoKind will be None)
+        if (jsonTypeInfo.Kind == JsonTypeInfoKind.None)
+            return jsonTypeInfo;
+
+        // Don't apply polymorphism to CqlToElmBase and its hierarchy - they have transitive conflicts
+        // through properties containing types with "type" properties. Custom converter handles these.
+        if (type.FullName == "Hl7.Cql.Elm.CqlToElmBase" || 
+            type.BaseType?.FullName == "Hl7.Cql.Elm.CqlToElmBase" ||
+            (type.BaseType?.BaseType?.FullName == "Hl7.Cql.Elm.CqlToElmBase"))
+            return jsonTypeInfo;
+
+        // Don't apply polymorphism to types with custom converters: Element, Expression, TypeSpecifier, ExpressionDef.
+        // These hierarchies have transitive conflicts through properties with "type" names.
+        // Arrays of these types are handled by PolymorphicArrayJsonConverter.
+        if (type.FullName is "Hl7.Cql.Elm.Element" or "Hl7.Cql.Elm.Expression" or "Hl7.Cql.Elm.TypeSpecifier" or "Hl7.Cql.Elm.OperatorExpression" or "Hl7.Cql.Elm.AggregateExpression" or "Hl7.Cql.Elm.ExpressionDef" or "Hl7.Cql.Elm.FunctionDef")
+            return jsonTypeInfo;
+
         var derivedTypes = BuildDerivedTypes(type).ToList();
 
         if (!derivedTypes.Any()) return jsonTypeInfo;
