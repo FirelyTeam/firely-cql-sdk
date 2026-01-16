@@ -74,7 +74,17 @@ internal static class LibraryJsonSerializer
         };
 
         var container = new LibraryContainer(library);
-        return JsonSerializer.Serialize(container, options);
+        var json = JsonSerializer.Serialize(container, options);
+        
+        // Convert "__type" back to "type" for backward compatibility
+        var node = JsonNode.Parse(json);
+        if (node != null)
+        {
+            ConvertDoubleUnderscoreTypeToType(node);
+            json = node.ToJsonString(new JsonSerializerOptions { WriteIndented = writeIndented });
+        }
+        
+        return json;
     }
 
     /// <summary>
@@ -91,7 +101,47 @@ internal static class LibraryJsonSerializer
         };
 
         var container = new LibraryContainer(library);
-        JsonSerializer.Serialize(stream, container, options);
+        var json = JsonSerializer.Serialize(container, options);
+        
+        // Convert "__type" back to "type" for backward compatibility
+        var node = JsonNode.Parse(json);
+        if (node != null)
+        {
+            ConvertDoubleUnderscoreTypeToType(node);
+            using var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = writeIndented });
+            node.WriteTo(writer);
+        }
+    }
+
+    private static void ConvertDoubleUnderscoreTypeToType(JsonNode node)
+    {
+        switch (node)
+        {
+            case JsonObject jo:
+                if (jo.TryGetPropertyValue("__type", out var doubleUnderscoreType))
+                {
+                    jo.Remove("__type");
+                    // Insert "type" at the beginning
+                    var children = jo.ToList();
+                    jo.Clear();
+                    jo.Add("type", doubleUnderscoreType);
+                    foreach (var child in children)
+                        jo.Add(child);
+                }
+                foreach (var (_, value) in jo.ToList())
+                {
+                    if (value != null)
+                        ConvertDoubleUnderscoreTypeToType(value);
+                }
+                break;
+            case JsonArray ja:
+                foreach (var item in ja)
+                {
+                    if (item != null)
+                        ConvertDoubleUnderscoreTypeToType(item);
+                }
+                break;
+        }
     }
 
     /// <summary>
@@ -116,13 +166,15 @@ internal static class LibraryJsonSerializer
         options.Converters.Add(new XmlQualifiedNameConverter());
         options.Converters.Add(new JsonStringEnumConverter());
 
-        options.TypeInfoResolver = new PolymorphicTypeResolver(allowOldStyleTypeDiscriminators)
-                                   .WithAddedModifier(ModifyNarrative)
-                                   .WithAddedModifier(DoNotSerializeDefaultValues)
-                                   .WithAddedModifier(HandleSpecifiedProperties);
+        var resolver = new PolymorphicTypeResolver(allowOldStyleTypeDiscriminators)
+                      .WithAddedModifier(ModifyNarrative)
+                      .WithAddedModifier(DoNotSerializeDefaultValues)
+                      .WithAddedModifier(HandleSpecifiedProperties);
 
         if(allowOldStyleTypeDiscriminators)
-            options.TypeInfoResolver = options.TypeInfoResolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
+            resolver = resolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
+
+        options.TypeInfoResolver = resolver;
 
         return options;
     }
@@ -174,21 +226,42 @@ internal static class LibraryJsonSerializer
 
         static void reorder(JsonObject o)
         {
-            if (!o.TryGetPropertyValue("type", out var typeProp) || o.First().Value == typeProp) return;
+            // Convert "type" discriminators to "__type" for .NET 10 compatibility
+            // We use "__type" to avoid conflicts with actual "type" properties in ELM types
+            // Only convert if the value is a string (discriminator), not an object/array (data property)
+            if (o.TryGetPropertyValue("type", out var typeProp))
+            {
+                if (typeProp!.GetValueKind() == JsonValueKind.String)
+                {
+                    // Check if this looks like a type discriminator (PascalCase type name)
+                    var typeValue = typeProp.GetValue<string>();
+                    if (!string.IsNullOrEmpty(typeValue) && char.IsUpper(typeValue[0]))
+                    {
+                        o.Remove("type");
+                        o.Add("__type", typeProp);
+                    }
+                }
+                // If "type" is an object or array, leave it alone - it's a data property, not a discriminator
+            }
+
+            if (!o.TryGetPropertyValue("__type", out var discrim)) return;
+            
+            // Ensure __type is first
+            if (o.First().Value == discrim) return;
 
             var children = o.ToList();
             o.Clear();
 
-            o.Add("type", typeProp);
-            foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
+            o.Add("__type", discrim);
+            foreach (var nonType in children.Where(o => o.Key != "__type")) o.Add(nonType);
         }
 
         static void fixType(JsonObject o)
         {
-            if (!o.TryGetPropertyValue("type", out var typeProp)) return;
+            if (!o.TryGetPropertyValue("__type", out var typeProp)) return;
 
             if (typeProp!.GetValueKind() == JsonValueKind.Object)
-                o.Remove("type");
+                o.Remove("__type");
         }
 
         static bool IsEmptyObjectOrArray(JsonNode node) =>

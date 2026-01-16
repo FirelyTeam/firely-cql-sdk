@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -27,22 +27,15 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
     {
         JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
 
-        // Remove "type" property from types where it conflicts with the discriminator
-        // These are legacy properties (ChoiceTypeSpecifier.type is replaced by choice,
-        // TupleElementDefinition.type is not used in JSON)
-        if ((type == typeof(ChoiceTypeSpecifier) || type == typeof(TupleElementDefinition)) &&
-            jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == "type") is { } oldTypeProp)
-        {
-            jsonTypeInfo.Properties.Remove(oldTypeProp);
-        }
-
         var derivedTypes = BuildDerivedTypes(type).ToList();
 
         if (!derivedTypes.Any()) return jsonTypeInfo;
 
         jsonTypeInfo.PolymorphismOptions = new JsonPolymorphismOptions
         {
-            TypeDiscriminatorPropertyName = "type",
+            // Use "__type" as discriminator to avoid conflicts with actual "type" properties in ELM types
+            // This solves the .NET 10 breaking change where discriminator names can't conflict with properties
+            TypeDiscriminatorPropertyName = "__type",
             IgnoreUnrecognizedTypeDiscriminators = false,
             UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FailSerialization,
         };
