@@ -11,7 +11,7 @@ so it is likely at this early stage that there will be deviations from other eng
 
 ## Target Frameworks
 
-The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal performance while maintaining long-term support. All SDK packages (Hl7.Cql.*) are multi-targeted and will run on either framework.
+The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal performance from .NET 10's enhancements (especially in LINQ which CQL heavily relies upon) while maintaining long-term support. All SDK packages (Hl7.Cql.*) are multi-targeted and will run on either framework with identical behavior.
 
 ## Release Notes
 This is release version 2.4.0 of the engine.
