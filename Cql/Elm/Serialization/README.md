@@ -434,6 +434,24 @@ Even with pre-processing, we need custom converters because:
 2. **Infinite recursion prevention**: Standard polymorphism + custom resolver can cause infinite loops
 3. **Precise control**: We need to remove `"type"` before deserializing to avoid unmapped member errors
 
+### Properties Named "type"
+
+Some ELM types have actual properties named `"type"` (e.g., `TupleElementDefinition.type`, `ChoiceTypeSpecifier.type`). These properties have complex types (objects/arrays) that would conflict with the string `"type"` discriminator used for polymorphism.
+
+**Solution**: The XSD-to-C# generator automatically adds `[System.Text.Json.Serialization.JsonIgnore]` to properties named `"type"` that have complex types. This prevents them from being serialized in JSON while preserving them for XML serialization (which doesn't use type discriminators).
+
+```csharp
+// Generated code example:
+[System.Xml.Serialization.XmlElementAttribute("type")]
+[System.Text.Json.Serialization.JsonIgnore]  // Auto-generated
+public TypeSpecifier[] type { get; set; }
+```
+
+This works because:
+- **XML serialization**: Uses the property normally (no discriminator conflicts)
+- **JSON serialization**: Ignores the property (discriminator takes precedence)
+- The type information is still available through `resultTypeSpecifier` or other means
+
 ```
 ???????????????????????????????????????????????????????????????????
 ?           Types Handled by Custom Converters                     ?
