@@ -111,21 +111,18 @@ public partial class Library
         return library;
     }
 
-    private static void CorrectLegacyConstructs(JsonNode a, bool isRoot = true)
+    private static void CorrectLegacyConstructs(JsonNode a)
     {
         switch(a)
         {
             case JsonObject jo:
-                reorder(jo, isRoot);
-                fixType(jo, isRoot);
+                reorder(jo);
+                fixType(jo);
                 foreach (var (key, value) in jo.ToList())
                 {
                     if (value == null) continue;
                     
-                    // The root container has a "library" property which is the actual Library object
-                    // Don't convert "type" in the Library object itself (key == "library")
-                    bool isLibraryObject = isRoot && key == "library";
-                    CorrectLegacyConstructs(value, isRoot: isLibraryObject);
+                    CorrectLegacyConstructs(value);
 
                     if (IsEmptyObjectOrArray(value))
                     {
@@ -139,7 +136,7 @@ public partial class Library
                     var item = ja[i];
                     if (item == null) continue;
                     
-                    CorrectLegacyConstructs(item, isRoot: false);
+                    CorrectLegacyConstructs(item);
 
                     if (IsEmptyObjectOrArray(item))
                     {
@@ -149,68 +146,23 @@ public partial class Library
                 break;
         }
 
-        static void reorder(JsonObject o, bool isLibraryOrKnownType)
+        static void reorder(JsonObject o)
         {
-#if NET10_0_OR_GREATER
-            // In .NET 10+, we need to convert "type" discriminators to "$type" for polymorphic types.
-            // However, types outside the inheritance structure use "type" as a regular property.
-            // These include: Library, VersionedIdentifier, and inner classes like Library$Usings
-            // Skip conversion for these known types
-            if (!isLibraryOrKnownType && 
-                o.TryGetPropertyValue("type", out var typeProp) && 
-                typeProp!.GetValueKind() == JsonValueKind.String)
-            {
-                var typeValue = typeProp.GetValue<string>();
-                // Whitelist of types that use "type" as a property, not a discriminator
-                // These are types with XmlTypeAttribute but NO XmlIncludeAttribute
-                var nonPolymorphicTypes = new[]
-                {
-                    "Library", "VersionedIdentifier"
-                };
-                
-                // Also skip inner classes like "Library$Usings"
-                bool isKnownNonPolymorphic = nonPolymorphicTypes.Contains(typeValue) || 
-                                              (typeValue?.Contains('$') ?? false);
-                
-                if (!isKnownNonPolymorphic && !string.IsNullOrEmpty(typeValue) && char.IsUpper(typeValue[0]))
-                {
-                    o.Remove("type");
-                    o.Add("$type", typeProp);
-                }
-            }
-            
-            const string discriminatorName = "$type";
-#else
-            const string discriminatorName = "type";
-#endif
-            
-            if (!o.TryGetPropertyValue(discriminatorName, out var discrim) || o.First().Value == discrim) return;
+            if (!o.TryGetPropertyValue("type", out var typeProp) || o.First().Value == typeProp) return;
 
             var children = o.ToList();
             o.Clear();
 
-            o.Add(discriminatorName, discrim);
-            foreach (var nonType in children.Where(o => o.Key != discriminatorName)) o.Add(nonType);
+            o.Add("type", typeProp);
+            foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
         }
 
-        static void fixType(JsonObject o, bool isLibraryOrKnownType)
+        static void fixType(JsonObject o)
         {
-#if NET10_0_OR_GREATER
-            const string discriminatorName = "$type";
-            // Also handle legacy "type" property that might be an object (not a discriminator)
-            if (o.TryGetPropertyValue("type", out var typePropLegacy) && typePropLegacy!.GetValueKind() == JsonValueKind.Object)
-            {
-                o.Remove("type");
-                return;
-            }
-#else
-            const string discriminatorName = "type";
-#endif
-            
-            if (!o.TryGetPropertyValue(discriminatorName, out var typeProp)) return;
+            if (!o.TryGetPropertyValue("type", out var typeProp)) return;
 
             if (typeProp!.GetValueKind() == JsonValueKind.Object)
-                o.Remove(discriminatorName);
+                o.Remove("type");
         }
 
         static bool IsEmptyObjectOrArray(JsonNode node) =>
@@ -232,54 +184,8 @@ public partial class Library
         };
 
         var container = new LibraryContainer(this);
-        var json = JsonSerializer.Serialize(container, options);
-        
-#if NET10_0_OR_GREATER
-        // In .NET 10, we use "$type" as the discriminator to avoid conflicts,
-        // but for backward compatibility, convert it back to "type" in the output
-        var node = JsonNode.Parse(json);
-        if (node != null)
-        {
-            ConvertDollarTypeToType(node);
-            json = node.ToJsonString(new JsonSerializerOptions { WriteIndented = writeIndented });
-        }
-#endif
-        
-        return json;
+        return JsonSerializer.Serialize(container, options);
     }
-
-#if NET10_0_OR_GREATER
-    private static void ConvertDollarTypeToType(JsonNode node)
-    {
-        switch (node)
-        {
-            case JsonObject jo:
-                if (jo.TryGetPropertyValue("$type", out var dollarType))
-                {
-                    jo.Remove("$type");
-                    // Insert "type" at the beginning
-                    var children = jo.ToList();
-                    jo.Clear();
-                    jo.Add("type", dollarType);
-                    foreach (var child in children)
-                        jo.Add(child);
-                }
-                foreach (var (_, value) in jo.ToList())
-                {
-                    if (value != null)
-                        ConvertDollarTypeToType(value);
-                }
-                break;
-            case JsonArray ja:
-                foreach (var item in ja)
-                {
-                    if (item != null)
-                        ConvertDollarTypeToType(item);
-                }
-                break;
-        }
-    }
-#endif
 
     /// <summary>
     /// Writes this library in JSON format to <paramref name="stream"/>.
@@ -294,21 +200,7 @@ public partial class Library
         };
 
         var container = new LibraryContainer(this);
-        
-#if NET10_0_OR_GREATER
-        // In .NET 10, we use "$type" as the discriminator to avoid conflicts,
-        // but for backward compatibility, convert it back to "type" in the output
-        var json = JsonSerializer.Serialize(container, options);
-        var node = JsonNode.Parse(json);
-        if (node != null)
-        {
-            ConvertDollarTypeToType(node);
-            using var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = writeIndented });
-            node.WriteTo(writer);
-        }
-#else
         JsonSerializer.Serialize(stream, container, options);
-#endif
     }
 
 

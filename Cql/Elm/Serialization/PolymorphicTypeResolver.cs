@@ -27,30 +27,22 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
     {
         JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
 
-        // Remove old "type" property if that is left on ChoiceTypeSpecifier and TupleElementDefinition,
-        // it is replaced by the new type discriminator in the current version of ELM.
-        // (note: the deserializer will rewrite any old-style type discriminators to the new format in its
-        // preprocessing phase).
-        // In .NET 10, System.Text.Json is more strict about type discriminator property conflicts,
-        // so we proactively remove the "type" property from any types that have it to avoid conflicts.
-        if (jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == "type") is { } oldTypeProp)
+        // Remove "type" property from types where it conflicts with the discriminator
+        // These are legacy properties (ChoiceTypeSpecifier.type is replaced by choice,
+        // TupleElementDefinition.type is not used in JSON)
+        if ((type == typeof(ChoiceTypeSpecifier) || type == typeof(TupleElementDefinition)) &&
+            jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == "type") is { } oldTypeProp)
+        {
             jsonTypeInfo.Properties.Remove(oldTypeProp);
+        }
 
         var derivedTypes = BuildDerivedTypes(type).ToList();
 
         if (!derivedTypes.Any()) return jsonTypeInfo;
 
-#if NET10_0_OR_GREATER
-        // In .NET 10+, use "$type" as discriminator to avoid conflicts with actual "type" properties
-        const string discriminatorName = "$type";
-#else
-        // In .NET 8, use "type" as discriminator for backward compatibility
-        const string discriminatorName = "type";
-#endif
-
         jsonTypeInfo.PolymorphismOptions = new JsonPolymorphismOptions
         {
-            TypeDiscriminatorPropertyName = discriminatorName,
+            TypeDiscriminatorPropertyName = "type",
             IgnoreUnrecognizedTypeDiscriminators = false,
             UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FailSerialization,
         };

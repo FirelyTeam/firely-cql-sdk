@@ -19,19 +19,6 @@ namespace CoreTests
         [TestMethod]
         public void Elm_Deserialize_TupleTypeSpecifier()
         {
-#if NET10_0_OR_GREATER
-            var json =
-                """
-                {
-                    "$type" : "ChoiceTypeSpecifier",
-                    "choice" : [ {
-                      "$type" : "NamedTypeSpecifier",
-                      "name" : "{http://hl7.org/fhir}CodeableConcept"  } ]
-                }
-                """;
-            var options = Library.BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
-            var ts = JsonSerializer.Deserialize<TypeSpecifier>(json, options);
-#else
             var json =
                 """
                 {
@@ -41,9 +28,9 @@ namespace CoreTests
                       "name" : "{http://hl7.org/fhir}CodeableConcept"  } ]
                 }
                 """;
+
             var options = Library.BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
-            var ts = JsonSerializer.Deserialize<ChoiceTypeSpecifier>(json, options);
-#endif
+            var ts = JsonSerializer.Deserialize<TypeSpecifier>(json, options);
             var cts = ts.Should().BeOfType<ChoiceTypeSpecifier>().Subject;
             cts.choice.Should().HaveCount(1);
         }
