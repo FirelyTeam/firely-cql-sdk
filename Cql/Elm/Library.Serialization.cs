@@ -148,21 +148,47 @@ public partial class Library
 
         static void reorder(JsonObject o)
         {
-            if (!o.TryGetPropertyValue("type", out var typeProp) || o.First().Value == typeProp) return;
+#if NET10_0_OR_GREATER
+            // In .NET 10+, we use "$type" as the discriminator
+            const string discriminatorName = "$type";
+            // But also check for "type" from older/external ELM files and convert it
+            if (o.TryGetPropertyValue("type", out var typePropOld) && typePropOld!.GetValueKind() == JsonValueKind.String)
+            {
+                o.Remove("type");
+                o.Add(discriminatorName, typePropOld);
+            }
+#else
+            // In .NET 8, we use "type" as the discriminator
+            const string discriminatorName = "type";
+#endif
+            
+            if (!o.TryGetPropertyValue(discriminatorName, out var typeProp) || o.First().Value == typeProp) return;
 
             var children = o.ToList();
             o.Clear();
 
-            o.Add("type", typeProp);
-            foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
+            o.Add(discriminatorName, typeProp);
+            foreach (var nonType in children.Where(o => o.Key != discriminatorName)) o.Add(nonType);
         }
 
         static void fixType(JsonObject o)
         {
-            if (!o.TryGetPropertyValue("type", out var typeProp)) return;
+#if NET10_0_OR_GREATER
+            const string discriminatorName = "$type";
+            // Also handle legacy "type" property
+            if (o.TryGetPropertyValue("type", out var typePropLegacy) && typePropLegacy!.GetValueKind() == JsonValueKind.Object)
+            {
+                o.Remove("type");
+                return;
+            }
+#else
+            const string discriminatorName = "type";
+#endif
+            
+            if (!o.TryGetPropertyValue(discriminatorName, out var typeProp)) return;
 
             if (typeProp!.GetValueKind() == JsonValueKind.Object)
-                o.Remove("type");
+                o.Remove(discriminatorName);
         }
 
         static bool IsEmptyObjectOrArray(JsonNode node) =>
@@ -336,12 +362,27 @@ public partial class Library
 
         static void addTypeProperty(JsonTypeInfo ti, string expected)
         {
-            var typeProp = ti.CreateJsonPropertyInfo(typeof(string), "type");
+#if NET10_0_OR_GREATER
+            const string discriminatorName = "$type";
+            // Also handle legacy "type" property for deserialization
+            var legacyTypeProp = ti.CreateJsonPropertyInfo(typeof(string), "type");
+            legacyTypeProp.ShouldSerialize = (_, _) => false;
+            legacyTypeProp.Set = (_, value) =>
+            {
+                if ((string?)value != expected)
+                    throw new JsonException($"Type property should be '{expected}' but was '{value}'.");
+            };
+            ti.Properties.Add(legacyTypeProp);
+#else
+            const string discriminatorName = "type";
+#endif
+            
+            var typeProp = ti.CreateJsonPropertyInfo(typeof(string), discriminatorName);
             typeProp.ShouldSerialize = (_, _) => false;
             typeProp.Set = (_, value) =>
                 {
                     if( (string?)value != expected)
-                        throw new JsonException("Library's type property should always be 'Library'.");
+                        throw new JsonException($"{discriminatorName} property should be '{expected}' but was '{value}'.");
                 };
             ti.Properties.Add(typeProp);
         }

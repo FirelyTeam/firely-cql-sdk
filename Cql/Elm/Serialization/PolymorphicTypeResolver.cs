@@ -25,23 +25,47 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 
     public override JsonTypeInfo GetTypeInfo(Type type, JsonSerializerOptions options)
     {
-        JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
+        JsonTypeInfo jsonTypeInfo;
+        
+        // For types with a "type" property, we need to handle them specially in .NET 10+
+        // to avoid the conflict with the type discriminator property name.
+        // We check if any type in the hierarchy has a "type" property.
+#if NET10_0_OR_GREATER
+        if (HasTypePropertyInHierarchy(type))
+        {
+            // Create JsonTypeInfo without going through base resolver to avoid early validation
+            jsonTypeInfo = JsonTypeInfo.CreateJsonTypeInfo(type, options);
+        }
+        else
+#endif
+        {
+            jsonTypeInfo = base.GetTypeInfo(type, options);
+        }
 
         // Remove old "type" property if that is left on ChoiceTypeSpecifier and TupleElementDefinition,
         // it is replaced by the new type discriminator in the current version of ELM.
         // (note: the deserializer will rewrite any old-style type discriminators to the new format in its
         // preprocessing phase).
-        if ((jsonTypeInfo.Type == typeof(ChoiceTypeSpecifier) || jsonTypeInfo.Type == typeof(TupleElementDefinition)) &&
-            jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == "type") is { } oldTypeProp)
+        // In .NET 10, System.Text.Json is more strict about type discriminator property conflicts,
+        // so we proactively remove the "type" property from any types that have it to avoid conflicts.
+        if (jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == "type") is { } oldTypeProp)
             jsonTypeInfo.Properties.Remove(oldTypeProp);
 
         var derivedTypes = BuildDerivedTypes(type).ToList();
 
         if (!derivedTypes.Any()) return jsonTypeInfo;
 
+#if NET10_0_OR_GREATER
+        // In .NET 10+, use "$type" as discriminator to avoid conflicts with actual "type" properties
+        const string discriminatorName = "$type";
+#else
+        // In .NET 8, use "type" as discriminator for backward compatibility
+        const string discriminatorName = "type";
+#endif
+
         jsonTypeInfo.PolymorphismOptions = new JsonPolymorphismOptions
         {
-            TypeDiscriminatorPropertyName = "type",
+            TypeDiscriminatorPropertyName = discriminatorName,
             IgnoreUnrecognizedTypeDiscriminators = false,
             UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FailSerialization,
         };
@@ -53,6 +77,24 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 
         return jsonTypeInfo;
     }
+
+#if NET10_0_OR_GREATER
+    private static bool HasTypePropertyInHierarchy(Type type)
+    {
+        // Check if this type or any of its derived types have a "type" property
+        if (type.GetProperty("type", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly) != null)
+            return true;
+        
+        var xmlIncludes = type.GetCustomAttributes<XmlIncludeAttribute>(false);
+        foreach (var include in xmlIncludes)
+        {
+            if (include.Type != null && HasTypePropertyInHierarchy(include.Type))
+                return true;
+        }
+        
+        return false;
+    }
+#endif
 
     private IEnumerable<JsonDerivedType> BuildDerivedTypes(Type baseType)
     {
