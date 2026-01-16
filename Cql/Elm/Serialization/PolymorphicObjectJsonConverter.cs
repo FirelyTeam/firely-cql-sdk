@@ -13,15 +13,9 @@ namespace Hl7.Cql.Elm.Serialization;
 /// This converter is needed because System.Text.Json's built-in polymorphism support
 /// conflicts with ELM types that have properties named "type".
 /// </summary>
-internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : class
+internal class PolymorphicObjectJsonConverter<T>(bool emitConcreteBaseTypeDiscriminator = false)
+    : JsonConverter<T> where T : class
 {
-    private readonly bool _emitConcreteBaseTypeDiscriminator;
-
-    public PolymorphicObjectJsonConverter(bool emitConcreteBaseTypeDiscriminator = false)
-    {
-        _emitConcreteBaseTypeDiscriminator = emitConcreteBaseTypeDiscriminator;
-    }
-
     public override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (reader.TokenType != JsonTokenType.StartObject)
@@ -52,7 +46,7 @@ internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : cl
 
         // Find the type by name using XmlIncludeAttribute
         var targetType = FindTypeByDiscriminator(typeToConvert, typeName);
-        if (targetType == null)
+        if (targetType is null)
         {
             throw new JsonException($"Unknown type discriminator '{typeName}' for base type {typeToConvert.Name}");
         }
@@ -102,7 +96,7 @@ internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : cl
             UnmappedMemberHandling = originalOptions.UnmappedMemberHandling,
             // Use modifiers-only resolver to avoid polymorphism conflicts while preserving
             // modifiers like HandleSpecifiedProperties
-            TypeInfoResolver = _emitConcreteBaseTypeDiscriminator
+            TypeInfoResolver = emitConcreteBaseTypeDiscriminator
                 ? LibraryJsonSerializer.BuildModifiersOnlyResolverWithOldStyleTypeDiscriminators()
                 : LibraryJsonSerializer.BuildModifiersOnlyResolver()
         };
@@ -128,7 +122,7 @@ internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : cl
             UnmappedMemberHandling = originalOptions.UnmappedMemberHandling,
             // Use modifiers-only resolver to avoid polymorphism conflicts while preserving
             // modifiers like HandleSpecifiedProperties
-            TypeInfoResolver = _emitConcreteBaseTypeDiscriminator
+            TypeInfoResolver = emitConcreteBaseTypeDiscriminator
                 ? LibraryJsonSerializer.BuildModifiersOnlyResolverWithOldStyleTypeDiscriminators()
                 : LibraryJsonSerializer.BuildModifiersOnlyResolver()
         };
@@ -149,7 +143,7 @@ internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : cl
 
     public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
     {
-        if (value == null)
+        if (value is null)
         {
             writer.WriteNullValue();
             return;
@@ -162,7 +156,7 @@ internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : cl
         bool needsDiscriminator = actualType != declaredType;
         if (!needsDiscriminator && declaredType.IsAbstract)
             needsDiscriminator = true;
-        if (!needsDiscriminator && _emitConcreteBaseTypeDiscriminator)
+        if (!needsDiscriminator && emitConcreteBaseTypeDiscriminator)
             needsDiscriminator = true;
 
         writer.WriteStartObject();
@@ -171,7 +165,7 @@ internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : cl
         if (needsDiscriminator)
         {
             var discriminator = FindDiscriminatorForType(actualType);
-            if (discriminator == null)
+            if (discriminator is null)
             {
                 throw new JsonException($"No XmlElementTypeMappingAttribute found for type {actualType.Name}");
             }
@@ -241,14 +235,14 @@ internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : cl
         foreach (var xmlInclude in xmlIncludes)
         {
             var type = xmlInclude.Type;
-            if (type == null) continue;
+            if (type is null) continue;
 
             if (type.Name == discriminator)
                 return type;
 
             // Recursively search this type's includes
             var found = FindTypeByDiscriminatorRecursive(type, discriminator, visited);
-            if (found != null)
+            if (found is not null)
                 return found;
         }
 

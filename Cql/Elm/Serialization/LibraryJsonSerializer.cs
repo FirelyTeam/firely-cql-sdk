@@ -170,119 +170,112 @@ internal static class LibraryJsonSerializer
             .WithAddedModifier(AllowOldStyleTypeDiscriminators);
     }
 
-    private static JsonDocumentOptions BuildJsonDocumentOptions()
-    {
-        var options = new JsonDocumentOptions()
-        {
-            MaxDepth = MaxDepth,
-        };
-
-        return options;
-    }
+    private static JsonDocumentOptions BuildJsonDocumentOptions() =>
+        new() { MaxDepth = MaxDepth };
 
     private static void CorrectLegacyConstructs(JsonNode a)
     {
-        switch (a)
-        {
-            case JsonObject jo:
-                reorder(jo);
-                fixType(jo);
-                foreach (var (key, value) in jo.ToList())
-                {
-                    if (value == null) continue;
-
-                    CorrectLegacyConstructs(value);
-
-                    if (IsEmptyObjectOrArray(value))
-                    {
-                        jo.Remove(key);
-                    }
-                }
-                break;
-            case JsonArray ja:
-                for (int i = ja.Count - 1; i >= 0; i--)
-                {
-                    var item = ja[i];
-                    if (item == null) continue;
-
-                    CorrectLegacyConstructs(item);
-
-                    if (IsEmptyObjectOrArray(item))
-                    {
-                        ja.RemoveAt(i);
-                    }
-                }
-                break;
-        }
-
-        static void reorder(JsonObject o)
-        {
-            if (!o.TryGetPropertyValue("type", out var typeProp) || o.First().Value == typeProp) return;
-
-            var children = o.ToList();
-            o.Clear();
-
-            o.Add("type", typeProp);
-            foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
-        }
-
-        static void fixType(JsonObject o)
-        {
-            if (!o.TryGetPropertyValue("type", out var typeProp)) return;
-
-            // If "type" is an object (not a discriminator string), remove it
-            if (typeProp!.GetValueKind() == JsonValueKind.Object)
+            switch (a)
             {
-                o.Remove("type");
-                return;
+                case JsonObject jo:
+                    reorder(jo);
+                    fixType(jo);
+                    foreach (var (key, value) in jo.ToList())
+                    {
+                        if (value is null) continue;
+
+                        CorrectLegacyConstructs(value);
+
+                        if (isEmptyObjectOrArray(value))
+                        {
+                            jo.Remove(key);
+                        }
+                    }
+                    break;
+                case JsonArray ja:
+                    for (int i = ja.Count - 1; i >= 0; i--)
+                    {
+                        var item = ja[i];
+                        if (item is null) continue;
+
+                        CorrectLegacyConstructs(item);
+
+                        if (isEmptyObjectOrArray(item))
+                        {
+                            ja.RemoveAt(i);
+                        }
+                    }
+                    break;
             }
 
-            // If "type" is an array (legacy ChoiceTypeSpecifier.type), convert to "choice"
-            if (typeProp.GetValueKind() == JsonValueKind.Array)
+            static void reorder(JsonObject o)
             {
-                // Only convert if there's no "choice" property already
-                if (!o.ContainsKey("choice"))
+                if (!o.TryGetPropertyValue("type", out var typeProp) || o.First().Value == typeProp) return;
+
+                var children = o.ToList();
+                o.Clear();
+
+                o.Add("type", typeProp);
+                foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
+            }
+
+            static void fixType(JsonObject o)
+            {
+                if (!o.TryGetPropertyValue("type", out var typeProp)) return;
+
+                // If "type" is an object (not a discriminator string), remove it
+                if (typeProp!.GetValueKind() == JsonValueKind.Object)
                 {
                     o.Remove("type");
-                    o.Add("choice", typeProp);
+                    return;
                 }
-                else
+
+                // If "type" is an array (legacy ChoiceTypeSpecifier.type), convert to "choice"
+                if (typeProp.GetValueKind() == JsonValueKind.Array)
                 {
-                    // If both exist, remove the legacy "type" property
-                    o.Remove("type");
+                    // Only convert if there's no "choice" property already
+                    if (!o.ContainsKey("choice"))
+                    {
+                        o.Remove("type");
+                        o.Add("choice", typeProp);
+                    }
+                    else
+                    {
+                        // If both exist, remove the legacy "type" property
+                        o.Remove("type");
+                    }
                 }
             }
-        }
 
-        static bool IsEmptyObjectOrArray(JsonNode node) =>
-            node is JsonObject { Count: 0 } or JsonArray { Count: 0 };
-    }
+            static bool isEmptyObjectOrArray(JsonNode node) =>
+                node is JsonObject { Count: 0 } or JsonArray { Count: 0 };
+        }
 
     private static void HandleSpecifiedProperties(JsonTypeInfo ti)
     {
-        IEnumerable<PropAndSpecified> specifiedProps = ti.Properties.SelectMany(getSpecifiedProperty);
+        var specifiedProps = ti.Properties.SelectMany(getSpecifiedProperty);
 
         foreach (var prop in specifiedProps)
         {
-            var originalSetter = prop.valueProp.Set;
+            var originalSetter = prop.ValueProp.Set;
 
             // On deserialization, if we need to set the property,
             // make sure we set the xxxSpecified property to true.
-            prop.valueProp.Set = (obj, value) =>
+            prop.ValueProp.Set = (obj, value) =>
             {
                 originalSetter?.Invoke(obj, value);
-                prop.valuePropSpecified.Set?.Invoke(obj, true);
+                prop.ValuePropSpecified.Set?.Invoke(obj, true);
             };
 
             // Only serialize the property if xxxSpecified is true.
             // Preserve the existing ShouldSerialize logic (e.g., from DoNotSerializeDefaultValues).
-            var existingShouldSerialize = prop.valueProp.ShouldSerialize;
-            prop.valueProp.ShouldSerialize = (obj, value) =>
+            var existingShouldSerialize = prop.ValueProp.ShouldSerialize;
+            prop.ValueProp.ShouldSerialize = (obj, value) =>
             {
-                var shouldSerialize = (bool?)prop.valuePropSpecified.Get?.Invoke(obj) == true;
+                var shouldSerialize = (bool?)prop.ValuePropSpecified.Get?.Invoke(obj) == true;
                 if (Library.EnableDebugAssertions && !shouldSerialize && !IsDefaultValue(value))
-                    Debug.Fail($"Property '{prop.valueProp.Name}' is set to '{value}', but " +
-                               $"the '{prop.valuePropSpecified.Name}' is false.");
+                    Debug.Fail($"Property '{prop.ValueProp.Name}' is set to '{value}', but " +
+                               $"the '{prop.ValuePropSpecified.Name}' is false.");
 
                 // If the specified flag is false, don't serialize
                 if (!shouldSerialize) return false;
@@ -292,7 +285,7 @@ internal static class LibraryJsonSerializer
             };
 
             // The xxxSpecified prop should never be serialized itself.
-            prop.valuePropSpecified.ShouldSerialize = (_, _) => false;
+            prop.ValuePropSpecified.ShouldSerialize = (_, _) => false;
         }
 
         IEnumerable<PropAndSpecified> getSpecifiedProperty(JsonPropertyInfo prop)
@@ -342,7 +335,7 @@ internal static class LibraryJsonSerializer
 
         var valueProp = ti.Properties.FirstOrDefault(p => p.Name == "Text");
 
-        if (valueProp != null)
+        if (valueProp is not null)
             valueProp.Name = "value";
     }
 
@@ -374,5 +367,5 @@ internal static class LibraryJsonSerializer
         }
     }
 
-    private record PropAndSpecified(JsonPropertyInfo valueProp, JsonPropertyInfo valuePropSpecified);
+    private record PropAndSpecified(JsonPropertyInfo ValueProp, JsonPropertyInfo ValuePropSpecified);
 }
