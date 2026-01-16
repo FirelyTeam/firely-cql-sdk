@@ -10,6 +10,7 @@
 
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Runtime;
+using System.Text.Json.Serialization;
 
 // ReSharper disable InconsistentNaming
 
@@ -54,6 +55,7 @@ internal interface IGetVersionedIdentifier
     /// Gets the versioned library identifier.
     /// </summary>
     [XmlIgnore]
+    [JsonIgnore]
     CqlVersionedLibraryIdentifier VersionedLibraryIdentifier { get; }
 }
 
@@ -81,6 +83,7 @@ partial class Library : IGetVersionedIdentifier
 
     /// <inheritdoc />
     [XmlIgnore]
+    [JsonIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
         get
@@ -109,6 +112,7 @@ partial class IncludeDef : IGetVersionedIdentifier
 
     /// <inheritdoc />
     [XmlIgnore]
+    [JsonIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
         get
