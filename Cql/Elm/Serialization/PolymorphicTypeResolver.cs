@@ -25,22 +25,7 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 
     public override JsonTypeInfo GetTypeInfo(Type type, JsonSerializerOptions options)
     {
-        JsonTypeInfo jsonTypeInfo;
-        
-        // For types with a "type" property, we need to handle them specially in .NET 10+
-        // to avoid the conflict with the type discriminator property name.
-        // We check if any type in the hierarchy has a "type" property.
-#if NET10_0_OR_GREATER
-        if (HasTypePropertyInHierarchy(type))
-        {
-            // Create JsonTypeInfo without going through base resolver to avoid early validation
-            jsonTypeInfo = JsonTypeInfo.CreateJsonTypeInfo(type, options);
-        }
-        else
-#endif
-        {
-            jsonTypeInfo = base.GetTypeInfo(type, options);
-        }
+        JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
 
         // Remove old "type" property if that is left on ChoiceTypeSpecifier and TupleElementDefinition,
         // it is replaced by the new type discriminator in the current version of ELM.
@@ -77,24 +62,6 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 
         return jsonTypeInfo;
     }
-
-#if NET10_0_OR_GREATER
-    private static bool HasTypePropertyInHierarchy(Type type)
-    {
-        // Check if this type or any of its derived types have a "type" property
-        if (type.GetProperty("type", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly) != null)
-            return true;
-        
-        var xmlIncludes = type.GetCustomAttributes<XmlIncludeAttribute>(false);
-        foreach (var include in xmlIncludes)
-        {
-            if (include.Type != null && HasTypePropertyInHierarchy(include.Type))
-                return true;
-        }
-        
-        return false;
-    }
-#endif
 
     private IEnumerable<JsonDerivedType> BuildDerivedTypes(Type baseType)
     {

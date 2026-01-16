@@ -210,8 +210,54 @@ public partial class Library
         };
 
         var container = new LibraryContainer(this);
-        return JsonSerializer.Serialize(container, options);
+        var json = JsonSerializer.Serialize(container, options);
+        
+#if NET10_0_OR_GREATER
+        // In .NET 10, we use "$type" as the discriminator to avoid conflicts,
+        // but for backward compatibility, convert it back to "type" in the output
+        var node = JsonNode.Parse(json);
+        if (node != null)
+        {
+            ConvertDollarTypeToType(node);
+            json = node.ToJsonString(new JsonSerializerOptions { WriteIndented = writeIndented });
+        }
+#endif
+        
+        return json;
     }
+
+#if NET10_0_OR_GREATER
+    private static void ConvertDollarTypeToType(JsonNode node)
+    {
+        switch (node)
+        {
+            case JsonObject jo:
+                if (jo.TryGetPropertyValue("$type", out var dollarType))
+                {
+                    jo.Remove("$type");
+                    // Insert "type" at the beginning
+                    var children = jo.ToList();
+                    jo.Clear();
+                    jo.Add("type", dollarType);
+                    foreach (var child in children)
+                        jo.Add(child);
+                }
+                foreach (var (_, value) in jo.ToList())
+                {
+                    if (value != null)
+                        ConvertDollarTypeToType(value);
+                }
+                break;
+            case JsonArray ja:
+                foreach (var item in ja)
+                {
+                    if (item != null)
+                        ConvertDollarTypeToType(item);
+                }
+                break;
+        }
+    }
+#endif
 
     /// <summary>
     /// Writes this library in JSON format to <paramref name="stream"/>.
@@ -226,7 +272,21 @@ public partial class Library
         };
 
         var container = new LibraryContainer(this);
+        
+#if NET10_0_OR_GREATER
+        // In .NET 10, we use "$type" as the discriminator to avoid conflicts,
+        // but for backward compatibility, convert it back to "type" in the output
+        var json = JsonSerializer.Serialize(container, options);
+        var node = JsonNode.Parse(json);
+        if (node != null)
+        {
+            ConvertDollarTypeToType(node);
+            using var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = writeIndented });
+            node.WriteTo(writer);
+        }
+#else
         JsonSerializer.Serialize(stream, container, options);
+#endif
     }
 
 
@@ -363,28 +423,27 @@ public partial class Library
         static void addTypeProperty(JsonTypeInfo ti, string expected)
         {
 #if NET10_0_OR_GREATER
-            const string discriminatorName = "$type";
-            // Also handle legacy "type" property for deserialization
+            // In .NET 10, the discriminator is "$type", but we only add the legacy "type" property
+            // The "$type" discriminator is handled by PolymorphismOptions, not as a manual property
             var legacyTypeProp = ti.CreateJsonPropertyInfo(typeof(string), "type");
             legacyTypeProp.ShouldSerialize = (_, _) => false;
             legacyTypeProp.Set = (_, value) =>
             {
                 if ((string?)value != expected)
-                    throw new JsonException($"Type property should be '{expected}' but was '{value}'.");
+                    throw new JsonException($"type property should be '{expected}' but was '{value}'.");
             };
             ti.Properties.Add(legacyTypeProp);
 #else
-            const string discriminatorName = "type";
-#endif
-            
-            var typeProp = ti.CreateJsonPropertyInfo(typeof(string), discriminatorName);
+            // In .NET 8, add "type" property for old-style discriminators
+            var typeProp = ti.CreateJsonPropertyInfo(typeof(string), "type");
             typeProp.ShouldSerialize = (_, _) => false;
             typeProp.Set = (_, value) =>
                 {
                     if( (string?)value != expected)
-                        throw new JsonException($"{discriminatorName} property should be '{expected}' but was '{value}'.");
+                        throw new JsonException($"type property should be '{expected}' but was '{value}'.");
                 };
             ti.Properties.Add(typeProp);
+#endif
         }
     }
 }
