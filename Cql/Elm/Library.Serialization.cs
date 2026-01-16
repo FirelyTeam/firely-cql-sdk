@@ -111,18 +111,21 @@ public partial class Library
         return library;
     }
 
-    private static void CorrectLegacyConstructs(JsonNode a)
+    private static void CorrectLegacyConstructs(JsonNode a, bool isRoot = true)
     {
         switch(a)
         {
             case JsonObject jo:
-                reorder(jo);
-                fixType(jo);
+                reorder(jo, isRoot);
+                fixType(jo, isRoot);
                 foreach (var (key, value) in jo.ToList())
                 {
                     if (value == null) continue;
                     
-                    CorrectLegacyConstructs(value);
+                    // The root container has a "library" property which is the actual Library object
+                    // Don't convert "type" in the Library object itself (key == "library")
+                    bool isLibraryObject = isRoot && key == "library";
+                    CorrectLegacyConstructs(value, isRoot: isLibraryObject);
 
                     if (IsEmptyObjectOrArray(value))
                     {
@@ -136,7 +139,7 @@ public partial class Library
                     var item = ja[i];
                     if (item == null) continue;
                     
-                    CorrectLegacyConstructs(item);
+                    CorrectLegacyConstructs(item, isRoot: false);
 
                     if (IsEmptyObjectOrArray(item))
                     {
@@ -146,36 +149,45 @@ public partial class Library
                 break;
         }
 
-        static void reorder(JsonObject o)
+        static void reorder(JsonObject o, bool isLibraryRoot)
         {
 #if NET10_0_OR_GREATER
-            // In .NET 10+, we use "$type" as the discriminator
-            const string discriminatorName = "$type";
-            // But also check for "type" from older/external ELM files and convert it
-            if (o.TryGetPropertyValue("type", out var typePropOld) && typePropOld!.GetValueKind() == JsonValueKind.String)
+            // In .NET 10+, we need to convert "type" discriminators to "$type" for polymorphic types.
+            // However, types outside the inheritance structure (like Library, Annotation, etc.)
+            // use "type" as a regular property via AllowOldStyleTypeDiscriminators.
+            // Skip conversion for the Library object itself (isLibraryRoot=true)
+            if (!isLibraryRoot && 
+                o.TryGetPropertyValue("type", out var typeProp) && 
+                typeProp!.GetValueKind() == JsonValueKind.String)
             {
-                o.Remove("type");
-                o.Add(discriminatorName, typePropOld);
+                var typeValue = typeProp.GetValue<string>();
+                // Check if this looks like a type discriminator (PascalCase type name)
+                if (!string.IsNullOrEmpty(typeValue) && char.IsUpper(typeValue[0]))
+                {
+                    o.Remove("type");
+                    o.Add("$type", typeProp);
+                }
             }
+            
+            const string discriminatorName = "$type";
 #else
-            // In .NET 8, we use "type" as the discriminator
             const string discriminatorName = "type";
 #endif
             
-            if (!o.TryGetPropertyValue(discriminatorName, out var typeProp) || o.First().Value == typeProp) return;
+            if (!o.TryGetPropertyValue(discriminatorName, out var discrim) || o.First().Value == discrim) return;
 
             var children = o.ToList();
             o.Clear();
 
-            o.Add(discriminatorName, typeProp);
+            o.Add(discriminatorName, discrim);
             foreach (var nonType in children.Where(o => o.Key != discriminatorName)) o.Add(nonType);
         }
 
-        static void fixType(JsonObject o)
+        static void fixType(JsonObject o, bool isLibraryRoot)
         {
 #if NET10_0_OR_GREATER
             const string discriminatorName = "$type";
-            // Also handle legacy "type" property
+            // Also handle legacy "type" property that might be an object (not a discriminator)
             if (o.TryGetPropertyValue("type", out var typePropLegacy) && typePropLegacy!.GetValueKind() == JsonValueKind.Object)
             {
                 o.Remove("type");
@@ -422,19 +434,10 @@ public partial class Library
 
         static void addTypeProperty(JsonTypeInfo ti, string expected)
         {
-#if NET10_0_OR_GREATER
-            // In .NET 10, the discriminator is "$type", but we only add the legacy "type" property
-            // The "$type" discriminator is handled by PolymorphismOptions, not as a manual property
-            var legacyTypeProp = ti.CreateJsonPropertyInfo(typeof(string), "type");
-            legacyTypeProp.ShouldSerialize = (_, _) => false;
-            legacyTypeProp.Set = (_, value) =>
-            {
-                if ((string?)value != expected)
-                    throw new JsonException($"type property should be '{expected}' but was '{value}'.");
-            };
-            ti.Properties.Add(legacyTypeProp);
-#else
-            // In .NET 8, add "type" property for old-style discriminators
+            // For types outside the inheritance structure, we need to handle the "type" property
+            // In .NET 8, we use "type" as both discriminator and regular property
+            // In .NET 10, polymorphic types use "$type" discriminator, but types outside inheritance
+            // use "type" as a regular property, so we DON'T convert it in preprocessing
             var typeProp = ti.CreateJsonPropertyInfo(typeof(string), "type");
             typeProp.ShouldSerialize = (_, _) => false;
             typeProp.Set = (_, value) =>
@@ -443,7 +446,6 @@ public partial class Library
                         throw new JsonException($"type property should be '{expected}' but was '{value}'.");
                 };
             ti.Properties.Add(typeProp);
-#endif
         }
     }
 }
