@@ -14,8 +14,6 @@ namespace Hl7.Cql.Elm;
 
 public partial class Library
 {
-    internal static bool EnableDebugAssertions = true;
-
     /// <summary>
     /// Loads a library from a JSON string.
     /// </summary>

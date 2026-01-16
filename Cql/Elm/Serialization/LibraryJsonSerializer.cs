@@ -20,6 +20,11 @@ internal record LibraryContainer(Library library);
 /// </summary>
 internal static class LibraryJsonSerializer
 {
+    /// <summary>
+    /// Enables debug assertions for serialization diagnostics.
+    /// </summary>
+    internal static bool EnableDebugAssertions = true;
+
     private const int MaxDepth = 4096; // int.MaxValue is not a good idea
     private static readonly JsonSerializerOptions _jsonSerializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: false);
     private static readonly JsonSerializerOptions _jsonDeserializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
@@ -273,7 +278,7 @@ internal static class LibraryJsonSerializer
             prop.ValueProp.ShouldSerialize = (obj, value) =>
             {
                 var shouldSerialize = (bool?)prop.ValuePropSpecified.Get?.Invoke(obj) == true;
-                if (Library.EnableDebugAssertions && !shouldSerialize && !IsDefaultValue(value))
+                if (EnableDebugAssertions && !shouldSerialize && !IsDefaultValue(value))
                     Debug.Fail($"Property '{prop.ValueProp.Name}' is set to '{value}', but " +
                                $"the '{prop.ValuePropSpecified.Name}' is false.");
 

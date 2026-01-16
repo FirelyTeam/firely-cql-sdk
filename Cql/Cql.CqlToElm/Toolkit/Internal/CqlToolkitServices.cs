@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CqlToElm.Visitors;
+using Hl7.Cql.Elm.Serialization;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Logging;
 using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
@@ -110,7 +111,7 @@ internal record CqlToolkitServices(
     {
         // This is really annoying in debug mode
         ExpressionVisitor.EnableDebugAssertions = false;
-        ElmLibrary.EnableDebugAssertions = false;
+        LibraryJsonSerializer.EnableDebugAssertions = false;
     }
 
     /// <summary>

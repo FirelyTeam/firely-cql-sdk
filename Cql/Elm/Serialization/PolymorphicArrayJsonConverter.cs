@@ -11,8 +11,6 @@ namespace Hl7.Cql.Elm.Serialization;
 internal class PolymorphicArrayJsonConverter<T>(bool allowOldStyleDefinitionTypeDiscriminators = false)
     : JsonConverter<T[]>
 {
-    public bool AllowOldStyleDefinitionTypeDiscriminators { get; } = allowOldStyleDefinitionTypeDiscriminators;
-
     public override T[]? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         var atProp = reader.TokenType == JsonTokenType.StartObject &&
@@ -21,7 +19,7 @@ internal class PolymorphicArrayJsonConverter<T>(bool allowOldStyleDefinitionType
             incorrect();
 
         // Ignore old-style type annotations, if allowed to
-        if (AllowOldStyleDefinitionTypeDiscriminators && reader.GetString() == "type")
+        if (allowOldStyleDefinitionTypeDiscriminators && reader.GetString() == "type")
         {
             if (!reader.Read() && reader.TokenType == JsonTokenType.String)
                 incorrect();

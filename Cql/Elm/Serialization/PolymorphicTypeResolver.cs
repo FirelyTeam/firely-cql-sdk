@@ -8,21 +8,17 @@
 
 namespace Hl7.Cql.Elm.Serialization;
 
-internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
+/// <summary>
+/// A JsonTypeInfoResolver that adds polymorphic type handling based on XmlInclude attributes.
+/// </summary>
+/// <param name="emitConcreteBaseTypeDiscriminator">
+/// In newer serializations of ELM, if the declared type of an element is a concrete type,
+/// and the runtime type is the same as the declared type, the type discriminator is not emitted.
+/// Set emitConcreteBaseTypeDiscriminator to true to override this behaviour and emit the type discriminator
+/// for concrete types as well.
+/// </param>
+internal class PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = false) : DefaultJsonTypeInfoResolver
 {
-    public PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = false)
-    {
-        EmitConcreteBaseTypeDiscriminator = emitConcreteBaseTypeDiscriminator;
-    }
-
-    /// <summary>
-    /// In newer serializations of ELM, if the declared type of an element is a concrete type,
-    /// and the runtime type is the same as the declared type, the type discriminator is not emitted.
-    /// Set EmitConcreteBaseTypeDiscriminator to true to override this behaviour and emit the type discriminator
-    /// for concrete types as well.
-    /// </summary>
-    public bool EmitConcreteBaseTypeDiscriminator { get; }
-
     public override JsonTypeInfo GetTypeInfo(Type type, JsonSerializerOptions options)
     {
         JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
@@ -33,7 +29,7 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 
         // Don't apply polymorphism to CqlToElmBase and its hierarchy - they have transitive conflicts
         // through properties containing types with "type" properties. Custom converter handles these.
-        if (type.FullName == "Hl7.Cql.Elm.CqlToElmBase" || 
+        if (type.FullName == "Hl7.Cql.Elm.CqlToElmBase" ||
             type.BaseType?.FullName == "Hl7.Cql.Elm.CqlToElmBase" ||
             (type.BaseType?.BaseType?.FullName == "Hl7.Cql.Elm.CqlToElmBase"))
             return jsonTypeInfo;
@@ -67,7 +63,7 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
     {
         var xmlHierarchyAttributes = baseType.GetCustomAttributes<XmlIncludeAttribute>(false).ToList();
 
-        if(EmitConcreteBaseTypeDiscriminator && baseType.IsAbstract == false && xmlHierarchyAttributes.Any())
+        if(emitConcreteBaseTypeDiscriminator && baseType.IsAbstract == false && xmlHierarchyAttributes.Any())
             yield return new JsonDerivedType(baseType, baseType.Name);
 
         foreach (var type in xmlHierarchyAttributes.Select(a => a.Type).Where(t => t != null))
