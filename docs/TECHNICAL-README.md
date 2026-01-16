@@ -23,7 +23,7 @@ The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to provide performance benef
 This causes `System.InvalidOperationException` in .NET 10 when setting up polymorphism.
 
 #### Solution
-We use **conditional compilation** to handle this difference between .NET 8 and .NET 10:
+We use **conditional compilation** and **preprocessing/post-processing** to handle this difference between .NET 8 and .NET 10:
 
 **Discriminator Names:**
 - **.NET 8**: Uses `"type"` as the discriminator (backward compatible with existing ELM JSON)
@@ -35,13 +35,57 @@ We use **conditional compilation** to handle this difference between .NET 8 and 
    - Removes "type" properties from JSON metadata before polymorphism setup
 
 2. `Cql/Elm/Library.Serialization.cs`:
-   - **Deserialization preprocessing**: Converts "type" to "$type" in .NET 10 (`CorrectLegacyConstructs`)
+   - **Deserialization preprocessing**: Converts "type" to "$type" in .NET 10 for polymorphic types (`CorrectLegacyConstructs`)
    - **Serialization post-processing**: Converts "$type" back to "type" in .NET 10 (`ConvertDollarTypeToType`)
+   - Uses a whitelist to identify non-polymorphic types (Library, VersionedIdentifier, inner classes like Library$Usings)
    - This ensures backward compatibility - serialized output uses "type" even in .NET 10
 
 3. `Cql/CoreTests/ElmSerializerTests.cs`:
    - Tests use conditional compilation to provide appropriate JSON for each framework
    - Direct `JsonSerializer.Deserialize` calls need framework-specific discriminators
+
+#### Current Limitations
+The preprocessing approach uses a whitelist of non-polymorphic types to determine which "type" properties to convert to "$type". This works for common scenarios but may not cover all edge cases. Known limitations:
+- Some nested ELM types may not be handled correctly if they're not in the whitelist
+- The whitelist needs to be maintained as new types are added to ELM
+
+#### Recommended Long-Term Solution: Attribute-Based Approach
+A cleaner solution would be to modify the generated `Elm.g.cs` types using attributes:
+
+**Option 1: JsonPropertyName Attribute**
+- Add `[JsonPropertyName("$type")]` conditionally to properties that conflict
+- This would require modifying the XSD to C# code generator (`tools/XsdToCSharpConverter`)
+- Example:
+  ```csharp
+  #if NET10_0_OR_GREATER
+  [JsonPropertyName("$type")]
+  #endif
+  [XmlElement("type")]
+  public TypeSpecifier[] type { get; set; }
+  ```
+- XML serialization would still use "type" via the XmlElement attribute
+- JSON serialization would use "$type" in .NET 10, "type" in .NET 8
+
+**Option 2: JsonIgnore + Separate Discriminator Property**
+- Mark the conflicting property with `[JsonIgnore]` for .NET 10
+- Let System.Text.Json use "$type" as the discriminator automatically
+- Handle XML serialization separately
+
+**Benefits of Attribute Approach:**
+- No preprocessing or post-processing needed
+- Cleaner, more maintainable code
+- Better performance (no JSON tree manipulation)
+- Type-safe at compile time
+- Eliminates the need for whitelists
+
+**Implementation Steps:**
+1. Modify `XsdToCSharpConverter` to detect properties named "type" in polymorphic hierarchies
+2. Add conditional `[JsonPropertyName]` attributes to generated code
+3. Test XML and JSON serialization compatibility
+4. Remove preprocessing/post-processing logic
+5. Regenerate `Elm.g.cs` with the updated generator
+
+This approach is recommended for future major versions of the SDK.
 
 #### Backward Compatibility
 - **Reading**: Both frameworks can read ELM JSON files with "type" discriminators (via preprocessing)

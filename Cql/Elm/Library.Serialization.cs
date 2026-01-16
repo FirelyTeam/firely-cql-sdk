@@ -149,20 +149,30 @@ public partial class Library
                 break;
         }
 
-        static void reorder(JsonObject o, bool isLibraryRoot)
+        static void reorder(JsonObject o, bool isLibraryOrKnownType)
         {
 #if NET10_0_OR_GREATER
             // In .NET 10+, we need to convert "type" discriminators to "$type" for polymorphic types.
-            // However, types outside the inheritance structure (like Library, Annotation, etc.)
-            // use "type" as a regular property via AllowOldStyleTypeDiscriminators.
-            // Skip conversion for the Library object itself (isLibraryRoot=true)
-            if (!isLibraryRoot && 
+            // However, types outside the inheritance structure use "type" as a regular property.
+            // These include: Library, VersionedIdentifier, and inner classes like Library$Usings
+            // Skip conversion for these known types
+            if (!isLibraryOrKnownType && 
                 o.TryGetPropertyValue("type", out var typeProp) && 
                 typeProp!.GetValueKind() == JsonValueKind.String)
             {
                 var typeValue = typeProp.GetValue<string>();
-                // Check if this looks like a type discriminator (PascalCase type name)
-                if (!string.IsNullOrEmpty(typeValue) && char.IsUpper(typeValue[0]))
+                // Whitelist of types that use "type" as a property, not a discriminator
+                // These are types with XmlTypeAttribute but NO XmlIncludeAttribute
+                var nonPolymorphicTypes = new[]
+                {
+                    "Library", "VersionedIdentifier"
+                };
+                
+                // Also skip inner classes like "Library$Usings"
+                bool isKnownNonPolymorphic = nonPolymorphicTypes.Contains(typeValue) || 
+                                              (typeValue?.Contains('$') ?? false);
+                
+                if (!isKnownNonPolymorphic && !string.IsNullOrEmpty(typeValue) && char.IsUpper(typeValue[0]))
                 {
                     o.Remove("type");
                     o.Add("$type", typeProp);
@@ -183,7 +193,7 @@ public partial class Library
             foreach (var nonType in children.Where(o => o.Key != discriminatorName)) o.Add(nonType);
         }
 
-        static void fixType(JsonObject o, bool isLibraryRoot)
+        static void fixType(JsonObject o, bool isLibraryOrKnownType)
         {
 #if NET10_0_OR_GREATER
             const string discriminatorName = "$type";
