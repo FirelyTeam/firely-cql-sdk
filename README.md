@@ -9,6 +9,10 @@ The engine has been tested by running it against the current NCQA HEDIS measures
 There is quite some variation in how CQL is written and interpreted, 
 so it is likely at this early stage that there will be deviations from other engines currently available.
 
+## Target Frameworks
+
+The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal performance while maintaining long-term support. All SDK packages (Hl7.Cql.*) are multi-targeted and will run on either framework.
+
 ## Release Notes
 This is release version 2.4.0 of the engine.
 
@@ -24,6 +28,7 @@ at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releas
 * [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
 * The [CQL Engine Architecture](docs/CQL-Engine-Architecture.md) document with background documentation on the design.
 * The [Toolkit Services Dependency Diagrams](docs/dependency-diagrams.md) showing the internal dependencies of the CQL SDK toolkit services.
+* The [Technical README](docs/TECHNICAL-README.md) for maintainers contains implementation details, conditional compilation, and multi-targeting information.
 
 
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, so the names of the classes in the presentation will differ from the examples in the Demo project itself.
