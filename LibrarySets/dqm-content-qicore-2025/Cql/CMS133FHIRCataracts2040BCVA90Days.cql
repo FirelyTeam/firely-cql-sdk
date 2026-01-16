@@ -70,6 +70,7 @@ valueset "Visual Field Defects": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.
 code "Best corrected visual acuity (observable entity)": '419775003' from "SNOMEDCT" display 'Best corrected visual acuity (observable entity)'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 

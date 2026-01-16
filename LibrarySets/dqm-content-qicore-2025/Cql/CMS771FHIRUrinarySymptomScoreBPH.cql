@@ -22,6 +22,7 @@ code "International Prostate Symptom Score [IPSS]": '80976-4' from "LOINC" displ
 code "virtual": 'VR' from "ActCode" display 'virtual'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2026-01-01T00:00:00.000Z, @2027-01-01T00:00:00.000Z)
 
 context Patient
 
