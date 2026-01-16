@@ -53,7 +53,6 @@ internal interface IGetVersionedIdentifier
     /// <summary>
     /// Gets the versioned library identifier.
     /// </summary>
-    [JsonIgnore]
     [XmlIgnore]
     CqlVersionedLibraryIdentifier VersionedLibraryIdentifier { get; }
 }
@@ -81,7 +80,6 @@ partial class Library : IGetVersionedIdentifier
         };
 
     /// <inheritdoc />
-    [JsonIgnore]
     [XmlIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
@@ -110,7 +108,6 @@ partial class IncludeDef : IGetVersionedIdentifier
 
 
     /// <inheritdoc />
-    [JsonIgnore]
     [XmlIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
@@ -136,7 +133,6 @@ partial class VersionedIdentifier : IGetVersionedIdentifier
     (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier => (this, null);
 
     /// <inheritdoc />
-    [JsonIgnore]
     [XmlIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
@@ -174,7 +170,6 @@ internal interface IGetLibraryName
 partial class IncludeDef : IGetLibraryName
 {
     /// <inheritdoc />
-    [JsonIgnore]
     [XmlIgnore]
     public string? libraryName => localIdentifier.NullIfEmpty() ?? path.NullIfEmpty();
 }

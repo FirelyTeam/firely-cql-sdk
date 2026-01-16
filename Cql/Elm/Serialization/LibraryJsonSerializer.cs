@@ -138,7 +138,8 @@ internal static class LibraryJsonSerializer
         var resolver = new PolymorphicTypeResolver(allowOldStyleTypeDiscriminators)
                       .WithAddedModifier(ModifyNarrative)
                       .WithAddedModifier(DoNotSerializeDefaultValues)
-                      .WithAddedModifier(HandleSpecifiedProperties);
+                      .WithAddedModifier(HandleSpecifiedProperties)
+                      .WithAddedModifier(RespectXmlIgnoreAttribute);
 
         if (allowOldStyleTypeDiscriminators)
             resolver = resolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
@@ -149,7 +150,7 @@ internal static class LibraryJsonSerializer
     }
 
     /// <summary>
-    /// Builds a type resolver with only the modifiers (DoNotSerializeDefaultValues, HandleSpecifiedProperties, ModifyNarrative)
+    /// Builds a type resolver with only the modifiers (DoNotSerializeDefaultValues, HandleSpecifiedProperties, ModifyNarrative, RespectXmlIgnoreAttribute)
     /// but without polymorphism configuration. This is used by PolymorphicObjectJsonConverter when deserializing
     /// derived types to avoid "type" property conflicts while still applying the necessary serialization modifiers.
     /// </summary>
@@ -158,7 +159,8 @@ internal static class LibraryJsonSerializer
         return new DefaultJsonTypeInfoResolver()
             .WithAddedModifier(ModifyNarrative)
             .WithAddedModifier(DoNotSerializeDefaultValues)
-            .WithAddedModifier(HandleSpecifiedProperties);
+            .WithAddedModifier(HandleSpecifiedProperties)
+            .WithAddedModifier(RespectXmlIgnoreAttribute);
     }
 
     /// <summary>
@@ -172,6 +174,7 @@ internal static class LibraryJsonSerializer
             .WithAddedModifier(ModifyNarrative)
             .WithAddedModifier(DoNotSerializeDefaultValues)
             .WithAddedModifier(HandleSpecifiedProperties)
+            .WithAddedModifier(RespectXmlIgnoreAttribute)
             .WithAddedModifier(AllowOldStyleTypeDiscriminators);
     }
 
@@ -332,6 +335,23 @@ internal static class LibraryJsonSerializer
 
     private static bool IsDefaultValue(object? o) =>
         o is null || o.Equals(GetDefaultValue(o.GetType()));
+
+    private static void RespectXmlIgnoreAttribute(JsonTypeInfo ti)
+    {
+        // Properties marked with [XmlIgnore] should also be ignored in JSON serialization.
+        // This allows us to avoid duplicating [JsonIgnore] attributes on computed properties.
+        foreach (var prop in ti.Properties)
+        {
+            var hasXmlIgnore = prop.AttributeProvider?
+                .GetCustomAttributes(typeof(XmlIgnoreAttribute), false)
+                .Length > 0;
+
+            if (hasXmlIgnore)
+            {
+                prop.ShouldSerialize = (_, _) => false;
+            }
+        }
+    }
 
     private static void ModifyNarrative(JsonTypeInfo ti)
     {

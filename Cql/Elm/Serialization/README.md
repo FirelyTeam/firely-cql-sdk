@@ -494,7 +494,12 @@ The serialization uses several "modifiers" that customize JsonTypeInfo:
 ?     ??? Only serializes property if xxxSpecified is true        ?
 ?     ??? Sets xxxSpecified = true on deserialization             ?
 ?                                                                  ?
-?  4. AllowOldStyleTypeDiscriminators (deserialization only)       ?
+?  4. RespectXmlIgnoreAttribute                                    ?
+?     ??? Properties with [XmlIgnore] are also ignored in JSON    ?
+?     ??? Avoids needing duplicate [JsonIgnore] attributes        ?
+?     ??? Used for computed properties in partial class extensions?
+?                                                                  ?
+?  5. AllowOldStyleTypeDiscriminators (deserialization only)       ?
 ?     ??? Adds "type" property handler for non-polymorphic types  ?
 ?     ??? Validates discriminator matches expected type name      ?
 ?                                                                  ?
