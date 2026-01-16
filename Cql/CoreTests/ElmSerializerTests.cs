@@ -428,7 +428,7 @@ namespace CoreTests
                 {
                     if (!expectedObj.ContainsKey(key))
                         result.Add(
-                            $"Unexpected key '{key}' (value '{actualObj[key].ToJsonString()}') found in actual object. At {actual.GetPath()}.");
+                            $"Unexpected key '{key}' (value '{actualObj[key]?.ToJsonString() ?? "null"}') found in actual object. At {actual.GetPath()}.");
                 }
             }
             else
