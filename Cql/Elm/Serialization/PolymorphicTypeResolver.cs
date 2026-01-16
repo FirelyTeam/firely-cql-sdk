@@ -33,9 +33,7 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
 
         jsonTypeInfo.PolymorphismOptions = new JsonPolymorphismOptions
         {
-            // Use "__type" as discriminator to avoid conflicts with actual "type" properties in ELM types
-            // This solves the .NET 10 breaking change where discriminator names can't conflict with properties
-            TypeDiscriminatorPropertyName = "__type",
+            TypeDiscriminatorPropertyName = "type",
             IgnoreUnrecognizedTypeDiscriminators = false,
             UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FailSerialization,
         };

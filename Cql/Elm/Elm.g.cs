@@ -2439,6 +2439,7 @@ namespace Hl7.Cql.Elm {
         private string nameField;
         
         /// <remarks/>
+        [System.Text.Json.Serialization.JsonIgnore]
         public TypeSpecifier type {
             get {
                 return this.typeField;
@@ -2504,6 +2505,7 @@ namespace Hl7.Cql.Elm {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("type")]
+        [System.Text.Json.Serialization.JsonIgnore]
         public TypeSpecifier[] type {
             get {
                 return this.typeField;
