@@ -94,7 +94,7 @@ internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : cl
     /// <summary>
     /// Creates modified options for deserializing derived types.
     /// </summary>
-    private static JsonSerializerOptions CreateModifiedOptionsForDerivedType(JsonSerializerOptions originalOptions)
+    private JsonSerializerOptions CreateModifiedOptionsForDerivedType(JsonSerializerOptions originalOptions)
     {
         var modifiedOptions = new JsonSerializerOptions
         {
@@ -102,7 +102,9 @@ internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : cl
             UnmappedMemberHandling = originalOptions.UnmappedMemberHandling,
             // Use modifiers-only resolver to avoid polymorphism conflicts while preserving
             // modifiers like HandleSpecifiedProperties
-            TypeInfoResolver = LibraryJsonSerializer.BuildModifiersOnlyResolver()
+            TypeInfoResolver = _emitConcreteBaseTypeDiscriminator
+                ? LibraryJsonSerializer.BuildModifiersOnlyResolverWithOldStyleTypeDiscriminators()
+                : LibraryJsonSerializer.BuildModifiersOnlyResolver()
         };
 
         // Copy all converters to handle nested abstract types
@@ -126,7 +128,9 @@ internal class PolymorphicObjectJsonConverter<T> : JsonConverter<T> where T : cl
             UnmappedMemberHandling = originalOptions.UnmappedMemberHandling,
             // Use modifiers-only resolver to avoid polymorphism conflicts while preserving
             // modifiers like HandleSpecifiedProperties
-            TypeInfoResolver = LibraryJsonSerializer.BuildModifiersOnlyResolver()
+            TypeInfoResolver = _emitConcreteBaseTypeDiscriminator
+                ? LibraryJsonSerializer.BuildModifiersOnlyResolverWithOldStyleTypeDiscriminators()
+                : LibraryJsonSerializer.BuildModifiersOnlyResolver()
         };
 
         // Copy all converters EXCEPT the one for T (the current type being deserialized)

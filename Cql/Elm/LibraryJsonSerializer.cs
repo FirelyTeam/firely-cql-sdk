@@ -118,6 +118,10 @@ internal static class LibraryJsonSerializer
         options.Converters.Add(new PolymorphicObjectJsonConverter<ExpressionDef>(allowOldStyleTypeDiscriminators));
         options.Converters.Add(new PolymorphicObjectJsonConverter<Expression>(allowOldStyleTypeDiscriminators));
         options.Converters.Add(new PolymorphicObjectJsonConverter<TypeSpecifier>(allowOldStyleTypeDiscriminators));
+        options.Converters.Add(new PolymorphicObjectJsonConverter<Element>(allowOldStyleTypeDiscriminators));
+        options.Converters.Add(new PolymorphicObjectJsonConverter<RelationshipClause>(allowOldStyleTypeDiscriminators));
+        options.Converters.Add(new PolymorphicObjectJsonConverter<AliasedQuerySource>(allowOldStyleTypeDiscriminators));
+        options.Converters.Add(new PolymorphicObjectJsonConverter<SortByItem>(allowOldStyleTypeDiscriminators));
 
         options.Converters.Add(new TopLevelDefinitionConverterFactory(allowOldStyleTypeDiscriminators));
         options.Converters.Add(new XmlQualifiedNameConverter());
@@ -147,6 +151,20 @@ internal static class LibraryJsonSerializer
                 .WithAddedModifier(ModifyNarrative)
                 .WithAddedModifier(DoNotSerializeDefaultValues)
                 .WithAddedModifier(HandleSpecifiedProperties);
+        }
+
+        /// <summary>
+        /// Builds a type resolver with modifiers including AllowOldStyleTypeDiscriminators.
+        /// This is used when deserializing legacy ELM files that include "type" discriminators
+        /// on concrete types outside the polymorphic hierarchies.
+        /// </summary>
+        internal static IJsonTypeInfoResolver BuildModifiersOnlyResolverWithOldStyleTypeDiscriminators()
+        {
+            return new DefaultJsonTypeInfoResolver()
+                .WithAddedModifier(ModifyNarrative)
+                .WithAddedModifier(DoNotSerializeDefaultValues)
+                .WithAddedModifier(HandleSpecifiedProperties)
+                .WithAddedModifier(AllowOldStyleTypeDiscriminators);
         }
 
         private static JsonDocumentOptions BuildJsonDocumentOptions()
