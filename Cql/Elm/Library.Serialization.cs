@@ -6,13 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Elm.Serialization;
+
 namespace Hl7.Cql.Elm;
 
 #pragma warning disable CS1591
-
-// The property should be 'library', not 'Library', to match the JSON structure.
-// ReSharper disable once InconsistentNaming
-internal record LibraryContainer(Library library);
 
 public partial class Library
 {

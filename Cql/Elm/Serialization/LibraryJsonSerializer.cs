@@ -6,10 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Elm.Serialization;
 using Hl7.Cql.Abstractions.Exceptions;
 
-namespace Hl7.Cql.Elm;
+namespace Hl7.Cql.Elm.Serialization;
+
+// The property should be 'library', not 'Library', to match the JSON structure.
+// ReSharper disable once InconsistentNaming
+internal record LibraryContainer(Library library);
 
 /// <summary>
 /// Internal type responsible for JSON serialization and deserialization of Library objects.
@@ -132,42 +135,42 @@ internal static class LibraryJsonSerializer
                       .WithAddedModifier(DoNotSerializeDefaultValues)
                       .WithAddedModifier(HandleSpecifiedProperties);
 
-            if(allowOldStyleTypeDiscriminators)
-                resolver = resolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
+        if (allowOldStyleTypeDiscriminators)
+            resolver = resolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
 
-            options.TypeInfoResolver = resolver;
+        options.TypeInfoResolver = resolver;
 
-            return options;
-        }
+        return options;
+    }
 
-        /// <summary>
-        /// Builds a type resolver with only the modifiers (DoNotSerializeDefaultValues, HandleSpecifiedProperties, ModifyNarrative)
-        /// but without polymorphism configuration. This is used by PolymorphicObjectJsonConverter when deserializing
-        /// derived types to avoid "type" property conflicts while still applying the necessary serialization modifiers.
-        /// </summary>
-        internal static IJsonTypeInfoResolver BuildModifiersOnlyResolver()
-        {
-            return new DefaultJsonTypeInfoResolver()
-                .WithAddedModifier(ModifyNarrative)
-                .WithAddedModifier(DoNotSerializeDefaultValues)
-                .WithAddedModifier(HandleSpecifiedProperties);
-        }
+    /// <summary>
+    /// Builds a type resolver with only the modifiers (DoNotSerializeDefaultValues, HandleSpecifiedProperties, ModifyNarrative)
+    /// but without polymorphism configuration. This is used by PolymorphicObjectJsonConverter when deserializing
+    /// derived types to avoid "type" property conflicts while still applying the necessary serialization modifiers.
+    /// </summary>
+    internal static IJsonTypeInfoResolver BuildModifiersOnlyResolver()
+    {
+        return new DefaultJsonTypeInfoResolver()
+            .WithAddedModifier(ModifyNarrative)
+            .WithAddedModifier(DoNotSerializeDefaultValues)
+            .WithAddedModifier(HandleSpecifiedProperties);
+    }
 
-        /// <summary>
-        /// Builds a type resolver with modifiers including AllowOldStyleTypeDiscriminators.
-        /// This is used when deserializing legacy ELM files that include "type" discriminators
-        /// on concrete types outside the polymorphic hierarchies.
-        /// </summary>
-        internal static IJsonTypeInfoResolver BuildModifiersOnlyResolverWithOldStyleTypeDiscriminators()
-        {
-            return new DefaultJsonTypeInfoResolver()
-                .WithAddedModifier(ModifyNarrative)
-                .WithAddedModifier(DoNotSerializeDefaultValues)
-                .WithAddedModifier(HandleSpecifiedProperties)
-                .WithAddedModifier(AllowOldStyleTypeDiscriminators);
-        }
+    /// <summary>
+    /// Builds a type resolver with modifiers including AllowOldStyleTypeDiscriminators.
+    /// This is used when deserializing legacy ELM files that include "type" discriminators
+    /// on concrete types outside the polymorphic hierarchies.
+    /// </summary>
+    internal static IJsonTypeInfoResolver BuildModifiersOnlyResolverWithOldStyleTypeDiscriminators()
+    {
+        return new DefaultJsonTypeInfoResolver()
+            .WithAddedModifier(ModifyNarrative)
+            .WithAddedModifier(DoNotSerializeDefaultValues)
+            .WithAddedModifier(HandleSpecifiedProperties)
+            .WithAddedModifier(AllowOldStyleTypeDiscriminators);
+    }
 
-        private static JsonDocumentOptions BuildJsonDocumentOptions()
+    private static JsonDocumentOptions BuildJsonDocumentOptions()
     {
         var options = new JsonDocumentOptions()
         {
@@ -179,7 +182,7 @@ internal static class LibraryJsonSerializer
 
     private static void CorrectLegacyConstructs(JsonNode a)
     {
-        switch(a)
+        switch (a)
         {
             case JsonObject jo:
                 reorder(jo);
@@ -187,7 +190,7 @@ internal static class LibraryJsonSerializer
                 foreach (var (key, value) in jo.ToList())
                 {
                     if (value == null) continue;
-                    
+
                     CorrectLegacyConstructs(value);
 
                     if (IsEmptyObjectOrArray(value))
@@ -201,7 +204,7 @@ internal static class LibraryJsonSerializer
                 {
                     var item = ja[i];
                     if (item == null) continue;
-                    
+
                     CorrectLegacyConstructs(item);
 
                     if (IsEmptyObjectOrArray(item))
@@ -253,14 +256,13 @@ internal static class LibraryJsonSerializer
 
         static bool IsEmptyObjectOrArray(JsonNode node) =>
             node is JsonObject { Count: 0 } or JsonArray { Count: 0 };
-
     }
 
     private static void HandleSpecifiedProperties(JsonTypeInfo ti)
     {
         IEnumerable<PropAndSpecified> specifiedProps = ti.Properties.SelectMany(getSpecifiedProperty);
 
-        foreach(var prop in specifiedProps)
+        foreach (var prop in specifiedProps)
         {
             var originalSetter = prop.valueProp.Set;
 
@@ -364,10 +366,10 @@ internal static class LibraryJsonSerializer
             var typeProp = ti.CreateJsonPropertyInfo(typeof(string), "type");
             typeProp.ShouldSerialize = (_, _) => false;
             typeProp.Set = (_, value) =>
-                {
-                    if( (string?)value != expected)
-                        throw new JsonException($"type property should be '{expected}' but was '{value}'.");
-                };
+            {
+                if ((string?)value != expected)
+                    throw new JsonException($"type property should be '{expected}' but was '{value}'.");
+            };
             ti.Properties.Add(typeProp);
         }
     }
