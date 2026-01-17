@@ -137,12 +137,43 @@ dotnet build Cql-Sdk.slnf -c Debug --framework net10.0
 ```
 
 ### Testing
+
+#### Local Testing
 ```bash
 # Run tests for both frameworks
 dotnet test Cql/CoreTests/CoreTests.csproj -c Debug
 
 # Run tests for specific framework
+dotnet test Cql/CoreTests/CoreTests.csproj -c Debug --framework net8.0
 dotnet test Cql/CoreTests/CoreTests.csproj -c Debug --framework net10.0
+```
+
+#### CI/CD Multi-Framework Testing
+The repository includes `build/test-multitarget.yml`, a dedicated Azure Pipelines template for testing both .NET 8 and .NET 10 in parallel. This follows Microsoft's best practices for multi-targeting validation.
+
+**Benefits:**
+- ✅ Tests run against both frameworks simultaneously (parallel execution)
+- ✅ Framework-specific test results and code coverage
+- ✅ Automatic comparison report to identify framework-specific issues
+- ✅ Early detection of framework behavioral differences
+
+**Usage:** See `build/README.md` for integration instructions.
+
+**When multi-targeting is re-enabled** (`<TargetFrameworks>net8.0;net10.0</TargetFrameworks>`), add the following stage to `azure-pipelines.yml`:
+
+```yaml
+- stage: multiFrameworkTests
+  displayName: 'Multi-Framework Testing'
+  dependsOn: build
+  condition: succeeded()
+  jobs:
+  - template: test-multitarget.yml
+    parameters:
+      dotNetCoreVersion: $(DOTNET_CORE_SDK)
+      testProjects: |
+        **/*Tests/*Tests.csproj
+        !**/XsdToCSharpConverterTests.csproj
+      buildConfiguration: $(buildConfiguration)
 ```
 
 ### Cross-Platform Considerations

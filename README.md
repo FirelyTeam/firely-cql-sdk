@@ -99,6 +99,24 @@ During development, pre-releases will appear on Firely's GitHub Package feed. To
 ```PAT```: your Personal access token with at least the scope ```read:packages```
 
 Further information can be found in [docs/getting-started.md](docs/getting-started.md).
+
+## Testing
+
+### Multi-Framework Testing
+The SDK includes tools for testing against both .NET 8 and .NET 10 to verify identical behavior:
+
+**Local Testing:**
+```bash
+# Windows
+.\test-multiframework.ps1 -Configuration Release
+
+# Linux/macOS
+./test-multiframework.sh release --verbose
+```
+
+**CI/CD Testing:**
+The repository includes Azure Pipelines templates for parallel multi-framework testing. See `build/README.md` for integration instructions.
+
 ## Support 
 We actively monitor the issues coming in through the GitHub repository at [https://github.com/FirelyTeam/firely-cql-sdk/issues](https://github.com/FirelyTeam/firely-cql-sdk/issues). You are welcome to register your bugs and feature suggestions there. For questions and broader discussions, we use the [.NET FHIR Implementers chat][netsdk-zulip] and [CQL chat][cql-spec] on Zulip.
 
