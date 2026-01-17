@@ -8,7 +8,7 @@ This directory contains Azure Pipelines configuration for building, testing, and
 Main pipeline configuration that orchestrates the complete CI/CD process with the following stages:
 
 1. **checkForDocChangesStage**: Checks if only documentation changed (skips build if so)
-2. **buildAndTest**: Builds solution without running tests or packaging
+2. **buildAndTest**: Builds solution only - NO tests, NO packaging (renamed to "Build Only" for clarity)
 3. **multiFrameworkTests**: Tests SDK projects on both .NET 8 and .NET 10 in parallel
 4. **packageAndSign**: Packages and signs NuGet artifacts (only after tests pass)
 5. **deployToGitHub**: Deploys to GitHub Packages (non-PR builds only)
@@ -35,7 +35,7 @@ Multi-framework testing template for verifying identical behavior across .NET 8 
 ```
 checkForDocChangesStage
         ↓
-  buildAndTest (build solution, no tests, no packaging)
+  buildAndTest (build solution ONLY - no tests, no packaging)
         ↓
 multiFrameworkTests (parallel .NET 8 + .NET 10 testing)
         ↓
@@ -48,7 +48,7 @@ multiFrameworkTests (parallel .NET 8 + .NET 10 testing)
 
 **Key Benefits of This Architecture**:
 - NuGet signing happens **after** multi-framework tests pass
-- No duplicate test execution (tests removed from buildAndTest stage)
+- **No tests run in buildAndTest stage** - all testing happens in multiFrameworkTests stage
 - Clear separation: build → test → package → deploy
 - All test project specifications centralized in `variables.yml`
 

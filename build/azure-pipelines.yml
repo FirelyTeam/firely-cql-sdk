@@ -79,7 +79,7 @@ stages:
           name: checkForDocChanges
 
 - stage: buildAndTest
-  displayName: 'Build and Unit Tests'
+  displayName: 'Build Only'
   dependsOn: checkForDocChangesStage
   condition: and(succeeded(), not(eq(dependencies.checkForDocChangesStage.outputs['CheckDocChangesJob.checkForDocChanges.skipBuild'], 'true')))
   jobs:
@@ -93,7 +93,7 @@ stages:
         useVersionSuffix: false
       buildSolutionFile: 'Cql-Sdk-All.sln'
       packageSolutionFile: 'Cql-Sdk.slnf'
-      testProjects: ''  # Tests are now handled in multi-framework testing stage
+      testProjects: '!**/*Tests.csproj'  # Explicitly exclude all test projects - tests run in multi-framework testing stage
       packageArtifacts: false  # Packaging happens in separate stage after tests
       restoreDependencies: true
       nuGetServiceConnections: GitHubPackageGetFeed
