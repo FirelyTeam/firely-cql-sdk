@@ -168,7 +168,7 @@ jobs:
               Write-Host "Signing: $file"
               az trustedsigning sign `
                 --endpoint "${{ parameters.trustedSigningAccountEndpoint }}" `
-                --trusted-signing-account-name "${{ parameters.trustedSigningAccountName }}" `
+                --account-name "${{ parameters.trustedSigningAccountName }}" `
                 --certificate-profile-name "${{ parameters.certificateProfileName }}" `
                 --files "$file" `
                 --file-digest SHA256 `
@@ -313,7 +313,7 @@ jobs:
               Write-Host "Signing: $file"
               az trustedsigning sign `
                 --endpoint "${{ parameters.trustedSigningAccountEndpoint }}" `
-                --trusted-signing-account-name "${{ parameters.trustedSigningAccountName }}" `
+                --account-name "${{ parameters.trustedSigningAccountName }}" `
                 --certificate-profile-name "${{ parameters.certificateProfileName }}" `
                 --files "$file" `
                 --file-digest SHA256 `
