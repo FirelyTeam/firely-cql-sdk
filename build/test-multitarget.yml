@@ -97,7 +97,10 @@ jobs:
         inputs:
           command: 'build'
           projects: 'Cql-Sdk-All.sln'
-          arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore ${{ if eq(parameters.useVersionSuffix, true) }}/p:VersionSuffix=$(Build.BuildNumber)${{ else }}${{ endif }}'
+          ${{ if eq(parameters.useVersionSuffix, true) }}:
+            arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore /p:VersionSuffix=$(Build.BuildNumber)'
+          ${{ else }}:
+            arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
 
       - task: DotNetCoreCLI@2
         displayName: 'Run tests on .NET 8'
@@ -241,7 +244,10 @@ jobs:
         inputs:
           command: 'build'
           projects: 'Cql-Sdk-All.sln'
-          arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore ${{ if eq(parameters.useVersionSuffix, true) }}/p:VersionSuffix=$(Build.BuildNumber)${{ else }}${{ endif }}'
+          ${{ if eq(parameters.useVersionSuffix, true) }}:
+            arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore /p:VersionSuffix=$(Build.BuildNumber)'
+          ${{ else }}:
+            arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
 
       - task: DotNetCoreCLI@2
         displayName: 'Run tests on .NET 10'
