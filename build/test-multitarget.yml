@@ -122,59 +122,21 @@ jobs:
           summaryFileLocation: '$(Agent.TempDirectory)/TestResults/net8.0/**/coverage.cobertura.xml'
           pathToSources: '$(Build.SourcesDirectory)'
 
-      - task: AzureCLI@2
-        displayName: 'Sign assemblies'
+      - task: AzureCodeSigning@1
+        displayName: 'Sign assemblies with Azure Trusted Signing'
         condition: and(succeeded(), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
         inputs:
-          azureSubscription: '${{ parameters.azureServiceConnectionForSigning }}'
-          scriptType: 'pscore'
-          scriptLocation: 'inlineScript'
-          inlineScript: |
-            $filesToSign = @()
-            $patterns = "${{ parameters.filesForSigning }}" -split ','
-            $excludePatterns = "${{ parameters.filesToExcludeForSigning }}" -split ','
-            
-            foreach ($pattern in $patterns) {
-              $pattern = $pattern.Trim()
-              if ($pattern) {
-                $files = Get-ChildItem -Path $pattern -Recurse -ErrorAction SilentlyContinue
-                foreach ($file in $files) {
-                  $excluded = $false
-                  foreach ($excludePattern in $excludePatterns) {
-                    $excludePattern = $excludePattern.Trim()
-                    if ($excludePattern -and $file.FullName -like "*$excludePattern*") {
-                      $excluded = $true
-                      break
-                    }
-                  }
-                  if (-not $excluded) {
-                    $filesToSign += $file.FullName
-                  }
-                }
-              }
-            }
-            
-            if ($filesToSign.Count -eq 0) {
-              Write-Host "No files to sign"
-              exit 0
-            }
-            
-            Write-Host "Files to sign:"
-            $filesToSign | ForEach-Object { Write-Host "  $_" }
-            
-            az extension add --name trustedsigning --upgrade
-            
-            foreach ($file in $filesToSign) {
-              Write-Host "Signing: $file"
-              az trustedsigning sign-code-signing-job `
-                --endpoint "${{ parameters.trustedSigningAccountEndpoint }}" `
-                --account-name "${{ parameters.trustedSigningAccountName }}" `
-                --certificate-profile-name "${{ parameters.certificateProfileName }}" `
-                --files "$file" `
-                --file-digest SHA256 `
-                --timestamp-rfc3161 http://timestamp.acs.microsoft.com `
-                --timestamp-digest SHA256
-            }
+          ConnectedServiceName: '${{ parameters.azureServiceConnectionForSigning }}'
+          ResourceEndpoint: '${{ parameters.trustedSigningAccountEndpoint }}'
+          AccountName: '${{ parameters.trustedSigningAccountName }}'
+          CertificateProfileName: '${{ parameters.certificateProfileName }}'
+          FilesFolder: '$(Build.SourcesDirectory)'
+          FilesPattern: |
+            ${{ parameters.filesForSigning }}
+          ExcludePatterns: |
+            ${{ parameters.filesToExcludeForSigning }}
+          TimeStampServerUrl: 'http://timestamp.acs.microsoft.com'
+          TimeStampDigest: 'SHA256'
 
       - task: DotNetCoreCLI@2
         displayName: 'Package solution'
@@ -267,59 +229,21 @@ jobs:
           summaryFileLocation: '$(Agent.TempDirectory)/TestResults/net10.0/**/coverage.cobertura.xml'
           pathToSources: '$(Build.SourcesDirectory)'
 
-      - task: AzureCLI@2
-        displayName: 'Sign assemblies'
+      - task: AzureCodeSigning@1
+        displayName: 'Sign assemblies with Azure Trusted Signing'
         condition: and(succeeded(), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
         inputs:
-          azureSubscription: '${{ parameters.azureServiceConnectionForSigning }}'
-          scriptType: 'pscore'
-          scriptLocation: 'inlineScript'
-          inlineScript: |
-            $filesToSign = @()
-            $patterns = "${{ parameters.filesForSigning }}" -split ','
-            $excludePatterns = "${{ parameters.filesToExcludeForSigning }}" -split ','
-            
-            foreach ($pattern in $patterns) {
-              $pattern = $pattern.Trim()
-              if ($pattern) {
-                $files = Get-ChildItem -Path $pattern -Recurse -ErrorAction SilentlyContinue
-                foreach ($file in $files) {
-                  $excluded = $false
-                  foreach ($excludePattern in $excludePatterns) {
-                    $excludePattern = $excludePattern.Trim()
-                    if ($excludePattern -and $file.FullName -like "*$excludePattern*") {
-                      $excluded = $true
-                      break
-                    }
-                  }
-                  if (-not $excluded) {
-                    $filesToSign += $file.FullName
-                  }
-                }
-              }
-            }
-            
-            if ($filesToSign.Count -eq 0) {
-              Write-Host "No files to sign"
-              exit 0
-            }
-            
-            Write-Host "Files to sign:"
-            $filesToSign | ForEach-Object { Write-Host "  $_" }
-            
-            az extension add --name trustedsigning --upgrade
-            
-            foreach ($file in $filesToSign) {
-              Write-Host "Signing: $file"
-              az trustedsigning sign-code-signing-job `
-                --endpoint "${{ parameters.trustedSigningAccountEndpoint }}" `
-                --account-name "${{ parameters.trustedSigningAccountName }}" `
-                --certificate-profile-name "${{ parameters.certificateProfileName }}" `
-                --files "$file" `
-                --file-digest SHA256 `
-                --timestamp-rfc3161 http://timestamp.acs.microsoft.com `
-                --timestamp-digest SHA256
-            }
+          ConnectedServiceName: '${{ parameters.azureServiceConnectionForSigning }}'
+          ResourceEndpoint: '${{ parameters.trustedSigningAccountEndpoint }}'
+          AccountName: '${{ parameters.trustedSigningAccountName }}'
+          CertificateProfileName: '${{ parameters.certificateProfileName }}'
+          FilesFolder: '$(Build.SourcesDirectory)'
+          FilesPattern: |
+            ${{ parameters.filesForSigning }}
+          ExcludePatterns: |
+            ${{ parameters.filesToExcludeForSigning }}
+          TimeStampServerUrl: 'http://timestamp.acs.microsoft.com'
+          TimeStampDigest: 'SHA256'
 
       - task: DotNetCoreCLI@2
         displayName: 'Package solution'
