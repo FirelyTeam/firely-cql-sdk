@@ -78,7 +78,8 @@ stages:
           displayName: 'Check for changes outside docs folder'
           name: checkForDocChanges
 
-- stage: build
+- stage: buildAndTest
+  displayName: 'Build and Unit Tests'
   dependsOn: checkForDocChangesStage
   condition: and(succeeded(), not(eq(dependencies.checkForDocChangesStage.outputs['CheckDocChangesJob.checkForDocChanges.skipBuild'], 'true')))
   jobs:
@@ -92,19 +93,44 @@ stages:
         useVersionSuffix: false
       buildSolutionFile: 'Cql-Sdk-All.sln'
       packageSolutionFile: 'Cql-Sdk.slnf'
-      testProjects: |
-        # Multi-target tests (run on both .NET 8 and .NET 10 in separate stage)
-        # Cql/CoreTests/CoreTests.csproj
-        # Cql/CqlToElmTests/CqlToElmTests.csproj
-        
-        # .NET 10 only tests
-        **/**/Test.Measures.Demo.csproj
-        submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj
-        
-        # Excluded tests
-        # !**/Ncqa.HT.DeckTests.csproj
-        # !**/Ncqa.HT.MeasuresTests.csproj 
-        !**/XsdToCSharpConverterTests.csproj # Not part of production code, only used for internal tool
+      testProjects: ''  # Tests are now handled in multi-framework testing stage
+      packageArtifacts: false  # Packaging happens in separate stage after tests
+      restoreDependencies: true
+      nuGetServiceConnections: GitHubPackageGetFeed
+      nuGetSources: --source https://nuget.pkg.github.com/FirelyTeam/index.json
+      signingKeyFileName: 'cql-sdk.snk'
+      pool:
+        vmImage: $(vmImage)
+
+- stage: multiFrameworkTests
+  displayName: 'Multi-Framework Testing'
+  dependsOn: buildAndTest
+  condition: succeeded()
+  jobs:
+  - template: test-multitarget.yml
+    parameters:
+      dotNetCoreVersion: $(DOTNET_CORE_SDK)
+      multiTargetTestProjects: $(multiTargetTestProjects)
+      net10OnlyTestProjects: $(net10OnlyTestProjects)
+      buildConfiguration: $(buildConfiguration)
+      checkoutSubmodules: 'true'
+
+- stage: packageAndSign
+  displayName: 'Package and Sign Artifacts'
+  dependsOn: multiFrameworkTests
+  condition: succeeded()
+  jobs:
+  - template: build.yml@templates
+    parameters:
+      dotNetCoreVersion: $(DOTNET_CORE_SDK)
+      checkoutSubmodules: 'true'
+      ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build
+        useVersionSuffix: true
+      ${{ else }}: # release mode
+        useVersionSuffix: false
+      buildSolutionFile: 'Cql-Sdk-All.sln'
+      packageSolutionFile: 'Cql-Sdk.slnf'
+      testProjects: ''  # No tests in packaging stage
       packageArtifacts: true
       restoreDependencies: true
       nuGetServiceConnections: GitHubPackageGetFeed
@@ -126,7 +152,7 @@ stages:
         vmImage: $(vmImage)
 
 - stage: deployToGitHub
-  dependsOn: build
+  dependsOn: packageAndSign
   displayName: Deploy packages To Github
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
   jobs:
@@ -164,20 +190,3 @@ stages:
               artifact: 'NuGetPackages'
               source: https://api.nuget.org/v3/index.json
               apiKey: $(NUGET_APIKEY)
-
-- stage: multiFrameworkTests
-  displayName: 'Multi-Framework Testing'
-  dependsOn: build
-  condition: succeeded()
-  jobs:
-  - template: test-multitarget.yml
-    parameters:
-      dotNetCoreVersion: $(DOTNET_CORE_SDK)
-      multiTargetTestProjects: |
-        Cql/CoreTests/CoreTests.csproj
-        Cql/CqlToElmTests/CqlToElmTests.csproj
-      net10OnlyTestProjects: |
-        submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
-        Demo/Test.Measures.Demo/Test.Measures.Demo.csproj
-      buildConfiguration: $(buildConfiguration)
-      checkoutSubmodules: 'true'

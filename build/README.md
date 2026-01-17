@@ -5,11 +5,14 @@ This directory contains Azure Pipelines configuration for building, testing, and
 ## Files
 
 ### `azure-pipelines.yml`
-Main pipeline configuration that orchestrates the complete CI/CD process:
-- Checks for documentation-only changes
-- Builds the solution
-- Runs tests
-- Deploys packages to GitHub and NuGet
+Main pipeline configuration that orchestrates the complete CI/CD process with the following stages:
+
+1. **checkForDocChangesStage**: Checks if only documentation changed (skips build if so)
+2. **buildAndTest**: Builds solution without running tests or packaging
+3. **multiFrameworkTests**: Tests SDK projects on both .NET 8 and .NET 10 in parallel
+4. **packageAndSign**: Packages and signs NuGet artifacts (only after tests pass)
+5. **deployToGitHub**: Deploys to GitHub Packages (non-PR builds only)
+6. **deployToNuget**: Deploys to NuGet.org (release tags only)
 
 ### `variables.yml`
 Centralized variables used across pipeline configurations:
@@ -17,57 +20,94 @@ Centralized variables used across pipeline configurations:
 - `vmImage`: VM image for build agents
 - `DOTNET_CORE_SDK`: .NET SDK version to use
 - API keys for package deployment
+- **Test project configuration** (new):
+  - `multiTargetTestProjects`: Projects tested on both .NET 8 and .NET 10
+  - `net10OnlyTestProjects`: Projects tested only on .NET 10
+  - `excludedTestProjects`: Projects excluded from all test runs
 
 ### `test-multitarget.yml`
 Multi-framework testing template for verifying identical behavior across .NET 8 and .NET 10.
+
+## Pipeline Architecture
+
+### Stage Dependencies
+
+```
+checkForDocChangesStage
+        ↓
+  buildAndTest (build solution, no tests, no packaging)
+        ↓
+multiFrameworkTests (parallel .NET 8 + .NET 10 testing)
+        ↓
+  packageAndSign (package and sign artifacts)
+        ↓
+  deployToGitHub (GitHub Packages)
+        ↓
+  deployToNuget (NuGet.org, tags only)
+```
+
+**Key Benefits of This Architecture**:
+- NuGet signing happens **after** multi-framework tests pass
+- No duplicate test execution (tests removed from buildAndTest stage)
+- Clear separation: build → test → package → deploy
+- All test project specifications centralized in `variables.yml`
 
 ## Multi-Framework Testing
 
 ### Overview
 The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to provide performance benefits while maintaining compatibility. The `test-multitarget.yml` template enables explicit testing against both frameworks in parallel to verify identical behavior.
 
-### Current Configuration
+### Test Project Configuration
 
-The pipeline is configured with two categories of test projects:
+All test project specifications are now centralized in `variables.yml`:
 
 **Multi-Target Tests** (tested on both .NET 8 and .NET 10):
 - `Cql/CoreTests/CoreTests.csproj`
 - `Cql/CqlToElmTests/CqlToElmTests.csproj`
 
-These projects are tested in a dedicated `multiFrameworkTests` stage that runs after the main build stage.
-
-**.NET 10 Only Tests** (tested only on .NET 10):
+**.NET 10 Only Tests**:
 - `submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj`
 - `Demo/Test.Measures.Demo/Test.Measures.Demo.csproj`
 
-These tests run in both the main build stage and the multi-framework stage (on .NET 10 only).
-
 **Excluded Tests**:
-- `tools/XsdToCSharpConverterTests/XsdToCSharpConverterTests.csproj` - Not part of production code
-- `submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj` - Commented out
-- `submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj` - Commented out
+- `tools/XsdToCSharpConverterTests/XsdToCSharpConverterTests.csproj` - Internal tool tests
+- `submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj`
+- `submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj`
 
 ### Architecture
 
-The multi-framework testing is implemented as a separate stage in `azure-pipelines.yml`:
+The multi-framework testing stage reads configuration from `variables.yml`:
 
 ```yaml
 - stage: multiFrameworkTests
   displayName: 'Multi-Framework Testing'
-  dependsOn: build
+  dependsOn: buildAndTest
   condition: succeeded()
   jobs:
   - template: test-multitarget.yml
     parameters:
       dotNetCoreVersion: $(DOTNET_CORE_SDK)
-      multiTargetTestProjects: |
-        Cql/CoreTests/CoreTests.csproj
-        Cql/CqlToElmTests/CqlToElmTests.csproj
-      net10OnlyTestProjects: |
-        submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
-        Demo/Test.Measures.Demo/Test.Measures.Demo.csproj
+      multiTargetTestProjects: $(multiTargetTestProjects)
+      net10OnlyTestProjects: $(net10OnlyTestProjects)
       buildConfiguration: $(buildConfiguration)
       checkoutSubmodules: 'true'
+```
+
+### Modifying Test Configuration
+
+To add, remove, or change test projects, edit `variables.yml`:
+
+```yaml
+variables:
+  multiTargetTestProjects: |
+    Cql/CoreTests/CoreTests.csproj
+    Cql/CqlToElmTests/CqlToElmTests.csproj
+    # Add new multi-target test here
+  
+  net10OnlyTestProjects: |
+    submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
+    Demo/Test.Measures.Demo/Test.Measures.Demo.csproj
+    # Add new .NET 10-only test here
 ```
 
 ### Usage
