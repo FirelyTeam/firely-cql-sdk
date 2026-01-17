@@ -166,7 +166,7 @@ jobs:
             
             foreach ($file in $filesToSign) {
               Write-Host "Signing: $file"
-              az trustedsigning sign-code-signing-job-code-signing-job `
+              az trustedsigning sign-code-signing-job `
                 --endpoint "${{ parameters.trustedSigningAccountEndpoint }}" `
                 --account-name "${{ parameters.trustedSigningAccountName }}" `
                 --certificate-profile-name "${{ parameters.certificateProfileName }}" `
@@ -311,7 +311,7 @@ jobs:
             
             foreach ($file in $filesToSign) {
               Write-Host "Signing: $file"
-              az trustedsigning sign-code-signing-job-code-signing-job `
+              az trustedsigning sign-code-signing-job `
                 --endpoint "${{ parameters.trustedSigningAccountEndpoint }}" `
                 --account-name "${{ parameters.trustedSigningAccountName }}" `
                 --certificate-profile-name "${{ parameters.certificateProfileName }}" `
