@@ -93,12 +93,18 @@ stages:
       buildSolutionFile: 'Cql-Sdk-All.sln'
       packageSolutionFile: 'Cql-Sdk.slnf'
       testProjects: |
-        **/*Tests/*Tests.csproj
+        # Multi-target tests (run on both .NET 8 and .NET 10 in separate stage)
+        # Cql/CoreTests/CoreTests.csproj
+        # Cql/CqlToElmTests/CqlToElmTests.csproj
+        
+        # .NET 10 only tests
         **/**/Test.Measures.Demo.csproj
-        !**/Ncqa.HT.DeckTests.csproj
-        !**/Ncqa.HT.MeasuresTests.csproj 
-        !**/XsdToCSharpConverterTests.csproj # Not part of production code, only used for internal tool
         submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj
+        
+        # Excluded tests
+        # !**/Ncqa.HT.DeckTests.csproj
+        # !**/Ncqa.HT.MeasuresTests.csproj 
+        !**/XsdToCSharpConverterTests.csproj # Not part of production code, only used for internal tool
       packageArtifacts: true
       restoreDependencies: true
       nuGetServiceConnections: GitHubPackageGetFeed
@@ -158,3 +164,20 @@ stages:
               artifact: 'NuGetPackages'
               source: https://api.nuget.org/v3/index.json
               apiKey: $(NUGET_APIKEY)
+
+- stage: multiFrameworkTests
+  displayName: 'Multi-Framework Testing'
+  dependsOn: build
+  condition: succeeded()
+  jobs:
+  - template: test-multitarget.yml
+    parameters:
+      dotNetCoreVersion: $(DOTNET_CORE_SDK)
+      multiTargetTestProjects: |
+        Cql/CoreTests/CoreTests.csproj
+        Cql/CqlToElmTests/CqlToElmTests.csproj
+      net10OnlyTestProjects: |
+        submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
+        Demo/Test.Measures.Demo/Test.Measures.Demo.csproj
+      buildConfiguration: $(buildConfiguration)
+      checkoutSubmodules: 'true'

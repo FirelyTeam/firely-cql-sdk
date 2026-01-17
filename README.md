@@ -103,19 +103,37 @@ Further information can be found in [docs/getting-started.md](docs/getting-start
 ## Testing
 
 ### Multi-Framework Testing
-The SDK includes tools for testing against both .NET 8 and .NET 10 to verify identical behavior:
+The SDK includes comprehensive tools for testing against both .NET 8 and .NET 10 to verify identical behavior across both LTS frameworks.
 
-**Local Testing:**
+**Test Categories:**
+- **Multi-Target Tests**: CoreTests and CqlToElmTests run on both .NET 8 and .NET 10
+- **.NET 10 Only**: IntegrationRunner and Test.Measures.Demo run only on .NET 10
+- **Excluded**: XsdToCSharpConverterTests, Ncqa.HT.DeckTests, Ncqa.HT.MeasuresTests
+
+**Local Testing Scripts:**
+```powershell
+# Windows - Test all multi-target projects against both frameworks
+.\test-multiframework.ps1
+
+# Windows - Test specific project against both frameworks
+.\test-multiframework.ps1 -TestProject CoreTests
+```
+
 ```bash
-# Windows
-.\test-multiframework.ps1 -Configuration Release
+# Linux/macOS - Test all multi-target projects against both frameworks
+./test-multiframework.sh
 
-# Linux/macOS
-./test-multiframework.sh release --verbose
+# Linux/macOS - Test specific project against both frameworks
+./test-multiframework.sh CoreTests
 ```
 
 **CI/CD Testing:**
-The repository includes Azure Pipelines templates for parallel multi-framework testing. See `build/README.md` for integration instructions.
+Multi-framework testing is fully integrated into the Azure Pipelines CI/CD workflow. The `multiFrameworkTests` stage runs after the main build and tests in parallel:
+- Job 1: Tests CoreTests and CqlToElmTests on .NET 8
+- Job 2: Tests CoreTests, CqlToElmTests, IntegrationRunner, and Test.Measures.Demo on .NET 10
+- Job 3: Compares results and reports any framework-specific differences
+
+See `build/README.md` for complete CI/CD testing documentation and configuration details.
 
 ## Support 
 We actively monitor the issues coming in through the GitHub repository at [https://github.com/FirelyTeam/firely-cql-sdk/issues](https://github.com/FirelyTeam/firely-cql-sdk/issues). You are welcome to register your bugs and feature suggestions there. For questions and broader discussions, we use the [.NET FHIR Implementers chat][netsdk-zulip] and [CQL chat][cql-spec] on Zulip.

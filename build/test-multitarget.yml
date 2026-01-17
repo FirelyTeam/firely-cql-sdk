@@ -11,12 +11,18 @@ parameters:
   - name: dotNetCoreVersion
     type: string
     default: '10.0.x'
-  - name: testProjects
+  - name: multiTargetTestProjects
     type: string
-    default: '**/*Tests/*Tests.csproj'
+    default: ''
+  - name: net10OnlyTestProjects
+    type: string
+    default: ''
   - name: buildConfiguration
     type: string
     default: 'Release'
+  - name: checkoutSubmodules
+    type: string
+    default: 'false'
 
 jobs:
   - job: TestNet8
@@ -24,6 +30,9 @@ jobs:
     pool:
       vmImage: 'windows-latest'
     steps:
+      - checkout: self
+        submodules: ${{ parameters.checkoutSubmodules }}
+
       - task: UseDotNet@2
         displayName: 'Install .NET 8 SDK'
         inputs:
@@ -42,20 +51,20 @@ jobs:
         displayName: 'Restore dependencies'
         inputs:
           command: 'restore'
-          projects: '${{ parameters.testProjects }}'
+          projects: '${{ parameters.multiTargetTestProjects }}'
 
       - task: DotNetCoreCLI@2
         displayName: 'Build test projects'
         inputs:
           command: 'build'
-          projects: '${{ parameters.testProjects }}'
+          projects: '${{ parameters.multiTargetTestProjects }}'
           arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
 
       - task: DotNetCoreCLI@2
         displayName: 'Run tests on .NET 8'
         inputs:
           command: 'test'
-          projects: '${{ parameters.testProjects }}'
+          projects: '${{ parameters.multiTargetTestProjects }}'
           arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net8.0'
           publishTestResults: false
 
@@ -81,6 +90,9 @@ jobs:
     pool:
       vmImage: 'windows-latest'
     steps:
+      - checkout: self
+        submodules: ${{ parameters.checkoutSubmodules }}
+
       - task: UseDotNet@2
         displayName: 'Install .NET 8 SDK'
         inputs:
@@ -96,23 +108,44 @@ jobs:
           installationPath: $(Agent.ToolsDirectory)/dotnet
 
       - task: DotNetCoreCLI@2
-        displayName: 'Restore dependencies'
+        displayName: 'Restore dependencies (multi-target)'
         inputs:
           command: 'restore'
-          projects: '${{ parameters.testProjects }}'
+          projects: '${{ parameters.multiTargetTestProjects }}'
 
       - task: DotNetCoreCLI@2
-        displayName: 'Build test projects'
+        displayName: 'Restore dependencies (.NET 10 only)'
+        inputs:
+          command: 'restore'
+          projects: '${{ parameters.net10OnlyTestProjects }}'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Build test projects (multi-target)'
         inputs:
           command: 'build'
-          projects: '${{ parameters.testProjects }}'
+          projects: '${{ parameters.multiTargetTestProjects }}'
           arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
 
       - task: DotNetCoreCLI@2
-        displayName: 'Run tests on .NET 10'
+        displayName: 'Build test projects (.NET 10 only)'
+        inputs:
+          command: 'build'
+          projects: '${{ parameters.net10OnlyTestProjects }}'
+          arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Run tests on .NET 10 (multi-target projects)'
         inputs:
           command: 'test'
-          projects: '${{ parameters.testProjects }}'
+          projects: '${{ parameters.multiTargetTestProjects }}'
+          arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net10.0'
+          publishTestResults: false
+
+      - task: DotNetCoreCLI@2
+        displayName: 'Run tests on .NET 10 (.NET 10 only projects)'
+        inputs:
+          command: 'test'
+          projects: '${{ parameters.net10OnlyTestProjects }}'
           arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net10.0'
           publishTestResults: false
 

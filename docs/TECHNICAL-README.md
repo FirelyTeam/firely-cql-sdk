@@ -151,29 +151,46 @@ dotnet test Cql/CoreTests/CoreTests.csproj -c Debug --framework net10.0
 #### CI/CD Multi-Framework Testing
 The repository includes `build/test-multitarget.yml`, a dedicated Azure Pipelines template for testing both .NET 8 and .NET 10 in parallel. This follows Microsoft's best practices for multi-targeting validation.
 
+**Configuration:**
+The multi-framework testing is **fully integrated** and runs automatically on every build in a dedicated stage after the main build stage.
+
+**Test Categories:**
+1. **Multi-Target Tests** (tested on both .NET 8 and .NET 10):
+   - `Cql/CoreTests/CoreTests.csproj` - Core SDK tests
+   - `Cql/CqlToElmTests/CqlToElmTests.csproj` - CQL to ELM conversion tests
+
+2. **.NET 10 Only Tests**:
+   - `submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj`
+   - `Demo/Test.Measures.Demo/Test.Measures.Demo.csproj`
+
+3. **Excluded Tests**:
+   - `tools/XsdToCSharpConverterTests/XsdToCSharpConverterTests.csproj` - Internal tool tests
+   - `submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj` - Commented out
+   - `submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj` - Commented out
+
 **Benefits:**
 - ✅ Tests run against both frameworks simultaneously (parallel execution)
 - ✅ Framework-specific test results and code coverage
 - ✅ Automatic comparison report to identify framework-specific issues
 - ✅ Early detection of framework behavioral differences
 
-**Usage:** See `build/README.md` for integration instructions.
+**Usage:** See `build/README.md` for complete documentation and configuration details.
 
-**When multi-targeting is re-enabled** (`<TargetFrameworks>net8.0;net10.0</TargetFrameworks>`), add the following stage to `azure-pipelines.yml`:
+**Local Testing:** Use the provided scripts for local validation:
+```powershell
+# Windows - Test all multi-target projects
+.\test-multiframework.ps1
 
-```yaml
-- stage: multiFrameworkTests
-  displayName: 'Multi-Framework Testing'
-  dependsOn: build
-  condition: succeeded()
-  jobs:
-  - template: test-multitarget.yml
-    parameters:
-      dotNetCoreVersion: $(DOTNET_CORE_SDK)
-      testProjects: |
-        **/*Tests/*Tests.csproj
-        !**/XsdToCSharpConverterTests.csproj
-      buildConfiguration: $(buildConfiguration)
+# Windows - Test specific project
+.\test-multiframework.ps1 -TestProject CoreTests
+```
+
+```bash
+# Linux/macOS - Test all multi-target projects
+./test-multiframework.sh
+
+# Linux/macOS - Test specific project
+./test-multiframework.sh CoreTests
 ```
 
 ### Cross-Platform Considerations

@@ -26,51 +26,108 @@ Multi-framework testing template for verifying identical behavior across .NET 8 
 ### Overview
 The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to provide performance benefits while maintaining compatibility. The `test-multitarget.yml` template enables explicit testing against both frameworks in parallel to verify identical behavior.
 
-### Usage
+### Current Configuration
 
-#### Option 1: Add as a separate stage (Recommended)
-Add a dedicated testing stage to `azure-pipelines.yml` after the build stage:
+The pipeline is configured with two categories of test projects:
+
+**Multi-Target Tests** (tested on both .NET 8 and .NET 10):
+- `Cql/CoreTests/CoreTests.csproj`
+- `Cql/CqlToElmTests/CqlToElmTests.csproj`
+
+These projects are tested in a dedicated `multiFrameworkTests` stage that runs after the main build stage.
+
+**.NET 10 Only Tests** (tested only on .NET 10):
+- `submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj`
+- `Demo/Test.Measures.Demo/Test.Measures.Demo.csproj`
+
+These tests run in both the main build stage and the multi-framework stage (on .NET 10 only).
+
+**Excluded Tests**:
+- `tools/XsdToCSharpConverterTests/XsdToCSharpConverterTests.csproj` - Not part of production code
+- `submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj` - Commented out
+- `submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj` - Commented out
+
+### Architecture
+
+The multi-framework testing is implemented as a separate stage in `azure-pipelines.yml`:
 
 ```yaml
 - stage: multiFrameworkTests
   displayName: 'Multi-Framework Testing'
   dependsOn: build
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  condition: succeeded()
   jobs:
   - template: test-multitarget.yml
     parameters:
       dotNetCoreVersion: $(DOTNET_CORE_SDK)
-      testProjects: |
-        **/*Tests/*Tests.csproj
-        !**/Ncqa.HT.DeckTests.csproj
-        !**/Ncqa.HT.MeasuresTests.csproj 
-        !**/XsdToCSharpConverterTests.csproj
+      multiTargetTestProjects: |
+        Cql/CoreTests/CoreTests.csproj
+        Cql/CqlToElmTests/CqlToElmTests.csproj
+      net10OnlyTestProjects: |
+        submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
+        Demo/Test.Measures.Demo/Test.Measures.Demo.csproj
       buildConfiguration: $(buildConfiguration)
+      checkoutSubmodules: 'true'
 ```
 
-#### Option 2: Run locally for validation
+### Usage
+
+The multi-framework testing stage is already integrated into `azure-pipelines.yml` and will run automatically on every build after the main build stage succeeds.
+
+#### Running Tests Locally
+
 Test both frameworks locally before pushing:
 
+**Windows (PowerShell)**:
+```powershell
+# Test all projects against both frameworks
+.\test-multiframework.ps1
+
+# Test specific project against both frameworks
+.\test-multiframework.ps1 -TestProject CoreTests
+```
+
+**Linux/macOS (Bash)**:
 ```bash
-# Test on .NET 8
+# Test all projects against both frameworks
+./test-multiframework.sh
+
+# Test specific project against both frameworks
+./test-multiframework.sh CoreTests
+```
+
+**Manual Testing**:
+```bash
+# Test CoreTests on .NET 8
+dotnet test Cql/CoreTests/CoreTests.csproj --framework net8.0
+
+# Test CoreTests on .NET 10
+dotnet test Cql/CoreTests/CoreTests.csproj --framework net10.0
+
+# Test all multi-target projects on both frameworks
 dotnet test --framework net8.0
-
-# Test on .NET 10
 dotnet test --framework net10.0
-
-# Test both frameworks
-dotnet test
 ```
 
 ### What It Does
 
-The multi-framework test template:
+The multi-framework test template creates two parallel jobs:
 
-1. **Parallel Execution**: Runs tests against .NET 8 and .NET 10 simultaneously in separate jobs
-2. **Framework-Specific Results**: Publishes separate test results for each framework
-3. **Code Coverage**: Collects code coverage for both frameworks
-4. **Comparison Report**: Generates a summary comparing test results across frameworks
-5. **Failure Detection**: Identifies framework-specific failures
+**Job 1: TestNet8**
+- Tests multi-target projects on .NET 8
+- Publishes test results as "Tests on .NET 8"
+- Collects code coverage for .NET 8
+
+**Job 2: TestNet10**
+- Tests multi-target projects on .NET 10
+- Tests .NET 10-only projects on .NET 10
+- Publishes test results as "Tests on .NET 10"
+- Collects code coverage for .NET 10
+
+**Job 3: CompareTestResults**
+- Runs after both TestNet8 and TestNet10 complete
+- Compares test results to identify framework-specific issues
+- Reports whether tests pass on both frameworks or if there are differences
 
 ### Benefits
 
@@ -90,12 +147,33 @@ Code coverage is published separately for each framework, allowing comparison of
 
 ### Current Status
 
-**Note**: The `cql-base.props` file currently targets only `net10.0` temporarily. When multi-targeting is re-enabled (setting `<TargetFrameworks>net8.0;net10.0</TargetFrameworks>`), this template will automatically test both frameworks in the CI/CD pipeline.
+**Status**: ✅ **Active** - Multi-framework testing is fully integrated and runs on every build.
 
-To enable multi-framework testing in CI/CD:
-1. Update `cql-base.props`: Set `<TargetFrameworks>net8.0;net10.0</TargetFrameworks>`
-2. Update `azure-pipelines.yml`: Add the `multiFrameworkTests` stage as shown above
-3. Commit and push - the pipeline will now test both frameworks
+The pipeline configuration:
+- Multi-target tests (CoreTests, CqlToElmTests) run on both .NET 8 and .NET 10
+- .NET 10-only tests (IntegrationRunner, Test.Measures.Demo) run only on .NET 10
+- Excluded tests are commented out in the main build stage and not included in multi-framework testing
+
+### Modifying Test Configuration
+
+To add or remove tests from multi-framework testing:
+
+1. **Edit `azure-pipelines.yml`**: Update the `multiFrameworkTests` stage parameters
+   ```yaml
+   multiTargetTestProjects: |
+     Cql/CoreTests/CoreTests.csproj
+     Cql/CqlToElmTests/CqlToElmTests.csproj
+     # Add new multi-target tests here
+   
+   net10OnlyTestProjects: |
+     submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
+     Demo/Test.Measures.Demo/Test.Measures.Demo.csproj
+     # Add new .NET 10-only tests here
+   ```
+
+2. **Update main build stage**: Comment out tests in the `testProjects` parameter that are now in multi-framework testing
+
+3. **Commit and push**: The pipeline will automatically use the new configuration
 
 ### Troubleshooting
 
