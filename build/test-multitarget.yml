@@ -50,9 +50,6 @@ parameters:
   - name: nuGetServiceConnections
     type: string
     default: ''
-  - name: nuGetSources
-    type: string
-    default: ''
 
 jobs:
   - job: BuildTestSignNet8
@@ -89,7 +86,6 @@ jobs:
           projects: 'Cql-Sdk-All.sln'
           feedsToUse: 'config'
           nugetConfigPath: 'NuGet.config'
-          restoreArguments: '${{ parameters.nuGetSources }}'
 
       - task: DotNetCoreCLI@2
         displayName: 'Build solution'
@@ -235,7 +231,6 @@ jobs:
           projects: 'Cql-Sdk-All.sln'
           feedsToUse: 'config'
           nugetConfigPath: 'NuGet.config'
-          restoreArguments: '${{ parameters.nuGetSources }}'
 
       - task: DotNetCoreCLI@2
         displayName: 'Build solution'
@@ -381,7 +376,6 @@ jobs:
           projects: '${{ parameters.net10IntegrationTestProjects }}'
           feedsToUse: 'config'
           nugetConfigPath: 'NuGet.config'
-          restoreArguments: '${{ parameters.nuGetSources }}'
 
       - task: DotNetCoreCLI@2
         displayName: 'Build test projects'

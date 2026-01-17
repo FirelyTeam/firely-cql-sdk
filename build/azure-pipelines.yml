@@ -108,7 +108,6 @@ stages:
         *CodeGeneration*,
         *CoreTests*
       nuGetServiceConnections: GitHubPackageGetFeed
-      nuGetSources: --source https://nuget.pkg.github.com/FirelyTeam/index.json
 
 - stage: deployToGitHub
   dependsOn: buildTestAndSign
