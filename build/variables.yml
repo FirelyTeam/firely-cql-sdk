@@ -15,8 +15,8 @@ variables:
     Cql/CoreTests/CoreTests.csproj
     Cql/CqlToElmTests/CqlToElmTests.csproj
 
-  # .NET 10 only tests
-  net10OnlyTestProjects: |
+  # .NET 10 integration tests (run in parallel as separate job)
+  net10IntegrationTestProjects: |
     submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
 
 

@@ -78,63 +78,22 @@ stages:
           displayName: 'Check for changes outside docs folder'
           name: checkForDocChanges
 
-- stage: buildAndTest
-  displayName: 'Build Only'
+- stage: buildTestAndSign
+  displayName: 'Build, Test and Sign'
   dependsOn: checkForDocChangesStage
   condition: and(succeeded(), not(eq(dependencies.checkForDocChangesStage.outputs['CheckDocChangesJob.checkForDocChanges.skipBuild'], 'true')))
-  jobs:
-  - template: build.yml@templates  # Template reference
-    parameters:
-      dotNetCoreVersion: $(DOTNET_CORE_SDK)
-      checkoutSubmodules: 'true'
-      ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build
-        useVersionSuffix: true
-      ${{ else }}: # release mode
-        useVersionSuffix: false
-      buildSolutionFile: 'Cql-Sdk-All.sln'
-      packageSolutionFile: 'Cql-Sdk.slnf'
-      testProjects: '!**/*Tests.csproj'  # Explicitly exclude all test projects - tests run in multi-framework testing stage
-      packageArtifacts: false  # Packaging happens in separate stage after tests
-      restoreDependencies: true
-      nuGetServiceConnections: GitHubPackageGetFeed
-      nuGetSources: --source https://nuget.pkg.github.com/FirelyTeam/index.json
-      signingKeyFileName: 'cql-sdk.snk'
-      pool:
-        vmImage: $(vmImage)
-
-- stage: multiFrameworkTests
-  displayName: 'Multi-Framework Testing'
-  dependsOn: buildAndTest
-  condition: succeeded()
   jobs:
   - template: test-multitarget.yml
     parameters:
       dotNetCoreVersion: $(DOTNET_CORE_SDK)
       multiTargetTestProjects: $(multiTargetTestProjects)
-      net10OnlyTestProjects: $(net10OnlyTestProjects)
+      net10IntegrationTestProjects: $(net10IntegrationTestProjects)
       buildConfiguration: $(buildConfiguration)
-      checkoutSubmodules: 'true'
-
-- stage: packageAndSign
-  displayName: 'Package and Sign Artifacts'
-  dependsOn: multiFrameworkTests
-  condition: succeeded()
-  jobs:
-  - template: build.yml@templates
-    parameters:
-      dotNetCoreVersion: $(DOTNET_CORE_SDK)
       checkoutSubmodules: 'true'
       ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build
         useVersionSuffix: true
       ${{ else }}: # release mode
         useVersionSuffix: false
-      buildSolutionFile: 'Cql-Sdk-All.sln'
-      packageSolutionFile: 'Cql-Sdk.slnf'
-      testProjects: ''  # No tests in packaging stage
-      packageArtifacts: true
-      restoreDependencies: true
-      nuGetServiceConnections: GitHubPackageGetFeed
-      nuGetSources: --source https://nuget.pkg.github.com/FirelyTeam/index.json
       azureServiceConnectionForSigning: 'AzureTrustedSigningPrincipal'
       trustedSigningAccountEndpoint: 'https://weu.codesigning.azure.net/'
       trustedSigningAccountName: 'FirelyCodeSigning'
@@ -148,11 +107,11 @@ stages:
       filesToExcludeForSigning: >-
         *CodeGeneration*,
         *CoreTests*
-      pool:
-        vmImage: $(vmImage)
+      nuGetServiceConnections: GitHubPackageGetFeed
+      nuGetSources: --source https://nuget.pkg.github.com/FirelyTeam/index.json
 
 - stage: deployToGitHub
-  dependsOn: packageAndSign
+  dependsOn: buildTestAndSign
   displayName: Deploy packages To Github
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
   jobs:
