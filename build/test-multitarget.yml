@@ -175,13 +175,6 @@ jobs:
     pool:
       vmImage: 'windows-latest'
     steps:
-      - task: DownloadPipelineArtifact@2
-        displayName: 'Download test results'
-        inputs:
-          artifactName: 'TestResults'
-          targetPath: '$(Agent.TempDirectory)/AllTestResults'
-        continueOnError: true
-
       - powershell: |
           Write-Host "##[section]Multi-Framework Test Comparison Report"
           Write-Host ""
