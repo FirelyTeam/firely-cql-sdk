@@ -166,11 +166,11 @@ jobs:
             
             foreach ($file in $filesToSign) {
               Write-Host "Signing: $file"
-              az trustedsigning sign-file `
+              az trustedsigning sign `
                 --endpoint "${{ parameters.trustedSigningAccountEndpoint }}" `
                 --trusted-signing-account-name "${{ parameters.trustedSigningAccountName }}" `
                 --certificate-profile-name "${{ parameters.certificateProfileName }}" `
-                --file "$file" `
+                --files "$file" `
                 --file-digest SHA256 `
                 --timestamp-rfc3161 http://timestamp.acs.microsoft.com `
                 --timestamp-digest SHA256
@@ -311,11 +311,11 @@ jobs:
             
             foreach ($file in $filesToSign) {
               Write-Host "Signing: $file"
-              az trustedsigning sign-file `
+              az trustedsigning sign `
                 --endpoint "${{ parameters.trustedSigningAccountEndpoint }}" `
                 --trusted-signing-account-name "${{ parameters.trustedSigningAccountName }}" `
                 --certificate-profile-name "${{ parameters.certificateProfileName }}" `
-                --file "$file" `
+                --files "$file" `
                 --file-digest SHA256 `
                 --timestamp-rfc3161 http://timestamp.acs.microsoft.com `
                 --timestamp-digest SHA256
