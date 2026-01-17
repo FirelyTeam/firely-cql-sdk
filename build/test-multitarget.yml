@@ -174,6 +174,9 @@ jobs:
     condition: succeededOrFailed()
     pool:
       vmImage: 'windows-latest'
+    variables:
+      net8Status: $[ dependencies.TestNet8.result ]
+      net10Status: $[ dependencies.TestNet10.result ]
     steps:
       - powershell: |
           Write-Host "##[section]Multi-Framework Test Comparison Report"
@@ -182,8 +185,8 @@ jobs:
           Write-Host "to verify identical behavior across frameworks."
           Write-Host ""
           
-          $net8Status = "$(TestNet8.status)"
-          $net10Status = "$(TestNet10.status)"
+          $net8Status = "$(net8Status)"
+          $net10Status = "$(net10Status)"
           
           Write-Host "Test Results:"
           Write-Host "  .NET 8:  $net8Status"
