@@ -1,9 +1,14 @@
 # Repo: FirelyTeam/Cql-sdk
-# File: build/test-multitarget.yml
+# File: build/build-test-sign.yml
 # Multi-framework build, test, and sign template for .NET 8 and .NET 10
 #
-# This template builds, tests, and signs against both target frameworks in parallel
-# to verify identical behavior across .NET 8 (LTS) and .NET 10 (LTS).
+# This template implements three parallel jobs:
+# 1. Build, Test and Sign for .NET 8 - Builds, tests, signs, and packages for .NET 8
+# 2. Build, Test and Sign for .NET 10 - Builds, tests, signs, and packages for .NET 10
+# 3. Build and IntegrationRunner Test for .NET 10 - Builds and tests integration tests
+#
+# This verifies identical behavior across .NET 8 (LTS) and .NET 10 (LTS) while
+# eliminating duplicate builds through parallel execution.
 #
 # Usage: Include this template in azure-pipelines.yml for complete build/test/sign pipeline
 

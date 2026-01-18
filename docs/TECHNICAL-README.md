@@ -149,7 +149,7 @@ dotnet test Cql/CoreTests/CoreTests.csproj -c Debug --framework net10.0
 ```
 
 #### CI/CD Multi-Framework Testing
-The repository includes `build/test-multitarget.yml`, a dedicated Azure Pipelines template for testing both .NET 8 and .NET 10 in parallel. This follows Microsoft's best practices for multi-targeting validation.
+The repository includes `build/build-test-sign.yml`, a dedicated Azure Pipelines template that builds, tests, and signs assemblies for both .NET 8 and .NET 10 in parallel. This template implements three parallel jobs to maximize efficiency while following Microsoft's best practices for multi-targeting validation.
 
 **Configuration:**
 The multi-framework testing is **fully integrated** and runs automatically on every build in a dedicated stage after the main build stage.

@@ -8,11 +8,9 @@ This directory contains Azure Pipelines configuration for building, testing, and
 Main pipeline configuration that orchestrates the complete CI/CD process with the following stages:
 
 1. **checkForDocChangesStage**: Checks if only documentation changed (skips build if so)
-2. **buildAndTest**: Builds solution only - NO tests, NO packaging (renamed to "Build Only" for clarity)
-3. **multiFrameworkTests**: Tests SDK projects on both .NET 8 and .NET 10 in parallel
-4. **packageAndSign**: Packages and signs NuGet artifacts (only after tests pass)
-5. **deployToGitHub**: Deploys to GitHub Packages (non-PR builds only)
-6. **deployToNuget**: Deploys to NuGet.org (release tags only)
+2. **buildTestAndSign**: Three parallel jobs that build, test, and sign for .NET 8 and .NET 10, plus integration tests
+3. **deployToGitHub**: Deploys to GitHub Packages (non-PR builds only)
+4. **deployToNuget**: Deploys to NuGet.org (release tags only)
 
 ### `variables.yml`
 Centralized variables used across pipeline configurations:
@@ -25,8 +23,11 @@ Centralized variables used across pipeline configurations:
   - `net10OnlyTestProjects`: Projects tested only on .NET 10
   - `excludedTestProjects`: Projects excluded from all test runs
 
-### `test-multitarget.yml`
-Multi-framework testing template for verifying identical behavior across .NET 8 and .NET 10.
+### `build-test-sign.yml`
+Azure Pipelines template for building, testing (multi-framework), and signing assemblies. This template implements three parallel jobs:
+- **Build, Test and Sign for .NET 8**: Builds, tests, signs, and packages for .NET 8
+- **Build, Test and Sign for .NET 10**: Builds, tests, signs, and packages for .NET 10  
+- **Build and IntegrationRunner Test for .NET 10**: Builds and tests integration tests (no signing/packaging)
 
 ## Pipeline Architecture
 
@@ -35,11 +36,10 @@ Multi-framework testing template for verifying identical behavior across .NET 8 
 ```
 checkForDocChangesStage
         ↓
-  buildAndTest (build solution ONLY - no tests, no packaging)
-        ↓
-multiFrameworkTests (parallel .NET 8 + .NET 10 testing)
-        ↓
-  packageAndSign (package and sign artifacts)
+buildTestAndSign (3 parallel jobs run simultaneously)
+    ├─ Build, Test and Sign for .NET 8
+    ├─ Build, Test and Sign for .NET 10
+    └─ Build and IntegrationRunner Test for .NET 10
         ↓
   deployToGitHub (GitHub Packages)
         ↓
@@ -47,15 +47,16 @@ multiFrameworkTests (parallel .NET 8 + .NET 10 testing)
 ```
 
 **Key Benefits of This Architecture**:
-- NuGet signing happens **after** multi-framework tests pass
-- **No tests run in buildAndTest stage** - all testing happens in multiFrameworkTests stage
-- Clear separation: build → test → package → deploy
-- All test project specifications centralized in `variables.yml`
+- **Zero duplicate builds** - Each job builds exactly once for its purpose
+- **Maximum parallelization** - All three jobs start simultaneously
+- **Integrated build/test/sign** - No sequential dependency between build and test
+- **Independent integration tests** - IntegrationRunner doesn't block SDK packaging
+- **All tests gate deployment** - Cannot deploy unless all three jobs succeed
 
 ## Multi-Framework Testing
 
 ### Overview
-The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to provide performance benefits while maintaining compatibility. The `test-multitarget.yml` template enables explicit testing against both frameworks in parallel to verify identical behavior.
+The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to provide performance benefits while maintaining compatibility. The `build-test-sign.yml` template implements three parallel jobs that build, test, and sign for both frameworks to verify identical behavior.
 
 ### Test Project Configuration
 
@@ -84,7 +85,7 @@ The multi-framework testing stage reads configuration from `variables.yml`:
   dependsOn: buildAndTest
   condition: succeeded()
   jobs:
-  - template: test-multitarget.yml
+  - template: build-test-sign.yml
     parameters:
       dotNetCoreVersion: $(DOTNET_CORE_SDK)
       multiTargetTestProjects: $(multiTargetTestProjects)

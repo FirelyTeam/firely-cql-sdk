@@ -83,7 +83,7 @@ stages:
   dependsOn: checkForDocChangesStage
   condition: and(succeeded(), not(eq(dependencies.checkForDocChangesStage.outputs['CheckDocChangesJob.checkForDocChanges.skipBuild'], 'true')))
   jobs:
-  - template: test-multitarget.yml
+  - template: build-test-sign.yml
     parameters:
       dotNetCoreVersion: $(DOTNET_CORE_SDK)
       multiTargetTestProjects: $(multiTargetTestProjects)
