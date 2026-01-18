@@ -216,8 +216,7 @@ jobs:
           packDirectory: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
           nobuild: true
           ${{ if eq(parameters.useVersionSuffix, true) }}:
-            versioningScheme: 'byEnvVar'
-            versionEnvVar: 'Build.BuildNumber'
+            buildProperties: 'VersionSuffix=$(Build.BuildNumber)'
           includesymbols: true
           includesource: true
 
@@ -392,8 +391,7 @@ jobs:
           packDirectory: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
           nobuild: true
           ${{ if eq(parameters.useVersionSuffix, true) }}:
-            versioningScheme: 'byEnvVar'
-            versionEnvVar: 'Build.BuildNumber'
+            buildProperties: 'VersionSuffix=$(Build.BuildNumber)'
           includesymbols: true
           includesource: true
 
