@@ -58,7 +58,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #region Cache Index Fields
 
-    private static readonly int _cacheIndex_InDemographic = 0;
+    private int _cacheIndex_InDemographic = 0;
 
     #endregion Cache Index Fields
 

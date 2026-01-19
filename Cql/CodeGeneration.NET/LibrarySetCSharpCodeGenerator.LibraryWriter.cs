@@ -259,7 +259,7 @@ partial class LibrarySetCSharpCodeGenerator
             foreach (var (definitionName, index) in sortedIndices)
             {
                 var fieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(definitionName)}";
-                ISB.AppendLine($"private static readonly int {fieldName} = {index};");
+                ISB.AppendLine($"private int {fieldName} = {index};");
             }
 
             ISB.AppendLine(

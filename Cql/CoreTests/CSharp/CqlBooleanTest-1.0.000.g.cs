@@ -31,7 +31,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     #region Cache Index Fields
 
-    private static readonly int _cacheIndex_SomethingTrueEqualsTrue = 0;
+    private int _cacheIndex_SomethingTrueEqualsTrue = 0;
 
     #endregion Cache Index Fields
 

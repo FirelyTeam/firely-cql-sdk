@@ -132,10 +132,10 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #region Cache Index Fields
 
-    private static readonly int _cacheIndex_MeasurementPeriod = 0;
-    private static readonly int _cacheIndex_Patient = 1;
-    private static readonly int _cacheIndex_InDemographic = 2;
-    private static readonly int _cacheIndex_SexuallyActive = 3;
+    private int _cacheIndex_MeasurementPeriod = 0;
+    private int _cacheIndex_Patient = 1;
+    private int _cacheIndex_InDemographic = 2;
+    private int _cacheIndex_SexuallyActive = 3;
 
     #endregion Cache Index Fields
 
