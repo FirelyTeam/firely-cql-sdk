@@ -86,6 +86,7 @@ partial class CqlContext : ICqlContextInternals
     /// </remarks>
     long ICqlContextInternals.CacheHits => _cacheCallCount - _cacheFactoryInvocations;
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     T ICqlContextInternals.GetOrCompute<T>(int cacheIndex, Func<T> factory)
     {
         Interlocked.Increment(ref _cacheCallCount);
