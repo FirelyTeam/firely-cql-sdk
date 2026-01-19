@@ -179,11 +179,11 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     #region Cache Index Fields
 
-    private int _cacheIndex_ChosenSubCategory = 0;
-    private int _cacheIndex_ChosenCode = 1;
-    private int _cacheIndex_ValueSetA = 2;
-    private int _cacheIndex_ValueSetB = 3;
-    private int _cacheIndex_Result = 4;
+    private int _cacheIndex_ChosenSubCategory;
+    private int _cacheIndex_ChosenCode;
+    private int _cacheIndex_ValueSetA;
+    private int _cacheIndex_ValueSetB;
+    private int _cacheIndex_Result;
 
     #endregion Cache Index Fields
 

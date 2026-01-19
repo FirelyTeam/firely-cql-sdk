@@ -91,9 +91,10 @@ partial class CqlContext : ICqlContextInternals
         Interlocked.Increment(ref _cacheCallCount);
 
         var cache = _cache;
-        if (cache is null)
+        
+        // If cacheIndex is 0 or cache is disabled, compute directly without caching
+        if (cache is null || cacheIndex == 0)
         {
-            // Caching disabled
             Interlocked.Increment(ref _cacheFactoryInvocations);
             return factory();
         }

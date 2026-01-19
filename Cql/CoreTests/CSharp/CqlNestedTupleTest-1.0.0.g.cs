@@ -31,7 +31,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
 
     #region Cache Index Fields
 
-    private int _cacheIndex_Result = 0;
+    private int _cacheIndex_Result;
 
     #endregion Cache Index Fields
 

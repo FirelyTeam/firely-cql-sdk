@@ -254,12 +254,13 @@ partial class LibrarySetCSharpCodeGenerator
 
                 """);
 
-            // Generate fields in order of their indices
+            // Generate fields in order (for consistency), but don't initialize them
+            // They will be set at runtime by a visitor
             var sortedIndices = _cacheIndices.OrderBy(kvp => kvp.Value).ToList();
-            foreach (var (definitionName, index) in sortedIndices)
+            foreach (var (definitionName, _) in sortedIndices)
             {
                 var fieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(definitionName)}";
-                ISB.AppendLine($"private int {fieldName} = {index};");
+                ISB.AppendLine($"private int {fieldName};");
             }
 
             ISB.AppendLine(

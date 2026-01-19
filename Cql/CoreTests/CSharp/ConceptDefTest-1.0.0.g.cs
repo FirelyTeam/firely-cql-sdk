@@ -84,7 +84,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
     #region Cache Index Fields
 
-    private int _cacheIndex_Patient = 0;
+    private int _cacheIndex_Patient;
 
     #endregion Cache Index Fields
 

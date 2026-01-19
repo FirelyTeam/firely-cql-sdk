@@ -182,11 +182,11 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #region Cache Index Fields
 
-    private int _cacheIndex_Measurement_Period = 0;
-    private int _cacheIndex_Patient = 1;
-    private int _cacheIndex_Injury_due_to_falling_rock_within_measurement_period = 2;
-    private int _cacheIndex_Latest_injury_due_to_falling_rock = 3;
-    private int _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = 4;
+    private int _cacheIndex_Measurement_Period;
+    private int _cacheIndex_Patient;
+    private int _cacheIndex_Injury_due_to_falling_rock_within_measurement_period;
+    private int _cacheIndex_Latest_injury_due_to_falling_rock;
+    private int _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock;
 
     #endregion Cache Index Fields
 
