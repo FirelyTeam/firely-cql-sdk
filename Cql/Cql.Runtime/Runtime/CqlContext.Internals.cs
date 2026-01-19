@@ -119,10 +119,8 @@ partial class CqlContext : ICqlContextInternals
         }
 
         // Map cache key to array index using modulo
-        // Use unchecked to handle negative keys gracefully
-        var index = unchecked((int)(cacheKey % cache.Length));
-        if (index < 0)
-            index += cache.Length;
+        // Handle negative keys by ensuring the result is always positive
+        var index = (int)((cacheKey % cache.Length + cache.Length) % cache.Length);
 
         // Linear probing: search for the key or an empty slot
         var startIndex = index;
@@ -133,7 +131,7 @@ partial class CqlContext : ICqlContextInternals
             if (entry is null)
             {
                 // Empty slot found - try to claim it
-                var newEntry = new CacheEntry { Key = cacheKey, Value = null!, IsReady = false };
+                var newEntry = new CacheEntry { Key = cacheKey, Value = null, IsReady = false };
                 var existingEntry = Interlocked.CompareExchange(ref cache[index], newEntry, null);
 
                 if (existingEntry is null)
@@ -153,9 +151,19 @@ partial class CqlContext : ICqlContextInternals
             if (entry.Key == cacheKey)
             {
                 // Found our key - spin until value is ready
+                // Use a hybrid approach: spin briefly, then yield to avoid CPU waste
+                var spinCount = 0;
                 while (!entry.IsReady)
                 {
-                    Thread.SpinWait(1);
+                    if (spinCount < 10)
+                    {
+                        Thread.SpinWait(1);
+                        spinCount++;
+                    }
+                    else
+                    {
+                        Thread.Yield();
+                    }
                 }
                 return (T)entry.Value!;
             }
