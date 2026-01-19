@@ -92,7 +92,7 @@ partial class CqlContext : ICqlContextInternals
         Interlocked.Increment(ref _cacheCallCount);
 
         var cache = _cache;
-        
+
         // If cacheIndex is 0 or cache is disabled, compute directly without caching
         if (cache is null || cacheIndex == 0)
         {
@@ -119,10 +119,10 @@ partial class CqlContext : ICqlContextInternals
         // Cache miss - compute value
         Interlocked.Increment(ref _cacheFactoryInvocations);
         var value = factory(this);
-        
+
         // Store in cache (thread-safe: later writes win, but all compute same value)
         Volatile.Write(ref cache[cacheIndex], value);
-        
+
         return value;
     }
 }

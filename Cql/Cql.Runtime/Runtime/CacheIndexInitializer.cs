@@ -27,7 +27,7 @@ public static class CacheIndexInitializer
     /// </exception>
     public static void Initialize(params ILibrary[] libraries)
     {
-        if (libraries == null || libraries.Length == 0)
+        if (libraries is not { Length: not 0 })
             return;
 
         // Use a HashSet to track processed libraries and avoid processing the same library multiple times
@@ -48,7 +48,7 @@ public static class CacheIndexInitializer
             return;
 
         // Process dependencies first (depth-first traversal)
-        if (library.Dependencies != null)
+        if (library.Dependencies is { Length:>0 })
         {
             foreach (var dependency in library.Dependencies)
             {

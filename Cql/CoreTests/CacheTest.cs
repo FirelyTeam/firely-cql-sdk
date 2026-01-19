@@ -357,13 +357,13 @@ public class CacheTest
     {
         // Arrange - use a library that should already be initialized from other tests
         var lib = RR23_1_0_0.Instance;
-        
+
         // Verify it's already initialized
         var libraryType = lib.GetType();
         var anyField = libraryType
             .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
             .FirstOrDefault(f => f.Name.StartsWith("_cacheIndex_") && f.FieldType == typeof(int));
-        
+
         if (anyField != null)
         {
             var currentValue = (int)anyField.GetValue(lib)!;
@@ -386,13 +386,13 @@ public class CacheTest
     {
         // Arrange
         var lib = CqlNestedTupleTest_1_0_0.Instance;
-        
+
         // Initialize if not already initialized
         var libraryType = lib.GetType();
         var anyField = libraryType
             .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
             .FirstOrDefault(f => f.Name.StartsWith("_cacheIndex_") && f.FieldType == typeof(int));
-        
+
         if (anyField != null)
         {
             var currentValue = (int)anyField.GetValue(lib)!;
