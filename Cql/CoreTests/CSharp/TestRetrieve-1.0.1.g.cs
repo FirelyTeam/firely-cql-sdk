@@ -86,7 +86,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     [CqlParameterDefinition("MeasurementPeriod")]
     public object MeasurementPeriod(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<object>(-7600276400685164205L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<object>(_cacheIndex_MeasurementPeriod, () => {
             CqlDateTime a_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, default);
             CqlDateTime b_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
@@ -101,7 +101,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(-2290543591551071229L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(_cacheIndex_Patient, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -110,7 +110,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Patient> InDemographic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Patient>>(6267391033452327865L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Patient>>(_cacheIndex_InDemographic, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             return a_;
         });
@@ -118,7 +118,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     [CqlExpressionDefinition("SexuallyActive")]
     public bool? SexuallyActive(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(430680482037105811L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(_cacheIndex_SexuallyActive, () => {
             IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
             bool? b_ = context.Operators.Exists<Condition>(a_);
             IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
@@ -129,6 +129,15 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields
+
+    private static readonly int _cacheIndex_MeasurementPeriod = 0;
+    private static readonly int _cacheIndex_Patient = 1;
+    private static readonly int _cacheIndex_InDemographic = 2;
+    private static readonly int _cacheIndex_SexuallyActive = 3;
+
+    #endregion Cache Index Fields
 
     #region Singleton Lifetime Members
 

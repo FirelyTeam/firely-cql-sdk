@@ -13,10 +13,10 @@ namespace Hl7.Cql.Runtime;
 public interface ICqlContextInternals
 {
     /// <summary>
-    /// Gets or computes a cached value for the specified cache key.
+    /// Gets or computes a cached value for the specified cache index.
     /// </summary>
     /// <typeparam name="T">The type of the cached value.</typeparam>
-    /// <param name="cacheKey">The unique key identifying the cached value.</param>
+    /// <param name="cacheIndex">The index identifying the cached value.</param>
     /// <param name="factory">A function to compute the value if it's not in the cache.</param>
     /// <returns>The cached or newly computed value.</returns>
     /// <remarks>
@@ -24,7 +24,7 @@ public interface ICqlContextInternals
     /// If caching is disabled (cache is null), the factory function is called without caching the result.
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public T GetOrCompute<T>(long cacheKey, Func<T> factory);
+    public T GetOrCompute<T>(int cacheIndex, Func<T> factory);
 
     /// <summary>
     /// Gets the total number of calls to GetOrCompute.
@@ -57,40 +57,7 @@ public interface ICqlContextInternals
 
 partial class CqlContext : ICqlContextInternals
 {
-    /// <summary>
-    /// Cache entry that stores both the key and value.
-    /// </summary>
-    private sealed class CacheEntry
-    {
-        /// <summary>
-        /// The cache key. Use Volatile.Read/Write for access to ensure visibility across threads.
-        /// </summary>
-        public long Key;
-        
-        /// <summary>
-        /// The cached value (boxed as object?). Must be volatile to ensure visibility across threads.
-        /// </summary>
-        public volatile object? Value;
-        
-        /// <summary>
-        /// Indicates whether the value has been computed and stored.
-        /// This is necessary to distinguish between a null value that hasn't been computed yet
-        /// and a null value that is the actual cached result.
-        /// </summary>
-        public volatile bool IsReady;
-    }
-
-    /// <summary>
-    /// Array-based cache with linear probing for collision resolution.
-    /// Null indicates caching is disabled.
-    /// </summary>
-    private CacheEntry[]? _cache;
-
-    /// <summary>
-    /// Number of times to spin before yielding when waiting for a cache value to be computed.
-    /// </summary>
-    private const int SpinCountBeforeYield = 10;
-
+    private object?[]? _cache;
     private long _cacheCallCount;
     private long _cacheFactoryInvocations;
 
@@ -119,7 +86,7 @@ partial class CqlContext : ICqlContextInternals
     /// </remarks>
     long ICqlContextInternals.CacheHits => _cacheCallCount - _cacheFactoryInvocations;
 
-    T ICqlContextInternals.GetOrCompute<T>(long cacheKey, Func<T> factory)
+    T ICqlContextInternals.GetOrCompute<T>(int cacheIndex, Func<T> factory)
     {
         Interlocked.Increment(ref _cacheCallCount);
 
@@ -131,73 +98,29 @@ partial class CqlContext : ICqlContextInternals
             return factory();
         }
 
-        // Ensure cache.Length is a power of 2 for bit masking optimization
-        Debug.Assert((cache.Length & (cache.Length - 1)) == 0, "Cache length must be a power of 2");
-
-        // Map cache key to array index using bit masking (cache.Length is power of 2)
-        // This is faster than modulo and naturally handles negative keys
-        var index = (int)(cacheKey & (cache.Length - 1));
-
-        // Linear probing: search for the key or an empty slot
-        var startIndex = index;
-        while (true)
+        // Ensure cache index is within bounds
+        if (cacheIndex < 0 || cacheIndex >= cache.Length)
         {
-            var entry = Volatile.Read(ref cache[index]);
-
-            if (entry is null)
-            {
-                // Empty slot found - try to claim it
-                var newEntry = new CacheEntry { Value = null, IsReady = false };
-                Volatile.Write(ref newEntry.Key, cacheKey); // Ensure Key is visible to other threads
-                var existingEntry = Interlocked.CompareExchange(ref cache[index], newEntry, null);
-
-                if (existingEntry is null)
-                {
-                    // We claimed the slot - compute the value
-                    Interlocked.Increment(ref _cacheFactoryInvocations);
-                    var value = factory();
-                    newEntry.Value = value;
-                    newEntry.IsReady = true; // Signal that the value is ready
-                    return value;
-                }
-
-                // Another thread claimed the slot - check if it's our key
-                entry = existingEntry;
-            }
-
-            if (Volatile.Read(ref entry.Key) == cacheKey)
-            {
-                // Found our key - spin until value is ready
-                // Use a hybrid approach: spin briefly, then yield to avoid CPU waste
-                var spinCount = 0;
-                while (!entry.IsReady)
-                {
-                    if (spinCount < SpinCountBeforeYield)
-                    {
-                        Thread.SpinWait(1);
-                        spinCount++;
-                    }
-                    else
-                    {
-                        Thread.Yield();
-                    }
-                }
-                // Safe to cast: entry.Value was set by the thread that computed it
-                // All values are boxed as object?, so null is a valid cached result
-                Debug.Assert(entry.Value is null or T, "Cached value type mismatch");
-                return (T)entry.Value!;
-            }
-
-            // Collision - try next slot (linear probing with bit masking)
-            index = (index + 1) & (cache.Length - 1);
-
-            // If we've wrapped around completely, fall back to computing without caching
-            // This should be extremely rare
-            if (index == startIndex)
-            {
-                Interlocked.Increment(ref _cacheFactoryInvocations);
-                return factory();
-            }
+            // Index out of range - compute without caching
+            Interlocked.Increment(ref _cacheFactoryInvocations);
+            return factory();
         }
+
+        // Try to get from cache
+        var cachedValue = Volatile.Read(ref cache[cacheIndex]);
+        if (cachedValue is not null)
+        {
+            // Cache hit
+            return (T)cachedValue;
+        }
+
+        // Cache miss - compute value
+        Interlocked.Increment(ref _cacheFactoryInvocations);
+        var value = factory();
+        
+        // Store in cache (thread-safe: later writes win, but all compute same value)
+        Volatile.Write(ref cache[cacheIndex], value);
+        
+        return value;
     }
 }

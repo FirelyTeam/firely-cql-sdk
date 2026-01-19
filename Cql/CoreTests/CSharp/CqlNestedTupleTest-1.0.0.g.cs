@@ -20,7 +20,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
 
     [CqlExpressionDefinition("Result")]
     public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)?>(-5211663732441812733L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)?>(_cacheIndex_Result, () => {
             (CqlTupleMetadata, string result1, string result2)? a_ = (CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ, "some first result", "some second result");
             (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? b_ = (CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY, "success", a_);
             return b_;
@@ -28,6 +28,12 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields
+
+    private static readonly int _cacheIndex_Result = 0;
+
+    #endregion Cache Index Fields
 
     #region Singleton Lifetime Members
 

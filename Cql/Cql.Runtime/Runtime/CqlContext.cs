@@ -104,10 +104,9 @@ namespace Hl7.Cql.Runtime
         /// refreshed.</remarks>
         public void UseNewCache()
         {
-            // Use array size that accommodates typical library sizes (1-20 definitions)
-            // while keeping it small for cache efficiency. Power of 2 for better modulo performance.
-            const int DefaultCacheSize = 64;
-            _cache = new CacheEntry[DefaultCacheSize];
+            // Use array size that accommodates typical library sizes (1-100 definitions)
+            const int DefaultCacheSize = 128;
+            _cache = new object?[DefaultCacheSize];
             _cacheCallCount = 0;
             _cacheFactoryInvocations = 0;
         }

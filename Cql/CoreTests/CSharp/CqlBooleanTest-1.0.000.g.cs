@@ -20,7 +20,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7966027749533621960L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(_cacheIndex_SomethingTrueEqualsTrue, () => {
             bool? a_ = context.Operators.Equal(1, 1);
             bool? b_ = context.Operators.Equal(a_, true);
             return b_;
@@ -28,6 +28,12 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields
+
+    private static readonly int _cacheIndex_SomethingTrueEqualsTrue = 0;
+
+    #endregion Cache Index Fields
 
     #region Singleton Lifetime Members
 

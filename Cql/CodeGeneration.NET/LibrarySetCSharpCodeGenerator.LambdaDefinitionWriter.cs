@@ -63,15 +63,14 @@ internal partial class LibrarySetCSharpCodeGenerator
 
             if (useCache)
             {
-                // Generate cache key from library identifier and definition name
-                var libraryVersionedIdentifier = LibraryWriter.LibraryName.ToString();
-                var definitionName = ld.Name;
-                var cacheKey = LibraryWriter.LibrarySetWriter.CacheKeyGenerator.GenerateCacheKey(libraryVersionedIdentifier, definitionName);
+                // Get cache index for this definition
+                var cacheIndex = LibraryWriter.GetCacheIndex(ld.Name);
+                var cacheIndexFieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(ld.Name)}";
                 
                 ISB.AppendLine($"{lambdaParameters} =>");
                 using (ISB.Indent())
                 {
-                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute<{returnType}>({cacheKey}L, () => {lambdaBody});");
+                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute<{returnType}>({cacheIndexFieldName}, () => {lambdaBody});");
                 }
                 ISB.AppendLine();
             }

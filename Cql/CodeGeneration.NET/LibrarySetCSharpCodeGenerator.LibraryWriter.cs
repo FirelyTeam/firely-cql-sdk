@@ -19,6 +19,8 @@ partial class LibrarySetCSharpCodeGenerator
         internal CqlVersionedLibraryIdentifier LibraryName => _library?.VersionedLibraryIdentifier ?? throw new InvalidOperationException("Library not initialized.");
         private string _className = string.Empty;
         private readonly Dictionary<string, int> _cacheFieldNameCount = new();
+        private readonly Dictionary<string, int> _cacheIndices = new();
+        private int _nextCacheIndex = 0;
 
         public string GetUniqueCacheFieldName(string baseName)
         {
@@ -36,6 +38,16 @@ partial class LibrarySetCSharpCodeGenerator
             _cacheFieldNameCount[baseName] = count;
             _cacheFieldNameCount[fieldName] = 0; // Mark this specific name as used
             return fieldName;
+        }
+
+        public int GetCacheIndex(string definitionName)
+        {
+            if (!_cacheIndices.TryGetValue(definitionName, out var index))
+            {
+                index = _nextCacheIndex++;
+                _cacheIndices[definitionName] = index;
+            }
+            return index;
         }
 
         public void AppendLibraryFile(ElmLibrary library, IndentedStringBuilder isb)
@@ -219,6 +231,9 @@ partial class LibrarySetCSharpCodeGenerator
                 // Put logic first
                 AppendMethods();
 
+                // Cache index fields (must come after AppendMethods so indices are assigned)
+                AppendCacheIndexFields();
+
                 // These are all boilerplate
                 AppendSingletonLifetimeMembers();
                 AppendLibraryInterfaceImplementation();
@@ -226,6 +241,33 @@ partial class LibrarySetCSharpCodeGenerator
             }
 
             ISB.AppendLine("}");
+        }
+
+        private void AppendCacheIndexFields()
+        {
+            if (_cacheIndices.Count == 0)
+                return;
+
+            ISB.AppendLine(
+                """
+                #region Cache Index Fields
+
+                """);
+
+            // Generate fields in order of their indices
+            var sortedIndices = _cacheIndices.OrderBy(kvp => kvp.Value).ToList();
+            foreach (var (definitionName, index) in sortedIndices)
+            {
+                var fieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(definitionName)}";
+                ISB.AppendLine($"private static readonly int {fieldName} = {index};");
+            }
+
+            ISB.AppendLine(
+                """
+
+                #endregion Cache Index Fields
+
+                """);
         }
 
         private void AppendSingletonLifetimeMembers()

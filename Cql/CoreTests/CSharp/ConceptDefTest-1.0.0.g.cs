@@ -73,7 +73,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(8038487315504585569L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(_cacheIndex_Patient, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -81,6 +81,12 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields
+
+    private static readonly int _cacheIndex_Patient = 0;
+
+    #endregion Cache Index Fields
 
     #region Singleton Lifetime Members
 

@@ -48,13 +48,19 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Observation> InDemographic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(1057832894862877646L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(_cacheIndex_InDemographic, () => {
             IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
             return a_;
         });
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields
+
+    private static readonly int _cacheIndex_InDemographic = 0;
+
+    #endregion Cache Index Fields
 
     #region Singleton Lifetime Members
 

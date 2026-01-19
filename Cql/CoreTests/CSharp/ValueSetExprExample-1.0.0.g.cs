@@ -40,7 +40,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(-6797237956357043470L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<string>(_cacheIndex_ChosenSubCategory, () => {
             object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
             return (string)a_;
         });
@@ -48,7 +48,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlParameterDefinition("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(4576364196465695553L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(_cacheIndex_ChosenCode, () => {
             object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
             return (CqlCode)a_;
         });
@@ -60,7 +60,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(3635379538251128517L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(_cacheIndex_ValueSetA, () => {
 
             CqlValueSet a_() {
 
@@ -99,7 +99,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlExpressionDefinition("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(1902915641396550611L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(_cacheIndex_ValueSetB, () => {
 
             CqlValueSet a_() {
 
@@ -138,7 +138,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlExpressionDefinition("Result")]
     public string Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(2591165112630919659L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<string>(_cacheIndex_Result, () => {
 
             string a_() {
 
@@ -176,6 +176,16 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields
+
+    private static readonly int _cacheIndex_ChosenSubCategory = 0;
+    private static readonly int _cacheIndex_ChosenCode = 1;
+    private static readonly int _cacheIndex_ValueSetA = 2;
+    private static readonly int _cacheIndex_ValueSetB = 3;
+    private static readonly int _cacheIndex_Result = 4;
+
+    #endregion Cache Index Fields
 
     #region Singleton Lifetime Members
 

@@ -60,7 +60,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     [CqlParameterDefinition("Measurement Period")]
     public object Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<object>(3305136097504393406L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<object>(_cacheIndex_Measurement_Period, () => {
             CqlDate a_ = context.Operators.Date(2023, 1, 1);
             CqlDate b_ = context.Operators.Date(2023, 12, 31);
             CqlInterval<CqlDate> c_ = context.Operators.Interval(a_, b_, true, true);
@@ -75,7 +75,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(-3348112132702101490L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(_cacheIndex_Patient, () => {
             IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
             Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
             return b_;
@@ -88,7 +88,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     [CqlTag("datarequirement", "\"code\",\"onset.ofType(DateTime)\",\"subject.ofType(Patient)\"]")]
     [CqlTag("coderequirement", "Condition.code http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
     public IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(6330377113132342568L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(_cacheIndex_Injury_due_to_falling_rock_within_measurement_period, () => {
             CqlValueSet a_ = this.Injury_due_to_falling_rock(context);
             IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
@@ -114,7 +114,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     [CqlExpressionDefinition("Latest injury due to falling rock")]
     public Condition Latest_injury_due_to_falling_rock(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Condition>(-4330520114394964250L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<Condition>(_cacheIndex_Latest_injury_due_to_falling_rock, () => {
             IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
 
             object b_(Condition @this) {
@@ -135,7 +135,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     [CqlTag("datarequirement", "\"suppliedItem.item.ofType(CodeableConcept)\",\"occurrenceDateTime\",\"patient\"]")]
     [CqlTag("coderequirement", "SupplyDelivery.item.orfType(CodeableConcept) http://acme.org/product-catalog|U707")]
     public IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<SupplyDelivery>>(8767411941886803436L, () => {
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<SupplyDelivery>>(_cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock, () => {
             IEnumerable<SupplyDelivery> a_ = context.Operators.Retrieve<SupplyDelivery>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/SupplyDelivery"));
 
             bool? b_(SupplyDelivery SD) {
@@ -179,6 +179,16 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields
+
+    private static readonly int _cacheIndex_Measurement_Period = 0;
+    private static readonly int _cacheIndex_Patient = 1;
+    private static readonly int _cacheIndex_Injury_due_to_falling_rock_within_measurement_period = 2;
+    private static readonly int _cacheIndex_Latest_injury_due_to_falling_rock = 3;
+    private static readonly int _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = 4;
+
+    #endregion Cache Index Fields
 
     #region Singleton Lifetime Members
 
