@@ -24,7 +24,7 @@ public interface ICqlContextInternals
     /// If caching is disabled (cache is null), the factory function is called without caching the result.
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public T GetOrCompute<T>(int cacheIndex, Func<T> factory);
+    public T GetOrCompute<T>(int cacheIndex, Func<CqlContext, T> factory);
 
     /// <summary>
     /// Gets the total number of calls to GetOrCompute.
@@ -87,7 +87,7 @@ partial class CqlContext : ICqlContextInternals
     long ICqlContextInternals.CacheHits => _cacheCallCount - _cacheFactoryInvocations;
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    T ICqlContextInternals.GetOrCompute<T>(int cacheIndex, Func<T> factory)
+    T ICqlContextInternals.GetOrCompute<T>(int cacheIndex, Func<CqlContext, T> factory)
     {
         Interlocked.Increment(ref _cacheCallCount);
 
@@ -97,7 +97,7 @@ partial class CqlContext : ICqlContextInternals
         if (cache is null || cacheIndex == 0)
         {
             Interlocked.Increment(ref _cacheFactoryInvocations);
-            return factory();
+            return factory(this);
         }
 
         // Ensure cache index is within bounds
@@ -105,7 +105,7 @@ partial class CqlContext : ICqlContextInternals
         {
             // Index out of range - compute without caching
             Interlocked.Increment(ref _cacheFactoryInvocations);
-            return factory();
+            return factory(this);
         }
 
         // Try to get from cache
@@ -118,7 +118,7 @@ partial class CqlContext : ICqlContextInternals
 
         // Cache miss - compute value
         Interlocked.Increment(ref _cacheFactoryInvocations);
-        var value = factory();
+        var value = factory(this);
         
         // Store in cache (thread-safe: later writes win, but all compute same value)
         Volatile.Write(ref cache[cacheIndex], value);

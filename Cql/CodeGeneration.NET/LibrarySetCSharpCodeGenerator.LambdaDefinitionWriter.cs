@@ -66,11 +66,30 @@ internal partial class LibrarySetCSharpCodeGenerator
                 // Get cache index for this definition
                 var cacheIndex = LibraryWriter.GetCacheIndex(ld.Name);
                 var cacheIndexFieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(ld.Name)}";
+                var computeMethodName = $"{methodName}_Compute";
                 
+                // Generate the public method that calls GetOrCompute
                 ISB.AppendLine($"{lambdaParameters} =>");
                 using (ISB.Indent())
                 {
-                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute<{returnType}>({cacheIndexFieldName}, () => {lambdaBody});");
+                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute<{returnType}>({cacheIndexFieldName}, {computeMethodName});");
+                }
+                ISB.AppendLine();
+                
+                // Generate the private compute method
+                ISB.AppendLine($"private {returnType} {computeMethodName}(CqlContext context)");
+                if (transformedLambda.Body is BlockExpression)
+                {
+                    ISB.AppendLine(lambdaBody);
+                }
+                else
+                {
+                    ISB.AppendLine("{");
+                    using (ISB.Indent())
+                    {
+                        ISB.AppendLine($"return {lambdaBody};");
+                    }
+                    ISB.AppendLine("}");
                 }
                 ISB.AppendLine();
             }

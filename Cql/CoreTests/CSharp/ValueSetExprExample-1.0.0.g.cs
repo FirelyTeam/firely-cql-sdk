@@ -40,18 +40,24 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(_cacheIndex_ChosenSubCategory, () => {
-            object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
-            return (string)a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<string>(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute);
+
+    private string ChosenSubCategory_Compute(CqlContext context)
+    {
+        object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
+        return (string)a_;
+    }
 
 
     [CqlParameterDefinition("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(_cacheIndex_ChosenCode, () => {
-            object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
-            return (CqlCode)a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(_cacheIndex_ChosenCode, ChosenCode_Compute);
+
+    private CqlCode ChosenCode_Compute(CqlContext context)
+    {
+        object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
+        return (CqlCode)a_;
+    }
 
 
     #endregion Parameters
@@ -60,119 +66,128 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(_cacheIndex_ValueSetA, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(_cacheIndex_ValueSetA, ValueSetA_Compute);
 
-            CqlValueSet a_() {
+    private CqlValueSet ValueSetA_Compute(CqlContext context)
+    {
 
-                bool b_() {
-                    string d_ = this.ChosenSubCategory(context);
-                    bool? e_ = context.Operators.Equal(d_, "1");
-                    return e_ ?? false;
-                }
+        CqlValueSet a_() {
 
-
-                bool c_() {
-                    string f_ = this.ChosenSubCategory(context);
-                    bool? g_ = context.Operators.Equal(f_, "2");
-                    return g_ ?? false;
-                }
-
-                if (b_())
-                {
-                    CqlValueSet h_ = this.ValueSet_A_1(context);
-                    return h_;
-                }
-                else if (c_())
-                {
-                    CqlValueSet i_ = this.ValueSet_A_2(context);
-                    return i_;
-                }
-                else
-                {
-                    return default;
-                };
+            bool b_() {
+                string d_ = this.ChosenSubCategory(context);
+                bool? e_ = context.Operators.Equal(d_, "1");
+                return e_ ?? false;
             }
 
-            return a_();
-        });
+
+            bool c_() {
+                string f_ = this.ChosenSubCategory(context);
+                bool? g_ = context.Operators.Equal(f_, "2");
+                return g_ ?? false;
+            }
+
+            if (b_())
+            {
+                CqlValueSet h_ = this.ValueSet_A_1(context);
+                return h_;
+            }
+            else if (c_())
+            {
+                CqlValueSet i_ = this.ValueSet_A_2(context);
+                return i_;
+            }
+            else
+            {
+                return default;
+            };
+        }
+
+        return a_();
+    }
 
 
     [CqlExpressionDefinition("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(_cacheIndex_ValueSetB, () => {
+        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(_cacheIndex_ValueSetB, ValueSetB_Compute);
 
-            CqlValueSet a_() {
+    private CqlValueSet ValueSetB_Compute(CqlContext context)
+    {
 
-                bool b_() {
-                    string d_ = this.ChosenSubCategory(context);
-                    bool? e_ = context.Operators.Equal(d_, "1");
-                    return e_ ?? false;
-                }
+        CqlValueSet a_() {
 
-
-                bool c_() {
-                    string f_ = this.ChosenSubCategory(context);
-                    bool? g_ = context.Operators.Equal(f_, "2");
-                    return g_ ?? false;
-                }
-
-                if (b_())
-                {
-                    CqlValueSet h_ = this.ValueSet_B_1(context);
-                    return h_;
-                }
-                else if (c_())
-                {
-                    CqlValueSet i_ = this.ValueSet_B_2(context);
-                    return i_;
-                }
-                else
-                {
-                    return default;
-                };
+            bool b_() {
+                string d_ = this.ChosenSubCategory(context);
+                bool? e_ = context.Operators.Equal(d_, "1");
+                return e_ ?? false;
             }
 
-            return a_();
-        });
+
+            bool c_() {
+                string f_ = this.ChosenSubCategory(context);
+                bool? g_ = context.Operators.Equal(f_, "2");
+                return g_ ?? false;
+            }
+
+            if (b_())
+            {
+                CqlValueSet h_ = this.ValueSet_B_1(context);
+                return h_;
+            }
+            else if (c_())
+            {
+                CqlValueSet i_ = this.ValueSet_B_2(context);
+                return i_;
+            }
+            else
+            {
+                return default;
+            };
+        }
+
+        return a_();
+    }
 
 
     [CqlExpressionDefinition("Result")]
     public string Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(_cacheIndex_Result, () => {
+        ((ICqlContextInternals)context).GetOrCompute<string>(_cacheIndex_Result, Result_Compute);
 
-            string a_() {
+    private string Result_Compute(CqlContext context)
+    {
 
-                bool b_() {
-                    CqlCode d_ = this.ChosenCode(context);
-                    CqlValueSet e_ = this.ValueSetA(context);
-                    bool? f_ = context.Operators.CodeInValueSet(d_, e_);
-                    return f_ ?? false;
-                }
+        string a_() {
 
-
-                bool c_() {
-                    CqlCode g_ = this.ChosenCode(context);
-                    CqlValueSet h_ = this.ValueSetB(context);
-                    bool? i_ = context.Operators.CodeInValueSet(g_, h_);
-                    return i_ ?? false;
-                }
-
-                if (b_())
-                {
-                    return "a";
-                }
-                else if (c_())
-                {
-                    return "b";
-                }
-                else
-                {
-                    return default;
-                };
+            bool b_() {
+                CqlCode d_ = this.ChosenCode(context);
+                CqlValueSet e_ = this.ValueSetA(context);
+                bool? f_ = context.Operators.CodeInValueSet(d_, e_);
+                return f_ ?? false;
             }
 
-            return a_();
-        });
+
+            bool c_() {
+                CqlCode g_ = this.ChosenCode(context);
+                CqlValueSet h_ = this.ValueSetB(context);
+                bool? i_ = context.Operators.CodeInValueSet(g_, h_);
+                return i_ ?? false;
+            }
+
+            if (b_())
+            {
+                return "a";
+            }
+            else if (c_())
+            {
+                return "b";
+            }
+            else
+            {
+                return default;
+            };
+        }
+
+        return a_();
+    }
 
 
     #endregion Functions and Expressions
