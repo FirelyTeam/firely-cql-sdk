@@ -294,4 +294,127 @@ public class CacheTest
         Assert.AreEqual(3, ((ICqlContextInternals)ctx).CacheMisses, "All calls should be misses without cache");
         Assert.AreEqual(0, ((ICqlContextInternals)ctx).CacheHits, "Should have no hits without cache");
     }
+
+    [TestMethod]
+    public void CacheIndexInitializer_ShouldSetIndicesSequentially()
+    {
+        // Arrange
+        var lib = ConceptDefTest_1_0_0.Instance;
+
+        // Act
+        CacheIndexInitializer.Initialize(lib);
+
+        // Assert - Cache indices should be set sequentially starting from 1
+        var libraryType = lib.GetType();
+        var cacheIndexFields = libraryType
+            .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+            .Where(f => f.Name.StartsWith("_cacheIndex_") && f.FieldType == typeof(int))
+            .OrderBy(f => f.Name)
+            .ToArray();
+
+        Assert.IsTrue(cacheIndexFields.Length > 0, "Should have cache index fields");
+
+        foreach (var field in cacheIndexFields)
+        {
+            var value = (int)field.GetValue(lib)!;
+            Assert.IsTrue(value > 0, $"Field {field.Name} should have a positive index, but was {value}");
+        }
+    }
+
+    [TestMethod]
+    public void CacheIndexInitializer_ShouldIncludeDependencies()
+    {
+        // Arrange
+        var lib = TestRetrieve_1_0_1.Instance;
+
+        // Act
+        CacheIndexInitializer.Initialize(lib);
+
+        // Assert - Dependencies should also have indices set
+        Assert.IsTrue(lib.Dependencies.Length > 0, "TestRetrieve should have dependencies");
+
+        foreach (var dependency in lib.Dependencies)
+        {
+            var depType = dependency.GetType();
+            var cacheIndexFields = depType
+                .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+                .Where(f => f.Name.StartsWith("_cacheIndex_") && f.FieldType == typeof(int))
+                .ToArray();
+
+            if (cacheIndexFields.Length > 0)
+            {
+                foreach (var field in cacheIndexFields)
+                {
+                    var value = (int)field.GetValue(dependency)!;
+                    Assert.IsTrue(value > 0, $"Dependency field {field.Name} should have a positive index");
+                }
+            }
+        }
+    }
+
+    [TestMethod]
+    public void CacheIndexInitializer_ShouldFailIfAlreadyInitialized()
+    {
+        // Arrange - use a library that should already be initialized from other tests
+        var lib = RR23_1_0_0.Instance;
+        
+        // Verify it's already initialized
+        var libraryType = lib.GetType();
+        var anyField = libraryType
+            .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+            .FirstOrDefault(f => f.Name.StartsWith("_cacheIndex_") && f.FieldType == typeof(int));
+        
+        if (anyField != null)
+        {
+            var currentValue = (int)anyField.GetValue(lib)!;
+            if (currentValue == 0)
+            {
+                // Initialize it first
+                CacheIndexInitializer.Initialize(lib);
+            }
+        }
+
+        // Act & Assert - Second initialization should throw
+        Assert.ThrowsException<InvalidOperationException>(() =>
+        {
+            CacheIndexInitializer.Initialize(lib);
+        });
+    }
+
+    [TestMethod]
+    public void Cache_WithInitializedIndices_ShouldCacheCorrectly()
+    {
+        // Arrange
+        var lib = CqlNestedTupleTest_1_0_0.Instance;
+        
+        // Initialize if not already initialized
+        var libraryType = lib.GetType();
+        var anyField = libraryType
+            .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+            .FirstOrDefault(f => f.Name.StartsWith("_cacheIndex_") && f.FieldType == typeof(int));
+        
+        if (anyField != null)
+        {
+            var currentValue = (int)anyField.GetValue(lib)!;
+            if (currentValue == 0)
+            {
+                CacheIndexInitializer.Initialize(lib);
+            }
+        }
+
+        var ctx = FhirCqlContext.ForBundle();
+        ctx.UseNewCache();
+
+        // Act - Call the same expression twice
+        var result1 = lib.Result(ctx);
+        var result2 = lib.Result(ctx);
+
+        // Assert - Results should be cached
+        Assert.IsNotNull(result1);
+        Assert.IsNotNull(result2);
+        Assert.AreEqual(result1, result2);
+        Assert.AreEqual(2, ((ICqlContextInternals)ctx).CacheCallCount);
+        Assert.AreEqual(1, ((ICqlContextInternals)ctx).CacheMisses);
+        Assert.AreEqual(1, ((ICqlContextInternals)ctx).CacheHits);
+    }
 }

@@ -1,3 +1,5 @@
+Hl7.Cql.Runtime.CacheIndexInitializer
 Hl7.Cql.Runtime.CqlContext.DontUseCaching() -> void
 Hl7.Cql.Runtime.CqlContext.UseNewCache() -> void
+static Hl7.Cql.Runtime.CacheIndexInitializer.Initialize(params Hl7.Cql.Abstractions.ILibrary![]! libraries) -> void
 
