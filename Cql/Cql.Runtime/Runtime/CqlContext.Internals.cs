@@ -123,6 +123,9 @@ partial class CqlContext : ICqlContextInternals
             return factory();
         }
 
+        // Ensure cache.Length is a power of 2 for bit masking optimization
+        Debug.Assert((cache.Length & (cache.Length - 1)) == 0, "Cache length must be a power of 2");
+
         // Map cache key to array index using bit masking (cache.Length is power of 2)
         // This is faster than modulo and naturally handles negative keys
         var index = (int)(cacheKey & (cache.Length - 1));
@@ -171,12 +174,13 @@ partial class CqlContext : ICqlContextInternals
                     }
                 }
                 // Safe to cast: entry.Value was set by the thread that computed it
-                // Null is a valid cached result (boxed as object?)
+                // All values are boxed as object?, so null is a valid cached result
+                Debug.Assert(entry.Value is null or T, "Cached value type mismatch");
                 return (T)entry.Value!;
             }
 
-            // Collision - try next slot (linear probing)
-            index = (index + 1) % cache.Length;
+            // Collision - try next slot (linear probing with bit masking)
+            index = (index + 1) & (cache.Length - 1);
 
             // If we've wrapped around completely, fall back to computing without caching
             // This should be extremely rare
