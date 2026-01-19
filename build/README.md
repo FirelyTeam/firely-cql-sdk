@@ -1,6 +1,6 @@
 # Build and CI/CD Pipeline Documentation
 
-This directory contains Azure Pipelines configuration for building, testing, and deploying the Firely CQL SDK.
+This directory contains Azure Pipelines configuration for building, testing, and deploying the Firely CQL SDK with multi-targeting support for .NET 8 (LTS) and .NET 10 (LTS).
 
 ## Files
 
@@ -15,19 +15,21 @@ Main pipeline configuration that orchestrates the complete CI/CD process with th
 ### `variables.yml`
 Centralized variables used across pipeline configurations:
 - `buildConfiguration`: Build configuration (Release)
-- `vmImage`: VM image for build agents
-- `DOTNET_CORE_SDK`: .NET SDK version to use
+- `vmImage`: VM image for build agents (windows-latest)
+- `DOTNET_CORE_SDK`: .NET SDK version (10.0.x)
 - API keys for package deployment
-- **Test project configuration** (new):
-  - `multiTargetTestProjects`: Projects tested on both .NET 8 and .NET 10
-  - `net10OnlyTestProjects`: Projects tested only on .NET 10
-  - `excludedTestProjects`: Projects excluded from all test runs
+- **Test project configuration**:
+  - `multiTargetTestProjects`: Projects tested on both .NET 8 and .NET 10 (CoreTests, CqlToElmTests)
+  - `net10IntegrationTestProjects`: Projects tested only on .NET 10 (IntegrationRunner)
+  - `excludedTestProjects`: Projects excluded from all test runs (XsdToCSharpConverterTests, NCQA tests)
 
 ### `build-test-sign.yml`
-Azure Pipelines template for building, testing (multi-framework), and signing assemblies. This template implements three parallel jobs:
-- **Build, Test and Sign for .NET 8**: Builds, tests, signs, and packages for .NET 8
-- **Build, Test and Sign for .NET 10**: Builds, tests, signs, and packages for .NET 10  
-- **Build and IntegrationRunner Test for .NET 10**: Builds and tests integration tests (no signing/packaging)
+Reusable Azure Pipelines template that implements the complete build, test, and sign workflow. This template creates three parallel jobs:
+- **Build, Test and Sign for .NET 8**: Builds solution, tests CoreTests/CqlToElmTests on .NET 8, signs assemblies, packages NuGet packages
+- **Build, Test and Sign for .NET 10**: Builds solution, tests CoreTests/CqlToElmTests on .NET 10, signs assemblies, packages NuGet packages  
+- **Build and IntegrationRunner Test for .NET 10**: Builds solution and tests IntegrationRunner on .NET 10 (no signing/packaging)
+
+All three jobs run in parallel to maximize efficiency while ensuring comprehensive testing across both target frameworks.
 
 ## Pipeline Architecture
 
@@ -56,42 +58,41 @@ buildTestAndSign (3 parallel jobs run simultaneously)
 ## Multi-Framework Testing
 
 ### Overview
-The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to provide performance benefits while maintaining compatibility. The `build-test-sign.yml` template implements three parallel jobs that build, test, and sign for both frameworks to verify identical behavior.
+The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to leverage .NET 10 performance improvements while maintaining broad compatibility. The `build-test-sign.yml` template implements three parallel jobs that build, test, and sign for both frameworks simultaneously to verify identical behavior and eliminate duplicate builds.
 
 ### Test Project Configuration
 
-All test project specifications are now centralized in `variables.yml`:
+All test project specifications are centralized in `variables.yml`:
 
 **Multi-Target Tests** (tested on both .NET 8 and .NET 10):
-- `Cql/CoreTests/CoreTests.csproj`
-- `Cql/CqlToElmTests/CqlToElmTests.csproj`
+- `Cql/CoreTests/CoreTests.csproj` - Core SDK unit tests
+- `Cql/CqlToElmTests/CqlToElmTests.csproj` - CQL to ELM conversion tests
 
-**.NET 10 Only Tests**:
-- `submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj`
-- `Demo/Test.Measures.Demo/Test.Measures.Demo.csproj`
+**.NET 10 Integration Tests** (tested only on .NET 10):
+- `submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj` - Integration test suite
 
-**Excluded Tests**:
+**Excluded Tests** (not run in pipeline):
 - `tools/XsdToCSharpConverterTests/XsdToCSharpConverterTests.csproj` - Internal tool tests
-- `submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj`
-- `submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj`
+- `submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj` - External NCQA tests
+- `submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj` - External NCQA tests
 
-### Architecture
+### Pipeline Integration
 
-The multi-framework testing stage reads configuration from `variables.yml`:
+The `buildTestAndSign` stage in `azure-pipelines.yml` uses the template with parameters from `variables.yml`:
 
 ```yaml
-- stage: multiFrameworkTests
-  displayName: 'Multi-Framework Testing'
-  dependsOn: buildAndTest
-  condition: succeeded()
+- stage: buildTestAndSign
+  displayName: 'Build, Test and Sign'
+  dependsOn: checkForDocChangesStage
   jobs:
   - template: build-test-sign.yml
     parameters:
       dotNetCoreVersion: $(DOTNET_CORE_SDK)
       multiTargetTestProjects: $(multiTargetTestProjects)
-      net10OnlyTestProjects: $(net10OnlyTestProjects)
+      net10IntegrationTestProjects: $(net10IntegrationTestProjects)
       buildConfiguration: $(buildConfiguration)
       checkoutSubmodules: 'true'
+      # Additional signing parameters...
 ```
 
 ### Modifying Test Configuration
@@ -103,41 +104,28 @@ variables:
   multiTargetTestProjects: |
     Cql/CoreTests/CoreTests.csproj
     Cql/CqlToElmTests/CqlToElmTests.csproj
-    # Add new multi-target test here
+    # Add new multi-target test projects here
   
-  net10OnlyTestProjects: |
+  net10IntegrationTestProjects: |
     submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
-    Demo/Test.Measures.Demo/Test.Measures.Demo.csproj
-    # Add new .NET 10-only test here
+    # Add new .NET 10-only integration test projects here
+  
+  excludedTestProjects: |
+    !**/XsdToCSharpConverterTests.csproj
+    !**/Ncqa.HT.DeckTests.csproj
+    !**/Ncqa.HT.MeasuresTests.csproj
+    # Add additional test exclusions here
 ```
 
 ### Usage
 
-The multi-framework testing stage is already integrated into `azure-pipelines.yml` and will run automatically on every build after the main build stage succeeds.
+Multi-framework testing is fully integrated into `azure-pipelines.yml` and runs automatically on every build (unless only documentation changed). The three parallel jobs execute simultaneously, providing fast feedback while ensuring framework parity.
 
 #### Running Tests Locally
 
-Test both frameworks locally before pushing:
+Before pushing changes, verify tests pass on both target frameworks:
 
-**Windows (PowerShell)**:
-```powershell
-# Test all projects against both frameworks
-.\test-multiframework.ps1
-
-# Test specific project against both frameworks
-.\test-multiframework.ps1 -TestProject CoreTests
-```
-
-**Linux/macOS (Bash)**:
-```bash
-# Test all projects against both frameworks
-./test-multiframework.sh
-
-# Test specific project against both frameworks
-./test-multiframework.sh CoreTests
-```
-
-**Manual Testing**:
+**Test specific projects on specific frameworks**:
 ```bash
 # Test CoreTests on .NET 8
 dotnet test Cql/CoreTests/CoreTests.csproj --framework net8.0
@@ -145,90 +133,135 @@ dotnet test Cql/CoreTests/CoreTests.csproj --framework net8.0
 # Test CoreTests on .NET 10
 dotnet test Cql/CoreTests/CoreTests.csproj --framework net10.0
 
-# Test all multi-target projects on both frameworks
-dotnet test --framework net8.0
-dotnet test --framework net10.0
+# Test CqlToElmTests on both frameworks
+dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --framework net8.0
+dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --framework net10.0
+
+# Test IntegrationRunner on .NET 10
+dotnet test submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj --framework net10.0
 ```
 
-### What It Does
+**Test entire solution**:
+```bash
+# Build entire solution for both frameworks
+dotnet build Cql-Sdk.slnf --configuration Release
 
-The multi-framework test template creates two parallel jobs:
+# Test all projects on .NET 8
+dotnet test Cql-Sdk.slnf --configuration Release --framework net8.0 --no-build
 
-**Job 1: TestNet8**
-- Tests multi-target projects on .NET 8
+# Test all projects on .NET 10
+dotnet test Cql-Sdk.slnf --configuration Release --framework net10.0 --no-build
+```
+
+### What the Template Does
+
+The `build-test-sign.yml` template creates three parallel jobs that execute simultaneously:
+
+**Job 1: Build, Test and Sign for .NET 8**
+- Installs .NET 8 SDK
+- Restores NuGet packages
+- Builds entire solution targeting both net8.0 and net10.0
+- Tests multi-target projects (CoreTests, CqlToElmTests) on .NET 8
+- Signs assemblies using Azure Trusted Signing (`dotnet sign` tool)
+- Packages NuGet packages with proper version suffix
 - Publishes test results as "Tests on .NET 8"
-- Collects code coverage for .NET 8
+- Publishes NuGet packages artifact
 
-**Job 2: TestNet10**
-- Tests multi-target projects on .NET 10
-- Tests .NET 10-only projects on .NET 10
+**Job 2: Build, Test and Sign for .NET 10**
+- Installs .NET 10 SDK
+- Restores NuGet packages
+- Builds entire solution targeting both net8.0 and net10.0
+- Tests multi-target projects (CoreTests, CqlToElmTests) on .NET 10
+- Signs assemblies using Azure Trusted Signing (`dotnet sign` tool)
+- Packages NuGet packages with proper version suffix
 - Publishes test results as "Tests on .NET 10"
-- Collects code coverage for .NET 10
+- Publishes NuGet packages artifact (primary artifact for deployment)
 
-**Job 3: CompareTestResults**
-- Runs after both TestNet8 and TestNet10 complete
-- Compares test results to identify framework-specific issues
-- Reports whether tests pass on both frameworks or if there are differences
+**Job 3: Build and IntegrationRunner Test for .NET 10**
+- Installs .NET 10 SDK
+- Restores NuGet packages
+- Builds entire solution targeting both net8.0 and net10.0
+- Tests IntegrationRunner on .NET 10
+- Publishes test results as "Integration Tests on .NET 10"
+- No signing or packaging (integration tests are not deployed)
+
+**Job 4: CompareTestResults**
+- Runs after all three jobs complete
+- Compares test results across .NET 8 and .NET 10
+- Reports framework parity status (identical vs. different behavior)
+- Identifies framework-specific test failures if any
 
 ### Benefits
 
-- ✅ **Early Detection**: Catches framework-specific issues before merging
-- ✅ **Confidence**: Verifies identical behavior across both LTS frameworks
-- ✅ **Visibility**: Separate test results make it easy to identify framework-specific failures
-- ✅ **Coverage**: Code coverage collected for both frameworks
-- ✅ **Efficiency**: Parallel execution doesn't significantly increase build time
+- ✅ **Zero Duplicate Builds**: Each job builds once - no separate build/test/sign stages
+- ✅ **Maximum Parallelization**: All three jobs execute simultaneously
+- ✅ **Framework Parity Verification**: Ensures identical behavior across .NET 8 and .NET 10
+- ✅ **Early Detection**: Framework-specific issues caught before deployment
+- ✅ **Comprehensive Testing**: Multi-target tests + integration tests
+- ✅ **Signed Artifacts**: Assemblies signed using Azure Trusted Signing
+- ✅ **Fast Feedback**: Parallel execution minimizes total pipeline time
+- ✅ **Deployment Gating**: All tests must pass before packages are deployed
 
 ### Test Results
 
-Test results are published with framework-specific titles:
-- "Tests on .NET 8" - Shows .NET 8 test results
-- "Tests on .NET 10" - Shows .NET 10 test results
+Test results are published with framework-specific titles for easy identification:
+- **Tests on .NET 8** - CoreTests and CqlToElmTests on .NET 8
+- **Tests on .NET 10** - CoreTests and CqlToElmTests on .NET 10
+- **Integration Tests on .NET 10** - IntegrationRunner on .NET 10
 
-Code coverage is published separately for each framework, allowing comparison of coverage metrics.
+The CompareTestResults job reports framework parity status after all tests complete.
+
+### Azure Trusted Signing
+
+The pipeline uses Azure Trusted Signing to sign assemblies, matching the approach in FirelyTeam/azure-pipeline-templates:
+
+**Signing Tool**: `dotnet sign` (version 0.9.1-beta.25379.1)
+- Installed as a .NET global tool
+- Requires .NET 8 runtime for compatibility
+- Authenticates via Azure CLI service connection
+
+**Signed Files**:
+- All `Hl7.Cql*.dll` assemblies
+- All `Ncqa.Cql*.dll` assemblies
+- All `Cql.*.dll` assemblies
+- `PackagerCLI.dll`
+- Excludes: CodeGeneration assemblies and test assemblies
+
+**Configuration**:
+- Service Connection: `AzureTrustedSigningPrincipal`
+- Endpoint: `https://weu.codesigning.azure.net/`
+- Account: `FirelyCodeSigning`
+- Certificate Profile: `FirelyCodeSigning`
 
 ### Current Status
 
-**Status**: ✅ **Active** - Multi-framework testing is fully integrated and runs on every build.
+**Status**: ✅ **Active** - Fully operational parallel build/test/sign pipeline
 
-The pipeline configuration:
-- Multi-target tests (CoreTests, CqlToElmTests) run on both .NET 8 and .NET 10
-- .NET 10-only tests (IntegrationRunner, Test.Measures.Demo) run only on .NET 10
-- Excluded tests are commented out in the main build stage and not included in multi-framework testing
+The pipeline executes three jobs in parallel:
+- ✅ Build, Test and Sign for .NET 8 (multi-target tests + signing + packaging)
+- ✅ Build, Test and Sign for .NET 10 (multi-target tests + signing + packaging)
+- ✅ Build and IntegrationRunner Test for .NET 10 (integration tests only)
 
-### Modifying Test Configuration
-
-To add or remove tests from multi-framework testing:
-
-1. **Edit `azure-pipelines.yml`**: Update the `multiFrameworkTests` stage parameters
-   ```yaml
-   multiTargetTestProjects: |
-     Cql/CoreTests/CoreTests.csproj
-     Cql/CqlToElmTests/CqlToElmTests.csproj
-     # Add new multi-target tests here
-   
-   net10OnlyTestProjects: |
-     submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
-     Demo/Test.Measures.Demo/Test.Measures.Demo.csproj
-     # Add new .NET 10-only tests here
-   ```
-
-2. **Update main build stage**: Comment out tests in the `testProjects` parameter that are now in multi-framework testing
-
-3. **Commit and push**: The pipeline will automatically use the new configuration
+All jobs must succeed before deployment stages run. This ensures:
+- Framework parity (identical behavior on .NET 8 and .NET 10)
+- Integration test validation
+- Signed assemblies ready for distribution
 
 ### Troubleshooting
 
 **Issue**: Tests fail on one framework but pass on another
 - **Solution**: This indicates a framework-specific issue. Check for:
-  - Different API behavior between frameworks
-  - Framework-specific bugs
+  - Different API behavior between .NET 8 and .NET 10
+  - Framework-specific bugs or breaking changes
   - Dependencies with different versions
-  - Conditional compilation issues
+  - Conditional compilation directives
+  - System.Text.Json serialization differences (common in .NET 10)
 
 **Issue**: "Framework not found" error
-- **Solution**: Ensure both .NET 8 and .NET 10 SDKs are installed
-  - The pipeline template automatically installs both SDKs
+- **Solution**: Ensure the required .NET SDK is installed
+  - The pipeline template automatically installs both .NET 8 and .NET 10 SDKs
   - Locally: `dotnet --list-sdks` to verify installation
+  - Download from: https://dotnet.microsoft.com/download
 
 **Issue**: Test results not showing for a framework
 - **Solution**: Check that the project file includes both target frameworks:
@@ -236,20 +269,33 @@ To add or remove tests from multi-framework testing:
   <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
   ```
 
+**Issue**: Signing fails with "dotnet sign: command not found"
+- **Solution**: The signing tool requires .NET 8 runtime
+  - Pipeline automatically installs: `dotnet --list-runtimes`
+  - Verify Azure CLI authentication is configured
+
+**Issue**: NuGet pack fails with "PackageVersion string specified 'build-YYYYMMDD-N' is invalid"
+- **Solution**: Use `buildProperties: VersionSuffix=...` instead of `versioningScheme: byEnvVar`
+  - Correct format generates: `1.0.0-build-YYYYMMDD-N` (valid SemVer)
+  - Incorrect format generates: `build-YYYYMMDD-N` (invalid)
+
 ## Microsoft Best Practices
 
-This implementation follows Microsoft's recommendations for multi-targeting:
+This implementation follows Microsoft's recommendations for multi-targeting and CI/CD:
 
-1. **Explicit Framework Testing**: Tests run explicitly against each target framework using `--framework` parameter
-2. **Parallel Execution**: Leverages Azure Pipelines jobs to test frameworks in parallel
-3. **Separate Results**: Framework-specific test results aid debugging
-4. **SDK Installation**: Installs all required SDK versions before testing
-5. **Code Coverage**: Collects coverage for each framework independently
-
-Reference: [Multi-targeting in .NET](https://learn.microsoft.com/en-us/dotnet/standard/frameworks)
+1. **Multi-Targeting**: Uses `<TargetFrameworks>net8.0;net10.0</TargetFrameworks>` to build for both frameworks
+2. **Explicit Framework Testing**: Tests run explicitly against each target framework using `--framework` parameter
+3. **Parallel Execution**: Leverages Azure Pipelines jobs to test frameworks simultaneously
+4. **Separate Results**: Framework-specific test results aid in debugging framework issues
+5. **SDK Management**: Installs all required SDK versions before building/testing
+6. **SemVer Compliance**: Uses VersionSuffix for preview builds (e.g., `1.0.0-build-20260118-1`)
+7. **Code Signing**: Uses Azure Trusted Signing for secure assembly signing
 
 ## Additional Resources
 
-- [Azure Pipelines .NET Core task](https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/reference/dotnet-core-cli-v2)
-- [Testing multi-targeted projects](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices#testing-multi-targeted-projects)
+- [Multi-targeting in .NET](https://learn.microsoft.com/en-us/dotnet/standard/frameworks)
+- [Azure Pipelines YAML schema](https://learn.microsoft.com/en-us/azure/devops/pipelines/yaml-schema)
+- [Azure Trusted Signing](https://learn.microsoft.com/en-us/azure/trusted-signing/)
 - [.NET 10 Release Notes](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-10)
+- [Testing multi-targeted projects](https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices#testing-multi-targeted-projects)
+- [NuGet Package Versioning](https://learn.microsoft.com/en-us/nuget/concepts/package-versioning)
