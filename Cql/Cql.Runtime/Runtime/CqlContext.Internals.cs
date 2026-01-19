@@ -62,8 +62,16 @@ partial class CqlContext : ICqlContextInternals
     /// </summary>
     private sealed class CacheEntry
     {
+        /// <summary>
+        /// The cache key. Use Volatile.Read/Write for access to ensure visibility across threads.
+        /// </summary>
         public long Key;
-        public object? Value;
+        
+        /// <summary>
+        /// The cached value (boxed as object?). Must be volatile to ensure visibility across threads.
+        /// </summary>
+        public volatile object? Value;
+        
         /// <summary>
         /// Indicates whether the value has been computed and stored.
         /// This is necessary to distinguish between a null value that hasn't been computed yet
@@ -139,7 +147,8 @@ partial class CqlContext : ICqlContextInternals
             if (entry is null)
             {
                 // Empty slot found - try to claim it
-                var newEntry = new CacheEntry { Key = cacheKey, Value = null, IsReady = false };
+                var newEntry = new CacheEntry { Value = null, IsReady = false };
+                Volatile.Write(ref newEntry.Key, cacheKey); // Ensure Key is visible to other threads
                 var existingEntry = Interlocked.CompareExchange(ref cache[index], newEntry, null);
 
                 if (existingEntry is null)
@@ -156,7 +165,7 @@ partial class CqlContext : ICqlContextInternals
                 entry = existingEntry;
             }
 
-            if (entry.Key == cacheKey)
+            if (Volatile.Read(ref entry.Key) == cacheKey)
             {
                 // Found our key - spin until value is ready
                 // Use a hybrid approach: spin briefly, then yield to avoid CPU waste
