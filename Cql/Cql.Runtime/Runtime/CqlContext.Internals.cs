@@ -57,7 +57,27 @@ public interface ICqlContextInternals
 
 partial class CqlContext : ICqlContextInternals
 {
-    private ConcurrentDictionary<long, object?>? _cache;
+    /// <summary>
+    /// Cache entry that stores both the key and value.
+    /// </summary>
+    private sealed class CacheEntry
+    {
+        public long Key;
+        public object? Value;
+        /// <summary>
+        /// Indicates whether the value has been computed and stored.
+        /// This is necessary to distinguish between a null value that hasn't been computed yet
+        /// and a null value that is the actual cached result.
+        /// </summary>
+        public volatile bool IsReady;
+    }
+
+    /// <summary>
+    /// Array-based cache with linear probing for collision resolution.
+    /// Null indicates caching is disabled.
+    /// </summary>
+    private CacheEntry[]? _cache;
+
     private long _cacheCallCount;
     private long _cacheFactoryInvocations;
 
@@ -98,14 +118,58 @@ partial class CqlContext : ICqlContextInternals
             return factory();
         }
 
-        // Use GetOrAdd for lock-free read and atomic add
-        // Note: We box the result, so null values are preserved correctly
-        var cachedValue = cache.GetOrAdd(cacheKey, _ =>
-        {
-            Interlocked.Increment(ref _cacheFactoryInvocations);
-            return factory()!;
-        });
+        // Map cache key to array index using modulo
+        // Use unchecked to handle negative keys gracefully
+        var index = unchecked((int)(cacheKey % cache.Length));
+        if (index < 0)
+            index += cache.Length;
 
-        return (T)cachedValue!;
+        // Linear probing: search for the key or an empty slot
+        var startIndex = index;
+        while (true)
+        {
+            var entry = Volatile.Read(ref cache[index]);
+
+            if (entry is null)
+            {
+                // Empty slot found - try to claim it
+                var newEntry = new CacheEntry { Key = cacheKey, Value = null!, IsReady = false };
+                var existingEntry = Interlocked.CompareExchange(ref cache[index], newEntry, null);
+
+                if (existingEntry is null)
+                {
+                    // We claimed the slot - compute the value
+                    Interlocked.Increment(ref _cacheFactoryInvocations);
+                    var value = factory();
+                    newEntry.Value = value;
+                    newEntry.IsReady = true; // Signal that the value is ready
+                    return value;
+                }
+
+                // Another thread claimed the slot - check if it's our key
+                entry = existingEntry;
+            }
+
+            if (entry.Key == cacheKey)
+            {
+                // Found our key - spin until value is ready
+                while (!entry.IsReady)
+                {
+                    Thread.SpinWait(1);
+                }
+                return (T)entry.Value!;
+            }
+
+            // Collision - try next slot (linear probing)
+            index = (index + 1) % cache.Length;
+
+            // If we've wrapped around completely, fall back to computing without caching
+            // This should be extremely rare
+            if (index == startIndex)
+            {
+                Interlocked.Increment(ref _cacheFactoryInvocations);
+                return factory();
+            }
+        }
     }
 }
