@@ -142,11 +142,15 @@ Use this header format with "Firely, NCQA" and the current year:
    - **Major version** (x.0.0.0): Breaking changes to generated code that require new `LibraryInstanceInvoker` support
    - **Minor version** (x.y.0.0): Non-breaking additions like new attributes or functionality
    - **Patch version** (x.y.z.0): Bug fixes that don't change the generated API
-3. **Check compatibility**: Ensure `LibraryInstanceInvoker_3_0.SupportsVersion` covers the new version range
-4. **Create new invoker if needed**: For major version changes, a new `LibraryInstanceInvoker_X_Y` may be required
+3. **LibraryInvoker version policy**: 
+   - **Only support the current version**: The SDK only supports libraries generated with the current `GeneratorToolVersion`
+   - **Remove old invokers**: When creating a new `LibraryInstanceInvoker_X_Y`, remove all previous version invokers (e.g., remove `LibraryInstanceInvoker_5_0.cs` when creating `LibraryInstanceInvoker_6_0.cs`)
+   - **Update LibraryInvoker.cs**: Remove version checks for old invokers from the `TryCreate` method
+   - **No backward compatibility**: Libraries generated with older versions must be regenerated with the current version to be used
+4. **Create new invoker if needed**: For major version changes, a new `LibraryInstanceInvoker_X_Y` is required
 5. **Examples**:
    - Adding `CqlFunctionParameterAttribute` → Minor version increment (3.0.0.0 → 3.1.0.0)
-   - Changing method signatures → Major version increment (3.0.0.0 → 4.0.0.0)
+   - Changing method signatures → Major version increment (3.0.0.0 → 4.0.0.0) + create new invoker
    - Fixing identifier normalization → Patch version increment (3.0.0.0 → 3.0.1.0)
 
 ### Generating ELM Files from CQL
