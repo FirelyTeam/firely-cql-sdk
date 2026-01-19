@@ -78,6 +78,11 @@ partial class CqlContext : ICqlContextInternals
     /// </summary>
     private CacheEntry[]? _cache;
 
+    /// <summary>
+    /// Number of times to spin before yielding when waiting for a cache value to be computed.
+    /// </summary>
+    private const int SpinCountBeforeYield = 10;
+
     private long _cacheCallCount;
     private long _cacheFactoryInvocations;
 
@@ -118,9 +123,9 @@ partial class CqlContext : ICqlContextInternals
             return factory();
         }
 
-        // Map cache key to array index using modulo
-        // Handle negative keys by ensuring the result is always positive
-        var index = (int)((cacheKey % cache.Length + cache.Length) % cache.Length);
+        // Map cache key to array index using bit masking (cache.Length is power of 2)
+        // This is faster than modulo and naturally handles negative keys
+        var index = (int)(cacheKey & (cache.Length - 1));
 
         // Linear probing: search for the key or an empty slot
         var startIndex = index;
@@ -155,7 +160,7 @@ partial class CqlContext : ICqlContextInternals
                 var spinCount = 0;
                 while (!entry.IsReady)
                 {
-                    if (spinCount < 10)
+                    if (spinCount < SpinCountBeforeYield)
                     {
                         Thread.SpinWait(1);
                         spinCount++;
@@ -165,6 +170,8 @@ partial class CqlContext : ICqlContextInternals
                         Thread.Yield();
                     }
                 }
+                // Safe to cast: entry.Value was set by the thread that computed it
+                // Null is a valid cached result (boxed as object?)
                 return (T)entry.Value!;
             }
 
