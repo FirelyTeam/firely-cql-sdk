@@ -194,8 +194,10 @@ partial class Program
 
         // Step 4: Create CqlContext with properly sized cache
         Console.WriteLine("Step 4: Create CqlContext with caching enabled");
-        var context = FhirCqlContext.WithDataSource();
-        context.UseNewCache();  // Cache indices are now properly initialized
+        var context = FhirCqlContext
+                      .WithDataSource()
+                      .WithCacheIndexCount(initializer.CacheIndexCount);  // This step is essential before calling UseNewCache
+        context.UseNewCache(CacheWriteStrategy.ExecutionAndPublication);  // Cache indices are now properly initialized
         Console.WriteLine("   ✓ Cache enabled and ready\n");
 
         // Step 5: Use the library
@@ -206,7 +208,7 @@ partial class Program
         {
             var result = definitionMethod.Invoke(library, [context]);
             Console.WriteLine($"   Result: {result}");
-            
+
             // Call again - should use cache
             result = definitionMethod.Invoke(library, [context]);
             Console.WriteLine($"   Result (cached): {result}\n");
@@ -230,7 +232,7 @@ partial class Program
         foreach (var libraryInvoker in invoker.LibraryInvokers.Values)
         {
             // Use reflection to get the Library property (it's internal)
-            var libraryProperty = libraryInvoker.GetType().GetProperty("Library", 
+            var libraryProperty = libraryInvoker.GetType().GetProperty("Library",
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
             if (libraryProperty != null)
