@@ -215,6 +215,8 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     #region ILibraryInternals Implementation
 
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
     int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
     {
         // Skip if already processed

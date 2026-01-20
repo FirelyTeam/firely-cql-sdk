@@ -47,6 +47,8 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ILibraryInternals, ISin
 
     #region ILibraryInternals Implementation
 
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
     int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
     {
         // Skip if already processed

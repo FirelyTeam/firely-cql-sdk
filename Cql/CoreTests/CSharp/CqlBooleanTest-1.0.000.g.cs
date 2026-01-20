@@ -43,6 +43,8 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ILibraryInternals, ISing
 
     #region ILibraryInternals Implementation
 
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
     int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
     {
         // Skip if already processed

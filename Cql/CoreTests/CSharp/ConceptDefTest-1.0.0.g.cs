@@ -96,12 +96,8 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ILibraryInternals, ISingle
 
     #region ILibraryInternals Implementation
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
-    {
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
 
-    }
-
-    /*
     int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
     {
         // Skip if already processed
@@ -130,7 +126,6 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ILibraryInternals, ISingle
 
         return count;
     }
-    */
 
     #endregion ILibraryInternals Implementation
 

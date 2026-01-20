@@ -162,6 +162,8 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     #region ILibraryInternals Implementation
 
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
     int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
     {
         // Skip if already processed

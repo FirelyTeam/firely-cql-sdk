@@ -2434,6 +2434,8 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ILibraryInternals, ISingleton
 
     #region ILibraryInternals Implementation
 
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
     int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
     {
         // Skip if already processed

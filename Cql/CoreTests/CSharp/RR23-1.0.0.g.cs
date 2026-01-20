@@ -10,7 +10,6 @@ using System.Reflection;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime.Internal;
 using Hl7.Fhir.Model;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
@@ -219,6 +218,8 @@ public partial class RR23_1_0_0 : ILibrary, ILibraryInternals, ISingleton<RR23_1
 
     #region ILibraryInternals Implementation
 
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
     int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
     {
         // Skip if already processed
@@ -239,7 +240,6 @@ public partial class RR23_1_0_0 : ILibrary, ILibraryInternals, ISingleton<RR23_1
             }
         }
 
-        
         // Initialize cache indices for this library
         if (_cacheIndex_Measurement_Period != 0)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");

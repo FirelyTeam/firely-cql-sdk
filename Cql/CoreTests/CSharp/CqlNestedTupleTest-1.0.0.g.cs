@@ -43,6 +43,8 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ILibraryInternals, ISi
 
     #region ILibraryInternals Implementation
 
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
     int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
     {
         // Skip if already processed

@@ -7194,6 +7194,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ILibraryInternals, 
 
     #region ILibraryInternals Implementation
 
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
     int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
     {
         // Skip if already processed
