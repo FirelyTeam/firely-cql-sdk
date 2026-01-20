@@ -70,9 +70,9 @@ partial class Program
         Console.WriteLine($"✓ Library loaded. Cache size: {librarySetInvoker.CacheIndexCount} entries\n");
 
         // Example 1: Basic caching
-        Console.WriteLine("1. Basic Caching (PublicationOnly strategy - default):");
+        Console.WriteLine("1. Basic Caching (ExecutionAndPublication strategy - default):");
         var context1 = FhirCqlContext.WithDataSource();
-        context1.UseNewCache();  // Enable array-based cache
+        context1.UseNewCache();  // Enable array-based cache with default strategy
 
         var sw = Stopwatch.StartNew();
         for (int i = 0; i < 3; i++)
@@ -102,17 +102,17 @@ partial class Program
         }
         Console.WriteLine();
 
-        // Example 3: ExecutionAndPublication strategy (single-compute mode)
-        Console.WriteLine("3. ExecutionAndPublication Strategy (guaranteed single computation):");
+        // Example 3: PublicationOnly strategy (allow multiple concurrent computations)
+        Console.WriteLine("3. PublicationOnly Strategy (multiple threads can compute concurrently):");
         var context3 = FhirCqlContext.WithDataSource();
-        context3.UseNewCache(CacheWriteStrategy.ExecutionAndPublication);
-        Console.WriteLine("   ✓ Using ExecutionAndPublication: Only one thread computes, others wait");
+        context3.UseNewCache(CacheWriteStrategy.PublicationOnly);
+        Console.WriteLine("   ✓ Using PublicationOnly: Multiple threads can compute, last write wins");
 
         var result3 = librarySetInvoker.InvokeLibraryDefinition(
             context3,
             cql.LibraryIdentifier,
             "ExpensiveComputation");
-        Console.WriteLine($"   Result: {result3} (computed once, guaranteed)\n");
+        Console.WriteLine($"   Result: {result3} (fastest mode for read-heavy scenarios)\n");
 
         // Example 4: Cache invalidation
         Console.WriteLine("4. Cache Invalidation:");

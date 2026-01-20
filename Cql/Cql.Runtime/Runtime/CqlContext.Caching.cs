@@ -15,13 +15,13 @@ partial class CqlContext
     /// Invalidates the current cache, forcing subsequent operations to use fresh data.
     /// </summary>
     /// <param name="writeStrategy">The strategy to use for handling concurrent writes to the cache.
-    /// Defaults to <see cref="CacheWriteStrategy.PublicationOnly"/>.</param>
+    /// Defaults to <see cref="CacheWriteStrategy.ExecutionAndPublication"/>.</param>
     /// <remarks>Call this method to clear any cached data and ensure that future operations do not use stale
     /// information. This is useful when the underlying data source has changed and the cache needs to be
     /// refreshed.</remarks>
     /// <exception cref="InvalidOperationException">Thrown if caching has not been enabled first by calling
     /// <see cref="CqlContextExtensions.WithCacheIndexCount"/>.</exception>
-    public void UseNewCache(CacheWriteStrategy writeStrategy = CacheWriteStrategy.PublicationOnly)
+    public void UseNewCache(CacheWriteStrategy writeStrategy = CacheWriteStrategy.ExecutionAndPublication)
     {
         if (_cacheIndexCount is 0)
             return;

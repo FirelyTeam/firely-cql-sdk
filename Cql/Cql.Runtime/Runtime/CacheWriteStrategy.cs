@@ -11,6 +11,10 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Specifies how a cache handles concurrent access when multiple threads attempt to compute and cache the same value.
     /// </summary>
+    /// <remarks>
+    /// The default strategy is <see cref="ExecutionAndPublication"/>, which guarantees the factory function
+    /// is called at most once per cache index.
+    /// </remarks>
     public enum CacheWriteStrategy
     {
         /// <summary>
@@ -30,6 +34,7 @@ namespace Hl7.Cql.Runtime
         /// Ensures that only one thread computes the value. Other threads wait for the computation to complete.
         /// This mode guarantees the factory function is called at most once per cache index.
         /// Similar to <see cref="System.Threading.LazyThreadSafetyMode.ExecutionAndPublication"/>.
+        /// This is the default strategy.
         /// </summary>
         /// <remarks>
         /// In this mode, if multiple threads concurrently attempt to cache a value at the same index,
