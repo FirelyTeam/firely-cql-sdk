@@ -343,7 +343,7 @@ public class CacheTest
         // Act
         var initializer = new CacheIndexInitializer(lib);
 
-        // Assert - Cache indices should be set sequentially starting from 1
+        // Assert - Cache indices should be set sequentially starting from 0
         var libraryType = lib.GetType();
         var cacheIndexFields = libraryType
             .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
@@ -356,7 +356,7 @@ public class CacheTest
         foreach (var field in cacheIndexFields)
         {
             var value = (int)field.GetValue(lib)!;
-            Assert.IsTrue(value > 0, $"Field {field.Name} should have a positive index, but was {value}");
+            Assert.IsTrue(value >= 0, $"Field {field.Name} should have a non-negative index, but was {value}");
         }
 
         // Verify CacheIndexCount property
@@ -390,7 +390,7 @@ public class CacheTest
                 foreach (var field in cacheIndexFields)
                 {
                     var value = (int)field.GetValue(dependency)!;
-                    Assert.IsTrue(value > 0, $"Dependency field {field.Name} should have a positive index");
+                    Assert.IsTrue(value >= 0, $"Dependency field {field.Name} should have a non-negative index");
                 }
             }
         }

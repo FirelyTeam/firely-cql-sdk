@@ -29,9 +29,8 @@ partial class CqlContext
 
         _cacheEnabled = true;
         _cacheWriteStrategy = writeStrategy;
-        // Allocate cache array with _cacheIndexCount + 1 elements to accommodate indices from 1 to _cacheIndexCount
-        // Index 0 is reserved and unused (cache indices start from 1)
-        _cache = new CacheEntry[_cacheIndexCount + 1];
+        // Allocate cache array with _cacheIndexCount elements for 0-based indexing (indices from 0 to _cacheIndexCount - 1)
+        _cache = new CacheEntry[_cacheIndexCount];
 
         // Initialize each cache entry (required since CacheEntry is now a class)
         for (int i = 0; i < _cache.Length; i++)
