@@ -60,10 +60,6 @@ namespace Hl7.Cql.Runtime
 {
     partial class CqlContext : Internal.ICqlContextInternals
     {
-        private object?[]? _cache;
-        private long _cacheCallCount;
-        private long _cacheFactoryInvocations;
-
         /// <summary>
         /// Gets the total number of calls to GetOrCompute.
         /// </summary>
@@ -97,14 +93,14 @@ namespace Hl7.Cql.Runtime
             var cache = _cache;
 
             // If cacheIndex is 0 or cache is disabled, compute directly without caching
-            if (cache is null || cacheIndex == 0)
+            if (!_cacheEnabled || cache is null || cacheIndex < 0)
             {
                 Interlocked.Increment(ref _cacheFactoryInvocations);
                 return factory(this);
             }
 
             // Ensure cache index is within bounds
-            if (cacheIndex < 0 || cacheIndex >= cache.Length)
+            if (cacheIndex >= cache.Length)
             {
                 // Index out of range - compute without caching
                 Interlocked.Increment(ref _cacheFactoryInvocations);

@@ -116,10 +116,12 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
                         _services.Logger,
                         (assemblyBinary, logMessage) => logMessage("Unable to load an assembly from the binary containing {byteLength} byte(s).", assemblyBinary.AssemblyBytes!.Length)));
 
-        return new LibrarySetInvoker(
+        var librarySetInvoker = new LibrarySetInvoker(
             alc,
             LoggerFactory,
             BatchProcessExceptionContinuation,
             librarySetName);
+
+        return librarySetInvoker;
     }
 }

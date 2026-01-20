@@ -23,7 +23,7 @@ public sealed class CacheIndexInitializer
     /// <summary>
     /// Gets the total count of cache index fields initialized across all libraries.
     /// </summary>
-    public int TotalIndexCount { get; private set; }
+    public int CacheIndexCount { get; private set; }
 
     /// <summary>
     /// Initializes a new instance of the CacheIndexInitializer class using the specified libraries as roots for cache
@@ -52,7 +52,7 @@ public sealed class CacheIndexInitializer
                 totalIndexCount += internals.InitializeCacheIndices(this);
             }
         }
-        TotalIndexCount = totalIndexCount;
+        CacheIndexCount = totalIndexCount;
     }
 
     /// <summary>

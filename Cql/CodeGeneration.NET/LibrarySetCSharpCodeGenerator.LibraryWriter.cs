@@ -18,27 +18,8 @@ partial class LibrarySetCSharpCodeGenerator
 
         internal CqlVersionedLibraryIdentifier LibraryName => _library?.VersionedLibraryIdentifier ?? throw new InvalidOperationException("Library not initialized.");
         private string _className = string.Empty;
-        private readonly Dictionary<string, int> _cacheFieldNameCount = new();
         private readonly Dictionary<string, int> _cacheIndices = new();
         private int _nextCacheIndex = 0;
-
-        public string GetUniqueCacheFieldName(string baseName)
-        {
-            if (string.IsNullOrEmpty(baseName))
-                throw new ArgumentException("Base name cannot be null or empty.", nameof(baseName));
-
-            var count = _cacheFieldNameCount.GetValueOrDefault(baseName, 0);
-            string fieldName;
-            do
-            {
-                fieldName = count == 0 ? baseName : $"{baseName}_{count}";
-                count++;
-            } while (_cacheFieldNameCount.ContainsKey(fieldName));
-
-            _cacheFieldNameCount[baseName] = count;
-            _cacheFieldNameCount[fieldName] = 0; // Mark this specific name as used
-            return fieldName;
-        }
 
         public int GetOrCreateCacheIndex(string definitionName)
         {
@@ -284,7 +265,7 @@ partial class LibrarySetCSharpCodeGenerator
             foreach (var (definitionName, _) in sortedIndices)
             {
                 var fieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(definitionName)}";
-                ISB.AppendLine($"private int {fieldName};");
+                ISB.AppendLine($"private int {fieldName} = -1;");
             }
 
             ISB.AppendLine(

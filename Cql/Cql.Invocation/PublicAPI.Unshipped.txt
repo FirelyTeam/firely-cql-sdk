@@ -1,1 +1,2 @@
 #nullable enable
+Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.CacheIndexCount.get -> int

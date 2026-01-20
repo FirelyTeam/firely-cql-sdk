@@ -34,7 +34,7 @@ namespace Hl7.Cql.Fhir
         {
             options ??= FhirCqlContextOptions.Default;
             ICqlOperators cqlOperators = CreateOperators(dataSource, valueSets, now, options);
-            CqlContext cqlContext = new CqlContext(cqlOperators, parameters);
+            CqlContext cqlContext = new CqlContext(cqlOperators, parameters: parameters);
             return cqlContext;
         }
 

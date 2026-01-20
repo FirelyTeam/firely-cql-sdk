@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
@@ -43,7 +44,24 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
                     return libraryInvoker;
                 })
                 .ToImmutableDictionary(o => o.LibraryIdentifier);
+
+
+        var libraries = GetAllLibraries();
+        var initializer = new CacheIndexInitializer(libraries);
+        CacheIndexCount = initializer.CacheIndexCount;
     }
+
+    /// <summary>
+    /// The total number of cache indices required for all libraries in the set.
+    /// This number should be passed to the <see cref="CqlContext"/> constructor
+    /// </summary>
+    public int CacheIndexCount { get; private set; }
+
+    private ILibrary[] GetAllLibraries() => // DO NOT MAKE THIS PUBLIC (Design Decision is to encapsulated Library Instances)
+        LibraryInvokers
+            .Values
+            .Cast<LibraryInstanceInvoker>()
+            .SelectToArray(LibraryInvokers.Count, libraryInvoker => libraryInvoker.Library);
 
     /// <summary>
     /// Releases all resources used by the <see cref="LibrarySetInvoker"/>.

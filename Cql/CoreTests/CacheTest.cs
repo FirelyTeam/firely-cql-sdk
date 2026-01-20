@@ -321,8 +321,8 @@ public class CacheTest
             Assert.IsTrue(value > 0, $"Field {field.Name} should have a positive index, but was {value}");
         }
 
-        // Verify TotalIndexCount property
-        Assert.AreEqual(cacheIndexFields.Length, initializer.TotalIndexCount, "TotalIndexCount should match number of cache index fields");
+        // Verify CacheIndexCount property
+        Assert.AreEqual(cacheIndexFields.Length, initializer.CacheIndexCount, "CacheIndexCount should match number of cache index fields");
     }
 
     [TestMethod]
@@ -365,8 +365,8 @@ public class CacheTest
             .ToArray();
         totalFields += libCacheIndexFields.Length;
 
-        // Verify TotalIndexCount includes dependencies
-        Assert.AreEqual(totalFields, initializer.TotalIndexCount, "TotalIndexCount should include all libraries and dependencies");
+        // Verify CacheIndexCount includes dependencies
+        Assert.AreEqual(totalFields, initializer.CacheIndexCount, "CacheIndexCount should include all libraries and dependencies");
     }
 
     [TestMethod]
