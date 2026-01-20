@@ -11,6 +11,7 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.Internal;
 using Hl7.Cql.ValueSets;
 
 namespace Hl7.Cql.CodeGeneration.NET;
@@ -76,6 +77,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             typeof(Iso8601.DateIso8601).Namespace!,
             typeof(PropertyInfo).Namespace!,
             typeof(RetrieveParameters).Namespace!,
+            typeof(ICqlContextInternals).Namespace!, // Hl7.Cql.Runtime.Internal
         };
 
         foreach (var @using in typeResolver.ModelNamespaces)

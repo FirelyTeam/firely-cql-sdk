@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.Internal;
 using System.Threading.Tasks;
 
 namespace CoreTests;
