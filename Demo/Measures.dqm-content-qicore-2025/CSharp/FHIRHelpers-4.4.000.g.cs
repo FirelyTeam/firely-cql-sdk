@@ -8,15 +8,16 @@ using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime.Internal;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("FHIRHelpers", "4.4.000")]
-public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_000>
+public partial class FHIRHelpers_4_4_000 : ILibrary, ILibraryInternals, ISingleton<FHIRHelpers_4_4_000>
 {
-    #region Functions and Expressions
+    #region Functions and Expressions (263)
 
     [CqlFunctionDefinition("ToInterval")]
     [CqlTag("description", "Converts the given [Period](https://hl7.org/fhir/datatypes.html#Period)\nvalue to a CQL DateTime Interval")]
@@ -2779,6 +2780,35 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
 
 
     #endregion Functions and Expressions
+
+    #region ILibraryInternals Implementation
+
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+        // Skip if already processed
+        if (!initializer.MarkAsProcessed(this))
+            return 0;
+
+        var count = 0;
+
+        // Process dependencies first (depth-first traversal)
+        if (Dependencies is { Length: > 0 })
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (dependency is ILibraryInternals internals)
+                {
+                    count += internals.InitializeCacheIndices(initializer);
+                }
+            }
+        }
+
+        return count;
+    }
+
+    #endregion ILibraryInternals Implementation
 
     #region Singleton Lifetime Members
 

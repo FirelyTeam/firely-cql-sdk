@@ -8,15 +8,16 @@ using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime.Internal;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CQMCommon", "4.1.000")]
-public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
+public partial class CQMCommon_4_1_000 : ILibrary, ILibraryInternals, ISingleton<CQMCommon_4_1_000>
 {
-    #region ValueSets
+    #region ValueSets (6)
 
     [CqlValueSetDefinition("Emergency Department Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", valueSetVersion: null)]
     public CqlValueSet Emergency_Department_Visit(CqlContext _) => _Emergency_Department_Visit;
@@ -44,7 +45,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
     #endregion ValueSets
 
-    #region Codes
+    #region Codes (19)
 
     [CqlCodeDefinition("Billing", codeId: "billing", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
     public CqlCode Billing(CqlContext _) => _Billing;
@@ -124,7 +125,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
     #endregion Codes
 
-    #region CodeSystems
+    #region CodeSystems (4)
 
     [CqlCodeSystemDefinition("DiagnosisRole", codeSystemId: "http://terminology.hl7.org/CodeSystem/diagnosis-role", codeSystemVersion: null)]
     public CqlCodeSystem DiagnosisRole(CqlContext _) => _DiagnosisRole;
@@ -167,52 +168,67 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
     #endregion CodeSystems
 
-    #region Parameters
+    #region Parameters (1)
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(8782724425627446250L, () => {
-            object a_ = context.ResolveParameter("CQMCommon-4.1.000", "Measurement Period", null);
-            return (CqlInterval<CqlDateTime>)a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
+            _cacheIndex_Measurement_Period,
+            Measurement_Period_Compute);
+
+    private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
+    {
+        object a_ = context.ResolveParameter("CQMCommon-4.1.000", "Measurement Period", null);
+        return (CqlInterval<CqlDateTime>)a_;
+    }
 
 
     #endregion Parameters
 
-    #region Functions and Expressions
+    #region Functions and Expressions (45)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(-1022634852813303399L, () => {
-            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-            return b_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(
+            _cacheIndex_Patient,
+            Patient_Compute);
+
+    private Patient Patient_Compute(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        return b_;
+    }
 
 
     [CqlExpressionDefinition("Inpatient Encounter")]
     public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6472726403027980764L, () => {
-            CqlValueSet a_ = this.Encounter_Inpatient(context);
-            IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
+            _cacheIndex_Inpatient_Encounter,
+            Inpatient_Encounter_Compute);
 
-            bool? c_(Encounter EncounterInpatient) {
-                Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
-                Encounter.EncounterStatus? f_ = e_?.Value;
-                Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
-                bool? h_ = context.Operators.Equal(g_, "finished");
-                Period i_ = EncounterInpatient?.Period;
-                CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
-                CqlDateTime k_ = context.Operators.End(j_);
-                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-                bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
-                bool? n_ = context.Operators.And(h_, m_);
-                return n_;
-            }
+    private IEnumerable<Encounter> Inpatient_Encounter_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Encounter_Inpatient(context);
+        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
-            IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
-            return d_;
-        });
+        bool? c_(Encounter EncounterInpatient) {
+            Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
+            Encounter.EncounterStatus? f_ = e_?.Value;
+            Code<Encounter.EncounterStatus> g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(f_);
+            bool? h_ = context.Operators.Equal(g_, "finished");
+            Period i_ = EncounterInpatient?.Period;
+            CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+            CqlDateTime k_ = context.Operators.End(j_);
+            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+            bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, "day");
+            bool? n_ = context.Operators.And(h_, m_);
+            return n_;
+        }
+
+        IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
+        return d_;
+    }
 
 
     [CqlFunctionDefinition("ToDateInterval")]
@@ -3761,6 +3777,59 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields (3)
+
+    private int _cacheIndex_Measurement_Period = -1;
+    private int _cacheIndex_Patient = -1;
+    private int _cacheIndex_Inpatient_Encounter = -1;
+
+    #endregion Cache Index Fields
+
+    #region ILibraryInternals Implementation
+
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+        // Skip if already processed
+        if (!initializer.MarkAsProcessed(this))
+            return 0;
+
+        var count = 0;
+
+        // Process dependencies first (depth-first traversal)
+        if (Dependencies is { Length: > 0 })
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (dependency is ILibraryInternals internals)
+                {
+                    count += internals.InitializeCacheIndices(initializer);
+                }
+            }
+        }
+
+        // Initialize cache indices for this library
+        if (_cacheIndex_Measurement_Period != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
+        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Patient != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
+        _cacheIndex_Patient = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Inpatient_Encounter != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Inpatient_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Inpatient_Encounter}}. Cache indices can only be initialized once.");
+        _cacheIndex_Inpatient_Encounter = initializer.GetNextIndex();
+        count++;
+
+        return count;
+    }
+
+    #endregion ILibraryInternals Implementation
 
     #region Singleton Lifetime Members
 

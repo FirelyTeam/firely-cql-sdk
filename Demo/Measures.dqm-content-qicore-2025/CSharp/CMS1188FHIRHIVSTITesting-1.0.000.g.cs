@@ -8,15 +8,16 @@ using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime.Internal;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS1188FHIRHIVSTITesting", "1.0.000")]
-public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS1188FHIRHIVSTITesting_1_0_000>
+public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryInternals, ISingleton<CMS1188FHIRHIVSTITesting_1_0_000>
 {
-    #region ValueSets
+    #region ValueSets (15)
 
     [CqlValueSetDefinition("Annual Wellness Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", valueSetVersion: null)]
     public CqlValueSet Annual_Wellness_Visit(CqlContext _) => _Annual_Wellness_Visit;
@@ -80,85 +81,100 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
 
     #endregion ValueSets
 
-    #region Parameters
+    #region Parameters (1)
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-7499856264790728684L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-            object d_ = context.ResolveParameter("CMS1188FHIRHIVSTITesting-1.0.000", "Measurement Period", c_);
-            return (CqlInterval<CqlDateTime>)d_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
+            _cacheIndex_Measurement_Period,
+            Measurement_Period_Compute);
+
+    private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
+    {
+        CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+        object d_ = context.ResolveParameter("CMS1188FHIRHIVSTITesting-1.0.000", "Measurement Period", c_);
+        return (CqlInterval<CqlDateTime>)d_;
+    }
 
 
     #endregion Parameters
 
-    #region Functions and Expressions
+    #region Functions and Expressions (14)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(-7409433686009501412L, () => {
-            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-            return b_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(
+            _cacheIndex_Patient,
+            Patient_Compute);
+
+    private Patient Patient_Compute(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        return b_;
+    }
 
 
     [CqlExpressionDefinition("Has Qualifying Encounter During Measurement Period")]
     public bool? Has_Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-44229219208618081L, () => {
-            CqlValueSet a_ = this.Office_Visit(context);
-            IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            CqlValueSet c_ = this.Outpatient_Consultation(context);
-            IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-            CqlValueSet f_ = this.Annual_Wellness_Visit(context);
-            IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            CqlValueSet h_ = this.Face_to_Face_Interaction(context);
-            IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
-            IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-            CqlValueSet l_ = this.Home_Healthcare_Services(context);
-            IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            CqlValueSet n_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
-            IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
-            IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-            CqlValueSet r_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
-            IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            CqlValueSet t_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
-            IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
-            IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
-            CqlValueSet x_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
-            IEnumerable<Encounter> y_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            CqlValueSet z_ = this.Telephone_Visits(context);
-            IEnumerable<Encounter> aa_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> ab_ = context.Operators.Union<Encounter>(y_, aa_);
-            IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(w_, ab_);
-            CqlValueSet ad_ = this.Preventive_Care_Services_Other(context);
-            IEnumerable<Encounter> ae_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> af_ = context.Operators.Union<Encounter>(ac_, ae_);
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period,
+            Has_Qualifying_Encounter_During_Measurement_Period_Compute);
 
-            bool? ag_(Encounter QualifyingEncounter) {
-                CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
-                Period ak_ = QualifyingEncounter?.Period;
-                CqlInterval<CqlDateTime> al_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ak_);
-                bool? am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aj_, al_, "day");
-                Code<Encounter.EncounterStatus> an_ = QualifyingEncounter?.StatusElement;
-                Encounter.EncounterStatus? ao_ = an_?.Value;
-                Code<Encounter.EncounterStatus> ap_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ao_);
-                bool? aq_ = context.Operators.Equal(ap_, "finished");
-                bool? ar_ = context.Operators.And(am_, aq_);
-                return ar_;
-            }
+    private bool? Has_Qualifying_Encounter_During_Measurement_Period_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Office_Visit(context);
+        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet c_ = this.Outpatient_Consultation(context);
+        IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
+        CqlValueSet f_ = this.Annual_Wellness_Visit(context);
+        IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet h_ = this.Face_to_Face_Interaction(context);
+        IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+        IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
+        CqlValueSet l_ = this.Home_Healthcare_Services(context);
+        IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet n_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
+        IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
+        IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
+        CqlValueSet r_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
+        IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet t_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
+        IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
+        IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
+        CqlValueSet x_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
+        IEnumerable<Encounter> y_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet z_ = this.Telephone_Visits(context);
+        IEnumerable<Encounter> aa_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> ab_ = context.Operators.Union<Encounter>(y_, aa_);
+        IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(w_, ab_);
+        CqlValueSet ad_ = this.Preventive_Care_Services_Other(context);
+        IEnumerable<Encounter> ae_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> af_ = context.Operators.Union<Encounter>(ac_, ae_);
 
-            IEnumerable<Encounter> ah_ = context.Operators.Where<Encounter>(af_, ag_);
-            bool? ai_ = context.Operators.Exists<Encounter>(ah_);
-            return ai_;
-        });
+        bool? ag_(Encounter QualifyingEncounter) {
+            CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
+            Period ak_ = QualifyingEncounter?.Period;
+            CqlInterval<CqlDateTime> al_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ak_);
+            bool? am_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aj_, al_, "day");
+            Code<Encounter.EncounterStatus> an_ = QualifyingEncounter?.StatusElement;
+            Encounter.EncounterStatus? ao_ = an_?.Value;
+            Code<Encounter.EncounterStatus> ap_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(ao_);
+            bool? aq_ = context.Operators.Equal(ap_, "finished");
+            bool? ar_ = context.Operators.And(am_, aq_);
+            return ar_;
+        }
+
+        IEnumerable<Encounter> ah_ = context.Operators.Where<Encounter>(af_, ag_);
+        bool? ai_ = context.Operators.Exists<Encounter>(ah_);
+        return ai_;
+    }
 
 
     [CqlFunctionDefinition("isVerified")]
@@ -193,351 +209,525 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
 
     [CqlExpressionDefinition("Has HIV Diagnosis Before End of Measurement Period")]
     public bool? Has_HIV_Diagnosis_Before_End_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7292671796849614126L, () => {
-            CqlValueSet a_ = this.HIV(context);
-            IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period,
+            Has_HIV_Diagnosis_Before_End_of_Measurement_Period_Compute);
 
-            bool? f_(object HIVDx) {
-                CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDx);
-                CqlDateTime j_ = context.Operators.Start(i_);
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                CqlDateTime l_ = context.Operators.End(k_);
-                bool? m_ = context.Operators.SameOrBefore(j_, l_, "day");
-                bool? n_ = this.isVerified(context, HIVDx);
-                bool? o_ = context.Operators.And(m_, n_);
-                return o_;
-            }
+    private bool? Has_HIV_Diagnosis_Before_End_of_Measurement_Period_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.HIV(context);
+        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
 
-            IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
-            bool? h_ = context.Operators.Exists<object>(g_);
-            return h_;
-        });
+        bool? f_(object HIVDx) {
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDx);
+            CqlDateTime j_ = context.Operators.Start(i_);
+            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+            CqlDateTime l_ = context.Operators.End(k_);
+            bool? m_ = context.Operators.SameOrBefore(j_, l_, "day");
+            bool? n_ = this.isVerified(context, HIVDx);
+            bool? o_ = context.Operators.And(m_, n_);
+            return o_;
+        }
+
+        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
+        bool? h_ = context.Operators.Exists<object>(g_);
+        return h_;
+    }
 
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(4471597997769822028L, () => {
-            Patient a_ = this.Patient(context);
-            Date b_ = a_?.BirthDateElement;
-            string c_ = b_?.Value;
-            CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-            CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
-            CqlDateTime f_ = context.Operators.Start(e_);
-            CqlDate g_ = context.Operators.DateFrom(f_);
-            int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            bool? i_ = context.Operators.GreaterOrEqual(h_, 13);
-            bool? j_ = this.Has_Qualifying_Encounter_During_Measurement_Period(context);
-            bool? k_ = context.Operators.And(i_, j_);
-            bool? l_ = this.Has_HIV_Diagnosis_Before_End_of_Measurement_Period(context);
-            bool? m_ = context.Operators.And(k_, l_);
-            return m_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Initial_Population,
+            Initial_Population_Compute);
+
+    private bool? Initial_Population_Compute(CqlContext context)
+    {
+        Patient a_ = this.Patient(context);
+        Date b_ = a_?.BirthDateElement;
+        string c_ = b_?.Value;
+        CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+        CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
+        CqlDateTime f_ = context.Operators.Start(e_);
+        CqlDate g_ = context.Operators.DateFrom(f_);
+        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+        bool? i_ = context.Operators.GreaterOrEqual(h_, 13);
+        bool? j_ = this.Has_Qualifying_Encounter_During_Measurement_Period(context);
+        bool? k_ = context.Operators.And(i_, j_);
+        bool? l_ = this.Has_HIV_Diagnosis_Before_End_of_Measurement_Period(context);
+        bool? m_ = context.Operators.And(k_, l_);
+        return m_;
+    }
 
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2657190060784088045L, () => {
-            bool? a_ = this.Initial_Population(context);
-            return a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Denominator,
+            Denominator_Compute);
+
+    private bool? Denominator_Compute(CqlContext context)
+    {
+        bool? a_ = this.Initial_Population(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("Has Chlamydia Testing")]
     public bool? Has_Chlamydia_Testing(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8881862878889127322L, () => {
-            CqlValueSet a_ = this.Chlamydia_Screening(context);
-            IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Has_Chlamydia_Testing,
+            Has_Chlamydia_Testing_Compute);
 
-            bool? c_(Observation ChlamydiaTest) {
-                DataType f_ = ChlamydiaTest?.Value;
-                object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-                bool? h_ = context.Operators.Not((bool?)(g_ is null));
-                Code<ObservationStatus> i_ = ChlamydiaTest?.StatusElement;
-                ObservationStatus? j_ = i_?.Value;
-                string k_ = context.Operators.Convert<string>(j_);
-                string[] l_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
-                bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
-                bool? n_ = context.Operators.And(h_, m_);
+    private bool? Has_Chlamydia_Testing_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Chlamydia_Screening(context);
+        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
-                object o_() {
+        bool? c_(Observation ChlamydiaTest) {
+            DataType f_ = ChlamydiaTest?.Value;
+            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+            bool? h_ = context.Operators.Not((bool?)(g_ is null));
+            Code<ObservationStatus> i_ = ChlamydiaTest?.StatusElement;
+            ObservationStatus? j_ = i_?.Value;
+            string k_ = context.Operators.Convert<string>(j_);
+            string[] l_ = [
+                "final",
+                "amended",
+                "corrected",
+            ];
+            bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
+            bool? n_ = context.Operators.And(h_, m_);
 
-                    bool t_() {
-                        DataType w_ = ChlamydiaTest?.Effective;
-                        object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                        bool y_ = x_ is CqlDateTime;
-                        return y_;
-                    }
+            object o_() {
 
-
-                    bool u_() {
-                        DataType z_ = ChlamydiaTest?.Effective;
-                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
-                        return ab_;
-                    }
-
-
-                    bool v_() {
-                        DataType ac_ = ChlamydiaTest?.Effective;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlDateTime;
-                        return ae_;
-                    }
-
-                    if (t_())
-                    {
-                        DataType af_ = ChlamydiaTest?.Effective;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        return (ag_ as CqlDateTime) as object;
-                    }
-                    else if (u_())
-                    {
-                        DataType ah_ = ChlamydiaTest?.Effective;
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        return (ai_ as CqlInterval<CqlDateTime>) as object;
-                    }
-                    else if (v_())
-                    {
-                        DataType aj_ = ChlamydiaTest?.Effective;
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        return (ak_ as CqlDateTime) as object;
-                    }
-                    else
-                    {
-                        return null;
-                    };
+                bool t_() {
+                    DataType w_ = ChlamydiaTest?.Effective;
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    bool y_ = x_ is CqlDateTime;
+                    return y_;
                 }
 
-                CqlDateTime p_ = QICoreCommon_4_0_000.Instance.latest(context, o_());
-                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-                bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
-                bool? s_ = context.Operators.And(n_, r_);
-                return s_;
+
+                bool u_() {
+                    DataType z_ = ChlamydiaTest?.Effective;
+                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                    bool ab_ = aa_ is CqlInterval<CqlDateTime>;
+                    return ab_;
+                }
+
+
+                bool v_() {
+                    DataType ac_ = ChlamydiaTest?.Effective;
+                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                    bool ae_ = ad_ is CqlDateTime;
+                    return ae_;
+                }
+
+                if (t_())
+                {
+                    DataType af_ = ChlamydiaTest?.Effective;
+                    object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                    return (ag_ as CqlDateTime) as object;
+                }
+                else if (u_())
+                {
+                    DataType ah_ = ChlamydiaTest?.Effective;
+                    object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                    return (ai_ as CqlInterval<CqlDateTime>) as object;
+                }
+                else if (v_())
+                {
+                    DataType aj_ = ChlamydiaTest?.Effective;
+                    object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                    return (ak_ as CqlDateTime) as object;
+                }
+                else
+                {
+                    return null;
+                };
             }
 
-            IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-            bool? e_ = context.Operators.Exists<Observation>(d_);
-            return e_;
-        });
+            CqlDateTime p_ = QICoreCommon_4_0_000.Instance.latest(context, o_());
+            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+            bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
+            bool? s_ = context.Operators.And(n_, r_);
+            return s_;
+        }
+
+        IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
+        bool? e_ = context.Operators.Exists<Observation>(d_);
+        return e_;
+    }
 
 
     [CqlExpressionDefinition("Has Gonorrhea Testing")]
     public bool? Has_Gonorrhea_Testing(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8502615815305729511L, () => {
-            CqlValueSet a_ = this.Gonorrhea_Screening(context);
-            IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Has_Gonorrhea_Testing,
+            Has_Gonorrhea_Testing_Compute);
 
-            bool? c_(Observation GonorrheaTest) {
-                DataType f_ = GonorrheaTest?.Value;
-                object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-                bool? h_ = context.Operators.Not((bool?)(g_ is null));
-                Code<ObservationStatus> i_ = GonorrheaTest?.StatusElement;
-                ObservationStatus? j_ = i_?.Value;
-                string k_ = context.Operators.Convert<string>(j_);
-                string[] l_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
-                bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
-                bool? n_ = context.Operators.And(h_, m_);
+    private bool? Has_Gonorrhea_Testing_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Gonorrhea_Screening(context);
+        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
-                object o_() {
+        bool? c_(Observation GonorrheaTest) {
+            DataType f_ = GonorrheaTest?.Value;
+            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+            bool? h_ = context.Operators.Not((bool?)(g_ is null));
+            Code<ObservationStatus> i_ = GonorrheaTest?.StatusElement;
+            ObservationStatus? j_ = i_?.Value;
+            string k_ = context.Operators.Convert<string>(j_);
+            string[] l_ = [
+                "final",
+                "amended",
+                "corrected",
+            ];
+            bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
+            bool? n_ = context.Operators.And(h_, m_);
 
-                    bool t_() {
-                        DataType w_ = GonorrheaTest?.Effective;
-                        object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                        bool y_ = x_ is CqlDateTime;
-                        return y_;
-                    }
+            object o_() {
 
-
-                    bool u_() {
-                        DataType z_ = GonorrheaTest?.Effective;
-                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
-                        return ab_;
-                    }
-
-
-                    bool v_() {
-                        DataType ac_ = GonorrheaTest?.Effective;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlDateTime;
-                        return ae_;
-                    }
-
-                    if (t_())
-                    {
-                        DataType af_ = GonorrheaTest?.Effective;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        return (ag_ as CqlDateTime) as object;
-                    }
-                    else if (u_())
-                    {
-                        DataType ah_ = GonorrheaTest?.Effective;
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        return (ai_ as CqlInterval<CqlDateTime>) as object;
-                    }
-                    else if (v_())
-                    {
-                        DataType aj_ = GonorrheaTest?.Effective;
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        return (ak_ as CqlDateTime) as object;
-                    }
-                    else
-                    {
-                        return null;
-                    };
+                bool t_() {
+                    DataType w_ = GonorrheaTest?.Effective;
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    bool y_ = x_ is CqlDateTime;
+                    return y_;
                 }
 
-                CqlDateTime p_ = QICoreCommon_4_0_000.Instance.latest(context, o_());
-                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-                bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
-                bool? s_ = context.Operators.And(n_, r_);
-                return s_;
+
+                bool u_() {
+                    DataType z_ = GonorrheaTest?.Effective;
+                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                    bool ab_ = aa_ is CqlInterval<CqlDateTime>;
+                    return ab_;
+                }
+
+
+                bool v_() {
+                    DataType ac_ = GonorrheaTest?.Effective;
+                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                    bool ae_ = ad_ is CqlDateTime;
+                    return ae_;
+                }
+
+                if (t_())
+                {
+                    DataType af_ = GonorrheaTest?.Effective;
+                    object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                    return (ag_ as CqlDateTime) as object;
+                }
+                else if (u_())
+                {
+                    DataType ah_ = GonorrheaTest?.Effective;
+                    object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                    return (ai_ as CqlInterval<CqlDateTime>) as object;
+                }
+                else if (v_())
+                {
+                    DataType aj_ = GonorrheaTest?.Effective;
+                    object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                    return (ak_ as CqlDateTime) as object;
+                }
+                else
+                {
+                    return null;
+                };
             }
 
-            IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-            bool? e_ = context.Operators.Exists<Observation>(d_);
-            return e_;
-        });
+            CqlDateTime p_ = QICoreCommon_4_0_000.Instance.latest(context, o_());
+            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+            bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
+            bool? s_ = context.Operators.And(n_, r_);
+            return s_;
+        }
+
+        IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
+        bool? e_ = context.Operators.Exists<Observation>(d_);
+        return e_;
+    }
 
 
     [CqlExpressionDefinition("Has Syphilis Testing")]
     public bool? Has_Syphilis_Testing(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(7686213639457514893L, () => {
-            CqlValueSet a_ = this.Syphilis_Tests(context);
-            IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Has_Syphilis_Testing,
+            Has_Syphilis_Testing_Compute);
 
-            bool? c_(Observation SyphilisTest) {
-                DataType f_ = SyphilisTest?.Value;
-                object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-                bool? h_ = context.Operators.Not((bool?)(g_ is null));
-                Code<ObservationStatus> i_ = SyphilisTest?.StatusElement;
-                ObservationStatus? j_ = i_?.Value;
-                string k_ = context.Operators.Convert<string>(j_);
-                string[] l_ = [
-                    "final",
-                    "amended",
-                    "corrected",
-                ];
-                bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
-                bool? n_ = context.Operators.And(h_, m_);
+    private bool? Has_Syphilis_Testing_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Syphilis_Tests(context);
+        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
-                object o_() {
+        bool? c_(Observation SyphilisTest) {
+            DataType f_ = SyphilisTest?.Value;
+            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+            bool? h_ = context.Operators.Not((bool?)(g_ is null));
+            Code<ObservationStatus> i_ = SyphilisTest?.StatusElement;
+            ObservationStatus? j_ = i_?.Value;
+            string k_ = context.Operators.Convert<string>(j_);
+            string[] l_ = [
+                "final",
+                "amended",
+                "corrected",
+            ];
+            bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
+            bool? n_ = context.Operators.And(h_, m_);
 
-                    bool t_() {
-                        DataType w_ = SyphilisTest?.Effective;
-                        object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                        bool y_ = x_ is CqlDateTime;
-                        return y_;
-                    }
+            object o_() {
 
-
-                    bool u_() {
-                        DataType z_ = SyphilisTest?.Effective;
-                        object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        bool ab_ = aa_ is CqlInterval<CqlDateTime>;
-                        return ab_;
-                    }
-
-
-                    bool v_() {
-                        DataType ac_ = SyphilisTest?.Effective;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlDateTime;
-                        return ae_;
-                    }
-
-                    if (t_())
-                    {
-                        DataType af_ = SyphilisTest?.Effective;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        return (ag_ as CqlDateTime) as object;
-                    }
-                    else if (u_())
-                    {
-                        DataType ah_ = SyphilisTest?.Effective;
-                        object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                        return (ai_ as CqlInterval<CqlDateTime>) as object;
-                    }
-                    else if (v_())
-                    {
-                        DataType aj_ = SyphilisTest?.Effective;
-                        object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                        return (ak_ as CqlDateTime) as object;
-                    }
-                    else
-                    {
-                        return null;
-                    };
+                bool t_() {
+                    DataType w_ = SyphilisTest?.Effective;
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    bool y_ = x_ is CqlDateTime;
+                    return y_;
                 }
 
-                CqlDateTime p_ = QICoreCommon_4_0_000.Instance.latest(context, o_());
-                CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-                bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
-                bool? s_ = context.Operators.And(n_, r_);
-                return s_;
+
+                bool u_() {
+                    DataType z_ = SyphilisTest?.Effective;
+                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                    bool ab_ = aa_ is CqlInterval<CqlDateTime>;
+                    return ab_;
+                }
+
+
+                bool v_() {
+                    DataType ac_ = SyphilisTest?.Effective;
+                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                    bool ae_ = ad_ is CqlDateTime;
+                    return ae_;
+                }
+
+                if (t_())
+                {
+                    DataType af_ = SyphilisTest?.Effective;
+                    object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                    return (ag_ as CqlDateTime) as object;
+                }
+                else if (u_())
+                {
+                    DataType ah_ = SyphilisTest?.Effective;
+                    object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                    return (ai_ as CqlInterval<CqlDateTime>) as object;
+                }
+                else if (v_())
+                {
+                    DataType aj_ = SyphilisTest?.Effective;
+                    object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                    return (ak_ as CqlDateTime) as object;
+                }
+                else
+                {
+                    return null;
+                };
             }
 
-            IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-            bool? e_ = context.Operators.Exists<Observation>(d_);
-            return e_;
-        });
+            CqlDateTime p_ = QICoreCommon_4_0_000.Instance.latest(context, o_());
+            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
+            bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, "day");
+            bool? s_ = context.Operators.And(n_, r_);
+            return s_;
+        }
+
+        IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
+        bool? e_ = context.Operators.Exists<Observation>(d_);
+        return e_;
+    }
 
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(5205330117834525639L, () => {
-            bool? a_ = this.Has_Chlamydia_Testing(context);
-            bool? b_ = this.Has_Gonorrhea_Testing(context);
-            bool? c_ = context.Operators.And(a_, b_);
-            bool? d_ = this.Has_Syphilis_Testing(context);
-            bool? e_ = context.Operators.And(c_, d_);
-            return e_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Numerator,
+            Numerator_Compute);
+
+    private bool? Numerator_Compute(CqlContext context)
+    {
+        bool? a_ = this.Has_Chlamydia_Testing(context);
+        bool? b_ = this.Has_Gonorrhea_Testing(context);
+        bool? c_ = context.Operators.And(a_, b_);
+        bool? d_ = this.Has_Syphilis_Testing(context);
+        bool? e_ = context.Operators.And(c_, d_);
+        return e_;
+    }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(1798453950093290862L, () => {
-            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
-            return a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
+            _cacheIndex_SDE_Ethnicity,
+            SDE_Ethnicity_Compute);
+
+    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    {
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-7550824248673390558L, () => {
-            IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
-            return a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
+            _cacheIndex_SDE_Payer,
+            SDE_Payer_Compute);
+
+    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
+    {
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-6756198988775072204L, () => {
-            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
-            return a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
+            _cacheIndex_SDE_Race,
+            SDE_Race_Compute);
+
+    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    {
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(-5848999743963259095L, () => {
-            CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
-            return a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
+            _cacheIndex_SDE_Sex,
+            SDE_Sex_Compute);
+
+    private CqlCode SDE_Sex_Compute(CqlContext context)
+    {
+        CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
+        return a_;
+    }
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields (14)
+
+    private int _cacheIndex_Measurement_Period = -1;
+    private int _cacheIndex_Patient = -1;
+    private int _cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period = -1;
+    private int _cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period = -1;
+    private int _cacheIndex_Initial_Population = -1;
+    private int _cacheIndex_Denominator = -1;
+    private int _cacheIndex_Has_Chlamydia_Testing = -1;
+    private int _cacheIndex_Has_Gonorrhea_Testing = -1;
+    private int _cacheIndex_Has_Syphilis_Testing = -1;
+    private int _cacheIndex_Numerator = -1;
+    private int _cacheIndex_SDE_Ethnicity = -1;
+    private int _cacheIndex_SDE_Payer = -1;
+    private int _cacheIndex_SDE_Race = -1;
+    private int _cacheIndex_SDE_Sex = -1;
+
+    #endregion Cache Index Fields
+
+    #region ILibraryInternals Implementation
+
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+        // Skip if already processed
+        if (!initializer.MarkAsProcessed(this))
+            return 0;
+
+        var count = 0;
+
+        // Process dependencies first (depth-first traversal)
+        if (Dependencies is { Length: > 0 })
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (dependency is ILibraryInternals internals)
+                {
+                    count += internals.InitializeCacheIndices(initializer);
+                }
+            }
+        }
+
+        // Initialize cache indices for this library
+        if (_cacheIndex_Measurement_Period != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
+        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Patient != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
+        _cacheIndex_Patient = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period}}. Cache indices can only be initialized once.");
+        _cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period}}. Cache indices can only be initialized once.");
+        _cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Initial_Population != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
+        _cacheIndex_Initial_Population = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Denominator != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
+        _cacheIndex_Denominator = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Has_Chlamydia_Testing != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Chlamydia_Testing' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Chlamydia_Testing}}. Cache indices can only be initialized once.");
+        _cacheIndex_Has_Chlamydia_Testing = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Has_Gonorrhea_Testing != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Gonorrhea_Testing' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Gonorrhea_Testing}}. Cache indices can only be initialized once.");
+        _cacheIndex_Has_Gonorrhea_Testing = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Has_Syphilis_Testing != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Syphilis_Testing' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Syphilis_Testing}}. Cache indices can only be initialized once.");
+        _cacheIndex_Has_Syphilis_Testing = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Numerator != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
+        _cacheIndex_Numerator = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_SDE_Ethnicity != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
+        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_SDE_Payer != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
+        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_SDE_Race != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
+        _cacheIndex_SDE_Race = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_SDE_Sex != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
+        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
+        count++;
+
+        return count;
+    }
+
+    #endregion ILibraryInternals Implementation
 
     #region Singleton Lifetime Members
 

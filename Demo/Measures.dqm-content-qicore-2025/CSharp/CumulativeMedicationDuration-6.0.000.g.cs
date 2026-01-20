@@ -8,15 +8,16 @@ using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime.Internal;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CumulativeMedicationDuration", "6.0.000")]
-public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton<CumulativeMedicationDuration_6_0_000>
+public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ILibraryInternals, ISingleton<CumulativeMedicationDuration_6_0_000>
 {
-    #region Codes
+    #region Codes (48)
 
     [CqlCodeDefinition("HS", codeId: "HS", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent")]
     public CqlCode HS(CqlContext _) => _HS;
@@ -212,7 +213,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
     #endregion Codes
 
-    #region CodeSystems
+    #region CodeSystems (2)
 
     [CqlCodeSystemDefinition("V3TimingEvent", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", codeSystemVersion: null)]
     public CqlCodeSystem V3TimingEvent(CqlContext _) => _V3TimingEvent;
@@ -252,27 +253,37 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
     #endregion CodeSystems
 
-    #region Parameters
+    #region Parameters (1)
 
     [CqlParameterDefinition("ErrorLevel")]
     public string ErrorLevel(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(772406137019326219L, () => {
-            object a_ = context.ResolveParameter("CumulativeMedicationDuration-6.0.000", "ErrorLevel", "Warning");
-            return (string)a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<string>(
+            _cacheIndex_ErrorLevel,
+            ErrorLevel_Compute);
+
+    private string ErrorLevel_Compute(CqlContext context)
+    {
+        object a_ = context.ResolveParameter("CumulativeMedicationDuration-6.0.000", "ErrorLevel", "Warning");
+        return (string)a_;
+    }
 
 
     #endregion Parameters
 
-    #region Functions and Expressions
+    #region Functions and Expressions (19)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(4069894667121727423L, () => {
-            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-            return b_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(
+            _cacheIndex_Patient,
+            Patient_Compute);
+
+    private Patient Patient_Compute(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        return b_;
+    }
 
 
     [CqlFunctionDefinition("ToDaily")]
@@ -2593,6 +2604,53 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields (2)
+
+    private int _cacheIndex_ErrorLevel = -1;
+    private int _cacheIndex_Patient = -1;
+
+    #endregion Cache Index Fields
+
+    #region ILibraryInternals Implementation
+
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+        // Skip if already processed
+        if (!initializer.MarkAsProcessed(this))
+            return 0;
+
+        var count = 0;
+
+        // Process dependencies first (depth-first traversal)
+        if (Dependencies is { Length: > 0 })
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (dependency is ILibraryInternals internals)
+                {
+                    count += internals.InitializeCacheIndices(initializer);
+                }
+            }
+        }
+
+        // Initialize cache indices for this library
+        if (_cacheIndex_ErrorLevel != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_ErrorLevel' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ErrorLevel}}. Cache indices can only be initialized once.");
+        _cacheIndex_ErrorLevel = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Patient != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
+        _cacheIndex_Patient = initializer.GetNextIndex();
+        count++;
+
+        return count;
+    }
+
+    #endregion ILibraryInternals Implementation
 
     #region Singleton Lifetime Members
 

@@ -8,15 +8,16 @@ using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime.Internal;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("VTE", "8.18.000")]
-public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
+public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_8_18_000>
 {
-    #region ValueSets
+    #region ValueSets (3)
 
     [CqlValueSetDefinition("Obstetrical or Pregnancy Related Conditions", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263", valueSetVersion: null)]
     public CqlValueSet Obstetrical_or_Pregnancy_Related_Conditions(CqlContext _) => _Obstetrical_or_Pregnancy_Related_Conditions;
@@ -32,27 +33,37 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
     #endregion ValueSets
 
-    #region Parameters
+    #region Parameters (1)
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(8773371835216757249L, () => {
-            object a_ = context.ResolveParameter("VTE-8.18.000", "Measurement Period", null);
-            return (CqlInterval<CqlDateTime>)a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
+            _cacheIndex_Measurement_Period,
+            Measurement_Period_Compute);
+
+    private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
+    {
+        object a_ = context.ResolveParameter("VTE-8.18.000", "Measurement Period", null);
+        return (CqlInterval<CqlDateTime>)a_;
+    }
 
 
     #endregion Parameters
 
-    #region Functions and Expressions
+    #region Functions and Expressions (7)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(-6064100381930538164L, () => {
-            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-            return b_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(
+            _cacheIndex_Patient,
+            Patient_Compute);
+
+    private Patient Patient_Compute(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        return b_;
+    }
 
 
     [CqlFunctionDefinition("hasEncDiagnosisOf")]
@@ -104,57 +115,72 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
     [CqlExpressionDefinition("Admission Without VTE Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1660812742436512091L, () => {
-            IEnumerable<Encounter> a_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
+            _cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions,
+            Admission_Without_VTE_Or_Obstetrical_Conditions_Compute);
 
-            bool? b_(Encounter InpatientEncounter) {
-                CqlValueSet d_ = this.Obstetrical_or_Pregnancy_Related_Conditions(context);
-                bool? e_ = this.hasEncDiagnosisOf(context, InpatientEncounter, d_);
-                CqlValueSet f_ = this.Venous_Thromboembolism(context);
-                bool? g_ = this.hasEncDiagnosisOf(context, InpatientEncounter, f_);
-                bool? h_ = context.Operators.Or(e_, g_);
-                CqlValueSet i_ = this.Obstetrics_VTE(context);
-                bool? j_ = this.hasEncDiagnosisOf(context, InpatientEncounter, i_);
-                bool? k_ = context.Operators.Or(h_, j_);
-                bool? l_ = context.Operators.Not(k_);
-                return l_;
-            }
+    private IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions_Compute(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = CQMCommon_4_1_000.Instance.Inpatient_Encounter(context);
 
-            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-            return c_;
-        });
+        bool? b_(Encounter InpatientEncounter) {
+            CqlValueSet d_ = this.Obstetrical_or_Pregnancy_Related_Conditions(context);
+            bool? e_ = this.hasEncDiagnosisOf(context, InpatientEncounter, d_);
+            CqlValueSet f_ = this.Venous_Thromboembolism(context);
+            bool? g_ = this.hasEncDiagnosisOf(context, InpatientEncounter, f_);
+            bool? h_ = context.Operators.Or(e_, g_);
+            CqlValueSet i_ = this.Obstetrics_VTE(context);
+            bool? j_ = this.hasEncDiagnosisOf(context, InpatientEncounter, i_);
+            bool? k_ = context.Operators.Or(h_, j_);
+            bool? l_ = context.Operators.Not(k_);
+            return l_;
+        }
+
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+        return c_;
+    }
 
 
     [CqlExpressionDefinition("Encounter With Age Range And Without VTE Diagnosis Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-8789342914136935360L, () => {
-            IEnumerable<Encounter> a_ = this.Admission_Without_VTE_Or_Obstetrical_Conditions(context);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
+            _cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions,
+            Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute);
 
-            bool? b_(Encounter EncounterWithoutConditions) {
-                Patient d_ = this.Patient(context);
-                Date e_ = d_?.BirthDateElement;
-                string f_ = e_?.Value;
-                CqlDate g_ = context.Operators.ConvertStringToDate(f_);
-                Period h_ = EncounterWithoutConditions?.Period;
-                CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
-                CqlDateTime j_ = context.Operators.Start(i_);
-                CqlDate k_ = context.Operators.DateFrom(j_);
-                int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
-                bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
-                return m_;
-            }
+    private IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = this.Admission_Without_VTE_Or_Obstetrical_Conditions(context);
 
-            IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-            return c_;
-        });
+        bool? b_(Encounter EncounterWithoutConditions) {
+            Patient d_ = this.Patient(context);
+            Date e_ = d_?.BirthDateElement;
+            string f_ = e_?.Value;
+            CqlDate g_ = context.Operators.ConvertStringToDate(f_);
+            Period h_ = EncounterWithoutConditions?.Period;
+            CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
+            CqlDateTime j_ = context.Operators.Start(i_);
+            CqlDate k_ = context.Operators.DateFrom(j_);
+            int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
+            bool? m_ = context.Operators.GreaterOrEqual(l_, 18);
+            return m_;
+        }
+
+        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+        return c_;
+    }
 
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6262669387061031876L, () => {
-            IEnumerable<Encounter> a_ = this.Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(context);
-            return a_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
+            _cacheIndex_Initial_Population,
+            Initial_Population_Compute);
+
+    private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = this.Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(context);
+        return a_;
+    }
 
 
     [CqlFunctionDefinition("fromDayOfStartOfHospitalizationToDayAfterAdmission")]
@@ -215,6 +241,71 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields (5)
+
+    private int _cacheIndex_Measurement_Period = -1;
+    private int _cacheIndex_Patient = -1;
+    private int _cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions = -1;
+    private int _cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions = -1;
+    private int _cacheIndex_Initial_Population = -1;
+
+    #endregion Cache Index Fields
+
+    #region ILibraryInternals Implementation
+
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+        // Skip if already processed
+        if (!initializer.MarkAsProcessed(this))
+            return 0;
+
+        var count = 0;
+
+        // Process dependencies first (depth-first traversal)
+        if (Dependencies is { Length: > 0 })
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (dependency is ILibraryInternals internals)
+                {
+                    count += internals.InitializeCacheIndices(initializer);
+                }
+            }
+        }
+
+        // Initialize cache indices for this library
+        if (_cacheIndex_Measurement_Period != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
+        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Patient != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
+        _cacheIndex_Patient = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions}}. Cache indices can only be initialized once.");
+        _cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions}}. Cache indices can only be initialized once.");
+        _cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Initial_Population != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
+        _cacheIndex_Initial_Population = initializer.GetNextIndex();
+        count++;
+
+        return count;
+    }
+
+    #endregion ILibraryInternals Implementation
 
     #region Singleton Lifetime Members
 
