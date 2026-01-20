@@ -5,6 +5,24 @@
 variables:
   buildConfiguration: '"Release"'
   vmImage: 'windows-latest'
-  DOTNET_CORE_SDK: '8.0.x'
+  DOTNET_CORE_SDK: '10.0.x'
   GITHUB_PACKAGES_APIKEY: $(GitHubPushPackagesAPIKey) # key is set in variable group APIKeys
   NUGET_APIKEY: $(NuGetFhirPackagesAPIKey) # key is set in variable group APIKeys
+
+  # Test Project Configuration
+  # Multi-target tests (run on both .NET 8 and .NET 10 in parallel)
+  multiTargetTestProjects: |
+    Cql/CoreTests/CoreTests.csproj
+    Cql/CqlToElmTests/CqlToElmTests.csproj
+
+  # .NET 10 integration tests (run in parallel as separate job)
+  net10IntegrationTestProjects: |
+    submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
+
+
+  # Excluded tests (not run in any stage)
+  excludedTestProjects: |
+    !**/XsdToCSharpConverterTests.csproj  # internal tooling, not for production
+    !**/Ncqa.HT.DeckTests.csproj          # will be re-added when fixed
+    !**/Ncqa.HT.MeasuresTests.csproj      # will be re-added when fixed
+    !Demo/Test.Measures.Demo/Test.Measures.Demo.csproj # needs the Demo project to generate resources

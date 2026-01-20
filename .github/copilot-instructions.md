@@ -89,6 +89,7 @@ Use this header format with "Firely, NCQA" and the current year:
    - Use record types for immutable data structures
    - Use nullable reference types and null-conditional operators
    - Use string interpolation instead of `string.Format` or concatenation
+10. **Local functions must use camelCase naming** - Local functions (functions defined inside methods) should start with a lowercase letter (e.g., `processItem()`, not `ProcessItem()`)
 
 ### Project References
 - When adding internal access, ensure the requesting project is appropriate for internal API usage

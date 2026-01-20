@@ -44,6 +44,12 @@
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
 		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
+		<!--
+			ElmToCSharpEnabled: This must always be true on the build server,
+			so that resources (that are not checked in), can be build, in order
+			for the MeasureTest.BCSEHEDIS2022_Numerator_FromResource_Passed to run.
+		-->
+		<ElmToCSharpEnabled Condition="'$(TF_BUILD)' == 'True'">true</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<ItemGroup>

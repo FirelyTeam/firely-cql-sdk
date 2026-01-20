@@ -101,10 +101,11 @@ Generates C# code that matches the output of the legacy `xsd.exe` tool:
 - ✅ **Abstract types**: Properly marks abstract XSD types as abstract C# classes
 - ✅ **Array handling**: Both array wrapper patterns and direct array elements
 - ✅ **Default values**: Constructor initialization for fields with defaults
-- ✅ ***Specified pattern**: Boolean flags for optional value type attributes
+- ✅ **`*Specified` pattern**: Boolean flags for optional value type attributes
 - ✅ **Mixed content**: Support for IsMixed complex types with Text property
 - ✅ **Type ordering**: Root element types first, then document order
 - ✅ **Exact formatting**: Block bracing style matching xsd.exe output
+- ✅ **JSON discriminator conflict handling**: Automatically adds `[JsonIgnore]` to properties named `"type"` with complex types to avoid conflicts with JSON polymorphic type discriminators
 
 ### Future Enhancements
 

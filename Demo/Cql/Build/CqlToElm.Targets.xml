@@ -25,6 +25,7 @@
 
 	<Target
 		Name="Download CQL to ELM CLI"
+		Condition="'$(TargetFramework)' == 'net10.0' Or '$(TargetFramework)' == ''"
 		BeforeTargets="PreBuildEvent">
 		<Exec Command="$(DownloadJavaDependenciesScript)" ContinueOnError="false" />
 	</Target>
@@ -70,7 +71,7 @@
 	<Target Name="GenerateElmFiles"
 	        Inputs="@(CqlFiles)"
 	        Outputs="@(CqlFiles->'$(ElmDirectory)/%(FileName).json')"
-	        Condition="'$(CqlToElmEnabled)'=='true' And '$(LibrarySet)'!=''"
+	        Condition="'$(CqlToElmEnabled)'=='true' And '$(LibrarySet)'!='' And ('$(TargetFramework)' == 'net10.0' Or '$(TargetFramework)' == '')"
 	        BeforeTargets="PreBuildEvent">
 
 		<ItemGroup>

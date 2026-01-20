@@ -23,7 +23,7 @@ public partial class Library
     internal bool IsValidated { get; private set; }
 
     /// <exception cref="LibraryMissingIncludeDefPathError"></exception>
-    private void Validate()
+    internal void Validate()
     {
         if (IsValidated)
             return;

@@ -7,23 +7,22 @@
  */
 
 
-namespace Hl7.Cql.Elm.Serialization
-{
-    internal class XmlQualifiedNameConverter : JsonConverter<XmlQualifiedName>
-    {
-        public override XmlQualifiedName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-        {
-            if (reader.TokenType == JsonTokenType.String)
-            {
-                var value = reader.GetString();
-                return new XmlQualifiedName(value);
-            }
-            else throw new JsonException($"{nameof(XmlQualifiedNameConverter)} was called to deserialize a non-string token");
-        }
+namespace Hl7.Cql.Elm.Serialization;
 
-        public override void Write(Utf8JsonWriter writer, XmlQualifiedName value, JsonSerializerOptions options)
+internal class XmlQualifiedNameConverter : JsonConverter<XmlQualifiedName>
+{
+    public override XmlQualifiedName? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        if (reader.TokenType == JsonTokenType.String)
         {
-            writer.WriteStringValue(value.Name);
+            var value = reader.GetString();
+            return new XmlQualifiedName(value);
         }
+        else throw new JsonException($"{nameof(XmlQualifiedNameConverter)} was called to deserialize a non-string token");
+    }
+
+    public override void Write(Utf8JsonWriter writer, XmlQualifiedName value, JsonSerializerOptions options)
+    {
+        writer.WriteStringValue(value.Name);
     }
 }

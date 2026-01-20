@@ -3,6 +3,7 @@
 	<Import Project="..\..\cql-base.props" />
 
 	<PropertyGroup>
+		<TargetFrameworks>net10.0</TargetFrameworks>
 		<IsPackable>false</IsPackable>
 		<RootNamespace>Hl7.Cql.CqlToElm.Test</RootNamespace>
 		<Configurations>Debug;Release</Configurations>

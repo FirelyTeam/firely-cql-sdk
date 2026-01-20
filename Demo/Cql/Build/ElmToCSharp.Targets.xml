@@ -17,18 +17,23 @@
 		<JsonPretty>true</JsonPretty>
 	</PropertyGroup>
 
+	<!-- Determine the latest target framework to use for code generation tools -->
+	<PropertyGroup>
+		<ToolTargetFramework Condition="'$(ToolTargetFramework)' == ''">net10.0</ToolTargetFramework>
+	</PropertyGroup>
+
 	<!-- Windows: Use .exe extension -->
 	<PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
-		<PackagerCLI>$(CqlSolutionDir)/Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
+		<PackagerCLI>$(CqlSolutionDir)/Cql/PackagerCLI/bin/$(Configuration)/$(ToolTargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 	</PropertyGroup>
 
 	<!-- Unix: No .exe extension -->
 	<PropertyGroup Condition="'$(OS)' != 'Windows_NT'">
-		<PackagerCLI>$(CqlSolutionDir)/Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager</PackagerCLI>
+		<PackagerCLI>$(CqlSolutionDir)/Cql/PackagerCLI/bin/$(Configuration)/$(ToolTargetFramework)/Hl7.Cql.Packager</PackagerCLI>
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
-	        Condition="'$(ElmToCSharpEnabled)'=='true' And Exists('$(PackagerCLI)')"
+	        Condition="'$(ElmToCSharpEnabled)'=='true' And Exists('$(PackagerCLI)') And ('$(TargetFramework)' == '$(ToolTargetFramework)' Or '$(TargetFramework)' == '')"
 	        BeforeTargets="PreBuildEvent">
 
 		<PropertyGroup>

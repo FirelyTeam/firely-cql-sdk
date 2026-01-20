@@ -127,29 +127,29 @@ namespace CoreTests
             // ReturnClause.distinct has a default value of true
             // Verify the constructor initializes it and the DefaultValueAttribute is present
             var returnClause = new ReturnClause();
-            
+
             // The default value should be set by the constructor
             returnClause.distinct.Should().Be(true);
-            
+
             // Verify that serialization doesn't include the default value
             var lib = new Library
             {
                 statements = [
-                    new ExpressionDef 
-                    { 
+                    new ExpressionDef
+                    {
                         name = "Test",
-                        expression = new Query 
-                        { 
-                            @return = returnClause 
+                        expression = new Query
+                        {
+                            @return = returnClause
                         }
                     }
                 ]
             };
-            
+
             var json = lib.SerializeToJson();
             // When the value is at default, it should not be serialized
             json.Should().NotContain("\"distinct\"");
-            
+
             // When the value is changed from default, it should be serialized
             returnClause.distinct = false;
             json = lib.SerializeToJson();
@@ -161,10 +161,10 @@ namespace CoreTests
         {
             // IncludeDef.mediaType has a default value of "application/elm+xml"
             var includeDef = new IncludeDef();
-            
+
             // The default value should be set by the constructor
             includeDef.mediaType.Should().Be("application/elm+xml");
-            
+
             // Verify the DataType attribute is present (anyURI)
             var property = typeof(IncludeDef).GetProperty("mediaType");
             var xmlAttr = property!.GetCustomAttributes(typeof(System.Xml.Serialization.XmlAttributeAttribute), false)
@@ -172,7 +172,7 @@ namespace CoreTests
                 .FirstOrDefault();
             xmlAttr.Should().NotBeNull();
             xmlAttr!.DataType.Should().Be("anyURI");
-            
+
             // Verify DefaultValueAttribute is present
             var defaultAttr = property.GetCustomAttributes(typeof(System.ComponentModel.DefaultValueAttribute), false)
                 .Cast<System.ComponentModel.DefaultValueAttribute>()
@@ -186,10 +186,10 @@ namespace CoreTests
         {
             // CodeDef.accessLevel has a default value of AccessModifier.Public (enum)
             var codeDef = new CodeDef();
-            
+
             // The default value should be set by the constructor
             codeDef.accessLevel.Should().Be(AccessModifier.Public);
-            
+
             // Verify DefaultValueAttribute is present with enum value (not string)
             var property = typeof(CodeDef).GetProperty("accessLevel");
             var defaultAttr = property!.GetCustomAttributes(typeof(System.ComponentModel.DefaultValueAttribute), false)
@@ -206,14 +206,14 @@ namespace CoreTests
             // Element.annotation is a direct array property that should have XmlElementAttribute
             var property = typeof(Hl7.Cql.Elm.Element).GetProperty("annotation");
             property.Should().NotBeNull();
-            
+
             var xmlElemAttr = property!.GetCustomAttributes(typeof(System.Xml.Serialization.XmlElementAttribute), false)
                 .Cast<System.Xml.Serialization.XmlElementAttribute>()
                 .FirstOrDefault();
-            
+
             xmlElemAttr.Should().NotBeNull();
             xmlElemAttr!.ElementName.Should().Be("annotation");
-            
+
             // Test serialization roundtrip
             var annotation = new Annotation
             {
@@ -222,25 +222,25 @@ namespace CoreTests
                     r = "1"
                 }
             };
-            
+
             var element = new ExpressionDef
             {
                 name = "Test",
                 annotation = [annotation]
             };
-            
+
             var lib = new Library { statements = [element] };
-            
+
             // Serialize to XML
             var serializer = new XmlSerializer(typeof(Library));
             var writer = new StringWriter();
             serializer.Serialize(writer, lib);
             var xml = writer.ToString();
-            
+
             // Deserialize back
             var reader = new StringReader(xml);
             var deserialized = (Library)serializer.Deserialize(reader)!;
-            
+
             deserialized.statements.Should().HaveCount(1);
             var deserializedElement = deserialized.statements[0].Should().BeOfType<ExpressionDef>().Subject;
             deserializedElement.annotation.Should().HaveCount(1);
@@ -256,22 +256,22 @@ namespace CoreTests
             {
                 name = "test"
             };
-            
+
             // By default, fluentSpecified should be false and fluent should be false
             functionDef.fluentSpecified.Should().BeFalse();
             functionDef.fluent.Should().BeFalse();
-            
+
             var lib = new Library { statements = [functionDef] };
             var json = lib.SerializeToJson();
-            
+
             // When fluentSpecified is false, the value should not be serialized
             json.Should().NotContain("\"fluent\"");
-            
+
             // Set both the value and the specified flag together
             functionDef.fluent = true;
             functionDef.fluentSpecified = true;
             json = lib.SerializeToJson();
-            
+
             // When fluentSpecified is true, the value should be serialized
             json.Should().Contain("\"fluent\"");
             json.Should().Contain("true");
@@ -286,13 +286,13 @@ namespace CoreTests
             var xmlIncludeAttrs = expressionType.GetCustomAttributes(typeof(System.Xml.Serialization.XmlIncludeAttribute), false)
                 .Cast<System.Xml.Serialization.XmlIncludeAttribute>()
                 .ToList();
-            
+
             // Should have multiple XmlIncludeAttribute declarations
             // Our tool generates only direct derivations (not transitive), so the count is lower than xsd.exe
             // but still sufficient for PolymorphicTypeResolver to work correctly
             xmlIncludeAttrs.Should().NotBeEmpty();
             xmlIncludeAttrs.Count.Should().BeGreaterThan(30, "Expression has many directly derived types");
-            
+
             // Check for some common expression types that are direct children of Expression
             var includedTypes = xmlIncludeAttrs.Select(a => a.Type).ToList();
             includedTypes.Should().Contain(typeof(Literal), "Literal directly inherits from Expression");
@@ -306,10 +306,10 @@ namespace CoreTests
         {
             // Element is an abstract type in XSD and should be abstract in C#
             typeof(Hl7.Cql.Elm.Element).IsAbstract.Should().BeTrue();
-            
+
             // Expression is also abstract
             typeof(Hl7.Cql.Elm.Expression).IsAbstract.Should().BeTrue();
-            
+
             // OperatorExpression is abstract
             typeof(OperatorExpression).IsAbstract.Should().BeTrue();
         }
@@ -322,16 +322,16 @@ namespace CoreTests
             var assembly = typeof(Library).Assembly;
             var allTypes = assembly.GetTypes();
             var elmTypes = allTypes.Where(t => t.Namespace == "Hl7.Cql.Elm").ToList();
-            
+
             // Library should exist and be a public class
             typeof(Library).IsPublic.Should().BeTrue();
             typeof(Library).IsClass.Should().BeTrue();
-            
+
             // It should have XmlRootAttribute
             var xmlRootAttr = typeof(Library).GetCustomAttributes(typeof(System.Xml.Serialization.XmlRootAttribute), false)
                 .Cast<System.Xml.Serialization.XmlRootAttribute>()
                 .FirstOrDefault();
-            
+
             xmlRootAttr.Should().NotBeNull();
             xmlRootAttr!.ElementName.Should().Be("library");
             xmlRootAttr.Namespace.Should().Be("urn:hl7-org:elm:r1");
@@ -346,7 +346,7 @@ namespace CoreTests
             var generatedAttr = library.GetCustomAttributes(typeof(System.CodeDom.Compiler.GeneratedCodeAttribute), false)
                 .Cast<System.CodeDom.Compiler.GeneratedCodeAttribute>()
                 .FirstOrDefault();
-            
+
             generatedAttr.Should().NotBeNull();
             generatedAttr!.Tool.Should().Be("xsd2cs");
             generatedAttr.Version.Should().MatchRegex(@"^\d+\.\d+\.\d+\.\d+$", "version should be in format x.x.x.x");
@@ -428,7 +428,7 @@ namespace CoreTests
                 {
                     if (!expectedObj.ContainsKey(key))
                         result.Add(
-                            $"Unexpected key '{key}' (value '{actualObj[key].ToJsonString()}') found in actual object. At {actual.GetPath()}.");
+                            $"Unexpected key '{key}' (value '{actualObj[key]?.ToJsonString() ?? "null"}') found in actual object. At {actual.GetPath()}.");
                 }
             }
             else

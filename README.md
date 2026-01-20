@@ -9,6 +9,10 @@ The engine has been tested by running it against the current NCQA HEDIS measures
 There is quite some variation in how CQL is written and interpreted, 
 so it is likely at this early stage that there will be deviations from other engines currently available.
 
+## Target Frameworks
+
+The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal performance from .NET 10's enhancements (especially in LINQ which CQL heavily relies upon) while maintaining long-term support. All SDK packages (Hl7.Cql.*) are multi-targeted and will run on either framework with identical behavior.
+
 ## Release Notes
 This is release version 2.4.0 of the engine.
 
@@ -24,6 +28,7 @@ at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releas
 * [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
 * The [CQL Engine Architecture](docs/CQL-Engine-Architecture.md) document with background documentation on the design.
 * The [Toolkit Services Dependency Diagrams](docs/dependency-diagrams.md) showing the internal dependencies of the CQL SDK toolkit services.
+* The [Technical README](docs/TECHNICAL-README.md) for maintainers contains implementation details, conditional compilation, and multi-targeting information.
 
 
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, so the names of the classes in the presentation will differ from the examples in the Demo project itself.
@@ -94,6 +99,42 @@ During development, pre-releases will appear on Firely's GitHub Package feed. To
 ```PAT```: your Personal access token with at least the scope ```read:packages```
 
 Further information can be found in [docs/getting-started.md](docs/getting-started.md).
+
+## Testing
+
+### Multi-Framework Testing
+The SDK includes comprehensive tools for testing against both .NET 8 and .NET 10 to verify identical behavior across both LTS frameworks.
+
+**Test Categories:**
+- **Multi-Target Tests**: CoreTests and CqlToElmTests run on both .NET 8 and .NET 10
+- **.NET 10 Only**: IntegrationRunner and Test.Measures.Demo run only on .NET 10
+- **Excluded**: XsdToCSharpConverterTests, Ncqa.HT.DeckTests, Ncqa.HT.MeasuresTests
+
+**Local Testing Scripts:**
+```powershell
+# Windows - Test all multi-target projects against both frameworks
+.\test-multiframework.ps1
+
+# Windows - Test specific project against both frameworks
+.\test-multiframework.ps1 -TestProject CoreTests
+```
+
+```bash
+# Linux/macOS - Test all multi-target projects against both frameworks
+./test-multiframework.sh
+
+# Linux/macOS - Test specific project against both frameworks
+./test-multiframework.sh CoreTests
+```
+
+**CI/CD Testing:**
+Multi-framework testing is fully integrated into the Azure Pipelines CI/CD workflow. The `multiFrameworkTests` stage runs after the main build and tests in parallel:
+- Job 1: Tests CoreTests and CqlToElmTests on .NET 8
+- Job 2: Tests CoreTests, CqlToElmTests, IntegrationRunner, and Test.Measures.Demo on .NET 10
+- Job 3: Compares results and reports any framework-specific differences
+
+See `build/README.md` for complete CI/CD testing documentation and configuration details.
+
 ## Support 
 We actively monitor the issues coming in through the GitHub repository at [https://github.com/FirelyTeam/firely-cql-sdk/issues](https://github.com/FirelyTeam/firely-cql-sdk/issues). You are welcome to register your bugs and feature suggestions there. For questions and broader discussions, we use the [.NET FHIR Implementers chat][netsdk-zulip] and [CQL chat][cql-spec] on Zulip.
 
