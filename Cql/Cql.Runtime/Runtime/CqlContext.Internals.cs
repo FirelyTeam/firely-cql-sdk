@@ -1,4 +1,7 @@
 // We consider the content here as internal thus it won't be documented in the public API docs.
+
+using Hl7.Cql.Abstractions.Infrastructure;
+
 #pragma warning disable RS0016 // Symbol 'x' is not part of the declared public API
 
 namespace Hl7.Cql.Runtime.Internal

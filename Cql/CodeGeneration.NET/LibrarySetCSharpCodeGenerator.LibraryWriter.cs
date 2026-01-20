@@ -345,7 +345,7 @@ partial class LibrarySetCSharpCodeGenerator
                     foreach (var (definitionName, _) in sortedIndices)
                     {
                         var fieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(definitionName)}";
-                        ISB.AppendLine($"if ({fieldName} != 0)");
+                        ISB.AppendLine($"if ({fieldName} != -1)");
                         using (ISB.Indent())
                         {
                             ISB.AppendLine($"throw new InvalidOperationException($\"Cache index field '{fieldName}' in library '{{{{Name}}}}' version '{{{{Version}}}}' is already initialized to {{{{{fieldName}}}}}. Cache indices can only be initialized once.\");");

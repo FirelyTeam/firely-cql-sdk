@@ -18,11 +18,6 @@ partial class CqlContext
     /// <see cref="CqlContextExtensions.WithCacheIndexCount"/>.</exception>
     public void UseNewCache()
     {
-        if (!_cacheEnabled)
-            throw new InvalidOperationException(
-                $"To use caching, a call must be made to {nameof(CqlContextExtensions.WithCacheIndexCount)} first on the {nameof(CqlContext)}. "
-                + $"To get the cache index count for a set of libraries, use the {nameof(CacheIndexInitializer)}.");
-
         if (_cacheIndexCount is 0)
             return;
 
