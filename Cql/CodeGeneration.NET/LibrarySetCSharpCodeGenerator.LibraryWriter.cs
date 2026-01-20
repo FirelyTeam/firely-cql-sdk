@@ -286,9 +286,9 @@ partial class LibrarySetCSharpCodeGenerator
 
                 int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
                 {
-                    // Skip if already processed
+                    // Throw if already processed - cache indices can only be initialized once
                     if (!initializer.MarkAsProcessed(this))
-                        return 0;
+                        throw new InvalidOperationException($"Cache indices for library '{Name}' version '{Version}' have already been initialized. Cache indices can only be initialized once.");
 
                     var count = 0;
 

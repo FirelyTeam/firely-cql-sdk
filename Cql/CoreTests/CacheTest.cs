@@ -9,6 +9,7 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Internal;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CoreTests;
@@ -38,8 +39,12 @@ public class CacheTest
     {
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
-        ctx.UseNewCache(); // Enable caching
         var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Initialize cache indices
+        var initializer = new CacheIndexInitializer(lib);
+        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
+        ctx.UseNewCache(); // Enable caching
 
         // Act - Call the same expression twice
         var result1 = lib.Result(ctx);
@@ -56,8 +61,12 @@ public class CacheTest
     {
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
-        ctx.UseNewCache(); // Enable caching
         var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Initialize cache indices
+        var initializer = new CacheIndexInitializer(lib);
+        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
+        ctx.UseNewCache(); // Enable caching
 
         var result1 = lib.Result(ctx); // First call - cached
 
@@ -75,13 +84,18 @@ public class CacheTest
     public void Cache_WithMultipleContexts_ShouldBeIndependent()
     {
         // Arrange
+        var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Initialize cache indices
+        var initializer = new CacheIndexInitializer(lib);
+
         var ctx1 = FhirCqlContext.ForBundle();
+        ctx1.WithCacheIndexCount(initializer.CacheIndexCount);
         ctx1.UseNewCache();
 
         var ctx2 = FhirCqlContext.ForBundle();
+        ctx2.WithCacheIndexCount(initializer.CacheIndexCount);
         ctx2.UseNewCache();
-
-        var lib = CqlNestedTupleTest_1_0_0.Instance;
 
         // Act - Call with different contexts
         var result1a = lib.Result(ctx1);
@@ -104,9 +118,13 @@ public class CacheTest
         var lib = CqlNestedTupleTest_1_0_0.Instance;
 
         // Act - Execute in parallel with different contexts
+        // Initialize cache indices once
+        var initializer = new CacheIndexInitializer(lib);
+
         var results = Parallel.For(0, 10, i =>
         {
             var ctx = FhirCqlContext.ForBundle();
+            ctx.WithCacheIndexCount(initializer.CacheIndexCount);
             ctx.UseNewCache();
 
             // Call twice to verify caching works per context
@@ -127,8 +145,12 @@ public class CacheTest
     {
         // Arrange - Shared context to test thread safety for same cache key
         var ctx = FhirCqlContext.ForBundle();
-        ctx.UseNewCache();
         var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Initialize cache indices
+        var initializer = new CacheIndexInitializer(lib);
+        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
+        ctx.UseNewCache();
         var results = new System.Collections.Concurrent.ConcurrentBag<object?>();
 
         // Act - Multiple threads accessing the same context and cache key simultaneously
@@ -155,8 +177,12 @@ public class CacheTest
     {
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
-        ctx.UseNewCache();
         var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Initialize cache indices
+        var initializer = new CacheIndexInitializer(lib);
+        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
+        ctx.UseNewCache();
 
         // Act - Get cached result
         var result1 = lib.Result(ctx);
@@ -180,8 +206,12 @@ public class CacheTest
     {
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
-        ctx.UseNewCache();
         var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Initialize cache indices
+        var initializer = new CacheIndexInitializer(lib);
+        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
+        ctx.UseNewCache();
 
         // Act - First call should be a miss
         var result1 = lib.Result(ctx);
@@ -213,8 +243,12 @@ public class CacheTest
     {
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
-        ctx.UseNewCache();
         var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Initialize cache indices
+        var initializer = new CacheIndexInitializer(lib);
+        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
+        ctx.UseNewCache();
 
         // Act - Make some calls to populate statistics
         lib.Result(ctx); // Miss
@@ -247,8 +281,12 @@ public class CacheTest
     {
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
-        ctx.UseNewCache();
         var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Initialize cache indices
+        var initializer = new CacheIndexInitializer(lib);
+        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
+        ctx.UseNewCache();
 
         // Act - Make some calls to populate statistics
         lib.Result(ctx); // Miss
@@ -375,21 +413,23 @@ public class CacheTest
         // Arrange - use a library that should already be initialized from other tests
         var lib = RR23_1_0_0.Instance;
 
-        // Verify it's already initialized
+        // Reset initialization state to test double initialization
         var libraryType = lib.GetType();
-        var anyField = libraryType
+        var cacheIndexInitializedProperty = typeof(Hl7.Cql.Runtime.Internal.ILibraryInternals).GetProperty(nameof(Hl7.Cql.Runtime.Internal.ILibraryInternals.CacheIndicesInitialized));
+        var cacheIndexFields = libraryType
             .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
-            .FirstOrDefault(f => f.Name.StartsWith("_cacheIndex_") && f.FieldType == typeof(int));
+            .Where(f => f.Name.StartsWith("_cacheIndex_") && f.FieldType == typeof(int))
+            .ToArray();
 
-        if (anyField != null)
+        // Reset to uninitialized state
+        cacheIndexInitializedProperty!.SetValue(lib, false);
+        foreach (var field in cacheIndexFields)
         {
-            var currentValue = (int)anyField.GetValue(lib)!;
-            if (currentValue == 0)
-            {
-                // Initialize it first
-                _ = new CacheIndexInitializer(lib);
-            }
+            field.SetValue(lib, -1);
         }
+
+        // Initialize once
+        _ = new CacheIndexInitializer(lib);
 
         // Act & Assert - Second initialization should throw
         Assert.ThrowsException<InvalidOperationException>(() =>
@@ -404,22 +444,11 @@ public class CacheTest
         // Arrange
         var lib = CqlNestedTupleTest_1_0_0.Instance;
 
-        // Initialize if not already initialized
-        var libraryType = lib.GetType();
-        var anyField = libraryType
-            .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
-            .FirstOrDefault(f => f.Name.StartsWith("_cacheIndex_") && f.FieldType == typeof(int));
-
-        if (anyField != null)
-        {
-            var currentValue = (int)anyField.GetValue(lib)!;
-            if (currentValue == 0)
-            {
-                _ = new CacheIndexInitializer(lib);
-            }
-        }
+        // Initialize cache indices
+        var initializer = new CacheIndexInitializer(lib);
 
         var ctx = FhirCqlContext.ForBundle();
+        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
         ctx.UseNewCache();
 
         // Act - Call the same expression twice

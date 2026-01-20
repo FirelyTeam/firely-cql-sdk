@@ -1,3 +1,4 @@
+using System.Threading;
 using Hl7.Cql.Runtime.Internal;
 
 namespace Hl7.Cql.Runtime;
@@ -28,16 +29,19 @@ partial class CqlContext
 
         _cacheEnabled = true;
         _cacheWriteStrategy = writeStrategy;
-        _cache = new CacheEntry[_cacheIndexCount];
-        
+        // Allocate cache array with _cacheIndexCount + 1 elements to accommodate indices from 1 to _cacheIndexCount
+        // Index 0 is reserved and unused (cache indices start from 1)
+        _cache = new CacheEntry[_cacheIndexCount + 1];
+
         // Initialize each cache entry (required since CacheEntry is now a class)
-        for (int i = 0; i < _cacheIndexCount; i++)
+        for (int i = 0; i < _cache.Length; i++)
         {
             _cache[i] = new CacheEntry();
         }
-        
-        _cacheCallCount = 0;
-        _cacheFactoryInvocations = 0;
+
+        // Use Interlocked.Exchange for thread-safe reset
+        Interlocked.Exchange(ref _cacheCallCount, 0);
+        Interlocked.Exchange(ref _cacheFactoryInvocations, 0);
     }
 
     /// <summary>
@@ -52,8 +56,8 @@ partial class CqlContext
 
         _cacheEnabled = false;
         _cache = null;
-        _cacheCallCount = 0;
-        _cacheFactoryInvocations = 0;
+        Interlocked.Exchange(ref _cacheCallCount, 0);
+        Interlocked.Exchange(ref _cacheFactoryInvocations, 0);
     }
 
     internal void SetCacheIndexCount(int count)
@@ -63,8 +67,8 @@ partial class CqlContext
 
         // Reset cache fields
         _cache = null;
-        _cacheCallCount = 0;
-        _cacheFactoryInvocations = 0;
+        Interlocked.Exchange(ref _cacheCallCount, 0);
+        Interlocked.Exchange(ref _cacheFactoryInvocations, 0);
     }
 }
 
