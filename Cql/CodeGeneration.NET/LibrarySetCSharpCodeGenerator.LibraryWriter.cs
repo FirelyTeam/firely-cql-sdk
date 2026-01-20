@@ -78,10 +78,10 @@ partial class LibrarySetCSharpCodeGenerator
                 var (propertyName, signature) = signatures[i];
                 if (i == 0)
                     ISB.AppendLine(
-                        """
-                        #region CqlTupleMetadata Properties
+                        $"""
+                         #region CqlTupleMetadata Properties ({signatures.Count})
 
-                        """);
+                         """);
 
                 var types = string.Join(", ", signature.Select(t => $"typeof({LibrarySetWriter.TypeToCSharpConverter.ToCSharp(t.Type)})"));
                 var names = string.Join(", ", signature.Select(t => t.PropName.QuoteString()));
@@ -159,8 +159,28 @@ partial class LibrarySetCSharpCodeGenerator
         private void AppendMethods()
         {
             string lastDefinitionRegion = "";
+            var regionCounts = new Dictionary<string, int>();
 
-            // Assumption: definitions are already sorted by definition type
+            // First pass: count definitions per region
+            foreach (var definition in _definitions)
+            {
+                // Assumption: type name will be Cql....Definition
+                Debug.Assert(definition.GetType().Name is { } name && name.StartsWith("Cql") && name.EndsWith("Definition"));
+                string definitionRegion =
+                    definition switch
+                    {
+                        // CqlFunctionDefinition is a CqlExpressionDefinition
+                        // We combine them into one region otherwise we would have too many segments switching between Function and Expression
+                        CqlExpressionDefinition => "Functions and Expressions",
+
+                        // Extract the region name from the definition type name e.g. Cql[Parameter]Definition => Parameters
+                        _ => $"{definition.GetType().Name["Cql".Length..^"Definition".Length]}s"
+                    };
+
+                regionCounts[definitionRegion] = regionCounts.GetValueOrDefault(definitionRegion, 0) + 1;
+            }
+
+            // Second pass: generate code with counts
             foreach (var definition in _definitions)
             {
                 // Assumption: type name will be Cql....Definition
@@ -187,9 +207,10 @@ partial class LibrarySetCSharpCodeGenerator
                              """);
                     }
 
+                    var count = regionCounts[definitionRegion];
                     ISB.AppendLine(
                         $"""
-                         #region {definitionRegion}
+                         #region {definitionRegion} ({count})
 
                          """);
                 }
@@ -249,10 +270,10 @@ partial class LibrarySetCSharpCodeGenerator
                 return;
 
             ISB.AppendLine(
-                """
-                #region Cache Index Fields
+                $"""
+                 #region Cache Index Fields ({_cacheIndices.Count})
 
-                """);
+                 """);
 
             // Generate fields in order (for consistency), but don't initialize them
             // They will be set at runtime by a visitor

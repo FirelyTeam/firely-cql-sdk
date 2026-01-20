@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CqlBooleanTest", "1.0.000")]
 public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTest_1_0_000>
 {
-    #region Functions and Expressions
+    #region Functions and Expressions (1)
 
     [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context) =>
@@ -32,7 +32,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     #endregion Functions and Expressions
 
-    #region Cache Index Fields
+    #region Cache Index Fields (1)
 
     private int _cacheIndex_SomethingTrueEqualsTrue;
 

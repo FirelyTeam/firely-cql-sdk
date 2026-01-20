@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
-    #region ValueSets
+    #region ValueSets (2)
 
     [CqlValueSetDefinition("Injury due to falling rock", valueSetId: "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", valueSetVersion: null)]
     public CqlValueSet Injury_due_to_falling_rock(CqlContext _) => _Injury_due_to_falling_rock;
@@ -28,7 +28,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #endregion ValueSets
 
-    #region Codes
+    #region Codes (2)
 
     [CqlCodeDefinition("Tiny Umbrella", codeId: "U707", codeSystem: "http://acme.org/product-catalog")]
     public CqlCode Tiny_Umbrella(CqlContext _) => _Tiny_Umbrella;
@@ -40,7 +40,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #endregion Codes
 
-    #region CodeSystems
+    #region CodeSystems (2)
 
     [CqlCodeSystemDefinition("ACME Product Catalog", codeSystemId: "http://acme.org/product-catalog", codeSystemVersion: null)]
     public CqlCodeSystem ACME_Product_Catalog(CqlContext _) => _ACME_Product_Catalog;
@@ -56,7 +56,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #endregion CodeSystems
 
-    #region Parameters
+    #region Parameters (1)
 
     [CqlParameterDefinition("Measurement Period")]
     public object Measurement_Period(CqlContext context) =>
@@ -74,7 +74,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #endregion Parameters
 
-    #region Functions and Expressions
+    #region Functions and Expressions (4)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -195,7 +195,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #endregion Functions and Expressions
 
-    #region Cache Index Fields
+    #region Cache Index Fields (5)
 
     private int _cacheIndex_Measurement_Period;
     private int _cacheIndex_Patient;

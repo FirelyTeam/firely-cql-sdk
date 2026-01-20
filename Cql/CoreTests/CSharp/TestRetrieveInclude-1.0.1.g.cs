@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
 public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_1_0_1>
 {
-    #region ValueSets
+    #region ValueSets (6)
 
     [CqlValueSetDefinition("Female Administrative Sex", valueSetId: "2.16.840.1.113883.3.560.100.2", valueSetVersion: null)]
     public CqlValueSet Female_Administrative_Sex(CqlContext _) => _Female_Administrative_Sex;
@@ -44,7 +44,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #endregion ValueSets
 
-    #region Functions and Expressions
+    #region Functions and Expressions (1)
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Observation> InDemographic(CqlContext context) =>
@@ -59,7 +59,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #endregion Functions and Expressions
 
-    #region Cache Index Fields
+    #region Cache Index Fields (1)
 
     private int _cacheIndex_InDemographic;
 

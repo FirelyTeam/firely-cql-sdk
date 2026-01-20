@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ConceptDefTest", "1.0.0")]
 public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_1_0_0>
 {
-    #region Codes
+    #region Codes (3)
 
     [CqlCodeDefinition("Diabetes Mellitus", codeId: "44054006", codeSystem: "http://snomed.info/sct")]
     public CqlCode Diabetes_Mellitus(CqlContext _) => _Diabetes_Mellitus;
@@ -32,7 +32,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
     #endregion Codes
 
-    #region CodeSystems
+    #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("SNOMED", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
     public CqlCodeSystem SNOMED(CqlContext _) => _SNOMED;
@@ -44,7 +44,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
     #endregion CodeSystems
 
-    #region Concepts
+    #region Concepts (3)
 
     [CqlConceptDefinition("Diabetes")]
     public CqlConcept Diabetes(CqlContext _) => _Diabetes;
@@ -69,7 +69,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
     #endregion Concepts
 
-    #region Functions and Expressions
+    #region Functions and Expressions (1)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -85,7 +85,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
     #endregion Functions and Expressions
 
-    #region Cache Index Fields
+    #region Cache Index Fields (1)
 
     private int _cacheIndex_Patient;
 

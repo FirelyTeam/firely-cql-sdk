@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ValueSetExprExample", "1.0.0")]
 public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetExprExample_1_0_0>
 {
-    #region ValueSets
+    #region ValueSets (4)
 
     [CqlValueSetDefinition("ValueSet-A-1", valueSetId: "http://fire.ly/ValueSet/ValueSet-A-1", valueSetVersion: null)]
     public CqlValueSet ValueSet_A_1(CqlContext _) => _ValueSet_A_1;
@@ -36,7 +36,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     #endregion ValueSets
 
-    #region Parameters
+    #region Parameters (2)
 
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context) =>
@@ -62,7 +62,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     #endregion Parameters
 
-    #region Functions and Expressions
+    #region Functions and Expressions (3)
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context) =>
@@ -192,7 +192,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     #endregion Functions and Expressions
 
-    #region Cache Index Fields
+    #region Cache Index Fields (5)
 
     private int _cacheIndex_ChosenSubCategory;
     private int _cacheIndex_ChosenCode;

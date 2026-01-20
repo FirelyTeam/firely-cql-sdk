@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CqlNestedTupleTest", "1.0.0")]
 public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTupleTest_1_0_0>
 {
-    #region Functions and Expressions
+    #region Functions and Expressions (1)
 
     [CqlExpressionDefinition("Result")]
     public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context) =>
@@ -32,7 +32,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
 
     #endregion Functions and Expressions
 
-    #region Cache Index Fields
+    #region Cache Index Fields (1)
 
     private int _cacheIndex_Result;
 
@@ -54,7 +54,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
 
     #endregion ILibrary Implementation
 
-    #region CqlTupleMetadata Properties
+    #region CqlTupleMetadata Properties (2)
 
     private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
        [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],

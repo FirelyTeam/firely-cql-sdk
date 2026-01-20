@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("TestRetrieve", "1.0.1")]
 public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_1>
 {
-    #region ValueSets
+    #region ValueSets (11)
 
     [CqlValueSetDefinition("HIV", valueSetId: "2.16.840.1.113883.3.464.1003.120.12.1003", valueSetVersion: null)]
     public CqlValueSet HIV(CqlContext _) => _HIV;
@@ -64,7 +64,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion ValueSets
 
-    #region Codes
+    #region Codes (1)
 
     [CqlCodeDefinition("Encounter for palliative care", codeId: "Z51.5", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
     public CqlCode Encounter_for_palliative_care(CqlContext _) => _Encounter_for_palliative_care;
@@ -72,7 +72,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion Codes
 
-    #region CodeSystems
+    #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("ICD-10", codeSystemId: "http://hl7.org/fhir/sid/icd-10-cm", codeSystemVersion: null)]
     public CqlCodeSystem ICD_10(CqlContext _) => _ICD_10;
@@ -82,7 +82,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion CodeSystems
 
-    #region Parameters
+    #region Parameters (1)
 
     [CqlParameterDefinition("MeasurementPeriod")]
     public object MeasurementPeriod(CqlContext context) =>
@@ -100,7 +100,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion Parameters
 
-    #region Functions and Expressions
+    #region Functions and Expressions (3)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -142,7 +142,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion Functions and Expressions
 
-    #region Cache Index Fields
+    #region Cache Index Fields (4)
 
     private int _cacheIndex_MeasurementPeriod;
     private int _cacheIndex_Patient;

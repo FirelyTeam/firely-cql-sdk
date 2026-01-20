@@ -16,7 +16,7 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("FHIRHelpers", "4.0.1")]
 public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
 {
-    #region Functions and Expressions
+    #region Functions and Expressions (233)
 
     [CqlFunctionDefinition("ToInterval")]
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, Period period)
