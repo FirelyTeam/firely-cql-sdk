@@ -1,28 +1,34 @@
-﻿namespace Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.Internal;
+
+namespace Hl7.Cql.Runtime;
 
 partial class CqlContext
 {
-    private object?[]? _cache;
+    private CacheEntry[]? _cache;
     private int _cacheIndexCount;
     private bool _cacheEnabled;
+    private CacheWriteStrategy _cacheWriteStrategy;
     private long _cacheCallCount;
     private long _cacheFactoryInvocations;
 
     /// <summary>
     /// Invalidates the current cache, forcing subsequent operations to use fresh data.
     /// </summary>
+    /// <param name="writeStrategy">The strategy to use for handling concurrent writes to the cache.
+    /// Defaults to <see cref="CacheWriteStrategy.PublicationOnly"/>.</param>
     /// <remarks>Call this method to clear any cached data and ensure that future operations do not use stale
     /// information. This is useful when the underlying data source has changed and the cache needs to be
     /// refreshed.</remarks>
     /// <exception cref="InvalidOperationException">Thrown if caching has not been enabled first by calling
     /// <see cref="CqlContextExtensions.WithCacheIndexCount"/>.</exception>
-    public void UseNewCache()
+    public void UseNewCache(CacheWriteStrategy writeStrategy = CacheWriteStrategy.PublicationOnly)
     {
         if (_cacheIndexCount is 0)
             return;
 
         _cacheEnabled = true;
-        _cache = new object?[_cacheIndexCount];
+        _cacheWriteStrategy = writeStrategy;
+        _cache = new CacheEntry[_cacheIndexCount];
         _cacheCallCount = 0;
         _cacheFactoryInvocations = 0;
     }

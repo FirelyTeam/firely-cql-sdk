@@ -96,7 +96,7 @@ namespace Hl7.Cql.Runtime
             var cache = _cache;
 
             // If cacheIndex is 0 or cache is disabled, compute directly without caching
-            if (!_cacheEnabled || cache is null || cacheIndex < 0)
+            if (!_cacheEnabled || cache is null || cacheIndex <= 0)
             {
                 Interlocked.Increment(ref _cacheFactoryInvocations);
                 return factory(this);
@@ -110,22 +110,52 @@ namespace Hl7.Cql.Runtime
                 return factory(this);
             }
 
-            // Try to get from cache
-            var cachedValue = Volatile.Read(ref cache[cacheIndex]);
-            if (cachedValue is not null)
+            // Try to get from cache - volatile read on the IsCached field ensures thread-safe visibility
+            ref var entry = ref cache[cacheIndex];
+            if (Volatile.Read(ref entry.IsCached))
             {
-                // Cache hit
-                return (T)cachedValue;
+                // Cache hit - return the cached value (which may be null)
+                // The value field is guaranteed to be set before IsCached is set to true
+                return (T)entry.Value!;
             }
 
-            // Cache miss - compute value
-            Interlocked.Increment(ref _cacheFactoryInvocations);
-            var value = factory(this);
+            // Cache miss - use the configured write strategy
+            if (_cacheWriteStrategy == CacheWriteStrategy.ExecutionAndPublication)
+            {
+                // Ensure only one thread computes - use lock on the cache entry
+                lock (cache)
+                {
+                    // Double-check after acquiring lock
+                    if (Volatile.Read(ref entry.IsCached))
+                    {
+                        return (T)entry.Value!;
+                    }
 
-            // Store in cache (thread-safe: later writes win, but all compute same value)
-            Volatile.Write(ref cache[cacheIndex], value);
+                    // Compute value
+                    Interlocked.Increment(ref _cacheFactoryInvocations);
+                    var value = factory(this);
 
-            return value;
+                    // Store in cache
+                    entry.Value = value;
+                    Volatile.Write(ref entry.IsCached, true);
+
+                    return value;
+                }
+            }
+            else // PublicationOnly - multiple threads can compute, last write wins
+            {
+                // Compute value without locking
+                Interlocked.Increment(ref _cacheFactoryInvocations);
+                var value = factory(this);
+
+                // Store in cache with volatile write for thread-safe access
+                // Set the value first, then set IsCached to true with a volatile write
+                // This ensures proper memory ordering: value is visible before IsCached becomes true
+                entry.Value = value;
+                Volatile.Write(ref entry.IsCached, true);
+
+                return value;
+            }
         }
     }
 }
