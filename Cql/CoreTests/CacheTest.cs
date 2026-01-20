@@ -303,7 +303,7 @@ public class CacheTest
         var lib = ConceptDefTest_1_0_0.Instance;
 
         // Act
-        CacheIndexInitializer.Initialize(lib);
+        CacheIndexInitializer.Instance.Initialize(lib);
 
         // Assert - Cache indices should be set sequentially starting from 1
         var libraryType = lib.GetType();
@@ -329,7 +329,7 @@ public class CacheTest
         var lib = TestRetrieve_1_0_1.Instance;
 
         // Act
-        CacheIndexInitializer.Initialize(lib);
+        CacheIndexInitializer.Instance.Initialize(lib);
 
         // Assert - Dependencies should also have indices set
         Assert.IsTrue(lib.Dependencies.Length > 0, "TestRetrieve should have dependencies");
@@ -371,14 +371,14 @@ public class CacheTest
             if (currentValue == 0)
             {
                 // Initialize it first
-                CacheIndexInitializer.Initialize(lib);
+                CacheIndexInitializer.Instance.Initialize(lib);
             }
         }
 
         // Act & Assert - Second initialization should throw
         Assert.ThrowsException<InvalidOperationException>(() =>
         {
-            CacheIndexInitializer.Initialize(lib);
+            CacheIndexInitializer.Instance.Initialize(lib);
         });
     }
 
@@ -399,7 +399,7 @@ public class CacheTest
             var currentValue = (int)anyField.GetValue(lib)!;
             if (currentValue == 0)
             {
-                CacheIndexInitializer.Initialize(lib);
+                CacheIndexInitializer.Instance.Initialize(lib);
             }
         }
 

@@ -243,7 +243,7 @@ partial class LibrarySetCSharpCodeGenerator
 
             ISB.AppendLine(
                 $$"""
-                  public partial class {{_className}} : ILibrary, ISingleton<{{_className}}>
+                  public partial class {{_className}} : ILibrary, ILibraryInternals, ISingleton<{{_className}}>
                   {
                   """);
 
@@ -254,6 +254,9 @@ partial class LibrarySetCSharpCodeGenerator
 
                 // Cache index fields (must come after AppendMethods so indices are assigned)
                 AppendCacheIndexFields();
+
+                // ILibraryInternals implementation
+                AppendInitializeCacheIndicesMethod();
 
                 // These are all boilerplate
                 AppendSingletonLifetimeMembers();
@@ -288,6 +291,96 @@ partial class LibrarySetCSharpCodeGenerator
                 """
 
                 #endregion Cache Index Fields
+
+                """);
+        }
+
+        private void AppendInitializeCacheIndicesMethod()
+        {
+            ISB.AppendLine(
+                """
+                #region ILibraryInternals Implementation
+
+                int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+                {
+                    // Skip if already processed
+                    if (!initializer.MarkAsProcessed(this))
+                        return 0;
+
+                    var count = 0;
+
+                """);
+
+            using (ISB.Indent())
+            {
+                // Process dependencies first
+                ISB.AppendLine(
+                    """
+                    // Process dependencies first (depth-first traversal)
+                    if (Dependencies is { Length: > 0 })
+                    {
+                    """);
+
+                using (ISB.Indent())
+                {
+                    ISB.AppendLine(
+                        """
+                        foreach (var dependency in Dependencies)
+                        {
+                        """);
+
+                    using (ISB.Indent())
+                    {
+                        ISB.AppendLine(
+                            """
+                            if (dependency is ILibraryInternals internals)
+                            {
+                            """);
+
+                        using (ISB.Indent())
+                        {
+                            ISB.AppendLine("count += internals.InitializeCacheIndices(initializer);");
+                        }
+
+                        ISB.AppendLine("}");
+                    }
+
+                    ISB.AppendLine("}");
+                }
+
+                ISB.AppendLine(
+                    """
+                    }
+
+                    """);
+
+                // Initialize cache indices for this library
+                if (_cacheIndices.Count > 0)
+                {
+                    ISB.AppendLine("// Initialize cache indices for this library");
+                    var sortedIndices = _cacheIndices.OrderBy(kvp => kvp.Value).ToList();
+                    foreach (var (definitionName, _) in sortedIndices)
+                    {
+                        var fieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(definitionName)}";
+                        ISB.AppendLine($"if ({fieldName} != 0)");
+                        using (ISB.Indent())
+                        {
+                            ISB.AppendLine($"throw new InvalidOperationException($\"Cache index field '{fieldName}' in library '{{{{Name}}}}' version '{{{{Version}}}}' is already initialized to {{{{{fieldName}}}}}. Cache indices can only be initialized once.\");");
+                        }
+                        ISB.AppendLine($"{fieldName} = initializer.GetNextIndex();");
+                        ISB.AppendLine("count++;");
+                        ISB.AppendLine();
+                    }
+                }
+
+                ISB.AppendLine("return count;");
+            }
+
+            ISB.AppendLine(
+                """
+                }
+
+                #endregion ILibraryInternals Implementation
 
                 """);
         }
