@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("ValueSetExprExample", "1.0.0")]
-public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetExprExample_1_0_0>
+public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, ISingleton<ValueSetExprExample_1_0_0>
 {
     #region ValueSets (4)
 
@@ -41,7 +41,9 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute);
+        ((ICqlContextInternals)context).GetOrCompute<string>(
+            _cacheIndex_ChosenSubCategory,
+            ChosenSubCategory_Compute);
 
     private string ChosenSubCategory_Compute(CqlContext context)
     {
@@ -52,7 +54,9 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlParameterDefinition("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(_cacheIndex_ChosenCode, ChosenCode_Compute);
+        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
+            _cacheIndex_ChosenCode,
+            ChosenCode_Compute);
 
     private CqlCode ChosenCode_Compute(CqlContext context)
     {
@@ -67,7 +71,9 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(_cacheIndex_ValueSetA, ValueSetA_Compute);
+        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(
+            _cacheIndex_ValueSetA,
+            ValueSetA_Compute);
 
     private CqlValueSet ValueSetA_Compute(CqlContext context)
     {
@@ -109,7 +115,9 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlExpressionDefinition("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(_cacheIndex_ValueSetB, ValueSetB_Compute);
+        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(
+            _cacheIndex_ValueSetB,
+            ValueSetB_Compute);
 
     private CqlValueSet ValueSetB_Compute(CqlContext context)
     {
@@ -151,7 +159,9 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlExpressionDefinition("Result")]
     public string Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(_cacheIndex_Result, Result_Compute);
+        ((ICqlContextInternals)context).GetOrCompute<string>(
+            _cacheIndex_Result,
+            Result_Compute);
 
     private string Result_Compute(CqlContext context)
     {
@@ -202,6 +212,59 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     private int _cacheIndex_Result;
 
     #endregion Cache Index Fields
+
+    #region ILibraryInternals Implementation
+
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+        // Skip if already processed
+        if (!initializer.MarkAsProcessed(this))
+            return 0;
+
+        var count = 0;
+
+        // Process dependencies first (depth-first traversal)
+        if (Dependencies is { Length: > 0 })
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (dependency is ILibraryInternals internals)
+                {
+                    count += internals.InitializeCacheIndices(initializer);
+                }
+            }
+        }
+
+        // Initialize cache indices for this library
+        if (_cacheIndex_ChosenSubCategory != 0)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_ChosenSubCategory' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ChosenSubCategory}}. Cache indices can only be initialized once.");
+        _cacheIndex_ChosenSubCategory = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_ChosenCode != 0)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_ChosenCode' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ChosenCode}}. Cache indices can only be initialized once.");
+        _cacheIndex_ChosenCode = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_ValueSetA != 0)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_ValueSetA' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ValueSetA}}. Cache indices can only be initialized once.");
+        _cacheIndex_ValueSetA = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_ValueSetB != 0)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_ValueSetB' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ValueSetB}}. Cache indices can only be initialized once.");
+        _cacheIndex_ValueSetB = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Result != 0)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Result' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Result}}. Cache indices can only be initialized once.");
+        _cacheIndex_Result = initializer.GetNextIndex();
+        count++;
+
+        return count;
+    }
+
+    #endregion ILibraryInternals Implementation
 
     #region Singleton Lifetime Members
 

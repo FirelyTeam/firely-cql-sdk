@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
-public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_1_0_1>
+public partial class TestRetrieveInclude_1_0_1 : ILibrary, ILibraryInternals, ISingleton<TestRetrieveInclude_1_0_1>
 {
     #region ValueSets (6)
 
@@ -49,7 +49,9 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Observation> InDemographic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(_cacheIndex_InDemographic, InDemographic_Compute);
+        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(
+            _cacheIndex_InDemographic,
+            InDemographic_Compute);
 
     private IEnumerable<Observation> InDemographic_Compute(CqlContext context)
     {
@@ -65,6 +67,39 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
     private int _cacheIndex_InDemographic;
 
     #endregion Cache Index Fields
+
+    #region ILibraryInternals Implementation
+
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+        // Skip if already processed
+        if (!initializer.MarkAsProcessed(this))
+            return 0;
+
+        var count = 0;
+
+        // Process dependencies first (depth-first traversal)
+        if (Dependencies is { Length: > 0 })
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (dependency is ILibraryInternals internals)
+                {
+                    count += internals.InitializeCacheIndices(initializer);
+                }
+            }
+        }
+
+        // Initialize cache indices for this library
+        if (_cacheIndex_InDemographic != 0)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_InDemographic' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_InDemographic}}. Cache indices can only be initialized once.");
+        _cacheIndex_InDemographic = initializer.GetNextIndex();
+        count++;
+
+        return count;
+    }
+
+    #endregion ILibraryInternals Implementation
 
     #region Singleton Lifetime Members
 

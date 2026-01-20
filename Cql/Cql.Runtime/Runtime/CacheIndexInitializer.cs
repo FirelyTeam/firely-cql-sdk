@@ -18,19 +18,20 @@ namespace Hl7.Cql.Runtime;
 /// </summary>
 public sealed class CacheIndexInitializer
 {
-    private readonly HashSet<ILibrary> _processed = new HashSet<ILibrary>();
-    private int _nextIndex = 1;
-
     /// <summary>
     /// Gets the total count of cache index fields initialized across all libraries.
     /// </summary>
     public int TotalIndexCount { get; private set; }
 
     /// <summary>
-    /// Initializes a new instance of the CacheIndexInitializer and processes the specified libraries.
-    /// Cache indices are assigned sequentially starting from 1 across all libraries in the dependency graph.
+    /// Initializes a new instance of the CacheIndexInitializer class using the specified libraries as roots for cache
+    /// index initialization.
     /// </summary>
-    /// <param name="libraries">The root libraries to initialize. Dependencies will be processed recursively.</param>
+    /// <remarks>If the libraries array is null or empty, no cache indices will be initialized and the total
+    /// index count will be zero. The initialization processes each library and its dependencies only once, in
+    /// dependency-first order.</remarks>
+    /// <param name="libraries">An array of root libraries to use for initializing cache indices. Each library and its dependencies will be
+    /// processed in dependency-first order. Must not be null or empty.</param>
     /// <exception cref="InvalidOperationException">
     /// Thrown if any cache index field is already initialized (non-zero), indicating that initialization
     /// has already been performed on these libraries.
@@ -40,33 +41,19 @@ public sealed class CacheIndexInitializer
         if (libraries is not { Length: not 0 })
             return;
 
-        // Process each root library and its dependencies in dependency-first order
+        int totalIndexCount = 0;
         foreach (var library in libraries)
         {
+            // Process each root library and its dependencies in dependency-first order
             if (library is ILibraryInternals internals)
             {
-                TotalIndexCount += internals.InitializeCacheIndices(this);
+                totalIndexCount += internals.InitializeCacheIndices(this);
             }
         }
+        TotalIndexCount = totalIndexCount;
     }
 
-    /// <summary>
-    /// Gets the next cache index and increments the counter.
-    /// This method is called by generated libraries during initialization.
-    /// </summary>
-    /// <returns>The next available cache index.</returns>
-    public int GetNextIndex()
-    {
-        return _nextIndex++;
-    }
+    public bool MarkAsProcessed(ILibrary _) => false;
 
-    /// <summary>
-    /// Marks a library as processed to avoid duplicate initialization.
-    /// </summary>
-    /// <param name="library">The library to mark as processed.</param>
-    /// <returns>True if the library was added (first time processing), false if already processed.</returns>
-    public bool MarkAsProcessed(ILibrary library)
-    {
-        return _processed.Add(library);
-    }
+    public int GetNextIndex() => 0;
 }

@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
-public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConversionTest_2023_0_0>
+public partial class FHIRConversionTest_2023_0_0 : ILibrary, ILibraryInternals, ISingleton<FHIRConversionTest_2023_0_0>
 {
     #region Functions and Expressions (131)
 
@@ -7191,6 +7191,33 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 
 
     #endregion Functions and Expressions
+
+    #region ILibraryInternals Implementation
+
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+        // Skip if already processed
+        if (!initializer.MarkAsProcessed(this))
+            return 0;
+
+        var count = 0;
+
+        // Process dependencies first (depth-first traversal)
+        if (Dependencies is { Length: > 0 })
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (dependency is ILibraryInternals internals)
+                {
+                    count += internals.InitializeCacheIndices(initializer);
+                }
+            }
+        }
+
+        return count;
+    }
+
+    #endregion ILibraryInternals Implementation
 
     #region Singleton Lifetime Members
 

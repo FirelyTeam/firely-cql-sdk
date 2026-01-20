@@ -97,6 +97,13 @@
         "CQLPACKAGE_PROFILE": "CoreTests"
       }
     },
+    "PackageCLI (CoreTests ELM->C#)": {
+      "commandName": "Project",
+      "commandLineArgs": "elm --elm \"$(CqlSolutionDir)/Cql/CoreTests/Input/ELM/HL7\" --cs \"$(CqlSolutionDir)/Cql/CoreTests/CSharp\" ",
+      "environmentVariables": {
+        "CQLPACKAGE_PROFILE": "CoreTests"
+      }
+    },
     "PackageCLI (Measures.Authoring)": {
       "commandName": "Project",
       "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\" ",

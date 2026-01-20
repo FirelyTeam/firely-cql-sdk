@@ -15,7 +15,7 @@ using Task = Hl7.Fhir.Model.Task;
 
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("ConceptDefTest", "1.0.0")]
-public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_1_0_0>
+public partial class ConceptDefTest_1_0_0 : ILibrary, ILibraryInternals, ISingleton<ConceptDefTest_1_0_0>
 {
     #region Codes (3)
 
@@ -74,7 +74,9 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(_cacheIndex_Patient, Patient_Compute);
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(
+            _cacheIndex_Patient,
+            Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -91,6 +93,46 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
     private int _cacheIndex_Patient;
 
     #endregion Cache Index Fields
+
+    #region ILibraryInternals Implementation
+
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+
+    }
+
+    /*
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+        // Skip if already processed
+        if (!initializer.MarkAsProcessed(this))
+            return 0;
+
+        var count = 0;
+
+        // Process dependencies first (depth-first traversal)
+        if (Dependencies is { Length: > 0 })
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (dependency is ILibraryInternals internals)
+                {
+                    count += internals.InitializeCacheIndices(initializer);
+                }
+            }
+        }
+
+        // Initialize cache indices for this library
+        if (_cacheIndex_Patient != 0)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
+        _cacheIndex_Patient = initializer.GetNextIndex();
+        count++;
+
+        return count;
+    }
+    */
+
+    #endregion ILibraryInternals Implementation
 
     #region Singleton Lifetime Members
 
