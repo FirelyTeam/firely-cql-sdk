@@ -303,7 +303,7 @@ public class CacheTest
         var lib = ConceptDefTest_1_0_0.Instance;
 
         // Act
-        CacheIndexInitializer.Instance.Initialize(lib);
+        var initializer = new CacheIndexInitializer(lib);
 
         // Assert - Cache indices should be set sequentially starting from 1
         var libraryType = lib.GetType();
@@ -320,6 +320,9 @@ public class CacheTest
             var value = (int)field.GetValue(lib)!;
             Assert.IsTrue(value > 0, $"Field {field.Name} should have a positive index, but was {value}");
         }
+
+        // Verify TotalIndexCount property
+        Assert.AreEqual(cacheIndexFields.Length, initializer.TotalIndexCount, "TotalIndexCount should match number of cache index fields");
     }
 
     [TestMethod]
@@ -329,11 +332,12 @@ public class CacheTest
         var lib = TestRetrieve_1_0_1.Instance;
 
         // Act
-        CacheIndexInitializer.Instance.Initialize(lib);
+        var initializer = new CacheIndexInitializer(lib);
 
         // Assert - Dependencies should also have indices set
         Assert.IsTrue(lib.Dependencies.Length > 0, "TestRetrieve should have dependencies");
 
+        var totalFields = 0;
         foreach (var dependency in lib.Dependencies)
         {
             var depType = dependency.GetType();
@@ -344,6 +348,7 @@ public class CacheTest
 
             if (cacheIndexFields.Length > 0)
             {
+                totalFields += cacheIndexFields.Length;
                 foreach (var field in cacheIndexFields)
                 {
                     var value = (int)field.GetValue(dependency)!;
@@ -351,6 +356,17 @@ public class CacheTest
                 }
             }
         }
+
+        // Count fields in the root library too
+        var libType = lib.GetType();
+        var libCacheIndexFields = libType
+            .GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+            .Where(f => f.Name.StartsWith("_cacheIndex_") && f.FieldType == typeof(int))
+            .ToArray();
+        totalFields += libCacheIndexFields.Length;
+
+        // Verify TotalIndexCount includes dependencies
+        Assert.AreEqual(totalFields, initializer.TotalIndexCount, "TotalIndexCount should include all libraries and dependencies");
     }
 
     [TestMethod]
@@ -371,14 +387,14 @@ public class CacheTest
             if (currentValue == 0)
             {
                 // Initialize it first
-                CacheIndexInitializer.Instance.Initialize(lib);
+                _ = new CacheIndexInitializer(lib);
             }
         }
 
         // Act & Assert - Second initialization should throw
         Assert.ThrowsException<InvalidOperationException>(() =>
         {
-            CacheIndexInitializer.Instance.Initialize(lib);
+            _ = new CacheIndexInitializer(lib);
         });
     }
 
@@ -399,7 +415,7 @@ public class CacheTest
             var currentValue = (int)anyField.GetValue(lib)!;
             if (currentValue == 0)
             {
-                CacheIndexInitializer.Instance.Initialize(lib);
+                _ = new CacheIndexInitializer(lib);
             }
         }
 

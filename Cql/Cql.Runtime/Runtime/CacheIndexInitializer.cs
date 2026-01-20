@@ -13,26 +13,21 @@ namespace Hl7.Cql.Runtime;
 
 /// <summary>
 /// Initializes cache index fields in CQL libraries and their dependencies.
-/// This must be called once before using the libraries to enable efficient array-based caching.
+/// Create an instance with the root libraries to initialize, which will traverse dependencies
+/// and assign sequential cache indices for efficient array-based caching.
 /// </summary>
 public sealed class CacheIndexInitializer
 {
-    private static readonly Lazy<CacheIndexInitializer> _instance = new Lazy<CacheIndexInitializer>(() => new CacheIndexInitializer());
-
-    /// <summary>
-    /// Gets the singleton instance of the CacheIndexInitializer.
-    /// </summary>
-    public static CacheIndexInitializer Instance => _instance.Value;
-
     private readonly HashSet<ILibrary> _processed = new HashSet<ILibrary>();
     private int _nextIndex = 1;
 
-    private CacheIndexInitializer()
-    {
-    }
+    /// <summary>
+    /// Gets the total count of cache index fields initialized across all libraries.
+    /// </summary>
+    public int TotalIndexCount { get; private set; }
 
     /// <summary>
-    /// Initializes cache index fields for the specified libraries and their dependencies.
+    /// Initializes a new instance of the CacheIndexInitializer and processes the specified libraries.
     /// Cache indices are assigned sequentially starting from 1 across all libraries in the dependency graph.
     /// </summary>
     /// <param name="libraries">The root libraries to initialize. Dependencies will be processed recursively.</param>
@@ -40,7 +35,7 @@ public sealed class CacheIndexInitializer
     /// Thrown if any cache index field is already initialized (non-zero), indicating that initialization
     /// has already been performed on these libraries.
     /// </exception>
-    public void Initialize(params ILibrary[] libraries)
+    public CacheIndexInitializer(params ILibrary[] libraries)
     {
         if (libraries is not { Length: not 0 })
             return;
@@ -50,7 +45,7 @@ public sealed class CacheIndexInitializer
         {
             if (library is ILibraryInternals internals)
             {
-                internals.InitializeCacheIndices(this);
+                TotalIndexCount += internals.InitializeCacheIndices(this);
             }
         }
     }
