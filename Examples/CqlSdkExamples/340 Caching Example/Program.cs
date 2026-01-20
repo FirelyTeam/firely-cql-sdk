@@ -107,6 +107,7 @@ partial class Program
         var context3 = FhirCqlContext.WithDataSource();
         context3.UseNewCache(CacheWriteStrategy.PublicationOnly);
         Console.WriteLine("   ✓ Using PublicationOnly: Multiple threads can compute, last write wins");
+        Console.WriteLine("   ✓ Per-entry locking: Different cache entries don't contend with each other");
 
         var result3 = librarySetInvoker.InvokeLibraryDefinition(
             context3,

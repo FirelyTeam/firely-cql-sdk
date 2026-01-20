@@ -111,8 +111,8 @@ namespace Hl7.Cql.Runtime
             }
 
             // Try to get from cache - volatile read on the IsCached field ensures thread-safe visibility
-            ref var entry = ref cache[cacheIndex];
-            if (Volatile.Read(ref entry.IsCached))
+            var entry = cache[cacheIndex];
+            if (entry.IsCached)
             {
                 // Cache hit - return the cached value (which may be null)
                 // The value field is guaranteed to be set before IsCached is set to true
@@ -122,11 +122,11 @@ namespace Hl7.Cql.Runtime
             // Cache miss - use the configured write strategy
             if (_cacheWriteStrategy == CacheWriteStrategy.ExecutionAndPublication)
             {
-                // Ensure only one thread computes - use lock on the cache entry
-                lock (cache)
+                // Ensure only one thread computes - use lock on the cache entry for fine-grained locking
+                lock (entry)
                 {
                     // Double-check after acquiring lock
-                    if (Volatile.Read(ref entry.IsCached))
+                    if (entry.IsCached)
                     {
                         return (T)entry.Value!;
                     }
@@ -135,9 +135,9 @@ namespace Hl7.Cql.Runtime
                     Interlocked.Increment(ref _cacheFactoryInvocations);
                     var value = factory(this);
 
-                    // Store in cache
+                    // Store in cache - set value first, then IsCached
                     entry.Value = value;
-                    Volatile.Write(ref entry.IsCached, true);
+                    entry.IsCached = true; // volatile field ensures memory barrier
 
                     return value;
                 }
@@ -148,11 +148,10 @@ namespace Hl7.Cql.Runtime
                 Interlocked.Increment(ref _cacheFactoryInvocations);
                 var value = factory(this);
 
-                // Store in cache with volatile write for thread-safe access
-                // Set the value first, then set IsCached to true with a volatile write
-                // This ensures proper memory ordering: value is visible before IsCached becomes true
+                // Store in cache - set value first, then IsCached
+                // The volatile field ensures proper memory ordering: value is visible before IsCached becomes true
                 entry.Value = value;
-                Volatile.Write(ref entry.IsCached, true);
+                entry.IsCached = true; // volatile field ensures memory barrier
 
                 return value;
             }

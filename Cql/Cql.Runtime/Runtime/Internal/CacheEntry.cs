@@ -10,15 +10,14 @@ namespace Hl7.Cql.Runtime.Internal
 {
     /// <summary>
     /// Represents a cache entry that can store a value (including null) and track whether it has been cached.
-    /// This struct is designed for thread-safe, lock-free access in read-heavy, write-once scenarios.
+    /// This class is designed for thread-safe access in read-heavy, write-once scenarios with per-entry locking.
     /// </summary>
     /// <remarks>
-    /// This struct uses a flag to distinguish between "not cached" and "cached with null value".
-    /// Thread safety is achieved through volatile semantics when accessing the entry.
-    /// In concurrent scenarios where multiple threads compute the same value, the last write wins,
-    /// which is acceptable since all threads should compute the same result for a given cache index.
+    /// This class uses a flag to distinguish between "not cached" and "cached with null value".
+    /// Thread safety is achieved through volatile semantics and per-entry locking, allowing concurrent
+    /// writes to different cache entries without contention.
     /// </remarks>
-    internal struct CacheEntry
+    internal sealed class CacheEntry
     {
         /// <summary>
         /// The cached value. Can be null if the computation result was null.
@@ -27,8 +26,9 @@ namespace Hl7.Cql.Runtime.Internal
 
         /// <summary>
         /// Indicates whether this entry has been cached (true) or is empty (false).
+        /// Uses volatile semantics for thread-safe reads.
         /// </summary>
-        public bool IsCached;
+        public volatile bool IsCached;
 
         /// <summary>
         /// Creates a new cached entry with the specified value.

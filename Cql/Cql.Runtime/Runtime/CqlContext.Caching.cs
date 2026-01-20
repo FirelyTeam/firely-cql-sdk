@@ -29,6 +29,13 @@ partial class CqlContext
         _cacheEnabled = true;
         _cacheWriteStrategy = writeStrategy;
         _cache = new CacheEntry[_cacheIndexCount];
+        
+        // Initialize each cache entry (required since CacheEntry is now a class)
+        for (int i = 0; i < _cacheIndexCount; i++)
+        {
+            _cache[i] = new CacheEntry();
+        }
+        
         _cacheCallCount = 0;
         _cacheFactoryInvocations = 0;
     }
