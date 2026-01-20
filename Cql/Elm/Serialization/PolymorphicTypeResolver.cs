@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, Firely, NCQA and contributors
+ * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -8,32 +8,37 @@
 
 namespace Hl7.Cql.Elm.Serialization;
 
-internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
+/// <summary>
+/// A JsonTypeInfoResolver that adds polymorphic type handling based on XmlInclude attributes.
+/// </summary>
+/// <param name="emitConcreteBaseTypeDiscriminator">
+/// In newer serializations of ELM, if the declared type of an element is a concrete type,
+/// and the runtime type is the same as the declared type, the type discriminator is not emitted.
+/// Set emitConcreteBaseTypeDiscriminator to true to override this behaviour and emit the type discriminator
+/// for concrete types as well.
+/// </param>
+internal class PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = false) : DefaultJsonTypeInfoResolver
 {
-    public PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = false)
-    {
-        EmitConcreteBaseTypeDiscriminator = emitConcreteBaseTypeDiscriminator;
-    }
-
-    /// <summary>
-    /// In newer serializations of ELM, if the declared type of an element is a concrete type,
-    /// and the runtime type is the same as the declared type, the type discriminator is not emitted.
-    /// Set EmitConcreteBaseTypeDiscriminator to true to override this behaviour and emit the type discriminator
-    /// for concrete types as well.
-    /// </summary>
-    public bool EmitConcreteBaseTypeDiscriminator { get; }
-
     public override JsonTypeInfo GetTypeInfo(Type type, JsonSerializerOptions options)
     {
         JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
 
-        // Remove old "type" property if that is left on ChoiceTypeSpecifier and TupleElementDefinition,
-        // it is replaced by the new type discriminator in the current version of ELM.
-        // (note: the deserializer will rewrite any old-style type discriminators to the new format in its
-        // preprocessing phase).
-        if ((jsonTypeInfo.Type == typeof(ChoiceTypeSpecifier) || jsonTypeInfo.Type == typeof(TupleElementDefinition)) &&
-            jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == "type") is { } oldTypeProp)
-            jsonTypeInfo.Properties.Remove(oldTypeProp);
+        // Don't apply polymorphism if a custom converter is registered (JsonTypeInfoKind will be None)
+        if (jsonTypeInfo.Kind == JsonTypeInfoKind.None)
+            return jsonTypeInfo;
+
+        // Don't apply polymorphism to CqlToElmBase and its hierarchy - they have transitive conflicts
+        // through properties containing types with "type" properties. Custom converter handles these.
+        if (type.FullName == "Hl7.Cql.Elm.CqlToElmBase" ||
+            type.BaseType?.FullName == "Hl7.Cql.Elm.CqlToElmBase" ||
+            (type.BaseType?.BaseType?.FullName == "Hl7.Cql.Elm.CqlToElmBase"))
+            return jsonTypeInfo;
+
+        // Don't apply polymorphism to types with custom converters: Element, Expression, TypeSpecifier, ExpressionDef.
+        // These hierarchies have transitive conflicts through properties with "type" names.
+        // Arrays of these types are handled by PolymorphicArrayJsonConverter.
+        if (type.FullName is "Hl7.Cql.Elm.Element" or "Hl7.Cql.Elm.Expression" or "Hl7.Cql.Elm.TypeSpecifier" or "Hl7.Cql.Elm.OperatorExpression" or "Hl7.Cql.Elm.AggregateExpression" or "Hl7.Cql.Elm.ExpressionDef" or "Hl7.Cql.Elm.FunctionDef")
+            return jsonTypeInfo;
 
         var derivedTypes = BuildDerivedTypes(type).ToList();
 
@@ -58,7 +63,7 @@ internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver
     {
         var xmlHierarchyAttributes = baseType.GetCustomAttributes<XmlIncludeAttribute>(false).ToList();
 
-        if(EmitConcreteBaseTypeDiscriminator && baseType.IsAbstract == false && xmlHierarchyAttributes.Any())
+        if(emitConcreteBaseTypeDiscriminator && baseType.IsAbstract == false && xmlHierarchyAttributes.Any())
             yield return new JsonDerivedType(baseType, baseType.Name);
 
         foreach (var type in xmlHierarchyAttributes.Select(a => a.Type).Where(t => t != null))

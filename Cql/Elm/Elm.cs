@@ -10,6 +10,7 @@
 
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Runtime;
+using System.Text.Json.Serialization;
 
 // ReSharper disable InconsistentNaming
 
@@ -53,8 +54,8 @@ internal interface IGetVersionedIdentifier
     /// <summary>
     /// Gets the versioned library identifier.
     /// </summary>
-    [JsonIgnore]
     [XmlIgnore]
+    [JsonIgnore]
     CqlVersionedLibraryIdentifier VersionedLibraryIdentifier { get; }
 }
 
@@ -81,8 +82,8 @@ partial class Library : IGetVersionedIdentifier
         };
 
     /// <inheritdoc />
-    [JsonIgnore]
     [XmlIgnore]
+    [JsonIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
         get
@@ -110,8 +111,8 @@ partial class IncludeDef : IGetVersionedIdentifier
 
 
     /// <inheritdoc />
-    [JsonIgnore]
     [XmlIgnore]
+    [JsonIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
         get
@@ -136,7 +137,6 @@ partial class VersionedIdentifier : IGetVersionedIdentifier
     (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier => (this, null);
 
     /// <inheritdoc />
-    [JsonIgnore]
     [XmlIgnore]
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier
     {
@@ -174,7 +174,6 @@ internal interface IGetLibraryName
 partial class IncludeDef : IGetLibraryName
 {
     /// <inheritdoc />
-    [JsonIgnore]
     [XmlIgnore]
     public string? libraryName => localIdentifier.NullIfEmpty() ?? path.NullIfEmpty();
 }

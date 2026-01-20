@@ -697,6 +697,28 @@ internal sealed class XsdCodeGenerator(CommandLineOptions options)
                                               ));
                 break;
         }
+
+        // Add JsonIgnore for properties named "type" that have complex types.
+        // This is because "type" is used as the JSON type discriminator for polymorphism,
+        // and having an actual property named "type" with a complex value would conflict.
+        if (element.Name == "type" && !IsSimpleType(element))
+        {
+            property.CustomAttributes.Add(new CodeAttributeDeclaration(
+                                              "System.Text.Json.Serialization.JsonIgnore"));
+        }
+    }
+
+    private bool IsSimpleType(XmlSchemaElement element)
+    {
+        // Check if the element type is a simple/primitive type (string, int, etc.)
+        // Complex types (TypeSpecifier, etc.) need JsonIgnore when named "type"
+        var typeName = GetElementType(element);
+        return typeName switch
+        {
+            "string" or "int" or "long" or "short" or "byte" or "bool" or "decimal" or
+            "float" or "double" or "System.DateTime" or "System.TimeSpan" or "object" => true,
+            _ => false
+        };
     }
 
     private string GetElementType(XmlSchemaElement element)

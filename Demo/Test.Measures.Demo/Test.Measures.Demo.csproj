@@ -3,6 +3,7 @@
   <Import Project="..\cql-demo.props" />
 
   <PropertyGroup>
+		<TargetFrameworks>net10.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
     <Configurations>Debug;Release</Configurations>

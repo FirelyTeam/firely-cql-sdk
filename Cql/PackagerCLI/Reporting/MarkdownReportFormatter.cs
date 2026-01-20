@@ -95,7 +95,7 @@ internal static class MarkdownReportFormatter
         sb.AppendLine();
 
         // Build library rows
-        foreach (var libraryId in tracker.Libraries.OrderBy(l => l.Identifier.ToString()).ThenBy(l => l.Version))
+        foreach (var libraryId in tracker.Libraries.OrderBy(l => l.ToString()))
         {
             sb.Append("| ");
             sb.Append(FormatLibraryName(libraryId).PadRight(columnWidths[0]));
