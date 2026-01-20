@@ -301,6 +301,8 @@ partial class LibrarySetCSharpCodeGenerator
                 """
                 #region ILibraryInternals Implementation
 
+                bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
                 int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
                 {
                     // Skip if already processed

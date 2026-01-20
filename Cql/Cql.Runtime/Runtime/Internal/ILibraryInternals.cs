@@ -15,6 +15,11 @@ namespace Hl7.Cql.Runtime.Internal;
 public interface ILibraryInternals
 {
     /// <summary>
+    /// Gets or sets a value indicating whether cache indices have been initialized for this library.
+    /// </summary>
+    bool CacheIndicesInitialized { get; set; }
+
+    /// <summary>
     /// Initializes cache indices for this library and its dependencies.
     /// </summary>
     /// <param name="initializer">The cache index initializer instance.</param>

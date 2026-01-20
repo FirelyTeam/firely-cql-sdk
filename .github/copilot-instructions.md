@@ -162,6 +162,49 @@ When adding CQL files (e.g., to `CoreTests\Input\ELM\HL7`), follow these steps t
 3. **Verify generation**: Confirm that all ELM files are generated for each CQL file. The directory for the ELM files can be discovered in the `ElmDirectory` property in the csproj file
 4. **Restore setting**: Roll back step 1 by commenting out `CqlToElmEnabled=true`
 
+### Regenerating C# Files from ELM
+When making changes to the code generator (`CodeGeneration.NET` project) or when ELM files are updated, you need to regenerate the C# library files:
+
+#### For CoreTests Project
+The CoreTests project has generated C# files in `Cql/CoreTests/CSharp/*.g.cs`. To regenerate them:
+
+1. **Enable C# generation**: The property `ElmToCSharpEnabled` should be set to `true` in the csproj or packaging tooling targets
+2. **Clean existing generated files**: Remove old generated files to force regeneration:
+   ```bash
+   rm -rf Cql/CoreTests/CSharp/*.g.cs
+   ```
+3. **Build the project**: Build CoreTests which will trigger code generation:
+   ```bash
+   dotnet build Cql/CoreTests/CoreTests.csproj -c Release
+   ```
+4. **Verify generation**: Check that all `*.g.cs` files are created in `Cql/CoreTests/CSharp/` directory
+5. **Restore from git if needed**: If generation fails, restore the files from git:
+   ```bash
+   git checkout HEAD -- Cql/CoreTests/CSharp/*.g.cs
+   ```
+
+#### Code Generation Process
+The build process uses MSBuild targets defined in `packaging-tooling.Targets.xml`:
+- **ElmToCSharp.Targets.xml**: Defines the `GenerateCSharp` target that runs `PackagerCLI` to generate C# from ELM
+- **Conditional execution**: Generation only runs when `ElmToCSharpEnabled='true'` and `PackagerCLI` executable exists
+- **Properties needed**:
+  - `ElmDirectory`: Path to ELM JSON files (e.g., `$(MSBuildProjectDirectory)/Input/ELM/HL7`)
+  - `CSharpDirectory`: Output path for generated C# files (e.g., `$(MSBuildProjectDirectory)/CSharp`)
+  - `LibrarySet`: Name of the library set being generated
+
+#### When to Regenerate
+Always regenerate C# files after:
+- Modifying code generator logic in `CodeGeneration.NET`
+- Updating `GeneratorToolVersion` 
+- Changing code generation templates or patterns
+- Updating ELM files
+- Adding new libraries to test projects
+
+#### Troubleshooting
+- **Files not generated**: Check that `PackagerCLI` is built first: `dotnet build Cql/PackagerCLI/PackagerCLI.csproj`
+- **Wrong generated code**: Ensure you're using the correct `ToolTargetFramework` (typically `net10.0`)
+- **Missing dependencies**: Build the entire solution first: `dotnet build Cql-Sdk.slnf -c Release`
+
 ## Naming Conventions
 - Use `CqlSdk` prefix for SDK-related example projects
 - Use `Hl7.Cql` namespace prefix for core SDK assemblies

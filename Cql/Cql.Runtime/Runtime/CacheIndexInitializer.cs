@@ -18,6 +18,8 @@ namespace Hl7.Cql.Runtime;
 /// </summary>
 public sealed class CacheIndexInitializer
 {
+    private int _nextIndex = 1; // Start at 1 (0 is reserved for uninitialized)
+
     /// <summary>
     /// Gets the total count of cache index fields initialized across all libraries.
     /// </summary>
@@ -53,7 +55,30 @@ public sealed class CacheIndexInitializer
         TotalIndexCount = totalIndexCount;
     }
 
-    public bool MarkAsProcessed(ILibrary _) => false;
+    /// <summary>
+    /// Marks a library as processed for cache index initialization.
+    /// </summary>
+    /// <param name="library">The library to mark as processed.</param>
+    /// <returns>True if the library was marked as processed (was not previously processed);
+    /// false if the library was already processed.</returns>
+    public bool MarkAsProcessed(ILibrary library)
+    {
+        if (library is not ILibraryInternals internals)
+            return false;
 
-    public int GetNextIndex() => 0;
+        if (internals.CacheIndicesInitialized)
+            return false;
+
+        internals.CacheIndicesInitialized = true;
+        return true;
+    }
+
+    /// <summary>
+    /// Gets the next sequential cache index value.
+    /// </summary>
+    /// <returns>The next cache index value (starting from 1).</returns>
+    public int GetNextIndex()
+    {
+        return _nextIndex++;
+    }
 }

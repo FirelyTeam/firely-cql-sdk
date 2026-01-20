@@ -1,7 +1,11 @@
 Hl7.Cql.Runtime.CacheIndexInitializer
 Hl7.Cql.Runtime.CacheIndexInitializer.CacheIndexInitializer(params Hl7.Cql.Abstractions.ILibrary![]! libraries) -> void
+Hl7.Cql.Runtime.CacheIndexInitializer.GetNextIndex() -> int
+Hl7.Cql.Runtime.CacheIndexInitializer.MarkAsProcessed(Hl7.Cql.Abstractions.ILibrary! library) -> bool
 Hl7.Cql.Runtime.CacheIndexInitializer.TotalIndexCount.get -> int
 Hl7.Cql.Runtime.CqlContext.DontUseCaching() -> void
 Hl7.Cql.Runtime.CqlContext.UseNewCache() -> void
 Hl7.Cql.Runtime.Internal.ILibraryInternals
+Hl7.Cql.Runtime.Internal.ILibraryInternals.CacheIndicesInitialized.get -> bool
+Hl7.Cql.Runtime.Internal.ILibraryInternals.CacheIndicesInitialized.set -> void
 Hl7.Cql.Runtime.Internal.ILibraryInternals.InitializeCacheIndices(Hl7.Cql.Runtime.CacheIndexInitializer! initializer) -> int
