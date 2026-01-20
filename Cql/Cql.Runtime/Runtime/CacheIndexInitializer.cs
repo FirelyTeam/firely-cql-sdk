@@ -51,11 +51,7 @@ public sealed class CacheIndexInitializer
             {
                 // Check if the library has already been initialized
                 if (internals.CacheIndicesInitialized)
-                {
-                    throw new InvalidOperationException(
-                        $"Cache indices for library '{library.Name}' version '{library.Version}' are already initialized. " +
-                        "Cache indices can only be initialized once per library instance.");
-                }
+                    continue; // Already initialized
 
                 totalIndexCount += internals.InitializeCacheIndices(this);
             }
