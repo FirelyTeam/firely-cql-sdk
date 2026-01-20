@@ -40,7 +40,7 @@ partial class LibrarySetCSharpCodeGenerator
             return fieldName;
         }
 
-        public int GetCacheIndex(string definitionName)
+        public int GetOrCreateCacheIndex(string definitionName)
         {
             if (!_cacheIndices.TryGetValue(definitionName, out var index))
             {
