@@ -37,7 +37,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ILibraryInternals, ISi
 
     #region Cache Index Fields (1)
 
-    private int _cacheIndex_Result;
+    private int _cacheIndex_Result = -1;
 
     #endregion Cache Index Fields
 
@@ -66,7 +66,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ILibraryInternals, ISi
         }
 
         // Initialize cache indices for this library
-        if (_cacheIndex_Result != 0)
+        if (_cacheIndex_Result != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_Result' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Result}}. Cache indices can only be initialized once.");
         _cacheIndex_Result = initializer.GetNextIndex();
         count++;

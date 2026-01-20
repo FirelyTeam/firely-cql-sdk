@@ -37,7 +37,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ILibraryInternals, ISing
 
     #region Cache Index Fields (1)
 
-    private int _cacheIndex_SomethingTrueEqualsTrue;
+    private int _cacheIndex_SomethingTrueEqualsTrue = -1;
 
     #endregion Cache Index Fields
 
@@ -66,7 +66,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ILibraryInternals, ISing
         }
 
         // Initialize cache indices for this library
-        if (_cacheIndex_SomethingTrueEqualsTrue != 0)
+        if (_cacheIndex_SomethingTrueEqualsTrue != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_SomethingTrueEqualsTrue' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SomethingTrueEqualsTrue}}. Cache indices can only be initialized once.");
         _cacheIndex_SomethingTrueEqualsTrue = initializer.GetNextIndex();
         count++;

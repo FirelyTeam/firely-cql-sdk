@@ -153,10 +153,10 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     #region Cache Index Fields (4)
 
-    private int _cacheIndex_MeasurementPeriod;
-    private int _cacheIndex_Patient;
-    private int _cacheIndex_InDemographic;
-    private int _cacheIndex_SexuallyActive;
+    private int _cacheIndex_MeasurementPeriod = -1;
+    private int _cacheIndex_Patient = -1;
+    private int _cacheIndex_InDemographic = -1;
+    private int _cacheIndex_SexuallyActive = -1;
 
     #endregion Cache Index Fields
 
@@ -185,22 +185,22 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
         }
 
         // Initialize cache indices for this library
-        if (_cacheIndex_MeasurementPeriod != 0)
+        if (_cacheIndex_MeasurementPeriod != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_MeasurementPeriod' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_MeasurementPeriod}}. Cache indices can only be initialized once.");
         _cacheIndex_MeasurementPeriod = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_Patient != 0)
+        if (_cacheIndex_Patient != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
         _cacheIndex_Patient = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_InDemographic != 0)
+        if (_cacheIndex_InDemographic != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_InDemographic' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_InDemographic}}. Cache indices can only be initialized once.");
         _cacheIndex_InDemographic = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_SexuallyActive != 0)
+        if (_cacheIndex_SexuallyActive != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_SexuallyActive' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SexuallyActive}}. Cache indices can only be initialized once.");
         _cacheIndex_SexuallyActive = initializer.GetNextIndex();
         count++;

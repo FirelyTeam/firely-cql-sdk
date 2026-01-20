@@ -8,23 +8,29 @@ using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime.Internal;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("MeasureExample", "0.0.1")]
-public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_0_0_1>
+public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingleton<MeasureExample_0_0_1>
 {
-    #region Functions and Expressions
+    #region Functions and Expressions (6)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(573802528633067256L, () => {
-            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-            return b_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<Patient>(
+            _cacheIndex_Patient,
+            Patient_Compute);
+
+    private Patient Patient_Compute(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        return b_;
+    }
 
 
     [CqlExpressionDefinition("Initial population")]
@@ -36,7 +42,14 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("population", "initial-population")]
     [CqlTag("description", "Patients in the IP")]
     public bool? Initial_population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3971454504690862483L, () => true);
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Initial_population,
+            Initial_population_Compute);
+
+    private bool? Initial_population_Compute(CqlContext context)
+    {
+        return true;
+    }
 
 
     [CqlExpressionDefinition("Exclusion")]
@@ -44,7 +57,14 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator-exclusion")]
     public bool? Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-340095662832327621L, () => false);
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Exclusion,
+            Exclusion_Compute);
+
+    private bool? Exclusion_Compute(CqlContext context)
+    {
+        return false;
+    }
 
 
     [CqlExpressionDefinition("Denominator")]
@@ -52,30 +72,120 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(4268609403665627099L, () => {
-            bool? a_ = this.Initial_population(context);
-            bool? b_ = this.Exclusion(context);
-            bool? c_ = context.Operators.Not(b_);
-            bool? d_ = context.Operators.And(a_, c_);
-            return d_;
-        });
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Denominator,
+            Denominator_Compute);
+
+    private bool? Denominator_Compute(CqlContext context)
+    {
+        bool? a_ = this.Initial_population(context);
+        bool? b_ = this.Exclusion(context);
+        bool? c_ = context.Operators.Not(b_);
+        bool? d_ = context.Operators.And(a_, c_);
+        return d_;
+    }
 
 
     [CqlExpressionDefinition("Numerator 1")]
     [CqlTag("group", "1")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5945716760631093539L, () => true);
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Numerator_1,
+            Numerator_1_Compute);
+
+    private bool? Numerator_1_Compute(CqlContext context)
+    {
+        return true;
+    }
 
 
     [CqlExpressionDefinition("Numerator 2")]
     [CqlTag("group", "2")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-18372347484029309L, () => false);
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(
+            _cacheIndex_Numerator_2,
+            Numerator_2_Compute);
+
+    private bool? Numerator_2_Compute(CqlContext context)
+    {
+        return false;
+    }
 
 
     #endregion Functions and Expressions
+
+    #region Cache Index Fields (6)
+
+    private int _cacheIndex_Patient = -1;
+    private int _cacheIndex_Initial_population = -1;
+    private int _cacheIndex_Exclusion = -1;
+    private int _cacheIndex_Denominator = -1;
+    private int _cacheIndex_Numerator_1 = -1;
+    private int _cacheIndex_Numerator_2 = -1;
+
+    #endregion Cache Index Fields
+
+    #region ILibraryInternals Implementation
+
+    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+
+    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    {
+        // Skip if already processed
+        if (!initializer.MarkAsProcessed(this))
+            return 0;
+
+        var count = 0;
+
+        // Process dependencies first (depth-first traversal)
+        if (Dependencies is { Length: > 0 })
+        {
+            foreach (var dependency in Dependencies)
+            {
+                if (dependency is ILibraryInternals internals)
+                {
+                    count += internals.InitializeCacheIndices(initializer);
+                }
+            }
+        }
+
+        // Initialize cache indices for this library
+        if (_cacheIndex_Patient != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
+        _cacheIndex_Patient = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Initial_population != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_population}}. Cache indices can only be initialized once.");
+        _cacheIndex_Initial_population = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Exclusion != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Exclusion' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Exclusion}}. Cache indices can only be initialized once.");
+        _cacheIndex_Exclusion = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Denominator != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
+        _cacheIndex_Denominator = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Numerator_1 != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_1' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_1}}. Cache indices can only be initialized once.");
+        _cacheIndex_Numerator_1 = initializer.GetNextIndex();
+        count++;
+
+        if (_cacheIndex_Numerator_2 != -1)
+            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_2' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_2}}. Cache indices can only be initialized once.");
+        _cacheIndex_Numerator_2 = initializer.GetNextIndex();
+        count++;
+
+        return count;
+    }
+
+    #endregion ILibraryInternals Implementation
 
     #region Singleton Lifetime Members
 

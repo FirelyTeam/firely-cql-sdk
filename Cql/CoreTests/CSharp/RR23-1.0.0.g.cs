@@ -208,11 +208,11 @@ public partial class RR23_1_0_0 : ILibrary, ILibraryInternals, ISingleton<RR23_1
 
     #region Cache Index Fields (5)
 
-    private int _cacheIndex_Measurement_Period;
-    private int _cacheIndex_Patient;
-    private int _cacheIndex_Injury_due_to_falling_rock_within_measurement_period;
-    private int _cacheIndex_Latest_injury_due_to_falling_rock;
-    private int _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock;
+    private int _cacheIndex_Measurement_Period = -1;
+    private int _cacheIndex_Patient = -1;
+    private int _cacheIndex_Injury_due_to_falling_rock_within_measurement_period = -1;
+    private int _cacheIndex_Latest_injury_due_to_falling_rock = -1;
+    private int _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = -1;
 
     #endregion Cache Index Fields
 
@@ -241,27 +241,27 @@ public partial class RR23_1_0_0 : ILibrary, ILibraryInternals, ISingleton<RR23_1
         }
 
         // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != 0)
+        if (_cacheIndex_Measurement_Period != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
         _cacheIndex_Measurement_Period = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_Patient != 0)
+        if (_cacheIndex_Patient != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
         _cacheIndex_Patient = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_Injury_due_to_falling_rock_within_measurement_period != 0)
+        if (_cacheIndex_Injury_due_to_falling_rock_within_measurement_period != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_Injury_due_to_falling_rock_within_measurement_period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Injury_due_to_falling_rock_within_measurement_period}}. Cache indices can only be initialized once.");
         _cacheIndex_Injury_due_to_falling_rock_within_measurement_period = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_Latest_injury_due_to_falling_rock != 0)
+        if (_cacheIndex_Latest_injury_due_to_falling_rock != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_Latest_injury_due_to_falling_rock' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Latest_injury_due_to_falling_rock}}. Cache indices can only be initialized once.");
         _cacheIndex_Latest_injury_due_to_falling_rock = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock != 0)
+        if (_cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock}}. Cache indices can only be initialized once.");
         _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = initializer.GetNextIndex();
         count++;

@@ -205,11 +205,11 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     #region Cache Index Fields (5)
 
-    private int _cacheIndex_ChosenSubCategory;
-    private int _cacheIndex_ChosenCode;
-    private int _cacheIndex_ValueSetA;
-    private int _cacheIndex_ValueSetB;
-    private int _cacheIndex_Result;
+    private int _cacheIndex_ChosenSubCategory = -1;
+    private int _cacheIndex_ChosenCode = -1;
+    private int _cacheIndex_ValueSetA = -1;
+    private int _cacheIndex_ValueSetB = -1;
+    private int _cacheIndex_Result = -1;
 
     #endregion Cache Index Fields
 
@@ -238,27 +238,27 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
         }
 
         // Initialize cache indices for this library
-        if (_cacheIndex_ChosenSubCategory != 0)
+        if (_cacheIndex_ChosenSubCategory != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_ChosenSubCategory' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ChosenSubCategory}}. Cache indices can only be initialized once.");
         _cacheIndex_ChosenSubCategory = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_ChosenCode != 0)
+        if (_cacheIndex_ChosenCode != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_ChosenCode' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ChosenCode}}. Cache indices can only be initialized once.");
         _cacheIndex_ChosenCode = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_ValueSetA != 0)
+        if (_cacheIndex_ValueSetA != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_ValueSetA' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ValueSetA}}. Cache indices can only be initialized once.");
         _cacheIndex_ValueSetA = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_ValueSetB != 0)
+        if (_cacheIndex_ValueSetB != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_ValueSetB' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ValueSetB}}. Cache indices can only be initialized once.");
         _cacheIndex_ValueSetB = initializer.GetNextIndex();
         count++;
 
-        if (_cacheIndex_Result != 0)
+        if (_cacheIndex_Result != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_Result' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Result}}. Cache indices can only be initialized once.");
         _cacheIndex_Result = initializer.GetNextIndex();
         count++;

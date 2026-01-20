@@ -64,7 +64,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ILibraryInternals, IS
 
     #region Cache Index Fields (1)
 
-    private int _cacheIndex_InDemographic;
+    private int _cacheIndex_InDemographic = -1;
 
     #endregion Cache Index Fields
 
@@ -93,7 +93,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ILibraryInternals, IS
         }
 
         // Initialize cache indices for this library
-        if (_cacheIndex_InDemographic != 0)
+        if (_cacheIndex_InDemographic != -1)
             throw new InvalidOperationException($"Cache index field '_cacheIndex_InDemographic' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_InDemographic}}. Cache indices can only be initialized once.");
         _cacheIndex_InDemographic = initializer.GetNextIndex();
         count++;
