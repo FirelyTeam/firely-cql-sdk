@@ -18,7 +18,7 @@ namespace Hl7.Cql.Runtime;
 /// </summary>
 public sealed class CacheIndexInitializer
 {
-    private int _nextIndex = 1; // Start at 1 (0 is reserved for uninitialized)
+    private int _nextIndex = 0; // Start at 0 for efficient array indexing
 
     /// <summary>
     /// Gets the total count of cache index fields initialized across all libraries.
@@ -80,7 +80,7 @@ public sealed class CacheIndexInitializer
     /// <summary>
     /// Gets the next sequential cache index value.
     /// </summary>
-    /// <returns>The next cache index value (starting from 1).</returns>
+    /// <returns>The next cache index value (starting from 0).</returns>
     public int GetNextIndex()
     {
         return _nextIndex++;

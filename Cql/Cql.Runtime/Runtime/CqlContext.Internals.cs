@@ -95,8 +95,8 @@ namespace Hl7.Cql.Runtime
 
             var cache = _cache;
 
-            // If cacheIndex is 0 or cache is disabled, compute directly without caching
-            if (!_cacheEnabled || cache is null || cacheIndex <= 0)
+            // If cacheIndex is negative or cache is disabled, compute directly without caching
+            if (!_cacheEnabled || cache is null || cacheIndex < 0)
             {
                 Interlocked.Increment(ref _cacheFactoryInvocations);
                 return factory(this);
