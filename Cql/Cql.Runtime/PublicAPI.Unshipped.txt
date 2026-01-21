@@ -7,12 +7,10 @@ Hl7.Cql.Runtime.CacheWriteStrategy
 Hl7.Cql.Runtime.CacheWriteStrategy.ExecutionAndPublication = 1 -> Hl7.Cql.Runtime.CacheWriteStrategy
 Hl7.Cql.Runtime.CacheWriteStrategy.PublicationOnly = 0 -> Hl7.Cql.Runtime.CacheWriteStrategy
 Hl7.Cql.Runtime.CqlContext.DontUseCaching() -> void
-Hl7.Cql.Runtime.CqlContext.UseNewCache(Hl7.Cql.Runtime.CacheWriteStrategy writeStrategy = Hl7.Cql.Runtime.CacheWriteStrategy.ExecutionAndPublication) -> void
-Hl7.Cql.Runtime.CqlContextExtensions
-Hl7.Cql.Runtime.CqlContextExtensions.extension<TCqlContext>(TCqlContext!)
-Hl7.Cql.Runtime.CqlContextExtensions.extension<TCqlContext>(TCqlContext!).WithCacheIndexCount(int cacheIndexCount) -> TCqlContext!
+Hl7.Cql.Runtime.CqlContext.UseNewCache(Hl7.Cql.Runtime.CacheIndexInitializer! initializer, Hl7.Cql.Runtime.CacheWriteStrategy writeStrategy = Hl7.Cql.Runtime.CacheWriteStrategy.ExecutionAndPublication) -> void
 Hl7.Cql.Runtime.Internal.ILibraryInternals
 Hl7.Cql.Runtime.Internal.ILibraryInternals.CacheIndicesInitialized.get -> bool
 Hl7.Cql.Runtime.Internal.ILibraryInternals.CacheIndicesInitialized.set -> void
+Hl7.Cql.Runtime.Internal.ILibraryInternals.CacheIndexInitializerInstance.get -> Hl7.Cql.Runtime.CacheIndexInitializer?
+Hl7.Cql.Runtime.Internal.ILibraryInternals.CacheIndexInitializerInstance.set -> void
 Hl7.Cql.Runtime.Internal.ILibraryInternals.InitializeCacheIndices(Hl7.Cql.Runtime.CacheIndexInitializer! initializer) -> int
-static Hl7.Cql.Runtime.CqlContextExtensions.WithCacheIndexCount<TCqlContext>(this TCqlContext! context, int cacheIndexCount) -> TCqlContext!

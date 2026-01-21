@@ -20,6 +20,13 @@ public interface ILibraryInternals
     bool CacheIndicesInitialized { get; set; }
 
     /// <summary>
+    /// Gets or sets the CacheIndexInitializer that initialized this library's cache indices.
+    /// This allows libraries to track which initializer they belong to, enabling re-initialization
+    /// with different initializers (e.g., in unit testing scenarios).
+    /// </summary>
+    CacheIndexInitializer? CacheIndexInitializerInstance { get; set; }
+
+    /// <summary>
     /// Initializes cache indices for this library and its dependencies.
     /// </summary>
     /// <param name="initializer">The cache index initializer instance.</param>

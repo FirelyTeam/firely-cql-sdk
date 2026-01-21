@@ -31,12 +31,14 @@ public sealed class CacheIndexInitializer
     /// </summary>
     /// <remarks>If the libraries array is null or empty, no cache indices will be initialized and the total
     /// index count will be zero. The initialization processes each library and its dependencies only once, in
-    /// dependency-first order.</remarks>
+    /// dependency-first order. Libraries can be re-initialized with a new CacheIndexInitializer instance even
+    /// if they were previously initialized by a different instance, allowing for scenarios like unit testing
+    /// where libraries need to be reset between tests.</remarks>
     /// <param name="libraries">An array of root libraries to use for initializing cache indices. Each library and its dependencies will be
     /// processed in dependency-first order. Must not be null or empty.</param>
     /// <exception cref="InvalidOperationException">
-    /// Thrown if any cache index field is already initialized (non-zero), indicating that initialization
-    /// has already been performed on these libraries.
+    /// Thrown if any cache index field is already initialized (non-negative), indicating that initialization
+    /// has already been performed on these libraries by THIS CacheIndexInitializer instance.
     /// </exception>
     public CacheIndexInitializer(params ILibrary[] libraries)
     {
@@ -49,9 +51,9 @@ public sealed class CacheIndexInitializer
             // Process each root library and its dependencies in dependency-first order
             if (library is ILibraryInternals internals)
             {
-                // Check if the library has already been initialized
-                if (internals.CacheIndicesInitialized)
-                    continue; // Already initialized
+                // Check if the library has already been initialized by THIS initializer
+                if (internals.CacheIndexInitializerInstance == this)
+                    continue; // Already initialized by this initializer instance
 
                 totalIndexCount += internals.InitializeCacheIndices(this);
             }
@@ -63,17 +65,19 @@ public sealed class CacheIndexInitializer
     /// Marks a library as processed for cache index initialization.
     /// </summary>
     /// <param name="library">The library to mark as processed.</param>
-    /// <returns>True if the library was marked as processed (was not previously processed);
-    /// false if the library was already processed.</returns>
+    /// <returns>True if the library was marked as processed (was not previously processed by this initializer);
+    /// false if the library was already processed by this initializer.</returns>
     public bool MarkAsProcessed(ILibrary library)
     {
         if (library is not ILibraryInternals internals)
             return false;
 
-        if (internals.CacheIndicesInitialized)
+        // Check if already processed by this specific initializer instance
+        if (internals.CacheIndexInitializerInstance == this)
             return false;
 
         internals.CacheIndicesInitialized = true;
+        internals.CacheIndexInitializerInstance = this;
         return true;
     }
 

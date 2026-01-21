@@ -284,11 +284,13 @@ partial class LibrarySetCSharpCodeGenerator
 
                 bool ILibraryInternals.CacheIndicesInitialized { get; set; }
 
+                CacheIndexInitializer? ILibraryInternals.CacheIndexInitializerInstance { get; set; }
+
                 int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
                 {
-                    // Throw if already processed - cache indices can only be initialized once
+                    // Skip if already processed by this initializer
                     if (!initializer.MarkAsProcessed(this))
-                        throw new InvalidOperationException($"Cache indices for library '{Name}' version '{Version}' have already been initialized. Cache indices can only be initialized once.");
+                        return 0;
 
                     var count = 0;
 

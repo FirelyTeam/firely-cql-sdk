@@ -6,36 +6,50 @@ namespace Hl7.Cql.Runtime;
 partial class CqlContext
 {
     private CacheEntry[]? _cache;
-    private int _cacheIndexCount;
+    private CacheIndexInitializer? _cacheIndexInitializer;
     private bool _cacheEnabled;
     private CacheWriteStrategy _cacheWriteStrategy;
     private long _cacheCallCount;
     private long _cacheFactoryInvocations;
 
     /// <summary>
-    /// Invalidates the current cache, forcing subsequent operations to use fresh data.
+    /// Initializes a new cache using the specified cache index initializer and write strategy.
+    /// The cache is sized based on the total number of cache indices in the initializer.
     /// </summary>
+    /// <param name="initializer">The cache index initializer that was used to initialize the libraries.
+    /// This determines the cache size and is used to validate that libraries match this context.</param>
     /// <param name="writeStrategy">The strategy to use for handling concurrent writes to the cache.
     /// Defaults to <see cref="CacheWriteStrategy.ExecutionAndPublication"/>.</param>
-    /// <remarks>Call this method to clear any cached data and ensure that future operations do not use stale
-    /// information. This is useful when the underlying data source has changed and the cache needs to be
-    /// refreshed.</remarks>
-    /// <exception cref="InvalidOperationException">Thrown if caching has not been enabled first by calling
-    /// <see cref="CqlContextExtensions.WithCacheIndexCount"/>.</exception>
-    public void UseNewCache(CacheWriteStrategy writeStrategy = CacheWriteStrategy.ExecutionAndPublication)
+    /// <remarks>
+    /// Call this method to enable caching with a specific set of initialized libraries. The cache will be sized
+    /// to accommodate all cache indices from the libraries processed by the initializer. Subsequent calls to
+    /// GetOrCompute will validate that the calling library was initialized by this same initializer instance.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">Thrown if <paramref name="initializer"/> is null.</exception>
+    public void UseNewCache(CacheIndexInitializer initializer, CacheWriteStrategy writeStrategy = CacheWriteStrategy.ExecutionAndPublication)
     {
-        if (_cacheIndexCount is 0)
-            return;
+        if (initializer is null)
+            throw new ArgumentNullException(nameof(initializer));
 
+        _cacheIndexInitializer = initializer;
         _cacheEnabled = true;
         _cacheWriteStrategy = writeStrategy;
-        // Allocate cache array with _cacheIndexCount elements for 0-based indexing (indices from 0 to _cacheIndexCount - 1)
-        _cache = new CacheEntry[_cacheIndexCount];
 
-        // Initialize each cache entry (required since CacheEntry is now a class)
-        for (int i = 0; i < _cache.Length; i++)
+        var cacheIndexCount = initializer.CacheIndexCount;
+        if (cacheIndexCount == 0)
         {
-            _cache[i] = new CacheEntry();
+            _cache = null;
+        }
+        else
+        {
+            // Allocate cache array with exactly cacheIndexCount elements for 0-based indexing (indices from 0 to cacheIndexCount - 1)
+            _cache = new CacheEntry[cacheIndexCount];
+
+            // Initialize each cache entry (required since CacheEntry is now a class)
+            for (int i = 0; i < _cache.Length; i++)
+            {
+                _cache[i] = new CacheEntry();
+            }
         }
 
         // Use Interlocked.Exchange for thread-safe reset
@@ -55,49 +69,8 @@ partial class CqlContext
 
         _cacheEnabled = false;
         _cache = null;
+        _cacheIndexInitializer = null;
         Interlocked.Exchange(ref _cacheCallCount, 0);
         Interlocked.Exchange(ref _cacheFactoryInvocations, 0);
-    }
-
-    internal void SetCacheIndexCount(int count)
-    {
-        // REVIEW: Should we fail when called multiple times with different counts?
-        _cacheIndexCount = count;
-
-        // Reset cache fields
-        _cache = null;
-        Interlocked.Exchange(ref _cacheCallCount, 0);
-        Interlocked.Exchange(ref _cacheFactoryInvocations, 0);
-    }
-}
-
-
-
-/// <summary>
-/// Provides extension methods for configuring and working with instances of the CqlContext class.
-/// </summary>
-/// <remarks>These extension methods enable fluent configuration of CqlContext instances. Methods in this
-/// class are intended to simplify context setup and enhance code readability when working with CQL-based
-/// operations.</remarks>
-public static class CqlContextExtensions
-{
-    /// <summary>
-    /// Provides extension methods for configuring and working with instances of a CqlContext-derived type.
-    /// </summary>
-    /// <typeparam name="TCqlContext">The type of the context to extend. Must inherit from CqlContext.</typeparam>
-    /// <param name="context">The context instance to configure. Cannot be null.</param>
-    extension<TCqlContext>(TCqlContext context) where TCqlContext : CqlContext
-    {
-        /// <summary>
-        /// Configures the number of cache indexes to use in the context and returns the updated context instance.
-        /// To enable caching, call the <see cref="CqlContext.UseNewCache"/> method after setting the cache index count.
-        /// </summary>
-        /// <param name="cacheIndexCount">The number of cache indexes to set. Must be a non-negative integer.</param>
-        /// <returns>The updated context instance with the specified cache index count applied.</returns>
-        public TCqlContext WithCacheIndexCount(int cacheIndexCount)
-        {
-            context.SetCacheIndexCount(cacheIndexCount);
-            return context;
-        }
     }
 }

@@ -75,6 +75,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute<{returnType}>(");
                     using (ISB.Indent())
                     {
+                        ISB.AppendLine($"this,");
                         ISB.AppendLine($"{cacheIndexFieldName},");
                         ISB.AppendLine($"{computeMethodName});");
                     }

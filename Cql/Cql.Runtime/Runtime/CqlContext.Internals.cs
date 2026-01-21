@@ -1,5 +1,6 @@
 // We consider the content here as internal thus it won't be documented in the public API docs.
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 #pragma warning disable RS0016 // Symbol 'x' is not part of the declared public API
@@ -19,15 +20,19 @@ namespace Hl7.Cql.Runtime.Internal
         /// Gets or computes a cached value for the specified cache index.
         /// </summary>
         /// <typeparam name="T">The type of the cached value.</typeparam>
+        /// <param name="library">The library instance requesting the cached value. Used to validate that the library
+        /// was initialized by the same CacheIndexInitializer as the context.</param>
         /// <param name="cacheIndex">The index identifying the cached value.</param>
         /// <param name="factory">A function to compute the value if it's not in the cache.</param>
         /// <returns>The cached or newly computed value.</returns>
         /// <remarks>
         /// This method is thread-safe and can be called concurrently from multiple threads.
         /// If caching is disabled (cache is null), the factory function is called without caching the result.
+        /// The library parameter is used to validate that it was initialized by the same CacheIndexInitializer
+        /// as the context, ensuring cache indices are consistent.
         /// </remarks>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public T GetOrCompute<T>(int cacheIndex, Func<CqlContext, T> factory);
+        public T GetOrCompute<T>(ILibrary library, int cacheIndex, Func<CqlContext, T> factory);
 
         /// <summary>
         /// Gets the total number of calls to GetOrCompute.
@@ -89,7 +94,7 @@ namespace Hl7.Cql.Runtime
         long Internal.ICqlContextInternals.CacheHits => _cacheCallCount - _cacheFactoryInvocations;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        T Internal.ICqlContextInternals.GetOrCompute<T>(int cacheIndex, Func<CqlContext, T> factory)
+        T Internal.ICqlContextInternals.GetOrCompute<T>(ILibrary library, int cacheIndex, Func<CqlContext, T> factory)
         {
             Interlocked.Increment(ref _cacheCallCount);
 
@@ -100,6 +105,18 @@ namespace Hl7.Cql.Runtime
             {
                 Interlocked.Increment(ref _cacheFactoryInvocations);
                 return factory(this);
+            }
+
+            // Validate that the library was initialized by the same CacheIndexInitializer as this context
+            if (library is Internal.ILibraryInternals internals)
+            {
+                if (internals.CacheIndexInitializerInstance != _cacheIndexInitializer)
+                {
+                    // Library was initialized by a different initializer - compute without caching
+                    // This can happen in unit testing scenarios where libraries are reused across tests
+                    Interlocked.Increment(ref _cacheFactoryInvocations);
+                    return factory(this);
+                }
             }
 
             // Ensure cache index is within bounds
