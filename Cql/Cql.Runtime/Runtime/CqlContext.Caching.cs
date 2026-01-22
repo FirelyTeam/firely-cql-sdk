@@ -28,10 +28,7 @@ partial class CqlContext
     /// <exception cref="ArgumentNullException">Thrown if <paramref name="initializer"/> is null.</exception>
     public void UseNewCache(CacheIndexInitializer initializer, CacheWriteStrategy writeStrategy = CacheWriteStrategy.ExecutionAndPublication)
     {
-        if (initializer is null)
-            throw new ArgumentNullException(nameof(initializer));
-
-        _cacheIndexInitializer = initializer;
+        _cacheIndexInitializer = initializer ?? throw new ArgumentNullException(nameof(initializer));
         _cacheEnabled = true;
         _cacheWriteStrategy = writeStrategy;
 

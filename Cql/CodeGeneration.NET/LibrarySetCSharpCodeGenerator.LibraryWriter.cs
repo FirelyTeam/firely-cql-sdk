@@ -284,7 +284,7 @@ partial class LibrarySetCSharpCodeGenerator
 
                 bool ILibraryInternals.CacheIndicesInitialized { get; set; }
 
-                CacheIndexInitializer? ILibraryInternals.CacheIndexInitializerInstance { get; set; }
+                CacheIndexInitializer ILibraryInternals.CacheIndexInitializerInstance { get; set; }
 
                 int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
                 {

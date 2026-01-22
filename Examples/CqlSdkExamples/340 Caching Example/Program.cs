@@ -67,12 +67,12 @@ partial class Program
                 .AddCqlLibraries(cql)
                 .CreateLibrarySetInvoker();
 
-        Console.WriteLine($"✓ Library loaded. Cache size: {librarySetInvoker.CacheIndexCount} entries\n");
+        Console.WriteLine($"✓ Library loaded. Cache size: {librarySetInvoker.CacheIndexInitializer.CacheIndexCount} entries\n");
 
         // Example 1: Basic caching
         Console.WriteLine("1. Basic Caching (ExecutionAndPublication strategy - default):");
         var context1 = FhirCqlContext.WithDataSource();
-        context1.UseNewCache();  // Enable array-based cache with default strategy
+        context1.UseNewCache(librarySetInvoker.CacheIndexInitializer);  // Enable array-based cache with default strategy
 
         var sw = Stopwatch.StartNew();
         for (int i = 0; i < 3; i++)
@@ -89,7 +89,7 @@ partial class Program
         // Example 2: Caching null values (now supported!)
         Console.WriteLine("2. Caching Null Values:");
         var context2 = FhirCqlContext.WithDataSource();
-        context2.UseNewCache();
+        context2.UseNewCache(librarySetInvoker.CacheIndexInitializer);
 
         for (int i = 0; i < 2; i++)
         {
@@ -105,7 +105,7 @@ partial class Program
         // Example 3: PublicationOnly strategy (allow multiple concurrent computations)
         Console.WriteLine("3. PublicationOnly Strategy (multiple threads can compute concurrently):");
         var context3 = FhirCqlContext.WithDataSource();
-        context3.UseNewCache(CacheWriteStrategy.PublicationOnly);
+        context3.UseNewCache(librarySetInvoker.CacheIndexInitializer, CacheWriteStrategy.PublicationOnly);
         Console.WriteLine("   ✓ Using PublicationOnly: Multiple threads can compute, last write wins");
         Console.WriteLine("   ✓ Per-entry locking: Different cache entries don't contend with each other");
 
@@ -118,7 +118,7 @@ partial class Program
         // Example 4: Cache invalidation
         Console.WriteLine("4. Cache Invalidation:");
         var context4 = FhirCqlContext.WithDataSource();
-        context4.UseNewCache();
+        context4.UseNewCache(librarySetInvoker.CacheIndexInitializer);
 
         var result4a = librarySetInvoker.InvokeLibraryDefinition(
             context4,
@@ -126,7 +126,7 @@ partial class Program
             "ExpensiveComputation");
         Console.WriteLine($"   First call: {result4a} (computed)");
 
-        context4.UseNewCache(); // Create new cache - invalidates old one
+        context4.UseNewCache(librarySetInvoker.CacheIndexInitializer); // Create new cache - invalidates old one
         var result4b = librarySetInvoker.InvokeLibraryDefinition(
             context4,
             cql.LibraryIdentifier,
@@ -138,7 +138,7 @@ partial class Program
         Parallel.For(0, 3, i =>
         {
             var context = FhirCqlContext.WithDataSource();
-            context.UseNewCache(); // Each context has independent cache
+            context.UseNewCache(librarySetInvoker.CacheIndexInitializer); // Each context has independent cache
             var result = librarySetInvoker.InvokeLibraryDefinition(
                 context,
                 cql.LibraryIdentifier,
@@ -195,9 +195,8 @@ partial class Program
         // Step 4: Create CqlContext with properly sized cache
         Console.WriteLine("Step 4: Create CqlContext with caching enabled");
         var context = FhirCqlContext
-                      .WithDataSource()
-                      .WithCacheIndexCount(initializer.CacheIndexCount);  // This step is essential before calling UseNewCache
-        context.UseNewCache(CacheWriteStrategy.ExecutionAndPublication);  // Cache indices are now properly initialized
+                      .WithDataSource();
+        context.UseNewCache(initializer, CacheWriteStrategy.ExecutionAndPublication);  // Cache indices are now properly initialized
         Console.WriteLine("   ✓ Cache enabled and ready\n");
 
         // Step 5: Use the library

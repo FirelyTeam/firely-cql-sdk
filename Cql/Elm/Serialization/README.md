@@ -36,7 +36,7 @@ The ELM JSON serialization system handles the conversion of `Library` objects to
 │  Library.ParseFromJson()  Library.LoadFromJson()  Library.SerializeToJson()  │
 │         ↓                        ↓                        ↓                  │
 └──────────────────────────────────────────────────────────────────────────────┘
-          │                        │                        │
+          ↓                        ↓                        ↓
           ↓                        ↓                        ↓
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         LibraryJsonSerializer                               │
@@ -267,12 +267,12 @@ Library.SerializeToJson(writeIndented)
          ↓
 LibraryJsonSerializer.SerializeToJson(library, writeIndented)
          ↓
-         ├─→ Create LibraryContainer wrapper: { "library": ... }
-         │
+         └─→ Create LibraryContainer wrapper: { "library": ... }
+         ↓
          ↓
 JsonSerializer.Serialize(container, options)
          ↓
-         ├─→ JsonSerializerOptions configured with:
+         └─→ JsonSerializerOptions configured with:
          │     • PolymorphicObjectJsonConverter&lt;Element&gt;
          │     • PolymorphicObjectJsonConverter&lt;Expression&gt;
          │     • PolymorphicObjectJsonConverter&lt;TypeSpecifier&gt;
@@ -285,25 +285,25 @@ JsonSerializer.Serialize(container, options)
          │     • XmlQualifiedNameConverter
          │     • JsonStringEnumConverter
          │     • PolymorphicTypeResolver (TypeInfoResolver)
-         │
+         ↓
          ↓
 For each polymorphic property:
          ↓
-         ├─→ PolymorphicObjectJsonConverter&lt;T&gt;.Write()
+         └─→ PolymorphicObjectJsonConverter&lt;T&gt;.Write()
          │     ↓
-         │     ├─→ Determine if "type" discriminator needed
+         │     └─→ Determine if "type" discriminator needed
          │     │     • actualType != declaredType
          │     │     • declaredType.IsAbstract
          │     │     • emitConcreteBaseTypeDiscriminator
          │     ↓
-         │     ├─→ Write "type" discriminator (if needed)
+         │     └─→ Write "type" discriminator (if needed)
          │     ↓
-         │     ├─→ Get type metadata via modifiers-only resolver
+         │     └─→ Get type metadata via modifiers-only resolver
          │     ↓
          │     └─→ For each property:
          │           • Check ShouldSerialize
          │           • Serialize with original options (for nested polymorphism)
-         │
+         ↓
          ↓
 Return JSON string
 </pre>
@@ -318,33 +318,33 @@ Library.LoadFromJson(file)
          ↓
 Library.LoadFromJson(stream)
          ↓
-         ├─→ JsonNode.Parse(stream)
-         │
+         └─→ JsonNode.Parse(stream)
+         ↓
          ↓
 LibraryJsonSerializer.DeserializeFromJsonNode(node, validate, filePath)
          ↓
-         ├─→ CorrectLegacyConstructs(node)
+         └─→ CorrectLegacyConstructs(node)
          │     ↓
-         │     ├─→ Reorder: Move "type" property to first position
+         │     └─→ Reorder: Move "type" property to first position
          │     ↓
-         │     ├─→ fixType: Handle "type" as object → remove
+         │     └─→ fixType: Handle "type" as object → remove
          │     │            Handle "type" as array → convert to "choice"
          │     ↓
          │     └─→ Remove empty objects/arrays
-         │
+         ↓
          ↓
 JsonSerializer.Deserialize&lt;LibraryContainer&gt;(node, options)
          ↓
-         ├─→ JsonSerializerOptions with allowOldStyleTypeDiscriminators = true
-         │
+         └─→ JsonSerializerOptions with allowOldStyleTypeDiscriminators = true
+         ↓
          ↓
 For each polymorphic property:
          ↓
-         ├─→ PolymorphicObjectJsonConverter&lt;T&gt;.Read()
+         └─→ PolymorphicObjectJsonConverter&lt;T&gt;.Read()
          │     ↓
-         │     ├─→ Parse JSON into JsonDocument
+         │     └─→ Parse JSON into JsonDocument
          │     ↓
-         │     ├─→ Look for "type" discriminator
+         │     └─→ Look for "type" discriminator
          │     │     ↓
          │     │     └─→ Found: FindTypeByDiscriminator()
          │     │     │          RemoveTypeProperty()
@@ -354,7 +354,7 @@ For each polymorphic property:
          │     │                    (for concrete base types)
          │     ↓
          │     └─→ Return deserialized object
-         │
+         ↓
          ↓
 Validate library (if validate = true)
          ↓
@@ -505,21 +505,21 @@ The serialization uses several "modifiers" that customize JsonTypeInfo:
 │     └─→ Renames Narrative.Text property to "value" in JSON       │
 │                                                                  │
 │  2. DoNotSerializeDefaultValues                                  │
-│     ├─→ Skips properties with default/null values                │
+│     └─→ Skips properties with default/null values                │
 │     └─→ Exception: Interval type always serializes all props     │
 │                                                                  │
 │  3. HandleSpecifiedProperties                                    │
-│     ├─→ Handles xxxSpecified pattern from XML serialization      │
-│     ├─→ Only serializes property if xxxSpecified is true         │
+│     └─→ Handles xxxSpecified pattern from XML serialization      │
+│     └─→ Only serializes property if xxxSpecified is true         │
 │     └─→ Sets xxxSpecified = true on deserialization              │
 │                                                                  │
 │  4. RespectXmlIgnoreAttribute                                    │
-│     ├─→ Properties with [XmlIgnore] are also ignored in JSON     │
-│     ├─→ Avoids needing duplicate [JsonIgnore] attributes         │
+│     └─→ Properties with [XmlIgnore] are also ignored in JSON     │
+│     └─→ Avoids needing duplicate [JsonIgnore] attributes         │
 │     └─→ Used for computed properties in partial class extensions │
 │                                                                  │
 │  5. AllowOldStyleTypeDiscriminators (deserialization only)       │
-│     ├─→ Adds "type" property handler for non-polymorphic types   │
+│     └─→ Adds "type" property handler for non-polymorphic types   │
 │     └─→ Validates discriminator matches expected type name       │
 │                                                                  │
 └──────────────────────────────────────────────────────────────────┘

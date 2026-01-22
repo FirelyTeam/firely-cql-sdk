@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Elm;
-using Hl7.Fhir.Model;
 using Library = Hl7.Cql.Elm.Library;
 using Annotation = Hl7.Cql.Elm.Annotation;
 

@@ -9,8 +9,6 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Internal;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace CoreTests;
 
@@ -43,8 +41,7 @@ public class CacheTest
 
         // Initialize cache indices
         var initializer = new CacheIndexInitializer(lib);
-        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
-        ctx.UseNewCache(); // Enable caching
+        ctx.UseNewCache(initializer);
 
         // Act - Call the same expression twice
         var result1 = lib.Result(ctx);
@@ -65,8 +62,7 @@ public class CacheTest
 
         // Initialize cache indices
         var initializer = new CacheIndexInitializer(lib);
-        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
-        ctx.UseNewCache(); // Enable caching
+        ctx.UseNewCache(initializer);
 
         var result1 = lib.Result(ctx); // First call - cached
 
@@ -90,12 +86,10 @@ public class CacheTest
         var initializer = new CacheIndexInitializer(lib);
 
         var ctx1 = FhirCqlContext.ForBundle();
-        ctx1.WithCacheIndexCount(initializer.CacheIndexCount);
-        ctx1.UseNewCache();
+        ctx1.UseNewCache(initializer);
 
         var ctx2 = FhirCqlContext.ForBundle();
-        ctx2.WithCacheIndexCount(initializer.CacheIndexCount);
-        ctx2.UseNewCache();
+        ctx2.UseNewCache(initializer);
 
         // Act - Call with different contexts
         var result1a = lib.Result(ctx1);
@@ -124,8 +118,7 @@ public class CacheTest
         var results = Parallel.For(0, 10, i =>
         {
             var ctx = FhirCqlContext.ForBundle();
-            ctx.WithCacheIndexCount(initializer.CacheIndexCount);
-            ctx.UseNewCache();
+            ctx.UseNewCache(initializer);
 
             // Call twice to verify caching works per context
             var result1 = lib.Result(ctx);
@@ -147,10 +140,11 @@ public class CacheTest
         var ctx = FhirCqlContext.ForBundle();
         var lib = CqlNestedTupleTest_1_0_0.Instance;
 
+        _ = new CacheIndexInitializer(lib);
+
         // Initialize cache indices
         var initializer = new CacheIndexInitializer(lib);
-        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
-        ctx.UseNewCache();
+        ctx.UseNewCache(initializer);
         var results = new System.Collections.Concurrent.ConcurrentBag<object?>();
 
         // Act - Multiple threads accessing the same context and cache key simultaneously
@@ -181,15 +175,14 @@ public class CacheTest
 
         // Initialize cache indices
         var initializer = new CacheIndexInitializer(lib);
-        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
-        ctx.UseNewCache();
+        ctx.UseNewCache(initializer);
 
         // Act - Get cached result
         var result1 = lib.Result(ctx);
         var result2 = lib.Result(ctx); // From cache
 
         // Invalidate cache
-        ctx.UseNewCache();
+        ctx.UseNewCache(initializer);
 
         var result3 = lib.Result(ctx); // New cache
         var result4 = lib.Result(ctx); // From new cache
@@ -210,8 +203,7 @@ public class CacheTest
 
         // Initialize cache indices
         var initializer = new CacheIndexInitializer(lib);
-        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
-        ctx.UseNewCache();
+        ctx.UseNewCache(initializer);
 
         // Act - First call should be a miss
         var result1 = lib.Result(ctx);
@@ -247,8 +239,7 @@ public class CacheTest
 
         // Initialize cache indices
         var initializer = new CacheIndexInitializer(lib);
-        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
-        ctx.UseNewCache();
+        ctx.UseNewCache(initializer);
 
         // Act - Make some calls to populate statistics
         lib.Result(ctx); // Miss
@@ -260,7 +251,7 @@ public class CacheTest
         Assert.AreEqual(1, ((ICqlContextInternals)ctx).CacheHits);
 
         // Act - Reset cache
-        ctx.UseNewCache();
+        ctx.UseNewCache(initializer);
 
         // Assert - Statistics should be reset to zero
         Assert.AreEqual(0, ((ICqlContextInternals)ctx).CacheCallCount, "Call count should be reset");
@@ -285,8 +276,7 @@ public class CacheTest
 
         // Initialize cache indices
         var initializer = new CacheIndexInitializer(lib);
-        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
-        ctx.UseNewCache();
+        ctx.UseNewCache(initializer);
 
         // Act - Make some calls to populate statistics
         lib.Result(ctx); // Miss
@@ -448,8 +438,7 @@ public class CacheTest
         var initializer = new CacheIndexInitializer(lib);
 
         var ctx = FhirCqlContext.ForBundle();
-        ctx.WithCacheIndexCount(initializer.CacheIndexCount);
-        ctx.UseNewCache();
+        ctx.UseNewCache(initializer);
 
         // Act - Call the same expression twice
         var result1 = lib.Result(ctx);

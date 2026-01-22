@@ -47,15 +47,13 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
 
 
         var libraries = GetAllLibraries();
-        var initializer = new CacheIndexInitializer(libraries);
-        CacheIndexCount = initializer.CacheIndexCount;
+        CacheIndexInitializer = new CacheIndexInitializer(libraries);
     }
 
     /// <summary>
-    /// The total number of cache indices required for all libraries in the set.
-    /// This number should be passed to the <see cref="CqlContext"/> constructor
+    /// Gets the initializer used to configure and create cache indexes for this instance.
     /// </summary>
-    public int CacheIndexCount { get; private set; }
+    public CacheIndexInitializer CacheIndexInitializer { get; private set; }
 
     private ILibrary[] GetAllLibraries() => // DO NOT MAKE THIS PUBLIC (Design Decision is to encapsulated Library Instances)
         LibraryInvokers
