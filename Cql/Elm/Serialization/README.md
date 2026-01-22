@@ -29,14 +29,14 @@ The ELM JSON serialization system handles the conversion of `Library` objects to
 
 ## Architecture Diagram
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │                              PUBLIC API                                      │
 │                                                                              │
 │  Library.ParseFromJson()  Library.LoadFromJson()  Library.SerializeToJson()  │
 │         ↓                        ↓                        ↓                  │
 └──────────────────────────────────────────────────────────────────────────────┘
-          ↓                        ↓                        ↓
+          │                        │                        │
           ↓                        ↓                        ↓
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         LibraryJsonSerializer                               │
@@ -62,7 +62,7 @@ The ELM JSON serialization system handles the conversion of `Library` objects to
         ↓                           ↓                           ↓
 ┌───────────────────┐  ┌────────────────────────┐  ┌────────────────────────┐
 │PolymorphicObject  │  │PolymorphicArray        │  │TopLevelDefinition      │
-│JsonConverter<T>   │  │JsonConverter<T>        │  │ConverterFactory        │
+│JsonConverter&lt;T&gt;   │  │JsonConverter&lt;T&gt;        │  │ConverterFactory        │
 │                   │  │                        │  │                        │
 │ Handles:          │  │ Handles:               │  │ Creates converters for:│
 │ • Element         │  │ • UsingDef[]           │  │ • UsingDef[]           │
@@ -83,7 +83,7 @@ The ELM JSON serialization system handles the conversion of `Library` objects to
 │                                                                              │
 │  JsonSerializer.Serialize() / JsonSerializer.Deserialize()                   │
 └──────────────────────────────────────────────────────────────────────────────┘
-```
+</pre>
 
 ---
 
@@ -93,7 +93,7 @@ The ELM JSON serialization system handles the conversion of `Library` objects to
 
 The central coordinator for all serialization operations.
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 ┌─────────────────────────────────────────────────────────────────┐
 │                     LibraryJsonSerializer                       │
 ├─────────────────────────────────────────────────────────────────┤
@@ -120,15 +120,15 @@ The central coordinator for all serialization operations.
 │   • ModifyNarrative(ti) - Renames Narrative.Text to "value"     │
 │   • AllowOldStyleTypeDiscriminators(ti) - Legacy support        │
 └─────────────────────────────────────────────────────────────────┘
-```
+</pre>
 
 ### 2. PolymorphicObjectJsonConverter\<T\>
 
 Handles polymorphic serialization for object types with `"type"` discriminators.
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 ┌─────────────────────────────────────────────────────────────────┐
-│              PolymorphicObjectJsonConverter<T>                  │
+│              PolymorphicObjectJsonConverter&lt;T&gt;                  │
 ├─────────────────────────────────────────────────────────────────┤
 │ Constructor Parameter:                                          │
 │   • emitConcreteBaseTypeDiscriminator (bool)                    │
@@ -152,15 +152,15 @@ Handles polymorphic serialization for object types with `"type"` discriminators.
 │   • FindTypeByDiscriminatorRecursive() - recursive search       │
 │   • FindDiscriminatorForType() - returns type.Name              │
 └─────────────────────────────────────────────────────────────────┘
-```
+</pre>
 
 ### 3. PolymorphicArrayJsonConverter\<T\>
 
 Handles array serialization with the ELM-specific wrapper structure.
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 ┌─────────────────────────────────────────────────────────────────┐
-│               PolymorphicArrayJsonConverter<T>                  │
+│               PolymorphicArrayJsonConverter&lt;T&gt;                  │
 ├─────────────────────────────────────────────────────────────────┤
 │ Constructor Parameter:                                          │
 │   • allowOldStyleDefinitionTypeDiscriminators (bool)            │
@@ -189,13 +189,13 @@ Handles array serialization with the ELM-specific wrapper structure.
 │   4. Serialize each element                                     │
 │   5. WriteEndArray, WriteEndObject                              │
 └─────────────────────────────────────────────────────────────────┘
-```
+</pre>
 
 ### 4. PolymorphicTypeResolver
 
 Custom `IJsonTypeInfoResolver` that configures polymorphism based on `[XmlInclude]` attributes.
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 ┌─────────────────────────────────────────────────────────────────┐
 │                   PolymorphicTypeResolver                       │
 ├─────────────────────────────────────────────────────────────────┤
@@ -218,13 +218,13 @@ Custom `IJsonTypeInfoResolver` that configures polymorphism based on `[XmlInclud
 │   • Skip abstract types                                         │
 │   • Use type.Name as discriminator                              │
 └─────────────────────────────────────────────────────────────────┘
-```
+</pre>
 
 ### 5. TopLevelDefinitionConverterFactory
 
 Factory that creates `PolymorphicArrayJsonConverter<T>` for top-level definition arrays.
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 ┌─────────────────────────────────────────────────────────────────┐
 │               TopLevelDefinitionConverterFactory                │
 ├─────────────────────────────────────────────────────────────────┤
@@ -240,111 +240,111 @@ Factory that creates `PolymorphicArrayJsonConverter<T>` for top-level definition
 │   • ExpressionDef[]                                             │
 ├─────────────────────────────────────────────────────────────────┤
 │ CreateConverter():                                              │
-│   Creates PolymorphicArrayJsonConverter<ElementType>            │
+│   Creates PolymorphicArrayJsonConverter&lt;ElementType&gt;            │
 └─────────────────────────────────────────────────────────────────┘
-```
+</pre>
 
 ### 6. XmlQualifiedNameConverter
 
 Simple converter for `System.Xml.XmlQualifiedName` objects.
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 ┌─────────────────────────────────────────────────────────────────┐
 │                   XmlQualifiedNameConverter                     │
 ├─────────────────────────────────────────────────────────────────┤
 │ Read: Parse string as XmlQualifiedName                          │
 │ Write: Write Name property as string                            │
 └─────────────────────────────────────────────────────────────────┘
-```
+</pre>
 
 ---
 
 ## Serialization Flow
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 Library.SerializeToJson(writeIndented)
          ↓
          ↓
 LibraryJsonSerializer.SerializeToJson(library, writeIndented)
          ↓
-         └─→ Create LibraryContainer wrapper: { "library": ... }
-         ↓
+         ├─→ Create LibraryContainer wrapper: { "library": ... }
+         │
          ↓
 JsonSerializer.Serialize(container, options)
          ↓
-         └─→ JsonSerializerOptions configured with:
-         │     • PolymorphicObjectJsonConverter<Element>
-         │     • PolymorphicObjectJsonConverter<Expression>
-         │     • PolymorphicObjectJsonConverter<TypeSpecifier>
-         │     • PolymorphicObjectJsonConverter<ExpressionDef>
-         │     • PolymorphicObjectJsonConverter<CqlToElmBase>
-         │     • PolymorphicObjectJsonConverter<RelationshipClause>
-         │     • PolymorphicObjectJsonConverter<AliasedQuerySource>
-         │     • PolymorphicObjectJsonConverter<SortByItem>
+         ├─→ JsonSerializerOptions configured with:
+         │     • PolymorphicObjectJsonConverter&lt;Element&gt;
+         │     • PolymorphicObjectJsonConverter&lt;Expression&gt;
+         │     • PolymorphicObjectJsonConverter&lt;TypeSpecifier&gt;
+         │     • PolymorphicObjectJsonConverter&lt;ExpressionDef&gt;
+         │     • PolymorphicObjectJsonConverter&lt;CqlToElmBase&gt;
+         │     • PolymorphicObjectJsonConverter&lt;RelationshipClause&gt;
+         │     • PolymorphicObjectJsonConverter&lt;AliasedQuerySource&gt;
+         │     • PolymorphicObjectJsonConverter&lt;SortByItem&gt;
          │     • TopLevelDefinitionConverterFactory
          │     • XmlQualifiedNameConverter
          │     • JsonStringEnumConverter
          │     • PolymorphicTypeResolver (TypeInfoResolver)
-         ↓
+         │
          ↓
 For each polymorphic property:
          ↓
-         └─→ PolymorphicObjectJsonConverter<T>.Write()
+         ├─→ PolymorphicObjectJsonConverter&lt;T&gt;.Write()
          │     ↓
-         │     └─→ Determine if "type" discriminator needed
+         │     ├─→ Determine if "type" discriminator needed
          │     │     • actualType != declaredType
          │     │     • declaredType.IsAbstract
          │     │     • emitConcreteBaseTypeDiscriminator
          │     ↓
-         │     └─→ Write "type" discriminator (if needed)
+         │     ├─→ Write "type" discriminator (if needed)
          │     ↓
-         │     └─→ Get type metadata via modifiers-only resolver
+         │     ├─→ Get type metadata via modifiers-only resolver
          │     ↓
          │     └─→ For each property:
          │           • Check ShouldSerialize
          │           • Serialize with original options (for nested polymorphism)
-         ↓
+         │
          ↓
 Return JSON string
-```
+</pre>
 
 ---
 
 ## Deserialization Flow
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 Library.LoadFromJson(file)
          ↓
          ↓
 Library.LoadFromJson(stream)
          ↓
-         └─→ JsonNode.Parse(stream)
-         ↓
+         ├─→ JsonNode.Parse(stream)
+         │
          ↓
 LibraryJsonSerializer.DeserializeFromJsonNode(node, validate, filePath)
          ↓
-         └─→ CorrectLegacyConstructs(node)
+         ├─→ CorrectLegacyConstructs(node)
          │     ↓
-         │     └─→ Reorder: Move "type" property to first position
+         │     ├─→ Reorder: Move "type" property to first position
          │     ↓
-         │     └─→ fixType: Handle "type" as object → remove
+         │     ├─→ fixType: Handle "type" as object → remove
          │     │            Handle "type" as array → convert to "choice"
          │     ↓
          │     └─→ Remove empty objects/arrays
+         │
          ↓
+JsonSerializer.Deserialize&lt;LibraryContainer&gt;(node, options)
          ↓
-JsonSerializer.Deserialize<LibraryContainer>(node, options)
-         ↓
-         └─→ JsonSerializerOptions with allowOldStyleTypeDiscriminators = true
-         ↓
+         ├─→ JsonSerializerOptions with allowOldStyleTypeDiscriminators = true
+         │
          ↓
 For each polymorphic property:
          ↓
-         └─→ PolymorphicObjectJsonConverter<T>.Read()
+         ├─→ PolymorphicObjectJsonConverter&lt;T&gt;.Read()
          │     ↓
-         │     └─→ Parse JSON into JsonDocument
+         │     ├─→ Parse JSON into JsonDocument
          │     ↓
-         │     └─→ Look for "type" discriminator
+         │     ├─→ Look for "type" discriminator
          │     │     ↓
          │     │     └─→ Found: FindTypeByDiscriminator()
          │     │     │          RemoveTypeProperty()
@@ -354,13 +354,13 @@ For each polymorphic property:
          │     │                    (for concrete base types)
          │     ↓
          │     └─→ Return deserialized object
-         ↓
+         │
          ↓
 Validate library (if validate = true)
          ↓
          ↓
 Return Library object
-```
+</pre>
 
 ---
 
@@ -398,7 +398,7 @@ System.Text.Json's built-in polymorphism support (`JsonPolymorphismOptions`) can
 
 ### The Solution
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 ┌──────────────────────────────────────────────────────────────────┐
 │                    Problem: "type" Ambiguity                     │
 ├──────────────────────────────────────────────────────────────────┤
@@ -425,7 +425,7 @@ System.Text.Json's built-in polymorphism support (`JsonPolymorphismOptions`) can
 │  }                                                               │
 │                                                                  │
 └──────────────────────────────────────────────────────────────────┘
-```
+</pre>
 
 ### Why Custom Converters Are Needed
 
@@ -453,12 +453,12 @@ This works because:
 - **JSON serialization**: Ignores the property (discriminator takes precedence)
 - The type information is still available through `resultTypeSpecifier` or other means
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 ┌──────────────────────────────────────────────────────────────────┐
 │           Types Handled by Custom Converters                     │
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
-│  PolymorphicObjectJsonConverter<T> registered for:               │
+│  PolymorphicObjectJsonConverter&lt;T&gt; registered for:               │
 │                                                                  │
 │  • CqlToElmBase      - Annotations with nested type conflicts    │
 │  • ExpressionDef     - Can be FunctionDef with complex body      │
@@ -470,7 +470,7 @@ This works because:
 │  • SortByItem        - Sort specifications                       │
 │                                                                  │
 └──────────────────────────────────────────────────────────────────┘
-```
+</pre>
 
 ---
 
@@ -496,7 +496,7 @@ This allows the serializer to:
 
 The serialization uses several "modifiers" that customize JsonTypeInfo:
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 ┌──────────────────────────────────────────────────────────────────┐
 │                      Modifier Pipeline                           │
 ├──────────────────────────────────────────────────────────────────┤
@@ -505,25 +505,25 @@ The serialization uses several "modifiers" that customize JsonTypeInfo:
 │     └─→ Renames Narrative.Text property to "value" in JSON       │
 │                                                                  │
 │  2. DoNotSerializeDefaultValues                                  │
-│     └─→ Skips properties with default/null values                │
+│     ├─→ Skips properties with default/null values                │
 │     └─→ Exception: Interval type always serializes all props     │
 │                                                                  │
 │  3. HandleSpecifiedProperties                                    │
-│     └─→ Handles xxxSpecified pattern from XML serialization      │
-│     └─→ Only serializes property if xxxSpecified is true         │
+│     ├─→ Handles xxxSpecified pattern from XML serialization      │
+│     ├─→ Only serializes property if xxxSpecified is true         │
 │     └─→ Sets xxxSpecified = true on deserialization              │
 │                                                                  │
 │  4. RespectXmlIgnoreAttribute                                    │
-│     └─→ Properties with [XmlIgnore] are also ignored in JSON     │
-│     └─→ Avoids needing duplicate [JsonIgnore] attributes         │
+│     ├─→ Properties with [XmlIgnore] are also ignored in JSON     │
+│     ├─→ Avoids needing duplicate [JsonIgnore] attributes         │
 │     └─→ Used for computed properties in partial class extensions │
 │                                                                  │
 │  5. AllowOldStyleTypeDiscriminators (deserialization only)       │
-│     └─→ Adds "type" property handler for non-polymorphic types   │
+│     ├─→ Adds "type" property handler for non-polymorphic types   │
 │     └─→ Validates discriminator matches expected type name       │
 │                                                                  │
 └──────────────────────────────────────────────────────────────────┘
-```
+</pre>
 
 ---
 
@@ -653,7 +653,7 @@ This is automatically disabled in the `CqlToolkit` to avoid interrupting executi
 
 ## File Structure
 
-```
+<pre style="line-height:1; font-family:Consolas, monospace;">
 Cql/Elm/Serialization/
 ├─ README.md                           # This document
 ├─ LibraryJsonSerializer.cs            # Main serialization coordinator
@@ -666,4 +666,4 @@ Cql/Elm/Serialization/
 Cql/Elm/
 ├─ Library.Serialization.cs            # Public API on Library class
 └─ ...
-```
+</pre>

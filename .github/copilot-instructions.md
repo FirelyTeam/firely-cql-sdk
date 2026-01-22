@@ -91,6 +91,13 @@ Use this header format with "Firely, NCQA" and the current year:
    - Use string interpolation instead of `string.Format` or concatenation
 10. **Local functions must use camelCase naming** - Local functions (functions defined inside methods) should start with a lowercase letter (e.g., `processItem()`, not `ProcessItem()`)
 
+### Code Generation
+- **When modifying code generation logic in `CodeGeneration.NET`**: The generated C# code does not have `#nullable enable` directives, so:
+  - Do not use nullable reference type operators (`?`, `!`) in generated code
+  - Avoid null-conditional operators (`?.`, `??`) that assume nullable reference type context
+  - Use traditional null checks instead of nullable reference type annotations
+  - This applies only to the *generated* code output, not to the code generator implementation itself
+
 ### Project References
 - When adding internal access, ensure the requesting project is appropriate for internal API usage
 - Preview/test projects can access internals, production projects should use public APIs
@@ -106,6 +113,12 @@ Use this header format with "Firely, NCQA" and the current year:
   - Only include code samples for packages that have clear public usage patterns designed for direct consumer use
   - Remove any placeholder or comment-only code blocks from documentation
   - Internal packages should describe what they do but not show how to use them directly
+- **ASCII art diagrams in markdown**: When creating diagrams using line and box drawing characters (e.g., `│`, `┌`, `─`), wrap them in `<pre style="line-height:1; font-family:Consolas, monospace;">` ... `</pre>` tags instead of code fences (` ``` `). This prevents unwanted line spacing that breaks the visual appearance of ASCII art
+  - **Important**: Content between `<pre>` tags is treated as HTML/XML, so proper escaping is required:
+    - Use `&lt;` for `<` (e.g., `MyClass&lt;T&gt;` instead of `MyClass<T>`)
+    - Use `&gt;` for `>` when it could be interpreted as an XML tag
+    - Use `&amp;` for `&`
+    - Example: `PolymorphicObjectJsonConverter&lt;T&gt;` not `PolymorphicObjectJsonConverter<T>`
 
 ## Build and Test
 - **Always use `Cql-Sdk.slnf` to build the solution** - This is because `Cql-Sdk-All.sln` contains submodules to which you do not have access to
@@ -168,7 +181,10 @@ When making changes to the code generator (`CodeGeneration.NET` project) or when
 #### For CoreTests Project
 The CoreTests project has generated C# files in `Cql/CoreTests/CSharp/*.g.cs`. To regenerate them:
 
-1. **Enable C# generation**: The property `ElmToCSharpEnabled` should be set to `true` in the csproj or packaging tooling targets
+1. **Enable C# generation**: The `ElmToCSharpEnabled` property can be set in two places:
+   - **For single project**: Add `<ElmToCSharpEnabled>true</ElmToCSharpEnabled>` in the csproj file between the imports of `packaging-tooling.props` and `packaging-tooling.Targets.xml`
+   - **For all projects globally**: Set `<ElmToCSharpEnabled>true</ElmToCSharpEnabled>` in `packaging-tooling.props` (uncomment existing line or add)
+   - Prefer project-level setting when focusing on one project
 2. **Clean existing generated files**: Remove old generated files to force regeneration:
    ```bash
    rm -rf Cql/CoreTests/CSharp/*.g.cs
@@ -178,7 +194,8 @@ The CoreTests project has generated C# files in `Cql/CoreTests/CSharp/*.g.cs`. T
    dotnet build Cql/CoreTests/CoreTests.csproj -c Release
    ```
 4. **Verify generation**: Check that all `*.g.cs` files are created in `Cql/CoreTests/CSharp/` directory
-5. **Restore from git if needed**: If generation fails, restore the files from git:
+5. **Restore setting**: Remove or comment out the `ElmToCSharpEnabled=true` setting added in step 1
+6. **Restore from git if needed**: If generation fails, restore the files from git:
    ```bash
    git checkout HEAD -- Cql/CoreTests/CSharp/*.g.cs
    ```
