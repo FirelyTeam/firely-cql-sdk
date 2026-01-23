@@ -20,6 +20,7 @@ public class CqlLibrarySetInvocationCacheTest
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
         var lib = RR23_1_0_0.Instance;
+        var cache = new CqlLibrarySetInvocationCache(lib);
 
         // Act - Call the same expression twice without cache
         var result1 = lib.Measurement_Period(ctx);
@@ -29,6 +30,13 @@ public class CqlLibrarySetInvocationCacheTest
         Assert.IsNotNull(result1);
         Assert.IsNotNull(result2);
         Assert.AreEqual(result1, result2);
+
+        // Verify no cache was used
+        Assert.AreEqual(false, cache.CacheEnabled);
+        Assert.AreEqual(0, cache.CacheEntriesCount);
+        Assert.AreEqual(0, cache.CacheCallCount);
+        Assert.AreEqual(0, cache.CacheMisses);
+        Assert.AreEqual(0, cache.CacheHits);
     }
 
     [TestMethod]
