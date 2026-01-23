@@ -67,8 +67,9 @@ partial class Program
                 .AddCqlLibraries(cql)
                 .CreateLibrarySetInvoker();
 
-        var cache = librarySetInvoker.Cache;
-        var libraryInvocationSet = librarySetInvoker.LibrarySet;
+        // Cache must be created outside LibrarySetInvoker
+        var libraryInvocationSet = librarySetInvoker.InvocationSet;
+        var cache = new CqlLibraryInvocationCache();
         cache.StartNewCache(libraryInvocationSet); // Initialize cache with default ExecutionAndPublication strategy
         Console.WriteLine($"✓ Library loaded. Cache size: {cache.CacheEntriesCount} entries\n");
 

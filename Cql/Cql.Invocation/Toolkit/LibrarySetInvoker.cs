@@ -47,19 +47,13 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
 
 
         var libraries = GetAllLibraries();
-        LibrarySet = new CqlLibraryInvocationSet(libraries);
-        Cache = new CqlLibraryInvocationCache();
+        InvocationSet = new CqlLibraryInvocationSet(libraries);
     }
 
     /// <summary>
     /// Gets the library invocation set for this library set.
     /// </summary>
-    public CqlLibraryInvocationSet LibrarySet { get; private set; }
-
-    /// <summary>
-    /// Gets the execution cache instance for this library set.
-    /// </summary>
-    public CqlLibraryInvocationCache Cache { get; private set; }
+    public CqlLibraryInvocationSet InvocationSet { get; private set; }
 
     private ILibrary[] GetAllLibraries() => // DO NOT MAKE THIS PUBLIC (Design Decision is to encapsulated Library Instances)
         LibraryInvokers
