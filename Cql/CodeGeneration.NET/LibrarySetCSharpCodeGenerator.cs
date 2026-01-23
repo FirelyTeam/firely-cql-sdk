@@ -77,7 +77,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             typeof(Iso8601.DateIso8601).Namespace!,
             typeof(PropertyInfo).Namespace!,
             typeof(RetrieveParameters).Namespace!,
-            typeof(ICqlContextInternals).Namespace!, // Hl7.Cql.Runtime.Internal
+            typeof(ILibraryInternals).Namespace!,
         };
 
         foreach (var @using in typeResolver.ModelNamespaces)

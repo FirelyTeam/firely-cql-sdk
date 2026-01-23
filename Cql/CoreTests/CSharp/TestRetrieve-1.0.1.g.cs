@@ -87,9 +87,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlParameterDefinition("MeasurementPeriod")]
     public object MeasurementPeriod(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<object>(
-            _cacheIndex_MeasurementPeriod,
-            MeasurementPeriod_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_MeasurementPeriod, MeasurementPeriod_Compute, context) ?? MeasurementPeriod_Compute(context);
 
     private object MeasurementPeriod_Compute(CqlContext context)
     {
@@ -107,9 +105,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -121,9 +117,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Patient> InDemographic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Patient>>(
-            _cacheIndex_InDemographic,
-            InDemographic_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute, context) ?? InDemographic_Compute(context);
 
     private IEnumerable<Patient> InDemographic_Compute(CqlContext context)
     {
@@ -134,9 +128,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlExpressionDefinition("SexuallyActive")]
     public bool? SexuallyActive(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_SexuallyActive,
-            SexuallyActive_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_SexuallyActive, SexuallyActive_Compute, context) ?? SexuallyActive_Compute(context);
 
     private bool? SexuallyActive_Compute(CqlContext context)
     {
@@ -162,47 +154,38 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    private CqlLibrariesExecutionCache CacheInstance { get; set; }
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        if (CacheInstance == cache)
             return 0;
+
+        CacheInstance = cache;
 
         var count = 0;
 
-        // Process dependencies first (depth-first traversal)
         if (Dependencies is { Length: > 0 })
         {
             foreach (var dependency in Dependencies)
             {
                 if (dependency is ILibraryInternals internals)
                 {
-                    count += internals.InitializeCacheIndices(initializer);
+                    count += internals.InitializeCacheIndices(cache);
                 }
             }
         }
 
-        // Initialize cache indices for this library
-        if (_cacheIndex_MeasurementPeriod != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_MeasurementPeriod' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_MeasurementPeriod}}. Cache indices can only be initialized once.");
-        _cacheIndex_MeasurementPeriod = initializer.GetNextIndex();
+        _cacheIndex_MeasurementPeriod = cache.GetNextIndex();
         count++;
 
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
+        _cacheIndex_Patient = cache.GetNextIndex();
         count++;
 
-        if (_cacheIndex_InDemographic != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_InDemographic' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_InDemographic}}. Cache indices can only be initialized once.");
-        _cacheIndex_InDemographic = initializer.GetNextIndex();
+        _cacheIndex_InDemographic = cache.GetNextIndex();
         count++;
 
-        if (_cacheIndex_SexuallyActive != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SexuallyActive' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SexuallyActive}}. Cache indices can only be initialized once.");
-        _cacheIndex_SexuallyActive = initializer.GetNextIndex();
+        _cacheIndex_SexuallyActive = cache.GetNextIndex();
         count++;
 
         return count;

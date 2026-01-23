@@ -15,21 +15,9 @@ namespace Hl7.Cql.Runtime.Internal;
 public interface ILibraryInternals
 {
     /// <summary>
-    /// Gets or sets a value indicating whether cache indices have been initialized for this library.
-    /// </summary>
-    bool CacheIndicesInitialized { get; set; }
-
-    /// <summary>
-    /// Gets or sets the CacheIndexInitializer that initialized this library's cache indices.
-    /// This allows libraries to track which initializer they belong to, enabling re-initialization
-    /// with different initializers (e.g., in unit testing scenarios).
-    /// </summary>
-    CacheIndexInitializer? CacheIndexInitializerInstance { get; set; }
-
-    /// <summary>
     /// Initializes cache indices for this library and its dependencies.
     /// </summary>
-    /// <param name="initializer">The cache index initializer instance.</param>
+    /// <param name="cache">The execution cache instance.</param>
     /// <returns>The total number of cache indices initialized in this library and all its dependencies.</returns>
-    int InitializeCacheIndices(CacheIndexInitializer initializer);
+    int InitializeCacheIndices(CqlLibrariesExecutionCache cache);
 }

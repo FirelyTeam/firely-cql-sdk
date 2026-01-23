@@ -49,9 +49,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Observation> InDemographic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(
-            _cacheIndex_InDemographic,
-            InDemographic_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute, context) ?? InDemographic_Compute(context);
 
     private IEnumerable<Observation> InDemographic_Compute(CqlContext context)
     {
@@ -70,32 +68,29 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ILibraryInternals, IS
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    private CqlLibrariesExecutionCache CacheInstance { get; set; }
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        if (CacheInstance == cache)
             return 0;
+
+        CacheInstance = cache;
 
         var count = 0;
 
-        // Process dependencies first (depth-first traversal)
         if (Dependencies is { Length: > 0 })
         {
             foreach (var dependency in Dependencies)
             {
                 if (dependency is ILibraryInternals internals)
                 {
-                    count += internals.InitializeCacheIndices(initializer);
+                    count += internals.InitializeCacheIndices(cache);
                 }
             }
         }
 
-        // Initialize cache indices for this library
-        if (_cacheIndex_InDemographic != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_InDemographic' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_InDemographic}}. Cache indices can only be initialized once.");
-        _cacheIndex_InDemographic = initializer.GetNextIndex();
+        _cacheIndex_InDemographic = cache.GetNextIndex();
         count++;
 
         return count;

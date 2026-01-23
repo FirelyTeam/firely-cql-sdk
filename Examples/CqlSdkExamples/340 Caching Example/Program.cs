@@ -67,12 +67,12 @@ partial class Program
                 .AddCqlLibraries(cql)
                 .CreateLibrarySetInvoker();
 
-        Console.WriteLine($"✓ Library loaded. Cache size: {librarySetInvoker.CacheIndexInitializer.CacheIndexCount} entries\n");
+        Console.WriteLine($"✓ Library loaded. Cache size: {librarySetInvoker.LibraryInitializer.CacheIndexCount} entries\n");
 
         // Example 1: Basic caching
         Console.WriteLine("1. Basic Caching (ExecutionAndPublication strategy - default):");
         var context1 = FhirCqlContext.WithDataSource();
-        context1.UseNewCache(librarySetInvoker.CacheIndexInitializer);  // Enable array-based cache with default strategy
+        context1.UseNewCache(librarySetInvoker.LibraryInitializer);  // Enable array-based cache with default strategy
 
         var sw = Stopwatch.StartNew();
         for (int i = 0; i < 3; i++)
@@ -89,7 +89,7 @@ partial class Program
         // Example 2: Caching null values (now supported!)
         Console.WriteLine("2. Caching Null Values:");
         var context2 = FhirCqlContext.WithDataSource();
-        context2.UseNewCache(librarySetInvoker.CacheIndexInitializer);
+        context2.UseNewCache(librarySetInvoker.LibraryInitializer);
 
         for (int i = 0; i < 2; i++)
         {
@@ -105,7 +105,7 @@ partial class Program
         // Example 3: PublicationOnly strategy (allow multiple concurrent computations)
         Console.WriteLine("3. PublicationOnly Strategy (multiple threads can compute concurrently):");
         var context3 = FhirCqlContext.WithDataSource();
-        context3.UseNewCache(librarySetInvoker.CacheIndexInitializer, CacheWriteStrategy.PublicationOnly);
+        context3.UseNewCache(librarySetInvoker.LibraryInitializer, CacheWriteStrategy.PublicationOnly);
         Console.WriteLine("   ✓ Using PublicationOnly: Multiple threads can compute, last write wins");
         Console.WriteLine("   ✓ Per-entry locking: Different cache entries don't contend with each other");
 
@@ -118,7 +118,7 @@ partial class Program
         // Example 4: Cache invalidation
         Console.WriteLine("4. Cache Invalidation:");
         var context4 = FhirCqlContext.WithDataSource();
-        context4.UseNewCache(librarySetInvoker.CacheIndexInitializer);
+        context4.UseNewCache(librarySetInvoker.LibraryInitializer);
 
         var result4a = librarySetInvoker.InvokeLibraryDefinition(
             context4,
@@ -126,7 +126,7 @@ partial class Program
             "ExpensiveComputation");
         Console.WriteLine($"   First call: {result4a} (computed)");
 
-        context4.UseNewCache(librarySetInvoker.CacheIndexInitializer); // Create new cache - invalidates old one
+        context4.UseNewCache(librarySetInvoker.LibraryInitializer); // Create new cache - invalidates old one
         var result4b = librarySetInvoker.InvokeLibraryDefinition(
             context4,
             cql.LibraryIdentifier,
@@ -138,7 +138,7 @@ partial class Program
         Parallel.For(0, 3, i =>
         {
             var context = FhirCqlContext.WithDataSource();
-            context.UseNewCache(librarySetInvoker.CacheIndexInitializer); // Each context has independent cache
+            context.UseNewCache(librarySetInvoker.LibraryInitializer); // Each context has independent cache
             var result = librarySetInvoker.InvokeLibraryDefinition(
                 context,
                 cql.LibraryIdentifier,
@@ -156,7 +156,7 @@ partial class Program
     /// <summary>
     /// NON-PREFERRED APPROACH: Manual DLL Loading
     /// Only use this if you're loading libraries dynamically from DLLs at runtime.
-    /// Requires manual cache index initialization using CacheIndexInitializer.
+    /// Requires manual cache index initialization using LibraryInitializer.
     /// </summary>
     void NonPreferredApproach_ManualDllLoading()
     {
@@ -187,8 +187,8 @@ partial class Program
         Console.WriteLine($"   Found {libraries.Length} library/libraries\n");
 
         // Step 3: CRITICAL - Initialize cache indices manually
-        Console.WriteLine("Step 3: Initialize cache indices using CacheIndexInitializer");
-        var initializer = new CacheIndexInitializer(libraries);
+        Console.WriteLine("Step 3: Initialize cache indices using LibraryInitializer");
+        var initializer = new LibraryInitializer(libraries);
         Console.WriteLine($"   ✓ Initialized {initializer.CacheIndexCount} cache index fields");
         Console.WriteLine($"   ✓ Cache size required: {initializer.CacheIndexCount} entries\n");
 

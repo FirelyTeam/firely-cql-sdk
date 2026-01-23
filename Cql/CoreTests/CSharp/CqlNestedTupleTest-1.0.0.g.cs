@@ -21,9 +21,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Result")]
     public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)?>(
-            _cacheIndex_Result,
-            Result_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_Result, Result_Compute, context) ?? Result_Compute(context);
 
     private (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result_Compute(CqlContext context)
     {
@@ -43,32 +41,29 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ILibraryInternals, ISi
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    private CqlLibrariesExecutionCache CacheInstance { get; set; }
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        if (CacheInstance == cache)
             return 0;
+
+        CacheInstance = cache;
 
         var count = 0;
 
-        // Process dependencies first (depth-first traversal)
         if (Dependencies is { Length: > 0 })
         {
             foreach (var dependency in Dependencies)
             {
                 if (dependency is ILibraryInternals internals)
                 {
-                    count += internals.InitializeCacheIndices(initializer);
+                    count += internals.InitializeCacheIndices(cache);
                 }
             }
         }
 
-        // Initialize cache indices for this library
-        if (_cacheIndex_Result != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Result' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Result}}. Cache indices can only be initialized once.");
-        _cacheIndex_Result = initializer.GetNextIndex();
+        _cacheIndex_Result = cache.GetNextIndex();
         count++;
 
         return count;

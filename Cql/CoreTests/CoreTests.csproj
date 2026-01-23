@@ -67,6 +67,7 @@
 	<Import Project="..\..\packaging-tooling.props" />
 
 	<PropertyGroup>
+		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 		<LibrarySet>CoreTests.HL7</LibrarySet>
 		<CqlDirectory>$(MSBuildProjectDirectory)/Input/ELM/HL7</CqlDirectory>
 		<ElmDirectory>$(MSBuildProjectDirectory)/Input/ELM/HL7</ElmDirectory>

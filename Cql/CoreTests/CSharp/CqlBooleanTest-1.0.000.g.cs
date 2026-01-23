@@ -21,9 +21,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_SomethingTrueEqualsTrue,
-            SomethingTrueEqualsTrue_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_SomethingTrueEqualsTrue, SomethingTrueEqualsTrue_Compute, context) ?? SomethingTrueEqualsTrue_Compute(context);
 
     private bool? SomethingTrueEqualsTrue_Compute(CqlContext context)
     {
@@ -43,32 +41,29 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ILibraryInternals, ISing
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    private CqlLibrariesExecutionCache CacheInstance { get; set; }
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        if (CacheInstance == cache)
             return 0;
+
+        CacheInstance = cache;
 
         var count = 0;
 
-        // Process dependencies first (depth-first traversal)
         if (Dependencies is { Length: > 0 })
         {
             foreach (var dependency in Dependencies)
             {
                 if (dependency is ILibraryInternals internals)
                 {
-                    count += internals.InitializeCacheIndices(initializer);
+                    count += internals.InitializeCacheIndices(cache);
                 }
             }
         }
 
-        // Initialize cache indices for this library
-        if (_cacheIndex_SomethingTrueEqualsTrue != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SomethingTrueEqualsTrue' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SomethingTrueEqualsTrue}}. Cache indices can only be initialized once.");
-        _cacheIndex_SomethingTrueEqualsTrue = initializer.GetNextIndex();
+        _cacheIndex_SomethingTrueEqualsTrue = cache.GetNextIndex();
         count++;
 
         return count;

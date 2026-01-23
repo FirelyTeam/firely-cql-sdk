@@ -41,9 +41,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(
-            _cacheIndex_ChosenSubCategory,
-            ChosenSubCategory_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute, context) ?? ChosenSubCategory_Compute(context);
 
     private string ChosenSubCategory_Compute(CqlContext context)
     {
@@ -54,9 +52,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlParameterDefinition("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_ChosenCode,
-            ChosenCode_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_ChosenCode, ChosenCode_Compute, context) ?? ChosenCode_Compute(context);
 
     private CqlCode ChosenCode_Compute(CqlContext context)
     {
@@ -71,9 +67,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(
-            _cacheIndex_ValueSetA,
-            ValueSetA_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_ValueSetA, ValueSetA_Compute, context) ?? ValueSetA_Compute(context);
 
     private CqlValueSet ValueSetA_Compute(CqlContext context)
     {
@@ -115,9 +109,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlValueSet>(
-            _cacheIndex_ValueSetB,
-            ValueSetB_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_ValueSetB, ValueSetB_Compute, context) ?? ValueSetB_Compute(context);
 
     private CqlValueSet ValueSetB_Compute(CqlContext context)
     {
@@ -159,9 +151,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Result")]
     public string Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<string>(
-            _cacheIndex_Result,
-            Result_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_Result, Result_Compute, context) ?? Result_Compute(context);
 
     private string Result_Compute(CqlContext context)
     {
@@ -215,52 +205,41 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    private CqlLibrariesExecutionCache CacheInstance { get; set; }
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        if (CacheInstance == cache)
             return 0;
+
+        CacheInstance = cache;
 
         var count = 0;
 
-        // Process dependencies first (depth-first traversal)
         if (Dependencies is { Length: > 0 })
         {
             foreach (var dependency in Dependencies)
             {
                 if (dependency is ILibraryInternals internals)
                 {
-                    count += internals.InitializeCacheIndices(initializer);
+                    count += internals.InitializeCacheIndices(cache);
                 }
             }
         }
 
-        // Initialize cache indices for this library
-        if (_cacheIndex_ChosenSubCategory != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ChosenSubCategory' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ChosenSubCategory}}. Cache indices can only be initialized once.");
-        _cacheIndex_ChosenSubCategory = initializer.GetNextIndex();
+        _cacheIndex_ChosenSubCategory = cache.GetNextIndex();
         count++;
 
-        if (_cacheIndex_ChosenCode != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ChosenCode' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ChosenCode}}. Cache indices can only be initialized once.");
-        _cacheIndex_ChosenCode = initializer.GetNextIndex();
+        _cacheIndex_ChosenCode = cache.GetNextIndex();
         count++;
 
-        if (_cacheIndex_ValueSetA != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ValueSetA' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ValueSetA}}. Cache indices can only be initialized once.");
-        _cacheIndex_ValueSetA = initializer.GetNextIndex();
+        _cacheIndex_ValueSetA = cache.GetNextIndex();
         count++;
 
-        if (_cacheIndex_ValueSetB != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ValueSetB' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ValueSetB}}. Cache indices can only be initialized once.");
-        _cacheIndex_ValueSetB = initializer.GetNextIndex();
+        _cacheIndex_ValueSetB = cache.GetNextIndex();
         count++;
 
-        if (_cacheIndex_Result != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Result' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Result}}. Cache indices can only be initialized once.");
-        _cacheIndex_Result = initializer.GetNextIndex();
+        _cacheIndex_Result = cache.GetNextIndex();
         count++;
 
         return count;

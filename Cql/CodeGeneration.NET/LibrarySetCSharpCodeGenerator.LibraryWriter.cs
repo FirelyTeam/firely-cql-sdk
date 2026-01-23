@@ -276,83 +276,52 @@ partial class LibrarySetCSharpCodeGenerator
                 """);
         }
 
+        /// <summary>
+        /// Generates the InitializeCacheIndices method implementation.
+        /// This method initializes cache index fields for the library and its dependencies.
+        /// It checks if already initialized by comparing CacheInstance, processes
+        /// dependencies in depth-first order, then assigns sequential cache indices to each
+        /// cached expression field in the library.
+        /// </summary>
         private void AppendInitializeCacheIndicesMethod()
         {
             ISB.AppendLine(
                 """
                 #region ILibraryInternals Implementation
 
-                bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+                private CqlLibrariesExecutionCache CacheInstance { get; set; }
 
-                CacheIndexInitializer ILibraryInternals.CacheIndexInitializerInstance { get; set; }
-
-                int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+                int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
                 {
-                    // Skip if already processed by this initializer
-                    if (!initializer.MarkAsProcessed(this))
+                    if (CacheInstance == cache)
                         return 0;
 
+                    CacheInstance = cache;
+
                     var count = 0;
+
+                    if (Dependencies is { Length: > 0 })
+                    {
+                        foreach (var dependency in Dependencies)
+                        {
+                            if (dependency is ILibraryInternals internals)
+                            {
+                                count += internals.InitializeCacheIndices(cache);
+                            }
+                        }
+                    }
 
                 """);
 
             using (ISB.Indent())
             {
-                // Process dependencies first
-                ISB.AppendLine(
-                    """
-                    // Process dependencies first (depth-first traversal)
-                    if (Dependencies is { Length: > 0 })
-                    {
-                    """);
-
-                using (ISB.Indent())
-                {
-                    ISB.AppendLine(
-                        """
-                        foreach (var dependency in Dependencies)
-                        {
-                        """);
-
-                    using (ISB.Indent())
-                    {
-                        ISB.AppendLine(
-                            """
-                            if (dependency is ILibraryInternals internals)
-                            {
-                            """);
-
-                        using (ISB.Indent())
-                        {
-                            ISB.AppendLine("count += internals.InitializeCacheIndices(initializer);");
-                        }
-
-                        ISB.AppendLine("}");
-                    }
-
-                    ISB.AppendLine("}");
-                }
-
-                ISB.AppendLine(
-                    """
-                    }
-
-                    """);
-
-                // Initialize cache indices for this library
                 if (_cacheIndices.Count > 0)
                 {
-                    ISB.AppendLine("// Initialize cache indices for this library");
                     var sortedIndices = _cacheIndices.OrderBy(kvp => kvp.Value).ToList();
                     foreach (var (definitionName, _) in sortedIndices)
                     {
                         var fieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(definitionName)}";
-                        ISB.AppendLine($"if ({fieldName} != -1)");
-                        using (ISB.Indent())
-                        {
-                            ISB.AppendLine($"throw new InvalidOperationException($\"Cache index field '{fieldName}' in library '{{{{Name}}}}' version '{{{{Version}}}}' is already initialized to {{{{{fieldName}}}}}. Cache indices can only be initialized once.\");");
-                        }
-                        ISB.AppendLine($"{fieldName} = initializer.GetNextIndex();");
+                        ISB.AppendLine($"{fieldName} = cache.GetNextIndex();");
                         ISB.AppendLine("count++;");
                         ISB.AppendLine();
                     }

@@ -1,2 +1,2 @@
 #nullable enable
-Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.CacheIndexCount.get -> int
+Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.Cache.get -> Hl7.Cql.Runtime.CqlLibrariesExecutionCache!

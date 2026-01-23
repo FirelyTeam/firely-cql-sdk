@@ -46,14 +46,14 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
                 .ToImmutableDictionary(o => o.LibraryIdentifier);
 
 
-        var libraries = GetAllLibraries();
-        CacheIndexInitializer = new CacheIndexInitializer(libraries);
-    }
+            var libraries = GetAllLibraries();
+            Cache = new CqlLibrariesExecutionCache(CacheWriteStrategy.ExecutionAndPublication, libraries);
+        }
 
-    /// <summary>
-    /// Gets the initializer used to configure and create cache indexes for this instance.
-    /// </summary>
-    public CacheIndexInitializer CacheIndexInitializer { get; private set; }
+        /// <summary>
+        /// Gets the execution cache instance for this library set.
+        /// </summary>
+        public CqlLibrariesExecutionCache Cache { get; private set; }
 
     private ILibrary[] GetAllLibraries() => // DO NOT MAKE THIS PUBLIC (Design Decision is to encapsulated Library Instances)
         LibraryInvokers

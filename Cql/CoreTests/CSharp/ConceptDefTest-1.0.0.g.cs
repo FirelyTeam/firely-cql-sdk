@@ -74,9 +74,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ILibraryInternals, ISingle
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        CacheInstance?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -96,32 +94,29 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ILibraryInternals, ISingle
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    private CqlLibrariesExecutionCache CacheInstance { get; set; }
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        if (CacheInstance == cache)
             return 0;
+
+        CacheInstance = cache;
 
         var count = 0;
 
-        // Process dependencies first (depth-first traversal)
         if (Dependencies is { Length: > 0 })
         {
             foreach (var dependency in Dependencies)
             {
                 if (dependency is ILibraryInternals internals)
                 {
-                    count += internals.InitializeCacheIndices(initializer);
+                    count += internals.InitializeCacheIndices(cache);
                 }
             }
         }
 
-        // Initialize cache indices for this library
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
+        _cacheIndex_Patient = cache.GetNextIndex();
         count++;
 
         return count;
