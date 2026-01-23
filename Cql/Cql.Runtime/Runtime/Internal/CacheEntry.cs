@@ -17,6 +17,7 @@ namespace Hl7.Cql.Runtime.Internal
     /// Thread safety is achieved through volatile semantics and per-entry locking, allowing concurrent
     /// writes to different cache entries without contention.
     /// </remarks>
+    [DebuggerDisplay("DebuggerDisplay,nq")]
     internal sealed class CacheEntry
     {
         /// <summary>
@@ -42,6 +43,18 @@ namespace Hl7.Cql.Runtime.Internal
                 Value = value,
                 IsCached = true
             };
+        }
+
+        private object? DebuggerDisplay
+        {
+            get
+            {
+                bool isCached = IsCached;
+                if (!isCached)
+                    return "<empty>";
+
+                return Value;
+            }
         }
     }
 }
