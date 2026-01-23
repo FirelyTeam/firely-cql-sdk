@@ -1,3 +1,5 @@
+using Hl7.Cql.Runtime.Graphs;
+
 namespace CoreTests.Infrastructure;
 
 

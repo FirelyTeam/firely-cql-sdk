@@ -15,9 +15,10 @@ namespace Hl7.Cql.Runtime.Internal;
 public interface ILibraryInternals
 {
     /// <summary>
-    /// Initializes cache indices for this library and its dependencies.
+    /// Initializes cache indices for this library, but excluding its dependencies.
     /// </summary>
     /// <param name="cache">The execution cache instance.</param>
-    /// <returns>The total number of cache indices initialized in this library and all its dependencies.</returns>
-    int InitializeCacheIndices(CqlLibrariesExecutionCache cache);
+    /// <param name="startIndex">The start index for cache indices.</param>
+    /// <returns>The total number of cache indices initialized in this library.</returns>
+    int InitializeCacheIndices(CqlLibrariesExecutionCache cache, int startIndex);
 }

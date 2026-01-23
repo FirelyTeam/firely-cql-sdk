@@ -61,7 +61,7 @@ public partial class RR23_1_0_0 : ILibrary, ILibraryInternals, ISingleton<RR23_1
 
     [CqlParameterDefinition("Measurement Period")]
     public object Measurement_Period(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private object Measurement_Period_Compute(CqlContext context)
     {
@@ -79,7 +79,7 @@ public partial class RR23_1_0_0 : ILibrary, ILibraryInternals, ISingleton<RR23_1
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -95,7 +95,7 @@ public partial class RR23_1_0_0 : ILibrary, ILibraryInternals, ISingleton<RR23_1
     [CqlTag("datarequirement", "\"code\",\"onset.ofType(DateTime)\",\"subject.ofType(Patient)\"]")]
     [CqlTag("coderequirement", "Condition.code http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
     public IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_Injury_due_to_falling_rock_within_measurement_period, Injury_due_to_falling_rock_within_measurement_period_Compute, context) ?? Injury_due_to_falling_rock_within_measurement_period_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_Injury_due_to_falling_rock_within_measurement_period, Injury_due_to_falling_rock_within_measurement_period_Compute, context) ?? Injury_due_to_falling_rock_within_measurement_period_Compute(context);
 
     private IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period_Compute(CqlContext context)
     {
@@ -124,7 +124,7 @@ public partial class RR23_1_0_0 : ILibrary, ILibraryInternals, ISingleton<RR23_1
 
     [CqlExpressionDefinition("Latest injury due to falling rock")]
     public Condition Latest_injury_due_to_falling_rock(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_Latest_injury_due_to_falling_rock, Latest_injury_due_to_falling_rock_Compute, context) ?? Latest_injury_due_to_falling_rock_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_Latest_injury_due_to_falling_rock, Latest_injury_due_to_falling_rock_Compute, context) ?? Latest_injury_due_to_falling_rock_Compute(context);
 
     private Condition Latest_injury_due_to_falling_rock_Compute(CqlContext context)
     {
@@ -148,7 +148,7 @@ public partial class RR23_1_0_0 : ILibrary, ILibraryInternals, ISingleton<RR23_1
     [CqlTag("datarequirement", "\"suppliedItem.item.ofType(CodeableConcept)\",\"occurrenceDateTime\",\"patient\"]")]
     [CqlTag("coderequirement", "SupplyDelivery.item.orfType(CodeableConcept) http://acme.org/product-catalog|U707")]
     public IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock, Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Compute, context) ?? Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock, Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Compute, context) ?? Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Compute(context);
 
     private IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Compute(CqlContext context)
     {
@@ -208,44 +208,24 @@ public partial class RR23_1_0_0 : ILibrary, ILibraryInternals, ISingleton<RR23_1
 
     #region ILibraryInternals Implementation
 
-    private CqlLibrariesExecutionCache CacheInstance { get; set; }
+    private CqlLibrariesExecutionCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrariesExecutionCache cache,
+        int startIndex)
     {
-        if (CacheInstance == cache)
+        if (_cache == cache)
             return 0;
 
-        CacheInstance = cache;
+        _cache = cache;
 
-        var count = 0;
-
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(cache);
-                }
-            }
-        }
-
-        _cacheIndex_Measurement_Period = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_Patient = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_Injury_due_to_falling_rock_within_measurement_period = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_Latest_injury_due_to_falling_rock = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = cache.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Injury_due_to_falling_rock_within_measurement_period = index++;
+        _cacheIndex_Latest_injury_due_to_falling_rock = index++;
+        _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

@@ -49,7 +49,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Observation> InDemographic(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute, context) ?? InDemographic_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute, context) ?? InDemographic_Compute(context);
 
     private IEnumerable<Observation> InDemographic_Compute(CqlContext context)
     {
@@ -68,32 +68,20 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ILibraryInternals, IS
 
     #region ILibraryInternals Implementation
 
-    private CqlLibrariesExecutionCache CacheInstance { get; set; }
+    private CqlLibrariesExecutionCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrariesExecutionCache cache,
+        int startIndex)
     {
-        if (CacheInstance == cache)
+        if (_cache == cache)
             return 0;
 
-        CacheInstance = cache;
+        _cache = cache;
 
-        var count = 0;
-
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(cache);
-                }
-            }
-        }
-
-        _cacheIndex_InDemographic = cache.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_InDemographic = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

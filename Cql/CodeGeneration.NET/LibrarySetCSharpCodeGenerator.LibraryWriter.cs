@@ -289,28 +289,18 @@ partial class LibrarySetCSharpCodeGenerator
                 """
                 #region ILibraryInternals Implementation
 
-                private CqlLibrariesExecutionCache CacheInstance { get; set; }
+                private CqlLibrariesExecutionCache _cache;
 
-                int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
+                int ILibraryInternals.InitializeCacheIndices(
+                    CqlLibrariesExecutionCache cache,
+                    int startIndex)
                 {
-                    if (CacheInstance == cache)
+                    if (_cache == cache)
                         return 0;
 
-                    CacheInstance = cache;
+                    _cache = cache;
 
-                    var count = 0;
-
-                    if (Dependencies is { Length: > 0 })
-                    {
-                        foreach (var dependency in Dependencies)
-                        {
-                            if (dependency is ILibraryInternals internals)
-                            {
-                                count += internals.InitializeCacheIndices(cache);
-                            }
-                        }
-                    }
-
+                    var index = startIndex;
                 """);
 
             using (ISB.Indent())
@@ -321,13 +311,11 @@ partial class LibrarySetCSharpCodeGenerator
                     foreach (var (definitionName, _) in sortedIndices)
                     {
                         var fieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(definitionName)}";
-                        ISB.AppendLine($"{fieldName} = cache.GetNextIndex();");
-                        ISB.AppendLine("count++;");
-                        ISB.AppendLine();
+                        ISB.AppendLine($"{fieldName} = index++;");
                     }
                 }
 
-                ISB.AppendLine("return count;");
+                ISB.AppendLine("return index - startIndex;");
             }
 
             ISB.AppendLine(

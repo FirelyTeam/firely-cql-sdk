@@ -87,7 +87,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlParameterDefinition("MeasurementPeriod")]
     public object MeasurementPeriod(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_MeasurementPeriod, MeasurementPeriod_Compute, context) ?? MeasurementPeriod_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_MeasurementPeriod, MeasurementPeriod_Compute, context) ?? MeasurementPeriod_Compute(context);
 
     private object MeasurementPeriod_Compute(CqlContext context)
     {
@@ -105,7 +105,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -117,7 +117,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Patient> InDemographic(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute, context) ?? InDemographic_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute, context) ?? InDemographic_Compute(context);
 
     private IEnumerable<Patient> InDemographic_Compute(CqlContext context)
     {
@@ -128,7 +128,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlExpressionDefinition("SexuallyActive")]
     public bool? SexuallyActive(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_SexuallyActive, SexuallyActive_Compute, context) ?? SexuallyActive_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_SexuallyActive, SexuallyActive_Compute, context) ?? SexuallyActive_Compute(context);
 
     private bool? SexuallyActive_Compute(CqlContext context)
     {
@@ -154,41 +154,23 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     #region ILibraryInternals Implementation
 
-    private CqlLibrariesExecutionCache CacheInstance { get; set; }
+    private CqlLibrariesExecutionCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrariesExecutionCache cache,
+        int startIndex)
     {
-        if (CacheInstance == cache)
+        if (_cache == cache)
             return 0;
 
-        CacheInstance = cache;
+        _cache = cache;
 
-        var count = 0;
-
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(cache);
-                }
-            }
-        }
-
-        _cacheIndex_MeasurementPeriod = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_Patient = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_InDemographic = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_SexuallyActive = cache.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_MeasurementPeriod = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_InDemographic = index++;
+        _cacheIndex_SexuallyActive = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

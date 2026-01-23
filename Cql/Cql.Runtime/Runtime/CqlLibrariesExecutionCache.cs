@@ -8,6 +8,8 @@
 
 using System.Threading;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime.Graphs;
 using Hl7.Cql.Runtime.Internal;
 
 namespace Hl7.Cql.Runtime;
@@ -29,15 +31,16 @@ namespace Hl7.Cql.Runtime;
 public sealed class CqlLibrariesExecutionCache
 {
     private int _nextIndex = 0;
-    private readonly CacheEntry[]? _cache;
+    private CacheEntry[]? _cache;
     private readonly CacheWriteStrategy _cacheWriteStrategy;
+    private readonly ILibrary[] _libraries;
     private long _cacheCallCount;
     private long _cacheFactoryInvocations;
 
     /// <summary>
     /// Gets the total count of cache index fields initialized across all libraries.
     /// </summary>
-    public int CacheIndexCount { get; private set; }
+    public int CacheEntriesCount => _cache?.Length ?? 0;
 
     /// <summary>
     /// Gets the total number of calls to GetOrCompute.
@@ -75,33 +78,7 @@ public sealed class CqlLibrariesExecutionCache
         params ILibrary[] libraries)
     {
         _cacheWriteStrategy = writeStrategy;
-
-        if (libraries is not { Length: not 0 })
-            return;
-
-        int totalIndexCount = 0;
-        foreach (var library in libraries)
-        {
-            if (library is ILibraryInternals internals)
-            {
-                totalIndexCount += internals.InitializeCacheIndices(this);
-            }
-        }
-
-        CacheIndexCount = totalIndexCount;
-
-        if (CacheIndexCount == 0)
-        {
-            _cache = null;
-        }
-        else
-        {
-            _cache = new CacheEntry[CacheIndexCount];
-            for (int i = 0; i < _cache.Length; i++)
-            {
-                _cache[i] = new CacheEntry();
-            }
-        }
+        _libraries = libraries;
     }
 
     /// <summary>
@@ -130,7 +107,10 @@ public sealed class CqlLibrariesExecutionCache
     /// If caching is disabled (cache is null) or the cache index is invalid, the factory function is called without caching the result.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public T GetOrCompute<T>(int cacheIndex, Func<CqlContext, T> factory, CqlContext context)
+    public T GetOrCompute<T>(
+        int cacheIndex,
+        Func<CqlContext, T> factory,
+        CqlContext context)
     {
         Interlocked.Increment(ref _cacheCallCount);
 
@@ -176,5 +156,54 @@ public sealed class CqlLibrariesExecutionCache
 
             return value;
         }
+    }
+
+    public bool CacheEnabled => _cache is not null;
+
+    public void DisableCache()
+    {
+        _cache = null;
+        ResetStats();
+    }
+
+    private void ResetStats()
+    {
+        _cacheCallCount = 0;
+        _cacheFactoryInvocations = 0;
+    }
+
+    public void EnableCache()
+    {
+        if (_cache is not null)
+            return;
+
+        var count = InitCacheIndices();
+        if (count <= 0)
+            return;
+
+        var cache = new CacheEntry[count];
+        for (int i = 0; i < cache.Length; i++)
+            cache[i] = new CacheEntry();
+
+        _cache = cache;
+        ResetStats();
+    }
+
+    private int InitCacheIndices()
+    {
+        var allLibs =
+            _libraries
+                .TopologicalSort(l => l.Dependencies)
+                .Cast<ILibraryInternals>()
+                .ToArray();
+
+        if (allLibs is not { Length: not 0 })
+            return 0;
+
+        int count = 0;
+        foreach (var library in allLibs)
+            count += library.InitializeCacheIndices(this, count);
+
+        return count;
     }
 }

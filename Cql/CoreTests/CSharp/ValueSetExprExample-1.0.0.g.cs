@@ -41,7 +41,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute, context) ?? ChosenSubCategory_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute, context) ?? ChosenSubCategory_Compute(context);
 
     private string ChosenSubCategory_Compute(CqlContext context)
     {
@@ -52,7 +52,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlParameterDefinition("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_ChosenCode, ChosenCode_Compute, context) ?? ChosenCode_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_ChosenCode, ChosenCode_Compute, context) ?? ChosenCode_Compute(context);
 
     private CqlCode ChosenCode_Compute(CqlContext context)
     {
@@ -67,7 +67,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_ValueSetA, ValueSetA_Compute, context) ?? ValueSetA_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_ValueSetA, ValueSetA_Compute, context) ?? ValueSetA_Compute(context);
 
     private CqlValueSet ValueSetA_Compute(CqlContext context)
     {
@@ -109,7 +109,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_ValueSetB, ValueSetB_Compute, context) ?? ValueSetB_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_ValueSetB, ValueSetB_Compute, context) ?? ValueSetB_Compute(context);
 
     private CqlValueSet ValueSetB_Compute(CqlContext context)
     {
@@ -151,7 +151,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Result")]
     public string Result(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_Result, Result_Compute, context) ?? Result_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_Result, Result_Compute, context) ?? Result_Compute(context);
 
     private string Result_Compute(CqlContext context)
     {
@@ -205,44 +205,24 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     #region ILibraryInternals Implementation
 
-    private CqlLibrariesExecutionCache CacheInstance { get; set; }
+    private CqlLibrariesExecutionCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrariesExecutionCache cache,
+        int startIndex)
     {
-        if (CacheInstance == cache)
+        if (_cache == cache)
             return 0;
 
-        CacheInstance = cache;
+        _cache = cache;
 
-        var count = 0;
-
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(cache);
-                }
-            }
-        }
-
-        _cacheIndex_ChosenSubCategory = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_ChosenCode = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_ValueSetA = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_ValueSetB = cache.GetNextIndex();
-        count++;
-
-        _cacheIndex_Result = cache.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_ChosenSubCategory = index++;
+        _cacheIndex_ChosenCode = index++;
+        _cacheIndex_ValueSetA = index++;
+        _cacheIndex_ValueSetB = index++;
+        _cacheIndex_Result = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

@@ -2434,29 +2434,19 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ILibraryInternals, ISingleton
 
     #region ILibraryInternals Implementation
 
-    private CqlLibrariesExecutionCache CacheInstance { get; set; }
+    private CqlLibrariesExecutionCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrariesExecutionCache cache,
+        int startIndex)
     {
-        if (CacheInstance == cache)
+        if (_cache == cache)
             return 0;
 
-        CacheInstance = cache;
+        _cache = cache;
 
-        var count = 0;
-
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(cache);
-                }
-            }
-        }
-
-        return count;
+        var index = startIndex;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

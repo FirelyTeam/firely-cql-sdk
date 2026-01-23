@@ -67,12 +67,13 @@ partial class Program
                 .AddCqlLibraries(cql)
                 .CreateLibrarySetInvoker();
 
-        Console.WriteLine($"✓ Library loaded. Cache size: {librarySetInvoker.LibraryInitializer.CacheIndexCount} entries\n");
+        var cache = librarySetInvoker.Cache; // Enable array-based cache with default strategy
+        Console.WriteLine($"✓ Library loaded. Cache size: {cache.CacheEntriesCount} entries\n");
 
         // Example 1: Basic caching
         Console.WriteLine("1. Basic Caching (ExecutionAndPublication strategy - default):");
         var context1 = FhirCqlContext.WithDataSource();
-        context1.UseNewCache(librarySetInvoker.LibraryInitializer);  // Enable array-based cache with default strategy
+        //context1.UseNewCache(cache);  // Enable array-based cache with default strategy
 
         var sw = Stopwatch.StartNew();
         for (int i = 0; i < 3; i++)

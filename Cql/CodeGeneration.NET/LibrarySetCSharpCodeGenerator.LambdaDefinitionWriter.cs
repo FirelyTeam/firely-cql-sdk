@@ -71,7 +71,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                 ISB.AppendLine($"{lambdaParameters} =>");
                 using (ISB.Indent())
                 {
-                    ISB.AppendLine($"CacheInstance?.GetOrCompute({cacheIndexFieldName}, {computeMethodName}, context) ?? {computeMethodName}(context);");
+                    ISB.AppendLine($"_cache?.GetOrCompute({cacheIndexFieldName}, {computeMethodName}, context) ?? {computeMethodName}(context);");
                 }
                 ISB.AppendLine();
 

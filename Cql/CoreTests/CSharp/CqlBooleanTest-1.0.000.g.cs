@@ -21,7 +21,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context) =>
-        CacheInstance?.GetOrCompute(_cacheIndex_SomethingTrueEqualsTrue, SomethingTrueEqualsTrue_Compute, context) ?? SomethingTrueEqualsTrue_Compute(context);
+        _cache?.GetOrCompute(_cacheIndex_SomethingTrueEqualsTrue, SomethingTrueEqualsTrue_Compute, context) ?? SomethingTrueEqualsTrue_Compute(context);
 
     private bool? SomethingTrueEqualsTrue_Compute(CqlContext context)
     {
@@ -41,32 +41,20 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ILibraryInternals, ISing
 
     #region ILibraryInternals Implementation
 
-    private CqlLibrariesExecutionCache CacheInstance { get; set; }
+    private CqlLibrariesExecutionCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CqlLibrariesExecutionCache cache)
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrariesExecutionCache cache,
+        int startIndex)
     {
-        if (CacheInstance == cache)
+        if (_cache == cache)
             return 0;
 
-        CacheInstance = cache;
+        _cache = cache;
 
-        var count = 0;
-
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(cache);
-                }
-            }
-        }
-
-        _cacheIndex_SomethingTrueEqualsTrue = cache.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_SomethingTrueEqualsTrue = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation
