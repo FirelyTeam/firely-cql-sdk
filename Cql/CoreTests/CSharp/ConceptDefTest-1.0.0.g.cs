@@ -94,12 +94,20 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ILibraryInternals, ISingle
 
     #region ILibraryInternals Implementation
 
-    private CqlLibrariesExecutionCache _cache;
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibrariesExecutionCache cache,
+        CqlLibrarySetInvocationCache cache,
         int startIndex)
     {
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
         if (_cache == cache)
             return 0;
 

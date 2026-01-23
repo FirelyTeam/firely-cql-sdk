@@ -17,7 +17,7 @@ This package provides the core runtime engine that executes CQL expressions and 
 
 ## Expression Caching
 
-**Caching is managed through CqlLibrariesExecutionCache.** The runtime supports high-performance array-based caching of CQL expression results.
+**Caching is managed through CqlLibrarySetInvocationCache.** The runtime supports high-performance array-based caching of CQL expression results.
 
 ### Architecture
 
@@ -44,7 +44,7 @@ For scenarios where you load libraries dynamically (e.g., from DLLs at runtime):
 
 ```csharp
 // Create cache with your libraries
-var cache = new CqlLibrariesExecutionCache(myLibrary);
+var cache = new CqlLibrarySetInvocationCache(myLibrary);
 
 // Start caching with desired strategy
 cache.StartNewCache(CacheWriteStrategy.ExecutionAndPublication);
@@ -68,7 +68,7 @@ cache.StartNewCache(CacheWriteStrategy.PublicationOnly);
 ### How It Works
 
 - Libraries generate int cache index fields for each cacheable expression
-- `CqlLibrariesExecutionCache` initializes these indices by traversing the library dependency graph
+- `CqlLibrarySetInvocationCache` initializes these indices by traversing the library dependency graph
 - Each library stores a reference to its cache instance, enabling re-initialization (critical for unit testing)
 - Only parameter-less expressions (functions with no parameters except `CqlContext`) are cached
 - Cache entries use `CacheEntry` class to distinguish between "not cached" and "cached null value"
@@ -79,7 +79,7 @@ cache.StartNewCache(CacheWriteStrategy.PublicationOnly);
 Monitor cache effectiveness:
 
 ```csharp
-var cache = new CqlLibrariesExecutionCache(myLibrary);
+var cache = new CqlLibrarySetInvocationCache(myLibrary);
 cache.StartNewCache();
 
 // After execution
@@ -106,7 +106,7 @@ Libraries can be re-initialized with different cache instances, critical for uni
 [Test]
 public void Test1()
 {
-    var cache1 = new CqlLibrariesExecutionCache(library);
+    var cache1 = new CqlLibrarySetInvocationCache(library);
     cache1.StartNewCache();
     // ... test with cache1
 }
@@ -115,7 +115,7 @@ public void Test1()
 public void Test2()
 {
     // Same library, different cache - library will be re-initialized
-    var cache2 = new CqlLibrariesExecutionCache(library);
+    var cache2 = new CqlLibrarySetInvocationCache(library);
     cache2.StartNewCache();
     // ... test with cache2
 }

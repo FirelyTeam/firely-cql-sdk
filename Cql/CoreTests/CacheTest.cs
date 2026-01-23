@@ -12,7 +12,7 @@ using Hl7.Cql.Runtime;
 namespace CoreTests;
 
 [TestClass]
-public class CqlLibrariesExecutionCacheTest
+public class CqlLibrarySetInvocationCacheTest
 {
     [TestMethod]
     public void Cache_WithoutCache_ShouldNotCache()
@@ -39,7 +39,7 @@ public class CqlLibrariesExecutionCacheTest
         var lib = CqlNestedTupleTest_1_0_0.Instance;
 
         // Initialize cache - this sets the CacheInstance on the library
-        var cache = new CqlLibrariesExecutionCache(lib);
+        var cache = new CqlLibrarySetInvocationCache(lib);
         cache.StartNewCache();
 
         // Act - Call the same expression twice - cache is accessed via library's CacheInstance
@@ -65,12 +65,12 @@ public class CqlLibrariesExecutionCacheTest
         var ctx = FhirCqlContext.ForBundle();
 
         // First cache
-        var cache1 = new CqlLibrariesExecutionCache(lib);
+        var cache1 = new CqlLibrarySetInvocationCache(lib);
         cache1.StartNewCache();
         var result1 = lib.Result(ctx);
 
         // Second cache - reinitializes the library with new cache
-        var cache2 = new CqlLibrariesExecutionCache(lib);
+        var cache2 = new CqlLibrarySetInvocationCache(lib);
         cache2.StartNewCache();
         var result2 = lib.Result(ctx);
 
@@ -87,7 +87,7 @@ public class CqlLibrariesExecutionCacheTest
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
         var lib = CqlNestedTupleTest_1_0_0.Instance;
-        var cache = new CqlLibrariesExecutionCache(lib);
+        var cache = new CqlLibrarySetInvocationCache(lib);
         cache.StartNewCache();
         var results = new System.Collections.Concurrent.ConcurrentBag<object?>();
 

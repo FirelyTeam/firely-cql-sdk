@@ -261,7 +261,7 @@ partial class LibrarySetCSharpCodeGenerator
         /// <summary>
         /// Generates cache index fields for cached definitions in this library.
         /// Each field is initialized to -1 (sentinel value indicating uninitialized state).
-        /// Fields will be set to actual cache indices at runtime by CqlLibrariesExecutionCache.
+        /// Fields will be set to actual cache indices at runtime by CqlLibrarySetInvocationCache.
         /// </summary>
         private void AppendCacheIndexFields()
         {
@@ -305,7 +305,7 @@ partial class LibrarySetCSharpCodeGenerator
                 #region ILibraryInternals Implementation
 
                 // Reference to the execution cache instance that initialized this library
-                private CqlLibrariesExecutionCache _cache;
+                private CqlLibrarySetInvocationCache _cache;
 
                 /// <summary>
                 /// Initializes cache indices for this library's cached expressions.
@@ -314,7 +314,7 @@ partial class LibrarySetCSharpCodeGenerator
                 /// <param name="startIndex">The starting index for cache field assignment.</param>
                 /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
                 int ILibraryInternals.InitializeCacheIndices(
-                    CqlLibrariesExecutionCache cache,
+                    CqlLibrarySetInvocationCache cache,
                     int startIndex)
                 {
                     // Skip if already initialized by this cache instance (allows re-initialization with different cache)

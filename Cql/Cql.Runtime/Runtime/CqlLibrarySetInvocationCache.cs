@@ -13,20 +13,20 @@ using Hl7.Cql.Runtime.Internal;
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
-/// Manages execution cache for CQL libraries, initializing cache indices and providing
+/// Manages invocation cache for a set of CQL libraries, initializing cache indices and providing
 /// cached execution results for library expressions.
 /// </summary>
 /// <remarks>
 /// This class serves two purposes:
 /// 1. Initializes cache index fields in CQL libraries and their dependencies by traversing
 ///    the library dependency graph and assigning sequential indices for array-based caching.
-/// 2. Provides a thread-safe execution cache that stores computed expression values and
+/// 2. Provides a thread-safe invocation cache that stores computed expression values and
 ///    returns cached results on subsequent calls.
 ///
 /// Libraries can be re-initialized with a new instance even if they were previously initialized,
 /// allowing for scenarios like unit testing where libraries need to be reset between tests.
 /// </remarks>
-public sealed class CqlLibrariesExecutionCache
+public sealed class CqlLibrarySetInvocationCache
 {
     private readonly ILibrary[] _libraries;
     private CacheWriteStrategy _cacheWriteStrategy;
@@ -58,7 +58,7 @@ public sealed class CqlLibrariesExecutionCache
     public long CacheHits => CacheCallCount - CacheMisses;
 
     /// <summary>
-    /// Initializes a new instance of the CqlLibrariesExecutionCache class using the specified libraries as roots.
+    /// Initializes a new instance of the CqlLibrarySetInvocationCache class using the specified libraries as roots.
     /// </summary>
     /// <param name="libraries">An array of root libraries to initialize. Each library and its dependencies will be
     /// processed in dependency-first order. Must not be null or empty.</param>
@@ -68,7 +68,7 @@ public sealed class CqlLibrariesExecutionCache
     /// Libraries can be re-initialized with a different cache instance, allowing the same library instance
     /// to be used with multiple caches (e.g., for testing scenarios or cache isolation).
     /// </remarks>
-    public CqlLibrariesExecutionCache(
+    public CqlLibrarySetInvocationCache(
         params ILibrary[] libraries) =>
         _libraries = libraries;
 
@@ -136,8 +136,14 @@ public sealed class CqlLibrariesExecutionCache
         }
     }
 
+    /// <summary>
+    /// Gets a value indicating whether caching is enabled for this instance.
+    /// </summary>
     public bool CacheEnabled => _cache is not null;
 
+    /// <summary>
+    /// Stops the cache and resets cache statistics.
+    /// </summary>
     public void StopCache()
     {
         _cache = null;
