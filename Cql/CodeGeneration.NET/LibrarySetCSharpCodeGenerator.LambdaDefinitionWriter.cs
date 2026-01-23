@@ -63,18 +63,21 @@ internal partial class LibrarySetCSharpCodeGenerator
 
             if (useCache)
             {
+                // Register this definition for caching and get its index field name
                 LibraryWriter.GetOrCreateCacheIndex(ld.Name);
                 var cacheIndexFieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(ld.Name)}";
                 var computeMethodName = $"{methodName}_Compute";
 
-                // Method signature without cache parameter
+                // Public method signature - delegates to cache or compute method
                 ISB.AppendLine($"{lambdaParameters} =>");
                 using (ISB.Indent())
                 {
+                    // Use cache if available, otherwise compute directly
                     ISB.AppendLine($"_cache?.GetOrCompute({cacheIndexFieldName}, {computeMethodName}, context) ?? {computeMethodName}(context);");
                 }
                 ISB.AppendLine();
 
+                // Private compute method - contains the actual computation logic
                 ISB.AppendLine($"private {returnType} {computeMethodName}(CqlContext context)");
                 if (transformedLambda.Body is BlockExpression)
                 {

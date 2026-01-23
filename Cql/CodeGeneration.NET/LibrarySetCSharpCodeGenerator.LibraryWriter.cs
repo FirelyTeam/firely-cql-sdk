@@ -8,6 +8,10 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 partial class LibrarySetCSharpCodeGenerator
 {
+    /// <summary>
+    /// Generates C# code for a single CQL library, including cached expression definitions,
+    /// cache index fields, and the ILibraryInternals implementation for cache initialization.
+    /// </summary>
     private class LibraryWriter
     {
         public LibraryWriter(
@@ -18,9 +22,15 @@ partial class LibrarySetCSharpCodeGenerator
 
         internal CqlVersionedLibraryIdentifier LibraryName => _library?.VersionedLibraryIdentifier ?? throw new InvalidOperationException("Library not initialized.");
         private string _className = string.Empty;
+        
+        // Maps definition names to their assigned cache indices within this library
         private readonly Dictionary<string, int> _cacheIndices = new();
         private int _nextCacheIndex = 0;
 
+        /// <summary>
+        /// Gets or creates a cache index for the specified definition name.
+        /// Indices are assigned sequentially starting from 0 within each library.
+        /// </summary>
         public int GetOrCreateCacheIndex(string definitionName)
         {
             if (!_cacheIndices.TryGetValue(definitionName, out var index))
@@ -248,6 +258,11 @@ partial class LibrarySetCSharpCodeGenerator
             ISB.AppendLine("}");
         }
 
+        /// <summary>
+        /// Generates cache index fields for cached definitions in this library.
+        /// Each field is initialized to -1 (sentinel value indicating uninitialized state).
+        /// Fields will be set to actual cache indices at runtime by CqlLibrariesExecutionCache.
+        /// </summary>
         private void AppendCacheIndexFields()
         {
             if (_cacheIndices.Count == 0)
@@ -259,8 +274,8 @@ partial class LibrarySetCSharpCodeGenerator
 
                  """);
 
-            // Generate fields in order (for consistency), but don't initialize them
-            // They will be set at runtime by a visitor
+            // Generate fields in deterministic order (sorted by assigned index)
+            // Initialize to -1 to indicate uninitialized state
             var sortedIndices = _cacheIndices.OrderBy(kvp => kvp.Value).ToList();
             foreach (var (definitionName, _) in sortedIndices)
             {
@@ -278,10 +293,10 @@ partial class LibrarySetCSharpCodeGenerator
 
         /// <summary>
         /// Generates the InitializeCacheIndices method implementation.
-        /// This method initializes cache index fields for the library and its dependencies.
-        /// It checks if already initialized by comparing CacheInstance, processes
-        /// dependencies in depth-first order, then assigns sequential cache indices to each
-        /// cached expression field in the library.
+        /// This method initializes cache index fields for this library only (dependencies are handled externally).
+        /// It checks if already initialized by comparing the cache instance reference, then assigns sequential
+        /// cache indices starting from the provided startIndex to each cached expression field in the library.
+        /// Returns the total number of indices assigned.
         /// </summary>
         private void AppendInitializeCacheIndicesMethod()
         {
@@ -289,12 +304,20 @@ partial class LibrarySetCSharpCodeGenerator
                 """
                 #region ILibraryInternals Implementation
 
+                // Reference to the execution cache instance that initialized this library
                 private CqlLibrariesExecutionCache _cache;
 
+                /// <summary>
+                /// Initializes cache indices for this library's cached expressions.
+                /// </summary>
+                /// <param name="cache">The execution cache instance performing initialization.</param>
+                /// <param name="startIndex">The starting index for cache field assignment.</param>
+                /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
                 int ILibraryInternals.InitializeCacheIndices(
                     CqlLibrariesExecutionCache cache,
                     int startIndex)
                 {
+                    // Skip if already initialized by this cache instance (allows re-initialization with different cache)
                     if (_cache == cache)
                         return 0;
 

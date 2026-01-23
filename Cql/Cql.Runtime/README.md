@@ -11,55 +11,114 @@ This package provides the core runtime engine that executes CQL expressions and 
 - **CQL Operators**: Complete implementation of CQL operators for arithmetic, logical, comparison, and other operations
 - **Type Comparers**: Specialized comparison logic for CQL data types
 - **Runtime Context**: Execution context management for CQL evaluation
-- **Expression Caching**: Optional caching of expression results for improved performance
+- **High-Performance Caching**: Array-based caching system with zero allocation for maximum performance
 - **Expression Evaluation**: Core engine for evaluating CQL expressions
 - **FHIR Metrics Support**: Integration with FHIR quantity and unit conversions
 
 ## Expression Caching
 
-**Caching is disabled by default.** The runtime supports optional caching of CQL expression results to improve performance when evaluating the same expressions multiple times.
+**Caching is managed through CqlLibrariesExecutionCache.** The runtime supports high-performance array-based caching of CQL expression results.
 
-### Enabling Caching
+### Architecture
+
+The caching system uses:
+- **0-based array indexing**: Direct array access with no hashing overhead
+- **Method references**: Zero delegate allocation
+- **Per-entry locking**: Better concurrency for multi-threaded scenarios
+- **Cache instance association**: Libraries track which cache initialized them
+- **Thread-safe null value support**: Correctly caches and retrieves null results
+
+### Enabling Caching (Preferred: InvocationToolkit)
+
+The preferred approach is to use the InvocationToolkit, which handles cache initialization automatically:
 
 ```csharp
-var context = new CqlContext();
-context.UseNewCache();  // Enable caching
+var invoker = LibrarySetInvoker.Create(...);
+// Cache is automatically configured
+var result = invoker.Execute(...);
 ```
 
-### Disabling Caching
+### Manual Caching Setup (Advanced)
+
+For scenarios where you load libraries dynamically (e.g., from DLLs at runtime):
 
 ```csharp
-context.DontUseCaching();  // Disable caching
+// Create cache with your libraries
+var cache = new CqlLibrariesExecutionCache(myLibrary);
+
+// Start caching with desired strategy
+cache.StartNewCache(CacheWriteStrategy.ExecutionAndPublication);
+
+// Use the cache
+var result = cache.GetOrCompute(cacheIndex, factory, context);
+```
+
+### Cache Write Strategies
+
+Control how concurrent writes are handled:
+
+```csharp
+// ExecutionAndPublication (default): Only one thread computes, others wait
+cache.StartNewCache(CacheWriteStrategy.ExecutionAndPublication);
+
+// PublicationOnly: Multiple threads can compute, last write wins (faster for read-heavy workloads)
+cache.StartNewCache(CacheWriteStrategy.PublicationOnly);
 ```
 
 ### How It Works
 
+- Libraries generate int cache index fields for each cacheable expression
+- `CqlLibrariesExecutionCache` initializes these indices by traversing the library dependency graph
+- Each library stores a reference to its cache instance, enabling re-initialization (critical for unit testing)
 - Only parameter-less expressions (functions with no parameters except `CqlContext`) are cached
-- Each `CqlContext` instance has its own independent cache
-- Cache entries are keyed by library version and definition name
-- Caching is thread-safe and supports concurrent access
-- Null values are cached correctly
+- Cache entries use `CacheEntry` class to distinguish between "not cached" and "cached null value"
+- Thread safety is guaranteed through volatile semantics and optional per-entry locking
+
+### Cache Statistics
+
+Monitor cache effectiveness:
+
+```csharp
+var cache = new CqlLibrariesExecutionCache(myLibrary);
+cache.StartNewCache();
+
+// After execution
+Console.WriteLine($"Cache entries: {cache.CacheEntriesCount}");
+Console.WriteLine($"Total calls: {cache.CacheCallCount}");
+Console.WriteLine($"Cache hits: {cache.CacheHits}");
+Console.WriteLine($"Cache misses: {cache.CacheMisses}");
+```
 
 ### When to Use Caching
 
 Enable caching when:
-- Evaluating the same expressions multiple times within a single execution context
+- Evaluating the same expressions multiple times
 - Working with expensive computations that don't depend on parameters
 - Performance is critical and expression results are deterministic
 
-**Note**: Always call `UseNewCache()` to create a fresh cache when starting a new evaluation cycle to ensure stale data isn't used.
+**Important**: Create a new cache instance or call `StartNewCache()` when starting a new evaluation cycle to ensure stale data isn't used.
 
-### Parallel Execution
+### Re-initialization for Unit Testing
 
-Each `CqlContext` instance maintains its own cache, making it safe to run multiple contexts in parallel without contention:
+Libraries can be re-initialized with different cache instances, critical for unit testing scenarios where singleton libraries are reused across tests:
 
 ```csharp
-Parallel.For(0, 10, i =>
+[Test]
+public void Test1()
 {
-    var context = new CqlContext();
-    context.UseNewCache();
-    // Evaluate expressions...
-});
+    var cache1 = new CqlLibrariesExecutionCache(library);
+    cache1.StartNewCache();
+    // ... test with cache1
+}
+
+[Test]
+public void Test2()
+{
+    // Same library, different cache - library will be re-initialized
+    var cache2 = new CqlLibrariesExecutionCache(library);
+    cache2.StartNewCache();
+    // ... test with cache2
+}
 ```
 
 ## Usage
