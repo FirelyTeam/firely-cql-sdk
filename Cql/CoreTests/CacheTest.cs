@@ -39,7 +39,8 @@ public class CqlLibrariesExecutionCacheTest
         var lib = CqlNestedTupleTest_1_0_0.Instance;
 
         // Initialize cache - this sets the CacheInstance on the library
-        var cache = new CqlLibrariesExecutionCache(libraries: lib);
+        var cache = new CqlLibrariesExecutionCache(lib);
+        cache.StartNewCache();
 
         // Act - Call the same expression twice - cache is accessed via library's CacheInstance
         var result1 = lib.Result(ctx);
@@ -64,11 +65,13 @@ public class CqlLibrariesExecutionCacheTest
         var ctx = FhirCqlContext.ForBundle();
 
         // First cache
-        var cache1 = new CqlLibrariesExecutionCache(libraries: lib);
+        var cache1 = new CqlLibrariesExecutionCache(lib);
+        cache1.StartNewCache();
         var result1 = lib.Result(ctx);
 
         // Second cache - reinitializes the library with new cache
-        var cache2 = new CqlLibrariesExecutionCache(libraries: lib);
+        var cache2 = new CqlLibrariesExecutionCache(lib);
+        cache2.StartNewCache();
         var result2 = lib.Result(ctx);
 
         // Assert - Each cache tracks independently
@@ -84,7 +87,8 @@ public class CqlLibrariesExecutionCacheTest
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
         var lib = CqlNestedTupleTest_1_0_0.Instance;
-        var cache = new CqlLibrariesExecutionCache(libraries: lib);
+        var cache = new CqlLibrariesExecutionCache(lib);
+        cache.StartNewCache();
         var results = new System.Collections.Concurrent.ConcurrentBag<object?>();
 
         // Act - Multiple threads accessing the same cache simultaneously

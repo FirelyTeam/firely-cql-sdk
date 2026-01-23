@@ -6,9 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Threading;
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime.Graphs;
 using Hl7.Cql.Runtime.Internal;
 
@@ -30,10 +28,9 @@ namespace Hl7.Cql.Runtime;
 /// </remarks>
 public sealed class CqlLibrariesExecutionCache
 {
-    private int _nextIndex = 0;
-    private CacheEntry[]? _cache;
-    private readonly CacheWriteStrategy _cacheWriteStrategy;
     private readonly ILibrary[] _libraries;
+    private CacheWriteStrategy _cacheWriteStrategy;
+    private CacheEntry[]? _cache;
     private long _cacheCallCount;
     private long _cacheFactoryInvocations;
 
@@ -65,8 +62,6 @@ public sealed class CqlLibrariesExecutionCache
     /// </summary>
     /// <param name="libraries">An array of root libraries to initialize. Each library and its dependencies will be
     /// processed in dependency-first order. Must not be null or empty.</param>
-    /// <param name="writeStrategy">The strategy to use for handling concurrent writes to the cache.
-    /// Defaults to <see cref="CacheWriteStrategy.ExecutionAndPublication"/>.</param>
     /// <remarks>
     /// If the libraries array is null or empty, no cache indices will be initialized and the cache will be disabled.
     /// The initialization processes each library and its dependencies only once, in dependency-first order.
@@ -74,25 +69,8 @@ public sealed class CqlLibrariesExecutionCache
     /// to be used with multiple caches (e.g., for testing scenarios or cache isolation).
     /// </remarks>
     public CqlLibrariesExecutionCache(
-        CacheWriteStrategy writeStrategy = CacheWriteStrategy.ExecutionAndPublication,
-        params ILibrary[] libraries)
-    {
-        _cacheWriteStrategy = writeStrategy;
+        params ILibrary[] libraries) =>
         _libraries = libraries;
-    }
-
-    /// <summary>
-    /// Gets the next sequential cache index value.
-    /// </summary>
-    /// <returns>The next cache index value (starting from 0).</returns>
-    /// <remarks>
-    /// This method is called during cache index initialization by generated library code
-    /// to assign sequential indices to each cached expression field.
-    /// </remarks>
-    public int GetNextIndex()
-    {
-        return _nextIndex++;
-    }
 
     /// <summary>
     /// Gets or computes a cached value for the specified cache index.
@@ -160,7 +138,7 @@ public sealed class CqlLibrariesExecutionCache
 
     public bool CacheEnabled => _cache is not null;
 
-    public void DisableCache()
+    public void StopCache()
     {
         _cache = null;
         ResetStats();
@@ -172,16 +150,24 @@ public sealed class CqlLibrariesExecutionCache
         _cacheFactoryInvocations = 0;
     }
 
-    public void EnableCache()
+    /// <summary>
+    /// Initializes a new cache using the specified cache write strategy, replacing any existing cache and resetting
+    /// related statistics.
+    /// </summary>
+    /// <remarks>Call this method to reset the cache and its statistics. Any previously cached entries will be
+    /// discarded. Use the cacheWriteStrategy parameter to control how cache writes are handled after
+    /// initialization.</remarks>
+    /// <param name="cacheWriteStrategy">The strategy to use when writing to the cache. The default is CacheWriteStrategy.ExecutionAndPublication.</param>
+    public void StartNewCache(
+        CacheWriteStrategy cacheWriteStrategy = CacheWriteStrategy.ExecutionAndPublication)
     {
-        if (_cache is not null)
+        _cacheWriteStrategy = cacheWriteStrategy;
+
+        var cacheLength = _cache?.Length ?? InitLibraryCacheIndices();
+        if (cacheLength <= 0)
             return;
 
-        var count = InitCacheIndices();
-        if (count <= 0)
-            return;
-
-        var cache = new CacheEntry[count];
+        var cache = new CacheEntry[cacheLength];
         for (int i = 0; i < cache.Length; i++)
             cache[i] = new CacheEntry();
 
@@ -189,7 +175,7 @@ public sealed class CqlLibrariesExecutionCache
         ResetStats();
     }
 
-    private int InitCacheIndices()
+    private int InitLibraryCacheIndices()
     {
         var allLibs =
             _libraries
