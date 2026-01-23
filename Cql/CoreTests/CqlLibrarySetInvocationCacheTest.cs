@@ -19,16 +19,16 @@ public class CqlLibrarySetInvocationCacheTest
     {
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
-        var lib = CqlNestedTupleTest_1_0_0.Instance;
+        var lib = RR23_1_0_0.Instance;
 
         // Act - Call the same expression twice without cache
-        var result1 = lib.Result(ctx);
-        var result2 = lib.Result(ctx);
+        var result1 = lib.Measurement_Period(ctx);
+        var result2 = lib.Measurement_Period(ctx);
 
         // Assert - Both results should be equal but not cached (new instances each time)
         Assert.IsNotNull(result1);
         Assert.IsNotNull(result2);
-        Assert.AreEqual(result1?.status, result2?.status);
+        Assert.AreEqual(result1, result2);
     }
 
     [TestMethod]
@@ -36,15 +36,15 @@ public class CqlLibrarySetInvocationCacheTest
     {
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
-        var lib = CqlNestedTupleTest_1_0_0.Instance;
+        var lib = RR23_1_0_0.Instance;
 
         // Initialize cache - this sets the CacheInstance on the library
         var cache = new CqlLibrarySetInvocationCache(lib);
         cache.StartNewCache();
 
         // Act - Call the same expression twice - cache is accessed via library's CacheInstance
-        var result1 = lib.Result(ctx);
-        var result2 = lib.Result(ctx);
+        var result1 = lib.Measurement_Period(ctx);
+        var result2 = lib.Measurement_Period(ctx);
 
         // Assert - Both results should be the exact same cached instance
         Assert.IsNotNull(result1);
@@ -61,18 +61,18 @@ public class CqlLibrarySetInvocationCacheTest
     public void Cache_DifferentCaches_ShouldBeIndependent()
     {
         // Arrange
-        var lib = CqlNestedTupleTest_1_0_0.Instance;
+        var lib = RR23_1_0_0.Instance;
         var ctx = FhirCqlContext.ForBundle();
 
         // First cache
         var cache1 = new CqlLibrarySetInvocationCache(lib);
         cache1.StartNewCache();
-        var result1 = lib.Result(ctx);
+        var result1 = lib.Measurement_Period(ctx);
 
         // Second cache - reinitializes the library with new cache
         var cache2 = new CqlLibrarySetInvocationCache(lib);
         cache2.StartNewCache();
-        var result2 = lib.Result(ctx);
+        var result2 = lib.Measurement_Period(ctx);
 
         // Assert - Each cache tracks independently
         Assert.AreEqual(1, cache1.CacheCallCount);
@@ -86,7 +86,7 @@ public class CqlLibrarySetInvocationCacheTest
     {
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
-        var lib = CqlNestedTupleTest_1_0_0.Instance;
+        var lib = RR23_1_0_0.Instance;
         var cache = new CqlLibrarySetInvocationCache(lib);
         cache.StartNewCache();
         var results = new System.Collections.Concurrent.ConcurrentBag<object?>();
@@ -94,7 +94,7 @@ public class CqlLibrarySetInvocationCacheTest
         // Act - Multiple threads accessing the same cache simultaneously
         var parallelResult = Parallel.For(0, 20, i =>
         {
-            var result = lib.Result(ctx);
+            var result = lib.Measurement_Period(ctx);
             results.Add(result);
         });
 
