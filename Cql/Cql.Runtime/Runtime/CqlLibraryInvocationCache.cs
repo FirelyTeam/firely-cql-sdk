@@ -13,29 +13,22 @@ using Hl7.Cql.Runtime.Internal;
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
-/// Manages invocation cache for a set of CQL libraries, initializing cache indices and providing
-/// cached execution results for library expressions.
+/// Manages invocation cache for CQL libraries, providing cached execution results for library expressions.
 /// </summary>
 /// <remarks>
-/// This class serves two purposes:
-/// 1. Initializes cache index fields in CQL libraries and their dependencies by traversing
-///    the library dependency graph and assigning sequential indices for array-based caching.
-/// 2. Provides a thread-safe invocation cache that stores computed expression values and
-///    returns cached results on subsequent calls.
-///
-/// Libraries can be re-initialized with a new instance even if they were previously initialized,
-/// allowing for scenarios like unit testing where libraries need to be reset between tests.
+/// This class provides a thread-safe invocation cache that stores computed expression values and
+/// returns cached results on subsequent calls. The cache size is determined by a CqlLibraryInvocationSet
+/// which handles cache index initialization.
 /// </remarks>
-public sealed class CqlLibrarySetInvocationCache
+public sealed class CqlLibraryInvocationCache
 {
-    private readonly ILibrary[] _libraries;
     private CacheWriteStrategy _cacheWriteStrategy;
     private CacheEntry[]? _cache;
     private long _cacheCallCount;
     private long _cacheFactoryInvocations;
 
     /// <summary>
-    /// Gets the total count of cache index fields initialized across all libraries.
+    /// Gets the total count of cache entries in this cache.
     /// </summary>
     public int CacheEntriesCount => _cache?.Length ?? 0;
 
@@ -56,21 +49,6 @@ public sealed class CqlLibrarySetInvocationCache
     /// Cache hits = Total calls to GetOrCompute - Factory invocations (cache misses).
     /// </remarks>
     public long CacheHits => CacheCallCount - CacheMisses;
-
-    /// <summary>
-    /// Initializes a new instance of the CqlLibrarySetInvocationCache class using the specified libraries as roots.
-    /// </summary>
-    /// <param name="libraries">An array of root libraries to initialize. Each library and its dependencies will be
-    /// processed in dependency-first order. Must not be null or empty.</param>
-    /// <remarks>
-    /// If the libraries array is null or empty, no cache indices will be initialized and the cache will be disabled.
-    /// The initialization processes each library and its dependencies only once, in dependency-first order.
-    /// Libraries can be re-initialized with a different cache instance, allowing the same library instance
-    /// to be used with multiple caches (e.g., for testing scenarios or cache isolation).
-    /// </remarks>
-    public CqlLibrarySetInvocationCache(
-        params ILibrary[] libraries) =>
-        _libraries = libraries;
 
     /// <summary>
     /// Gets or computes a cached value for the specified cache index.
@@ -157,21 +135,30 @@ public sealed class CqlLibrarySetInvocationCache
     }
 
     /// <summary>
-    /// Initializes a new cache using the specified cache write strategy, replacing any existing cache and resetting
+    /// Initializes a new cache using the specified library invocation set and cache write strategy, replacing any existing cache and resetting
     /// related statistics.
     /// </summary>
+    /// <param name="librarySet">The library invocation set that defines the cache size and initialized libraries.</param>
+    /// <param name="cacheWriteStrategy">The strategy to use when writing to the cache. The default is CacheWriteStrategy.ExecutionAndPublication.</param>
     /// <remarks>Call this method to reset the cache and its statistics. Any previously cached entries will be
     /// discarded. Use the cacheWriteStrategy parameter to control how cache writes are handled after
     /// initialization.</remarks>
-    /// <param name="cacheWriteStrategy">The strategy to use when writing to the cache. The default is CacheWriteStrategy.ExecutionAndPublication.</param>
     public void StartNewCache(
+        CqlLibraryInvocationSet librarySet,
         CacheWriteStrategy cacheWriteStrategy = CacheWriteStrategy.ExecutionAndPublication)
     {
+        if (librarySet is null)
+            throw new ArgumentNullException(nameof(librarySet));
+
         _cacheWriteStrategy = cacheWriteStrategy;
 
-        var cacheLength = _cache?.Length ?? InitLibraryCacheIndices();
+        var cacheLength = librarySet.CacheEntriesCount;
         if (cacheLength <= 0)
+        {
+            _cache = null;
+            ResetStats();
             return;
+        }
 
         var cache = new CacheEntry[cacheLength];
         for (int i = 0; i < cache.Length; i++)
@@ -179,23 +166,8 @@ public sealed class CqlLibrarySetInvocationCache
 
         _cache = cache;
         ResetStats();
-    }
-
-    private int InitLibraryCacheIndices()
-    {
-        var allLibs =
-            _libraries
-                .TopologicalSort(l => l.Dependencies)
-                .Cast<ILibraryInternals>()
-                .ToArray();
-
-        if (allLibs is not { Length: not 0 })
-            return 0;
-
-        int count = 0;
-        foreach (var library in allLibs)
-            count += library.InitializeCacheIndices(this, count);
-
-        return count;
+        
+        // Set this cache instance on all libraries in the set
+        librarySet.SetCacheInstanceOnLibraries(this);
     }
 }

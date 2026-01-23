@@ -1,15 +1,19 @@
 Hl7.Cql.Runtime.CacheWriteStrategy
 Hl7.Cql.Runtime.CacheWriteStrategy.ExecutionAndPublication = 1 -> Hl7.Cql.Runtime.CacheWriteStrategy
 Hl7.Cql.Runtime.CacheWriteStrategy.PublicationOnly = 2 -> Hl7.Cql.Runtime.CacheWriteStrategy
-Hl7.Cql.Runtime.CqlLibrarySetInvocationCache
-Hl7.Cql.Runtime.CqlLibrarySetInvocationCache.CacheCallCount.get -> long
-Hl7.Cql.Runtime.CqlLibrarySetInvocationCache.CacheEnabled.get -> bool
-Hl7.Cql.Runtime.CqlLibrarySetInvocationCache.CacheEntriesCount.get -> int
-Hl7.Cql.Runtime.CqlLibrarySetInvocationCache.CacheHits.get -> long
-Hl7.Cql.Runtime.CqlLibrarySetInvocationCache.CacheMisses.get -> long
-Hl7.Cql.Runtime.CqlLibrarySetInvocationCache.CqlLibrarySetInvocationCache(params Hl7.Cql.Abstractions.ILibrary![]! libraries) -> void
-Hl7.Cql.Runtime.CqlLibrarySetInvocationCache.GetOrCompute<T>(int cacheIndex, System.Func<Hl7.Cql.Runtime.CqlContext!, T>! factory, Hl7.Cql.Runtime.CqlContext! context) -> T
-Hl7.Cql.Runtime.CqlLibrarySetInvocationCache.StartNewCache(Hl7.Cql.Runtime.CacheWriteStrategy cacheWriteStrategy = Hl7.Cql.Runtime.CacheWriteStrategy.ExecutionAndPublication) -> void
-Hl7.Cql.Runtime.CqlLibrarySetInvocationCache.StopCache() -> void
+Hl7.Cql.Runtime.CqlLibraryInvocationCache
+Hl7.Cql.Runtime.CqlLibraryInvocationCache.CacheCallCount.get -> long
+Hl7.Cql.Runtime.CqlLibraryInvocationCache.CacheEnabled.get -> bool
+Hl7.Cql.Runtime.CqlLibraryInvocationCache.CacheEntriesCount.get -> int
+Hl7.Cql.Runtime.CqlLibraryInvocationCache.CacheHits.get -> long
+Hl7.Cql.Runtime.CqlLibraryInvocationCache.CacheMisses.get -> long
+Hl7.Cql.Runtime.CqlLibraryInvocationCache.CqlLibraryInvocationCache() -> void
+Hl7.Cql.Runtime.CqlLibraryInvocationCache.GetOrCompute<T>(int cacheIndex, System.Func<Hl7.Cql.Runtime.CqlContext!, T>! factory, Hl7.Cql.Runtime.CqlContext! context) -> T
+Hl7.Cql.Runtime.CqlLibraryInvocationCache.StartNewCache(Hl7.Cql.Runtime.CqlLibraryInvocationSet! librarySet, Hl7.Cql.Runtime.CacheWriteStrategy cacheWriteStrategy = Hl7.Cql.Runtime.CacheWriteStrategy.ExecutionAndPublication) -> void
+Hl7.Cql.Runtime.CqlLibraryInvocationCache.StopCache() -> void
+Hl7.Cql.Runtime.CqlLibraryInvocationSet
+Hl7.Cql.Runtime.CqlLibraryInvocationSet.CacheEntriesCount.get -> int
+Hl7.Cql.Runtime.CqlLibraryInvocationSet.CqlLibraryInvocationSet(params Hl7.Cql.Abstractions.ILibrary![]! libraries) -> void
 Hl7.Cql.Runtime.Internal.ILibraryInternals
-Hl7.Cql.Runtime.Internal.ILibraryInternals.InitializeCacheIndices(Hl7.Cql.Runtime.CqlLibrarySetInvocationCache! cache, int startIndex) -> int
+Hl7.Cql.Runtime.Internal.ILibraryInternals.InitializeCacheIndices(Hl7.Cql.Runtime.CqlLibraryInvocationSet! librarySet, int startIndex) -> int
+Hl7.Cql.Runtime.Internal.ILibraryInternals.SetCacheInstance(Hl7.Cql.Runtime.CqlLibraryInvocationCache! cache) -> void

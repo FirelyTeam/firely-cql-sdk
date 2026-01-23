@@ -68,7 +68,8 @@ partial class Program
                 .CreateLibrarySetInvoker();
 
         var cache = librarySetInvoker.Cache;
-        cache.StartNewCache(); // Initialize cache with default ExecutionAndPublication strategy
+        var librarySet = librarySetInvoker.LibrarySet;
+        cache.StartNewCache(librarySet); // Initialize cache with default ExecutionAndPublication strategy
         Console.WriteLine($"✓ Library loaded. Cache size: {cache.CacheEntriesCount} entries\n");
 
         // Example 1: Basic caching
@@ -90,7 +91,7 @@ partial class Program
 
         // Example 2: Caching null values (now supported!)
         Console.WriteLine("2. Caching Null Values:");
-        cache.StartNewCache(); // Reset cache for demonstration
+        cache.StartNewCache(librarySet); // Reset cache for demonstration
         var context2 = FhirCqlContext.WithDataSource();
 
         for (int i = 0; i < 2; i++)
@@ -106,7 +107,7 @@ partial class Program
 
         // Example 3: PublicationOnly strategy (allow multiple concurrent computations)
         Console.WriteLine("3. PublicationOnly Strategy (multiple threads can compute concurrently):");
-        cache.StartNewCache(CacheWriteStrategy.PublicationOnly); // Use PublicationOnly strategy
+        cache.StartNewCache(librarySet, CacheWriteStrategy.PublicationOnly); // Use PublicationOnly strategy
         var context3 = FhirCqlContext.WithDataSource();
         Console.WriteLine("   ✓ Using PublicationOnly: Multiple threads can compute, last write wins");
         Console.WriteLine("   ✓ Per-entry locking: Different cache entries don't contend with each other");
@@ -119,7 +120,7 @@ partial class Program
 
         // Example 4: Cache invalidation
         Console.WriteLine("4. Cache Invalidation:");
-        cache.StartNewCache(); // Initialize cache
+        cache.StartNewCache(librarySet); // Initialize cache
         var context4 = FhirCqlContext.WithDataSource();
 
         var result4a = librarySetInvoker.InvokeLibraryDefinition(
@@ -129,17 +130,17 @@ partial class Program
         Console.WriteLine($"   First call: {result4a} (computed)");
         Console.WriteLine($"   Cache stats: {cache.CacheHits} hits, {cache.CacheMisses} misses");
 
-        cache.StartNewCache(); // Reset cache - invalidates old cached values
+        cache.StartNewCache(librarySet); // Reset cache - invalidates old cached values
         var result4b = librarySetInvoker.InvokeLibraryDefinition(
             context4,
             cql.LibraryIdentifier,
             "ExpensiveComputation");
-        Console.WriteLine($"   After StartNewCache(): {result4b} (recomputed)");
+        Console.WriteLine($"   After StartNewCache(librarySet): {result4b} (recomputed)");
         Console.WriteLine($"   Cache stats: {cache.CacheHits} hits, {cache.CacheMisses} misses\n");
 
         // Example 5: Cache statistics
         Console.WriteLine("5. Cache Statistics Monitoring:");
-        cache.StartNewCache();
+        cache.StartNewCache(librarySet);
         var context5 = FhirCqlContext.WithDataSource();
 
         // Execute several expressions
@@ -198,11 +199,14 @@ partial class Program
         var libraries = ExtractLibrariesFromAssemblies(tempInvoker);
         Console.WriteLine($"   Found {libraries.Length} library/libraries\n");
 
-        // Step 3: CRITICAL - Create CqlLibrarySetInvocationCache manually
-        Console.WriteLine("Step 3: Create CqlLibrarySetInvocationCache manually");
-        var cache = new CqlLibrarySetInvocationCache(libraries);
-        cache.StartNewCache(); // Initialize the cache
-        Console.WriteLine($"   ✓ Initialized {cache.CacheEntriesCount} cache entries");
+        // Step 3: CRITICAL - Create CqlLibraryInvocationSet and CqlLibraryInvocationCache manually
+        Console.WriteLine("Step 3: Create CqlLibraryInvocationSet and CqlLibraryInvocationCache manually");
+        var librarySet = new CqlLibraryInvocationSet(libraries);
+        Console.WriteLine($"   ✓ Initialized {librarySet.CacheEntriesCount} cache entries in library set");
+        
+        var cache = new CqlLibraryInvocationCache();
+        cache.StartNewCache(librarySet); // Initialize the cache with the library set
+        Console.WriteLine($"   ✓ Cache has {cache.CacheEntriesCount} entries");
         Console.WriteLine($"   ✓ Cache enabled and ready\n");
 
         // Step 4: Use the library with manual method invocation
@@ -238,7 +242,7 @@ partial class Program
         }
 
         Console.WriteLine("✗ Manual Approach Complete (NOT RECOMMENDED)");
-        Console.WriteLine("  • Requires manual CqlLibrarySetInvocationCache creation");
+        Console.WriteLine("  • Requires manual CqlLibraryInvocationCache creation");
         Console.WriteLine("  • Must manually invoke library methods via reflection");
         Console.WriteLine("  • More error-prone than InvocationToolkit");
         Console.WriteLine("  • Only use when InvocationToolkit cannot be used");
