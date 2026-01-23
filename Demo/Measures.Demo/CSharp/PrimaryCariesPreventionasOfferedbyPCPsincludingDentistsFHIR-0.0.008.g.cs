@@ -79,9 +79,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -96,9 +94,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -110,9 +106,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -123,9 +117,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -136,9 +128,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -149,9 +139,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -162,9 +150,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Qualifying_Encounters,
-            Qualifying_Encounters_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute, context) ?? Qualifying_Encounters_Compute(context);
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -211,9 +197,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -243,9 +227,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -256,9 +238,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator_Exclusions,
-            Denominator_Exclusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -269,9 +249,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Stratification 1")]
     public bool? Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Stratification_1,
-            Stratification_1_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute, context) ?? Stratification_1_Compute(context);
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
@@ -298,9 +276,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Stratification 2")]
     public bool? Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Stratification_2,
-            Stratification_2_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute, context) ?? Stratification_2_Compute(context);
 
     private bool? Stratification_2_Compute(CqlContext context)
     {
@@ -320,9 +296,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Stratification 3")]
     public bool? Stratification_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Stratification_3,
-            Stratification_3_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Stratification_3, Stratification_3_Compute, context) ?? Stratification_3_Compute(context);
 
     private bool? Stratification_3_Compute(CqlContext context)
     {
@@ -342,9 +316,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -392,100 +364,41 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Qualifying_Encounters != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Qualifying_Encounters' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Qualifying_Encounters}}. Cache indices can only be initialized once.");
-        _cacheIndex_Qualifying_Encounters = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exclusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exclusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exclusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exclusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Stratification_1 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Stratification_1' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Stratification_1}}. Cache indices can only be initialized once.");
-        _cacheIndex_Stratification_1 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Stratification_2 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Stratification_2' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Stratification_2}}. Cache indices can only be initialized once.");
-        _cacheIndex_Stratification_2 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Stratification_3 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Stratification_3' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Stratification_3}}. Cache indices can only be initialized once.");
-        _cacheIndex_Stratification_3 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        _cacheIndex_Qualifying_Encounters = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Denominator_Exclusions = index++;
+        _cacheIndex_Stratification_1 = index++;
+        _cacheIndex_Stratification_2 = index++;
+        _cacheIndex_Stratification_3 = index++;
+        _cacheIndex_Numerator = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

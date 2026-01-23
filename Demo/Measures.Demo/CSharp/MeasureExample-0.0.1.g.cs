@@ -21,9 +21,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -42,9 +40,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
     [CqlTag("population", "initial-population")]
     [CqlTag("description", "Patients in the IP")]
     public bool? Initial_population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Initial_population,
-            Initial_population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_population, Initial_population_Compute, context) ?? Initial_population_Compute(context);
 
     private bool? Initial_population_Compute(CqlContext context)
     {
@@ -57,9 +53,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator-exclusion")]
     public bool? Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Exclusion,
-            Exclusion_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Exclusion, Exclusion_Compute, context) ?? Exclusion_Compute(context);
 
     private bool? Exclusion_Compute(CqlContext context)
     {
@@ -72,9 +66,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -90,9 +82,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
     [CqlTag("group", "1")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator_1,
-            Numerator_1_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute, context) ?? Numerator_1_Compute(context);
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
@@ -104,9 +94,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
     [CqlTag("group", "2")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator_2,
-            Numerator_2_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute, context) ?? Numerator_2_Compute(context);
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
@@ -129,60 +117,33 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Exclusion != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Exclusion' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Exclusion}}. Cache indices can only be initialized once.");
-        _cacheIndex_Exclusion = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator_1 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_1' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_1}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator_1 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator_2 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_2' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_2}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator_2 = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Initial_population = index++;
+        _cacheIndex_Exclusion = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Numerator_1 = index++;
+        _cacheIndex_Numerator_2 = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

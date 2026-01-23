@@ -100,9 +100,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -120,9 +118,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -164,9 +160,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Has Active HIV Diagnosis Before or in First 90 Days of Measurement Period")]
     public bool? Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period,
-            Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period, Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period_Compute, context) ?? Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period_Compute(context);
 
     private bool? Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -196,9 +190,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Has Qualifying Encounter During First 240 Days of Measurement Period")]
     public bool? Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period,
-            Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period, Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Compute, context) ?? Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Compute(context);
 
     private bool? Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -261,9 +253,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -276,9 +266,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -289,9 +277,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Most Recent Viral Load Test During Measurement Period")]
     public Observation Most_Recent_Viral_Load_Test_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Observation>(
-            _cacheIndex_Most_Recent_Viral_Load_Test_During_Measurement_Period,
-            Most_Recent_Viral_Load_Test_During_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Most_Recent_Viral_Load_Test_During_Measurement_Period, Most_Recent_Viral_Load_Test_During_Measurement_Period_Compute, context) ?? Most_Recent_Viral_Load_Test_During_Measurement_Period_Compute(context);
 
     private Observation Most_Recent_Viral_Load_Test_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -430,9 +416,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -459,9 +443,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -472,9 +454,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -485,9 +465,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -498,9 +476,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -530,90 +506,39 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ILibraryI
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Most_Recent_Viral_Load_Test_During_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Most_Recent_Viral_Load_Test_During_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Most_Recent_Viral_Load_Test_During_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Most_Recent_Viral_Load_Test_During_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period = index++;
+        _cacheIndex_Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Most_Recent_Viral_Load_Test_During_Measurement_Period = index++;
+        _cacheIndex_Numerator = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

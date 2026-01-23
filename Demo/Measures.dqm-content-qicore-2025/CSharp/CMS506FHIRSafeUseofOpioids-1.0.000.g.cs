@@ -73,9 +73,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -93,9 +91,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -107,9 +103,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Inpatient Encounter With Age Greater Than Or Equal To 18")]
     public IEnumerable<Encounter> Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18,
-            Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18, Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18_Compute, context) ?? Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18_Compute(context);
 
     private IEnumerable<Encounter> Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18_Compute(CqlContext context)
     {
@@ -136,9 +130,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Opioid At Discharge")]
     public IEnumerable<MedicationRequest> Opioid_At_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(
-            _cacheIndex_Opioid_At_Discharge,
-            Opioid_At_Discharge_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Opioid_At_Discharge, Opioid_At_Discharge_Compute, context) ?? Opioid_At_Discharge_Compute(context);
 
     private IEnumerable<MedicationRequest> Opioid_At_Discharge_Compute(CqlContext context)
     {
@@ -207,9 +199,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Benzodiazepine At Discharge")]
     public IEnumerable<MedicationRequest> Benzodiazepine_At_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(
-            _cacheIndex_Benzodiazepine_At_Discharge,
-            Benzodiazepine_At_Discharge_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Benzodiazepine_At_Discharge, Benzodiazepine_At_Discharge_Compute, context) ?? Benzodiazepine_At_Discharge_Compute(context);
 
     private IEnumerable<MedicationRequest> Benzodiazepine_At_Discharge_Compute(CqlContext context)
     {
@@ -279,9 +269,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
     [CqlExpressionDefinition("Inpatient Encounters With An Opioid Or Benzodiazepine At Discharge")]
     [CqlTag("description", "Captures encounters of patients with an opioid and/or benzodiazepine at discharge.")]
     public IEnumerable<Encounter> Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge,
-            Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge, Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge_Compute, context) ?? Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge_Compute(context);
 
     private IEnumerable<Encounter> Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge_Compute(CqlContext context)
     {
@@ -314,9 +302,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -327,9 +313,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -341,9 +325,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
     [CqlExpressionDefinition("Numerator")]
     [CqlTag("description", "Encounters of patients prescribed two or more opioids or an opioid and benzodiazepine at discharge.")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -410,9 +392,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Inpatient Encounter With Encounter Diagnosis Of Cancer Pain")]
     public IEnumerable<Encounter> Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain,
-            Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain, Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain_Compute, context) ?? Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain_Compute(context);
 
     private IEnumerable<Encounter> Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain_Compute(CqlContext context)
     {
@@ -490,9 +470,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Medications For Opioid Use Disorder")]
     public IEnumerable<MedicationRequest> Medications_For_Opioid_Use_Disorder(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(
-            _cacheIndex_Medications_For_Opioid_Use_Disorder,
-            Medications_For_Opioid_Use_Disorder_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Medications_For_Opioid_Use_Disorder, Medications_For_Opioid_Use_Disorder_Compute, context) ?? Medications_For_Opioid_Use_Disorder_Compute(context);
 
     private IEnumerable<MedicationRequest> Medications_For_Opioid_Use_Disorder_Compute(CqlContext context)
     {
@@ -561,9 +539,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Treatment For Opioid Use Disorders")]
     public IEnumerable<MedicationRequest> Treatment_For_Opioid_Use_Disorders(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(
-            _cacheIndex_Treatment_For_Opioid_Use_Disorders,
-            Treatment_For_Opioid_Use_Disorders_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Treatment_For_Opioid_Use_Disorders, Treatment_For_Opioid_Use_Disorders_Compute, context) ?? Treatment_For_Opioid_Use_Disorders_Compute(context);
 
     private IEnumerable<MedicationRequest> Treatment_For_Opioid_Use_Disorders_Compute(CqlContext context)
     {
@@ -697,9 +673,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Intervention Palliative Or Hospice Care")]
     public IEnumerable<object> Intervention_Palliative_Or_Hospice_Care(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Intervention_Palliative_Or_Hospice_Care,
-            Intervention_Palliative_Or_Hospice_Care_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Intervention_Palliative_Or_Hospice_Care, Intervention_Palliative_Or_Hospice_Care_Compute, context) ?? Intervention_Palliative_Or_Hospice_Care_Compute(context);
 
     private IEnumerable<object> Intervention_Palliative_Or_Hospice_Care_Compute(CqlContext context)
     {
@@ -744,9 +718,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
     [CqlExpressionDefinition("Denominator Exclusion")]
     [CqlTag("description", "Excludes encounters of patients with cancer pain or who are receiving palliative or hospice care at the time of the encounter or who receive treatment for opioid use disorder, have sickle cell disease, or who are discharged to another inpatient care facility or discharged against medical advice, or expire during the inpatient stay.")]
     public IEnumerable<Encounter> Denominator_Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator_Exclusion,
-            Denominator_Exclusion_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusion, Denominator_Exclusion_Compute, context) ?? Denominator_Exclusion_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Exclusion_Compute(CqlContext context)
     {
@@ -911,9 +883,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -924,9 +894,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -937,9 +905,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -950,9 +916,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -988,120 +952,45 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18}}. Cache indices can only be initialized once.");
-        _cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Opioid_At_Discharge != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Opioid_At_Discharge' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Opioid_At_Discharge}}. Cache indices can only be initialized once.");
-        _cacheIndex_Opioid_At_Discharge = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Benzodiazepine_At_Discharge != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Benzodiazepine_At_Discharge' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Benzodiazepine_At_Discharge}}. Cache indices can only be initialized once.");
-        _cacheIndex_Benzodiazepine_At_Discharge = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge}}. Cache indices can only be initialized once.");
-        _cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain}}. Cache indices can only be initialized once.");
-        _cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Medications_For_Opioid_Use_Disorder != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Medications_For_Opioid_Use_Disorder' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Medications_For_Opioid_Use_Disorder}}. Cache indices can only be initialized once.");
-        _cacheIndex_Medications_For_Opioid_Use_Disorder = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Treatment_For_Opioid_Use_Disorders != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Treatment_For_Opioid_Use_Disorders' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Treatment_For_Opioid_Use_Disorders}}. Cache indices can only be initialized once.");
-        _cacheIndex_Treatment_For_Opioid_Use_Disorders = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Intervention_Palliative_Or_Hospice_Care != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Intervention_Palliative_Or_Hospice_Care' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Intervention_Palliative_Or_Hospice_Care}}. Cache indices can only be initialized once.");
-        _cacheIndex_Intervention_Palliative_Or_Hospice_Care = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exclusion != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exclusion' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exclusion}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exclusion = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18 = index++;
+        _cacheIndex_Opioid_At_Discharge = index++;
+        _cacheIndex_Benzodiazepine_At_Discharge = index++;
+        _cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Numerator = index++;
+        _cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain = index++;
+        _cacheIndex_Medications_For_Opioid_Use_Disorder = index++;
+        _cacheIndex_Treatment_For_Opioid_Use_Disorders = index++;
+        _cacheIndex_Intervention_Palliative_Or_Hospice_Care = index++;
+        _cacheIndex_Denominator_Exclusion = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

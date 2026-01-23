@@ -103,9 +103,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -123,9 +121,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -137,9 +133,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Evaluation and Management")]
     public IEnumerable<Encounter> ED_Evaluation_and_Management(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Evaluation_and_Management,
-            ED_Evaluation_and_Management_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Evaluation_and_Management, ED_Evaluation_and_Management_Compute, context) ?? ED_Evaluation_and_Management_Compute(context);
 
     private IEnumerable<Encounter> ED_Evaluation_and_Management_Compute(CqlContext context)
     {
@@ -167,9 +161,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Triage")]
     public IEnumerable<Encounter> ED_Triage(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Triage,
-            ED_Triage_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Triage, ED_Triage_Compute, context) ?? ED_Triage_Compute(context);
 
     private IEnumerable<Encounter> ED_Triage_Compute(CqlContext context)
     {
@@ -202,9 +194,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Triage Excluding Those Prior To ED Encounters")]
     public IEnumerable<Encounter> ED_Triage_Excluding_Those_Prior_To_ED_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters,
-            ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters, ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Compute, context) ?? ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Compute(context);
 
     private IEnumerable<Encounter> ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Compute(CqlContext context)
     {
@@ -258,9 +248,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -273,9 +261,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -390,9 +376,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Triage Before Evaluation Management")]
     public IEnumerable<Encounter> ED_Triage_Before_Evaluation_Management(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Triage_Before_Evaluation_Management,
-            ED_Triage_Before_Evaluation_Management_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Triage_Before_Evaluation_Management, ED_Triage_Before_Evaluation_Management_Compute, context) ?? ED_Triage_Before_Evaluation_Management_Compute(context);
 
     private IEnumerable<Encounter> ED_Triage_Before_Evaluation_Management_Compute(CqlContext context)
     {
@@ -446,9 +430,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Triage and Evaluation Management")]
     public IEnumerable<Encounter> ED_Triage_and_Evaluation_Management(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Triage_and_Evaluation_Management,
-            ED_Triage_and_Evaluation_Management_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Triage_and_Evaluation_Management, ED_Triage_and_Evaluation_Management_Compute, context) ?? ED_Triage_and_Evaluation_Management_Compute(context);
 
     private IEnumerable<Encounter> ED_Triage_and_Evaluation_Management_Compute(CqlContext context)
     {
@@ -504,9 +486,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Time to Treatment Room Greater Than 60 Minutes")]
     public IEnumerable<Encounter> Time_to_Treatment_Room_Greater_Than_60_Minutes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes,
-            Time_to_Treatment_Room_Greater_Than_60_Minutes_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes, Time_to_Treatment_Room_Greater_Than_60_Minutes_Compute, context) ?? Time_to_Treatment_Room_Greater_Than_60_Minutes_Compute(context);
 
     private IEnumerable<Encounter> Time_to_Treatment_Room_Greater_Than_60_Minutes_Compute(CqlContext context)
     {
@@ -528,9 +508,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Arrival Left Without Being Seen")]
     public IEnumerable<Encounter> ED_Arrival_Left_Without_Being_Seen(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Arrival_Left_Without_Being_Seen,
-            ED_Arrival_Left_Without_Being_Seen_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Arrival_Left_Without_Being_Seen, ED_Arrival_Left_Without_Being_Seen_Compute, context) ?? ED_Arrival_Left_Without_Being_Seen_Compute(context);
 
     private IEnumerable<Encounter> ED_Arrival_Left_Without_Being_Seen_Compute(CqlContext context)
     {
@@ -589,9 +567,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED To Inpatient Order")]
     public IEnumerable<ServiceRequest> ED_To_Inpatient_Order(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<ServiceRequest>>(
-            _cacheIndex_ED_To_Inpatient_Order,
-            ED_To_Inpatient_Order_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_To_Inpatient_Order, ED_To_Inpatient_Order_Compute, context) ?? ED_To_Inpatient_Order_Compute(context);
 
     private IEnumerable<ServiceRequest> ED_To_Inpatient_Order_Compute(CqlContext context)
     {
@@ -777,9 +753,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Decision to Admit Encounter Order")]
     public IEnumerable<Encounter> Decision_to_Admit_Encounter_Order(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Decision_to_Admit_Encounter_Order,
-            Decision_to_Admit_Encounter_Order_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Decision_to_Admit_Encounter_Order, Decision_to_Admit_Encounter_Order_Compute, context) ?? Decision_to_Admit_Encounter_Order_Compute(context);
 
     private IEnumerable<Encounter> Decision_to_Admit_Encounter_Order_Compute(CqlContext context)
     {
@@ -854,9 +828,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Assessment In ED")]
     public IEnumerable<object> Assessment_In_ED(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Assessment_In_ED,
-            Assessment_In_ED_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Assessment_In_ED, Assessment_In_ED_Compute, context) ?? Assessment_In_ED_Compute(context);
 
     private IEnumerable<object> Assessment_In_ED_Compute(CqlContext context)
     {
@@ -880,9 +852,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Decision to Admit Using Assessment")]
     public IEnumerable<Encounter> Decision_to_Admit_Using_Assessment(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Decision_to_Admit_Using_Assessment,
-            Decision_to_Admit_Using_Assessment_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Decision_to_Admit_Using_Assessment, Decision_to_Admit_Using_Assessment_Compute, context) ?? Decision_to_Admit_Using_Assessment_Compute(context);
 
     private IEnumerable<Encounter> Decision_to_Admit_Using_Assessment_Compute(CqlContext context)
     {
@@ -944,9 +914,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Inpatient Or Bed Assignment Encounter Order")]
     public IEnumerable<ServiceRequest> Inpatient_Or_Bed_Assignment_Encounter_Order(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<ServiceRequest>>(
-            _cacheIndex_Inpatient_Or_Bed_Assignment_Encounter_Order,
-            Inpatient_Or_Bed_Assignment_Encounter_Order_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Inpatient_Or_Bed_Assignment_Encounter_Order, Inpatient_Or_Bed_Assignment_Encounter_Order_Compute, context) ?? Inpatient_Or_Bed_Assignment_Encounter_Order_Compute(context);
 
     private IEnumerable<ServiceRequest> Inpatient_Or_Bed_Assignment_Encounter_Order_Compute(CqlContext context)
     {
@@ -977,9 +945,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Time of Admit Order Or Bed Assignment to Departure Greater Than 241 Minutes")]
     public IEnumerable<Encounter> Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes,
-            Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes, Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes_Compute, context) ?? Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes_Compute(context);
 
     private IEnumerable<Encounter> Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes_Compute(CqlContext context)
     {
@@ -1043,9 +1009,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Admitted to Inpatient 241 Minutes or More Before Departure")]
     public IEnumerable<Encounter> Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure,
-            Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure, Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure_Compute, context) ?? Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure_Compute(context);
 
     private IEnumerable<Encounter> Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure_Compute(CqlContext context)
     {
@@ -1076,9 +1040,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Boarded Time Greater Than 240 Minutes")]
     public IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Boarded_Time_Greater_Than_240_Minutes,
-            Boarded_Time_Greater_Than_240_Minutes_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Boarded_Time_Greater_Than_240_Minutes, Boarded_Time_Greater_Than_240_Minutes_Compute, context) ?? Boarded_Time_Greater_Than_240_Minutes_Compute(context);
 
     private IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_Compute(CqlContext context)
     {
@@ -1095,9 +1057,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Observation Status")]
     public IEnumerable<Encounter> ED_Observation_Status(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Observation_Status,
-            ED_Observation_Status_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Observation_Status, ED_Observation_Status_Compute, context) ?? ED_Observation_Status_Compute(context);
 
     private IEnumerable<Encounter> ED_Observation_Status_Compute(CqlContext context)
     {
@@ -1134,9 +1094,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Boarded Time Greater Than 240 Minutes and No Observation Stay")]
     public IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay,
-            Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay, Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Compute, context) ?? Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Compute(context);
 
     private IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Compute(CqlContext context)
     {
@@ -1167,9 +1125,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Length of Stay Greater Than 480 Minutes")]
     public IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes,
-            ED_Length_of_Stay_Greater_Than_480_Minutes_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes, ED_Length_of_Stay_Greater_Than_480_Minutes_Compute, context) ?? ED_Length_of_Stay_Greater_Than_480_Minutes_Compute(context);
 
     private IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_Compute(CqlContext context)
     {
@@ -1191,9 +1147,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Length of Stay Greater Than 480 Minutes and No Observation Stay")]
     public IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay,
-            ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay, ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Compute, context) ?? ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Compute(context);
 
     private IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Compute(CqlContext context)
     {
@@ -1224,9 +1178,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -1243,9 +1195,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Encounter or Triage of Patients Less Than 18 Years")]
     public IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years,
-            ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years, ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Compute, context) ?? ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Compute(context);
 
     private IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Compute(CqlContext context)
     {
@@ -1271,9 +1221,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Pediatric With No Mental Health Diagnosis")]
     public IEnumerable<Encounter> Pediatric_With_No_Mental_Health_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis,
-            Pediatric_With_No_Mental_Health_Diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis, Pediatric_With_No_Mental_Health_Diagnosis_Compute, context) ?? Pediatric_With_No_Mental_Health_Diagnosis_Compute(context);
 
     private IEnumerable<Encounter> Pediatric_With_No_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -1293,9 +1241,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("ED Encounter or Triage of Patients 18 Years and Older")]
     public IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older,
-            ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older, ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Compute, context) ?? ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Compute(context);
 
     private IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Compute(CqlContext context)
     {
@@ -1321,9 +1267,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Adult With No Mental Health Diagnosis")]
     public IEnumerable<Encounter> Adult_With_No_Mental_Health_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Adult_With_No_Mental_Health_Diagnosis,
-            Adult_With_No_Mental_Health_Diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Adult_With_No_Mental_Health_Diagnosis, Adult_With_No_Mental_Health_Diagnosis_Compute, context) ?? Adult_With_No_Mental_Health_Diagnosis_Compute(context);
 
     private IEnumerable<Encounter> Adult_With_No_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -1343,9 +1287,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Pediatric With Mental Health Diagnosis")]
     public IEnumerable<Encounter> Pediatric_With_Mental_Health_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Pediatric_With_Mental_Health_Diagnosis,
-            Pediatric_With_Mental_Health_Diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Pediatric_With_Mental_Health_Diagnosis, Pediatric_With_Mental_Health_Diagnosis_Compute, context) ?? Pediatric_With_Mental_Health_Diagnosis_Compute(context);
 
     private IEnumerable<Encounter> Pediatric_With_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -1364,9 +1306,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Adult With Mental Health Diagnosis")]
     public IEnumerable<Encounter> Adult_With_Mental_Health_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Adult_With_Mental_Health_Diagnosis,
-            Adult_With_Mental_Health_Diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Adult_With_Mental_Health_Diagnosis, Adult_With_Mental_Health_Diagnosis_Compute, context) ?? Adult_With_Mental_Health_Diagnosis_Compute(context);
 
     private IEnumerable<Encounter> Adult_With_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -1385,9 +1325,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Stratification 1")]
     public IEnumerable<Encounter> Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Stratification_1,
-            Stratification_1_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute, context) ?? Stratification_1_Compute(context);
 
     private IEnumerable<Encounter> Stratification_1_Compute(CqlContext context)
     {
@@ -1398,9 +1336,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Stratification 2")]
     public IEnumerable<Encounter> Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Stratification_2,
-            Stratification_2_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute, context) ?? Stratification_2_Compute(context);
 
     private IEnumerable<Encounter> Stratification_2_Compute(CqlContext context)
     {
@@ -1411,9 +1347,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Stratification 3")]
     public IEnumerable<Encounter> Stratification_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Stratification_3,
-            Stratification_3_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Stratification_3, Stratification_3_Compute, context) ?? Stratification_3_Compute(context);
 
     private IEnumerable<Encounter> Stratification_3_Compute(CqlContext context)
     {
@@ -1424,9 +1358,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("Stratification 4")]
     public IEnumerable<Encounter> Stratification_4(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Stratification_4,
-            Stratification_4_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Stratification_4, Stratification_4_Compute, context) ?? Stratification_4_Compute(context);
 
     private IEnumerable<Encounter> Stratification_4_Compute(CqlContext context)
     {
@@ -1437,9 +1369,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1450,9 +1380,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1463,9 +1391,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1476,9 +1402,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -1534,220 +1458,65 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ILibraryInternals, 
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Evaluation_and_Management != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Evaluation_and_Management' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Evaluation_and_Management}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Evaluation_and_Management = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Triage != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Triage' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Triage}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Triage = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Triage_Before_Evaluation_Management != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Triage_Before_Evaluation_Management' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Triage_Before_Evaluation_Management}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Triage_Before_Evaluation_Management = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Triage_and_Evaluation_Management != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Triage_and_Evaluation_Management' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Triage_and_Evaluation_Management}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Triage_and_Evaluation_Management = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes}}. Cache indices can only be initialized once.");
-        _cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Arrival_Left_Without_Being_Seen != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Arrival_Left_Without_Being_Seen' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Arrival_Left_Without_Being_Seen}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Arrival_Left_Without_Being_Seen = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_To_Inpatient_Order != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_To_Inpatient_Order' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_To_Inpatient_Order}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_To_Inpatient_Order = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Decision_to_Admit_Encounter_Order != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Decision_to_Admit_Encounter_Order' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Decision_to_Admit_Encounter_Order}}. Cache indices can only be initialized once.");
-        _cacheIndex_Decision_to_Admit_Encounter_Order = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Assessment_In_ED != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Assessment_In_ED' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Assessment_In_ED}}. Cache indices can only be initialized once.");
-        _cacheIndex_Assessment_In_ED = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Decision_to_Admit_Using_Assessment != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Decision_to_Admit_Using_Assessment' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Decision_to_Admit_Using_Assessment}}. Cache indices can only be initialized once.");
-        _cacheIndex_Decision_to_Admit_Using_Assessment = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Inpatient_Or_Bed_Assignment_Encounter_Order != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Inpatient_Or_Bed_Assignment_Encounter_Order' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Inpatient_Or_Bed_Assignment_Encounter_Order}}. Cache indices can only be initialized once.");
-        _cacheIndex_Inpatient_Or_Bed_Assignment_Encounter_Order = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes}}. Cache indices can only be initialized once.");
-        _cacheIndex_Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure}}. Cache indices can only be initialized once.");
-        _cacheIndex_Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Boarded_Time_Greater_Than_240_Minutes != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Boarded_Time_Greater_Than_240_Minutes' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Boarded_Time_Greater_Than_240_Minutes}}. Cache indices can only be initialized once.");
-        _cacheIndex_Boarded_Time_Greater_Than_240_Minutes = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Observation_Status != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Observation_Status' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Observation_Status}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Observation_Status = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay}}. Cache indices can only be initialized once.");
-        _cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Adult_With_No_Mental_Health_Diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Adult_With_No_Mental_Health_Diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Adult_With_No_Mental_Health_Diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_Adult_With_No_Mental_Health_Diagnosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Pediatric_With_Mental_Health_Diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Pediatric_With_Mental_Health_Diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Pediatric_With_Mental_Health_Diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_Pediatric_With_Mental_Health_Diagnosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Adult_With_Mental_Health_Diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Adult_With_Mental_Health_Diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Adult_With_Mental_Health_Diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_Adult_With_Mental_Health_Diagnosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Stratification_1 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Stratification_1' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Stratification_1}}. Cache indices can only be initialized once.");
-        _cacheIndex_Stratification_1 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Stratification_2 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Stratification_2' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Stratification_2}}. Cache indices can only be initialized once.");
-        _cacheIndex_Stratification_2 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Stratification_3 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Stratification_3' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Stratification_3}}. Cache indices can only be initialized once.");
-        _cacheIndex_Stratification_3 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Stratification_4 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Stratification_4' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Stratification_4}}. Cache indices can only be initialized once.");
-        _cacheIndex_Stratification_4 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_ED_Evaluation_and_Management = index++;
+        _cacheIndex_ED_Triage = index++;
+        _cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_ED_Triage_Before_Evaluation_Management = index++;
+        _cacheIndex_ED_Triage_and_Evaluation_Management = index++;
+        _cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes = index++;
+        _cacheIndex_ED_Arrival_Left_Without_Being_Seen = index++;
+        _cacheIndex_ED_To_Inpatient_Order = index++;
+        _cacheIndex_Decision_to_Admit_Encounter_Order = index++;
+        _cacheIndex_Assessment_In_ED = index++;
+        _cacheIndex_Decision_to_Admit_Using_Assessment = index++;
+        _cacheIndex_Inpatient_Or_Bed_Assignment_Encounter_Order = index++;
+        _cacheIndex_Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes = index++;
+        _cacheIndex_Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure = index++;
+        _cacheIndex_Boarded_Time_Greater_Than_240_Minutes = index++;
+        _cacheIndex_ED_Observation_Status = index++;
+        _cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay = index++;
+        _cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes = index++;
+        _cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay = index++;
+        _cacheIndex_Numerator = index++;
+        _cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years = index++;
+        _cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis = index++;
+        _cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older = index++;
+        _cacheIndex_Adult_With_No_Mental_Health_Diagnosis = index++;
+        _cacheIndex_Pediatric_With_Mental_Health_Diagnosis = index++;
+        _cacheIndex_Adult_With_Mental_Health_Diagnosis = index++;
+        _cacheIndex_Stratification_1 = index++;
+        _cacheIndex_Stratification_2 = index++;
+        _cacheIndex_Stratification_3 = index++;
+        _cacheIndex_Stratification_4 = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

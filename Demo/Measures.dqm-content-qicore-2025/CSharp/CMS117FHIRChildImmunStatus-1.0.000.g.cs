@@ -289,9 +289,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -309,9 +307,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -323,9 +319,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Qualifying_Encounters,
-            Qualifying_Encounters_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute, context) ?? Qualifying_Encounters_Compute(context);
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -389,9 +383,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -413,9 +405,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -426,9 +416,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Date of Second Birthday")]
     public CqlDate Date_of_Second_Birthday(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(
-            _cacheIndex_Date_of_Second_Birthday,
-            Date_of_Second_Birthday_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_of_Second_Birthday, Date_of_Second_Birthday_Compute, context) ?? Date_of_Second_Birthday_Compute(context);
 
     private CqlDate Date_of_Second_Birthday_Compute(CqlContext context)
     {
@@ -446,9 +434,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("First Two Years")]
     public CqlInterval<CqlDate> First_Two_Years(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(
-            _cacheIndex_First_Two_Years,
-            First_Two_Years_Compute);
+        _cache?.GetOrCompute(_cacheIndex_First_Two_Years, First_Two_Years_Compute, context) ?? First_Two_Years_Compute(context);
 
     private CqlInterval<CqlDate> First_Two_Years_Compute(CqlContext context)
     {
@@ -466,9 +452,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Has Severe Combined Immunodeficiency")]
     public bool? Has_Severe_Combined_Immunodeficiency(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Severe_Combined_Immunodeficiency,
-            Has_Severe_Combined_Immunodeficiency_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Severe_Combined_Immunodeficiency, Has_Severe_Combined_Immunodeficiency_Compute, context) ?? Has_Severe_Combined_Immunodeficiency_Compute(context);
 
     private bool? Has_Severe_Combined_Immunodeficiency_Compute(CqlContext context)
     {
@@ -495,9 +479,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Has Immunodeficiency")]
     public bool? Has_Immunodeficiency(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Immunodeficiency,
-            Has_Immunodeficiency_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Immunodeficiency, Has_Immunodeficiency_Compute, context) ?? Has_Immunodeficiency_Compute(context);
 
     private bool? Has_Immunodeficiency_Compute(CqlContext context)
     {
@@ -524,9 +506,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Has HIV")]
     public bool? Has_HIV(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_HIV,
-            Has_HIV_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_HIV, Has_HIV_Compute, context) ?? Has_HIV_Compute(context);
 
     private bool? Has_HIV_Compute(CqlContext context)
     {
@@ -553,9 +533,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Has Lymphoreticular Cancer, Multiple Myeloma or Leukemia")]
     public bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia,
-            Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia, Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Compute, context) ?? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Compute(context);
 
     private bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Compute(CqlContext context)
     {
@@ -582,9 +560,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Has Intussusception")]
     public bool? Has_Intussusception(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Intussusception,
-            Has_Intussusception_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Intussusception, Has_Intussusception_Compute, context) ?? Has_Intussusception_Compute(context);
 
     private bool? Has_Intussusception_Compute(CqlContext context)
     {
@@ -611,9 +587,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator_Exclusions,
-            Denominator_Exclusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -634,9 +608,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Vaccine Administration Interval - 42 Days up to 2 Years Old")]
     public CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(
-            _cacheIndex_Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old,
-            Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old, Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Compute, context) ?? Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Compute(context);
 
     private CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Compute(CqlContext context)
     {
@@ -656,9 +628,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("DTaP Immunizations or Procedures")]
     public IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_DTaP_Immunizations_or_Procedures,
-            DTaP_Immunizations_or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_DTaP_Immunizations_or_Procedures, DTaP_Immunizations_or_Procedures_Compute, context) ?? DTaP_Immunizations_or_Procedures_Compute(context);
 
     private IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -721,9 +691,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Four DTaP Vaccinations")]
     public IEnumerable<CqlDate> Four_DTaP_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Four_DTaP_Vaccinations,
-            Four_DTaP_Vaccinations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Four_DTaP_Vaccinations, Four_DTaP_Vaccinations_Compute, context) ?? Four_DTaP_Vaccinations_Compute(context);
 
     private IEnumerable<CqlDate> Four_DTaP_Vaccinations_Compute(CqlContext context)
     {
@@ -775,9 +743,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("DTaP Numerator Inclusion Conditions")]
     public IEnumerable<object> DTaP_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_DTaP_Numerator_Inclusion_Conditions,
-            DTaP_Numerator_Inclusion_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_DTaP_Numerator_Inclusion_Conditions, DTaP_Numerator_Inclusion_Conditions_Compute, context) ?? DTaP_Numerator_Inclusion_Conditions_Compute(context);
 
     private IEnumerable<object> DTaP_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -808,9 +774,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Polio Immunizations or Procedures")]
     public IEnumerable<CqlDate> Polio_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Polio_Immunizations_or_Procedures,
-            Polio_Immunizations_or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Polio_Immunizations_or_Procedures, Polio_Immunizations_or_Procedures_Compute, context) ?? Polio_Immunizations_or_Procedures_Compute(context);
 
     private IEnumerable<CqlDate> Polio_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -873,9 +837,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Three Polio Vaccinations")]
     public IEnumerable<CqlDate> Three_Polio_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Three_Polio_Vaccinations,
-            Three_Polio_Vaccinations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Three_Polio_Vaccinations, Three_Polio_Vaccinations_Compute, context) ?? Three_Polio_Vaccinations_Compute(context);
 
     private IEnumerable<CqlDate> Three_Polio_Vaccinations_Compute(CqlContext context)
     {
@@ -927,9 +889,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Polio Numerator Inclusion Conditions")]
     public IEnumerable<object> Polio_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Polio_Numerator_Inclusion_Conditions,
-            Polio_Numerator_Inclusion_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Polio_Numerator_Inclusion_Conditions, Polio_Numerator_Inclusion_Conditions_Compute, context) ?? Polio_Numerator_Inclusion_Conditions_Compute(context);
 
     private IEnumerable<object> Polio_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -957,9 +917,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Date of First Birthday")]
     public CqlDate Date_of_First_Birthday(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(
-            _cacheIndex_Date_of_First_Birthday,
-            Date_of_First_Birthday_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_of_First_Birthday, Date_of_First_Birthday_Compute, context) ?? Date_of_First_Birthday_Compute(context);
 
     private CqlDate Date_of_First_Birthday_Compute(CqlContext context)
     {
@@ -977,9 +935,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Date of First Birthday to Date of Second Birthday")]
     public CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(
-            _cacheIndex_Date_of_First_Birthday_to_Date_of_Second_Birthday,
-            Date_of_First_Birthday_to_Date_of_Second_Birthday_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_of_First_Birthday_to_Date_of_Second_Birthday, Date_of_First_Birthday_to_Date_of_Second_Birthday_Compute, context) ?? Date_of_First_Birthday_to_Date_of_Second_Birthday_Compute(context);
 
     private CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday_Compute(CqlContext context)
     {
@@ -992,9 +948,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("One MMR Vaccination")]
     public IEnumerable<CqlDate> One_MMR_Vaccination(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_One_MMR_Vaccination,
-            One_MMR_Vaccination_Compute);
+        _cache?.GetOrCompute(_cacheIndex_One_MMR_Vaccination, One_MMR_Vaccination_Compute, context) ?? One_MMR_Vaccination_Compute(context);
 
     private IEnumerable<CqlDate> One_MMR_Vaccination_Compute(CqlContext context)
     {
@@ -1057,9 +1011,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("MMR Numerator Inclusion Conditions")]
     public IEnumerable<object> MMR_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_MMR_Numerator_Inclusion_Conditions,
-            MMR_Numerator_Inclusion_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_MMR_Numerator_Inclusion_Conditions, MMR_Numerator_Inclusion_Conditions_Compute, context) ?? MMR_Numerator_Inclusion_Conditions_Compute(context);
 
     private IEnumerable<object> MMR_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -1087,9 +1039,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Measles Indicators")]
     public IEnumerable<object> Measles_Indicators(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Measles_Indicators,
-            Measles_Indicators_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measles_Indicators, Measles_Indicators_Compute, context) ?? Measles_Indicators_Compute(context);
 
     private IEnumerable<object> Measles_Indicators_Compute(CqlContext context)
     {
@@ -1117,9 +1067,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Mumps Indicators")]
     public IEnumerable<object> Mumps_Indicators(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Mumps_Indicators,
-            Mumps_Indicators_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Mumps_Indicators, Mumps_Indicators_Compute, context) ?? Mumps_Indicators_Compute(context);
 
     private IEnumerable<object> Mumps_Indicators_Compute(CqlContext context)
     {
@@ -1145,9 +1093,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Rubella Indicators")]
     public IEnumerable<object> Rubella_Indicators(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Rubella_Indicators,
-            Rubella_Indicators_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Rubella_Indicators, Rubella_Indicators_Compute, context) ?? Rubella_Indicators_Compute(context);
 
     private IEnumerable<object> Rubella_Indicators_Compute(CqlContext context)
     {
@@ -1173,9 +1119,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Hib 3 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Hib_3_Dose_Immunizations_or_Procedures,
-            Hib_3_Dose_Immunizations_or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Hib_3_Dose_Immunizations_or_Procedures, Hib_3_Dose_Immunizations_or_Procedures_Compute, context) ?? Hib_3_Dose_Immunizations_or_Procedures_Compute(context);
 
     private IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -1238,9 +1182,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Hib 4 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Hib_4_Dose_Immunizations_or_Procedures,
-            Hib_4_Dose_Immunizations_or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Hib_4_Dose_Immunizations_or_Procedures, Hib_4_Dose_Immunizations_or_Procedures_Compute, context) ?? Hib_4_Dose_Immunizations_or_Procedures_Compute(context);
 
     private IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -1303,9 +1245,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Hib 3 or 4 Dose Immunizations")]
     public IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Hib_3_or_4_Dose_Immunizations,
-            Hib_3_or_4_Dose_Immunizations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Hib_3_or_4_Dose_Immunizations, Hib_3_or_4_Dose_Immunizations_Compute, context) ?? Hib_3_or_4_Dose_Immunizations_Compute(context);
 
     private IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations_Compute(CqlContext context)
     {
@@ -1318,9 +1258,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Has Appropriate Number of Hib Immunizations")]
     public bool? Has_Appropriate_Number_of_Hib_Immunizations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Appropriate_Number_of_Hib_Immunizations,
-            Has_Appropriate_Number_of_Hib_Immunizations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Appropriate_Number_of_Hib_Immunizations, Has_Appropriate_Number_of_Hib_Immunizations_Compute, context) ?? Has_Appropriate_Number_of_Hib_Immunizations_Compute(context);
 
     private bool? Has_Appropriate_Number_of_Hib_Immunizations_Compute(CqlContext context)
     {
@@ -1374,9 +1312,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Hib Numerator Inclusion Conditions")]
     public IEnumerable<object> Hib_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Hib_Numerator_Inclusion_Conditions,
-            Hib_Numerator_Inclusion_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Hib_Numerator_Inclusion_Conditions, Hib_Numerator_Inclusion_Conditions_Compute, context) ?? Hib_Numerator_Inclusion_Conditions_Compute(context);
 
     private IEnumerable<object> Hib_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -1404,9 +1340,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Hepatitis B Immunizations or Procedures")]
     public IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Hepatitis_B_Immunizations_or_Procedures,
-            Hepatitis_B_Immunizations_or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Hepatitis_B_Immunizations_or_Procedures, Hepatitis_B_Immunizations_or_Procedures_Compute, context) ?? Hepatitis_B_Immunizations_or_Procedures_Compute(context);
 
     private IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -1469,9 +1403,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Three Hepatitis B Vaccinations")]
     public IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Three_Hepatitis_B_Vaccinations,
-            Three_Hepatitis_B_Vaccinations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Three_Hepatitis_B_Vaccinations, Three_Hepatitis_B_Vaccinations_Compute, context) ?? Three_Hepatitis_B_Vaccinations_Compute(context);
 
     private IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations_Compute(CqlContext context)
     {
@@ -1523,9 +1455,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("NewBorn Vaccine Requirement")]
     public IEnumerable<CqlDate> NewBorn_Vaccine_Requirement(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_NewBorn_Vaccine_Requirement,
-            NewBorn_Vaccine_Requirement_Compute);
+        _cache?.GetOrCompute(_cacheIndex_NewBorn_Vaccine_Requirement, NewBorn_Vaccine_Requirement_Compute, context) ?? NewBorn_Vaccine_Requirement_Compute(context);
 
     private IEnumerable<CqlDate> NewBorn_Vaccine_Requirement_Compute(CqlContext context)
     {
@@ -1575,9 +1505,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Meets HepB Vaccination Requirement")]
     public IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Meets_HepB_Vaccination_Requirement,
-            Meets_HepB_Vaccination_Requirement_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Meets_HepB_Vaccination_Requirement, Meets_HepB_Vaccination_Requirement_Compute, context) ?? Meets_HepB_Vaccination_Requirement_Compute(context);
 
     private IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement_Compute(CqlContext context)
     {
@@ -1637,9 +1565,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Hepatitis B Numerator Inclusion Conditions")]
     public IEnumerable<object> Hepatitis_B_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions,
-            Hepatitis_B_Numerator_Inclusion_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions, Hepatitis_B_Numerator_Inclusion_Conditions_Compute, context) ?? Hepatitis_B_Numerator_Inclusion_Conditions_Compute(context);
 
     private IEnumerable<object> Hepatitis_B_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -1672,9 +1598,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("One Chicken Pox Vaccination")]
     public IEnumerable<CqlDate> One_Chicken_Pox_Vaccination(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_One_Chicken_Pox_Vaccination,
-            One_Chicken_Pox_Vaccination_Compute);
+        _cache?.GetOrCompute(_cacheIndex_One_Chicken_Pox_Vaccination, One_Chicken_Pox_Vaccination_Compute, context) ?? One_Chicken_Pox_Vaccination_Compute(context);
 
     private IEnumerable<CqlDate> One_Chicken_Pox_Vaccination_Compute(CqlContext context)
     {
@@ -1737,9 +1661,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Varicella Zoster Numerator Inclusion Conditions")]
     public IEnumerable<object> Varicella_Zoster_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions,
-            Varicella_Zoster_Numerator_Inclusion_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions, Varicella_Zoster_Numerator_Inclusion_Conditions_Compute, context) ?? Varicella_Zoster_Numerator_Inclusion_Conditions_Compute(context);
 
     private IEnumerable<object> Varicella_Zoster_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -1772,9 +1694,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Pneumococcal Conjugate Immunizations or Procedures")]
     public IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Pneumococcal_Conjugate_Immunizations_or_Procedures,
-            Pneumococcal_Conjugate_Immunizations_or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Pneumococcal_Conjugate_Immunizations_or_Procedures, Pneumococcal_Conjugate_Immunizations_or_Procedures_Compute, context) ?? Pneumococcal_Conjugate_Immunizations_or_Procedures_Compute(context);
 
     private IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -1837,9 +1757,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Four Pneumococcal Conjugate Vaccinations")]
     public IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Four_Pneumococcal_Conjugate_Vaccinations,
-            Four_Pneumococcal_Conjugate_Vaccinations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Four_Pneumococcal_Conjugate_Vaccinations, Four_Pneumococcal_Conjugate_Vaccinations_Compute, context) ?? Four_Pneumococcal_Conjugate_Vaccinations_Compute(context);
 
     private IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations_Compute(CqlContext context)
     {
@@ -1899,9 +1817,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Pneumococcal Conjugate Numerator Inclusion Conditions")]
     public IEnumerable<object> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions,
-            Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions, Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Compute, context) ?? Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Compute(context);
 
     private IEnumerable<object> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -1929,9 +1845,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("One Hepatitis A Vaccinations")]
     public IEnumerable<CqlDate> One_Hepatitis_A_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_One_Hepatitis_A_Vaccinations,
-            One_Hepatitis_A_Vaccinations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_One_Hepatitis_A_Vaccinations, One_Hepatitis_A_Vaccinations_Compute, context) ?? One_Hepatitis_A_Vaccinations_Compute(context);
 
     private IEnumerable<CqlDate> One_Hepatitis_A_Vaccinations_Compute(CqlContext context)
     {
@@ -1994,9 +1908,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Hepatitis A Numerator Inclusion Conditions")]
     public IEnumerable<object> Hepatitis_A_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions,
-            Hepatitis_A_Numerator_Inclusion_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions, Hepatitis_A_Numerator_Inclusion_Conditions_Compute, context) ?? Hepatitis_A_Numerator_Inclusion_Conditions_Compute(context);
 
     private IEnumerable<object> Hepatitis_A_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -2029,9 +1941,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Rotavirus 2 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Rotavirus_2_Dose_Immunizations_or_Procedures,
-            Rotavirus_2_Dose_Immunizations_or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Rotavirus_2_Dose_Immunizations_or_Procedures, Rotavirus_2_Dose_Immunizations_or_Procedures_Compute, context) ?? Rotavirus_2_Dose_Immunizations_or_Procedures_Compute(context);
 
     private IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -2095,9 +2005,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Rotavirus 3 Dose Immunizations or Procedures")]
     public IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Rotavirus_3_Dose_Immunizations_or_Procedures,
-            Rotavirus_3_Dose_Immunizations_or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Rotavirus_3_Dose_Immunizations_or_Procedures, Rotavirus_3_Dose_Immunizations_or_Procedures_Compute, context) ?? Rotavirus_3_Dose_Immunizations_or_Procedures_Compute(context);
 
     private IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -2160,9 +2068,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Rotavirus 2 or 3 Dose Immunizations")]
     public IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Rotavirus_2_or_3_Dose_Immunizations,
-            Rotavirus_2_or_3_Dose_Immunizations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Rotavirus_2_or_3_Dose_Immunizations, Rotavirus_2_or_3_Dose_Immunizations_Compute, context) ?? Rotavirus_2_or_3_Dose_Immunizations_Compute(context);
 
     private IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations_Compute(CqlContext context)
     {
@@ -2175,9 +2081,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Has Appropriate Number of Rotavirus Immunizations")]
     public bool? Has_Appropriate_Number_of_Rotavirus_Immunizations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Appropriate_Number_of_Rotavirus_Immunizations,
-            Has_Appropriate_Number_of_Rotavirus_Immunizations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Appropriate_Number_of_Rotavirus_Immunizations, Has_Appropriate_Number_of_Rotavirus_Immunizations_Compute, context) ?? Has_Appropriate_Number_of_Rotavirus_Immunizations_Compute(context);
 
     private bool? Has_Appropriate_Number_of_Rotavirus_Immunizations_Compute(CqlContext context)
     {
@@ -2231,9 +2135,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Rotavirus Numerator Inclusion Conditions")]
     public IEnumerable<object> Rotavirus_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Rotavirus_Numerator_Inclusion_Conditions,
-            Rotavirus_Numerator_Inclusion_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Rotavirus_Numerator_Inclusion_Conditions, Rotavirus_Numerator_Inclusion_Conditions_Compute, context) ?? Rotavirus_Numerator_Inclusion_Conditions_Compute(context);
 
     private IEnumerable<object> Rotavirus_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -2261,9 +2163,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Vaccine Administration Interval - 180 Days up to 2 Years Old")]
     public CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDate>>(
-            _cacheIndex_Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old,
-            Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old, Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Compute, context) ?? Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Compute(context);
 
     private CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Compute(CqlContext context)
     {
@@ -2283,9 +2183,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Influenza Immunizations or Procedures")]
     public IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Influenza_Immunizations_or_Procedures,
-            Influenza_Immunizations_or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Influenza_Immunizations_or_Procedures, Influenza_Immunizations_or_Procedures_Compute, context) ?? Influenza_Immunizations_or_Procedures_Compute(context);
 
     private IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -2348,9 +2246,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Two Influenza Vaccinations")]
     public IEnumerable<CqlDate> Two_Influenza_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Two_Influenza_Vaccinations,
-            Two_Influenza_Vaccinations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Two_Influenza_Vaccinations, Two_Influenza_Vaccinations_Compute, context) ?? Two_Influenza_Vaccinations_Compute(context);
 
     private IEnumerable<CqlDate> Two_Influenza_Vaccinations_Compute(CqlContext context)
     {
@@ -2394,9 +2290,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("LAIV Vaccinations")]
     public IEnumerable<CqlDate> LAIV_Vaccinations(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_LAIV_Vaccinations,
-            LAIV_Vaccinations_Compute);
+        _cache?.GetOrCompute(_cacheIndex_LAIV_Vaccinations, LAIV_Vaccinations_Compute, context) ?? LAIV_Vaccinations_Compute(context);
 
     private IEnumerable<CqlDate> LAIV_Vaccinations_Compute(CqlContext context)
     {
@@ -2461,9 +2355,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Two Influenza Vaccinations Including One LAIV Vaccination")]
     public bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination,
-            Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination, Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Compute, context) ?? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Compute(context);
 
     private bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Compute(CqlContext context)
     {
@@ -2478,9 +2370,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Influenza Numerator Inclusion Conditions")]
     public IEnumerable<object> Influenza_Numerator_Inclusion_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Influenza_Numerator_Inclusion_Conditions,
-            Influenza_Numerator_Inclusion_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Influenza_Numerator_Inclusion_Conditions, Influenza_Numerator_Inclusion_Conditions_Compute, context) ?? Influenza_Numerator_Inclusion_Conditions_Compute(context);
 
     private IEnumerable<object> Influenza_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -2508,9 +2398,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -2591,9 +2479,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -2604,9 +2490,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -2617,9 +2501,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -2630,9 +2512,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -2710,330 +2590,87 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ILibraryInte
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Qualifying_Encounters != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Qualifying_Encounters' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Qualifying_Encounters}}. Cache indices can only be initialized once.");
-        _cacheIndex_Qualifying_Encounters = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_of_Second_Birthday != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_of_Second_Birthday' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_of_Second_Birthday}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_of_Second_Birthday = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_First_Two_Years != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_First_Two_Years' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_First_Two_Years}}. Cache indices can only be initialized once.");
-        _cacheIndex_First_Two_Years = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Severe_Combined_Immunodeficiency != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Severe_Combined_Immunodeficiency' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Severe_Combined_Immunodeficiency}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Severe_Combined_Immunodeficiency = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Immunodeficiency != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Immunodeficiency' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Immunodeficiency}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Immunodeficiency = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_HIV != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_HIV' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_HIV}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_HIV = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Intussusception != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Intussusception' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Intussusception}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Intussusception = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exclusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exclusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exclusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exclusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old}}. Cache indices can only be initialized once.");
-        _cacheIndex_Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_DTaP_Immunizations_or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_DTaP_Immunizations_or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_DTaP_Immunizations_or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_DTaP_Immunizations_or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Four_DTaP_Vaccinations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Four_DTaP_Vaccinations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Four_DTaP_Vaccinations}}. Cache indices can only be initialized once.");
-        _cacheIndex_Four_DTaP_Vaccinations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_DTaP_Numerator_Inclusion_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_DTaP_Numerator_Inclusion_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_DTaP_Numerator_Inclusion_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_DTaP_Numerator_Inclusion_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Polio_Immunizations_or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Polio_Immunizations_or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Polio_Immunizations_or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Polio_Immunizations_or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Three_Polio_Vaccinations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Three_Polio_Vaccinations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Three_Polio_Vaccinations}}. Cache indices can only be initialized once.");
-        _cacheIndex_Three_Polio_Vaccinations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Polio_Numerator_Inclusion_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Polio_Numerator_Inclusion_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Polio_Numerator_Inclusion_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Polio_Numerator_Inclusion_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_of_First_Birthday != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_of_First_Birthday' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_of_First_Birthday}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_of_First_Birthday = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_of_First_Birthday_to_Date_of_Second_Birthday != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_of_First_Birthday_to_Date_of_Second_Birthday' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_of_First_Birthday_to_Date_of_Second_Birthday}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_of_First_Birthday_to_Date_of_Second_Birthday = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_One_MMR_Vaccination != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_One_MMR_Vaccination' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_One_MMR_Vaccination}}. Cache indices can only be initialized once.");
-        _cacheIndex_One_MMR_Vaccination = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_MMR_Numerator_Inclusion_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_MMR_Numerator_Inclusion_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_MMR_Numerator_Inclusion_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_MMR_Numerator_Inclusion_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Measles_Indicators != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measles_Indicators' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measles_Indicators}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measles_Indicators = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Mumps_Indicators != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Mumps_Indicators' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Mumps_Indicators}}. Cache indices can only be initialized once.");
-        _cacheIndex_Mumps_Indicators = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Rubella_Indicators != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Rubella_Indicators' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Rubella_Indicators}}. Cache indices can only be initialized once.");
-        _cacheIndex_Rubella_Indicators = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Hib_3_Dose_Immunizations_or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Hib_3_Dose_Immunizations_or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Hib_3_Dose_Immunizations_or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Hib_3_Dose_Immunizations_or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Hib_4_Dose_Immunizations_or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Hib_4_Dose_Immunizations_or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Hib_4_Dose_Immunizations_or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Hib_4_Dose_Immunizations_or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Hib_3_or_4_Dose_Immunizations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Hib_3_or_4_Dose_Immunizations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Hib_3_or_4_Dose_Immunizations}}. Cache indices can only be initialized once.");
-        _cacheIndex_Hib_3_or_4_Dose_Immunizations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Appropriate_Number_of_Hib_Immunizations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Appropriate_Number_of_Hib_Immunizations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Appropriate_Number_of_Hib_Immunizations}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Appropriate_Number_of_Hib_Immunizations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Hib_Numerator_Inclusion_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Hib_Numerator_Inclusion_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Hib_Numerator_Inclusion_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Hib_Numerator_Inclusion_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Hepatitis_B_Immunizations_or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Hepatitis_B_Immunizations_or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Hepatitis_B_Immunizations_or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Hepatitis_B_Immunizations_or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Three_Hepatitis_B_Vaccinations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Three_Hepatitis_B_Vaccinations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Three_Hepatitis_B_Vaccinations}}. Cache indices can only be initialized once.");
-        _cacheIndex_Three_Hepatitis_B_Vaccinations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_NewBorn_Vaccine_Requirement != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_NewBorn_Vaccine_Requirement' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_NewBorn_Vaccine_Requirement}}. Cache indices can only be initialized once.");
-        _cacheIndex_NewBorn_Vaccine_Requirement = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Meets_HepB_Vaccination_Requirement != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Meets_HepB_Vaccination_Requirement' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Meets_HepB_Vaccination_Requirement}}. Cache indices can only be initialized once.");
-        _cacheIndex_Meets_HepB_Vaccination_Requirement = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_One_Chicken_Pox_Vaccination != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_One_Chicken_Pox_Vaccination' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_One_Chicken_Pox_Vaccination}}. Cache indices can only be initialized once.");
-        _cacheIndex_One_Chicken_Pox_Vaccination = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Pneumococcal_Conjugate_Immunizations_or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Pneumococcal_Conjugate_Immunizations_or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Pneumococcal_Conjugate_Immunizations_or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Pneumococcal_Conjugate_Immunizations_or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Four_Pneumococcal_Conjugate_Vaccinations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Four_Pneumococcal_Conjugate_Vaccinations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Four_Pneumococcal_Conjugate_Vaccinations}}. Cache indices can only be initialized once.");
-        _cacheIndex_Four_Pneumococcal_Conjugate_Vaccinations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_One_Hepatitis_A_Vaccinations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_One_Hepatitis_A_Vaccinations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_One_Hepatitis_A_Vaccinations}}. Cache indices can only be initialized once.");
-        _cacheIndex_One_Hepatitis_A_Vaccinations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Rotavirus_2_Dose_Immunizations_or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Rotavirus_2_Dose_Immunizations_or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Rotavirus_2_Dose_Immunizations_or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Rotavirus_2_Dose_Immunizations_or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Rotavirus_3_Dose_Immunizations_or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Rotavirus_3_Dose_Immunizations_or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Rotavirus_3_Dose_Immunizations_or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Rotavirus_3_Dose_Immunizations_or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Rotavirus_2_or_3_Dose_Immunizations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Rotavirus_2_or_3_Dose_Immunizations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Rotavirus_2_or_3_Dose_Immunizations}}. Cache indices can only be initialized once.");
-        _cacheIndex_Rotavirus_2_or_3_Dose_Immunizations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Appropriate_Number_of_Rotavirus_Immunizations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Appropriate_Number_of_Rotavirus_Immunizations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Appropriate_Number_of_Rotavirus_Immunizations}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Appropriate_Number_of_Rotavirus_Immunizations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Rotavirus_Numerator_Inclusion_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Rotavirus_Numerator_Inclusion_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Rotavirus_Numerator_Inclusion_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Rotavirus_Numerator_Inclusion_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old}}. Cache indices can only be initialized once.");
-        _cacheIndex_Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Influenza_Immunizations_or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Influenza_Immunizations_or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Influenza_Immunizations_or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Influenza_Immunizations_or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Two_Influenza_Vaccinations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Two_Influenza_Vaccinations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Two_Influenza_Vaccinations}}. Cache indices can only be initialized once.");
-        _cacheIndex_Two_Influenza_Vaccinations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_LAIV_Vaccinations != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_LAIV_Vaccinations' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_LAIV_Vaccinations}}. Cache indices can only be initialized once.");
-        _cacheIndex_LAIV_Vaccinations = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination}}. Cache indices can only be initialized once.");
-        _cacheIndex_Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Influenza_Numerator_Inclusion_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Influenza_Numerator_Inclusion_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Influenza_Numerator_Inclusion_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Influenza_Numerator_Inclusion_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Qualifying_Encounters = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Date_of_Second_Birthday = index++;
+        _cacheIndex_First_Two_Years = index++;
+        _cacheIndex_Has_Severe_Combined_Immunodeficiency = index++;
+        _cacheIndex_Has_Immunodeficiency = index++;
+        _cacheIndex_Has_HIV = index++;
+        _cacheIndex_Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia = index++;
+        _cacheIndex_Has_Intussusception = index++;
+        _cacheIndex_Denominator_Exclusions = index++;
+        _cacheIndex_Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old = index++;
+        _cacheIndex_DTaP_Immunizations_or_Procedures = index++;
+        _cacheIndex_Four_DTaP_Vaccinations = index++;
+        _cacheIndex_DTaP_Numerator_Inclusion_Conditions = index++;
+        _cacheIndex_Polio_Immunizations_or_Procedures = index++;
+        _cacheIndex_Three_Polio_Vaccinations = index++;
+        _cacheIndex_Polio_Numerator_Inclusion_Conditions = index++;
+        _cacheIndex_Date_of_First_Birthday = index++;
+        _cacheIndex_Date_of_First_Birthday_to_Date_of_Second_Birthday = index++;
+        _cacheIndex_One_MMR_Vaccination = index++;
+        _cacheIndex_MMR_Numerator_Inclusion_Conditions = index++;
+        _cacheIndex_Measles_Indicators = index++;
+        _cacheIndex_Mumps_Indicators = index++;
+        _cacheIndex_Rubella_Indicators = index++;
+        _cacheIndex_Hib_3_Dose_Immunizations_or_Procedures = index++;
+        _cacheIndex_Hib_4_Dose_Immunizations_or_Procedures = index++;
+        _cacheIndex_Hib_3_or_4_Dose_Immunizations = index++;
+        _cacheIndex_Has_Appropriate_Number_of_Hib_Immunizations = index++;
+        _cacheIndex_Hib_Numerator_Inclusion_Conditions = index++;
+        _cacheIndex_Hepatitis_B_Immunizations_or_Procedures = index++;
+        _cacheIndex_Three_Hepatitis_B_Vaccinations = index++;
+        _cacheIndex_NewBorn_Vaccine_Requirement = index++;
+        _cacheIndex_Meets_HepB_Vaccination_Requirement = index++;
+        _cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions = index++;
+        _cacheIndex_One_Chicken_Pox_Vaccination = index++;
+        _cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions = index++;
+        _cacheIndex_Pneumococcal_Conjugate_Immunizations_or_Procedures = index++;
+        _cacheIndex_Four_Pneumococcal_Conjugate_Vaccinations = index++;
+        _cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions = index++;
+        _cacheIndex_One_Hepatitis_A_Vaccinations = index++;
+        _cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions = index++;
+        _cacheIndex_Rotavirus_2_Dose_Immunizations_or_Procedures = index++;
+        _cacheIndex_Rotavirus_3_Dose_Immunizations_or_Procedures = index++;
+        _cacheIndex_Rotavirus_2_or_3_Dose_Immunizations = index++;
+        _cacheIndex_Has_Appropriate_Number_of_Rotavirus_Immunizations = index++;
+        _cacheIndex_Rotavirus_Numerator_Inclusion_Conditions = index++;
+        _cacheIndex_Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old = index++;
+        _cacheIndex_Influenza_Immunizations_or_Procedures = index++;
+        _cacheIndex_Two_Influenza_Vaccinations = index++;
+        _cacheIndex_LAIV_Vaccinations = index++;
+        _cacheIndex_Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination = index++;
+        _cacheIndex_Influenza_Numerator_Inclusion_Conditions = index++;
+        _cacheIndex_Numerator = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

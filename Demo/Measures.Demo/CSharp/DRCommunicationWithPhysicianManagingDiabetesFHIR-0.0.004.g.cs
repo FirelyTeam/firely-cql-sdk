@@ -122,9 +122,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -139,9 +137,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -153,9 +149,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -166,9 +160,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -179,9 +171,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -192,9 +182,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -205,9 +193,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Qualifying_Encounter_During_Measurement_Period,
-            Qualifying_Encounter_During_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Qualifying_Encounter_During_Measurement_Period, Qualifying_Encounter_During_Measurement_Period_Compute, context) ?? Qualifying_Encounter_During_Measurement_Period_Compute(context);
 
     private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -245,9 +231,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Diabetic Retinopathy Encounter")]
     public IEnumerable<Encounter> Diabetic_Retinopathy_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Diabetic_Retinopathy_Encounter,
-            Diabetic_Retinopathy_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Diabetic_Retinopathy_Encounter, Diabetic_Retinopathy_Encounter_Compute, context) ?? Diabetic_Retinopathy_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Diabetic_Retinopathy_Encounter_Compute(CqlContext context)
     {
@@ -314,9 +298,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(
-            _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy,
-            Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy, Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy_Compute, context) ?? Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy_Compute(context);
 
     private IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy_Compute(CqlContext context)
     {
@@ -408,9 +390,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Medical or Patient Reason for Not Communicating Absence of Macular Edema")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(
-            _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema,
-            Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema, Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema_Compute, context) ?? Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema_Compute(context);
 
     private IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema_Compute(CqlContext context)
     {
@@ -503,9 +483,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Medical or Patient Reason for Not Communicating Presence of Macular Edema")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(
-            _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema,
-            Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema, Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema_Compute, context) ?? Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema_Compute(context);
 
     private IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema_Compute(CqlContext context)
     {
@@ -597,9 +575,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator_Exceptions,
-            Denominator_Exceptions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute, context) ?? Denominator_Exceptions_Compute(context);
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -617,9 +593,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -640,9 +614,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Macular Exam Performed")]
     public IEnumerable<Observation> Macular_Exam_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(
-            _cacheIndex_Macular_Exam_Performed,
-            Macular_Exam_Performed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Macular_Exam_Performed, Macular_Exam_Performed_Compute, context) ?? Macular_Exam_Performed_Compute(context);
 
     private IEnumerable<Observation> Macular_Exam_Performed_Compute(CqlContext context)
     {
@@ -691,9 +663,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -707,9 +677,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Level of Severity of Retinopathy Findings Communicated")]
     public IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(
-            _cacheIndex_Level_of_Severity_of_Retinopathy_Findings_Communicated,
-            Level_of_Severity_of_Retinopathy_Findings_Communicated_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Level_of_Severity_of_Retinopathy_Findings_Communicated, Level_of_Severity_of_Retinopathy_Findings_Communicated_Compute, context) ?? Level_of_Severity_of_Retinopathy_Findings_Communicated_Compute(context);
 
     private IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated_Compute(CqlContext context)
     {
@@ -752,9 +720,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Macular Edema Absence Communicated")]
     public IEnumerable<Communication> Macular_Edema_Absence_Communicated(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(
-            _cacheIndex_Macular_Edema_Absence_Communicated,
-            Macular_Edema_Absence_Communicated_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Macular_Edema_Absence_Communicated, Macular_Edema_Absence_Communicated_Compute, context) ?? Macular_Edema_Absence_Communicated_Compute(context);
 
     private IEnumerable<Communication> Macular_Edema_Absence_Communicated_Compute(CqlContext context)
     {
@@ -798,9 +764,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Macular Edema Presence Communicated")]
     public IEnumerable<Communication> Macular_Edema_Presence_Communicated(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Communication>>(
-            _cacheIndex_Macular_Edema_Presence_Communicated,
-            Macular_Edema_Presence_Communicated_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Macular_Edema_Presence_Communicated, Macular_Edema_Presence_Communicated_Compute, context) ?? Macular_Edema_Presence_Communicated_Compute(context);
 
     private IEnumerable<Communication> Macular_Edema_Presence_Communicated_Compute(CqlContext context)
     {
@@ -843,9 +807,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Results of Dilated Macular or Fundus Exam Communicated")]
     public bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Results_of_Dilated_Macular_or_Fundus_Exam_Communicated,
-            Results_of_Dilated_Macular_or_Fundus_Exam_Communicated_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Results_of_Dilated_Macular_or_Fundus_Exam_Communicated, Results_of_Dilated_Macular_or_Fundus_Exam_Communicated_Compute, context) ?? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated_Compute(context);
 
     private bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated_Compute(CqlContext context)
     {
@@ -863,9 +825,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -910,130 +870,47 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Qualifying_Encounter_During_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Qualifying_Encounter_During_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Qualifying_Encounter_During_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Qualifying_Encounter_During_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Diabetic_Retinopathy_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Diabetic_Retinopathy_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Diabetic_Retinopathy_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Diabetic_Retinopathy_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy}}. Cache indices can only be initialized once.");
-        _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema}}. Cache indices can only be initialized once.");
-        _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema}}. Cache indices can only be initialized once.");
-        _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exceptions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exceptions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exceptions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exceptions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Macular_Exam_Performed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Macular_Exam_Performed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Macular_Exam_Performed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Macular_Exam_Performed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Level_of_Severity_of_Retinopathy_Findings_Communicated != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Level_of_Severity_of_Retinopathy_Findings_Communicated' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Level_of_Severity_of_Retinopathy_Findings_Communicated}}. Cache indices can only be initialized once.");
-        _cacheIndex_Level_of_Severity_of_Retinopathy_Findings_Communicated = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Macular_Edema_Absence_Communicated != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Macular_Edema_Absence_Communicated' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Macular_Edema_Absence_Communicated}}. Cache indices can only be initialized once.");
-        _cacheIndex_Macular_Edema_Absence_Communicated = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Macular_Edema_Presence_Communicated != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Macular_Edema_Presence_Communicated' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Macular_Edema_Presence_Communicated}}. Cache indices can only be initialized once.");
-        _cacheIndex_Macular_Edema_Presence_Communicated = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Results_of_Dilated_Macular_or_Fundus_Exam_Communicated != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Results_of_Dilated_Macular_or_Fundus_Exam_Communicated' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Results_of_Dilated_Macular_or_Fundus_Exam_Communicated}}. Cache indices can only be initialized once.");
-        _cacheIndex_Results_of_Dilated_Macular_or_Fundus_Exam_Communicated = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        _cacheIndex_Qualifying_Encounter_During_Measurement_Period = index++;
+        _cacheIndex_Diabetic_Retinopathy_Encounter = index++;
+        _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy = index++;
+        _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema = index++;
+        _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema = index++;
+        _cacheIndex_Denominator_Exceptions = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Macular_Exam_Performed = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Level_of_Severity_of_Retinopathy_Findings_Communicated = index++;
+        _cacheIndex_Macular_Edema_Absence_Communicated = index++;
+        _cacheIndex_Macular_Edema_Presence_Communicated = index++;
+        _cacheIndex_Results_of_Dilated_Macular_or_Fundus_Exam_Communicated = index++;
+        _cacheIndex_Numerator = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

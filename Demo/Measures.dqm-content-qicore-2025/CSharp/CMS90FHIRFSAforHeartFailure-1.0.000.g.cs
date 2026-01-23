@@ -204,9 +204,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -224,9 +222,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -238,9 +234,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -251,9 +245,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -264,9 +256,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -277,9 +267,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -290,9 +278,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Qualifying_Encounters,
-            Qualifying_Encounters_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute, context) ?? Qualifying_Encounters_Compute(context);
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -321,9 +307,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Outpatient Encounters with at least one subsequent Outpatient Encounter during Measurement Period")]
     public IEnumerable<Encounter> Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period,
-            Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period, Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period_Compute, context) ?? Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period_Compute(context);
 
     private IEnumerable<Encounter> Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period_Compute(CqlContext context)
     {
@@ -358,9 +342,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -398,9 +380,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -411,9 +391,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator_Exclusions,
-            Denominator_Exclusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -442,9 +420,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Date PROMIS10 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Date_PROMIS10_Total_Assessment_Completed,
-            Date_PROMIS10_Total_Assessment_Completed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_PROMIS10_Total_Assessment_Completed, Date_PROMIS10_Total_Assessment_Completed_Compute, context) ?? Date_PROMIS10_Total_Assessment_Completed_Compute(context);
 
     private IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -507,9 +483,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up PROMIS10 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments,
-            Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments, Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments_Compute, context) ?? Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments_Compute(context);
 
     private bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments_Compute(CqlContext context)
     {
@@ -571,9 +545,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Date PROMIS29 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_PROMIS29_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Date_PROMIS29_Total_Assessment_Completed,
-            Date_PROMIS29_Total_Assessment_Completed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_PROMIS29_Total_Assessment_Completed, Date_PROMIS29_Total_Assessment_Completed_Compute, context) ?? Date_PROMIS29_Total_Assessment_Completed_Compute(context);
 
     private IEnumerable<CqlDate> Date_PROMIS29_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -731,9 +703,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up PROMIS29 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments,
-            Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments, Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments_Compute, context) ?? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments_Compute(context);
 
     private bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments_Compute(CqlContext context)
     {
@@ -795,9 +765,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Date VR12 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Date_VR12_Oblique_Total_Assessment_Completed,
-            Date_VR12_Oblique_Total_Assessment_Completed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_VR12_Oblique_Total_Assessment_Completed, Date_VR12_Oblique_Total_Assessment_Completed_Compute, context) ?? Date_VR12_Oblique_Total_Assessment_Completed_Compute(context);
 
     private IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -860,9 +828,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR12 Oblique Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments,
-            Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments, Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Compute, context) ?? Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Compute(context);
 
     private bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Compute(CqlContext context)
     {
@@ -924,9 +890,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Date VR12 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Date_VR12_Orthogonal_Total_Assessment_Completed,
-            Date_VR12_Orthogonal_Total_Assessment_Completed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_VR12_Orthogonal_Total_Assessment_Completed, Date_VR12_Orthogonal_Total_Assessment_Completed_Compute, context) ?? Date_VR12_Orthogonal_Total_Assessment_Completed_Compute(context);
 
     private IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -989,9 +953,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR12 Orthogonal Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments,
-            Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments, Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Compute, context) ?? Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Compute(context);
 
     private bool? Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Compute(CqlContext context)
     {
@@ -1053,9 +1015,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Date VR36 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR36_Oblique_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Date_VR36_Oblique_Total_Assessment_Completed,
-            Date_VR36_Oblique_Total_Assessment_Completed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_VR36_Oblique_Total_Assessment_Completed, Date_VR36_Oblique_Total_Assessment_Completed_Compute, context) ?? Date_VR36_Oblique_Total_Assessment_Completed_Compute(context);
 
     private IEnumerable<CqlDate> Date_VR36_Oblique_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -1118,9 +1078,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR36 Oblique Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments,
-            Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments, Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments_Compute, context) ?? Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments_Compute(context);
 
     private bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments_Compute(CqlContext context)
     {
@@ -1182,9 +1140,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Date VR36 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR36_Orthogonal_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Date_VR36_Orthogonal_Total_Assessment_Completed,
-            Date_VR36_Orthogonal_Total_Assessment_Completed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_VR36_Orthogonal_Total_Assessment_Completed, Date_VR36_Orthogonal_Total_Assessment_Completed_Compute, context) ?? Date_VR36_Orthogonal_Total_Assessment_Completed_Compute(context);
 
     private IEnumerable<CqlDate> Date_VR36_Orthogonal_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -1247,9 +1203,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up VR36 Orthogonal Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments,
-            Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments, Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments_Compute, context) ?? Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments_Compute(context);
 
     private bool? Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments_Compute(CqlContext context)
     {
@@ -1311,9 +1265,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Date MLHFQ Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_MLHFQ_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Date_MLHFQ_Total_Assessment_Completed,
-            Date_MLHFQ_Total_Assessment_Completed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_MLHFQ_Total_Assessment_Completed, Date_MLHFQ_Total_Assessment_Completed_Compute, context) ?? Date_MLHFQ_Total_Assessment_Completed_Compute(context);
 
     private IEnumerable<CqlDate> Date_MLHFQ_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -1376,9 +1328,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up MLHFQ Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments,
-            Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments, Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments_Compute, context) ?? Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments_Compute(context);
 
     private bool? Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments_Compute(CqlContext context)
     {
@@ -1440,9 +1390,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Date KCCQ12 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ12_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Date_KCCQ12_Total_Assessment_Completed,
-            Date_KCCQ12_Total_Assessment_Completed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_KCCQ12_Total_Assessment_Completed, Date_KCCQ12_Total_Assessment_Completed_Compute, context) ?? Date_KCCQ12_Total_Assessment_Completed_Compute(context);
 
     private IEnumerable<CqlDate> Date_KCCQ12_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -1505,9 +1453,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up KCCQ12 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments,
-            Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments, Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments_Compute, context) ?? Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments_Compute(context);
 
     private bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments_Compute(CqlContext context)
     {
@@ -1569,9 +1515,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Date KCCQ Domain Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ_Domain_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Date_KCCQ_Domain_Assessment_Completed,
-            Date_KCCQ_Domain_Assessment_Completed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_KCCQ_Domain_Assessment_Completed, Date_KCCQ_Domain_Assessment_Completed_Compute, context) ?? Date_KCCQ_Domain_Assessment_Completed_Compute(context);
 
     private IEnumerable<CqlDate> Date_KCCQ_Domain_Assessment_Completed_Compute(CqlContext context)
     {
@@ -1710,9 +1654,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up KCCQ Domain Score Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments,
-            Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments, Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments_Compute, context) ?? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments_Compute(context);
 
     private bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments_Compute(CqlContext context)
     {
@@ -1774,9 +1716,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Date KCCQ Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ_Total_Assessment_Completed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlDate>>(
-            _cacheIndex_Date_KCCQ_Total_Assessment_Completed,
-            Date_KCCQ_Total_Assessment_Completed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Date_KCCQ_Total_Assessment_Completed, Date_KCCQ_Total_Assessment_Completed_Compute, context) ?? Date_KCCQ_Total_Assessment_Completed_Compute(context);
 
     private IEnumerable<CqlDate> Date_KCCQ_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -1811,9 +1751,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Encounter with Initial and Follow Up KCCQ Total Score Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments,
-            Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments, Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments_Compute, context) ?? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments_Compute(context);
 
     private bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments_Compute(CqlContext context)
     {
@@ -1875,9 +1813,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -1945,190 +1881,59 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ILibraryInt
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Qualifying_Encounters != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Qualifying_Encounters' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Qualifying_Encounters}}. Cache indices can only be initialized once.");
-        _cacheIndex_Qualifying_Encounters = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exclusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exclusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exclusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exclusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_PROMIS10_Total_Assessment_Completed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_PROMIS10_Total_Assessment_Completed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_PROMIS10_Total_Assessment_Completed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_PROMIS10_Total_Assessment_Completed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_PROMIS29_Total_Assessment_Completed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_PROMIS29_Total_Assessment_Completed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_PROMIS29_Total_Assessment_Completed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_PROMIS29_Total_Assessment_Completed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_VR12_Oblique_Total_Assessment_Completed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_VR12_Oblique_Total_Assessment_Completed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_VR12_Oblique_Total_Assessment_Completed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_VR12_Oblique_Total_Assessment_Completed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_VR12_Orthogonal_Total_Assessment_Completed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_VR12_Orthogonal_Total_Assessment_Completed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_VR12_Orthogonal_Total_Assessment_Completed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_VR12_Orthogonal_Total_Assessment_Completed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_VR36_Oblique_Total_Assessment_Completed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_VR36_Oblique_Total_Assessment_Completed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_VR36_Oblique_Total_Assessment_Completed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_VR36_Oblique_Total_Assessment_Completed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_VR36_Orthogonal_Total_Assessment_Completed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_VR36_Orthogonal_Total_Assessment_Completed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_VR36_Orthogonal_Total_Assessment_Completed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_VR36_Orthogonal_Total_Assessment_Completed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_MLHFQ_Total_Assessment_Completed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_MLHFQ_Total_Assessment_Completed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_MLHFQ_Total_Assessment_Completed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_MLHFQ_Total_Assessment_Completed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_KCCQ12_Total_Assessment_Completed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_KCCQ12_Total_Assessment_Completed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_KCCQ12_Total_Assessment_Completed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_KCCQ12_Total_Assessment_Completed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_KCCQ_Domain_Assessment_Completed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_KCCQ_Domain_Assessment_Completed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_KCCQ_Domain_Assessment_Completed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_KCCQ_Domain_Assessment_Completed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Date_KCCQ_Total_Assessment_Completed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Date_KCCQ_Total_Assessment_Completed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Date_KCCQ_Total_Assessment_Completed}}. Cache indices can only be initialized once.");
-        _cacheIndex_Date_KCCQ_Total_Assessment_Completed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        _cacheIndex_Qualifying_Encounters = index++;
+        _cacheIndex_Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Denominator_Exclusions = index++;
+        _cacheIndex_Date_PROMIS10_Total_Assessment_Completed = index++;
+        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS10_Assessments = index++;
+        _cacheIndex_Date_PROMIS29_Total_Assessment_Completed = index++;
+        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments = index++;
+        _cacheIndex_Date_VR12_Oblique_Total_Assessment_Completed = index++;
+        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Oblique_Assessments = index++;
+        _cacheIndex_Date_VR12_Orthogonal_Total_Assessment_Completed = index++;
+        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments = index++;
+        _cacheIndex_Date_VR36_Oblique_Total_Assessment_Completed = index++;
+        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Oblique_Assessments = index++;
+        _cacheIndex_Date_VR36_Orthogonal_Total_Assessment_Completed = index++;
+        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_VR36_Orthogonal_Assessments = index++;
+        _cacheIndex_Date_MLHFQ_Total_Assessment_Completed = index++;
+        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_MLHFQ_Assessments = index++;
+        _cacheIndex_Date_KCCQ12_Total_Assessment_Completed = index++;
+        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ12_Assessments = index++;
+        _cacheIndex_Date_KCCQ_Domain_Assessment_Completed = index++;
+        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments = index++;
+        _cacheIndex_Date_KCCQ_Total_Assessment_Completed = index++;
+        _cacheIndex_Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Total_Score_Assessments = index++;
+        _cacheIndex_Numerator = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

@@ -77,9 +77,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -94,9 +92,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -108,9 +104,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Dementia Medications In Year Before or During Measurement Period")]
     public IEnumerable<MedicationRequest> Dementia_Medications_In_Year_Before_or_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(
-            _cacheIndex_Dementia_Medications_In_Year_Before_or_During_Measurement_Period,
-            Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Dementia_Medications_In_Year_Before_or_During_Measurement_Period, Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Compute, context) ?? Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Compute(context);
 
     private IEnumerable<MedicationRequest> Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -173,9 +167,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Long Term Care Periods During Measurement Period")]
     public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Periods_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDateTime>>>(
-            _cacheIndex_Long_Term_Care_Periods_During_Measurement_Period,
-            Long_Term_Care_Periods_During_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Long_Term_Care_Periods_During_Measurement_Period, Long_Term_Care_Periods_During_Measurement_Period_Compute, context) ?? Long_Term_Care_Periods_During_Measurement_Period_Compute(context);
 
     private IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Periods_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -215,9 +207,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Outpatient Encounters with Advanced Illness")]
     public IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Outpatient_Encounters_with_Advanced_Illness,
-            Outpatient_Encounters_with_Advanced_Illness_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Outpatient_Encounters_with_Advanced_Illness, Outpatient_Encounters_with_Advanced_Illness_Compute, context) ?? Outpatient_Encounters_with_Advanced_Illness_Compute(context);
 
     private IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness_Compute(CqlContext context)
     {
@@ -279,9 +269,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Two Outpatient Encounters with Advanced Illness on Different Dates of Service")]
     public IEnumerable<Encounter> Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service,
-            Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service, Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service_Compute, context) ?? Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service_Compute(context);
 
     private IEnumerable<Encounter> Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service_Compute(CqlContext context)
     {
@@ -318,9 +306,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Long Term Care Overlapping Periods")]
     public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Overlapping_Periods(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDateTime>>>(
-            _cacheIndex_Long_Term_Care_Overlapping_Periods,
-            Long_Term_Care_Overlapping_Periods_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Long_Term_Care_Overlapping_Periods, Long_Term_Care_Overlapping_Periods_Compute, context) ?? Long_Term_Care_Overlapping_Periods_Compute(context);
 
     private IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Overlapping_Periods_Compute(CqlContext context)
     {
@@ -332,9 +318,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Long Term Care Adjacent Periods")]
     public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Adjacent_Periods(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDateTime>>>(
-            _cacheIndex_Long_Term_Care_Adjacent_Periods,
-            Long_Term_Care_Adjacent_Periods_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Long_Term_Care_Adjacent_Periods, Long_Term_Care_Adjacent_Periods_Compute, context) ?? Long_Term_Care_Adjacent_Periods_Compute(context);
 
     private IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Adjacent_Periods_Compute(CqlContext context)
     {
@@ -378,9 +362,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Max Long Term Care Period Length")]
     public int? Max_Long_Term_Care_Period_Length(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<int?>(
-            _cacheIndex_Max_Long_Term_Care_Period_Length,
-            Max_Long_Term_Care_Period_Length_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Max_Long_Term_Care_Period_Length, Max_Long_Term_Care_Period_Length_Compute, context) ?? Max_Long_Term_Care_Period_Length_Compute(context);
 
     private int? Max_Long_Term_Care_Period_Length_Compute(CqlContext context)
     {
@@ -405,9 +387,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Inpatient Encounter with Advanced Illness")]
     public IEnumerable<Encounter> Inpatient_Encounter_with_Advanced_Illness(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Inpatient_Encounter_with_Advanced_Illness,
-            Inpatient_Encounter_with_Advanced_Illness_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Inpatient_Encounter_with_Advanced_Illness, Inpatient_Encounter_with_Advanced_Illness_Compute, context) ?? Inpatient_Encounter_with_Advanced_Illness_Compute(context);
 
     private IEnumerable<Encounter> Inpatient_Encounter_with_Advanced_Illness_Compute(CqlContext context)
     {
@@ -460,9 +440,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Has Criteria Indicating Frailty")]
     public bool? Has_Criteria_Indicating_Frailty(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Criteria_Indicating_Frailty,
-            Has_Criteria_Indicating_Frailty_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Criteria_Indicating_Frailty, Has_Criteria_Indicating_Frailty_Compute, context) ?? Has_Criteria_Indicating_Frailty_Compute(context);
 
     private bool? Has_Criteria_Indicating_Frailty_Compute(CqlContext context)
     {
@@ -577,9 +555,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Advanced Illness and Frailty Exclusion Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80,
-            Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80, Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Compute, context) ?? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Compute(context);
 
     private bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Compute(CqlContext context)
     {
@@ -619,9 +595,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80,
-            Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80, Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Compute, context) ?? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Compute(context);
 
     private bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Compute(CqlContext context)
     {
@@ -651,9 +625,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     [CqlExpressionDefinition("Has Long Term Care Periods Longer Than 90 Consecutive Days")]
     public bool? Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days,
-            Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days, Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days_Compute, context) ?? Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days_Compute(context);
 
     private bool? Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days_Compute(CqlContext context)
     {
@@ -686,100 +658,41 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Dementia_Medications_In_Year_Before_or_During_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Dementia_Medications_In_Year_Before_or_During_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Dementia_Medications_In_Year_Before_or_During_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Dementia_Medications_In_Year_Before_or_During_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Long_Term_Care_Periods_During_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Long_Term_Care_Periods_During_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Long_Term_Care_Periods_During_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Long_Term_Care_Periods_During_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Outpatient_Encounters_with_Advanced_Illness != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Outpatient_Encounters_with_Advanced_Illness' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Outpatient_Encounters_with_Advanced_Illness}}. Cache indices can only be initialized once.");
-        _cacheIndex_Outpatient_Encounters_with_Advanced_Illness = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service}}. Cache indices can only be initialized once.");
-        _cacheIndex_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Long_Term_Care_Overlapping_Periods != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Long_Term_Care_Overlapping_Periods' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Long_Term_Care_Overlapping_Periods}}. Cache indices can only be initialized once.");
-        _cacheIndex_Long_Term_Care_Overlapping_Periods = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Long_Term_Care_Adjacent_Periods != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Long_Term_Care_Adjacent_Periods' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Long_Term_Care_Adjacent_Periods}}. Cache indices can only be initialized once.");
-        _cacheIndex_Long_Term_Care_Adjacent_Periods = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Max_Long_Term_Care_Period_Length != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Max_Long_Term_Care_Period_Length' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Max_Long_Term_Care_Period_Length}}. Cache indices can only be initialized once.");
-        _cacheIndex_Max_Long_Term_Care_Period_Length = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Inpatient_Encounter_with_Advanced_Illness != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Inpatient_Encounter_with_Advanced_Illness' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Inpatient_Encounter_with_Advanced_Illness}}. Cache indices can only be initialized once.");
-        _cacheIndex_Inpatient_Encounter_with_Advanced_Illness = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Criteria_Indicating_Frailty != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Criteria_Indicating_Frailty' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Criteria_Indicating_Frailty}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Criteria_Indicating_Frailty = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80}}. Cache indices can only be initialized once.");
-        _cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80}}. Cache indices can only be initialized once.");
-        _cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Dementia_Medications_In_Year_Before_or_During_Measurement_Period = index++;
+        _cacheIndex_Long_Term_Care_Periods_During_Measurement_Period = index++;
+        _cacheIndex_Outpatient_Encounters_with_Advanced_Illness = index++;
+        _cacheIndex_Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service = index++;
+        _cacheIndex_Long_Term_Care_Overlapping_Periods = index++;
+        _cacheIndex_Long_Term_Care_Adjacent_Periods = index++;
+        _cacheIndex_Max_Long_Term_Care_Period_Length = index++;
+        _cacheIndex_Inpatient_Encounter_with_Advanced_Illness = index++;
+        _cacheIndex_Has_Criteria_Indicating_Frailty = index++;
+        _cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80 = index++;
+        _cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80 = index++;
+        _cacheIndex_Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

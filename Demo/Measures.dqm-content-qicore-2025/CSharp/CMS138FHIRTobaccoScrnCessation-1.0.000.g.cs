@@ -174,9 +174,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -194,9 +192,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -208,9 +204,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Qualifying Visit During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Visit_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Qualifying_Visit_During_Measurement_Period,
-            Qualifying_Visit_During_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Qualifying_Visit_During_Measurement_Period, Qualifying_Visit_During_Measurement_Period_Compute, context) ?? Qualifying_Visit_During_Measurement_Period_Compute(context);
 
     private IEnumerable<Encounter> Qualifying_Visit_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -314,9 +308,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Preventive Visit During Measurement Period")]
     public IEnumerable<Encounter> Preventive_Visit_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Preventive_Visit_During_Measurement_Period,
-            Preventive_Visit_During_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Preventive_Visit_During_Measurement_Period, Preventive_Visit_During_Measurement_Period_Compute, context) ?? Preventive_Visit_During_Measurement_Period_Compute(context);
 
     private IEnumerable<Encounter> Preventive_Visit_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -411,9 +403,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -439,9 +429,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator 1")]
     public bool? Denominator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator_1,
-            Denominator_1_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_1, Denominator_1_Compute, context) ?? Denominator_1_Compute(context);
 
     private bool? Denominator_1_Compute(CqlContext context)
     {
@@ -452,9 +440,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Most Recent Tobacco Use Screening Indicates Tobacco User")]
     public Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Observation>(
-            _cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User,
-            Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User, Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User_Compute, context) ?? Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User_Compute(context);
 
     private Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User_Compute(CqlContext context)
     {
@@ -502,9 +488,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator 2")]
     public bool? Denominator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator_2,
-            Denominator_2_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_2, Denominator_2_Compute, context) ?? Denominator_2_Compute(context);
 
     private bool? Denominator_2_Compute(CqlContext context)
     {
@@ -518,9 +502,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator 3")]
     public bool? Denominator_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator_3,
-            Denominator_3_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_3, Denominator_3_Compute, context) ?? Denominator_3_Compute(context);
 
     private bool? Denominator_3_Compute(CqlContext context)
     {
@@ -531,9 +513,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Most Recent Tobacco Use Screening Indicates Tobacco Non User")]
     public Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Observation>(
-            _cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User,
-            Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User, Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User_Compute, context) ?? Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User_Compute(context);
 
     private Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User_Compute(CqlContext context)
     {
@@ -581,9 +561,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator_1,
-            Numerator_1_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute, context) ?? Numerator_1_Compute(context);
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
@@ -598,9 +576,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Tobacco Cessation Counseling Given")]
     public IEnumerable<object> Tobacco_Cessation_Counseling_Given(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Tobacco_Cessation_Counseling_Given,
-            Tobacco_Cessation_Counseling_Given_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Tobacco_Cessation_Counseling_Given, Tobacco_Cessation_Counseling_Given_Compute, context) ?? Tobacco_Cessation_Counseling_Given_Compute(context);
 
     private IEnumerable<object> Tobacco_Cessation_Counseling_Given_Compute(CqlContext context)
     {
@@ -714,9 +690,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Tobacco Cessation Pharmacotherapy Ordered")]
     public IEnumerable<MedicationRequest> Tobacco_Cessation_Pharmacotherapy_Ordered(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(
-            _cacheIndex_Tobacco_Cessation_Pharmacotherapy_Ordered,
-            Tobacco_Cessation_Pharmacotherapy_Ordered_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Tobacco_Cessation_Pharmacotherapy_Ordered, Tobacco_Cessation_Pharmacotherapy_Ordered_Compute, context) ?? Tobacco_Cessation_Pharmacotherapy_Ordered_Compute(context);
 
     private IEnumerable<MedicationRequest> Tobacco_Cessation_Pharmacotherapy_Ordered_Compute(CqlContext context)
     {
@@ -789,9 +763,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Active Pharmacotherapy for Tobacco Cessation")]
     public IEnumerable<MedicationRequest> Active_Pharmacotherapy_for_Tobacco_Cessation(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(
-            _cacheIndex_Active_Pharmacotherapy_for_Tobacco_Cessation,
-            Active_Pharmacotherapy_for_Tobacco_Cessation_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Active_Pharmacotherapy_for_Tobacco_Cessation, Active_Pharmacotherapy_for_Tobacco_Cessation_Compute, context) ?? Active_Pharmacotherapy_for_Tobacco_Cessation_Compute(context);
 
     private IEnumerable<MedicationRequest> Active_Pharmacotherapy_for_Tobacco_Cessation_Compute(CqlContext context)
     {
@@ -852,9 +824,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator_2,
-            Numerator_2_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute, context) ?? Numerator_2_Compute(context);
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
@@ -872,9 +842,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Numerator 3")]
     public bool? Numerator_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator_3,
-            Numerator_3_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator_3, Numerator_3_Compute, context) ?? Numerator_3_Compute(context);
 
     private bool? Numerator_3_Compute(CqlContext context)
     {
@@ -898,9 +866,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator_Exclusions,
-            Denominator_Exclusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -911,9 +877,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -924,9 +888,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -937,9 +899,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -950,9 +910,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -991,135 +949,48 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ILibrary
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Qualifying_Visit_During_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Qualifying_Visit_During_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Qualifying_Visit_During_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Qualifying_Visit_During_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Preventive_Visit_During_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Preventive_Visit_During_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Preventive_Visit_During_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Preventive_Visit_During_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_1 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_1' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_1}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_1 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User}}. Cache indices can only be initialized once.");
-        _cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_2 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_2' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_2}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_2 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_3 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_3' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_3}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_3 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User}}. Cache indices can only be initialized once.");
-        _cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator_1 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_1' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_1}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator_1 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Tobacco_Cessation_Counseling_Given != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Tobacco_Cessation_Counseling_Given' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Tobacco_Cessation_Counseling_Given}}. Cache indices can only be initialized once.");
-        _cacheIndex_Tobacco_Cessation_Counseling_Given = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Tobacco_Cessation_Pharmacotherapy_Ordered != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Tobacco_Cessation_Pharmacotherapy_Ordered' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Tobacco_Cessation_Pharmacotherapy_Ordered}}. Cache indices can only be initialized once.");
-        _cacheIndex_Tobacco_Cessation_Pharmacotherapy_Ordered = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Active_Pharmacotherapy_for_Tobacco_Cessation != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Active_Pharmacotherapy_for_Tobacco_Cessation' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Active_Pharmacotherapy_for_Tobacco_Cessation}}. Cache indices can only be initialized once.");
-        _cacheIndex_Active_Pharmacotherapy_for_Tobacco_Cessation = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator_2 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_2' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_2}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator_2 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator_3 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_3' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_3}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator_3 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exclusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exclusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exclusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exclusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Qualifying_Visit_During_Measurement_Period = index++;
+        _cacheIndex_Preventive_Visit_During_Measurement_Period = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator_1 = index++;
+        _cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User = index++;
+        _cacheIndex_Denominator_2 = index++;
+        _cacheIndex_Denominator_3 = index++;
+        _cacheIndex_Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User = index++;
+        _cacheIndex_Numerator_1 = index++;
+        _cacheIndex_Tobacco_Cessation_Counseling_Given = index++;
+        _cacheIndex_Tobacco_Cessation_Pharmacotherapy_Ordered = index++;
+        _cacheIndex_Active_Pharmacotherapy_for_Tobacco_Cessation = index++;
+        _cacheIndex_Numerator_2 = index++;
+        _cacheIndex_Numerator_3 = index++;
+        _cacheIndex_Denominator_Exclusions = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

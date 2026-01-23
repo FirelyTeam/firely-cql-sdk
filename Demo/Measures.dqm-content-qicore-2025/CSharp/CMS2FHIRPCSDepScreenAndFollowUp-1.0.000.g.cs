@@ -112,9 +112,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -132,9 +130,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -146,9 +142,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Patient Age 12 Years or Older at Start of Measurement Period")]
     public bool? Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period,
-            Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period, Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period_Compute, context) ?? Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period_Compute(context);
 
     private bool? Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -167,9 +161,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Qualifying_Encounter_During_Measurement_Period,
-            Qualifying_Encounter_During_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Qualifying_Encounter_During_Measurement_Period, Qualifying_Encounter_During_Measurement_Period_Compute, context) ?? Qualifying_Encounter_During_Measurement_Period_Compute(context);
 
     private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -202,9 +194,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -218,9 +208,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -231,9 +219,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("History of Bipolar Diagnosis Before Qualifying Encounter")]
     public IEnumerable<Condition> History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(
-            _cacheIndex_History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter,
-            History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter, History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter_Compute, context) ?? History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter_Compute(context);
 
     private IEnumerable<Condition> History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -266,9 +252,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator_Exclusions,
-            Denominator_Exclusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -280,9 +264,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Patient Age 12 to 16 Years at Start of Measurement Period")]
     public bool? Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period,
-            Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period, Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period_Compute, context) ?? Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period_Compute(context);
 
     private bool? Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -302,9 +284,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Most Recent Adolescent Depression Screening")]
     public Observation Most_Recent_Adolescent_Depression_Screening(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Observation>(
-            _cacheIndex_Most_Recent_Adolescent_Depression_Screening,
-            Most_Recent_Adolescent_Depression_Screening_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Most_Recent_Adolescent_Depression_Screening, Most_Recent_Adolescent_Depression_Screening_Compute, context) ?? Most_Recent_Adolescent_Depression_Screening_Compute(context);
 
     private Observation Most_Recent_Adolescent_Depression_Screening_Compute(CqlContext context)
     {
@@ -374,9 +354,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Most Recent Adolescent Screening Negative")]
     public bool? Has_Most_Recent_Adolescent_Screening_Negative(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Most_Recent_Adolescent_Screening_Negative,
-            Has_Most_Recent_Adolescent_Screening_Negative_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Most_Recent_Adolescent_Screening_Negative, Has_Most_Recent_Adolescent_Screening_Negative_Compute, context) ?? Has_Most_Recent_Adolescent_Screening_Negative_Compute(context);
 
     private bool? Has_Most_Recent_Adolescent_Screening_Negative_Compute(CqlContext context)
     {
@@ -403,9 +381,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Follow Up Intervention for Positive Adolescent Depression Screening")]
     public IEnumerable<object> Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening,
-            Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening, Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening_Compute, context) ?? Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening_Compute(context);
 
     private IEnumerable<object> Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening_Compute(CqlContext context)
     {
@@ -547,9 +523,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Most Recent Adolescent Depression Screening Positive and Follow Up Provided")]
     public IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?> Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>>(
-            _cacheIndex_Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided,
-            Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided, Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided_Compute, context) ?? Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?> Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided_Compute(CqlContext context)
     {
@@ -764,9 +738,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Patient Age 17 Years at Start of Measurement Period")]
     public bool? Patient_Age_17_Years_at_Start_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Patient_Age_17_Years_at_Start_of_Measurement_Period,
-            Patient_Age_17_Years_at_Start_of_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient_Age_17_Years_at_Start_of_Measurement_Period, Patient_Age_17_Years_at_Start_of_Measurement_Period_Compute, context) ?? Patient_Age_17_Years_at_Start_of_Measurement_Period_Compute(context);
 
     private bool? Patient_Age_17_Years_at_Start_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -785,9 +757,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Most Recent Adult Depression Screening")]
     public Observation Most_Recent_Adult_Depression_Screening(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Observation>(
-            _cacheIndex_Most_Recent_Adult_Depression_Screening,
-            Most_Recent_Adult_Depression_Screening_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Most_Recent_Adult_Depression_Screening, Most_Recent_Adult_Depression_Screening_Compute, context) ?? Most_Recent_Adult_Depression_Screening_Compute(context);
 
     private Observation Most_Recent_Adult_Depression_Screening_Compute(CqlContext context)
     {
@@ -857,9 +827,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Most Recent Adult Screening Negative")]
     public bool? Has_Most_Recent_Adult_Screening_Negative(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Most_Recent_Adult_Screening_Negative,
-            Has_Most_Recent_Adult_Screening_Negative_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Most_Recent_Adult_Screening_Negative, Has_Most_Recent_Adult_Screening_Negative_Compute, context) ?? Has_Most_Recent_Adult_Screening_Negative_Compute(context);
 
     private bool? Has_Most_Recent_Adult_Screening_Negative_Compute(CqlContext context)
     {
@@ -886,9 +854,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Follow Up Intervention for Positive Adult Depression Screening")]
     public IEnumerable<object> Follow_Up_Intervention_for_Positive_Adult_Depression_Screening(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Follow_Up_Intervention_for_Positive_Adult_Depression_Screening,
-            Follow_Up_Intervention_for_Positive_Adult_Depression_Screening_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Follow_Up_Intervention_for_Positive_Adult_Depression_Screening, Follow_Up_Intervention_for_Positive_Adult_Depression_Screening_Compute, context) ?? Follow_Up_Intervention_for_Positive_Adult_Depression_Screening_Compute(context);
 
     private IEnumerable<object> Follow_Up_Intervention_for_Positive_Adult_Depression_Screening_Compute(CqlContext context)
     {
@@ -1030,9 +996,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Most Recent Adult Depression Screening Positive and Follow Up Provided")]
     public IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?> Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>>(
-            _cacheIndex_Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided,
-            Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided, Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided_Compute, context) ?? Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?> Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided_Compute(CqlContext context)
     {
@@ -1247,9 +1211,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Patient Age 18 Years or Older at Start of Measurement Period")]
     public bool? Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period,
-            Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period, Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period_Compute, context) ?? Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period_Compute(context);
 
     private bool? Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -1268,9 +1230,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -1301,9 +1261,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Medical or Patient Reason for Not Screening Adolescent for Depression")]
     public IEnumerable<Observation> Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(
-            _cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression,
-            Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression, Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression_Compute, context) ?? Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression_Compute(context);
 
     private IEnumerable<Observation> Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression_Compute(CqlContext context)
     {
@@ -1389,9 +1347,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Adolescent Depression Screening")]
     public bool? Has_Adolescent_Depression_Screening(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Adolescent_Depression_Screening,
-            Has_Adolescent_Depression_Screening_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Adolescent_Depression_Screening, Has_Adolescent_Depression_Screening_Compute, context) ?? Has_Adolescent_Depression_Screening_Compute(context);
 
     private bool? Has_Adolescent_Depression_Screening_Compute(CqlContext context)
     {
@@ -1451,9 +1407,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Medical or Patient Reason for Not Screening Adult for Depression")]
     public IEnumerable<Observation> Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(
-            _cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression,
-            Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression, Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression_Compute, context) ?? Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression_Compute(context);
 
     private IEnumerable<Observation> Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression_Compute(CqlContext context)
     {
@@ -1539,9 +1493,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Adult Depression Screening")]
     public bool? Has_Adult_Depression_Screening(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Adult_Depression_Screening,
-            Has_Adult_Depression_Screening_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Adult_Depression_Screening, Has_Adult_Depression_Screening_Compute, context) ?? Has_Adult_Depression_Screening_Compute(context);
 
     private bool? Has_Adult_Depression_Screening_Compute(CqlContext context)
     {
@@ -1601,9 +1553,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator_Exceptions,
-            Denominator_Exceptions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute, context) ?? Denominator_Exceptions_Compute(context);
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -1624,9 +1574,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1637,9 +1585,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1650,9 +1596,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1663,9 +1607,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -1712,175 +1654,56 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ILibrar
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Qualifying_Encounter_During_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Qualifying_Encounter_During_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Qualifying_Encounter_During_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Qualifying_Encounter_During_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exclusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exclusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exclusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exclusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Most_Recent_Adolescent_Depression_Screening != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Most_Recent_Adolescent_Depression_Screening' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Most_Recent_Adolescent_Depression_Screening}}. Cache indices can only be initialized once.");
-        _cacheIndex_Most_Recent_Adolescent_Depression_Screening = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Most_Recent_Adolescent_Screening_Negative != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Most_Recent_Adolescent_Screening_Negative' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Most_Recent_Adolescent_Screening_Negative}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Most_Recent_Adolescent_Screening_Negative = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening}}. Cache indices can only be initialized once.");
-        _cacheIndex_Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided}}. Cache indices can only be initialized once.");
-        _cacheIndex_Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient_Age_17_Years_at_Start_of_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient_Age_17_Years_at_Start_of_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient_Age_17_Years_at_Start_of_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient_Age_17_Years_at_Start_of_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Most_Recent_Adult_Depression_Screening != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Most_Recent_Adult_Depression_Screening' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Most_Recent_Adult_Depression_Screening}}. Cache indices can only be initialized once.");
-        _cacheIndex_Most_Recent_Adult_Depression_Screening = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Most_Recent_Adult_Screening_Negative != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Most_Recent_Adult_Screening_Negative' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Most_Recent_Adult_Screening_Negative}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Most_Recent_Adult_Screening_Negative = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Follow_Up_Intervention_for_Positive_Adult_Depression_Screening != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Follow_Up_Intervention_for_Positive_Adult_Depression_Screening' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Follow_Up_Intervention_for_Positive_Adult_Depression_Screening}}. Cache indices can only be initialized once.");
-        _cacheIndex_Follow_Up_Intervention_for_Positive_Adult_Depression_Screening = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided}}. Cache indices can only be initialized once.");
-        _cacheIndex_Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression}}. Cache indices can only be initialized once.");
-        _cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Adolescent_Depression_Screening != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Adolescent_Depression_Screening' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Adolescent_Depression_Screening}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Adolescent_Depression_Screening = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression}}. Cache indices can only be initialized once.");
-        _cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Adult_Depression_Screening != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Adult_Depression_Screening' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Adult_Depression_Screening}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Adult_Depression_Screening = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exceptions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exceptions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exceptions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exceptions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Patient_Age_12_Years_or_Older_at_Start_of_Measurement_Period = index++;
+        _cacheIndex_Qualifying_Encounter_During_Measurement_Period = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_History_of_Bipolar_Diagnosis_Before_Qualifying_Encounter = index++;
+        _cacheIndex_Denominator_Exclusions = index++;
+        _cacheIndex_Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period = index++;
+        _cacheIndex_Most_Recent_Adolescent_Depression_Screening = index++;
+        _cacheIndex_Has_Most_Recent_Adolescent_Screening_Negative = index++;
+        _cacheIndex_Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening = index++;
+        _cacheIndex_Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided = index++;
+        _cacheIndex_Patient_Age_17_Years_at_Start_of_Measurement_Period = index++;
+        _cacheIndex_Most_Recent_Adult_Depression_Screening = index++;
+        _cacheIndex_Has_Most_Recent_Adult_Screening_Negative = index++;
+        _cacheIndex_Follow_Up_Intervention_for_Positive_Adult_Depression_Screening = index++;
+        _cacheIndex_Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided = index++;
+        _cacheIndex_Patient_Age_18_Years_or_Older_at_Start_of_Measurement_Period = index++;
+        _cacheIndex_Numerator = index++;
+        _cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adolescent_for_Depression = index++;
+        _cacheIndex_Has_Adolescent_Depression_Screening = index++;
+        _cacheIndex_Medical_or_Patient_Reason_for_Not_Screening_Adult_for_Depression = index++;
+        _cacheIndex_Has_Adult_Depression_Screening = index++;
+        _cacheIndex_Denominator_Exceptions = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

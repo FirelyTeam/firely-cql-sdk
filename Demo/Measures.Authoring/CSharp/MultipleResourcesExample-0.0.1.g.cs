@@ -51,9 +51,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ILibraryInternal
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -65,9 +63,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ILibraryInternal
 
     [CqlExpressionDefinition("Smoking status observation")]
     public IEnumerable<Observation> Smoking_status_observation(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(
-            _cacheIndex_Smoking_status_observation,
-            Smoking_status_observation_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Smoking_status_observation, Smoking_status_observation_Compute, context) ?? Smoking_status_observation_Compute(context);
 
     private IEnumerable<Observation> Smoking_status_observation_Compute(CqlContext context)
     {
@@ -93,9 +89,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ILibraryInternal
 
     [CqlExpressionDefinition("Lung cancer diagnosis")]
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(
-            _cacheIndex_Lung_cancer_diagnosis,
-            Lung_cancer_diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Lung_cancer_diagnosis, Lung_cancer_diagnosis_Compute, context) ?? Lung_cancer_diagnosis_Compute(context);
 
     private IEnumerable<Condition> Lung_cancer_diagnosis_Compute(CqlContext context)
     {
@@ -127,45 +121,30 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ILibraryInternal
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Smoking_status_observation != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Smoking_status_observation' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Smoking_status_observation}}. Cache indices can only be initialized once.");
-        _cacheIndex_Smoking_status_observation = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Lung_cancer_diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Lung_cancer_diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Lung_cancer_diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_Lung_cancer_diagnosis = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Smoking_status_observation = index++;
+        _cacheIndex_Lung_cancer_diagnosis = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

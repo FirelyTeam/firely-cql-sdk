@@ -312,9 +312,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -332,9 +330,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -346,9 +342,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -359,9 +353,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -372,9 +364,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -385,9 +375,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -398,9 +386,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -411,9 +397,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Calculated Gestational Age Greater Than Or Equal To 20 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks,
-            Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks, Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Compute, context) ?? Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Compute(CqlContext context)
     {
@@ -432,9 +416,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Estimated Gestational Age Assessment Greater Than Or Equal To 20 Weeks")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks,
-            Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks, Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks_Compute, context) ?? Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks_Compute(CqlContext context)
     {
@@ -456,9 +438,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Gestational Age Greater Than Or Equal To 20 Weeks Based On Coding")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding,
-            Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding, Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding_Compute, context) ?? Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding_Compute(CqlContext context)
     {
@@ -509,9 +489,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters At Greater Than Or Equal To 20 Weeks Gestation")]
     public IEnumerable<Encounter> Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation,
-            Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation, Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation_Compute, context) ?? Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation_Compute(CqlContext context)
     {
@@ -526,9 +504,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications Diagnosis Or Procedure Excluding Blood Transfusion")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion,
-            Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion, Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion_Compute, context) ?? Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion_Compute(CqlContext context)
     {
@@ -631,9 +607,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Expiration")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Expiration(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Expiration,
-            Delivery_Encounters_With_Expiration_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Expiration, Delivery_Encounters_With_Expiration_Compute, context) ?? Delivery_Encounters_With_Expiration_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Expiration_Compute(CqlContext context)
     {
@@ -655,9 +629,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Blood Transfusion")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Blood_Transfusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Blood_Transfusion,
-            Delivery_Encounters_With_Blood_Transfusion_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Blood_Transfusion, Delivery_Encounters_With_Blood_Transfusion_Compute, context) ?? Delivery_Encounters_With_Blood_Transfusion_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Blood_Transfusion_Compute(CqlContext context)
     {
@@ -757,9 +729,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications,
-            Delivery_Encounters_With_Severe_Obstetric_Complications_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications, Delivery_Encounters_With_Severe_Obstetric_Complications_Compute, context) ?? Delivery_Encounters_With_Severe_Obstetric_Complications_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Compute(CqlContext context)
     {
@@ -774,9 +744,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Hysterectomy")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Hysterectomy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Hysterectomy,
-            Delivery_Encounters_With_Hysterectomy_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Hysterectomy, Delivery_Encounters_With_Hysterectomy_Compute, context) ?? Delivery_Encounters_With_Hysterectomy_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Hysterectomy_Compute(CqlContext context)
     {
@@ -876,9 +844,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Cardiac Conversion, Tracheostomy Or Ventilation Procedures")]
     public IEnumerable<Procedure> Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(
-            _cacheIndex_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures,
-            Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures, Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute, context) ?? Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute(context);
 
     private IEnumerable<Procedure> Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute(CqlContext context)
     {
@@ -896,9 +862,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Cardiac Conversion, Tracheostomy Or Ventilation Procedures")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures,
-            Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures, Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute, context) ?? Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute(CqlContext context)
     {
@@ -997,9 +961,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SOC With Hysterectomy Or Blood Transfusion With Placenta Increta Or Placenta Percreta Without Additional SOC")]
     public IEnumerable<Encounter> SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC,
-            SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC, SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute, context) ?? SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute(context);
 
     private IEnumerable<Encounter> SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute(CqlContext context)
     {
@@ -1066,9 +1028,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Delivery Encounters With Severe Obstetric Complication Diagnosis")]
     public IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis,
-            SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis, SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis_Compute, context) ?? SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis_Compute(context);
 
     private IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis_Compute(CqlContext context)
     {
@@ -1090,9 +1050,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Delivery Encounters With Severe Obstetric Complication Procedures")]
     public IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures,
-            SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures, SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures_Compute, context) ?? SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures_Compute(context);
 
     private IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures_Compute(CqlContext context)
     {
@@ -1425,9 +1383,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE SOC Diagnoses Detail")]
     public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?> SDE_SOC_Diagnoses_Detail(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?>>(
-            _cacheIndex_SDE_SOC_Diagnoses_Detail,
-            SDE_SOC_Diagnoses_Detail_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_SOC_Diagnoses_Detail, SDE_SOC_Diagnoses_Detail_Compute, context) ?? SDE_SOC_Diagnoses_Detail_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?> SDE_SOC_Diagnoses_Detail_Compute(CqlContext context)
     {
@@ -1650,9 +1606,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE SOC Procedure Detail")]
     public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?> SDE_SOC_Procedure_Detail(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?>>(
-            _cacheIndex_SDE_SOC_Procedure_Detail,
-            SDE_SOC_Procedure_Detail_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_SOC_Procedure_Detail, SDE_SOC_Procedure_Detail_Compute, context) ?? SDE_SOC_Procedure_Detail_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?> SDE_SOC_Procedure_Detail_Compute(CqlContext context)
     {
@@ -1691,9 +1645,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Numerator Exclusions 1")]
     public IEnumerable<Encounter> Numerator_Exclusions_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Numerator_Exclusions_1,
-            Numerator_Exclusions_1_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator_Exclusions_1, Numerator_Exclusions_1_Compute, context) ?? Numerator_Exclusions_1_Compute(context);
 
     private IEnumerable<Encounter> Numerator_Exclusions_1_Compute(CqlContext context)
     {
@@ -1704,9 +1656,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications Excluding Blood Transfusions")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions,
-            Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions, Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Compute, context) ?? Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Compute(CqlContext context)
     {
@@ -1719,9 +1669,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Numerator 1")]
     public IEnumerable<Encounter> Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Numerator_1,
-            Numerator_1_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute, context) ?? Numerator_1_Compute(context);
 
     private IEnumerable<Encounter> Numerator_1_Compute(CqlContext context)
     {
@@ -1732,9 +1680,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Variable Calculated Gestational Age")]
     public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> SDE_Variable_Calculated_Gestational_Age(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>>(
-            _cacheIndex_SDE_Variable_Calculated_Gestational_Age,
-            SDE_Variable_Calculated_Gestational_Age_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Variable_Calculated_Gestational_Age, SDE_Variable_Calculated_Gestational_Age_Compute, context) ?? SDE_Variable_Calculated_Gestational_Age_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> SDE_Variable_Calculated_Gestational_Age_Compute(CqlContext context)
     {
@@ -1745,9 +1691,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -1758,9 +1702,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Delivery Encounters With Severe Obstetric Complications Excluding Blood Transfusions Only")]
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only,
-            Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only, Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only_Compute, context) ?? Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only_Compute(context);
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only_Compute(CqlContext context)
     {
@@ -1773,9 +1715,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Numerator 2")]
     public IEnumerable<Encounter> Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Numerator_2,
-            Numerator_2_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute, context) ?? Numerator_2_Compute(context);
 
     private IEnumerable<Encounter> Numerator_2_Compute(CqlContext context)
     {
@@ -1786,9 +1726,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SOC Excluding Blood Transfusions Only With Hysterectomy Or Blood Transfusion With Placenta Increta Or Placenta Percreta Without Additional SOC")]
     public IEnumerable<Encounter> SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC,
-            SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC, SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute, context) ?? SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute(context);
 
     private IEnumerable<Encounter> SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute(CqlContext context)
     {
@@ -1855,9 +1793,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Numerator Exclusions 2")]
     public IEnumerable<Encounter> Numerator_Exclusions_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Numerator_Exclusions_2,
-            Numerator_Exclusions_2_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator_Exclusions_2, Numerator_Exclusions_2_Compute, context) ?? Numerator_Exclusions_2_Compute(context);
 
     private IEnumerable<Encounter> Numerator_Exclusions_2_Compute(CqlContext context)
     {
@@ -1868,9 +1804,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Anemia")]
     public IEnumerable<Encounter> Risk_Variable_Anemia(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Anemia,
-            Risk_Variable_Anemia_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Anemia, Risk_Variable_Anemia_Compute, context) ?? Risk_Variable_Anemia_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Anemia_Compute(CqlContext context)
     {
@@ -1890,9 +1824,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Asthma")]
     public IEnumerable<Encounter> Risk_Variable_Asthma(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Asthma,
-            Risk_Variable_Asthma_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Asthma, Risk_Variable_Asthma_Compute, context) ?? Risk_Variable_Asthma_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Asthma_Compute(CqlContext context)
     {
@@ -1912,9 +1844,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Autoimmune Disease")]
     public IEnumerable<Encounter> Risk_Variable_Autoimmune_Disease(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Autoimmune_Disease,
-            Risk_Variable_Autoimmune_Disease_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Autoimmune_Disease, Risk_Variable_Autoimmune_Disease_Compute, context) ?? Risk_Variable_Autoimmune_Disease_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Autoimmune_Disease_Compute(CqlContext context)
     {
@@ -1934,9 +1864,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Bariatric Surgery")]
     public IEnumerable<Encounter> Risk_Variable_Bariatric_Surgery(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Bariatric_Surgery,
-            Risk_Variable_Bariatric_Surgery_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Bariatric_Surgery, Risk_Variable_Bariatric_Surgery_Compute, context) ?? Risk_Variable_Bariatric_Surgery_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Bariatric_Surgery_Compute(CqlContext context)
     {
@@ -1956,9 +1884,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Bleeding Disorder")]
     public IEnumerable<Encounter> Risk_Variable_Bleeding_Disorder(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Bleeding_Disorder,
-            Risk_Variable_Bleeding_Disorder_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Bleeding_Disorder, Risk_Variable_Bleeding_Disorder_Compute, context) ?? Risk_Variable_Bleeding_Disorder_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Bleeding_Disorder_Compute(CqlContext context)
     {
@@ -1978,9 +1904,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Cardiac Disease")]
     public IEnumerable<Encounter> Risk_Variable_Cardiac_Disease(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Cardiac_Disease,
-            Risk_Variable_Cardiac_Disease_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Cardiac_Disease, Risk_Variable_Cardiac_Disease_Compute, context) ?? Risk_Variable_Cardiac_Disease_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Cardiac_Disease_Compute(CqlContext context)
     {
@@ -2000,9 +1924,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Economic Housing Instability")]
     public IEnumerable<Encounter> Risk_Variable_Economic_Housing_Instability(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Economic_Housing_Instability,
-            Risk_Variable_Economic_Housing_Instability_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Economic_Housing_Instability, Risk_Variable_Economic_Housing_Instability_Compute, context) ?? Risk_Variable_Economic_Housing_Instability_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Economic_Housing_Instability_Compute(CqlContext context)
     {
@@ -2022,9 +1944,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Gastrointestinal Disease")]
     public IEnumerable<Encounter> Risk_Variable_Gastrointestinal_Disease(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Gastrointestinal_Disease,
-            Risk_Variable_Gastrointestinal_Disease_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Gastrointestinal_Disease, Risk_Variable_Gastrointestinal_Disease_Compute, context) ?? Risk_Variable_Gastrointestinal_Disease_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Gastrointestinal_Disease_Compute(CqlContext context)
     {
@@ -2044,9 +1964,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Gestational Diabetes")]
     public IEnumerable<Encounter> Risk_Variable_Gestational_Diabetes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Gestational_Diabetes,
-            Risk_Variable_Gestational_Diabetes_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Gestational_Diabetes, Risk_Variable_Gestational_Diabetes_Compute, context) ?? Risk_Variable_Gestational_Diabetes_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Gestational_Diabetes_Compute(CqlContext context)
     {
@@ -2066,9 +1984,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable HIV")]
     public IEnumerable<Encounter> Risk_Variable_HIV(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_HIV,
-            Risk_Variable_HIV_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_HIV, Risk_Variable_HIV_Compute, context) ?? Risk_Variable_HIV_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_HIV_Compute(CqlContext context)
     {
@@ -2088,9 +2004,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Hypertension")]
     public IEnumerable<Encounter> Risk_Variable_Hypertension(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Hypertension,
-            Risk_Variable_Hypertension_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Hypertension, Risk_Variable_Hypertension_Compute, context) ?? Risk_Variable_Hypertension_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Hypertension_Compute(CqlContext context)
     {
@@ -2110,9 +2024,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Long Term Anticoagulant Use")]
     public IEnumerable<Encounter> Risk_Variable_Long_Term_Anticoagulant_Use(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Long_Term_Anticoagulant_Use,
-            Risk_Variable_Long_Term_Anticoagulant_Use_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Long_Term_Anticoagulant_Use, Risk_Variable_Long_Term_Anticoagulant_Use_Compute, context) ?? Risk_Variable_Long_Term_Anticoagulant_Use_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Long_Term_Anticoagulant_Use_Compute(CqlContext context)
     {
@@ -2132,9 +2044,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Maternal Age")]
     public IEnumerable<IEnumerable<object>> Risk_Variable_Maternal_Age(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<IEnumerable<object>>>(
-            _cacheIndex_Risk_Variable_Maternal_Age,
-            Risk_Variable_Maternal_Age_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Maternal_Age, Risk_Variable_Maternal_Age_Compute, context) ?? Risk_Variable_Maternal_Age_Compute(context);
 
     private IEnumerable<IEnumerable<object>> Risk_Variable_Maternal_Age_Compute(CqlContext context)
     {
@@ -2165,9 +2075,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Mental Health Disorder")]
     public IEnumerable<Encounter> Risk_Variable_Mental_Health_Disorder(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Mental_Health_Disorder,
-            Risk_Variable_Mental_Health_Disorder_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Mental_Health_Disorder, Risk_Variable_Mental_Health_Disorder_Compute, context) ?? Risk_Variable_Mental_Health_Disorder_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Mental_Health_Disorder_Compute(CqlContext context)
     {
@@ -2187,9 +2095,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Morbid Obesity")]
     public IEnumerable<Encounter> Risk_Variable_Morbid_Obesity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Morbid_Obesity,
-            Risk_Variable_Morbid_Obesity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Morbid_Obesity, Risk_Variable_Morbid_Obesity_Compute, context) ?? Risk_Variable_Morbid_Obesity_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Morbid_Obesity_Compute(CqlContext context)
     {
@@ -2209,9 +2115,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Multiple Pregnancy")]
     public IEnumerable<Encounter> Risk_Variable_Multiple_Pregnancy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Multiple_Pregnancy,
-            Risk_Variable_Multiple_Pregnancy_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Multiple_Pregnancy, Risk_Variable_Multiple_Pregnancy_Compute, context) ?? Risk_Variable_Multiple_Pregnancy_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Multiple_Pregnancy_Compute(CqlContext context)
     {
@@ -2231,9 +2135,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Neuromuscular Disease")]
     public IEnumerable<Encounter> Risk_Variable_Neuromuscular_Disease(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Neuromuscular_Disease,
-            Risk_Variable_Neuromuscular_Disease_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Neuromuscular_Disease, Risk_Variable_Neuromuscular_Disease_Compute, context) ?? Risk_Variable_Neuromuscular_Disease_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Neuromuscular_Disease_Compute(CqlContext context)
     {
@@ -2253,9 +2155,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Obstetrical VTE")]
     public IEnumerable<Encounter> Risk_Variable_Obstetrical_VTE(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Obstetrical_VTE,
-            Risk_Variable_Obstetrical_VTE_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Obstetrical_VTE, Risk_Variable_Obstetrical_VTE_Compute, context) ?? Risk_Variable_Obstetrical_VTE_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Obstetrical_VTE_Compute(CqlContext context)
     {
@@ -2275,9 +2175,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Other Preeclampsia")]
     public IEnumerable<Encounter> Risk_Variable_Other_Preeclampsia(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Other_Preeclampsia,
-            Risk_Variable_Other_Preeclampsia_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Other_Preeclampsia, Risk_Variable_Other_Preeclampsia_Compute, context) ?? Risk_Variable_Other_Preeclampsia_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Other_Preeclampsia_Compute(CqlContext context)
     {
@@ -2297,9 +2195,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Placenta Previa")]
     public IEnumerable<Encounter> Risk_Variable_Placenta_Previa(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Placenta_Previa,
-            Risk_Variable_Placenta_Previa_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Placenta_Previa, Risk_Variable_Placenta_Previa_Compute, context) ?? Risk_Variable_Placenta_Previa_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Placenta_Previa_Compute(CqlContext context)
     {
@@ -2319,9 +2215,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Placental Abruption")]
     public IEnumerable<Encounter> Risk_Variable_Placental_Abruption(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Placental_Abruption,
-            Risk_Variable_Placental_Abruption_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Placental_Abruption, Risk_Variable_Placental_Abruption_Compute, context) ?? Risk_Variable_Placental_Abruption_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Placental_Abruption_Compute(CqlContext context)
     {
@@ -2341,9 +2235,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Placental Accreta Spectrum")]
     public IEnumerable<Encounter> Risk_Variable_Placental_Accreta_Spectrum(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Placental_Accreta_Spectrum,
-            Risk_Variable_Placental_Accreta_Spectrum_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Placental_Accreta_Spectrum, Risk_Variable_Placental_Accreta_Spectrum_Compute, context) ?? Risk_Variable_Placental_Accreta_Spectrum_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Placental_Accreta_Spectrum_Compute(CqlContext context)
     {
@@ -2366,9 +2258,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Preexisting Diabetes")]
     public IEnumerable<Encounter> Risk_Variable_Preexisting_Diabetes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Preexisting_Diabetes,
-            Risk_Variable_Preexisting_Diabetes_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Preexisting_Diabetes, Risk_Variable_Preexisting_Diabetes_Compute, context) ?? Risk_Variable_Preexisting_Diabetes_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Preexisting_Diabetes_Compute(CqlContext context)
     {
@@ -2388,9 +2278,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Previous Cesarean")]
     public IEnumerable<Encounter> Risk_Variable_Previous_Cesarean(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Previous_Cesarean,
-            Risk_Variable_Previous_Cesarean_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Previous_Cesarean, Risk_Variable_Previous_Cesarean_Compute, context) ?? Risk_Variable_Previous_Cesarean_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Previous_Cesarean_Compute(CqlContext context)
     {
@@ -2410,9 +2298,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Pulmonary Hypertension")]
     public IEnumerable<Encounter> Risk_Variable_Pulmonary_Hypertension(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Pulmonary_Hypertension,
-            Risk_Variable_Pulmonary_Hypertension_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Pulmonary_Hypertension, Risk_Variable_Pulmonary_Hypertension_Compute, context) ?? Risk_Variable_Pulmonary_Hypertension_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Pulmonary_Hypertension_Compute(CqlContext context)
     {
@@ -2432,9 +2318,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Renal Disease")]
     public IEnumerable<Encounter> Risk_Variable_Renal_Disease(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Renal_Disease,
-            Risk_Variable_Renal_Disease_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Renal_Disease, Risk_Variable_Renal_Disease_Compute, context) ?? Risk_Variable_Renal_Disease_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Renal_Disease_Compute(CqlContext context)
     {
@@ -2454,9 +2338,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Severe Preeclampsia")]
     public IEnumerable<Encounter> Risk_Variable_Severe_Preeclampsia(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Severe_Preeclampsia,
-            Risk_Variable_Severe_Preeclampsia_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Severe_Preeclampsia, Risk_Variable_Severe_Preeclampsia_Compute, context) ?? Risk_Variable_Severe_Preeclampsia_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Severe_Preeclampsia_Compute(CqlContext context)
     {
@@ -2476,9 +2358,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Substance Abuse")]
     public IEnumerable<Encounter> Risk_Variable_Substance_Abuse(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Substance_Abuse,
-            Risk_Variable_Substance_Abuse_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Substance_Abuse, Risk_Variable_Substance_Abuse_Compute, context) ?? Risk_Variable_Substance_Abuse_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Substance_Abuse_Compute(CqlContext context)
     {
@@ -2498,9 +2378,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Thyrotoxicosis")]
     public IEnumerable<Encounter> Risk_Variable_Thyrotoxicosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Thyrotoxicosis,
-            Risk_Variable_Thyrotoxicosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Thyrotoxicosis, Risk_Variable_Thyrotoxicosis_Compute, context) ?? Risk_Variable_Thyrotoxicosis_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Thyrotoxicosis_Compute(CqlContext context)
     {
@@ -2520,9 +2398,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Preterm Birth")]
     public IEnumerable<Encounter> Risk_Variable_Preterm_Birth(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Risk_Variable_Preterm_Birth,
-            Risk_Variable_Preterm_Birth_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Preterm_Birth, Risk_Variable_Preterm_Birth_Compute, context) ?? Risk_Variable_Preterm_Birth_Compute(context);
 
     private IEnumerable<Encounter> Risk_Variable_Preterm_Birth_Compute(CqlContext context)
     {
@@ -2574,9 +2450,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable First Hematocrit Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Risk_Variable_First_Hematocrit_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>>(
-            _cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test,
-            Risk_Variable_First_Hematocrit_Lab_Test_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test, Risk_Variable_First_Hematocrit_Lab_Test_Compute, context) ?? Risk_Variable_First_Hematocrit_Lab_Test_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Risk_Variable_First_Hematocrit_Lab_Test_Compute(CqlContext context)
     {
@@ -2687,9 +2561,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable First White Blood Cell Count Lab Test")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?>>(
-            _cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test,
-            Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test, Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Compute, context) ?? Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Compute(CqlContext context)
     {
@@ -2800,9 +2672,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Heart Rate")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?> Risk_Variable_Heart_Rate(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?>>(
-            _cacheIndex_Risk_Variable_Heart_Rate,
-            Risk_Variable_Heart_Rate_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Heart_Rate, Risk_Variable_Heart_Rate_Compute, context) ?? Risk_Variable_Heart_Rate_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?> Risk_Variable_Heart_Rate_Compute(CqlContext context)
     {
@@ -2901,9 +2771,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Risk Variable Systolic Blood Pressure")]
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?> Risk_Variable_Systolic_Blood_Pressure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?>>(
-            _cacheIndex_Risk_Variable_Systolic_Blood_Pressure,
-            Risk_Variable_Systolic_Blood_Pressure_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Systolic_Blood_Pressure, Risk_Variable_Systolic_Blood_Pressure_Compute, context) ?? Risk_Variable_Systolic_Blood_Pressure_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?> Risk_Variable_Systolic_Blood_Pressure_Compute(CqlContext context)
     {
@@ -3135,360 +3003,93 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ILibraryInte
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
-
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Expiration != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Expiration' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Expiration}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Expiration = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Blood_Transfusion != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Blood_Transfusion' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Blood_Transfusion}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Blood_Transfusion = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Hysterectomy != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Hysterectomy' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Hysterectomy}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Hysterectomy = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC}}. Cache indices can only be initialized once.");
-        _cacheIndex_SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_SOC_Diagnoses_Detail != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_SOC_Diagnoses_Detail' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_SOC_Diagnoses_Detail}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_SOC_Diagnoses_Detail = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_SOC_Procedure_Detail != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_SOC_Procedure_Detail' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_SOC_Procedure_Detail}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_SOC_Procedure_Detail = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator_Exclusions_1 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_Exclusions_1' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_Exclusions_1}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator_Exclusions_1 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator_1 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_1' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_1}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator_1 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Variable_Calculated_Gestational_Age != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Variable_Calculated_Gestational_Age' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Variable_Calculated_Gestational_Age}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Variable_Calculated_Gestational_Age = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only}}. Cache indices can only be initialized once.");
-        _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator_2 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_2' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_2}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator_2 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC}}. Cache indices can only be initialized once.");
-        _cacheIndex_SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator_Exclusions_2 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_Exclusions_2' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_Exclusions_2}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator_Exclusions_2 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Anemia != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Anemia' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Anemia}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Anemia = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Asthma != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Asthma' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Asthma}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Asthma = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Autoimmune_Disease != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Autoimmune_Disease' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Autoimmune_Disease}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Autoimmune_Disease = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Bariatric_Surgery != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Bariatric_Surgery' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Bariatric_Surgery}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Bariatric_Surgery = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Bleeding_Disorder != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Bleeding_Disorder' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Bleeding_Disorder}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Bleeding_Disorder = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Cardiac_Disease != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Cardiac_Disease' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Cardiac_Disease}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Cardiac_Disease = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Economic_Housing_Instability != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Economic_Housing_Instability' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Economic_Housing_Instability}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Economic_Housing_Instability = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Gastrointestinal_Disease != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Gastrointestinal_Disease' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Gastrointestinal_Disease}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Gastrointestinal_Disease = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Gestational_Diabetes != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Gestational_Diabetes' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Gestational_Diabetes}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Gestational_Diabetes = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_HIV != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_HIV' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_HIV}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_HIV = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Hypertension != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Hypertension' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Hypertension}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Hypertension = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Long_Term_Anticoagulant_Use != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Long_Term_Anticoagulant_Use' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Long_Term_Anticoagulant_Use}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Long_Term_Anticoagulant_Use = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Maternal_Age != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Maternal_Age' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Maternal_Age}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Maternal_Age = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Mental_Health_Disorder != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Mental_Health_Disorder' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Mental_Health_Disorder}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Mental_Health_Disorder = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Morbid_Obesity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Morbid_Obesity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Morbid_Obesity}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Morbid_Obesity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Multiple_Pregnancy != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Multiple_Pregnancy' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Multiple_Pregnancy}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Multiple_Pregnancy = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Neuromuscular_Disease != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Neuromuscular_Disease' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Neuromuscular_Disease}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Neuromuscular_Disease = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Obstetrical_VTE != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Obstetrical_VTE' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Obstetrical_VTE}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Obstetrical_VTE = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Other_Preeclampsia != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Other_Preeclampsia' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Other_Preeclampsia}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Other_Preeclampsia = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Placenta_Previa != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Placenta_Previa' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Placenta_Previa}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Placenta_Previa = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Placental_Abruption != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Placental_Abruption' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Placental_Abruption}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Placental_Abruption = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Placental_Accreta_Spectrum != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Placental_Accreta_Spectrum' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Placental_Accreta_Spectrum}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Placental_Accreta_Spectrum = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Preexisting_Diabetes != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Preexisting_Diabetes' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Preexisting_Diabetes}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Preexisting_Diabetes = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Previous_Cesarean != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Previous_Cesarean' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Previous_Cesarean}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Previous_Cesarean = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Pulmonary_Hypertension != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Pulmonary_Hypertension' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Pulmonary_Hypertension}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Pulmonary_Hypertension = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Renal_Disease != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Renal_Disease' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Renal_Disease}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Renal_Disease = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Severe_Preeclampsia != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Severe_Preeclampsia' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Severe_Preeclampsia}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Severe_Preeclampsia = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Substance_Abuse != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Substance_Abuse' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Substance_Abuse}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Substance_Abuse = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Thyrotoxicosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Thyrotoxicosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Thyrotoxicosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Thyrotoxicosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Preterm_Birth != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Preterm_Birth' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Preterm_Birth}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Preterm_Birth = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Heart_Rate != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Heart_Rate' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Heart_Rate}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Heart_Rate = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Risk_Variable_Systolic_Blood_Pressure != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Risk_Variable_Systolic_Blood_Pressure' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Risk_Variable_Systolic_Blood_Pressure}}. Cache indices can only be initialized once.");
-        _cacheIndex_Risk_Variable_Systolic_Blood_Pressure = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        _cache = cache;
+
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        _cacheIndex_Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks = index++;
+        _cacheIndex_Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks = index++;
+        _cacheIndex_Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding = index++;
+        _cacheIndex_Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation = index++;
+        _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion = index++;
+        _cacheIndex_Delivery_Encounters_With_Expiration = index++;
+        _cacheIndex_Delivery_Encounters_With_Blood_Transfusion = index++;
+        _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications = index++;
+        _cacheIndex_Delivery_Encounters_With_Hysterectomy = index++;
+        _cacheIndex_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures = index++;
+        _cacheIndex_Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures = index++;
+        _cacheIndex_SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC = index++;
+        _cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis = index++;
+        _cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures = index++;
+        _cacheIndex_SDE_SOC_Diagnoses_Detail = index++;
+        _cacheIndex_SDE_SOC_Procedure_Detail = index++;
+        _cacheIndex_Numerator_Exclusions_1 = index++;
+        _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions = index++;
+        _cacheIndex_Numerator_1 = index++;
+        _cacheIndex_SDE_Variable_Calculated_Gestational_Age = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only = index++;
+        _cacheIndex_Numerator_2 = index++;
+        _cacheIndex_SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC = index++;
+        _cacheIndex_Numerator_Exclusions_2 = index++;
+        _cacheIndex_Risk_Variable_Anemia = index++;
+        _cacheIndex_Risk_Variable_Asthma = index++;
+        _cacheIndex_Risk_Variable_Autoimmune_Disease = index++;
+        _cacheIndex_Risk_Variable_Bariatric_Surgery = index++;
+        _cacheIndex_Risk_Variable_Bleeding_Disorder = index++;
+        _cacheIndex_Risk_Variable_Cardiac_Disease = index++;
+        _cacheIndex_Risk_Variable_Economic_Housing_Instability = index++;
+        _cacheIndex_Risk_Variable_Gastrointestinal_Disease = index++;
+        _cacheIndex_Risk_Variable_Gestational_Diabetes = index++;
+        _cacheIndex_Risk_Variable_HIV = index++;
+        _cacheIndex_Risk_Variable_Hypertension = index++;
+        _cacheIndex_Risk_Variable_Long_Term_Anticoagulant_Use = index++;
+        _cacheIndex_Risk_Variable_Maternal_Age = index++;
+        _cacheIndex_Risk_Variable_Mental_Health_Disorder = index++;
+        _cacheIndex_Risk_Variable_Morbid_Obesity = index++;
+        _cacheIndex_Risk_Variable_Multiple_Pregnancy = index++;
+        _cacheIndex_Risk_Variable_Neuromuscular_Disease = index++;
+        _cacheIndex_Risk_Variable_Obstetrical_VTE = index++;
+        _cacheIndex_Risk_Variable_Other_Preeclampsia = index++;
+        _cacheIndex_Risk_Variable_Placenta_Previa = index++;
+        _cacheIndex_Risk_Variable_Placental_Abruption = index++;
+        _cacheIndex_Risk_Variable_Placental_Accreta_Spectrum = index++;
+        _cacheIndex_Risk_Variable_Preexisting_Diabetes = index++;
+        _cacheIndex_Risk_Variable_Previous_Cesarean = index++;
+        _cacheIndex_Risk_Variable_Pulmonary_Hypertension = index++;
+        _cacheIndex_Risk_Variable_Renal_Disease = index++;
+        _cacheIndex_Risk_Variable_Severe_Preeclampsia = index++;
+        _cacheIndex_Risk_Variable_Substance_Abuse = index++;
+        _cacheIndex_Risk_Variable_Thyrotoxicosis = index++;
+        _cacheIndex_Risk_Variable_Preterm_Birth = index++;
+        _cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test = index++;
+        _cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test = index++;
+        _cacheIndex_Risk_Variable_Heart_Rate = index++;
+        _cacheIndex_Risk_Variable_Systolic_Blood_Pressure = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

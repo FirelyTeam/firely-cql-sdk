@@ -85,9 +85,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -102,9 +100,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -116,9 +112,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("October 1 Two Years Prior to the Measurement Period")]
     public CqlDateTime October_1_Two_Years_Prior_to_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDateTime>(
-            _cacheIndex_October_1_Two_Years_Prior_to_the_Measurement_Period,
-            October_1_Two_Years_Prior_to_the_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_October_1_Two_Years_Prior_to_the_Measurement_Period, October_1_Two_Years_Prior_to_the_Measurement_Period_Compute, context) ?? October_1_Two_Years_Prior_to_the_Measurement_Period_Compute(context);
 
     private CqlDateTime October_1_Two_Years_Prior_to_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -134,9 +128,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Participation Period")]
     public CqlInterval<CqlDateTime> Participation_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Participation_Period,
-            Participation_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Participation_Period, Participation_Period_Compute, context) ?? Participation_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Participation_Period_Compute(CqlContext context)
     {
@@ -150,9 +142,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Member Coverage")]
     public IEnumerable<Coverage> Member_Coverage(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coverage>>(
-            _cacheIndex_Member_Coverage,
-            Member_Coverage_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Member_Coverage, Member_Coverage_Compute, context) ?? Member_Coverage_Compute(context);
 
     private IEnumerable<Coverage> Member_Coverage_Compute(CqlContext context)
     {
@@ -173,9 +163,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Enrolled During Participation Period")]
     public bool? Enrolled_During_Participation_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Enrolled_During_Participation_Period,
-            Enrolled_During_Participation_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Enrolled_During_Participation_Period, Enrolled_During_Participation_Period_Compute, context) ?? Enrolled_During_Participation_Period_Compute(context);
 
     private bool? Enrolled_During_Participation_Period_Compute(CqlContext context)
     {
@@ -218,9 +206,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -247,9 +233,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -260,9 +244,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Right Mastectomy Diagnosis")]
     public IEnumerable<Condition> Right_Mastectomy_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(
-            _cacheIndex_Right_Mastectomy_Diagnosis,
-            Right_Mastectomy_Diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Right_Mastectomy_Diagnosis, Right_Mastectomy_Diagnosis_Compute, context) ?? Right_Mastectomy_Diagnosis_Compute(context);
 
     private IEnumerable<Condition> Right_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -286,9 +268,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Right Mastectomy Procedure")]
     public IEnumerable<Procedure> Right_Mastectomy_Procedure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(
-            _cacheIndex_Right_Mastectomy_Procedure,
-            Right_Mastectomy_Procedure_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Right_Mastectomy_Procedure, Right_Mastectomy_Procedure_Compute, context) ?? Right_Mastectomy_Procedure_Compute(context);
 
     private IEnumerable<Procedure> Right_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -353,9 +333,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Left Mastectomy Diagnosis")]
     public IEnumerable<Condition> Left_Mastectomy_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(
-            _cacheIndex_Left_Mastectomy_Diagnosis,
-            Left_Mastectomy_Diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Left_Mastectomy_Diagnosis, Left_Mastectomy_Diagnosis_Compute, context) ?? Left_Mastectomy_Diagnosis_Compute(context);
 
     private IEnumerable<Condition> Left_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -379,9 +357,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Left Mastectomy Procedure")]
     public IEnumerable<Procedure> Left_Mastectomy_Procedure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(
-            _cacheIndex_Left_Mastectomy_Procedure,
-            Left_Mastectomy_Procedure_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Left_Mastectomy_Procedure, Left_Mastectomy_Procedure_Compute, context) ?? Left_Mastectomy_Procedure_Compute(context);
 
     private IEnumerable<Procedure> Left_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -446,9 +422,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Bilateral Mastectomy Diagnosis")]
     public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Condition>>(
-            _cacheIndex_Bilateral_Mastectomy_Diagnosis,
-            Bilateral_Mastectomy_Diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Diagnosis, Bilateral_Mastectomy_Diagnosis_Compute, context) ?? Bilateral_Mastectomy_Diagnosis_Compute(context);
 
     private IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -472,9 +446,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Bilateral Mastectomy Procedure")]
     public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Procedure>>(
-            _cacheIndex_Bilateral_Mastectomy_Procedure,
-            Bilateral_Mastectomy_Procedure_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Procedure, Bilateral_Mastectomy_Procedure_Compute, context) ?? Bilateral_Mastectomy_Procedure_Compute(context);
 
     private IEnumerable<Procedure> Bilateral_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -539,9 +511,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Mastectomy Exclusion")]
     public bool? Mastectomy_Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Mastectomy_Exclusion,
-            Mastectomy_Exclusion_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Mastectomy_Exclusion, Mastectomy_Exclusion_Compute, context) ?? Mastectomy_Exclusion_Compute(context);
 
     private bool? Mastectomy_Exclusion_Compute(CqlContext context)
     {
@@ -568,9 +538,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Exclusions")]
     public bool? Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Exclusions,
-            Exclusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Exclusions, Exclusions_Compute, context) ?? Exclusions_Compute(context);
 
     private bool? Exclusions_Compute(CqlContext context)
     {
@@ -588,9 +556,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -638,115 +604,44 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ILibraryInternals, ISingl
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_October_1_Two_Years_Prior_to_the_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_October_1_Two_Years_Prior_to_the_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_October_1_Two_Years_Prior_to_the_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_October_1_Two_Years_Prior_to_the_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Participation_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Participation_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Participation_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Participation_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Member_Coverage != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Member_Coverage' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Member_Coverage}}. Cache indices can only be initialized once.");
-        _cacheIndex_Member_Coverage = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Enrolled_During_Participation_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Enrolled_During_Participation_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Enrolled_During_Participation_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Enrolled_During_Participation_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Right_Mastectomy_Diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Right_Mastectomy_Diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Right_Mastectomy_Diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_Right_Mastectomy_Diagnosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Right_Mastectomy_Procedure != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Right_Mastectomy_Procedure' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Right_Mastectomy_Procedure}}. Cache indices can only be initialized once.");
-        _cacheIndex_Right_Mastectomy_Procedure = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Left_Mastectomy_Diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Left_Mastectomy_Diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Left_Mastectomy_Diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_Left_Mastectomy_Diagnosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Left_Mastectomy_Procedure != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Left_Mastectomy_Procedure' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Left_Mastectomy_Procedure}}. Cache indices can only be initialized once.");
-        _cacheIndex_Left_Mastectomy_Procedure = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Bilateral_Mastectomy_Diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Bilateral_Mastectomy_Diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Bilateral_Mastectomy_Diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_Bilateral_Mastectomy_Diagnosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Bilateral_Mastectomy_Procedure != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Bilateral_Mastectomy_Procedure' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Bilateral_Mastectomy_Procedure}}. Cache indices can only be initialized once.");
-        _cacheIndex_Bilateral_Mastectomy_Procedure = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Mastectomy_Exclusion != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Mastectomy_Exclusion' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Mastectomy_Exclusion}}. Cache indices can only be initialized once.");
-        _cacheIndex_Mastectomy_Exclusion = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Exclusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Exclusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Exclusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Exclusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_October_1_Two_Years_Prior_to_the_Measurement_Period = index++;
+        _cacheIndex_Participation_Period = index++;
+        _cacheIndex_Member_Coverage = index++;
+        _cacheIndex_Enrolled_During_Participation_Period = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Right_Mastectomy_Diagnosis = index++;
+        _cacheIndex_Right_Mastectomy_Procedure = index++;
+        _cacheIndex_Left_Mastectomy_Diagnosis = index++;
+        _cacheIndex_Left_Mastectomy_Procedure = index++;
+        _cacheIndex_Bilateral_Mastectomy_Diagnosis = index++;
+        _cacheIndex_Bilateral_Mastectomy_Procedure = index++;
+        _cacheIndex_Mastectomy_Exclusion = index++;
+        _cacheIndex_Exclusions = index++;
+        _cacheIndex_Numerator = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

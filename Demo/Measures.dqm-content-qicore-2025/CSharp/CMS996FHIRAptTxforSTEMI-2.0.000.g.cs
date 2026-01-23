@@ -269,9 +269,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -289,9 +287,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -303,9 +299,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("ED Encounter During MP")]
     public IEnumerable<Encounter> ED_Encounter_During_MP(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Encounter_During_MP,
-            ED_Encounter_During_MP_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Encounter_During_MP, ED_Encounter_During_MP_Compute, context) ?? ED_Encounter_During_MP_Compute(context);
 
     private IEnumerable<Encounter> ED_Encounter_During_MP_Compute(CqlContext context)
     {
@@ -356,9 +350,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("ED Encounter with STEMI Diagnosis")]
     public IEnumerable<Encounter> ED_Encounter_with_STEMI_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Encounter_with_STEMI_Diagnosis,
-            ED_Encounter_with_STEMI_Diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Encounter_with_STEMI_Diagnosis, ED_Encounter_with_STEMI_Diagnosis_Compute, context) ?? ED_Encounter_with_STEMI_Diagnosis_Compute(context);
 
     private IEnumerable<Encounter> ED_Encounter_with_STEMI_Diagnosis_Compute(CqlContext context)
     {
@@ -423,9 +415,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -436,9 +426,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -449,9 +437,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Allergy or Intolerance to Thrombolytic Medications Overlaps ED Encounter")]
     public IEnumerable<Encounter> Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter,
-            Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter, Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter_Compute, context) ?? Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter_Compute(CqlContext context)
     {
@@ -509,9 +495,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Adverse Effect to Thrombolytic Medications Before End of ED Encounter")]
     public IEnumerable<Encounter> Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter,
-            Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter, Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter_Compute, context) ?? Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter_Compute(CqlContext context)
     {
@@ -553,9 +537,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Active Exclusion Diagnosis at Start of ED Encounter")]
     public IEnumerable<Encounter> Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter,
-            Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter, Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter_Compute, context) ?? Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter_Compute(CqlContext context)
     {
@@ -604,9 +586,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Active Oral Anticoagulant Medication at the Start of ED Encounter")]
     public IEnumerable<Encounter> Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter,
-            Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter, Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter_Compute, context) ?? Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter_Compute(CqlContext context)
     {
@@ -689,9 +669,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Active Long Term use of Anticoagulants")]
     public IEnumerable<Encounter> Active_Long_Term_use_of_Anticoagulants(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Active_Long_Term_use_of_Anticoagulants,
-            Active_Long_Term_use_of_Anticoagulants_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Active_Long_Term_use_of_Anticoagulants, Active_Long_Term_use_of_Anticoagulants_Compute, context) ?? Active_Long_Term_use_of_Anticoagulants_Compute(context);
 
     private IEnumerable<Encounter> Active_Long_Term_use_of_Anticoagulants_Compute(CqlContext context)
     {
@@ -734,9 +712,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Active use of Anticoagulants")]
     public IEnumerable<Encounter> Active_use_of_Anticoagulants(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Active_use_of_Anticoagulants,
-            Active_use_of_Anticoagulants_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Active_use_of_Anticoagulants, Active_use_of_Anticoagulants_Compute, context) ?? Active_use_of_Anticoagulants_Compute(context);
 
     private IEnumerable<Encounter> Active_use_of_Anticoagulants_Compute(CqlContext context)
     {
@@ -749,9 +725,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Exclusion Diagnosis During ED Encounter or Within 24 Hours of ED Encounter Start")]
     public IEnumerable<Encounter> Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start,
-            Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start, Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Compute, context) ?? Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Compute(context);
 
     private IEnumerable<Encounter> Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Compute(CqlContext context)
     {
@@ -826,9 +800,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Major Surgical Procedure 21 Days or Less Before Start of or Starts During ED Encounter")]
     public IEnumerable<Encounter> Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter,
-            Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter, Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter_Compute, context) ?? Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter_Compute(CqlContext context)
     {
@@ -1008,9 +980,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Intubation or Mechanical Circulatory Assist Device Placement or Removal Procedure During ED Encounter or Within 24 Hours of ED Encounter Start")]
     public IEnumerable<Encounter> Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start,
-            Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start, Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Compute, context) ?? Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Compute(context);
 
     private IEnumerable<Encounter> Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start_Compute(CqlContext context)
     {
@@ -1193,9 +1163,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Active Exclusion Diagnosis Within 90 Days Before or At the Start of ED Encounter")]
     public IEnumerable<Encounter> Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter,
-            Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter, Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter_Compute, context) ?? Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter_Compute(CqlContext context)
     {
@@ -1242,9 +1210,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Intracranial or Intraspinal Procedure 90 Days or Less Before Start of ED Encounter")]
     public IEnumerable<Encounter> Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter,
-            Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter, Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter_Compute, context) ?? Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter_Compute(CqlContext context)
     {
@@ -1355,9 +1321,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("ED Encounter with Discharge Disposition as Patient Expired")]
     public IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Patient_Expired(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Patient_Expired,
-            ED_Encounter_with_Discharge_Disposition_as_Patient_Expired_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Patient_Expired, ED_Encounter_with_Discharge_Disposition_as_Patient_Expired_Compute, context) ?? ED_Encounter_with_Discharge_Disposition_as_Patient_Expired_Compute(context);
 
     private IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Patient_Expired_Compute(CqlContext context)
     {
@@ -1379,9 +1343,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("ED Encounter with Discharge Disposition as Left Against Medical Advice")]
     public IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice,
-            ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice, ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice_Compute, context) ?? ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice_Compute(context);
 
     private IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice_Compute(CqlContext context)
     {
@@ -1403,9 +1365,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("ED Encounter with Hospice Services")]
     public IEnumerable<Encounter> ED_Encounter_with_Hospice_Services(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Encounter_with_Hospice_Services,
-            ED_Encounter_with_Hospice_Services_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Encounter_with_Hospice_Services, ED_Encounter_with_Hospice_Services_Compute, context) ?? ED_Encounter_with_Hospice_Services_Compute(context);
 
     private IEnumerable<Encounter> ED_Encounter_with_Hospice_Services_Compute(CqlContext context)
     {
@@ -1726,9 +1686,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Currently Pregnant")]
     public IEnumerable<Encounter> Currently_Pregnant(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Currently_Pregnant,
-            Currently_Pregnant_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Currently_Pregnant, Currently_Pregnant_Compute, context) ?? Currently_Pregnant_Compute(context);
 
     private IEnumerable<Encounter> Currently_Pregnant_Compute(CqlContext context)
     {
@@ -1769,9 +1727,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator_Exclusions,
-            Denominator_Exclusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -1806,9 +1762,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Received tPA in Another Facility within 24 hours Prior to Admission")]
     public IEnumerable<Encounter> Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission,
-            Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission, Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission_Compute, context) ?? Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission_Compute(context);
 
     private IEnumerable<Encounter> Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission_Compute(CqlContext context)
     {
@@ -1845,9 +1799,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("ED Encounter with a Documented Reason for No PCI Performed")]
     public IEnumerable<Encounter> ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed,
-            ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed, ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed_Compute, context) ?? ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed_Compute(context);
 
     private IEnumerable<Encounter> ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed_Compute(CqlContext context)
     {
@@ -1909,9 +1861,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("ED Encounter with a Documented Reason for Not Administering Fibrinolytic Therapy")]
     public IEnumerable<Encounter> ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy,
-            ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy, ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy_Compute, context) ?? ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy_Compute(context);
 
     private IEnumerable<Encounter> ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy_Compute(CqlContext context)
     {
@@ -1985,9 +1935,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator_Exceptions,
-            Denominator_Exceptions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute, context) ?? Denominator_Exceptions_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -2060,9 +2008,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Fibrinolytic Therapy Administration within 30 Minutes of Arrival")]
     public IEnumerable<Encounter> Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival,
-            Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival, Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival_Compute, context) ?? Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival_Compute(context);
 
     private IEnumerable<Encounter> Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival_Compute(CqlContext context)
     {
@@ -2132,9 +2078,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("PCI within 90 Minutes of Arrival")]
     public IEnumerable<Encounter> PCI_within_90_Minutes_of_Arrival(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_PCI_within_90_Minutes_of_Arrival,
-            PCI_within_90_Minutes_of_Arrival_Compute);
+        _cache?.GetOrCompute(_cacheIndex_PCI_within_90_Minutes_of_Arrival, PCI_within_90_Minutes_of_Arrival_Compute, context) ?? PCI_within_90_Minutes_of_Arrival_Compute(context);
 
     private IEnumerable<Encounter> PCI_within_90_Minutes_of_Arrival_Compute(CqlContext context)
     {
@@ -2297,9 +2241,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("ED Departure with Discharge to Acute Care Facility Within 45 Minutes Of Arrival")]
     public IEnumerable<Encounter> ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival,
-            ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival_Compute);
+        _cache?.GetOrCompute(_cacheIndex_ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival, ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival_Compute, context) ?? ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival_Compute(context);
 
     private IEnumerable<Encounter> ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival_Compute(CqlContext context)
     {
@@ -2330,9 +2272,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -2347,9 +2287,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -2360,9 +2298,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -2373,9 +2309,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -2386,9 +2320,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -2440,200 +2372,61 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ILibraryInterna
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Encounter_During_MP != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Encounter_During_MP' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Encounter_During_MP}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Encounter_During_MP = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Encounter_with_STEMI_Diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Encounter_with_STEMI_Diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Encounter_with_STEMI_Diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Encounter_with_STEMI_Diagnosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Active_Long_Term_use_of_Anticoagulants != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Active_Long_Term_use_of_Anticoagulants' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Active_Long_Term_use_of_Anticoagulants}}. Cache indices can only be initialized once.");
-        _cacheIndex_Active_Long_Term_use_of_Anticoagulants = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Active_use_of_Anticoagulants != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Active_use_of_Anticoagulants' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Active_use_of_Anticoagulants}}. Cache indices can only be initialized once.");
-        _cacheIndex_Active_use_of_Anticoagulants = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start}}. Cache indices can only be initialized once.");
-        _cacheIndex_Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start}}. Cache indices can only be initialized once.");
-        _cacheIndex_Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Patient_Expired != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Patient_Expired' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Patient_Expired}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Patient_Expired = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Encounter_with_Hospice_Services != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Encounter_with_Hospice_Services' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Encounter_with_Hospice_Services}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Encounter_with_Hospice_Services = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Currently_Pregnant != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Currently_Pregnant' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Currently_Pregnant}}. Cache indices can only be initialized once.");
-        _cacheIndex_Currently_Pregnant = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exclusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exclusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exclusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exclusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission}}. Cache indices can only be initialized once.");
-        _cacheIndex_Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exceptions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exceptions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exceptions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exceptions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival}}. Cache indices can only be initialized once.");
-        _cacheIndex_Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_PCI_within_90_Minutes_of_Arrival != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_PCI_within_90_Minutes_of_Arrival' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_PCI_within_90_Minutes_of_Arrival}}. Cache indices can only be initialized once.");
-        _cacheIndex_PCI_within_90_Minutes_of_Arrival = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival}}. Cache indices can only be initialized once.");
-        _cacheIndex_ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_ED_Encounter_During_MP = index++;
+        _cacheIndex_ED_Encounter_with_STEMI_Diagnosis = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Allergy_or_Intolerance_to_Thrombolytic_Medications_Overlaps_ED_Encounter = index++;
+        _cacheIndex_Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter = index++;
+        _cacheIndex_Active_Exclusion_Diagnosis_at_Start_of_ED_Encounter = index++;
+        _cacheIndex_Active_Oral_Anticoagulant_Medication_at_the_Start_of_ED_Encounter = index++;
+        _cacheIndex_Active_Long_Term_use_of_Anticoagulants = index++;
+        _cacheIndex_Active_use_of_Anticoagulants = index++;
+        _cacheIndex_Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start = index++;
+        _cacheIndex_Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter = index++;
+        _cacheIndex_Intubation_or_Mechanical_Circulatory_Assist_Device_Placement_or_Removal_Procedure_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start = index++;
+        _cacheIndex_Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter = index++;
+        _cacheIndex_Intracranial_or_Intraspinal_Procedure_90_Days_or_Less_Before_Start_of_ED_Encounter = index++;
+        _cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Patient_Expired = index++;
+        _cacheIndex_ED_Encounter_with_Discharge_Disposition_as_Left_Against_Medical_Advice = index++;
+        _cacheIndex_ED_Encounter_with_Hospice_Services = index++;
+        _cacheIndex_Currently_Pregnant = index++;
+        _cacheIndex_Denominator_Exclusions = index++;
+        _cacheIndex_Received_tPA_in_Another_Facility_within_24_hours_Prior_to_Admission = index++;
+        _cacheIndex_ED_Encounter_with_a_Documented_Reason_for_No_PCI_Performed = index++;
+        _cacheIndex_ED_Encounter_with_a_Documented_Reason_for_Not_Administering_Fibrinolytic_Therapy = index++;
+        _cacheIndex_Denominator_Exceptions = index++;
+        _cacheIndex_Fibrinolytic_Therapy_Administration_within_30_Minutes_of_Arrival = index++;
+        _cacheIndex_PCI_within_90_Minutes_of_Arrival = index++;
+        _cacheIndex_ED_Departure_with_Discharge_to_Acute_Care_Facility_Within_45_Minutes_Of_Arrival = index++;
+        _cacheIndex_Numerator = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

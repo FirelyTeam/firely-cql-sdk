@@ -53,9 +53,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -73,9 +71,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -87,9 +83,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Comfort Measures Care")]
     public IEnumerable<object> Comfort_Measures_Care(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Comfort_Measures_Care,
-            Comfort_Measures_Care_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Comfort_Measures_Care, Comfort_Measures_Care_Compute, context) ?? Comfort_Measures_Care_Compute(context);
 
     private IEnumerable<object> Comfort_Measures_Care_Compute(CqlContext context)
     {
@@ -128,9 +122,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Qualifying_Encounter,
-            Qualifying_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Qualifying_Encounter, Qualifying_Encounter_Compute, context) ?? Qualifying_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -168,9 +160,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Encounter with Hospitalization Period")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> Encounter_with_Hospitalization_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>>(
-            _cacheIndex_Encounter_with_Hospitalization_Period,
-            Encounter_with_Hospitalization_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_with_Hospitalization_Period, Encounter_with_Hospitalization_Period_Compute, context) ?? Encounter_with_Hospitalization_Period_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> Encounter_with_Hospitalization_Period_Compute(CqlContext context)
     {
@@ -190,9 +180,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Encounter with Existing Diabetes Diagnosis")]
     public IEnumerable<Encounter> Encounter_with_Existing_Diabetes_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_with_Existing_Diabetes_Diagnosis,
-            Encounter_with_Existing_Diabetes_Diagnosis_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_with_Existing_Diabetes_Diagnosis, Encounter_with_Existing_Diabetes_Diagnosis_Compute, context) ?? Encounter_with_Existing_Diabetes_Diagnosis_Compute(context);
 
     private IEnumerable<Encounter> Encounter_with_Existing_Diabetes_Diagnosis_Compute(CqlContext context)
     {
@@ -298,9 +286,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Encounter with Hypoglycemic Medication")]
     public IEnumerable<Encounter> Encounter_with_Hypoglycemic_Medication(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_with_Hypoglycemic_Medication,
-            Encounter_with_Hypoglycemic_Medication_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_with_Hypoglycemic_Medication, Encounter_with_Hypoglycemic_Medication_Compute, context) ?? Encounter_with_Hypoglycemic_Medication_Compute(context);
 
     private IEnumerable<Encounter> Encounter_with_Hypoglycemic_Medication_Compute(CqlContext context)
     {
@@ -376,9 +362,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Encounter with Elevated Glucose Greater Than or Equal to 200")]
     public IEnumerable<Encounter> Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200,
-            Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200, Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200_Compute, context) ?? Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200_Compute(context);
 
     private IEnumerable<Encounter> Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200_Compute(CqlContext context)
     {
@@ -481,9 +465,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -498,9 +480,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -511,9 +491,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Measurement Population")]
     public IEnumerable<Encounter> Measurement_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Measurement_Population,
-            Measurement_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Population, Measurement_Population_Compute, context) ?? Measurement_Population_Compute(context);
 
     private IEnumerable<Encounter> Measurement_Population_Compute(CqlContext context)
     {
@@ -541,9 +519,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Days in Hospitalization")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> Days_in_Hospitalization(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?>>(
-            _cacheIndex_Days_in_Hospitalization,
-            Days_in_Hospitalization_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Days_in_Hospitalization, Days_in_Hospitalization_Compute, context) ?? Days_in_Hospitalization_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> Days_in_Hospitalization_Compute(CqlContext context)
     {
@@ -566,9 +542,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Days with Glucose Results")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoGlucoseTest)?> relevantDays)?> Days_with_Glucose_Results(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoGlucoseTest)?> relevantDays)?>>(
-            _cacheIndex_Days_with_Glucose_Results,
-            Days_with_Glucose_Results_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Days_with_Glucose_Results, Days_with_Glucose_Results_Compute, context) ?? Days_with_Glucose_Results_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoGlucoseTest)?> relevantDays)?> Days_with_Glucose_Results_Compute(CqlContext context)
     {
@@ -825,9 +799,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Days with Hyperglycemic Events")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> Days_with_Hyperglycemic_Events(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?>>(
-            _cacheIndex_Days_with_Hyperglycemic_Events,
-            Days_with_Hyperglycemic_Events_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Days_with_Hyperglycemic_Events, Days_with_Hyperglycemic_Events_Compute, context) ?? Days_with_Hyperglycemic_Events_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> Days_with_Hyperglycemic_Events_Compute(CqlContext context)
     {
@@ -879,9 +851,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Glucose Greater Than 600 within 1 Hour Prior To and 6 Hours After Encounter Start")]
     public IEnumerable<Observation> Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(
-            _cacheIndex_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start,
-            Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start, Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute, context) ?? Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute(context);
 
     private IEnumerable<Observation> Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute(CqlContext context)
     {
@@ -986,9 +956,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Glucose Tests Earlier Than Glucose Greater Than 600 within 1 Hour Prior To and 6 Hours After Encounter Start")]
     public IEnumerable<Observation> Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(
-            _cacheIndex_Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start,
-            Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start, Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute, context) ?? Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute(context);
 
     private IEnumerable<Observation> Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute(CqlContext context)
     {
@@ -1193,9 +1161,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Initial Glucose Greater Than 600 within 1 Hour Prior To and 6 Hours After Encounter Start")]
     public IEnumerable<Observation> Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(
-            _cacheIndex_Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start,
-            Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start, Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute, context) ?? Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute(context);
 
     private IEnumerable<Observation> Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute(CqlContext context)
     {
@@ -1236,9 +1202,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Encounter with Glucose Greater Than 600 within 1 Hour Prior To and 6 Hours After Encounter Start")]
     public IEnumerable<Encounter> Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start,
-            Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start, Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute, context) ?? Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute(context);
 
     private IEnumerable<Encounter> Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start_Compute(CqlContext context)
     {
@@ -1342,9 +1306,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Encounter with Comfort Measures during Hospitalization")]
     public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization,
-            Encounter_with_Comfort_Measures_during_Hospitalization_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization, Encounter_with_Comfort_Measures_during_Hospitalization_Compute, context) ?? Encounter_with_Comfort_Measures_during_Hospitalization_Compute(context);
 
     private IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization_Compute(CqlContext context)
     {
@@ -1441,9 +1403,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Encounter with Discharge for Hospice Care")]
     public IEnumerable<Encounter> Encounter_with_Discharge_for_Hospice_Care(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_with_Discharge_for_Hospice_Care,
-            Encounter_with_Discharge_for_Hospice_Care_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_with_Discharge_for_Hospice_Care, Encounter_with_Discharge_for_Hospice_Care_Compute, context) ?? Encounter_with_Discharge_for_Hospice_Care_Compute(context);
 
     private IEnumerable<Encounter> Encounter_with_Discharge_for_Hospice_Care_Compute(CqlContext context)
     {
@@ -1470,9 +1430,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Encounter with Early Glucose Greater Than 600 or with Comfort or Hospice Care")]
     public IEnumerable<Encounter> Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care,
-            Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care, Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care_Compute, context) ?? Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care_Compute(context);
 
     private IEnumerable<Encounter> Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care_Compute(CqlContext context)
     {
@@ -1487,9 +1445,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator_Exclusions,
-            Denominator_Exclusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -1500,9 +1456,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Encounter with Hyperglycemic Events")]
     public IEnumerable<Encounter> Encounter_with_Hyperglycemic_Events(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_with_Hyperglycemic_Events,
-            Encounter_with_Hyperglycemic_Events_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_with_Hyperglycemic_Events, Encounter_with_Hyperglycemic_Events_Compute, context) ?? Encounter_with_Hyperglycemic_Events_Compute(context);
 
     private IEnumerable<Encounter> Encounter_with_Hyperglycemic_Events_Compute(CqlContext context)
     {
@@ -1536,9 +1490,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -1549,9 +1501,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Numerator Exclusions")]
     public IEnumerable<Encounter> Numerator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Numerator_Exclusions,
-            Numerator_Exclusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator_Exclusions, Numerator_Exclusions_Compute, context) ?? Numerator_Exclusions_Compute(context);
 
     private IEnumerable<Encounter> Numerator_Exclusions_Compute(CqlContext context)
     {
@@ -1562,9 +1512,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1575,9 +1523,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1588,9 +1534,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1601,9 +1545,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -1817,175 +1759,56 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ILibraryInternals, IS
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Comfort_Measures_Care != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Comfort_Measures_Care' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Comfort_Measures_Care}}. Cache indices can only be initialized once.");
-        _cacheIndex_Comfort_Measures_Care = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Qualifying_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Qualifying_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Qualifying_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Qualifying_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_with_Hospitalization_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_with_Hospitalization_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_with_Hospitalization_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_with_Hospitalization_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_with_Existing_Diabetes_Diagnosis != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_with_Existing_Diabetes_Diagnosis' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_with_Existing_Diabetes_Diagnosis}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_with_Existing_Diabetes_Diagnosis = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_with_Hypoglycemic_Medication != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_with_Hypoglycemic_Medication' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_with_Hypoglycemic_Medication}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_with_Hypoglycemic_Medication = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Measurement_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Days_in_Hospitalization != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Days_in_Hospitalization' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Days_in_Hospitalization}}. Cache indices can only be initialized once.");
-        _cacheIndex_Days_in_Hospitalization = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Days_with_Glucose_Results != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Days_with_Glucose_Results' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Days_with_Glucose_Results}}. Cache indices can only be initialized once.");
-        _cacheIndex_Days_with_Glucose_Results = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Days_with_Hyperglycemic_Events != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Days_with_Hyperglycemic_Events' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Days_with_Hyperglycemic_Events}}. Cache indices can only be initialized once.");
-        _cacheIndex_Days_with_Hyperglycemic_Events = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start}}. Cache indices can only be initialized once.");
-        _cacheIndex_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start}}. Cache indices can only be initialized once.");
-        _cacheIndex_Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_with_Discharge_for_Hospice_Care != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_with_Discharge_for_Hospice_Care' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_with_Discharge_for_Hospice_Care}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_with_Discharge_for_Hospice_Care = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exclusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exclusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exclusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exclusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_with_Hyperglycemic_Events != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_with_Hyperglycemic_Events' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_with_Hyperglycemic_Events}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_with_Hyperglycemic_Events = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator_Exclusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator_Exclusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator_Exclusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator_Exclusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Comfort_Measures_Care = index++;
+        _cacheIndex_Qualifying_Encounter = index++;
+        _cacheIndex_Encounter_with_Hospitalization_Period = index++;
+        _cacheIndex_Encounter_with_Existing_Diabetes_Diagnosis = index++;
+        _cacheIndex_Encounter_with_Hypoglycemic_Medication = index++;
+        _cacheIndex_Encounter_with_Elevated_Glucose_Greater_Than_or_Equal_to_200 = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Measurement_Population = index++;
+        _cacheIndex_Days_in_Hospitalization = index++;
+        _cacheIndex_Days_with_Glucose_Results = index++;
+        _cacheIndex_Days_with_Hyperglycemic_Events = index++;
+        _cacheIndex_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start = index++;
+        _cacheIndex_Glucose_Tests_Earlier_Than_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start = index++;
+        _cacheIndex_Initial_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start = index++;
+        _cacheIndex_Encounter_with_Glucose_Greater_Than_600_within_1_Hour_Prior_To_and_6_Hours_After_Encounter_Start = index++;
+        _cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization = index++;
+        _cacheIndex_Encounter_with_Discharge_for_Hospice_Care = index++;
+        _cacheIndex_Encounter_with_Early_Glucose_Greater_Than_600_or_with_Comfort_or_Hospice_Care = index++;
+        _cacheIndex_Denominator_Exclusions = index++;
+        _cacheIndex_Encounter_with_Hyperglycemic_Events = index++;
+        _cacheIndex_Numerator = index++;
+        _cacheIndex_Numerator_Exclusions = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

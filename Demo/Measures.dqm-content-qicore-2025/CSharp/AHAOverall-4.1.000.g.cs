@@ -99,9 +99,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -116,9 +114,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -130,9 +126,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlExpressionDefinition("Outpatient Encounter")]
     public IEnumerable<Encounter> Outpatient_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Outpatient_Encounter,
-            Outpatient_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Outpatient_Encounter, Outpatient_Encounter_Compute, context) ?? Outpatient_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Outpatient_Encounter_Compute(CqlContext context)
     {
@@ -221,9 +215,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
     [CqlExpressionDefinition("Heart Failure Outpatient Encounter")]
     [CqlTag("description", "Returns certain finished encounter types that overlap a Heart Failure condition and are during the measurement period: \ncare services in long term residential facility (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014)\nhome healthcare services (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016)\nnursing facility visits (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012)\noffice visits (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001)\noutpatient consultation (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008)")]
     public IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Heart_Failure_Outpatient_Encounter,
-            Heart_Failure_Outpatient_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Heart_Failure_Outpatient_Encounter, Heart_Failure_Outpatient_Encounter_Compute, context) ?? Heart_Failure_Outpatient_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_Compute(CqlContext context)
     {
@@ -271,9 +263,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
     [CqlExpressionDefinition("Moderate or Severe LVSD Findings")]
     [CqlTag("description", "Returns a union  of the following:\nObservations where the final, amended or correction ejection fraction result is <= 40\nModerate or Severe LVSD conditions where the diagnosis has been confirmed as active")]
     public IEnumerable<object> Moderate_or_Severe_LVSD_Findings(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Moderate_or_Severe_LVSD_Findings,
-            Moderate_or_Severe_LVSD_Findings_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Moderate_or_Severe_LVSD_Findings, Moderate_or_Severe_LVSD_Findings_Compute, context) ?? Moderate_or_Severe_LVSD_Findings_Compute(context);
 
     private IEnumerable<object> Moderate_or_Severe_LVSD_Findings_Compute(CqlContext context)
     {
@@ -335,9 +325,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
     [CqlExpressionDefinition("Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD")]
     [CqlTag("description", "Returns heart failure outpatient encounters that start before the end of a moderate or severe LVSD finding")]
     public IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD,
-            Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD, Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD_Compute(context);
 
     private IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -373,9 +361,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
     [CqlExpressionDefinition("Has Heart Transplant Complications")]
     [CqlTag("description", "Returns true if patient has confirmed heart transplant complications that start before the end of a heart failure outpatient encounter with history of moderate or severe LVSD")]
     public bool? Has_Heart_Transplant_Complications(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Heart_Transplant_Complications,
-            Has_Heart_Transplant_Complications_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Heart_Transplant_Complications, Has_Heart_Transplant_Complications_Compute, context) ?? Has_Heart_Transplant_Complications_Compute(context);
 
     private bool? Has_Heart_Transplant_Complications_Compute(CqlContext context)
     {
@@ -423,9 +409,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
     [CqlExpressionDefinition("Has Left Ventricular Assist Device")]
     [CqlTag("description", "Returns true if patient has a completed LVAD placement that starts before the end of a heart failure outpatient encounter with history of moderate or severe LVSD")]
     public bool? Has_Left_Ventricular_Assist_Device(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Left_Ventricular_Assist_Device,
-            Has_Left_Ventricular_Assist_Device_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Left_Ventricular_Assist_Device, Has_Left_Ventricular_Assist_Device_Compute, context) ?? Has_Left_Ventricular_Assist_Device_Compute(context);
 
     private bool? Has_Left_Ventricular_Assist_Device_Compute(CqlContext context)
     {
@@ -534,9 +518,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
     [CqlExpressionDefinition("Has Left Ventricular Assist Device Complications")]
     [CqlTag("description", "Returns true if patient has active LVAD complications that start before the end of a heart failure outpatient encounter with history of moderate or severe LVSD")]
     public bool? Has_Left_Ventricular_Assist_Device_Complications(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Left_Ventricular_Assist_Device_Complications,
-            Has_Left_Ventricular_Assist_Device_Complications_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Left_Ventricular_Assist_Device_Complications, Has_Left_Ventricular_Assist_Device_Complications_Compute, context) ?? Has_Left_Ventricular_Assist_Device_Complications_Compute(context);
 
     private bool? Has_Left_Ventricular_Assist_Device_Complications_Compute(CqlContext context)
     {
@@ -583,9 +565,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
 
     [CqlExpressionDefinition("Outpatient Encounter or Patient Provider Interaction")]
     public IEnumerable<Encounter> Outpatient_Encounter_or_Patient_Provider_Interaction(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Outpatient_Encounter_or_Patient_Provider_Interaction,
-            Outpatient_Encounter_or_Patient_Provider_Interaction_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Outpatient_Encounter_or_Patient_Provider_Interaction, Outpatient_Encounter_or_Patient_Provider_Interaction_Compute, context) ?? Outpatient_Encounter_or_Patient_Provider_Interaction_Compute(context);
 
     private IEnumerable<Encounter> Outpatient_Encounter_or_Patient_Provider_Interaction_Compute(CqlContext context)
     {
@@ -600,9 +580,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
     [CqlExpressionDefinition("Qualifying Outpatient Encounter During Measurement Period")]
     [CqlTag("description", "Returns certain finished encounter types that occurred during the measurement period: \noffice visits (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001)\noutpatient consultation (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008)\nnursing facility visits (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012)\ncare services in long term residential facility (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014)\nhome healthcare services (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016)\npatient provider interactions (http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012)")]
     public IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Qualifying_Outpatient_Encounter_During_Measurement_Period,
-            Qualifying_Outpatient_Encounter_During_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Qualifying_Outpatient_Encounter_During_Measurement_Period, Qualifying_Outpatient_Encounter_During_Measurement_Period_Compute, context) ?? Qualifying_Outpatient_Encounter_During_Measurement_Period_Compute(context);
 
     private IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -626,9 +604,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
     [CqlExpressionDefinition("Has Heart Transplant")]
     [CqlTag("description", "Returns completed heart tansplant procedures that start before the end of a heart failure outpatient encounter with history of moderate or severe LVSD")]
     public bool? Has_Heart_Transplant(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Has_Heart_Transplant,
-            Has_Heart_Transplant_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Has_Heart_Transplant, Has_Heart_Transplant_Compute, context) ?? Has_Heart_Transplant_Compute(context);
 
     private bool? Has_Heart_Transplant_Compute(CqlContext context)
     {
@@ -737,9 +713,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
     [CqlExpressionDefinition("Is Adult With Two Qualifying Outpatient Encounters and One Heart Failure Outpatient Encounter During the Measurement Period")]
     [CqlTag("description", "Returns true if the patient meets the following criteria:\n18 years of age or older,\nHas two Qualifying Outpatient Encounters During Measurement Period\nHas a Heart Failure Outpatient Encounter")]
     public bool? Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period,
-            Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period, Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period_Compute, context) ?? Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period_Compute(context);
 
     private bool? Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -1282,95 +1256,40 @@ public partial class AHAOverall_4_1_000 : ILibrary, ILibraryInternals, ISingleto
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Outpatient_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Outpatient_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Outpatient_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Outpatient_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Heart_Failure_Outpatient_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Heart_Failure_Outpatient_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Heart_Failure_Outpatient_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Heart_Failure_Outpatient_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Moderate_or_Severe_LVSD_Findings != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Moderate_or_Severe_LVSD_Findings' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Moderate_or_Severe_LVSD_Findings}}. Cache indices can only be initialized once.");
-        _cacheIndex_Moderate_or_Severe_LVSD_Findings = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD}}. Cache indices can only be initialized once.");
-        _cacheIndex_Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Heart_Transplant_Complications != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Heart_Transplant_Complications' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Heart_Transplant_Complications}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Heart_Transplant_Complications = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Left_Ventricular_Assist_Device != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Left_Ventricular_Assist_Device' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Left_Ventricular_Assist_Device}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Left_Ventricular_Assist_Device = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Left_Ventricular_Assist_Device_Complications != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Left_Ventricular_Assist_Device_Complications' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Left_Ventricular_Assist_Device_Complications}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Left_Ventricular_Assist_Device_Complications = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Outpatient_Encounter_or_Patient_Provider_Interaction != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Outpatient_Encounter_or_Patient_Provider_Interaction' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Outpatient_Encounter_or_Patient_Provider_Interaction}}. Cache indices can only be initialized once.");
-        _cacheIndex_Outpatient_Encounter_or_Patient_Provider_Interaction = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Qualifying_Outpatient_Encounter_During_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Qualifying_Outpatient_Encounter_During_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Qualifying_Outpatient_Encounter_During_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Qualifying_Outpatient_Encounter_During_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Has_Heart_Transplant != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Has_Heart_Transplant' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Has_Heart_Transplant}}. Cache indices can only be initialized once.");
-        _cacheIndex_Has_Heart_Transplant = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Outpatient_Encounter = index++;
+        _cacheIndex_Heart_Failure_Outpatient_Encounter = index++;
+        _cacheIndex_Moderate_or_Severe_LVSD_Findings = index++;
+        _cacheIndex_Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD = index++;
+        _cacheIndex_Has_Heart_Transplant_Complications = index++;
+        _cacheIndex_Has_Left_Ventricular_Assist_Device = index++;
+        _cacheIndex_Has_Left_Ventricular_Assist_Device_Complications = index++;
+        _cacheIndex_Outpatient_Encounter_or_Patient_Provider_Interaction = index++;
+        _cacheIndex_Qualifying_Outpatient_Encounter_During_Measurement_Period = index++;
+        _cacheIndex_Has_Heart_Transplant = index++;
+        _cacheIndex_Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

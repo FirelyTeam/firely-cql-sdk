@@ -57,9 +57,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -74,9 +72,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -88,9 +84,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Non Elective Inpatient Encounter With Age")]
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_With_Age(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Non_Elective_Inpatient_Encounter_With_Age,
-            Non_Elective_Inpatient_Encounter_With_Age_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Non_Elective_Inpatient_Encounter_With_Age, Non_Elective_Inpatient_Encounter_With_Age_Compute, context) ?? Non_Elective_Inpatient_Encounter_With_Age_Compute(context);
 
     private IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_With_Age_Compute(CqlContext context)
     {
@@ -123,9 +117,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Ischemic Stroke Encounter")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Ischemic_Stroke_Encounter,
-            Ischemic_Stroke_Encounter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounter, Ischemic_Stroke_Encounter_Compute, context) ?? Ischemic_Stroke_Encounter_Compute(context);
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounter_Compute(CqlContext context)
     {
@@ -144,9 +136,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Ischemic Stroke Encounters With Discharge Disposition")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounters_With_Discharge_Disposition(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition,
-            Ischemic_Stroke_Encounters_With_Discharge_Disposition_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition, Ischemic_Stroke_Encounters_With_Discharge_Disposition_Compute, context) ?? Ischemic_Stroke_Encounters_With_Discharge_Disposition_Compute(context);
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounters_With_Discharge_Disposition_Compute(CqlContext context)
     {
@@ -188,9 +178,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Intervention Comfort Measures")]
     public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Intervention_Comfort_Measures,
-            Intervention_Comfort_Measures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Intervention_Comfort_Measures, Intervention_Comfort_Measures_Compute, context) ?? Intervention_Comfort_Measures_Compute(context);
 
     private IEnumerable<object> Intervention_Comfort_Measures_Compute(CqlContext context)
     {
@@ -247,9 +235,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Encounter With Comfort Measures During Hospitalization")]
     public IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Hospitalization(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization,
-            Encounter_With_Comfort_Measures_During_Hospitalization_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization, Encounter_With_Comfort_Measures_During_Hospitalization_Compute, context) ?? Encounter_With_Comfort_Measures_During_Hospitalization_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Hospitalization_Compute(CqlContext context)
     {
@@ -370,65 +356,34 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Non_Elective_Inpatient_Encounter_With_Age != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Non_Elective_Inpatient_Encounter_With_Age' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Non_Elective_Inpatient_Encounter_With_Age}}. Cache indices can only be initialized once.");
-        _cacheIndex_Non_Elective_Inpatient_Encounter_With_Age = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Ischemic_Stroke_Encounter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Ischemic_Stroke_Encounter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Ischemic_Stroke_Encounter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Ischemic_Stroke_Encounter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition}}. Cache indices can only be initialized once.");
-        _cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Intervention_Comfort_Measures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Intervention_Comfort_Measures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Intervention_Comfort_Measures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Intervention_Comfort_Measures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Non_Elective_Inpatient_Encounter_With_Age = index++;
+        _cacheIndex_Ischemic_Stroke_Encounter = index++;
+        _cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition = index++;
+        _cacheIndex_Intervention_Comfort_Measures = index++;
+        _cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

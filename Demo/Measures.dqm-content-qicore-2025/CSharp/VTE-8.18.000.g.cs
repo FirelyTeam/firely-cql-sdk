@@ -37,9 +37,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -54,9 +52,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -115,9 +111,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Admission Without VTE Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions,
-            Admission_Without_VTE_Or_Obstetrical_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions, Admission_Without_VTE_Or_Obstetrical_Conditions_Compute, context) ?? Admission_Without_VTE_Or_Obstetrical_Conditions_Compute(context);
 
     private IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions_Compute(CqlContext context)
     {
@@ -143,9 +137,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Encounter With Age Range And Without VTE Diagnosis Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions,
-            Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions, Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute, context) ?? Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute(CqlContext context)
     {
@@ -172,9 +164,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -254,55 +244,32 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions = index++;
+        _cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions = index++;
+        _cacheIndex_Initial_Population = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

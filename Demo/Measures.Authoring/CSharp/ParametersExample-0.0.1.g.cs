@@ -29,9 +29,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlParameterDefinition("AgeThreshold")]
     public int? AgeThreshold(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<int?>(
-            _cacheIndex_AgeThreshold,
-            AgeThreshold_Compute);
+        _cache?.GetOrCompute(_cacheIndex_AgeThreshold, AgeThreshold_Compute, context) ?? AgeThreshold_Compute(context);
 
     private int? AgeThreshold_Compute(CqlContext context)
     {
@@ -46,9 +44,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -60,9 +56,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlDate>(
-            _cacheIndex_CurrentDate,
-            CurrentDate_Compute);
+        _cache?.GetOrCompute(_cacheIndex_CurrentDate, CurrentDate_Compute, context) ?? CurrentDate_Compute(context);
 
     private CqlDate CurrentDate_Compute(CqlContext context)
     {
@@ -73,9 +67,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Filter")]
     public Patient Patient_Filter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient_Filter,
-            Patient_Filter_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient_Filter, Patient_Filter_Compute, context) ?? Patient_Filter_Compute(context);
 
     private Patient Patient_Filter_Compute(CqlContext context)
     {
@@ -112,9 +104,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Date>(
-            _cacheIndex_Patient_Birthdate,
-            Patient_Birthdate_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient_Birthdate, Patient_Birthdate_Compute, context) ?? Patient_Birthdate_Compute(context);
 
     private Date Patient_Birthdate_Compute(CqlContext context)
     {
@@ -126,9 +116,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Age in Years")]
     public int? Patient_Age_in_Years(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<int?>(
-            _cacheIndex_Patient_Age_in_Years,
-            Patient_Age_in_Years_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient_Age_in_Years, Patient_Age_in_Years_Compute, context) ?? Patient_Age_in_Years_Compute(context);
 
     private int? Patient_Age_in_Years_Compute(CqlContext context)
     {
@@ -142,9 +130,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(
-            _cacheIndex_Patient_Older_Than_AgeThreshold,
-            Patient_Older_Than_AgeThreshold_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient_Older_Than_AgeThreshold, Patient_Older_Than_AgeThreshold_Compute, context) ?? Patient_Older_Than_AgeThreshold_Compute(context);
 
     private bool? Patient_Older_Than_AgeThreshold_Compute(CqlContext context)
     {
@@ -171,65 +157,34 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_AgeThreshold != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_AgeThreshold' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_AgeThreshold}}. Cache indices can only be initialized once.");
-        _cacheIndex_AgeThreshold = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_CurrentDate != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_CurrentDate' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_CurrentDate}}. Cache indices can only be initialized once.");
-        _cacheIndex_CurrentDate = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient_Filter != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient_Filter' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient_Filter}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient_Filter = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient_Birthdate != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient_Birthdate' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient_Birthdate}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient_Birthdate = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient_Age_in_Years != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient_Age_in_Years' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient_Age_in_Years}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient_Age_in_Years = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient_Older_Than_AgeThreshold != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient_Older_Than_AgeThreshold' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient_Older_Than_AgeThreshold}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient_Older_Than_AgeThreshold = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_AgeThreshold = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_CurrentDate = index++;
+        _cacheIndex_Patient_Filter = index++;
+        _cacheIndex_Patient_Birthdate = index++;
+        _cacheIndex_Patient_Age_in_Years = index++;
+        _cacheIndex_Patient_Older_Than_AgeThreshold = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation

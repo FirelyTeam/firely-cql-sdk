@@ -57,9 +57,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(
-            _cacheIndex_Measurement_Period,
-            Measurement_Period_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -77,9 +75,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(
-            _cacheIndex_Patient,
-            Patient_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -91,9 +87,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Initial_Population,
-            Initial_Population_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -104,9 +98,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator,
-            Denominator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -117,9 +109,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter Less Than Two Days")]
     public IEnumerable<Encounter> Encounter_Less_Than_Two_Days(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_Less_Than_Two_Days,
-            Encounter_Less_Than_Two_Days_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_Less_Than_Two_Days, Encounter_Less_Than_Two_Days_Compute, context) ?? Encounter_Less_Than_Two_Days_Compute(context);
 
     private IEnumerable<Encounter> Encounter_Less_Than_Two_Days_Compute(CqlContext context)
     {
@@ -139,9 +129,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With Comfort Measures During Day Of Or Day After Arrival")]
     public IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival,
-            Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival, Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival_Compute, context) ?? Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival_Compute(CqlContext context)
     {
@@ -252,9 +240,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Thrombolytic Therapy Medication Or Procedures")]
     public IEnumerable<object> Thrombolytic_Therapy_Medication_Or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<object>>(
-            _cacheIndex_Thrombolytic_Therapy_Medication_Or_Procedures,
-            Thrombolytic_Therapy_Medication_Or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Thrombolytic_Therapy_Medication_Or_Procedures, Thrombolytic_Therapy_Medication_Or_Procedures_Compute, context) ?? Thrombolytic_Therapy_Medication_Or_Procedures_Compute(context);
 
     private IEnumerable<object> Thrombolytic_Therapy_Medication_Or_Procedures_Compute(CqlContext context)
     {
@@ -344,9 +330,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With Thrombolytic Therapy Medication Or Procedures")]
     public IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures,
-            Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures, Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures_Compute, context) ?? Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures_Compute(CqlContext context)
     {
@@ -461,9 +445,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With Thrombolytic Therapy Prior To Arrival")]
     public IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival,
-            Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival, Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival_Compute, context) ?? Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival_Compute(CqlContext context)
     {
@@ -492,9 +474,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With Thrombolytic Therapy Documented As Already Given")]
     public IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given,
-            Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given, Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given_Compute, context) ?? Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given_Compute(CqlContext context)
     {
@@ -559,9 +539,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With Thrombolytic Therapy Given Prior To Arrival Or During Hospitalization")]
     public IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization,
-            Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization, Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization_Compute, context) ?? Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization_Compute(CqlContext context)
     {
@@ -576,9 +554,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator_Exclusions,
-            Denominator_Exclusions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -593,9 +569,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With Antithrombotic Therapy")]
     public IEnumerable<Encounter> Encounter_With_Antithrombotic_Therapy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_Antithrombotic_Therapy,
-            Encounter_With_Antithrombotic_Therapy_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Antithrombotic_Therapy, Encounter_With_Antithrombotic_Therapy_Compute, context) ?? Encounter_With_Antithrombotic_Therapy_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_Antithrombotic_Therapy_Compute(CqlContext context)
     {
@@ -679,9 +653,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Numerator,
-            Numerator_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -692,9 +664,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Reason For Not Ordering Antithrombotic")]
     public IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> Reason_For_Not_Ordering_Antithrombotic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>>(
-            _cacheIndex_Reason_For_Not_Ordering_Antithrombotic,
-            Reason_For_Not_Ordering_Antithrombotic_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Reason_For_Not_Ordering_Antithrombotic, Reason_For_Not_Ordering_Antithrombotic_Compute, context) ?? Reason_For_Not_Ordering_Antithrombotic_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> Reason_For_Not_Ordering_Antithrombotic_Compute(CqlContext context)
     {
@@ -849,9 +819,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Reason For Not Administering Antithrombotic")]
     public IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> Reason_For_Not_Administering_Antithrombotic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?>>(
-            _cacheIndex_Reason_For_Not_Administering_Antithrombotic,
-            Reason_For_Not_Administering_Antithrombotic_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Reason_For_Not_Administering_Antithrombotic, Reason_For_Not_Administering_Antithrombotic_Compute, context) ?? Reason_For_Not_Administering_Antithrombotic_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> Reason_For_Not_Administering_Antithrombotic_Compute(CqlContext context)
     {
@@ -921,9 +889,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Documented Reason For No Antithrombotic Ordered Or Administered")]
     public IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>>(
-            _cacheIndex_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered,
-            Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered, Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Compute, context) ?? Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Compute(CqlContext context)
     {
@@ -938,9 +904,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With Documented Reason For No Antithrombotic Ordered Or Administered Day Of Or Day After Hospital Arrival")]
     public IEnumerable<Encounter> Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival,
-            Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival, Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival_Compute, context) ?? Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival_Compute(CqlContext context)
     {
@@ -984,9 +948,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With Pharmacological Contraindications For Antithrombotic Therapy Given Day Of Or Day After Hospital Arrival")]
     public IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival,
-            Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival, Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival_Compute, context) ?? Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival_Compute(CqlContext context)
     {
@@ -1070,9 +1032,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With An INR Greater Than 3.5")]
     public IEnumerable<Encounter> Encounter_With_An_INR_Greater_Than_3_5(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Encounter_With_An_INR_Greater_Than_3_5,
-            Encounter_With_An_INR_Greater_Than_3_5_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Encounter_With_An_INR_Greater_Than_3_5, Encounter_With_An_INR_Greater_Than_3_5_Compute, context) ?? Encounter_With_An_INR_Greater_Than_3_5_Compute(context);
 
     private IEnumerable<Encounter> Encounter_With_An_INR_Greater_Than_3_5_Compute(CqlContext context)
     {
@@ -1134,9 +1094,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(
-            _cacheIndex_Denominator_Exceptions,
-            Denominator_Exceptions_Compute);
+        _cache?.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute, context) ?? Denominator_Exceptions_Compute(context);
 
     private IEnumerable<Encounter> Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -1151,9 +1109,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Ethnicity,
-            SDE_Ethnicity_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1164,9 +1120,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(
-            _cacheIndex_SDE_Payer,
-            SDE_Payer_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1177,9 +1131,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(
-            _cacheIndex_SDE_Race,
-            SDE_Race_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1190,9 +1142,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(
-            _cacheIndex_SDE_Sex,
-            SDE_Sex_Compute);
+        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -1235,155 +1185,52 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ILibrary
 
     #region ILibraryInternals Implementation
 
-    bool ILibraryInternals.CacheIndicesInitialized { get; set; }
+    // Reference to the execution cache instance that initialized this library
+    private CqlLibrarySetInvocationCache _cache;
 
-    int ILibraryInternals.InitializeCacheIndices(CacheIndexInitializer initializer)
+    /// <summary>
+    /// Initializes cache indices for this library's cached expressions.
+    /// </summary>
+    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="startIndex">The starting index for cache field assignment.</param>
+    /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
+    int ILibraryInternals.InitializeCacheIndices(
+        CqlLibrarySetInvocationCache cache,
+        int startIndex)
     {
-        // Skip if already processed
-        if (!initializer.MarkAsProcessed(this))
+        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
+        if (_cache == cache)
             return 0;
 
-        var count = 0;
+        _cache = cache;
 
-        // Process dependencies first (depth-first traversal)
-        if (Dependencies is { Length: > 0 })
-        {
-            foreach (var dependency in Dependencies)
-            {
-                if (dependency is ILibraryInternals internals)
-                {
-                    count += internals.InitializeCacheIndices(initializer);
-                }
-            }
-        }
-
-        // Initialize cache indices for this library
-        if (_cacheIndex_Measurement_Period != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Measurement_Period' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Measurement_Period}}. Cache indices can only be initialized once.");
-        _cacheIndex_Measurement_Period = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Patient != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Patient' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Patient}}. Cache indices can only be initialized once.");
-        _cacheIndex_Patient = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Initial_Population != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Initial_Population' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Initial_Population}}. Cache indices can only be initialized once.");
-        _cacheIndex_Initial_Population = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_Less_Than_Two_Days != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_Less_Than_Two_Days' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_Less_Than_Two_Days}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_Less_Than_Two_Days = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Thrombolytic_Therapy_Medication_Or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Thrombolytic_Therapy_Medication_Or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Thrombolytic_Therapy_Medication_Or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Thrombolytic_Therapy_Medication_Or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exclusions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exclusions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exclusions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exclusions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_Antithrombotic_Therapy != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Antithrombotic_Therapy' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Antithrombotic_Therapy}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_Antithrombotic_Therapy = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Numerator != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Numerator' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Numerator}}. Cache indices can only be initialized once.");
-        _cacheIndex_Numerator = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Reason_For_Not_Ordering_Antithrombotic != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Reason_For_Not_Ordering_Antithrombotic' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Reason_For_Not_Ordering_Antithrombotic}}. Cache indices can only be initialized once.");
-        _cacheIndex_Reason_For_Not_Ordering_Antithrombotic = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Reason_For_Not_Administering_Antithrombotic != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Reason_For_Not_Administering_Antithrombotic' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Reason_For_Not_Administering_Antithrombotic}}. Cache indices can only be initialized once.");
-        _cacheIndex_Reason_For_Not_Administering_Antithrombotic = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered}}. Cache indices can only be initialized once.");
-        _cacheIndex_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Encounter_With_An_INR_Greater_Than_3_5 != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Encounter_With_An_INR_Greater_Than_3_5' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Encounter_With_An_INR_Greater_Than_3_5}}. Cache indices can only be initialized once.");
-        _cacheIndex_Encounter_With_An_INR_Greater_Than_3_5 = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_Denominator_Exceptions != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_Denominator_Exceptions' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_Denominator_Exceptions}}. Cache indices can only be initialized once.");
-        _cacheIndex_Denominator_Exceptions = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Ethnicity != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Ethnicity' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Ethnicity}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Ethnicity = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Payer != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Payer' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Payer}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Payer = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Race != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Race' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Race}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Race = initializer.GetNextIndex();
-        count++;
-
-        if (_cacheIndex_SDE_Sex != -1)
-            throw new InvalidOperationException($"Cache index field '_cacheIndex_SDE_Sex' in library '{{Name}}' version '{{Version}}' is already initialized to {{_cacheIndex_SDE_Sex}}. Cache indices can only be initialized once.");
-        _cacheIndex_SDE_Sex = initializer.GetNextIndex();
-        count++;
-
-        return count;
+        var index = startIndex;
+        _cacheIndex_Measurement_Period = index++;
+        _cacheIndex_Patient = index++;
+        _cacheIndex_Initial_Population = index++;
+        _cacheIndex_Denominator = index++;
+        _cacheIndex_Encounter_Less_Than_Two_Days = index++;
+        _cacheIndex_Encounter_With_Comfort_Measures_During_Day_Of_Or_Day_After_Arrival = index++;
+        _cacheIndex_Thrombolytic_Therapy_Medication_Or_Procedures = index++;
+        _cacheIndex_Encounter_With_Thrombolytic_Therapy_Medication_Or_Procedures = index++;
+        _cacheIndex_Encounter_With_Thrombolytic_Therapy_Prior_To_Arrival = index++;
+        _cacheIndex_Encounter_With_Thrombolytic_Therapy_Documented_As_Already_Given = index++;
+        _cacheIndex_Encounter_With_Thrombolytic_Therapy_Given_Prior_To_Arrival_Or_During_Hospitalization = index++;
+        _cacheIndex_Denominator_Exclusions = index++;
+        _cacheIndex_Encounter_With_Antithrombotic_Therapy = index++;
+        _cacheIndex_Numerator = index++;
+        _cacheIndex_Reason_For_Not_Ordering_Antithrombotic = index++;
+        _cacheIndex_Reason_For_Not_Administering_Antithrombotic = index++;
+        _cacheIndex_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered = index++;
+        _cacheIndex_Encounter_With_Documented_Reason_For_No_Antithrombotic_Ordered_Or_Administered_Day_Of_Or_Day_After_Hospital_Arrival = index++;
+        _cacheIndex_Encounter_With_Pharmacological_Contraindications_For_Antithrombotic_Therapy_Given_Day_Of_Or_Day_After_Hospital_Arrival = index++;
+        _cacheIndex_Encounter_With_An_INR_Greater_Than_3_5 = index++;
+        _cacheIndex_Denominator_Exceptions = index++;
+        _cacheIndex_SDE_Ethnicity = index++;
+        _cacheIndex_SDE_Payer = index++;
+        _cacheIndex_SDE_Race = index++;
+        _cacheIndex_SDE_Sex = index++;
+        return index - startIndex;
     }
 
     #endregion ILibraryInternals Implementation
