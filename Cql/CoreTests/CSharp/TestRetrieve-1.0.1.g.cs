@@ -154,24 +154,27 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
 
     #region ILibraryInternals Implementation
 
-    // Reference to the execution cache instance that initialized this library
-    private CqlLibrarySetInvocationCache _cache;
+    // Reference to the library invocation set that initialized this library
+    private CqlLibraryInvocationSet _librarySet;
+
+    // Reference to the cache instance used for caching computed values
+    private CqlLibraryInvocationCache _cache;
 
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
-    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="librarySet">The library invocation set performing initialization.</param>
     /// <param name="startIndex">The starting index for cache field assignment.</param>
     /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibrarySetInvocationCache cache,
+        CqlLibraryInvocationSet librarySet,
         int startIndex)
     {
-        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
-        if (_cache == cache)
+        // Skip if already initialized by this library set instance (allows re-initialization with different set)
+        if (_librarySet == librarySet)
             return 0;
 
-        _cache = cache;
+        _librarySet = librarySet;
 
         var index = startIndex;
         _cacheIndex_MeasurementPeriod = index++;
@@ -179,6 +182,15 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ILibraryInternals, ISingleto
         _cacheIndex_InDemographic = index++;
         _cacheIndex_SexuallyActive = index++;
         return index - startIndex;
+    }
+
+    /// <summary>
+    /// Sets the cache instance that this library will use for caching computed values.
+    /// </summary>
+    /// <param name="cache">The cache instance to use.</param>
+    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
+    {
+        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation
