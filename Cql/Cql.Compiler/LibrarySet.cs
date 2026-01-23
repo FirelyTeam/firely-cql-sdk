@@ -9,9 +9,10 @@
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure.Diagramming;
-using Hl7.Cql.Compiler.Infrastructure.Graphs;
 using Hl7.Cql.Compiler.Infrastructure.Sets;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Runtime.Graphs;
+
 #pragma warning disable CS8321 // Local function is declared but never used
 
 namespace Hl7.Cql.Compiler;

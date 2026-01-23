@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Compiler.Infrastructure.Graphs;
+namespace Hl7.Cql.Runtime.Graphs;
 
 internal static class Traversal
 {

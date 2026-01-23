@@ -14,6 +14,7 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Hl7.Fhir.Validation;
 using System.Text.Json;
+using Hl7.Cql.Runtime.Graphs;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -135,10 +136,10 @@ internal static partial class FhirLibraryUtilities
     {
         HashSet<string> resourceIds = new();
 
-        return Compiler.Infrastructure.Graphs.Traversal.PreOrder(
-                           default(FhirLibrary),
-                           GetDirectDependencies)
-                       .OfType<FhirLibrary>();
+        return Traversal.PreOrder(
+                            default(FhirLibrary),
+                            GetDirectDependencies)
+                        .OfType<FhirLibrary>();
 
         IEnumerable<FhirLibrary> GetDirectDependencies(FhirLibrary? fhirLib)
         {
