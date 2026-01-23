@@ -138,21 +138,21 @@ public sealed class CqlLibraryInvocationCache
     /// Initializes a new cache using the specified library invocation set and cache write strategy, replacing any existing cache and resetting
     /// related statistics.
     /// </summary>
-    /// <param name="librarySet">The library invocation set that defines the cache size and initialized libraries.</param>
+    /// <param name="libraryInvocationSet">The library invocation set that defines the cache size and initialized libraries.</param>
     /// <param name="cacheWriteStrategy">The strategy to use when writing to the cache. The default is CacheWriteStrategy.ExecutionAndPublication.</param>
     /// <remarks>Call this method to reset the cache and its statistics. Any previously cached entries will be
     /// discarded. Use the cacheWriteStrategy parameter to control how cache writes are handled after
     /// initialization.</remarks>
     public void StartNewCache(
-        CqlLibraryInvocationSet librarySet,
+        CqlLibraryInvocationSet libraryInvocationSet,
         CacheWriteStrategy cacheWriteStrategy = CacheWriteStrategy.ExecutionAndPublication)
     {
-        if (librarySet is null)
-            throw new ArgumentNullException(nameof(librarySet));
+        if (libraryInvocationSet is null)
+            throw new ArgumentNullException(nameof(libraryInvocationSet));
 
         _cacheWriteStrategy = cacheWriteStrategy;
 
-        var cacheLength = librarySet.CacheEntriesCount;
+        var cacheLength = libraryInvocationSet.CacheEntriesCount;
         if (cacheLength <= 0)
         {
             _cache = null;
@@ -168,6 +168,6 @@ public sealed class CqlLibraryInvocationCache
         ResetStats();
         
         // Set this cache instance on all libraries in the set
-        librarySet.SetCacheInstanceOnLibraries(this);
+        libraryInvocationSet.SetCacheInstanceOnLibraries(this);
     }
 }

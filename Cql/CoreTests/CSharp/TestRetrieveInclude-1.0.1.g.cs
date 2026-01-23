@@ -68,28 +68,19 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ILibraryInternals, IS
 
     #region ILibraryInternals Implementation
 
-    // Reference to the library invocation set that initialized this library
-    private CqlLibraryInvocationSet _librarySet;
-
     // Reference to the cache instance used for caching computed values
     private CqlLibraryInvocationCache _cache;
 
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
-    /// <param name="librarySet">The library invocation set performing initialization.</param>
+    /// <param name="libraryInvocationSet">The library invocation set performing initialization.</param>
     /// <param name="startIndex">The starting index for cache field assignment.</param>
     /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibraryInvocationSet librarySet,
+        CqlLibraryInvocationSet libraryInvocationSet,
         int startIndex)
     {
-        // Skip if already initialized by this library set instance (allows re-initialization with different set)
-        if (_librarySet == librarySet)
-            return 0;
-
-        _librarySet = librarySet;
-
         var index = startIndex;
         _cacheIndex_InDemographic = index++;
         return index - startIndex;

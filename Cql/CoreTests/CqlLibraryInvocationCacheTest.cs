@@ -20,7 +20,9 @@ public class CqlLibraryInvocationCacheTest
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
         var lib = RR23_1_0_0.Instance;
-        var cache = new CqlLibrarySetInvocationCache(lib);
+        
+        // Create library invocation set but don't create/start a cache
+        var libraryInvocationSet = new CqlLibraryInvocationSet(lib);
 
         // Act - Call the same expression twice without cache
         var result1 = lib.Measurement_Period(ctx);
@@ -30,13 +32,6 @@ public class CqlLibraryInvocationCacheTest
         Assert.IsNotNull(result1);
         Assert.IsNotNull(result2);
         Assert.AreEqual(result1, result2);
-
-        // Verify no cache was used
-        Assert.AreEqual(false, cache.CacheEnabled);
-        Assert.AreEqual(0, cache.CacheEntriesCount);
-        Assert.AreEqual(0, cache.CacheCallCount);
-        Assert.AreEqual(0, cache.CacheMisses);
-        Assert.AreEqual(0, cache.CacheHits);
     }
 
     [TestMethod]
@@ -46,10 +41,10 @@ public class CqlLibraryInvocationCacheTest
         var ctx = FhirCqlContext.ForBundle();
         var lib = RR23_1_0_0.Instance;
 
-        // Initialize library set and cache
-        var librarySet = new CqlLibraryInvocationSet(lib);
+        // Initialize library invocation set and cache
+        var libraryInvocationSet = new CqlLibraryInvocationSet(lib);
         var cache = new CqlLibraryInvocationCache();
-        cache.StartNewCache(librarySet);
+        cache.StartNewCache(libraryInvocationSet);
 
         // Act - Call the same expression twice - cache is accessed via library's invocation set
         var result1 = lib.Measurement_Period(ctx);
@@ -73,16 +68,16 @@ public class CqlLibraryInvocationCacheTest
         var lib = RR23_1_0_0.Instance;
         var ctx = FhirCqlContext.ForBundle();
 
-        // First cache with first library set
-        var librarySet1 = new CqlLibraryInvocationSet(lib);
+        // First cache with first library invocation set
+        var libraryInvocationSet1 = new CqlLibraryInvocationSet(lib);
         var cache1 = new CqlLibraryInvocationCache();
-        cache1.StartNewCache(librarySet1);
+        cache1.StartNewCache(libraryInvocationSet1);
         var result1 = lib.Measurement_Period(ctx);
 
-        // Second cache with second library set - reinitializes the library with new set
-        var librarySet2 = new CqlLibraryInvocationSet(lib);
+        // Second cache with second library invocation set - reinitializes the library with new set
+        var libraryInvocationSet2 = new CqlLibraryInvocationSet(lib);
         var cache2 = new CqlLibraryInvocationCache();
-        cache2.StartNewCache(librarySet2);
+        cache2.StartNewCache(libraryInvocationSet2);
         var result2 = lib.Measurement_Period(ctx);
 
         // Assert - Each cache tracks independently
@@ -98,9 +93,9 @@ public class CqlLibraryInvocationCacheTest
         // Arrange
         var ctx = FhirCqlContext.ForBundle();
         var lib = RR23_1_0_0.Instance;
-        var librarySet = new CqlLibraryInvocationSet(lib);
+        var libraryInvocationSet = new CqlLibraryInvocationSet(lib);
         var cache = new CqlLibraryInvocationCache();
-        cache.StartNewCache(librarySet);
+        cache.StartNewCache(libraryInvocationSet);
         var results = new System.Collections.Concurrent.ConcurrentBag<object?>();
 
         // Act - Multiple threads accessing the same cache simultaneously

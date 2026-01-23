@@ -17,10 +17,10 @@ public interface ILibraryInternals
     /// <summary>
     /// Initializes cache indices for this library, but excluding its dependencies.
     /// </summary>
-    /// <param name="librarySet">The library invocation set being initialized.</param>
+    /// <param name="libraryInvocationSet">The library invocation set being initialized.</param>
     /// <param name="startIndex">The start index for cache indices.</param>
     /// <returns>The total number of cache indices initialized in this library.</returns>
-    int InitializeCacheIndices(CqlLibraryInvocationSet librarySet, int startIndex);
+    int InitializeCacheIndices(CqlLibraryInvocationSet libraryInvocationSet, int startIndex);
     
     /// <summary>
     /// Sets the cache instance that this library will use for caching computed values.
