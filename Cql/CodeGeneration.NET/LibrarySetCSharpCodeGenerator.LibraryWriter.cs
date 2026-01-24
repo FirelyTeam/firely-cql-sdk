@@ -294,8 +294,7 @@ partial class LibrarySetCSharpCodeGenerator
         /// <summary>
         /// Generates the InitializeCacheIndices method implementation.
         /// This method initializes cache index fields for this library only (dependencies are handled externally).
-        /// It checks if already initialized by comparing the library set instance reference, then assigns sequential
-        /// cache indices starting from the provided startIndex to each cached expression field in the library.
+        /// It assigns sequential cache indices starting from the provided startIndex to each cached expression field in the library.
         /// Returns the total number of indices assigned.
         /// </summary>
         private void AppendInitializeCacheIndicesMethod()
@@ -303,8 +302,6 @@ partial class LibrarySetCSharpCodeGenerator
             ISB.AppendLine(
                 """
                 #region ILibraryInternals Implementation
-
-                private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
 
                 /// <summary>
                 /// Initializes cache indices for this library's cached expressions.
@@ -336,15 +333,6 @@ partial class LibrarySetCSharpCodeGenerator
 
             ISB.AppendLine(
                 """
-                }
-
-                /// <summary>
-                /// Sets the cache instance that this library will use for caching computed values.
-                /// </summary>
-                /// <param name="cache">The cache instance to use.</param>
-                void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-                {
-                    _cache = cache;
                 }
 
                 #endregion ILibraryInternals Implementation

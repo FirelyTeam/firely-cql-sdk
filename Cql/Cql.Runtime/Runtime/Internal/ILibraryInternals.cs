@@ -21,10 +21,4 @@ public interface ILibraryInternals
     /// <param name="startIndex">The start index for cache indices.</param>
     /// <returns>The total number of cache indices initialized in this library.</returns>
     int InitializeCacheIndices(CqlLibraryInvocationSet libraryInvocationSet, int startIndex);
-    
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void SetCacheInstance(CqlLibraryInvocationCache cache);
 }

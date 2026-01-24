@@ -41,7 +41,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute, context) ?? ChosenSubCategory_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute);
 
     private string ChosenSubCategory_Compute(CqlContext context)
     {
@@ -52,7 +52,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlParameterDefinition("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_ChosenCode, ChosenCode_Compute, context) ?? ChosenCode_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ChosenCode, ChosenCode_Compute);
 
     private CqlCode ChosenCode_Compute(CqlContext context)
     {
@@ -67,7 +67,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_ValueSetA, ValueSetA_Compute, context) ?? ValueSetA_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ValueSetA, ValueSetA_Compute);
 
     private CqlValueSet ValueSetA_Compute(CqlContext context)
     {
@@ -109,7 +109,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_ValueSetB, ValueSetB_Compute, context) ?? ValueSetB_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ValueSetB, ValueSetB_Compute);
 
     private CqlValueSet ValueSetB_Compute(CqlContext context)
     {
@@ -151,7 +151,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Result")]
     public string Result(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Result, Result_Compute, context) ?? Result_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Result, Result_Compute);
 
     private string Result_Compute(CqlContext context)
     {
@@ -205,9 +205,6 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     #region ILibraryInternals Implementation
 
-    // Reference to the cache instance used for caching computed values
-    private CqlLibraryInvocationCache _cache;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -225,15 +222,6 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
         _cacheIndex_ValueSetB = index++;
         _cacheIndex_Result = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

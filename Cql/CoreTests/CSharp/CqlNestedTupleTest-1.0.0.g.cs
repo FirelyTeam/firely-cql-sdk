@@ -21,7 +21,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Result")]
     public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Result, Result_Compute, context) ?? Result_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Result, Result_Compute);
 
     private (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result_Compute(CqlContext context)
     {
@@ -41,9 +41,6 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ILibraryInternals, ISi
 
     #region ILibraryInternals Implementation
 
-    // Reference to the cache instance used for caching computed values
-    private CqlLibraryInvocationCache _cache;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -57,15 +54,6 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ILibraryInternals, ISi
         var index = startIndex;
         _cacheIndex_Result = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

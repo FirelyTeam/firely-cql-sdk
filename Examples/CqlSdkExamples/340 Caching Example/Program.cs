@@ -67,15 +67,14 @@ partial class Program
                 .AddCqlLibraries(cql)
                 .CreateLibrarySetInvoker();
 
-        // Cache must be created outside LibrarySetInvoker
+        // Get the library invocation set
         var libraryInvocationSet = librarySetInvoker.InvocationSet;
-        var cache = new CqlLibraryInvocationCache();
-        cache.StartNewCache(libraryInvocationSet); // Initialize cache with default ExecutionAndPublication strategy
-        Console.WriteLine($"✓ Library loaded. Cache size: {cache.CacheEntriesCount} entries\n");
+        Console.WriteLine($"✓ Library loaded. Cache size: {libraryInvocationSet.CacheEntriesCount} entries\n");
 
         // Example 1: Basic caching
         Console.WriteLine("1. Basic Caching (ExecutionAndPublication strategy - default):");
         var context1 = FhirCqlContext.WithDataSource();
+        context1.StartCaching(libraryInvocationSet); // Start caching on the context
 
         var sw = Stopwatch.StartNew();
         for (int i = 0; i < 3; i++)
@@ -88,12 +87,12 @@ partial class Program
                             $"({(i == 0 ? "computed" : "cached")})");
         }
         Console.WriteLine($"   Time: {sw.ElapsedMilliseconds}ms");
-        Console.WriteLine($"   Cache hits: {cache.CacheHits}, misses: {cache.CacheMisses}\n");
+        Console.WriteLine($"   Cache hits: {context1.CacheHits}, misses: {context1.CacheMisses}\n");
 
         // Example 2: Caching null values (now supported!)
         Console.WriteLine("2. Caching Null Values:");
-        cache.StartNewCache(libraryInvocationSet); // Reset cache for demonstration
         var context2 = FhirCqlContext.WithDataSource();
+        context2.StartCaching(libraryInvocationSet);
 
         for (int i = 0; i < 2; i++)
         {
@@ -104,12 +103,12 @@ partial class Program
             Console.WriteLine($"   Call {i + 1}: Result = {result ?? "(null)"} " +
                             $"({(i == 0 ? "computed and cached" : "retrieved from cache")})");
         }
-        Console.WriteLine($"   Cache hits: {cache.CacheHits}, misses: {cache.CacheMisses}\n");
+        Console.WriteLine($"   Cache hits: {context2.CacheHits}, misses: {context2.CacheMisses}\n");
 
         // Example 3: PublicationOnly strategy (allow multiple concurrent computations)
         Console.WriteLine("3. PublicationOnly Strategy (multiple threads can compute concurrently):");
-        cache.StartNewCache(libraryInvocationSet, CacheWriteStrategy.PublicationOnly); // Use PublicationOnly strategy
         var context3 = FhirCqlContext.WithDataSource();
+        context3.StartCaching(libraryInvocationSet, CacheWriteStrategy.PublicationOnly);
         Console.WriteLine("   ✓ Using PublicationOnly: Multiple threads can compute, last write wins");
         Console.WriteLine("   ✓ Per-entry locking: Different cache entries don't contend with each other");
 
@@ -121,28 +120,29 @@ partial class Program
 
         // Example 4: Cache invalidation
         Console.WriteLine("4. Cache Invalidation:");
-        cache.StartNewCache(libraryInvocationSet); // Initialize cache
         var context4 = FhirCqlContext.WithDataSource();
+        context4.StartCaching(libraryInvocationSet);
 
         var result4a = librarySetInvoker.InvokeLibraryDefinition(
             context4,
             cql.LibraryIdentifier,
             "ExpensiveComputation");
         Console.WriteLine($"   First call: {result4a} (computed)");
-        Console.WriteLine($"   Cache stats: {cache.CacheHits} hits, {cache.CacheMisses} misses");
+        Console.WriteLine($"   Cache stats: {context4.CacheHits} hits, {context4.CacheMisses} misses");
 
-        cache.StartNewCache(libraryInvocationSet); // Reset cache - invalidates old cached values
+        var context4b = FhirCqlContext.WithDataSource();
+        context4b.StartCaching(libraryInvocationSet);
         var result4b = librarySetInvoker.InvokeLibraryDefinition(
-            context4,
+            context4b,
             cql.LibraryIdentifier,
             "ExpensiveComputation");
-        Console.WriteLine($"   After StartNewCache(libraryInvocationSet): {result4b} (recomputed)");
-        Console.WriteLine($"   Cache stats: {cache.CacheHits} hits, {cache.CacheMisses} misses\n");
+        Console.WriteLine($"   After new context.StartCaching(): {result4b} (recomputed)");
+        Console.WriteLine($"   Cache stats: {context4b.CacheHits} hits, {context4b.CacheMisses} misses\n");
 
         // Example 5: Cache statistics
         Console.WriteLine("5. Cache Statistics Monitoring:");
-        cache.StartNewCache(libraryInvocationSet);
         var context5 = FhirCqlContext.WithDataSource();
+        context5.StartCaching(libraryInvocationSet);
 
         // Execute several expressions
         for (int i = 0; i < 5; i++)
@@ -151,10 +151,10 @@ partial class Program
             _ = librarySetInvoker.InvokeLibraryDefinition(context5, cql.LibraryIdentifier, "NullValue");
         }
 
-        Console.WriteLine($"   Total cache calls: {cache.CacheCallCount}");
-        Console.WriteLine($"   Cache hits: {cache.CacheHits}");
-        Console.WriteLine($"   Cache misses: {cache.CacheMisses}");
-        var effectiveness = cache.CacheCallCount > 0 ? (cache.CacheHits * 100.0 / cache.CacheCallCount) : 0;
+        Console.WriteLine($"   Total cache calls: {context5.CacheCallCount}");
+        Console.WriteLine($"   Cache hits: {context5.CacheHits}");
+        Console.WriteLine($"   Cache misses: {context5.CacheMisses}");
+        var effectiveness = context5.CacheCallCount > 0 ? (context5.CacheHits * 100.0 / context5.CacheCallCount) : 0;
         Console.WriteLine($"   Cache effectiveness: {effectiveness:F1}%");
 
         Console.WriteLine("\n✓ Preferred Approach Complete!");
@@ -200,19 +200,18 @@ partial class Program
         var libraries = ExtractLibrariesFromAssemblies(tempInvoker);
         Console.WriteLine($"   Found {libraries.Length} library/libraries\n");
 
-        // Step 3: CRITICAL - Create CqlLibraryInvocationSet and CqlLibraryInvocationCache manually
-        Console.WriteLine("Step 3: Create CqlLibraryInvocationSet and CqlLibraryInvocationCache manually");
+        // Step 3: CRITICAL - Create CqlLibraryInvocationSet and start caching on context
+        Console.WriteLine("Step 3: Create CqlLibraryInvocationSet and start caching on context");
         var libraryInvocationSet = new CqlLibraryInvocationSet(libraries);
         Console.WriteLine($"   ✓ Initialized {libraryInvocationSet.CacheEntriesCount} cache entries in library set");
-        
-        var cache = new CqlLibraryInvocationCache();
-        cache.StartNewCache(libraryInvocationSet); // Initialize the cache with the library set
-        Console.WriteLine($"   ✓ Cache has {cache.CacheEntriesCount} entries");
-        Console.WriteLine($"   ✓ Cache enabled and ready\n");
 
         // Step 4: Use the library with manual method invocation
-        Console.WriteLine("Step 4: Invoke library expressions manually");
+        Console.WriteLine("\nStep 4: Invoke library expressions manually");
         var context = FhirCqlContext.WithDataSource();
+        context.StartCaching(libraryInvocationSet);
+        Console.WriteLine($"   ✓ Cache enabled with {libraryInvocationSet.CacheEntriesCount} entries");
+        Console.WriteLine($"   ✓ Cache ready\n");
+
         var library = libraries[0];
 
         var testExpressionMethod = library.GetType().GetMethod("TestExpression");
@@ -221,12 +220,12 @@ partial class Program
             // First call - cache miss
             var result1 = testExpressionMethod.Invoke(library, [context]);
             Console.WriteLine($"   First call: {result1}");
-            Console.WriteLine($"   Cache stats: {cache.CacheHits} hits, {cache.CacheMisses} misses");
+            Console.WriteLine($"   Cache stats: {context.CacheHits} hits, {context.CacheMisses} misses");
 
             // Second call - cache hit
             var result2 = testExpressionMethod.Invoke(library, [context]);
             Console.WriteLine($"   Second call: {result2} (cached)");
-            Console.WriteLine($"   Cache stats: {cache.CacheHits} hits, {cache.CacheMisses} misses");
+            Console.WriteLine($"   Cache stats: {context.CacheHits} hits, {context.CacheMisses} misses");
         }
 
         // Null value caching
@@ -239,11 +238,11 @@ partial class Program
 
             var nullResult2 = nullExpressionMethod.Invoke(library, [context]);
             Console.WriteLine($"   Second call: {nullResult2 ?? "(null)"} (cached null value!)");
-            Console.WriteLine($"   Cache stats: {cache.CacheHits} hits, {cache.CacheMisses} misses\n");
+            Console.WriteLine($"   Cache stats: {context.CacheHits} hits, {context.CacheMisses} misses\n");
         }
 
         Console.WriteLine("✗ Manual Approach Complete (NOT RECOMMENDED)");
-        Console.WriteLine("  • Requires manual CqlLibraryInvocationCache creation");
+        Console.WriteLine("  • Requires manual CqlLibraryInvocationSet creation");
         Console.WriteLine("  • Must manually invoke library methods via reflection");
         Console.WriteLine("  • More error-prone than InvocationToolkit");
         Console.WriteLine("  • Only use when InvocationToolkit cannot be used");

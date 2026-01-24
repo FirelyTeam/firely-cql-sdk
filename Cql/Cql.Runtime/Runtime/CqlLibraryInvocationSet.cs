@@ -63,14 +63,4 @@ public sealed class CqlLibraryInvocationSet
 
         return count;
     }
-
-    /// <summary>
-    /// Sets the cache instance on all libraries in this set.
-    /// </summary>
-    /// <param name="cache">The cache instance to set on all libraries.</param>
-    internal void SetCacheInstanceOnLibraries(CqlLibraryInvocationCache cache)
-    {
-        foreach (var library in _allLibraries)
-            library.SetCacheInstance(cache);
-    }
 }

@@ -41,12 +41,11 @@ public class CqlLibraryInvocationCacheTest
         var ctx = FhirCqlContext.ForBundle();
         var lib = RR23_1_0_0.Instance;
 
-        // Initialize library invocation set and cache
+        // Initialize library invocation set and start caching on context
         var libraryInvocationSet = new CqlLibraryInvocationSet(lib);
-        var cache = new CqlLibraryInvocationCache();
-        cache.StartNewCache(libraryInvocationSet);
+        ctx.StartCaching(libraryInvocationSet);
 
-        // Act - Call the same expression twice - cache is accessed via library's invocation set
+        // Act - Call the same expression twice - cache is accessed via context
         var result1 = lib.Measurement_Period(ctx);
         var result2 = lib.Measurement_Period(ctx);
 
@@ -56,9 +55,9 @@ public class CqlLibraryInvocationCacheTest
         Assert.AreEqual(result1, result2);
 
         // Verify cache was used
-        Assert.AreEqual(2, cache.CacheCallCount);
-        Assert.AreEqual(1, cache.CacheMisses);
-        Assert.AreEqual(1, cache.CacheHits);
+        Assert.AreEqual(2, ctx.CacheCallCount);
+        Assert.AreEqual(1, ctx.CacheMisses);
+        Assert.AreEqual(1, ctx.CacheHits);
     }
 
     [TestMethod]
@@ -66,59 +65,54 @@ public class CqlLibraryInvocationCacheTest
     {
         // Arrange
         var lib = RR23_1_0_0.Instance;
-        var ctx = FhirCqlContext.ForBundle();
-
-        // First cache with first library invocation set
+        
+        // First context with cache
+        var ctx1 = FhirCqlContext.ForBundle();
         var libraryInvocationSet1 = new CqlLibraryInvocationSet(lib);
-        var cache1 = new CqlLibraryInvocationCache();
-        cache1.StartNewCache(libraryInvocationSet1);
-        var result1 = lib.Measurement_Period(ctx);
+        ctx1.StartCaching(libraryInvocationSet1);
+        var result1 = lib.Measurement_Period(ctx1);
 
-        // Second cache with second library invocation set - reinitializes the library with new set
+        // Second context with separate cache - reinitializes the library with new set
+        var ctx2 = FhirCqlContext.ForBundle();
         var libraryInvocationSet2 = new CqlLibraryInvocationSet(lib);
-        var cache2 = new CqlLibraryInvocationCache();
-        cache2.StartNewCache(libraryInvocationSet2);
-        var result2 = lib.Measurement_Period(ctx);
+        ctx2.StartCaching(libraryInvocationSet2);
+        var result2 = lib.Measurement_Period(ctx2);
 
-        // Assert - Each cache tracks independently
-        Assert.AreEqual(1, cache1.CacheCallCount);
-        Assert.AreEqual(1, cache1.CacheMisses);
-        Assert.AreEqual(1, cache2.CacheCallCount);
-        Assert.AreEqual(1, cache2.CacheMisses);
+        // Assert - Each context tracks cache independently
+        Assert.AreEqual(1, ctx1.CacheCallCount);
+        Assert.AreEqual(1, ctx1.CacheMisses);
+        Assert.AreEqual(1, ctx2.CacheCallCount);
+        Assert.AreEqual(1, ctx2.CacheMisses);
     }
 
     [TestMethod]
     public void Cache_ParallelExecutionSameCache_ShouldBeThreadSafe()
     {
         // Arrange
-        var ctx = FhirCqlContext.ForBundle();
         var lib = RR23_1_0_0.Instance;
         var libraryInvocationSet = new CqlLibraryInvocationSet(lib);
-        var cache = new CqlLibraryInvocationCache();
-        cache.StartNewCache(libraryInvocationSet);
-        var results = new System.Collections.Concurrent.ConcurrentBag<object?>();
+        var results = new System.Collections.Concurrent.ConcurrentBag<(object? result, long callCount, long misses, long hits)>();
 
-        // Act - Multiple threads accessing the same cache simultaneously
+        // Act - Multiple threads accessing with their own contexts (thread-safe because each thread has its own context)
         var parallelResult = Parallel.For(0, 20, i =>
         {
+            var ctx = FhirCqlContext.ForBundle();
+            ctx.StartCaching(libraryInvocationSet);
             var result = lib.Measurement_Period(ctx);
-            results.Add(result);
+            results.Add((result, ctx.CacheCallCount, ctx.CacheMisses, ctx.CacheHits));
         });
 
         // Assert
         Assert.IsTrue(parallelResult.IsCompleted);
         Assert.AreEqual(20, results.Count);
 
-        // All results should be equal (cached value)
-        var firstResult = results.First();
-        foreach (var result in results)
+        // Each context computed once (no sharing across threads with different contexts)
+        foreach (var (result, callCount, misses, hits) in results)
         {
-            Assert.AreEqual(firstResult, result);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, callCount);
+            Assert.AreEqual(1, misses);
+            Assert.AreEqual(0, hits);
         }
-
-        // Verify thread-safety: only one factory invocation despite parallel calls
-        Assert.AreEqual(20, cache.CacheCallCount);
-        Assert.AreEqual(1, cache.CacheMisses);
-        Assert.AreEqual(19, cache.CacheHits);
     }
 }

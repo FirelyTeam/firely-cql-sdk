@@ -74,7 +74,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ILibraryInternals, ISingle
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -94,9 +94,6 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ILibraryInternals, ISingle
 
     #region ILibraryInternals Implementation
 
-    // Reference to the cache instance used for caching computed values
-    private CqlLibraryInvocationCache _cache;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -110,15 +107,6 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ILibraryInternals, ISingle
         var index = startIndex;
         _cacheIndex_Patient = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

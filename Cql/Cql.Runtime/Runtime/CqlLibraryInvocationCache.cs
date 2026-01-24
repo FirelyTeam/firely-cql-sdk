@@ -19,10 +19,11 @@ namespace Hl7.Cql.Runtime;
 /// This class provides a thread-safe invocation cache that stores computed expression values and
 /// returns cached results on subsequent calls. The cache size is determined by a CqlLibraryInvocationSet
 /// which handles cache index initialization.
+/// This class is internal and accessed through CqlContext.
 /// </remarks>
-public sealed class CqlLibraryInvocationCache
+internal sealed class CqlLibraryInvocationCache
 {
-    public static CqlLibraryInvocationCache NeverCached { get; } = new
+    internal static CqlLibraryInvocationCache NeverCached { get; } = new
         CqlLibraryInvocationCache(true);
 
     /// <summary>
@@ -31,7 +32,7 @@ public sealed class CqlLibraryInvocationCache
     /// <remarks>This constructor creates the cache with default behavior, equivalent to passing <see
     /// langword="false"/> to the parameterized constructor. Use this overload when no custom configuration is
     /// required.</remarks>
-    public CqlLibraryInvocationCache() : this(false) {}
+    internal CqlLibraryInvocationCache() : this(false) {}
 
     private CqlLibraryInvocationCache(bool neverCacheMode) => _neverCacheMode = neverCacheMode;
 
@@ -44,17 +45,17 @@ public sealed class CqlLibraryInvocationCache
     /// <summary>
     /// Gets the total count of cache entries in this cache.
     /// </summary>
-    public int CacheEntriesCount => _cache?.Length ?? 0;
+    internal int CacheEntriesCount => _cache?.Length ?? 0;
 
     /// <summary>
     /// Gets the total number of calls to GetOrCompute.
     /// </summary>
-    public long CacheCallCount => Interlocked.Read(ref _cacheCallCount);
+    internal long CacheCallCount => Interlocked.Read(ref _cacheCallCount);
 
     /// <summary>
     /// Gets the number of times the factory function was invoked (cache misses).
     /// </summary>
-    public long CacheMisses => Interlocked.Read(ref _cacheFactoryInvocations);
+    internal long CacheMisses => Interlocked.Read(ref _cacheFactoryInvocations);
 
     /// <summary>
     /// Gets the number of cache hits (calls where a cached value was returned).
@@ -62,7 +63,7 @@ public sealed class CqlLibraryInvocationCache
     /// <remarks>
     /// Cache hits = Total calls to GetOrCompute - Factory invocations (cache misses).
     /// </remarks>
-    public long CacheHits => CacheCallCount - CacheMisses;
+    internal long CacheHits => CacheCallCount - CacheMisses;
 
     /// <summary>
     /// Gets or computes a cached value for the specified cache index.
@@ -77,7 +78,7 @@ public sealed class CqlLibraryInvocationCache
     /// If caching is disabled (cache is null) or the cache index is invalid, the factory function is called without caching the result.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public T GetOrCompute<T>(
+    internal T GetOrCompute<T>(
         int cacheIndex,
         Func<CqlContext, T> factory,
         CqlContext context)
@@ -134,12 +135,12 @@ public sealed class CqlLibraryInvocationCache
     /// <summary>
     /// Gets a value indicating whether caching is enabled for this instance.
     /// </summary>
-    public bool CacheEnabled => _cache is not null;
+    internal bool CacheEnabled => _cache is not null;
 
     /// <summary>
     /// Stops the cache and resets cache statistics.
     /// </summary>
-    public void StopCache()
+    internal void StopCache()
     {
         if (_neverCacheMode)
             throw new NotSupportedException($"Cannot call {nameof(StopCache)} on the NeverCached instance.");
@@ -158,12 +159,12 @@ public sealed class CqlLibraryInvocationCache
     /// Initializes a new cache using the specified library invocation set and cache write strategy, replacing any existing cache and resetting
     /// related statistics.
     /// </summary>
-    /// <param name="libraryInvocationSet">The library invocation set that defines the cache size and initialized libraries.</param>
+    /// <param name="libraryInvocationSet">The library invocation set that defines the cache size.</param>
     /// <param name="cacheWriteStrategy">The strategy to use when writing to the cache. The default is CacheWriteStrategy.ExecutionAndPublication.</param>
     /// <remarks>Call this method to reset the cache and its statistics. Any previously cached entries will be
     /// discarded. Use the cacheWriteStrategy parameter to control how cache writes are handled after
     /// initialization.</remarks>
-    public void StartNewCache(
+    internal void StartNewCache(
         CqlLibraryInvocationSet libraryInvocationSet,
         CacheWriteStrategy cacheWriteStrategy = CacheWriteStrategy.ExecutionAndPublication)
     {
@@ -189,8 +190,5 @@ public sealed class CqlLibraryInvocationCache
 
         _cache = cache;
         ResetStats();
-
-        // Set this cache instance on all libraries in the set
-        libraryInvocationSet.SetCacheInstanceOnLibraries(this);
     }
 }
