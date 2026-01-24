@@ -25,10 +25,15 @@ public sealed class CqlLibraryInvocationCache
     public static CqlLibraryInvocationCache NeverCached { get; } = new
         CqlLibraryInvocationCache(true);
 
-    private CqlLibraryInvocationCache(bool neverCacheMode)
-    {
-        _neverCacheMode = true;
-    }
+    /// <summary>
+    /// Initializes a new instance of the CqlLibraryInvocationCache class with default settings.
+    /// </summary>
+    /// <remarks>This constructor creates the cache with default behavior, equivalent to passing <see
+    /// langword="false"/> to the parameterized constructor. Use this overload when no custom configuration is
+    /// required.</remarks>
+    public CqlLibraryInvocationCache() : this(false) {}
+
+    private CqlLibraryInvocationCache(bool neverCacheMode) => _neverCacheMode = neverCacheMode;
 
     private readonly bool _neverCacheMode = false;
     private CacheWriteStrategy _cacheWriteStrategy;
