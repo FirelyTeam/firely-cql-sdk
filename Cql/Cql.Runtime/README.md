@@ -76,7 +76,7 @@ context.StartCaching(libraryInvocationSet, CacheWriteStrategy.PublicationOnly);
 - Libraries generate int cache index fields for each cacheable expression
 - `CqlLibraryInvocationSet` initializes these indices by traversing the library dependency graph
 - Each CqlContext manages its own internal cache instance
-- Libraries access the cache through `ICqlContextInternals` interface via the context
+- Libraries access the cache by calling `context.GetOrCompute(...)` directly
 - Only parameter-less expressions (functions with no parameters except `CqlContext`) are cached
 - Cache entries use `CacheEntry` struct to distinguish between "not cached" and "cached null value"
 - Thread safety is guaranteed through context-per-thread model and optional per-entry locking
