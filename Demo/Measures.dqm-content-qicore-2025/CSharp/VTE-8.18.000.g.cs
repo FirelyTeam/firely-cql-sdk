@@ -37,7 +37,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -52,7 +52,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -111,7 +111,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Admission Without VTE Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions, Admission_Without_VTE_Or_Obstetrical_Conditions_Compute);
+        context.GetOrCompute(_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions, Admission_Without_VTE_Or_Obstetrical_Conditions_Compute);
 
     private IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions_Compute(CqlContext context)
     {
@@ -137,7 +137,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Encounter With Age Range And Without VTE Diagnosis Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions, Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions, Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute(CqlContext context)
     {
@@ -164,7 +164,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {

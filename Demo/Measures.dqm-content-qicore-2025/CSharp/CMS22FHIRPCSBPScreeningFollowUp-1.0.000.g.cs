@@ -138,7 +138,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -156,7 +156,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -168,7 +168,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Qualifying Encounter during Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounter_during_Measurement_Period, Qualifying_Encounter_during_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Qualifying_Encounter_during_Measurement_Period, Qualifying_Encounter_during_Measurement_Period_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period_Compute(CqlContext context)
     {
@@ -202,7 +202,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -228,7 +228,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -270,7 +270,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -325,7 +325,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with Normal Blood Pressure Reading")]
     public IEnumerable<Encounter> Encounter_with_Normal_Blood_Pressure_Reading(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Normal_Blood_Pressure_Reading, Encounter_with_Normal_Blood_Pressure_Reading_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Normal_Blood_Pressure_Reading, Encounter_with_Normal_Blood_Pressure_Reading_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Normal_Blood_Pressure_Reading_Compute(CqlContext context)
     {
@@ -449,7 +449,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80")]
     public IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80, Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80, Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_Compute(CqlContext context)
     {
@@ -574,7 +574,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Follow up with Rescreen Within 6 Months")]
     public IEnumerable<ServiceRequest> Follow_up_with_Rescreen_Within_6_Months(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Follow_up_with_Rescreen_Within_6_Months, Follow_up_with_Rescreen_Within_6_Months_Compute);
+        context.GetOrCompute(_cacheIndex_Follow_up_with_Rescreen_Within_6_Months, Follow_up_with_Rescreen_Within_6_Months_Compute);
 
     private IEnumerable<ServiceRequest> Follow_up_with_Rescreen_Within_6_Months_Compute(CqlContext context)
     {
@@ -596,7 +596,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("NonPharmacological Interventions")]
     public IEnumerable<ServiceRequest> NonPharmacological_Interventions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_NonPharmacological_Interventions, NonPharmacological_Interventions_Compute);
+        context.GetOrCompute(_cacheIndex_NonPharmacological_Interventions, NonPharmacological_Interventions_Compute);
 
     private IEnumerable<ServiceRequest> NonPharmacological_Interventions_Compute(CqlContext context)
     {
@@ -638,7 +638,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Referral to Alternate or Primary Healthcare Professional for Hypertensive Reading")]
     public IEnumerable<ServiceRequest> Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading, Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading_Compute);
+        context.GetOrCompute(_cacheIndex_Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading, Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading_Compute);
 
     private IEnumerable<ServiceRequest> Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading_Compute(CqlContext context)
     {
@@ -679,7 +679,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80 and Interventions")]
     public IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions, Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions, Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Elevated_Blood_Pressure_Reading_SBP_120_to_129_AND_DBP_less_than_80_and_Interventions_Compute(CqlContext context)
     {
@@ -751,7 +751,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with Hypertensive Reading Within Year Prior")]
     public IEnumerable<Encounter> Encounter_with_Hypertensive_Reading_Within_Year_Prior(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Hypertensive_Reading_Within_Year_Prior, Encounter_with_Hypertensive_Reading_Within_Year_Prior_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Hypertensive_Reading_Within_Year_Prior, Encounter_with_Hypertensive_Reading_Within_Year_Prior_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Hypertensive_Reading_Within_Year_Prior_Compute(CqlContext context)
     {
@@ -1015,7 +1015,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with First Hypertensive Reading SBP Greater than or Equal to 130 OR DBP Greater than or Equal to 80")]
     public IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80, Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80, Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_Compute);
 
     private IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_Compute(CqlContext context)
     {
@@ -1241,7 +1241,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("First Hypertensive Reading Interventions or Referral to Alternate Professional")]
     public IEnumerable<ServiceRequest> First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional, First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional_Compute);
+        context.GetOrCompute(_cacheIndex_First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional, First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional_Compute);
 
     private IEnumerable<ServiceRequest> First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional_Compute(CqlContext context)
     {
@@ -1291,7 +1291,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with First Hypertensive Reading SBP Greater than or Equal to 130 OR DBP Greater than or Equal to 80 and Interventions")]
     public IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions, Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions, Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions_Compute);
 
     private IEnumerable<Encounter> Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80_and_Interventions_Compute(CqlContext context)
     {
@@ -1322,7 +1322,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89")]
     public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89, Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89, Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Compute(CqlContext context)
     {
@@ -1554,7 +1554,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Laboratory Test or ECG for Hypertension")]
     public IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Laboratory_Test_or_ECG_for_Hypertension, Laboratory_Test_or_ECG_for_Hypertension_Compute);
+        context.GetOrCompute(_cacheIndex_Laboratory_Test_or_ECG_for_Hypertension, Laboratory_Test_or_ECG_for_Hypertension_Compute);
 
     private IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Compute(CqlContext context)
     {
@@ -1592,7 +1592,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 and Interventions")]
     public IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions, Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions_Compute);
+        context.GetOrCompute(_cacheIndex_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions, Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions_Compute);
 
     private IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions_Compute(CqlContext context)
     {
@@ -1645,7 +1645,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 and Interventions")]
     public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions, Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions, Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_and_Interventions_Compute(CqlContext context)
     {
@@ -1697,7 +1697,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90")]
     public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90, Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90, Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Compute(CqlContext context)
     {
@@ -1923,7 +1923,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 Interventions")]
     public IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions, Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Compute);
+        context.GetOrCompute(_cacheIndex_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions, Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Compute);
 
     private IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Compute(CqlContext context)
     {
@@ -2052,7 +2052,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 and Interventions")]
     public IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions, Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions, Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_and_Interventions_Compute(CqlContext context)
     {
@@ -2104,7 +2104,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -2123,7 +2123,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with Medical Reason for Not Obtaining or Patient Declined Blood Pressure Measurement")]
     public IEnumerable<Encounter> Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement, Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement, Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Medical_Reason_for_Not_Obtaining_or_Patient_Declined_Blood_Pressure_Measurement_Compute(CqlContext context)
     {
@@ -2211,7 +2211,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("NonPharmacological Intervention Not Ordered")]
     public IEnumerable<ServiceRequest> NonPharmacological_Intervention_Not_Ordered(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_NonPharmacological_Intervention_Not_Ordered, NonPharmacological_Intervention_Not_Ordered_Compute);
+        context.GetOrCompute(_cacheIndex_NonPharmacological_Intervention_Not_Ordered, NonPharmacological_Intervention_Not_Ordered_Compute);
 
     private IEnumerable<ServiceRequest> NonPharmacological_Intervention_Not_Ordered_Compute(CqlContext context)
     {
@@ -2284,7 +2284,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Laboratory Test or ECG for Hypertension Not Ordered")]
     public IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered, Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered_Compute);
+        context.GetOrCompute(_cacheIndex_Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered, Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered_Compute);
 
     private IEnumerable<ServiceRequest> Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered_Compute(CqlContext context)
     {
@@ -2345,7 +2345,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 Interventions Declined")]
     public IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined, Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined_Compute);
+        context.GetOrCompute(_cacheIndex_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined, Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined_Compute);
 
     private IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined_Compute(CqlContext context)
     {
@@ -2407,7 +2407,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 Interventions Declined")]
     public IEnumerable<object> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined, Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined_Compute);
+        context.GetOrCompute(_cacheIndex_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined, Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined_Compute);
 
     private IEnumerable<object> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined_Compute(CqlContext context)
     {
@@ -2488,7 +2488,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Encounter with Order for Hypertension Follow Up Declined by Patient")]
     public IEnumerable<Encounter> Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient, Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient, Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Order_for_Hypertension_Follow_Up_Declined_by_Patient_Compute(CqlContext context)
     {
@@ -2711,7 +2711,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
     private IEnumerable<Encounter> Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -2724,7 +2724,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -2735,7 +2735,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -2746,7 +2746,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -2757,7 +2757,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

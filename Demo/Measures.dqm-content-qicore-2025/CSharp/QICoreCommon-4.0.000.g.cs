@@ -399,7 +399,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ILibraryInternals, ISingle
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {

@@ -64,7 +64,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -76,7 +76,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -197,7 +197,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -221,7 +221,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -344,7 +344,7 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

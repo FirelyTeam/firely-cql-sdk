@@ -88,7 +88,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -106,7 +106,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -118,7 +118,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Essential Hypertension Diagnosis")]
     public IEnumerable<object> Essential_Hypertension_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Essential_Hypertension_Diagnosis, Essential_Hypertension_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Essential_Hypertension_Diagnosis, Essential_Hypertension_Diagnosis_Compute);
 
     private IEnumerable<object> Essential_Hypertension_Diagnosis_Compute(CqlContext context)
     {
@@ -147,7 +147,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -173,7 +173,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -184,7 +184,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Pregnancy or Renal Diagnosis")]
     public IEnumerable<object> Pregnancy_or_Renal_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Pregnancy_or_Renal_Diagnosis, Pregnancy_or_Renal_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Pregnancy_or_Renal_Diagnosis, Pregnancy_or_Renal_Diagnosis_Compute);
 
     private IEnumerable<object> Pregnancy_or_Renal_Diagnosis_Compute(CqlContext context)
     {
@@ -223,7 +223,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("End Stage Renal Disease Procedures")]
     public IEnumerable<Procedure> End_Stage_Renal_Disease_Procedures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_End_Stage_Renal_Disease_Procedures, End_Stage_Renal_Disease_Procedures_Compute);
+        context.GetOrCompute(_cacheIndex_End_Stage_Renal_Disease_Procedures, End_Stage_Renal_Disease_Procedures_Compute);
 
     private IEnumerable<Procedure> End_Stage_Renal_Disease_Procedures_Compute(CqlContext context)
     {
@@ -314,7 +314,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("End Stage Renal Disease Encounter")]
     public IEnumerable<Encounter> End_Stage_Renal_Disease_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_End_Stage_Renal_Disease_Encounter, End_Stage_Renal_Disease_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_End_Stage_Renal_Disease_Encounter, End_Stage_Renal_Disease_Encounter_Compute);
 
     private IEnumerable<Encounter> End_Stage_Renal_Disease_Encounter_Compute(CqlContext context)
     {
@@ -339,7 +339,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -386,7 +386,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Qualifying Blood Pressure Reading")]
     public IEnumerable<Observation> Qualifying_Blood_Pressure_Reading(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Blood_Pressure_Reading, Qualifying_Blood_Pressure_Reading_Compute);
+        context.GetOrCompute(_cacheIndex_Qualifying_Blood_Pressure_Reading, Qualifying_Blood_Pressure_Reading_Compute);
 
     private IEnumerable<Observation> Qualifying_Blood_Pressure_Reading_Compute(CqlContext context)
     {
@@ -466,7 +466,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Blood Pressure Days")]
     public IEnumerable<CqlDate> Blood_Pressure_Days(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Blood_Pressure_Days, Blood_Pressure_Days_Compute);
+        context.GetOrCompute(_cacheIndex_Blood_Pressure_Days, Blood_Pressure_Days_Compute);
 
     private IEnumerable<CqlDate> Blood_Pressure_Days_Compute(CqlContext context)
     {
@@ -488,7 +488,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Most Recent Blood Pressure Day")]
     public CqlDate Most_Recent_Blood_Pressure_Day(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Most_Recent_Blood_Pressure_Day, Most_Recent_Blood_Pressure_Day_Compute);
+        context.GetOrCompute(_cacheIndex_Most_Recent_Blood_Pressure_Day, Most_Recent_Blood_Pressure_Day_Compute);
 
     private CqlDate Most_Recent_Blood_Pressure_Day_Compute(CqlContext context)
     {
@@ -501,7 +501,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Lowest Systolic Reading on Most Recent Blood Pressure Day")]
     public CqlQuantity Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day, Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day_Compute);
+        context.GetOrCompute(_cacheIndex_Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day, Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day_Compute);
 
     private CqlQuantity Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day_Compute(CqlContext context)
     {
@@ -555,7 +555,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Systolic Blood Pressure Less Than 140")]
     public bool? Has_Systolic_Blood_Pressure_Less_Than_140(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Systolic_Blood_Pressure_Less_Than_140, Has_Systolic_Blood_Pressure_Less_Than_140_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Systolic_Blood_Pressure_Less_Than_140, Has_Systolic_Blood_Pressure_Less_Than_140_Compute);
 
     private bool? Has_Systolic_Blood_Pressure_Less_Than_140_Compute(CqlContext context)
     {
@@ -568,7 +568,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Lowest Diastolic Reading on Most Recent Blood Pressure Day")]
     public CqlQuantity Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day, Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day_Compute);
+        context.GetOrCompute(_cacheIndex_Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day, Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day_Compute);
 
     private CqlQuantity Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day_Compute(CqlContext context)
     {
@@ -622,7 +622,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Diastolic Blood Pressure Less Than 90")]
     public bool? Has_Diastolic_Blood_Pressure_Less_Than_90(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Diastolic_Blood_Pressure_Less_Than_90, Has_Diastolic_Blood_Pressure_Less_Than_90_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Diastolic_Blood_Pressure_Less_Than_90, Has_Diastolic_Blood_Pressure_Less_Than_90_Compute);
 
     private bool? Has_Diastolic_Blood_Pressure_Less_Than_90_Compute(CqlContext context)
     {
@@ -635,7 +635,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -648,7 +648,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -659,7 +659,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -670,7 +670,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -681,7 +681,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

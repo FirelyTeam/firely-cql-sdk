@@ -89,7 +89,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -107,7 +107,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -119,7 +119,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -130,7 +130,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -141,7 +141,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -152,7 +152,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -163,7 +163,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounter, Qualifying_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_Qualifying_Encounter, Qualifying_Encounter_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -228,7 +228,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -250,7 +250,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -261,7 +261,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -272,7 +272,7 @@ public partial class CMS139FHIRFallRiskScreening_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {

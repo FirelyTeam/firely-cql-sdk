@@ -85,7 +85,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -103,7 +103,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -115,7 +115,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Encounter to Assess Cognition")]
     public IEnumerable<Encounter> Encounter_to_Assess_Cognition(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_to_Assess_Cognition, Encounter_to_Assess_Cognition_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_to_Assess_Cognition, Encounter_to_Assess_Cognition_Compute);
 
     private IEnumerable<Encounter> Encounter_to_Assess_Cognition_Compute(CqlContext context)
     {
@@ -196,7 +196,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Dementia Encounter During Measurement Period")]
     public IEnumerable<Encounter> Dementia_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Dementia_Encounter_During_Measurement_Period, Dementia_Encounter_During_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Dementia_Encounter_During_Measurement_Period, Dementia_Encounter_During_Measurement_Period_Compute);
 
     private IEnumerable<Encounter> Dementia_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -244,7 +244,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounter_During_Measurement_Period, Qualifying_Encounter_During_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Qualifying_Encounter_During_Measurement_Period, Qualifying_Encounter_During_Measurement_Period_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -273,7 +273,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -289,7 +289,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -300,7 +300,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Assessment of Cognition Using Standardized Tools or Alternate Methods")]
     public IEnumerable<Observation> Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods, Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Compute);
+        context.GetOrCompute(_cacheIndex_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods, Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Compute);
 
     private IEnumerable<Observation> Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Compute(CqlContext context)
     {
@@ -366,7 +366,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -378,7 +378,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Patient Reason for Not Performing Assessment of Cognition Using Standardized Tools or Alternate Methods")]
     public IEnumerable<Observation> Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods, Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Compute);
+        context.GetOrCompute(_cacheIndex_Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods, Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Compute);
 
     private IEnumerable<Observation> Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Compute(CqlContext context)
     {
@@ -442,7 +442,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -454,7 +454,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -465,7 +465,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -476,7 +476,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -487,7 +487,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {

@@ -219,7 +219,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ILibraryI
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -237,7 +237,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -259,7 +259,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Inpatient Encounter")]
     public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Inpatient_Encounter, Inpatient_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_Inpatient_Encounter, Inpatient_Encounter_Compute);
 
     private IEnumerable<Encounter> Inpatient_Encounter_Compute(CqlContext context)
     {

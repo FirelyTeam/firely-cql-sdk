@@ -65,7 +65,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -83,7 +83,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -95,7 +95,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -106,7 +106,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -117,7 +117,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -128,7 +128,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -139,7 +139,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
+        context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -180,7 +180,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -203,7 +203,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -214,7 +214,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Pregnancy Diagnosis Which Overlaps Measurement Period")]
     public IEnumerable<object> Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period, Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period, Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period_Compute);
 
     private IEnumerable<object> Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period_Compute(CqlContext context)
     {
@@ -238,7 +238,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -252,7 +252,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("BMI Percentile in Measurement Period")]
     public IEnumerable<Observation> BMI_Percentile_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_BMI_Percentile_in_Measurement_Period, BMI_Percentile_in_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_BMI_Percentile_in_Measurement_Period, BMI_Percentile_in_Measurement_Period_Compute);
 
     private IEnumerable<Observation> BMI_Percentile_in_Measurement_Period_Compute(CqlContext context)
     {
@@ -279,7 +279,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Height in Measurement Period")]
     public IEnumerable<Observation> Height_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Height_in_Measurement_Period, Height_in_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Height_in_Measurement_Period, Height_in_Measurement_Period_Compute);
 
     private IEnumerable<Observation> Height_in_Measurement_Period_Compute(CqlContext context)
     {
@@ -306,7 +306,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Weight in Measurement Period")]
     public IEnumerable<Observation> Weight_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Weight_in_Measurement_Period, Weight_in_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Weight_in_Measurement_Period, Weight_in_Measurement_Period_Compute);
 
     private IEnumerable<Observation> Weight_in_Measurement_Period_Compute(CqlContext context)
     {
@@ -333,7 +333,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
@@ -351,7 +351,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
@@ -438,7 +438,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Numerator 3")]
     public bool? Numerator_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator_3, Numerator_3_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator_3, Numerator_3_Compute);
 
     private bool? Numerator_3_Compute(CqlContext context)
     {
@@ -525,7 +525,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Stratification 1")]
     public bool? Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
@@ -545,7 +545,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Stratification 2")]
     public bool? Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
     private bool? Stratification_2_Compute(CqlContext context)
     {

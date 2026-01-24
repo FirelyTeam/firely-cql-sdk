@@ -80,7 +80,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -98,7 +98,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -110,7 +110,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -172,7 +172,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -183,7 +183,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Right Mastectomy Diagnosis")]
     public IEnumerable<object> Right_Mastectomy_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Right_Mastectomy_Diagnosis, Right_Mastectomy_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Right_Mastectomy_Diagnosis, Right_Mastectomy_Diagnosis_Compute);
 
     private IEnumerable<object> Right_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -245,7 +245,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Right Mastectomy Procedure")]
     public IEnumerable<Procedure> Right_Mastectomy_Procedure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Right_Mastectomy_Procedure, Right_Mastectomy_Procedure_Compute);
+        context.GetOrCompute(_cacheIndex_Right_Mastectomy_Procedure, Right_Mastectomy_Procedure_Compute);
 
     private IEnumerable<Procedure> Right_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -333,7 +333,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Left Mastectomy Diagnosis")]
     public IEnumerable<object> Left_Mastectomy_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Left_Mastectomy_Diagnosis, Left_Mastectomy_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Left_Mastectomy_Diagnosis, Left_Mastectomy_Diagnosis_Compute);
 
     private IEnumerable<object> Left_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -395,7 +395,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Left Mastectomy Procedure")]
     public IEnumerable<Procedure> Left_Mastectomy_Procedure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Left_Mastectomy_Procedure, Left_Mastectomy_Procedure_Compute);
+        context.GetOrCompute(_cacheIndex_Left_Mastectomy_Procedure, Left_Mastectomy_Procedure_Compute);
 
     private IEnumerable<Procedure> Left_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -483,7 +483,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Bilateral Mastectomy Diagnosis")]
     public IEnumerable<object> Bilateral_Mastectomy_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Diagnosis, Bilateral_Mastectomy_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Diagnosis, Bilateral_Mastectomy_Diagnosis_Compute);
 
     private IEnumerable<object> Bilateral_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -509,7 +509,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Bilateral Mastectomy Procedure")]
     public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Procedure, Bilateral_Mastectomy_Procedure_Compute);
+        context.GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Procedure, Bilateral_Mastectomy_Procedure_Compute);
 
     private IEnumerable<Procedure> Bilateral_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -597,7 +597,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -632,7 +632,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("October 1 Two Years Prior to the Measurement Period")]
     public CqlDateTime October_1_Two_Years_Prior_to_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_October_1_Two_Years_Prior_to_the_Measurement_Period, October_1_Two_Years_Prior_to_the_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_October_1_Two_Years_Prior_to_the_Measurement_Period, October_1_Two_Years_Prior_to_the_Measurement_Period_Compute);
 
     private CqlDateTime October_1_Two_Years_Prior_to_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -648,7 +648,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -677,7 +677,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -688,7 +688,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -699,7 +699,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -710,7 +710,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -721,7 +721,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Stratification 1")]
     public bool? Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
@@ -741,7 +741,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Stratification 2")]
     public bool? Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
     private bool? Stratification_2_Compute(CqlContext context)
     {

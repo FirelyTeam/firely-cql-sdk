@@ -77,7 +77,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -95,7 +95,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -107,7 +107,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -118,7 +118,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Payer Type")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer_Type, SDE_Payer_Type_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer_Type, SDE_Payer_Type_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type_Compute(CqlContext context)
     {
@@ -129,7 +129,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -140,7 +140,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -151,7 +151,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -196,7 +196,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Measure Population")]
     public IEnumerable<Encounter> Measure_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measure_Population, Measure_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Measure_Population, Measure_Population_Compute);
 
     private IEnumerable<Encounter> Measure_Population_Compute(CqlContext context)
     {
@@ -207,7 +207,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Discharge for Hospice Care")]
     public IEnumerable<Encounter> Encounters_with_Discharge_for_Hospice_Care(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Discharge_for_Hospice_Care, Encounters_with_Discharge_for_Hospice_Care_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Discharge_for_Hospice_Care, Encounters_with_Discharge_for_Hospice_Care_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Discharge_for_Hospice_Care_Compute(CqlContext context)
     {
@@ -229,7 +229,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Intervention Hospice Care")]
     public IEnumerable<CqlDateTime> Intervention_Hospice_Care(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Intervention_Hospice_Care, Intervention_Hospice_Care_Compute);
+        context.GetOrCompute(_cacheIndex_Intervention_Hospice_Care, Intervention_Hospice_Care_Compute);
 
     private IEnumerable<CqlDateTime> Intervention_Hospice_Care_Compute(CqlContext context)
     {
@@ -368,7 +368,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Hospice during Eligible Encounter")]
     public IEnumerable<Encounter> Encounters_with_Hospice_during_Eligible_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Hospice_during_Eligible_Encounter, Encounters_with_Hospice_during_Eligible_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Hospice_during_Eligible_Encounter, Encounters_with_Hospice_during_Eligible_Encounter_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Hospice_during_Eligible_Encounter_Compute(CqlContext context)
     {
@@ -396,7 +396,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Measure Population Exclusion")]
     public IEnumerable<Encounter> Measure_Population_Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measure_Population_Exclusion, Measure_Population_Exclusion_Compute);
+        context.GetOrCompute(_cacheIndex_Measure_Population_Exclusion, Measure_Population_Exclusion_Compute);
 
     private IEnumerable<Encounter> Measure_Population_Exclusion_Compute(CqlContext context)
     {
@@ -409,7 +409,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Intervention Dietitian Referral")]
     public IEnumerable<CqlDateTime> Intervention_Dietitian_Referral(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Intervention_Dietitian_Referral, Intervention_Dietitian_Referral_Compute);
+        context.GetOrCompute(_cacheIndex_Intervention_Dietitian_Referral, Intervention_Dietitian_Referral_Compute);
 
     private IEnumerable<CqlDateTime> Intervention_Dietitian_Referral_Compute(CqlContext context)
     {
@@ -548,7 +548,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Dietitian Referral")]
     public IEnumerable<Encounter> Encounters_with_Dietitian_Referral(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Dietitian_Referral, Encounters_with_Dietitian_Referral_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Dietitian_Referral, Encounters_with_Dietitian_Referral_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Dietitian_Referral_Compute(CqlContext context)
     {
@@ -576,7 +576,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Malnutrition Risk Screening Not At Risk")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk, Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk, Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk_Compute(CqlContext context)
     {
@@ -623,7 +623,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Malnutrition Risk Screening At Risk")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_At_Risk, Encounters_with_Malnutrition_Risk_Screening_At_Risk_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_At_Risk, Encounters_with_Malnutrition_Risk_Screening_At_Risk_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk_Compute(CqlContext context)
     {
@@ -670,7 +670,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Malnutrition Risk Screening")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening, Encounters_with_Malnutrition_Risk_Screening_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening, Encounters_with_Malnutrition_Risk_Screening_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_Compute(CqlContext context)
     {
@@ -683,7 +683,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Malnutrition Risk Screening or with Dietitian Referral")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral, Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral, Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral_Compute(CqlContext context)
     {
@@ -696,7 +696,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Malnutrition Not At Risk Screening and without Dietitian Referral")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral, Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral, Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral_Compute(CqlContext context)
     {
@@ -709,7 +709,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Malnutrition Risk Screening At Risk or with Dietitian Referral")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral, Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral, Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral_Compute(CqlContext context)
     {
@@ -815,7 +815,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounter With Most Recent Nutrition Assessment And Identified Status")]
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status, Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status, Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status_Compute(CqlContext context)
     {
@@ -924,7 +924,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounter With Most Recent Nutrition Assessment Status of Moderately Or Severely Malnourished")]
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished, Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished, Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished_Compute(CqlContext context)
     {
@@ -1029,7 +1029,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounter With Most Recent Nutrition Assessment Status of Not or Mildly Malnourished")]
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished, Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished, Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished_Compute(CqlContext context)
     {
@@ -1160,7 +1160,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Has Malnutrition Diagnosis")]
     public IEnumerable<Condition> Has_Malnutrition_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Malnutrition_Diagnosis, Has_Malnutrition_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Malnutrition_Diagnosis, Has_Malnutrition_Diagnosis_Compute);
 
     private IEnumerable<Condition> Has_Malnutrition_Diagnosis_Compute(CqlContext context)
     {
@@ -1183,7 +1183,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters With Encounter Diagnosis Of Malnutrition Diagnosis")]
     public IEnumerable<Encounter> Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis, Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis, Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis_Compute);
 
     private IEnumerable<Encounter> Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis_Compute(CqlContext context)
     {
@@ -1231,7 +1231,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Malnutrition Diagnosis")]
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Diagnosis, Encounters_with_Malnutrition_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Diagnosis, Encounters_with_Malnutrition_Diagnosis_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Diagnosis_Compute(CqlContext context)
     {
@@ -1261,7 +1261,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ILibraryInt
 
     [CqlExpressionDefinition("Encounters with Nutrition Care Plan")]
     public IEnumerable<Encounter> Encounters_with_Nutrition_Care_Plan(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_with_Nutrition_Care_Plan, Encounters_with_Nutrition_Care_Plan_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_with_Nutrition_Care_Plan, Encounters_with_Nutrition_Care_Plan_Compute);
 
     private IEnumerable<Encounter> Encounters_with_Nutrition_Care_Plan_Compute(CqlContext context)
     {

@@ -51,7 +51,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ILibraryInternal
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -63,7 +63,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ILibraryInternal
 
     [CqlExpressionDefinition("Smoking status observation")]
     public IEnumerable<Observation> Smoking_status_observation(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Smoking_status_observation, Smoking_status_observation_Compute);
+        context.GetOrCompute(_cacheIndex_Smoking_status_observation, Smoking_status_observation_Compute);
 
     private IEnumerable<Observation> Smoking_status_observation_Compute(CqlContext context)
     {
@@ -89,7 +89,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ILibraryInternal
 
     [CqlExpressionDefinition("Lung cancer diagnosis")]
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Lung_cancer_diagnosis, Lung_cancer_diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Lung_cancer_diagnosis, Lung_cancer_diagnosis_Compute);
 
     private IEnumerable<Condition> Lung_cancer_diagnosis_Compute(CqlContext context)
     {

@@ -85,7 +85,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -103,7 +103,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -115,7 +115,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("Has Qualifying Encounter During Measurement Period")]
     public bool? Has_Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period, Has_Qualifying_Encounter_During_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period, Has_Qualifying_Encounter_During_Measurement_Period_Compute);
 
     private bool? Has_Qualifying_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -203,7 +203,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("Has HIV Diagnosis Before End of Measurement Period")]
     public bool? Has_HIV_Diagnosis_Before_End_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period, Has_HIV_Diagnosis_Before_End_of_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period, Has_HIV_Diagnosis_Before_End_of_Measurement_Period_Compute);
 
     private bool? Has_HIV_Diagnosis_Before_End_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -231,7 +231,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -254,7 +254,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -265,7 +265,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("Has Chlamydia Testing")]
     public bool? Has_Chlamydia_Testing(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Chlamydia_Testing, Has_Chlamydia_Testing_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Chlamydia_Testing, Has_Chlamydia_Testing_Compute);
 
     private bool? Has_Chlamydia_Testing_Compute(CqlContext context)
     {
@@ -351,7 +351,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("Has Gonorrhea Testing")]
     public bool? Has_Gonorrhea_Testing(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Gonorrhea_Testing, Has_Gonorrhea_Testing_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Gonorrhea_Testing, Has_Gonorrhea_Testing_Compute);
 
     private bool? Has_Gonorrhea_Testing_Compute(CqlContext context)
     {
@@ -437,7 +437,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("Has Syphilis Testing")]
     public bool? Has_Syphilis_Testing(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Syphilis_Testing, Has_Syphilis_Testing_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Syphilis_Testing, Has_Syphilis_Testing_Compute);
 
     private bool? Has_Syphilis_Testing_Compute(CqlContext context)
     {
@@ -523,7 +523,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -538,7 +538,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -549,7 +549,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -560,7 +560,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -571,7 +571,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ILibraryIntern
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

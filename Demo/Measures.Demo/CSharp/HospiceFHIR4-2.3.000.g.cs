@@ -56,7 +56,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ILibraryInternals, ISingle
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -71,7 +71,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ILibraryInternals, ISingle
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -83,7 +83,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ILibraryInternals, ISingle
 
     [CqlExpressionDefinition("Has Hospice")]
     public bool? Has_Hospice(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Hospice, Has_Hospice_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Hospice, Has_Hospice_Compute);
 
     private bool? Has_Hospice_Compute(CqlContext context)
     {

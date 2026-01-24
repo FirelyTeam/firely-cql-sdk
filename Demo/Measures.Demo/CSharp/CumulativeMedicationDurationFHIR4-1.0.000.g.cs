@@ -169,7 +169,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ILibr
 
     [CqlParameterDefinition("ErrorLevel")]
     public string ErrorLevel(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ErrorLevel, ErrorLevel_Compute);
+        context.GetOrCompute(_cacheIndex_ErrorLevel, ErrorLevel_Compute);
 
     private string ErrorLevel_Compute(CqlContext context)
     {
@@ -184,7 +184,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {

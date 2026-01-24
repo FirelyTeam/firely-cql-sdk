@@ -142,7 +142,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -160,7 +160,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -172,7 +172,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -183,7 +183,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -194,7 +194,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -205,7 +205,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -216,7 +216,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
+        context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -260,7 +260,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Has Assessments Identifying Sexual Activity")]
     public bool? Has_Assessments_Identifying_Sexual_Activity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Assessments_Identifying_Sexual_Activity, Has_Assessments_Identifying_Sexual_Activity_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Assessments_Identifying_Sexual_Activity, Has_Assessments_Identifying_Sexual_Activity_Compute);
 
     private bool? Has_Assessments_Identifying_Sexual_Activity_Compute(CqlContext context)
     {
@@ -314,7 +314,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Has Diagnoses Identifying Sexual Activity")]
     public bool? Has_Diagnoses_Identifying_Sexual_Activity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Diagnoses_Identifying_Sexual_Activity, Has_Diagnoses_Identifying_Sexual_Activity_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Diagnoses_Identifying_Sexual_Activity, Has_Diagnoses_Identifying_Sexual_Activity_Compute);
 
     private bool? Has_Diagnoses_Identifying_Sexual_Activity_Compute(CqlContext context)
     {
@@ -349,7 +349,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Has Active Contraceptive Medications")]
     public bool? Has_Active_Contraceptive_Medications(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Active_Contraceptive_Medications, Has_Active_Contraceptive_Medications_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Active_Contraceptive_Medications, Has_Active_Contraceptive_Medications_Compute);
 
     private bool? Has_Active_Contraceptive_Medications_Compute(CqlContext context)
     {
@@ -406,7 +406,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Has Ordered Contraceptive Medications")]
     public bool? Has_Ordered_Contraceptive_Medications(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Ordered_Contraceptive_Medications, Has_Ordered_Contraceptive_Medications_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Ordered_Contraceptive_Medications, Has_Ordered_Contraceptive_Medications_Compute);
 
     private bool? Has_Ordered_Contraceptive_Medications_Compute(CqlContext context)
     {
@@ -458,7 +458,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Has Laboratory Tests Identifying Sexual Activity But Not Pregnancy")]
     public bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy, Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy, Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy_Compute);
 
     private bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy_Compute(CqlContext context)
     {
@@ -489,7 +489,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Has Laboratory Tests Identifying Sexual Activity")]
     public bool? Has_Laboratory_Tests_Identifying_Sexual_Activity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Laboratory_Tests_Identifying_Sexual_Activity, Has_Laboratory_Tests_Identifying_Sexual_Activity_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Laboratory_Tests_Identifying_Sexual_Activity, Has_Laboratory_Tests_Identifying_Sexual_Activity_Compute);
 
     private bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_Compute(CqlContext context)
     {
@@ -516,7 +516,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Has Diagnostic Studies Identifying Sexual Activity")]
     public bool? Has_Diagnostic_Studies_Identifying_Sexual_Activity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Diagnostic_Studies_Identifying_Sexual_Activity, Has_Diagnostic_Studies_Identifying_Sexual_Activity_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Diagnostic_Studies_Identifying_Sexual_Activity, Has_Diagnostic_Studies_Identifying_Sexual_Activity_Compute);
 
     private bool? Has_Diagnostic_Studies_Identifying_Sexual_Activity_Compute(CqlContext context)
     {
@@ -541,7 +541,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Has Procedures Identifying Sexual Activity")]
     public bool? Has_Procedures_Identifying_Sexual_Activity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Procedures_Identifying_Sexual_Activity, Has_Procedures_Identifying_Sexual_Activity_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Procedures_Identifying_Sexual_Activity, Has_Procedures_Identifying_Sexual_Activity_Compute);
 
     private bool? Has_Procedures_Identifying_Sexual_Activity_Compute(CqlContext context)
     {
@@ -628,7 +628,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -704,7 +704,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -715,7 +715,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Has Pregnancy Test Exclusion")]
     public bool? Has_Pregnancy_Test_Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Pregnancy_Test_Exclusion, Has_Pregnancy_Test_Exclusion_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Pregnancy_Test_Exclusion, Has_Pregnancy_Test_Exclusion_Compute);
 
     private bool? Has_Pregnancy_Test_Exclusion_Compute(CqlContext context)
     {
@@ -855,7 +855,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -889,7 +889,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -966,7 +966,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Stratification 1")]
     public bool? Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
@@ -986,7 +986,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ILibraryIn
 
     [CqlExpressionDefinition("Stratification 2")]
     public bool? Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
     private bool? Stratification_2_Compute(CqlContext context)
     {

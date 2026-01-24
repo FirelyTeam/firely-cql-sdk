@@ -81,7 +81,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -96,7 +96,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -108,7 +108,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -119,7 +119,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Antithrombotic Not Given at Discharge")]
     public IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Antithrombotic_Not_Given_at_Discharge, Antithrombotic_Not_Given_at_Discharge_Compute);
+        context.GetOrCompute(_cacheIndex_Antithrombotic_Not_Given_at_Discharge, Antithrombotic_Not_Given_at_Discharge_Compute);
 
     private IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge_Compute(CqlContext context)
     {
@@ -190,7 +190,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Encounter With No Antithrombotic At Discharge")]
     public IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_No_Antithrombotic_At_Discharge, Encounter_With_No_Antithrombotic_At_Discharge_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_With_No_Antithrombotic_At_Discharge, Encounter_With_No_Antithrombotic_At_Discharge_Compute);
 
     private IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge_Compute(CqlContext context)
     {
@@ -221,7 +221,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge, Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute);
+        context.GetOrCompute(_cacheIndex_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge, Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute);
 
     private IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute(CqlContext context)
     {
@@ -272,7 +272,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge, Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge, Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute(CqlContext context)
     {
@@ -303,7 +303,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
     private IEnumerable<Encounter> Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -316,7 +316,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -329,7 +329,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -340,7 +340,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Antithrombotic Therapy at Discharge")]
     public IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Antithrombotic_Therapy_at_Discharge, Antithrombotic_Therapy_at_Discharge_Compute);
+        context.GetOrCompute(_cacheIndex_Antithrombotic_Therapy_at_Discharge, Antithrombotic_Therapy_at_Discharge_Compute);
 
     private IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge_Compute(CqlContext context)
     {
@@ -391,7 +391,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -422,7 +422,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -433,7 +433,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -444,7 +444,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -455,7 +455,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

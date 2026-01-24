@@ -275,7 +275,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -293,7 +293,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -305,7 +305,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Cataract Surgery Between January and September of Measurement Period")]
     public IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Cataract_Surgery_Between_January_and_September_of_Measurement_Period, Cataract_Surgery_Between_January_and_September_of_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Cataract_Surgery_Between_January_and_September_of_Measurement_Period, Cataract_Surgery_Between_January_and_September_of_Measurement_Period_Compute);
 
     private IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -466,7 +466,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Procedure> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Procedure> Initial_Population_Compute(CqlContext context)
     {
@@ -492,7 +492,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Procedure> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private IEnumerable<Procedure> Denominator_Compute(CqlContext context)
     {
@@ -534,7 +534,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Cataract Surgeries in Patients with Significant Ocular Conditions Impacting the Visual Outcome of Surgery")]
     public IEnumerable<Procedure> Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery, Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery_Compute);
+        context.GetOrCompute(_cacheIndex_Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery, Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery_Compute);
 
     private IEnumerable<Procedure> Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery_Compute(CqlContext context)
     {
@@ -902,7 +902,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Procedure> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private IEnumerable<Procedure> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -913,7 +913,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Procedure> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private IEnumerable<Procedure> Numerator_Compute(CqlContext context)
     {
@@ -1167,7 +1167,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1178,7 +1178,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1189,7 +1189,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1200,7 +1200,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ILibr
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

@@ -95,7 +95,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -113,7 +113,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -125,7 +125,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("Non Elective Inpatient Encounter")]
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Non_Elective_Inpatient_Encounter, Non_Elective_Inpatient_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_Non_Elective_Inpatient_Encounter, Non_Elective_Inpatient_Encounter_Compute);
 
     private IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_Compute(CqlContext context)
     {
@@ -152,7 +152,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("All Stroke Encounter")]
     public IEnumerable<Encounter> All_Stroke_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_All_Stroke_Encounter, All_Stroke_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_All_Stroke_Encounter, All_Stroke_Encounter_Compute);
 
     private IEnumerable<Encounter> All_Stroke_Encounter_Compute(CqlContext context)
     {
@@ -179,7 +179,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("Encounter with Principal Diagnosis and Age")]
     public IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Principal_Diagnosis_and_Age, Encounter_with_Principal_Diagnosis_and_Age_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Principal_Diagnosis_and_Age, Encounter_with_Principal_Diagnosis_and_Age_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age_Compute(CqlContext context)
     {
@@ -214,7 +214,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("Ischemic Stroke Encounter")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounter, Ischemic_Stroke_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounter, Ischemic_Stroke_Encounter_Compute);
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounter_Compute(CqlContext context)
     {
@@ -236,7 +236,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("Ischemic Stroke Encounters with Discharge Disposition")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounters_with_Discharge_Disposition, Ischemic_Stroke_Encounters_with_Discharge_Disposition_Compute);
+        context.GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounters_with_Discharge_Disposition, Ischemic_Stroke_Encounters_with_Discharge_Disposition_Compute);
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition_Compute(CqlContext context)
     {
@@ -278,7 +278,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("Intervention Comfort Measures")]
     public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Intervention_Comfort_Measures, Intervention_Comfort_Measures_Compute);
+        context.GetOrCompute(_cacheIndex_Intervention_Comfort_Measures, Intervention_Comfort_Measures_Compute);
 
     private IEnumerable<object> Intervention_Comfort_Measures_Compute(CqlContext context)
     {
@@ -314,7 +314,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("Comfort Measures during Hospitalization")]
     public IEnumerable<Encounter> Comfort_Measures_during_Hospitalization(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Comfort_Measures_during_Hospitalization, Comfort_Measures_during_Hospitalization_Compute);
+        context.GetOrCompute(_cacheIndex_Comfort_Measures_during_Hospitalization, Comfort_Measures_during_Hospitalization_Compute);
 
     private IEnumerable<Encounter> Comfort_Measures_during_Hospitalization_Compute(CqlContext context)
     {
@@ -345,7 +345,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("Encounter with Comfort Measures during Hospitalization")]
     public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization, Encounter_with_Comfort_Measures_during_Hospitalization_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization, Encounter_with_Comfort_Measures_during_Hospitalization_Compute);
 
     private IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization_Compute(CqlContext context)
     {

@@ -86,7 +86,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -104,7 +104,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -116,7 +116,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Evaluation and Management")]
     public IEnumerable<Encounter> ED_Evaluation_and_Management(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Evaluation_and_Management, ED_Evaluation_and_Management_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Evaluation_and_Management, ED_Evaluation_and_Management_Compute);
 
     private IEnumerable<Encounter> ED_Evaluation_and_Management_Compute(CqlContext context)
     {
@@ -144,7 +144,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Triage")]
     public IEnumerable<Encounter> ED_Triage(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Triage, ED_Triage_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Triage, ED_Triage_Compute);
 
     private IEnumerable<Encounter> ED_Triage_Compute(CqlContext context)
     {
@@ -177,7 +177,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Triage Excluding Those Prior To ED Encounters")]
     public IEnumerable<Encounter> ED_Triage_Excluding_Those_Prior_To_ED_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters, ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters, ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Compute);
 
     private IEnumerable<Encounter> ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Compute(CqlContext context)
     {
@@ -231,7 +231,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -244,7 +244,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -359,7 +359,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Triage Before Evaluation Management")]
     public IEnumerable<Encounter> ED_Triage_Before_Evaluation_Management(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Triage_Before_Evaluation_Management, ED_Triage_Before_Evaluation_Management_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Triage_Before_Evaluation_Management, ED_Triage_Before_Evaluation_Management_Compute);
 
     private IEnumerable<Encounter> ED_Triage_Before_Evaluation_Management_Compute(CqlContext context)
     {
@@ -413,7 +413,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Triage and Evaluation Management")]
     public IEnumerable<Encounter> ED_Triage_and_Evaluation_Management(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Triage_and_Evaluation_Management, ED_Triage_and_Evaluation_Management_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Triage_and_Evaluation_Management, ED_Triage_and_Evaluation_Management_Compute);
 
     private IEnumerable<Encounter> ED_Triage_and_Evaluation_Management_Compute(CqlContext context)
     {
@@ -469,7 +469,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Time to Treatment Room Greater Than 60 Minutes")]
     public IEnumerable<Encounter> Time_to_Treatment_Room_Greater_Than_60_Minutes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes, Time_to_Treatment_Room_Greater_Than_60_Minutes_Compute);
+        context.GetOrCompute(_cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes, Time_to_Treatment_Room_Greater_Than_60_Minutes_Compute);
 
     private IEnumerable<Encounter> Time_to_Treatment_Room_Greater_Than_60_Minutes_Compute(CqlContext context)
     {
@@ -491,7 +491,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Arrival Left Without Being Seen")]
     public IEnumerable<Encounter> ED_Arrival_Left_Without_Being_Seen(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Arrival_Left_Without_Being_Seen, ED_Arrival_Left_Without_Being_Seen_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Arrival_Left_Without_Being_Seen, ED_Arrival_Left_Without_Being_Seen_Compute);
 
     private IEnumerable<Encounter> ED_Arrival_Left_Without_Being_Seen_Compute(CqlContext context)
     {
@@ -664,7 +664,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Boarded Time Greater Than 240 Minutes")]
     public IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Boarded_Time_Greater_Than_240_Minutes, Boarded_Time_Greater_Than_240_Minutes_Compute);
+        context.GetOrCompute(_cacheIndex_Boarded_Time_Greater_Than_240_Minutes, Boarded_Time_Greater_Than_240_Minutes_Compute);
 
     private IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_Compute(CqlContext context)
     {
@@ -686,7 +686,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Observation Status")]
     public IEnumerable<Encounter> ED_Observation_Status(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Observation_Status, ED_Observation_Status_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Observation_Status, ED_Observation_Status_Compute);
 
     private IEnumerable<Encounter> ED_Observation_Status_Compute(CqlContext context)
     {
@@ -723,7 +723,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Boarded Time Greater Than 240 Minutes and No Observation Stay")]
     public IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay, Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Compute);
+        context.GetOrCompute(_cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay, Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Compute);
 
     private IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Compute(CqlContext context)
     {
@@ -754,7 +754,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Length of Stay Greater Than 480 Minutes")]
     public IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes, ED_Length_of_Stay_Greater_Than_480_Minutes_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes, ED_Length_of_Stay_Greater_Than_480_Minutes_Compute);
 
     private IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_Compute(CqlContext context)
     {
@@ -776,7 +776,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Length of Stay Greater Than 480 Minutes and No Observation Stay")]
     public IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay, ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay, ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Compute);
 
     private IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Compute(CqlContext context)
     {
@@ -807,7 +807,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -824,7 +824,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Encounter or Triage of Patients Less Than 18 Years")]
     public IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years, ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years, ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Compute);
 
     private IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Compute(CqlContext context)
     {
@@ -851,7 +851,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Pediatric With No Mental Health Diagnosis")]
     public IEnumerable<Encounter> Pediatric_With_No_Mental_Health_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis, Pediatric_With_No_Mental_Health_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis, Pediatric_With_No_Mental_Health_Diagnosis_Compute);
 
     private IEnumerable<Encounter> Pediatric_With_No_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -871,7 +871,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("ED Encounter or Triage of Patients 18 Years and Older")]
     public IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older, ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Compute);
+        context.GetOrCompute(_cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older, ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Compute);
 
     private IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Compute(CqlContext context)
     {
@@ -898,7 +898,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Adult With No Mental Health Diagnosis")]
     public IEnumerable<Encounter> Adult_With_No_Mental_Health_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Adult_With_No_Mental_Health_Diagnosis, Adult_With_No_Mental_Health_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Adult_With_No_Mental_Health_Diagnosis, Adult_With_No_Mental_Health_Diagnosis_Compute);
 
     private IEnumerable<Encounter> Adult_With_No_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -918,7 +918,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Pediatric With Mental Health Diagnosis")]
     public IEnumerable<Encounter> Pediatric_With_Mental_Health_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Pediatric_With_Mental_Health_Diagnosis, Pediatric_With_Mental_Health_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Pediatric_With_Mental_Health_Diagnosis, Pediatric_With_Mental_Health_Diagnosis_Compute);
 
     private IEnumerable<Encounter> Pediatric_With_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -937,7 +937,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Adult With Mental Health Diagnosis")]
     public IEnumerable<Encounter> Adult_With_Mental_Health_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Adult_With_Mental_Health_Diagnosis, Adult_With_Mental_Health_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Adult_With_Mental_Health_Diagnosis, Adult_With_Mental_Health_Diagnosis_Compute);
 
     private IEnumerable<Encounter> Adult_With_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -956,7 +956,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Stratification 1")]
     public IEnumerable<Encounter> Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
     private IEnumerable<Encounter> Stratification_1_Compute(CqlContext context)
     {
@@ -967,7 +967,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Stratification 2")]
     public IEnumerable<Encounter> Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
     private IEnumerable<Encounter> Stratification_2_Compute(CqlContext context)
     {
@@ -978,7 +978,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Stratification 3")]
     public IEnumerable<Encounter> Stratification_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_3, Stratification_3_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_3, Stratification_3_Compute);
 
     private IEnumerable<Encounter> Stratification_3_Compute(CqlContext context)
     {
@@ -989,7 +989,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("Stratification 4")]
     public IEnumerable<Encounter> Stratification_4(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_4, Stratification_4_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_4, Stratification_4_Compute);
 
     private IEnumerable<Encounter> Stratification_4_Compute(CqlContext context)
     {
@@ -1000,7 +1000,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1011,7 +1011,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1022,7 +1022,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1033,7 +1033,7 @@ public partial class CMS1264FHIRECATREHQR_1_0_000 : ILibrary, ILibraryInternals,
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

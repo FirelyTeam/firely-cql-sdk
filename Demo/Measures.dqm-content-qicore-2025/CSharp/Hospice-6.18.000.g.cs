@@ -79,7 +79,7 @@ public partial class Hospice_6_18_000 : ILibrary, ILibraryInternals, ISingleton<
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -94,7 +94,7 @@ public partial class Hospice_6_18_000 : ILibrary, ILibraryInternals, ISingleton<
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -106,7 +106,7 @@ public partial class Hospice_6_18_000 : ILibrary, ILibraryInternals, ISingleton<
 
     [CqlExpressionDefinition("Has Hospice Services")]
     public bool? Has_Hospice_Services(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Hospice_Services, Has_Hospice_Services_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Hospice_Services, Has_Hospice_Services_Compute);
 
     private bool? Has_Hospice_Services_Compute(CqlContext context)
     {

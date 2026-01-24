@@ -61,7 +61,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ILibraryInternals, I
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -76,7 +76,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ILibraryInternals, I
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -88,7 +88,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ILibraryInternals, I
 
     [CqlExpressionDefinition("Palliative Care in the Measurement Period")]
     public bool? Palliative_Care_in_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Palliative_Care_in_the_Measurement_Period, Palliative_Care_in_the_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Palliative_Care_in_the_Measurement_Period, Palliative_Care_in_the_Measurement_Period_Compute);
 
     private bool? Palliative_Care_in_the_Measurement_Period_Compute(CqlContext context)
     {

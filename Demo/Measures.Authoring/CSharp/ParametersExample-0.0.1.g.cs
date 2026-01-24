@@ -29,7 +29,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlParameterDefinition("AgeThreshold")]
     public int? AgeThreshold(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_AgeThreshold, AgeThreshold_Compute);
+        context.GetOrCompute(_cacheIndex_AgeThreshold, AgeThreshold_Compute);
 
     private int? AgeThreshold_Compute(CqlContext context)
     {
@@ -44,7 +44,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -56,7 +56,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_CurrentDate, CurrentDate_Compute);
+        context.GetOrCompute(_cacheIndex_CurrentDate, CurrentDate_Compute);
 
     private CqlDate CurrentDate_Compute(CqlContext context)
     {
@@ -67,7 +67,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Filter")]
     public Patient Patient_Filter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_Filter, Patient_Filter_Compute);
+        context.GetOrCompute(_cacheIndex_Patient_Filter, Patient_Filter_Compute);
 
     private Patient Patient_Filter_Compute(CqlContext context)
     {
@@ -104,7 +104,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_Birthdate, Patient_Birthdate_Compute);
+        context.GetOrCompute(_cacheIndex_Patient_Birthdate, Patient_Birthdate_Compute);
 
     private Date Patient_Birthdate_Compute(CqlContext context)
     {
@@ -116,7 +116,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Age in Years")]
     public int? Patient_Age_in_Years(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_Age_in_Years, Patient_Age_in_Years_Compute);
+        context.GetOrCompute(_cacheIndex_Patient_Age_in_Years, Patient_Age_in_Years_Compute);
 
     private int? Patient_Age_in_Years_Compute(CqlContext context)
     {
@@ -130,7 +130,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_Older_Than_AgeThreshold, Patient_Older_Than_AgeThreshold_Compute);
+        context.GetOrCompute(_cacheIndex_Patient_Older_Than_AgeThreshold, Patient_Older_Than_AgeThreshold_Compute);
 
     private bool? Patient_Older_Than_AgeThreshold_Compute(CqlContext context)
     {

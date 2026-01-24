@@ -33,7 +33,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ILibraryInternals, ISingleton
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -48,7 +48,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ILibraryInternals, ISingleton
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -60,7 +60,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ILibraryInternals, ISingleton
 
     [CqlExpressionDefinition("Hospice Intervention or Encounter")]
     public bool? Hospice_Intervention_or_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Hospice_Intervention_or_Encounter, Hospice_Intervention_or_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_Hospice_Intervention_or_Encounter, Hospice_Intervention_or_Encounter_Compute);
 
     private bool? Hospice_Intervention_or_Encounter_Compute(CqlContext context)
     {

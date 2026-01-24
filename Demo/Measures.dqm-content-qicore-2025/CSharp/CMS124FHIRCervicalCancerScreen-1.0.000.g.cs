@@ -83,7 +83,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -101,7 +101,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -113,7 +113,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
+        context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -151,7 +151,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -213,7 +213,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -224,7 +224,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Absence of Cervix")]
     public IEnumerable<object> Absence_of_Cervix(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Absence_of_Cervix, Absence_of_Cervix_Compute);
+        context.GetOrCompute(_cacheIndex_Absence_of_Cervix, Absence_of_Cervix_Compute);
 
     private IEnumerable<object> Absence_of_Cervix_Compute(CqlContext context)
     {
@@ -329,7 +329,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -345,7 +345,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Cervical Cytology Within 3 Years")]
     public IEnumerable<Observation> Cervical_Cytology_Within_3_Years(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Cervical_Cytology_Within_3_Years, Cervical_Cytology_Within_3_Years_Compute);
+        context.GetOrCompute(_cacheIndex_Cervical_Cytology_Within_3_Years, Cervical_Cytology_Within_3_Years_Compute);
 
     private IEnumerable<Observation> Cervical_Cytology_Within_3_Years_Compute(CqlContext context)
     {
@@ -426,7 +426,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("HPV Test Within 5 Years for Women Age 30 and Older")]
     public IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_HPV_Test_Within_5_Years_for_Women_Age_30_and_Older, HPV_Test_Within_5_Years_for_Women_Age_30_and_Older_Compute);
+        context.GetOrCompute(_cacheIndex_HPV_Test_Within_5_Years_for_Women_Age_30_and_Older, HPV_Test_Within_5_Years_for_Women_Age_30_and_Older_Compute);
 
     private IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older_Compute(CqlContext context)
     {
@@ -566,7 +566,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -581,7 +581,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -592,7 +592,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -603,7 +603,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -614,7 +614,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

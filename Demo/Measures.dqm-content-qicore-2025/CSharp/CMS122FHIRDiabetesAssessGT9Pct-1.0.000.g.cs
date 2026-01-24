@@ -114,7 +114,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -132,7 +132,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -144,7 +144,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -155,7 +155,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -166,7 +166,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -177,7 +177,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -188,7 +188,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
+        context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -355,7 +355,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -394,7 +394,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -405,7 +405,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -422,7 +422,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Glycemic Status Assessment")]
     public IEnumerable<Observation> Glycemic_Status_Assessment(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Glycemic_Status_Assessment, Glycemic_Status_Assessment_Compute);
+        context.GetOrCompute(_cacheIndex_Glycemic_Status_Assessment, Glycemic_Status_Assessment_Compute);
 
     private IEnumerable<Observation> Glycemic_Status_Assessment_Compute(CqlContext context)
     {
@@ -498,7 +498,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Most Recent Glycemic Status Date")]
     public CqlDate Most_Recent_Glycemic_Status_Date(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Most_Recent_Glycemic_Status_Date, Most_Recent_Glycemic_Status_Date_Compute);
+        context.GetOrCompute(_cacheIndex_Most_Recent_Glycemic_Status_Date, Most_Recent_Glycemic_Status_Date_Compute);
 
     private CqlDate Most_Recent_Glycemic_Status_Date_Compute(CqlContext context)
     {
@@ -570,7 +570,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Lowest Glycemic Status Assessment Reading on Most Recent Day")]
     public Observation Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day, Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day_Compute);
+        context.GetOrCompute(_cacheIndex_Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day, Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day_Compute);
 
     private Observation Lowest_Glycemic_Status_Assessment_Reading_on_Most_Recent_Day_Compute(CqlContext context)
     {
@@ -660,7 +660,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Most Recent Glycemic Status Assessment Without Result")]
     public bool? Has_Most_Recent_Glycemic_Status_Assessment_Without_Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Most_Recent_Glycemic_Status_Assessment_Without_Result, Has_Most_Recent_Glycemic_Status_Assessment_Without_Result_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Most_Recent_Glycemic_Status_Assessment_Without_Result, Has_Most_Recent_Glycemic_Status_Assessment_Without_Result_Compute);
 
     private bool? Has_Most_Recent_Glycemic_Status_Assessment_Without_Result_Compute(CqlContext context)
     {
@@ -675,7 +675,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Most Recent Elevated Glycemic Status Assessment")]
     public bool? Has_Most_Recent_Elevated_Glycemic_Status_Assessment(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Most_Recent_Elevated_Glycemic_Status_Assessment, Has_Most_Recent_Elevated_Glycemic_Status_Assessment_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Most_Recent_Elevated_Glycemic_Status_Assessment, Has_Most_Recent_Elevated_Glycemic_Status_Assessment_Compute);
 
     private bool? Has_Most_Recent_Elevated_Glycemic_Status_Assessment_Compute(CqlContext context)
     {
@@ -690,7 +690,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has No Record Of Glycemic Status Assessment")]
     public bool? Has_No_Record_Of_Glycemic_Status_Assessment(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_No_Record_Of_Glycemic_Status_Assessment, Has_No_Record_Of_Glycemic_Status_Assessment_Compute);
+        context.GetOrCompute(_cacheIndex_Has_No_Record_Of_Glycemic_Status_Assessment, Has_No_Record_Of_Glycemic_Status_Assessment_Compute);
 
     private bool? Has_No_Record_Of_Glycemic_Status_Assessment_Compute(CqlContext context)
     {
@@ -703,7 +703,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {

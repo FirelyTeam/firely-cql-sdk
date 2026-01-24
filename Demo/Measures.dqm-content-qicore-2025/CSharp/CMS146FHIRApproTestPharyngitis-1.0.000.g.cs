@@ -119,7 +119,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -137,7 +137,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -149,7 +149,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -160,7 +160,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -171,7 +171,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -182,7 +182,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -193,7 +193,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
+        context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -284,7 +284,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With Antibiotic Ordered Within Three Days")]
     public IEnumerable<Encounter> Encounter_With_Antibiotic_Ordered_Within_Three_Days(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Antibiotic_Ordered_Within_Three_Days, Encounter_With_Antibiotic_Ordered_Within_Three_Days_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_With_Antibiotic_Ordered_Within_Three_Days, Encounter_With_Antibiotic_Ordered_Within_Three_Days_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Antibiotic_Ordered_Within_Three_Days_Compute(CqlContext context)
     {
@@ -353,7 +353,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Pharyngitis or Tonsillitis")]
     public IEnumerable<object> Pharyngitis_or_Tonsillitis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Pharyngitis_or_Tonsillitis, Pharyngitis_or_Tonsillitis_Compute);
+        context.GetOrCompute(_cacheIndex_Pharyngitis_or_Tonsillitis, Pharyngitis_or_Tonsillitis_Compute);
 
     private IEnumerable<object> Pharyngitis_or_Tonsillitis_Compute(CqlContext context)
     {
@@ -371,7 +371,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounter With Pharyngitis or Tonsillitis With Antibiotic")]
     public IEnumerable<Encounter> Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic, Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic, Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic_Compute(CqlContext context)
     {
@@ -405,7 +405,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -434,7 +434,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -445,7 +445,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Encounters and Assessments with Hospice Patient")]
     public IEnumerable<Encounter> Encounters_and_Assessments_with_Hospice_Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounters_and_Assessments_with_Hospice_Patient, Encounters_and_Assessments_with_Hospice_Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Encounters_and_Assessments_with_Hospice_Patient, Encounters_and_Assessments_with_Hospice_Patient_Compute);
 
     private IEnumerable<Encounter> Encounters_and_Assessments_with_Hospice_Patient_Compute(CqlContext context)
     {
@@ -463,7 +463,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -523,7 +523,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Group A Streptococcus Lab Test With Result")]
     public IEnumerable<Observation> Group_A_Streptococcus_Lab_Test_With_Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Group_A_Streptococcus_Lab_Test_With_Result, Group_A_Streptococcus_Lab_Test_With_Result_Compute);
+        context.GetOrCompute(_cacheIndex_Group_A_Streptococcus_Lab_Test_With_Result, Group_A_Streptococcus_Lab_Test_With_Result_Compute);
 
     private IEnumerable<Observation> Group_A_Streptococcus_Lab_Test_With_Result_Compute(CqlContext context)
     {
@@ -545,7 +545,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -588,7 +588,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Stratification 1")]
     public IEnumerable<Encounter> Stratification_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
     private IEnumerable<Encounter> Stratification_1_Compute(CqlContext context)
     {
@@ -618,7 +618,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Stratification 2")]
     public IEnumerable<Encounter> Stratification_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
     private IEnumerable<Encounter> Stratification_2_Compute(CqlContext context)
     {
@@ -648,7 +648,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Stratification 3")]
     public IEnumerable<Encounter> Stratification_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_3, Stratification_3_Compute);
+        context.GetOrCompute(_cacheIndex_Stratification_3, Stratification_3_Compute);
 
     private IEnumerable<Encounter> Stratification_3_Compute(CqlContext context)
     {

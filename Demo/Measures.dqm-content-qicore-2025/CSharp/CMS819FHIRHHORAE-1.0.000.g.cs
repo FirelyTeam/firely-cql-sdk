@@ -54,7 +54,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -72,7 +72,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -84,7 +84,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounter, Qualifying_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_Qualifying_Encounter, Qualifying_Encounter_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -122,7 +122,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Opioid Administration")]
     public IEnumerable<MedicationAdministration> Opioid_Administration(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Opioid_Administration, Opioid_Administration_Compute);
+        context.GetOrCompute(_cacheIndex_Opioid_Administration, Opioid_Administration_Compute);
 
     private IEnumerable<MedicationAdministration> Opioid_Administration_Compute(CqlContext context)
     {
@@ -171,7 +171,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Encounter With Opioid Administration Outside Of Operating Room")]
     public IEnumerable<Encounter> Encounter_With_Opioid_Administration_Outside_Of_Operating_Room(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Opioid_Administration_Outside_Of_Operating_Room, Encounter_With_Opioid_Administration_Outside_Of_Operating_Room_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_With_Opioid_Administration_Outside_Of_Operating_Room, Encounter_With_Opioid_Administration_Outside_Of_Operating_Room_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Opioid_Administration_Outside_Of_Operating_Room_Compute(CqlContext context)
     {
@@ -233,7 +233,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -244,7 +244,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -255,7 +255,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Non Enteral Opioid Antagonist Administration")]
     public IEnumerable<MedicationAdministration> Non_Enteral_Opioid_Antagonist_Administration(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Non_Enteral_Opioid_Antagonist_Administration, Non_Enteral_Opioid_Antagonist_Administration_Compute);
+        context.GetOrCompute(_cacheIndex_Non_Enteral_Opioid_Antagonist_Administration, Non_Enteral_Opioid_Antagonist_Administration_Compute);
 
     private IEnumerable<MedicationAdministration> Non_Enteral_Opioid_Antagonist_Administration_Compute(CqlContext context)
     {
@@ -307,7 +307,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
     [CqlTag("description", "Provides guidance to implementers to interpret logic in following defintion correctly")]
     [CqlTag("comment", "Excludes opioid antagonist administered in operating room AND excludes opioids administered in operating room AND opioid is administered before opioid antagonist AND limits opioid antagonist to non-enteral routes")]
     public IEnumerable<Encounter> Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration, Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration_Compute);
+        context.GetOrCompute(_cacheIndex_Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration, Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration_Compute);
 
     private IEnumerable<Encounter> Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration_Compute(CqlContext context)
     {
@@ -404,7 +404,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -415,7 +415,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -426,7 +426,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -437,7 +437,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -448,7 +448,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

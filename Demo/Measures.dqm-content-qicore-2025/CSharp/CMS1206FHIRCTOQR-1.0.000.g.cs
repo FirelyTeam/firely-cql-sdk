@@ -52,7 +52,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -70,7 +70,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -82,7 +82,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Qualified Scan")]
     public IEnumerable<Observation> Qualified_Scan(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualified_Scan, Qualified_Scan_Compute);
+        context.GetOrCompute(_cacheIndex_Qualified_Scan, Qualified_Scan_Compute);
 
     private IEnumerable<Observation> Qualified_Scan_Compute(CqlContext context)
     {
@@ -126,7 +126,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Qualified Scan Without Inpatient Encounter")]
     public IEnumerable<Observation> Qualified_Scan_Without_Inpatient_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualified_Scan_Without_Inpatient_Encounter, Qualified_Scan_Without_Inpatient_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_Qualified_Scan_Without_Inpatient_Encounter, Qualified_Scan_Without_Inpatient_Encounter_Compute);
 
     private IEnumerable<Observation> Qualified_Scan_Without_Inpatient_Encounter_Compute(CqlContext context)
     {
@@ -171,7 +171,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Qualified Scan With Values")]
     public IEnumerable<Observation> Qualified_Scan_With_Values(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualified_Scan_With_Values, Qualified_Scan_With_Values_Compute);
+        context.GetOrCompute(_cacheIndex_Qualified_Scan_With_Values, Qualified_Scan_With_Values_Compute);
 
     private IEnumerable<Observation> Qualified_Scan_With_Values_Compute(CqlContext context)
     {
@@ -197,7 +197,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Observation> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private IEnumerable<Observation> Denominator_Compute(CqlContext context)
     {
@@ -208,7 +208,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Denominator Exclusion")]
     public IEnumerable<Observation> Denominator_Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusion, Denominator_Exclusion_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusion, Denominator_Exclusion_Compute);
 
     private IEnumerable<Observation> Denominator_Exclusion_Compute(CqlContext context)
     {
@@ -230,7 +230,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Observation> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Observation> Initial_Population_Compute(CqlContext context)
     {
@@ -241,7 +241,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Observation> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private IEnumerable<Observation> Numerator_Compute(CqlContext context)
     {
@@ -259,7 +259,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -270,7 +270,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -281,7 +281,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -292,7 +292,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

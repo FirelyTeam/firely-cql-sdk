@@ -172,7 +172,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ILibraryInternals, ISingleton
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -187,7 +187,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ILibraryInternals, ISingleton
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -199,7 +199,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ILibraryInternals, ISingleton
 
     [CqlExpressionDefinition("Inpatient Encounter")]
     public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Inpatient_Encounter, Inpatient_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_Inpatient_Encounter, Inpatient_Encounter_Compute);
 
     private IEnumerable<Encounter> Inpatient_Encounter_Compute(CqlContext context)
     {

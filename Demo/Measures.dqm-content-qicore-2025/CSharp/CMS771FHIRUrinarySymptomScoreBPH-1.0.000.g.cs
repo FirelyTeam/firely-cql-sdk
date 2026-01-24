@@ -89,7 +89,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -107,7 +107,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -119,7 +119,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Patient is Male")]
     public bool? Patient_is_Male(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_is_Male, Patient_is_Male_Compute);
+        context.GetOrCompute(_cacheIndex_Patient_is_Male, Patient_is_Male_Compute);
 
     private bool? Patient_is_Male_Compute(CqlContext context)
     {
@@ -132,7 +132,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Has Qualifying Encounter")]
     public bool? Has_Qualifying_Encounter(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Qualifying_Encounter, Has_Qualifying_Encounter_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Qualifying_Encounter, Has_Qualifying_Encounter_Compute);
 
     private bool? Has_Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -191,7 +191,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Initial BPH Diagnosis Starts Within 6 Months Before the Measurement Period")]
     public object Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period, Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period, Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period_Compute);
 
     private object Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -235,7 +235,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Has Qualifying BPH Diagnosis")]
     public bool? Has_Qualifying_BPH_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Qualifying_BPH_Diagnosis, Has_Qualifying_BPH_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Qualifying_BPH_Diagnosis, Has_Qualifying_BPH_Diagnosis_Compute);
 
     private bool? Has_Qualifying_BPH_Diagnosis_Compute(CqlContext context)
     {
@@ -247,7 +247,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -262,7 +262,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Documented IPSS Assessment Result")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> Documented_IPSS_Assessment_Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Documented_IPSS_Assessment_Result, Documented_IPSS_Assessment_Result_Compute);
+        context.GetOrCompute(_cacheIndex_Documented_IPSS_Assessment_Result, Documented_IPSS_Assessment_Result_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> Documented_IPSS_Assessment_Result_Compute(CqlContext context)
     {
@@ -355,7 +355,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("AUA Symptom Index and Quality of Life Assessment Result")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result, AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result_Compute);
+        context.GetOrCompute(_cacheIndex_AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result, AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> AUA_Symptom_Index_and_Quality_of_Life_Assessment_Result_Compute(CqlContext context)
     {
@@ -635,7 +635,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Urinary Symptom Score Assessment")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> Urinary_Symptom_Score_Assessment(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Urinary_Symptom_Score_Assessment, Urinary_Symptom_Score_Assessment_Compute);
+        context.GetOrCompute(_cacheIndex_Urinary_Symptom_Score_Assessment, Urinary_Symptom_Score_Assessment_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> Urinary_Symptom_Score_Assessment_Compute(CqlContext context)
     {
@@ -648,7 +648,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Urinary Symptom Score Within 1 Month After Initial BPH Diagnosis")]
     public (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? Urinary_Symptom_Score_Within_1_Month_After_Initial_BPH_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Urinary_Symptom_Score_Within_1_Month_After_Initial_BPH_Diagnosis, Urinary_Symptom_Score_Within_1_Month_After_Initial_BPH_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Urinary_Symptom_Score_Within_1_Month_After_Initial_BPH_Diagnosis, Urinary_Symptom_Score_Within_1_Month_After_Initial_BPH_Diagnosis_Compute);
 
     private (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? Urinary_Symptom_Score_Within_1_Month_After_Initial_BPH_Diagnosis_Compute(CqlContext context)
     {
@@ -696,7 +696,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Urinary Symptom Score 6 to 12 Months After Initial BPH Diagnosis")]
     public (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis, Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis, Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis_Compute);
 
     private (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis_Compute(CqlContext context)
     {
@@ -739,7 +739,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -756,7 +756,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Urinary Retention Diagnosis Starts Within 1 Year After Initial BPH Diagnosis")]
     public IEnumerable<object> Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis, Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis_Compute);
+        context.GetOrCompute(_cacheIndex_Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis, Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis_Compute);
 
     private IEnumerable<object> Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis_Compute(CqlContext context)
     {
@@ -807,7 +807,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Has Initial BPH Diagnosis Starts During or Within 30 Days After End of Hospitalization")]
     public object Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization, Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization_Compute);
+        context.GetOrCompute(_cacheIndex_Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization, Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization_Compute);
 
     private object Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization_Compute(CqlContext context)
     {
@@ -854,7 +854,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Morbid Obesity Diagnosis On or Before Follow Up USS Assessment")]
     public IEnumerable<object> Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment, Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment_Compute);
+        context.GetOrCompute(_cacheIndex_Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment, Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment_Compute);
 
     private IEnumerable<object> Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment_Compute(CqlContext context)
     {
@@ -902,7 +902,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
     [CqlTag("code", "Body mass index (BMI) [Ratio] - 39156-5")]
     [CqlTag("profile", "http://hl7.org/fhir/StructureDefinition/bmi")]
     public bool? BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment, BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment_Compute);
+        context.GetOrCompute(_cacheIndex_BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment, BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment_Compute);
 
     private bool? BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment_Compute(CqlContext context)
     {
@@ -967,7 +967,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Morbid Obesity Diagnosis or BMI Exam Result Greater Than or Equal to 40 Starts On or Before Follow Up USS Assessment")]
     public bool? Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment, Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment_Compute);
+        context.GetOrCompute(_cacheIndex_Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment, Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment_Compute);
 
     private bool? Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment_Compute(CqlContext context)
     {
@@ -981,7 +981,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -998,7 +998,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Urinary Symptom Score Change")]
     public int? Urinary_Symptom_Score_Change(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Urinary_Symptom_Score_Change, Urinary_Symptom_Score_Change_Compute);
+        context.GetOrCompute(_cacheIndex_Urinary_Symptom_Score_Change, Urinary_Symptom_Score_Change_Compute);
 
     private int? Urinary_Symptom_Score_Change_Compute(CqlContext context)
     {
@@ -1035,7 +1035,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Urinary Symptom Score Improvement Greater Than or Equal To 3")]
     public bool? Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3, Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3_Compute);
+        context.GetOrCompute(_cacheIndex_Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3, Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3_Compute);
 
     private bool? Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3_Compute(CqlContext context)
     {
@@ -1058,7 +1058,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -1069,7 +1069,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1080,7 +1080,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1091,7 +1091,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1102,7 +1102,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

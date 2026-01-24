@@ -167,7 +167,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -185,7 +185,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -197,7 +197,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -208,7 +208,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -219,7 +219,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -230,7 +230,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -241,7 +241,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Telehealth Services")]
     public IEnumerable<Encounter> Telehealth_Services(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Telehealth_Services, Telehealth_Services_Compute);
+        context.GetOrCompute(_cacheIndex_Telehealth_Services, Telehealth_Services_Compute);
 
     private IEnumerable<Encounter> Telehealth_Services_Compute(CqlContext context)
     {
@@ -270,7 +270,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Age at start of Measurement Period")]
     public int? Age_at_start_of_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Age_at_start_of_Measurement_Period, Age_at_start_of_Measurement_Period_Compute);
+        context.GetOrCompute(_cacheIndex_Age_at_start_of_Measurement_Period, Age_at_start_of_Measurement_Period_Compute);
 
     private int? Age_at_start_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -288,7 +288,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -313,7 +313,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -324,7 +324,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Malignant Neoplasm")]
     public IEnumerable<Condition> Malignant_Neoplasm(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Malignant_Neoplasm, Malignant_Neoplasm_Compute);
+        context.GetOrCompute(_cacheIndex_Malignant_Neoplasm, Malignant_Neoplasm_Compute);
 
     private IEnumerable<Condition> Malignant_Neoplasm_Compute(CqlContext context)
     {
@@ -347,7 +347,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Total Colectomy Performed")]
     public IEnumerable<Procedure> Total_Colectomy_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Total_Colectomy_Performed, Total_Colectomy_Performed_Compute);
+        context.GetOrCompute(_cacheIndex_Total_Colectomy_Performed, Total_Colectomy_Performed_Compute);
 
     private IEnumerable<Procedure> Total_Colectomy_Performed_Compute(CqlContext context)
     {
@@ -375,7 +375,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Total Colectomy Condition")]
     public IEnumerable<Condition> Total_Colectomy_Condition(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Total_Colectomy_Condition, Total_Colectomy_Condition_Compute);
+        context.GetOrCompute(_cacheIndex_Total_Colectomy_Condition, Total_Colectomy_Condition_Compute);
 
     private IEnumerable<Condition> Total_Colectomy_Condition_Compute(CqlContext context)
     {
@@ -398,7 +398,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -434,7 +434,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Display Date, Result, Category, Status")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status, Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Compute);
+        context.GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status, Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Compute(CqlContext context)
     {
@@ -536,7 +536,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Performed, Fecal_Occult_Blood_Test_Performed_Compute);
+        context.GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Performed, Fecal_Occult_Blood_Test_Performed_Compute);
 
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_Compute(CqlContext context)
     {
@@ -614,7 +614,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Performed__day_of_TZoffset, Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Compute);
+        context.GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Performed__day_of_TZoffset, Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Compute);
 
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Compute(CqlContext context)
     {
@@ -692,7 +692,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed without appropriate category, ignore status, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset, Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Compute);
+        context.GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset, Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Compute);
 
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Compute(CqlContext context)
     {
@@ -762,7 +762,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed without appropriate status, ignore category, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset, Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Compute);
+        context.GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset, Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Compute);
 
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Compute(CqlContext context)
     {
@@ -797,7 +797,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Display Date, Result, Category, Status")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status, Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Compute);
+        context.GetOrCompute(_cacheIndex_Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status, Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Compute(CqlContext context)
     {
@@ -902,7 +902,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Fecal_Immunochemical_Test_DNA_Performed, Fecal_Immunochemical_Test_DNA_Performed_Compute);
+        context.GetOrCompute(_cacheIndex_Fecal_Immunochemical_Test_DNA_Performed, Fecal_Immunochemical_Test_DNA_Performed_Compute);
 
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_Compute(CqlContext context)
     {
@@ -988,7 +988,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset, Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Compute);
+        context.GetOrCompute(_cacheIndex_Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset, Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Compute);
 
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Compute(CqlContext context)
     {
@@ -1074,7 +1074,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed without appropriate category, ignore status, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset, Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Compute);
+        context.GetOrCompute(_cacheIndex_Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset, Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Compute);
 
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Compute(CqlContext context)
     {
@@ -1152,7 +1152,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Fecal Immunochemical Test DNA Performed without appropriate status, ignore category, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset, Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Compute);
+        context.GetOrCompute(_cacheIndex_Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset, Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Compute);
 
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Compute(CqlContext context)
     {
@@ -1195,7 +1195,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("CT Colonography Display Date")]
     public IEnumerable<CqlDateTime> CT_Colonography_Display_Date(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_CT_Colonography_Display_Date, CT_Colonography_Display_Date_Compute);
+        context.GetOrCompute(_cacheIndex_CT_Colonography_Display_Date, CT_Colonography_Display_Date_Compute);
 
     private IEnumerable<CqlDateTime> CT_Colonography_Display_Date_Compute(CqlContext context)
     {
@@ -1235,7 +1235,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("CT Colonography Performed")]
     public IEnumerable<Observation> CT_Colonography_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_CT_Colonography_Performed, CT_Colonography_Performed_Compute);
+        context.GetOrCompute(_cacheIndex_CT_Colonography_Performed, CT_Colonography_Performed_Compute);
 
     private IEnumerable<Observation> CT_Colonography_Performed_Compute(CqlContext context)
     {
@@ -1276,7 +1276,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("CT Colonography Performed without appropriate status")]
     public IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_CT_Colonography_Performed_without_appropriate_status, CT_Colonography_Performed_without_appropriate_status_Compute);
+        context.GetOrCompute(_cacheIndex_CT_Colonography_Performed_without_appropriate_status, CT_Colonography_Performed_without_appropriate_status_Compute);
 
     private IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status_Compute(CqlContext context)
     {
@@ -1318,7 +1318,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Flexible Sigmoidoscopy Display Date")]
     public IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Flexible_Sigmoidoscopy_Display_Date, Flexible_Sigmoidoscopy_Display_Date_Compute);
+        context.GetOrCompute(_cacheIndex_Flexible_Sigmoidoscopy_Display_Date, Flexible_Sigmoidoscopy_Display_Date_Compute);
 
     private IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date_Compute(CqlContext context)
     {
@@ -1358,7 +1358,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Flexible Sigmoidoscopy Performed")]
     public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Flexible_Sigmoidoscopy_Performed, Flexible_Sigmoidoscopy_Performed_Compute);
+        context.GetOrCompute(_cacheIndex_Flexible_Sigmoidoscopy_Performed, Flexible_Sigmoidoscopy_Performed_Compute);
 
     private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_Compute(CqlContext context)
     {
@@ -1393,7 +1393,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Flexible Sigmoidoscopy Performed without appropriate status")]
     public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Flexible_Sigmoidoscopy_Performed_without_appropriate_status, Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Compute);
+        context.GetOrCompute(_cacheIndex_Flexible_Sigmoidoscopy_Performed_without_appropriate_status, Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Compute);
 
     private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Compute(CqlContext context)
     {
@@ -1429,7 +1429,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Colonoscopy Display Date")]
     public IEnumerable<CqlDateTime> Colonoscopy_Display_Date(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Colonoscopy_Display_Date, Colonoscopy_Display_Date_Compute);
+        context.GetOrCompute(_cacheIndex_Colonoscopy_Display_Date, Colonoscopy_Display_Date_Compute);
 
     private IEnumerable<CqlDateTime> Colonoscopy_Display_Date_Compute(CqlContext context)
     {
@@ -1469,7 +1469,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Colonoscopy Performed")]
     public IEnumerable<Procedure> Colonoscopy_Performed(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Colonoscopy_Performed, Colonoscopy_Performed_Compute);
+        context.GetOrCompute(_cacheIndex_Colonoscopy_Performed, Colonoscopy_Performed_Compute);
 
     private IEnumerable<Procedure> Colonoscopy_Performed_Compute(CqlContext context)
     {
@@ -1504,7 +1504,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Colonoscopy Performed without appropriate status")]
     public IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Colonoscopy_Performed_without_appropriate_status, Colonoscopy_Performed_without_appropriate_status_Compute);
+        context.GetOrCompute(_cacheIndex_Colonoscopy_Performed_without_appropriate_status, Colonoscopy_Performed_without_appropriate_status_Compute);
 
     private IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status_Compute(CqlContext context)
     {
@@ -1540,7 +1540,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -1564,7 +1564,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Final Numerator Population")]
     public bool? Final_Numerator_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Final_Numerator_Population, Final_Numerator_Population_Compute);
+        context.GetOrCompute(_cacheIndex_Final_Numerator_Population, Final_Numerator_Population_Compute);
 
     private bool? Final_Numerator_Population_Compute(CqlContext context)
     {
