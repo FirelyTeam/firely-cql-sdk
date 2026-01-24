@@ -23,20 +23,6 @@ namespace Hl7.Cql.Runtime;
 /// </remarks>
 internal sealed class CqlLibraryInvocationCache
 {
-    internal static CqlLibraryInvocationCache NeverCached { get; } = new
-        CqlLibraryInvocationCache(true);
-
-    /// <summary>
-    /// Initializes a new instance of the CqlLibraryInvocationCache class with default settings.
-    /// </summary>
-    /// <remarks>This constructor creates the cache with default behavior, equivalent to passing <see
-    /// langword="false"/> to the parameterized constructor. Use this overload when no custom configuration is
-    /// required.</remarks>
-    internal CqlLibraryInvocationCache() : this(false) {}
-
-    private CqlLibraryInvocationCache(bool neverCacheMode) => _neverCacheMode = neverCacheMode;
-
-    private readonly bool _neverCacheMode = false;
     private CacheWriteStrategy _cacheWriteStrategy;
     private CacheEntry[]? _cache;
     private long _cacheCallCount;
@@ -83,9 +69,6 @@ internal sealed class CqlLibraryInvocationCache
         Func<CqlContext, T> factory,
         CqlContext context)
     {
-        if (_neverCacheMode)
-            return factory(context);
-
         Interlocked.Increment(ref _cacheCallCount);
 
         var cache = _cache;
@@ -142,9 +125,6 @@ internal sealed class CqlLibraryInvocationCache
     /// </summary>
     internal void StopCache()
     {
-        if (_neverCacheMode)
-            throw new NotSupportedException($"Cannot call {nameof(StopCache)} on the NeverCached instance.");
-
         _cache = null;
         ResetStats();
     }
@@ -168,9 +148,6 @@ internal sealed class CqlLibraryInvocationCache
         CqlLibraryInvocationSet libraryInvocationSet,
         CacheWriteStrategy cacheWriteStrategy = CacheWriteStrategy.ExecutionAndPublication)
     {
-        if (_neverCacheMode)
-            throw new NotSupportedException($"Cannot call {nameof(StopCache)} on the NeverCached instance.");
-
         if (libraryInvocationSet is null)
             throw new ArgumentNullException(nameof(libraryInvocationSet));
 
