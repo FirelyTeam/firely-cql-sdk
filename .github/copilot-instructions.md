@@ -82,14 +82,15 @@ Use this header format with "Firely, NCQA" and the current year:
 6. **When adding new utility files or functionality that are only used internally, keep those types as `internal`, not `public`** - Only expose public APIs when they are intended for external consumption
 7. **When creating new files or modifying existing ones, always remove unused usings at the top of the file** - Keep using statements clean and only include what is actually used
 8. **Do not add duplicate usings in files where the using is already included globally in `GlobalUsings.cs`** - Check GlobalUsings.cs first to avoid redundant using statements
-9. **Always use the latest C# language features** when appropriate:
+9. **System.* namespaces must be added to `GlobalUsings.cs`, not directly in C# files** - All `System.*` using statements (e.g., `System.Linq`, `System.Collections.Generic`, `System.ComponentModel`) should be centralized in the project's `GlobalUsings.cs` file. Never add them directly to individual `.cs` files. Check `GlobalUsings.cs` first before adding any using statement.
+10. **Always use the latest C# language features** when appropriate:
    - Use collection expressions `[]` instead of `new[] { ... }` for arrays and collections
    - Use target-typed `new()` expressions when the type is clear from context
    - Use pattern matching and switch expressions where applicable
    - Use record types for immutable data structures
    - Use nullable reference types and null-conditional operators
    - Use string interpolation instead of `string.Format` or concatenation
-10. **Local functions must use camelCase naming** - Local functions (functions defined inside methods) should start with a lowercase letter (e.g., `processItem()`, not `ProcessItem()`)
+11. **Local functions must use camelCase naming** - Local functions (functions defined inside methods) should start with a lowercase letter (e.g., `processItem()`, not `ProcessItem()`)
 
 ### Code Generation
 - **When modifying code generation logic in `CodeGeneration.NET`**: The generated C# code does not have `#nullable enable` directives, so:

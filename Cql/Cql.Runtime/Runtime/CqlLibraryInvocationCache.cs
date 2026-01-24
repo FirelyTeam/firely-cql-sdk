@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Buffers;
 using Hl7.Cql.Runtime.Internal;
 
 namespace Hl7.Cql.Runtime;

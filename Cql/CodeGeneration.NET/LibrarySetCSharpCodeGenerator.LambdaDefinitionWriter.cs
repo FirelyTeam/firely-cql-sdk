@@ -68,12 +68,12 @@ internal partial class LibrarySetCSharpCodeGenerator
                 var cacheIndexFieldName = $"_cacheIndex_{IdentifierNormalizer.Normalize(ld.Name)}";
                 var computeMethodName = $"{methodName}_Compute";
 
-                // Public method signature - delegates to cache via ICqlContextInternals or compute method
+                // Public method signature - delegates to cache or compute method
                 ISB.AppendLine($"{lambdaParameters} =>");
                 using (ISB.Indent())
                 {
-                    // Use context's cache through ICqlContextInternals interface
-                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute({cacheIndexFieldName}, {computeMethodName});");
+                    // Call GetOrCompute directly on CqlContext (sealed class, no interface casting)
+                    ISB.AppendLine($"context.GetOrCompute({cacheIndexFieldName}, {computeMethodName});");
                 }
                 ISB.AppendLine();
 

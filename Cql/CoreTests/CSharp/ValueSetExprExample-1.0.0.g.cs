@@ -41,7 +41,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlParameterDefinition("ChosenSubCategory")]
     public string ChosenSubCategory(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute);
+        context.GetOrCompute(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute);
 
     private string ChosenSubCategory_Compute(CqlContext context)
     {
@@ -52,7 +52,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlParameterDefinition("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ChosenCode, ChosenCode_Compute);
+        context.GetOrCompute(_cacheIndex_ChosenCode, ChosenCode_Compute);
 
     private CqlCode ChosenCode_Compute(CqlContext context)
     {
@@ -67,7 +67,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("ValueSetA")]
     public CqlValueSet ValueSetA(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ValueSetA, ValueSetA_Compute);
+        context.GetOrCompute(_cacheIndex_ValueSetA, ValueSetA_Compute);
 
     private CqlValueSet ValueSetA_Compute(CqlContext context)
     {
@@ -109,7 +109,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_ValueSetB, ValueSetB_Compute);
+        context.GetOrCompute(_cacheIndex_ValueSetB, ValueSetB_Compute);
 
     private CqlValueSet ValueSetB_Compute(CqlContext context)
     {
@@ -151,7 +151,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("Result")]
     public string Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Result, Result_Compute);
+        context.GetOrCompute(_cacheIndex_Result, Result_Compute);
 
     private string Result_Compute(CqlContext context)
     {

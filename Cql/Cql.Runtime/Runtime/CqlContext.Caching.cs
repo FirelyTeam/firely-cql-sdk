@@ -6,12 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Runtime.Internal;
-using System.Runtime.CompilerServices;
-
 namespace Hl7.Cql.Runtime;
 
-public partial class CqlContext : ICqlContextInternals
+public partial class CqlContext
 {
     private CqlLibraryInvocationCache? _cache;
 
@@ -54,32 +51,15 @@ public partial class CqlContext : ICqlContextInternals
         _cache.StartNewCache(libraryInvocationSet, cacheWriteStrategy);
     }
 
-    /// <summary>
-    /// Stops caching for this context and resets cache statistics.
-    /// </summary>
-    public void StopCaching()
-    {
-        if (_cache is not null)
+        /// <summary>
+        /// Stops caching for this context and resets cache statistics.
+        /// </summary>
+        public void StopCaching()
         {
-            _cache.StopCache();
-            _cache = null;
+            if (_cache is not null)
+            {
+                _cache.StopCache();
+                _cache = null;
+            }
         }
     }
-
-    /// <summary>
-    /// Gets or computes a cached value for the specified cache index.
-    /// </summary>
-    /// <typeparam name="T">The type of the cached value.</typeparam>
-    /// <param name="cacheIndex">The index identifying the cached value.</param>
-    /// <param name="factory">A function to compute the value if it's not in the cache.</param>
-    /// <returns>The cached or newly computed value.</returns>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    T ICqlContextInternals.GetOrCompute<T>(int cacheIndex, Func<CqlContext, T> factory)
-    {
-        var cache = _cache;
-        if (cache is null)
-            return factory(this);
-
-        return cache.GetOrCompute(cacheIndex, factory, this);
-    }
-}

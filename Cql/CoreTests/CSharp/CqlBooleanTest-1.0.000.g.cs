@@ -21,7 +21,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ILibraryInternals, ISing
 
     [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SomethingTrueEqualsTrue, SomethingTrueEqualsTrue_Compute);
+        context.GetOrCompute(_cacheIndex_SomethingTrueEqualsTrue, SomethingTrueEqualsTrue_Compute);
 
     private bool? SomethingTrueEqualsTrue_Compute(CqlContext context)
     {

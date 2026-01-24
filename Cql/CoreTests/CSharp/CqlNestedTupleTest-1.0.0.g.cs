@@ -21,7 +21,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ILibraryInternals, ISi
 
     [CqlExpressionDefinition("Result")]
     public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Result, Result_Compute);
+        context.GetOrCompute(_cacheIndex_Result, Result_Compute);
 
     private (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result_Compute(CqlContext context)
     {

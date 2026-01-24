@@ -49,7 +49,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ILibraryInternals, IS
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Observation> InDemographic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute);
+        context.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute);
 
     private IEnumerable<Observation> InDemographic_Compute(CqlContext context)
     {
