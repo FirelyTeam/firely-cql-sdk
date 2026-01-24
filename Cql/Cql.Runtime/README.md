@@ -17,15 +17,17 @@ This package provides the core runtime engine that executes CQL expressions and 
 
 ## Expression Caching
 
-**Caching is managed through CqlLibrarySetInvocationCache.** The runtime supports high-performance array-based caching of CQL expression results.
+**Caching is managed through CqlContext.** The runtime supports high-performance array-based caching of CQL expression results with ArrayPool-based memory management for optimal performance and reduced GC pressure.
 
 ### Architecture
 
 The caching system uses:
 - **0-based array indexing**: Direct array access with no hashing overhead
+- **ArrayPool**: Rents/returns arrays to reduce allocations and GC pressure
+- **Struct-based entries**: Cache entries are lightweight structs for improved memory locality
 - **Method references**: Zero delegate allocation
-- **Per-entry locking**: Better concurrency for multi-threaded scenarios
-- **Cache instance association**: Libraries track which cache initialized them
+- **Per-entry locking**: Better concurrency for multi-threaded scenarios (ExecutionAndPublication mode)
+- **Context-managed cache**: Each CqlContext has its own cache instance - eliminates race conditions
 - **Thread-safe null value support**: Correctly caches and retrieves null results
 
 ### Enabling Caching (Preferred: InvocationToolkit)
@@ -38,19 +40,23 @@ var invoker = LibrarySetInvoker.Create(...);
 var result = invoker.Execute(...);
 ```
 
-### Manual Caching Setup (Advanced)
+### Manual Caching Setup
 
-For scenarios where you load libraries dynamically (e.g., from DLLs at runtime):
+Start caching on a CqlContext:
 
 ```csharp
-// Create cache with your libraries
-var cache = new CqlLibrarySetInvocationCache(myLibrary);
+// Create library invocation set (initializes cache indices)
+var libraryInvocationSet = new CqlLibraryInvocationSet(myLibrary);
 
-// Start caching with desired strategy
-cache.StartNewCache(CacheWriteStrategy.ExecutionAndPublication);
+// Start caching on the context
+var context = FhirCqlContext.ForBundle();
+context.StartCaching(libraryInvocationSet);
 
-// Use the cache
-var result = cache.GetOrCompute(cacheIndex, factory, context);
+// Execute with caching enabled
+var result = myLibrary.SomeExpression(context);
+
+// Stop caching when done
+context.StopCaching();
 ```
 
 ### Cache Write Strategies
@@ -59,34 +65,39 @@ Control how concurrent writes are handled:
 
 ```csharp
 // ExecutionAndPublication (default): Only one thread computes, others wait
-cache.StartNewCache(CacheWriteStrategy.ExecutionAndPublication);
+context.StartCaching(libraryInvocationSet, CacheWriteStrategy.ExecutionAndPublication);
 
 // PublicationOnly: Multiple threads can compute, last write wins (faster for read-heavy workloads)
-cache.StartNewCache(CacheWriteStrategy.PublicationOnly);
+context.StartCaching(libraryInvocationSet, CacheWriteStrategy.PublicationOnly);
 ```
 
 ### How It Works
 
 - Libraries generate int cache index fields for each cacheable expression
-- `CqlLibrarySetInvocationCache` initializes these indices by traversing the library dependency graph
-- Each library stores a reference to its cache instance, enabling re-initialization (critical for unit testing)
+- `CqlLibraryInvocationSet` initializes these indices by traversing the library dependency graph
+- Each CqlContext manages its own internal cache instance
+- Libraries access the cache through `ICqlContextInternals` interface via the context
 - Only parameter-less expressions (functions with no parameters except `CqlContext`) are cached
-- Cache entries use `CacheEntry` class to distinguish between "not cached" and "cached null value"
-- Thread safety is guaranteed through volatile semantics and optional per-entry locking
+- Cache entries use `CacheEntry` struct to distinguish between "not cached" and "cached null value"
+- Thread safety is guaranteed through context-per-thread model and optional per-entry locking
 
 ### Cache Statistics
 
-Monitor cache effectiveness:
+Monitor cache effectiveness through the CqlContext:
 
 ```csharp
-var cache = new CqlLibrarySetInvocationCache(myLibrary);
-cache.StartNewCache();
+var libraryInvocationSet = new CqlLibraryInvocationSet(myLibrary);
+var context = FhirCqlContext.ForBundle();
+context.StartCaching(libraryInvocationSet);
 
-// After execution
-Console.WriteLine($"Cache entries: {cache.CacheEntriesCount}");
-Console.WriteLine($"Total calls: {cache.CacheCallCount}");
-Console.WriteLine($"Cache hits: {cache.CacheHits}");
-Console.WriteLine($"Cache misses: {cache.CacheMisses}");
+// Execute expressions
+myLibrary.SomeExpression(context);
+
+// Check statistics
+Console.WriteLine($"Caching enabled: {context.CachingEnabled}");
+Console.WriteLine($"Total calls: {context.CacheCallCount}");
+Console.WriteLine($"Cache hits: {context.CacheHits}");
+Console.WriteLine($"Cache misses: {context.CacheMisses}");
 ```
 
 ### When to Use Caching
@@ -96,29 +107,24 @@ Enable caching when:
 - Working with expensive computations that don't depend on parameters
 - Performance is critical and expression results are deterministic
 
-**Important**: Create a new cache instance or call `StartNewCache()` when starting a new evaluation cycle to ensure stale data isn't used.
+**Important**: Call `StartCaching()` when starting a new evaluation cycle to reset the cache and ensure stale data isn't used.
 
-### Re-initialization for Unit Testing
+### Thread Safety
 
-Libraries can be re-initialized with different cache instances, critical for unit testing scenarios where singleton libraries are reused across tests:
+Each thread should use its own CqlContext with its own cache:
 
 ```csharp
-[Test]
-public void Test1()
-{
-    var cache1 = new CqlLibrarySetInvocationCache(library);
-    cache1.StartNewCache();
-    // ... test with cache1
-}
+// Thread 1
+var ctx1 = FhirCqlContext.ForBundle();
+ctx1.StartCaching(libraryInvocationSet);
+var result1 = library.SomeExpression(ctx1); // Uses ctx1's cache
 
-[Test]
-public void Test2()
-{
-    // Same library, different cache - library will be re-initialized
-    var cache2 = new CqlLibrarySetInvocationCache(library);
-    cache2.StartNewCache();
-    // ... test with cache2
-}
+// Thread 2
+var ctx2 = FhirCqlContext.ForBundle();
+ctx2.StartCaching(libraryInvocationSet);
+var result2 = library.SomeExpression(ctx2); // Uses ctx2's cache
+
+// No shared state, no race conditions
 ```
 
 ## Usage
