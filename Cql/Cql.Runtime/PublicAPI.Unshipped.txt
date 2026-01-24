@@ -5,12 +5,11 @@ Hl7.Cql.Runtime.CqlContext.CacheCallCount.get -> long
 Hl7.Cql.Runtime.CqlContext.CacheHits.get -> long
 Hl7.Cql.Runtime.CqlContext.CacheMisses.get -> long
 Hl7.Cql.Runtime.CqlContext.CachingEnabled.get -> bool
+Hl7.Cql.Runtime.CqlContext.GetOrCompute<T>(int cacheIndex, System.Func<Hl7.Cql.Runtime.CqlContext!, T>! factory) -> T
 Hl7.Cql.Runtime.CqlContext.StartCaching(Hl7.Cql.Runtime.CqlLibraryInvocationSet! libraryInvocationSet, Hl7.Cql.Runtime.CacheWriteStrategy cacheWriteStrategy = Hl7.Cql.Runtime.CacheWriteStrategy.ExecutionAndPublication) -> void
 Hl7.Cql.Runtime.CqlContext.StopCaching() -> void
 Hl7.Cql.Runtime.CqlLibraryInvocationSet
 Hl7.Cql.Runtime.CqlLibraryInvocationSet.CacheEntriesCount.get -> int
 Hl7.Cql.Runtime.CqlLibraryInvocationSet.CqlLibraryInvocationSet(params Hl7.Cql.Abstractions.ILibrary![]! libraries) -> void
-Hl7.Cql.Runtime.Internal.ICqlContextInternals
-Hl7.Cql.Runtime.Internal.ICqlContextInternals.GetOrCompute<T>(int cacheIndex, System.Func<Hl7.Cql.Runtime.CqlContext!, T>! factory) -> T
 Hl7.Cql.Runtime.Internal.ILibraryInternals
 Hl7.Cql.Runtime.Internal.ILibraryInternals.InitializeCacheIndices(Hl7.Cql.Runtime.CqlLibraryInvocationSet! libraryInvocationSet, int startIndex) -> int
