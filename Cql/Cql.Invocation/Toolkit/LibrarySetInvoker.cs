@@ -47,13 +47,13 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
 
 
         var libraries = GetAllLibraries();
-        InvocationSet = new CqlLibraryInvocationSet(libraries);
+        LibraryInvocationSet = new CqlLibraryInvocationSet(libraries);
     }
 
     /// <summary>
     /// Gets the library invocation set for this library set.
     /// </summary>
-    public CqlLibraryInvocationSet InvocationSet { get; private set; }
+    public CqlLibraryInvocationSet LibraryInvocationSet { get; private set; }
 
     private ILibrary[] GetAllLibraries() => // DO NOT MAKE THIS PUBLIC (Design Decision is to encapsulated Library Instances)
         LibraryInvokers

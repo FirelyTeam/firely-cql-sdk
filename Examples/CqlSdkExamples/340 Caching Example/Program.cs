@@ -68,7 +68,7 @@ partial class Program
                 .CreateLibrarySetInvoker();
 
         // Get the library invocation set
-        var libraryInvocationSet = librarySetInvoker.InvocationSet;
+        var libraryInvocationSet = librarySetInvoker.LibraryInvocationSet;
         Console.WriteLine($"✓ Library loaded. Cache size: {libraryInvocationSet.CacheEntriesCount} entries\n");
 
         // Example 1: Basic caching
