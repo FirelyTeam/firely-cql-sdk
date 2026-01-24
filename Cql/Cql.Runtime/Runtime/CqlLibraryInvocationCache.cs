@@ -14,16 +14,27 @@ namespace Hl7.Cql.Runtime;
 /// Manages invocation cache for CQL libraries, providing cached execution results for library expressions.
 /// </summary>
 /// <remarks>
+/// <para>
 /// This class provides a thread-safe invocation cache that stores computed expression values and
 /// returns cached results on subsequent calls. The cache size is determined by a CqlLibraryInvocationSet
 /// which handles cache index initialization.
 /// This class is internal and accessed through CqlContext.
+/// </para>
+/// <para>
+/// <strong>Note:</strong> For .NET 9+ (C# 13), this implementation uses System.Threading.Lock 
+/// which provides better performance than traditional object-based locking. For earlier framework versions,
+/// it falls back to object-based locking.
+/// </para>
 /// </remarks>
 internal sealed class CqlLibraryInvocationCache
 {
     private CacheWriteStrategy _cacheWriteStrategy;
     private CacheEntry[]? _entries;
-    private object[]? _locks; // Separate array for lock objects to support struct-based CacheEntry
+#if NET9_0_OR_GREATER
+    private Lock[]? _locks; // Use System.Threading.Lock for .NET 9+ (C# 13) for better performance
+#else
+    private object[]? _locks; // Fallback to object-based locking for earlier framework versions
+#endif
     private int _cacheLength; // Track actual length since pooled array may be larger
     private long _cacheCallCount;
     private long _cacheFactoryInvocations;
@@ -65,14 +76,26 @@ internal sealed class CqlLibraryInvocationCache
         // No need to initialize cache entries - default struct values (IsCached=false, Value=null) are correct
 
         // Only allocate locks if ExecutionAndPublication strategy is used
+#if NET9_0_OR_GREATER
+        Lock[]? locks = null;
+#else
         object[]? locks = null;
+#endif
         if (cacheWriteStrategy == CacheWriteStrategy.ExecutionAndPublication)
         {
+#if NET9_0_OR_GREATER
+            locks = ArrayPool<Lock>.Shared.Rent(cacheLength);
+
+            // Initialize Lock objects (.NET 9+ / C# 13)
+            for (int i = 0; i < cacheLength; i++)
+                locks[i] = new Lock();
+#else
             locks = ArrayPool<object>.Shared.Rent(cacheLength);
 
-            // Initialize lock objects
+            // Initialize lock objects (fallback for earlier frameworks)
             for (int i = 0; i < cacheLength; i++)
                 locks[i] = new object();
+#endif
         }
 
         _entries = entries;
@@ -108,7 +131,11 @@ internal sealed class CqlLibraryInvocationCache
         if (locks is not null)
         {
             Array.Clear(locks, 0, _cacheLength);
+#if NET9_0_OR_GREATER
+            ArrayPool<Lock>.Shared.Return(locks, clearArray: false);
+#else
             ArrayPool<object>.Shared.Return(locks, clearArray: false);
+#endif
         }
     }
 
