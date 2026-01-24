@@ -6,8 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.Runtime.Graphs;
+using System.Buffers;
 using Hl7.Cql.Runtime.Internal;
 
 namespace Hl7.Cql.Runtime;
@@ -24,14 +23,106 @@ namespace Hl7.Cql.Runtime;
 internal sealed class CqlLibraryInvocationCache
 {
     private CacheWriteStrategy _cacheWriteStrategy;
-    private CacheEntry[]? _cache;
+    private CacheEntry[]? _entries;
+    private object[]? _locks; // Separate array for lock objects to support struct-based CacheEntry
+    private int _cacheLength; // Track actual length since pooled array may be larger
     private long _cacheCallCount;
     private long _cacheFactoryInvocations;
 
     /// <summary>
+    /// Initializes a new cache using the specified library invocation set and cache write strategy, replacing any existing cache and resetting
+    /// related statistics.
+    /// </summary>
+    /// <param name="libraryInvocationSet">The library invocation set that defines the cache size.</param>
+    /// <param name="cacheWriteStrategy">The strategy to use when writing to the cache. The default is CacheWriteStrategy.ExecutionAndPublication.</param>
+    /// <remarks>Call this method to reset the cache and its statistics. Any previously cached entries will be
+    /// discarded. Use the cacheWriteStrategy parameter to control how cache writes are handled after
+    /// initialization.</remarks>
+    internal void StartNewCache(
+        CqlLibraryInvocationSet libraryInvocationSet,
+        CacheWriteStrategy cacheWriteStrategy = CacheWriteStrategy.ExecutionAndPublication)
+    {
+        if (libraryInvocationSet is null)
+            throw new ArgumentNullException(nameof(libraryInvocationSet));
+
+        // Return previous arrays to pool
+        ReturnArraysToPool();
+
+        _cacheWriteStrategy = cacheWriteStrategy;
+
+        var cacheLength = libraryInvocationSet.CacheEntriesCount;
+        if (cacheLength <= 0)
+        {
+            _entries = null;
+            _locks = null;
+            _cacheLength = 0;
+            ResetStats();
+            return;
+        }
+
+        // Rent arrays from pool - may return larger arrays than requested
+        var entries = ArrayPool<CacheEntry>.Shared.Rent(cacheLength);
+
+        // No need to initialize cache entries - default struct values (IsCached=false, Value=null) are correct
+
+        // Only allocate locks if ExecutionAndPublication strategy is used
+        object[]? locks = null;
+        if (cacheWriteStrategy == CacheWriteStrategy.ExecutionAndPublication)
+        {
+            locks = ArrayPool<object>.Shared.Rent(cacheLength);
+
+            // Initialize lock objects
+            for (int i = 0; i < cacheLength; i++)
+                locks[i] = new object();
+        }
+
+        _entries = entries;
+        _locks = locks;
+        _cacheLength = cacheLength;
+        ResetStats();
+    }
+
+    /// <summary>
+    /// Stops the cache and resets cache statistics.
+    /// </summary>
+    internal void StopCache()
+    {
+        ReturnArraysToPool();
+
+        _entries = null;
+        _locks = null;
+        _cacheLength = 0;
+        ResetStats();
+    }
+
+    private void ReturnArraysToPool()
+    {
+        var entries = _entries;
+        if (entries is not null)
+        {
+            // Clear only the portion we used to allow GC
+            Array.Clear(entries, 0, _cacheLength);
+            ArrayPool<CacheEntry>.Shared.Return(entries, clearArray: false);
+        }
+
+        var locks = _locks;
+        if (locks is not null)
+        {
+            Array.Clear(locks, 0, _cacheLength);
+            ArrayPool<object>.Shared.Return(locks, clearArray: false);
+        }
+    }
+
+    private void ResetStats()
+    {
+        _cacheCallCount = 0;
+        _cacheFactoryInvocations = 0;
+    }
+
+    /// <summary>
     /// Gets the total count of cache entries in this cache.
     /// </summary>
-    internal int CacheEntriesCount => _cache?.Length ?? 0;
+    internal int CacheEntriesCount => _cacheLength;
 
     /// <summary>
     /// Gets the total number of calls to GetOrCompute.
@@ -71,29 +162,62 @@ internal sealed class CqlLibraryInvocationCache
     {
         Interlocked.Increment(ref _cacheCallCount);
 
-        var cache = _cache;
+        var entries = _entries;
 
-        if (cache is null || cacheIndex < 0 || cacheIndex >= cache.Length)
+        // If cache is disabled, compute without caching
+        if (entries is null)
         {
             Interlocked.Increment(ref _cacheFactoryInvocations);
             return factory(context);
         }
 
-        var entry = cache[cacheIndex];
+        // Cache index out of bounds indicates a programming error
+        if (cacheIndex < 0 || cacheIndex >= _cacheLength)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(cacheIndex),
+                cacheIndex,
+                $"Cache index {cacheIndex} is out of range. Valid range is 0 to {_cacheLength - 1}. This indicates the cache was not properly initialized or the library was not included during cache index initialization.");
+        }
+
+        ref var entry = ref entries[cacheIndex]; // Use ref to avoid copying struct
         if (entry.IsCached)
         {
             return (T)entry.Value!;
         }
 
-        if (_cacheWriteStrategy == CacheWriteStrategy.ExecutionAndPublication)
+        switch (_cacheWriteStrategy)
         {
-            lock (entry)
+            case CacheWriteStrategy.ExecutionAndPublication:
             {
-                if (entry.IsCached)
+                var locks = _locks;
+                if (locks is null)
                 {
-                    return (T)entry.Value!;
+                    // Fallback: locks should have been allocated but weren't - compute without caching
+                    Interlocked.Increment(ref _cacheFactoryInvocations);
+                    return factory(context);
                 }
 
+                lock (locks[cacheIndex]) // Lock on corresponding lock object
+                {
+                    // Re-check after acquiring lock (entry might have been cached by another thread)
+                    entry = ref entries[cacheIndex];
+                    if (entry.IsCached)
+                    {
+                        return (T)entry.Value!;
+                    }
+
+                    Interlocked.Increment(ref _cacheFactoryInvocations);
+                    var value = factory(context);
+
+                    entry.Value = value;
+                    entry.IsCached = true;
+
+                    return value;
+                }
+            }
+            default:
+            {
                 Interlocked.Increment(ref _cacheFactoryInvocations);
                 var value = factory(context);
 
@@ -103,69 +227,10 @@ internal sealed class CqlLibraryInvocationCache
                 return value;
             }
         }
-        else
-        {
-            Interlocked.Increment(ref _cacheFactoryInvocations);
-            var value = factory(context);
-
-            entry.Value = value;
-            entry.IsCached = true;
-
-            return value;
-        }
     }
 
     /// <summary>
     /// Gets a value indicating whether caching is enabled for this instance.
     /// </summary>
-    internal bool CacheEnabled => _cache is not null;
-
-    /// <summary>
-    /// Stops the cache and resets cache statistics.
-    /// </summary>
-    internal void StopCache()
-    {
-        _cache = null;
-        ResetStats();
-    }
-
-    private void ResetStats()
-    {
-        _cacheCallCount = 0;
-        _cacheFactoryInvocations = 0;
-    }
-
-    /// <summary>
-    /// Initializes a new cache using the specified library invocation set and cache write strategy, replacing any existing cache and resetting
-    /// related statistics.
-    /// </summary>
-    /// <param name="libraryInvocationSet">The library invocation set that defines the cache size.</param>
-    /// <param name="cacheWriteStrategy">The strategy to use when writing to the cache. The default is CacheWriteStrategy.ExecutionAndPublication.</param>
-    /// <remarks>Call this method to reset the cache and its statistics. Any previously cached entries will be
-    /// discarded. Use the cacheWriteStrategy parameter to control how cache writes are handled after
-    /// initialization.</remarks>
-    internal void StartNewCache(
-        CqlLibraryInvocationSet libraryInvocationSet,
-        CacheWriteStrategy cacheWriteStrategy = CacheWriteStrategy.ExecutionAndPublication)
-    {
-        if (libraryInvocationSet is null)
-            throw new ArgumentNullException(nameof(libraryInvocationSet));
-
-        _cacheWriteStrategy = cacheWriteStrategy;
-
-        var cacheLength = libraryInvocationSet.CacheEntriesCount;
-        if (cacheLength <= 0)
-        {
-            _cache = null;
-            ResetStats();
-            return;
-        }
-
-        var cache = new CacheEntry[cacheLength];
-        for (int i = 0; i < cache.Length; i++)
-            cache[i] = new CacheEntry();
-
-        _cache = cache;
-        ResetStats();
-    }
+    internal bool CacheEnabled => _entries is not null;
 }
