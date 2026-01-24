@@ -22,8 +22,8 @@ namespace Hl7.Cql.Runtime;
 /// </para>
 /// <para>
 /// <strong>Note:</strong> For .NET 9+ (C# 13), this implementation uses System.Threading.Lock 
-/// which provides better performance than traditional object-based locking. For earlier framework versions,
-/// it falls back to object-based locking.
+/// with Lock.EnterScope() which provides better performance than traditional lock keyword on object.
+/// For earlier framework versions, it falls back to object-based locking with lock keyword.
 /// </para>
 /// </remarks>
 internal sealed class CqlLibraryInvocationCache
@@ -224,7 +224,12 @@ internal sealed class CqlLibraryInvocationCache
                     return factory(context);
                 }
 
-                lock (locks[cacheIndex]) // Lock on corresponding lock object
+#if NET9_0_OR_GREATER
+                // Use Lock.EnterScope() for .NET 9+ (C# 13) - faster than lock keyword
+                using (locks[cacheIndex].EnterScope())
+#else
+                lock (locks[cacheIndex]) // Lock on corresponding lock object for earlier frameworks
+#endif
                 {
                     // Re-check after acquiring lock (entry might have been cached by another thread)
                     entry = ref entries[cacheIndex];
