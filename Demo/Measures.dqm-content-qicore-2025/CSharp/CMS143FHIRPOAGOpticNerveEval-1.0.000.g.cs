@@ -579,25 +579,18 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ILibraryIn
 
     #region ILibraryInternals Implementation
 
-    // Reference to the execution cache instance that initialized this library
-    private CqlLibrarySetInvocationCache _cache;
+    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
 
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
-    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="libraryInvocationSet">The library invocation set performing initialization.</param>
     /// <param name="startIndex">The starting index for cache field assignment.</param>
     /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibrarySetInvocationCache cache,
+        CqlLibraryInvocationSet libraryInvocationSet,
         int startIndex)
     {
-        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
-        if (_cache == cache)
-            return 0;
-
-        _cache = cache;
-
         var index = startIndex;
         _cacheIndex_Measurement_Period = index++;
         _cacheIndex_Patient = index++;
@@ -616,6 +609,15 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ILibraryIn
         _cacheIndex_Optic_Disc_Exam_Performed_with_Result = index++;
         _cacheIndex_Numerator = index++;
         return index - startIndex;
+    }
+
+    /// <summary>
+    /// Sets the cache instance that this library will use for caching computed values.
+    /// </summary>
+    /// <param name="cache">The cache instance to use.</param>
+    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
+    {
+        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

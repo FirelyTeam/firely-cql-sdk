@@ -438,25 +438,18 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
 
     #region ILibraryInternals Implementation
 
-    // Reference to the execution cache instance that initialized this library
-    private CqlLibrarySetInvocationCache _cache;
+    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
 
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
-    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="libraryInvocationSet">The library invocation set performing initialization.</param>
     /// <param name="startIndex">The starting index for cache field assignment.</param>
     /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibrarySetInvocationCache cache,
+        CqlLibraryInvocationSet libraryInvocationSet,
         int startIndex)
     {
-        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
-        if (_cache == cache)
-            return 0;
-
-        _cache = cache;
-
         var index = startIndex;
         _cacheIndex_Measurement_Period = index++;
         _cacheIndex_Patient = index++;
@@ -467,6 +460,15 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
         _cacheIndex_Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty = index++;
         _cacheIndex_Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home = index++;
         return index - startIndex;
+    }
+
+    /// <summary>
+    /// Sets the cache instance that this library will use for caching computed values.
+    /// </summary>
+    /// <param name="cache">The cache instance to use.</param>
+    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
+    {
+        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation
