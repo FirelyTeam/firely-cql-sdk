@@ -73,7 +73,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -91,7 +91,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -103,7 +103,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Inpatient Encounter With Age Greater Than Or Equal To 18")]
     public IEnumerable<Encounter> Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18, Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18_Compute, context) ?? Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18, Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18_Compute);
 
     private IEnumerable<Encounter> Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18_Compute(CqlContext context)
     {
@@ -130,7 +130,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Opioid At Discharge")]
     public IEnumerable<MedicationRequest> Opioid_At_Discharge(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Opioid_At_Discharge, Opioid_At_Discharge_Compute, context) ?? Opioid_At_Discharge_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Opioid_At_Discharge, Opioid_At_Discharge_Compute);
 
     private IEnumerable<MedicationRequest> Opioid_At_Discharge_Compute(CqlContext context)
     {
@@ -199,7 +199,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Benzodiazepine At Discharge")]
     public IEnumerable<MedicationRequest> Benzodiazepine_At_Discharge(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Benzodiazepine_At_Discharge, Benzodiazepine_At_Discharge_Compute, context) ?? Benzodiazepine_At_Discharge_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Benzodiazepine_At_Discharge, Benzodiazepine_At_Discharge_Compute);
 
     private IEnumerable<MedicationRequest> Benzodiazepine_At_Discharge_Compute(CqlContext context)
     {
@@ -269,7 +269,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
     [CqlExpressionDefinition("Inpatient Encounters With An Opioid Or Benzodiazepine At Discharge")]
     [CqlTag("description", "Captures encounters of patients with an opioid and/or benzodiazepine at discharge.")]
     public IEnumerable<Encounter> Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge, Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge_Compute, context) ?? Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge, Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge_Compute);
 
     private IEnumerable<Encounter> Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge_Compute(CqlContext context)
     {
@@ -302,7 +302,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -313,7 +313,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -325,7 +325,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
     [CqlExpressionDefinition("Numerator")]
     [CqlTag("description", "Encounters of patients prescribed two or more opioids or an opioid and benzodiazepine at discharge.")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -392,7 +392,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Inpatient Encounter With Encounter Diagnosis Of Cancer Pain")]
     public IEnumerable<Encounter> Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain, Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain_Compute, context) ?? Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain, Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain_Compute);
 
     private IEnumerable<Encounter> Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain_Compute(CqlContext context)
     {
@@ -470,7 +470,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Medications For Opioid Use Disorder")]
     public IEnumerable<MedicationRequest> Medications_For_Opioid_Use_Disorder(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Medications_For_Opioid_Use_Disorder, Medications_For_Opioid_Use_Disorder_Compute, context) ?? Medications_For_Opioid_Use_Disorder_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Medications_For_Opioid_Use_Disorder, Medications_For_Opioid_Use_Disorder_Compute);
 
     private IEnumerable<MedicationRequest> Medications_For_Opioid_Use_Disorder_Compute(CqlContext context)
     {
@@ -539,7 +539,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Treatment For Opioid Use Disorders")]
     public IEnumerable<MedicationRequest> Treatment_For_Opioid_Use_Disorders(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Treatment_For_Opioid_Use_Disorders, Treatment_For_Opioid_Use_Disorders_Compute, context) ?? Treatment_For_Opioid_Use_Disorders_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Treatment_For_Opioid_Use_Disorders, Treatment_For_Opioid_Use_Disorders_Compute);
 
     private IEnumerable<MedicationRequest> Treatment_For_Opioid_Use_Disorders_Compute(CqlContext context)
     {
@@ -673,7 +673,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Intervention Palliative Or Hospice Care")]
     public IEnumerable<object> Intervention_Palliative_Or_Hospice_Care(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Intervention_Palliative_Or_Hospice_Care, Intervention_Palliative_Or_Hospice_Care_Compute, context) ?? Intervention_Palliative_Or_Hospice_Care_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Intervention_Palliative_Or_Hospice_Care, Intervention_Palliative_Or_Hospice_Care_Compute);
 
     private IEnumerable<object> Intervention_Palliative_Or_Hospice_Care_Compute(CqlContext context)
     {
@@ -718,7 +718,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
     [CqlExpressionDefinition("Denominator Exclusion")]
     [CqlTag("description", "Excludes encounters of patients with cancer pain or who are receiving palliative or hospice care at the time of the encounter or who receive treatment for opioid use disorder, have sickle cell disease, or who are discharged to another inpatient care facility or discharged against medical advice, or expire during the inpatient stay.")]
     public IEnumerable<Encounter> Denominator_Exclusion(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusion, Denominator_Exclusion_Compute, context) ?? Denominator_Exclusion_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusion, Denominator_Exclusion_Compute);
 
     private IEnumerable<Encounter> Denominator_Exclusion_Compute(CqlContext context)
     {
@@ -883,7 +883,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -894,7 +894,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -905,7 +905,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -916,7 +916,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -952,8 +952,6 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -984,15 +982,6 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ILibraryInte
         _cacheIndex_SDE_Race = index++;
         _cacheIndex_SDE_Sex = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

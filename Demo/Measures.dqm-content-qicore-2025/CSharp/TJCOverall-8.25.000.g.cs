@@ -57,7 +57,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -72,7 +72,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -84,7 +84,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Non Elective Inpatient Encounter With Age")]
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_With_Age(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Non_Elective_Inpatient_Encounter_With_Age, Non_Elective_Inpatient_Encounter_With_Age_Compute, context) ?? Non_Elective_Inpatient_Encounter_With_Age_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Non_Elective_Inpatient_Encounter_With_Age, Non_Elective_Inpatient_Encounter_With_Age_Compute);
 
     private IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_With_Age_Compute(CqlContext context)
     {
@@ -117,7 +117,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Ischemic Stroke Encounter")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounter, Ischemic_Stroke_Encounter_Compute, context) ?? Ischemic_Stroke_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounter, Ischemic_Stroke_Encounter_Compute);
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounter_Compute(CqlContext context)
     {
@@ -136,7 +136,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Ischemic Stroke Encounters With Discharge Disposition")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounters_With_Discharge_Disposition(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition, Ischemic_Stroke_Encounters_With_Discharge_Disposition_Compute, context) ?? Ischemic_Stroke_Encounters_With_Discharge_Disposition_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition, Ischemic_Stroke_Encounters_With_Discharge_Disposition_Compute);
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounters_With_Discharge_Disposition_Compute(CqlContext context)
     {
@@ -178,7 +178,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Intervention Comfort Measures")]
     public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Intervention_Comfort_Measures, Intervention_Comfort_Measures_Compute, context) ?? Intervention_Comfort_Measures_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Intervention_Comfort_Measures, Intervention_Comfort_Measures_Compute);
 
     private IEnumerable<object> Intervention_Comfort_Measures_Compute(CqlContext context)
     {
@@ -235,7 +235,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Encounter With Comfort Measures During Hospitalization")]
     public IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Hospitalization(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization, Encounter_With_Comfort_Measures_During_Hospitalization_Compute, context) ?? Encounter_With_Comfort_Measures_During_Hospitalization_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization, Encounter_With_Comfort_Measures_During_Hospitalization_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Hospitalization_Compute(CqlContext context)
     {
@@ -356,8 +356,6 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -377,15 +375,6 @@ public partial class TJCOverall_8_25_000 : ILibrary, ILibraryInternals, ISinglet
         _cacheIndex_Intervention_Comfort_Measures = index++;
         _cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

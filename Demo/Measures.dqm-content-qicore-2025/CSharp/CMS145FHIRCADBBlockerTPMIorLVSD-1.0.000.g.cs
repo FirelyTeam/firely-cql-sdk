@@ -155,7 +155,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -173,7 +173,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -185,7 +185,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Qualifying_Encounter_During_Measurement_Period, Qualifying_Encounter_During_Measurement_Period_Compute, context) ?? Qualifying_Encounter_During_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounter_During_Measurement_Period, Qualifying_Encounter_During_Measurement_Period_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -227,7 +227,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Outpatient Encounter During Measurement Period")]
     public IEnumerable<Encounter> Outpatient_Encounter_During_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Outpatient_Encounter_During_Measurement_Period, Outpatient_Encounter_During_Measurement_Period_Compute, context) ?? Outpatient_Encounter_During_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Outpatient_Encounter_During_Measurement_Period, Outpatient_Encounter_During_Measurement_Period_Compute);
 
     private IEnumerable<Encounter> Outpatient_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -311,7 +311,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Coronary Artery Disease Encounter")]
     public IEnumerable<Encounter> Coronary_Artery_Disease_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Coronary_Artery_Disease_Encounter, Coronary_Artery_Disease_Encounter_Compute, context) ?? Coronary_Artery_Disease_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Coronary_Artery_Disease_Encounter, Coronary_Artery_Disease_Encounter_Compute);
 
     private IEnumerable<Encounter> Coronary_Artery_Disease_Encounter_Compute(CqlContext context)
     {
@@ -341,7 +341,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("History of Cardiac Surgery Prior to Encounter")]
     public IEnumerable<Encounter> History_of_Cardiac_Surgery_Prior_to_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_History_of_Cardiac_Surgery_Prior_to_Encounter, History_of_Cardiac_Surgery_Prior_to_Encounter_Compute, context) ?? History_of_Cardiac_Surgery_Prior_to_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_History_of_Cardiac_Surgery_Prior_to_Encounter, History_of_Cardiac_Surgery_Prior_to_Encounter_Compute);
 
     private IEnumerable<Encounter> History_of_Cardiac_Surgery_Prior_to_Encounter_Compute(CqlContext context)
     {
@@ -443,7 +443,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Qualifying CAD Encounter")]
     public IEnumerable<Encounter> Qualifying_CAD_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Qualifying_CAD_Encounter, Qualifying_CAD_Encounter_Compute, context) ?? Qualifying_CAD_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_CAD_Encounter, Qualifying_CAD_Encounter_Compute);
 
     private IEnumerable<Encounter> Qualifying_CAD_Encounter_Compute(CqlContext context)
     {
@@ -456,7 +456,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -502,7 +502,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Qualifying CAD Encounter and Prior MI")]
     public IEnumerable<Encounter> Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Qualifying_CAD_Encounter_and_Prior_MI, Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_CAD_Encounter_and_Prior_MI, Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private IEnumerable<Encounter> Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -552,7 +552,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator 2")]
     public bool? Denominator_2(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_2, Denominator_2_Compute, context) ?? Denominator_2_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_2, Denominator_2_Compute);
 
     private bool? Denominator_2_Compute(CqlContext context)
     {
@@ -566,7 +566,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -587,7 +587,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Diagnosis of Cardiac Pacer in Situ with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -608,7 +608,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Cardiac Pacer Device Implanted with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private bool? Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -711,7 +711,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and Prior MI without Cardiac Pacer")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer, Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer_Compute, context) ?? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer, Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer_Compute);
 
     private bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_Prior_MI_without_Cardiac_Pacer_Compute(CqlContext context)
     {
@@ -730,7 +730,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
     [CqlTag("code", "Heart rate - 8867-4")]
     [CqlTag("profile", "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate")]
     public bool? Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private bool? Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -831,7 +831,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public IEnumerable<Encounter> Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private IEnumerable<Encounter> Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -942,7 +942,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Beta Blocker Therapy for LVSD Ordered")]
     public bool? Has_Beta_Blocker_Therapy_for_LVSD_Ordered(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Beta_Blocker_Therapy_for_LVSD_Ordered, Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Compute, context) ?? Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Beta_Blocker_Therapy_for_LVSD_Ordered, Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Compute);
 
     private bool? Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Compute(CqlContext context)
     {
@@ -963,7 +963,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Is Currently Taking Beta Blocker Therapy for LVSD")]
     public bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD, Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Compute, context) ?? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD, Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Compute);
 
     private bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Compute(CqlContext context)
     {
@@ -1085,7 +1085,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute, context) ?? Numerator_1_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
@@ -1098,7 +1098,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Beta Blocker Therapy Ordered")]
     public bool? Has_Beta_Blocker_Therapy_Ordered(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Beta_Blocker_Therapy_Ordered, Has_Beta_Blocker_Therapy_Ordered_Compute, context) ?? Has_Beta_Blocker_Therapy_Ordered_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Beta_Blocker_Therapy_Ordered, Has_Beta_Blocker_Therapy_Ordered_Compute);
 
     private bool? Has_Beta_Blocker_Therapy_Ordered_Compute(CqlContext context)
     {
@@ -1119,7 +1119,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Is Currently Taking Beta Blocker Therapy")]
     public bool? Is_Currently_Taking_Beta_Blocker_Therapy(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Is_Currently_Taking_Beta_Blocker_Therapy, Is_Currently_Taking_Beta_Blocker_Therapy_Compute, context) ?? Is_Currently_Taking_Beta_Blocker_Therapy_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Is_Currently_Taking_Beta_Blocker_Therapy, Is_Currently_Taking_Beta_Blocker_Therapy_Compute);
 
     private bool? Is_Currently_Taking_Beta_Blocker_Therapy_Compute(CqlContext context)
     {
@@ -1241,7 +1241,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute, context) ?? Numerator_2_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
@@ -1254,7 +1254,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1265,7 +1265,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1276,7 +1276,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1287,7 +1287,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -1298,7 +1298,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator 1")]
     public bool? Denominator_1(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_1, Denominator_1_Compute, context) ?? Denominator_1_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_1, Denominator_1_Compute);
 
     private bool? Denominator_1_Compute(CqlContext context)
     {
@@ -1312,7 +1312,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -1333,7 +1333,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Diagnosis of Cardiac Pacer in Situ with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -1354,7 +1354,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Cardiac Pacer Device Implanted with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private bool? Has_Cardiac_Pacer_Device_Implanted_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -1452,7 +1452,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Atrioventricular Block with Qualifying CAD Encounter and History of Moderate or Severe LVSD without Cardiac Pacer")]
     public bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer, Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer_Compute, context) ?? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer, Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer_Compute);
 
     private bool? Has_Atrioventricular_Block_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_without_Cardiac_Pacer_Compute(CqlContext context)
     {
@@ -1471,7 +1471,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
     [CqlTag("code", "Heart rate - 8867-4")]
     [CqlTag("profile", "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate")]
     public bool? Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private bool? Has_Consecutive_Heart_Rates_Less_than_50_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -1635,7 +1635,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Allergy or Intolerance to Beta Blocker Therapy Ingredient with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -1660,7 +1660,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Arrhythmia with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private bool? Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -1681,7 +1681,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Arrhythmia with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private bool? Has_Arrhythmia_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -1702,7 +1702,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Asthma with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private bool? Has_Asthma_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -1723,7 +1723,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Asthma with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private bool? Has_Asthma_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -1744,7 +1744,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Bradycardia with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private bool? Has_Bradycardia_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -1765,7 +1765,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Bradycardia with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private bool? Has_Bradycardia_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -1786,7 +1786,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -1810,7 +1810,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -1834,7 +1834,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Hypotension with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private bool? Has_Hypotension_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -1855,7 +1855,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Hypotension with Qualifying CAD Encounter and Prior MI")]
     public bool? Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute, context) ?? Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI, Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute);
 
     private bool? Has_Hypotension_with_Qualifying_CAD_Encounter_and_Prior_MI_Compute(CqlContext context)
     {
@@ -1878,7 +1878,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Allergy or Intolerance to Beta Blocker Therapy Ingredient with Qualifying CAD Encounter and History of Moderate or Severe LVSD")]
     public bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute, context) ?? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD, Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute);
 
     private bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_with_Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -1903,7 +1903,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD")]
     public bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD, Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Compute, context) ?? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD, Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Compute);
 
     private bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Compute(CqlContext context)
     {
@@ -1983,7 +1983,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator Exceptions 1")]
     public bool? Denominator_Exceptions_1(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exceptions_1, Denominator_Exceptions_1_Compute, context) ?? Denominator_Exceptions_1_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exceptions_1, Denominator_Exceptions_1_Compute);
 
     private bool? Denominator_Exceptions_1_Compute(CqlContext context)
     {
@@ -2010,7 +2010,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Medical or Patient Reason for Not Ordering Beta Blocker Therapy")]
     public bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy, Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy_Compute, context) ?? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy, Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy_Compute);
 
     private bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy_Compute(CqlContext context)
     {
@@ -2090,7 +2090,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator Exceptions 2")]
     public bool? Denominator_Exceptions_2(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exceptions_2, Denominator_Exceptions_2_Compute, context) ?? Denominator_Exceptions_2_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exceptions_2, Denominator_Exceptions_2_Compute);
 
     private bool? Denominator_Exceptions_2_Compute(CqlContext context)
     {
@@ -2172,8 +2172,6 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -2234,15 +2232,6 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ILibrar
         _cacheIndex_Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_Therapy = index++;
         _cacheIndex_Denominator_Exceptions_2 = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

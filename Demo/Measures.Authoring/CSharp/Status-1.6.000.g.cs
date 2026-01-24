@@ -64,7 +64,7 @@ public partial class Status_1_6_000 : ILibrary, ILibraryInternals, ISingleton<St
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -1081,25 +1081,16 @@ public partial class Status_1_6_000 : ILibrary, ILibraryInternals, ISingleton<St
 
     #region ILibraryInternals Implementation
 
-    // Reference to the execution cache instance that initialized this library
-    private CqlLibrarySetInvocationCache _cache;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
-    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="libraryInvocationSet">The library invocation set performing initialization.</param>
     /// <param name="startIndex">The starting index for cache field assignment.</param>
     /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibrarySetInvocationCache cache,
+        CqlLibraryInvocationSet libraryInvocationSet,
         int startIndex)
     {
-        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
-        if (_cache == cache)
-            return 0;
-
-        _cache = cache;
-
         var index = startIndex;
         _cacheIndex_Patient = index++;
         return index - startIndex;

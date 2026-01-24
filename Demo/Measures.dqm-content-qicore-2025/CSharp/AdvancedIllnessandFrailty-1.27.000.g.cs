@@ -82,7 +82,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -97,7 +97,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -109,7 +109,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Has Criteria Indicating Frailty")]
     public bool? Has_Criteria_Indicating_Frailty(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Criteria_Indicating_Frailty, Has_Criteria_Indicating_Frailty_Compute, context) ?? Has_Criteria_Indicating_Frailty_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Criteria_Indicating_Frailty, Has_Criteria_Indicating_Frailty_Compute);
 
     private bool? Has_Criteria_Indicating_Frailty_Compute(CqlContext context)
     {
@@ -206,7 +206,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Has Advanced Illness in Year Before or During Measurement Period")]
     public bool? Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period, Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period_Compute, context) ?? Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period, Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period_Compute);
 
     private bool? Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -237,7 +237,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Has Dementia Medications in Year Before or During Measurement Period")]
     public bool? Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period, Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period_Compute, context) ?? Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period, Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period_Compute);
 
     private bool? Has_Dementia_Medications_in_Year_Before_or_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -299,7 +299,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Is Age 66 or Older with Advanced Illness and Frailty")]
     public bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty, Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty_Compute, context) ?? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty, Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty_Compute);
 
     private bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty_Compute(CqlContext context)
     {
@@ -324,7 +324,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Is Age 66 to 80 with Advanced Illness and Frailty or Is Age 81 or Older with Frailty")]
     public bool? Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty, Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty_Compute, context) ?? Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty, Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty_Compute);
 
     private bool? Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty_Compute(CqlContext context)
     {
@@ -359,7 +359,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
 
     [CqlExpressionDefinition("Is Age 66 or Older Living Long Term in a Nursing Home")]
     public bool? Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home, Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home_Compute, context) ?? Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home, Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home_Compute);
 
     private bool? Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home_Compute(CqlContext context)
     {
@@ -438,8 +438,6 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -460,15 +458,6 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ILibraryInte
         _cacheIndex_Is_Age_66_to_80_with_Advanced_Illness_and_Frailty_or_Is_Age_81_or_Older_with_Frailty = index++;
         _cacheIndex_Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

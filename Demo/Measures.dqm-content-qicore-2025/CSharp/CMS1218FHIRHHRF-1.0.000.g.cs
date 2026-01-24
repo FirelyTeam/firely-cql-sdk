@@ -224,7 +224,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -242,7 +242,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -254,7 +254,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Elective Inpatient Encounter With Age 18 And Older Without ED Visit")]
     public IEnumerable<Encounter> Elective_Inpatient_Encounter_With_Age_18_And_Older_Without_ED_Visit(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Elective_Inpatient_Encounter_With_Age_18_And_Older_Without_ED_Visit, Elective_Inpatient_Encounter_With_Age_18_And_Older_Without_ED_Visit_Compute, context) ?? Elective_Inpatient_Encounter_With_Age_18_And_Older_Without_ED_Visit_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Elective_Inpatient_Encounter_With_Age_18_And_Older_Without_ED_Visit, Elective_Inpatient_Encounter_With_Age_18_And_Older_Without_ED_Visit_Compute);
 
     private IEnumerable<Encounter> Elective_Inpatient_Encounter_With_Age_18_And_Older_Without_ED_Visit_Compute(CqlContext context)
     {
@@ -361,7 +361,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Elective Inpatient Encounter With Age And Without Obstetrical Condition")]
     public IEnumerable<Encounter> Elective_Inpatient_Encounter_With_Age_And_Without_Obstetrical_Condition(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Elective_Inpatient_Encounter_With_Age_And_Without_Obstetrical_Condition, Elective_Inpatient_Encounter_With_Age_And_Without_Obstetrical_Condition_Compute, context) ?? Elective_Inpatient_Encounter_With_Age_And_Without_Obstetrical_Condition_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Elective_Inpatient_Encounter_With_Age_And_Without_Obstetrical_Condition, Elective_Inpatient_Encounter_With_Age_And_Without_Obstetrical_Condition_Compute);
 
     private IEnumerable<Encounter> Elective_Inpatient_Encounter_With_Age_And_Without_Obstetrical_Condition_Compute(CqlContext context)
     {
@@ -409,7 +409,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Elective Inpatient Encounter With OR Procedure Within 3 Days")]
     public IEnumerable<Encounter> Elective_Inpatient_Encounter_With_OR_Procedure_Within_3_Days(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Elective_Inpatient_Encounter_With_OR_Procedure_Within_3_Days, Elective_Inpatient_Encounter_With_OR_Procedure_Within_3_Days_Compute, context) ?? Elective_Inpatient_Encounter_With_OR_Procedure_Within_3_Days_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Elective_Inpatient_Encounter_With_OR_Procedure_Within_3_Days, Elective_Inpatient_Encounter_With_OR_Procedure_Within_3_Days_Compute);
 
     private IEnumerable<Encounter> Elective_Inpatient_Encounter_With_OR_Procedure_Within_3_Days_Compute(CqlContext context)
     {
@@ -458,7 +458,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -469,7 +469,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -480,7 +480,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Degenerative Neurological Disorder")]
     public IEnumerable<Encounter> Encounter_With_Degenerative_Neurological_Disorder(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Degenerative_Neurological_Disorder, Encounter_With_Degenerative_Neurological_Disorder_Compute, context) ?? Encounter_With_Degenerative_Neurological_Disorder_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Degenerative_Neurological_Disorder, Encounter_With_Degenerative_Neurological_Disorder_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Degenerative_Neurological_Disorder_Compute(CqlContext context)
     {
@@ -634,7 +634,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With High Risk To Airway Head Neck And Thoracic Surgery")]
     public IEnumerable<Encounter> Encounter_With_High_Risk_To_Airway_Head_Neck_And_Thoracic_Surgery(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_High_Risk_To_Airway_Head_Neck_And_Thoracic_Surgery, Encounter_With_High_Risk_To_Airway_Head_Neck_And_Thoracic_Surgery_Compute, context) ?? Encounter_With_High_Risk_To_Airway_Head_Neck_And_Thoracic_Surgery_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_High_Risk_To_Airway_Head_Neck_And_Thoracic_Surgery, Encounter_With_High_Risk_To_Airway_Head_Neck_And_Thoracic_Surgery_Compute);
 
     private IEnumerable<Encounter> Encounter_With_High_Risk_To_Airway_Head_Neck_And_Thoracic_Surgery_Compute(CqlContext context)
     {
@@ -760,7 +760,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Anesthesia Procedure List")]
     public IEnumerable<Procedure> Anesthesia_Procedure_List(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Anesthesia_Procedure_List, Anesthesia_Procedure_List_Compute, context) ?? Anesthesia_Procedure_List_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Anesthesia_Procedure_List, Anesthesia_Procedure_List_Compute);
 
     private IEnumerable<Procedure> Anesthesia_Procedure_List_Compute(CqlContext context)
     {
@@ -783,7 +783,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Mechanical Ventilation That Starts More Than One Hour Prior To Start Of First OR Procedure")]
     public IEnumerable<Encounter> Encounter_With_Mechanical_Ventilation_That_Starts_More_Than_One_Hour_Prior_To_Start_Of_First_OR_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Mechanical_Ventilation_That_Starts_More_Than_One_Hour_Prior_To_Start_Of_First_OR_Procedure, Encounter_With_Mechanical_Ventilation_That_Starts_More_Than_One_Hour_Prior_To_Start_Of_First_OR_Procedure_Compute, context) ?? Encounter_With_Mechanical_Ventilation_That_Starts_More_Than_One_Hour_Prior_To_Start_Of_First_OR_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Mechanical_Ventilation_That_Starts_More_Than_One_Hour_Prior_To_Start_Of_First_OR_Procedure, Encounter_With_Mechanical_Ventilation_That_Starts_More_Than_One_Hour_Prior_To_Start_Of_First_OR_Procedure_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Mechanical_Ventilation_That_Starts_More_Than_One_Hour_Prior_To_Start_Of_First_OR_Procedure_Compute(CqlContext context)
     {
@@ -960,7 +960,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Neuromuscular Disorder")]
     public IEnumerable<Encounter> Encounter_With_Neuromuscular_Disorder(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Neuromuscular_Disorder, Encounter_With_Neuromuscular_Disorder_Compute, context) ?? Encounter_With_Neuromuscular_Disorder_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Neuromuscular_Disorder, Encounter_With_Neuromuscular_Disorder_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Neuromuscular_Disorder_Compute(CqlContext context)
     {
@@ -1007,7 +1007,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With PaCO2 Greater Than 50 And Arterial pH Less Than 7.30 Within 48 Hours Prior To Start Of First OR Procedure")]
     public IEnumerable<Encounter> Encounter_With_PaCO2_Greater_Than_50_And_Arterial_pH_Less_Than_7_30_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_PaCO2_Greater_Than_50_And_Arterial_pH_Less_Than_7_30_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure, Encounter_With_PaCO2_Greater_Than_50_And_Arterial_pH_Less_Than_7_30_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure_Compute, context) ?? Encounter_With_PaCO2_Greater_Than_50_And_Arterial_pH_Less_Than_7_30_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_PaCO2_Greater_Than_50_And_Arterial_pH_Less_Than_7_30_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure, Encounter_With_PaCO2_Greater_Than_50_And_Arterial_pH_Less_Than_7_30_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure_Compute);
 
     private IEnumerable<Encounter> Encounter_With_PaCO2_Greater_Than_50_And_Arterial_pH_Less_Than_7_30_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure_Compute(CqlContext context)
     {
@@ -1544,7 +1544,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With PaO2 Less Than 50 Within 48 Hours Prior To Start Of First OR Procedure")]
     public IEnumerable<Encounter> Encounter_With_PaO2_Less_Than_50_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_PaO2_Less_Than_50_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure, Encounter_With_PaO2_Less_Than_50_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure_Compute, context) ?? Encounter_With_PaO2_Less_Than_50_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_PaO2_Less_Than_50_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure, Encounter_With_PaO2_Less_Than_50_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure_Compute);
 
     private IEnumerable<Encounter> Encounter_With_PaO2_Less_Than_50_Within_48_Hours_Prior_To_Start_Of_First_OR_Procedure_Compute(CqlContext context)
     {
@@ -1818,7 +1818,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Principal Diagnosis Of Acute Respiratory Failure")]
     public IEnumerable<Encounter> Encounter_With_Principal_Diagnosis_Of_Acute_Respiratory_Failure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Principal_Diagnosis_Of_Acute_Respiratory_Failure, Encounter_With_Principal_Diagnosis_Of_Acute_Respiratory_Failure_Compute, context) ?? Encounter_With_Principal_Diagnosis_Of_Acute_Respiratory_Failure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Principal_Diagnosis_Of_Acute_Respiratory_Failure, Encounter_With_Principal_Diagnosis_Of_Acute_Respiratory_Failure_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Principal_Diagnosis_Of_Acute_Respiratory_Failure_Compute(CqlContext context)
     {
@@ -1837,7 +1837,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Diagnosis Of Acute Respiratory Failure Present On Admission")]
     public IEnumerable<Encounter> Encounter_With_Diagnosis_Of_Acute_Respiratory_Failure_Present_On_Admission(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Diagnosis_Of_Acute_Respiratory_Failure_Present_On_Admission, Encounter_With_Diagnosis_Of_Acute_Respiratory_Failure_Present_On_Admission_Compute, context) ?? Encounter_With_Diagnosis_Of_Acute_Respiratory_Failure_Present_On_Admission_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Diagnosis_Of_Acute_Respiratory_Failure_Present_On_Admission, Encounter_With_Diagnosis_Of_Acute_Respiratory_Failure_Present_On_Admission_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Diagnosis_Of_Acute_Respiratory_Failure_Present_On_Admission_Compute(CqlContext context)
     {
@@ -1857,7 +1857,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Tracheostomy Present On Admission")]
     public IEnumerable<Encounter> Encounter_With_Tracheostomy_Present_On_Admission(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Tracheostomy_Present_On_Admission, Encounter_With_Tracheostomy_Present_On_Admission_Compute, context) ?? Encounter_With_Tracheostomy_Present_On_Admission_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Tracheostomy_Present_On_Admission, Encounter_With_Tracheostomy_Present_On_Admission_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Tracheostomy_Present_On_Admission_Compute(CqlContext context)
     {
@@ -1877,7 +1877,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Tracheostomy Before Day Of First OR Procedure")]
     public IEnumerable<Encounter> Encounter_With_Tracheostomy_Before_Day_Of_First_OR_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Tracheostomy_Before_Day_Of_First_OR_Procedure, Encounter_With_Tracheostomy_Before_Day_Of_First_OR_Procedure_Compute, context) ?? Encounter_With_Tracheostomy_Before_Day_Of_First_OR_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Tracheostomy_Before_Day_Of_First_OR_Procedure, Encounter_With_Tracheostomy_Before_Day_Of_First_OR_Procedure_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Tracheostomy_Before_Day_Of_First_OR_Procedure_Compute(CqlContext context)
     {
@@ -2201,7 +2201,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Tracheostomy Same Day Of First OR Procedure")]
     public IEnumerable<Encounter> Encounter_With_Tracheostomy_Same_Day_Of_First_OR_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Tracheostomy_Same_Day_Of_First_OR_Procedure, Encounter_With_Tracheostomy_Same_Day_Of_First_OR_Procedure_Compute, context) ?? Encounter_With_Tracheostomy_Same_Day_Of_First_OR_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Tracheostomy_Same_Day_Of_First_OR_Procedure, Encounter_With_Tracheostomy_Same_Day_Of_First_OR_Procedure_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Tracheostomy_Same_Day_Of_First_OR_Procedure_Compute(CqlContext context)
     {
@@ -2375,7 +2375,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Tracheostomy Prior To Or On The Same Day Of First OR Procedure")]
     public IEnumerable<Encounter> Encounter_With_Tracheostomy_Prior_To_Or_On_The_Same_Day_Of_First_OR_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Tracheostomy_Prior_To_Or_On_The_Same_Day_Of_First_OR_Procedure, Encounter_With_Tracheostomy_Prior_To_Or_On_The_Same_Day_Of_First_OR_Procedure_Compute, context) ?? Encounter_With_Tracheostomy_Prior_To_Or_On_The_Same_Day_Of_First_OR_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Tracheostomy_Prior_To_Or_On_The_Same_Day_Of_First_OR_Procedure, Encounter_With_Tracheostomy_Prior_To_Or_On_The_Same_Day_Of_First_OR_Procedure_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Tracheostomy_Prior_To_Or_On_The_Same_Day_Of_First_OR_Procedure_Compute(CqlContext context)
     {
@@ -2388,7 +2388,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -2943,7 +2943,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("General Anesthesia And MAC")]
     public IEnumerable<Procedure> General_Anesthesia_And_MAC(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_General_Anesthesia_And_MAC, General_Anesthesia_And_MAC_Compute, context) ?? General_Anesthesia_And_MAC_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_General_Anesthesia_And_MAC, General_Anesthesia_And_MAC_Compute);
 
     private IEnumerable<Procedure> General_Anesthesia_And_MAC_Compute(CqlContext context)
     {
@@ -3001,7 +3001,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Intubation During General Anesthesia And MAC")]
     public IEnumerable<Procedure> Intubation_During_General_Anesthesia_And_MAC(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Intubation_During_General_Anesthesia_And_MAC, Intubation_During_General_Anesthesia_And_MAC_Compute, context) ?? Intubation_During_General_Anesthesia_And_MAC_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Intubation_During_General_Anesthesia_And_MAC, Intubation_During_General_Anesthesia_And_MAC_Compute);
 
     private IEnumerable<Procedure> Intubation_During_General_Anesthesia_And_MAC_Compute(CqlContext context)
     {
@@ -3171,7 +3171,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Intubation Outside Of Procedural Area Within 30 Days Of End Of First OR Procedure")]
     public IEnumerable<Encounter> Encounter_With_Intubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Intubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure, Encounter_With_Intubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_Compute, context) ?? Encounter_With_Intubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Intubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure, Encounter_With_Intubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Intubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_Compute(CqlContext context)
     {
@@ -3440,7 +3440,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Noninvasive Oxygen Therapy")]
     public IEnumerable<object> Noninvasive_Oxygen_Therapy(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Noninvasive_Oxygen_Therapy, Noninvasive_Oxygen_Therapy_Compute, context) ?? Noninvasive_Oxygen_Therapy_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Noninvasive_Oxygen_Therapy, Noninvasive_Oxygen_Therapy_Compute);
 
     private IEnumerable<object> Noninvasive_Oxygen_Therapy_Compute(CqlContext context)
     {
@@ -3578,7 +3578,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Mechanical Ventilation Outside Of Procedural Area Within 30 Days Of End Of First OR Procedure And Preceded By Non Invasive Oxygen Therapy")]
     public IEnumerable<Encounter> Encounter_With_Mechanical_Ventilation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Preceded_By_Non_Invasive_Oxygen_Therapy(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Mechanical_Ventilation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Preceded_By_Non_Invasive_Oxygen_Therapy, Encounter_With_Mechanical_Ventilation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Preceded_By_Non_Invasive_Oxygen_Therapy_Compute, context) ?? Encounter_With_Mechanical_Ventilation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Preceded_By_Non_Invasive_Oxygen_Therapy_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Mechanical_Ventilation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Preceded_By_Non_Invasive_Oxygen_Therapy, Encounter_With_Mechanical_Ventilation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Preceded_By_Non_Invasive_Oxygen_Therapy_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Mechanical_Ventilation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Preceded_By_Non_Invasive_Oxygen_Therapy_Compute(CqlContext context)
     {
@@ -4066,7 +4066,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Extubation With Preceding Noninvasive Oxygen")]
     public IEnumerable<Procedure> Extubation_With_Preceding_Noninvasive_Oxygen(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Extubation_With_Preceding_Noninvasive_Oxygen, Extubation_With_Preceding_Noninvasive_Oxygen_Compute, context) ?? Extubation_With_Preceding_Noninvasive_Oxygen_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Extubation_With_Preceding_Noninvasive_Oxygen, Extubation_With_Preceding_Noninvasive_Oxygen_Compute);
 
     private IEnumerable<Procedure> Extubation_With_Preceding_Noninvasive_Oxygen_Compute(CqlContext context)
     {
@@ -4540,7 +4540,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Extubation During General Anesthesia")]
     public IEnumerable<Procedure> Extubation_During_General_Anesthesia(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Extubation_During_General_Anesthesia, Extubation_During_General_Anesthesia_Compute, context) ?? Extubation_During_General_Anesthesia_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Extubation_During_General_Anesthesia, Extubation_During_General_Anesthesia_Compute);
 
     private IEnumerable<Procedure> Extubation_During_General_Anesthesia_Compute(CqlContext context)
     {
@@ -4749,7 +4749,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Extubation Outside Of Procedural Area Within 30 Days Of End Of First OR Procedure More Than 48 Hours After End Of Anesthesia")]
     public IEnumerable<Encounter> Encounter_With_Extubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_More_Than_48_Hours_After_End_Of_Anesthesia(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Extubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_More_Than_48_Hours_After_End_Of_Anesthesia, Encounter_With_Extubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_More_Than_48_Hours_After_End_Of_Anesthesia_Compute, context) ?? Encounter_With_Extubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_More_Than_48_Hours_After_End_Of_Anesthesia_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Extubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_More_Than_48_Hours_After_End_Of_Anesthesia, Encounter_With_Extubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_More_Than_48_Hours_After_End_Of_Anesthesia_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Extubation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_More_Than_48_Hours_After_End_Of_Anesthesia_Compute(CqlContext context)
     {
@@ -4980,7 +4980,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Encounter With Mechanical Ventilation Within 30 Days Of End Of First OR Procedure And Between 48 And 72 Hours After End Of OR Procedure And Not Preceded By Non Invasive Oxygen Therapy Or Anesthesia")]
     public IEnumerable<Encounter> Encounter_With_Mechanical_Ventilation_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Between_48_And_72_Hours_After_End_Of_OR_Procedure_And_Not_Preceded_By_Non_Invasive_Oxygen_Therapy_Or_Anesthesia(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Mechanical_Ventilation_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Between_48_And_72_Hours_After_End_Of_OR_Procedure_And_Not_Preceded_By_Non_Invasive_Oxygen_Therapy_Or_Anesthesia, Encounter_With_Mechanical_Ventilation_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Between_48_And_72_Hours_After_End_Of_OR_Procedure_And_Not_Preceded_By_Non_Invasive_Oxygen_Therapy_Or_Anesthesia_Compute, context) ?? Encounter_With_Mechanical_Ventilation_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Between_48_And_72_Hours_After_End_Of_OR_Procedure_And_Not_Preceded_By_Non_Invasive_Oxygen_Therapy_Or_Anesthesia_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Mechanical_Ventilation_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Between_48_And_72_Hours_After_End_Of_OR_Procedure_And_Not_Preceded_By_Non_Invasive_Oxygen_Therapy_Or_Anesthesia, Encounter_With_Mechanical_Ventilation_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Between_48_And_72_Hours_After_End_Of_OR_Procedure_And_Not_Preceded_By_Non_Invasive_Oxygen_Therapy_Or_Anesthesia_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Mechanical_Ventilation_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Between_48_And_72_Hours_After_End_Of_OR_Procedure_And_Not_Preceded_By_Non_Invasive_Oxygen_Therapy_Or_Anesthesia_Compute(CqlContext context)
     {
@@ -5481,7 +5481,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -5653,7 +5653,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable All Encounter Diagnoses With POA Indication")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnoses)?> Risk_Variable_All_Encounter_Diagnoses_With_POA_Indication(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_All_Encounter_Diagnoses_With_POA_Indication, Risk_Variable_All_Encounter_Diagnoses_With_POA_Indication_Compute, context) ?? Risk_Variable_All_Encounter_Diagnoses_With_POA_Indication_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_All_Encounter_Diagnoses_With_POA_Indication, Risk_Variable_All_Encounter_Diagnoses_With_POA_Indication_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnoses)?> Risk_Variable_All_Encounter_Diagnoses_With_POA_Indication_Compute(CqlContext context)
     {
@@ -5675,7 +5675,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable ASA Physical Status Class")]
     public IEnumerable<CqlConcept> Risk_Variable_ASA_Physical_Status_Class(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_ASA_Physical_Status_Class, Risk_Variable_ASA_Physical_Status_Class_Compute, context) ?? Risk_Variable_ASA_Physical_Status_Class_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_ASA_Physical_Status_Class, Risk_Variable_ASA_Physical_Status_Class_Compute);
 
     private IEnumerable<CqlConcept> Risk_Variable_ASA_Physical_Status_Class_Compute(CqlContext context)
     {
@@ -5728,7 +5728,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable Body Mass Index (BMI)")]
     public IEnumerable<CqlQuantity> Risk_Variable_Body_Mass_Index__BMI_(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Body_Mass_Index__BMI_, Risk_Variable_Body_Mass_Index__BMI__Compute, context) ?? Risk_Variable_Body_Mass_Index__BMI__Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_Body_Mass_Index__BMI_, Risk_Variable_Body_Mass_Index__BMI__Compute);
 
     private IEnumerable<CqlQuantity> Risk_Variable_Body_Mass_Index__BMI__Compute(CqlContext context)
     {
@@ -5871,7 +5871,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable Encounter Procedures")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedureCode, int? procedureRank, CqlInterval<CqlDateTime> procedureTime)?> Risk_Variable_Encounter_Procedures(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_Procedures, Risk_Variable_Encounter_Procedures_Compute, context) ?? Risk_Variable_Encounter_Procedures_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_Encounter_Procedures, Risk_Variable_Encounter_Procedures_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedureCode, int? procedureRank, CqlInterval<CqlDateTime> procedureTime)?> Risk_Variable_Encounter_Procedures_Compute(CqlContext context)
     {
@@ -6173,7 +6173,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Albumin In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstAlbumin)?> Risk_Variable_First_Albumin_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Albumin_In_Encounter, Risk_Variable_First_Albumin_In_Encounter_Compute, context) ?? Risk_Variable_First_Albumin_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Albumin_In_Encounter, Risk_Variable_First_Albumin_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstAlbumin)?> Risk_Variable_First_Albumin_In_Encounter_Compute(CqlContext context)
     {
@@ -6281,7 +6281,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Arterial pH In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstArterialpH)?> Risk_Variable_First_Arterial_pH_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Arterial_pH_In_Encounter, Risk_Variable_First_Arterial_pH_In_Encounter_Compute, context) ?? Risk_Variable_First_Arterial_pH_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Arterial_pH_In_Encounter, Risk_Variable_First_Arterial_pH_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstArterialpH)?> Risk_Variable_First_Arterial_pH_In_Encounter_Compute(CqlContext context)
     {
@@ -6389,7 +6389,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First AST In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstAST)?> Risk_Variable_First_AST_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_AST_In_Encounter, Risk_Variable_First_AST_In_Encounter_Compute, context) ?? Risk_Variable_First_AST_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_AST_In_Encounter, Risk_Variable_First_AST_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstAST)?> Risk_Variable_First_AST_In_Encounter_Compute(CqlContext context)
     {
@@ -6497,7 +6497,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Bicarbonate In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstBicarbonate)?> Risk_Variable_First_Bicarbonate_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Bicarbonate_In_Encounter, Risk_Variable_First_Bicarbonate_In_Encounter_Compute, context) ?? Risk_Variable_First_Bicarbonate_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Bicarbonate_In_Encounter, Risk_Variable_First_Bicarbonate_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstBicarbonate)?> Risk_Variable_First_Bicarbonate_In_Encounter_Compute(CqlContext context)
     {
@@ -6605,7 +6605,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Bilirubin In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstBilirubin)?> Risk_Variable_First_Bilirubin_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Bilirubin_In_Encounter, Risk_Variable_First_Bilirubin_In_Encounter_Compute, context) ?? Risk_Variable_First_Bilirubin_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Bilirubin_In_Encounter, Risk_Variable_First_Bilirubin_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstBilirubin)?> Risk_Variable_First_Bilirubin_In_Encounter_Compute(CqlContext context)
     {
@@ -6713,7 +6713,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Blood Urea Nitrogen In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstBUN)?> Risk_Variable_First_Blood_Urea_Nitrogen_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Blood_Urea_Nitrogen_In_Encounter, Risk_Variable_First_Blood_Urea_Nitrogen_In_Encounter_Compute, context) ?? Risk_Variable_First_Blood_Urea_Nitrogen_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Blood_Urea_Nitrogen_In_Encounter, Risk_Variable_First_Blood_Urea_Nitrogen_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstBUN)?> Risk_Variable_First_Blood_Urea_Nitrogen_In_Encounter_Compute(CqlContext context)
     {
@@ -6781,7 +6781,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First BMI")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstBMI)?> Risk_Variable_First_BMI(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_BMI, Risk_Variable_First_BMI_Compute, context) ?? Risk_Variable_First_BMI_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_BMI, Risk_Variable_First_BMI_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstBMI)?> Risk_Variable_First_BMI_Compute(CqlContext context)
     {
@@ -6850,7 +6850,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Body Temperature In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstBodyTemp)?> Risk_Variable_First_Body_Temperature_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Body_Temperature_In_Encounter, Risk_Variable_First_Body_Temperature_In_Encounter_Compute, context) ?? Risk_Variable_First_Body_Temperature_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Body_Temperature_In_Encounter, Risk_Variable_First_Body_Temperature_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstBodyTemp)?> Risk_Variable_First_Body_Temperature_In_Encounter_Compute(CqlContext context)
     {
@@ -6958,7 +6958,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Carbon Dioxide In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstCarbonDioxide)?> Risk_Variable_First_Carbon_Dioxide_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Carbon_Dioxide_In_Encounter, Risk_Variable_First_Carbon_Dioxide_In_Encounter_Compute, context) ?? Risk_Variable_First_Carbon_Dioxide_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Carbon_Dioxide_In_Encounter, Risk_Variable_First_Carbon_Dioxide_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstCarbonDioxide)?> Risk_Variable_First_Carbon_Dioxide_In_Encounter_Compute(CqlContext context)
     {
@@ -7066,7 +7066,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Creatinine In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstCreatinine)?> Risk_Variable_First_Creatinine_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Creatinine_In_Encounter, Risk_Variable_First_Creatinine_In_Encounter_Compute, context) ?? Risk_Variable_First_Creatinine_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Creatinine_In_Encounter, Risk_Variable_First_Creatinine_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstCreatinine)?> Risk_Variable_First_Creatinine_In_Encounter_Compute(CqlContext context)
     {
@@ -7135,7 +7135,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Heart Rate In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstHeartRate)?> Risk_Variable_First_Heart_Rate_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Heart_Rate_In_Encounter, Risk_Variable_First_Heart_Rate_In_Encounter_Compute, context) ?? Risk_Variable_First_Heart_Rate_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Heart_Rate_In_Encounter, Risk_Variable_First_Heart_Rate_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstHeartRate)?> Risk_Variable_First_Heart_Rate_In_Encounter_Compute(CqlContext context)
     {
@@ -7243,7 +7243,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Hematocrit In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstHematocrit)?> Risk_Variable_First_Hematocrit_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Hematocrit_In_Encounter, Risk_Variable_First_Hematocrit_In_Encounter_Compute, context) ?? Risk_Variable_First_Hematocrit_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Hematocrit_In_Encounter, Risk_Variable_First_Hematocrit_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstHematocrit)?> Risk_Variable_First_Hematocrit_In_Encounter_Compute(CqlContext context)
     {
@@ -7351,7 +7351,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Hemoglobin In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstHemoglobin)?> Risk_Variable_First_Hemoglobin_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Hemoglobin_In_Encounter, Risk_Variable_First_Hemoglobin_In_Encounter_Compute, context) ?? Risk_Variable_First_Hemoglobin_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Hemoglobin_In_Encounter, Risk_Variable_First_Hemoglobin_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstHemoglobin)?> Risk_Variable_First_Hemoglobin_In_Encounter_Compute(CqlContext context)
     {
@@ -7459,7 +7459,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Leukocyte Count In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstLeukocyte)?> Risk_Variable_First_Leukocyte_Count_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Leukocyte_Count_In_Encounter, Risk_Variable_First_Leukocyte_Count_In_Encounter_Compute, context) ?? Risk_Variable_First_Leukocyte_Count_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Leukocyte_Count_In_Encounter, Risk_Variable_First_Leukocyte_Count_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstLeukocyte)?> Risk_Variable_First_Leukocyte_Count_In_Encounter_Compute(CqlContext context)
     {
@@ -7567,7 +7567,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Oxygen In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstOxygen)?> Risk_Variable_First_Oxygen_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Oxygen_In_Encounter, Risk_Variable_First_Oxygen_In_Encounter_Compute, context) ?? Risk_Variable_First_Oxygen_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Oxygen_In_Encounter, Risk_Variable_First_Oxygen_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstOxygen)?> Risk_Variable_First_Oxygen_In_Encounter_Compute(CqlContext context)
     {
@@ -7675,7 +7675,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Platelet Count In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstPlatelet)?> Risk_Variable_First_Platelet_Count_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Platelet_Count_In_Encounter, Risk_Variable_First_Platelet_Count_In_Encounter_Compute, context) ?? Risk_Variable_First_Platelet_Count_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Platelet_Count_In_Encounter, Risk_Variable_First_Platelet_Count_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstPlatelet)?> Risk_Variable_First_Platelet_Count_In_Encounter_Compute(CqlContext context)
     {
@@ -7744,7 +7744,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Respiratory Rate In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstRespiratoryRate)?> Risk_Variable_First_Respiratory_Rate_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Respiratory_Rate_In_Encounter, Risk_Variable_First_Respiratory_Rate_In_Encounter_Compute, context) ?? Risk_Variable_First_Respiratory_Rate_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Respiratory_Rate_In_Encounter, Risk_Variable_First_Respiratory_Rate_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstRespiratoryRate)?> Risk_Variable_First_Respiratory_Rate_In_Encounter_Compute(CqlContext context)
     {
@@ -7852,7 +7852,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Sodium In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstSodium)?> Risk_Variable_First_Sodium_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Sodium_In_Encounter, Risk_Variable_First_Sodium_In_Encounter_Compute, context) ?? Risk_Variable_First_Sodium_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Sodium_In_Encounter, Risk_Variable_First_Sodium_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstSodium)?> Risk_Variable_First_Sodium_In_Encounter_Compute(CqlContext context)
     {
@@ -7933,7 +7933,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Qualifying Systolic Blood Pressure Reading")]
     public IEnumerable<Observation> Qualifying_Systolic_Blood_Pressure_Reading(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Qualifying_Systolic_Blood_Pressure_Reading, Qualifying_Systolic_Blood_Pressure_Reading_Compute, context) ?? Qualifying_Systolic_Blood_Pressure_Reading_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Systolic_Blood_Pressure_Reading, Qualifying_Systolic_Blood_Pressure_Reading_Compute);
 
     private IEnumerable<Observation> Qualifying_Systolic_Blood_Pressure_Reading_Compute(CqlContext context)
     {
@@ -7955,7 +7955,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First Systolic Blood Pressure In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstSystolic)?> Risk_Variable_First_Systolic_Blood_Pressure_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_Systolic_Blood_Pressure_In_Encounter, Risk_Variable_First_Systolic_Blood_Pressure_In_Encounter_Compute, context) ?? Risk_Variable_First_Systolic_Blood_Pressure_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_Systolic_Blood_Pressure_In_Encounter, Risk_Variable_First_Systolic_Blood_Pressure_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstSystolic)?> Risk_Variable_First_Systolic_Blood_Pressure_In_Encounter_Compute(CqlContext context)
     {
@@ -8063,7 +8063,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable First White Blood Cell Count In Encounter")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstWBCcount)?> Risk_Variable_First_White_Blood_Cell_Count_In_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_In_Encounter, Risk_Variable_First_White_Blood_Cell_Count_In_Encounter_Compute, context) ?? Risk_Variable_First_White_Blood_Cell_Count_In_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_In_Encounter, Risk_Variable_First_White_Blood_Cell_Count_In_Encounter_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlQuantity firstWBCcount)?> Risk_Variable_First_White_Blood_Cell_Count_In_Encounter_Compute(CqlContext context)
     {
@@ -8085,7 +8085,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable Principal Procedure")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedureCode, int? procedureRank, CqlInterval<CqlDateTime> procedureTime)?> Risk_Variable_Principal_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Principal_Procedure, Risk_Variable_Principal_Procedure_Compute, context) ?? Risk_Variable_Principal_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_Principal_Procedure, Risk_Variable_Principal_Procedure_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, string procedureId, CqlConcept procedureCode, int? procedureRank, CqlInterval<CqlDateTime> procedureTime)?> Risk_Variable_Principal_Procedure_Compute(CqlContext context)
     {
@@ -8243,7 +8243,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Risk Variable Latest Smoking Status")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, CqlConcept latestSmokingStatus)?> Risk_Variable_Latest_Smoking_Status(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Risk_Variable_Latest_Smoking_Status, Risk_Variable_Latest_Smoking_Status_Compute, context) ?? Risk_Variable_Latest_Smoking_Status_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Risk_Variable_Latest_Smoking_Status, Risk_Variable_Latest_Smoking_Status_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, CqlConcept latestSmokingStatus)?> Risk_Variable_Latest_Smoking_Status_Compute(CqlContext context)
     {
@@ -8265,7 +8265,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -8276,7 +8276,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -8287,7 +8287,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -8298,7 +8298,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -8378,8 +8378,6 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -8454,15 +8452,6 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ILibraryInternals, ISin
         _cacheIndex_SDE_Race = index++;
         _cacheIndex_SDE_Sex = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

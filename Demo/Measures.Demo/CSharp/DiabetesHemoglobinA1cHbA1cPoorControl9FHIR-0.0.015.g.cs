@@ -91,7 +91,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -106,7 +106,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -118,7 +118,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -129,7 +129,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -140,7 +140,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -151,7 +151,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -162,7 +162,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("Telehealth Services")]
     public IEnumerable<Encounter> Telehealth_Services(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Telehealth_Services, Telehealth_Services_Compute, context) ?? Telehealth_Services_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Telehealth_Services, Telehealth_Services_Compute);
 
     private IEnumerable<Encounter> Telehealth_Services_Compute(CqlContext context)
     {
@@ -188,7 +188,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -226,7 +226,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -237,7 +237,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("Most Recent HbA1c")]
     public Observation Most_Recent_HbA1c(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Most_Recent_HbA1c, Most_Recent_HbA1c_Compute, context) ?? Most_Recent_HbA1c_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Most_Recent_HbA1c, Most_Recent_HbA1c_Compute);
 
     private Observation Most_Recent_HbA1c_Compute(CqlContext context)
     {
@@ -278,7 +278,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("Has Most Recent HbA1c Without Result")]
     public bool? Has_Most_Recent_HbA1c_Without_Result(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Most_Recent_HbA1c_Without_Result, Has_Most_Recent_HbA1c_Without_Result_Compute, context) ?? Has_Most_Recent_HbA1c_Without_Result_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Most_Recent_HbA1c_Without_Result, Has_Most_Recent_HbA1c_Without_Result_Compute);
 
     private bool? Has_Most_Recent_HbA1c_Without_Result_Compute(CqlContext context)
     {
@@ -292,7 +292,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("Has Most Recent Elevated HbA1c")]
     public bool? Has_Most_Recent_Elevated_HbA1c(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Most_Recent_Elevated_HbA1c, Has_Most_Recent_Elevated_HbA1c_Compute, context) ?? Has_Most_Recent_Elevated_HbA1c_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Most_Recent_Elevated_HbA1c, Has_Most_Recent_Elevated_HbA1c_Compute);
 
     private bool? Has_Most_Recent_Elevated_HbA1c_Compute(CqlContext context)
     {
@@ -307,7 +307,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("Has No Record Of HbA1c")]
     public bool? Has_No_Record_Of_HbA1c(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_No_Record_Of_HbA1c, Has_No_Record_Of_HbA1c_Compute, context) ?? Has_No_Record_Of_HbA1c_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_No_Record_Of_HbA1c, Has_No_Record_Of_HbA1c_Compute);
 
     private bool? Has_No_Record_Of_HbA1c_Compute(CqlContext context)
     {
@@ -340,7 +340,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -355,7 +355,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -404,25 +404,16 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     #region ILibraryInternals Implementation
 
-    // Reference to the execution cache instance that initialized this library
-    private CqlLibrarySetInvocationCache _cache;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
-    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="libraryInvocationSet">The library invocation set performing initialization.</param>
     /// <param name="startIndex">The starting index for cache field assignment.</param>
     /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibrarySetInvocationCache cache,
+        CqlLibraryInvocationSet libraryInvocationSet,
         int startIndex)
     {
-        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
-        if (_cache == cache)
-            return 0;
-
-        _cache = cache;
-
         var index = startIndex;
         _cacheIndex_Measurement_Period = index++;
         _cacheIndex_Patient = index++;

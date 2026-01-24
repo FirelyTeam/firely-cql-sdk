@@ -163,7 +163,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -181,7 +181,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -193,7 +193,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -204,7 +204,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -215,7 +215,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -226,7 +226,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -237,7 +237,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("August 1 Year Prior to the Measurement Period")]
     public CqlDateTime August_1_Year_Prior_to_the_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_August_1_Year_Prior_to_the_Measurement_Period, August_1_Year_Prior_to_the_Measurement_Period_Compute, context) ?? August_1_Year_Prior_to_the_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_August_1_Year_Prior_to_the_Measurement_Period, August_1_Year_Prior_to_the_Measurement_Period_Compute);
 
     private CqlDateTime August_1_Year_Prior_to_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -253,7 +253,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Qualifying Encounter")]
     public bool? Has_Qualifying_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Qualifying_Encounter, Has_Qualifying_Encounter_Compute, context) ?? Has_Qualifying_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Qualifying_Encounter, Has_Qualifying_Encounter_Compute);
 
     private bool? Has_Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -315,7 +315,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("November 1 Two Years Prior to the Measurement Period")]
     public CqlDateTime November_1_Two_Years_Prior_to_the_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_November_1_Two_Years_Prior_to_the_Measurement_Period, November_1_Two_Years_Prior_to_the_Measurement_Period_Compute, context) ?? November_1_Two_Years_Prior_to_the_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_November_1_Two_Years_Prior_to_the_Measurement_Period, November_1_Two_Years_Prior_to_the_Measurement_Period_Compute);
 
     private CqlDateTime November_1_Two_Years_Prior_to_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -331,7 +331,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("October 31 Year Prior to the Measurement Period")]
     public CqlDateTime October_31_Year_Prior_to_the_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_October_31_Year_Prior_to_the_Measurement_Period, October_31_Year_Prior_to_the_Measurement_Period_Compute, context) ?? October_31_Year_Prior_to_the_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_October_31_Year_Prior_to_the_Measurement_Period, October_31_Year_Prior_to_the_Measurement_Period_Compute);
 
     private CqlDateTime October_31_Year_Prior_to_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -347,7 +347,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Total Hip Arthroplasty Procedure")]
     public IEnumerable<Procedure> Total_Hip_Arthroplasty_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Total_Hip_Arthroplasty_Procedure, Total_Hip_Arthroplasty_Procedure_Compute, context) ?? Total_Hip_Arthroplasty_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Total_Hip_Arthroplasty_Procedure, Total_Hip_Arthroplasty_Procedure_Compute);
 
     private IEnumerable<Procedure> Total_Hip_Arthroplasty_Procedure_Compute(CqlContext context)
     {
@@ -436,7 +436,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -460,7 +460,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -471,7 +471,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Severe Cognitive Impairment")]
     public bool? Has_Severe_Cognitive_Impairment(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Severe_Cognitive_Impairment, Has_Severe_Cognitive_Impairment_Compute, context) ?? Has_Severe_Cognitive_Impairment_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Severe_Cognitive_Impairment, Has_Severe_Cognitive_Impairment_Compute);
 
     private bool? Has_Severe_Cognitive_Impairment_Compute(CqlContext context)
     {
@@ -529,7 +529,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Total Hip Arthroplasty with 1 or More Lower Body Fractures")]
     public bool? Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures, Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures_Compute, context) ?? Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures, Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures_Compute);
 
     private bool? Has_Total_Hip_Arthroplasty_with_1_or_More_Lower_Body_Fractures_Compute(CqlContext context)
     {
@@ -767,7 +767,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Partial Hip Arthroplasty Procedure")]
     public bool? Has_Partial_Hip_Arthroplasty_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Partial_Hip_Arthroplasty_Procedure, Has_Partial_Hip_Arthroplasty_Procedure_Compute, context) ?? Has_Partial_Hip_Arthroplasty_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Partial_Hip_Arthroplasty_Procedure, Has_Partial_Hip_Arthroplasty_Procedure_Compute);
 
     private bool? Has_Partial_Hip_Arthroplasty_Procedure_Compute(CqlContext context)
     {
@@ -927,7 +927,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Revision Hip Arthroplasty Procedure or Implanted Device or Prosthesis Removal Procedure")]
     public bool? Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure, Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure_Compute, context) ?? Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure, Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure_Compute);
 
     private bool? Has_Revision_Hip_Arthroplasty_Procedure_or_Implanted_Device_or_Prosthesis_Removal_Procedure_Compute(CqlContext context)
     {
@@ -1087,7 +1087,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Malignant Neoplasm of Lower and Unspecified Limbs")]
     public bool? Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs, Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs_Compute, context) ?? Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs, Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs_Compute);
 
     private bool? Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs_Compute(CqlContext context)
     {
@@ -1186,7 +1186,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has Mechanical Complication")]
     public bool? Has_Mechanical_Complication(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Mechanical_Complication, Has_Mechanical_Complication_Compute, context) ?? Has_Mechanical_Complication_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Mechanical_Complication, Has_Mechanical_Complication_Compute);
 
     private bool? Has_Mechanical_Complication_Compute(CqlContext context)
     {
@@ -1285,7 +1285,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has More Than One Elective Primary Total Hip Arthroplasty Performed")]
     public bool? Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed, Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed_Compute, context) ?? Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed, Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed_Compute);
 
     private bool? Has_More_Than_One_Elective_Primary_Total_Hip_Arthroplasty_Performed_Compute(CqlContext context)
     {
@@ -1524,7 +1524,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Death Within 300 Days of the THA Procedure")]
     public bool? Death_Within_300_Days_of_the_THA_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Death_Within_300_Days_of_the_THA_Procedure, Death_Within_300_Days_of_the_THA_Procedure_Compute, context) ?? Death_Within_300_Days_of_the_THA_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Death_Within_300_Days_of_the_THA_Procedure, Death_Within_300_Days_of_the_THA_Procedure_Compute);
 
     private bool? Death_Within_300_Days_of_the_THA_Procedure_Compute(CqlContext context)
     {
@@ -1684,7 +1684,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -1711,7 +1711,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Date HOOS Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_HOOS_Total_Assessment_Completed(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Date_HOOS_Total_Assessment_Completed, Date_HOOS_Total_Assessment_Completed_Compute, context) ?? Date_HOOS_Total_Assessment_Completed_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Date_HOOS_Total_Assessment_Completed, Date_HOOS_Total_Assessment_Completed_Compute);
 
     private IEnumerable<CqlDate> Date_HOOS_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -1859,7 +1859,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has THA with Initial and Follow Up HOOS Assessments")]
     public bool? Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments, Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments_Compute, context) ?? Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments, Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments_Compute);
 
     private bool? Has_THA_with_Initial_and_Follow_Up_HOOS_Assessments_Compute(CqlContext context)
     {
@@ -2004,7 +2004,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Date HOOSJr Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_HOOSJr_Total_Assessment_Completed(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Date_HOOSJr_Total_Assessment_Completed, Date_HOOSJr_Total_Assessment_Completed_Compute, context) ?? Date_HOOSJr_Total_Assessment_Completed_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Date_HOOSJr_Total_Assessment_Completed, Date_HOOSJr_Total_Assessment_Completed_Compute);
 
     private IEnumerable<CqlDate> Date_HOOSJr_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -2039,7 +2039,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has THA with Initial and Follow Up HOOSJr Assessments")]
     public bool? Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments, Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments_Compute, context) ?? Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments, Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments_Compute);
 
     private bool? Has_THA_with_Initial_and_Follow_Up_HOOSJr_Assessments_Compute(CqlContext context)
     {
@@ -2184,7 +2184,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Date PROMIS10 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Date_PROMIS10_Total_Assessment_Completed, Date_PROMIS10_Total_Assessment_Completed_Compute, context) ?? Date_PROMIS10_Total_Assessment_Completed_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Date_PROMIS10_Total_Assessment_Completed, Date_PROMIS10_Total_Assessment_Completed_Compute);
 
     private IEnumerable<CqlDate> Date_PROMIS10_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -2257,7 +2257,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has THA with Initial and Follow Up PROMIS10 Assessments")]
     public bool? Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments, Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments_Compute, context) ?? Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments, Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments_Compute);
 
     private bool? Has_THA_with_Initial_and_Follow_Up_PROMIS10_Assessments_Compute(CqlContext context)
     {
@@ -2402,7 +2402,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Date VR12 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Date_VR12_Oblique_Total_Assessment_Completed, Date_VR12_Oblique_Total_Assessment_Completed_Compute, context) ?? Date_VR12_Oblique_Total_Assessment_Completed_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Date_VR12_Oblique_Total_Assessment_Completed, Date_VR12_Oblique_Total_Assessment_Completed_Compute);
 
     private IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -2475,7 +2475,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has THA with Initial and Follow Up VR12 Oblique Assessments")]
     public bool? Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments, Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Compute, context) ?? Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments, Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Compute);
 
     private bool? Has_THA_with_Initial_and_Follow_Up_VR12_Oblique_Assessments_Compute(CqlContext context)
     {
@@ -2620,7 +2620,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Date VR12 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Date_VR12_Orthogonal_Total_Assessment_Completed, Date_VR12_Orthogonal_Total_Assessment_Completed_Compute, context) ?? Date_VR12_Orthogonal_Total_Assessment_Completed_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Date_VR12_Orthogonal_Total_Assessment_Completed, Date_VR12_Orthogonal_Total_Assessment_Completed_Compute);
 
     private IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed_Compute(CqlContext context)
     {
@@ -2693,7 +2693,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Has THA with Initial and Follow Up VR12 Orthogonal Assessments")]
     public bool? Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments, Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Compute, context) ?? Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments, Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Compute);
 
     private bool? Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments_Compute(CqlContext context)
     {
@@ -2838,7 +2838,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -2897,8 +2897,6 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -2944,15 +2942,6 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ILibrar
         _cacheIndex_Has_THA_with_Initial_and_Follow_Up_VR12_Orthogonal_Assessments = index++;
         _cacheIndex_Numerator = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

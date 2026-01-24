@@ -172,7 +172,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ILibraryInternals, ISingleton
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -187,7 +187,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ILibraryInternals, ISingleton
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -199,7 +199,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ILibraryInternals, ISingleton
 
     [CqlExpressionDefinition("Inpatient Encounter")]
     public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Inpatient_Encounter, Inpatient_Encounter_Compute, context) ?? Inpatient_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Inpatient_Encounter, Inpatient_Encounter_Compute);
 
     private IEnumerable<Encounter> Inpatient_Encounter_Compute(CqlContext context)
     {
@@ -3782,8 +3782,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ILibraryInternals, ISingleton
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -3799,15 +3797,6 @@ public partial class CQMCommon_4_1_000 : ILibrary, ILibraryInternals, ISingleton
         _cacheIndex_Patient = index++;
         _cacheIndex_Inpatient_Encounter = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

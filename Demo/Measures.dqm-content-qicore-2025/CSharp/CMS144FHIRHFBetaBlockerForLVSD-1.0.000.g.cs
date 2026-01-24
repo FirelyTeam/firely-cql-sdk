@@ -95,7 +95,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -113,7 +113,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -125,7 +125,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -136,7 +136,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -150,7 +150,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -167,7 +167,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Beta Blocker Therapy for LVSD Ordered")]
     public bool? Has_Beta_Blocker_Therapy_for_LVSD_Ordered(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Beta_Blocker_Therapy_for_LVSD_Ordered, Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Compute, context) ?? Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Beta_Blocker_Therapy_for_LVSD_Ordered, Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Compute);
 
     private bool? Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Compute(CqlContext context)
     {
@@ -187,7 +187,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Is Currently Taking Beta Blocker Therapy for LVSD")]
     public bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD, Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Compute, context) ?? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD, Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Compute);
 
     private bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Compute(CqlContext context)
     {
@@ -234,7 +234,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -247,7 +247,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Consecutive Heart Rates Less than 50")]
     public bool? Has_Consecutive_Heart_Rates_Less_than_50(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Consecutive_Heart_Rates_Less_than_50, Has_Consecutive_Heart_Rates_Less_than_50_Compute, context) ?? Has_Consecutive_Heart_Rates_Less_than_50_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Consecutive_Heart_Rates_Less_than_50, Has_Consecutive_Heart_Rates_Less_than_50_Compute);
 
     private bool? Has_Consecutive_Heart_Rates_Less_than_50_Compute(CqlContext context)
     {
@@ -333,7 +333,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD")]
     public bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD, Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Compute, context) ?? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD, Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Compute);
 
     private bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Compute(CqlContext context)
     {
@@ -413,7 +413,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Arrhythmia Diagnosis")]
     public bool? Has_Arrhythmia_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Arrhythmia_Diagnosis, Has_Arrhythmia_Diagnosis_Compute, context) ?? Has_Arrhythmia_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Arrhythmia_Diagnosis, Has_Arrhythmia_Diagnosis_Compute);
 
     private bool? Has_Arrhythmia_Diagnosis_Compute(CqlContext context)
     {
@@ -437,7 +437,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Hypotension Diagnosis")]
     public bool? Has_Hypotension_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Hypotension_Diagnosis, Has_Hypotension_Diagnosis_Compute, context) ?? Has_Hypotension_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Hypotension_Diagnosis, Has_Hypotension_Diagnosis_Compute);
 
     private bool? Has_Hypotension_Diagnosis_Compute(CqlContext context)
     {
@@ -461,7 +461,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Asthma Diagnosis")]
     public bool? Has_Asthma_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Asthma_Diagnosis, Has_Asthma_Diagnosis_Compute, context) ?? Has_Asthma_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Asthma_Diagnosis, Has_Asthma_Diagnosis_Compute);
 
     private bool? Has_Asthma_Diagnosis_Compute(CqlContext context)
     {
@@ -485,7 +485,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy")]
     public bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy, Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Compute, context) ?? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy, Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Compute);
 
     private bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Compute(CqlContext context)
     {
@@ -514,7 +514,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Bradycardia Diagnosis")]
     public bool? Has_Bradycardia_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Bradycardia_Diagnosis, Has_Bradycardia_Diagnosis_Compute, context) ?? Has_Bradycardia_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Bradycardia_Diagnosis, Has_Bradycardia_Diagnosis_Compute);
 
     private bool? Has_Bradycardia_Diagnosis_Compute(CqlContext context)
     {
@@ -538,7 +538,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Allergy or Intolerance to Beta Blocker Therapy Ingredient")]
     public bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient, Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_Compute, context) ?? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient, Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_Compute);
 
     private bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_Compute(CqlContext context)
     {
@@ -564,7 +564,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Atrioventricular Block Diagnosis")]
     public bool? Has_Atrioventricular_Block_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_Diagnosis, Has_Atrioventricular_Block_Diagnosis_Compute, context) ?? Has_Atrioventricular_Block_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_Diagnosis, Has_Atrioventricular_Block_Diagnosis_Compute);
 
     private bool? Has_Atrioventricular_Block_Diagnosis_Compute(CqlContext context)
     {
@@ -588,7 +588,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Diagnosis of Cardiac Pacer in Situ")]
     public bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Diagnosis_of_Cardiac_Pacer_in_Situ, Has_Diagnosis_of_Cardiac_Pacer_in_Situ_Compute, context) ?? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Diagnosis_of_Cardiac_Pacer_in_Situ, Has_Diagnosis_of_Cardiac_Pacer_in_Situ_Compute);
 
     private bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_Compute(CqlContext context)
     {
@@ -612,7 +612,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Has Cardiac Pacer Device Implanted")]
     public bool? Has_Cardiac_Pacer_Device_Implanted(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Cardiac_Pacer_Device_Implanted, Has_Cardiac_Pacer_Device_Implanted_Compute, context) ?? Has_Cardiac_Pacer_Device_Implanted_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Cardiac_Pacer_Device_Implanted, Has_Cardiac_Pacer_Device_Implanted_Compute);
 
     private bool? Has_Cardiac_Pacer_Device_Implanted_Compute(CqlContext context)
     {
@@ -720,7 +720,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Atrioventricular Block without Cardiac Pacer")]
     public bool? Atrioventricular_Block_without_Cardiac_Pacer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Atrioventricular_Block_without_Cardiac_Pacer, Atrioventricular_Block_without_Cardiac_Pacer_Compute, context) ?? Atrioventricular_Block_without_Cardiac_Pacer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Atrioventricular_Block_without_Cardiac_Pacer, Atrioventricular_Block_without_Cardiac_Pacer_Compute);
 
     private bool? Atrioventricular_Block_without_Cardiac_Pacer_Compute(CqlContext context)
     {
@@ -737,7 +737,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute, context) ?? Denominator_Exceptions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -764,7 +764,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -775,7 +775,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -786,7 +786,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -797,7 +797,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -840,8 +840,6 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -879,15 +877,6 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ILibrary
         _cacheIndex_SDE_Race = index++;
         _cacheIndex_SDE_Sex = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

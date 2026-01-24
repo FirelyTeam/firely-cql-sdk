@@ -37,7 +37,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -52,7 +52,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -111,7 +111,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Admission Without VTE Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions, Admission_Without_VTE_Or_Obstetrical_Conditions_Compute, context) ?? Admission_Without_VTE_Or_Obstetrical_Conditions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions, Admission_Without_VTE_Or_Obstetrical_Conditions_Compute);
 
     private IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions_Compute(CqlContext context)
     {
@@ -137,7 +137,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Encounter With Age Range And Without VTE Diagnosis Or Obstetrical Conditions")]
     public IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions, Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute, context) ?? Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions, Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute(CqlContext context)
     {
@@ -164,7 +164,7 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -244,8 +244,6 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -263,15 +261,6 @@ public partial class VTE_8_18_000 : ILibrary, ILibraryInternals, ISingleton<VTE_
         _cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions = index++;
         _cacheIndex_Initial_Population = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

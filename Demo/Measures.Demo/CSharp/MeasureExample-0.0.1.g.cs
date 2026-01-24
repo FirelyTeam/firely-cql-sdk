@@ -21,7 +21,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -40,7 +40,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
     [CqlTag("population", "initial-population")]
     [CqlTag("description", "Patients in the IP")]
     public bool? Initial_population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_population, Initial_population_Compute, context) ?? Initial_population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_population, Initial_population_Compute);
 
     private bool? Initial_population_Compute(CqlContext context)
     {
@@ -53,7 +53,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator-exclusion")]
     public bool? Exclusion(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Exclusion, Exclusion_Compute, context) ?? Exclusion_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Exclusion, Exclusion_Compute);
 
     private bool? Exclusion_Compute(CqlContext context)
     {
@@ -66,7 +66,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator")]
     public bool? Denominator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -82,7 +82,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
     [CqlTag("group", "1")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_1(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute, context) ?? Numerator_1_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
@@ -94,7 +94,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
     [CqlTag("group", "2")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute, context) ?? Numerator_2_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
@@ -117,25 +117,16 @@ public partial class MeasureExample_0_0_1 : ILibrary, ILibraryInternals, ISingle
 
     #region ILibraryInternals Implementation
 
-    // Reference to the execution cache instance that initialized this library
-    private CqlLibrarySetInvocationCache _cache;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
-    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="libraryInvocationSet">The library invocation set performing initialization.</param>
     /// <param name="startIndex">The starting index for cache field assignment.</param>
     /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibrarySetInvocationCache cache,
+        CqlLibraryInvocationSet libraryInvocationSet,
         int startIndex)
     {
-        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
-        if (_cache == cache)
-            return 0;
-
-        _cache = cache;
-
         var index = startIndex;
         _cacheIndex_Patient = index++;
         _cacheIndex_Initial_population = index++;

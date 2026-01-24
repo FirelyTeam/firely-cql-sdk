@@ -29,7 +29,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlParameterDefinition("AgeThreshold")]
     public int? AgeThreshold(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_AgeThreshold, AgeThreshold_Compute, context) ?? AgeThreshold_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_AgeThreshold, AgeThreshold_Compute);
 
     private int? AgeThreshold_Compute(CqlContext context)
     {
@@ -44,7 +44,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -56,7 +56,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_CurrentDate, CurrentDate_Compute, context) ?? CurrentDate_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_CurrentDate, CurrentDate_Compute);
 
     private CqlDate CurrentDate_Compute(CqlContext context)
     {
@@ -67,7 +67,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Filter")]
     public Patient Patient_Filter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient_Filter, Patient_Filter_Compute, context) ?? Patient_Filter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_Filter, Patient_Filter_Compute);
 
     private Patient Patient_Filter_Compute(CqlContext context)
     {
@@ -104,7 +104,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient_Birthdate, Patient_Birthdate_Compute, context) ?? Patient_Birthdate_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_Birthdate, Patient_Birthdate_Compute);
 
     private Date Patient_Birthdate_Compute(CqlContext context)
     {
@@ -116,7 +116,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Age in Years")]
     public int? Patient_Age_in_Years(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient_Age_in_Years, Patient_Age_in_Years_Compute, context) ?? Patient_Age_in_Years_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_Age_in_Years, Patient_Age_in_Years_Compute);
 
     private int? Patient_Age_in_Years_Compute(CqlContext context)
     {
@@ -130,7 +130,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     [CqlExpressionDefinition("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient_Older_Than_AgeThreshold, Patient_Older_Than_AgeThreshold_Compute, context) ?? Patient_Older_Than_AgeThreshold_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_Older_Than_AgeThreshold, Patient_Older_Than_AgeThreshold_Compute);
 
     private bool? Patient_Older_Than_AgeThreshold_Compute(CqlContext context)
     {
@@ -157,25 +157,16 @@ public partial class ParametersExample_0_0_1 : ILibrary, ILibraryInternals, ISin
 
     #region ILibraryInternals Implementation
 
-    // Reference to the execution cache instance that initialized this library
-    private CqlLibrarySetInvocationCache _cache;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
-    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="libraryInvocationSet">The library invocation set performing initialization.</param>
     /// <param name="startIndex">The starting index for cache field assignment.</param>
     /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibrarySetInvocationCache cache,
+        CqlLibraryInvocationSet libraryInvocationSet,
         int startIndex)
     {
-        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
-        if (_cache == cache)
-            return 0;
-
-        _cache = cache;
-
         var index = startIndex;
         _cacheIndex_AgeThreshold = index++;
         _cacheIndex_Patient = index++;

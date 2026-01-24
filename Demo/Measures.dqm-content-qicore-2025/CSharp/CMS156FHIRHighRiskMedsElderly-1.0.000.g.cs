@@ -288,7 +288,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -306,7 +306,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -318,7 +318,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute, context) ?? Qualifying_Encounters_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -397,7 +397,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -419,7 +419,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -430,7 +430,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -520,7 +520,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Same High Risk Medications Ordered on Different Days")]
     public IEnumerable<MedicationRequest> Same_High_Risk_Medications_Ordered_on_Different_Days(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Same_High_Risk_Medications_Ordered_on_Different_Days, Same_High_Risk_Medications_Ordered_on_Different_Days_Compute, context) ?? Same_High_Risk_Medications_Ordered_on_Different_Days_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Same_High_Risk_Medications_Ordered_on_Different_Days, Same_High_Risk_Medications_Ordered_on_Different_Days_Compute);
 
     private IEnumerable<MedicationRequest> Same_High_Risk_Medications_Ordered_on_Different_Days_Compute(CqlContext context)
     {
@@ -1161,7 +1161,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Two High Risk Medications with Prolonged Duration")]
     public bool? Two_High_Risk_Medications_with_Prolonged_Duration(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Two_High_Risk_Medications_with_Prolonged_Duration, Two_High_Risk_Medications_with_Prolonged_Duration_Compute, context) ?? Two_High_Risk_Medications_with_Prolonged_Duration_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Two_High_Risk_Medications_with_Prolonged_Duration, Two_High_Risk_Medications_with_Prolonged_Duration_Compute);
 
     private bool? Two_High_Risk_Medications_with_Prolonged_Duration_Compute(CqlContext context)
     {
@@ -1481,7 +1481,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("High Risk Medications with Average Daily Dose Criteria")]
     public bool? High_Risk_Medications_with_Average_Daily_Dose_Criteria(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_High_Risk_Medications_with_Average_Daily_Dose_Criteria, High_Risk_Medications_with_Average_Daily_Dose_Criteria_Compute, context) ?? High_Risk_Medications_with_Average_Daily_Dose_Criteria_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_High_Risk_Medications_with_Average_Daily_Dose_Criteria, High_Risk_Medications_with_Average_Daily_Dose_Criteria_Compute);
 
     private bool? High_Risk_Medications_with_Average_Daily_Dose_Criteria_Compute(CqlContext context)
     {
@@ -1571,7 +1571,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Numerator 1")]
     public bool? Numerator_1(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute, context) ?? Numerator_1_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
@@ -1587,7 +1587,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("More than One Antipsychotic Order")]
     public bool? More_than_One_Antipsychotic_Order(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_More_than_One_Antipsychotic_Order, More_than_One_Antipsychotic_Order_Compute, context) ?? More_than_One_Antipsychotic_Order_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_More_than_One_Antipsychotic_Order, More_than_One_Antipsychotic_Order_Compute);
 
     private bool? More_than_One_Antipsychotic_Order_Compute(CqlContext context)
     {
@@ -1628,7 +1628,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Schizophrenia Diagnosis")]
     public IEnumerable<object> Schizophrenia_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Schizophrenia_Diagnosis, Schizophrenia_Diagnosis_Compute, context) ?? Schizophrenia_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Schizophrenia_Diagnosis, Schizophrenia_Diagnosis_Compute);
 
     private IEnumerable<object> Schizophrenia_Diagnosis_Compute(CqlContext context)
     {
@@ -1643,7 +1643,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Bipolar Disorder Diagnosis")]
     public IEnumerable<object> Bipolar_Disorder_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Bipolar_Disorder_Diagnosis, Bipolar_Disorder_Diagnosis_Compute, context) ?? Bipolar_Disorder_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Bipolar_Disorder_Diagnosis, Bipolar_Disorder_Diagnosis_Compute);
 
     private IEnumerable<object> Bipolar_Disorder_Diagnosis_Compute(CqlContext context)
     {
@@ -1658,7 +1658,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Antipsychotic Index Prescription Start Date")]
     public CqlDateTime Antipsychotic_Index_Prescription_Start_Date(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Antipsychotic_Index_Prescription_Start_Date, Antipsychotic_Index_Prescription_Start_Date_Compute, context) ?? Antipsychotic_Index_Prescription_Start_Date_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Antipsychotic_Index_Prescription_Start_Date, Antipsychotic_Index_Prescription_Start_Date_Compute);
 
     private CqlDateTime Antipsychotic_Index_Prescription_Start_Date_Compute(CqlContext context)
     {
@@ -1719,7 +1719,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("More than One Benzodiazepine Order")]
     public bool? More_than_One_Benzodiazepine_Order(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_More_than_One_Benzodiazepine_Order, More_than_One_Benzodiazepine_Order_Compute, context) ?? More_than_One_Benzodiazepine_Order_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_More_than_One_Benzodiazepine_Order, More_than_One_Benzodiazepine_Order_Compute);
 
     private bool? More_than_One_Benzodiazepine_Order_Compute(CqlContext context)
     {
@@ -1760,7 +1760,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Seizure Disorder Diagnosis")]
     public IEnumerable<object> Seizure_Disorder_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Seizure_Disorder_Diagnosis, Seizure_Disorder_Diagnosis_Compute, context) ?? Seizure_Disorder_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Seizure_Disorder_Diagnosis, Seizure_Disorder_Diagnosis_Compute);
 
     private IEnumerable<object> Seizure_Disorder_Diagnosis_Compute(CqlContext context)
     {
@@ -1775,7 +1775,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("REM Sleep Behavior Disorder Diagnosis")]
     public IEnumerable<object> REM_Sleep_Behavior_Disorder_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_REM_Sleep_Behavior_Disorder_Diagnosis, REM_Sleep_Behavior_Disorder_Diagnosis_Compute, context) ?? REM_Sleep_Behavior_Disorder_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_REM_Sleep_Behavior_Disorder_Diagnosis, REM_Sleep_Behavior_Disorder_Diagnosis_Compute);
 
     private IEnumerable<object> REM_Sleep_Behavior_Disorder_Diagnosis_Compute(CqlContext context)
     {
@@ -1790,7 +1790,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Benzodiazepine Withdrawal Diagnosis")]
     public IEnumerable<object> Benzodiazepine_Withdrawal_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Benzodiazepine_Withdrawal_Diagnosis, Benzodiazepine_Withdrawal_Diagnosis_Compute, context) ?? Benzodiazepine_Withdrawal_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Benzodiazepine_Withdrawal_Diagnosis, Benzodiazepine_Withdrawal_Diagnosis_Compute);
 
     private IEnumerable<object> Benzodiazepine_Withdrawal_Diagnosis_Compute(CqlContext context)
     {
@@ -1805,7 +1805,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Alcohol Withdrawal Diagnosis")]
     public IEnumerable<object> Alcohol_Withdrawal_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Alcohol_Withdrawal_Diagnosis, Alcohol_Withdrawal_Diagnosis_Compute, context) ?? Alcohol_Withdrawal_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Alcohol_Withdrawal_Diagnosis, Alcohol_Withdrawal_Diagnosis_Compute);
 
     private IEnumerable<object> Alcohol_Withdrawal_Diagnosis_Compute(CqlContext context)
     {
@@ -1820,7 +1820,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Generalized Anxiety Disorder Diagnosis")]
     public IEnumerable<object> Generalized_Anxiety_Disorder_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Generalized_Anxiety_Disorder_Diagnosis, Generalized_Anxiety_Disorder_Diagnosis_Compute, context) ?? Generalized_Anxiety_Disorder_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Generalized_Anxiety_Disorder_Diagnosis, Generalized_Anxiety_Disorder_Diagnosis_Compute);
 
     private IEnumerable<object> Generalized_Anxiety_Disorder_Diagnosis_Compute(CqlContext context)
     {
@@ -1835,7 +1835,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Benzodiazepine Index Prescription Start Date")]
     public CqlDateTime Benzodiazepine_Index_Prescription_Start_Date(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Benzodiazepine_Index_Prescription_Start_Date, Benzodiazepine_Index_Prescription_Start_Date_Compute, context) ?? Benzodiazepine_Index_Prescription_Start_Date_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Benzodiazepine_Index_Prescription_Start_Date, Benzodiazepine_Index_Prescription_Start_Date_Compute);
 
     private CqlDateTime Benzodiazepine_Index_Prescription_Start_Date_Compute(CqlContext context)
     {
@@ -1896,7 +1896,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Numerator 2")]
     public bool? Numerator_2(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute, context) ?? Numerator_2_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
@@ -1955,7 +1955,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("Numerator 3")]
     public bool? Numerator_3(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator_3, Numerator_3_Compute, context) ?? Numerator_3_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator_3, Numerator_3_Compute);
 
     private bool? Numerator_3_Compute(CqlContext context)
     {
@@ -1970,7 +1970,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1981,7 +1981,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1992,7 +1992,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -2003,7 +2003,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -2048,8 +2048,6 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -2089,15 +2087,6 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ILibraryI
         _cacheIndex_SDE_Race = index++;
         _cacheIndex_SDE_Sex = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

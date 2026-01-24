@@ -116,7 +116,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -134,7 +134,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -146,7 +146,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute, context) ?? Qualifying_Encounters_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -187,7 +187,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -226,7 +226,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -237,7 +237,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Bilateral Absence of Eyes")]
     public bool? Bilateral_Absence_of_Eyes(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Bilateral_Absence_of_Eyes, Bilateral_Absence_of_Eyes_Compute, context) ?? Bilateral_Absence_of_Eyes_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Bilateral_Absence_of_Eyes, Bilateral_Absence_of_Eyes_Compute);
 
     private bool? Bilateral_Absence_of_Eyes_Compute(CqlContext context)
     {
@@ -266,7 +266,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -285,7 +285,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Diabetic Retinopathy Overlapping Measurement Period")]
     public bool? Diabetic_Retinopathy_Overlapping_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Diabetic_Retinopathy_Overlapping_Measurement_Period, Diabetic_Retinopathy_Overlapping_Measurement_Period_Compute, context) ?? Diabetic_Retinopathy_Overlapping_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Diabetic_Retinopathy_Overlapping_Measurement_Period, Diabetic_Retinopathy_Overlapping_Measurement_Period_Compute);
 
     private bool? Diabetic_Retinopathy_Overlapping_Measurement_Period_Compute(CqlContext context)
     {
@@ -310,7 +310,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Retinal Exam in Measurement Period")]
     public bool? Retinal_Exam_in_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Retinal_Exam_in_Measurement_Period, Retinal_Exam_in_Measurement_Period_Compute, context) ?? Retinal_Exam_in_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Retinal_Exam_in_Measurement_Period, Retinal_Exam_in_Measurement_Period_Compute);
 
     private bool? Retinal_Exam_in_Measurement_Period_Compute(CqlContext context)
     {
@@ -335,7 +335,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Retinal Exam in Measurement Period or Year Prior")]
     public bool? Retinal_Exam_in_Measurement_Period_or_Year_Prior(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Retinal_Exam_in_Measurement_Period_or_Year_Prior, Retinal_Exam_in_Measurement_Period_or_Year_Prior_Compute, context) ?? Retinal_Exam_in_Measurement_Period_or_Year_Prior_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Retinal_Exam_in_Measurement_Period_or_Year_Prior, Retinal_Exam_in_Measurement_Period_or_Year_Prior_Compute);
 
     private bool? Retinal_Exam_in_Measurement_Period_or_Year_Prior_Compute(CqlContext context)
     {
@@ -365,7 +365,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Autonomous Eye Exam in Measurement Period")]
     public bool? Autonomous_Eye_Exam_in_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Autonomous_Eye_Exam_in_Measurement_Period, Autonomous_Eye_Exam_in_Measurement_Period_Compute, context) ?? Autonomous_Eye_Exam_in_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Autonomous_Eye_Exam_in_Measurement_Period, Autonomous_Eye_Exam_in_Measurement_Period_Compute);
 
     private bool? Autonomous_Eye_Exam_in_Measurement_Period_Compute(CqlContext context)
     {
@@ -396,7 +396,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Has Left Eye Retinopathy")]
     public bool? Has_Left_Eye_Retinopathy(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Left_Eye_Retinopathy, Has_Left_Eye_Retinopathy_Compute, context) ?? Has_Left_Eye_Retinopathy_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Left_Eye_Retinopathy, Has_Left_Eye_Retinopathy_Compute);
 
     private bool? Has_Left_Eye_Retinopathy_Compute(CqlContext context)
     {
@@ -427,7 +427,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Has Right Eye Retinopathy")]
     public bool? Has_Right_Eye_Retinopathy(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Right_Eye_Retinopathy, Has_Right_Eye_Retinopathy_Compute, context) ?? Has_Right_Eye_Retinopathy_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Right_Eye_Retinopathy, Has_Right_Eye_Retinopathy_Compute);
 
     private bool? Has_Right_Eye_Retinopathy_Compute(CqlContext context)
     {
@@ -458,7 +458,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Has Right Eye No Retinopathy in Year Prior")]
     public bool? Has_Right_Eye_No_Retinopathy_in_Year_Prior(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Right_Eye_No_Retinopathy_in_Year_Prior, Has_Right_Eye_No_Retinopathy_in_Year_Prior_Compute, context) ?? Has_Right_Eye_No_Retinopathy_in_Year_Prior_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Right_Eye_No_Retinopathy_in_Year_Prior, Has_Right_Eye_No_Retinopathy_in_Year_Prior_Compute);
 
     private bool? Has_Right_Eye_No_Retinopathy_in_Year_Prior_Compute(CqlContext context)
     {
@@ -496,7 +496,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Has Left Eye No Retinopathy in Year Prior")]
     public bool? Has_Left_Eye_No_Retinopathy_in_Year_Prior(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Left_Eye_No_Retinopathy_in_Year_Prior, Has_Left_Eye_No_Retinopathy_in_Year_Prior_Compute, context) ?? Has_Left_Eye_No_Retinopathy_in_Year_Prior_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Left_Eye_No_Retinopathy_in_Year_Prior, Has_Left_Eye_No_Retinopathy_in_Year_Prior_Compute);
 
     private bool? Has_Left_Eye_No_Retinopathy_in_Year_Prior_Compute(CqlContext context)
     {
@@ -534,7 +534,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Retinal Exam Finding with Retinopathy Severity Level in Measurement Period")]
     public bool? Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period, Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period_Compute, context) ?? Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period, Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period_Compute);
 
     private bool? Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period_Compute(CqlContext context)
     {
@@ -553,7 +553,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Retinal Exam Finding with No Retinopathy Severity Level in Year Prior")]
     public bool? Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior, Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior_Compute, context) ?? Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior, Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior_Compute);
 
     private bool? Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior_Compute(CqlContext context)
     {
@@ -566,7 +566,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -589,7 +589,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -600,7 +600,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -611,7 +611,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -622,7 +622,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -662,8 +662,6 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -698,15 +696,6 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ILibraryInter
         _cacheIndex_SDE_Race = index++;
         _cacheIndex_SDE_Sex = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

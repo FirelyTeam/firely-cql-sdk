@@ -73,7 +73,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -91,7 +91,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -103,7 +103,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -114,7 +114,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -125,7 +125,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -136,7 +136,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -147,7 +147,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Telehealth Services")]
     public IEnumerable<Encounter> Telehealth_Services(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Telehealth_Services, Telehealth_Services_Compute, context) ?? Telehealth_Services_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Telehealth_Services, Telehealth_Services_Compute);
 
     private IEnumerable<Encounter> Telehealth_Services_Compute(CqlContext context)
     {
@@ -176,7 +176,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Age at start of Measurement Period")]
     public int? Age_at_start_of_Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Age_at_start_of_Measurement_Period, Age_at_start_of_Measurement_Period_Compute, context) ?? Age_at_start_of_Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Age_at_start_of_Measurement_Period, Age_at_start_of_Measurement_Period_Compute);
 
     private int? Age_at_start_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -194,7 +194,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -223,7 +223,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -234,7 +234,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Right Mastectomy Diagnosis")]
     public IEnumerable<Condition> Right_Mastectomy_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Right_Mastectomy_Diagnosis, Right_Mastectomy_Diagnosis_Compute, context) ?? Right_Mastectomy_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Right_Mastectomy_Diagnosis, Right_Mastectomy_Diagnosis_Compute);
 
     private IEnumerable<Condition> Right_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -276,7 +276,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Right Mastectomy Procedure")]
     public IEnumerable<Procedure> Right_Mastectomy_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Right_Mastectomy_Procedure, Right_Mastectomy_Procedure_Compute, context) ?? Right_Mastectomy_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Right_Mastectomy_Procedure, Right_Mastectomy_Procedure_Compute);
 
     private IEnumerable<Procedure> Right_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -304,7 +304,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Left Mastectomy Diagnosis")]
     public IEnumerable<Condition> Left_Mastectomy_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Left_Mastectomy_Diagnosis, Left_Mastectomy_Diagnosis_Compute, context) ?? Left_Mastectomy_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Left_Mastectomy_Diagnosis, Left_Mastectomy_Diagnosis_Compute);
 
     private IEnumerable<Condition> Left_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -346,7 +346,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Left Mastectomy Procedure")]
     public IEnumerable<Procedure> Left_Mastectomy_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Left_Mastectomy_Procedure, Left_Mastectomy_Procedure_Compute, context) ?? Left_Mastectomy_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Left_Mastectomy_Procedure, Left_Mastectomy_Procedure_Compute);
 
     private IEnumerable<Procedure> Left_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -374,7 +374,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Bilateral Mastectomy Diagnosis")]
     public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Diagnosis, Bilateral_Mastectomy_Diagnosis_Compute, context) ?? Bilateral_Mastectomy_Diagnosis_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Diagnosis, Bilateral_Mastectomy_Diagnosis_Compute);
 
     private IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -397,7 +397,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Bilateral Mastectomy Procedure")]
     public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Procedure, Bilateral_Mastectomy_Procedure_Compute, context) ?? Bilateral_Mastectomy_Procedure_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Procedure, Bilateral_Mastectomy_Procedure_Compute);
 
     private IEnumerable<Procedure> Bilateral_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -425,7 +425,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -470,7 +470,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Observation with status")]
     public bool? Observation_with_status(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Observation_with_status, Observation_with_status_Compute, context) ?? Observation_with_status_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Observation_with_status, Observation_with_status_Compute);
 
     private bool? Observation_with_status_Compute(CqlContext context)
     {
@@ -512,7 +512,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Diagnostic Report with status")]
     public bool? Diagnostic_Report_with_status(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Diagnostic_Report_with_status, Diagnostic_Report_with_status_Compute, context) ?? Diagnostic_Report_with_status_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Diagnostic_Report_with_status, Diagnostic_Report_with_status_Compute);
 
     private bool? Diagnostic_Report_with_status_Compute(CqlContext context)
     {
@@ -554,7 +554,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -567,7 +567,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Final Numerator Population")]
     public bool? Final_Numerator_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Final_Numerator_Population, Final_Numerator_Population_Compute, context) ?? Final_Numerator_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Final_Numerator_Population, Final_Numerator_Population_Compute);
 
     private bool? Final_Numerator_Population_Compute(CqlContext context)
     {
@@ -585,7 +585,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Observation without appropriate status")]
     public bool? Observation_without_appropriate_status(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Observation_without_appropriate_status, Observation_without_appropriate_status_Compute, context) ?? Observation_without_appropriate_status_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Observation_without_appropriate_status, Observation_without_appropriate_status_Compute);
 
     private bool? Observation_without_appropriate_status_Compute(CqlContext context)
     {
@@ -628,7 +628,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Diagnostic Report without appropriate status")]
     public bool? Diagnostic_Report_without_appropriate_status(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Diagnostic_Report_without_appropriate_status, Diagnostic_Report_without_appropriate_status_Compute, context) ?? Diagnostic_Report_without_appropriate_status_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Diagnostic_Report_without_appropriate_status, Diagnostic_Report_without_appropriate_status_Compute);
 
     private bool? Diagnostic_Report_without_appropriate_status_Compute(CqlContext context)
     {
@@ -701,25 +701,16 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ILibraryInternals, ISinglet
 
     #region ILibraryInternals Implementation
 
-    // Reference to the execution cache instance that initialized this library
-    private CqlLibrarySetInvocationCache _cache;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
-    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="libraryInvocationSet">The library invocation set performing initialization.</param>
     /// <param name="startIndex">The starting index for cache field assignment.</param>
     /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibrarySetInvocationCache cache,
+        CqlLibraryInvocationSet libraryInvocationSet,
         int startIndex)
     {
-        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
-        if (_cache == cache)
-            return 0;
-
-        _cache = cache;
-
         var index = startIndex;
         _cacheIndex_Measurement_Period = index++;
         _cacheIndex_Patient = index++;

@@ -137,7 +137,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -155,7 +155,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -167,7 +167,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Depression Assessments Greater Than 9")]
     public IEnumerable<Observation> Depression_Assessments_Greater_Than_9(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Depression_Assessments_Greater_Than_9, Depression_Assessments_Greater_Than_9_Compute, context) ?? Depression_Assessments_Greater_Than_9_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Depression_Assessments_Greater_Than_9, Depression_Assessments_Greater_Than_9_Compute);
 
     private IEnumerable<Observation> Depression_Assessments_Greater_Than_9_Compute(CqlContext context)
     {
@@ -228,7 +228,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Depression Diagnoses")]
     public IEnumerable<object> Depression_Diagnoses(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Depression_Diagnoses, Depression_Diagnoses_Compute, context) ?? Depression_Diagnoses_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Depression_Diagnoses, Depression_Diagnoses_Compute);
 
     private IEnumerable<object> Depression_Diagnoses_Compute(CqlContext context)
     {
@@ -254,7 +254,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Denominator Identification Period")]
     public CqlInterval<CqlDateTime> Denominator_Identification_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Identification_Period, Denominator_Identification_Period_Compute, context) ?? Denominator_Identification_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Identification_Period, Denominator_Identification_Period_Compute);
 
     private CqlInterval<CqlDateTime> Denominator_Identification_Period_Compute(CqlContext context)
     {
@@ -272,7 +272,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Depression Encounter")]
     public IEnumerable<Encounter> Depression_Encounter(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Depression_Encounter, Depression_Encounter_Compute, context) ?? Depression_Encounter_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Depression_Encounter, Depression_Encounter_Compute);
 
     private IEnumerable<Encounter> Depression_Encounter_Compute(CqlContext context)
     {
@@ -313,7 +313,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Index Depression Assessment")]
     public Observation Index_Depression_Assessment(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Index_Depression_Assessment, Index_Depression_Assessment_Compute, context) ?? Index_Depression_Assessment_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Index_Depression_Assessment, Index_Depression_Assessment_Compute);
 
     private Observation Index_Depression_Assessment_Compute(CqlContext context)
     {
@@ -362,7 +362,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute, context) ?? Initial_Population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -383,7 +383,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute, context) ?? Denominator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -394,7 +394,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Measure Assessment Period")]
     public CqlInterval<CqlDate> Measure_Assessment_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measure_Assessment_Period, Measure_Assessment_Period_Compute, context) ?? Measure_Assessment_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measure_Assessment_Period, Measure_Assessment_Period_Compute);
 
     private CqlInterval<CqlDate> Measure_Assessment_Period_Compute(CqlContext context)
     {
@@ -432,7 +432,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Has Hospice Services prior to or during the Measure Assessment Period")]
     public bool? Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period, Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period_Compute, context) ?? Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period, Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period_Compute);
 
     private bool? Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period_Compute(CqlContext context)
     {
@@ -703,7 +703,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Has Palliative Care prior to or during the Measure Assessment Period")]
     public bool? Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period, Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period_Compute, context) ?? Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period, Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period_Compute);
 
     private bool? Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period_Compute(CqlContext context)
     {
@@ -882,7 +882,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Patient Expired")]
     public bool? Patient_Expired(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient_Expired, Patient_Expired_Compute, context) ?? Patient_Expired_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient_Expired, Patient_Expired_Compute);
 
     private bool? Patient_Expired_Compute(CqlContext context)
     {
@@ -899,7 +899,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Has Mental Health Disorder Diagnoses")]
     public bool? Has_Mental_Health_Disorder_Diagnoses(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Has_Mental_Health_Disorder_Diagnoses, Has_Mental_Health_Disorder_Diagnoses_Compute, context) ?? Has_Mental_Health_Disorder_Diagnoses_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Has_Mental_Health_Disorder_Diagnoses, Has_Mental_Health_Disorder_Diagnoses_Compute);
 
     private bool? Has_Mental_Health_Disorder_Diagnoses_Compute(CqlContext context)
     {
@@ -943,7 +943,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute, context) ?? Denominator_Exclusions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -960,7 +960,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -1015,7 +1015,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute, context) ?? SDE_Ethnicity_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1026,7 +1026,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute, context) ?? SDE_Payer_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1037,7 +1037,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute, context) ?? SDE_Race_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1048,7 +1048,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute, context) ?? SDE_Sex_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -1059,7 +1059,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Stratification 1")]
     public bool? Stratification_1(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute, context) ?? Stratification_1_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
@@ -1093,7 +1093,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     [CqlExpressionDefinition("Stratification 2")]
     public bool? Stratification_2(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute, context) ?? Stratification_2_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
     private bool? Stratification_2_Compute(CqlContext context)
     {
@@ -1155,8 +1155,6 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -1191,15 +1189,6 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ILibra
         _cacheIndex_Stratification_1 = index++;
         _cacheIndex_Stratification_2 = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

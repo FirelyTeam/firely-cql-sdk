@@ -68,7 +68,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -83,7 +83,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -95,7 +95,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Encounter With Age Range")]
     public IEnumerable<Encounter> Encounter_With_Age_Range(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Encounter_With_Age_Range, Encounter_With_Age_Range_Compute, context) ?? Encounter_With_Age_Range_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Encounter_With_Age_Range, Encounter_With_Age_Range_Compute);
 
     private IEnumerable<Encounter> Encounter_With_Age_Range_Compute(CqlContext context)
     {
@@ -355,7 +355,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Delivery Encounter With Age Range")]
     public IEnumerable<Encounter> Delivery_Encounter_With_Age_Range(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Delivery_Encounter_With_Age_Range, Delivery_Encounter_With_Age_Range_Compute, context) ?? Delivery_Encounter_With_Age_Range_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Delivery_Encounter_With_Age_Range, Delivery_Encounter_With_Age_Range_Compute);
 
     private IEnumerable<Encounter> Delivery_Encounter_With_Age_Range_Compute(CqlContext context)
     {
@@ -761,7 +761,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     [CqlExpressionDefinition("Variable Calculated Gestational Age")]
     public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Variable_Calculated_Gestational_Age, Variable_Calculated_Gestational_Age_Compute, context) ?? Variable_Calculated_Gestational_Age_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Variable_Calculated_Gestational_Age, Variable_Calculated_Gestational_Age_Compute);
 
     private IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age_Compute(CqlContext context)
     {
@@ -1052,8 +1052,6 @@ public partial class PCMaternal_5_25_000 : ILibrary, ILibraryInternals, ISinglet
 
     #region ILibraryInternals Implementation
 
-    private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
@@ -1071,15 +1069,6 @@ public partial class PCMaternal_5_25_000 : ILibrary, ILibraryInternals, ISinglet
         _cacheIndex_Delivery_Encounter_With_Age_Range = index++;
         _cacheIndex_Variable_Calculated_Gestational_Age = index++;
         return index - startIndex;
-    }
-
-    /// <summary>
-    /// Sets the cache instance that this library will use for caching computed values.
-    /// </summary>
-    /// <param name="cache">The cache instance to use.</param>
-    void ILibraryInternals.SetCacheInstance(CqlLibraryInvocationCache cache)
-    {
-        _cache = cache;
     }
 
     #endregion ILibraryInternals Implementation

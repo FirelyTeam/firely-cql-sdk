@@ -44,7 +44,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ILibraryInternals, ISingleton<
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute, context) ?? Measurement_Period_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -59,7 +59,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ILibraryInternals, ISingleton<
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Patient, Patient_Compute, context) ?? Patient_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -71,7 +71,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ILibraryInternals, ISingleton<
 
     [CqlExpressionDefinition("Jet engine conditions")]
     public IEnumerable<Condition> Jet_engine_conditions(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Jet_engine_conditions, Jet_engine_conditions_Compute, context) ?? Jet_engine_conditions_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Jet_engine_conditions, Jet_engine_conditions_Compute);
 
     private IEnumerable<Condition> Jet_engine_conditions_Compute(CqlContext context)
     {
@@ -105,7 +105,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ILibraryInternals, ISingleton<
 
     [CqlExpressionDefinition("Subsequent encounters")]
     public IEnumerable<Condition> Subsequent_encounters(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Subsequent_encounters, Subsequent_encounters_Compute, context) ?? Subsequent_encounters_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Subsequent_encounters, Subsequent_encounters_Compute);
 
     private IEnumerable<Condition> Subsequent_encounters_Compute(CqlContext context)
     {
@@ -139,7 +139,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ILibraryInternals, ISingleton<
 
     [CqlExpressionDefinition("Initial population")]
     public bool? Initial_population(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Initial_population, Initial_population_Compute, context) ?? Initial_population_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Initial_population, Initial_population_Compute);
 
     private bool? Initial_population_Compute(CqlContext context)
     {
@@ -151,7 +151,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ILibraryInternals, ISingleton<
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        _cache?.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute, context) ?? Numerator_Compute(context);
+        ((ICqlContextInternals)context).GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -176,25 +176,16 @@ public partial class DevDays_2023_0_0 : ILibrary, ILibraryInternals, ISingleton<
 
     #region ILibraryInternals Implementation
 
-    // Reference to the execution cache instance that initialized this library
-    private CqlLibrarySetInvocationCache _cache;
-
     /// <summary>
     /// Initializes cache indices for this library's cached expressions.
     /// </summary>
-    /// <param name="cache">The execution cache instance performing initialization.</param>
+    /// <param name="libraryInvocationSet">The library invocation set performing initialization.</param>
     /// <param name="startIndex">The starting index for cache field assignment.</param>
     /// <returns>The number of cache indices initialized (number of cached expressions in this library).</returns>
     int ILibraryInternals.InitializeCacheIndices(
-        CqlLibrarySetInvocationCache cache,
+        CqlLibraryInvocationSet libraryInvocationSet,
         int startIndex)
     {
-        // Skip if already initialized by this cache instance (allows re-initialization with different cache)
-        if (_cache == cache)
-            return 0;
-
-        _cache = cache;
-
         var index = startIndex;
         _cacheIndex_Measurement_Period = index++;
         _cacheIndex_Patient = index++;
