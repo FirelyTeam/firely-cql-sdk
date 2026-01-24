@@ -22,7 +22,7 @@ partial class LibrarySetCSharpCodeGenerator
 
         internal CqlVersionedLibraryIdentifier LibraryName => _library?.VersionedLibraryIdentifier ?? throw new InvalidOperationException("Library not initialized.");
         private string _className = string.Empty;
-        
+
         // Maps definition names to their assigned cache indices within this library
         private readonly Dictionary<string, int> _cacheIndices = new();
         private int _nextCacheIndex = 0;
@@ -304,8 +304,7 @@ partial class LibrarySetCSharpCodeGenerator
                 """
                 #region ILibraryInternals Implementation
 
-                // Reference to the cache instance used for caching computed values
-                private CqlLibraryInvocationCache _cache;
+                private CqlLibraryInvocationCache _cache = CqlLibraryInvocationCache.NeverCached;
 
                 /// <summary>
                 /// Initializes cache indices for this library's cached expressions.

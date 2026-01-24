@@ -22,7 +22,7 @@ namespace Hl7.Cql.Runtime;
 /// </remarks>
 public sealed class CqlLibraryInvocationSet
 {
-    private readonly ILibrary[] _libraries;
+    private readonly ILibraryInternals[] _allLibraries;
 
     /// <summary>
     /// Gets the total count of cache entries across all libraries in this set.
@@ -41,41 +41,36 @@ public sealed class CqlLibraryInvocationSet
     /// </remarks>
     public CqlLibraryInvocationSet(params ILibrary[] libraries)
     {
-        _libraries = libraries ?? throw new ArgumentNullException(nameof(libraries));
+        ArgumentNullException.ThrowIfNull(libraries);
+        _allLibraries = GetAllLibrariesSorted(libraries);
         CacheEntriesCount = InitializeLibraryCacheIndices();
     }
 
+    private ILibraryInternals[] GetAllLibrariesSorted(ILibrary[] libraries) =>
+        libraries
+            .TopologicalSort(l => l.Dependencies)
+            .Cast<ILibraryInternals>()
+            .ToArray();
+
     private int InitializeLibraryCacheIndices()
     {
-        var allLibs =
-            _libraries
-                .TopologicalSort(l => l.Dependencies)
-                .Cast<ILibraryInternals>()
-                .ToArray();
-
-        if (allLibs is not { Length: not 0 })
+        if (_allLibraries is not { Length: not 0 })
             return 0;
 
         int count = 0;
-        foreach (var library in allLibs)
+        foreach (var library in _allLibraries)
             count += library.InitializeCacheIndices(this, count);
 
         return count;
     }
-    
+
     /// <summary>
     /// Sets the cache instance on all libraries in this set.
     /// </summary>
     /// <param name="cache">The cache instance to set on all libraries.</param>
     internal void SetCacheInstanceOnLibraries(CqlLibraryInvocationCache cache)
     {
-        var allLibs =
-            _libraries
-                .TopologicalSort(l => l.Dependencies)
-                .Cast<ILibraryInternals>()
-                .ToArray();
-
-        foreach (var library in allLibs)
+        foreach (var library in _allLibraries)
             library.SetCacheInstance(cache);
     }
 }
