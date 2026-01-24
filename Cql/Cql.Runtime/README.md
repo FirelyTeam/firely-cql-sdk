@@ -59,6 +59,10 @@ var result = myLibrary.SomeExpression(context);
 context.StopCaching();
 ```
 
+**⚠️ IMPORTANT CONSTRAINT:** Each library should be included in only ONE `CqlLibraryInvocationSet` at a time. The constructor initializes internal cache index fields within the libraries. Including the same library in multiple active invocation sets will overwrite these indices, causing cache corruption and incorrect behavior.
+
+If you need different caches for the same libraries (e.g., for unit testing), create a new `CqlLibraryInvocationSet` for each scenario - the libraries will be safely re-initialized with new indices.
+
 ### Cache Write Strategies
 
 Control how concurrent writes are handled:
