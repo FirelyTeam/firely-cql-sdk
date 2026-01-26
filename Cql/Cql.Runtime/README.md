@@ -42,20 +42,41 @@ var result = invoker.Execute(...);
 
 ### Manual Caching Setup
 
-Start caching on a CqlContext:
+**Preferred: Use StartCachingScope** (automatically stops caching when disposed):
 
 ```csharp
 // Create library invocation set (initializes cache indices)
 var libraryInvocationSet = new CqlLibraryInvocationSet(myLibrary);
 
-// Start caching on the context
+// Start caching scope - automatically stops when disposed
+var context = FhirCqlContext.ForBundle();
+using (context.StartCachingScope(libraryInvocationSet))
+{
+    // Execute with caching enabled
+    var result = myLibrary.SomeExpression(context);
+    
+    // Cache statistics available
+    Console.WriteLine($"Hits: {context.CacheHits}, Misses: {context.CacheMisses}");
+    
+} // Cache automatically stopped and resources released here
+```
+
+**Why use StartCachingScope?**
+- **Deterministic cleanup**: Automatically stops caching and releases pooled arrays when the scope is disposed
+- **Exception safety**: Ensures proper cleanup even if exceptions occur
+- **Resource management**: Returns ArrayPool arrays back to the pool immediately
+- **Cleaner code**: No need to manually call StopCaching()
+
+**Alternative: Manual start/stop** (when you need more control):
+
+```csharp
 var context = FhirCqlContext.ForBundle();
 context.StartCaching(libraryInvocationSet);
 
 // Execute with caching enabled
 var result = myLibrary.SomeExpression(context);
 
-// Stop caching when done
+// Manually stop caching when done
 context.StopCaching();
 ```
 
@@ -69,10 +90,16 @@ Control how concurrent writes are handled:
 
 ```csharp
 // ExecutionAndPublication (default): Only one thread computes, others wait
-context.StartCaching(libraryInvocationSet, CacheWriteStrategy.ExecutionAndPublication);
+using (context.StartCachingScope(libraryInvocationSet, CacheWriteStrategy.ExecutionAndPublication))
+{
+    // ... use cache
+}
 
 // PublicationOnly: Multiple threads can compute, last write wins (faster for read-heavy workloads)
-context.StartCaching(libraryInvocationSet, CacheWriteStrategy.PublicationOnly);
+using (context.StartCachingScope(libraryInvocationSet, CacheWriteStrategy.PublicationOnly))
+{
+    // ... use cache
+}
 ```
 
 ### How It Works
@@ -92,16 +119,17 @@ Monitor cache effectiveness through the CqlContext:
 ```csharp
 var libraryInvocationSet = new CqlLibraryInvocationSet(myLibrary);
 var context = FhirCqlContext.ForBundle();
-context.StartCaching(libraryInvocationSet);
-
-// Execute expressions
-myLibrary.SomeExpression(context);
-
-// Check statistics
-Console.WriteLine($"Caching enabled: {context.CachingEnabled}");
-Console.WriteLine($"Total calls: {context.CacheCallCount}");
-Console.WriteLine($"Cache hits: {context.CacheHits}");
-Console.WriteLine($"Cache misses: {context.CacheMisses}");
+using (context.StartCachingScope(libraryInvocationSet))
+{
+    // Execute expressions
+    myLibrary.SomeExpression(context);
+    
+    // Check statistics
+    Console.WriteLine($"Caching enabled: {context.CachingEnabled}");
+    Console.WriteLine($"Total calls: {context.CacheCallCount}");
+    Console.WriteLine($"Cache hits: {context.CacheHits}");
+    Console.WriteLine($"Cache misses: {context.CacheMisses}");
+}
 ```
 
 ### When to Use Caching
@@ -111,7 +139,7 @@ Enable caching when:
 - Working with expensive computations that don't depend on parameters
 - Performance is critical and expression results are deterministic
 
-**Important**: Call `StartCaching()` when starting a new evaluation cycle to reset the cache and ensure stale data isn't used.
+**Important**: Use `StartCachingScope()` in a using block for automatic cleanup and to ensure stale data isn't used between evaluation cycles.
 
 ### Thread Safety
 
@@ -120,13 +148,17 @@ Each thread should use its own CqlContext with its own cache:
 ```csharp
 // Thread 1
 var ctx1 = FhirCqlContext.ForBundle();
-ctx1.StartCaching(libraryInvocationSet);
-var result1 = library.SomeExpression(ctx1); // Uses ctx1's cache
+using (ctx1.StartCachingScope(libraryInvocationSet))
+{
+    var result1 = library.SomeExpression(ctx1); // Uses ctx1's cache
+}
 
 // Thread 2
 var ctx2 = FhirCqlContext.ForBundle();
-ctx2.StartCaching(libraryInvocationSet);
-var result2 = library.SomeExpression(ctx2); // Uses ctx2's cache
+using (ctx2.StartCachingScope(libraryInvocationSet))
+{
+    var result2 = library.SomeExpression(ctx2); // Uses ctx2's cache
+}
 
 // No shared state, no race conditions
 ```
