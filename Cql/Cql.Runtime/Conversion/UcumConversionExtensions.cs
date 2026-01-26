@@ -38,12 +38,6 @@ namespace Hl7.Cql.Conversion
                 canonicalizedQuantity = null;
                 return false;
             }
-            // Convert CQL calendar duration units to UCUM equivalents before canonicalization
-            // This ensures units like "week" are converted to "wk" before passing to Fhir.Metrics
-            if (CalendarDurationMapping.TryGetValue(quantityUnit, out var ucumUnit))
-            {
-                quantityUnit = ucumUnit;
-            }
 
             try
             {
