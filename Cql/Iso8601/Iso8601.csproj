@@ -12,6 +12,6 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="Cql.Primatives" Key="$(LibraryPKHash)" />
-	</ItemGroup>
+	</ItemGroup>             
 
 </Project>

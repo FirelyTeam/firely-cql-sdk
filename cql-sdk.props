@@ -47,7 +47,7 @@
 
 		<PackageReference
 			Include="Microsoft.SourceLink.GitHub"
-			Version="8.0.0"
+			Version="10.0.102"
 			PrivateAssets="All"/>
 
 		<PackageReference
