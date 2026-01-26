@@ -99,7 +99,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.MeasuresTests", "su
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks", "Cql\Benchmarks\Benchmarks.csproj", "{B4C6C534-15E6-4364-A68C-286EB0EFAD50}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{55D1DD84-B6F3-4B15-8A5E-664C25DBF374}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools (internal use)", "tools (internal use)", "{55D1DD84-B6F3-4B15-8A5E-664C25DBF374}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XsdToCSharpConverter", "tools\XsdToCSharpConverter\XsdToCSharpConverter.csproj", "{1C402259-15D7-4967-973D-A743A28424ED}"
 EndProject
