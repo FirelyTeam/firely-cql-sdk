@@ -79,35 +79,6 @@ namespace Hl7.Cql.Runtime
         }
 
         /// <summary>
-        /// Gets or computes a cached value for the specified cache index.
-        /// </summary>
-        /// <typeparam name="T">The type of the cached value.</typeparam>
-        /// <param name="cacheIndex">The cache index identifying the cached expression.</param>
-        /// <param name="factory">A function to compute the value if it's not in the cache.</param>
-        /// <returns>The cached or newly computed value.</returns>
-        /// <remarks>
-        /// <para>
-        /// <strong>⚠️ INTERNAL USE ONLY</strong> - This method is intended to be called only by generated CQL libraries.
-        /// Do not call this method directly in application code.
-        /// </para>
-        /// <para>
-        /// This method provides direct access to the invocation cache without interface casting overhead,
-        /// enabling better JIT inlining and performance for the hot-path expression evaluation in generated libraries.
-        /// </para>
-        /// </remarks>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        [EditorBrowsable(EditorBrowsableState.Never)] // Hide from IntelliSense
-        [Browsable(false)] // Hide from property grids and designers
-        public T GetOrCompute<T>(int cacheIndex, Func<CqlContext, T> factory)
-        {
-            var cache = _cache;
-            if (cache is null)
-                return factory(this);
-
-            return cache.GetOrCompute(cacheIndex, factory, this);
-        }
-
-        /// <summary>
         /// Defines the delimiter separating library names from parameter names.
         /// </summary>
         private const string ParameterDelimiter = ".";
