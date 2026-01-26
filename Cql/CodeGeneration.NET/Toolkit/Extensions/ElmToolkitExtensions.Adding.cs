@@ -126,30 +126,92 @@ public static partial class ElmToolkitExtensions
     /// </summary>
     /// <param name="elmToolkit">The ELM toolkit to add the file to.</param>
     /// <param name="file">The ELM file to add.</param>
-    /// <param name="options">Optional enumeration options for dependency retrieval.</param>
     /// <returns>The updated ELM toolkit.</returns>
-    /// <exception cref="NotImplementedException">Thrown when the method is not implemented.</exception>
-    private static ElmToolkit AddElmFileWithDependencies(
+    /// <exception cref="FileNotFoundException">Thrown when the specified file or its dependencies are not found.</exception>
+    public static ElmToolkit AddElmFileWithDependencies(
         this ElmToolkit elmToolkit,
-        FileInfo file,
-        EnumerationOptions? options) =>
-        throw new NotImplementedException();
+        FileInfo file)
+    {
+        if (!file.Exists)
+            throw new FileNotFoundException($"File '{file.FullName}' does not exist.", file.FullName);
+
+        var logger = elmToolkit.CreateLogger();
+        logger.LogInformation("Loading ELM library with dependencies from file: {file}", file.FullName);
+
+        var rootLibrary = ElmLibrary.LoadFromJson(file);
+        var libraryName = rootLibrary.identifier?.id ?? throw new InvalidOperationException($"Library in file '{file.FullName}' has no identifier.");
+        var version = rootLibrary.identifier?.version ?? string.Empty;
+
+        var directory = file.Directory ?? throw new InvalidOperationException($"Could not determine directory for file '{file.FullName}'.");
+
+        return elmToolkit.AddElmFileWithDependenciesFromDirectory(directory, libraryName, version);
+    }
 
     /// <summary>
     /// Adds an ELM file with its dependencies from a specified directory to the ELM toolkit.
     /// </summary>
     /// <param name="elmToolkit">The ELM toolkit to add the file to.</param>
     /// <param name="directory">The directory containing the ELM file and its dependencies.</param>
-    /// <param name="fileName">The identifier of the library file.</param>
-    /// <param name="options">Optional enumeration options for dependency retrieval.</param>
+    /// <param name="libraryName">The name of the library file.</param>
+    /// <param name="version">The version of the library file.</param>
     /// <returns>The updated ELM toolkit.</returns>
-    /// <exception cref="NotImplementedException">Thrown when the method is not implemented.</exception>
-    private static ElmToolkit AddElmFileWithDependencies(
+    /// <exception cref="FileNotFoundException">Thrown when the specified file or its dependencies are not found.</exception>
+    public static ElmToolkit AddElmFileWithDependenciesFromDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
-        CqlVersionedLibraryIdentifier fileName,
-        EnumerationOptions? options) =>
-        throw new NotImplementedException();
+        string libraryName,
+        string version = "")
+    {
+        if (Path.GetExtension(libraryName).Equals(".cql", StringComparison.InvariantCultureIgnoreCase))
+            libraryName = Path.GetFileNameWithoutExtension(libraryName);
+
+        var logger = elmToolkit.CreateLogger();
+        var librariesToLoad = new Queue<(string lib, string version)>();
+        var loadedLibraries = new HashSet<string>();
+        var libraries = new List<ElmLibrary>();
+
+        // Check which libraries are already loaded in the toolkit
+        var alreadyLoadedIds = elmToolkit.ArtifactsById.Keys
+            .Select(k => string.IsNullOrEmpty(k.Version) ? k.Identifier.ToString() : $"{k.Identifier}-{k.Version}")
+            .ToHashSet();
+
+        librariesToLoad.Enqueue((libraryName, version));
+
+        while (librariesToLoad.Count > 0)
+        {
+            var (lib, ver) = librariesToLoad.Dequeue();
+            var versionedId = string.IsNullOrEmpty(ver) ? lib : $"{lib}-{ver}";
+
+            if (!loadedLibraries.Add(versionedId))
+                continue;
+
+            // Skip if already loaded in the toolkit
+            if (alreadyLoadedIds.Contains(versionedId))
+            {
+                logger.LogDebug("Skipping already loaded library: {lib}-{version}", lib, ver);
+                continue;
+            }
+
+            logger.LogInformation("Loading ELM library from directory: {lib}-{version}", lib, ver);
+
+            var library = ElmLibrary.LoadFromJson(directory, lib, ver);
+            libraries.Add(library);
+
+            if (library.includes is { Length: > 0 } includeDefs)
+            {
+                foreach (var includeDef in includeDefs)
+                {
+                    var includeVersionedId = $"{includeDef.path}-{includeDef.version}";
+                    if (!loadedLibraries.Contains(includeVersionedId))
+                    {
+                        librariesToLoad.Enqueue((includeDef.path, includeDef.version));
+                    }
+                }
+            }
+        }
+
+        return libraries.Count > 0 ? elmToolkit.AddElmLibraries(libraries) : elmToolkit;
+    }
 
     /// <summary>
     /// Adds a single ELM file to the ELM toolkit.

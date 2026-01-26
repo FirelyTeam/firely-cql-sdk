@@ -90,6 +90,7 @@ Use this header format with "Firely, NCQA" and the current year:
    - Use record types for immutable data structures
    - Use nullable reference types and null-conditional operators
    - Use string interpolation instead of `string.Format` or concatenation
+   - **DO NOT use extension type syntax (`extension<T>(T self)`)** for projects that target .NET 8 - extension types are a C# 14 / .NET 10+ feature and will cause compilation errors in multi-targeted projects
 11. **Local functions must use camelCase naming** - Local functions (functions defined inside methods) should start with a lowercase letter (e.g., `processItem()`, not `ProcessItem()`)
 
 ### Code Generation

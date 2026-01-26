@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -22,7 +22,7 @@ using Hl7.Cql.Runtime;
 namespace CoreTests;
 
 [TestClass]
-public class ToolkitTests
+public class CqlToolkitTests
 {
     [TestMethod]
     public void TestNestedTupleResult_ToString_MatchesExpectedFormat()
@@ -50,9 +50,9 @@ public class ToolkitTests
 
         // Act
         var results = librarySetInvoker
-                     .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
-                     .SelectResults(ctx)
-                     .ToDictionary(t => t.definitionInvoker.DefinitionName);
+                      .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
+                      .SelectResults(ctx)
+                      .ToDictionary(t => t.definitionInvoker.DefinitionName);
 
         // Assert
         Assert.IsNotNull(results);
@@ -101,8 +101,8 @@ public class ToolkitTests
             + "support it yet. Once it does, this test need to be modified to remove this "
             + "assertion and the workaround code below to manually create the annotations in the ELM.");
 
-        stmtInitialPopulation.annotation = new[]
-        {
+        stmtInitialPopulation.annotation =
+        [
             new Annotation()
             {
                 t =
@@ -113,7 +113,7 @@ public class ToolkitTests
                     new Tag { name = "description", value = "Patients in the IP", },
                 ]
             }
-        };
+        ];
         // END WORKAROUND
 
         using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
@@ -428,7 +428,7 @@ public class ToolkitTests
 
         // Act: Inspect the function signature that was actually created by the CQL compiler
         var processTupleFunction = libraryInvoker.Definitions.Values
-                                                .FirstOrDefault(d => d.DefinitionName == "ProcessLargeTuple");
+                                                 .FirstOrDefault(d => d.DefinitionName == "ProcessLargeTuple");
 
         // Assert: Function should be found and have the expected structure
         processTupleFunction.Should().NotBeNull("ProcessLargeTuple function should exist");
@@ -438,9 +438,9 @@ public class ToolkitTests
         parameterType.Should().NotBeNull("Parameter should have a type");
 
         // Let's examine what type the CQL compiler actually generated
-        var underlyingType = parameterType.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>) 
-                           ? parameterType.GetGenericArguments()[0] 
-                           : parameterType;
+        var underlyingType = parameterType.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                                 ? parameterType.GetGenericArguments()[0]
+                                 : parameterType;
 
         // Verify this is indeed a large tuple with nested structure
         underlyingType.IsCqlValueTuple().Should().BeTrue("The underlying ValueTuple should be recognized as a CQL value tuple");
@@ -453,8 +453,8 @@ public class ToolkitTests
         ], ["item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", "item9"]);
 
         // Create the large tuple (9 items) that will have the nested structure
-        var largeTuple9 = (metadata, "first", (int?)42, (bool?)true, (decimal?)3.14m, "middle", 
-                          (int?)100, (bool?)false, (decimal?)99.99m, "last");
+        var largeTuple9 = (metadata, "first", (int?)42, (bool?)true, (decimal?)3.14m, "middle",
+                              (int?)100, (bool?)false, (decimal?)99.99m, "last");
 
         // Verify the created tuple matches the expected underlying type
         largeTuple9.GetType().Should().Be(underlyingType, "Created tuple type should match the underlying function parameter type");
@@ -465,11 +465,11 @@ public class ToolkitTests
         // Assert: Function should execute successfully with large tuple
         result.Should().NotBeNull("Function invocation should return a result");
         result.Should().Be("Processed: first, last", "Function should process the large tuple correctly");
-        
+
         // Verify that large tuple signature matching works properly for finding definitions
         var signature = processTupleFunction.DefinitionSignature;
         var foundBySignature = libraryInvoker.Definitions.GetValueOrDefault(signature);
-        
+
         foundBySignature.Should().Be(processTupleFunction, "Should be able to find function by its signature");
         foundBySignature!.DefinitionSignature.ParameterTypes.Should().HaveCount(1, "Signature should show one parameter");
         foundBySignature.DefinitionSignature.ParameterTypes[0].Should().Be(parameterType, "Signature should include correct parameter type");
@@ -501,18 +501,18 @@ public class ToolkitTests
 
         // Act: Find the function and inspect its signature
         var processFunction = libraryInvoker.Definitions.Values
-                                           .FirstOrDefault(d => d.DefinitionName == "ProcessVeryLargeTuple");
+                                            .FirstOrDefault(d => d.DefinitionName == "ProcessVeryLargeTuple");
 
         // Assert: Function should be found with very large tuple parameter
         processFunction.Should().NotBeNull("ProcessVeryLargeTuple function should exist");
         processFunction!.Parameters.Should().HaveCount(1, "Function should have exactly one parameter");
 
         var parameterType = processFunction.Parameters[0].Type;
-        
+
         // Get underlying type (removing Nullable wrapper if present)
-        var underlyingType = parameterType!.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>) 
-                           ? parameterType.GetGenericArguments()[0] 
-                           : parameterType;
+        var underlyingType = parameterType!.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                                 ? parameterType.GetGenericArguments()[0]
+                                 : parameterType;
 
         // Verify this is a large tuple that uses nested ValueTuple structures
         underlyingType.IsCqlValueTuple().Should().BeTrue("15-item tuple parameter should be recognized as a CQL value tuple");
@@ -521,9 +521,9 @@ public class ToolkitTests
         // Verify the function signature can be used for lookup
         var signature = processFunction.DefinitionSignature;
         var foundBySignature = libraryInvoker.Definitions.GetValueOrDefault(signature);
-        
+
         foundBySignature.Should().Be(processFunction, "Should be able to find very large tuple function by its signature");
-        
+
         // The fact that we can create a function with 15 tuple items and find it by signature
         // demonstrates that large tuple signature discovery works correctly with the invocation toolkit
     }
@@ -558,9 +558,9 @@ public class ToolkitTests
 
         // Act: Find both functions and verify they have different signatures
         var tuple9Function = libraryInvoker.Definitions.Values
-                                          .FirstOrDefault(d => d.DefinitionName == "ProcessTuple9");
+                                           .FirstOrDefault(d => d.DefinitionName == "ProcessTuple9");
         var tuple10Function = libraryInvoker.Definitions.Values
-                                           .FirstOrDefault(d => d.DefinitionName == "ProcessTuple10");
+                                            .FirstOrDefault(d => d.DefinitionName == "ProcessTuple10");
 
         // Assert: Both functions should be found with distinct signatures
         tuple9Function.Should().NotBeNull("ProcessTuple9 should be found");
@@ -577,9 +577,11 @@ public class ToolkitTests
 
         // Both underlying types should be recognized as CQL value tuples
         var underlying9 = param9Type!.IsGenericType && param9Type.GetGenericTypeDefinition() == typeof(Nullable<>)
-                        ? param9Type.GetGenericArguments()[0] : param9Type;
+                              ? param9Type.GetGenericArguments()[0]
+                              : param9Type;
         var underlying10 = param10Type!.IsGenericType && param10Type.GetGenericTypeDefinition() == typeof(Nullable<>)
-                         ? param10Type.GetGenericArguments()[0] : param10Type;
+                               ? param10Type.GetGenericArguments()[0]
+                               : param10Type;
 
         underlying9.IsCqlValueTuple().Should().BeTrue("9-item tuple parameter should be recognized as CQL value tuple");
         underlying10.IsCqlValueTuple().Should().BeTrue("10-item tuple parameter should be recognized as CQL value tuple");
@@ -595,7 +597,7 @@ public class ToolkitTests
 
         foundBySignature9.Should().Be(tuple9Function, "Should find ProcessTuple9 by its signature");
         foundBySignature10.Should().Be(tuple10Function, "Should find ProcessTuple10 by its signature");
-        
+
         // This demonstrates that the invocation toolkit can distinguish between 
         // different large tuple signatures and find the correct definitions
     }
