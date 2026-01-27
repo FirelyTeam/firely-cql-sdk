@@ -113,28 +113,24 @@ namespace Hl7.Cql.Conversion
         {
             var mapping = new Dictionary<string, string>(StringComparer.Ordinal);
 
-            // Local method to add bidirectional mapping
-            void AddMapping(string cqlUnit, string ucumUnit) => mapping[cqlUnit] = ucumUnit;
+            void AddMappingSingularAndPlural(string cqlUnitSingular, string ucumUnit)
+            {
+                var cqlUnitPlural = $"{cqlUnitSingular}s"; // In these cases, plural is just adding 's'
+                mapping[cqlUnitSingular] = ucumUnit;
+                mapping[cqlUnitPlural] = ucumUnit;
+            }
 
             // Add all calendar duration unit mappings
             // Based on https://hl7.org/fhirpath/N1/#time-valued-quantities
-            AddMapping("year", "a");
-            AddMapping("years", "a");
-            AddMapping("month", "mo");
-            AddMapping("months", "mo");
-            AddMapping("week", "wk");
-            AddMapping("weeks", "wk");
-            AddMapping("day", "d");
-            AddMapping("days", "d");
-            AddMapping("hour", "h");
-            AddMapping("hours", "h");
-            AddMapping("minute", "min");
-            AddMapping("minutes", "min");
-            AddMapping("second", "s");
-            AddMapping("seconds", "s");
-            AddMapping("millisecond", "ms");
-            AddMapping("milliseconds", "ms");
-
+            AddMappingSingularAndPlural("year", "a");
+            AddMappingSingularAndPlural("month", "mo");
+            AddMappingSingularAndPlural("week", "wk");
+            AddMappingSingularAndPlural("day", "d");
+            AddMappingSingularAndPlural("hour", "h");
+            AddMappingSingularAndPlural("minute", "min");
+            AddMappingSingularAndPlural("second", "s");
+            AddMappingSingularAndPlural("millisecond", "ms");
+            
             return mapping;
         }
 
