@@ -63,6 +63,25 @@ namespace CoreTests
                 return AcceptableErrors.Any(s.Contains);
             }
         }
+        [TestMethod]
+        public void Elm_Deserialize_Deep()
+        {
+            var originalElm = File.ReadAllText(Path.Combine("Input", "ELM", "Libs", "CMS133FHIRCataracts2040BCVA90Days.json"));
+            var lib = Library.ParseFromJson(originalElm);
+            var elm = lib.SerializeToJson();
+
+            var expected = JsonNode.Parse(originalElm);
+            var actual = JsonNode.Parse(elm);
+            var errors = CompareNode(expected, actual);
+            errors.RemoveAll(acceptable);
+
+            Assert.AreEqual(0, errors.Count, message: string.Join("\n", errors));
+
+            static bool acceptable(string s)
+            {
+                return AcceptableErrors.Any(s.Contains);
+            }
+        }
 
         [TestMethod]
         public void DeserializeFieldSpecifiedElement()
