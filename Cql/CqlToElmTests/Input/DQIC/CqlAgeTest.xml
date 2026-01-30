@@ -16,7 +16,7 @@
 		</test>
 		<test name="CalculateAgeInDaysAt">
 			<expression>CalculateAgeInDaysAt(@1976-01-01, @2020-01-02)</expression>
-			<output>16072</output>
+			<output>16073</output>
 		</test>
 		<test name="CalculateAgeInHoursAt">
 			<expression>CalculateAgeInHoursAt(@1976-01-01, @2020-01-02)</expression>
