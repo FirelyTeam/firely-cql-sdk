@@ -32,7 +32,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
-                Assert.AreEqual(30, result);
+                Assert.AreEqual(31, result);
             }
         }
 
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
-                Assert.AreEqual(30, result);
+                Assert.AreEqual(31, result);
             }
         }
 
