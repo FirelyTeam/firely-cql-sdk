@@ -15,7 +15,8 @@
       "CMS108FHIRVTEProphylaxis.json",
 
       // Retrieve statements can only accept terminology expressions whose type is CqlValueSet or IEnumerable.  The expression provided has a type of Hl7.Cql.Primitives.CqlCode (Parameter 'codes')
-      "CMS69FHIRPCSBMIScreenAndFollowUp.json",
+      //https://github.com/cqframework/dqm-content-qicore-2025/issues/46
+      //"CMS69FHIRPCSBMIScreenAndFollowUp.json",
 
       // Duplicate property name CrLabObsCategory in tuple. (Parameter 'tupleProps')
       "CMS832FHIRHHAKI.json"
