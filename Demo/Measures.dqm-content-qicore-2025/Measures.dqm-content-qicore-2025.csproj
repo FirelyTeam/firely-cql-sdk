@@ -40,8 +40,8 @@
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
 		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 		<ResourcesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</ResourcesDirectory>
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
+		<CqlToElmEnabled>true</CqlToElmEnabled>
+		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<ItemGroup>
