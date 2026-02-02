@@ -12,8 +12,9 @@ if (-not (Test-Path variable:CqlToElmCliVersion)) {
 	# If you change the version here, you also need to update it in these places too:
 	# * pom.xml
 	# * Java-Dependencies-Vars.ps1
+	# * Java-Dependencies-Vars.sh
 	# * The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
-    $script:CqlToElmCliVersion = "3.28.0"
+    $script:CqlToElmCliVersion = "4.2.0"
 }
 
 if (-not (Test-Path variable:TargetDependencies)) {

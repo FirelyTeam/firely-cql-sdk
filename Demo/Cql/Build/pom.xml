@@ -16,9 +16,10 @@
 		If you change the version here, you also need to update it in these places too:
 		* pom.xml
 		* Java-Dependencies-Vars.ps1
+		* Java-Dependencies-Vars.sh
 		* The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
 		-->
-		<cql.version>3.28.0</cql.version>
+		<cql.version>4.2.0</cql.version>
 	</properties>
 	<repositories>
 		<repository>
