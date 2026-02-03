@@ -52,8 +52,8 @@ namespace CoreTests
             var lib = Library.ParseFromJson(originalElm);
             var elm = lib.SerializeToJson();
 
-            var expected = JsonNode.Parse(originalElm);
-            var actual = JsonNode.Parse(elm);
+            var expected = LibraryJsonSerializer.ParseToJsonNode(originalElm);
+            var actual = LibraryJsonSerializer.ParseToJsonNode(elm);
             var errors = CompareNode(expected, actual);
             errors.RemoveAll(acceptable);
 
@@ -72,8 +72,8 @@ namespace CoreTests
             var lib = Library.ParseFromJson(originalElm);
             var elm = lib.SerializeToJson();
 
-            var expected = JsonNode.Parse(originalElm, documentOptions: LibraryJsonSerializer.GetJsonDocumentOptions());
-            var actual = JsonNode.Parse(elm, documentOptions: LibraryJsonSerializer.GetJsonDocumentOptions());
+            var expected = LibraryJsonSerializer.ParseToJsonNode(originalElm);
+            var actual = LibraryJsonSerializer.ParseToJsonNode(elm);
             var errors = CompareNode(expected, actual);
             errors.RemoveAll(acceptable);
 

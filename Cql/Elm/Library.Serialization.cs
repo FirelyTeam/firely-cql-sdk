@@ -19,8 +19,8 @@ public partial class Library
     /// </summary>
     public static Library ParseFromJson(string json, bool validate = true)
     {
-        var node = JsonNode.Parse(json, documentOptions: LibraryJsonSerializer.GetJsonDocumentOptions()) ??
-                   throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
+        var node = LibraryJsonSerializer.ParseToJsonNode(json)
+                   ?? throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
 
         return LibraryJsonSerializer.DeserializeFromJsonNode(node, validate, null);
     }
