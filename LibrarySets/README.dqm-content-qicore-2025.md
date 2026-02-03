@@ -18,12 +18,7 @@ Addresses C# code generator issues:
 These changes were necessary to resolve type inference issues in the CQL-to-ELM translator.
 
 ### CMS69FHIRPCSBMIScreenAndFollowUp.cql
-Fixed syntax error in `ObservationCancelled` query (line 107):
-- Changed: `[ObservationCancelled: "Body mass index (BMI) [Ratio]"]`
-- To: `[ObservationCancelled: code = "Body mass index (BMI) [Ratio]"]`
-
-This change adds the required `code =` property to the `ObservationCancelled` data type query.
-
+Fixed a syntax error in the `ObservationCancelled` query (line 107).
 Key structural change example from the `ToAbatementInterval` function:
 
 ## Source
