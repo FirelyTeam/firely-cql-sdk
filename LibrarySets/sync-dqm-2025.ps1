@@ -94,6 +94,24 @@ if (Test-Path $qicoreFile) {
 }
 
 # -----------------------------
+# UPDATE CMS69FHIRPCSBMIScreenAndFollowUp.cql
+# -----------------------------
+$cms69File = Join-Path $finalCql "CMS69FHIRPCSBMIScreenAndFollowUp.cql"
+$cms69Backup = Join-Path $finalCql "CMS69FHIRPCSBMIScreenAndFollowUp.cql.original"
+
+if (Test-Path $cms69File) {
+    Write-Host "Backing up CMS69FHIRPCSBMIScreenAndFollowUp.cql to CMS69FHIRPCSBMIScreenAndFollowUp.cql.original"
+    Copy-Item -Path $cms69File -Destination $cms69Backup -Force
+
+    $fileContents = Get-Content -Raw -Path $cms69File
+    $newFileContents = $fileContents -replace '\[ObservationCancelled: "Body mass index \(BMI\) \[Ratio\]"\] NoBMI  // \?\? \[ObservationCancelled: code = "Body mass index \(BMI\) \[Ratio\]"\] NoBMI', "[ObservationCancelled: code = `"Body mass index (BMI) [Ratio]`"] NoBMI // Modified by $scriptName`: Fixed ObservationCancelled syntax"
+    Set-Content -Path $cms69File -Value $newFileContents -Force
+    Write-Host "Updated CMS69FHIRPCSBMIScreenAndFollowUp.cql successfully."
+} else {
+    Write-Host "CMS69FHIRPCSBMIScreenAndFollowUp.cql not found in $finalCql"
+}
+
+# -----------------------------
 # RUN JAVA CQL COMPILER
 # -----------------------------
 

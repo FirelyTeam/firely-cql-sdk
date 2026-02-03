@@ -8,13 +8,21 @@ This content represents quality measures and clinical decision support logic wri
 
 ## Modifications
 
-Manual changes were made to `QICoreCommon.cql` after copying from the source repository to address C# code generator issues.
+Manual changes were made to the following files after copying from the source repository:
 
-The main modifications include:
+### QICoreCommon.cql
+Addresses C# code generator issues:
 1. Added explicit `as DateTime` type casts in the `ToAbatementInterval` function (line 401)
 2. Added explicit `as DateTime` type casts in the `abatementInterval` function (line 424)
 
 These changes were necessary to resolve type inference issues in the CQL-to-ELM translator.
+
+### CMS69FHIRPCSBMIScreenAndFollowUp.cql
+Fixed syntax error in `ObservationCancelled` query (line 107):
+- Changed: `[ObservationCancelled: "Body mass index (BMI) [Ratio]"]`
+- To: `[ObservationCancelled: code = "Body mass index (BMI) [Ratio]"]`
+
+This change adds the required `code =` property to the `ObservationCancelled` data type query.
 
 Key structural change example from the `ToAbatementInterval` function:
 
