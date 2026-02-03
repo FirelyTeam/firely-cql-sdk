@@ -1,11 +1,28 @@
 ﻿# -----------------------------
 # CONFIGURATION
 # -----------------------------
-$scriptPath  = Split-Path -Parent $MyInvocation.MyCommand.Path
-$finalRoot   = Join-Path $scriptPath "dqm-content-qicore-2025"
-$finalCql    = Join-Path $finalRoot "Cql"
-$repoUrl     = "https://github.com/cqframework/dqm-content-qicore-2025.git"
-$tempPath    = Join-Path $scriptPath "dqm-content-qicore-2025-temp"
+$scriptPath   = Split-Path -Parent $MyInvocation.MyCommand.Path
+$scriptName   = Split-Path -Leaf $MyInvocation.MyCommand.Path
+$finalRoot    = Join-Path $scriptPath "dqm-content-qicore-2025"
+$finalCql     = Join-Path $finalRoot "Cql"
+$repoUrl      = "https://github.com/cqframework/dqm-content-qicore-2025.git"
+$tempPath     = Join-Path $scriptPath "dqm-content-qicore-2025-temp"
+$repoCommitId = "c89ea1a7a6ac80e42609b55eafc05a86448bdea4"  # Set to specific commit hash, or leave as $null for latest
+
+# -----------------------------
+# TOOL INFORMATION
+# -----------------------------
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host "DQM Content QICore 2025 Sync Tool" -ForegroundColor Cyan
+Write-Host "========================================" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "Configuration Variables:" -ForegroundColor Yellow
+Write-Host "  Repository URL: $repoUrl"
+Write-Host "  Commit ID:      $(if ($repoCommitId) { $repoCommitId } else { 'latest' })"
+Write-Host "  Final Root:     $finalRoot"
+Write-Host "  Final CQL:      $finalCql"
+Write-Host "  Temp Path:      $tempPath"
+Write-Host ""
 
 # -----------------------------
 # CLEANUP PREVIOUS RUN
@@ -28,7 +45,18 @@ Set-Location $tempPath
 
 git sparse-checkout init --cone
 git sparse-checkout set input/cql
-git checkout master
+
+if ($repoCommitId) {
+    Write-Host "Checking out commit: $repoCommitId"
+    git checkout $repoCommitId
+} else {
+    Write-Host "Checking out latest from master branch"
+    git checkout master
+}
+
+# Get and display the actual commit ID
+$actualCommitId = git rev-parse HEAD
+Write-Host "Using commit: $actualCommitId" -ForegroundColor Green
 
 # -----------------------------
 # COPY .CQL FILES TO FINAL DESTINATION
@@ -51,28 +79,18 @@ Remove-Item -Recurse -Force $tempPath
 # UPDATE QICoreCommon.cql
 # -----------------------------
 $qicoreFile = Join-Path $finalCql "QICoreCommon.cql"
+$qicoreBackup = Join-Path $finalCql "QICoreCommon.cql.original"
 
 if (Test-Path $qicoreFile) {
+    Write-Host "Backing up QICoreCommon.cql to QICoreCommon.cql.original"
+    Copy-Item -Path $qicoreFile -Destination $qicoreBackup -Force
+
     $fileContents = Get-Content -Raw -Path $qicoreFile
-    $newFileContents = $fileContents -replace 'Interval\[condition\.abatement\.low, condition\.abatement\.high\)', 'Interval[condition.abatement.low as DateTime, condition.abatement.high as DateTime)'
+    $newFileContents = $fileContents -replace 'Interval\[condition\.abatement\.low, condition\.abatement\.high\)', "Interval[condition.abatement.low as DateTime, condition.abatement.high as DateTime) // Modified by $scriptName`: Added explicit DateTime casts"
     Set-Content -Path $qicoreFile -Value $newFileContents -Force
     Write-Host "Updated QICoreCommon.cql successfully."
 } else {
     Write-Host "QICoreCommon.cql not found in $finalCql"
-}
-
-# -----------------------------
-# UPDATE QICoreCommon.cql
-# -----------------------------
-$fhirHelpersFile = Join-Path $finalCql "FHIRHelpers.cql"
-
-if (Test-Path $fhirHelpersFile) {
-    $fileContents = Get-Content -Raw -Path $fhirHelpersFile
-    $newFileContents = $fileContents + "`ndefine function ToString(value FHIR.id): value.value"
-    Set-Content -Path $fhirHelpersFile -Value $newFileContents -Force
-    Write-Host "Updated FHIRHelpers.cql successfully."
-} else {
-    Write-Host "FHIRHelpers.cql not found in $finalCql"
 }
 
 # -----------------------------

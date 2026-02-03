@@ -104,7 +104,7 @@ define "High BMI Interventions Performed":
   )
 
 define "Medical Reason Or Patient Reason For Not Performing BMI Exam":
-  [ObservationCancelled: "Body mass index (BMI) [Ratio]"] NoBMI
+  [ObservationCancelled: "Body mass index (BMI) [Ratio]"] NoBMI  // ?? [ObservationCancelled: code = "Body mass index (BMI) [Ratio]"] NoBMI
     with "Qualifying Encounter During Day Of Measurement Period" QualifyingEncounter
       such that NoBMI.effective.toInterval ( ) ends same day as start of QualifyingEncounter.period
     where ( NoBMI.notDoneReason in "Patient Declined"

@@ -3842,5 +3842,43 @@ namespace CoreTests
         }
 
         #endregion
+
+        #region Duration tests
+        [TestMethod]
+        public void DurationBetweenDifferentDays()
+        {
+            var rtx = GetNewContext();
+            var startDate = new CqlDate(2025, 1, 1);
+            var endDate = new CqlDate(2025, 1, 10);
+            int expected = 10;
+            var actual = rtx.Operators.DurationBetween(startDate, endDate, "day");
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void DurationBetweenSameDay()
+        {
+            var rtx = GetNewContext();
+            var startDate = new CqlDate(2025, 1, 1);
+            var endDate = new CqlDate(2025, 1, 1);
+            int expected = 1;
+            var actual = rtx.Operators.DurationBetween(startDate, endDate, "day");
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void DurationBetweenDifferentDaysNegative()
+        {
+            var rtx = GetNewContext();
+            var startDate = new CqlDate(2025, 1, 10);
+            var endDate = new CqlDate(2025, 1, 1);
+            int expected = -9;
+            var actual = rtx.Operators.DurationBetween(startDate, endDate, "day");
+            Assert.IsNotNull(actual);
+            Assert.AreEqual(expected, actual);
+        }
+        #endregion
     }
 }

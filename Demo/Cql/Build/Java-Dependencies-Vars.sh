@@ -15,9 +15,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #
 # If you change the version here, you also need to update it in these places too:
 # * pom.xml
-# * Java-Dependencies-Vars.ps1 / Java-Dependencies-Vars.sh
+# * Java-Dependencies-Vars.ps1
+# * Java-Dependencies-Vars.sh
 # * The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
-: "${CqlToElmCliVersion:=3.28.0}"
+: "${CqlToElmCliVersion:=3.29.0}"}"
 
 : "${TargetDependencies:=$SCRIPT_DIR/target/dependency}"
 
