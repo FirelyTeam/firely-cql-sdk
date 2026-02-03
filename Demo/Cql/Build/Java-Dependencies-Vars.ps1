@@ -14,7 +14,7 @@ if (-not (Test-Path variable:CqlToElmCliVersion)) {
 	# * Java-Dependencies-Vars.ps1
 	# * Java-Dependencies-Vars.sh
 	# * The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
-    $script:CqlToElmCliVersion = "4.2.0"
+    $script:CqlToElmCliVersion = "3.29.0"
 }
 
 if (-not (Test-Path variable:TargetDependencies)) {

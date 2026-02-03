@@ -23,7 +23,7 @@ public class Program
     // * Java-Dependencies-Vars.ps1
     // * Java-Dependencies-Vars.sh
     // * The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
-    private const string JavaToolVersion = "4.2.0";
+    private const string JavaToolVersion = "3.29.0";
 
     internal static readonly string Disclaimer =
         Environment.NewLine +
