@@ -104,7 +104,7 @@ if (Test-Path $cms69File) {
     Copy-Item -Path $cms69File -Destination $cms69Backup -Force
 
     $fileContents = Get-Content -Raw -Path $cms69File
-    $newFileContents = $fileContents -replace '\[ObservationCancelled: "Body mass index \(BMI\) \[Ratio\]"\] NoBMI  // \?\? \[ObservationCancelled: code = "Body mass index \(BMI\) \[Ratio\]"\] NoBMI', "[ObservationCancelled: code = `"Body mass index (BMI) [Ratio]`"] NoBMI // Modified by $scriptName`: Fixed ObservationCancelled syntax"
+    $newFileContents = $fileContents -replace '\[ObservationCancelled: "Body mass index \(BMI\) \[Ratio\]"\] NoBMI', "[ObservationCancelled: code = `"Body mass index (BMI) [Ratio]`"] NoBMI // Modified by $scriptName`: Fixed ObservationCancelled syntax"
     Set-Content -Path $cms69File -Value $newFileContents -Force
     Write-Host "Updated CMS69FHIRPCSBMIScreenAndFollowUp.cql successfully."
 } else {
