@@ -1,10 +1,21 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.28.0",
+         "translatorVersion" : "3.29.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
+      }, {
+         "libraryId" : "CMS69FHIRPCSBMIScreenAndFollowUp",
+         "libraryVersion" : "1.0.000",
+         "startLine" : 107,
+         "startChar" : 3,
+         "endLine" : 107,
+         "endChar" : 57,
+         "message" : "Terminology resolution using contains is not supported at this time. Use a where clause with an in operator instead.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
       } ],
       "identifier" : {
          "id" : "CMS69FHIRPCSBMIScreenAndFollowUp",
@@ -12131,7 +12142,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "107:3-107:70",
+                  "locator" : "107:3-107:63",
                   "alias" : "NoBMI",
                   "annotation" : [ ],
                   "resultTypeSpecifier" : {
@@ -12144,12 +12155,8 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "107:3-107:64",
-                     "dataType" : "{http://hl7.org/fhir}Observation",
-                     "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationcancelled",
-                     "codeProperty" : "code",
-                     "codeComparator" : "=",
-                     "type" : "Retrieve",
+                     "locator" : "107:3-107:57",
+                     "type" : "Union",
                      "annotation" : [ ],
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -12160,22 +12167,75 @@
                            "annotation" : [ ]
                         }
                      },
-                     "codes" : {
-                        "type" : "ToList",
+                     "signature" : [ {
+                        "type" : "ListTypeSpecifier",
                         "annotation" : [ ],
-                        "signature" : [ ],
-                        "operand" : {
-                           "locator" : "107:33-107:63",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     }, {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "type" : "NamedTypeSpecifier",
+                           "annotation" : [ ]
+                        }
+                     } ],
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}Observation",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationcancelled",
+                        "codeProperty" : "code",
+                        "codeComparator" : "~",
+                        "type" : "Retrieve",
+                        "annotation" : [ ],
+                        "codes" : {
+                           "type" : "ToList",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "locator" : "107:26-107:56",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                              "name" : "Body mass index (BMI) [Ratio]",
+                              "type" : "CodeRef",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
+                     }, {
+                        "locator" : "107:3-107:57",
+                        "dataType" : "{http://hl7.org/fhir}Observation",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationcancelled",
+                        "codeProperty" : "code",
+                        "codeComparator" : "contains",
+                        "type" : "Retrieve",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Observation",
+                              "type" : "NamedTypeSpecifier",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "107:26-107:56",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                            "name" : "Body mass index (BMI) [Ratio]",
                            "type" : "CodeRef",
                            "annotation" : [ ]
-                        }
-                     },
-                     "include" : [ ],
-                     "codeFilter" : [ ],
-                     "dateFilter" : [ ],
-                     "otherFilter" : [ ]
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
+                     } ]
                   }
                } ],
                "let" : [ ],
