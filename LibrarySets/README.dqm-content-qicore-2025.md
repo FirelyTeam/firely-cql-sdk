@@ -12,13 +12,13 @@ Manual changes were made to the following files after copying from the source re
 
 ### QICoreCommon.cql
 Addresses C# code generator issues:
-1. Added explicit `as DateTime` type casts in the `ToAbatementInterval` function (line 401)
-2. Added explicit `as DateTime` type casts in the `abatementInterval` function (line 424)
+1. Added explicit `as DateTime` type casts in the `ToAbatementInterval` function definition
+2. Added explicit `as DateTime` type casts in the `abatementInterval` function definition
 
 These changes were necessary to resolve type inference issues in the CQL-to-ELM translator.
 
 ### CMS69FHIRPCSBMIScreenAndFollowUp.cql
-Fixed a syntax error in the `ObservationCancelled` query (line 107).
+Fixed a syntax error in the `ObservationCancelled` query definition.
 Key structural change example from the `ToAbatementInterval` function:
 
 ## Source
