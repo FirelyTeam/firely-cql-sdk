@@ -274,10 +274,6 @@ stages:
               version: '8.0.x'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
-          - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
-            inputs:
-              nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
 
           # Download build artifacts
           - task: DownloadPipelineArtifact@2
@@ -328,10 +324,6 @@ stages:
               version: '${{ parameters.dotNetCoreVersion }}'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
-          - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
-            inputs:
-              nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
 
           # Download build artifacts
           - task: DownloadPipelineArtifact@2
@@ -382,10 +374,6 @@ stages:
               version: '${{ parameters.dotNetCoreVersion }}'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
-          - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
-            inputs:
-              nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
 
           # Download build artifacts
           - task: DownloadPipelineArtifact@2

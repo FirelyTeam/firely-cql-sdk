@@ -101,6 +101,10 @@ stages:
       certificateProfileName: 'FirelyCodeSigning'
     ${{ else }}:
       shouldSign: false
+      azureServiceConnectionForSigning: ''
+      trustedSigningAccountEndpoint: ''
+      trustedSigningAccountName: ''
+      certificateProfileName: ''
     signingKeyFileName: 'cql-sdk.snk'
     filesForSigning: >-
       $(Build.SourcesDirectory)\Cql\*\bin\Release\*\Hl7.Cql*.dll,
