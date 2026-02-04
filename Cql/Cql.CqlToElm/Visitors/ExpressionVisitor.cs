@@ -215,7 +215,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var qie = context.qualifiedIdentifierExpression();
             var e = context.expression();
             if (e is not null)
-                Visit(e);
+                return Visit(e);
             return Visit(qie);
         }
 
