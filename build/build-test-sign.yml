@@ -1,14 +1,17 @@
 # Repo: FirelyTeam/Cql-sdk
 # File: build/build-test-sign.yml
-# Multi-framework build, test, and sign template for .NET 8 and .NET 10
+# Optimized multi-framework build, test, and sign template for .NET 8 and .NET 10
 #
-# This template implements three parallel jobs:
-# 1. Build, Test and Sign for .NET 8 - Builds, tests, signs, and packages for .NET 8
-# 2. Build, Test and Sign for .NET 10 - Builds, tests, signs, and packages for .NET 10
-# 3. Build and IntegrationRunner Test for .NET 10 - Builds and tests integration tests
+# This template implements an optimized pipeline with separate stages:
+# 1. Build Stage - Builds, signs (if enabled), packages, and publishes artifacts
+# 2. Test Stage - Parallel test jobs download artifacts and run tests
 #
-# This verifies identical behavior across .NET 8 (LTS) and .NET 10 (LTS) while
-# eliminating duplicate builds through parallel execution.
+# Optimizations:
+# - Build once, sign and pack on same agent (no artifact download overhead)
+# - Tests run in parallel after build
+# - Java dependencies are cached across builds
+# - Signing only happens on release tags or develop branch
+# - .NET SDKs are only installed where needed (test jobs only install what they need)
 #
 # Usage: Include this template in azure-pipelines.yml for complete build/test/sign pipeline
 
@@ -55,468 +58,423 @@ parameters:
   - name: nuGetServiceConnections
     type: string
     default: ''
+  - name: shouldSign
+    type: boolean
+    default: false
+  - name: buildStageDependsOn
+    type: string
+    default: ''
+  - name: buildStageCondition
+    type: string
+    default: 'succeeded()'
 
-jobs:
-  - job: BuildTestSignNet8
-    displayName: 'Build, Test and Sign for .NET 8'
-    pool:
-      vmImage: 'windows-latest'
-    steps:
-      - checkout: self
-        submodules: ${{ parameters.checkoutSubmodules }}
+stages:
+  # ============================================================================
+  # BUILD STAGE - Builds, signs (if enabled), packages, and publishes artifacts
+  # ============================================================================
+  - stage: Build
+    displayName: 'Build, Sign & Package'
+    ${{ if ne(parameters.buildStageDependsOn, '') }}:
+      dependsOn: ${{ parameters.buildStageDependsOn }}
+    condition: ${{ parameters.buildStageCondition }}
+    jobs:
+      - job: BuildSignPackage
+        displayName: 'Build, Sign & Package'
+        pool:
+          vmImage: 'windows-latest'
+        variables:
+          JAVA_CACHE_KEY: 'java-deps | "$(Agent.OS)" | Demo/Cql/Build/pom.xml'
+        steps:
+          - checkout: self
+            submodules: ${{ parameters.checkoutSubmodules }}
 
-      - task: UseDotNet@2
-        displayName: 'Install .NET 8 SDK'
-        inputs:
-          packageType: 'sdk'
-          version: '8.0.x'
-          installationPath: $(Agent.ToolsDirectory)/dotnet
+          # Install .NET SDKs
+          - task: UseDotNet@2
+            displayName: 'Install .NET 8 SDK'
+            inputs:
+              packageType: 'sdk'
+              version: '8.0.x'
+              installationPath: $(Agent.ToolsDirectory)/dotnet
 
-      - task: UseDotNet@2
-        displayName: 'Install .NET 10 SDK'
-        inputs:
-          packageType: 'sdk'
-          version: '${{ parameters.dotNetCoreVersion }}'
-          installationPath: $(Agent.ToolsDirectory)/dotnet
+          - task: UseDotNet@2
+            displayName: 'Install .NET 10 SDK'
+            inputs:
+              packageType: 'sdk'
+              version: '${{ parameters.dotNetCoreVersion }}'
+              installationPath: $(Agent.ToolsDirectory)/dotnet
 
-      - task: NuGetAuthenticate@1
-        displayName: 'NuGet Authenticate'
-        inputs:
-          nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
+          - task: NuGetAuthenticate@1
+            displayName: 'NuGet Authenticate'
+            inputs:
+              nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
 
-      - task: DotNetCoreCLI@2
-        displayName: 'Restore solution'
-        inputs:
-          command: 'restore'
-          projects: 'Cql-Sdk-All.sln'
-          feedsToUse: 'config'
-          nugetConfigPath: 'NuGet.config'
+          # Cache Java dependencies to avoid re-downloading on each build
+          - task: Cache@2
+            displayName: 'Cache Java Dependencies'
+            inputs:
+              key: $(JAVA_CACHE_KEY)
+              path: $(Build.SourcesDirectory)/Demo/Cql/Build/target/dependency
+              restoreKeys: |
+                java-deps | "$(Agent.OS)"
 
-      - task: DotNetCoreCLI@2
-        displayName: 'Build solution'
-        inputs:
-          command: 'build'
-          projects: 'Cql-Sdk-All.sln'
-          ${{ if eq(parameters.useVersionSuffix, true) }}:
-            arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore /p:VersionSuffix=$(Build.BuildNumber)'
-          ${{ else }}:
-            arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
+          - task: DotNetCoreCLI@2
+            displayName: 'Restore solution'
+            inputs:
+              command: 'restore'
+              projects: 'Cql-Sdk-All.sln'
+              feedsToUse: 'config'
+              nugetConfigPath: 'NuGet.config'
 
-      - task: DotNetCoreCLI@2
-        displayName: 'Run tests on .NET 8'
-        inputs:
-          command: 'test'
-          projects: '${{ parameters.multiTargetTestProjects }}'
-          arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net8.0'
-          publishTestResults: false
+          - task: DotNetCoreCLI@2
+            displayName: 'Build solution'
+            inputs:
+              command: 'build'
+              projects: 'Cql-Sdk-All.sln'
+              ${{ if eq(parameters.useVersionSuffix, true) }}:
+                arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore /p:VersionSuffix=$(Build.BuildNumber)'
+              ${{ else }}:
+                arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
 
-      - task: PublishTestResults@2
-        displayName: 'Publish .NET 8 test results'
-        condition: succeededOrFailed()
-        inputs:
-          testResultsFormat: 'VSTest'
-          testResultsFiles: '$(Agent.TempDirectory)/TestResults/net8.0/**/*.trx'
-          testRunTitle: 'Tests on .NET 8'
-          mergeTestResults: true
-          failTaskOnFailedTests: true
+          # Sign assemblies (only on release tags or develop branch)
+          - task: UseDotNet@2
+            displayName: 'Install .NET 8 runtime for signing'
+            condition: and(succeeded(), eq('${{ parameters.shouldSign }}', 'true'), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
+            inputs:
+              packageType: runtime
+              version: 8.x
+              includePreviewVersions: false
 
-      - task: PublishCodeCoverageResults@2
-        displayName: 'Publish .NET 8 code coverage'
-        condition: succeededOrFailed()
-        inputs:
-          summaryFileLocation: '$(Agent.TempDirectory)/TestResults/net8.0/**/coverage.cobertura.xml'
-          pathToSources: '$(Build.SourcesDirectory)'
+          - task: AzureCLI@2
+            displayName: 'Sign assemblies with Azure Trusted Signing'
+            condition: and(succeeded(), eq('${{ parameters.shouldSign }}', 'true'), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
+            inputs:
+              azureSubscription: '${{ parameters.azureServiceConnectionForSigning }}'
+              scriptType: 'pscore'
+              scriptLocation: 'inlineScript'
+              addSpnToEnvironment: true
+              inlineScript: |
+                # Install dotnet sign tool
+                Write-Host "Installing dotnet sign tool..."
+                dotnet tool install --global sign --version 0.9.1-beta.25379.1
 
-      - task: UseDotNet@2
-        displayName: 'Install .NET 8 runtime for signing'
-        condition: and(succeeded(), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
-        inputs:
-          packageType: runtime
-          version: 8.x
-          includePreviewVersions: false
+                if ($LASTEXITCODE -ne 0) {
+                  Write-Error "Failed to install dotnet sign tool"
+                  exit 1
+                }
 
-      - task: AzureCLI@2
-        displayName: 'Sign assemblies with Azure Trusted Signing'
-        condition: and(succeeded(), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
-        inputs:
-          azureSubscription: '${{ parameters.azureServiceConnectionForSigning }}'
-          scriptType: 'pscore'
-          scriptLocation: 'inlineScript'
-          addSpnToEnvironment: true
-          inlineScript: |
-            # Install dotnet sign tool
-            Write-Host "Installing dotnet sign tool..."
-            dotnet tool install --global sign --version 0.9.1-beta.25379.1
-            
-            if ($LASTEXITCODE -ne 0) {
-              Write-Error "Failed to install dotnet sign tool"
-              exit 1
-            }
-            
-            # Get list of files to sign
-            $filesToSign = @()
-            $patterns = "${{ parameters.filesForSigning }}" -split ','
-            $excludePatterns = "${{ parameters.filesToExcludeForSigning }}" -split ','
-            
-            foreach ($pattern in $patterns) {
-              $pattern = $pattern.Trim()
-              if ($pattern) {
-                $files = Get-ChildItem -Path $pattern -Recurse -ErrorAction SilentlyContinue
-                foreach ($file in $files) {
-                  $excluded = $false
-                  foreach ($excludePattern in $excludePatterns) {
-                    $excludePattern = $excludePattern.Trim()
-                    if ($excludePattern -and $file.FullName -like "*$excludePattern*") {
-                      $excluded = $true
-                      break
+                # Get list of files to sign
+                $filesToSign = @()
+                $patterns = "${{ parameters.filesForSigning }}" -split ','
+                $excludePatterns = "${{ parameters.filesToExcludeForSigning }}" -split ','
+
+                foreach ($pattern in $patterns) {
+                  $pattern = $pattern.Trim()
+                  if ($pattern) {
+                    $files = Get-ChildItem -Path $pattern -Recurse -ErrorAction SilentlyContinue
+                    foreach ($file in $files) {
+                      $excluded = $false
+                      foreach ($excludePattern in $excludePatterns) {
+                        $excludePattern = $excludePattern.Trim()
+                        if ($excludePattern -and $file.FullName -like "*$excludePattern*") {
+                          $excluded = $true
+                          break
+                        }
+                      }
+                      if (-not $excluded) {
+                        $filesToSign += $file.FullName
+                      }
                     }
                   }
-                  if (-not $excluded) {
-                    $filesToSign += $file.FullName
-                  }
                 }
-              }
-            }
-            
-            if ($filesToSign.Count -eq 0) {
-              Write-Host "No files to sign"
-              exit 0
-            }
-            
-            Write-Host "Found $($filesToSign.Count) file(s) to sign:"
-            $filesToSign | ForEach-Object { Write-Host "  $_" }
-            
-            # Sign each file
-            foreach ($file in $filesToSign) {
-              Write-Host "`nSigning file: $file"
-              
-              $signArgs = @(
-                'code',
-                'trusted-signing',
-                $file,
-                '--trusted-signing-account', '${{ parameters.trustedSigningAccountName }}',
-                '--trusted-signing-certificate-profile', '${{ parameters.certificateProfileName }}',
-                '--trusted-signing-endpoint', '${{ parameters.trustedSigningAccountEndpoint }}',
-                '--azure-credential-type', 'azure-cli'
-              )
-              
-              & sign @signArgs
-              
-              if ($LASTEXITCODE -ne 0) {
-                Write-Error "Failed to sign file: $file"
-                exit 1
-              }
-              
-              Write-Host "Successfully signed: $file"
-            }
-            
-            Write-Host "`nAll files signed successfully!"
 
-      - task: DotNetCoreCLI@2
-        displayName: 'Package solution'
-        inputs:
-          command: 'pack'
-          packagesToPack: 'Cql-Sdk.slnf'
-          configuration: '${{ parameters.buildConfiguration }}'
-          packDirectory: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
-          nobuild: true
-          ${{ if eq(parameters.useVersionSuffix, true) }}:
-            buildProperties: 'VersionSuffix=$(Build.BuildNumber)'
-          includesymbols: true
-          includesource: true
-
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish NuGet packages'
-        inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
-          ArtifactName: 'NuGetPackages-Net8'
-          publishLocation: 'Container'
-
-  - job: BuildTestSignNet10
-    displayName: 'Build, Test and Sign for .NET 10'
-    pool:
-      vmImage: 'windows-latest'
-    steps:
-      - checkout: self
-        submodules: ${{ parameters.checkoutSubmodules }}
-
-      - task: UseDotNet@2
-        displayName: 'Install .NET 8 SDK'
-        inputs:
-          packageType: 'sdk'
-          version: '8.0.x'
-          installationPath: $(Agent.ToolsDirectory)/dotnet
-
-      - task: UseDotNet@2
-        displayName: 'Install .NET 10 SDK'
-        inputs:
-          packageType: 'sdk'
-          version: '${{ parameters.dotNetCoreVersion }}'
-          installationPath: $(Agent.ToolsDirectory)/dotnet
-
-      - task: NuGetAuthenticate@1
-        displayName: 'NuGet Authenticate'
-        inputs:
-          nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
-
-      - task: DotNetCoreCLI@2
-        displayName: 'Restore solution'
-        inputs:
-          command: 'restore'
-          projects: 'Cql-Sdk-All.sln'
-          feedsToUse: 'config'
-          nugetConfigPath: 'NuGet.config'
-
-      - task: DotNetCoreCLI@2
-        displayName: 'Build solution'
-        inputs:
-          command: 'build'
-          projects: 'Cql-Sdk-All.sln'
-          ${{ if eq(parameters.useVersionSuffix, true) }}:
-            arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore /p:VersionSuffix=$(Build.BuildNumber)'
-          ${{ else }}:
-            arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
-
-      - task: DotNetCoreCLI@2
-        displayName: 'Run tests on .NET 10'
-        inputs:
-          command: 'test'
-          projects: '${{ parameters.multiTargetTestProjects }}'
-          arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net10.0'
-          publishTestResults: false
-
-      - task: PublishTestResults@2
-        displayName: 'Publish .NET 10 test results'
-        condition: succeededOrFailed()
-        inputs:
-          testResultsFormat: 'VSTest'
-          testResultsFiles: '$(Agent.TempDirectory)/TestResults/net10.0/**/*.trx'
-          testRunTitle: 'Tests on .NET 10'
-          mergeTestResults: true
-          failTaskOnFailedTests: true
-
-      - task: PublishCodeCoverageResults@2
-        displayName: 'Publish .NET 10 code coverage'
-        condition: succeededOrFailed()
-        inputs:
-          summaryFileLocation: '$(Agent.TempDirectory)/TestResults/net10.0/**/coverage.cobertura.xml'
-          pathToSources: '$(Build.SourcesDirectory)'
-
-      - task: UseDotNet@2
-        displayName: 'Install .NET 8 runtime for signing'
-        condition: and(succeeded(), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
-        inputs:
-          packageType: runtime
-          version: 8.x
-          includePreviewVersions: false
-
-      - task: AzureCLI@2
-        displayName: 'Sign assemblies with Azure Trusted Signing'
-        condition: and(succeeded(), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
-        inputs:
-          azureSubscription: '${{ parameters.azureServiceConnectionForSigning }}'
-          scriptType: 'pscore'
-          scriptLocation: 'inlineScript'
-          addSpnToEnvironment: true
-          inlineScript: |
-            # Install dotnet sign tool
-            Write-Host "Installing dotnet sign tool..."
-            dotnet tool install --global sign --version 0.9.1-beta.25379.1
-            
-            if ($LASTEXITCODE -ne 0) {
-              Write-Error "Failed to install dotnet sign tool"
-              exit 1
-            }
-            
-            # Get list of files to sign
-            $filesToSign = @()
-            $patterns = "${{ parameters.filesForSigning }}" -split ','
-            $excludePatterns = "${{ parameters.filesToExcludeForSigning }}" -split ','
-            
-            foreach ($pattern in $patterns) {
-              $pattern = $pattern.Trim()
-              if ($pattern) {
-                $files = Get-ChildItem -Path $pattern -Recurse -ErrorAction SilentlyContinue
-                foreach ($file in $files) {
-                  $excluded = $false
-                  foreach ($excludePattern in $excludePatterns) {
-                    $excludePattern = $excludePattern.Trim()
-                    if ($excludePattern -and $file.FullName -like "*$excludePattern*") {
-                      $excluded = $true
-                      break
-                    }
-                  }
-                  if (-not $excluded) {
-                    $filesToSign += $file.FullName
-                  }
+                if ($filesToSign.Count -eq 0) {
+                  Write-Host "No files to sign"
+                  exit 0
                 }
-              }
-            }
-            
-            if ($filesToSign.Count -eq 0) {
-              Write-Host "No files to sign"
-              exit 0
-            }
-            
-            Write-Host "Found $($filesToSign.Count) file(s) to sign:"
-            $filesToSign | ForEach-Object { Write-Host "  $_" }
-            
-            # Sign each file
-            foreach ($file in $filesToSign) {
-              Write-Host "`nSigning file: $file"
-              
-              $signArgs = @(
-                'code',
-                'trusted-signing',
-                $file,
-                '--trusted-signing-account', '${{ parameters.trustedSigningAccountName }}',
-                '--trusted-signing-certificate-profile', '${{ parameters.certificateProfileName }}',
-                '--trusted-signing-endpoint', '${{ parameters.trustedSigningAccountEndpoint }}',
-                '--azure-credential-type', 'azure-cli'
-              )
-              
-              & sign @signArgs
-              
-              if ($LASTEXITCODE -ne 0) {
-                Write-Error "Failed to sign file: $file"
-                exit 1
-              }
-              
-              Write-Host "Successfully signed: $file"
-            }
-            
-            Write-Host "`nAll files signed successfully!"
 
-      - task: DotNetCoreCLI@2
-        displayName: 'Package solution'
-        inputs:
-          command: 'pack'
-          packagesToPack: 'Cql-Sdk.slnf'
-          configuration: '${{ parameters.buildConfiguration }}'
-          packDirectory: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
-          nobuild: true
-          ${{ if eq(parameters.useVersionSuffix, true) }}:
-            buildProperties: 'VersionSuffix=$(Build.BuildNumber)'
-          includesymbols: true
-          includesource: true
+                Write-Host "Found $($filesToSign.Count) file(s) to sign:"
+                $filesToSign | ForEach-Object { Write-Host "  $_" }
 
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish NuGet packages'
-        inputs:
-          PathtoPublish: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
-          ArtifactName: 'NuGetPackages'
-          publishLocation: 'Container'
+                # Sign each file
+                foreach ($file in $filesToSign) {
+                  Write-Host "`nSigning file: $file"
 
-  - job: BuildTestIntegrationNet10
-    displayName: 'Build and IntegrationRunner Test for .NET 10'
-    pool:
-      vmImage: 'windows-latest'
-    steps:
-      - checkout: self
-        submodules: ${{ parameters.checkoutSubmodules }}
+                  $signArgs = @(
+                    'code',
+                    'trusted-signing',
+                    $file,
+                    '--trusted-signing-account', '${{ parameters.trustedSigningAccountName }}',
+                    '--trusted-signing-certificate-profile', '${{ parameters.certificateProfileName }}',
+                    '--trusted-signing-endpoint', '${{ parameters.trustedSigningAccountEndpoint }}',
+                    '--azure-credential-type', 'azure-cli'
+                  )
 
-      - task: UseDotNet@2
-        displayName: 'Install .NET 8 SDK'
-        inputs:
-          packageType: 'sdk'
-          version: '8.0.x'
-          installationPath: $(Agent.ToolsDirectory)/dotnet
+                  & sign @signArgs
 
-      - task: UseDotNet@2
-        displayName: 'Install .NET 10 SDK'
-        inputs:
-          packageType: 'sdk'
-          version: '${{ parameters.dotNetCoreVersion }}'
-          installationPath: $(Agent.ToolsDirectory)/dotnet
+                  if ($LASTEXITCODE -ne 0) {
+                    Write-Error "Failed to sign file: $file"
+                    exit 1
+                  }
 
-      - task: NuGetAuthenticate@1
-        displayName: 'NuGet Authenticate'
-        inputs:
-          nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
+                  Write-Host "Successfully signed: $file"
+                }
 
-      - task: DotNetCoreCLI@2
-        displayName: 'Restore dependencies'
-        inputs:
-          command: 'restore'
-          projects: '${{ parameters.net10IntegrationTestProjects }}'
-          feedsToUse: 'config'
-          nugetConfigPath: 'NuGet.config'
+                Write-Host "`nAll files signed successfully!"
 
-      - task: DotNetCoreCLI@2
-        displayName: 'Build test projects'
-        inputs:
-          command: 'build'
-          projects: '${{ parameters.net10IntegrationTestProjects }}'
-          arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
+          # Package solution (NuGet packages already restored, no need to restore again)
+          - task: DotNetCoreCLI@2
+            displayName: 'Package solution'
+            inputs:
+              command: 'pack'
+              packagesToPack: 'Cql-Sdk.slnf'
+              configuration: '${{ parameters.buildConfiguration }}'
+              packDirectory: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
+              nobuild: true
+              ${{ if eq(parameters.useVersionSuffix, true) }}:
+                buildProperties: 'VersionSuffix=$(Build.BuildNumber)'
+              includesymbols: true
+              includesource: true
 
-      - task: DotNetCoreCLI@2
-        displayName: 'Run integration tests on .NET 10'
-        inputs:
-          command: 'test'
-          projects: '${{ parameters.net10IntegrationTestProjects }}'
-          arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/integration-net10.0'
-          publishTestResults: false
+          # Prepare trimmed build artifacts (only bin/obj directories) for test stage
+          - task: PowerShell@2
+            displayName: 'Stage build outputs for artifact'
+            inputs:
+              targetType: 'inline'
+              script: |
+                $sourceRoot = "$(Build.SourcesDirectory)"
+                $stagingRoot = "$(Build.ArtifactStagingDirectory)/BuildOutput"
+                New-Item -ItemType Directory -Path $stagingRoot -Force | Out-Null
+                Write-Host "Staging bin/obj directories from '$sourceRoot' into '$stagingRoot'"
+                
+                # Find all bin and obj directories and copy them preserving relative paths
+                Get-ChildItem -Path $sourceRoot -Recurse -Directory | Where-Object { $_.Name -eq 'bin' -or $_.Name -eq 'obj' } | ForEach-Object {
+                  $relativePath = $_.FullName.Substring($sourceRoot.Length).TrimStart('\', '/')
+                  $destinationParent = Join-Path $stagingRoot (Split-Path $relativePath -Parent)
+                  New-Item -ItemType Directory -Path $destinationParent -Force | Out-Null
+                  Copy-Item -Path $_.FullName -Destination $destinationParent -Recurse -Force
+                  Write-Host "  Copied: $relativePath"
+                }
+                
+                # Calculate size
+                $size = (Get-ChildItem -Path $stagingRoot -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB
+                Write-Host "Total artifact size: $([math]::Round($size, 2)) MB"
 
-      - task: PublishTestResults@2
-        displayName: 'Publish integration test results'
+          # Publish build artifacts for test stage (only bin/obj directories)
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish Build Artifacts'
+            inputs:
+              targetPath: '$(Build.ArtifactStagingDirectory)/BuildOutput'
+              artifact: 'BuildOutput'
+              publishLocation: 'pipeline'
+
+          # Publish NuGet packages
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish NuGet packages'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
+              ArtifactName: 'NuGetPackages'
+              publishLocation: 'Container'
+
+  # ============================================================================
+  # TEST STAGE - Download artifacts and run tests in parallel
+  # ============================================================================
+  - stage: Test
+    displayName: 'Test'
+    dependsOn: Build
+    jobs:
+      - job: TestNet8
+        displayName: 'Test on .NET 8'
+        pool:
+          vmImage: 'windows-latest'
+        steps:
+          - checkout: self
+            submodules: ${{ parameters.checkoutSubmodules }}
+
+          # Only install .NET 8 SDK for running tests
+          - task: UseDotNet@2
+            displayName: 'Install .NET 8 SDK'
+            inputs:
+              packageType: 'sdk'
+              version: '8.0.x'
+              installationPath: $(Agent.ToolsDirectory)/dotnet
+
+
+          # Download build artifacts
+          - task: DownloadPipelineArtifact@2
+            displayName: 'Download Build Artifacts'
+            inputs:
+              buildType: 'current'
+              artifactName: 'BuildOutput'
+              targetPath: '$(Build.SourcesDirectory)'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Run tests on .NET 8'
+            inputs:
+              command: 'test'
+              projects: '${{ parameters.multiTargetTestProjects }}'
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net8.0'
+              publishTestResults: false
+
+          - task: PublishTestResults@2
+            displayName: 'Publish .NET 8 test results'
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFormat: 'VSTest'
+              testResultsFiles: '$(Agent.TempDirectory)/TestResults/net8.0/**/*.trx'
+              testRunTitle: 'Tests on .NET 8'
+              mergeTestResults: true
+              failTaskOnFailedTests: true
+
+          - task: PublishCodeCoverageResults@2
+            displayName: 'Publish .NET 8 code coverage'
+            condition: succeededOrFailed()
+            inputs:
+              summaryFileLocation: '$(Agent.TempDirectory)/TestResults/net8.0/**/coverage.cobertura.xml'
+              pathToSources: '$(Build.SourcesDirectory)'
+
+      - job: TestNet10
+        displayName: 'Test on .NET 10'
+        pool:
+          vmImage: 'windows-latest'
+        steps:
+          - checkout: self
+            submodules: ${{ parameters.checkoutSubmodules }}
+
+          # Only install .NET 10 SDK for running tests
+          - task: UseDotNet@2
+            displayName: 'Install .NET 10 SDK'
+            inputs:
+              packageType: 'sdk'
+              version: '${{ parameters.dotNetCoreVersion }}'
+              installationPath: $(Agent.ToolsDirectory)/dotnet
+
+
+          # Download build artifacts
+          - task: DownloadPipelineArtifact@2
+            displayName: 'Download Build Artifacts'
+            inputs:
+              buildType: 'current'
+              artifactName: 'BuildOutput'
+              targetPath: '$(Build.SourcesDirectory)'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Run tests on .NET 10'
+            inputs:
+              command: 'test'
+              projects: '${{ parameters.multiTargetTestProjects }}'
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net10.0'
+              publishTestResults: false
+
+          - task: PublishTestResults@2
+            displayName: 'Publish .NET 10 test results'
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFormat: 'VSTest'
+              testResultsFiles: '$(Agent.TempDirectory)/TestResults/net10.0/**/*.trx'
+              testRunTitle: 'Tests on .NET 10'
+              mergeTestResults: true
+              failTaskOnFailedTests: true
+
+          - task: PublishCodeCoverageResults@2
+            displayName: 'Publish .NET 10 code coverage'
+            condition: succeededOrFailed()
+            inputs:
+              summaryFileLocation: '$(Agent.TempDirectory)/TestResults/net10.0/**/coverage.cobertura.xml'
+              pathToSources: '$(Build.SourcesDirectory)'
+
+      - job: TestIntegrationNet10
+        displayName: 'Integration Tests on .NET 10'
+        pool:
+          vmImage: 'windows-latest'
+        steps:
+          - checkout: self
+            submodules: ${{ parameters.checkoutSubmodules }}
+
+          # Only install .NET 10 SDK for running tests
+          - task: UseDotNet@2
+            displayName: 'Install .NET 10 SDK'
+            inputs:
+              packageType: 'sdk'
+              version: '${{ parameters.dotNetCoreVersion }}'
+              installationPath: $(Agent.ToolsDirectory)/dotnet
+
+
+          # Download build artifacts
+          - task: DownloadPipelineArtifact@2
+            displayName: 'Download Build Artifacts'
+            inputs:
+              buildType: 'current'
+              artifactName: 'BuildOutput'
+              targetPath: '$(Build.SourcesDirectory)'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Run integration tests on .NET 10'
+            inputs:
+              command: 'test'
+              projects: '${{ parameters.net10IntegrationTestProjects }}'
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/integration-net10.0'
+              publishTestResults: false
+
+          - task: PublishTestResults@2
+            displayName: 'Publish integration test results'
+            condition: succeededOrFailed()
+            inputs:
+              testResultsFormat: 'VSTest'
+              testResultsFiles: '$(Agent.TempDirectory)/TestResults/integration-net10.0/**/*.trx'
+              testRunTitle: 'Integration Tests on .NET 10'
+              mergeTestResults: true
+              failTaskOnFailedTests: true
+
+          - task: PublishCodeCoverageResults@2
+            displayName: 'Publish integration test code coverage'
+            condition: succeededOrFailed()
+            inputs:
+              summaryFileLocation: '$(Agent.TempDirectory)/TestResults/integration-net10.0/**/coverage.cobertura.xml'
+              pathToSources: '$(Build.SourcesDirectory)'
+      # Compare test results across frameworks
+      - job: CompareTestResults
+        displayName: 'Compare Test Results Across Frameworks'
+        dependsOn:
+          - TestNet8
+          - TestNet10
+          - TestIntegrationNet10
         condition: succeededOrFailed()
-        inputs:
-          testResultsFormat: 'VSTest'
-          testResultsFiles: '$(Agent.TempDirectory)/TestResults/integration-net10.0/**/*.trx'
-          testRunTitle: 'Integration Tests on .NET 10'
-          mergeTestResults: true
-          failTaskOnFailedTests: true
-
-      - task: PublishCodeCoverageResults@2
-        displayName: 'Publish integration test code coverage'
-        condition: succeededOrFailed()
-        inputs:
-          summaryFileLocation: '$(Agent.TempDirectory)/TestResults/integration-net10.0/**/coverage.cobertura.xml'
-          pathToSources: '$(Build.SourcesDirectory)'
-
-  - job: CompareTestResults
-    displayName: 'Compare Test Results Across Frameworks'
-    dependsOn:
-      - BuildTestSignNet8
-      - BuildTestSignNet10
-      - BuildTestIntegrationNet10
-    condition: succeededOrFailed()
-    pool:
-      vmImage: 'windows-latest'
-    variables:
-      net8Status: $[ dependencies.BuildTestSignNet8.result ]
-      net10Status: $[ dependencies.BuildTestSignNet10.result ]
-      integrationStatus: $[ dependencies.BuildTestIntegrationNet10.result ]
-    steps:
-      - powershell: |
-          Write-Host "##[section]Multi-Framework Test Comparison Report"
-          Write-Host ""
-          Write-Host "This pipeline built, tested, and signed the SDK against both .NET 8 (LTS) and .NET 10 (LTS)"
-          Write-Host "to verify identical behavior across frameworks."
-          Write-Host ""
-          
-          $net8Status = "$(net8Status)"
-          $net10Status = "$(net10Status)"
-          $integrationStatus = "$(integrationStatus)"
-          
-          Write-Host "Build, Test and Sign Results:"
-          Write-Host "  .NET 8:  $net8Status"
-          Write-Host "  .NET 10: $net10Status"
-          Write-Host ""
-          Write-Host "Integration Test Results:"
-          Write-Host "  .NET 10: $integrationStatus"
-          Write-Host ""
-          
-          if ($net8Status -eq "Succeeded" -and $net10Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded") {
-              Write-Host "##[section]✅ SUCCESS: All tests pass on both .NET 8 and .NET 10, including integration tests"
-              Write-Host "The SDK exhibits identical behavior across both LTS frameworks."
-          } elseif ($net8Status -ne $net10Status) {
-              Write-Host "##[warning]⚠️ WARNING: Test results differ between .NET 8 and .NET 10!"
-              Write-Host "This may indicate a framework-specific issue that needs investigation."
-          } elseif ($integrationStatus -ne "Succeeded") {
-              Write-Host "##[warning]⚠️ WARNING: Integration tests failed on .NET 10"
-          } else {
-              Write-Host "##[error]❌ FAILURE: Tests failed"
-          }
-        displayName: 'Compare results'
-        condition: always()
+        pool:
+          vmImage: 'windows-latest'
+        variables:
+          net8Status: $[ dependencies.TestNet8.result ]
+          net10Status: $[ dependencies.TestNet10.result ]
+          integrationStatus: $[ dependencies.TestIntegrationNet10.result ]
+        steps:
+          - powershell: |
+              Write-Host "##[section]Multi-Framework Test Comparison Report"
+              Write-Host ""
+              Write-Host "This pipeline built, tested, and signed the SDK against both .NET 8 (LTS) and .NET 10 (LTS)"
+              Write-Host "to verify identical behavior across frameworks."
+              Write-Host ""
+              
+              $net8Status = "$(net8Status)"
+              $net10Status = "$(net10Status)"
+              $integrationStatus = "$(integrationStatus)"
+              
+              Write-Host "Test Results:"
+              Write-Host "  .NET 8:  $net8Status"
+              Write-Host "  .NET 10: $net10Status"
+              Write-Host ""
+              Write-Host "Integration Test Results:"
+              Write-Host "  .NET 10: $integrationStatus"
+              Write-Host ""
+              
+              if ($net8Status -eq "Succeeded" -and $net10Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded") {
+                  Write-Host "##[section]✅ SUCCESS: All tests pass on both .NET 8 and .NET 10, including integration tests"
+                  Write-Host "The SDK exhibits identical behavior across both LTS frameworks."
+              } elseif ($net8Status -ne $net10Status) {
+                  Write-Host "##[warning]⚠️ WARNING: Test results differ between .NET 8 and .NET 10!"
+                  Write-Host "This may indicate a framework-specific issue that needs investigation."
+              } elseif ($integrationStatus -ne "Succeeded") {
+                  Write-Host "##[warning]⚠️ WARNING: Integration tests failed on .NET 10"
+              } else {
+                  Write-Host "##[error]❌ FAILURE: Tests failed"
+              }
+            displayName: 'Compare results'
+            condition: always()

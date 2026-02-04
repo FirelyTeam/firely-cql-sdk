@@ -8,9 +8,10 @@ This directory contains Azure Pipelines configuration for building, testing, and
 Main pipeline configuration that orchestrates the complete CI/CD process with the following stages:
 
 1. **checkForDocChangesStage**: Checks if only documentation changed (skips build if so)
-2. **buildTestAndSign**: Three parallel jobs that build, test, and sign for .NET 8 and .NET 10, plus integration tests
-3. **deployToGitHub**: Deploys to GitHub Packages (non-PR builds only)
-4. **deployToNuget**: Deploys to NuGet.org (release tags only)
+2. **Build**: Builds the solution once, signs assemblies (conditionally), and packages NuGet packages
+3. **Test**: Three parallel test jobs that download build artifacts and run tests
+4. **deployToGitHub**: Deploys to GitHub Packages (non-PR builds only)
+5. **deployToNuget**: Deploys to NuGet.org (release tags only)
 
 ### `variables.yml`
 Centralized variables used across pipeline configurations:
@@ -24,41 +25,70 @@ Centralized variables used across pipeline configurations:
   - `excludedTestProjects`: Projects excluded from all test runs (XsdToCSharpConverterTests, NCQA tests)
 
 ### `build-test-sign.yml`
-Reusable Azure Pipelines template that implements the complete build, test, and sign workflow. This template creates three parallel jobs:
-- **Build, Test and Sign for .NET 8**: Builds solution, tests CoreTests/CqlToElmTests on .NET 8, signs assemblies, packages NuGet packages
-- **Build, Test and Sign for .NET 10**: Builds solution, tests CoreTests/CqlToElmTests on .NET 10, signs assemblies, packages NuGet packages  
-- **Build and IntegrationRunner Test for .NET 10**: Builds solution and tests IntegrationRunner on .NET 10 (no signing/packaging)
+Reusable Azure Pipelines template that implements an optimized build-once, test-parallel workflow:
 
-All three jobs run in parallel to maximize efficiency while ensuring comprehensive testing across both target frameworks.
+**Build Stage** (single job):
+- Installs .NET 8 and .NET 10 SDKs
+- Caches Java dependencies (Maven) to avoid redundant downloads
+- Restores NuGet packages and builds the entire solution once
+- Signs assemblies using Azure Trusted Signing (conditionally - only on release tags or develop branch)
+- Packages NuGet packages
+- Publishes build artifacts for test jobs
+
+**Test Stage** (three parallel jobs):
+- **TestNet8**: Downloads artifacts, tests CoreTests/CqlToElmTests on .NET 8
+- **TestNet10**: Downloads artifacts, tests CoreTests/CqlToElmTests on .NET 10
+- **IntegrationTests**: Downloads artifacts, tests IntegrationRunner on .NET 10
+
+Each test job only installs the .NET SDK version it needs, maximizing efficiency.
 
 ## Pipeline Architecture
 
 ### Stage Dependencies
 
 ```
-checkForDocChangesStage
-        ↓
-buildTestAndSign (3 parallel jobs run simultaneously)
-    ├─ Build, Test and Sign for .NET 8
-    ├─ Build, Test and Sign for .NET 10
-    └─ Build and IntegrationRunner Test for .NET 10
-        ↓
-  deployToGitHub (GitHub Packages)
-        ↓
-  deployToNuget (NuGet.org, tags only)
+┌─────────────────────────────────────────────────────────────────┐
+│              checkForDocChangesStage                            │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│               Build, Sign & Package Stage                       │
+│  • Restore NuGet packages                                       │
+│  • Build solution                                               │
+│  • Sign assemblies (if release/develop)                         │
+│  • Pack NuGet packages (on same agent - no restore needed!)     │
+│  • Publish artifacts                                            │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    Test Stage                                   │
+│  ┌─────────────┐  ┌─────────────┐  ┌──────────────────┐        │
+│  │ TestNet8    │  │ TestNet10   │  │ TestIntegration  │        │
+│  └─────────────┘  └─────────────┘  └──────────────────┘        │
+│                   (run in parallel)                             │
+└─────────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                 Deploy to GitHub / NuGet                        │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 **Key Benefits of This Architecture**:
-- **Zero duplicate builds** - Each job builds exactly once for its purpose
-- **Maximum parallelization** - All three jobs start simultaneously
-- **Integrated build/test/sign** - No sequential dependency between build and test
-- **Independent integration tests** - IntegrationRunner doesn't block SDK packaging
-- **All tests gate deployment** - Cannot deploy unless all three jobs succeed
+- **Single build** - Solution is built exactly once, not duplicated across jobs
+- **Java dependency caching** - Maven dependencies cached to avoid redundant downloads
+- **Conditional signing** - Assemblies signed only on release tags or develop branch (not PRs), saving ~12 minutes on PR builds
+- **Optimized SDK installation** - Each test job only installs the .NET version it needs
+- **Maximum test parallelization** - All three test jobs start simultaneously after build completes
+- **Build artifacts shared** - Test jobs download pre-built artifacts instead of rebuilding
+- **All tests gate deployment** - Cannot deploy unless all test jobs succeed
 
 ## Multi-Framework Testing
 
 ### Overview
-The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to leverage .NET 10 performance improvements while maintaining broad compatibility. The `build-test-sign.yml` template implements three parallel jobs that build, test, and sign for both frameworks simultaneously to verify identical behavior and eliminate duplicate builds.
+The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to leverage .NET 10 performance improvements while maintaining broad compatibility. The `build-test-sign.yml` template implements a build-once, test-parallel workflow: a single Build stage compiles the solution once, then three parallel Test jobs verify behavior across both frameworks.
 
 ### Test Project Configuration
 
@@ -78,21 +108,20 @@ All test project specifications are centralized in `variables.yml`:
 
 ### Pipeline Integration
 
-The `buildTestAndSign` stage in `azure-pipelines.yml` uses the template with parameters from `variables.yml`:
+The `Build` and `Test` stages in `azure-pipelines.yml` use the template with parameters from `variables.yml`:
 
 ```yaml
-- stage: buildTestAndSign
-  displayName: 'Build, Test and Sign'
-  dependsOn: checkForDocChangesStage
-  jobs:
-  - template: build-test-sign.yml
-    parameters:
-      dotNetCoreVersion: $(DOTNET_CORE_SDK)
-      multiTargetTestProjects: $(multiTargetTestProjects)
-      net10IntegrationTestProjects: $(net10IntegrationTestProjects)
-      buildConfiguration: $(buildConfiguration)
-      checkoutSubmodules: 'true'
-      # Additional signing parameters...
+- template: build-test-sign.yml
+  parameters:
+    dotNetCoreVersion: $(DOTNET_CORE_SDK)
+    multiTargetTestProjects: $(multiTargetTestProjects)
+    net10IntegrationTestProjects: $(net10IntegrationTestProjects)
+    buildConfiguration: $(buildConfiguration)
+    checkoutSubmodules: 'true'
+    shouldSign: ${{ ... }}  # true only for release tags or develop branch
+    buildStageDependsOn: checkForDocChangesStage
+    buildStageCondition: ...
+    # Additional signing parameters...
 ```
 
 ### Modifying Test Configuration
@@ -119,7 +148,7 @@ variables:
 
 ### Usage
 
-Multi-framework testing is fully integrated into `azure-pipelines.yml` and runs automatically on every build (unless only documentation changed). The three parallel jobs execute simultaneously, providing fast feedback while ensuring framework parity.
+Multi-framework testing is fully integrated into `azure-pipelines.yml` and runs automatically on every build (unless only documentation changed). The Build stage completes first, then three parallel Test jobs execute simultaneously, providing fast feedback while ensuring framework parity.
 
 #### Running Tests Locally
 
@@ -155,46 +184,50 @@ dotnet test Cql-Sdk.slnf --configuration Release --framework net10.0 --no-build
 
 ### What the Template Does
 
-The `build-test-sign.yml` template creates three parallel jobs that execute simultaneously:
+The `build-test-sign.yml` template creates a two-stage pipeline optimized for efficiency:
 
-**Job 1: Build, Test and Sign for .NET 8**
-- Installs .NET 8 SDK
+**Build Stage** (single job):
+- Installs .NET 8 and .NET 10 SDKs
+- Caches Java dependencies using `Cache@2` task with `Demo/Cql/Build/pom.xml` as cache key
 - Restores NuGet packages
-- Builds entire solution targeting both net8.0 and net10.0
+- Builds entire solution targeting both net8.0 and net10.0 (single build)
+- Conditionally signs assemblies using Azure Trusted Signing (`shouldSign` parameter)
+- Packages NuGet packages with proper version suffix
+- Publishes build artifacts (BuildOutput) for test jobs
+
+**Test Stage** (three parallel jobs):
+
+**Job 1: TestNet8**
+- Installs only .NET 8 SDK
+- Downloads BuildOutput artifact
 - Tests multi-target projects (CoreTests, CqlToElmTests) on .NET 8
-- Signs assemblies using Azure Trusted Signing (`dotnet sign` tool)
-- Packages NuGet packages with proper version suffix
 - Publishes test results as "Tests on .NET 8"
-- Publishes NuGet packages artifact
 
-**Job 2: Build, Test and Sign for .NET 10**
-- Installs .NET 10 SDK
-- Restores NuGet packages
-- Builds entire solution targeting both net8.0 and net10.0
+**Job 2: TestNet10**
+- Installs only .NET 10 SDK
+- Downloads BuildOutput artifact
 - Tests multi-target projects (CoreTests, CqlToElmTests) on .NET 10
-- Signs assemblies using Azure Trusted Signing (`dotnet sign` tool)
-- Packages NuGet packages with proper version suffix
 - Publishes test results as "Tests on .NET 10"
-- Publishes NuGet packages artifact (primary artifact for deployment)
 
-**Job 3: Build and IntegrationRunner Test for .NET 10**
-- Installs .NET 10 SDK
-- Restores NuGet packages
-- Builds entire solution targeting both net8.0 and net10.0
+**Job 3: IntegrationTests**
+- Installs only .NET 10 SDK
+- Downloads BuildOutput artifact
 - Tests IntegrationRunner on .NET 10
 - Publishes test results as "Integration Tests on .NET 10"
-- No signing or packaging (integration tests are not deployed)
 
 **Job 4: CompareTestResults**
-- Runs after all three jobs complete
+- Runs after all three test jobs complete
 - Compares test results across .NET 8 and .NET 10
 - Reports framework parity status (identical vs. different behavior)
 - Identifies framework-specific test failures if any
 
 ### Benefits
 
-- ✅ **Zero Duplicate Builds**: Each job builds once - no separate build/test/sign stages
-- ✅ **Maximum Parallelization**: All three jobs execute simultaneously
+- ✅ **Single Build**: Solution built once, artifacts shared with test jobs
+- ✅ **Java Dependency Caching**: Maven dependencies cached to avoid redundant downloads across builds
+- ✅ **Conditional Signing**: Assemblies signed only on release tags or develop branch (~12 min saved on PRs)
+- ✅ **Optimized SDK Installation**: Each test job installs only the .NET version it needs
+- ✅ **Maximum Test Parallelization**: Three test jobs execute simultaneously after build
 - ✅ **Framework Parity Verification**: Ensures identical behavior across .NET 8 and .NET 10
 - ✅ **Early Detection**: Framework-specific issues caught before deployment
 - ✅ **Comprehensive Testing**: Multi-target tests + integration tests
@@ -214,6 +247,11 @@ The CompareTestResults job reports framework parity status after all tests compl
 ### Azure Trusted Signing
 
 The pipeline uses Azure Trusted Signing to sign assemblies, matching the approach in FirelyTeam/azure-pipeline-templates:
+
+**Conditional Signing**: Signing is only performed when the `shouldSign` parameter is `true`:
+- ✅ Release tags (e.g., `v1.0.0`, `refs/tags/v*`)
+- ✅ Builds merged to `develop` branch
+- ❌ Pull request builds (signing skipped to save ~12 minutes)
 
 **Signing Tool**: `dotnet sign` (version 0.9.1-beta.25379.1)
 - Installed as a .NET global tool
@@ -235,17 +273,26 @@ The pipeline uses Azure Trusted Signing to sign assemblies, matching the approac
 
 ### Current Status
 
-**Status**: ✅ **Active** - Fully operational parallel build/test/sign pipeline
+**Status**: ✅ **Active** - Optimized build-once, test-parallel pipeline
 
-The pipeline executes three jobs in parallel:
-- ✅ Build, Test and Sign for .NET 8 (multi-target tests + signing + packaging)
-- ✅ Build, Test and Sign for .NET 10 (multi-target tests + signing + packaging)
-- ✅ Build and IntegrationRunner Test for .NET 10 (integration tests only)
+The pipeline executes in two stages:
 
-All jobs must succeed before deployment stages run. This ensures:
+**Build Stage** (single job):
+- ✅ Builds solution once for both .NET 8 and .NET 10
+- ✅ Caches Java dependencies (Maven)
+- ✅ Signs assemblies conditionally (release tags/develop branch only)
+- ✅ Packages NuGet packages
+- ✅ Publishes build artifacts
+
+**Test Stage** (three parallel jobs):
+- ✅ TestNet8 - CoreTests/CqlToElmTests on .NET 8
+- ✅ TestNet10 - CoreTests/CqlToElmTests on .NET 10
+- ✅ IntegrationTests - IntegrationRunner on .NET 10
+
+All test jobs must succeed before deployment stages run. This ensures:
 - Framework parity (identical behavior on .NET 8 and .NET 10)
 - Integration test validation
-- Signed assemblies ready for distribution
+- Signed assemblies ready for distribution (when signing is enabled)
 
 ### Troubleshooting
 
@@ -273,6 +320,17 @@ All jobs must succeed before deployment stages run. This ensures:
 - **Solution**: The signing tool requires .NET 8 runtime
   - Pipeline automatically installs: `dotnet --list-runtimes`
   - Verify Azure CLI authentication is configured
+
+**Issue**: Signing is skipped unexpectedly
+- **Solution**: Signing only runs on release tags or develop branch
+  - Check the `shouldSign` parameter in azure-pipelines.yml
+  - PR builds intentionally skip signing to save time
+
+**Issue**: Java dependencies downloading on every build
+- **Solution**: The pipeline uses `Cache@2` task to cache Maven dependencies
+  - Cache key is based on `Demo/Cql/Build/pom.xml`
+  - If pom.xml changes, cache is invalidated and dependencies are re-downloaded
+  - Check cache hit/miss in the "Cache Java dependencies" step output
 
 **Issue**: NuGet pack fails with "PackageVersion string specified 'build-YYYYMMDD-N' is invalid"
 - **Solution**: Use `buildProperties: VersionSuffix=...` instead of `versioningScheme: byEnvVar`
