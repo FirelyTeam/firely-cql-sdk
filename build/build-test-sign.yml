@@ -407,3 +407,50 @@ stages:
             inputs:
               summaryFileLocation: '$(Agent.TempDirectory)/TestResults/integration-net10.0/**/coverage.cobertura.xml'
               pathToSources: '$(Build.SourcesDirectory)'
+      # Compare test results across frameworks
+      - job: CompareTestResults
+        displayName: 'Compare Test Results Across Frameworks'
+        dependsOn:
+          - TestNet8
+          - TestNet10
+          - TestIntegrationNet10
+        condition: succeededOrFailed()
+        pool:
+          vmImage: 'windows-latest'
+        variables:
+          net8Status: $[ dependencies.TestNet8.result ]
+          net10Status: $[ dependencies.TestNet10.result ]
+          integrationStatus: $[ dependencies.TestIntegrationNet10.result ]
+        steps:
+          - powershell: |
+              Write-Host "##[section]Multi-Framework Test Comparison Report"
+              Write-Host ""
+              Write-Host "This pipeline built, tested, and signed the SDK against both .NET 8 (LTS) and .NET 10 (LTS)"
+              Write-Host "to verify identical behavior across frameworks."
+              Write-Host ""
+              
+              $net8Status = "$(net8Status)"
+              $net10Status = "$(net10Status)"
+              $integrationStatus = "$(integrationStatus)"
+              
+              Write-Host "Test Results:"
+              Write-Host "  .NET 8:  $net8Status"
+              Write-Host "  .NET 10: $net10Status"
+              Write-Host ""
+              Write-Host "Integration Test Results:"
+              Write-Host "  .NET 10: $integrationStatus"
+              Write-Host ""
+              
+              if ($net8Status -eq "Succeeded" -and $net10Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded") {
+                  Write-Host "##[section]✅ SUCCESS: All tests pass on both .NET 8 and .NET 10, including integration tests"
+                  Write-Host "The SDK exhibits identical behavior across both LTS frameworks."
+              } elseif ($net8Status -ne $net10Status) {
+                  Write-Host "##[warning]⚠️ WARNING: Test results differ between .NET 8 and .NET 10!"
+                  Write-Host "This may indicate a framework-specific issue that needs investigation."
+              } elseif ($integrationStatus -ne "Succeeded") {
+                  Write-Host "##[warning]⚠️ WARNING: Integration tests failed on .NET 10"
+              } else {
+                  Write-Host "##[error]❌ FAILURE: Tests failed"
+              }
+            displayName: 'Compare results'
+            condition: always()
