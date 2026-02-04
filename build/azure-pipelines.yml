@@ -94,10 +94,15 @@ stages:
         useVersionSuffix: true
       ${{ else }}: # release mode
         useVersionSuffix: false
-      azureServiceConnectionForSigning: 'AzureTrustedSigningPrincipal'
-      trustedSigningAccountEndpoint: 'https://weu.codesigning.azure.net/'
-      trustedSigningAccountName: 'FirelyCodeSigning'
-      certificateProfileName: 'FirelyCodeSigning'
+      # Only sign on release tags or develop branch (not PRs)
+      ${{ if or(startswith(variables['Build.SourceBranch'], 'refs/tags/v'), startswith(variables['Build.SourceBranch'], 'refs/heads/develop')) }}:
+        shouldSign: true
+        azureServiceConnectionForSigning: 'AzureTrustedSigningPrincipal'
+        trustedSigningAccountEndpoint: 'https://weu.codesigning.azure.net/'
+        trustedSigningAccountName: 'FirelyCodeSigning'
+        certificateProfileName: 'FirelyCodeSigning'
+      ${{ else }}:
+        shouldSign: false
       signingKeyFileName: 'cql-sdk.snk'
       filesForSigning: >-
         $(Build.SourcesDirectory)\Cql\*\bin\Release\*\Hl7.Cql*.dll,
