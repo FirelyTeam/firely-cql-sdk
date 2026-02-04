@@ -113,7 +113,7 @@ stages:
     nuGetServiceConnections: GitHubPackageGetFeed
 
 - stage: deployToGitHub
-  dependsOn: Package
+  dependsOn: Test
   displayName: Deploy packages To Github
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
   jobs:

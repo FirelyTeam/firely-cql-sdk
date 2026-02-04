@@ -3,12 +3,12 @@
 # Optimized multi-framework build, test, and sign template for .NET 8 and .NET 10
 #
 # This template implements an optimized pipeline with separate stages:
-# 1. Build Stage - Single build job that builds once and publishes artifacts
+# 1. Build Stage - Builds, signs (if enabled), packages, and publishes artifacts
 # 2. Test Stage - Parallel test jobs download artifacts and run tests
-# 3. Package Stage - Signs (if enabled) and packages NuGet packages
 #
 # Optimizations:
-# - Build once, test in parallel (avoids duplicate builds)
+# - Build once, sign and pack on same agent (no artifact download overhead)
+# - Tests run in parallel after build
 # - Java dependencies are cached across builds
 # - Signing only happens on release tags or develop branch
 # - .NET SDKs are only installed where needed (test jobs only install what they need)
@@ -70,16 +70,16 @@ parameters:
 
 stages:
   # ============================================================================
-  # BUILD STAGE - Builds once and publishes artifacts
+  # BUILD STAGE - Builds, signs (if enabled), packages, and publishes artifacts
   # ============================================================================
   - stage: Build
-    displayName: 'Build'
+    displayName: 'Build, Sign & Package'
     ${{ if ne(parameters.buildStageDependsOn, '') }}:
       dependsOn: ${{ parameters.buildStageDependsOn }}
     condition: ${{ parameters.buildStageCondition }}
     jobs:
-      - job: BuildSolution
-        displayName: 'Build Solution'
+      - job: BuildSignPackage
+        displayName: 'Build, Sign & Package'
         pool:
           vmImage: 'windows-latest'
         variables:
@@ -88,7 +88,7 @@ stages:
           - checkout: self
             submodules: ${{ parameters.checkoutSubmodules }}
 
-          # Install .NET SDKs (only once in build stage)
+          # Install .NET SDKs
           - task: UseDotNet@2
             displayName: 'Install .NET 8 SDK'
             inputs:
@@ -135,13 +135,121 @@ stages:
               ${{ else }}:
                 arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
 
-          # Publish build artifacts for test and package stages
+          # Sign assemblies (only on release tags or develop branch)
+          - task: UseDotNet@2
+            displayName: 'Install .NET 8 runtime for signing'
+            condition: and(succeeded(), eq('${{ parameters.shouldSign }}', 'true'), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
+            inputs:
+              packageType: runtime
+              version: 8.x
+              includePreviewVersions: false
+
+          - task: AzureCLI@2
+            displayName: 'Sign assemblies with Azure Trusted Signing'
+            condition: and(succeeded(), eq('${{ parameters.shouldSign }}', 'true'), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
+            inputs:
+              azureSubscription: '${{ parameters.azureServiceConnectionForSigning }}'
+              scriptType: 'pscore'
+              scriptLocation: 'inlineScript'
+              addSpnToEnvironment: true
+              inlineScript: |
+                # Install dotnet sign tool
+                Write-Host "Installing dotnet sign tool..."
+                dotnet tool install --global sign --version 0.9.1-beta.25379.1
+
+                if ($LASTEXITCODE -ne 0) {
+                  Write-Error "Failed to install dotnet sign tool"
+                  exit 1
+                }
+
+                # Get list of files to sign
+                $filesToSign = @()
+                $patterns = "${{ parameters.filesForSigning }}" -split ','
+                $excludePatterns = "${{ parameters.filesToExcludeForSigning }}" -split ','
+
+                foreach ($pattern in $patterns) {
+                  $pattern = $pattern.Trim()
+                  if ($pattern) {
+                    $files = Get-ChildItem -Path $pattern -Recurse -ErrorAction SilentlyContinue
+                    foreach ($file in $files) {
+                      $excluded = $false
+                      foreach ($excludePattern in $excludePatterns) {
+                        $excludePattern = $excludePattern.Trim()
+                        if ($excludePattern -and $file.FullName -like "*$excludePattern*") {
+                          $excluded = $true
+                          break
+                        }
+                      }
+                      if (-not $excluded) {
+                        $filesToSign += $file.FullName
+                      }
+                    }
+                  }
+                }
+
+                if ($filesToSign.Count -eq 0) {
+                  Write-Host "No files to sign"
+                  exit 0
+                }
+
+                Write-Host "Found $($filesToSign.Count) file(s) to sign:"
+                $filesToSign | ForEach-Object { Write-Host "  $_" }
+
+                # Sign each file
+                foreach ($file in $filesToSign) {
+                  Write-Host "`nSigning file: $file"
+
+                  $signArgs = @(
+                    'code',
+                    'trusted-signing',
+                    $file,
+                    '--trusted-signing-account', '${{ parameters.trustedSigningAccountName }}',
+                    '--trusted-signing-certificate-profile', '${{ parameters.certificateProfileName }}',
+                    '--trusted-signing-endpoint', '${{ parameters.trustedSigningAccountEndpoint }}',
+                    '--azure-credential-type', 'azure-cli'
+                  )
+
+                  & sign @signArgs
+
+                  if ($LASTEXITCODE -ne 0) {
+                    Write-Error "Failed to sign file: $file"
+                    exit 1
+                  }
+
+                  Write-Host "Successfully signed: $file"
+                }
+
+                Write-Host "`nAll files signed successfully!"
+
+          # Package solution (NuGet packages already restored, no need to restore again)
+          - task: DotNetCoreCLI@2
+            displayName: 'Package solution'
+            inputs:
+              command: 'pack'
+              packagesToPack: 'Cql-Sdk.slnf'
+              configuration: '${{ parameters.buildConfiguration }}'
+              packDirectory: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
+              nobuild: true
+              ${{ if eq(parameters.useVersionSuffix, true) }}:
+                buildProperties: 'VersionSuffix=$(Build.BuildNumber)'
+              includesymbols: true
+              includesource: true
+
+          # Publish build artifacts for test stage
           - task: PublishPipelineArtifact@1
             displayName: 'Publish Build Artifacts'
             inputs:
               targetPath: '$(Build.SourcesDirectory)'
               artifact: 'BuildOutput'
               publishLocation: 'pipeline'
+
+          # Publish NuGet packages
+          - task: PublishBuildArtifacts@1
+            displayName: 'Publish NuGet packages'
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
+              ArtifactName: 'NuGetPackages'
+              publishLocation: 'Container'
 
   # ============================================================================
   # TEST STAGE - Download artifacts and run tests in parallel
@@ -311,209 +419,3 @@ stages:
             inputs:
               summaryFileLocation: '$(Agent.TempDirectory)/TestResults/integration-net10.0/**/coverage.cobertura.xml'
               pathToSources: '$(Build.SourcesDirectory)'
-
-  # ============================================================================
-  # PACKAGE STAGE - Sign (if enabled) and create NuGet packages
-  # ============================================================================
-  - stage: Package
-    displayName: 'Package'
-    dependsOn: Test
-    jobs:
-      # Sign and Package job - Only runs on release tags or develop branch
-      - job: SignAndPackage
-        displayName: 'Sign and Package'
-        condition: eq('${{ parameters.shouldSign }}', 'true')
-        pool:
-          vmImage: 'windows-latest'
-        steps:
-          - checkout: self
-            submodules: ${{ parameters.checkoutSubmodules }}
-
-          - task: UseDotNet@2
-            displayName: 'Install .NET 8 SDK'
-            inputs:
-              packageType: 'sdk'
-              version: '8.0.x'
-              installationPath: $(Agent.ToolsDirectory)/dotnet
-
-          - task: UseDotNet@2
-            displayName: 'Install .NET 10 SDK'
-            inputs:
-              packageType: 'sdk'
-              version: '${{ parameters.dotNetCoreVersion }}'
-              installationPath: $(Agent.ToolsDirectory)/dotnet
-
-          - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
-            inputs:
-              nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
-
-          # Download build artifacts
-          - task: DownloadPipelineArtifact@2
-            displayName: 'Download Build Artifacts'
-            inputs:
-              buildType: 'current'
-              artifactName: 'BuildOutput'
-              targetPath: '$(Build.SourcesDirectory)'
-
-          - task: UseDotNet@2
-            displayName: 'Install .NET 8 runtime for signing'
-            condition: and(succeeded(), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
-            inputs:
-              packageType: runtime
-              version: 8.x
-              includePreviewVersions: false
-
-          - task: AzureCLI@2
-            displayName: 'Sign assemblies with Azure Trusted Signing'
-            condition: and(succeeded(), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
-            inputs:
-              azureSubscription: '${{ parameters.azureServiceConnectionForSigning }}'
-              scriptType: 'pscore'
-              scriptLocation: 'inlineScript'
-              addSpnToEnvironment: true
-              inlineScript: |
-                # Install dotnet sign tool
-                Write-Host "Installing dotnet sign tool..."
-                dotnet tool install --global sign --version 0.9.1-beta.25379.1
-
-                if ($LASTEXITCODE -ne 0) {
-                  Write-Error "Failed to install dotnet sign tool"
-                  exit 1
-                }
-
-                # Get list of files to sign
-                $filesToSign = @()
-                $patterns = "${{ parameters.filesForSigning }}" -split ','
-                $excludePatterns = "${{ parameters.filesToExcludeForSigning }}" -split ','
-
-                foreach ($pattern in $patterns) {
-                  $pattern = $pattern.Trim()
-                  if ($pattern) {
-                    $files = Get-ChildItem -Path $pattern -Recurse -ErrorAction SilentlyContinue
-                    foreach ($file in $files) {
-                      $excluded = $false
-                      foreach ($excludePattern in $excludePatterns) {
-                        $excludePattern = $excludePattern.Trim()
-                        if ($excludePattern -and $file.FullName -like "*$excludePattern*") {
-                          $excluded = $true
-                          break
-                        }
-                      }
-                      if (-not $excluded) {
-                        $filesToSign += $file.FullName
-                      }
-                    }
-                  }
-                }
-
-                if ($filesToSign.Count -eq 0) {
-                  Write-Host "No files to sign"
-                  exit 0
-                }
-
-                Write-Host "Found $($filesToSign.Count) file(s) to sign:"
-                $filesToSign | ForEach-Object { Write-Host "  $_" }
-
-                # Sign each file
-                foreach ($file in $filesToSign) {
-                  Write-Host "`nSigning file: $file"
-
-                  $signArgs = @(
-                    'code',
-                    'trusted-signing',
-                    $file,
-                    '--trusted-signing-account', '${{ parameters.trustedSigningAccountName }}',
-                    '--trusted-signing-certificate-profile', '${{ parameters.certificateProfileName }}',
-                    '--trusted-signing-endpoint', '${{ parameters.trustedSigningAccountEndpoint }}',
-                    '--azure-credential-type', 'azure-cli'
-                  )
-
-                  & sign @signArgs
-
-                  if ($LASTEXITCODE -ne 0) {
-                    Write-Error "Failed to sign file: $file"
-                    exit 1
-                  }
-
-                  Write-Host "Successfully signed: $file"
-                }
-
-                Write-Host "`nAll files signed successfully!"
-
-          - task: DotNetCoreCLI@2
-            displayName: 'Package solution'
-            inputs:
-              command: 'pack'
-              packagesToPack: 'Cql-Sdk.slnf'
-              configuration: '${{ parameters.buildConfiguration }}'
-              packDirectory: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
-              nobuild: true
-              ${{ if eq(parameters.useVersionSuffix, true) }}:
-                buildProperties: 'VersionSuffix=$(Build.BuildNumber)'
-              includesymbols: true
-              includesource: true
-
-          - task: PublishBuildArtifacts@1
-            displayName: 'Publish NuGet packages'
-            inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
-              ArtifactName: 'NuGetPackages'
-              publishLocation: 'Container'
-
-      # Package without signing job - For PRs
-      - job: PackageWithoutSigning
-        displayName: 'Package (No Signing)'
-        condition: eq('${{ parameters.shouldSign }}', 'false')
-        pool:
-          vmImage: 'windows-latest'
-        steps:
-          - checkout: self
-            submodules: ${{ parameters.checkoutSubmodules }}
-
-          - task: UseDotNet@2
-            displayName: 'Install .NET 8 SDK'
-            inputs:
-              packageType: 'sdk'
-              version: '8.0.x'
-              installationPath: $(Agent.ToolsDirectory)/dotnet
-
-          - task: UseDotNet@2
-            displayName: 'Install .NET 10 SDK'
-            inputs:
-              packageType: 'sdk'
-              version: '${{ parameters.dotNetCoreVersion }}'
-              installationPath: $(Agent.ToolsDirectory)/dotnet
-
-          - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
-            inputs:
-              nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
-
-          # Download build artifacts
-          - task: DownloadPipelineArtifact@2
-            displayName: 'Download Build Artifacts'
-            inputs:
-              buildType: 'current'
-              artifactName: 'BuildOutput'
-              targetPath: '$(Build.SourcesDirectory)'
-
-          - task: DotNetCoreCLI@2
-            displayName: 'Package solution (unsigned)'
-            inputs:
-              command: 'pack'
-              packagesToPack: 'Cql-Sdk.slnf'
-              configuration: '${{ parameters.buildConfiguration }}'
-              packDirectory: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
-              nobuild: true
-              ${{ if eq(parameters.useVersionSuffix, true) }}:
-                buildProperties: 'VersionSuffix=$(Build.BuildNumber)'
-              includesymbols: true
-              includesource: true
-
-          - task: PublishBuildArtifacts@1
-            displayName: 'Publish NuGet packages (unsigned)'
-            inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)/NuGetPackages'
-              ArtifactName: 'NuGetPackages'
-              publishLocation: 'Container'
