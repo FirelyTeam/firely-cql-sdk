@@ -199,5 +199,49 @@ namespace Hl7.Cql.CqlToElm.Test
             var observations = (IEnumerable<Observation>)result;
             Assert.AreEqual(1, observations.Count());
         }
+
+        [TestMethod]
+        public void Retrieve_FilteredByCodeList()
+        {
+            var cqlToolkit = CreateCqlToolkit();
+            var cqlLibraryString = CqlLibraryString.Parse("""
+                                                          library Test version '1.0.0'
+                                                          using FHIR version '4.0.1'
+                                                          codesystem "LOINC": 'http://loinc.org'
+                                                          code "Systolic BP": '8480-6' from "LOINC"
+                                                          context Unfiltered
+                                                          define q: from [Observation : { "Systolic BP" }] o return o.id
+                                                          """);
+            var lib = cqlToolkit.MakeLibrary(cqlLibraryString.Cql);
+
+            Assert.IsNotNull(lib.statements);
+            Assert.AreEqual(1, lib.statements.Length);
+
+            var queryExpression = lib.statements[0].expression;
+            Assert.IsNotNull(queryExpression);
+            Assert.IsInstanceOfType(queryExpression, typeof(Query));
+
+            var query = (Query)queryExpression;
+            Assert.IsNotNull(query.source);
+            Assert.AreEqual(1, query.source.Length);
+
+            var aliasedQuerySource = query.source[0];
+            Assert.IsNotNull(aliasedQuerySource.expression);
+            Assert.IsInstanceOfType(aliasedQuerySource.expression, typeof(Retrieve));
+
+            var retrieve = (Retrieve)aliasedQuerySource.expression;
+            Assert.AreEqual("{http://hl7.org/fhir}Observation", retrieve.dataType?.Name);
+            // Note: codeProperty and codeComparator may not be set when using list syntax in retrieves
+            Assert.IsNotNull(retrieve.codes);
+            Assert.IsInstanceOfType(retrieve.codes, typeof(Elm.List));
+
+            var list = (Elm.List)retrieve.codes;
+            Assert.IsNotNull(list.element);
+            Assert.AreEqual(1, list.element.Length);
+            Assert.IsInstanceOfType(list.element[0], typeof(CodeRef));
+
+            var codeRef = (CodeRef)list.element[0];
+            Assert.AreEqual("Systolic BP", codeRef.name);
+        }
     }
 }
