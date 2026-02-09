@@ -15,6 +15,9 @@ namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
+        // Cache the UCUM system for performance
+        private static readonly Lazy<M.SystemOfUnits> _ucumSystem = new(M.UCUM.Load);
+        
         #region Abs
 
         public int? Abs(int? argument)
@@ -143,7 +146,7 @@ namespace Hl7.Cql.Operators
             try
             {
                 // Use Fhir.Metrics library for proper UCUM unit division
-                var system = M.UCUM.Load();
+                var system = _ucumSystem.Value;
                 var leftMetric = system.Metric(left.unit);
                 var rightMetric = system.Metric(right.unit);
 
@@ -165,9 +168,10 @@ namespace Hl7.Cql.Operators
 
                 return new CqlQuantity(resultQuantity.Value.ToDecimal(), resultUnit);
             }
-            catch (Exception ex) when (ex is ArgumentException or InvalidCastException)
+            catch (Exception ex)
             {
-                // If Fhir.Metrics fails, fall back to simple division for special cases
+                // If Fhir.Metrics fails to handle the division, fall back to simple division for special cases
+                // This handles cases where the units are not valid UCUM codes or other edge cases
                 if (left.unit == right.unit)
                 {
                     // Same units divide to unitless
@@ -182,7 +186,7 @@ namespace Hl7.Cql.Operators
                 }
                 else
                 {
-                    // If we can't handle it, throw the original exception
+                    // If we can't handle it, throw an exception with more context
                     throw new NotSupportedException($"Division of quantities with units '{left.unit}' and '{right.unit}' is not supported. Original error: {ex.Message}", ex);
                 }
             }

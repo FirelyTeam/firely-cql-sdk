@@ -105,9 +105,11 @@ public class CqlQuantityTests
 
         Assert.IsNotNull(result);
         Assert.AreEqual(5m, result.value);
-        // The result should be mg/mL or an equivalent UCUM representation
-        Assert.IsTrue(result.unit?.Contains("mg") == true && result.unit?.Contains("mL") == true ||
-                     result.unit?.Contains("/") == true);
+        // The result should be a compound unit
+        // Fhir.Metrics canonicalizes to UCUM format which may be "mg/mL" or "mg.mL-1"
+        Assert.IsNotNull(result.unit);
+        Assert.IsTrue(result.unit!.Contains("/") || result.unit.Contains("-1"), 
+            $"Expected compound unit (with '/' or '-1'), but got '{result.unit}'");
     }
 
     [TestMethod]

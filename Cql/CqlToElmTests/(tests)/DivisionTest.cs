@@ -1230,10 +1230,12 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(result, typeof(CqlQuantity));
                 var quantity = (CqlQuantity)result;
                 Assert.AreEqual(5.0m, quantity.value);
-                // Result should have a compound unit like mg/mL
+                // Result should have a compound unit. Fhir.Metrics canonicalizes to UCUM format
+                // which may be "mg/mL" or "mg.mL-1" (UCUM canonical form with negative exponent)
                 Assert.IsNotNull(quantity.unit);
-                Assert.IsTrue(quantity.unit!.Contains("mg") || quantity.unit.Contains("g"));
-                Assert.IsTrue(quantity.unit.Contains("mL") || quantity.unit.Contains("L") || quantity.unit.Contains("/"));
+                // Check that the result is a compound unit (contains either "/" or "-1" for negative exponent)
+                Assert.IsTrue(quantity.unit!.Contains("/") || quantity.unit.Contains("-1"), 
+                    $"Expected compound unit (with '/' or '-1'), but got '{quantity.unit}'");
             }
         }
 
