@@ -9,15 +9,11 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
-using M = Fhir.Metrics;
 
 namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
-        // Cache the UCUM system for performance
-        private static readonly Lazy<M.SystemOfUnits> _ucumSystem = new(M.UCUM.Load);
-        
         #region Abs
 
         public int? Abs(int? argument)
@@ -138,58 +134,7 @@ namespace Hl7.Cql.Operators
 
         public CqlQuantity? Divide(CqlQuantity? left, CqlQuantity? right)
         {
-            if (left == null || right == null) return null;
-            else if (left.value == null || right.value == null) return null;
-            else if (right.value == 0m) return null;
-            else if (left.unit == null || right.unit == null) return null;
-
-            try
-            {
-                // Use Fhir.Metrics library for proper UCUM unit division
-                var system = _ucumSystem.Value;
-                var leftMetric = system.Metric(left.unit);
-                var rightMetric = system.Metric(right.unit);
-
-                var leftQuantity = new M.Quantity(left.value.Value, leftMetric);
-                var rightQuantity = new M.Quantity(right.value.Value, rightMetric);
-
-                // Perform division using dimensional analysis
-                var resultQuantity = leftQuantity / rightQuantity;
-
-                // Convert back to CqlQuantity
-                var resultUnit = resultQuantity.Metric.ToString();
-                
-                // Fhir.Metrics may return empty string for dimensionless quantities
-                // Convert to "1" for consistency with CQL specification
-                if (string.IsNullOrEmpty(resultUnit))
-                {
-                    resultUnit = UCUMUnits.Default;
-                }
-
-                return new CqlQuantity(resultQuantity.Value.ToDecimal(), resultUnit);
-            }
-            catch (Exception ex)
-            {
-                // If Fhir.Metrics fails to handle the division, fall back to simple division for special cases
-                // This handles cases where the units are not valid UCUM codes or other edge cases
-                if (left.unit == right.unit)
-                {
-                    // Same units divide to unitless
-                    var newValue = left.value.Value / right.value.Value;
-                    return new CqlQuantity(newValue, UCUMUnits.Default);
-                }
-                else if (right.unit == UCUMUnits.Default)
-                {
-                    // Dividing by a unitless quantity preserves left unit
-                    var newValue = left.value.Value / right.value.Value;
-                    return new CqlQuantity(newValue, left.unit);
-                }
-                else
-                {
-                    // If we can't handle it, throw an exception with more context
-                    throw new NotSupportedException($"Division of quantities with units '{left.unit}' and '{right.unit}' is not supported. Original error: {ex.Message}", ex);
-                }
-            }
+            return Conversion.Ucum.Divide(left, right);
         }
 
         #endregion

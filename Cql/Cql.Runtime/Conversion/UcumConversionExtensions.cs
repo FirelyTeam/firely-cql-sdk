@@ -158,5 +158,72 @@ namespace Hl7.Cql.Conversion
             var metric = SYSTEM.Metric(unit);
             return new M.Quantity(value, metric);
         }
+
+        /// <summary>
+        /// Divides two CqlQuantity values using UCUM dimensional analysis.
+        /// </summary>
+        /// <param name="left">The dividend quantity.</param>
+        /// <param name="right">The divisor quantity.</param>
+        /// <returns>The result of the division, or null if the operation cannot be performed.</returns>
+        /// <remarks>
+        /// This method performs dimensional analysis according to UCUM rules:
+        /// - Same units divide to unitless (e.g., 6 'mg' / 3 'mg' = 2 '1')
+        /// - Different units create compound units (e.g., 10 'mg' / 2 'mL' = 5 'mg.mL-1')
+        /// - Division by unitless preserves left unit (e.g., 10 'mg' / 2 '1' = 5 'mg')
+        /// </remarks>
+        public static CqlQuantity? Divide(CqlQuantity? left, CqlQuantity? right)
+        {
+            if (left == null || right == null) return null;
+            else if (left.value == null || right.value == null) return null;
+            else if (right.value == 0m) return null;
+            else if (left.unit == null || right.unit == null) return null;
+
+            try
+            {
+                // Use Fhir.Metrics library for proper UCUM unit division
+                var leftMetric = SYSTEM.Metric(left.unit);
+                var rightMetric = SYSTEM.Metric(right.unit);
+
+                var leftQuantity = new M.Quantity(left.value.Value, leftMetric);
+                var rightQuantity = new M.Quantity(right.value.Value, rightMetric);
+
+                // Perform division using dimensional analysis
+                var resultQuantity = leftQuantity / rightQuantity;
+
+                // Convert back to CqlQuantity
+                var resultUnit = resultQuantity.Metric.ToString();
+                
+                // Fhir.Metrics may return empty string for dimensionless quantities
+                // Convert to "1" for consistency with CQL specification
+                if (string.IsNullOrEmpty(resultUnit))
+                {
+                    resultUnit = Abstractions.UCUMUnits.Default;
+                }
+
+                return new CqlQuantity(resultQuantity.Value.ToDecimal(), resultUnit);
+            }
+            catch (Exception)
+            {
+                // If Fhir.Metrics fails to handle the division, fall back to simple division for special cases
+                // This handles cases where the units are not valid UCUM codes or other edge cases
+                if (left.unit == right.unit)
+                {
+                    // Same units divide to unitless
+                    var newValue = left.value.Value / right.value.Value;
+                    return new CqlQuantity(newValue, Abstractions.UCUMUnits.Default);
+                }
+                else if (right.unit == Abstractions.UCUMUnits.Default)
+                {
+                    // Dividing by a unitless quantity preserves left unit
+                    var newValue = left.value.Value / right.value.Value;
+                    return new CqlQuantity(newValue, left.unit);
+                }
+                else
+                {
+                    // Cannot handle this case
+                    return null;
+                }
+            }
+        }
     }
 }
