@@ -78,4 +78,64 @@ public class CqlQuantityTests
         Assert.IsNull(negated);
     }
 
+    [TestMethod]
+    public void Divide_SameUnits_ReturnsUnitless()
+    {
+        var operators = new Hl7.Cql.Operators.CqlOperators(
+            Hl7.Cql.Runtime.FhirCqlContext.ForBundle());
+
+        var left = new CqlQuantity(6m, "mg");
+        var right = new CqlQuantity(3m, "mg");
+        var result = operators.Divide(left, right);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2m, result.value);
+        Assert.AreEqual("1", result.unit); // Unitless
+    }
+
+    [TestMethod]
+    public void Divide_DifferentUnits_ReturnsCompoundUnit()
+    {
+        var operators = new Hl7.Cql.Operators.CqlOperators(
+            Hl7.Cql.Runtime.FhirCqlContext.ForBundle());
+
+        var left = new CqlQuantity(10m, "mg");
+        var right = new CqlQuantity(2m, "mL");
+        var result = operators.Divide(left, right);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(5m, result.value);
+        // The result should be mg/mL or an equivalent UCUM representation
+        Assert.IsTrue(result.unit?.Contains("mg") == true && result.unit?.Contains("mL") == true ||
+                     result.unit?.Contains("/") == true);
+    }
+
+    [TestMethod]
+    public void Divide_ByUnitless_PreservesLeftUnit()
+    {
+        var operators = new Hl7.Cql.Operators.CqlOperators(
+            Hl7.Cql.Runtime.FhirCqlContext.ForBundle());
+
+        var left = new CqlQuantity(10m, "mg");
+        var right = new CqlQuantity(2m, "1");
+        var result = operators.Divide(left, right);
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(5m, result.value);
+        Assert.AreEqual("mg", result.unit);
+    }
+
+    [TestMethod]
+    public void Divide_ByZero_ReturnsNull()
+    {
+        var operators = new Hl7.Cql.Operators.CqlOperators(
+            Hl7.Cql.Runtime.FhirCqlContext.ForBundle());
+
+        var left = new CqlQuantity(10m, "mg");
+        var right = new CqlQuantity(0m, "mg");
+        var result = operators.Divide(left, right);
+
+        Assert.IsNull(result);
+    }
+
 }

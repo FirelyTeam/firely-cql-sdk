@@ -1205,6 +1205,38 @@ namespace Hl7.Cql.CqlToElm.Test
             }
         }
 
+        [TestMethod]
+        public void DivideQuantityDifferentUnits()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library DivideQuantityDifferentUnits version '1.0.0'
+
+                define private DivideQuantityDifferentUnits: 10.0 'mg' / 2.0 'mL'
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Divide));
+            {
+                var divide = (Divide)library.statements[0].expression;
+                Assert.IsNotNull(divide.resultTypeName);
+                Assert.AreEqual($"{{{SystemUri}}}Quantity", divide.resultTypeName.Name);
+
+                var lambda = CreateElmToolkit().Lambda(divide);
+                var dg = lambda.Compile();
+                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(CqlQuantity));
+                var quantity = (CqlQuantity)result;
+                Assert.AreEqual(5.0m, quantity.value);
+                // Result should have a compound unit like mg/mL
+                Assert.IsNotNull(quantity.unit);
+                Assert.IsTrue(quantity.unit!.Contains("mg") || quantity.unit.Contains("g"));
+                Assert.IsTrue(quantity.unit.Contains("mL") || quantity.unit.Contains("L") || quantity.unit.Contains("/"));
+            }
+        }
+
         #endregion
 
     }
