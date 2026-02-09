@@ -43,8 +43,8 @@ namespace CoreTests
             "Unexpected key 'accessLevel' (value '\"Public\"') found in actual object.",
             //now removing empty values due to JAVA ELM having many empty arrays in the output
             "(value '[]') not found in actual object.",
-// Java ELM includes default boolean values, but we omit them
-"Expected key 'strict' (value 'false') not found in actual object."
+            // Java ELM includes default boolean values, but we omit them
+            "Expected key 'strict' (value 'false') not found in actual object."
         };
 
         [TestMethod]
