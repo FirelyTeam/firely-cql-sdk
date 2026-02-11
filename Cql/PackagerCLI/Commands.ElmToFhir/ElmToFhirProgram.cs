@@ -63,9 +63,29 @@ internal sealed class ElmToFhirProgram
             if (!packOpt.ExitOnError)
                 elmToolkit = elmToolkit.SetIgnoreEnumerationExceptions();
 
-            elmToolkit = elmToolkit.AddElmFilesFromDirectory(
-                                        opt.ElmInDir,
-                                        filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
+            // Create path mapper if subdirectory preservation is requested
+            SubdirectoryPathMapper? pathMapper = opt.MaintainSubdirs switch
+            {
+                MaintainSubdirsSource.Elm => new SubdirectoryPathMapper(opt.ElmInDir),
+                MaintainSubdirsSource.Cql when opt.CqlInDir is not null => new SubdirectoryPathMapper(opt.CqlInDir),
+                _ => null
+            };
+
+            // Load ELM files with optional path tracking
+            if (pathMapper is not null && opt.MaintainSubdirs == MaintainSubdirsSource.Elm)
+            {
+                elmToolkit = elmToolkit.AddElmFilesFromDirectoryWithTracking(
+                    opt.ElmInDir,
+                    pathMapper,
+                    filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
+            }
+            else
+            {
+                elmToolkit = elmToolkit.AddElmFilesFromDirectory(
+                    opt.ElmInDir,
+                    filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
+            }
+
             if (elmToolkit.ArtifactsById.Count == 0)
             {
                 logger.LogInformation($"Exiting. No ELM libraries found in directory {opt.ElmInDir}.");
@@ -110,8 +130,9 @@ internal sealed class ElmToFhirProgram
             if (opt.CSharpOutDir is not null)
             {
                 elmToolkit
-                    .SaveCSharpFilesToDirectory(
+                    .SaveCSharpFilesToDirectoryWithSubdirs(
                         opt.CSharpOutDir,
+                        pathMapper,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
                 // Update status to "saved" for C#
@@ -126,9 +147,10 @@ internal sealed class ElmToFhirProgram
             if (opt.DllOutDir is not null)
             {
                 elmToolkit
-                    .SaveAssemblyBinariesToDirectory(
+                    .SaveAssemblyBinariesToDirectoryWithSubdirs(
                         opt.DllOutDir,
                         opt.PdbOutDir ?? opt.DllOutDir,
+                        pathMapper,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
 
@@ -146,9 +168,18 @@ internal sealed class ElmToFhirProgram
 
             if ((opt.CqlInDir, opt.FhirOutDir) is (not null, not null))
             {
+                // Load CQL files with optional path tracking if MaintainSubdirs is Cql
                 CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
-                                        .SetIgnoreEnumerationExceptions()
-                                        .AddCqlLibrariesFromDirectory(opt.CqlInDir);
+                    .SetIgnoreEnumerationExceptions();
+
+                if (pathMapper is not null && opt.MaintainSubdirs == MaintainSubdirsSource.Cql)
+                {
+                    cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectoryWithTracking(opt.CqlInDir, pathMapper);
+                }
+                else
+                {
+                    cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir);
+                }
 
                 if (cqlToolkit.ArtifactsById.Count == 0)
                 {
@@ -176,8 +207,9 @@ internal sealed class ElmToFhirProgram
                 packagingToolkit
                     .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
-                    .SaveFhirResourcesToDirectory(
+                    .SaveFhirResourcesToDirectoryWithSubdirs(
                         opt.FhirOutDir,
+                        pathMapper,
                         packOpt.JsonPretty,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 

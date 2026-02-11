@@ -72,7 +72,20 @@ public class CqlToFhirProgram
             if (!packOpt.ExitOnError)
                 cqlToolkit = cqlToolkit.SetIgnoreEnumerationExceptions();
 
-            cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir);
+            // Create path mapper if subdirectory preservation is requested
+            SubdirectoryPathMapper? pathMapper = opt.MaintainSubdirs == MaintainSubdirsSource.Cql
+                ? new SubdirectoryPathMapper(opt.CqlInDir)
+                : null;
+
+            // Load CQL files with optional path tracking
+            if (pathMapper is not null)
+            {
+                cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectoryWithTracking(opt.CqlInDir, pathMapper);
+            }
+            else
+            {
+                cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir);
+            }
 
             if (cqlToolkit.ArtifactsById.Count == 0)
             {
@@ -114,8 +127,9 @@ public class CqlToFhirProgram
 
             if (opt.ElmOutDir is not null)
             {
-                cqlToolkit.SaveElmFilesToDirectory(
+                cqlToolkit.SaveElmFilesToDirectoryWithSubdirs(
                     opt.ElmOutDir,
+                    pathMapper,
                     writeIndented: packOpt.JsonPretty,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
@@ -164,8 +178,9 @@ public class CqlToFhirProgram
             if (opt.CSharpOutDir is not null)
             {
                 elmToolkit
-                    .SaveCSharpFilesToDirectory(
+                    .SaveCSharpFilesToDirectoryWithSubdirs(
                         opt.CSharpOutDir,
+                        pathMapper,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
                 // Update status to "saved" for C#
@@ -181,9 +196,10 @@ public class CqlToFhirProgram
             {
                 elmToolkit
                     .CompileToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
-                    .SaveAssemblyBinariesToDirectory(
+                    .SaveAssemblyBinariesToDirectoryWithSubdirs(
                         opt.DllOutDir,
                         opt.PdbOutDir ?? opt.DllOutDir,
+                        pathMapper,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
 
@@ -213,8 +229,9 @@ public class CqlToFhirProgram
                 packagingToolkit
                     .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
-                    .SaveFhirResourcesToDirectory(
+                    .SaveFhirResourcesToDirectoryWithSubdirs(
                         opt.FhirOutDir,
+                        pathMapper,
                         packOpt.JsonPretty,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
