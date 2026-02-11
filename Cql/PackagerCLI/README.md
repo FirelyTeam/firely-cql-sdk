@@ -42,11 +42,12 @@ Get help for the command line tool by running any of the following commands:
 cql-package --help
 cql-package cql --help
 cql-package elm --help
+cql-package library-extract-attachments --help
 ```
 
 ### Command Reference
 
-The CQL Packager has two main commands:
+The CQL Packager has three main commands:
 
 #### `elm` Command
 
@@ -107,7 +108,23 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 **Debug Options:**
 - `--debug-symbols <None|PortablePdb|Embedded>` - Debug symbol generation (same as elm command)
 
-**Logging Options (both commands):**
+#### `library-extract-attachments` Command
+
+Extract attachments from a FHIR Library resource to individual files. This command is useful for extracting embedded CQL, ELM, C#, DLL, and PDB files from packaged FHIR Library resources.
+
+**Usage:** `cql-package library-extract-attachments [options]`
+
+**Required Options:**
+- `--library-file <file>` - FHIR Library resource file in JSON format containing embedded attachments
+
+**Output Options** (at least one must be specified):
+- `--cql-dir <directory>` - CQL output directory for extracted CQL files "*.cql"
+- `--elm-dir <directory>` - ELM output directory for extracted ELM JSON files "*.json"
+- `--csharp-dir <directory>` - C# output directory for extracted C# source code files "*.g.cs"
+- `--dll-dir <directory>` - DLL output directory for extracted .NET assembly libraries "*.dll"
+- `--pdb-dir <directory>` - PDB output directory for extracted portable debug symbol files "*.pdb"
+
+**Logging Options (all commands):**
 - `--log-append` - Append to existing log file instead of clearing
 - `--console-log-level <level>` - Minimum log level for console output
 - `--file-log-level <level>` - Minimum log level for file output
@@ -192,6 +209,28 @@ cql-package elm --elm input/elm --cs output/csharp --cs-namespace MyCompany.MyCq
 - Generates C# source code from ELM files.
 - All generated C# classes will be in the `MyCompany.MyCqlLibraries` namespace.
 - This is useful for organizing generated code in larger projects or avoiding naming conflicts.
+
+7. Extract all attachments from a FHIR Library resource:
+
+```shell
+cql-package library-extract-attachments --library-file Library-MyLibrary.json --cql-dir output/cql --elm-dir output/elm --csharp-dir output/csharp --dll-dir output/dll --pdb-dir output/pdb
+```
+
+- Extracts all embedded attachments from the FHIR Library resource file `Library-MyLibrary.json`.
+- CQL files are saved to `output/cql` as `*.cql`.
+- ELM files are saved to `output/elm` as `*.json`.
+- C# source code is saved to `output/csharp` as `*.g.cs`.
+- .NET assemblies are saved to `output/dll` as `*.dll`.
+- Debug symbols are saved to `output/pdb` as `*.pdb`.
+
+8. Extract only CQL and ELM from a FHIR Library resource:
+
+```shell
+cql-package library-extract-attachments --library-file Library-MyLibrary.json --cql-dir output/cql --elm-dir output/elm
+```
+
+- Extracts only CQL and ELM attachments from the FHIR Library resource.
+- Other attachment types (C#, DLL, PDB) are not extracted.
 
 ## Further Reading
 
