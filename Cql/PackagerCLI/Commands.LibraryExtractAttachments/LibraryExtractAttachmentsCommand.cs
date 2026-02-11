@@ -17,7 +17,7 @@ internal record LibraryExtractAttachmentsCommand
     FileInfo LibraryFile,
     DirectoryInfo? CqlDir,
     DirectoryInfo? ElmDir,
-    DirectoryInfo? CsharpDir,
+    DirectoryInfo? CSharpDir,
     DirectoryInfo? DllDir,
     DirectoryInfo? PdbDir)
 {
@@ -84,7 +84,7 @@ internal record LibraryExtractAttachmentsCommand
         (LibraryFile, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.LibraryFile)]),
         (CqlDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.CqlOutDir)]),
         (ElmDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.ElmOutDir)]),
-        (CsharpDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.CSharpOutDir)]),
+        (CSharpDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.CSharpOutDir)]),
         (DllDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.DllOutDir)]),
         (PdbDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.PdbOutDir)])
     ];

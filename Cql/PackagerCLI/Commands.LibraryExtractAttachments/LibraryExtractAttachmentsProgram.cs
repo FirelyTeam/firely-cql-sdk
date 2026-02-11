@@ -27,7 +27,7 @@ internal sealed class LibraryExtractAttachmentsProgram
             // Validate at least one output directory is specified
             if (opt.CqlOutDir is null && opt.ElmOutDir is null && opt.CSharpOutDir is null && opt.DllOutDir is null && opt.PdbOutDir is null)
             {
-                logger.LogInformation("Exiting. At least one output directory must be specified.");
+                logger.LogError("Exiting. At least one output directory must be specified.");
                 return ExitCode.NoOutputDirs;
             }
 
@@ -97,7 +97,7 @@ internal sealed class LibraryExtractAttachmentsProgram
         catch (Exception ex)
         {
             logger.LogError(ex, "Error extracting attachments from FHIR Library resource");
-            return 1;
+            return ExitCode.LibraryExtractionError;
         }
     }
 
