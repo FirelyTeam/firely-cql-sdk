@@ -27,7 +27,7 @@ public record CqlToFhirCommand
     bool? JsonPretty,
     bool? ExitOnError,
     DebugSymbolsFormat? DebugSymbols,
-    MaintainSubdirsSource? MaintainSubdirs)
+    MaintainSubdirsFromSource? MaintainSubdirsFrom)
 {
     public const string Name =
         "cql";
@@ -121,8 +121,8 @@ public record CqlToFhirCommand
             (Used with --cs or --dll)
             """),
 
-        Option<MaintainSubdirsSource>(
-            "--maintain-subdirs",
+        Option<MaintainSubdirsFromSource>(
+            "--maintain-subdirs-from",
             """
             Preserve the subdirectory hierarchy from the specified input directory when outputting files.
             Options are:
@@ -146,6 +146,6 @@ public record CqlToFhirCommand
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
-        (MaintainSubdirs, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.MaintainSubdirs)]),
+        (MaintainSubdirsFrom, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.MaintainSubdirsFrom)]),
     ];
 }

@@ -19,5 +19,5 @@ internal record ElmToFhirOptions : IBindOptions
     public DirectoryInfo? DllOutDir { get; set; }
     public DirectoryInfo? PdbOutDir { get; set; }
     public required DirectoryInfo? FhirOutDir { get; set; }
-    public MaintainSubdirsSource MaintainSubdirs { get; set; } = MaintainSubdirsSource.None;
+    public MaintainSubdirsFromSource MaintainSubdirsFrom { get; set; } = MaintainSubdirsFromSource.None;
 }

@@ -64,15 +64,15 @@ internal sealed class ElmToFhirProgram
                 elmToolkit = elmToolkit.SetIgnoreEnumerationExceptions();
 
             // Create path mapper if subdirectory preservation is requested
-            SubdirectoryPathMapper? pathMapper = opt.MaintainSubdirs switch
+            SubdirectoryPathMapper? pathMapper = opt.MaintainSubdirsFrom switch
             {
-                MaintainSubdirsSource.Elm => new SubdirectoryPathMapper(opt.ElmInDir),
-                MaintainSubdirsSource.Cql when opt.CqlInDir is not null => new SubdirectoryPathMapper(opt.CqlInDir),
+                MaintainSubdirsFromSource.Elm => new SubdirectoryPathMapper(opt.ElmInDir),
+                MaintainSubdirsFromSource.Cql when opt.CqlInDir is not null => new SubdirectoryPathMapper(opt.CqlInDir),
                 _ => null
             };
 
             // Load ELM files with optional path tracking
-            if (pathMapper is not null && opt.MaintainSubdirs == MaintainSubdirsSource.Elm)
+            if (pathMapper is not null && opt.MaintainSubdirsFrom == MaintainSubdirsFromSource.Elm)
             {
                 elmToolkit = elmToolkit.AddElmFilesFromDirectoryWithTracking(
                     opt.ElmInDir,
@@ -168,11 +168,11 @@ internal sealed class ElmToFhirProgram
 
             if ((opt.CqlInDir, opt.FhirOutDir) is (not null, not null))
             {
-                // Load CQL files with optional path tracking if MaintainSubdirs is Cql
+                // Load CQL files with optional path tracking if MaintainSubdirsFrom is Cql
                 CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                     .SetIgnoreEnumerationExceptions();
 
-                if (pathMapper is not null && opt.MaintainSubdirs == MaintainSubdirsSource.Cql)
+                if (pathMapper is not null && opt.MaintainSubdirsFrom == MaintainSubdirsFromSource.Cql)
                 {
                     cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectoryWithTracking(opt.CqlInDir, pathMapper);
                 }

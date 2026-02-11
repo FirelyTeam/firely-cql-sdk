@@ -11,7 +11,7 @@ namespace Hl7.Cql.Packager.Options;
 /// <summary>
 /// Specifies which input directory structure should be preserved in output directories.
 /// </summary>
-public enum MaintainSubdirsSource
+public enum MaintainSubdirsFromSource
 {
     /// <summary>
     /// Do not preserve subdirectory structure (default behavior - flatten all outputs).

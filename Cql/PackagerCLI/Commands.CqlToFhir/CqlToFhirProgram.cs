@@ -73,7 +73,7 @@ public class CqlToFhirProgram
                 cqlToolkit = cqlToolkit.SetIgnoreEnumerationExceptions();
 
             // Create path mapper if subdirectory preservation is requested
-            SubdirectoryPathMapper? pathMapper = opt.MaintainSubdirs == MaintainSubdirsSource.Cql
+            SubdirectoryPathMapper? pathMapper = opt.MaintainSubdirsFrom == MaintainSubdirsFromSource.Cql
                 ? new SubdirectoryPathMapper(opt.CqlInDir)
                 : null;
 

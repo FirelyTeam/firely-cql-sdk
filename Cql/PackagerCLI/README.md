@@ -80,7 +80,7 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
   - `Embedded` - Debug symbols embedded in DLL with C# source
 
 **Directory Structure Options:**
-- `--maintain-subdirs <None|Cql|Elm>` - Preserve subdirectory hierarchy from input to output:
+- `--maintain-subdirs-from <None|Cql|Elm>` - Preserve subdirectory hierarchy from input to output:
   - `None` (DEFAULT) - Flatten all output files into output directory root
   - `Cql` - Preserve subdirectory structure from CQL input directory (requires --cql)
   - `Elm` - Preserve subdirectory structure from ELM input directory
@@ -114,7 +114,7 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 - `--debug-symbols <None|PortablePdb|Embedded>` - Debug symbol generation (same as elm command)
 
 **Directory Structure Options:**
-- `--maintain-subdirs <None|Cql|Elm>` - Preserve subdirectory hierarchy from input to output:
+- `--maintain-subdirs-from <None|Cql|Elm>` - Preserve subdirectory hierarchy from input to output:
   - `None` (DEFAULT) - Flatten all output files into output directory root
   - `Cql` - Preserve subdirectory structure from CQL input directory
   - `Elm` - Preserve subdirectory structure from ELM input directory
@@ -208,7 +208,7 @@ cql-package elm --elm input/elm --cs output/csharp --cs-namespace MyCompany.MyCq
 7. Preserve subdirectory structure from CQL input:
 
 ```shell
-cql-package cql --cql input/cql --elm output/elm --cs output/csharp --maintain-subdirs cql
+cql-package cql --cql input/cql --elm output/elm --cs output/csharp --maintain-subdirs-from cql
 ```
 
 - Processes CQL files from `input/cql` including all subdirectories.

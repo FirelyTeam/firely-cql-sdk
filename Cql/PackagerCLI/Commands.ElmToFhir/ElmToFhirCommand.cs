@@ -27,7 +27,7 @@ internal record ElmToFhirCommand
     bool? JsonPretty,
     bool? ExitOnError,
     DebugSymbolsFormat? DebugSymbols,
-    MaintainSubdirsSource? MaintainSubdirs)
+    MaintainSubdirsFromSource? MaintainSubdirsFrom)
 {
     public const string Name =
         "elm";
@@ -118,8 +118,8 @@ internal record ElmToFhirCommand
             (Used with --cs or --dll)
             """),
 
-        Option<MaintainSubdirsSource>(
-            "--maintain-subdirs",
+        Option<MaintainSubdirsFromSource>(
+            "--maintain-subdirs-from",
             """
             Preserve the subdirectory hierarchy from the specified input directory when outputting files.
             Options are:
@@ -148,6 +148,6 @@ internal record ElmToFhirCommand
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
-        (MaintainSubdirs, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.MaintainSubdirs)]),
+        (MaintainSubdirsFrom, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.MaintainSubdirsFrom)]),
     ];
 }
