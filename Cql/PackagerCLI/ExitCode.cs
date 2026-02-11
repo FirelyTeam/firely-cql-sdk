@@ -20,4 +20,7 @@ internal static class ExitCode
     public const int PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb = 7;
     public const int DllDirIsRequiredWhenPdbDirIsSpecified = 8;
     public const int PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb = 9;
+    public const int NoInputFiles = 10;
+    public const int InvalidLibraryJson = 11;
+    public const int UnknownError = 99;
 }
