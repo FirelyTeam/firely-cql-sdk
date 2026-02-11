@@ -6,11 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Packager.Commands.LibraryExtractAttachments;
+namespace Hl7.Cql.Packager.Commands.ExtractLibraryAttachments;
 
-internal record LibraryExtractAttachmentsOptions : IBindOptions
+internal record ExtractLibraryAttachmentsOptions : IBindOptions
 {
-    public const string ConfigSection = "LibraryExtractAttachments";
+    public const string ConfigSection = "ExtractLibraryAttachments";
     static string IBindOptions.ConfigSection => ConfigSection;
 
     public required FileInfo LibraryFile { get; set; }

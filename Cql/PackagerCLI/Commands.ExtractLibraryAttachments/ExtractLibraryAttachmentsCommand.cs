@@ -8,10 +8,10 @@
 
 using Hl7.Cql.Packager.Options;
 
-namespace Hl7.Cql.Packager.Commands.LibraryExtractAttachments;
+namespace Hl7.Cql.Packager.Commands.ExtractLibraryAttachments;
 
 [UsedImplicitly]
-internal record LibraryExtractAttachmentsCommand
+internal record ExtractLibraryAttachmentsCommand
 (
     // Do not rename these properties, they must match the command line options
     FileInfo LibraryFile,
@@ -21,7 +21,7 @@ internal record LibraryExtractAttachmentsCommand
     DirectoryInfo? DllDir,
     DirectoryInfo? PdbDir)
 {
-    public const string Name = "library-extract-attachments";
+    public const string Name = "extract-library-attachments";
 
     public static readonly string Description =
         "Extract attachments from a FHIR Library resource to individual files. " +
@@ -77,15 +77,15 @@ internal record LibraryExtractAttachmentsCommand
     public static Command CreateCommand() =>
         new Command(Name, Description)
             .AddOptions(Options)
-            .SetHandler(typeof(LibraryExtractAttachmentsProgram), nameof(LibraryExtractAttachmentsProgram.CommandHandler));
+            .SetHandler(typeof(ExtractLibraryAttachmentsProgram), nameof(ExtractLibraryAttachmentsProgram.CommandHandler));
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [
-        (LibraryFile, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.LibraryFile)]),
-        (CqlDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.CqlOutDir)]),
-        (ElmDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.ElmOutDir)]),
-        (CSharpDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.CSharpOutDir)]),
-        (DllDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.DllOutDir)]),
-        (PdbDir, [LibraryExtractAttachmentsOptions.ConfigSection, nameof(LibraryExtractAttachmentsOptions.PdbOutDir)])
+        (LibraryFile, [ExtractLibraryAttachmentsOptions.ConfigSection, nameof(ExtractLibraryAttachmentsOptions.LibraryFile)]),
+        (CqlDir, [ExtractLibraryAttachmentsOptions.ConfigSection, nameof(ExtractLibraryAttachmentsOptions.CqlOutDir)]),
+        (ElmDir, [ExtractLibraryAttachmentsOptions.ConfigSection, nameof(ExtractLibraryAttachmentsOptions.ElmOutDir)]),
+        (CSharpDir, [ExtractLibraryAttachmentsOptions.ConfigSection, nameof(ExtractLibraryAttachmentsOptions.CSharpOutDir)]),
+        (DllDir, [ExtractLibraryAttachmentsOptions.ConfigSection, nameof(ExtractLibraryAttachmentsOptions.DllOutDir)]),
+        (PdbDir, [ExtractLibraryAttachmentsOptions.ConfigSection, nameof(ExtractLibraryAttachmentsOptions.PdbOutDir)])
     ];
 }

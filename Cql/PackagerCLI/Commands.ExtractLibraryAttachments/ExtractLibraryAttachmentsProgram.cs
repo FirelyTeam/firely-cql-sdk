@@ -11,12 +11,12 @@ using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Fhir.Model;
 
-namespace Hl7.Cql.Packager.Commands.LibraryExtractAttachments;
+namespace Hl7.Cql.Packager.Commands.ExtractLibraryAttachments;
 
-internal sealed class LibraryExtractAttachmentsProgram
+internal sealed class ExtractLibraryAttachmentsProgram
 (
-    ILogger<LibraryExtractAttachmentsProgram> logger,
-    IOptions<LibraryExtractAttachmentsOptions> extractAttachmentsOptions) : IProgram
+    ILogger<ExtractLibraryAttachmentsProgram> logger,
+    IOptions<ExtractLibraryAttachmentsOptions> extractAttachmentsOptions) : IProgram
 {
     public int Run()
     {
@@ -166,12 +166,12 @@ internal sealed class LibraryExtractAttachmentsProgram
         IConsole console,
         LoggingCommand loggingCommand,
         GlobalCommand globalCommand,
-        LibraryExtractAttachmentsCommand extractAttachmentsCommand) =>
-        RunProgram<LibraryExtractAttachmentsProgram>(
+        ExtractLibraryAttachmentsCommand extractAttachmentsCommand) =>
+        RunProgram<ExtractLibraryAttachmentsProgram>(
             console,
             loggingCommand,
             globalCommand,
             extractAttachmentsCommand.GetConfigMapping,
             (_, services) =>
-                services.AddAndBindOptions<LibraryExtractAttachmentsOptions>());
+                services.AddAndBindOptions<ExtractLibraryAttachmentsOptions>());
 }

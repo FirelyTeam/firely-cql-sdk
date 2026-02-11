@@ -42,7 +42,7 @@ Get help for the command line tool by running any of the following commands:
 cql-package --help
 cql-package cql --help
 cql-package elm --help
-cql-package library-extract-attachments --help
+cql-package extract-library-attachments --help
 ```
 
 ### Command Reference
@@ -108,11 +108,11 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 **Debug Options:**
 - `--debug-symbols <None|PortablePdb|Embedded>` - Debug symbol generation (same as elm command)
 
-#### `library-extract-attachments` Command
+#### `extract-library-attachments` Command
 
 Extract attachments from a FHIR Library resource to individual files. This command is useful for extracting embedded CQL, ELM, C#, DLL, and PDB files from packaged FHIR Library resources.
 
-**Usage:** `cql-package library-extract-attachments [options]`
+**Usage:** `cql-package extract-library-attachments [options]`
 
 **Required Options:**
 - `--library-file <file>` - FHIR Library resource file in JSON format containing embedded attachments
@@ -213,7 +213,7 @@ cql-package elm --elm input/elm --cs output/csharp --cs-namespace MyCompany.MyCq
 7. Extract all attachments from a FHIR Library resource:
 
 ```shell
-cql-package library-extract-attachments --library-file Library-MyLibrary.json --cql-dir output/cql --elm-dir output/elm --csharp-dir output/csharp --dll-dir output/dll --pdb-dir output/pdb
+cql-package extract-library-attachments --library-file Library-MyLibrary.json --cql-dir output/cql --elm-dir output/elm --csharp-dir output/csharp --dll-dir output/dll --pdb-dir output/pdb
 ```
 
 - Extracts all embedded attachments from the FHIR Library resource file `Library-MyLibrary.json`.
@@ -226,7 +226,7 @@ cql-package library-extract-attachments --library-file Library-MyLibrary.json --
 8. Extract only CQL and ELM from a FHIR Library resource:
 
 ```shell
-cql-package library-extract-attachments --library-file Library-MyLibrary.json --cql-dir output/cql --elm-dir output/elm
+cql-package extract-library-attachments --library-file Library-MyLibrary.json --cql-dir output/cql --elm-dir output/elm
 ```
 
 - Extracts only CQL and ELM attachments from the FHIR Library resource.
