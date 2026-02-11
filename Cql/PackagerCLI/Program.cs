@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Packager.Commands.CqlToFhir;
 using Hl7.Cql.Packager.Commands.ElmToFhir;
+using Hl7.Cql.Packager.Commands.ExtractLibraryAttachments;
 using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Commands.ReplaceLibraryAttachments;
@@ -57,6 +58,7 @@ public class Program
 
         rootCommand.AddCommand(ElmToFhirCommand.CreateCommand());
         rootCommand.AddCommand(CqlToFhirCommand.CreateCommand());
+        rootCommand.AddCommand(ExtractLibraryAttachmentsCommand.CreateCommand());
         rootCommand.AddCommand(ReplaceLibraryAttachmentsCommand.CreateCommand());
 
         var systemConsole = new SystemConsole();

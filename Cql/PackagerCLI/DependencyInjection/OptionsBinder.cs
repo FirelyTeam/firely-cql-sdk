@@ -50,7 +50,10 @@ public static class OptionsBinder
                                     property.SetValue(options, new DirectoryInfo(dirValue));
                                 break;
 
-                            case var type when type == typeof(FileInfo):
+                            case
+                            {
+                                Name: "FileInfo"
+                            } type when type == typeof(FileInfo):
 
                                 var fileValue = configuration[$"{configSectionPath}:{property.Name}"];
                                 if (!string.IsNullOrEmpty(fileValue))
