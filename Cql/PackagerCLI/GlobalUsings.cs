@@ -32,5 +32,6 @@ global using Microsoft.Extensions.Hosting;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Logging.Abstractions;
 global using Microsoft.Extensions.Options;
+global using Hl7.Cql.Packager.Options;
 global using static System.FormattableString;
 global using static Hl7.Cql.Packager.GlobalMethods;

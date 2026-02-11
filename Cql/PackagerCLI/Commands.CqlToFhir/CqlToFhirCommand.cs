@@ -26,7 +26,8 @@ public record CqlToFhirCommand
     string? CSharpNamespace,
     bool? JsonPretty,
     bool? ExitOnError,
-    DebugSymbolsFormat? DebugSymbols)
+    DebugSymbolsFormat? DebugSymbols,
+    MaintainSubdirsSource? MaintainSubdirs)
 {
     public const string Name =
         "cql";
@@ -118,6 +119,16 @@ public record CqlToFhirCommand
             """
             The C# namespace to use for generated code.
             (Used with --cs or --dll)
+            """),
+
+        Option<MaintainSubdirsSource>(
+            "--maintain-subdirs",
+            """
+            Preserve the subdirectory hierarchy from the specified input directory when outputting files.
+            Options are:
+            - None (DEFAULT) = Flatten all output files into the output directory root.
+            - Cql = Preserve the subdirectory structure from the CQL input directory.
+            - Elm = Preserve the subdirectory structure from the ELM input directory.
             """)
     ];
 
@@ -135,5 +146,6 @@ public record CqlToFhirCommand
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
+        (MaintainSubdirs, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.MaintainSubdirs)]),
     ];
 }
