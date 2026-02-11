@@ -79,6 +79,7 @@ internal static class PackagerCliServiceCollectionExtensions
                 bool b            => b ? "true" : "false",
                 string s          => s,
                 DirectoryInfo di  => di.FullName,
+                FileInfo fi       => fi.FullName,
                 DateTimeOffset dt => dt.ToString("u", CultureInfo.InvariantCulture),
                 Enum e            => e.ToString(),
                 { } o             => throw new NotSupportedException($"Unsupported type: {o.GetType()}"),
