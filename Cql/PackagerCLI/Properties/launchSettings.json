@@ -129,23 +129,16 @@
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     },
-    "PackageCLI (Extract: Demo Library - All Attachments)": {
+    "PackageCLI (dqm-content-qicore-2025) Extract: All Attachments for CMS56FHIRFuncStatHipReplacement": {
       "commandName": "Project",
-      "commandLineArgs": "library-extract-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/Demo/Resources/Library-Example.json\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Extracted/Elm\" --csharp-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Extracted/CSharp\" --dll-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Extracted/Assemblies\" --pdb-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Extracted/DebugSymbols\" ",
+      "commandLineArgs": "library-extract-attachments --library-file \"$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Elm\" --csharp-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/CSharp\" --dll-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Assemblies\" --pdb-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/DebugSymbols\" ",
       "environmentVariables": {
-        "CQLPACKAGE_PROFILE": "Demo"
+        "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     },
-    "PackageCLI (Extract: Demo Library - CQL and ELM Only)": {
+    "PackageCLI (dqm-content-qicore-2025) Extract: CQL and ELM Only for CMS56FHIRFuncStatHipReplacement": {
       "commandName": "Project",
-      "commandLineArgs": "library-extract-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/Demo/Resources/Library-Example.json\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Extracted/Elm\" ",
-      "environmentVariables": {
-        "CQLPACKAGE_PROFILE": "Demo"
-      }
-    },
-    "PackageCLI (Extract: dqm-content-qicore-2025 Library - All Attachments)": {
-      "commandName": "Project",
-      "commandLineArgs": "library-extract-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Resources/Library-Example.json\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Elm\" --csharp-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/CSharp\" --dll-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Assemblies\" --pdb-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/DebugSymbols\" ",
+      "commandLineArgs": "library-extract-attachments --library-file \"$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Elm\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
