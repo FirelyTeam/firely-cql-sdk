@@ -79,6 +79,12 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
   - `PortablePdb` - Separate PDB files, no optimizations
   - `Embedded` - Debug symbols embedded in DLL with C# source
 
+**Directory Structure Options:**
+- `--maintain-subdirs <None|Cql|Elm>` - Preserve subdirectory hierarchy from input to output:
+  - `None` (DEFAULT) - Flatten all output files into output directory root
+  - `Cql` - Preserve subdirectory structure from CQL input directory (requires --cql)
+  - `Elm` - Preserve subdirectory structure from ELM input directory
+
 #### `cql` Command
 
 Start from CQL files and convert to one or more of the following outputs: ELM, C#, DLL, PDB, FHIR Resources.
@@ -106,6 +112,12 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 
 **Debug Options:**
 - `--debug-symbols <None|PortablePdb|Embedded>` - Debug symbol generation (same as elm command)
+
+**Directory Structure Options:**
+- `--maintain-subdirs <None|Cql|Elm>` - Preserve subdirectory hierarchy from input to output:
+  - `None` (DEFAULT) - Flatten all output files into output directory root
+  - `Cql` - Preserve subdirectory structure from CQL input directory
+  - `Elm` - Preserve subdirectory structure from ELM input directory
 
 **Logging Options (both commands):**
 - `--log-append` - Append to existing log file instead of clearing
@@ -192,6 +204,17 @@ cql-package elm --elm input/elm --cs output/csharp --cs-namespace MyCompany.MyCq
 - Generates C# source code from ELM files.
 - All generated C# classes will be in the `MyCompany.MyCqlLibraries` namespace.
 - This is useful for organizing generated code in larger projects or avoiding naming conflicts.
+
+7. Preserve subdirectory structure from CQL input:
+
+```shell
+cql-package cql --cql input/cql --elm output/elm --cs output/csharp --maintain-subdirs cql
+```
+
+- Processes CQL files from `input/cql` including all subdirectories.
+- Preserves the subdirectory structure from the CQL input directory in all outputs.
+- For example, `input/cql/folder1/Library1.cql` → `output/elm/folder1/Library1-1.0.0.json`
+- Useful when organizing libraries in a hierarchical structure (e.g., by domain, version, or module).
 
 ## Further Reading
 
