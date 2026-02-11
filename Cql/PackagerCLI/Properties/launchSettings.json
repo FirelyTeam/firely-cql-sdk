@@ -1,142 +1,142 @@
 {
   "profiles": {
-    "PackageCLI (--help)": {
+    "PackageCLI Help": {
       "commandName": "Project",
       "commandLineArgs": "--help"
     },
-    "PackageCLI (cql --help)": {
+    "PackageCLI cql Help": {
       "commandName": "Project",
       "commandLineArgs": "cql --help"
     },
-    "PackageCLI (elm --help)": {
+    "PackageCLI elm Help": {
       "commandName": "Project",
       "commandLineArgs": "elm --help"
     },
-    "PackageCLI (extract-library-attachments --help)": {
+    "PackageCLI extract-library-attachments Help": {
       "commandName": "Project",
       "commandLineArgs": "extract-library-attachments --help"
     },
-    "PackageCLI (--version)": {
+    "PackageCLI version": {
       "commandName": "Project",
       "commandLineArgs": "--version"
     },
-    "PackageCLI (No commands)": {
+    "PackageCLI (empty)": {
       "commandName": "Project",
       "commandLineArgs": ""
     },
-    "PackageCLI (Demo CQL->ELM)": {
+    "PackageCLI cql (Demo CQL->ELM)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/ElmOut\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (Demo CQL->FHIR)": {
+    "PackageCLI cql (Demo CQL->FHIR)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (Demo CQL->DLL with PDB in separate folder->FHIR)": {
+    "PackageCLI cql (Demo CQL->DLL with PDB in separate folder->FHIR)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/DebugSymbols\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols PortablePdb",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (Demo CQL->DLL with PDB in DLL folder->FHIR)": {
+    "PackageCLI cql (Demo CQL->DLL with PDB in DLL folder->FHIR)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols PortablePdb",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (Demo CQL->DLL with embedded PDB->FHIR)": {
+    "PackageCLI cql (Demo CQL->DLL with embedded PDB->FHIR)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols Embedded",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (Demo ELM->FHIR)": {
+    "PackageCLI elm (Demo ELM->FHIR)": {
       "commandName": "Project",
       "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (Demo ELM->FHIR, Command Line Args overriding AppSettings)": {
+    "PackageCLI elm (Demo ELM->FHIR, Command Line Args overriding AppSettings)": {
       "commandName": "Project",
       "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --json-pretty --override-utc-date-time \"2000-01-01T00:00:00.000Z\" --console-log-level \"Debug\" --log-append --canonical-root-url \"https://fire.ly/acme/\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (Demo ExitCode:PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb)": {
+    "PackageCLI cql (Demo ExitCode:PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/DebugSymbols\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols None",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (Demo ExitCode:PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb)": {
+    "PackageCLI cql (Demo ExitCode:PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols PortablePdb",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (Demo ExitCode:DllDirIsRequiredWhenPdbDirIsSpecified)": {
+    "PackageCLI cql (Demo ExitCode:DllDirIsRequiredWhenPdbDirIsSpecified)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --pdb \"$(CqlSolutionDir)/LibrarySets/Demo/DebugSymbols\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --debug-symbols PortablePdb",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (CoreTests CQL->C#)": {
+    "PackageCLI cql (CoreTests CQL->C#)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/Cql/CoreTests/Input/ELM/HL7\" --cs \"$(CqlSolutionDir)/Cql/CoreTests/CSharp\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "CoreTests"
       }
     },
-    "PackageCLI (Measures.Authoring)": {
+    "PackageCLI elm (Measures.Authoring)": {
       "commandName": "Project",
       "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
-    "PackageCLI (RR23 CQL->FHIR)": {
+    "PackageCLI cql (RR23 CQL->FHIR)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/RR23/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/RR23/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/RR23/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/RR23/Assemblies\" --cs \"$(CqlSolutionDir)/LibrarySets/RR23/CSharp\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "RR23"
       }
     },
-    "PackageCLI (Ncqa.DQIC)": {
+    "PackageCLI elm (Ncqa.DQIC)": {
       "commandName": "Project",
       "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Cql\" --elm \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Elm\" --fhir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Resources\" --cs \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/CSharp\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "NCQA.DQIC"
       }
     },
-    "PackageCLI (dqm-content-qicore-2025)": {
+    "PackageCLI elm (dqm-content-qicore-2025)": {
       "commandName": "Project",
       "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.dqm-content-qicore-2025/CSharp\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     },
-    "PackageCLI (dqm-content-qicore-2025) Extract: All Attachments for CMS56FHIRFuncStatHipReplacement": {
+    "PackageCLI extract-library-attachments (dqm-content-qicore-2025 | All Attachments for CMS56FHIRFuncStatHipReplacement)": {
       "commandName": "Project",
       "commandLineArgs": "extract-library-attachments --library-file \"$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Elm\" --csharp-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/CSharp\" --dll-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Assemblies\" --pdb-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/DebugSymbols\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     },
-    "PackageCLI (dqm-content-qicore-2025) Extract: CQL and ELM Only for CMS56FHIRFuncStatHipReplacement": {
+    "PackageCLI extract-library-attachments (dqm-content-qicore-2025 | CQL and ELM Only for CMS56FHIRFuncStatHipReplacement)": {
       "commandName": "Project",
       "commandLineArgs": "extract-library-attachments --library-file \"$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Elm\" ",
       "environmentVariables": {
