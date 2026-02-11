@@ -43,11 +43,11 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             try
             {
                 library = JsonSerializer.Deserialize<Library>(libraryJson, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector))
-                    ?? throw new InvalidOperationException("Failed to deserialize FHIR library.");
+                    ?? throw new InvalidOperationException($"Failed to deserialize FHIR library from {opt.LibraryFile.FullName}. Please verify the file contains valid FHIR Library JSON.");
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Failed to parse FHIR library JSON.");
+                logger.LogError(ex, "Failed to parse FHIR library JSON from {LibraryFile}. Please verify the file contains valid FHIR Library JSON.", opt.LibraryFile.FullName);
                 return ExitCode.InvalidLibraryJson;
             }
 
@@ -68,11 +68,25 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             int replacedCount = 0;
             int addedCount = 0;
 
-            replacedCount += ReplaceOrAddAttachment(library, opt.CqlFile, libraryIdentifier, "+cql", "text/cql", ref addedCount);
-            replacedCount += ReplaceOrAddAttachment(library, opt.ElmFile, libraryIdentifier, "+elm", "application/elm+json", ref addedCount);
-            replacedCount += ReplaceOrAddAttachment(library, opt.CSharpFile, libraryIdentifier, "+csharp", "text/plain", ref addedCount);
-            replacedCount += ReplaceOrAddAttachment(library, opt.DllFile, libraryIdentifier, "+dll", "application/octet-stream", ref addedCount);
-            replacedCount += ReplaceOrAddAttachment(library, opt.PdbFile, libraryIdentifier, "+pdb", "application/octet-stream", ref addedCount);
+            var (replaced, added) = ReplaceOrAddAttachment(library, opt.CqlFile, libraryIdentifier, "+cql", "text/cql");
+            replacedCount += replaced;
+            addedCount += added;
+
+            (replaced, added) = ReplaceOrAddAttachment(library, opt.ElmFile, libraryIdentifier, "+elm", "application/elm+json");
+            replacedCount += replaced;
+            addedCount += added;
+
+            (replaced, added) = ReplaceOrAddAttachment(library, opt.CSharpFile, libraryIdentifier, "+csharp", "text/plain");
+            replacedCount += replaced;
+            addedCount += added;
+
+            (replaced, added) = ReplaceOrAddAttachment(library, opt.DllFile, libraryIdentifier, "+dll", "application/octet-stream");
+            replacedCount += replaced;
+            addedCount += added;
+
+            (replaced, added) = ReplaceOrAddAttachment(library, opt.PdbFile, libraryIdentifier, "+pdb", "application/octet-stream");
+            replacedCount += replaced;
+            addedCount += added;
 
             logger.LogInformation("Replaced {ReplacedCount} attachment(s), added {AddedCount} new attachment(s).", replacedCount, addedCount);
 
@@ -93,21 +107,20 @@ internal sealed class ReplaceLibraryAttachmentsProgram
         }
     }
 
-    private int ReplaceOrAddAttachment(
+    private (int replaced, int added) ReplaceOrAddAttachment(
         Library library,
         FileInfo? attachmentFile,
         string libraryIdentifier,
         string idSuffix,
-        string contentType,
-        ref int addedCount)
+        string contentType)
     {
         if (attachmentFile == null)
-            return 0;
+            return (0, 0);
 
         if (!attachmentFile.Exists)
         {
             logger.LogWarning("Attachment file not found, skipping: {FilePath}", attachmentFile.FullName);
-            return 0;
+            return (0, 0);
         }
 
         logger.LogInformation("Processing {Suffix} attachment from: {FilePath}", idSuffix, attachmentFile.FullName);
@@ -121,13 +134,13 @@ internal sealed class ReplaceLibraryAttachmentsProgram
         catch (Exception ex)
         {
             logger.LogError(ex, "Failed to read attachment file: {FilePath}", attachmentFile.FullName);
-            return 0;
+            return (0, 0);
         }
 
         var attachmentId = $"{libraryIdentifier}{idSuffix}";
 
-        // Find existing attachment with this ID
-        var existingAttachment = library.Content.FirstOrDefault(a => a.ElementId == attachmentId);
+        // Find existing attachment with this ID (ensure ElementId is not null)
+        var existingAttachment = library.Content.FirstOrDefault(a => a.ElementId != null && a.ElementId == attachmentId);
 
         if (existingAttachment != null)
         {
@@ -135,7 +148,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             existingAttachment.ContentType = contentType;
             existingAttachment.Data = data;
             logger.LogInformation("Replaced existing {Suffix} attachment (ID: {AttachmentId})", idSuffix, attachmentId);
-            return 1;
+            return (1, 0);
         }
         else
         {
@@ -148,8 +161,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             };
             library.Content.Add(newAttachment);
             logger.LogInformation("Added new {Suffix} attachment (ID: {AttachmentId})", idSuffix, attachmentId);
-            addedCount++;
-            return 0;
+            return (0, 1);
         }
     }
 
