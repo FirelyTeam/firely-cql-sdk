@@ -52,8 +52,17 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             }
 
             // Get the library identifier for building attachment IDs
+            if (string.IsNullOrWhiteSpace(library.Name) || string.IsNullOrWhiteSpace(library.Version))
+            {
+                logger.LogError("Library must have both Name and Version properties.");
+                return ExitCode.InvalidLibraryJson;
+            }
+
             var libraryIdentifier = $"{library.Name}-{library.Version}";
             logger.LogInformation("Processing library: {LibraryIdentifier}", libraryIdentifier);
+
+            // Ensure Content collection is initialized
+            library.Content ??= [];
 
             // Replace or add attachments
             int replacedCount = 0;
