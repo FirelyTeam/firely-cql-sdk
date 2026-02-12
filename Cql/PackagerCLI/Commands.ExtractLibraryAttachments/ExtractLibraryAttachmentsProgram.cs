@@ -34,35 +34,36 @@ internal sealed class ExtractLibraryAttachmentsProgram
             // Parse FHIR Library resource
             logger.LogInformation("Reading FHIR Library resource from {LibraryFile}", opt.LibraryFile.FullName);
             var libraryJson = File.ReadAllText(opt.LibraryFile.FullName);
-            FhirLibrary library = FhirLibrary.ReadLibraryFromJson(libraryJson);
+            FhirLibrary fhirLibrary = FhirLibrary.ReadLibraryFromJson(libraryJson);
 
-            if (string.IsNullOrWhiteSpace(library.Name))
+            if (string.IsNullOrWhiteSpace(fhirLibrary.Name))
             {
                 logger.LogError("FHIR Library must have a Name property.");
                 return ExitCode.InvalidLibraryJson;
             }
 
-            var libraryName = library.Name;
-
-            var libraryVersion = library.Version;
+            var libraryName = fhirLibrary.Name;
+            var libraryVersion = fhirLibrary.Version;
             var libraryIdentifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(libraryName, libraryVersion);
 
             logger.LogInformation("Processing FHIR Library: {LibraryIdentifier}", libraryIdentifier);
 
-            if (library is { Content: null or { Count: 0 } })
+            if (fhirLibrary is { Content: null or { Count: 0 } })
             {
                 logger.LogWarning("No content attachments found in FHIR Library resource.");
                 return ExitCode.Normal;
             }
 
-            int extractedCount = 0;
+            List<string> successfulExtractions = [];
+            List<(string? elementId, string? contentType)> failedExtractions = [];
 
             // Process each attachment
-            foreach (var attachment in library.Content)
+            foreach (var attachment in fhirLibrary.Content)
             {
                 if (attachment is { Data: null })
                 {
                     logger.LogWarning("Skipping attachment with ID {AttachmentId}: no data", attachment.ElementId);
+                    failedExtractions.Add((attachment.ElementId, attachment.ContentType));
                     continue;
                 }
 
@@ -72,14 +73,41 @@ internal sealed class ExtractLibraryAttachmentsProgram
                 logger.LogDebug("Processing attachment: ID={ElementId}, ContentType={ContentType}", elementId, contentType);
 
                 // Determine which type of attachment this is and extract if requested
-                var extracted = TrySaveAttachmentToFile(attachment, opt, libraryIdentifier, contentType, elementId);
-                if (extracted)
+                var (success, outputPath) = TrySaveAttachmentToFile(attachment, opt, libraryIdentifier, contentType, elementId);
+                if (success && outputPath != null)
                 {
-                    extractedCount++;
+                    successfulExtractions.Add(outputPath);
+                }
+                else if (!success)
+                {
+                    failedExtractions.Add((elementId, contentType));
                 }
             }
 
-            logger.LogInformation("Successfully extracted {ExtractedCount} attachment(s) from FHIR Library resource.", extractedCount);
+            // Display summary
+            if (successfulExtractions.Count > 0)
+            {
+                logger.LogInformation("Successfully extracted {Count} attachment(s):", successfulExtractions.Count);
+                foreach (var path in successfulExtractions)
+                {
+                    logger.LogInformation("  - {Path}", path);
+                }
+            }
+
+            if (failedExtractions.Count > 0)
+            {
+                logger.LogWarning("Failed to extract {Count} attachment(s):", failedExtractions.Count);
+                foreach (var (elementId, contentType) in failedExtractions)
+                {
+                    logger.LogWarning("  - ElementId: {ElementId}, ContentType: {ContentType}", elementId ?? "N/A", contentType ?? "N/A");
+                }
+            }
+
+            if (successfulExtractions.Count == 0 && failedExtractions.Count == 0)
+            {
+                logger.LogInformation("No attachments matched the requested output directories.");
+            }
+
             return ExitCode.Normal;
         }
         catch (Exception ex)
@@ -89,14 +117,14 @@ internal sealed class ExtractLibraryAttachmentsProgram
         }
     }
 
-    private bool TrySaveAttachmentToFile(
+    private (bool success, string? outputPath) TrySaveAttachmentToFile(
         Attachment attachment,
         ExtractLibraryAttachmentsOptions opt,
         CqlVersionedLibraryIdentifier libraryIdentifier,
         string? contentType,
         string? elementId)
     {
-        var extracted = contentType switch
+        return contentType switch
         {
             "text/cql" when opt is { CqlOutDir: not null }
                 => TrySaveAttachmentToFile(attachment, opt.CqlOutDir, libraryIdentifier, ".cql"),
@@ -113,16 +141,15 @@ internal sealed class ExtractLibraryAttachmentsProgram
             "application/octet-stream" when opt is { PdbOutDir: not null } && elementId?.Contains("pdb") == true
                 => TrySaveAttachmentToFile(attachment, opt.PdbOutDir, libraryIdentifier, ".pdb"),
 
-            _ => false
+            _ => (false, null)
         };
-        return extracted;
     }
 
     /// <summary>
     /// Extracts an attachment from a FHIR Library to a file.
-    /// Returns true if extraction was successful, false otherwise.
+    /// Returns a tuple indicating success and the output path if successful.
     /// </summary>
-    private bool TrySaveAttachmentToFile(
+    private (bool success, string? outputPath) TrySaveAttachmentToFile(
         Attachment attachment,
         DirectoryInfo outputDir,
         CqlVersionedLibraryIdentifier libraryIdentifier,
@@ -133,7 +160,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             if (attachment.Data is null)
             {
                 logger.LogWarning("Attachment has no data: {ElementId}", attachment.ElementId);
-                return false;
+                return (false, null);
             }
 
             var fileName = $"{libraryIdentifier}{fileExtension}";
@@ -148,7 +175,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             File.WriteAllBytes(outputPath, attachment.Data);
 
             logger.LogInformation("Saved {Extension} to {OutputPath}", fileExtension, outputPath);
-            return true;
+            return (true, outputPath);
         }
         catch (Exception ex)
         {
@@ -156,7 +183,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
                 ex,
                 "Failed to save attachment: {ElementId}",
                 attachment.ElementId);
-            return false;
+            return (false, null);
         }
     }
 
