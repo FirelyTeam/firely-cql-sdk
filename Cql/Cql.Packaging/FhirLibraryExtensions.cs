@@ -439,7 +439,7 @@ internal static class FhirLibraryExtensions
     /// <summary>
     /// Creates an ELM attachment for a FHIR Library resource.
     /// </summary>
-    private static Attachment CreateElmAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] elmBytes) =>
+    public static Attachment CreateElmAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] elmBytes) =>
         new()
         {
             ElementId = $"{libraryIdentifier}+elm",
@@ -450,7 +450,7 @@ internal static class FhirLibraryExtensions
     /// <summary>
     /// Creates a CQL attachment for a FHIR Library resource.
     /// </summary>
-    private static Attachment CreateCqlAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] cqlBytes) =>
+    public static Attachment CreateCqlAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] cqlBytes) =>
         new()
         {
             ElementId = $"{libraryIdentifier}+cql",
@@ -461,7 +461,7 @@ internal static class FhirLibraryExtensions
     /// <summary>
     /// Creates a C# source code attachment for a FHIR Library resource.
     /// </summary>
-    private static Attachment CreateCSharpAttachment(KeyValuePair<string, string> kvp) =>
+    public static Attachment CreateCSharpAttachment(KeyValuePair<string, string> kvp) =>
         new()
         {
             ElementId = $"{kvp.Key}+csharp",
@@ -472,7 +472,7 @@ internal static class FhirLibraryExtensions
     /// <summary>
     /// Creates a DLL attachment for a FHIR Library resource.
     /// </summary>
-    private static Attachment CreateDllAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] assemblyBytes) =>
+    public static Attachment CreateDllAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] assemblyBytes) =>
         new()
         {
             ElementId = $"{libraryIdentifier}+dll",
@@ -483,7 +483,7 @@ internal static class FhirLibraryExtensions
     /// <summary>
     /// Creates a PDB attachment for a FHIR Library resource.
     /// </summary>
-    private static Attachment CreatePdbAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] debugSymbols) =>
+    public static Attachment CreatePdbAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] debugSymbols) =>
         new()
         {
             ElementId = $"{libraryIdentifier}+pdb",

@@ -72,8 +72,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
                 logger.LogDebug("Processing attachment: ID={ElementId}, ContentType={ContentType}", elementId, contentType);
 
                 // Determine which type of attachment this is and extract if requested
-                var extracted = ExtractAttachment(contentType, opt, attachment, libraryIdentifier, elementId);
-
+                var extracted = TrySaveAttachmentToFile(attachment, opt, libraryIdentifier, contentType, elementId);
                 if (extracted)
                 {
                     extractedCount++;
@@ -90,116 +89,75 @@ internal sealed class ExtractLibraryAttachmentsProgram
         }
     }
 
-    private bool ExtractAttachment(string? contentType,
-                                   ExtractLibraryAttachmentsOptions opt,
-                                   Attachment attachment,
-                                   CqlVersionedLibraryIdentifier libraryIdentifier,
-                                   string? elementId)
+    private bool TrySaveAttachmentToFile(
+        Attachment attachment,
+        ExtractLibraryAttachmentsOptions opt,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        string? contentType,
+        string? elementId)
     {
         var extracted = contentType switch
         {
-            "text/cql" when opt is { CqlOutDir: not null } => ExtractTextAttachment(attachment, opt.CqlOutDir, libraryIdentifier, ".cql"),
+            "text/cql" when opt is { CqlOutDir: not null }
+                => TrySaveAttachmentToFile(attachment, opt.CqlOutDir, libraryIdentifier, ".cql"),
 
-            "application/elm+json" when opt is { ElmOutDir: not null } => ExtractTextAttachment(attachment, opt.ElmOutDir, libraryIdentifier, ".json"),
+            "application/elm+json" when opt is { ElmOutDir: not null }
+                => TrySaveAttachmentToFile(attachment, opt.ElmOutDir, libraryIdentifier, ".json"),
 
             "text/plain" when opt is { CSharpOutDir: not null } && elementId?.Contains("csharp") == true
-                => ExtractTextAttachment(attachment, opt.CSharpOutDir, libraryIdentifier, ".g.cs"),
+                => TrySaveAttachmentToFile(attachment, opt.CSharpOutDir, libraryIdentifier, ".g.cs"),
 
             "application/octet-stream" when opt is { DllOutDir: not null } && elementId?.Contains("dll") == true
-                => ExtractBinaryAttachment(attachment, opt.DllOutDir, libraryIdentifier, ".dll"),
+                => TrySaveAttachmentToFile(attachment, opt.DllOutDir, libraryIdentifier, ".dll"),
 
             "application/octet-stream" when opt is { PdbOutDir: not null } && elementId?.Contains("pdb") == true
-                => ExtractBinaryAttachment(attachment, opt.PdbOutDir, libraryIdentifier, ".pdb"),
+                => TrySaveAttachmentToFile(attachment, opt.PdbOutDir, libraryIdentifier, ".pdb"),
 
             _ => false
         };
         return extracted;
     }
 
-    private bool ExtractTextAttachment(Attachment attachment, DirectoryInfo outputDir, CqlVersionedLibraryIdentifier libraryIdentifier, string extension)
-    {
-        try
-        {
-            var fileName = $"{libraryIdentifier}{extension}";
-            var outputPath = Path.Combine(outputDir.FullName, fileName);
-
-            var success = ExtractAttachment(attachment, outputPath, isBinary: false);
-            if (success)
-            {
-                logger.LogInformation("Extracted {Extension} to {OutputPath}", extension, outputPath);
-            }
-            else
-            {
-                logger.LogWarning("Attachment has no data: {ElementId}", attachment.ElementId);
-            }
-            return success;
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Failed to extract text attachment: {ElementId}", attachment.ElementId);
-            return false;
-        }
-    }
-
-    private bool ExtractBinaryAttachment(Attachment attachment, DirectoryInfo outputDir, CqlVersionedLibraryIdentifier libraryIdentifier, string extension)
-    {
-        try
-        {
-            var fileName = $"{libraryIdentifier}{extension}";
-            var outputPath = Path.Combine(outputDir.FullName, fileName);
-
-            var success = ExtractAttachment(attachment, outputPath, isBinary: true);
-            if (success)
-            {
-                logger.LogInformation("Extracted {Extension} to {OutputPath}", extension, outputPath);
-            }
-            else
-            {
-                logger.LogWarning("Attachment has no data: {ElementId}", attachment.ElementId);
-            }
-            return success;
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Failed to extract binary attachment: {ElementId}", attachment.ElementId);
-            return false;
-        }
-    }
-
     /// <summary>
     /// Extracts an attachment from a FHIR Library to a file.
     /// Returns true if extraction was successful, false otherwise.
     /// </summary>
-    private static bool ExtractAttachment(
+    private bool TrySaveAttachmentToFile(
         Attachment attachment,
-        string outputPath,
-        bool isBinary = false)
+        DirectoryInfo outputDir,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        string fileExtension)
     {
-        if (attachment.Data is null)
+        try
         {
+            if (attachment.Data is null)
+            {
+                logger.LogWarning("Attachment has no data: {ElementId}", attachment.ElementId);
+                return false;
+            }
+
+            var fileName = $"{libraryIdentifier}{fileExtension}";
+            var outputPath = Path.Combine(outputDir.FullName, fileName);
+
+            // Ensure output directory exists
+            if (!outputDir.Exists)
+            {
+                outputDir.Create();
+            }
+
+            File.WriteAllBytes(outputPath, attachment.Data);
+
+            logger.LogInformation("Saved {Extension} to {OutputPath}", fileExtension, outputPath);
+            return true;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(
+                ex,
+                "Failed to save attachment: {ElementId}",
+                attachment.ElementId);
             return false;
         }
-
-        var data = attachment.Data;
-
-        // Ensure output directory exists
-        var outputDir = Path.GetDirectoryName(outputPath);
-        if (!string.IsNullOrEmpty(outputDir) && !Directory.Exists(outputDir))
-        {
-            Directory.CreateDirectory(outputDir);
-        }
-
-        if (isBinary)
-        {
-            File.WriteAllBytes(outputPath, data);
-        }
-        else
-        {
-            var text = Encoding.UTF8.GetString(data);
-            File.WriteAllText(outputPath, text);
-        }
-
-        return true;
     }
 
     internal static int CommandHandler(
