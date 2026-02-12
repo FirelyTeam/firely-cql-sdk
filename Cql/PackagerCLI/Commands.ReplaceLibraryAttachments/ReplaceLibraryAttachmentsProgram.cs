@@ -35,6 +35,35 @@ internal sealed class ReplaceLibraryAttachmentsProgram
                 return ExitCode.NoInputFiles;
             }
 
+            // Validate that all specified input files exist
+            var missingFiles = new List<string>();
+            
+            if (opt.CqlFile != null && !opt.CqlFile.Exists)
+                missingFiles.Add($"--cql-file: {opt.CqlFile.FullName}");
+            
+            if (opt.ElmFile != null && !opt.ElmFile.Exists)
+                missingFiles.Add($"--elm-file: {opt.ElmFile.FullName}");
+            
+            if (opt.CSharpFile != null && !opt.CSharpFile.Exists)
+                missingFiles.Add($"--csharp-file: {opt.CSharpFile.FullName}");
+            
+            if (opt.DllFile != null && !opt.DllFile.Exists)
+                missingFiles.Add($"--dll-file: {opt.DllFile.FullName}");
+            
+            if (opt.PdbFile != null && !opt.PdbFile.Exists)
+                missingFiles.Add($"--pdb-file: {opt.PdbFile.FullName}");
+
+            if (missingFiles.Count > 0)
+            {
+                logger.LogError("The following input files do not exist:");
+                foreach (var file in missingFiles)
+                {
+                    logger.LogError("  {MissingFile}", file);
+                }
+                logger.LogError("All specified attachment input files must exist before processing can begin.");
+                return ExitCode.NoInputFiles;
+            }
+
             // Determine the output file
             FileInfo outputFile;
             if (opt.LibraryOutFile != null)
@@ -150,10 +179,10 @@ internal sealed class ReplaceLibraryAttachmentsProgram
         if (attachmentFile == null)
             return (0, 0);
 
+        // This should not happen as we validate file existence upfront
         if (!attachmentFile.Exists)
         {
-            logger.LogWarning("Attachment file not found, skipping: {FilePath}", attachmentFile.FullName);
-            return (0, 0);
+            throw new InvalidOperationException($"Attachment file does not exist: {attachmentFile.FullName}. This should have been caught during validation.");
         }
 
         logger.LogInformation("Processing {Suffix} attachment from: {FilePath}", idSuffix, attachmentFile.FullName);
