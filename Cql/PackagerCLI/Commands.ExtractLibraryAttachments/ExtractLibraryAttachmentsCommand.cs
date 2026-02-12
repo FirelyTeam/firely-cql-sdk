@@ -26,7 +26,12 @@ internal record ExtractLibraryAttachmentsCommand
     public static readonly string Description =
         "Extract attachments from a FHIR Library resource to individual files. " +
         "Given a FHIR Library resource file, this command extracts embedded attachments " +
-        "(CQL, ELM, C#, DLL, PDB) and saves them to the specified output directories.";
+        "(CQL, ELM, C#, DLL, PDB) and saves them to the specified output directories." +
+        Environment.NewLine + Environment.NewLine +
+        "Exit Codes:" + Environment.NewLine +
+        "  0  - Success" + Environment.NewLine +
+        "  5  - No output directories specified" + Environment.NewLine +
+        "  10 - Library extraction error occurred";
 
     public static readonly Option[] Options =
     [
