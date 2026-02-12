@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Text;
 using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
@@ -28,8 +29,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             var packOpt = packagingOptions.Value;
 
             // Validate that at least one attachment file is provided
-            if (opt.CqlFile == null && opt.ElmFile == null && opt.CSharpFile == null &&
-                opt.DllFile == null && opt.PdbFile == null)
+            if (opt is { CqlFile: null, ElmFile: null, CSharpFile: null, DllFile: null, PdbFile: null })
             {
                 logger.LogError("At least one attachment file must be specified (--cql-file, --elm-file, --csharp-file, --dll-file, or --pdb-file).");
                 return ExitCode.NoInputFiles;
@@ -37,28 +37,26 @@ internal sealed class ReplaceLibraryAttachmentsProgram
 
             // Validate that all specified input files exist
             var missingFiles = new List<string>();
-            
-            if (opt.CqlFile != null && !opt.CqlFile.Exists)
+
+            if (opt.CqlFile is { Exists: false })
                 missingFiles.Add($"--cql-file: {opt.CqlFile.FullName}");
-            
-            if (opt.ElmFile != null && !opt.ElmFile.Exists)
+
+            if (opt.ElmFile is { Exists: false })
                 missingFiles.Add($"--elm-file: {opt.ElmFile.FullName}");
-            
-            if (opt.CSharpFile != null && !opt.CSharpFile.Exists)
+
+            if (opt.CSharpFile is { Exists: false })
                 missingFiles.Add($"--csharp-file: {opt.CSharpFile.FullName}");
-            
-            if (opt.DllFile != null && !opt.DllFile.Exists)
+
+            if (opt.DllFile is { Exists: false })
                 missingFiles.Add($"--dll-file: {opt.DllFile.FullName}");
-            
-            if (opt.PdbFile != null && !opt.PdbFile.Exists)
+
+            if (opt.PdbFile is { Exists: false })
                 missingFiles.Add($"--pdb-file: {opt.PdbFile.FullName}");
 
             if (missingFiles.Count > 0)
             {
-                var errorMessage = "The following input files do not exist:" + Environment.NewLine +
-                    string.Join(Environment.NewLine, missingFiles.Select(f => $"  {f}")) + Environment.NewLine +
-                    "All specified attachment input files must exist before processing can begin.";
-                logger.LogError(errorMessage);
+                var filesPluralized = missingFiles.Count > 1 ? "files do" : "file does";
+                logger.LogError($$"""The following {{filesPluralized}} do not exist:{{Environment.NewLine}}{MissingFiles}{{Environment.NewLine}}All specified attachment input files must exist before processing can begin.", Environment.NewLine, missingFiles.ToString());
                 return ExitCode.NoInputFiles;
             }
 
@@ -70,14 +68,14 @@ internal sealed class ReplaceLibraryAttachmentsProgram
                 try
                 {
                     logger.LogInformation("Copying library file from: {SourceFile} to: {DestFile}", opt.LibraryFile.FullName, opt.LibraryOutFile.FullName);
-                    
+
                     // Ensure output directory exists
                     var outDir = opt.LibraryOutFile.Directory;
                     if (outDir != null && !outDir.Exists)
                     {
                         outDir.Create();
                     }
-                    
+
                     File.Copy(opt.LibraryFile.FullName, opt.LibraryOutFile.FullName, overwrite: true);
                     logger.LogInformation("Library file copied successfully.");
                     outputFile = opt.LibraryOutFile;
