@@ -6,12 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Text;
 using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
+using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
-using Hl7.Fhir.Serialization;
 
 namespace Hl7.Cql.Packager.Commands.ReplaceLibraryAttachments;
 
@@ -102,8 +101,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             Library library;
             try
             {
-                library = JsonSerializer.Deserialize<Library>(libraryJson, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector))
-                    ?? throw new InvalidOperationException($"Failed to deserialize FHIR library from {outputFile.FullName}. Please verify the file contains valid FHIR Library JSON.");
+                library = LibraryPackager.ReadLibraryFromJson(libraryJson);
             }
             catch (Exception ex)
             {
@@ -120,9 +118,6 @@ internal sealed class ReplaceLibraryAttachmentsProgram
 
             var libraryIdentifier = $"{library.Name}-{library.Version}";
             logger.LogInformation("Processing library: {LibraryIdentifier}", libraryIdentifier);
-
-            // Ensure Content collection is initialized
-            library.Content ??= [];
 
             // Replace or add attachments
             int replacedCount = 0;
@@ -151,9 +146,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             logger.LogInformation("Replaced {ReplacedCount} attachment(s), added {AddedCount} new attachment(s).", replacedCount, addedCount);
 
             // Serialize and save the updated library
-            var jsonOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
-            jsonOptions.WriteIndented = packOpt.JsonPretty;
-            var updatedLibraryJson = JsonSerializer.Serialize(library, jsonOptions);
+            var updatedLibraryJson = LibraryPackager.WriteLibraryToJson(library, packOpt.JsonPretty);
 
             File.WriteAllText(outputFile.FullName, updatedLibraryJson);
             logger.LogInformation("Updated FHIR library saved to: {LibraryFile}", outputFile.FullName);
@@ -197,32 +190,18 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             return (0, 0);
         }
 
-        var attachmentId = $"{libraryIdentifier}{idSuffix}";
+        var (replaced, added) = LibraryPackager.ReplaceOrAddAttachment(library, libraryIdentifier, idSuffix, contentType, data);
 
-        // Find existing attachment with this ID (ensure ElementId is not null)
-        var existingAttachment = library.Content.FirstOrDefault(a => a.ElementId != null && a.ElementId == attachmentId);
+        if (replaced > 0)
+        {
+            logger.LogInformation("Replaced existing {Suffix} attachment (ID: {AttachmentId})", idSuffix, $"{libraryIdentifier}{idSuffix}");
+        }
+        else if (added > 0)
+        {
+            logger.LogInformation("Added new {Suffix} attachment (ID: {AttachmentId})", idSuffix, $"{libraryIdentifier}{idSuffix}");
+        }
 
-        if (existingAttachment != null)
-        {
-            // Replace existing attachment
-            existingAttachment.ContentType = contentType;
-            existingAttachment.Data = data;
-            logger.LogInformation("Replaced existing {Suffix} attachment (ID: {AttachmentId})", idSuffix, attachmentId);
-            return (1, 0);
-        }
-        else
-        {
-            // Add new attachment
-            var newAttachment = new Attachment
-            {
-                ElementId = attachmentId,
-                ContentType = contentType,
-                Data = data
-            };
-            library.Content.Add(newAttachment);
-            logger.LogInformation("Added new {Suffix} attachment (ID: {AttachmentId})", idSuffix, attachmentId);
-            return (0, 1);
-        }
+        return (replaced, added);
     }
 
     internal static int CommandHandler(

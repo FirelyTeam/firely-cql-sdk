@@ -6,9 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
+using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Packager.Commands.ExtractLibraryAttachments;
@@ -34,7 +34,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             // Parse FHIR Library resource
             logger.LogInformation("Reading FHIR Library resource from {LibraryFile}", opt.LibraryFile.FullName);
             var libraryJson = File.ReadAllText(opt.LibraryFile.FullName);
-            var library = libraryJson.DeserializeJsonToFhir<Library>();
+            var library = LibraryPackager.ReadLibraryFromJson(libraryJson);
 
             var libraryName = library.Name ?? library.Id;
             var libraryVersion = library.Version;
@@ -105,25 +105,19 @@ internal sealed class ExtractLibraryAttachmentsProgram
     {
         try
         {
-            if (attachment.Data is null)
-            {
-                logger.LogWarning("Attachment has no data: {ElementId}", attachment.ElementId);
-                return false;
-            }
-
-            var data = attachment.Data;
-            var text = Encoding.UTF8.GetString(data);
             var fileName = $"{libraryIdentifier}{extension}";
             var outputPath = Path.Combine(outputDir.FullName, fileName);
 
-            if (!outputDir.Exists)
+            var success = LibraryPackager.ExtractAttachment(attachment, outputPath, isBinary: false);
+            if (success)
             {
-                outputDir.Create();
+                logger.LogInformation("Extracted {Extension} to {OutputPath}", extension, outputPath);
             }
-
-            File.WriteAllText(outputPath, text);
-            logger.LogInformation("Extracted {Extension} to {OutputPath}", extension, outputPath);
-            return true;
+            else
+            {
+                logger.LogWarning("Attachment has no data: {ElementId}", attachment.ElementId);
+            }
+            return success;
         }
         catch (Exception ex)
         {
@@ -136,24 +130,19 @@ internal sealed class ExtractLibraryAttachmentsProgram
     {
         try
         {
-            if (attachment.Data is null)
-            {
-                logger.LogWarning("Attachment has no data: {ElementId}", attachment.ElementId);
-                return false;
-            }
-
-            var data = attachment.Data;
             var fileName = $"{libraryIdentifier}{extension}";
             var outputPath = Path.Combine(outputDir.FullName, fileName);
 
-            if (!outputDir.Exists)
+            var success = LibraryPackager.ExtractAttachment(attachment, outputPath, isBinary: true);
+            if (success)
             {
-                outputDir.Create();
+                logger.LogInformation("Extracted {Extension} to {OutputPath}", extension, outputPath);
             }
-
-            File.WriteAllBytes(outputPath, data);
-            logger.LogInformation("Extracted {Extension} to {OutputPath}", extension, outputPath);
-            return true;
+            else
+            {
+                logger.LogWarning("Attachment has no data: {ElementId}", attachment.ElementId);
+            }
+            return success;
         }
         catch (Exception ex)
         {

@@ -12,6 +12,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
+using Hl7.Fhir.Serialization;
 
 namespace Hl7.Cql.Packaging;
 
@@ -697,5 +698,98 @@ internal static class LibraryPackager
                 Value = new FhirString(cqlTypeName),
             }
         ];
+    }
+
+    /// <summary>
+    /// Reads and deserializes a FHIR Library resource from JSON string.
+    /// </summary>
+    public static FhirLibrary ReadLibraryFromJson(string json)
+    {
+        var library = JsonSerializer.Deserialize<FhirLibrary>(json, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector))
+            ?? throw new InvalidOperationException("Failed to deserialize FHIR library from JSON.");
+        return library;
+    }
+
+    /// <summary>
+    /// Serializes a FHIR Library resource to JSON string.
+    /// </summary>
+    public static string WriteLibraryToJson(FhirLibrary library, bool pretty = false)
+    {
+        var jsonOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
+        jsonOptions.WriteIndented = pretty;
+        return JsonSerializer.Serialize(library, jsonOptions);
+    }
+
+    /// <summary>
+    /// Extracts an attachment from a FHIR Library to a file.
+    /// Returns true if extraction was successful, false otherwise.
+    /// </summary>
+    public static bool ExtractAttachment(Attachment attachment, string outputPath, bool isBinary = false)
+    {
+        if (attachment.Data is null)
+        {
+            return false;
+        }
+
+        var data = attachment.Data;
+        
+        // Ensure output directory exists
+        var outputDir = Path.GetDirectoryName(outputPath);
+        if (!string.IsNullOrEmpty(outputDir) && !Directory.Exists(outputDir))
+        {
+            Directory.CreateDirectory(outputDir);
+        }
+
+        if (isBinary)
+        {
+            File.WriteAllBytes(outputPath, data);
+        }
+        else
+        {
+            var text = Encoding.UTF8.GetString(data);
+            File.WriteAllText(outputPath, text);
+        }
+
+        return true;
+    }
+
+    /// <summary>
+    /// Replaces or adds an attachment to a FHIR Library resource.
+    /// Returns a tuple indicating (replaced count, added count).
+    /// </summary>
+    public static (int replaced, int added) ReplaceOrAddAttachment(
+        FhirLibrary library,
+        string libraryIdentifier,
+        string suffix,
+        string contentType,
+        byte[] data)
+    {
+        var attachmentId = $"{libraryIdentifier}{suffix}";
+
+        // Ensure Content collection is initialized
+        library.Content ??= [];
+
+        // Find existing attachment with this ID
+        var existingAttachment = library.Content.FirstOrDefault(a => a.ElementId != null && a.ElementId == attachmentId);
+
+        if (existingAttachment != null)
+        {
+            // Replace existing attachment
+            existingAttachment.ContentType = contentType;
+            existingAttachment.Data = data;
+            return (1, 0);
+        }
+        else
+        {
+            // Add new attachment
+            var newAttachment = new Attachment
+            {
+                ElementId = attachmentId,
+                ContentType = contentType,
+                Data = data
+            };
+            library.Content.Add(newAttachment);
+            return (0, 1);
+        }
     }
 }
