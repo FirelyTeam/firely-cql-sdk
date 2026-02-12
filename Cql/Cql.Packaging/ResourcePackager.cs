@@ -772,7 +772,7 @@ internal static class LibraryPackager
     /// </summary>
     public static void ReplaceOrAddAttachment(
         FhirLibrary library,
-        string libraryIdentifier,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
         string suffix,
         byte[] data)
     {

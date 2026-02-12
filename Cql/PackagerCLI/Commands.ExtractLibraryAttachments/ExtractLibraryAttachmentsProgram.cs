@@ -36,9 +36,16 @@ internal sealed class ExtractLibraryAttachmentsProgram
             var libraryJson = File.ReadAllText(opt.LibraryFile.FullName);
             FhirLibrary library = LibraryPackager.ReadLibraryFromJson(libraryJson);
 
-            var libraryName = library.Name ?? library.Id;
+            if (string.IsNullOrWhiteSpace(library.Name))
+            {
+                logger.LogError("FHIR Library must have a Name property.");
+                return ExitCode.InvalidLibraryJson;
+            }
+
+            var libraryName = library.Name;
+
             var libraryVersion = library.Version;
-            var libraryIdentifier = $"{libraryName}-{libraryVersion}";
+            var libraryIdentifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(libraryName, libraryVersion);
 
             logger.LogInformation("Processing FHIR Library: {LibraryIdentifier}", libraryIdentifier);
 
@@ -86,7 +93,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
     private bool ExtractAttachment(string? contentType,
                                    ExtractLibraryAttachmentsOptions opt,
                                    Attachment attachment,
-                                   string libraryIdentifier,
+                                   CqlVersionedLibraryIdentifier libraryIdentifier,
                                    string? elementId)
     {
         var extracted = contentType switch
@@ -109,7 +116,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
         return extracted;
     }
 
-    private bool ExtractTextAttachment(Attachment attachment, DirectoryInfo outputDir, string libraryIdentifier, string extension)
+    private bool ExtractTextAttachment(Attachment attachment, DirectoryInfo outputDir, CqlVersionedLibraryIdentifier libraryIdentifier, string extension)
     {
         try
         {
@@ -134,7 +141,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
         }
     }
 
-    private bool ExtractBinaryAttachment(Attachment attachment, DirectoryInfo outputDir, string libraryIdentifier, string extension)
+    private bool ExtractBinaryAttachment(Attachment attachment, DirectoryInfo outputDir, CqlVersionedLibraryIdentifier libraryIdentifier, string extension)
     {
         try
         {

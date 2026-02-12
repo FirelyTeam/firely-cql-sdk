@@ -34,5 +34,6 @@ global using Microsoft.Extensions.Logging.Abstractions;
 global using Microsoft.Extensions.Options;
 global using static System.FormattableString;
 global using static Hl7.Cql.Packager.GlobalMethods;
+global using CqlVersionedLibraryIdentifier = Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier;
 global using ElmLibrary = Hl7.Cql.Elm.Library;
 global using FhirLibrary = Hl7.Fhir.Model.Library;

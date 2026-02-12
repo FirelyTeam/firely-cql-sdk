@@ -176,3 +176,41 @@ When adding CQL files (e.g., to `CoreTests\Input\ELM\HL7`), follow these steps t
 - Use `CqlSdk` prefix for SDK-related example projects
 - Use `Hl7.Cql` namespace prefix for core SDK assemblies
 - Follow existing patterns in the codebase for consistency
+
+## FHIR Library Resource Handling
+
+### Library.Name vs Library.Id
+**CRITICAL**: `library.Name` and `library.Id` are NOT interchangeable and serve different purposes:
+
+- **`library.Name`**: The canonical identifier/name used for library identification and versioning (e.g., "MyLibrary")
+  - Use this when constructing `CqlVersionedLibraryIdentifier` or building canonical URLs
+  - This is the name that appears in CQL `library` declarations
+  - Required for library packaging and identification workflows
+
+- **`library.Id`**: The FHIR resource identifier, typically a generated or assigned ID (e.g., "Library/abc123")
+  - Use this for resource identification within a FHIR server
+  - NOT suitable for library name/version identification
+
+**DO NOT** use code like: `var name = library.Name ?? library.Id;`
+
+**DO** validate that `library.Name` exists when it's required:
+```csharp
+if (string.IsNullOrWhiteSpace(library.Name))
+{
+    logger.LogError("FHIR Library must have a Name property.");
+    return ExitCode.InvalidLibraryJson;
+}
+```
+
+### Library Identifier Construction
+Always use `CqlVersionedLibraryIdentifier` for parsing and formatting library names and versions:
+
+```csharp
+// Creating from separate name and version
+var identifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(library.Name, library.Version);
+
+// Using the identifier (automatically formats as "name-version")
+string formatted = identifier.ToString();
+```
+
+**DO NOT** manually construct identifiers like: `$"{library.Name}-{library.Version}"`

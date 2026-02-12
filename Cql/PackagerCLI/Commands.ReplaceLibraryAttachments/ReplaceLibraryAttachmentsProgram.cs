@@ -116,7 +116,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
                 return ExitCode.InvalidLibraryJson;
             }
 
-            var libraryIdentifier = $"{library.Name}-{library.Version}";
+            var libraryIdentifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(library.Name, library.Version);
             logger.LogInformation("Processing library: {LibraryIdentifier}", libraryIdentifier);
 
             // Replace or add attachments
@@ -146,7 +146,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
     private void ReplaceOrAddAttachment(
         FhirLibrary library,
         FileInfo? attachmentFile,
-        string libraryIdentifier,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
         string idSuffix)
     {
         if (attachmentFile == null)
