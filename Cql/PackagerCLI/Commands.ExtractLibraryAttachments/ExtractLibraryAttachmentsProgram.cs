@@ -25,7 +25,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             var opt = extractAttachmentsOptions.Value;
 
             // Validate at least one output directory is specified
-            if (opt.CqlOutDir is null && opt.ElmOutDir is null && opt.CSharpOutDir is null && opt.DllOutDir is null && opt.PdbOutDir is null)
+            if (opt is { CqlOutDir: null, ElmOutDir: null, CSharpOutDir: null, DllOutDir: null, PdbOutDir: null })
             {
                 logger.LogError("Exiting. At least one output directory must be specified.");
                 return ExitCode.NoOutputDirs;
@@ -42,7 +42,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
 
             logger.LogInformation("Processing FHIR Library: {LibraryIdentifier}", libraryIdentifier);
 
-            if (library.Content is null || library.Content.Count == 0)
+            if (library is { Content: null or { Count: 0 } })
             {
                 logger.LogWarning("No content attachments found in FHIR Library resource.");
                 return ExitCode.Normal;
@@ -53,7 +53,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             // Process each attachment
             foreach (var attachment in library.Content)
             {
-                if (attachment.Data is null)
+                if (attachment is { Data: null })
                 {
                     logger.LogWarning("Skipping attachment with ID {AttachmentId}: no data", attachment.ElementId);
                     continue;
@@ -65,25 +65,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
                 logger.LogDebug("Processing attachment: ID={ElementId}, ContentType={ContentType}", elementId, contentType);
 
                 // Determine which type of attachment this is and extract if requested
-                var extracted = contentType switch
-                {
-                    "text/cql" when opt.CqlOutDir is not null
-                        => ExtractTextAttachment(attachment, opt.CqlOutDir, libraryIdentifier, ".cql"),
-
-                    "application/elm+json" when opt.ElmOutDir is not null
-                        => ExtractTextAttachment(attachment, opt.ElmOutDir, libraryIdentifier, ".json"),
-
-                    "text/plain" when opt.CSharpOutDir is not null && elementId?.Contains("csharp") == true
-                        => ExtractTextAttachment(attachment, opt.CSharpOutDir, libraryIdentifier, ".g.cs"),
-
-                    "application/octet-stream" when opt.DllOutDir is not null && elementId?.Contains("dll") == true
-                        => ExtractBinaryAttachment(attachment, opt.DllOutDir, libraryIdentifier, ".dll"),
-
-                    "application/octet-stream" when opt.PdbOutDir is not null && elementId?.Contains("pdb") == true
-                        => ExtractBinaryAttachment(attachment, opt.PdbOutDir, libraryIdentifier, ".pdb"),
-
-                    _ => false
-                };
+                var extracted = ExtractAttachment(contentType, opt, attachment, libraryIdentifier, elementId);
 
                 if (extracted)
                 {
@@ -99,6 +81,32 @@ internal sealed class ExtractLibraryAttachmentsProgram
             logger.LogError(ex, "Error extracting attachments from FHIR Library resource");
             return ExitCode.LibraryExtractionError;
         }
+    }
+
+    private bool ExtractAttachment(string? contentType,
+                                   ExtractLibraryAttachmentsOptions opt,
+                                   Attachment attachment,
+                                   string libraryIdentifier,
+                                   string? elementId)
+    {
+        var extracted = contentType switch
+        {
+            "text/cql" when opt is { CqlOutDir: not null } => ExtractTextAttachment(attachment, opt.CqlOutDir, libraryIdentifier, ".cql"),
+
+            "application/elm+json" when opt is { ElmOutDir: not null } => ExtractTextAttachment(attachment, opt.ElmOutDir, libraryIdentifier, ".json"),
+
+            "text/plain" when opt is { CSharpOutDir: not null } && elementId?.Contains("csharp") == true
+                => ExtractTextAttachment(attachment, opt.CSharpOutDir, libraryIdentifier, ".g.cs"),
+
+            "application/octet-stream" when opt is { DllOutDir: not null } && elementId?.Contains("dll") == true
+                => ExtractBinaryAttachment(attachment, opt.DllOutDir, libraryIdentifier, ".dll"),
+
+            "application/octet-stream" when opt is { PdbOutDir: not null } && elementId?.Contains("pdb") == true
+                => ExtractBinaryAttachment(attachment, opt.PdbOutDir, libraryIdentifier, ".pdb"),
+
+            _ => false
+        };
+        return extracted;
     }
 
     private bool ExtractTextAttachment(Attachment attachment, DirectoryInfo outputDir, string libraryIdentifier, string extension)
