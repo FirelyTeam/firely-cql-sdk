@@ -13,7 +13,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
-using Microsoft.Extensions.Logging.Abstractions;
 using System.Diagnostics;
 using DateTime = System.DateTime;
 using Library = Hl7.Cql.Elm.Library;
@@ -92,18 +91,16 @@ public class LibraryPackagerTests
         var versionedIdentifier = VersionedIdentifier;
         var elmLibrary = new Library(versionedIdentifier);
         // Act
-        var library = LibraryPackager.CreateLibraryResource(
-            NullLogger.Instance,
-            typeCrosswalk: _mapper,
-            elmLibrary: elmLibrary,
-            elmBytes: ElmBytes,
-            cqlBytes: CqlBytes,
-            assemblyBytes: AssemblyBytes,
-            debugSymbols: DebugSymbolBytes,
-            cSharpSourceCodeById: [new (CSharpFileName, CSharpString)],
-            elmLibrarySet: new LibrarySet("", [elmLibrary]),
-            resourceCanonicalBuilder: (_, _, _) => TestUrl,
-            elmFileLastWriteTimeUtc: Date);
+        var library = LibraryPackager.CreateLibraryResource(typeCrosswalk: _mapper,
+                                                            elmLibrary: elmLibrary,
+                                                            elmBytes: ElmBytes,
+                                                            cqlBytes: CqlBytes,
+                                                            assemblyBytes: AssemblyBytes,
+                                                            debugSymbols: DebugSymbolBytes,
+                                                            cSharpSourceCodeById: [new (CSharpFileName, CSharpString)],
+                                                            elmLibrarySet: new LibrarySet("", [elmLibrary]),
+                                                            resourceCanonicalBuilder: (_, _, _) => TestUrl,
+                                                            elmFileLastWriteTimeUtc: Date);
         Assert.IsNotNull(library);
         return library;
     }
@@ -118,17 +115,15 @@ public class LibraryPackagerTests
         // Arrange
         var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
         // Act
-        var library = LibraryPackager.CreateLibraryResource(
-            NullLogger.Instance,
-            typeCrosswalk: _mapper,
-            elmLibrary: elmLibrary,
-            elmBytes: File.ReadAllBytes(filename),
-            cqlBytes: [],
-            assemblyBytes: [],
-            debugSymbols: [],
-            cSharpSourceCodeById: [],
-            elmLibrarySet: new LibrarySet("", [elmLibrary] ),
-            resourceCanonicalBuilder: (_, _, _) => "");
+        var library = LibraryPackager.CreateLibraryResource(typeCrosswalk: _mapper,
+                                                            elmLibrary: elmLibrary,
+                                                            elmBytes: File.ReadAllBytes(filename),
+                                                            cqlBytes: [],
+                                                            assemblyBytes: [],
+                                                            debugSymbols: [],
+                                                            cSharpSourceCodeById: [],
+                                                            elmLibrarySet: new LibrarySet("", [elmLibrary] ),
+                                                            resourceCanonicalBuilder: (_, _, _) => "");
 
         // Assert
         Assert.IsNotNull(library);
@@ -146,16 +141,14 @@ public class LibraryPackagerTests
         var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
         var fhirHelpers = Library.LoadFromJson(new FileInfo("Input/ELM/HL7/FHIRHelpers-4.0.1.json"));
         // Act
-        var library = LibraryPackager.CreateLibraryResource(
-            NullLoggerFactory.Instance.CreateLogger("Dummy"),
-            typeCrosswalk: _mapper,
-            elmLibrary: elmLibrary,
-            elmBytes: File.ReadAllBytes(filename),
-            cqlBytes: [],
-            assemblyBytes: [],
-            debugSymbols: [],
-            cSharpSourceCodeById: [],
-            elmLibrarySet: new LibrarySet("", [elmLibrary, fhirHelpers] ), resourceCanonicalBuilder: (_,_,_) => "");
+        var library = LibraryPackager.CreateLibraryResource(typeCrosswalk: _mapper,
+                                                            elmLibrary: elmLibrary,
+                                                            elmBytes: File.ReadAllBytes(filename),
+                                                            cqlBytes: [],
+                                                            assemblyBytes: [],
+                                                            debugSymbols: [],
+                                                            cSharpSourceCodeById: [],
+                                                            elmLibrarySet: new LibrarySet("", [elmLibrary, fhirHelpers] ), resourceCanonicalBuilder: (_,_,_) => "");
 
         // Assert
         Assert.IsNotNull(library);

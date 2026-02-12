@@ -49,18 +49,16 @@ internal class ResourcePackager(
             var (cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary, debugSymbols) = inputsById(versionedIdentifier);
             if (versionedIdentifier != elmLibraryInput.VersionedLibraryIdentifier) throw new InvalidOperationException("Versioned identifiers do not match.");
 
-            var fhirLibrary = LibraryPackager.CreateLibraryResource(
-                libraryPackagerLogger,
-                _cqlTypeToFhirTypeMapper,
-                elmLibrary,
-                null,
-                Encoding.Default.GetBytes(cqlString),
-                assemblyBinary,
-                debugSymbols,
-                GetCSharpSourceCodeByName(),
-                librarySet,
-                resourceCanonicalBuilder,
-                localOverrideDate);
+            var fhirLibrary = LibraryPackager.CreateLibraryResource(_cqlTypeToFhirTypeMapper,
+                                                                    elmLibrary,
+                                                                    null,
+                                                                    Encoding.Default.GetBytes(cqlString),
+                                                                    assemblyBinary,
+                                                                    debugSymbols,
+                                                                    GetCSharpSourceCodeByName(),
+                                                                    librarySet,
+                                                                    resourceCanonicalBuilder,
+                                                                    localOverrideDate);
 
             IEnumerable<KeyValuePair<string, string>>? GetCSharpSourceCodeByName()
             {
@@ -278,7 +276,6 @@ file static class MeasurePackager
 internal static class LibraryPackager
 {
     public static FhirLibrary CreateLibraryResource(
-        ILogger logger,
         CqlTypeToFhirTypeMapper typeCrosswalk,
         ElmLibrary? elmLibrary,
         byte[]? elmBytes,
