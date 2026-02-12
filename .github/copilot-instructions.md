@@ -2,6 +2,20 @@
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
+## User Workflow Preferences
+
+**IMPORTANT: Discuss Before Implementing**
+- When user asks for ideas, suggestions, or "what would be the best way to..." questions, **DISCUSS OPTIONS FIRST**
+- Present 2-3 approaches with pros/cons
+- Wait for user to choose an approach before implementing
+- DO NOT immediately implement solutions when user asks for ideas
+- User will explicitly ask to proceed with implementation when ready
+
+**PR Description Requirements**
+- When user adds new instructions or requirements, the PR description **MUST include ALL work in the branch**, not just changes scoped to the last instructions
+- Provide comprehensive summary of the entire branch's changes
+- Include context from initial implementation through all subsequent modifications
+
 ## InternalsVisibleTo Configuration
 
 **IMPORTANT**: Always add `InternalsVisibleTo` attributes in `.csproj` files, never in `AssemblyInfo.cs` files.
