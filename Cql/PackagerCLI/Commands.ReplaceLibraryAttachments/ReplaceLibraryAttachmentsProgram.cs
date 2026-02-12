@@ -35,43 +35,52 @@ internal sealed class ReplaceLibraryAttachmentsProgram
                 return ExitCode.NoInputFiles;
             }
 
-            // Create backup if requested
-            if (opt.LibraryBackupFile != null)
+            // Determine the output file
+            FileInfo outputFile;
+            if (opt.LibraryOutFile != null)
             {
+                // Copy library-file to library-out-file
                 try
                 {
-                    logger.LogInformation("Creating backup: {BackupFile}", opt.LibraryBackupFile.FullName);
+                    logger.LogInformation("Copying library file from: {SourceFile} to: {DestFile}", opt.LibraryFile.FullName, opt.LibraryOutFile.FullName);
                     
-                    // Ensure backup directory exists
-                    var backupDir = opt.LibraryBackupFile.Directory;
-                    if (backupDir != null && !backupDir.Exists)
+                    // Ensure output directory exists
+                    var outDir = opt.LibraryOutFile.Directory;
+                    if (outDir != null && !outDir.Exists)
                     {
-                        backupDir.Create();
+                        outDir.Create();
                     }
                     
-                    File.Copy(opt.LibraryFile.FullName, opt.LibraryBackupFile.FullName, overwrite: true);
-                    logger.LogInformation("Backup created successfully.");
+                    File.Copy(opt.LibraryFile.FullName, opt.LibraryOutFile.FullName, overwrite: true);
+                    logger.LogInformation("Library file copied successfully.");
+                    outputFile = opt.LibraryOutFile;
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "Failed to create backup file: {BackupFile}", opt.LibraryBackupFile.FullName);
+                    logger.LogError(ex, "Failed to copy library file to output location: {OutFile}", opt.LibraryOutFile.FullName);
                     return ExitCode.UnknownError;
                 }
             }
+            else
+            {
+                // Update in-place
+                logger.LogInformation("Updating library file in-place: {LibraryFile}", opt.LibraryFile.FullName);
+                outputFile = opt.LibraryFile;
+            }
 
-            // Read and parse the FHIR library
-            logger.LogInformation("Reading FHIR library from: {LibraryFile}", opt.LibraryFile.FullName);
-            var libraryJson = File.ReadAllText(opt.LibraryFile.FullName);
+            // Read and parse the FHIR library from the output file
+            logger.LogInformation("Reading FHIR library from: {LibraryFile}", outputFile.FullName);
+            var libraryJson = File.ReadAllText(outputFile.FullName);
 
             Library library;
             try
             {
                 library = JsonSerializer.Deserialize<Library>(libraryJson, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector))
-                    ?? throw new InvalidOperationException($"Failed to deserialize FHIR library from {opt.LibraryFile.FullName}. Please verify the file contains valid FHIR Library JSON.");
+                    ?? throw new InvalidOperationException($"Failed to deserialize FHIR library from {outputFile.FullName}. Please verify the file contains valid FHIR Library JSON.");
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Failed to parse FHIR library JSON from {LibraryFile}. Please verify the file contains valid FHIR Library JSON.", opt.LibraryFile.FullName);
+                logger.LogError(ex, "Failed to parse FHIR library JSON from {LibraryFile}. Please verify the file contains valid FHIR Library JSON.", outputFile.FullName);
                 return ExitCode.InvalidLibraryJson;
             }
 
@@ -119,8 +128,8 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             jsonOptions.WriteIndented = packOpt.JsonPretty;
             var updatedLibraryJson = JsonSerializer.Serialize(library, jsonOptions);
 
-            File.WriteAllText(opt.LibraryFile.FullName, updatedLibraryJson);
-            logger.LogInformation("Updated FHIR library saved to: {LibraryFile}", opt.LibraryFile.FullName);
+            File.WriteAllText(outputFile.FullName, updatedLibraryJson);
+            logger.LogInformation("Updated FHIR library saved to: {LibraryFile}", outputFile.FullName);
 
             return ExitCode.Normal;
         }

@@ -43,11 +43,12 @@ cql-package --help
 cql-package cql --help
 cql-package elm --help
 cql-package extract-library-attachments --help
+cql-package replace-library-attachments --help
 ```
 
 ### Command Reference
 
-The CQL Packager has three main commands:
+The CQL Packager has the following commands:
 
 #### `elm` Command
 
@@ -130,6 +131,32 @@ Extract attachments from a FHIR Library resource to individual files. This comma
 - `--file-log-level <level>` - Minimum log level for file output
 
 Log levels: `Critical`, `Debug`, `Error`, `Information`, `None`, `Trace`, `Warning`
+
+#### `replace-library-attachments` Command
+
+Replace or add attachments in an existing FHIR Library resource. This command is useful for updating embedded CQL, ELM, C#, DLL, and PDB files in packaged FHIR Library resources.
+
+**Usage:** `cql-package replace-library-attachments [options]`
+
+**Required Options:**
+- `--library-file <file>` - FHIR Library resource file in JSON format to read from
+
+**Output Behavior:**
+- If `--library-out-file` is not specified, the `--library-file` will be updated in-place.
+- If `--library-out-file` is specified, `--library-file` will be copied to the output location, and the output file will be updated with the new attachments.
+
+**Output Options:**
+- `--library-out-file <file>` - Output file for the updated library (optional)
+
+**Attachment Input Options** (at least one must be specified):
+- `--cql-file <file>` - CQL file to replace or add as +cql content
+- `--elm-file <file>` - ELM JSON file to replace or add as +elm content
+- `--csharp-file <file>` - C# source file to replace or add as +csharp content
+- `--dll-file <file>` - DLL file to replace or add as +dll content
+- `--pdb-file <file>` - PDB file to replace or add as +pdb content
+
+**Formatting Options:**
+- `--json-pretty` - Output JSON using multiline and indentation
 
 ### Disclaimer
 
@@ -231,6 +258,36 @@ cql-package extract-library-attachments --library-file Library-MyLibrary.json --
 
 - Extracts only CQL and ELM attachments from the FHIR Library resource.
 - Other attachment types (C#, DLL, PDB) are not extracted.
+
+9. Replace CQL and ELM attachments in a FHIR Library resource (in-place):
+
+```shell
+cql-package replace-library-attachments --library-file Library-MyLibrary.json --cql-file UpdatedLibrary.cql --elm-file UpdatedLibrary.json
+```
+
+- Updates the FHIR Library resource file `Library-MyLibrary.json` in-place.
+- Replaces the existing +cql attachment with content from `UpdatedLibrary.cql`.
+- Replaces the existing +elm attachment with content from `UpdatedLibrary.json`.
+- The original file is directly modified.
+
+10. Replace attachments while preserving the original (copy to output):
+
+```shell
+cql-package replace-library-attachments --library-file Library-Original.json --library-out-file Library-Updated.json --cql-file UpdatedLibrary.cql --elm-file UpdatedLibrary.json
+```
+
+- Copies `Library-Original.json` to `Library-Updated.json`.
+- Updates `Library-Updated.json` with new CQL and ELM attachments.
+- The original file `Library-Original.json` remains unchanged.
+
+11. Replace a single attachment type:
+
+```shell
+cql-package replace-library-attachments --library-file Library-MyLibrary.json --elm-file UpdatedLibrary.json
+```
+
+- Updates only the +elm attachment in the library.
+- All other attachments (CQL, C#, DLL, PDB) remain unchanged.
 
 ## Further Reading
 

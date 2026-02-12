@@ -15,7 +15,7 @@ internal record ReplaceLibraryAttachmentsCommand
 (
     // Do not rename these properties, they must match the command line options e.g. --library-file maps to LibraryFile, etc
     FileInfo LibraryFile,
-    FileInfo? LibraryBackupFile,
+    FileInfo? LibraryOutFile,
     FileInfo? CqlFile,
     FileInfo? ElmFile,
     FileInfo? CSharpFile,
@@ -28,22 +28,25 @@ internal record ReplaceLibraryAttachmentsCommand
     public static readonly string Description =
         "Replace attachments in an existing FHIR library resource. " +
         "Given a FHIR library file and one or more attachment files, this command replaces or adds " +
-        "the corresponding content in the library (identified by content type: +cql, +elm, +dll, +pdb, +csharp).";
+        "the corresponding content in the library (identified by content type: +cql, +elm, +dll, +pdb, +csharp). " +
+        "If --library-out-file is not specified, the library-file will be updated in-place. " +
+        "If --library-out-file is specified, library-file will be copied to library-out-file, and the latter will be updated.";
 
     public static readonly Option[] Options =
     [
         Option<FileInfo>(
                 "--library-file",
                 """
-                FHIR library file in JSON format to update.
+                FHIR library file in JSON format to read from.
                 """)
             .IsRequired()
             .ExistingOnly(),
 
         Option<FileInfo>(
-            "--library-backup-file",
+            "--library-out-file",
             """
-            If specified, the library file will be copied to this backup location before replacing attachments.
+            Output file for the updated library. If not specified, the library-file will be updated in-place.
+            If specified, library-file will be copied to this location, and this file will be updated with the new attachments.
             """),
 
         Option<FileInfo>(
@@ -91,7 +94,7 @@ internal record ReplaceLibraryAttachmentsCommand
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [
         (LibraryFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.LibraryFile)]),
-        (LibraryBackupFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.LibraryBackupFile)]),
+        (LibraryOutFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.LibraryOutFile)]),
         (CqlFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.CqlFile)]),
         (ElmFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.ElmFile)]),
         (CSharpFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.CSharpFile)]),

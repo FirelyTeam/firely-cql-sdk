@@ -14,7 +14,7 @@ internal record ReplaceLibraryAttachmentsOptions : IBindOptions
     static string IBindOptions.ConfigSection => ConfigSection;
 
     public required FileInfo LibraryFile { get; set; }
-    public FileInfo? LibraryBackupFile { get; set; }
+    public FileInfo? LibraryOutFile { get; set; }
     public FileInfo? CqlFile { get; set; }
     public FileInfo? ElmFile { get; set; }
     public FileInfo? CSharpFile { get; set; }
