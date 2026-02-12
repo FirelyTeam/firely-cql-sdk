@@ -12,12 +12,12 @@ internal static class FhirLibraryExtensions
     /// </summary>
     private static string GetContentTypeForSuffix(string suffix) => suffix switch
     {
-        "+cql"    => "text/cql",
-        "+elm"    => "application/elm+json",
-        "+csharp" => "text/plain",
-        "+dll"    => "application/octet-stream",
-        "+pdb"    => "application/octet-stream",
-        _         => throw new ArgumentException($"Unknown suffix: {suffix}", nameof(suffix))
+        Constants.ElementIdSuffixes.Cql    => Constants.ContentMimeTypes.Cql,
+        Constants.ElementIdSuffixes.Elm    => Constants.ContentMimeTypes.Elm,
+        Constants.ElementIdSuffixes.CSharp => Constants.ContentMimeTypes.CSharp,
+        Constants.ElementIdSuffixes.Dll    => Constants.ContentMimeTypes.Binary,
+        Constants.ElementIdSuffixes.Pdb    => Constants.ContentMimeTypes.Binary,
+        _                                   => throw new ArgumentException($"Unknown suffix: {suffix}", nameof(suffix))
     };
 
     extension(FhirLibrary)
@@ -442,7 +442,7 @@ internal static class FhirLibraryExtensions
     public static Attachment CreateElmAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] elmBytes) =>
         new()
         {
-            ElementId = $"{libraryIdentifier}+elm",
+            ElementId = $"{libraryIdentifier}{Constants.ElementIdSuffixes.Elm}",
             ContentType = ElmLibrary.JsonMimeType,
             Data = elmBytes,
         };
@@ -453,8 +453,8 @@ internal static class FhirLibraryExtensions
     public static Attachment CreateCqlAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] cqlBytes) =>
         new()
         {
-            ElementId = $"{libraryIdentifier}+cql",
-            ContentType = "text/cql",
+            ElementId = $"{libraryIdentifier}{Constants.ElementIdSuffixes.Cql}",
+            ContentType = Constants.ContentMimeTypes.Cql,
             Data = cqlBytes,
         };
 
@@ -464,8 +464,8 @@ internal static class FhirLibraryExtensions
     public static Attachment CreateCSharpAttachment(KeyValuePair<string, string> kvp) =>
         new()
         {
-            ElementId = $"{kvp.Key}+csharp",
-            ContentType = "text/plain",
+            ElementId = $"{kvp.Key}{Constants.ElementIdSuffixes.CSharp}",
+            ContentType = Constants.ContentMimeTypes.CSharp,
             Data = Encoding.UTF8.GetBytes(kvp.Value),
         };
 
@@ -475,8 +475,8 @@ internal static class FhirLibraryExtensions
     public static Attachment CreateDllAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] assemblyBytes) =>
         new()
         {
-            ElementId = $"{libraryIdentifier}+dll",
-            ContentType = "application/octet-stream",
+            ElementId = $"{libraryIdentifier}{Constants.ElementIdSuffixes.Dll}",
+            ContentType = Constants.ContentMimeTypes.Binary,
             Data = assemblyBytes,
         };
 
@@ -486,8 +486,8 @@ internal static class FhirLibraryExtensions
     public static Attachment CreatePdbAttachment(CqlVersionedLibraryIdentifier libraryIdentifier, byte[] debugSymbols) =>
         new()
         {
-            ElementId = $"{libraryIdentifier}+pdb",
-            ContentType = "application/octet-stream",
+            ElementId = $"{libraryIdentifier}{Constants.ElementIdSuffixes.Pdb}",
+            ContentType = Constants.ContentMimeTypes.Binary,
             Data = debugSymbols,
         };
 }

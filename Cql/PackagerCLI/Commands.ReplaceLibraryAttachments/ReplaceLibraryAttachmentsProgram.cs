@@ -120,11 +120,11 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             logger.LogInformation("Processing library: {LibraryIdentifier}", libraryIdentifier);
 
             // Replace or add attachments
-            ReplaceOrAddAttachment(library, opt.CqlFile, libraryIdentifier, "+cql");
-            ReplaceOrAddAttachment(library, opt.ElmFile, libraryIdentifier, "+elm");
-            ReplaceOrAddAttachment(library, opt.CSharpFile, libraryIdentifier, "+csharp");
-            ReplaceOrAddAttachment(library, opt.DllFile, libraryIdentifier, "+dll");
-            ReplaceOrAddAttachment(library, opt.PdbFile, libraryIdentifier, "+pdb");
+            ReplaceOrAddAttachment(library, opt.CqlFile, libraryIdentifier, ElementIdSuffixes.Cql);
+            ReplaceOrAddAttachment(library, opt.ElmFile, libraryIdentifier, ElementIdSuffixes.Elm);
+            ReplaceOrAddAttachment(library, opt.CSharpFile, libraryIdentifier, ElementIdSuffixes.CSharp);
+            ReplaceOrAddAttachment(library, opt.DllFile, libraryIdentifier, ElementIdSuffixes.Dll);
+            ReplaceOrAddAttachment(library, opt.PdbFile, libraryIdentifier, ElementIdSuffixes.Pdb);
 
             logger.LogInformation("Attachments processed successfully.");
 

@@ -12,5 +12,31 @@ namespace Hl7.Cql.Packaging
     {
         public const string Hl7FhirStructureDefinitionCqlAccessModifier = "http://hl7.org/fhir/StructureDefinition/cqf-cqlAccessModifier";
         public const string Hl7FhirStructureDefinitionCqlType = "http://hl7.org/fhir/StructureDefinition/cqf-cqlType";
+
+        public static class ContentMimeTypes
+        {
+            public const string Cql = "text/cql";
+            public const string Elm = "application/elm+json";
+            public const string CSharp = "text/plain";
+            public const string Binary = "application/octet-stream";
+        }
+
+        public static class FileExtensions
+        {
+            public const string Cql = ".cql";
+            public const string Elm = ".json";
+            public const string CSharp = ".g.cs";
+            public const string Dll = ".dll";
+            public const string Pdb = ".pdb";
+        }
+
+        public static class ElementIdSuffixes
+        {
+            public const string Cql = "+cql";
+            public const string Elm = "+elm";
+            public const string CSharp = "+csharp";
+            public const string Dll = "+dll";
+            public const string Pdb = "+pdb";
+        }
     }
 }

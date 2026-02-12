@@ -69,7 +69,6 @@ internal sealed class ExtractLibraryAttachmentsProgram
 
                 var contentType = attachment.ContentType;
                 var elementId = attachment.ElementId;
-
                 logger.LogDebug("Processing attachment: ID={ElementId}, ContentType={ContentType}", elementId, contentType);
 
                 // Determine which type of attachment this is and extract if requested
@@ -126,20 +125,20 @@ internal sealed class ExtractLibraryAttachmentsProgram
     {
         return contentType switch
         {
-            "text/cql" when opt is { CqlOutDir: not null }
-                => TrySaveAttachmentToFile(attachment, opt.CqlOutDir, libraryIdentifier, ".cql"),
+            ContentMimeTypes.Cql when opt is { CqlOutDir: not null }
+                => TrySaveAttachmentToFile(attachment, opt.CqlOutDir, libraryIdentifier, FileExtensions.Cql),
 
-            "application/elm+json" when opt is { ElmOutDir: not null }
-                => TrySaveAttachmentToFile(attachment, opt.ElmOutDir, libraryIdentifier, ".json"),
+            ContentMimeTypes.Elm when opt is { ElmOutDir: not null }
+                => TrySaveAttachmentToFile(attachment, opt.ElmOutDir, libraryIdentifier, FileExtensions.Elm),
 
-            "text/plain" when opt is { CSharpOutDir: not null } && elementId?.Contains("csharp") == true
-                => TrySaveAttachmentToFile(attachment, opt.CSharpOutDir, libraryIdentifier, ".g.cs"),
+            ContentMimeTypes.CSharp when opt is { CSharpOutDir: not null } && elementId?.Contains("csharp") == true
+                => TrySaveAttachmentToFile(attachment, opt.CSharpOutDir, libraryIdentifier, FileExtensions.CSharp),
 
-            "application/octet-stream" when opt is { DllOutDir: not null } && elementId?.Contains("dll") == true
-                => TrySaveAttachmentToFile(attachment, opt.DllOutDir, libraryIdentifier, ".dll"),
+            ContentMimeTypes.Binary when opt is { DllOutDir: not null } && elementId?.Contains("dll") == true
+                => TrySaveAttachmentToFile(attachment, opt.DllOutDir, libraryIdentifier, FileExtensions.Dll),
 
-            "application/octet-stream" when opt is { PdbOutDir: not null } && elementId?.Contains("pdb") == true
-                => TrySaveAttachmentToFile(attachment, opt.PdbOutDir, libraryIdentifier, ".pdb"),
+            ContentMimeTypes.Binary when opt is { PdbOutDir: not null } && elementId?.Contains("pdb") == true
+                => TrySaveAttachmentToFile(attachment, opt.PdbOutDir, libraryIdentifier, FileExtensions.Pdb),
 
             _ => (false, null)
         };
