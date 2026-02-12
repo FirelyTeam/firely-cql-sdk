@@ -174,6 +174,22 @@ internal sealed class ReplaceLibraryAttachmentsProgram
 
         library.ReplaceOrAddAttachment(libraryIdentifier, idSuffix, data);
         logger.LogInformation("Processed {Suffix} attachment (ID: {AttachmentId})", idSuffix, $"{libraryIdentifier}{idSuffix}");
+
+        // When replacing ELM, update CQL options from the new ELM library
+        if (idSuffix == ElementIdSuffixes.Elm)
+        {
+            try
+            {
+                var elmJson = Encoding.UTF8.GetString(data);
+                var elmLibrary = ElmLibrary.ParseFromJson(elmJson);
+                library.SetCqlOptionsParameterAndExtension(elmLibrary);
+                logger.LogInformation("Updated CQL options from ELM library");
+            }
+            catch (Exception ex)
+            {
+                logger.LogWarning(ex, "Failed to update CQL options from ELM library. The ELM attachment was replaced but options were not updated.");
+            }
+        }
     }
 
     internal static int CommandHandler(
