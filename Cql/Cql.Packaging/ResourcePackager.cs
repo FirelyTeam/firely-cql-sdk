@@ -66,12 +66,10 @@ internal class ResourcePackager(
                 yield return KeyValuePair.Create(versionedIdentifier, cSharpSourceCode);
             }
 
-            MeasurePackager.TryCreateMeasure(
-                elmLibrary,
-                fhirLibrary,
-                out var fhirMeasure,
-                resourceCanonicalBuilder,
-                localOverrideDate);
+            MeasurePackager.TryCreateMeasure(fhirLibrary,
+                                             elmLibrary,
+                                             out var fhirMeasure,
+                                             resourceCanonicalBuilder, localOverrideDate);
             return (versionedIdentifier, fhirLibrary, fhirMeasure);
         }
     }
@@ -91,8 +89,8 @@ internal class ResourcePackager(
 file static class MeasurePackager
 {
     public static bool TryCreateMeasure(
-        ElmLibrary elmLibrary,
         FhirLibrary fhirLibrary,
+        ElmLibrary elmLibrary,
         [NotNullWhen(true)] out FhirMeasure? fhirMeasure,
         ResourceCanonicalBuilder resourceCanonicalBuilder,
         SysDateTime overrideDate)
@@ -111,11 +109,9 @@ file static class MeasurePackager
         {
             fhirMeasure = CreateMeasureResource(
                 fhirLibrary,
-                measureAnnotation,
-                measureYear,
                 elmLibrary,
-                resourceCanonicalBuilder,
-                overrideDate);
+                measureAnnotation,
+                measureYear, resourceCanonicalBuilder, overrideDate);
             return true;
         }
 
@@ -125,9 +121,9 @@ file static class MeasurePackager
 
     private static FhirMeasure CreateMeasureResource(
         FhirLibrary fhirLibrary,
+        ElmLibrary elmLibrary,
         Tag measureAnnotation,
         int measureYear,
-        ElmLibrary elmLibrary,
         ResourceCanonicalBuilder resourceCanonicalBuilder,
         SysDateTime overrideDate)
     {
@@ -180,7 +176,7 @@ file static class MeasurePackager
         { "numerator-medicaid", "Numerator Medicaid" }
     };
 
-    private static void AnnotateMeasurePopulations(Measure measure, ElmLibrary library)
+    private static void AnnotateMeasurePopulations(FhirMeasure measure, ElmLibrary library)
     {
         var defs = library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>();
         foreach (var def in defs)
@@ -214,14 +210,14 @@ file static class MeasurePackager
                     var groupsForRate = measure.Group?
                                                .Where(g => g.ElementId == rate)
                                                .ToArray() ?? [];
-                    Measure.GroupComponent? group;
+                    FhirMeasure.GroupComponent? group;
                     if (groupsForRate.Length == 1)
                     {
                         group = groupsForRate[0];
                     }
                     else if (groupsForRate.Length == 0)
                     {
-                        group = new Measure.GroupComponent
+                        group = new FhirMeasure.GroupComponent
                         {
                             ElementId = rate,
                             //Code = new CodeableConcept(rate, MeasureGroupCodeSystem),
@@ -236,14 +232,14 @@ file static class MeasurePackager
                     var populationsForGroup = group.Population
                                                    .Where(p => p.ElementId == pop)
                                                    .ToArray();
-                    Measure.PopulationComponent? population;
+                    FhirMeasure.PopulationComponent? population;
                     if (populationsForGroup.Length == 1)
                     {
                         population = populationsForGroup[0];
                     }
                     else if (populationsForGroup.Length == 0)
                     {
-                        population = new Measure.PopulationComponent
+                        population = new FhirMeasure.PopulationComponent
                         {
                             ElementId = pop,
                             Code = new CodeableConcept
@@ -301,21 +297,21 @@ internal static class LibraryPackager
         }
 
         var fhirLibrary = CreateFhirLibrary(elmLibrary, resourceCanonicalBuilder, elmFileLastWriteTimeUtc ?? SysDateTime.Now);
-        AddElmAttachment(elmLibrary, fhirLibrary, elmBytes);
+        fhirLibrary.AddElmAttachment(elmLibrary, elmBytes);
         var parameters = new List<ParameterDefinition>();
         AddInParameters(elmLibrary, parameters, typeCrosswalk);
         AddOutParameters(elmLibrary, parameters, typeCrosswalk);
         fhirLibrary.Parameter = parameters.Count > 0 ? parameters : null!;
 
-        AddRelatedArtefacts(elmLibrary, fhirLibrary, elmLibrarySet, resourceCanonicalBuilder);
-        AddDataRequirements(elmLibrary, fhirLibrary, elmLibrarySet);
+        fhirLibrary.AddRelatedArtefacts(elmLibrary, elmLibrarySet, resourceCanonicalBuilder);
+        fhirLibrary.AddDataRequirements(elmLibrary, elmLibrarySet);
 
         var fhirParameters = CreateFhirParameters(elmLibrary);
         if (fhirParameters.Any())
-            AddCqlOptions(fhirLibrary, fhirParameters);
+            fhirLibrary.AddCqlOptions(fhirParameters);
 
         if (cqlBytes != null)
-            AddCqlAttachment(fhirLibrary, elmLibrary!.VersionedLibraryIdentifier, cqlBytes);
+            fhirLibrary.AddCqlAttachment(elmLibrary!.VersionedLibraryIdentifier, cqlBytes);
 
         if (assemblyBytes is {Length:>0} dll)
             fhirLibrary.AddDllAttachment(elmLibrary!.VersionedLibraryIdentifier, dll);
@@ -325,24 +321,9 @@ internal static class LibraryPackager
 
         if (cSharpSourceCodeById != null)
             foreach (var kvp in cSharpSourceCodeById)
-                AddCSharpAttachment(fhirLibrary, kvp);
+                fhirLibrary.AddCSharpAttachment(kvp);
 
         return fhirLibrary;
-    }
-
-    private static void AddElmAttachment(
-        ElmLibrary elmLibrary,
-        FhirLibrary fhirLibrary,
-        byte[] elmBytes)
-    {
-        var bytes = elmBytes;
-        var attachment = new Attachment
-        {
-            ElementId = $"{elmLibrary.VersionedLibraryIdentifier}+elm",
-            ContentType = ElmLibrary.JsonMimeType,
-            Data = bytes,
-        };
-        fhirLibrary.Content.Add(attachment);
     }
 
     private static FhirLibrary CreateFhirLibrary(
@@ -372,61 +353,6 @@ internal static class LibraryPackager
         return fhirLibrary;
     }
 
-    private static void AddRelatedArtefacts(
-        ElmLibrary elmLibrary,
-        FhirLibrary library,
-        ElmLibrarySet elmLibrarySet,
-        ResourceCanonicalBuilder resourceCanonicalBuilder)
-    {
-        List<RelatedArtifact> result = [];
-        var dependencies = elmLibrarySet.GetLibraryDependencies(elmLibrary);
-        foreach (var dependency in dependencies.Prepend(elmLibrary))
-        {
-            foreach (IncludeDef include in dependency?.includes ?? [])
-            {
-                var resourceUrl = resourceCanonicalBuilder("Library", include.path, include.version);
-                var ra = new RelatedArtifact
-                {
-                    Display = $"Library {include.localIdentifier}",
-                    Type = RelatedArtifact.RelatedArtifactType.DependsOn,
-                    Resource = resourceUrl,
-                };
-                if (!result.Any(r => r.IsExactly(ra)))
-                    result.Add(ra);
-            }
-
-            foreach (ValueSetDef include in dependency?.valueSets ?? [])
-            {
-                var ra = new RelatedArtifact
-                {
-                    Display = $"{include.GetTypeSpecifier()} {include.name}",
-                    Type = RelatedArtifact.RelatedArtifactType.DependsOn,
-                    Resource = include.id,
-                };
-                if (!result.Any(r => r.IsExactly(ra)))
-                    result.Add(ra);
-            }
-        }
-        library.RelatedArtifact.AddRange(result);
-        library.RelatedArtifact.Sort((x, y) => string.Compare(x.Display, y.Display ?? "", StringComparison.Ordinal));
-    }
-
-    private static void AddDataRequirements(
-        ElmLibrary elmLibrary,
-        FhirLibrary library,
-        ElmLibrarySet elmLibrarySet
-        )
-    {
-        // Analyze datarequirements and add to the FHIR Library resource.
-        var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(elmLibrarySet, elmLibrary);
-        var dataRequirements = dataRequirementsAnalyzer.Analyze();
-        library.DataRequirement.AddRange(dataRequirements);
-        library.DataRequirement = library.DataRequirement
-        .OrderBy(dr => dr.Type)  // Primary sorting by Type
-        .ThenBy(dr => dr.CodeFilter?.FirstOrDefault()?.ValueSet ?? string.Empty) // Secondary sorting by ValueSet
-        .ToList();
-    }
-
     private static void AddOutParameters(
         ElmLibrary elmLibrary,
         List<ParameterDefinition> parameters,
@@ -453,86 +379,6 @@ internal static class LibraryPackager
 
     }
 
-    public static void AddCqlAttachment(
-        FhirLibrary fhirLibrary,
-        CqlVersionedLibraryIdentifier libraryIdentifier,
-        byte[] cqlBytes)
-    {
-        var attachment = new Attachment
-        {
-            ElementId = $"{libraryIdentifier}+cql",
-            ContentType = "text/cql",
-            Data = cqlBytes,
-        };
-        fhirLibrary.Content.Add(attachment);
-    }
-
-    public static void AddCqlOptions(
-        FhirLibrary fhirLibrary,
-        IReadOnlyList<Parameters.ParameterComponent> fhirParameters)
-    {
-        // Adding CQL Options as a contained resource
-        // See: https://build.fhir.org/domainresource-definitions.html#DomainResource.contained
-
-        var p = new Parameters();
-        p.Id = "options";
-        p.Parameter.AddRange(fhirParameters);
-        fhirLibrary.Contained = [p];
-
-        // See requirement for Contained resources: https://build.fhir.org/domainresource.html#invs
-        // dom-3: If the resource is contained in another resource,
-        //        it SHALL be referred to from elsewhere in the resource
-        //        or SHALL refer to the containing resource
-        //
-        // This is done by adding an extension. (Example: https://build.fhir.org/ig/HL7/cql-ig/Library-CQLExample.json.html)
-
-        var extension = new Extension
-        {
-            Url = "http://hl7.org/fhir/StructureDefinition/cqf-cqlOptions",
-            Value = new ResourceReference { Reference = "#options" },
-        };
-        fhirLibrary.Extension.Add(extension);
-    }
-
-    public static void AddCSharpAttachment(FhirLibrary library, KeyValuePair<string, string> kvp)
-    {
-        var sourceBytes = Encoding.UTF8.GetBytes(kvp.Value);
-        var attachment = new Attachment
-        {
-            ElementId = $"{kvp.Key}+csharp",
-            ContentType = "text/plain",
-            Data = sourceBytes,
-        };
-        library.Content.Add(attachment);
-    }
-
-    public static void AddDllAttachment(
-        this FhirLibrary library,
-        CqlVersionedLibraryIdentifier libraryIdentifier,
-        byte[] assemblyBytes)
-    {
-        var attachment = new Attachment
-        {
-            ElementId = $"{libraryIdentifier}+dll",
-            ContentType = "application/octet-stream",
-            Data = assemblyBytes,
-        };
-        library.Content.Add(attachment);
-    }
-
-    public static void AddPdbAttachment(
-        this FhirLibrary library,
-        CqlVersionedLibraryIdentifier libraryIdentifier,
-        byte[] debugSymbols)
-    {
-        var attachment = new Attachment
-        {
-            ElementId = $"{libraryIdentifier}+pdb",
-            ContentType = "application/octet-stream",
-            Data = debugSymbols,
-        };
-        library.Content.Add(attachment);
-    }
 
     private static void AddFhirParameterIfNotNull(
         List<Parameters.ParameterComponent> parameters,
@@ -732,82 +578,24 @@ internal static class LibraryPackager
 
         return true;
     }
+}
 
+internal static class FhirLibraryExtensions
+{
     /// <summary>
     /// Gets the content type for a given attachment suffix.
     /// </summary>
     private static string GetContentTypeForSuffix(string suffix) => suffix switch
     {
-        "+cql" => "text/cql",
-        "+elm" => "application/elm+json",
+        "+cql"    => "text/cql",
+        "+elm"    => "application/elm+json",
         "+csharp" => "text/plain",
-        "+dll" => "application/octet-stream",
-        "+pdb" => "application/octet-stream",
-        _ => throw new ArgumentException($"Unknown suffix: {suffix}", nameof(suffix))
+        "+dll"    => "application/octet-stream",
+        "+pdb"    => "application/octet-stream",
+        _         => throw new ArgumentException($"Unknown suffix: {suffix}", nameof(suffix))
     };
 
-    /// <summary>
-    /// Replaces or adds an attachment to a FHIR Library resource.
-    /// The content type is automatically inferred from the suffix.
-    /// </summary>
-    public static void ReplaceOrAddAttachment(
-        FhirLibrary library,
-        CqlVersionedLibraryIdentifier libraryIdentifier,
-        string suffix,
-        byte[] data)
-    {
-        var attachmentId = $"{libraryIdentifier}{suffix}";
-        var contentType = GetContentTypeForSuffix(suffix);
-
-        // Ensure Content collection is initialized
-        library.Content ??= [];
-
-        // Find existing attachment with this ID
-        var existingAttachment = library.Content.FirstOrDefault(a => a.ElementId != null && a.ElementId == attachmentId);
-
-        if (existingAttachment != null)
-        {
-            // Replace existing attachment
-            existingAttachment.ContentType = contentType;
-            existingAttachment.Data = data;
-        }
-        else
-        {
-            // Add new attachment
-            var newAttachment = new Attachment
-            {
-                ElementId = attachmentId,
-                ContentType = contentType,
-                Data = data
-            };
-            library.Content.Add(newAttachment);
-        }
-    }
-}
-
-internal static class FhirLibraryExtensions
-{
-    // /// <summary>
-    // /// Reads and deserializes a FHIR Library resource from JSON string.
-    // /// </summary>
-    // public static FhirLibrary ReadLibraryFromJson(string json)
-    // {
-    //     var library = JsonSerializer.Deserialize<FhirLibrary>(json, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector))
-    //                   ?? throw new InvalidOperationException("Failed to deserialize FHIR library from JSON.");
-    //     return library;
-    // }
-
-    /// <summary>
-    /// Serializes a FHIR Library resource to JSON string.
-    /// </summary>
-    public static string WriteLibraryToJson(this FhirLibrary library, bool pretty = false)
-    {
-        var jsonOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
-        jsonOptions.WriteIndented = pretty;
-        return JsonSerializer.Serialize(library, jsonOptions);
-    }
-
-    extension(FhirLibrary library)
+    extension(FhirLibrary)
     {
         /// <summary>
         /// Reads and deserializes a FHIR Library resource from JSON string.
@@ -817,6 +605,202 @@ internal static class FhirLibraryExtensions
             var lib = JsonSerializer.Deserialize<FhirLibrary>(json, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector))
                           ?? throw new InvalidOperationException("Failed to deserialize FHIR library from JSON.");
             return lib;
+        }
+    }
+
+    extension(FhirLibrary fhirLibrary)
+    {
+        /// <summary>
+        /// Serializes a FHIR Library resource to JSON string.
+        /// </summary>
+        public string WriteLibraryToJson(bool pretty = false)
+        {
+            var jsonOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
+            jsonOptions.WriteIndented = pretty;
+            return JsonSerializer.Serialize(fhirLibrary, jsonOptions);
+        }
+
+
+        public void AddElmAttachment(
+            ElmLibrary elmLibrary,
+            byte[] elmBytes)
+        {
+            var bytes = elmBytes;
+            var attachment = new Attachment
+            {
+                ElementId = $"{elmLibrary.VersionedLibraryIdentifier}+elm",
+                ContentType = ElmLibrary.JsonMimeType,
+                Data = bytes,
+            };
+            fhirLibrary.Content.Add(attachment);
+        }
+
+        public void AddDataRequirements(
+            ElmLibrary elmLibrary,
+            ElmLibrarySet elmLibrarySet)
+        {
+            // Analyze datarequirements and add to the FHIR Library resource.
+            var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(elmLibrarySet, elmLibrary);
+            var dataRequirements = dataRequirementsAnalyzer.Analyze();
+            fhirLibrary.DataRequirement.AddRange(dataRequirements);
+            fhirLibrary.DataRequirement = fhirLibrary.DataRequirement
+                                             .OrderBy(dr => dr.Type)                                                  // Primary sorting by Type
+                                             .ThenBy(dr => dr.CodeFilter?.FirstOrDefault()?.ValueSet ?? string.Empty) // Secondary sorting by ValueSet
+                                             .ToList();
+        }
+
+
+        public void AddRelatedArtefacts(
+            ElmLibrary elmLibrary,
+            ElmLibrarySet elmLibrarySet,
+            ResourceCanonicalBuilder resourceCanonicalBuilder)
+        {
+            List<RelatedArtifact> result = [];
+            var dependencies = elmLibrarySet.GetLibraryDependencies(elmLibrary);
+            foreach (var dependency in dependencies.Prepend(elmLibrary))
+            {
+                foreach (IncludeDef include in dependency?.includes ?? [])
+                {
+                    var resourceUrl = resourceCanonicalBuilder("Library", include.path, include.version);
+                    var ra = new RelatedArtifact
+                    {
+                        Display = $"Library {include.localIdentifier}",
+                        Type = RelatedArtifact.RelatedArtifactType.DependsOn,
+                        Resource = resourceUrl,
+                    };
+                    if (!result.Any(r => r.IsExactly(ra)))
+                        result.Add(ra);
+                }
+
+                foreach (ValueSetDef include in dependency?.valueSets ?? [])
+                {
+                    var ra = new RelatedArtifact
+                    {
+                        Display = $"{include.GetTypeSpecifier()} {include.name}",
+                        Type = RelatedArtifact.RelatedArtifactType.DependsOn,
+                        Resource = include.id,
+                    };
+                    if (!result.Any(r => r.IsExactly(ra)))
+                        result.Add(ra);
+                }
+            }
+            fhirLibrary.RelatedArtifact.AddRange(result);
+            fhirLibrary.RelatedArtifact.Sort((x, y) => string.Compare(x.Display, y.Display ?? "", StringComparison.Ordinal));
+        }
+
+        public void AddCqlAttachment(
+            CqlVersionedLibraryIdentifier libraryIdentifier,
+            byte[] cqlBytes)
+        {
+            var attachment = new Attachment
+            {
+                ElementId = $"{libraryIdentifier}+cql",
+                ContentType = "text/cql",
+                Data = cqlBytes,
+            };
+            fhirLibrary.Content.Add(attachment);
+        }
+
+        public void AddCqlOptions(
+            IReadOnlyList<Parameters.ParameterComponent> fhirParameters)
+        {
+            // Adding CQL Options as a contained resource
+            // See: https://build.fhir.org/domainresource-definitions.html#DomainResource.contained
+
+            var p = new Parameters();
+            p.Id = "options";
+            p.Parameter.AddRange(fhirParameters);
+            fhirLibrary.Contained = [p];
+
+            // See requirement for Contained resources: https://build.fhir.org/domainresource.html#invs
+            // dom-3: If the resource is contained in another resource,
+            //        it SHALL be referred to from elsewhere in the resource
+            //        or SHALL refer to the containing resource
+            //
+            // This is done by adding an extension. (Example: https://build.fhir.org/ig/HL7/cql-ig/Library-CQLExample.json.html)
+
+            var extension = new Extension
+            {
+                Url = "http://hl7.org/fhir/StructureDefinition/cqf-cqlOptions",
+                Value = new ResourceReference { Reference = "#options" },
+            };
+            fhirLibrary.Extension.Add(extension);
+        }
+
+        public void AddCSharpAttachment(
+            KeyValuePair<string, string> kvp)
+        {
+            var sourceBytes = Encoding.UTF8.GetBytes(kvp.Value);
+            var attachment = new Attachment
+            {
+                ElementId = $"{kvp.Key}+csharp",
+                ContentType = "text/plain",
+                Data = sourceBytes,
+            };
+            fhirLibrary.Content.Add(attachment);
+        }
+
+        public void AddDllAttachment(
+            CqlVersionedLibraryIdentifier libraryIdentifier,
+            byte[] assemblyBytes)
+        {
+            var attachment = new Attachment
+            {
+                ElementId = $"{libraryIdentifier}+dll",
+                ContentType = "application/octet-stream",
+                Data = assemblyBytes,
+            };
+            fhirLibrary.Content.Add(attachment);
+        }
+
+        public void AddPdbAttachment(
+            CqlVersionedLibraryIdentifier libraryIdentifier,
+            byte[] debugSymbols)
+        {
+            var attachment = new Attachment
+            {
+                ElementId = $"{libraryIdentifier}+pdb",
+                ContentType = "application/octet-stream",
+                Data = debugSymbols,
+            };
+            fhirLibrary.Content.Add(attachment);
+        }
+
+        /// <summary>
+        /// Replaces or adds an attachment to a FHIR Library resource.
+        /// The content type is automatically inferred from the suffix.
+        /// </summary>
+        public void ReplaceOrAddAttachment(
+            CqlVersionedLibraryIdentifier libraryIdentifier,
+            string suffix,
+            byte[] data)
+        {
+            var attachmentId = $"{libraryIdentifier}{suffix}";
+            var contentType = GetContentTypeForSuffix(suffix);
+
+            // Ensure Content collection is initialized
+            fhirLibrary.Content ??= [];
+
+            // Find existing attachment with this ID
+            var existingAttachment = fhirLibrary.Content.FirstOrDefault(a => a.ElementId != null && a.ElementId == attachmentId);
+
+            if (existingAttachment != null)
+            {
+                // Replace existing attachment
+                existingAttachment.ContentType = contentType;
+                existingAttachment.Data = data;
+            }
+            else
+            {
+                // Add new attachment
+                var newAttachment = new Attachment
+                {
+                    ElementId = attachmentId,
+                    ContentType = contentType,
+                    Data = data
+                };
+                fhirLibrary.Content.Add(newAttachment);
+            }
         }
     }
 }

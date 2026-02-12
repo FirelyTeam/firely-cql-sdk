@@ -172,7 +172,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             return;
         }
 
-        LibraryPackager.ReplaceOrAddAttachment(library, libraryIdentifier, idSuffix, data);
+        library.ReplaceOrAddAttachment(libraryIdentifier, idSuffix, data);
         logger.LogInformation("Processed {Suffix} attachment (ID: {AttachmentId})", idSuffix, $"{libraryIdentifier}{idSuffix}");
     }
 
