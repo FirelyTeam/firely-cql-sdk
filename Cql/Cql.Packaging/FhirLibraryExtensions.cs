@@ -20,6 +20,34 @@ internal static class FhirLibraryExtensions
         _                                   => throw new ArgumentException($"Unknown suffix: {suffix}", nameof(suffix))
     };
 
+    private static Extension CreateCqlOptionsExtension()
+    {
+        // See requirement for Contained resources: https://build.fhir.org/domainresource.html#invs
+        // dom-3: If the resource is contained in another resource,
+        //        it SHALL be referred to from elsewhere in the resource
+        //        or SHALL refer to the containing resource
+        //
+        // This is done by adding an extension. (Example: https://build.fhir.org/ig/HL7/cql-ig/Library-CQLExample.json.html)
+
+        var extension = new Extension
+        {
+            Url = "http://hl7.org/fhir/StructureDefinition/cqf-cqlOptions",
+            Value = new ResourceReference { Reference = "#options" },
+        };
+        return extension;
+    }
+
+    private static Parameters CreateOptionsParameter(IReadOnlyList<Parameters.ParameterComponent> fhirParameters)
+    {
+        // Adding CQL Options as a contained resource
+        // See: https://build.fhir.org/domainresource-definitions.html#DomainResource.contained
+
+        var p = new Parameters();
+        p.Id = "options";
+        p.Parameter.AddRange(fhirParameters);
+        return p;
+    }
+
     extension(FhirLibrary)
     {
         /// <summary>
@@ -95,9 +123,7 @@ internal static class FhirLibraryExtensions
             fhirLibrary.AddRelatedArtefacts(elmLibrary, elmLibrarySet, resourceCanonicalBuilder);
             fhirLibrary.AddDataRequirements(elmLibrary, elmLibrarySet);
 
-            var fhirParameters = CreateFhirParameters(elmLibrary);
-            if (fhirParameters.Any())
-                fhirLibrary.AddCqlOptions(fhirParameters);
+            fhirLibrary.SetCqlOptionsParameterAndExtension(elmLibrary);
 
             if (cqlBytes != null)
                 fhirLibrary.Content.Add(CreateCqlAttachment(elmLibrary!.VersionedLibraryIdentifier, cqlBytes));
@@ -125,7 +151,21 @@ internal static class FhirLibraryExtensions
             JsonSerializer.Serialize(fhirLibrary, pretty ? JsonSerializerOptions.ForFhirPretty : JsonSerializerOptions.ForFhir);
 
 
-        public void AddDataRequirements(
+        private void SetCqlOptionsParameterAndExtension(
+            ElmLibrary elmLibrary)
+        {
+            var fhirParameters = CreateFhirParameters(elmLibrary);
+            if (fhirParameters.Any())
+            {
+                var parameter = CreateOptionsParameter(fhirParameters);
+                fhirLibrary.Contained = [parameter];
+
+                var extension = CreateCqlOptionsExtension();
+                fhirLibrary.Extension.Add(extension);
+            }
+        }
+
+        private void AddDataRequirements(
             ElmLibrary elmLibrary,
             ElmLibrarySet elmLibrarySet)
         {
@@ -140,7 +180,7 @@ internal static class FhirLibraryExtensions
         }
 
 
-        public void AddRelatedArtefacts(
+        private void AddRelatedArtefacts(
             ElmLibrary elmLibrary,
             ElmLibrarySet elmLibrarySet,
             ResourceCanonicalBuilder resourceCanonicalBuilder)
@@ -177,32 +217,6 @@ internal static class FhirLibraryExtensions
 
             fhirLibrary.RelatedArtifact.AddRange(result);
             fhirLibrary.RelatedArtifact.Sort((x, y) => string.Compare(x.Display, y.Display ?? "", StringComparison.Ordinal));
-        }
-
-        public void AddCqlOptions(
-            IReadOnlyList<Parameters.ParameterComponent> fhirParameters)
-        {
-            // Adding CQL Options as a contained resource
-            // See: https://build.fhir.org/domainresource-definitions.html#DomainResource.contained
-
-            var p = new Parameters();
-            p.Id = "options";
-            p.Parameter.AddRange(fhirParameters);
-            fhirLibrary.Contained = [p];
-
-            // See requirement for Contained resources: https://build.fhir.org/domainresource.html#invs
-            // dom-3: If the resource is contained in another resource,
-            //        it SHALL be referred to from elsewhere in the resource
-            //        or SHALL refer to the containing resource
-            //
-            // This is done by adding an extension. (Example: https://build.fhir.org/ig/HL7/cql-ig/Library-CQLExample.json.html)
-
-            var extension = new Extension
-            {
-                Url = "http://hl7.org/fhir/StructureDefinition/cqf-cqlOptions",
-                Value = new ResourceReference { Reference = "#options" },
-            };
-            fhirLibrary.Extension.Add(extension);
         }
 
         /// <summary>
