@@ -30,13 +30,13 @@ internal record ReplaceLibraryAttachmentsCommand
         "Given a FHIR library file and one or more attachment files, this command replaces or adds " +
         "the corresponding content in the library (identified by content type: +cql, +elm, +dll, +pdb, +csharp). " +
         "If --library-out-file is not specified, the library-file will be updated in-place. " +
-        "If --library-out-file is specified, library-file will be copied to library-out-file, and the latter will be updated." +
-        Environment.NewLine + Environment.NewLine +
-        "Exit Codes:" + Environment.NewLine +
-        "  0  - Success" + Environment.NewLine +
-        "  11 - No input files specified or one or more input files do not exist" + Environment.NewLine +
-        "  12 - Invalid library JSON or missing required library properties (Name, Version)" + Environment.NewLine +
-        "  99 - Unknown error occurred during processing";
+        "If --library-out-file is specified, library-file will be copied to library-out-file, and the latter will be updated.";
+
+    public static readonly string ExitCodes =
+        "0  - Success" + Environment.NewLine +
+        "11 - No input files specified or one or more input files do not exist" + Environment.NewLine +
+        "12 - Invalid library JSON or missing required library properties (Name, Version)" + Environment.NewLine +
+        "99 - Unknown error occurred during processing";
 
     public static readonly Option[] Options =
     [
@@ -92,10 +92,13 @@ internal record ReplaceLibraryAttachmentsCommand
             """),
     ];
 
-    public static Command CreateCommand() =>
-        new Command(Name, Description)
+    public static Command CreateCommand()
+    {
+        CustomHelpBuilder.RegisterExitCodes(Name, ExitCodes);
+        return new Command(Name, Description)
             .AddOptions(Options)
             .SetHandler(typeof(ReplaceLibraryAttachmentsProgram), nameof(ReplaceLibraryAttachmentsProgram.CommandHandler));
+    }
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [

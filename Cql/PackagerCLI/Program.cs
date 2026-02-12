@@ -12,6 +12,7 @@ using Hl7.Cql.Packager.Commands.ExtractLibraryAttachments;
 using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Commands.ReplaceLibraryAttachments;
+using System.CommandLine.Builder;
 
 namespace Hl7.Cql.Packager;
 
@@ -62,7 +63,23 @@ public class Program
         rootCommand.AddCommand(ReplaceLibraryAttachmentsCommand.CreateCommand());
 
         var systemConsole = new SystemConsole();
-        var result = rootCommand.Invoke(args, systemConsole);
+        
+        // Configure custom help builder  
+        var builder = new CommandLineBuilder(rootCommand)
+            .UseHelpBuilder(context => new CustomHelpBuilder(LocalizationResources.Instance))
+            .UseHelp()
+            .UseParseDirective()
+            .UseSuggestDirective()
+            .RegisterWithDotnetSuggest()
+            .UseTypoCorrections()
+            .UseParseErrorReporting()
+            .UseExceptionHandler()
+            .CancelOnProcessTermination();
+        
+        var parser = builder.Build();
+        
+        // Invoke the command
+        var result = parser.InvokeAsync(args, systemConsole).Result;
         return result;
     }
 }
