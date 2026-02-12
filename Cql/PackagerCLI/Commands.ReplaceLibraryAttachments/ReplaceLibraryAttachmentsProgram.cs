@@ -120,30 +120,13 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             logger.LogInformation("Processing library: {LibraryIdentifier}", libraryIdentifier);
 
             // Replace or add attachments
-            int replacedCount = 0;
-            int addedCount = 0;
+            ReplaceOrAddAttachment(library, opt.CqlFile, libraryIdentifier, "+cql");
+            ReplaceOrAddAttachment(library, opt.ElmFile, libraryIdentifier, "+elm");
+            ReplaceOrAddAttachment(library, opt.CSharpFile, libraryIdentifier, "+csharp");
+            ReplaceOrAddAttachment(library, opt.DllFile, libraryIdentifier, "+dll");
+            ReplaceOrAddAttachment(library, opt.PdbFile, libraryIdentifier, "+pdb");
 
-            var (replaced, added) = ReplaceOrAddAttachment(library, opt.CqlFile, libraryIdentifier, "+cql", "text/cql");
-            replacedCount += replaced;
-            addedCount += added;
-
-            (replaced, added) = ReplaceOrAddAttachment(library, opt.ElmFile, libraryIdentifier, "+elm", "application/elm+json");
-            replacedCount += replaced;
-            addedCount += added;
-
-            (replaced, added) = ReplaceOrAddAttachment(library, opt.CSharpFile, libraryIdentifier, "+csharp", "text/plain");
-            replacedCount += replaced;
-            addedCount += added;
-
-            (replaced, added) = ReplaceOrAddAttachment(library, opt.DllFile, libraryIdentifier, "+dll", "application/octet-stream");
-            replacedCount += replaced;
-            addedCount += added;
-
-            (replaced, added) = ReplaceOrAddAttachment(library, opt.PdbFile, libraryIdentifier, "+pdb", "application/octet-stream");
-            replacedCount += replaced;
-            addedCount += added;
-
-            logger.LogInformation("Replaced {ReplacedCount} attachment(s), added {AddedCount} new attachment(s).", replacedCount, addedCount);
+            logger.LogInformation("Attachments processed successfully.");
 
             // Serialize and save the updated library
             var updatedLibraryJson = LibraryPackager.WriteLibraryToJson(library, packOpt.JsonPretty);
@@ -160,15 +143,14 @@ internal sealed class ReplaceLibraryAttachmentsProgram
         }
     }
 
-    private (int replaced, int added) ReplaceOrAddAttachment(
+    private void ReplaceOrAddAttachment(
         Library library,
         FileInfo? attachmentFile,
         string libraryIdentifier,
-        string idSuffix,
-        string contentType)
+        string idSuffix)
     {
         if (attachmentFile == null)
-            return (0, 0);
+            return;
 
         // This should not happen as we validate file existence upfront
         if (!attachmentFile.Exists)
@@ -187,21 +169,11 @@ internal sealed class ReplaceLibraryAttachmentsProgram
         catch (Exception ex)
         {
             logger.LogError(ex, "Failed to read attachment file: {FilePath}", attachmentFile.FullName);
-            return (0, 0);
+            return;
         }
 
-        var (replaced, added) = LibraryPackager.ReplaceOrAddAttachment(library, libraryIdentifier, idSuffix, contentType, data);
-
-        if (replaced > 0)
-        {
-            logger.LogInformation("Replaced existing {Suffix} attachment (ID: {AttachmentId})", idSuffix, $"{libraryIdentifier}{idSuffix}");
-        }
-        else if (added > 0)
-        {
-            logger.LogInformation("Added new {Suffix} attachment (ID: {AttachmentId})", idSuffix, $"{libraryIdentifier}{idSuffix}");
-        }
-
-        return (replaced, added);
+        LibraryPackager.ReplaceOrAddAttachment(library, libraryIdentifier, idSuffix, data);
+        logger.LogInformation("Processed {Suffix} attachment (ID: {AttachmentId})", idSuffix, $"{libraryIdentifier}{idSuffix}");
     }
 
     internal static int CommandHandler(

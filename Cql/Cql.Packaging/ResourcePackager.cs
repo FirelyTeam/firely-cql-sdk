@@ -754,17 +754,30 @@ internal static class LibraryPackager
     }
 
     /// <summary>
-    /// Replaces or adds an attachment to a FHIR Library resource.
-    /// Returns a tuple indicating (replaced count, added count).
+    /// Gets the content type for a given attachment suffix.
     /// </summary>
-    public static (int replaced, int added) ReplaceOrAddAttachment(
+    private static string GetContentTypeForSuffix(string suffix) => suffix switch
+    {
+        "+cql" => "text/cql",
+        "+elm" => "application/elm+json",
+        "+csharp" => "text/plain",
+        "+dll" => "application/octet-stream",
+        "+pdb" => "application/octet-stream",
+        _ => throw new ArgumentException($"Unknown suffix: {suffix}", nameof(suffix))
+    };
+
+    /// <summary>
+    /// Replaces or adds an attachment to a FHIR Library resource.
+    /// The content type is automatically inferred from the suffix.
+    /// </summary>
+    public static void ReplaceOrAddAttachment(
         FhirLibrary library,
         string libraryIdentifier,
         string suffix,
-        string contentType,
         byte[] data)
     {
         var attachmentId = $"{libraryIdentifier}{suffix}";
+        var contentType = GetContentTypeForSuffix(suffix);
 
         // Ensure Content collection is initialized
         library.Content ??= [];
@@ -777,7 +790,6 @@ internal static class LibraryPackager
             // Replace existing attachment
             existingAttachment.ContentType = contentType;
             existingAttachment.Data = data;
-            return (1, 0);
         }
         else
         {
@@ -789,7 +801,6 @@ internal static class LibraryPackager
                 Data = data
             };
             library.Content.Add(newAttachment);
-            return (0, 1);
         }
     }
 }
