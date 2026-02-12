@@ -98,7 +98,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             logger.LogInformation("Reading FHIR library from: {LibraryFile}", outputFile.FullName);
             var libraryJson = File.ReadAllText(outputFile.FullName);
 
-            Library library;
+            FhirLibrary library;
             try
             {
                 library = LibraryPackager.ReadLibraryFromJson(libraryJson);
@@ -144,7 +144,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
     }
 
     private void ReplaceOrAddAttachment(
-        Library library,
+        FhirLibrary library,
         FileInfo? attachmentFile,
         string libraryIdentifier,
         string idSuffix)
