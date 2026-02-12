@@ -56,7 +56,9 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             if (missingFiles.Count > 0)
             {
                 var filesPluralized = missingFiles.Count > 1 ? "files do" : "file does";
-                logger.LogError($$"""The following {{filesPluralized}} do not exist:{{Environment.NewLine}}{MissingFiles}{{Environment.NewLine}}All specified attachment input files must exist before processing can begin.", Environment.NewLine, missingFiles.ToString());
+                var missingFilesNewLines = string.Join(Environment.NewLine, missingFiles);
+                var template = $$"""The following {{filesPluralized}} not exist:{{Environment.NewLine}}{MissingFiles}{{Environment.NewLine}}All specified attachment input files must exist before processing can begin.""";
+                logger.LogError(template, missingFilesNewLines);
                 return ExitCode.NoInputFiles;
             }
 
