@@ -135,21 +135,21 @@
     },
     "PackageCLI extract-library-attachments (dqm-content-qicore-2025 | All Attachments for CMS56FHIRFuncStatHipReplacement)": {
       "commandName": "Project",
-      "commandLineArgs": "extract-library-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json.original\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Elm\" --csharp-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/CSharp\" --dll-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Assemblies\" --pdb-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/DebugSymbols\" ",
+      "commandLineArgs": "extract-library-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Elm\" --csharp-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/CSharp\" --dll-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Assemblies\" --pdb-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/DebugSymbols\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     },
     "PackageCLI extract-library-attachments (dqm-content-qicore-2025 | CQL and ELM Only for CMS56FHIRFuncStatHipReplacement)": {
       "commandName": "Project",
-      "commandLineArgs": "extract-library-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json.original\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Elm\" ",
+      "commandLineArgs": "extract-library-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Cql\" --elm-dir \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Elm\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     },
     "PackageCLI replace-library-attachments (dqm-content-qicore-2025 | Replace CQL and ELM for CMS56FHIRFuncStatHipReplacement)": {
       "commandName": "Project",
-      "commandLineArgs": "replace-library-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json.original\" --library-out-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Cql/CMS56FHIRFuncStatHipReplacement.cql\" --elm-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Elm/CMS56FHIRFuncStatHipReplacement.json\" ",
+      "commandLineArgs": "replace-library-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --library-out-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.replaced.json\" --elm-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Elm/CMS56FHIRFuncStatHipReplacement.json\" --csharp-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/CSharpCMS56FHIRFuncStatHipReplacement.g.cs\" --dll-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/Assemblies/CMS56FHIRFuncStatHipReplacement.dll\" --pdb-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Extracted/DebugSymbols/CMS56FHIRFuncStatHipReplacement.pdb\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
