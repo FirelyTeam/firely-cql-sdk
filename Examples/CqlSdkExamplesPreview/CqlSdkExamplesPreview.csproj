@@ -23,11 +23,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="**\input\**">
+		<None Update="**\input\**" Exclude="bin\**;obj\**">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<Compile Remove="**\input\**\*.g.cs" />
-		<None Include="**\input\**\*.g.cs">
+		<Compile Remove="**\input\**\*.g.cs" Exclude="bin\**;obj\**" />
+		<None Include="**\input\**\*.g.cs" Exclude="bin\**;obj\**">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
