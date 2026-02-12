@@ -149,7 +149,7 @@
     },
     "PackageCLI replace-library-attachments (dqm-content-qicore-2025 | Replace CQL and ELM for CMS56FHIRFuncStatHipReplacement)": {
       "commandName": "Project",
-      "commandLineArgs": "replace-library-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Cql/CMS56FHIRFuncStatHipReplacement.cql\" --elm-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Elm/CMS56FHIRFuncStatHipReplacement.json\" ",
+      "commandLineArgs": "replace-library-attachments --library-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --library-backup-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json.backup\" --cql-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Cql/CMS56FHIRFuncStatHipReplacement.cql\" --elm-file \"$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/Elm/CMS56FHIRFuncStatHipReplacement.json\" ",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }

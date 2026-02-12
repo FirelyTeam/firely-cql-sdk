@@ -15,6 +15,7 @@ internal record ReplaceLibraryAttachmentsCommand
 (
     // Do not rename these properties, they must match the command line options e.g. --library-file maps to LibraryFile, etc
     FileInfo LibraryFile,
+    FileInfo? LibraryBackupFile,
     FileInfo? CqlFile,
     FileInfo? ElmFile,
     FileInfo? CSharpFile,
@@ -38,6 +39,12 @@ internal record ReplaceLibraryAttachmentsCommand
                 """)
             .IsRequired()
             .ExistingOnly(),
+
+        Option<FileInfo>(
+            "--library-backup-file",
+            """
+            If specified, the library file will be copied to this backup location before replacing attachments.
+            """),
 
         Option<FileInfo>(
             "--cql-file",
@@ -84,6 +91,7 @@ internal record ReplaceLibraryAttachmentsCommand
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [
         (LibraryFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.LibraryFile)]),
+        (LibraryBackupFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.LibraryBackupFile)]),
         (CqlFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.CqlFile)]),
         (ElmFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.ElmFile)]),
         (CSharpFile, [ReplaceLibraryAttachmentsOptions.ConfigSection, nameof(ReplaceLibraryAttachmentsOptions.CSharpFile)]),

@@ -35,6 +35,30 @@ internal sealed class ReplaceLibraryAttachmentsProgram
                 return ExitCode.NoInputFiles;
             }
 
+            // Create backup if requested
+            if (opt.LibraryBackupFile != null)
+            {
+                try
+                {
+                    logger.LogInformation("Creating backup: {BackupFile}", opt.LibraryBackupFile.FullName);
+                    
+                    // Ensure backup directory exists
+                    var backupDir = opt.LibraryBackupFile.Directory;
+                    if (backupDir != null && !backupDir.Exists)
+                    {
+                        backupDir.Create();
+                    }
+                    
+                    File.Copy(opt.LibraryFile.FullName, opt.LibraryBackupFile.FullName, overwrite: true);
+                    logger.LogInformation("Backup created successfully.");
+                }
+                catch (Exception ex)
+                {
+                    logger.LogError(ex, "Failed to create backup file: {BackupFile}", opt.LibraryBackupFile.FullName);
+                    return ExitCode.UnknownError;
+                }
+            }
+
             // Read and parse the FHIR library
             logger.LogInformation("Reading FHIR library from: {LibraryFile}", opt.LibraryFile.FullName);
             var libraryJson = File.ReadAllText(opt.LibraryFile.FullName);
