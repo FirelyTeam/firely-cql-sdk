@@ -101,7 +101,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             FhirLibrary library;
             try
             {
-                library = LibraryPackager.ReadLibraryFromJson(libraryJson);
+                library = FhirLibrary.ReadLibraryFromJson(libraryJson);
             }
             catch (Exception ex)
             {
@@ -129,7 +129,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             logger.LogInformation("Attachments processed successfully.");
 
             // Serialize and save the updated library
-            var updatedLibraryJson = LibraryPackager.WriteLibraryToJson(library, packOpt.JsonPretty);
+            var updatedLibraryJson = library.WriteLibraryToJson(packOpt.JsonPretty);
 
             File.WriteAllText(outputFile.FullName, updatedLibraryJson);
             logger.LogInformation("Updated FHIR library saved to: {LibraryFile}", outputFile.FullName);

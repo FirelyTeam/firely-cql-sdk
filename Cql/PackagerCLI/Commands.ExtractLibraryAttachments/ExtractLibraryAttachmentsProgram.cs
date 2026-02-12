@@ -34,7 +34,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             // Parse FHIR Library resource
             logger.LogInformation("Reading FHIR Library resource from {LibraryFile}", opt.LibraryFile.FullName);
             var libraryJson = File.ReadAllText(opt.LibraryFile.FullName);
-            FhirLibrary library = LibraryPackager.ReadLibraryFromJson(libraryJson);
+            FhirLibrary library = FhirLibrary.ReadLibraryFromJson(libraryJson);
 
             if (string.IsNullOrWhiteSpace(library.Name))
             {

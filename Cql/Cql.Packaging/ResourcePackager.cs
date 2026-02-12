@@ -318,10 +318,10 @@ internal static class LibraryPackager
             AddCqlAttachment(fhirLibrary, elmLibrary!.VersionedLibraryIdentifier, cqlBytes);
 
         if (assemblyBytes is {Length:>0} dll)
-            AddDllAttachment(fhirLibrary, elmLibrary!.VersionedLibraryIdentifier, dll);
+            fhirLibrary.AddDllAttachment(elmLibrary!.VersionedLibraryIdentifier, dll);
 
         if (debugSymbols is {Length:>0} pdb)
-            AddPdbAttachment(fhirLibrary, elmLibrary!.VersionedLibraryIdentifier, pdb);
+            fhirLibrary.AddPdbAttachment(elmLibrary!.VersionedLibraryIdentifier, pdb);
 
         if (cSharpSourceCodeById != null)
             foreach (var kvp in cSharpSourceCodeById)
@@ -453,7 +453,7 @@ internal static class LibraryPackager
 
     }
 
-    private static void AddCqlAttachment(
+    public static void AddCqlAttachment(
         FhirLibrary fhirLibrary,
         CqlVersionedLibraryIdentifier libraryIdentifier,
         byte[] cqlBytes)
@@ -467,7 +467,7 @@ internal static class LibraryPackager
         fhirLibrary.Content.Add(attachment);
     }
 
-    private static void AddCqlOptions(
+    public static void AddCqlOptions(
         FhirLibrary fhirLibrary,
         IReadOnlyList<Parameters.ParameterComponent> fhirParameters)
     {
@@ -494,7 +494,7 @@ internal static class LibraryPackager
         fhirLibrary.Extension.Add(extension);
     }
 
-    private static void AddCSharpAttachment(FhirLibrary library, KeyValuePair<string, string> kvp)
+    public static void AddCSharpAttachment(FhirLibrary library, KeyValuePair<string, string> kvp)
     {
         var sourceBytes = Encoding.UTF8.GetBytes(kvp.Value);
         var attachment = new Attachment
@@ -506,8 +506,8 @@ internal static class LibraryPackager
         library.Content.Add(attachment);
     }
 
-    private static void AddDllAttachment(
-        FhirLibrary library,
+    public static void AddDllAttachment(
+        this FhirLibrary library,
         CqlVersionedLibraryIdentifier libraryIdentifier,
         byte[] assemblyBytes)
     {
@@ -520,8 +520,8 @@ internal static class LibraryPackager
         library.Content.Add(attachment);
     }
 
-    private static void AddPdbAttachment(
-        FhirLibrary library,
+    public static void AddPdbAttachment(
+        this FhirLibrary library,
         CqlVersionedLibraryIdentifier libraryIdentifier,
         byte[] debugSymbols)
     {
@@ -701,26 +701,6 @@ internal static class LibraryPackager
     }
 
     /// <summary>
-    /// Reads and deserializes a FHIR Library resource from JSON string.
-    /// </summary>
-    public static FhirLibrary ReadLibraryFromJson(string json)
-    {
-        var library = JsonSerializer.Deserialize<FhirLibrary>(json, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector))
-            ?? throw new InvalidOperationException("Failed to deserialize FHIR library from JSON.");
-        return library;
-    }
-
-    /// <summary>
-    /// Serializes a FHIR Library resource to JSON string.
-    /// </summary>
-    public static string WriteLibraryToJson(FhirLibrary library, bool pretty = false)
-    {
-        var jsonOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
-        jsonOptions.WriteIndented = pretty;
-        return JsonSerializer.Serialize(library, jsonOptions);
-    }
-
-    /// <summary>
     /// Extracts an attachment from a FHIR Library to a file.
     /// Returns true if extraction was successful, false otherwise.
     /// </summary>
@@ -732,7 +712,7 @@ internal static class LibraryPackager
         }
 
         var data = attachment.Data;
-        
+
         // Ensure output directory exists
         var outputDir = Path.GetDirectoryName(outputPath);
         if (!string.IsNullOrEmpty(outputDir) && !Directory.Exists(outputDir))
@@ -801,6 +781,42 @@ internal static class LibraryPackager
                 Data = data
             };
             library.Content.Add(newAttachment);
+        }
+    }
+}
+
+internal static class FhirLibraryExtensions
+{
+    // /// <summary>
+    // /// Reads and deserializes a FHIR Library resource from JSON string.
+    // /// </summary>
+    // public static FhirLibrary ReadLibraryFromJson(string json)
+    // {
+    //     var library = JsonSerializer.Deserialize<FhirLibrary>(json, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector))
+    //                   ?? throw new InvalidOperationException("Failed to deserialize FHIR library from JSON.");
+    //     return library;
+    // }
+
+    /// <summary>
+    /// Serializes a FHIR Library resource to JSON string.
+    /// </summary>
+    public static string WriteLibraryToJson(this FhirLibrary library, bool pretty = false)
+    {
+        var jsonOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
+        jsonOptions.WriteIndented = pretty;
+        return JsonSerializer.Serialize(library, jsonOptions);
+    }
+
+    extension(FhirLibrary library)
+    {
+        /// <summary>
+        /// Reads and deserializes a FHIR Library resource from JSON string.
+        /// </summary>
+        public static FhirLibrary ReadLibraryFromJson(string json)
+        {
+            var lib = JsonSerializer.Deserialize<FhirLibrary>(json, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector))
+                          ?? throw new InvalidOperationException("Failed to deserialize FHIR library from JSON.");
+            return lib;
         }
     }
 }
