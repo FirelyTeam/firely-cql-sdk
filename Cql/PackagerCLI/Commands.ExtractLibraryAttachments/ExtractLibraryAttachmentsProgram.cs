@@ -123,7 +123,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             var fileName = $"{libraryIdentifier}{extension}";
             var outputPath = Path.Combine(outputDir.FullName, fileName);
 
-            var success = LibraryPackager.ExtractAttachment(attachment, outputPath, isBinary: false);
+            var success = ExtractAttachment(attachment, outputPath, isBinary: false);
             if (success)
             {
                 logger.LogInformation("Extracted {Extension} to {OutputPath}", extension, outputPath);
@@ -148,7 +148,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             var fileName = $"{libraryIdentifier}{extension}";
             var outputPath = Path.Combine(outputDir.FullName, fileName);
 
-            var success = LibraryPackager.ExtractAttachment(attachment, outputPath, isBinary: true);
+            var success = ExtractAttachment(attachment, outputPath, isBinary: true);
             if (success)
             {
                 logger.LogInformation("Extracted {Extension} to {OutputPath}", extension, outputPath);
@@ -164,6 +164,42 @@ internal sealed class ExtractLibraryAttachmentsProgram
             logger.LogError(ex, "Failed to extract binary attachment: {ElementId}", attachment.ElementId);
             return false;
         }
+    }
+
+    /// <summary>
+    /// Extracts an attachment from a FHIR Library to a file.
+    /// Returns true if extraction was successful, false otherwise.
+    /// </summary>
+    private static bool ExtractAttachment(
+        Attachment attachment,
+        string outputPath,
+        bool isBinary = false)
+    {
+        if (attachment.Data is null)
+        {
+            return false;
+        }
+
+        var data = attachment.Data;
+
+        // Ensure output directory exists
+        var outputDir = Path.GetDirectoryName(outputPath);
+        if (!string.IsNullOrEmpty(outputDir) && !Directory.Exists(outputDir))
+        {
+            Directory.CreateDirectory(outputDir);
+        }
+
+        if (isBinary)
+        {
+            File.WriteAllBytes(outputPath, data);
+        }
+        else
+        {
+            var text = Encoding.UTF8.GetString(data);
+            File.WriteAllText(outputPath, text);
+        }
+
+        return true;
     }
 
     internal static int CommandHandler(
