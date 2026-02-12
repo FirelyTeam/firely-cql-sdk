@@ -80,7 +80,7 @@ internal class OptionsConsoleDumper(
             }
         }
 
-        bool HasNonNullProperties(object obj)
+        bool HasNonNullProperties(object? obj)
         {
             if (obj is null) return false;
             

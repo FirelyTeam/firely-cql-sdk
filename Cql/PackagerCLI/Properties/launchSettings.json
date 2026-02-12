@@ -16,6 +16,10 @@
       "commandName": "Project",
       "commandLineArgs": "extract-library-attachments --help"
     },
+    "PackageCLI replace-library-attachments Help": {
+      "commandName": "Project",
+      "commandLineArgs": "replace-library-attachments --help"
+    },
     "PackageCLI version": {
       "commandName": "Project",
       "commandLineArgs": "--version"
