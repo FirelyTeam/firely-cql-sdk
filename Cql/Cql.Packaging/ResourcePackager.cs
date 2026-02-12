@@ -580,6 +580,22 @@ internal static class LibraryPackager
     }
 }
 
+internal static class JsonSerializerOptionsExtensions
+{
+    private static readonly JsonSerializerOptions DefaultFhirJsonOptionsCached =
+        new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
+
+    private static readonly JsonSerializerOptions PrettyFhirJsonOptionsCached =
+        DefaultFhirJsonOptionsCached.Pretty();
+
+    extension(JsonSerializerOptions)
+    {
+        public static JsonSerializerOptions DefaultFhirJsonOptions => DefaultFhirJsonOptionsCached;
+
+        public static JsonSerializerOptions PrettyFhirJsonOptions => PrettyFhirJsonOptionsCached;
+    }
+}
+
 internal static class FhirLibraryExtensions
 {
     /// <summary>
@@ -602,7 +618,7 @@ internal static class FhirLibraryExtensions
         /// </summary>
         public static FhirLibrary ReadLibraryFromJson(string json)
         {
-            var lib = JsonSerializer.Deserialize<FhirLibrary>(json, new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector))
+            var lib = JsonSerializer.Deserialize<FhirLibrary>(json, JsonSerializerOptions.DefaultFhirJsonOptions)
                           ?? throw new InvalidOperationException("Failed to deserialize FHIR library from JSON.");
             return lib;
         }
@@ -613,12 +629,8 @@ internal static class FhirLibraryExtensions
         /// <summary>
         /// Serializes a FHIR Library resource to JSON string.
         /// </summary>
-        public string WriteLibraryToJson(bool pretty = false)
-        {
-            var jsonOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
-            jsonOptions.WriteIndented = pretty;
-            return JsonSerializer.Serialize(fhirLibrary, jsonOptions);
-        }
+        public string WriteLibraryToJson(bool pretty = false) =>
+            JsonSerializer.Serialize(fhirLibrary, pretty ? JsonSerializerOptions.PrettyFhirJsonOptions : JsonSerializerOptions.DefaultFhirJsonOptions);
 
 
         public void AddElmAttachment(
