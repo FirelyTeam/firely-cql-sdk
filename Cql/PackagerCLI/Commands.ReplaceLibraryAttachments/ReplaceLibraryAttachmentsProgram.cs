@@ -72,7 +72,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
 
                     // Ensure output directory exists
                     var outDir = opt.LibraryOutFile.Directory;
-                    if (outDir != null && !outDir.Exists)
+                    if (outDir is { Exists: false })
                     {
                         outDir.Create();
                     }
