@@ -55,6 +55,60 @@ public static partial class PackagingToolkitExtensions
     }
 
     /// <summary>
+    /// Saves FHIR resources to separate directories for libraries and measures.
+    /// </summary>
+    /// <param name="packagingToolkit">The packaging toolkit instance.</param>
+    /// <param name="librariesDirectory">The directory where FHIR library resources will be saved. If null, falls back to fhirDirectory.</param>
+    /// <param name="measuresDirectory">The directory where FHIR measure resources will be saved. If null, falls back to fhirDirectory.</param>
+    /// <param name="fhirDirectory">The fallback directory for resources when specific directories are not provided.</param>
+    /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
+    /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directories.</param>
+    /// <param name="configureJsonSerializerOptions">Optional mutator for JSON serialization options.</param>
+    /// <returns>The packaging toolkit instance.</returns>
+    public static PackagingToolkit SaveFhirResourcesToDirectories(
+        this PackagingToolkit packagingToolkit,
+        DirectoryInfo? librariesDirectory,
+        DirectoryInfo? measuresDirectory,
+        DirectoryInfo? fhirDirectory = null,
+        bool writeIndented = false,
+        DirectoryInfoHandler? directoryPreparationStrategy = null,
+        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
+    {
+        var preparedDirectories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        ILogger? logger = null;
+
+        var fhirResources = packagingToolkit
+                            .GetPackagingResults()
+                            .SelectMany(t => t.resultArtifacts.GetFhirResources());
+
+        foreach (var (resourceFileName, resourceJson) in
+                 packagingToolkit.SerializeFhirResourcesToJson(fhirResources, writeIndented, configureJsonSerializerOptions))
+        {
+            // Determine the target directory based on resource type
+            var (resourceType, _, _) = resourceFileName;
+            DirectoryInfo targetDirectory = resourceType switch
+            {
+                "Library" => librariesDirectory ?? fhirDirectory ?? throw new InvalidOperationException("No directory specified for FHIR library resources."),
+                "Measure" => measuresDirectory ?? fhirDirectory ?? throw new InvalidOperationException("No directory specified for FHIR measure resources."),
+                _ => throw new InvalidOperationException($"Unknown resource type: {resourceType}")
+            };
+
+            // Prepare directory if not already prepared
+            if (preparedDirectories.Add(targetDirectory.FullName))
+            {
+                (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate)(targetDirectory);
+            }
+
+            logger ??= packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
+            var fullFilePath = Path.Combine(targetDirectory.FullName, resourceFileName.ToString());
+            logger.LogInformation("Saving FHIR Resource: {file}", fullFilePath);
+            File.WriteAllText(fullFilePath, resourceJson);
+        }
+
+        return packagingToolkit;
+    }
+
+    /// <summary>
     /// Gets the packaging results from the packaging toolkit.
     /// </summary>
     /// <param name="packagingToolkit">The packaging toolkit instance.</param>

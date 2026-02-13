@@ -19,4 +19,6 @@ public class CqlToFhirOptions : IBindOptions
     public DirectoryInfo? DllOutDir { get; set; }
     public DirectoryInfo? PdbOutDir { get; set; }
     public required DirectoryInfo? FhirOutDir { get; set; }
+    public DirectoryInfo? LibrariesOutDir { get; set; }
+    public DirectoryInfo? MeasuresOutDir { get; set; }
 }

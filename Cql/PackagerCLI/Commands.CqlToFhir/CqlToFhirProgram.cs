@@ -128,9 +128,9 @@ public class CqlToFhirProgram
                 sbSummary.AppendLine(Invariant($"* Saved {cqlToolkitResults.Count} ELM files to directory {opt.ElmOutDir}."));
             }
 
-            switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
+            switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir, opt.LibrariesOutDir, opt.MeasuresOutDir)
             {
-                case (null, null, null):
+                case (null, null, null, null, null):
                     return ExitCodes.Success.Code;
             }
 
@@ -199,7 +199,7 @@ public class CqlToFhirProgram
                     sbSummary.AppendLine(Invariant($"* Saved {elmToolkitResults.Count} Debug Symbol files (*.pdb) to directory {opt.PdbOutDir}."));
             }
 
-            if (opt.FhirOutDir is not null)
+            if (opt.FhirOutDir is not null || opt.LibrariesOutDir is not null || opt.MeasuresOutDir is not null)
             {
                 var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
                     .AddPackagingInputs(cqlToolkit, elmToolkit);
@@ -213,7 +213,9 @@ public class CqlToFhirProgram
                 packagingToolkit
                     .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
-                    .SaveFhirResourcesToDirectory(
+                    .SaveFhirResourcesToDirectories(
+                        opt.LibrariesOutDir,
+                        opt.MeasuresOutDir,
                         opt.FhirOutDir,
                         packOpt.JsonPretty,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
@@ -233,7 +235,29 @@ public class CqlToFhirProgram
                     tracker.RecordStatus(libraryId, LibraryProcessingStage.FhirResource, LibraryStageStatus.Saved([.. extensions]));
                 }
 
-                sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
+                // Build summary message
+                var librariesDir = opt.LibrariesOutDir ?? opt.FhirOutDir;
+                var measuresDir = opt.MeasuresOutDir ?? opt.FhirOutDir;
+
+                // Compare normalized full paths to determine if directories are the same
+                bool sameDirectory = librariesDir is not null && measuresDir is not null &&
+                    string.Equals(
+                        Path.GetFullPath(librariesDir.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                        Path.GetFullPath(measuresDir.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                        StringComparison.OrdinalIgnoreCase);
+
+                if (sameDirectory)
+                {
+                    sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {librariesDir}."));
+                }
+                else
+                {
+                    sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) to directory {librariesDir}."));
+                    if (measuresCount > 0)
+                    {
+                        sbSummary.AppendLine(Invariant($"* Saved {measuresCount} measures (Measure-*.json) to directory {measuresDir}."));
+                    }
+                }
             }
 
             return ExitCodes.Success.Code;
