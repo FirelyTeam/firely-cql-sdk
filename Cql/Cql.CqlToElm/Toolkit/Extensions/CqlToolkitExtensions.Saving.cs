@@ -27,6 +27,23 @@ public static partial class CqlToolkitExtensions
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
         bool writeIndented = false,
+        DirectoryInfoHandler? directoryPreparationStrategy = null) =>
+        SaveElmFilesToDirectory(cqlToolkit, directory, null, writeIndented, directoryPreparationStrategy);
+
+    /// <summary>
+    /// Saves the ELM files to the specified directory, optionally preserving subdirectory structure.
+    /// </summary>
+    /// <param name="cqlToolkit">The CQL toolkit instance.</param>
+    /// <param name="directory">The directory to save the ELM files to.</param>
+    /// <param name="computeOutputPath">Optional function to compute custom output paths. Receives (outputDirectory, libraryIdentifier, fileName) and returns the full output path.</param>
+    /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
+    /// <param name="directoryPreparationStrategy">The directory preparation strategy.</param>
+    /// <returns>The <see cref="CqlToolkit"/> instance.</returns>
+    public static CqlToolkit SaveElmFilesToDirectory(
+        this CqlToolkit cqlToolkit,
+        DirectoryInfo directory,
+        Func<DirectoryInfo, Runtime.CqlVersionedLibraryIdentifier, string, string>? computeOutputPath,
+        bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
         var prepElmDir = true;
@@ -39,9 +56,13 @@ public static partial class CqlToolkitExtensions
                 prepElmDir = false;
                 (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
             }
-            var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.json");
-            File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
-            logger.LogInformation("Saved ELM to file: {file}", fileName);
+
+            var fileName = $"{libraryIdentifier}.json";
+            var fullPath = computeOutputPath?.Invoke(directory, libraryIdentifier, fileName)
+                ?? Path.Combine(directory.FullName, fileName);
+
+            File.WriteAllText(fullPath, elmLibrary.SerializeToJson(writeIndented));
+            logger.LogInformation("Saved ELM to file: {file}", fullPath);
         }
 
         return cqlToolkit;

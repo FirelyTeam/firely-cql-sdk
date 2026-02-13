@@ -29,26 +29,54 @@ public static partial class PackagingToolkitExtensions
         DirectoryInfo directory,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
+        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null) =>
+        SaveFhirResourcesToDirectory(packagingToolkit, directory, null, writeIndented, directoryPreparationStrategy, configureJsonSerializerOptions);
+
+    /// <summary>
+    /// Saves FHIR resources to the specified directory, optionally preserving subdirectory structure.
+    /// </summary>
+    /// <param name="packagingToolkit">The packaging toolkit instance.</param>
+    /// <param name="directory">The directory where the FHIR resources will be saved.</param>
+    /// <param name="computeOutputPath">Optional function to compute custom output paths. Receives (outputDirectory, libraryIdentifier, fileName) and returns the full output path.</param>
+    /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
+    /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
+    /// <param name="configureJsonSerializerOptions">Optional mutator for JSON serialization options.</param>
+    /// <returns>The packaging toolkit instance.</returns>
+    public static PackagingToolkit SaveFhirResourcesToDirectory(
+        this PackagingToolkit packagingToolkit,
+        DirectoryInfo directory,
+        Func<DirectoryInfo, CqlVersionedLibraryIdentifier, string, string>? computeOutputPath,
+        bool writeIndented = false,
+        DirectoryInfoHandler? directoryPreparationStrategy = null,
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
         bool prepFhirDir = true;
         ILogger? logger = null;
-        var fhirResources = packagingToolkit
-                            .GetPackagingResults()
-                            .SelectMany(t => t.resultArtifacts.GetFhirResources());
-        foreach (var (resourceFileName, resourceJson) in
-                 packagingToolkit.SerializeFhirResourcesToJson(fhirResources, writeIndented, configureJsonSerializerOptions))
-        {
-            if (prepFhirDir)
-            {
-                prepFhirDir = false;
-                (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate)(directory);
-            }
 
-            logger ??= packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
-            var fullFilePath = Path.Combine(directory.FullName, resourceFileName.ToString());
-            logger.LogInformation("Saving FHIR Resource: {file}", fullFilePath);
-            File.WriteAllText(fullFilePath, resourceJson);
+        // Get packaging results with library identifiers
+        var packagingResults = packagingToolkit.GetPackagingResults().ToList();
+
+        foreach (var (libraryIdentifier, resultArtifacts) in packagingResults)
+        {
+            var fhirResources = resultArtifacts.GetFhirResources();
+
+            foreach (var (resourceFileName, resourceJson) in
+                     packagingToolkit.SerializeFhirResourcesToJson(fhirResources, writeIndented, configureJsonSerializerOptions))
+            {
+                if (prepFhirDir)
+                {
+                    prepFhirDir = false;
+                    (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate)(directory);
+                }
+
+                logger ??= packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
+
+                var fullFilePath = computeOutputPath?.Invoke(directory, libraryIdentifier, resourceFileName.ToString())
+                    ?? Path.Combine(directory.FullName, resourceFileName.ToString());
+
+                logger.LogInformation("Saving FHIR Resource: {file}", fullFilePath);
+                File.WriteAllText(fullFilePath, resourceJson);
+            }
         }
 
         return packagingToolkit;

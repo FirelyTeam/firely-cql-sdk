@@ -114,11 +114,47 @@ public static partial class ElmToolkitExtensions
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
+        Func<FileInfo, bool>? filePredicate = null) =>
+        AddElmFilesFromDirectory(elmToolkit, directory, null, options, filePredicate);
+
+    /// <summary>
+    /// Adds ELM files from a specified directory to the ELM toolkit, optionally tracking file paths.
+    /// </summary>
+    /// <param name="elmToolkit">The ELM toolkit to add the files to.</param>
+    /// <param name="directory">The directory containing the ELM files.</param>
+    /// <param name="onLibraryLoaded">Optional callback invoked after each library is loaded. Receives (fileInfo, libraryIdentifier).</param>
+    /// <param name="options">Optional enumeration options for file retrieval.</param>
+    /// <param name="filePredicate">Optional predicate to filter files.</param>
+    /// <returns>The updated ELM toolkit.</returns>
+    public static ElmToolkit AddElmFilesFromDirectory(
+        this ElmToolkit elmToolkit,
+        DirectoryInfo directory,
+        Action<FileInfo, CqlVersionedLibraryIdentifier>? onLibraryLoaded,
+        EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
+        var logger = elmToolkit.CreateLogger();
         var files = directory.EnumerateFiles("*.json", options ?? Defaults.EnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
-        return elmToolkit.AddElmFiles(files);
+
+        var libraries = files
+            .TrySelect(f =>
+            {
+                logger.LogInformation("Loading ELM library from file: {file}", f);
+                var library = ElmLibrary.LoadFromJson(f);
+                
+                // Invoke callback if provided
+                onLibraryLoaded?.Invoke(f, library.VersionedLibraryIdentifier);
+                
+                return library;
+            },
+            s => s
+                 .SetContinuation(elmToolkit.BatchProcessExceptionContinuation)
+                 .AddLoggerExceptionHandler(
+                     logger,
+                     (fileInfo, logMessage) => logMessage("Could not load ELM library from file: {file}", fileInfo.FullName))); // Log errors
+        
+        return elmToolkit.AddElmLibraries(libraries);
     }
 
     /// <summary>

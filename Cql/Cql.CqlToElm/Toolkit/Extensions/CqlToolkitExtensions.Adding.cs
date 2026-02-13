@@ -40,11 +40,49 @@ public static partial class CqlToolkitExtensions
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
+        Func<FileInfo, bool>? filePredicate = null) =>
+        AddCqlLibrariesFromDirectory(cqlToolkit, directory, null, options, filePredicate);
+
+    /// <summary>
+    /// Adds CQL libraries from the specified directory to the <see cref="CqlToolkit"/>, optionally tracking file paths.
+    /// </summary>
+    /// <param name="cqlToolkit">The CQL toolkit to add the libraries to.</param>
+    /// <param name="directory">The directory to search for CQL files.</param>
+    /// <param name="onLibraryLoaded">Optional callback invoked after each library is loaded. Receives (fileInfo, libraryIdentifier).</param>
+    /// <param name="options">The enumeration options to use when searching for files.</param>
+    /// <param name="filePredicate">An optional predicate to filter the files.</param>
+    /// <returns>The updated <see cref="CqlToolkit"/>.</returns>
+    public static CqlToolkit AddCqlLibrariesFromDirectory(
+        this CqlToolkit cqlToolkit,
+        DirectoryInfo directory,
+        Action<FileInfo, CqlVersionedLibraryIdentifier>? onLibraryLoaded,
+        EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
+        var logger = cqlToolkit.CreateLogger();
         var files = directory.EnumerateFiles("*.cql", options ?? Defaults.EnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
-        return cqlToolkit.AddCqlLibraryFiles(files);
+
+        var cqlLibraries = files
+            .TrySelect(f =>
+                       {
+                           logger.LogInformation("Loading CQL from file: {file}", f);
+                           var cqlContent = File.ReadAllText(f.FullName);
+                           var cqlLibrary = CqlLibraryString.Parse(cqlContent);
+                           
+                           // Invoke callback if provided
+                           onLibraryLoaded?.Invoke(f, cqlLibrary.LibraryIdentifier);
+                           
+                           return cqlLibrary;
+                       },
+                       s => s
+                            .SetContinuation(cqlToolkit.BatchProcessExceptionContinuation)
+                            .AddLoggerExceptionHandler(
+                                logger,
+                                (fileInfo, logMessage) =>
+                                    logMessage("Could not load CQL from file: {file}", fileInfo.FullName))); // Log errors
+
+        return cqlToolkit.AddCqlLibraries(cqlLibraries);
     }
 
     /// <summary>

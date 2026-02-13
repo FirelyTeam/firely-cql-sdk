@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
@@ -25,6 +26,21 @@ public static partial class ElmToolkitExtensions
     public static ElmToolkit SaveCSharpFilesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
+        DirectoryInfoHandler? directoryPreparationStrategy = null) =>
+        SaveCSharpFilesToDirectory(elmToolkit, directory, null, directoryPreparationStrategy);
+
+    /// <summary>
+    /// Saves the generated C# source files to the specified directory, optionally preserving subdirectory structure.
+    /// </summary>
+    /// <param name="elmToolkit">The ElmToolkit instance containing the generated C# source files.</param>
+    /// <param name="directory">The directory where the C# source files will be saved.</param>
+    /// <param name="computeOutputPath">Optional function to compute custom output paths. Receives (outputDirectory, libraryIdentifier, fileName) and returns the full output path.</param>
+    /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
+    /// <returns>The ElmToolkit instance.</returns>
+    public static ElmToolkit SaveCSharpFilesToDirectory(
+        this ElmToolkit elmToolkit,
+        DirectoryInfo directory,
+        Func<DirectoryInfo, CqlVersionedLibraryIdentifier, string, string>? computeOutputPath,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
         var prepCsDir = true;
@@ -37,9 +53,13 @@ public static partial class ElmToolkitExtensions
                 prepCsDir = false;
                 (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
             }
-            var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.g.cs");
-            File.WriteAllText(fileName, csharpSourceCode);
-            logger.LogInformation("Saved C# source code to file: {file}", fileName);
+
+            var fileName = $"{libraryIdentifier}.g.cs";
+            var fullPath = computeOutputPath?.Invoke(directory, libraryIdentifier, fileName)
+                ?? Path.Combine(directory.FullName, fileName);
+
+            File.WriteAllText(fullPath, csharpSourceCode);
+            logger.LogInformation("Saved C# source code to file: {file}", fullPath);
         }
 
         return elmToolkit;
@@ -56,7 +76,7 @@ public static partial class ElmToolkitExtensions
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null) =>
-        SaveAssemblyBinariesToDirectory(elmToolkit, directory, directory, directoryPreparationStrategy, directoryPreparationStrategy);
+        SaveAssemblyBinariesToDirectory(elmToolkit, directory, directory, null, directoryPreparationStrategy, directoryPreparationStrategy);
 
     /// <summary>
     /// Saves the generated assembly binaries and debug symbols to the specified directory.
@@ -71,6 +91,25 @@ public static partial class ElmToolkitExtensions
         this ElmToolkit elmToolkit,
         DirectoryInfo dllDirectory,
         DirectoryInfo pdbDirectory,
+        DirectoryInfoHandler? dllDirectoryPreparationStrategy = null,
+        DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null) =>
+        SaveAssemblyBinariesToDirectory(elmToolkit, dllDirectory, pdbDirectory, null, dllDirectoryPreparationStrategy, pdbDirectoryPreparationStrategy);
+
+    /// <summary>
+    /// Saves the generated assembly binaries and debug symbols to the specified directory, optionally preserving subdirectory structure.
+    /// </summary>
+    /// <param name="elmToolkit">The ElmToolkit instance containing the generated assembly binaries and debug symbols.</param>
+    /// <param name="dllDirectory">The directory where the assembly binaries will be saved.</param>
+    /// <param name="pdbDirectory">The directory where the debug symbol binaries (if provided) will be saved.</param>
+    /// <param name="computeOutputPath">Optional function to compute custom output paths. Receives (outputDirectory, libraryIdentifier, fileName) and returns the full output path.</param>
+    /// <param name="dllDirectoryPreparationStrategy">Optional strategy for preparing the dll directory.</param>
+    /// <param name="pdbDirectoryPreparationStrategy">Optional strategy for preparing the pdb directory.</param>
+    /// <returns>The ElmToolkit instance.</returns>
+    public static ElmToolkit SaveAssemblyBinariesToDirectory(
+        this ElmToolkit elmToolkit,
+        DirectoryInfo dllDirectory,
+        DirectoryInfo pdbDirectory,
+        Func<DirectoryInfo, CqlVersionedLibraryIdentifier, string, string>? computeOutputPath,
         DirectoryInfoHandler? dllDirectoryPreparationStrategy = null,
         DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null)
     {
@@ -103,15 +142,21 @@ public static partial class ElmToolkitExtensions
 
         foreach (var (libraryIdentifier, _, _, assemblyBytes, debugSymbolsBytes) in elmToAssemblyResults)
         {
-            var dllFileName = Path.Combine(dllDirectory.FullName, $"{libraryIdentifier}.dll");
-            File.WriteAllBytes(dllFileName, assemblyBytes);
-            logger.LogInformation("Saved assembly to file: {file}", dllFileName);
+            var dllFileName = $"{libraryIdentifier}.dll";
+            var dllFullPath = computeOutputPath?.Invoke(dllDirectory, libraryIdentifier, dllFileName)
+                ?? Path.Combine(dllDirectory.FullName, dllFileName);
+
+            File.WriteAllBytes(dllFullPath, assemblyBytes);
+            logger.LogInformation("Saved assembly to file: {file}", dllFullPath);
 
             if (debugSymbolsBytes is { Length: > 0 } pdb)
             {
-                var pdbFileName = Path.Combine(pdbDirectory.FullName, $"{libraryIdentifier}.pdb");
-                File.WriteAllBytes(pdbFileName, pdb);
-                logger.LogInformation("Saved debug symbols to file: {file}", pdbFileName);
+                var pdbFileName = $"{libraryIdentifier}.pdb";
+                var pdbFullPath = computeOutputPath?.Invoke(pdbDirectory, libraryIdentifier, pdbFileName)
+                    ?? Path.Combine(pdbDirectory.FullName, pdbFileName);
+
+                File.WriteAllBytes(pdbFullPath, pdb);
+                logger.LogInformation("Saved debug symbols to file: {file}", pdbFullPath);
             }
         }
 

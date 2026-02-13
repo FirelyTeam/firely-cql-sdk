@@ -65,14 +65,14 @@ internal sealed class ElmToFhirProgram
 
             // Create path mapper unless flattening is explicitly requested
             // For elm command, use ELM input directory as source
-            SubdirectoryMapper? subDirMapper = !opt.FlattenDirHierarchy
-                ? new SubdirectoryMapper(opt.ElmInDir)
+            Packaging.SubdirectoryMapper? subDirMapper = !opt.FlattenDirHierarchy
+                ? new Packaging.SubdirectoryMapper(opt.ElmInDir)
                 : null;
 
             // Load ELM files with optional path tracking
             elmToolkit = elmToolkit.AddElmFilesFromDirectory(
                 opt.ElmInDir,
-                subDirMapper,
+                onLibraryLoaded: subDirMapper != null ? (file, libId) => subDirMapper.RecordFilePath(file, libId) : null,
                 filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
 
             if (elmToolkit.ArtifactsById.Count == 0)
@@ -121,7 +121,7 @@ internal sealed class ElmToFhirProgram
                 elmToolkit
                     .SaveCSharpFilesToDirectory(
                         opt.CSharpOutDir,
-                        subDirMapper,
+                        computeOutputPath: subDirMapper != null ? subDirMapper.GetOutputPath : null,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
                 // Update status to "saved" for C#
@@ -139,7 +139,7 @@ internal sealed class ElmToFhirProgram
                     .SaveAssemblyBinariesToDirectory(
                         opt.DllOutDir,
                         opt.PdbOutDir ?? opt.DllOutDir,
-                        subDirMapper,
+                        computeOutputPath: subDirMapper != null ? subDirMapper.GetOutputPath : null,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
 
@@ -193,7 +193,7 @@ internal sealed class ElmToFhirProgram
                     .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectory(
                         opt.FhirOutDir,
-                        subDirMapper,
+                        computeOutputPath: subDirMapper != null ? subDirMapper.GetOutputPath : null,
                         packOpt.JsonPretty,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
