@@ -4,6 +4,15 @@
 
 	<PropertyGroup>
 		<CqlSolutionDir>$(MSBuildProjectDirectory)/../../</CqlSolutionDir>
+		<DqmContentQiCoreLibrarySetDir>$(CqlSolutionDir)/LibrarySets/dqm-content-qicore-2025/</DqmContentQiCoreLibrarySetDir>
+		<RR23LibrarySetDir>$(CqlSolutionDir)/LibrarySets/RR23/</RR23LibrarySetDir>
+		<DemoLibrarySetDir>$(CqlSolutionDir)/LibrarySets/Demo/</DemoLibrarySetDir>
+		<NcqaBuildArtifactsDir>$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/</NcqaBuildArtifactsDir>
+		<MeasuresAuthoringDemoDir>$(CqlSolutionDir)/Demo/Measures.Authoring/</MeasuresAuthoringDemoDir>
+		<MeasuresDemoDir>$(CqlSolutionDir)/Demo/Measures.Demo/</MeasuresDemoDir>
+		<MeasuresDqmContentQiCoreDemoDir>$(CqlSolutionDir)/Demo/Measures.dqm-content-qicore-2025/</MeasuresDqmContentQiCoreDemoDir>
+		<CoreTestsDir>$(CqlSolutionDir)/Cql/CoreTests/</CoreTestsDir>
+
 		<OutputType>Exe</OutputType>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackAsTool>true</PackAsTool>

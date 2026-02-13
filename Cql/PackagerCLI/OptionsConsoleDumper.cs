@@ -19,7 +19,8 @@ internal class OptionsConsoleDumper(
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
     IOptions<PackagingOptions> packagingOptions,
-    IOptions<LoggingOptions> loggingOptions)
+    IOptions<LoggingOptions> loggingOptions,
+    IServiceProvider serviceProvider)
 {
     public void DumpToConsole()
     {
@@ -43,15 +44,21 @@ internal class OptionsConsoleDumper(
         jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<FileInfo>());
         jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<DirectoryInfo>());
         jsonOpt.Converters.Add(new KeyToStringDictionaryJsonConverter<CqlLibraryIdentifier, string>());
-        var root = new
+        
+        // Build the root object dynamically to include command-specific options
+        var rootDict = new Dictionary<string, object?>
         {
-            Cql = cqlOptions.Value,
-            Elm = elmOptions.Value,
-            Packaging = packagingOptions.Value,
-            Logging = loggingOptions.Value,
+            ["Cql"] = cqlOptions.Value,
+            ["Elm"] = elmOptions.Value,
+            ["Packaging"] = packagingOptions.Value,
+            ["Logging"] = loggingOptions.Value,
         };
 
-        WriteLine(JsonSerializer.Serialize(root, jsonOpt));
+        // Try to add command-specific options if they're registered and have non-null values
+        TryAddCommandOptionsIfUsed<Commands.ExtractLibraryAttachments.ExtractLibraryAttachmentsOptions>(rootDict, "ExtractLibraryAttachments");
+        TryAddCommandOptionsIfUsed<Commands.ReplaceLibraryAttachments.ReplaceLibraryAttachmentsOptions>(rootDict, "ReplaceLibraryAttachments");
+
+        WriteLine(JsonSerializer.Serialize(rootDict, jsonOpt));
 
         if (sb is not null)
             logger.LogInformation("{options}", sb.ToString());
@@ -62,6 +69,31 @@ internal class OptionsConsoleDumper(
                 sb.AppendLine(s);
             else
                 console.WriteLine(s);
+        }
+
+        void TryAddCommandOptionsIfUsed<T>(Dictionary<string, object?> dict, string key) where T : class
+        {
+            var options = serviceProvider.GetService<IOptions<T>>();
+            if (options is not null && HasNonNullProperties(options.Value))
+            {
+                dict[key] = options.Value;
+            }
+        }
+
+        bool HasNonNullProperties(object? obj)
+        {
+            if (obj is null) return false;
+            
+            var properties = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var prop in properties)
+            {
+                var value = prop.GetValue(obj);
+                if (value is not null)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

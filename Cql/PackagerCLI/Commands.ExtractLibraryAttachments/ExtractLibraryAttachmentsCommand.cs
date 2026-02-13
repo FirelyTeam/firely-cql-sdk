@@ -24,9 +24,21 @@ internal record ExtractLibraryAttachmentsCommand
     public const string Name = "extract-library-attachments";
 
     public static readonly string Description =
+        "ALPHA FEATURE: This command is currently in alpha and its behavior may change in future releases." +
+        Environment.NewLine + Environment.NewLine +
         "Extract attachments from a FHIR Library resource to individual files. " +
         "Given a FHIR Library resource file, this command extracts embedded attachments " +
-        "(CQL, ELM, C#, DLL, PDB) and saves them to the specified output directories.";
+        "(CQL, ELM, C#, DLL, PDB) and saves them to the specified output directories." +
+        Environment.NewLine + Environment.NewLine + Environment.NewLine +
+        "Exit Codes:" + Environment.NewLine +
+        "  0  - Success" + Environment.NewLine +
+        "  5  - No output directories specified" + Environment.NewLine +
+        "  10 - Library extraction error occurred";
+
+    public static readonly string ExitCodes =
+        "0  - Success" + Environment.NewLine +
+        "5  - No output directories specified" + Environment.NewLine +
+        "10 - Library extraction error occurred";
 
     public static readonly Option[] Options =
     [

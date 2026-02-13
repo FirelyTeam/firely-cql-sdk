@@ -2,6 +2,39 @@
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
+## User Workflow Preferences
+
+**IMPORTANT: Discuss Before Implementing**
+- When user asks for ideas, suggestions, or "what would be the best way to..." questions, **DISCUSS OPTIONS FIRST**
+- Present 2-3 approaches with pros/cons
+- Wait for user to choose an approach before implementing
+- DO NOT immediately implement solutions when user asks for ideas
+- User will explicitly ask to proceed with implementation when ready
+
+**PR Description Requirements**
+## Instruction for PR AI
+
+When I ask you to update or improve the Pull Request description, you must **NOT**
+base the description only on the last change request or a summary of my prompt.
+
+Instead:
+
+1. **Analyze the entire set of commits in this PR’s branch.**
+2. **Incorporate all changes made across the full diff**, not just the snippet I'm
+   currently discussing.
+3. **Summarize the full scope and intent of the work** done throughout the branch.
+4. When I ask for additions or modifications to the code, **do NOT replace the PR
+   description with a summary of only that change**.
+5. The PR description should always reflect:
+   - the whole branch history
+   - the complete set of code changes
+   - architectural decisions
+   - reasoning behind changes
+   - any breaking changes or migrations
+   - anything meaningful discovered during review discussions
+
+Your goal:  
+**Maintain a comprehensive, up-to-date PR description that represents the entire branch’s work, not just the latest prompt.**
 ## InternalsVisibleTo Configuration
 
 **IMPORTANT**: Always add `InternalsVisibleTo` attributes in `.csproj` files, never in `AssemblyInfo.cs` files.
@@ -162,3 +195,42 @@ When adding CQL files (e.g., to `CoreTests\Input\ELM\HL7`), follow these steps t
 - Use `CqlSdk` prefix for SDK-related example projects
 - Use `Hl7.Cql` namespace prefix for core SDK assemblies
 - Follow existing patterns in the codebase for consistency
+
+## FHIR Library Resource Handling
+
+### Library.Name vs Library.Id
+**CRITICAL**: `library.Name` and `library.Id` are NOT interchangeable and serve different purposes:
+
+- **`library.Name`**: The canonical identifier/name used for library identification and versioning (e.g., "MyLibrary")
+  - Use this when constructing `CqlVersionedLibraryIdentifier` or building canonical URLs
+  - This is the name that appears in CQL `library` declarations
+  - Required for library packaging and identification workflows
+
+- **`library.Id`**: The FHIR resource identifier, typically a generated or assigned ID (e.g., "Library/abc123")
+  - Use this for resource identification within a FHIR server
+  - NOT suitable for library name/version identification
+
+**DO NOT** use code like: `var name = library.Name ?? library.Id;`
+
+**DO** validate that `library.Name` exists when it's required:
+```csharp
+if (string.IsNullOrWhiteSpace(library.Name))
+{
+    logger.LogError("FHIR Library must have a Name property.");
+    return ExitCode.InvalidLibraryJson;
+}
+```
+
+### Library Identifier Construction
+Always use `CqlVersionedLibraryIdentifier` for parsing and formatting library names and versions:
+
+```csharp
+// Creating from separate name and version
+var identifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(library.Name, library.Version);
+
+// Using the identifier (automatically formats as "name-version")
+string formatted = identifier.ToString();
+```
+
+### PowerShell Command Execution
+When generating PowerShell commands in the future, ensure they are 100% non-interactive by using `pwsh -NonInteractive -Command "<your actual command>"` to prevent hanging the terminal. Avoid creating interactive shells like `pwsh` or `dotnet repl`.

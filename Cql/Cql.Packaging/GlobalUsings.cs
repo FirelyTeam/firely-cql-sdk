@@ -21,6 +21,7 @@ global using System.Text.RegularExpressions;
 global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Microsoft.Extensions.Logging;
 global using CqlLibraryString = Hl7.Cql.CqlToElm.CqlLibraryString;
+global using CqlVersionedLibraryIdentifier = Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier;
 global using ElmAnnotation = Hl7.Cql.Elm.Annotation;
 global using ElmLibrary = Hl7.Cql.Elm.Library;
 global using ElmLibrarySet = Hl7.Cql.Compiler.LibrarySet;
