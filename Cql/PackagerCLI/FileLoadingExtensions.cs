@@ -12,7 +12,6 @@ using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
-using ElmLibrary = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Packager;
 
