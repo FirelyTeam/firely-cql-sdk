@@ -239,7 +239,14 @@ public class CqlToFhirProgram
                 var librariesDir = opt.LibrariesOutDir ?? opt.FhirOutDir;
                 var measuresDir = opt.MeasuresOutDir ?? opt.FhirOutDir;
 
-                if (librariesDir?.FullName == measuresDir?.FullName)
+                // Compare normalized full paths to determine if directories are the same
+                bool sameDirectory = librariesDir is not null && measuresDir is not null &&
+                    string.Equals(
+                        Path.GetFullPath(librariesDir.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                        Path.GetFullPath(measuresDir.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                        StringComparison.OrdinalIgnoreCase);
+
+                if (sameDirectory)
                 {
                     sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {librariesDir}."));
                 }
