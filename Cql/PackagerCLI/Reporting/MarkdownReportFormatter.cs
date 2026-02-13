@@ -98,7 +98,7 @@ internal static class MarkdownReportFormatter
         foreach (var libraryId in tracker.Libraries.OrderBy(l => l.ToString()))
         {
             sb.Append("| ");
-            sb.Append(FormatLibraryName(libraryId).PadRight(columnWidths[0]));
+            sb.Append(libraryId.ToString().PadRight(columnWidths[0]));
             sb.Append(" |");
 
             var statuses = activeStages.Select(stage => (stage, status: tracker.GetStatus(libraryId, stage))).ToList();
@@ -148,7 +148,7 @@ internal static class MarkdownReportFormatter
         int libraryNameWidth = "Library".Length;
         foreach (var libraryId in tracker.Libraries)
         {
-            int nameLength = FormatLibraryName(libraryId).Length;
+            int nameLength = libraryId.ToString().Length;
             if (nameLength > libraryNameWidth)
                 libraryNameWidth = nameLength;
         }
@@ -201,14 +201,6 @@ internal static class MarkdownReportFormatter
         LibraryProcessingStage.FhirResource => "FHIR Resource",
         _ => stage.ToString()
     };
-
-    private static string FormatLibraryName(CqlVersionedLibraryIdentifier libraryId)
-    {
-        if (libraryId.Version is null)
-            return libraryId.Identifier.ToString();
-
-        return FormattableString.Invariant($"{libraryId.Identifier}-{libraryId.Version}");
-    }
 
     private static string FormatStatus(LibraryStageStatus status) => status.StatusType switch
     {

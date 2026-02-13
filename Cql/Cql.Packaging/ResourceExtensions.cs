@@ -11,12 +11,12 @@ namespace Hl7.Cql.Packaging;
 
 internal static class ResourceExtensions
 {
-    public static ResourceFileName GetResourceFileName(this Resource resource)
+    public static ResourceFileName GetResourceFileName(this FhirResource resource)
     {
         ResourceFileName resourceFileName = resource switch
         {
             Library l => ResourceFileName.Create(nameof(Library), l.Name ?? throw new ArgumentException("Library must have a name", nameof(resource)), l.Version),
-            Measure m => ResourceFileName.Create(nameof(Measure), m.Name ?? throw new ArgumentException("Measure must have a name", nameof(resource)), m.Version),
+            FhirMeasure m => ResourceFileName.Create(nameof(Measure), m.Name ?? throw new ArgumentException("Measure must have a name", nameof(resource)), m.Version),
             _ => throw new UnreachableException("Only expecting Library or Measure.")
         };
         return resourceFileName;

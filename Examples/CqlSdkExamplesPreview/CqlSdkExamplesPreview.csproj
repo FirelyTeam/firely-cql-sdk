@@ -26,10 +26,15 @@
 		<None Update="**\input\**">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Remove="bin\**\input\**;obj\**\input\**" />
+
 		<Compile Remove="**\input\**\*.g.cs" />
+		<Compile Remove="bin\**;obj\**" />
+
 		<None Include="**\input\**\*.g.cs">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Remove="bin\**\input\**\*.g.cs;obj\**\input\**\*.g.cs" />
 	</ItemGroup>
 
 	<Import Project="..\CqlSdkExamplesCodeGeneration.targets" />
