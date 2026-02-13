@@ -46,14 +46,14 @@ internal sealed class ElmToFhirProgram
             {
                 case (null, null, null):
                     logger.LogInformation("Exiting. No output directories specified.");
-                    return ExitCode.NoOutputDirs;
+                    return ExitCodes.NoOutputDirs.Code;
 
                 case (_, _, not null) when opt.CqlInDir is not { Exists: true }:
                     logger.LogInformation("Exiting. CQL input directory required when outputting FHIR.");
-                    return ExitCode.NoCqlDirRequiredForFhir;
+                    return ExitCodes.NoCqlDirRequiredForFhir.Code;
             }
 
-            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCode.Normal)
+            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCodes.Success.Code)
             {
                 return exitCode;
             }
@@ -69,7 +69,7 @@ internal sealed class ElmToFhirProgram
             if (elmToolkit.ArtifactsById.Count == 0)
             {
                 logger.LogInformation($"Exiting. No ELM libraries found in directory {opt.ElmInDir}.");
-                return ExitCode.NoElmLibsInDir;
+                return ExitCodes.NoElmLibsInDir.Code;
             }
 
             // Track loaded ELM libraries
@@ -87,11 +87,11 @@ internal sealed class ElmToFhirProgram
             if (elmToolkitResults.Count == 0)
             {
                 logger.LogInformation("Exiting. No ELM libraries compiled.");
-                return ExitCode.NoElmLibsCompiled;
+                return ExitCodes.NoElmLibsCompiled.Code;
             }
 
             // Track C# and .NET results - check which libraries have successful results
-            var successfulLibraries = new HashSet<Runtime.CqlVersionedLibraryIdentifier>(elmToolkitResults.Select(r => r.libraryIdentifier));
+            var successfulLibraries = new HashSet<CqlVersionedLibraryIdentifier>(elmToolkitResults.Select(r => r.libraryIdentifier));
             foreach (var (libraryId, artifacts) in elmToolkit.ArtifactsById)
             {
                 if (successfulLibraries.Contains(libraryId))
@@ -153,7 +153,7 @@ internal sealed class ElmToFhirProgram
                 if (cqlToolkit.ArtifactsById.Count == 0)
                 {
                     logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
-                    return ExitCode.NoCqlLibsInDir;
+                    return ExitCodes.NoCqlLibsInDirWhenFhirRequested.Code;
                 }
 
                 // Track loaded CQL libraries
@@ -170,7 +170,7 @@ internal sealed class ElmToFhirProgram
                 if (packagingToolkit.ArtifactsById.Count == 0)
                 {
                     logger.LogInformation("Exiting. No CQL or ELM libraries matched with each other for packaging.");
-                    return ExitCode.CantPackageNoCqlElmMatches;
+                    return ExitCodes.CantPackageNoCqlElmMatches.Code;
                 }
 
                 packagingToolkit
@@ -199,7 +199,7 @@ internal sealed class ElmToFhirProgram
                 sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
             }
 
-            return ExitCode.Normal;
+            return ExitCodes.Success.Code;
         }
         finally
         {

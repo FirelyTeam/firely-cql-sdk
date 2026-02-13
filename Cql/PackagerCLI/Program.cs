@@ -28,10 +28,10 @@ public class Program
     private const string JavaToolVersion = "3.29.0";
 
     internal static readonly string Disclaimer =
-        Environment.NewLine +
-        Environment.NewLine +
+        NewLine +
+        NewLine +
         "DISCLAIMER:" +
-        Environment.NewLine +
+        NewLine +
         "The cql command is a very early addition and only supports basic cql translation. " +
         "It is not yet production ready. " +
         $"If you find issues, please start from the ELM produced by the Java v{JavaToolVersion} tooling instead " +

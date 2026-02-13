@@ -20,34 +20,6 @@ internal static class FhirLibraryExtensions
         _                                   => throw new ArgumentException($"Unknown suffix: {suffix}", nameof(suffix))
     };
 
-    private static Extension CreateCqlOptionsExtension()
-    {
-        // See requirement for Contained resources: https://build.fhir.org/domainresource.html#invs
-        // dom-3: If the resource is contained in another resource,
-        //        it SHALL be referred to from elsewhere in the resource
-        //        or SHALL refer to the containing resource
-        //
-        // This is done by adding an extension. (Example: https://build.fhir.org/ig/HL7/cql-ig/Library-CQLExample.json.html)
-
-        var extension = new Extension
-        {
-            Url = Constants.Hl7FhirStructureDefinitionCqlOptions,
-            Value = new ResourceReference { Reference = "#options" },
-        };
-        return extension;
-    }
-
-    private static Parameters CreateOptionsParameter(IReadOnlyList<Parameters.ParameterComponent> fhirParameters)
-    {
-        // Adding CQL Options as a contained resource
-        // See: https://build.fhir.org/domainresource-definitions.html#DomainResource.contained
-
-        var p = new Parameters();
-        p.Id = "options";
-        p.Parameter.AddRange(fhirParameters);
-        return p;
-    }
-
     extension(FhirLibrary)
     {
         /// <summary>
@@ -104,10 +76,10 @@ internal static class FhirLibraryExtensions
                 case (null, null):
                     throw new ArgumentException("Either elmLibrary or elmBytes must be provided.", nameof(elmLibrary));
                 case (null, not null):
-                    elmLibrary = ElmLibrary.ParseFromJson(Encoding.Default.GetString(elmBytes));
+                    elmLibrary = ElmLibrary.ParseFromJson(Encoding.UTF8.GetString(elmBytes));
                     break;
                 case (not null, null):
-                    elmBytes = Encoding.Default.GetBytes(elmLibrary.SerializeToJson(true));
+                    elmBytes = Encoding.UTF8.GetBytes(elmLibrary.SerializeToJson(true));
                     break;
             }
 
