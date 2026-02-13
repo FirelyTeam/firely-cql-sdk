@@ -20,17 +20,21 @@ internal static class CqlToolkitSubdirExtensions
     /// <summary>
     /// Saves the ELM files to the specified directory, optionally preserving subdirectory structure.
     /// </summary>
-    public static CqlToolkit SaveElmFilesToDirectoryWithSubdirs(
+    public static CqlToolkit SaveElmFilesToDirectory(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
-        SubdirectoryPathMapper? subDirMapper,
+        SubdirectoryMapper? subDirMapper = null,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
         if (subDirMapper is null)
         {
-            // Use default behavior - call simpler overload
-            return cqlToolkit.SaveElmFilesToDirectory(directory, writeIndented, directoryPreparationStrategy);
+            // Use default behavior - call original extension from CqlToElm
+            return CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.SaveElmFilesToDirectory(
+                cqlToolkit,
+                directory,
+                writeIndented,
+                directoryPreparationStrategy);
         }
 
         var prepElmDir = true;

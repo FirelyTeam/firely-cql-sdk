@@ -23,18 +23,19 @@ internal static class PackagingToolkitSubdirExtensions
     /// <summary>
     /// Saves FHIR resources to the specified directory, optionally preserving subdirectory structure.
     /// </summary>
-    public static PackagingToolkit SaveFhirResourcesToDirectoryWithSubdirs(
+    public static PackagingToolkit SaveFhirResourcesToDirectory(
         this PackagingToolkit packagingToolkit,
         DirectoryInfo directory,
-        SubdirectoryPathMapper? subDirMapper,
+        SubdirectoryMapper? subDirMapper = null,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
         if (subDirMapper is null)
         {
-            // Use default behavior - call simpler overload
-            return packagingToolkit.SaveFhirResourcesToDirectory(
+            // Use default behavior - call original extension from Cql.Packaging
+            return Packaging.Toolkit.Extensions.PackagingToolkitExtensions.SaveFhirResourcesToDirectory(
+                packagingToolkit,
                 directory,
                 writeIndented,
                 directoryPreparationStrategy,

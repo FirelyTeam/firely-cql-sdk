@@ -74,19 +74,12 @@ public class CqlToFhirProgram
 
             // Create path mapper unless flattening is explicitly requested
             // For cql command, always use CQL input directory as the source
-            SubdirectoryPathMapper? subDirMapper = !opt.FlattenDirHierarchy
-                ? new SubdirectoryPathMapper(opt.CqlInDir)
+            SubdirectoryMapper? subDirMapper = !opt.FlattenDirHierarchy
+                ? new SubdirectoryMapper(opt.CqlInDir)
                 : null;
 
             // Load CQL files with optional path tracking
-            if (subDirMapper is not null)
-            {
-                cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectoryWithTracking(opt.CqlInDir, subDirMapper);
-            }
-            else
-            {
-                cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir);
-            }
+            cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir, subDirMapper);
 
             if (cqlToolkit.ArtifactsById.Count == 0)
             {
@@ -109,7 +102,7 @@ public class CqlToFhirProgram
             if (cqlToolkitResults.Count == 0)
             {
                 logger.LogInformation("Exiting. No CQL libraries converted to ELM.");
-                return ExitCodes.NoElmLibsCompiled.Code;
+                return ExitCodes.NoCqlLibsConvertedToElm.Code;
             }
 
             // Track ELM translation results
@@ -128,7 +121,7 @@ public class CqlToFhirProgram
 
             if (opt.ElmOutDir is not null)
             {
-                cqlToolkit.SaveElmFilesToDirectoryWithSubdirs(
+                cqlToolkit.SaveElmFilesToDirectory(
                     opt.ElmOutDir,
                     subDirMapper,
                     writeIndented: packOpt.JsonPretty,
@@ -179,7 +172,7 @@ public class CqlToFhirProgram
             if (opt.CSharpOutDir is not null)
             {
                 elmToolkit
-                    .SaveCSharpFilesToDirectoryWithSubdirs(
+                    .SaveCSharpFilesToDirectory(
                         opt.CSharpOutDir,
                         subDirMapper,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
@@ -197,7 +190,7 @@ public class CqlToFhirProgram
             {
                 elmToolkit
                     .CompileToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
-                    .SaveAssemblyBinariesToDirectoryWithSubdirs(
+                    .SaveAssemblyBinariesToDirectory(
                         opt.DllOutDir,
                         opt.PdbOutDir ?? opt.DllOutDir,
                         subDirMapper,
@@ -230,7 +223,7 @@ public class CqlToFhirProgram
                 packagingToolkit
                     .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
-                    .SaveFhirResourcesToDirectoryWithSubdirs(
+                    .SaveFhirResourcesToDirectory(
                         opt.FhirOutDir,
                         subDirMapper,
                         packOpt.JsonPretty,

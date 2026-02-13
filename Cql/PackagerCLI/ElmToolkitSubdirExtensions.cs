@@ -20,16 +20,19 @@ internal static class ElmToolkitSubdirExtensions
     /// <summary>
     /// Saves the generated C# source files to the specified directory, optionally preserving subdirectory structure.
     /// </summary>
-    public static ElmToolkit SaveCSharpFilesToDirectoryWithSubdirs(
+    public static ElmToolkit SaveCSharpFilesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
-        SubdirectoryPathMapper? subDirMapper,
+        SubdirectoryMapper? subDirMapper = null,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
         if (subDirMapper is null)
         {
-            // Use default behavior - call simpler overload
-            return elmToolkit.SaveCSharpFilesToDirectory(directory, directoryPreparationStrategy);
+            // Use default behavior - call original extension from CodeGeneration.NET
+            return CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveCSharpFilesToDirectory(
+                elmToolkit,
+                directory,
+                directoryPreparationStrategy);
         }
 
         var prepCsDir = true;
@@ -56,18 +59,19 @@ internal static class ElmToolkitSubdirExtensions
     /// <summary>
     /// Saves the generated assembly binaries and debug symbols to the specified directory, optionally preserving subdirectory structure.
     /// </summary>
-    public static ElmToolkit SaveAssemblyBinariesToDirectoryWithSubdirs(
+    public static ElmToolkit SaveAssemblyBinariesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo dllDirectory,
         DirectoryInfo pdbDirectory,
-        SubdirectoryPathMapper? subDirMapper,
+        SubdirectoryMapper? subDirMapper = null,
         DirectoryInfoHandler? dllDirectoryPreparationStrategy = null,
         DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null)
     {
         if (subDirMapper is null)
         {
-            // Use default behavior - call simpler overload
-            return elmToolkit.SaveAssemblyBinariesToDirectory(
+            // Use default behavior - call original extension from CodeGeneration.NET
+            return CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveAssemblyBinariesToDirectory(
+                elmToolkit,
                 dllDirectory,
                 pdbDirectory,
                 dllDirectoryPreparationStrategy,

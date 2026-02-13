@@ -13,12 +13,12 @@ namespace Hl7.Cql.Packager;
 /// <summary>
 /// Tracks the relative paths of source files to preserve subdirectory structure in outputs.
 /// </summary>
-internal class SubdirectoryPathMapper
+internal class SubdirectoryMapper
 {
     private readonly Dictionary<CqlVersionedLibraryIdentifier, string> _relativePathsByLibraryId = new();
     private readonly string _baseDirectory;
 
-    public SubdirectoryPathMapper(DirectoryInfo baseDirectory)
+    public SubdirectoryMapper(DirectoryInfo baseDirectory)
     {
         _baseDirectory = baseDirectory.FullName;
     }

@@ -21,15 +21,25 @@ namespace Hl7.Cql.Packager;
 internal static class FileLoadingExtensions
 {
     /// <summary>
-    /// Adds CQL libraries from a directory and tracks their relative paths.
+    /// Adds CQL libraries from a directory, optionally tracking their relative paths.
     /// </summary>
-    public static CqlToolkit AddCqlLibrariesFromDirectoryWithTracking(
+    public static CqlToolkit AddCqlLibrariesFromDirectory(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
-        SubdirectoryPathMapper subDirMapper,
+        SubdirectoryMapper? subDirMapper = null,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
+        if (subDirMapper is null)
+        {
+            // Use default behavior from CqlToElm - no path tracking
+            return CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibrariesFromDirectory(
+                cqlToolkit,
+                directory,
+                options,
+                filePredicate);
+        }
+
         var logger = cqlToolkit.LoggerFactory.CreateLogger(typeof(FileLoadingExtensions));
         var files = directory.EnumerateFiles("*.cql", options ?? new EnumerationOptions { RecurseSubdirectories = true });
         if (filePredicate is not null) files = files.Where(filePredicate);
@@ -60,12 +70,12 @@ internal static class FileLoadingExtensions
     }
 
     /// <summary>
-    /// Adds ELM libraries from a directory and tracks their relative paths.
+    /// Adds ELM libraries from a directory, optionally tracking their relative paths.
     /// </summary>
-    public static ElmToolkit AddElmFilesFromDirectoryWithTracking(
+    public static ElmToolkit AddElmFilesFromDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
-        SubdirectoryPathMapper subDirMapper,
+        SubdirectoryMapper? subDirMapper = null,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
@@ -80,8 +90,8 @@ internal static class FileLoadingExtensions
                 logger.LogInformation("Loading ELM library from file: {file}", file);
                 var library = ElmLibrary.LoadFromJson(file);
 
-                // Track the file's path
-                subDirMapper.RecordFilePath(file, library.VersionedLibraryIdentifier);
+                // Track the file's path if mapper provided
+                subDirMapper?.RecordFilePath(file, library.VersionedLibraryIdentifier);
 
                 // Add to toolkit
                 elmToolkit = elmToolkit.AddElmLibraries(library);
