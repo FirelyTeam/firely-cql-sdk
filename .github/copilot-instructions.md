@@ -12,10 +12,29 @@ This document contains development guidelines and instructions for maintaining c
 - User will explicitly ask to proceed with implementation when ready
 
 **PR Description Requirements**
-- When user adds new instructions or requirements, the PR description **MUST include ALL work in the branch**, not just changes scoped to the last instructions
-- Provide comprehensive summary of the entire branch's changes
-- Include context from initial implementation through all subsequent modifications
+## Instruction for PR AI
 
+When I ask you to update or improve the Pull Request description, you must **NOT**
+base the description only on the last change request or a summary of my prompt.
+
+Instead:
+
+1. **Analyze the entire set of commits in this PR’s branch.**
+2. **Incorporate all changes made across the full diff**, not just the snippet I'm
+   currently discussing.
+3. **Summarize the full scope and intent of the work** done throughout the branch.
+4. When I ask for additions or modifications to the code, **do NOT replace the PR
+   description with a summary of only that change**.
+5. The PR description should always reflect:
+   - the whole branch history
+   - the complete set of code changes
+   - architectural decisions
+   - reasoning behind changes
+   - any breaking changes or migrations
+   - anything meaningful discovered during review discussions
+
+Your goal:  
+**Maintain a comprehensive, up-to-date PR description that represents the entire branch’s work, not just the latest prompt.**
 ## InternalsVisibleTo Configuration
 
 **IMPORTANT**: Always add `InternalsVisibleTo` attributes in `.csproj` files, never in `AssemblyInfo.cs` files.
