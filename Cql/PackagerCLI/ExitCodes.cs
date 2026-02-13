@@ -112,6 +112,18 @@ internal static class ExitCodes
         public const string Message = "16 - No CQL libraries converted to ELM";
     }
 
+    internal static class MixedFhirAndSpecificDirs
+    {
+        public const int Code = 17;
+        public const string Message = "17 - Cannot mix --fhir with --libraries or --measures";
+    }
+
+    internal static class IncompleteLibrariesMeasuresDirs
+    {
+        public const int Code = 18;
+        public const string Message = "18 - Both --libraries and --measures must be specified together";
+    }
+
     internal static class UnknownError
     {
         public const int Code = 99;

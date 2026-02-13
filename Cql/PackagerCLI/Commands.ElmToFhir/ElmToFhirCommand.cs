@@ -92,21 +92,21 @@ internal record ElmToFhirCommand
             "--fhir",
             """
             FHIR Resource output directory which contains the FHIR library files in JSON format "Library-*.json" and FHIR measures in JSON format "Measure-*.json".
-            Cannot be used with --libraries-dir or --measures-dir (mutually exclusive).
+            Cannot be used with --libraries or --measures (mutually exclusive).
             """),
 
         Option<DirectoryInfo>(
-            "--libraries-dir",
+            "--libraries",
             """
             FHIR Libraries output directory which contains the FHIR library files in JSON format "Library-*.json".
-            Must be used together with --measures-dir. Cannot be combined with --fhir.
+            Must be used together with --measures. Cannot be combined with --fhir.
             """),
 
         Option<DirectoryInfo>(
-            "--measures-dir",
+            "--measures",
             """
             FHIR Measures output directory which contains the FHIR measure files in JSON format "Measure-*.json".
-            Must be used together with --libraries-dir. Cannot be combined with --fhir.
+            Must be used together with --libraries. Cannot be combined with --fhir.
             """),
 
         Option<string>(
