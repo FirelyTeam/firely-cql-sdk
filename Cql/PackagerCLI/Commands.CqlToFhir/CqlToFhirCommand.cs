@@ -27,7 +27,7 @@ public record CqlToFhirCommand
     bool? JsonPretty,
     bool? ExitOnError,
     DebugSymbolsFormat? DebugSymbols,
-    MaintainSubdirsFromSource? MaintainSubdirsFrom)
+    bool? PreserveSubdirs)
 {
     public const string Name =
         "cql";
@@ -135,14 +135,12 @@ public record CqlToFhirCommand
             (Used with --cs or --dll)
             """),
 
-        Option<MaintainSubdirsFromSource>(
-            "--maintain-subdirs-from",
+        Option<bool>(
+            "--preserve-subdirs",
             """
-            Preserve the subdirectory hierarchy from the specified input directory when outputting files.
-            Options are:
-            - None (DEFAULT) = Flatten all output files into the output directory root.
-            - Cql = Preserve the subdirectory structure from the CQL input directory.
-            - Elm = Preserve the subdirectory structure from the ELM input directory.
+            Preserve the subdirectory hierarchy from the CQL input directory when outputting files.
+            When enabled, subdirectory structure from the CQL input directory is preserved in all output directories.
+            When disabled (DEFAULT), all output files are flattened into the output directory root.
             """)
     ];
 
@@ -160,6 +158,6 @@ public record CqlToFhirCommand
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
-        (MaintainSubdirsFrom, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.MaintainSubdirsFrom)]),
+        (PreserveSubdirs, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.PreserveSubdirs)]),
     ];
 }

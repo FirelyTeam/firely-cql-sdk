@@ -82,10 +82,11 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
   - `Embedded` - Debug symbols embedded in DLL with C# source
 
 **Directory Structure Options:**
-- `--maintain-subdirs-from <None|Cql|Elm>` - Preserve subdirectory hierarchy from input to output:
-  - `None` (DEFAULT) - Flatten all output files into output directory root
-  - `Cql` - Preserve subdirectory structure from CQL input directory (requires --cql)
-  - `Elm` - Preserve subdirectory structure from ELM input directory
+- `--preserve-subdirs` - Preserve subdirectory hierarchy from input directory to all output directories.
+  - When enabled, the subdirectory structure from the relevant input directory is preserved in all outputs.
+  - When disabled (DEFAULT), all output files are flattened into the output directory root.
+  - For `cql` command: Uses CQL input directory as source.
+  - For `elm` command: Uses ELM input directory as source.
 
 #### `cql` Command
 
@@ -116,8 +117,7 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 - `--debug-symbols <None|PortablePdb|Embedded>` - Debug symbol generation (same as elm command)
 
 **Directory Structure Options:**
-- `--maintain-subdirs-from <None|Cql|Elm>` - Preserve subdirectory hierarchy from input to output:
-  - `None` (DEFAULT) - Flatten all output files into output directory root
+- `--preserve-subdirs` - Preserve subdirectory hierarchy from CQL input directory to all output directories.
   - `Cql` - Preserve subdirectory structure from CQL input directory
   - `Elm` - Preserve subdirectory structure from ELM input directory
 
@@ -258,7 +258,7 @@ cql-package elm --elm input/elm --cs output/csharp --cs-namespace MyCompany.MyCq
 7. Preserve subdirectory structure from CQL input:
 
 ```shell
-cql-package cql --cql input/cql --elm output/elm --cs output/csharp --maintain-subdirs-from cql
+cql-package cql --cql input/cql --elm output/elm --cs output/csharp --preserve-subdirs
 ```
 
 - Processes CQL files from `input/cql` including all subdirectories.

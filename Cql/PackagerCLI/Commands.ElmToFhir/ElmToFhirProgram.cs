@@ -64,15 +64,13 @@ internal sealed class ElmToFhirProgram
                 elmToolkit = elmToolkit.SetIgnoreEnumerationExceptions();
 
             // Create path mapper if subdirectory preservation is requested
-            SubdirectoryPathMapper? pathMapper = opt.MaintainSubdirsFrom switch
-            {
-                MaintainSubdirsFromSource.Elm => new SubdirectoryPathMapper(opt.ElmInDir),
-                MaintainSubdirsFromSource.Cql when opt.CqlInDir is not null => new SubdirectoryPathMapper(opt.CqlInDir),
-                _ => null
-            };
+            // For elm command, use ELM input directory as source
+            SubdirectoryPathMapper? pathMapper = opt.PreserveSubdirs
+                ? new SubdirectoryPathMapper(opt.ElmInDir)
+                : null;
 
             // Load ELM files with optional path tracking
-            if (pathMapper is not null && opt.MaintainSubdirsFrom == MaintainSubdirsFromSource.Elm)
+            if (pathMapper is not null)
             {
                 elmToolkit = elmToolkit.AddElmFilesFromDirectoryWithTracking(
                     opt.ElmInDir,
@@ -168,18 +166,13 @@ internal sealed class ElmToFhirProgram
 
             if ((opt.CqlInDir, opt.FhirOutDir) is (not null, not null))
             {
-                // Load CQL files with optional path tracking if MaintainSubdirsFrom is Cql
+                // Load CQL files - path tracking already done via ELM files
                 CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                     .SetIgnoreEnumerationExceptions();
 
-                if (pathMapper is not null && opt.MaintainSubdirsFrom == MaintainSubdirsFromSource.Cql)
-                {
-                    cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectoryWithTracking(opt.CqlInDir, pathMapper);
-                }
-                else
-                {
-                    cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir);
-                }
+                // Note: For elm command with CQL files, we don't track paths from CQL
+                // because the subdirectory structure comes from ELM files
+                cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir);
 
                 if (cqlToolkit.ArtifactsById.Count == 0)
                 {
