@@ -111,6 +111,8 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 
 #### `extract-library-attachments` Command
 
+> **⚠️ ALPHA FEATURE**: This command is currently in alpha and its behavior may change in future releases.
+
 Extract attachments from a FHIR Library resource to individual files. This command is useful for extracting embedded CQL, ELM, C#, DLL, and PDB files from packaged FHIR Library resources.
 
 **Usage:** `cql-package extract-library-attachments [options]`
@@ -134,7 +136,11 @@ Log levels: `Critical`, `Debug`, `Error`, `Information`, `None`, `Trace`, `Warni
 
 #### `replace-library-attachments` Command
 
+> **⚠️ ALPHA FEATURE**: This command is currently in alpha and its behavior may change in future releases.
+
 Replace or add attachments in an existing FHIR Library resource. This command is useful for updating embedded CQL, ELM, C#, DLL, and PDB files in packaged FHIR Library resources.
+
+**Note**: When replacing the ELM attachment (`--elm-file`), the CQL options parameters in the FHIR Library resource will be automatically overridden with the values from the new ELM file.
 
 **Usage:** `cql-package replace-library-attachments [options]`
 

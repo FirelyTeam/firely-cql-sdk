@@ -213,4 +213,5 @@ var identifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(lib
 string formatted = identifier.ToString();
 ```
 
-**DO NOT** manually construct identifiers like: `$"{library.Name}-{library.Version}"`
+### PowerShell Command Execution
+When generating PowerShell commands in the future, ensure they are 100% non-interactive by using `pwsh -NonInteractive -Command "<your actual command>"` to prevent hanging the terminal. Avoid creating interactive shells like `pwsh` or `dotnet repl`.

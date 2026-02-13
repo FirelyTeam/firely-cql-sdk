@@ -24,6 +24,8 @@ internal record ExtractLibraryAttachmentsCommand
     public const string Name = "extract-library-attachments";
 
     public static readonly string Description =
+        "ALPHA FEATURE: This command is currently in alpha and its behavior may change in future releases." +
+        Environment.NewLine + Environment.NewLine +
         "Extract attachments from a FHIR Library resource to individual files. " +
         "Given a FHIR Library resource file, this command extracts embedded attachments " +
         "(CQL, ELM, C#, DLL, PDB) and saves them to the specified output directories." +
