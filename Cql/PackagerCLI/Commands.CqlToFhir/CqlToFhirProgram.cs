@@ -201,6 +201,23 @@ public class CqlToFhirProgram
 
             if (opt.FhirOutDir is not null || opt.LibrariesOutDir is not null || opt.MeasuresOutDir is not null)
             {
+                // Validate mutual exclusivity: either --fhir alone, or both --libraries-dir and --measures-dir
+                bool hasFhir = opt.FhirOutDir is not null;
+                bool hasLibrariesDir = opt.LibrariesOutDir is not null;
+                bool hasMeasuresDir = opt.MeasuresOutDir is not null;
+
+                if (hasFhir && (hasLibrariesDir || hasMeasuresDir))
+                {
+                    logger.LogError("Cannot mix --fhir with --libraries-dir or --measures-dir. Use either --fhir alone for all resources, or both --libraries-dir and --measures-dir for separate directories.");
+                    return ExitCodes.NoOutputDirs.Code;
+                }
+
+                if ((hasLibrariesDir && !hasMeasuresDir) || (!hasLibrariesDir && hasMeasuresDir))
+                {
+                    logger.LogError("Both --libraries-dir and --measures-dir must be specified together. Use --fhir if you want all resources in one directory.");
+                    return ExitCodes.NoOutputDirs.Code;
+                }
+
                 var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
                     .AddPackagingInputs(cqlToolkit, elmToolkit);
 
@@ -211,15 +228,8 @@ public class CqlToFhirProgram
                 }
 
                 // Determine the target directories for libraries and measures
-                var librariesDir = opt.LibrariesOutDir ?? opt.FhirOutDir;
-                var measuresDir = opt.MeasuresOutDir ?? opt.FhirOutDir;
-
-                // Both directories must be specified
-                if (librariesDir is null || measuresDir is null)
-                {
-                    logger.LogError("Both libraries and measures directories must be specified. Use --fhir for both, or --libraries-dir and --measures-dir for separate directories.");
-                    return ExitCodes.NoOutputDirs.Code;
-                }
+                var librariesDir = opt.LibrariesOutDir ?? opt.FhirOutDir!;
+                var measuresDir = opt.MeasuresOutDir ?? opt.FhirOutDir!;
 
                 packagingToolkit
                     .AddPackagingInputs(cqlToolkit, elmToolkit)
