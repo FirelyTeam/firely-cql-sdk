@@ -88,16 +88,28 @@ internal static class ExitCodes
         public const string Message = "12 - Invalid library JSON";
     }
 
-    internal static class InvalidLibraryJsonOrMissingProperties
-    {
-        public const int Code = 12;
-        public const string Message = "12 - Invalid library JSON or missing required library properties (Name, Version)";
-    }
-
     internal static class NoCqlLibsInDirWhenFhirRequested
     {
         public const int Code = 13;
         public const string Message = "13 - No CQL libraries found in the CQL input directory (when FHIR output is requested)";
+    }
+
+    internal static class InvalidLibraryMissingNameOrVersion
+    {
+        public const int Code = 14;
+        public const string Message = "14 - Invalid FHIR library, missing required Name and Version";
+    }
+
+    internal static class LibraryMissingName
+    {
+        public const int Code = 15;
+        public const string Message = "15 - FHIR Library must have a Name property";
+    }
+
+    internal static class NoCqlLibsConvertedToElm
+    {
+        public const int Code = 16;
+        public const string Message = "16 - No CQL libraries converted to ELM";
     }
 
     internal static class UnknownError

@@ -40,7 +40,8 @@ internal record ReplaceLibraryAttachmentsCommand
         "Exit Codes:" + NewLine +
         "  " + ExitCodes.Success.Message + NewLine +
         "  " + ExitCodes.NoInputFiles.Message + NewLine +
-        "  " + ExitCodes.InvalidLibraryJsonOrMissingProperties.Message + NewLine +
+        "  " + ExitCodes.InvalidLibraryJson.Message + NewLine +
+        "  " + ExitCodes.InvalidLibraryMissingNameOrVersion.Message + NewLine +
         "  " + ExitCodes.UnknownError.Message;
 
     public static readonly Option[] Options =

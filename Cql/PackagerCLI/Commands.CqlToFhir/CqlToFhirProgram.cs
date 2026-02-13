@@ -95,7 +95,7 @@ public class CqlToFhirProgram
             if (cqlToolkitResults.Count == 0)
             {
                 logger.LogInformation("Exiting. No CQL libraries converted to ELM.");
-                return ExitCodes.NoElmLibsCompiled.Code;
+                return ExitCodes.NoCqlLibsConvertedToElm.Code;
             }
 
             // Track ELM translation results

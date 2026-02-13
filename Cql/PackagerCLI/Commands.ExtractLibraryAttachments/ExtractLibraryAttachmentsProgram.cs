@@ -39,7 +39,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             if (string.IsNullOrWhiteSpace(fhirLibrary.Name))
             {
                 logger.LogError("FHIR Library must have a Name property.");
-                return ExitCodes.InvalidLibraryJson.Code;
+                return ExitCodes.LibraryMissingName.Code;
             }
 
             var libraryName = fhirLibrary.Name;

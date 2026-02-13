@@ -34,7 +34,7 @@ internal record ExtractLibraryAttachmentsCommand
         "  " + ExitCodes.Success.Message + NewLine +
         "  " + ExitCodes.NoOutputDirs.Message + NewLine +
         "  " + ExitCodes.LibraryExtractionError.Message + NewLine +
-        "  " + ExitCodes.InvalidLibraryJson.Message;
+        "  " + ExitCodes.LibraryMissingName.Message;
 
     public static readonly Option[] Options =
     [

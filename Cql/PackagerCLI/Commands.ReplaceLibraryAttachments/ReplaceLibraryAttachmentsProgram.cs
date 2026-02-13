@@ -113,7 +113,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             if (string.IsNullOrWhiteSpace(library.Name) || string.IsNullOrWhiteSpace(library.Version))
             {
                 logger.LogError("Library must have both Name and Version properties.");
-                return ExitCodes.InvalidLibraryJson.Code;
+                return ExitCodes.InvalidLibraryMissingNameOrVersion.Code;
             }
 
             var libraryIdentifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(library.Name, library.Version);
