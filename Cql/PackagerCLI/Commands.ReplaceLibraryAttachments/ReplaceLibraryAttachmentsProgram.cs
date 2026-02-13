@@ -169,7 +169,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
         catch (Exception ex)
         {
             logger.LogError(ex, "Failed to read attachment file: {FilePath}", attachmentFile.FullName);
-            return;
+            throw;
         }
 
         library.ReplaceOrAddAttachment(libraryIdentifier, idSuffix, data);

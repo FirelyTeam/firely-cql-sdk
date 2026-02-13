@@ -140,7 +140,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             ContentMimeTypes.Binary when opt is { PdbOutDir: not null } && elementId?.Contains("pdb") == true
                 => TrySaveAttachmentToFile(attachment, opt.PdbOutDir, libraryIdentifier, FileExtensions.Pdb),
 
-            _ => (false, null)
+            _ => (true, null)
         };
     }
 

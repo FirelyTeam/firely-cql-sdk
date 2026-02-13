@@ -33,12 +33,14 @@ internal record ExtractLibraryAttachmentsCommand
         "Exit Codes:" + Environment.NewLine +
         "  0  - Success" + Environment.NewLine +
         "  5  - No output directories specified" + Environment.NewLine +
-        "  10 - Library extraction error occurred";
+        "  10 - Library extraction error occurred" + Environment.NewLine +
+        "  12 - Invalid library JSON";
 
     public static readonly string ExitCodes =
         "0  - Success" + Environment.NewLine +
         "5  - No output directories specified" + Environment.NewLine +
-        "10 - Library extraction error occurred";
+        "10 - Library extraction error occurred" + Environment.NewLine +
+        "12 - Invalid library JSON";
 
     public static readonly Option[] Options =
     [
