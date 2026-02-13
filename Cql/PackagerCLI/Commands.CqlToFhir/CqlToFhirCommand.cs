@@ -36,20 +36,17 @@ public record CqlToFhirCommand
         "Start from CQL and convert to one or more of the following outputs: ELM, C#, DLL, PDB, FHIR Resources. " +
         "Take note of the disclaimer above." +
         Program.Disclaimer +
-        Environment.NewLine + Environment.NewLine + Environment.NewLine +
-        "Exit Codes:" + Environment.NewLine +
-        "  0 - Success" + Environment.NewLine +
-        "  1 - No CQL libraries found in the CQL input directory" + Environment.NewLine +
-        "  3 - No ELM libraries compiled" + Environment.NewLine +
-        "  4 - Cannot package: No matching CQL-ELM pairs found" + Environment.NewLine +
-        "  5 - No output directories specified";
-
-    public static readonly string ExitCodes =
-        "0 - Success" + Environment.NewLine +
-        "1 - No CQL libraries found in the CQL input directory" + Environment.NewLine +
-        "  3 - No ELM libraries compiled" + Environment.NewLine +
-        "4 - Cannot package: No matching CQL-ELM pairs found" + Environment.NewLine +
-        "5 - No output directories specified";
+        NewLine + NewLine + NewLine +
+        "Exit Codes:" + NewLine +
+        "  " + ExitCodes.Success.Message + NewLine +
+        "  " + ExitCodes.NoCqlLibsInDir.Message + NewLine +
+        "  " + ExitCodes.NoElmLibsCompiled.Message + NewLine +
+        "  " + ExitCodes.CantPackageNoCqlElmMatches.Message + NewLine +
+        "  " + ExitCodes.NoOutputDirs.Message + NewLine +
+        "  " + ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.Message + NewLine +
+        "  " + ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.Message + NewLine +
+        "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Message + NewLine +
+        "  " + ExitCodes.NoCqlLibsConvertedToElm.Message;
 
     public static Command CreateCommand() =>
         new Command(Name, Description)
@@ -138,9 +135,7 @@ public record CqlToFhirCommand
         Option<bool>(
             "--flatten-dir-hierarchy",
             """
-            Flatten the subdirectory hierarchy when outputting files.
-            When enabled, all output files are placed in the output directory root.
-            When disabled (DEFAULT), subdirectory structure from the CQL input directory is preserved in all output directories.
+            Flatten subdirectory hierarchy when outputting files. By default, the subdirectory structure from the CQL input directory is preserved in all outputs.
             """)
     ];
 
@@ -152,12 +147,12 @@ public record CqlToFhirCommand
         (Dll, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.DllOutDir)]),
         (Pdb, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.PdbOutDir)]),
         (Fhir, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FhirOutDir)]),
+        (FlattenDirHierarchy, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FlattenDirHierarchy)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
-        (FlattenDirHierarchy, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FlattenDirHierarchy)]),
     ];
 }

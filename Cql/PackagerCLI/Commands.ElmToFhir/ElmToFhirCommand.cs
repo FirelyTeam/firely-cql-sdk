@@ -37,24 +37,18 @@ internal record ElmToFhirCommand
         "When outputing to FHIR Resources, the CQL matchinging against the ELM based on their versioned " +
         "identifier must be supplied as well." +
         Program.Disclaimer +
-        Environment.NewLine + Environment.NewLine + Environment.NewLine +
-        "Exit Codes:" + Environment.NewLine +
-        "  0 - Success" + Environment.NewLine +
-        "  1 - No CQL libraries found in the CQL input directory (when FHIR output is requested)" + Environment.NewLine +
-        "  2 - No ELM libraries found in the ELM input directory" + Environment.NewLine +
-        "  3 - No ELM libraries compiled" + Environment.NewLine +
-        "  4 - Cannot package: No matching CQL-ELM pairs found" + Environment.NewLine +
-        "  5 - No output directories specified" + Environment.NewLine +
-        "  6 - CQL directory is required when FHIR output is requested";
-
-    public static readonly string ExitCodes =
-        "0 - Success" + Environment.NewLine +
-        "1 - No CQL libraries found in the CQL input directory (when FHIR output is requested)" + Environment.NewLine +
-        "2 - No ELM libraries found in the ELM input directory" + Environment.NewLine +
-        "3 - No ELM libraries compiled" + Environment.NewLine +
-        "4 - Cannot package: No matching CQL-ELM pairs found" + Environment.NewLine +
-        "5 - No output directories specified" + Environment.NewLine +
-        "6 - CQL directory is required when FHIR output is requested";
+        NewLine + NewLine + NewLine +
+        "Exit Codes:" + NewLine +
+        "  " + ExitCodes.Success.Message + NewLine +
+        "  " + ExitCodes.NoElmLibsInDir.Message + NewLine +
+        "  " + ExitCodes.NoElmLibsCompiled.Message + NewLine +
+        "  " + ExitCodes.CantPackageNoCqlElmMatches.Message + NewLine +
+        "  " + ExitCodes.NoOutputDirs.Message + NewLine +
+        "  " + ExitCodes.NoCqlDirRequiredForFhir.Message + NewLine +
+        "  " + ExitCodes.NoCqlLibsInDirWhenFhirRequested.Message + NewLine +
+        "  " + ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.Message + NewLine +
+        "  " + ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.Message + NewLine +
+        "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Message;
 
     public static readonly Option[] Options =
     [
@@ -139,9 +133,7 @@ internal record ElmToFhirCommand
         Option<bool>(
             "--flatten-dir-hierarchy",
             """
-            Flatten the subdirectory hierarchy when outputting files.
-            When enabled, all output files are placed in the output directory root.
-            When disabled (DEFAULT), subdirectory structure from the ELM input directory is preserved in all output directories.
+            Flatten subdirectory hierarchy when outputting files. By default, the subdirectory structure from the ELM input directory is preserved in all outputs.
             """)
     ];
 
@@ -158,12 +150,12 @@ internal record ElmToFhirCommand
         (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
         (Pdb, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
+        (FlattenDirHierarchy, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FlattenDirHierarchy)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
-        (FlattenDirHierarchy, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FlattenDirHierarchy)]),
     ];
 }
