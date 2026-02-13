@@ -31,12 +31,12 @@ internal class OptionsConsoleDumper(
 
         WriteLine("- PackageCLI ------------------------------------");
         WriteLine($"{"Path",-20} : {assembly.Location}");
-        WriteLine($"{"Command Line Args",-20} : {string.Join(' ', Environment.GetCommandLineArgs()[1..])}");
+        WriteLine($"{"Command Line Args",-20} : {string.Join(' ', GetCommandLineArgs()[1..])}");
         WriteLine($"{"Build",-20} : {assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration}");
         WriteLine($"{"Version",-20} : {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+')[0]}");
         WriteLine("- Environment -----------------------------------");
         WriteLine($"{"Current Time",-20} : {DateTimeOffset.Now:O}");
-        WriteLine($"{"Current Directory",-20} : {Environment.CurrentDirectory}");
+        WriteLine($"{"Current Directory",-20} : {CurrentDirectory}");
         WriteLine("- Configuration ---------------------------------");
         JsonSerializerOptions jsonOpt = new();
         jsonOpt.WriteIndented = true;

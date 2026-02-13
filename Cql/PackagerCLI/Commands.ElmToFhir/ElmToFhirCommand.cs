@@ -21,8 +21,6 @@ internal record ElmToFhirCommand
     DirectoryInfo? Dll,
     DirectoryInfo? Pdb,
     DirectoryInfo? Fhir,
-    DirectoryInfo? LibrariesDir,
-    DirectoryInfo? MeasuresDir,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
     string? CSharpNamespace,
@@ -38,24 +36,18 @@ internal record ElmToFhirCommand
         "When outputing to FHIR Resources, the CQL matchinging against the ELM based on their versioned " +
         "identifier must be supplied as well." +
         Program.Disclaimer +
-        Environment.NewLine + Environment.NewLine + Environment.NewLine +
-        "Exit Codes:" + Environment.NewLine +
-        "  0 - Success" + Environment.NewLine +
-        "  1 - No CQL libraries found in the CQL input directory (when FHIR output is requested)" + Environment.NewLine +
-        "  2 - No ELM libraries found in the ELM input directory" + Environment.NewLine +
-        "  3 - No ELM libraries compiled" + Environment.NewLine +
-        "  4 - Cannot package: No matching CQL-ELM pairs found" + Environment.NewLine +
-        "  5 - No output directories specified" + Environment.NewLine +
-        "  6 - CQL directory is required when FHIR output is requested";
-
-    public static readonly string ExitCodes =
-        "0 - Success" + Environment.NewLine +
-        "1 - No CQL libraries found in the CQL input directory (when FHIR output is requested)" + Environment.NewLine +
-        "2 - No ELM libraries found in the ELM input directory" + Environment.NewLine +
-        "3 - No ELM libraries compiled" + Environment.NewLine +
-        "4 - Cannot package: No matching CQL-ELM pairs found" + Environment.NewLine +
-        "5 - No output directories specified" + Environment.NewLine +
-        "6 - CQL directory is required when FHIR output is requested";
+        NewLine + NewLine + NewLine +
+        "Exit Codes:" + NewLine +
+        "  " + ExitCodes.Success.Message + NewLine +
+        "  " + ExitCodes.NoElmLibsInDir.Message + NewLine +
+        "  " + ExitCodes.NoElmLibsCompiled.Message + NewLine +
+        "  " + ExitCodes.CantPackageNoCqlElmMatches.Message + NewLine +
+        "  " + ExitCodes.NoOutputDirs.Message + NewLine +
+        "  " + ExitCodes.NoCqlDirRequiredForFhir.Message + NewLine +
+        "  " + ExitCodes.NoCqlLibsInDirWhenFhirRequested.Message + NewLine +
+        "  " + ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.Message + NewLine +
+        "  " + ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.Message + NewLine +
+        "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Message;
 
     public static readonly Option[] Options =
     [
@@ -98,23 +90,6 @@ internal record ElmToFhirCommand
             "--fhir",
             """
             FHIR Resource output directory which contains the FHIR library files in JSON format "Library-*.json" and FHIR measures in JSON format "Measure-*.json".
-            If --libraries-dir or --measures-dir are specified, those directories take precedence for their respective resource types.
-            """),
-
-        Option<DirectoryInfo>(
-            "--libraries-dir",
-            """
-            FHIR Libraries output directory which contains the FHIR library files in JSON format "Library-*.json".
-            If specified, overrides --fhir for library resources.
-            (Used with --fhir or standalone)
-            """),
-
-        Option<DirectoryInfo>(
-            "--measures-dir",
-            """
-            FHIR Measures output directory which contains the FHIR measure files in JSON format "Measure-*.json".
-            If specified, overrides --fhir for measure resources.
-            (Used with --fhir or standalone)
             """),
 
         Option<string>(
@@ -168,8 +143,6 @@ internal record ElmToFhirCommand
         (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
         (Pdb, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
-        (LibrariesDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.LibrariesOutDir)]),
-        (MeasuresDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.MeasuresOutDir)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
