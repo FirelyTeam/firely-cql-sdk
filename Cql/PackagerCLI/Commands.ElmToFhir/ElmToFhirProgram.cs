@@ -63,18 +63,18 @@ internal sealed class ElmToFhirProgram
             if (!packOpt.ExitOnError)
                 elmToolkit = elmToolkit.SetIgnoreEnumerationExceptions();
 
-            // Create path mapper if subdirectory preservation is requested
+            // Create path mapper unless flattening is explicitly requested
             // For elm command, use ELM input directory as source
-            SubdirectoryPathMapper? pathMapper = opt.PreserveSubdirs
+            SubdirectoryPathMapper? subDirMapper = !opt.FlattenDirHierarchy
                 ? new SubdirectoryPathMapper(opt.ElmInDir)
                 : null;
 
             // Load ELM files with optional path tracking
-            if (pathMapper is not null)
+            if (subDirMapper is not null)
             {
                 elmToolkit = elmToolkit.AddElmFilesFromDirectoryWithTracking(
                     opt.ElmInDir,
-                    pathMapper,
+                    subDirMapper,
                     filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
             }
             else
@@ -130,7 +130,7 @@ internal sealed class ElmToFhirProgram
                 elmToolkit
                     .SaveCSharpFilesToDirectoryWithSubdirs(
                         opt.CSharpOutDir,
-                        pathMapper,
+                        subDirMapper,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
                 // Update status to "saved" for C#
@@ -148,7 +148,7 @@ internal sealed class ElmToFhirProgram
                     .SaveAssemblyBinariesToDirectoryWithSubdirs(
                         opt.DllOutDir,
                         opt.PdbOutDir ?? opt.DllOutDir,
-                        pathMapper,
+                        subDirMapper,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
 
@@ -202,7 +202,7 @@ internal sealed class ElmToFhirProgram
                     .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectoryWithSubdirs(
                         opt.FhirOutDir,
-                        pathMapper,
+                        subDirMapper,
                         packOpt.JsonPretty,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 

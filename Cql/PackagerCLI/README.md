@@ -82,11 +82,11 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
   - `Embedded` - Debug symbols embedded in DLL with C# source
 
 **Directory Structure Options:**
-- `--preserve-subdirs` - Preserve subdirectory hierarchy from input directory to all output directories.
-  - When enabled, the subdirectory structure from the relevant input directory is preserved in all outputs.
-  - When disabled (DEFAULT), all output files are flattened into the output directory root.
-  - For `cql` command: Uses CQL input directory as source.
-  - For `elm` command: Uses ELM input directory as source.
+- `--flatten-dir-hierarchy` - Flatten subdirectory hierarchy when outputting files.
+  - When enabled, all output files are placed in the output directory root.
+  - When disabled (DEFAULT), the subdirectory structure from the relevant input directory is preserved in all outputs.
+  - For `cql` command: Preserves structure from CQL input directory (unless this flag is set).
+  - For `elm` command: Preserves structure from ELM input directory (unless this flag is set).
 
 #### `cql` Command
 
@@ -115,11 +115,6 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 
 **Debug Options:**
 - `--debug-symbols <None|PortablePdb|Embedded>` - Debug symbol generation (same as elm command)
-
-**Directory Structure Options:**
-- `--preserve-subdirs` - Preserve subdirectory hierarchy from CQL input directory to all output directories.
-  - `Cql` - Preserve subdirectory structure from CQL input directory
-  - `Elm` - Preserve subdirectory structure from ELM input directory
 
 #### `extract-library-attachments` Command
 
@@ -255,16 +250,16 @@ cql-package elm --elm input/elm --cs output/csharp --cs-namespace MyCompany.MyCq
 - All generated C# classes will be in the `MyCompany.MyCqlLibraries` namespace.
 - This is useful for organizing generated code in larger projects or avoiding naming conflicts.
 
-7. Preserve subdirectory structure from CQL input:
+7. Preserving subdirectory structure (default behavior):
 
 ```shell
-cql-package cql --cql input/cql --elm output/elm --cs output/csharp --preserve-subdirs
+cql-package cql --cql input/cql --elm output/elm --cs output/csharp
 ```
 
 - Processes CQL files from `input/cql` including all subdirectories.
-- Preserves the subdirectory structure from the CQL input directory in all outputs.
+- **By default**, subdirectory structure from the CQL input directory is preserved in all outputs.
 - For example, `input/cql/folder1/Library1.cql` → `output/elm/folder1/Library1-1.0.0.json`
-- Useful when organizing libraries in a hierarchical structure (e.g., by domain, version, or module).
+- To flatten all outputs into the root directory, use `--flatten-dir-hierarchy` flag.
 
 8. Extract all attachments from a FHIR Library resource:
 

@@ -19,5 +19,5 @@ public class CqlToFhirOptions : IBindOptions
     public DirectoryInfo? DllOutDir { get; set; }
     public DirectoryInfo? PdbOutDir { get; set; }
     public required DirectoryInfo? FhirOutDir { get; set; }
-    public bool PreserveSubdirs { get; set; } = false;
+    public bool FlattenDirHierarchy { get; set; } = false;
 }

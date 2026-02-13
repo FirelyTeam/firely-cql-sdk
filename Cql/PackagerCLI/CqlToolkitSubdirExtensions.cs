@@ -23,13 +23,13 @@ internal static class CqlToolkitSubdirExtensions
     public static CqlToolkit SaveElmFilesToDirectoryWithSubdirs(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
-        SubdirectoryPathMapper? pathMapper,
+        SubdirectoryPathMapper? subDirMapper,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        if (pathMapper is null)
+        if (subDirMapper is null)
         {
-            // Use default behavior
+            // Use default behavior - call simpler overload
             return cqlToolkit.SaveElmFilesToDirectory(directory, writeIndented, directoryPreparationStrategy);
         }
 
@@ -45,7 +45,7 @@ internal static class CqlToolkitSubdirExtensions
             }
 
             var fileName = $"{libraryIdentifier}.json";
-            var fullPath = pathMapper.GetOutputPath(directory, libraryIdentifier, fileName);
+            var fullPath = subDirMapper.GetOutputPath(directory, libraryIdentifier, fileName);
 
             File.WriteAllText(fullPath, elmLibrary.SerializeToJson(writeIndented));
             logger.LogInformation("Saved ELM to file: {file}", fullPath);

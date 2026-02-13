@@ -27,7 +27,7 @@ internal record ElmToFhirCommand
     bool? JsonPretty,
     bool? ExitOnError,
     DebugSymbolsFormat? DebugSymbols,
-    bool? PreserveSubdirs)
+    bool? FlattenDirHierarchy)
 {
     public const string Name =
         "elm";
@@ -137,11 +137,11 @@ internal record ElmToFhirCommand
             """),
 
         Option<bool>(
-            "--preserve-subdirs",
+            "--flatten-dir-hierarchy",
             """
-            Preserve the subdirectory hierarchy from the ELM input directory when outputting files.
-            When enabled, subdirectory structure from the ELM input directory (or CQL input if ELM not provided) is preserved in all output directories.
-            When disabled (DEFAULT), all output files are flattened into the output directory root.
+            Flatten the subdirectory hierarchy when outputting files.
+            When enabled, all output files are placed in the output directory root.
+            When disabled (DEFAULT), subdirectory structure from the ELM input directory is preserved in all output directories.
             """)
     ];
 
@@ -164,6 +164,6 @@ internal record ElmToFhirCommand
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
-        (PreserveSubdirs, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PreserveSubdirs)]),
+        (FlattenDirHierarchy, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FlattenDirHierarchy)]),
     ];
 }

@@ -72,16 +72,16 @@ public class CqlToFhirProgram
             if (!packOpt.ExitOnError)
                 cqlToolkit = cqlToolkit.SetIgnoreEnumerationExceptions();
 
-            // Create path mapper if subdirectory preservation is requested
+            // Create path mapper unless flattening is explicitly requested
             // For cql command, always use CQL input directory as the source
-            SubdirectoryPathMapper? pathMapper = opt.PreserveSubdirs
+            SubdirectoryPathMapper? subDirMapper = !opt.FlattenDirHierarchy
                 ? new SubdirectoryPathMapper(opt.CqlInDir)
                 : null;
 
             // Load CQL files with optional path tracking
-            if (pathMapper is not null)
+            if (subDirMapper is not null)
             {
-                cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectoryWithTracking(opt.CqlInDir, pathMapper);
+                cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectoryWithTracking(opt.CqlInDir, subDirMapper);
             }
             else
             {
@@ -130,7 +130,7 @@ public class CqlToFhirProgram
             {
                 cqlToolkit.SaveElmFilesToDirectoryWithSubdirs(
                     opt.ElmOutDir,
-                    pathMapper,
+                    subDirMapper,
                     writeIndented: packOpt.JsonPretty,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
@@ -181,7 +181,7 @@ public class CqlToFhirProgram
                 elmToolkit
                     .SaveCSharpFilesToDirectoryWithSubdirs(
                         opt.CSharpOutDir,
-                        pathMapper,
+                        subDirMapper,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
                 // Update status to "saved" for C#
@@ -200,7 +200,7 @@ public class CqlToFhirProgram
                     .SaveAssemblyBinariesToDirectoryWithSubdirs(
                         opt.DllOutDir,
                         opt.PdbOutDir ?? opt.DllOutDir,
-                        pathMapper,
+                        subDirMapper,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
 
@@ -232,7 +232,7 @@ public class CqlToFhirProgram
                     .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectoryWithSubdirs(
                         opt.FhirOutDir,
-                        pathMapper,
+                        subDirMapper,
                         packOpt.JsonPretty,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 

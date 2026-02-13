@@ -26,14 +26,14 @@ internal static class PackagingToolkitSubdirExtensions
     public static PackagingToolkit SaveFhirResourcesToDirectoryWithSubdirs(
         this PackagingToolkit packagingToolkit,
         DirectoryInfo directory,
-        SubdirectoryPathMapper? pathMapper,
+        SubdirectoryPathMapper? subDirMapper,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
-        if (pathMapper is null)
+        if (subDirMapper is null)
         {
-            // Use default behavior
+            // Use default behavior - call simpler overload
             return packagingToolkit.SaveFhirResourcesToDirectory(
                 directory,
                 writeIndented,
@@ -62,7 +62,7 @@ internal static class PackagingToolkitSubdirExtensions
 
                 logger ??= packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitSubdirExtensions));
 
-                var fullFilePath = pathMapper.GetOutputPath(directory, libraryIdentifier, resourceFileName.ToString());
+                var fullFilePath = subDirMapper.GetOutputPath(directory, libraryIdentifier, resourceFileName.ToString());
                 logger.LogInformation("Saving FHIR Resource: {file}", fullFilePath);
                 File.WriteAllText(fullFilePath, resourceJson);
             }

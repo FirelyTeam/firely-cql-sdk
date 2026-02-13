@@ -26,7 +26,7 @@ internal static class FileLoadingExtensions
     public static CqlToolkit AddCqlLibrariesFromDirectoryWithTracking(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
-        SubdirectoryPathMapper pathMapper,
+        SubdirectoryPathMapper subDirMapper,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
@@ -43,7 +43,7 @@ internal static class FileLoadingExtensions
                 var cqlLibrary = CqlLibraryString.Parse(cqlContent);
 
                 // Track the file's path
-                pathMapper.RecordFilePath(file, cqlLibrary.LibraryIdentifier);
+                subDirMapper.RecordFilePath(file, cqlLibrary.LibraryIdentifier);
 
                 // Add to toolkit
                 cqlToolkit = cqlToolkit.AddCqlLibraries(cqlLibrary);
@@ -65,7 +65,7 @@ internal static class FileLoadingExtensions
     public static ElmToolkit AddElmFilesFromDirectoryWithTracking(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
-        SubdirectoryPathMapper pathMapper,
+        SubdirectoryPathMapper subDirMapper,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
@@ -81,7 +81,7 @@ internal static class FileLoadingExtensions
                 var library = ElmLibrary.LoadFromJson(file);
 
                 // Track the file's path
-                pathMapper.RecordFilePath(file, library.VersionedLibraryIdentifier);
+                subDirMapper.RecordFilePath(file, library.VersionedLibraryIdentifier);
 
                 // Add to toolkit
                 elmToolkit = elmToolkit.AddElmLibraries(library);

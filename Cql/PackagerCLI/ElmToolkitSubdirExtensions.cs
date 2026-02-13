@@ -23,12 +23,12 @@ internal static class ElmToolkitSubdirExtensions
     public static ElmToolkit SaveCSharpFilesToDirectoryWithSubdirs(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
-        SubdirectoryPathMapper? pathMapper,
+        SubdirectoryPathMapper? subDirMapper,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        if (pathMapper is null)
+        if (subDirMapper is null)
         {
-            // Use default behavior
+            // Use default behavior - call simpler overload
             return elmToolkit.SaveCSharpFilesToDirectory(directory, directoryPreparationStrategy);
         }
 
@@ -44,7 +44,7 @@ internal static class ElmToolkitSubdirExtensions
             }
 
             var fileName = $"{libraryIdentifier}.g.cs";
-            var fullPath = pathMapper.GetOutputPath(directory, libraryIdentifier, fileName);
+            var fullPath = subDirMapper.GetOutputPath(directory, libraryIdentifier, fileName);
 
             File.WriteAllText(fullPath, csharpSourceCode);
             logger.LogInformation("Saved C# source code to file: {file}", fullPath);
@@ -60,13 +60,13 @@ internal static class ElmToolkitSubdirExtensions
         this ElmToolkit elmToolkit,
         DirectoryInfo dllDirectory,
         DirectoryInfo pdbDirectory,
-        SubdirectoryPathMapper? pathMapper,
+        SubdirectoryPathMapper? subDirMapper,
         DirectoryInfoHandler? dllDirectoryPreparationStrategy = null,
         DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null)
     {
-        if (pathMapper is null)
+        if (subDirMapper is null)
         {
-            // Use default behavior
+            // Use default behavior - call simpler overload
             return elmToolkit.SaveAssemblyBinariesToDirectory(
                 dllDirectory,
                 pdbDirectory,
@@ -102,14 +102,14 @@ internal static class ElmToolkitSubdirExtensions
         foreach (var (libraryIdentifier, _, _, assemblyBytes, debugSymbolsBytes) in elmToAssemblyResults)
         {
             var dllFileName = $"{libraryIdentifier}.dll";
-            var dllFullPath = pathMapper.GetOutputPath(dllDirectory, libraryIdentifier, dllFileName);
+            var dllFullPath = subDirMapper.GetOutputPath(dllDirectory, libraryIdentifier, dllFileName);
             File.WriteAllBytes(dllFullPath, assemblyBytes);
             logger.LogInformation("Saved assembly to file: {file}", dllFullPath);
 
             if (debugSymbolsBytes is { Length: > 0 } pdb)
             {
                 var pdbFileName = $"{libraryIdentifier}.pdb";
-                var pdbFullPath = pathMapper.GetOutputPath(pdbDirectory, libraryIdentifier, pdbFileName);
+                var pdbFullPath = subDirMapper.GetOutputPath(pdbDirectory, libraryIdentifier, pdbFileName);
                 File.WriteAllBytes(pdbFullPath, pdb);
                 logger.LogInformation("Saved debug symbols to file: {file}", pdbFullPath);
             }

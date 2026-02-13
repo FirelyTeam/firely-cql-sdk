@@ -27,7 +27,7 @@ public record CqlToFhirCommand
     bool? JsonPretty,
     bool? ExitOnError,
     DebugSymbolsFormat? DebugSymbols,
-    bool? PreserveSubdirs)
+    bool? FlattenDirHierarchy)
 {
     public const string Name =
         "cql";
@@ -136,11 +136,11 @@ public record CqlToFhirCommand
             """),
 
         Option<bool>(
-            "--preserve-subdirs",
+            "--flatten-dir-hierarchy",
             """
-            Preserve the subdirectory hierarchy from the CQL input directory when outputting files.
-            When enabled, subdirectory structure from the CQL input directory is preserved in all output directories.
-            When disabled (DEFAULT), all output files are flattened into the output directory root.
+            Flatten the subdirectory hierarchy when outputting files.
+            When enabled, all output files are placed in the output directory root.
+            When disabled (DEFAULT), subdirectory structure from the CQL input directory is preserved in all output directories.
             """)
     ];
 
@@ -158,6 +158,6 @@ public record CqlToFhirCommand
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
         (ExitOnError, [PackagingOptions.ConfigSection, nameof(PackagingOptions.ExitOnError)]),
         (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
-        (PreserveSubdirs, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.PreserveSubdirs)]),
+        (FlattenDirHierarchy, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FlattenDirHierarchy)]),
     ];
 }
