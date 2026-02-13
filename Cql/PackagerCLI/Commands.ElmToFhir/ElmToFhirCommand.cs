@@ -38,22 +38,22 @@ internal record ElmToFhirCommand
         Program.Disclaimer +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        $"  {ExitCode.Normal} - {ExitCodeMessages.Normal}" + Environment.NewLine +
-        $"  {ExitCode.NoElmLibsInDir} - {ExitCodeMessages.NoElmLibsInDir}" + Environment.NewLine +
-        $"  {ExitCode.NoElmLibsCompiled} - {ExitCodeMessages.NoElmLibsCompiled}" + Environment.NewLine +
-        $"  {ExitCode.CantPackageNoCqlElmMatches} - {ExitCodeMessages.CantPackageNoCqlElmMatches}" + Environment.NewLine +
-        $"  {ExitCode.NoOutputDirs} - {ExitCodeMessages.NoOutputDirs}" + Environment.NewLine +
-        $"  {ExitCode.NoCqlDirRequiredForFhir} - {ExitCodeMessages.NoCqlDirRequiredForFhir}" + Environment.NewLine +
-        $"  {ExitCode.NoCqlLibsInDirWhenFhirRequested} - {ExitCodeMessages.NoCqlLibsInDirWhenFhirRequested}";
+        "  " + ExitCodeMessages.Normal + Environment.NewLine +
+        "  " + ExitCodeMessages.NoElmLibsInDir + Environment.NewLine +
+        "  " + ExitCodeMessages.NoElmLibsCompiled + Environment.NewLine +
+        "  " + ExitCodeMessages.CantPackageNoCqlElmMatches + Environment.NewLine +
+        "  " + ExitCodeMessages.NoOutputDirs + Environment.NewLine +
+        "  " + ExitCodeMessages.NoCqlDirRequiredForFhir + Environment.NewLine +
+        "  " + ExitCodeMessages.NoCqlLibsInDirWhenFhirRequested;
 
     public static readonly string ExitCodes =
-        $"{ExitCode.Normal} - {ExitCodeMessages.Normal}" + Environment.NewLine +
-        $"{ExitCode.NoElmLibsInDir} - {ExitCodeMessages.NoElmLibsInDir}" + Environment.NewLine +
-        $"{ExitCode.NoElmLibsCompiled} - {ExitCodeMessages.NoElmLibsCompiled}" + Environment.NewLine +
-        $"{ExitCode.CantPackageNoCqlElmMatches} - {ExitCodeMessages.CantPackageNoCqlElmMatches}" + Environment.NewLine +
-        $"{ExitCode.NoOutputDirs} - {ExitCodeMessages.NoOutputDirs}" + Environment.NewLine +
-        $"{ExitCode.NoCqlDirRequiredForFhir} - {ExitCodeMessages.NoCqlDirRequiredForFhir}" + Environment.NewLine +
-        $"{ExitCode.NoCqlLibsInDirWhenFhirRequested} - {ExitCodeMessages.NoCqlLibsInDirWhenFhirRequested}";
+        ExitCodeMessages.Normal + Environment.NewLine +
+        ExitCodeMessages.NoElmLibsInDir + Environment.NewLine +
+        ExitCodeMessages.NoElmLibsCompiled + Environment.NewLine +
+        ExitCodeMessages.CantPackageNoCqlElmMatches + Environment.NewLine +
+        ExitCodeMessages.NoOutputDirs + Environment.NewLine +
+        ExitCodeMessages.NoCqlDirRequiredForFhir + Environment.NewLine +
+        ExitCodeMessages.NoCqlLibsInDirWhenFhirRequested;
 
     public static readonly Option[] Options =
     [

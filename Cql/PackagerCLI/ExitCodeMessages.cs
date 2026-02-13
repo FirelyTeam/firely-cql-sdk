@@ -10,21 +10,21 @@ namespace Hl7.Cql.Packager;
 
 /// <summary>
 /// Contains string constants for exit code messages used in command help text.
-/// Property names should match the corresponding ExitCode constants for consistency.
+/// Each message includes the exit code number and description for direct use in help text.
 /// </summary>
 internal static class ExitCodeMessages
 {
-    public const string Normal = "Success";
-    public const string NoCqlLibsInDir = "No CQL libraries found in the CQL input directory";
-    public const string NoCqlLibsInDirWhenFhirRequested = "No CQL libraries found in the CQL input directory (when FHIR output is requested)";
-    public const string NoElmLibsInDir = "No ELM libraries found in the ELM input directory";
-    public const string NoElmLibsCompiled = "No ELM libraries compiled";
-    public const string CantPackageNoCqlElmMatches = "Cannot package: No matching CQL-ELM pairs found";
-    public const string NoOutputDirs = "No output directories specified";
-    public const string NoCqlDirRequiredForFhir = "CQL directory is required when FHIR output is requested";
-    public const string LibraryExtractionError = "Library extraction error occurred";
-    public const string NoInputFiles = "No input files specified or one or more input files do not exist";
-    public const string InvalidLibraryJson = "Invalid library JSON";
-    public const string InvalidLibraryJsonOrMissingProperties = "Invalid library JSON or missing required library properties (Name, Version)";
-    public const string UnknownError = "Unknown error occurred during processing";
+    public const string Normal = "0  - Success";
+    public const string NoCqlLibsInDir = "1  - No CQL libraries found in the CQL input directory";
+    public const string NoElmLibsInDir = "2  - No ELM libraries found in the ELM input directory";
+    public const string NoElmLibsCompiled = "3  - No ELM libraries compiled";
+    public const string CantPackageNoCqlElmMatches = "4  - Cannot package: No matching CQL-ELM pairs found";
+    public const string NoOutputDirs = "5  - No output directories specified";
+    public const string NoCqlDirRequiredForFhir = "6  - CQL directory is required when FHIR output is requested";
+    public const string LibraryExtractionError = "10 - Library extraction error occurred";
+    public const string NoInputFiles = "11 - No input files specified or one or more input files do not exist";
+    public const string InvalidLibraryJson = "12 - Invalid library JSON";
+    public const string InvalidLibraryJsonOrMissingProperties = "12 - Invalid library JSON or missing required library properties (Name, Version)";
+    public const string NoCqlLibsInDirWhenFhirRequested = "13 - No CQL libraries found in the CQL input directory (when FHIR output is requested)";
+    public const string UnknownError = "99 - Unknown error occurred during processing";
 }
