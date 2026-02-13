@@ -42,13 +42,15 @@ internal sealed class ElmToFhirProgram
             var elmOpt = elmOptions.Value;
             var packOpt = packagingOptions.Value;
 
-            switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
+            switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir, opt.LibrariesOutDir, opt.MeasuresOutDir)
             {
-                case (null, null, null):
+                case (null, null, null, null, null):
                     logger.LogInformation("Exiting. No output directories specified.");
                     return ExitCode.NoOutputDirs;
 
-                case (_, _, not null) when opt.CqlInDir is not { Exists: true }:
+                case (_, _, not null, _, _) when opt.CqlInDir is not { Exists: true }:
+                case (_, _, _, not null, _) when opt.CqlInDir is not { Exists: true }:
+                case (_, _, _, _, not null) when opt.CqlInDir is not { Exists: true }:
                     logger.LogInformation("Exiting. CQL input directory required when outputting FHIR.");
                     return ExitCode.NoCqlDirRequiredForFhir;
             }
@@ -144,7 +146,7 @@ internal sealed class ElmToFhirProgram
                     sbSummary.AppendLine(Invariant($"* Saved {elmToolkitResults.Count} Debug Symbol files (*.pdb) to directory {opt.PdbOutDir}."));
             }
 
-            if ((opt.CqlInDir, opt.FhirOutDir) is (not null, not null))
+            if ((opt.CqlInDir, opt.FhirOutDir ?? opt.LibrariesOutDir ?? opt.MeasuresOutDir) is (not null, not null))
             {
                 CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                                         .SetIgnoreEnumerationExceptions()
@@ -176,7 +178,9 @@ internal sealed class ElmToFhirProgram
                 packagingToolkit
                     .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
-                    .SaveFhirResourcesToDirectory(
+                    .SaveFhirResourcesToDirectories(
+                        opt.LibrariesOutDir,
+                        opt.MeasuresOutDir,
                         opt.FhirOutDir,
                         packOpt.JsonPretty,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
@@ -196,7 +200,22 @@ internal sealed class ElmToFhirProgram
                     tracker.RecordStatus(libraryId, LibraryProcessingStage.FhirResource, LibraryStageStatus.Saved([.. extensions]));
                 }
 
-                sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
+                // Build summary message
+                var librariesDir = opt.LibrariesOutDir ?? opt.FhirOutDir;
+                var measuresDir = opt.MeasuresOutDir ?? opt.FhirOutDir;
+
+                if (librariesDir == measuresDir)
+                {
+                    sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {librariesDir}."));
+                }
+                else
+                {
+                    sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) to directory {librariesDir}."));
+                    if (measuresCount > 0)
+                    {
+                        sbSummary.AppendLine(Invariant($"* Saved {measuresCount} measures (Measure-*.json) to directory {measuresDir}."));
+                    }
+                }
             }
 
             return ExitCode.Normal;

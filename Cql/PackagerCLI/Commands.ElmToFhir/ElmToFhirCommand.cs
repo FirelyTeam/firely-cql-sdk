@@ -21,6 +21,8 @@ internal record ElmToFhirCommand
     DirectoryInfo? Dll,
     DirectoryInfo? Pdb,
     DirectoryInfo? Fhir,
+    DirectoryInfo? LibrariesDir,
+    DirectoryInfo? MeasuresDir,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
     string? CSharpNamespace,
@@ -96,6 +98,23 @@ internal record ElmToFhirCommand
             "--fhir",
             """
             FHIR Resource output directory which contains the FHIR library files in JSON format "Library-*.json" and FHIR measures in JSON format "Measure-*.json".
+            If --libraries-dir or --measures-dir are specified, those directories take precedence for their respective resource types.
+            """),
+
+        Option<DirectoryInfo>(
+            "--libraries-dir",
+            """
+            FHIR Libraries output directory which contains the FHIR library files in JSON format "Library-*.json".
+            If specified, overrides --fhir for library resources.
+            (Used with --fhir or standalone)
+            """),
+
+        Option<DirectoryInfo>(
+            "--measures-dir",
+            """
+            FHIR Measures output directory which contains the FHIR measure files in JSON format "Measure-*.json".
+            If specified, overrides --fhir for measure resources.
+            (Used with --fhir or standalone)
             """),
 
         Option<string>(
@@ -149,6 +168,8 @@ internal record ElmToFhirCommand
         (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
         (Pdb, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
+        (LibrariesDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.LibrariesOutDir)]),
+        (MeasuresDir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.MeasuresOutDir)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
