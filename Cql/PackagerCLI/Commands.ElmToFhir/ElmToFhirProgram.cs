@@ -53,7 +53,7 @@ internal sealed class ElmToFhirProgram
                     return ExitCodes.NoCqlDirRequiredForFhir.Code;
             }
 
-            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCodes.Normal.Code)
+            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCodes.Success.Code)
             {
                 return exitCode;
             }
@@ -91,7 +91,7 @@ internal sealed class ElmToFhirProgram
             }
 
             // Track C# and .NET results - check which libraries have successful results
-            var successfulLibraries = new HashSet<Runtime.CqlVersionedLibraryIdentifier>(elmToolkitResults.Select(r => r.libraryIdentifier));
+            var successfulLibraries = new HashSet<CqlVersionedLibraryIdentifier>(elmToolkitResults.Select(r => r.libraryIdentifier));
             foreach (var (libraryId, artifacts) in elmToolkit.ArtifactsById)
             {
                 if (successfulLibraries.Contains(libraryId))
@@ -199,7 +199,7 @@ internal sealed class ElmToFhirProgram
                 sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
             }
 
-            return ExitCodes.Normal.Code;
+            return ExitCodes.Success.Code;
         }
         finally
         {

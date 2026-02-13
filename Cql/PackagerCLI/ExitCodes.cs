@@ -10,7 +10,7 @@ namespace Hl7.Cql.Packager;
 
 internal static class ExitCodes
 {
-    internal static class Normal
+    internal static class Success
     {
         public const int Code = 0;
         public const string Message = "0 - Success";

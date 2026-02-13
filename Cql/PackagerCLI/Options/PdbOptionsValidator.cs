@@ -31,7 +31,7 @@ public sealed class PdbOptionsValidator(
                 logger.LogInformation("Exiting. If --debug-symbols is PortablePdb, then (--dll with --pdb) or (--fhir) must be specified.");
                 return ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Code;
             default:
-                return ExitCodes.Normal.Code;
+                return ExitCodes.Success.Code;
         }
     }
 }

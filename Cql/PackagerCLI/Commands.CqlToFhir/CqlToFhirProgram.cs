@@ -62,7 +62,7 @@ public class CqlToFhirProgram
                     return ExitCodes.NoOutputDirs.Code;
             }
 
-            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCodes.Normal.Code)
+            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCodes.Success.Code)
             {
                 return exitCode;
             }
@@ -99,7 +99,7 @@ public class CqlToFhirProgram
             }
 
             // Track ELM translation results
-            var successfulElmLibraries = new HashSet<Runtime.CqlVersionedLibraryIdentifier>(cqlToolkitResults.Select(r => r.libraryIdentifier));
+            var successfulElmLibraries = new HashSet<CqlVersionedLibraryIdentifier>(cqlToolkitResults.Select(r => r.libraryIdentifier));
             foreach (var (libraryId, artifacts) in cqlToolkit.ArtifactsById)
             {
                 if (successfulElmLibraries.Contains(libraryId))
@@ -131,7 +131,7 @@ public class CqlToFhirProgram
             switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
             {
                 case (null, null, null):
-                    return ExitCodes.Normal.Code;
+                    return ExitCodes.Success.Code;
             }
 
             ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
@@ -147,7 +147,7 @@ public class CqlToFhirProgram
             }
 
             // Track C# and .NET results
-            var successfulCompilations = new HashSet<Runtime.CqlVersionedLibraryIdentifier>(elmToolkitResults.Select(r => r.libraryIdentifier));
+            var successfulCompilations = new HashSet<CqlVersionedLibraryIdentifier>(elmToolkitResults.Select(r => r.libraryIdentifier));
             foreach (var libraryId in successfulElmLibraries)
             {
                 if (successfulCompilations.Contains(libraryId))
@@ -236,7 +236,7 @@ public class CqlToFhirProgram
                 sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
             }
 
-            return ExitCodes.Normal.Code;
+            return ExitCodes.Success.Code;
         }
         finally
         {

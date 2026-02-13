@@ -36,24 +36,15 @@ internal record ElmToFhirCommand
         "When outputing to FHIR Resources, the CQL matchinging against the ELM based on their versioned " +
         "identifier must be supplied as well." +
         Program.Disclaimer +
-        Environment.NewLine + Environment.NewLine + Environment.NewLine +
-        "Exit Codes:" + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.NoElmLibsInDir.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.NoElmLibsCompiled.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.CantPackageNoCqlElmMatches.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.NoOutputDirs.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.NoCqlDirRequiredForFhir.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.NoCqlLibsInDirWhenFhirRequested.Message;
-
-    public static readonly string ExitCodes =
-        Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.NoElmLibsInDir.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.NoElmLibsCompiled.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.CantPackageNoCqlElmMatches.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.NoOutputDirs.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.NoCqlDirRequiredForFhir.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.NoCqlLibsInDirWhenFhirRequested.Message;
+        NewLine + NewLine + NewLine +
+        "Exit Codes:" + NewLine +
+        "  " + ExitCodes.Success.Message + NewLine +
+        "  " + ExitCodes.NoElmLibsInDir.Message + NewLine +
+        "  " + ExitCodes.NoElmLibsCompiled.Message + NewLine +
+        "  " + ExitCodes.CantPackageNoCqlElmMatches.Message + NewLine +
+        "  " + ExitCodes.NoOutputDirs.Message + NewLine +
+        "  " + ExitCodes.NoCqlDirRequiredForFhir.Message + NewLine +
+        "  " + ExitCodes.NoCqlLibsInDirWhenFhirRequested.Message;
 
     public static readonly Option[] Options =
     [

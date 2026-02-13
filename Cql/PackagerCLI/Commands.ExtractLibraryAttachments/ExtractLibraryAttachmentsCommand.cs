@@ -25,22 +25,16 @@ internal record ExtractLibraryAttachmentsCommand
 
     public static readonly string Description =
         "ALPHA FEATURE: This command is currently in alpha and its behavior may change in future releases." +
-        Environment.NewLine + Environment.NewLine +
+        NewLine + NewLine +
         "Extract attachments from a FHIR Library resource to individual files. " +
         "Given a FHIR Library resource file, this command extracts embedded attachments " +
         "(CQL, ELM, C#, DLL, PDB) and saves them to the specified output directories." +
-        Environment.NewLine + Environment.NewLine + Environment.NewLine +
-        "Exit Codes:" + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.NoOutputDirs.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.LibraryExtractionError.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.InvalidLibraryJson.Message;
-
-    public static readonly string ExitCodes =
-        Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.NoOutputDirs.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.LibraryExtractionError.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.InvalidLibraryJson.Message;
+        NewLine + NewLine + NewLine +
+        "Exit Codes:" + NewLine +
+        "  " + ExitCodes.Success.Message + NewLine +
+        "  " + ExitCodes.NoOutputDirs.Message + NewLine +
+        "  " + ExitCodes.LibraryExtractionError.Message + NewLine +
+        "  " + ExitCodes.InvalidLibraryJson.Message;
 
     public static readonly Option[] Options =
     [

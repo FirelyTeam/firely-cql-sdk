@@ -49,7 +49,7 @@ public sealed partial class ColorConsoleLogger(
         var defaultColorEsc = GetDefaultForegroundColorEscapeCode();
         var logRecord = $"{colorEsc}{logLevelText}{defaultColorEsc} {_categoryName}{message}";
         if (exception != null)
-            logRecord += $"{Environment.NewLine}{colorEsc}{exception}{defaultColorEsc}";
+            logRecord += $"{NewLine}{colorEsc}{exception}{defaultColorEsc}";
 
         Console.WriteLine(logRecord);
     }
@@ -179,14 +179,14 @@ file static class ConsoleFeatures
         {
             // We subscribe to the informal standard from https://no-color.org/.  If we'd otherwise emit
             // ANSI color codes but the NO_COLOR environment variable is set, disable emitting them.
-            enabled = Environment.GetEnvironmentVariable("NO_COLOR") is null;
+            enabled = GetEnvironmentVariable("NO_COLOR") is null;
         }
         else
         {
             // We also support overriding in the other direction.  If we'd otherwise avoid emitting color
             // codes but the DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION environment variable is
             // set to 1 or true, enable color.
-            string? envVar = Environment.GetEnvironmentVariable("DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION");
+            string? envVar = GetEnvironmentVariable("DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION");
             enabled = envVar is not null && (envVar == "1" || envVar.Equals("true", StringComparison.OrdinalIgnoreCase));
         }
 

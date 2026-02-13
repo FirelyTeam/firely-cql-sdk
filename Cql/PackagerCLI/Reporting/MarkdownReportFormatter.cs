@@ -82,11 +82,11 @@ internal static class MarkdownReportFormatter
             string totalText;
             if (stage == LibraryProcessingStage.FhirResource && measures > 0)
             {
-                totalText = FormattableString.Invariant($"**{total}** (Lib:{libraries}, Meas:{measures})");
+                totalText = Invariant($"**{total}** (Lib:{libraries}, Meas:{measures})");
             }
             else
             {
-                totalText = FormattableString.Invariant($"**{total}**");
+                totalText = Invariant($"**{total}**");
             }
             sb.Append(" ");
             sb.Append(totalText.PadRight(columnWidths[i + 1]));
@@ -164,11 +164,11 @@ internal static class MarkdownReportFormatter
             string totalText;
             if (stage == LibraryProcessingStage.FhirResource && measures > 0)
             {
-                totalText = FormattableString.Invariant($"**{total}** (Lib:{libraries}, Meas:{measures})");
+                totalText = Invariant($"**{total}** (Lib:{libraries}, Meas:{measures})");
             }
             else
             {
-                totalText = FormattableString.Invariant($"**{total}**");
+                totalText = Invariant($"**{total}**");
             }
             stageWidth = Math.Max(stageWidth, totalText.Length);
 

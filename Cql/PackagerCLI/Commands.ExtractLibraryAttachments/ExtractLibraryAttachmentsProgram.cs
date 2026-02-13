@@ -51,7 +51,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             if (fhirLibrary is { Content: null or { Count: 0 } })
             {
                 logger.LogWarning("No content attachments found in FHIR Library resource.");
-                return ExitCodes.Normal.Code;
+                return ExitCodes.Success.Code;
             }
 
             List<string> successfulExtractions = [];
@@ -107,7 +107,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
                 logger.LogInformation("No attachments matched the requested output directories.");
             }
 
-            return ExitCodes.Normal.Code;
+            return ExitCodes.Success.Code;
         }
         catch (Exception ex)
         {

@@ -55,8 +55,8 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             if (missingFiles.Count > 0)
             {
                 var filesPluralized = missingFiles.Count > 1 ? "files do" : "file does";
-                var missingFilesNewLines = string.Join(Environment.NewLine, missingFiles);
-                var template = $$"""The following {{filesPluralized}} not exist:{{Environment.NewLine}}{MissingFiles}{{Environment.NewLine}}All specified attachment input files must exist before processing can begin.""";
+                var missingFilesNewLines = string.Join(NewLine, missingFiles);
+                var template = $$"""The following {{filesPluralized}} not exist:{{NewLine}}{MissingFiles}{{NewLine}}All specified attachment input files must exist before processing can begin.""";
                 logger.LogError(template, missingFilesNewLines);
                 return ExitCodes.NoInputFiles.Code;
             }
@@ -134,7 +134,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             File.WriteAllText(outputFile.FullName, updatedLibraryJson);
             logger.LogInformation("Updated FHIR library saved to: {LibraryFile}", outputFile.FullName);
 
-            return ExitCodes.Normal.Code;
+            return ExitCodes.Success.Code;
         }
         catch (Exception ex)
         {

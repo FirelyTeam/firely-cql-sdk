@@ -27,27 +27,21 @@ internal record ReplaceLibraryAttachmentsCommand
 
     public static readonly string Description =
         "ALPHA FEATURE: This command is currently in alpha and its behavior may change in future releases." +
-        Environment.NewLine + Environment.NewLine +
+        NewLine + NewLine +
         "Replace attachments in an existing FHIR library resource. " +
         "Given a FHIR library file and one or more attachment files, this command replaces or adds " +
         "the corresponding content in the library (identified by content type: +cql, +elm, +dll, +pdb, +csharp). " +
         "If --library-out-file is not specified, the library-file will be updated in-place. " +
         "If --library-out-file is specified, library-file will be copied to library-out-file, and the latter will be updated." +
-        Environment.NewLine + Environment.NewLine +
+        NewLine + NewLine +
         "Note: When replacing the ELM attachment (--elm-file), the CQL options parameters in the FHIR Library " +
         "resource will be automatically overridden with the values from the new ELM file." +
-        Environment.NewLine + Environment.NewLine + Environment.NewLine +
-        "Exit Codes:" + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.NoInputFiles.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.InvalidLibraryJsonOrMissingProperties.Message + Environment.NewLine +
-        "  " + Hl7.Cql.Packager.ExitCodes.UnknownError.Message;
-
-    public static readonly string ExitCodes =
-        Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.NoInputFiles.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.InvalidLibraryJsonOrMissingProperties.Message + Environment.NewLine +
-        Hl7.Cql.Packager.ExitCodes.UnknownError.Message;
+        NewLine + NewLine + NewLine +
+        "Exit Codes:" + NewLine +
+        "  " + ExitCodes.Success.Message + NewLine +
+        "  " + ExitCodes.NoInputFiles.Message + NewLine +
+        "  " + ExitCodes.InvalidLibraryJsonOrMissingProperties.Message + NewLine +
+        "  " + ExitCodes.UnknownError.Message;
 
     public static readonly Option[] Options =
     [
