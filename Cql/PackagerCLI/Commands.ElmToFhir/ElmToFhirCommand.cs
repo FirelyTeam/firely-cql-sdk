@@ -38,22 +38,22 @@ internal record ElmToFhirCommand
         Program.Disclaimer +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        "  0 - Success" + Environment.NewLine +
-        "  1 - No CQL libraries found in the CQL input directory (when FHIR output is requested)" + Environment.NewLine +
-        "  2 - No ELM libraries found in the ELM input directory" + Environment.NewLine +
-        "  3 - No ELM libraries compiled" + Environment.NewLine +
-        "  4 - Cannot package: No matching CQL-ELM pairs found" + Environment.NewLine +
-        "  5 - No output directories specified" + Environment.NewLine +
-        "  6 - CQL directory is required when FHIR output is requested";
+        $"  {ExitCode.Normal} - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"  {ExitCode.NoCqlLibsInDir} - {ExitCodeMessages.NoCqlLibsInDirWhenFhirRequested}" + Environment.NewLine +
+        $"  {ExitCode.NoElmLibsInDir} - {ExitCodeMessages.NoElmLibsInDir}" + Environment.NewLine +
+        $"  {ExitCode.NoElmLibsCompiled} - {ExitCodeMessages.NoElmLibsCompiled}" + Environment.NewLine +
+        $"  {ExitCode.CantPackageNoCqlElmMatches} - {ExitCodeMessages.CantPackageNoCqlElmMatches}" + Environment.NewLine +
+        $"  {ExitCode.NoOutputDirs} - {ExitCodeMessages.NoOutputDirs}" + Environment.NewLine +
+        $"  {ExitCode.NoCqlDirRequiredForFhir} - {ExitCodeMessages.NoCqlDirRequiredForFhir}";
 
     public static readonly string ExitCodes =
-        "0 - Success" + Environment.NewLine +
-        "1 - No CQL libraries found in the CQL input directory (when FHIR output is requested)" + Environment.NewLine +
-        "2 - No ELM libraries found in the ELM input directory" + Environment.NewLine +
-        "3 - No ELM libraries compiled" + Environment.NewLine +
-        "4 - Cannot package: No matching CQL-ELM pairs found" + Environment.NewLine +
-        "5 - No output directories specified" + Environment.NewLine +
-        "6 - CQL directory is required when FHIR output is requested";
+        $"{ExitCode.Normal} - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"{ExitCode.NoCqlLibsInDir} - {ExitCodeMessages.NoCqlLibsInDirWhenFhirRequested}" + Environment.NewLine +
+        $"{ExitCode.NoElmLibsInDir} - {ExitCodeMessages.NoElmLibsInDir}" + Environment.NewLine +
+        $"{ExitCode.NoElmLibsCompiled} - {ExitCodeMessages.NoElmLibsCompiled}" + Environment.NewLine +
+        $"{ExitCode.CantPackageNoCqlElmMatches} - {ExitCodeMessages.CantPackageNoCqlElmMatches}" + Environment.NewLine +
+        $"{ExitCode.NoOutputDirs} - {ExitCodeMessages.NoOutputDirs}" + Environment.NewLine +
+        $"{ExitCode.NoCqlDirRequiredForFhir} - {ExitCodeMessages.NoCqlDirRequiredForFhir}";
 
     public static readonly Option[] Options =
     [

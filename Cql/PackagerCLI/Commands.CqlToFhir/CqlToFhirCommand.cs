@@ -37,18 +37,18 @@ public record CqlToFhirCommand
         Program.Disclaimer +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        "  0 - Success" + Environment.NewLine +
-        "  1 - No CQL libraries found in the CQL input directory" + Environment.NewLine +
-        "  3 - No ELM libraries compiled" + Environment.NewLine +
-        "  4 - Cannot package: No matching CQL-ELM pairs found" + Environment.NewLine +
-        "  5 - No output directories specified";
+        $"  {ExitCode.Normal} - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"  {ExitCode.NoCqlLibsInDir} - {ExitCodeMessages.NoCqlLibsInDir}" + Environment.NewLine +
+        $"  {ExitCode.NoElmLibsCompiled} - {ExitCodeMessages.NoElmLibsCompiled}" + Environment.NewLine +
+        $"  {ExitCode.CantPackageNoCqlElmMatches} - {ExitCodeMessages.CantPackageNoCqlElmMatches}" + Environment.NewLine +
+        $"  {ExitCode.NoOutputDirs} - {ExitCodeMessages.NoOutputDirs}";
 
     public static readonly string ExitCodes =
-        "0 - Success" + Environment.NewLine +
-        "1 - No CQL libraries found in the CQL input directory" + Environment.NewLine +
-        "  3 - No ELM libraries compiled" + Environment.NewLine +
-        "4 - Cannot package: No matching CQL-ELM pairs found" + Environment.NewLine +
-        "5 - No output directories specified";
+        $"{ExitCode.Normal} - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"{ExitCode.NoCqlLibsInDir} - {ExitCodeMessages.NoCqlLibsInDir}" + Environment.NewLine +
+        $"  {ExitCode.NoElmLibsCompiled} - {ExitCodeMessages.NoElmLibsCompiled}" + Environment.NewLine +
+        $"{ExitCode.CantPackageNoCqlElmMatches} - {ExitCodeMessages.CantPackageNoCqlElmMatches}" + Environment.NewLine +
+        $"{ExitCode.NoOutputDirs} - {ExitCodeMessages.NoOutputDirs}";
 
     public static Command CreateCommand() =>
         new Command(Name, Description)

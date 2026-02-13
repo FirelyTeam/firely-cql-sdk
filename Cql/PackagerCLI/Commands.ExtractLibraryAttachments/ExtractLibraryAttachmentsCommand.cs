@@ -31,16 +31,16 @@ internal record ExtractLibraryAttachmentsCommand
         "(CQL, ELM, C#, DLL, PDB) and saves them to the specified output directories." +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        "  0  - Success" + Environment.NewLine +
-        "  5  - No output directories specified" + Environment.NewLine +
-        "  10 - Library extraction error occurred" + Environment.NewLine +
-        "  12 - Invalid library JSON";
+        $"  {ExitCode.Normal}  - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"  {ExitCode.NoOutputDirs}  - {ExitCodeMessages.NoOutputDirs}" + Environment.NewLine +
+        $"  {ExitCode.LibraryExtractionError} - {ExitCodeMessages.LibraryExtractionError}" + Environment.NewLine +
+        $"  {ExitCode.InvalidLibraryJson} - {ExitCodeMessages.InvalidLibraryJson}";
 
     public static readonly string ExitCodes =
-        "0  - Success" + Environment.NewLine +
-        "5  - No output directories specified" + Environment.NewLine +
-        "10 - Library extraction error occurred" + Environment.NewLine +
-        "12 - Invalid library JSON";
+        $"{ExitCode.Normal}  - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"{ExitCode.NoOutputDirs}  - {ExitCodeMessages.NoOutputDirs}" + Environment.NewLine +
+        $"{ExitCode.LibraryExtractionError} - {ExitCodeMessages.LibraryExtractionError}" + Environment.NewLine +
+        $"{ExitCode.InvalidLibraryJson} - {ExitCodeMessages.InvalidLibraryJson}";
 
     public static readonly Option[] Options =
     [

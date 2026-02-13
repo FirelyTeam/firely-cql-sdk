@@ -38,16 +38,16 @@ internal record ReplaceLibraryAttachmentsCommand
         "resource will be automatically overridden with the values from the new ELM file." +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        "  0  - Success" + Environment.NewLine +
-        "  11 - No input files specified or one or more input files do not exist" + Environment.NewLine +
-        "  12 - Invalid library JSON or missing required library properties (Name, Version)" + Environment.NewLine +
-        "  99 - Unknown error occurred during processing";
+        $"  {ExitCode.Normal}  - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"  {ExitCode.NoInputFiles} - {ExitCodeMessages.NoInputFiles}" + Environment.NewLine +
+        $"  {ExitCode.InvalidLibraryJson} - {ExitCodeMessages.InvalidLibraryJsonOrMissingProperties}" + Environment.NewLine +
+        $"  {ExitCode.UnknownError} - {ExitCodeMessages.UnknownError}";
 
     public static readonly string ExitCodes =
-        "0  - Success" + Environment.NewLine +
-        "11 - No input files specified or one or more input files do not exist" + Environment.NewLine +
-        "12 - Invalid library JSON or missing required library properties (Name, Version)" + Environment.NewLine +
-        "99 - Unknown error occurred during processing";
+        $"{ExitCode.Normal}  - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"{ExitCode.NoInputFiles} - {ExitCodeMessages.NoInputFiles}" + Environment.NewLine +
+        $"{ExitCode.InvalidLibraryJson} - {ExitCodeMessages.InvalidLibraryJsonOrMissingProperties}" + Environment.NewLine +
+        $"{ExitCode.UnknownError} - {ExitCodeMessages.UnknownError}";
 
     public static readonly Option[] Options =
     [
