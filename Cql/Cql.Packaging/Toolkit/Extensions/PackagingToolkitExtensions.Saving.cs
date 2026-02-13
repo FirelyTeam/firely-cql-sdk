@@ -31,27 +31,13 @@ public static partial class PackagingToolkitExtensions
         DirectoryInfoHandler? directoryPreparationStrategy = null,
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
-        bool prepFhirDir = true;
-        ILogger? logger = null;
-        var fhirResources = packagingToolkit
-                            .GetPackagingResults()
-                            .SelectMany(t => t.resultArtifacts.GetFhirResources());
-        foreach (var (resourceFileName, resourceJson) in
-                 packagingToolkit.SerializeFhirResourcesToJson(fhirResources, writeIndented, configureJsonSerializerOptions))
-        {
-            if (prepFhirDir)
-            {
-                prepFhirDir = false;
-                (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate)(directory);
-            }
-
-            logger ??= packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
-            var fullFilePath = Path.Combine(directory.FullName, resourceFileName.ToString());
-            logger.LogInformation("Saving FHIR Resource: {file}", fullFilePath);
-            File.WriteAllText(fullFilePath, resourceJson);
-        }
-
-        return packagingToolkit;
+        // Route to SaveFhirResourcesToDirectories with the same directory for both libraries and measures
+        return packagingToolkit.SaveFhirResourcesToDirectories(
+            directory,
+            directory,
+            writeIndented,
+            directoryPreparationStrategy,
+            configureJsonSerializerOptions);
     }
 
     /// <summary>
