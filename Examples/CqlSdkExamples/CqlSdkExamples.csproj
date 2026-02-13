@@ -23,13 +23,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="**\input\**" Exclude="bin\**;obj\**">
+		<None Update="**\input\**">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
-		<Compile Remove="**\input\**\*.g.cs" Exclude="bin\**;obj\**" />
-		<None Include="**\input\**\*.g.cs" Exclude="bin\**;obj\**">
+		<None Remove="bin\**\input\**;obj\**\input\**" />
+
+		<Compile Remove="**\input\**\*.g.cs" />
+		<Compile Remove="bin\**;obj\**" />
+
+		<None Include="**\input\**\*.g.cs">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Remove="bin\**\input\**\*.g.cs;obj\**\input\**\*.g.cs" />
 	</ItemGroup>
 
 	<Import Project="..\CqlSdkExamplesCodeGeneration.targets" />
