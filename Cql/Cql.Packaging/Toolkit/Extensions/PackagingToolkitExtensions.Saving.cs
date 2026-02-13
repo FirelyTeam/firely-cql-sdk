@@ -56,20 +56,19 @@ public static partial class PackagingToolkitExtensions
 
     /// <summary>
     /// Saves FHIR resources to separate directories for libraries and measures.
+    /// Both directories must be specified.
     /// </summary>
     /// <param name="packagingToolkit">The packaging toolkit instance.</param>
-    /// <param name="librariesDirectory">The directory where FHIR library resources will be saved. If null, falls back to fhirDirectory.</param>
-    /// <param name="measuresDirectory">The directory where FHIR measure resources will be saved. If null, falls back to fhirDirectory.</param>
-    /// <param name="fhirDirectory">The fallback directory for resources when specific directories are not provided.</param>
+    /// <param name="librariesDirectory">The directory where FHIR library resources will be saved.</param>
+    /// <param name="measuresDirectory">The directory where FHIR measure resources will be saved.</param>
     /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
     /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directories.</param>
     /// <param name="configureJsonSerializerOptions">Optional mutator for JSON serialization options.</param>
     /// <returns>The packaging toolkit instance.</returns>
     public static PackagingToolkit SaveFhirResourcesToDirectories(
         this PackagingToolkit packagingToolkit,
-        DirectoryInfo? librariesDirectory,
-        DirectoryInfo? measuresDirectory,
-        DirectoryInfo? fhirDirectory = null,
+        DirectoryInfo librariesDirectory,
+        DirectoryInfo measuresDirectory,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
@@ -88,8 +87,8 @@ public static partial class PackagingToolkitExtensions
             var (resourceType, _, _) = resourceFileName;
             DirectoryInfo targetDirectory = resourceType switch
             {
-                "Library" => librariesDirectory ?? fhirDirectory ?? throw new InvalidOperationException("No directory specified for FHIR library resources."),
-                "Measure" => measuresDirectory ?? fhirDirectory ?? throw new InvalidOperationException("No directory specified for FHIR measure resources."),
+                "Library" => librariesDirectory,
+                "Measure" => measuresDirectory,
                 _ => throw new InvalidOperationException($"Unknown resource type: {resourceType}")
             };
 

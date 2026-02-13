@@ -175,13 +175,23 @@ internal sealed class ElmToFhirProgram
                     return ExitCodes.CantPackageNoCqlElmMatches.Code;
                 }
 
+                // Determine the target directories for libraries and measures
+                var librariesDir = opt.LibrariesOutDir ?? opt.FhirOutDir;
+                var measuresDir = opt.MeasuresOutDir ?? opt.FhirOutDir;
+
+                // Both directories must be specified
+                if (librariesDir is null || measuresDir is null)
+                {
+                    logger.LogError("Both libraries and measures directories must be specified. Use --fhir for both, or --libraries-dir and --measures-dir for separate directories.");
+                    return ExitCodes.NoOutputDirs.Code;
+                }
+
                 packagingToolkit
                     .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectories(
-                        opt.LibrariesOutDir,
-                        opt.MeasuresOutDir,
-                        opt.FhirOutDir,
+                        librariesDir,
+                        measuresDir,
                         packOpt.JsonPretty,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
@@ -201,15 +211,11 @@ internal sealed class ElmToFhirProgram
                 }
 
                 // Build summary message
-                var librariesDir = opt.LibrariesOutDir ?? opt.FhirOutDir;
-                var measuresDir = opt.MeasuresOutDir ?? opt.FhirOutDir;
-
                 // Compare normalized full paths to determine if directories are the same
-                bool sameDirectory = librariesDir is not null && measuresDir is not null &&
-                    string.Equals(
-                        Path.GetFullPath(librariesDir.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
-                        Path.GetFullPath(measuresDir.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
-                        StringComparison.OrdinalIgnoreCase);
+                bool sameDirectory = string.Equals(
+                    Path.GetFullPath(librariesDir.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                    Path.GetFullPath(measuresDir.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+                    StringComparison.OrdinalIgnoreCase);
 
                 if (sameDirectory)
                 {
