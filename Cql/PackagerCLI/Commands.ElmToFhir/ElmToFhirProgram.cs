@@ -204,7 +204,7 @@ internal sealed class ElmToFhirProgram
                 var librariesDir = opt.LibrariesOutDir ?? opt.FhirOutDir;
                 var measuresDir = opt.MeasuresOutDir ?? opt.FhirOutDir;
 
-                if (librariesDir == measuresDir)
+                if (librariesDir?.FullName == measuresDir?.FullName)
                 {
                     sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {librariesDir}."));
                 }

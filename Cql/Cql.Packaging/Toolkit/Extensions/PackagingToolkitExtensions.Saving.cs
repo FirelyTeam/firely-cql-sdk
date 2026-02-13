@@ -88,8 +88,8 @@ public static partial class PackagingToolkitExtensions
             var (resourceType, _, _) = resourceFileName;
             DirectoryInfo targetDirectory = resourceType switch
             {
-                "Library" => librariesDirectory ?? fhirDirectory ?? throw new InvalidOperationException("No directory specified for FHIR libraries."),
-                "Measure" => measuresDirectory ?? fhirDirectory ?? throw new InvalidOperationException("No directory specified for FHIR measures."),
+                "Library" => librariesDirectory ?? fhirDirectory ?? throw new InvalidOperationException("No directory specified for FHIR libraries. Use --libraries-dir or --fhir to specify an output directory."),
+                "Measure" => measuresDirectory ?? fhirDirectory ?? throw new InvalidOperationException("No directory specified for FHIR measures. Use --measures-dir or --fhir to specify an output directory."),
                 _ => throw new InvalidOperationException($"Unknown resource type: {resourceType}")
             };
 
