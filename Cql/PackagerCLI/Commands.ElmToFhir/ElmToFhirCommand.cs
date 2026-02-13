@@ -49,7 +49,9 @@ internal record ElmToFhirCommand
         "  " + ExitCodes.NoCqlLibsInDirWhenFhirRequested.Message + NewLine +
         "  " + ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.Message + NewLine +
         "  " + ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.Message + NewLine +
-        "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Message;
+        "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Message + NewLine +
+        "  " + ExitCodes.MixedFhirAndSpecificDirs.Message + NewLine +
+        "  " + ExitCodes.IncompleteLibrariesMeasuresDirs.Message;
 
     public static readonly Option[] Options =
     [

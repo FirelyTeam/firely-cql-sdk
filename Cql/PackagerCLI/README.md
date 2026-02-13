@@ -64,6 +64,8 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
 - `--dll <directory>` - DLL output directory for .NET assembly libraries "*.dll"
 - `--pdb <directory>` - PDB output directory for portable debug symbol files "*.pdb"
 - `--fhir <directory>` - FHIR Resource output directory for Library and Measure files in JSON format
+- `--libraries <directory>` - FHIR Libraries output directory (Library-*.json). Must be used with `--measures`. Cannot be combined with `--fhir`.
+- `--measures <directory>` - FHIR Measures output directory (Measure-*.json). Must be used with `--libraries`. Cannot be combined with `--fhir`.
 
 **C# Code Generation Options:**
 - `--cs-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries"). 
@@ -96,6 +98,8 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 - `--dll <directory>` - DLL output directory for .NET assembly libraries "*.dll"
 - `--pdb <directory>` - PDB output directory for portable debug symbol files "*.pdb"
 - `--fhir <directory>` - FHIR Resource output directory for Library and Measure files in JSON format
+- `--libraries <directory>` - FHIR Libraries output directory (Library-*.json). Must be used with `--measures`. Cannot be combined with `--fhir`.
+- `--measures <directory>` - FHIR Measures output directory (Measure-*.json). Must be used with `--libraries`. Cannot be combined with `--fhir`.
 
 **C# Code Generation Options:**
 - `--cs-namespace <namespace>` - The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries"). 
@@ -294,6 +298,61 @@ cql-package replace-library-attachments --library-file Library-MyLibrary.json --
 
 - Updates only the +elm attachment in the library.
 - All other attachments (CQL, C#, DLL, PDB) remain unchanged.
+
+## Exit Codes
+
+All commands return exit codes to indicate success or failure. The following exit codes are used:
+
+### Common Exit Codes
+
+- `0` - Success
+- `5` - No output directories specified
+- `99` - Unknown error occurred during processing
+
+### `cql` Command Exit Codes
+
+- `0` - Success
+- `1` - No CQL libraries found in the CQL input directory
+- `3` - No ELM libraries compiled
+- `4` - Cannot package: No matching CQL-ELM pairs found
+- `5` - No output directories specified
+- `7` - If --pdb is specified, then --debug-symbols must be PortablePdb
+- `8` - If --pdb is specified, then --dll is required
+- `9` - If --debug-symbols is PortablePdb, then (--dll with --pdb) or (--fhir) must be specified
+- `16` - No CQL libraries converted to ELM
+- `17` - Cannot mix --fhir with --libraries or --measures
+- `18` - Both --libraries and --measures must be specified together
+
+### `elm` Command Exit Codes
+
+- `0` - Success
+- `2` - No ELM libraries found in the ELM input directory
+- `3` - No ELM libraries compiled
+- `4` - Cannot package: No matching CQL-ELM pairs found
+- `5` - No output directories specified
+- `6` - CQL directory is required when FHIR output is requested
+- `7` - If --pdb is specified, then --debug-symbols must be PortablePdb
+- `8` - If --pdb is specified, then --dll is required
+- `9` - If --debug-symbols is PortablePdb, then (--dll with --pdb) or (--fhir) must be specified
+- `13` - No CQL libraries found in the CQL input directory (when FHIR output is requested)
+- `17` - Cannot mix --fhir with --libraries or --measures
+- `18` - Both --libraries and --measures must be specified together
+
+### `extract-library-attachments` Command Exit Codes
+
+- `0` - Success
+- `10` - Library extraction error occurred
+- `11` - No input files specified or one or more input files do not exist
+- `12` - Invalid library JSON
+
+### `replace-library-attachments` Command Exit Codes
+
+- `0` - Success
+- `11` - No input files specified or one or more input files do not exist
+- `12` - Invalid library JSON
+- `14` - Invalid FHIR library, missing required Name and Version
+- `15` - FHIR Library must have a Name property
+- `99` - Unknown error occurred during processing
 
 ## Further Reading
 
