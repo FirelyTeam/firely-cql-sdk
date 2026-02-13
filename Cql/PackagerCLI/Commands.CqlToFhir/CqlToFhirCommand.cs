@@ -37,18 +37,18 @@ public record CqlToFhirCommand
         Program.Disclaimer +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        "  " + ExitCodeMessages.Normal + Environment.NewLine +
-        "  " + ExitCodeMessages.NoCqlLibsInDir + Environment.NewLine +
-        "  " + ExitCodeMessages.NoElmLibsCompiled + Environment.NewLine +
-        "  " + ExitCodeMessages.CantPackageNoCqlElmMatches + Environment.NewLine +
-        "  " + ExitCodeMessages.NoOutputDirs;
+        "  " + Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
+        "  " + Hl7.Cql.Packager.ExitCodes.NoCqlLibsInDir.Message + Environment.NewLine +
+        "  " + Hl7.Cql.Packager.ExitCodes.NoElmLibsCompiled.Message + Environment.NewLine +
+        "  " + Hl7.Cql.Packager.ExitCodes.CantPackageNoCqlElmMatches.Message + Environment.NewLine +
+        "  " + Hl7.Cql.Packager.ExitCodes.NoOutputDirs.Message;
 
     public static readonly string ExitCodes =
-        ExitCodeMessages.Normal + Environment.NewLine +
-        ExitCodeMessages.NoCqlLibsInDir + Environment.NewLine +
-        ExitCodeMessages.NoElmLibsCompiled + Environment.NewLine +
-        ExitCodeMessages.CantPackageNoCqlElmMatches + Environment.NewLine +
-        ExitCodeMessages.NoOutputDirs;
+        Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
+        Hl7.Cql.Packager.ExitCodes.NoCqlLibsInDir.Message + Environment.NewLine +
+        Hl7.Cql.Packager.ExitCodes.NoElmLibsCompiled.Message + Environment.NewLine +
+        Hl7.Cql.Packager.ExitCodes.CantPackageNoCqlElmMatches.Message + Environment.NewLine +
+        Hl7.Cql.Packager.ExitCodes.NoOutputDirs.Message;
 
     public static Command CreateCommand() =>
         new Command(Name, Description)

@@ -38,16 +38,16 @@ internal record ReplaceLibraryAttachmentsCommand
         "resource will be automatically overridden with the values from the new ELM file." +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        "  " + ExitCodeMessages.Normal + Environment.NewLine +
-        "  " + ExitCodeMessages.NoInputFiles + Environment.NewLine +
-        "  " + ExitCodeMessages.InvalidLibraryJsonOrMissingProperties + Environment.NewLine +
-        "  " + ExitCodeMessages.UnknownError;
+        "  " + Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
+        "  " + Hl7.Cql.Packager.ExitCodes.NoInputFiles.Message + Environment.NewLine +
+        "  " + Hl7.Cql.Packager.ExitCodes.InvalidLibraryJsonOrMissingProperties.Message + Environment.NewLine +
+        "  " + Hl7.Cql.Packager.ExitCodes.UnknownError.Message;
 
     public static readonly string ExitCodes =
-        ExitCodeMessages.Normal + Environment.NewLine +
-        ExitCodeMessages.NoInputFiles + Environment.NewLine +
-        ExitCodeMessages.InvalidLibraryJsonOrMissingProperties + Environment.NewLine +
-        ExitCodeMessages.UnknownError;
+        Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
+        Hl7.Cql.Packager.ExitCodes.NoInputFiles.Message + Environment.NewLine +
+        Hl7.Cql.Packager.ExitCodes.InvalidLibraryJsonOrMissingProperties.Message + Environment.NewLine +
+        Hl7.Cql.Packager.ExitCodes.UnknownError.Message;
 
     public static readonly Option[] Options =
     [

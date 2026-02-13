@@ -31,7 +31,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             if (opt is { CqlFile: null, ElmFile: null, CSharpFile: null, DllFile: null, PdbFile: null })
             {
                 logger.LogError("At least one attachment file must be specified (--cql-file, --elm-file, --csharp-file, --dll-file, or --pdb-file).");
-                return ExitCode.NoInputFiles;
+                return ExitCodes.NoInputFiles.Code;
             }
 
             // Validate that all specified input files exist
@@ -58,7 +58,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
                 var missingFilesNewLines = string.Join(Environment.NewLine, missingFiles);
                 var template = $$"""The following {{filesPluralized}} not exist:{{Environment.NewLine}}{MissingFiles}{{Environment.NewLine}}All specified attachment input files must exist before processing can begin.""";
                 logger.LogError(template, missingFilesNewLines);
-                return ExitCode.NoInputFiles;
+                return ExitCodes.NoInputFiles.Code;
             }
 
             // Determine the output file
@@ -84,7 +84,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
                 catch (Exception ex)
                 {
                     logger.LogError(ex, "Failed to copy library file to output location: {OutFile}", opt.LibraryOutFile.FullName);
-                    return ExitCode.UnknownError;
+                    return ExitCodes.UnknownError.Code;
                 }
             }
             else
@@ -106,14 +106,14 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             catch (Exception ex)
             {
                 logger.LogError(ex, "Failed to parse FHIR library JSON from {LibraryFile}. Please verify the file contains valid FHIR Library JSON.", outputFile.FullName);
-                return ExitCode.InvalidLibraryJson;
+                return ExitCodes.InvalidLibraryJson.Code;
             }
 
             // Get the library identifier for building attachment IDs
             if (string.IsNullOrWhiteSpace(library.Name) || string.IsNullOrWhiteSpace(library.Version))
             {
                 logger.LogError("Library must have both Name and Version properties.");
-                return ExitCode.InvalidLibraryJson;
+                return ExitCodes.InvalidLibraryJson.Code;
             }
 
             var libraryIdentifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(library.Name, library.Version);
@@ -134,12 +134,12 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             File.WriteAllText(outputFile.FullName, updatedLibraryJson);
             logger.LogInformation("Updated FHIR library saved to: {LibraryFile}", outputFile.FullName);
 
-            return ExitCode.Normal;
+            return ExitCodes.Normal.Code;
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "An unexpected error occurred.");
-            return ExitCode.UnknownError;
+            return ExitCodes.UnknownError.Code;
         }
     }
 

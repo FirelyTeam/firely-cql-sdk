@@ -31,16 +31,16 @@ internal record ExtractLibraryAttachmentsCommand
         "(CQL, ELM, C#, DLL, PDB) and saves them to the specified output directories." +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        "  " + ExitCodeMessages.Normal + Environment.NewLine +
-        "  " + ExitCodeMessages.NoOutputDirs + Environment.NewLine +
-        "  " + ExitCodeMessages.LibraryExtractionError + Environment.NewLine +
-        "  " + ExitCodeMessages.InvalidLibraryJson;
+        "  " + Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
+        "  " + Hl7.Cql.Packager.ExitCodes.NoOutputDirs.Message + Environment.NewLine +
+        "  " + Hl7.Cql.Packager.ExitCodes.LibraryExtractionError.Message + Environment.NewLine +
+        "  " + Hl7.Cql.Packager.ExitCodes.InvalidLibraryJson.Message;
 
     public static readonly string ExitCodes =
-        ExitCodeMessages.Normal + Environment.NewLine +
-        ExitCodeMessages.NoOutputDirs + Environment.NewLine +
-        ExitCodeMessages.LibraryExtractionError + Environment.NewLine +
-        ExitCodeMessages.InvalidLibraryJson;
+        Hl7.Cql.Packager.ExitCodes.Normal.Message + Environment.NewLine +
+        Hl7.Cql.Packager.ExitCodes.NoOutputDirs.Message + Environment.NewLine +
+        Hl7.Cql.Packager.ExitCodes.LibraryExtractionError.Message + Environment.NewLine +
+        Hl7.Cql.Packager.ExitCodes.InvalidLibraryJson.Message;
 
     public static readonly Option[] Options =
     [

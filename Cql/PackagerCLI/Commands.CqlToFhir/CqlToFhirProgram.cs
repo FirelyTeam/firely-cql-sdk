@@ -59,10 +59,10 @@ public class CqlToFhirProgram
             {
                 case (null, null, null, null):
                     logger.LogInformation("Exiting. No output directories specified.");
-                    return ExitCode.NoOutputDirs;
+                    return ExitCodes.NoOutputDirs.Code;
             }
 
-            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCode.Normal)
+            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCodes.Normal.Code)
             {
                 return exitCode;
             }
@@ -77,7 +77,7 @@ public class CqlToFhirProgram
             if (cqlToolkit.ArtifactsById.Count == 0)
             {
                 logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
-                return ExitCode.NoCqlLibsInDir;
+                return ExitCodes.NoCqlLibsInDir.Code;
             }
 
             // Track loaded CQL libraries
@@ -95,7 +95,7 @@ public class CqlToFhirProgram
             if (cqlToolkitResults.Count == 0)
             {
                 logger.LogInformation("Exiting. No CQL libraries converted to ELM.");
-                return ExitCode.NoElmLibsCompiled;
+                return ExitCodes.NoElmLibsCompiled.Code;
             }
 
             // Track ELM translation results
@@ -131,7 +131,7 @@ public class CqlToFhirProgram
             switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
             {
                 case (null, null, null):
-                    return ExitCode.Normal;
+                    return ExitCodes.Normal.Code;
             }
 
             ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
@@ -143,7 +143,7 @@ public class CqlToFhirProgram
             if (elmToolkitResults.Count == 0)
             {
                 logger.LogInformation("Exiting. No ELM libraries compiled to C#/DLL.");
-                return ExitCode.NoElmLibsCompiled;
+                return ExitCodes.NoElmLibsCompiled.Code;
             }
 
             // Track C# and .NET results
@@ -207,7 +207,7 @@ public class CqlToFhirProgram
                 if (packagingToolkit.ArtifactsById.Count == 0)
                 {
                     logger.LogInformation("Exiting. No CQL or ELM libraries matched with each other for packaging.");
-                    return ExitCode.CantPackageNoCqlElmMatches;
+                    return ExitCodes.CantPackageNoCqlElmMatches.Code;
                 }
 
                 packagingToolkit
@@ -236,7 +236,7 @@ public class CqlToFhirProgram
                 sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
             }
 
-            return ExitCode.Normal;
+            return ExitCodes.Normal.Code;
         }
         finally
         {

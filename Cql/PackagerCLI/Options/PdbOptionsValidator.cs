@@ -23,15 +23,15 @@ public sealed class PdbOptionsValidator(
         {
             case (not DebugSymbolsFormat.PortablePdb, { }, _, _):
                 logger.LogInformation("Exiting. If --pdb is specified, then --debug-symbols must be PortablePdb.");
-                return ExitCode.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb;
+                return ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.Code;
             case (DebugSymbolsFormat.PortablePdb, { }, null, _):
                 logger.LogInformation("Exiting. If --pdb is specified, then --dll is required.");
-                return ExitCode.DllDirIsRequiredWhenPdbDirIsSpecified;
+                return ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.Code;
             case (DebugSymbolsFormat.PortablePdb, null, _, null):
                 logger.LogInformation("Exiting. If --debug-symbols is PortablePdb, then (--dll with --pdb) or (--fhir) must be specified.");
-                return ExitCode.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb;
+                return ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Code;
             default:
-                return ExitCode.Normal;
+                return ExitCodes.Normal.Code;
         }
     }
 }

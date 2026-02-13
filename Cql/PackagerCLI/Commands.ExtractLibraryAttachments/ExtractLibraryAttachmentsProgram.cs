@@ -28,7 +28,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             if (opt is { CqlOutDir: null, ElmOutDir: null, CSharpOutDir: null, DllOutDir: null, PdbOutDir: null })
             {
                 logger.LogError("Exiting. At least one output directory must be specified.");
-                return ExitCode.NoOutputDirs;
+                return ExitCodes.NoOutputDirs.Code;
             }
 
             // Parse FHIR Library resource
@@ -39,7 +39,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             if (string.IsNullOrWhiteSpace(fhirLibrary.Name))
             {
                 logger.LogError("FHIR Library must have a Name property.");
-                return ExitCode.InvalidLibraryJson;
+                return ExitCodes.InvalidLibraryJson.Code;
             }
 
             var libraryName = fhirLibrary.Name;
@@ -51,7 +51,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             if (fhirLibrary is { Content: null or { Count: 0 } })
             {
                 logger.LogWarning("No content attachments found in FHIR Library resource.");
-                return ExitCode.Normal;
+                return ExitCodes.Normal.Code;
             }
 
             List<string> successfulExtractions = [];
@@ -107,12 +107,12 @@ internal sealed class ExtractLibraryAttachmentsProgram
                 logger.LogInformation("No attachments matched the requested output directories.");
             }
 
-            return ExitCode.Normal;
+            return ExitCodes.Normal.Code;
         }
         catch (Exception ex)
         {
             logger.LogError(ex, "Error extracting attachments from FHIR Library resource");
-            return ExitCode.LibraryExtractionError;
+            return ExitCodes.LibraryExtractionError.Code;
         }
     }
 
