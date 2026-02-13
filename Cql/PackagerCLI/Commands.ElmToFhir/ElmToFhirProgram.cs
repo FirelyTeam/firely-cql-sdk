@@ -153,7 +153,7 @@ internal sealed class ElmToFhirProgram
                 if (cqlToolkit.ArtifactsById.Count == 0)
                 {
                     logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
-                    return ExitCode.NoCqlLibsInDir;
+                    return ExitCode.NoCqlLibsInDirWhenFhirRequested;
                 }
 
                 // Track loaded CQL libraries

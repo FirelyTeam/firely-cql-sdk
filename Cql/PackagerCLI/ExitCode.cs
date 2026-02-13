@@ -23,5 +23,6 @@ internal static class ExitCode
     public const int LibraryExtractionError = 10;
     public const int NoInputFiles = 11;
     public const int InvalidLibraryJson = 12;
+    public const int NoCqlLibsInDirWhenFhirRequested = 13;
     public const int UnknownError = 99;
 }
