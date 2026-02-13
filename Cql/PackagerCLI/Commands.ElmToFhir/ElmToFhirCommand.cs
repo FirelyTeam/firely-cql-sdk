@@ -38,7 +38,7 @@ internal record ElmToFhirCommand
         Program.Disclaimer +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        $"  {ExitCode.Normal} - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"  {ExitCode.Normal} - {ExitCodeMessages.Normal}" + Environment.NewLine +
         $"  {ExitCode.NoCqlLibsInDir} - {ExitCodeMessages.NoCqlLibsInDirWhenFhirRequested}" + Environment.NewLine +
         $"  {ExitCode.NoElmLibsInDir} - {ExitCodeMessages.NoElmLibsInDir}" + Environment.NewLine +
         $"  {ExitCode.NoElmLibsCompiled} - {ExitCodeMessages.NoElmLibsCompiled}" + Environment.NewLine +
@@ -47,7 +47,7 @@ internal record ElmToFhirCommand
         $"  {ExitCode.NoCqlDirRequiredForFhir} - {ExitCodeMessages.NoCqlDirRequiredForFhir}";
 
     public static readonly string ExitCodes =
-        $"{ExitCode.Normal} - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"{ExitCode.Normal} - {ExitCodeMessages.Normal}" + Environment.NewLine +
         $"{ExitCode.NoCqlLibsInDir} - {ExitCodeMessages.NoCqlLibsInDirWhenFhirRequested}" + Environment.NewLine +
         $"{ExitCode.NoElmLibsInDir} - {ExitCodeMessages.NoElmLibsInDir}" + Environment.NewLine +
         $"{ExitCode.NoElmLibsCompiled} - {ExitCodeMessages.NoElmLibsCompiled}" + Environment.NewLine +

@@ -37,14 +37,14 @@ public record CqlToFhirCommand
         Program.Disclaimer +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        $"  {ExitCode.Normal} - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"  {ExitCode.Normal} - {ExitCodeMessages.Normal}" + Environment.NewLine +
         $"  {ExitCode.NoCqlLibsInDir} - {ExitCodeMessages.NoCqlLibsInDir}" + Environment.NewLine +
         $"  {ExitCode.NoElmLibsCompiled} - {ExitCodeMessages.NoElmLibsCompiled}" + Environment.NewLine +
         $"  {ExitCode.CantPackageNoCqlElmMatches} - {ExitCodeMessages.CantPackageNoCqlElmMatches}" + Environment.NewLine +
         $"  {ExitCode.NoOutputDirs} - {ExitCodeMessages.NoOutputDirs}";
 
     public static readonly string ExitCodes =
-        $"{ExitCode.Normal} - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"{ExitCode.Normal} - {ExitCodeMessages.Normal}" + Environment.NewLine +
         $"{ExitCode.NoCqlLibsInDir} - {ExitCodeMessages.NoCqlLibsInDir}" + Environment.NewLine +
         $"  {ExitCode.NoElmLibsCompiled} - {ExitCodeMessages.NoElmLibsCompiled}" + Environment.NewLine +
         $"{ExitCode.CantPackageNoCqlElmMatches} - {ExitCodeMessages.CantPackageNoCqlElmMatches}" + Environment.NewLine +

@@ -31,13 +31,13 @@ internal record ExtractLibraryAttachmentsCommand
         "(CQL, ELM, C#, DLL, PDB) and saves them to the specified output directories." +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        $"  {ExitCode.Normal}  - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"  {ExitCode.Normal}  - {ExitCodeMessages.Normal}" + Environment.NewLine +
         $"  {ExitCode.NoOutputDirs}  - {ExitCodeMessages.NoOutputDirs}" + Environment.NewLine +
         $"  {ExitCode.LibraryExtractionError} - {ExitCodeMessages.LibraryExtractionError}" + Environment.NewLine +
         $"  {ExitCode.InvalidLibraryJson} - {ExitCodeMessages.InvalidLibraryJson}";
 
     public static readonly string ExitCodes =
-        $"{ExitCode.Normal}  - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"{ExitCode.Normal}  - {ExitCodeMessages.Normal}" + Environment.NewLine +
         $"{ExitCode.NoOutputDirs}  - {ExitCodeMessages.NoOutputDirs}" + Environment.NewLine +
         $"{ExitCode.LibraryExtractionError} - {ExitCodeMessages.LibraryExtractionError}" + Environment.NewLine +
         $"{ExitCode.InvalidLibraryJson} - {ExitCodeMessages.InvalidLibraryJson}";

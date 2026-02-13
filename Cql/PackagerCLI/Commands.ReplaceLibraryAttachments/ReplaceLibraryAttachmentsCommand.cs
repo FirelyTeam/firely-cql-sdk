@@ -38,13 +38,13 @@ internal record ReplaceLibraryAttachmentsCommand
         "resource will be automatically overridden with the values from the new ELM file." +
         Environment.NewLine + Environment.NewLine + Environment.NewLine +
         "Exit Codes:" + Environment.NewLine +
-        $"  {ExitCode.Normal}  - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"  {ExitCode.Normal}  - {ExitCodeMessages.Normal}" + Environment.NewLine +
         $"  {ExitCode.NoInputFiles} - {ExitCodeMessages.NoInputFiles}" + Environment.NewLine +
         $"  {ExitCode.InvalidLibraryJson} - {ExitCodeMessages.InvalidLibraryJsonOrMissingProperties}" + Environment.NewLine +
         $"  {ExitCode.UnknownError} - {ExitCodeMessages.UnknownError}";
 
     public static readonly string ExitCodes =
-        $"{ExitCode.Normal}  - {ExitCodeMessages.Success}" + Environment.NewLine +
+        $"{ExitCode.Normal}  - {ExitCodeMessages.Normal}" + Environment.NewLine +
         $"{ExitCode.NoInputFiles} - {ExitCodeMessages.NoInputFiles}" + Environment.NewLine +
         $"{ExitCode.InvalidLibraryJson} - {ExitCodeMessages.InvalidLibraryJsonOrMissingProperties}" + Environment.NewLine +
         $"{ExitCode.UnknownError} - {ExitCodeMessages.UnknownError}";

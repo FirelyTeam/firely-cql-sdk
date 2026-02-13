@@ -10,10 +10,11 @@ namespace Hl7.Cql.Packager;
 
 /// <summary>
 /// Contains string constants for exit code messages used in command help text.
+/// Property names should match the corresponding ExitCode constants for consistency.
 /// </summary>
 internal static class ExitCodeMessages
 {
-    public const string Success = "Success";
+    public const string Normal = "Success";
     public const string NoCqlLibsInDir = "No CQL libraries found in the CQL input directory";
     public const string NoCqlLibsInDirWhenFhirRequested = "No CQL libraries found in the CQL input directory (when FHIR output is requested)";
     public const string NoElmLibsInDir = "No ELM libraries found in the ELM input directory";
