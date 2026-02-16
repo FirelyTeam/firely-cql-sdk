@@ -10,6 +10,8 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
+public record AddCqlLibrariesFromDirectoryOptions(DirectoryInfo Directory, EnumerationOptions? Options, Func<FileInfo, bool>? FilePredicate);
+
 /// <summary>
 /// Provides extension methods for adding CQL libraries to a <see cref="CqlToolkit"/>.
 /// </summary>
@@ -40,8 +42,25 @@ public static partial class CqlToolkitExtensions
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
-        Func<FileInfo, bool>? filePredicate = null)
+        Func<FileInfo, bool>? filePredicate = null) =>
+        AddCqlLibrariesFromDirectory(cqlToolkit, new AddCqlLibrariesFromDirectoryOptions(directory, options, filePredicate));
+
+    /// <summary>
+    /// Adds all CQL library files from the specified directory to the provided CqlToolkit instance.
+    /// </summary>
+    /// <remarks>Only files with a ".cql" extension are considered. An optional file predicate can be provided
+    /// to further filter which files are added.</remarks>
+    /// <param name="cqlToolkit">The CqlToolkit instance to which the discovered CQL libraries will be added.</param>
+    /// <param name="opt">An options object that specifies the directory to search, file enumeration options, and an optional predicate to
+    /// filter files.</param>
+    /// <returns>The CqlToolkit instance with the added CQL libraries from the specified directory.</returns>
+    public static CqlToolkit AddCqlLibrariesFromDirectory(
+        CqlToolkit cqlToolkit,
+        AddCqlLibrariesFromDirectoryOptions opt)
     {
+        var directory = opt.Directory;
+        var options = opt.Options;
+        var filePredicate = opt.FilePredicate;
         var files = directory.EnumerateFiles("*.cql", options ?? Defaults.EnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
         return cqlToolkit.AddCqlLibraryFiles(files);

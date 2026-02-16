@@ -10,6 +10,13 @@ using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
+public class SaveElmFilesToDirectoryOptions(DirectoryInfo directory, bool writeIndented, DirectoryInfoHandler? directoryPreparationStrategy)
+{
+    public DirectoryInfo Directory { get; } = directory;
+    public bool WriteIndented { get; } = writeIndented;
+    public DirectoryInfoHandler? DirectoryPreparationStrategy { get; } = directoryPreparationStrategy;
+}
+
 /// <summary>
 /// Provides extension methods for the <see cref="CqlToolkit"/> class.
 /// </summary>
@@ -27,8 +34,26 @@ public static partial class CqlToolkitExtensions
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
         bool writeIndented = false,
-        DirectoryInfoHandler? directoryPreparationStrategy = null)
+        DirectoryInfoHandler? directoryPreparationStrategy = null) =>
+        SaveElmFilesToDirectory(cqlToolkit, new SaveElmFilesToDirectoryOptions(directory, writeIndented, directoryPreparationStrategy));
+
+    /// <summary>
+    /// Saves all ELM (Expression Logical Model) libraries contained in the specified CQL toolkit to JSON files in the
+    /// target directory.
+    /// </summary>
+    /// <remarks>Each ELM library is serialized to a JSON file named after its library identifier. The
+    /// directory is prepared according to the specified strategy before files are written. Existing files with the same
+    /// name may be overwritten.</remarks>
+    /// <param name="cqlToolkit">The CQL toolkit containing the ELM libraries to be saved.</param>
+    /// <param name="opt">Options that specify the target directory, file formatting, and directory preparation strategy.</param>
+    /// <returns>The same CQL toolkit instance provided in the input parameter.</returns>
+    public static CqlToolkit SaveElmFilesToDirectory(
+        CqlToolkit cqlToolkit,
+        SaveElmFilesToDirectoryOptions opt)
     {
+        var directory = opt.Directory;
+        var writeIndented = opt.WriteIndented;
+        var directoryPreparationStrategy = opt.DirectoryPreparationStrategy;
         var prepElmDir = true;
         var logger = cqlToolkit.CreateLogger();
 
