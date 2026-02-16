@@ -33,11 +33,30 @@ public static partial class PackagingToolkitExtensions
         SaveFhirResourcesToDirectory(packagingToolkit, directory, null, writeIndented, directoryPreparationStrategy, configureJsonSerializerOptions);
 
     /// <summary>
+    /// Saves FHIR resources to the specified directory with options.
+    /// </summary>
+    /// <param name="packagingToolkit">The packaging toolkit instance.</param>
+    /// <param name="directory">The directory where the FHIR resources will be saved.</param>
+    /// <param name="options">Options for saving FHIR resources.</param>
+    /// <returns>The packaging toolkit instance.</returns>
+    public static PackagingToolkit SaveFhirResourcesToDirectory(
+        this PackagingToolkit packagingToolkit,
+        DirectoryInfo directory,
+        SaveFhirResourcesOptions options) =>
+        SaveFhirResourcesToDirectory(
+            packagingToolkit,
+            directory,
+            options.ComputeOutputPath,
+            options.WriteIndented,
+            options.DirectoryPreparationStrategy,
+            options.ConfigureJsonSerializerOptions);
+
+    /// <summary>
     /// Saves FHIR resources to the specified directory, optionally preserving subdirectory structure.
     /// </summary>
     /// <param name="packagingToolkit">The packaging toolkit instance.</param>
     /// <param name="directory">The directory where the FHIR resources will be saved.</param>
-    /// <param name="computeOutputPath">Optional function to compute custom output paths. Receives (outputDirectory, libraryIdentifier, fileName) and returns the full output path.</param>
+    /// <param name="computeOutputPath">Optional delegate to compute custom output paths.</param>
     /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
     /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
     /// <param name="configureJsonSerializerOptions">Optional mutator for JSON serialization options.</param>
@@ -45,7 +64,7 @@ public static partial class PackagingToolkitExtensions
     public static PackagingToolkit SaveFhirResourcesToDirectory(
         this PackagingToolkit packagingToolkit,
         DirectoryInfo directory,
-        Func<DirectoryInfo, CqlVersionedLibraryIdentifier, string, string>? computeOutputPath,
+        ComputeFhirOutputPathDelegate? computeOutputPath,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
