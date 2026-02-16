@@ -44,36 +44,18 @@ public static partial class CqlToolkitExtensions
         AddCqlLibrariesFromDirectory(cqlToolkit, directory, null, options, filePredicate);
 
     /// <summary>
-    /// Adds CQL libraries from the specified directory to the <see cref="CqlToolkit"/> with options.
-    /// </summary>
-    /// <param name="cqlToolkit">The CQL toolkit to add the libraries to.</param>
-    /// <param name="directory">The directory to search for CQL files.</param>
-    /// <param name="options">Options for adding CQL libraries.</param>
-    /// <returns>The updated <see cref="CqlToolkit"/>.</returns>
-    public static CqlToolkit AddCqlLibrariesFromDirectory(
-        this CqlToolkit cqlToolkit,
-        DirectoryInfo directory,
-        AddCqlLibrariesOptions options) =>
-        AddCqlLibrariesFromDirectory(
-            cqlToolkit,
-            directory,
-            options.OnLibraryLoaded,
-            options.EnumerationOptions,
-            options.FilePredicate);
-
-    /// <summary>
     /// Adds CQL libraries from the specified directory to the <see cref="CqlToolkit"/>, optionally tracking file paths.
     /// </summary>
     /// <param name="cqlToolkit">The CQL toolkit to add the libraries to.</param>
     /// <param name="directory">The directory to search for CQL files.</param>
-    /// <param name="onLibraryLoaded">Optional callback invoked after each library is loaded.</param>
+    /// <param name="onLibraryLoaded">Optional callback invoked after each library is loaded. Receives (fileInfo, libraryIdentifier).</param>
     /// <param name="options">The enumeration options to use when searching for files.</param>
     /// <param name="filePredicate">An optional predicate to filter the files.</param>
     /// <returns>The updated <see cref="CqlToolkit"/>.</returns>
     public static CqlToolkit AddCqlLibrariesFromDirectory(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
-        LibraryLoadedCallback? onLibraryLoaded,
+        Action<FileInfo, CqlVersionedLibraryIdentifier>? onLibraryLoaded,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {

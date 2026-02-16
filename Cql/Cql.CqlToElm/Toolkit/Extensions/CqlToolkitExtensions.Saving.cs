@@ -31,36 +31,18 @@ public static partial class CqlToolkitExtensions
         SaveElmFilesToDirectory(cqlToolkit, directory, null, writeIndented, directoryPreparationStrategy);
 
     /// <summary>
-    /// Saves the ELM files to the specified directory with options.
-    /// </summary>
-    /// <param name="cqlToolkit">The CQL toolkit instance.</param>
-    /// <param name="directory">The directory to save the ELM files to.</param>
-    /// <param name="options">Options for saving ELM files.</param>
-    /// <returns>The <see cref="CqlToolkit"/> instance.</returns>
-    public static CqlToolkit SaveElmFilesToDirectory(
-        this CqlToolkit cqlToolkit,
-        DirectoryInfo directory,
-        SaveElmFilesOptions options) =>
-        SaveElmFilesToDirectory(
-            cqlToolkit,
-            directory,
-            options.ComputeOutputPath,
-            options.WriteIndented,
-            options.DirectoryPreparationStrategy);
-
-    /// <summary>
     /// Saves the ELM files to the specified directory, optionally preserving subdirectory structure.
     /// </summary>
     /// <param name="cqlToolkit">The CQL toolkit instance.</param>
     /// <param name="directory">The directory to save the ELM files to.</param>
-    /// <param name="computeOutputPath">Optional delegate to compute custom output paths.</param>
+    /// <param name="computeOutputPath">Optional function to compute custom output paths. Receives (outputDirectory, libraryIdentifier, fileName) and returns the full output path.</param>
     /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
     /// <param name="directoryPreparationStrategy">The directory preparation strategy.</param>
     /// <returns>The <see cref="CqlToolkit"/> instance.</returns>
     public static CqlToolkit SaveElmFilesToDirectory(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
-        ComputeOutputPathDelegate? computeOutputPath,
+        Func<DirectoryInfo, Runtime.CqlVersionedLibraryIdentifier, string, string>? computeOutputPath,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {

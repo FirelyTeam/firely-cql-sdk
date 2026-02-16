@@ -3,18 +3,5 @@ Hl7.Cql.Packaging.SubdirectoryMapper
 Hl7.Cql.Packaging.SubdirectoryMapper.GetOutputPath(System.IO.DirectoryInfo! outputDirectory, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryId, string! fileName) -> string!
 Hl7.Cql.Packaging.SubdirectoryMapper.GetRelativePath(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryId) -> string!
 Hl7.Cql.Packaging.SubdirectoryMapper.RecordFilePath(System.IO.FileInfo! file, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryId) -> void
-Hl7.Cql.Packaging.Toolkit.ComputeFhirOutputPathDelegate
-Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions
-Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions.ComputeOutputPath.get -> Hl7.Cql.Packaging.Toolkit.ComputeFhirOutputPathDelegate?
-Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions.ComputeOutputPath.init -> void
-Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions.ConfigureJsonSerializerOptions.get -> Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>?
-Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions.ConfigureJsonSerializerOptions.init -> void
-Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions.DirectoryPreparationStrategy.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler?
-Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions.DirectoryPreparationStrategy.init -> void
-Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions.SaveFhirResourcesOptions() -> void
-Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions.WriteIndented.get -> bool
-Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions.WriteIndented.init -> void
-static Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions.SaveFhirResourcesToDirectory(this Hl7.Cql.Packaging.Toolkit.PackagingToolkit! packagingToolkit, System.IO.DirectoryInfo! directory, Hl7.Cql.Packaging.Toolkit.ComputeFhirOutputPathDelegate? computeOutputPath, bool writeIndented = false, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureJsonSerializerOptions = null) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
-static Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions.SaveFhirResourcesToDirectory(this Hl7.Cql.Packaging.Toolkit.PackagingToolkit! packagingToolkit, System.IO.DirectoryInfo! directory, Hl7.Cql.Packaging.Toolkit.SaveFhirResourcesOptions! options) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
 Hl7.Cql.Packaging.SubdirectoryMapper.SubdirectoryMapper(System.IO.DirectoryInfo! baseDirectory) -> void
 static Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions.SaveFhirResourcesToDirectory(this Hl7.Cql.Packaging.Toolkit.PackagingToolkit! packagingToolkit, System.IO.DirectoryInfo! directory, System.Func<System.IO.DirectoryInfo!, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, string!, string!>? computeOutputPath, bool writeIndented = false, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null, Hl7.Cql.Abstractions.Mutator<System.Text.Json.JsonSerializerOptions!>? configureJsonSerializerOptions = null) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
