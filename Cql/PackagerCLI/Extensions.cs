@@ -88,16 +88,4 @@ internal static class Extensions
         command.Handler = commandHandler;
         return command;
     }
-
-    /// <summary>
-    /// Compares two directory paths to determine if they refer to the same directory.
-    /// Uses normalized full paths with case-insensitive comparison for cross-platform correctness.
-    /// </summary>
-    public static bool AreSameDirectory(DirectoryInfo dir1, DirectoryInfo dir2)
-    {
-        return string.Equals(
-            Path.GetFullPath(dir1.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
-            Path.GetFullPath(dir2.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
-            StringComparison.OrdinalIgnoreCase);
-    }
 }

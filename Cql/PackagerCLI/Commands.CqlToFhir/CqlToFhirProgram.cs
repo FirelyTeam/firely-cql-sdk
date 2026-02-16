@@ -16,6 +16,7 @@ using Hl7.Cql.Packager.Options;
 using Hl7.Cql.Packager.Reporting;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 using Hl7.Cql.Toolkit;
 
@@ -256,7 +257,7 @@ public class CqlToFhirProgram
                 }
 
                 // Build summary message
-                bool sameDirectory = Extensions.AreSameDirectory(librariesDir, measuresDir);
+                bool sameDirectory = librariesDir.IsSameDirectory(measuresDir);
 
                 if (sameDirectory)
                 {
