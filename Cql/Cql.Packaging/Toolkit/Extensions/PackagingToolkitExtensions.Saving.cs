@@ -75,7 +75,8 @@ public static partial class PackagingToolkitExtensions
             {
                 "Library" => librariesDirectory,
                 "Measure" => measuresDirectory,
-                _ => throw new InvalidOperationException($"Unknown resource type: {resourceType}")
+                _ => throw new InvalidOperationException(
+                    $"Unsupported FHIR resource type '{resourceType}'. Only 'Library' and 'Measure' resources are supported.")
             };
 
             // Prepare directory if not already prepared

@@ -256,11 +256,7 @@ public class CqlToFhirProgram
                 }
 
                 // Build summary message
-                // Compare normalized full paths to determine if directories are the same
-                bool sameDirectory = string.Equals(
-                    Path.GetFullPath(librariesDir.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
-                    Path.GetFullPath(measuresDir.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
-                    StringComparison.OrdinalIgnoreCase);
+                bool sameDirectory = Extensions.AreSameDirectory(librariesDir, measuresDir);
 
                 if (sameDirectory)
                 {
