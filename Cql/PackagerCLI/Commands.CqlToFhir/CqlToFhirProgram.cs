@@ -16,6 +16,7 @@ using Hl7.Cql.Packager.Options;
 using Hl7.Cql.Packager.Reporting;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 using Hl7.Cql.Toolkit;
 
@@ -128,9 +129,9 @@ public class CqlToFhirProgram
                 sbSummary.AppendLine(Invariant($"* Saved {cqlToolkitResults.Count} ELM files to directory {opt.ElmOutDir}."));
             }
 
-            switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
+            switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir, opt.LibrariesOutDir, opt.MeasuresOutDir)
             {
-                case (null, null, null):
+                case (null, null, null, null, null):
                     return ExitCodes.Success.Code;
             }
 
@@ -199,8 +200,25 @@ public class CqlToFhirProgram
                     sbSummary.AppendLine(Invariant($"* Saved {elmToolkitResults.Count} Debug Symbol files (*.pdb) to directory {opt.PdbOutDir}."));
             }
 
-            if (opt.FhirOutDir is not null)
+            if (opt.FhirOutDir is not null || opt.LibrariesOutDir is not null || opt.MeasuresOutDir is not null)
             {
+                // Validate mutual exclusivity: either --fhir alone, or both --libraries and --measures
+                bool hasFhir = opt.FhirOutDir is not null;
+                bool hasLibrariesDir = opt.LibrariesOutDir is not null;
+                bool hasMeasuresDir = opt.MeasuresOutDir is not null;
+
+                if (hasFhir && (hasLibrariesDir || hasMeasuresDir))
+                {
+                    logger.LogError("Cannot mix --fhir with --libraries or --measures. Use either --fhir alone for all resources, or both --libraries and --measures for separate directories.");
+                    return ExitCodes.MixedFhirAndSpecificDirs.Code;
+                }
+
+                if ((hasLibrariesDir && !hasMeasuresDir) || (!hasLibrariesDir && hasMeasuresDir))
+                {
+                    logger.LogError("Both --libraries and --measures must be specified together. Use --fhir if you want all resources in one directory.");
+                    return ExitCodes.IncompleteLibrariesMeasuresDirs.Code;
+                }
+
                 var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
                     .AddPackagingInputs(cqlToolkit, elmToolkit);
 
@@ -210,11 +228,16 @@ public class CqlToFhirProgram
                     return ExitCodes.CantPackageNoCqlElmMatches.Code;
                 }
 
+                // Determine the target directories for libraries and measures
+                var librariesDir = opt.LibrariesOutDir ?? opt.FhirOutDir!;
+                var measuresDir = opt.MeasuresOutDir ?? opt.FhirOutDir!;
+
                 packagingToolkit
                     .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
-                    .SaveFhirResourcesToDirectory(
-                        opt.FhirOutDir,
+                    .SaveFhirResourcesToDirectories(
+                        librariesDir,
+                        measuresDir,
                         packOpt.JsonPretty,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
@@ -233,7 +256,21 @@ public class CqlToFhirProgram
                     tracker.RecordStatus(libraryId, LibraryProcessingStage.FhirResource, LibraryStageStatus.Saved([.. extensions]));
                 }
 
-                sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {opt.FhirOutDir}."));
+                // Build summary message
+                bool sameDirectory = librariesDir.IsSameDirectory(measuresDir);
+
+                if (sameDirectory)
+                {
+                    sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {librariesDir}."));
+                }
+                else
+                {
+                    sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) to directory {librariesDir}."));
+                    if (measuresCount > 0)
+                    {
+                        sbSummary.AppendLine(Invariant($"* Saved {measuresCount} measures (Measure-*.json) to directory {measuresDir}."));
+                    }
+                }
             }
 
             return ExitCodes.Success.Code;
