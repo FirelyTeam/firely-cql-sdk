@@ -26,7 +26,11 @@ public static partial class ElmToolkitExtensions
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null) =>
-        SaveCSharpFilesToDirectory(elmToolkit, new SaveCSharpFilesToDirectoryOptions(directory, directoryPreparationStrategy));
+        SaveCSharpFilesToDirectory(
+            elmToolkit,
+            new SaveCSharpFilesToDirectoryOptions(
+                directory,
+                directoryPreparationStrategy));
 
     /// <summary>
     /// Saves all generated C# source files contained in the specified ElmToolkit to the target directory.
@@ -56,7 +60,12 @@ public static partial class ElmToolkitExtensions
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null) =>
-        SaveAssemblyBinariesToDirectory(elmToolkit, directory, directory, directoryPreparationStrategy, directoryPreparationStrategy);
+        SaveAssemblyBinariesToDirectory(
+            elmToolkit,
+            directory,
+            directory,
+            directoryPreparationStrategy,
+            directoryPreparationStrategy);
 
     /// <summary>
     /// Saves the generated assembly binaries and debug symbols to the specified directory.
@@ -73,7 +82,13 @@ public static partial class ElmToolkitExtensions
         DirectoryInfo? pdbDirectory,
         DirectoryInfoHandler? dllDirectoryPreparationStrategy = null,
         DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null) =>
-        SaveAssemblyBinariesToDirectory(elmToolkit, new SaveAssemblyBinariesToDirectoryOptions(dllDirectory, pdbDirectory, dllDirectoryPreparationStrategy, pdbDirectoryPreparationStrategy));
+        SaveAssemblyBinariesToDirectory(
+            elmToolkit,
+            new SaveAssemblyBinariesToDirectoryOptions(
+                dllDirectory,
+                pdbDirectory,
+                dllDirectoryPreparationStrategy,
+                pdbDirectoryPreparationStrategy));
 
     /// <summary>
     /// Saves all generated assembly binaries and debug symbols contained in the specified ElmToolkit to the target directories.
