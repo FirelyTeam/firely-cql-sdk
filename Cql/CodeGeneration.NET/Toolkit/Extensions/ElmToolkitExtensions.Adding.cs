@@ -114,10 +114,28 @@ public static partial class ElmToolkitExtensions
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
-        Func<FileInfo, bool>? filePredicate = null)
+        Func<FileInfo, bool>? filePredicate = null) =>
+        AddElmFilesFromDirectory(
+            elmToolkit,
+            new AddElmFilesFromDirectoryOptions(
+                directory,
+                options,
+                filePredicate));
+
+    /// <summary>
+    /// Adds all ELM library files from the specified directory to the provided ElmToolkit instance.
+    /// </summary>
+    /// <remarks>Only files with a ".json" extension are considered. An optional file predicate can be provided
+    /// to further filter which files are added.</remarks>
+    /// <param name="elmToolkit">The ElmToolkit instance to which the discovered ELM libraries will be added.</param>
+    /// <param name="opt">An options object that specifies the directory to search, file enumeration options, and an optional predicate to
+    /// filter files.</param>
+    /// <returns>The ElmToolkit instance with the added ELM libraries from the specified directory.</returns>
+    public static ElmToolkit AddElmFilesFromDirectory(
+        ElmToolkit elmToolkit,
+        AddElmFilesFromDirectoryOptions opt)
     {
-        var files = directory.EnumerateFiles("*.json", options ?? Defaults.EnumerationOptions);
-        if (filePredicate is not null) files = files.Where(filePredicate);
+        var files = opt.GetFilesToAdd();
         return elmToolkit.AddElmFiles(files);
     }
 
@@ -161,4 +179,37 @@ public static partial class ElmToolkitExtensions
         this ElmToolkit elmToolkit,
         FileInfo file) =>
         elmToolkit.AddElmFiles([file]);
+}
+
+/// <summary>
+/// Represents options for adding ELM files from a directory, including directory location, file enumeration settings,
+/// and file filtering criteria.
+/// </summary>
+/// <remarks>The default file pattern is "*.json". Use the FilePattern property to specify a different pattern if
+/// needed.</remarks>
+/// <param name="Directory">The directory from which ELM files will be added. Must not be null.</param>
+/// <param name="EnumerationOptions">The options to use when enumerating files in the directory. If null, default enumeration options are used.</param>
+/// <param name="FilePredicate">A predicate used to filter files. Only files for which this function returns true will be included. If null, all
+/// files matching the pattern are included.</param>
+public record AddElmFilesFromDirectoryOptions(
+    DirectoryInfo Directory,
+    EnumerationOptions? EnumerationOptions,
+    Func<FileInfo, bool>? FilePredicate)
+{
+    /// <summary>
+    /// Gets the search pattern used to match file names.
+    /// </summary>
+    /// <remarks>The pattern can include wildcard characters such as '*' and '?'. The default value is
+    /// "*.json".</remarks>
+    public string FilePattern { get; init; } = "*.json";
+
+    internal IEnumerable<FileInfo> GetFilesToAdd()
+    {
+        var directory = Directory;
+        var options = EnumerationOptions;
+        var filePredicate = FilePredicate;
+        var files = directory.EnumerateFiles(FilePattern, options ?? Defaults.EnumerationOptions);
+        if (filePredicate is not null) files = files.Where(filePredicate);
+        return files;
+    }
 }
