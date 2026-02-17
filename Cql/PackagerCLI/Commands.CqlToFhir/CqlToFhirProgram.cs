@@ -69,12 +69,19 @@ public class CqlToFhirProgram
                 return exitCode;
             }
 
+            // Create subdirectory preserver if not flattening hierarchy
+            SubdirectoryPreserver? subdirectoryPreserver = opt.FlattenDirHierarchy 
+                ? null 
+                : new SubdirectoryPreserver();
+
             CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt);
 
             if (!packOpt.ExitOnError)
                 cqlToolkit = cqlToolkit.SetIgnoreEnumerationExceptions();
 
-            cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(opt.CqlInDir);
+            cqlToolkit = cqlToolkit.AddCqlLibrariesFromDirectory(
+                opt.CqlInDir,
+                subdirectoryPreserver: subdirectoryPreserver);
 
             if (cqlToolkit.ArtifactsById.Count == 0)
             {
@@ -119,7 +126,8 @@ public class CqlToFhirProgram
                 cqlToolkit.SaveElmFilesToDirectory(
                     opt.ElmOutDir,
                     writeIndented: packOpt.JsonPretty,
-                    DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
+                    DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
+                    subdirectoryPreserver: subdirectoryPreserver);
 
                 // Update status to "saved" for ELM
                 foreach (var libraryId in successfulElmLibraries)
@@ -168,7 +176,8 @@ public class CqlToFhirProgram
                 elmToolkit
                     .SaveCSharpFilesToDirectory(
                         opt.CSharpOutDir,
-                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"),
+                        subdirectoryPreserver: subdirectoryPreserver);
 
                 // Update status to "saved" for C#
                 foreach (var libraryId in successfulCompilations)
@@ -187,7 +196,8 @@ public class CqlToFhirProgram
                         opt.DllOutDir,
                         opt.PdbOutDir ?? opt.DllOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
-                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"),
+                        subdirectoryPreserver: subdirectoryPreserver);
 
                 // Update status to "saved" for .NET
                 var extensions = opt.PdbOutDir is not null ? new[] { ".dll", ".pdb" } : new[] { ".dll" };
@@ -241,7 +251,8 @@ public class CqlToFhirProgram
                             librariesDir,
                             measuresDir,
                             packOpt.JsonPretty,
-                            DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json")));
+                            DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
+                            SubdirectoryPreserver: subdirectoryPreserver));
 
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;

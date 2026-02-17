@@ -62,6 +62,11 @@ internal sealed class ElmToFhirProgram
                 return exitCode;
             }
 
+            // Create subdirectory preserver if not flattening hierarchy
+            SubdirectoryPreserver? subdirectoryPreserver = opt.FlattenDirHierarchy
+                ? null
+                : new SubdirectoryPreserver();
+
             ElmToolkit elmToolkit = new ElmToolkit(loggerFactory, elmOpt);
 
             if (!packOpt.ExitOnError)
@@ -69,7 +74,8 @@ internal sealed class ElmToFhirProgram
 
             elmToolkit = elmToolkit.AddElmFilesFromDirectory(
                                         opt.ElmInDir,
-                                        filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
+                                        filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name),
+                                        subdirectoryPreserver: subdirectoryPreserver);
             if (elmToolkit.ArtifactsById.Count == 0)
             {
                 logger.LogInformation($"Exiting. No ELM libraries found in directory {opt.ElmInDir}.");
@@ -116,7 +122,8 @@ internal sealed class ElmToFhirProgram
                 elmToolkit
                     .SaveCSharpFilesToDirectory(
                         opt.CSharpOutDir,
-                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"),
+                        subdirectoryPreserver: subdirectoryPreserver);
 
                 // Update status to "saved" for C#
                 foreach (var libraryId in successfulLibraries)
@@ -134,7 +141,8 @@ internal sealed class ElmToFhirProgram
                         opt.DllOutDir,
                         opt.PdbOutDir ?? opt.DllOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
-                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"),
+                        subdirectoryPreserver: subdirectoryPreserver);
 
                 // Update status to "saved" for .NET
                 var extensions = opt.PdbOutDir is not null ? new[] { ".dll", ".pdb" } : new[] { ".dll" };
@@ -169,7 +177,7 @@ internal sealed class ElmToFhirProgram
 
                 CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                                         .SetIgnoreEnumerationExceptions()
-                                        .AddCqlLibrariesFromDirectory(opt.CqlInDir);
+                                        .AddCqlLibrariesFromDirectory(opt.CqlInDir, subdirectoryPreserver: subdirectoryPreserver);
 
                 if (cqlToolkit.ArtifactsById.Count == 0)
                 {
@@ -206,7 +214,8 @@ internal sealed class ElmToFhirProgram
                             librariesDir,
                             measuresDir,
                             packOpt.JsonPretty,
-                            DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json")));
+                            DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
+                            SubdirectoryPreserver: subdirectoryPreserver));
 
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;

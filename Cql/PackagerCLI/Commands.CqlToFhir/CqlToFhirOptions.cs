@@ -21,4 +21,5 @@ public class CqlToFhirOptions : IBindOptions
     public DirectoryInfo? FhirOutDir { get; set; }
     public DirectoryInfo? LibrariesOutDir { get; set; }
     public DirectoryInfo? MeasuresOutDir { get; set; }
+    public bool FlattenDirHierarchy { get; set; }
 }

@@ -28,6 +28,7 @@ internal record ElmToFhirCommand
     string? CSharpNamespace,
     bool? JsonPretty,
     bool? ExitOnError,
+    bool? FlattenDirHierarchy,
     DebugSymbolsFormat? DebugSymbols)
 {
     public const string Name =
@@ -146,6 +147,13 @@ internal record ElmToFhirCommand
             """
             The C# namespace to use for generated code.
             (Used with --cs or --dll)
+            """),
+
+        Option<bool>(
+            "--flatten-dir-hierarchy",
+            """
+            Flatten the output directory structure, ignoring subdirectories from the input.
+            By default, subdirectory structure is preserved from input to output directories.
             """)
     ];
 
@@ -164,6 +172,7 @@ internal record ElmToFhirCommand
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
         (Libraries, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.LibrariesOutDir)]),
         (Measures, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.MeasuresOutDir)]),
+        (FlattenDirHierarchy, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FlattenDirHierarchy)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
