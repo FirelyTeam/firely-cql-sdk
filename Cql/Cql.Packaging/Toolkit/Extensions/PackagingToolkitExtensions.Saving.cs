@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.Packaging.Toolkit.Extensions;
@@ -79,12 +80,14 @@ public static partial class PackagingToolkitExtensions
 /// <param name="DirectoryPreparationStrategy">An optional delegate that defines how to prepare the target directory before saving resources. If null, a default
 /// preparation strategy is used.</param>
 /// <param name="ConfigureJsonSerializerOptions">An optional delegate to configure the JsonSerializerOptions used when serializing FHIR resources to JSON.</param>
+/// <param name="SubdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
 public record SaveFhirResourcesToDirectoriesOptions(
     DirectoryInfo LibrariesDirectory,
     DirectoryInfo MeasuresDirectory,
     bool WriteIndented = false,
     DirectoryInfoHandler? DirectoryPreparationStrategy = null,
-    Mutator<JsonSerializerOptions>? ConfigureJsonSerializerOptions = null)
+    Mutator<JsonSerializerOptions>? ConfigureJsonSerializerOptions = null,
+    SubdirectoryPreserver? SubdirectoryPreserver = null)
 {
     /// <summary>
     /// Initializes a new instance of the SaveFhirResourcesToDirectoriesOptions class with the specified output
@@ -96,44 +99,60 @@ public record SaveFhirResourcesToDirectoriesOptions(
     /// <param name="DirectoryPreparationStrategy">An optional delegate that defines how to prepare the target directory before saving resources. If null, no
     /// special preparation is performed.</param>
     /// <param name="ConfigureJsonSerializerOptions">An optional delegate to configure the JsonSerializerOptions used when serializing FHIR resources to JSON.</param>
+    /// <param name="SubdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
     public SaveFhirResourcesToDirectoriesOptions(
         DirectoryInfo directory,
         bool WriteIndented = false,
         DirectoryInfoHandler? DirectoryPreparationStrategy = null,
-        Mutator<JsonSerializerOptions>? ConfigureJsonSerializerOptions = null) : this(directory, directory, WriteIndented, DirectoryPreparationStrategy, ConfigureJsonSerializerOptions) {}
+        Mutator<JsonSerializerOptions>? ConfigureJsonSerializerOptions = null,
+        SubdirectoryPreserver? SubdirectoryPreserver = null) : this(directory, directory, WriteIndented, DirectoryPreparationStrategy, ConfigureJsonSerializerOptions, SubdirectoryPreserver) {}
 
     internal void Save(PackagingToolkit packagingToolkit)
     {
         var preparedDirectories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         ILogger? logger = null;
 
-        var fhirResources = packagingToolkit
-            .GetPackagingResults()
-            .SelectMany(t => t.resultArtifacts.GetFhirResources());
+        var packagingResults = packagingToolkit.GetPackagingResults();
 
-        foreach (var (resourceFileName, resourceJson) in
-                 packagingToolkit.SerializeFhirResourcesToJson(fhirResources, WriteIndented, ConfigureJsonSerializerOptions))
+        foreach (var (libraryIdentifier, resultArtifacts) in packagingResults)
         {
-            // Determine the target directory based on resource type
-            var (resourceType, _, _) = resourceFileName;
-            DirectoryInfo targetDirectory = resourceType switch
+            var fhirResources = resultArtifacts.GetFhirResources();
+            
+            foreach (var (resourceFileName, resourceJson) in
+                     packagingToolkit.SerializeFhirResourcesToJson(fhirResources, WriteIndented, ConfigureJsonSerializerOptions))
             {
-                "Library" => LibrariesDirectory,
-                "Measure" => MeasuresDirectory,
-                _ => throw new InvalidOperationException(
-                    $"Unsupported FHIR resource type '{resourceType}'. Only 'Library' and 'Measure' resources are supported.")
-            };
+                // Determine the base directory based on resource type
+                var (resourceType, _, _) = resourceFileName;
+                DirectoryInfo baseDirectory = resourceType switch
+                {
+                    "Library" => LibrariesDirectory,
+                    "Measure" => MeasuresDirectory,
+                    _ => throw new InvalidOperationException(
+                        $"Unsupported FHIR resource type '{resourceType}'. Only 'Library' and 'Measure' resources are supported.")
+                };
 
-            // Prepare directory if not already prepared
-            if (preparedDirectories.Add(targetDirectory.FullName))
-            {
-                (DirectoryPreparationStrategy ?? Runtime.IO.DirectoryPreparationStrategy.Recreate)(targetDirectory);
+                // Determine target directory based on subdirectory preservation
+                DirectoryInfo targetDirectory = baseDirectory;
+                if (SubdirectoryPreserver is not null)
+                {
+                    var (relativePath, found) = SubdirectoryPreserver.TryGetRelativePath(libraryIdentifier);
+                    if (found && !string.IsNullOrEmpty(relativePath))
+                    {
+                        targetDirectory = new DirectoryInfo(Path.Combine(baseDirectory.FullName, relativePath));
+                    }
+                }
+
+                // Prepare directory if not already prepared
+                if (preparedDirectories.Add(targetDirectory.FullName))
+                {
+                    (DirectoryPreparationStrategy ?? Runtime.IO.DirectoryPreparationStrategy.Recreate)(targetDirectory);
+                }
+
+                logger ??= packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
+                var fullFilePath = Path.Combine(targetDirectory.FullName, resourceFileName.ToString());
+                logger.LogInformation("Saving FHIR Resource: {file}", fullFilePath);
+                File.WriteAllText(fullFilePath, resourceJson);
             }
-
-            logger ??= packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
-            var fullFilePath = Path.Combine(targetDirectory.FullName, resourceFileName.ToString());
-            logger.LogInformation("Saving FHIR Resource: {file}", fullFilePath);
-            File.WriteAllText(fullFilePath, resourceJson);
         }
     }
 }

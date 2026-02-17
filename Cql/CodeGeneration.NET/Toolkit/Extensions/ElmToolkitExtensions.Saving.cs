@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
@@ -21,16 +22,19 @@ public static partial class ElmToolkitExtensions
     /// <param name="elmToolkit">The ElmToolkit instance containing the generated C# source files.</param>
     /// <param name="directory">The directory where the C# source files will be saved.</param>
     /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
+    /// <param name="subdirectoryPreserver">Optional subdirectory preserver to maintain directory structure.</param>
     /// <returns>The ElmToolkit instance.</returns>
     public static ElmToolkit SaveCSharpFilesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
-        DirectoryInfoHandler? directoryPreparationStrategy = null) =>
+        DirectoryInfoHandler? directoryPreparationStrategy = null,
+        SubdirectoryPreserver? subdirectoryPreserver = null) =>
         SaveCSharpFilesToDirectory(
             elmToolkit,
             new SaveCSharpFilesToDirectoryOptions(
                 directory,
-                directoryPreparationStrategy));
+                directoryPreparationStrategy,
+                subdirectoryPreserver));
 
     /// <summary>
     /// Saves all generated C# source files contained in the specified ElmToolkit to the target directory.
@@ -55,17 +59,20 @@ public static partial class ElmToolkitExtensions
     /// <param name="elmToolkit">The ElmToolkit instance containing the generated assembly binaries and debug symbols.</param>
     /// <param name="directory">The directory where the assembly binaries and debug symbols (if provided) will be saved.</param>
     /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
+    /// <param name="subdirectoryPreserver">Optional subdirectory preserver to maintain directory structure.</param>
     /// <returns>The ElmToolkit instance.</returns>
     public static ElmToolkit SaveAssemblyBinariesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
-        DirectoryInfoHandler? directoryPreparationStrategy = null) =>
+        DirectoryInfoHandler? directoryPreparationStrategy = null,
+        SubdirectoryPreserver? subdirectoryPreserver = null) =>
         SaveAssemblyBinariesToDirectory(
             elmToolkit,
             directory,
             directory,
             directoryPreparationStrategy,
-            directoryPreparationStrategy);
+            directoryPreparationStrategy,
+            subdirectoryPreserver);
 
     /// <summary>
     /// Saves the generated assembly binaries and debug symbols to the specified directory.
@@ -75,20 +82,23 @@ public static partial class ElmToolkitExtensions
     /// <param name="pdbDirectory">The directory where the debug symbol binaries (if provided) will be saved.</param>
     /// <param name="dllDirectoryPreparationStrategy">Optional strategy for preparing the dll directory.</param>
     /// <param name="pdbDirectoryPreparationStrategy">Optional strategy for preparing the pdb directory.</param>
+    /// <param name="subdirectoryPreserver">Optional subdirectory preserver to maintain directory structure.</param>
     /// <returns>The ElmToolkit instance.</returns>
     public static ElmToolkit SaveAssemblyBinariesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo dllDirectory,
         DirectoryInfo? pdbDirectory,
         DirectoryInfoHandler? dllDirectoryPreparationStrategy = null,
-        DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null) =>
+        DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null,
+        SubdirectoryPreserver? subdirectoryPreserver = null) =>
         SaveAssemblyBinariesToDirectory(
             elmToolkit,
             new SaveAssemblyBinariesToDirectoryOptions(
                 dllDirectory,
                 pdbDirectory,
                 dllDirectoryPreparationStrategy,
-                pdbDirectoryPreparationStrategy));
+                pdbDirectoryPreparationStrategy,
+                subdirectoryPreserver));
 
     /// <summary>
     /// Saves all generated assembly binaries and debug symbols contained in the specified ElmToolkit to the target directories.
@@ -120,11 +130,13 @@ public static partial class ElmToolkitExtensions
 /// used.</param>
 /// <param name="PdbDirectoryPreparationStrategy">An optional strategy for preparing the debug symbol directory before saving files. If null, the default strategy is
 /// used.</param>
+/// <param name="SubdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
 public record SaveAssemblyBinariesToDirectoryOptions(
     DirectoryInfo DllDirectory,
     DirectoryInfo? PdbDirectory,
     DirectoryInfoHandler? DllDirectoryPreparationStrategy,
-    DirectoryInfoHandler? PdbDirectoryPreparationStrategy)
+    DirectoryInfoHandler? PdbDirectoryPreparationStrategy,
+    SubdirectoryPreserver? SubdirectoryPreserver = null)
 {
     internal void Save(ElmToolkit elmToolkit)
     {
@@ -141,33 +153,57 @@ public record SaveAssemblyBinariesToDirectoryOptions(
             return;
         }
 
-        // Prepare the directories
-        (dllDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(dllDirectory);
+        var preparedDllDirectories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var preparedPdbDirectories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
         bool hasAnyDebugSymbols = elmToAssemblyResults.Any(t => t.debugSymbolsBinary is { Length: > 0 });
-        if (hasAnyDebugSymbols && pdbDirectory is not null)
-        {
-            if (dllDirectory.FullName == pdbDirectory.FullName
-                && pdbDirectoryPreparationStrategy != DirectoryPreparationStrategy.Recreate)
-            {
-                // We do not want to recreate the pdb directory if it is the same as the dll directory
-            }
-            else
-            {
-                (pdbDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(pdbDirectory);
-            }
-        }
-
 
         foreach (var (libraryIdentifier, _, _, assemblyBytes, debugSymbolsBytes) in elmToAssemblyResults)
         {
-            var dllFileName = Path.Combine(dllDirectory.FullName, $"{libraryIdentifier}.dll");
+            // Determine target directories based on subdirectory preservation
+            DirectoryInfo targetDllDirectory = dllDirectory;
+            DirectoryInfo? targetPdbDirectory = pdbDirectory;
+            
+            if (SubdirectoryPreserver is not null)
+            {
+                var (relativePath, found) = SubdirectoryPreserver.TryGetRelativePath(libraryIdentifier);
+                if (found && !string.IsNullOrEmpty(relativePath))
+                {
+                    targetDllDirectory = new DirectoryInfo(Path.Combine(dllDirectory.FullName, relativePath));
+                    if (pdbDirectory is not null)
+                    {
+                        targetPdbDirectory = new DirectoryInfo(Path.Combine(pdbDirectory.FullName, relativePath));
+                    }
+                }
+            }
+
+            // Prepare the DLL directory if not already prepared
+            if (preparedDllDirectories.Add(targetDllDirectory.FullName))
+            {
+                (dllDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(targetDllDirectory);
+            }
+
+            // Prepare the PDB directory if not already prepared
+            if (hasAnyDebugSymbols && targetPdbDirectory is not null)
+            {
+                if (targetDllDirectory.FullName == targetPdbDirectory.FullName
+                    && pdbDirectoryPreparationStrategy != DirectoryPreparationStrategy.Recreate)
+                {
+                    // We do not want to recreate the pdb directory if it is the same as the dll directory
+                }
+                else if (preparedPdbDirectories.Add(targetPdbDirectory.FullName))
+                {
+                    (pdbDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(targetPdbDirectory);
+                }
+            }
+
+            var dllFileName = Path.Combine(targetDllDirectory.FullName, $"{libraryIdentifier}.dll");
             File.WriteAllBytes(dllFileName, assemblyBytes);
             logger.LogInformation("Saved assembly to file: {file}", dllFileName);
 
-            if (debugSymbolsBytes is { Length: > 0 } pdb && pdbDirectory is not null)
+            if (debugSymbolsBytes is { Length: > 0 } pdb && targetPdbDirectory is not null)
             {
-                var pdbFileName = Path.Combine(pdbDirectory.FullName, $"{libraryIdentifier}.pdb");
+                var pdbFileName = Path.Combine(targetPdbDirectory.FullName, $"{libraryIdentifier}.pdb");
                 File.WriteAllBytes(pdbFileName, pdb);
                 logger.LogInformation("Saved debug symbols to file: {file}", pdbFileName);
             }
@@ -185,25 +221,39 @@ public record SaveAssemblyBinariesToDirectoryOptions(
 /// <param name="Directory">The target directory where C# source files will be saved.</param>
 /// <param name="DirectoryPreparationStrategy">An optional strategy for preparing the target directory before saving files. If null, the default strategy creates
 /// the directory if it does not exist.</param>
+/// <param name="SubdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
 public record SaveCSharpFilesToDirectoryOptions(
     DirectoryInfo Directory,
-    DirectoryInfoHandler? DirectoryPreparationStrategy)
+    DirectoryInfoHandler? DirectoryPreparationStrategy,
+    SubdirectoryPreserver? SubdirectoryPreserver = null)
 {
     internal void Save(ElmToolkit elmToolkit)
     {
         var directory = Directory;
         var directoryPreparationStrategy = DirectoryPreparationStrategy;
-        var prepCsDir = true;
+        var preparedDirectories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
 
         foreach (var (libraryIdentifier, _, csharpSourceCode) in elmToolkit.GetElmToCSharpResults())
         {
-            if (prepCsDir)
+            // Determine target directory based on subdirectory preservation
+            DirectoryInfo targetDirectory = directory;
+            if (SubdirectoryPreserver is not null)
             {
-                prepCsDir = false;
-                (directoryPreparationStrategy ?? Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists)(directory);
+                var (relativePath, found) = SubdirectoryPreserver.TryGetRelativePath(libraryIdentifier);
+                if (found && !string.IsNullOrEmpty(relativePath))
+                {
+                    targetDirectory = new DirectoryInfo(Path.Combine(directory.FullName, relativePath));
+                }
             }
-            var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.g.cs");
+
+            // Prepare directory if not already prepared
+            if (preparedDirectories.Add(targetDirectory.FullName))
+            {
+                (directoryPreparationStrategy ?? Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists)(targetDirectory);
+            }
+
+            var fileName = Path.Combine(targetDirectory.FullName, $"{libraryIdentifier}.g.cs");
             File.WriteAllText(fileName, csharpSourceCode);
             logger.LogInformation("Saved C# source code to file: {file}", fileName);
         }
