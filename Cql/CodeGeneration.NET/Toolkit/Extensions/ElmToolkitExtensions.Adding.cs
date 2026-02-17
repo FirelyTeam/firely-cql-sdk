@@ -115,7 +115,12 @@ public static partial class ElmToolkitExtensions
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null) =>
-        AddElmFilesFromDirectory(elmToolkit, new AddElmFilesFromDirectoryOptions(directory, options, filePredicate));
+        AddElmFilesFromDirectory(
+            elmToolkit,
+            new AddElmFilesFromDirectoryOptions(
+                directory,
+                options,
+                filePredicate));
 
     /// <summary>
     /// Adds all ELM library files from the specified directory to the provided ElmToolkit instance.
