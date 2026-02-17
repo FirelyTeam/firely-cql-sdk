@@ -28,7 +28,12 @@ public static partial class CqlToolkitExtensions
         DirectoryInfo directory,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null) =>
-        SaveElmFilesToDirectory(cqlToolkit, new SaveElmFilesToDirectoryOptions(directory, writeIndented, directoryPreparationStrategy));
+        SaveElmFilesToDirectory(
+            cqlToolkit,
+            new SaveElmFilesToDirectoryOptions(
+                directory,
+                writeIndented,
+                directoryPreparationStrategy));
 
     /// <summary>
     /// Saves all ELM (Expression Logical Model) libraries contained in the specified CQL toolkit to JSON files in the

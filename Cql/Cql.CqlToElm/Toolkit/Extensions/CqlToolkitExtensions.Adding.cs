@@ -41,7 +41,12 @@ public static partial class CqlToolkitExtensions
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null) =>
-        AddCqlLibrariesFromDirectory(cqlToolkit, new AddCqlLibrariesFromDirectoryOptions(directory, options, filePredicate));
+        AddCqlLibrariesFromDirectory(
+            cqlToolkit,
+            new AddCqlLibrariesFromDirectoryOptions(
+                directory,
+                options,
+                filePredicate));
 
     /// <summary>
     /// Adds all CQL library files from the specified directory to the provided CqlToolkit instance.

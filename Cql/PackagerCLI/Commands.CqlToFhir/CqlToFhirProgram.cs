@@ -233,8 +233,15 @@ public class CqlToFhirProgram
                 var librariesDir = opt.LibrariesOutDir ?? opt.FhirOutDir!;
                 var measuresDir = opt.MeasuresOutDir ?? opt.FhirOutDir!;
 
-                DirectoryInfoHandler? directoryPreparationStrategy = DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json");
-                packagingToolkit.AddPackagingInputs(cqlToolkit, elmToolkit).ConvertToFhirResources().SaveFhirResourcesToDirectory(new SaveFhirResourcesToDirectoriesOptions(librariesDir, measuresDir, packOpt.JsonPretty, directoryPreparationStrategy, null));
+                packagingToolkit
+                    .AddPackagingInputs(cqlToolkit, elmToolkit)
+                    .ConvertToFhirResources()
+                    .SaveFhirResourcesToDirectory(
+                        new SaveFhirResourcesToDirectoriesOptions(
+                            librariesDir,
+                            measuresDir,
+                            packOpt.JsonPretty,
+                            DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json")));
 
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;

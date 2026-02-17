@@ -8,7 +8,7 @@
 
 // using Hl7.Cql.Elm;
 // using Microsoft.Extensions.DependencyInjection;
-// using Microsoft.Extensions.EnumerationOptions;
+// using Microsoft.Extensions.Options;
 // using System;
 // using System.Collections.Generic;
 // using System.Collections.Immutable;

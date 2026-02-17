@@ -29,7 +29,12 @@ public static partial class PackagingToolkitExtensions
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null) =>
-        packagingToolkit.SaveFhirResourcesToDirectory(new SaveFhirResourcesToDirectoriesOptions(directory, writeIndented, directoryPreparationStrategy, configureJsonSerializerOptions));
+        packagingToolkit.SaveFhirResourcesToDirectory(
+            new SaveFhirResourcesToDirectoriesOptions(
+                directory,
+                writeIndented,
+                directoryPreparationStrategy,
+                configureJsonSerializerOptions));
 
     /// <summary>
     /// Saves all FHIR resources from the specified PackagingToolkit to the specified directory or directories.
