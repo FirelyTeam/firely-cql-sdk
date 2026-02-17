@@ -10,8 +10,6 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
-public record AddCqlLibrariesFromDirectoryOptions(DirectoryInfo Directory, EnumerationOptions? Options, Func<FileInfo, bool>? FilePredicate);
-
 /// <summary>
 /// Provides extension methods for adding CQL libraries to a <see cref="CqlToolkit"/>.
 /// </summary>
@@ -58,11 +56,7 @@ public static partial class CqlToolkitExtensions
         CqlToolkit cqlToolkit,
         AddCqlLibrariesFromDirectoryOptions opt)
     {
-        var directory = opt.Directory;
-        var options = opt.Options;
-        var filePredicate = opt.FilePredicate;
-        var files = directory.EnumerateFiles("*.cql", options ?? Defaults.EnumerationOptions);
-        if (filePredicate is not null) files = files.Where(filePredicate);
+        var files = opt.GetFilesToAdd();
         return cqlToolkit.AddCqlLibraryFiles(files);
     }
 
@@ -93,5 +87,38 @@ public static partial class CqlToolkitExtensions
                                     logMessage("Could not load CQL from file: {file}", fileInfo.FullName))); // Log errors
 
         return cqlToolkit.AddCqlLibraries(cqlLibraries);
+    }
+}
+
+/// <summary>
+/// Represents options for adding CQL libraries from a directory, including directory selection, file enumeration
+/// behavior, and file filtering.
+/// </summary>
+/// <remarks>Use this record to configure which CQL files are discovered and added from a directory. The options
+/// allow customization of file search patterns and filtering logic.</remarks>
+/// <param name="Directory">The directory from which to search for CQL library files. Must not be null.</param>
+/// <param name="EnumerationOptions">The options that control how the directory is enumerated. If null, default enumeration options are used.</param>
+/// <param name="FilePredicate">A predicate used to filter files within the directory. Only files for which this function returns true will be
+/// included. If null, all matching files are included.</param>
+public record AddCqlLibrariesFromDirectoryOptions(
+    DirectoryInfo Directory,
+    EnumerationOptions? EnumerationOptions,
+    Func<FileInfo, bool>? FilePredicate)
+{
+    /// <summary>
+    /// Gets the file name pattern used to match files for processing.
+    /// </summary>
+    /// <remarks>The pattern should follow standard file system wildcard conventions. For example, "*.cql"
+    /// matches all files with the ".cql" extension.</remarks>
+    public string FilePattern { get; init; } = "*.cql";
+
+    internal IEnumerable<FileInfo> GetFilesToAdd()
+    {
+        var directory = Directory;
+        var options = EnumerationOptions;
+        var filePredicate = FilePredicate;
+        var files = directory.EnumerateFiles(FilePattern, options ?? Defaults.EnumerationOptions);
+        if (filePredicate is not null) files = files.Where(filePredicate);
+        return files;
     }
 }

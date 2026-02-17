@@ -50,7 +50,7 @@ public class Program
                 {
                     Name = Process.GetCurrentProcess().ProcessName, // Use the name of the executable as the command name
             }
-                //.AddOptions(ElmToFhirCommand.Options)
+                //.AddOptions(ElmToFhirCommand.EnumerationOptions)
                 .AddGlobalOptions(LoggingCommand.Options)
                 .AddGlobalOptions(GlobalCommand.Options)
                 //.SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler))

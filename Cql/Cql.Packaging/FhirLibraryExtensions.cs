@@ -129,7 +129,7 @@ internal static class FhirLibraryExtensions
             if (!fhirParameters.Any())
                 return;
 
-            // Add or replace CQL Options as a contained resource
+            // Add or replace CQL EnumerationOptions as a contained resource
             // See: https://build.fhir.org/domainresource-definitions.html#DomainResource.contained
 
             // Ensure Contained collection is initialized

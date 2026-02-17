@@ -137,7 +137,7 @@ public record CqlToFhirCommand
         Option<DebugSymbolsFormat>(
             "--debug-symbols",
             """
-            The way debug symbols are emitted when generating .NET assemblies. Options are:
+            The way debug symbols are emitted when generating .NET assemblies. EnumerationOptions are:
             - None (DEFAULT) = No debug symbols are generated and .NET assemblies are compiled with optimizations enabled.
             - PortablePdb = .NET assemblies are compiled with no optimizations and debug symbols are written as a separate Portable PDB format. Will be emitted to the --pdb directory.
             - Embedded = .NET assemblies are compiled with no optimizations and debug symbols are embedded in the DLL itself, together with the C# source code.

@@ -17,7 +17,7 @@ public static class OptionsBinder
 {
     /// <summary>
     /// Binds additional properties of the options class to the configuration
-    /// that is not supported out of the box by the Options pattern.
+    /// that is not supported out of the box by the EnumerationOptions pattern.
     /// e.g. DirectoryInfo properties.
     /// </summary>
     private static OptionsBuilder<TOptions> BindConfigurationSpecialPropertyTypes<

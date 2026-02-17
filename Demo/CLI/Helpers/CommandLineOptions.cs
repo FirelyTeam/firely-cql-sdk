@@ -164,7 +164,7 @@ namespace CLI.Helpers
                 DataDirectory,
                 ResourcesDirectory,
                 ValueSetsDirectory
-            }.DumpConsole("Options");
+            }.DumpConsole("EnumerationOptions");
         }
     }
 

@@ -10,13 +10,6 @@ using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
-public class SaveElmFilesToDirectoryOptions(DirectoryInfo directory, bool writeIndented, DirectoryInfoHandler? directoryPreparationStrategy)
-{
-    public DirectoryInfo Directory { get; } = directory;
-    public bool WriteIndented { get; } = writeIndented;
-    public DirectoryInfoHandler? DirectoryPreparationStrategy { get; } = directoryPreparationStrategy;
-}
-
 /// <summary>
 /// Provides extension methods for the <see cref="CqlToolkit"/> class.
 /// </summary>
@@ -45,15 +38,37 @@ public static partial class CqlToolkitExtensions
     /// directory is prepared according to the specified strategy before files are written. Existing files with the same
     /// name may be overwritten.</remarks>
     /// <param name="cqlToolkit">The CQL toolkit containing the ELM libraries to be saved.</param>
-    /// <param name="opt">Options that specify the target directory, file formatting, and directory preparation strategy.</param>
+    /// <param name="opt">EnumerationOptions that specify the target directory, file formatting, and directory preparation strategy.</param>
     /// <returns>The same CQL toolkit instance provided in the input parameter.</returns>
     public static CqlToolkit SaveElmFilesToDirectory(
         CqlToolkit cqlToolkit,
         SaveElmFilesToDirectoryOptions opt)
     {
-        var directory = opt.Directory;
-        var writeIndented = opt.WriteIndented;
-        var directoryPreparationStrategy = opt.DirectoryPreparationStrategy;
+        opt.Save(cqlToolkit);
+        return cqlToolkit;
+    }
+}
+
+/// <summary>
+/// Represents options for saving ELM (Expression Logical Model) files to a specified directory.
+/// </summary>
+/// <remarks>Use this record to configure how ELM files are output by specifying the destination directory,
+/// formatting preferences, and any custom directory preparation logic. The directory preparation strategy allows for
+/// custom behaviors such as cleaning, validating, or creating the directory before files are written.</remarks>
+/// <param name="Directory">The target directory where ELM files will be saved. Must not be null.</param>
+/// <param name="WriteIndented">true to write the ELM JSON files with indented formatting; otherwise, false for compact formatting.</param>
+/// <param name="DirectoryPreparationStrategy">An optional delegate that defines how the target directory should be prepared before saving files. If null, the
+/// default strategy creates the directory if it does not exist.</param>
+public record SaveElmFilesToDirectoryOptions(
+    DirectoryInfo Directory,
+    bool WriteIndented,
+    DirectoryInfoHandler? DirectoryPreparationStrategy)
+{
+    internal void Save(CqlToolkit cqlToolkit)
+    {
+        var directory = Directory;
+        var writeIndented = WriteIndented;
+        var directoryPreparationStrategy = DirectoryPreparationStrategy;
         var prepElmDir = true;
         var logger = cqlToolkit.CreateLogger();
 
@@ -62,13 +77,11 @@ public static partial class CqlToolkitExtensions
             if (prepElmDir)
             {
                 prepElmDir = false;
-                (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
+                (directoryPreparationStrategy ?? Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists)(directory);
             }
             var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.json");
             File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
             logger.LogInformation("Saved ELM to file: {file}", fileName);
         }
-
-        return cqlToolkit;
     }
 }
