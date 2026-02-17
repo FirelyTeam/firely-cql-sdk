@@ -54,10 +54,13 @@ The CQL Packager has the following commands:
 
 Start from ELM files and convert to one or more of the following outputs: C#, DLL, PDB, FHIR Resources.
 
+> **⚠️ BREAKING CHANGE (v5.x)**: The default behavior now **preserves subdirectory structure**. Input files in subdirectories 
+> will be output to corresponding subdirectories. Use `--flatten-dir-hierarchy` to get the old behavior (all files in the root output directory).
+
 **Usage:** `cql-package elm [options]`
 
 **Required Options:**
-- `--elm <directory>` - ELM input directory containing ELM files in JSON format "*.json"
+- `--elm <directory>` - ELM input directory containing ELM files in JSON format "*.json" (searched recursively in subdirectories)
 
 **Output Options:**
 - `--cs <directory>` - C# output directory for generated C# source code files "*.g.cs"
@@ -72,7 +75,7 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
   If ommitted, C# types will be generated without a namespace.
 
 **FHIR-specific Options:**
-- `--cql <directory>` - CQL input directory (REQUIRED with --fhir)
+- `--cql <directory>` - CQL input directory (REQUIRED with --fhir, searched recursively in subdirectories)
 - `--canonical-root-url <url>` - The root canonical URL output in FHIR library
 - `--override-utc-date-time <datetime>` - Override date output in FHIR library
 - `--json-pretty` - Output JSON using multiline and indentation (for --fhir)
@@ -83,14 +86,21 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
   - `PortablePdb` - Separate PDB files, no optimizations
   - `Embedded` - Debug symbols embedded in DLL with C# source
 
+**Directory Structure Options:**
+- `--flatten-dir-hierarchy` - Flatten the output directory structure, ignoring subdirectories from the input. 
+  By default (without this flag), subdirectory structure is preserved from input to output directories.
+
 #### `cql` Command
 
 Start from CQL files and convert to one or more of the following outputs: ELM, C#, DLL, PDB, FHIR Resources.
 
+> **⚠️ BREAKING CHANGE (v5.x)**: The default behavior now **preserves subdirectory structure**. Input files in subdirectories 
+> will be output to corresponding subdirectories. Use `--flatten-dir-hierarchy` to get the old behavior (all files in the root output directory).
+
 **Usage:** `cql-package cql [options]`
 
 **Required Options:**
-- `--cql <directory>` - CQL input directory containing CQL files "*.cql"
+- `--cql <directory>` - CQL input directory containing CQL files "*.cql" (searched recursively in subdirectories)
 
 **Output Options:**
 - `--elm <directory>` - ELM output directory for generated ELM JSON files
@@ -112,6 +122,9 @@ Start from CQL files and convert to one or more of the following outputs: ELM, C
 
 **Debug Options:**
 - `--debug-symbols <None|PortablePdb|Embedded>` - Debug symbol generation (same as elm command)
+
+**Directory Structure Options:**
+- `--flatten-dir-hierarchy` - Flatten the output directory structure (see details above)
 
 #### `extract-library-attachments` Command
 
@@ -197,6 +210,7 @@ cql-package elm --elm input/elm --cql input/cql --fhir output/fhir --cs output/c
 - Packages ELM JSON files from the directory `input/elm` into FHIR Library resources saving them to `output/fhir`.
 - The CQL files in `input/cql` are included in the FHIR Library resources, if they match the ELM files by file name.
 - The generated C# source code is saved to directory `output/csharp`.
+- **Subdirectories are preserved**: If `input/elm` contains `measures/MyMeasure.json`, the output will be `output/fhir/measures/Library-MyMeasure.json`.
 
 2. Package CQL into FHIR resources (as indented JSON) and save C# source code:
 
@@ -205,11 +219,22 @@ cql-package cql --cql input/cql --fhir output/fhir --cs output/csharp --json-pre
 ```
 
 - Packages CQL files from the directory `input/cql` into FHIR Library resources saving them to `output/fhir`.
+- **Subdirectories are preserved**: Files are organized in the same subdirectory structure as the input.
 - The ELM files are included in the FHIR Library resources, but are not saved to a separate directory.
 - The generated C# source code is saved to directory `output/csharp`.
 - Read the disclaimer in the help.
 
-3. Package ELM into .NET assembly DLL's, which can be stepped through in a debugger:
+3. Flatten directory structure (get old pre-v5.x behavior):
+
+```shell
+cql-package cql --cql input/cql --fhir output/fhir --flatten-dir-hierarchy
+```
+
+- Packages all CQL files from `input/cql` and its subdirectories into FHIR Library resources.
+- **All output files are placed directly in `output/fhir`**, ignoring the subdirectory structure from input.
+- This was the default behavior before v5.x.
+
+4. Package ELM into .NET assembly DLL's, which can be stepped through in a debugger:
 
 ```shell
 cql-package elm --elm input/elm --dll output/dll --debug-symbols Embedded
