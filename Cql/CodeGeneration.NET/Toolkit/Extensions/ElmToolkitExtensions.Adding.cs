@@ -109,18 +109,21 @@ public static partial class ElmToolkitExtensions
     /// <param name="directory">The directory containing the ELM files.</param>
     /// <param name="options">Optional enumeration options for file retrieval.</param>
     /// <param name="filePredicate">Optional predicate to filter files.</param>
+    /// <param name="subdirectoryPreserver">An optional subdirectory preserver to track relative paths.</param>
     /// <returns>The updated ELM toolkit.</returns>
     public static ElmToolkit AddElmFilesFromDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
-        Func<FileInfo, bool>? filePredicate = null) =>
+        Func<FileInfo, bool>? filePredicate = null,
+        SubdirectoryPreserver? subdirectoryPreserver = null) =>
         AddElmFilesFromDirectory(
             elmToolkit,
             new AddElmFilesFromDirectoryOptions(
                 directory,
                 options,
-                filePredicate));
+                filePredicate,
+                subdirectoryPreserver));
 
     /// <summary>
     /// Adds all ELM library files from the specified directory to the provided ElmToolkit instance.
@@ -136,7 +139,32 @@ public static partial class ElmToolkitExtensions
         AddElmFilesFromDirectoryOptions opt)
     {
         var files = opt.GetFilesToAdd();
-        return elmToolkit.AddElmFiles(files);
+        var logger = elmToolkit.CreateLogger();
+        var baseDirectory = opt.Directory.FullName;
+
+        var libraries = files
+            .TrySelect(f =>
+            {
+                logger.LogInformation("Loading ELM library from file: {file}", f);
+                var library = ElmLibrary.LoadFromJson(f);
+                
+                // Track relative path if subdirectory preserver is provided
+                if (opt.SubdirectoryPreserver is not null)
+                {
+                    var relativePath = Path.GetRelativePath(baseDirectory, Path.GetDirectoryName(f.FullName) ?? baseDirectory);
+                    if (relativePath == ".")
+                        relativePath = string.Empty;
+                    opt.SubdirectoryPreserver.AddRelativePath(relativePath, library.VersionedLibraryIdentifier);
+                }
+
+                return library;
+            },
+            s => s
+                 .SetContinuation(elmToolkit.BatchProcessExceptionContinuation)
+                 .AddLoggerExceptionHandler(
+                     logger,
+                     (fileInfo, logMessage) => logMessage("Could not load ELM library from file: {file}", fileInfo.FullName))); // Log errors
+        return elmToolkit.AddElmLibraries(libraries);
     }
 
     /// <summary>
@@ -191,10 +219,12 @@ public static partial class ElmToolkitExtensions
 /// <param name="EnumerationOptions">The options to use when enumerating files in the directory. If null, default enumeration options are used.</param>
 /// <param name="FilePredicate">A predicate used to filter files. Only files for which this function returns true will be included. If null, all
 /// files matching the pattern are included.</param>
+/// <param name="SubdirectoryPreserver">An optional subdirectory preserver to track relative paths of loaded libraries.</param>
 public record AddElmFilesFromDirectoryOptions(
     DirectoryInfo Directory,
     EnumerationOptions? EnumerationOptions,
-    Func<FileInfo, bool>? FilePredicate)
+    Func<FileInfo, bool>? FilePredicate,
+    SubdirectoryPreserver? SubdirectoryPreserver = null)
 {
     /// <summary>
     /// Gets the search pattern used to match file names.
