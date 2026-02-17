@@ -23,6 +23,7 @@ internal static class ResourceCanonicalBuilderFactory
             string identifier,
             string? version = null) =>
         {
+            identifier = identifier.Replace('_', '-');
             string includeVersionString = string.IsNullOrEmpty(version) ? string.Empty : $"|{version}";
             var resultCanonical = fixedLibraryCanonicals is { Count: > 0 }
                                   && CqlLibraryIdentifier.TryParse(identifier, out var cqlLibraryIdentifier)
