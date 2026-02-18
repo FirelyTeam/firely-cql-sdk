@@ -407,12 +407,19 @@ namespace Hl7.Cql.Fhir
         private static bool? ConvertStringToBoolean(string? s)
         {
             if (s == null) return null;
-            // Per CQL spec, only "true" and "false" (case-insensitive) are valid
             switch (s.ToLower(CultureInfo.InvariantCulture))
             {
                 case "true":
+                case "t":
+                case "yes":
+                case "y":
+                case "1":
                     return true;
                 case "false":
+                case "f":
+                case "no":
+                case "n":
+                case "0":
                     return false;
                 default:
                     return null;
