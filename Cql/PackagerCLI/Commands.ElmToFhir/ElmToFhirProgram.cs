@@ -47,20 +47,35 @@ internal sealed class ElmToFhirProgram
             switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir, opt.LibrariesOutDir, opt.MeasuresOutDir)
             {
                 case (null, null, null, null, null):
-                    logger.LogInformation("Exiting. No output directories specified.");
+                    logger.LogError(ExitCodes.NoOutputDirs.ExitingMessage);
                     return ExitCodes.NoOutputDirs.Code;
 
                 case (_, _, not null, _, _) when opt.CqlInDir is not { Exists: true }:
                 case (_, _, _, not null, _) when opt.CqlInDir is not { Exists: true }:
                 case (_, _, _, _, not null) when opt.CqlInDir is not { Exists: true }:
-                    logger.LogInformation("Exiting. CQL input directory required when outputting FHIR.");
+                    logger.LogError(ExitCodes.NoCqlDirRequiredForFhir.ExitingMessage);
                     return ExitCodes.NoCqlDirRequiredForFhir.Code;
+
+                case (_, _, not null, not null, _):
+                case (_, _, not null, _, not null):
+                    logger.LogError(ExitCodes.MixedFhirAndSpecificDirs.ExitingMessage);
+                    return ExitCodes.MixedFhirAndSpecificDirs.Code;
+
+                case (_, _, null, not null, null):
+                case (_, _, null, null, not null):
+                    logger.LogError(ExitCodes.IncompleteLibrariesMeasuresDirs.ExitingMessage);
+                    return ExitCodes.IncompleteLibrariesMeasuresDirs.Code;
             }
 
-            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCodes.Success.Code)
+            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir, opt.LibrariesOutDir, opt.MeasuresOutDir) is var exitCode and not ExitCodes.Success.Code)
             {
                 return exitCode;
             }
+
+            // Create subdirectory preserver if not flattening hierarchy
+            SubdirectoryPreserver? subdirectoryPreserver = opt.FlattenDirHierarchy
+                ? null
+                : new SubdirectoryPreserver();
 
             ElmToolkit elmToolkit = new ElmToolkit(loggerFactory, elmOpt);
 
@@ -69,10 +84,11 @@ internal sealed class ElmToFhirProgram
 
             elmToolkit = elmToolkit.AddElmFilesFromDirectory(
                                         opt.ElmInDir,
-                                        filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
+                                        filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name),
+                                        subdirectoryPreserver: subdirectoryPreserver);
             if (elmToolkit.ArtifactsById.Count == 0)
             {
-                logger.LogInformation($"Exiting. No ELM libraries found in directory {opt.ElmInDir}.");
+                logger.LogError(ExitCodes.NoElmLibsInDir.ExitingMessageWithPlaceholder, opt.ElmInDir);
                 return ExitCodes.NoElmLibsInDir.Code;
             }
 
@@ -90,7 +106,7 @@ internal sealed class ElmToFhirProgram
                                     .ToList();
             if (elmToolkitResults.Count == 0)
             {
-                logger.LogInformation("Exiting. No ELM libraries compiled.");
+                logger.LogError(ExitCodes.NoElmLibsCompiled.ExitingMessage);
                 return ExitCodes.NoElmLibsCompiled.Code;
             }
 
@@ -116,7 +132,8 @@ internal sealed class ElmToFhirProgram
                 elmToolkit
                     .SaveCSharpFilesToDirectory(
                         opt.CSharpOutDir,
-                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"),
+                        subdirectoryPreserver: subdirectoryPreserver);
 
                 // Update status to "saved" for C#
                 foreach (var libraryId in successfulLibraries)
@@ -134,7 +151,8 @@ internal sealed class ElmToFhirProgram
                         opt.DllOutDir,
                         opt.PdbOutDir ?? opt.DllOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"),
-                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"));
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.pdb"),
+                        subdirectoryPreserver: subdirectoryPreserver);
 
                 // Update status to "saved" for .NET
                 var extensions = opt.PdbOutDir is not null ? new[] { ".dll", ".pdb" } : new[] { ".dll" };
@@ -150,30 +168,16 @@ internal sealed class ElmToFhirProgram
 
             if ((opt.CqlInDir, opt.FhirOutDir ?? opt.LibrariesOutDir ?? opt.MeasuresOutDir) is (not null, not null))
             {
-                // Validate mutual exclusivity: either --fhir alone, or both --libraries and --measures
-                bool hasFhir = opt.FhirOutDir is not null;
-                bool hasLibrariesDir = opt.LibrariesOutDir is not null;
-                bool hasMeasuresDir = opt.MeasuresOutDir is not null;
-
-                if (hasFhir && (hasLibrariesDir || hasMeasuresDir))
-                {
-                    logger.LogError("Cannot mix --fhir with --libraries or --measures. Use either --fhir alone for all resources, or both --libraries and --measures for separate directories.");
-                    return ExitCodes.MixedFhirAndSpecificDirs.Code;
-                }
-
-                if ((hasLibrariesDir && !hasMeasuresDir) || (!hasLibrariesDir && hasMeasuresDir))
-                {
-                    logger.LogError("Both --libraries and --measures must be specified together. Use --fhir if you want all resources in one directory.");
-                    return ExitCodes.IncompleteLibrariesMeasuresDirs.Code;
-                }
-
                 CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                                         .SetIgnoreEnumerationExceptions()
-                                        .AddCqlLibrariesFromDirectory(opt.CqlInDir);
+                                        .AddCqlLibrariesFromDirectory(
+                                            opt.CqlInDir,
+                                            subdirectoryPreserver: null // We only track subdirectories on elm
+                                            );
 
                 if (cqlToolkit.ArtifactsById.Count == 0)
                 {
-                    logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
+                    logger.LogError(ExitCodes.NoCqlLibsInDirWhenFhirRequested.ExitingMessageWithPlaceholder, opt.CqlInDir);
                     return ExitCodes.NoCqlLibsInDirWhenFhirRequested.Code;
                 }
 
@@ -206,7 +210,8 @@ internal sealed class ElmToFhirProgram
                             librariesDir,
                             measuresDir,
                             packOpt.JsonPretty,
-                            DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json")));
+                            DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
+                            SubdirectoryPreserver: subdirectoryPreserver));
 
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;
@@ -224,19 +229,10 @@ internal sealed class ElmToFhirProgram
                 }
 
                 // Build summary message
-                bool sameDirectory = librariesDir.IsSameDirectory(measuresDir);
-
-                if (sameDirectory)
+                sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) to directory {librariesDir}."));
+                if (measuresCount > 0)
                 {
-                    sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {librariesDir}."));
-                }
-                else
-                {
-                    sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) to directory {librariesDir}."));
-                    if (measuresCount > 0)
-                    {
-                        sbSummary.AppendLine(Invariant($"* Saved {measuresCount} measures (Measure-*.json) to directory {measuresDir}."));
-                    }
+                    sbSummary.AppendLine(Invariant($"* Saved {measuresCount} measures (Measure-*.json) to directory {measuresDir}."));
                 }
             }
 

@@ -137,10 +137,8 @@ static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.DefaultCqlModels.set -> void
 static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.operator !=(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? left, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? right) -> bool
 static Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.operator ==(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? left, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? right) -> bool
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibraries(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, params Hl7.Cql.CqlToElm.CqlLibraryString[]! cqlLibraries) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
-static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibrariesFromDirectory(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.IO.DirectoryInfo! directory, System.IO.EnumerationOptions? options = null, System.Func<System.IO.FileInfo!, bool>? filePredicate = null) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibraryFiles(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.Collections.Generic.IEnumerable<System.IO.FileInfo!>! files) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.GetCqlToolkitResults(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, Hl7.Cql.Elm.Library! elmLibrary)>!
-static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.SaveElmFilesToDirectory(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.IO.DirectoryInfo! directory, bool writeIndented = false, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 static readonly Hl7.Cql.CqlToElm.CqlToElmOptions.Default -> Hl7.Cql.CqlToElm.CqlToElmOptions!
 virtual Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.<Clone>$() -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig!
 virtual Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EqualityContract.get -> System.Type!
