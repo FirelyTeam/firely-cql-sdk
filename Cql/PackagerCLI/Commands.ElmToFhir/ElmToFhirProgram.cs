@@ -235,19 +235,10 @@ internal sealed class ElmToFhirProgram
                 }
 
                 // Build summary message
-                bool sameDirectory = librariesDir.IsSameDirectory(measuresDir);
-
-                if (sameDirectory)
+                sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) to directory {librariesDir}."));
+                if (measuresCount > 0)
                 {
-                    sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) and {measuresCount} measures (Measure-*.json) to directory {librariesDir}."));
-                }
-                else
-                {
-                    sbSummary.AppendLine(Invariant($"* Saved {librariesCount} FHIR libraries (Library-*.json) to directory {librariesDir}."));
-                    if (measuresCount > 0)
-                    {
-                        sbSummary.AppendLine(Invariant($"* Saved {measuresCount} measures (Measure-*.json) to directory {measuresDir}."));
-                    }
+                    sbSummary.AppendLine(Invariant($"* Saved {measuresCount} measures (Measure-*.json) to directory {measuresDir}."));
                 }
             }
 
