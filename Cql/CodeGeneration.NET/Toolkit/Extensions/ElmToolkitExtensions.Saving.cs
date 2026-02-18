@@ -221,12 +221,13 @@ public record SaveAssemblyBinariesToDirectoryOptions(
         }
 
         // Post-process directories after all files have been saved
-        if (DirectoryPostProcessingStrategy is not null)
+        var postProcessingStrategy = DirectoryPostProcessingStrategy ?? (SubdirectoryPreserver is not null ? Runtime.IO.DirectoryPostProcessingStrategy.DeleteEmptySubdirectories : null);
+        if (postProcessingStrategy is not null)
         {
-            DirectoryPostProcessingStrategy(dllDirectory);
+            postProcessingStrategy(dllDirectory);
             if (pdbDirectory is not null && pdbDirectory.FullName != dllDirectory.FullName)
             {
-                DirectoryPostProcessingStrategy(pdbDirectory);
+                postProcessingStrategy(pdbDirectory);
             }
         }
     }
@@ -282,9 +283,10 @@ public record SaveCSharpFilesToDirectoryOptions(
         }
 
         // Post-process the directory after all files have been saved
-        if (DirectoryPostProcessingStrategy is not null)
+        var postProcessingStrategy = DirectoryPostProcessingStrategy ?? (SubdirectoryPreserver is not null ? Runtime.IO.DirectoryPostProcessingStrategy.DeleteEmptySubdirectories : null);
+        if (postProcessingStrategy is not null)
         {
-            DirectoryPostProcessingStrategy(directory);
+            postProcessingStrategy(directory);
         }
     }
 }

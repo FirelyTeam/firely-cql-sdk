@@ -171,12 +171,13 @@ public record SaveFhirResourcesToDirectoriesOptions(
         }
 
         // Post-process each top-level directory after all files have been saved
-        if (DirectoryPostProcessingStrategy is not null)
+        var postProcessingStrategy = DirectoryPostProcessingStrategy ?? (SubdirectoryPreserver is not null ? Runtime.IO.DirectoryPostProcessingStrategy.DeleteEmptySubdirectories : null);
+        if (postProcessingStrategy is not null)
         {
             foreach (var baseDirectoryPath in preparedBaseDirectories)
             {
                 var baseDirectory = new DirectoryInfo(baseDirectoryPath);
-                DirectoryPostProcessingStrategy(baseDirectory);
+                postProcessingStrategy(baseDirectory);
             }
         }
     }
