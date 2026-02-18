@@ -54,7 +54,7 @@ The CQL Packager has the following commands:
 
 Start from ELM files and convert to one or more of the following outputs: C#, DLL, PDB, FHIR Resources.
 
-> **⚠️ BREAKING CHANGE (v5.x)**: The default behavior now **preserves subdirectory structure**. Input files in subdirectories 
+> **⚠️ BREAKING CHANGE (v2.5)**: The default behavior now **preserves subdirectory structure**. Input files in subdirectories 
 > will be output to corresponding subdirectories. Use `--flatten-dir-hierarchy` to get the old behavior (all files in the root output directory).
 
 **Usage:** `cql-package elm [options]`
@@ -94,7 +94,7 @@ Start from ELM files and convert to one or more of the following outputs: C#, DL
 
 Start from CQL files and convert to one or more of the following outputs: ELM, C#, DLL, PDB, FHIR Resources.
 
-> **⚠️ BREAKING CHANGE (v5.x)**: The default behavior now **preserves subdirectory structure**. Input files in subdirectories 
+> **⚠️ BREAKING CHANGE (v2.5)**: The default behavior now **preserves subdirectory structure**. Input files in subdirectories 
 > will be output to corresponding subdirectories. Use `--flatten-dir-hierarchy` to get the old behavior (all files in the root output directory).
 
 **Usage:** `cql-package cql [options]`
