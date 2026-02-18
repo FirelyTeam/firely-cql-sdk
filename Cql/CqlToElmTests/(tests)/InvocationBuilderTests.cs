@@ -295,10 +295,15 @@ namespace Hl7.Cql.CqlToElm.Test
         public void MatchNullContainsIntegerAmibugious()
         {
             // null contains 5
+            // When one argument is null and multiple signatures match, we pick the first one
+            // T is inferred from the non-null argument (Integer in this case)
             var arguments = new Expression[] { Null, Integer(5) };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.Contains, arguments);
-            result.Compatible.Should().BeFalse();
-            result.IsAmbiguous.Should().BeTrue();
+            result.Compatible.Should().BeTrue();
+            result.IsAmbiguous.Should().BeFalse();
+            // Should infer T from the Integer argument
+            result.GenericInferences.Should().ContainKey("T");
+            result.GenericInferences["T"].Should().Be(SystemTypes.IntegerType);
         }
 
         [TestMethod]

@@ -325,6 +325,18 @@ namespace Hl7.Cql.CqlToElm
                     }
                     else if (cheapest.Length > 0)
                     {
+                        // When multiple signatures match with the same cost and we're coercing from null (Any type),
+                        // prefer the first signature (typically the list variant for Contains).
+                        // This allows expressions like "null contains 5" to compile successfully.
+                        var hasNullArgument = arguments.Any(arg => arg is Null);
+                        
+                        if (hasNullArgument)
+                        {
+                            // Pick the first match without marking as ambiguous
+                            result = cheapest[0];
+                            return true;
+                        }
+                        
                         result = new(cheapest[0].Function,
                             cheapest[0].Arguments,
                             cheapest[0].GenericInferences,
