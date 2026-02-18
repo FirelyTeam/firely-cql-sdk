@@ -309,8 +309,10 @@ namespace Hl7.Cql.Operators
             {
                 if (argument == 1m && @base == 1m)
                     return null;
-                var result = (decimal?)Math.Log((double)argument, (double)@base);
-                return result;
+                var result = Math.Log((double)argument, (double)@base);
+                if (double.IsNaN(result) || double.IsInfinity(result))
+                    return null;
+                return (decimal?)result;
             }
         }
 
