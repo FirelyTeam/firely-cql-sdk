@@ -1,0 +1,41 @@
+{
+  "library": {
+    "identifier": {
+      "id": "NullContainsTest",
+      "version": "1.0.0"
+    },
+    "schemaIdentifier": {
+      "id": "urn:hl7-org:elm",
+      "version": "r1"
+    },
+    "usings": {
+      "def": [
+        {
+          "localIdentifier": "System",
+          "uri": "urn:hl7-org:elm-types:r1"
+        }
+      ]
+    },
+    "statements": {
+      "def": [
+        {
+          "name": "NullContainsFive",
+          "context": "Patient",
+          "expression": {
+            "type": "Contains",
+            "operand": [
+              {
+                "type": "Null"
+              },
+              {
+                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                "value": "5",
+                "type": "Literal"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

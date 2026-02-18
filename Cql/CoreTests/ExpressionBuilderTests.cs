@@ -183,5 +183,29 @@ namespace CoreTests
 
             return result;
         }
+
+        /// <summary>
+        /// Test that "null contains 5" ELM can be processed without throwing ExpressionBuildingException.
+        /// This validates the fix for the issue where Contains method would throw an exception
+        /// when the left operand is neither a list nor an interval (e.g., null).
+        /// </summary>
+        [TestMethod]
+        public void NullContains_ShouldNotThrowException()
+        {
+            using var serviceProvider = BuildServiceProvider();
+            using var servicesScope = serviceProvider.CreateScope();
+            var elm = new FileInfo(Path.Combine("Input", "ELM", "Test", "NullContainsTest.json"));
+            var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
+            
+            // This should not throw an ExpressionBuildingException
+            var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
+            
+            Assert.IsNotNull(definitions);
+            Assert.IsTrue(definitions.Libraries.Any());
+            
+            // Verify the expression was processed
+            var library = definitions.Libraries.First();
+            Assert.IsTrue(library.Value.Expressions.ContainsKey("NullContainsFive"));
+        }
     }
 }
