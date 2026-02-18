@@ -172,7 +172,8 @@ internal sealed class ElmToFhirProgram
                                         .SetIgnoreEnumerationExceptions()
                                         .AddCqlLibrariesFromDirectory(
                                             opt.CqlInDir,
-                                            subdirectoryPreserver: subdirectoryPreserver);
+                                            subdirectoryPreserver: null // We only track subdirectories on elm
+                                            );
 
                 if (cqlToolkit.ArtifactsById.Count == 0)
                 {
