@@ -20,6 +20,10 @@ variables:
     submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
 
 
+  # Console logger verbosity for test runs. Can be overridden at queue time.
+  # Valid values: quiet, minimal, normal, detailed, diagnostic
+  testConsoleLoggerVerbosity: 'detailed'
+
   # Excluded tests (not run in any stage)
   excludedTestProjects: |
     !**/XsdToCSharpConverterTests.csproj  # internal tooling, not for production
