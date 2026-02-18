@@ -82,29 +82,26 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void CqlIntervalOfTime_MapToFhirType()
+        public void CqlIntervalOfTime_NoFhirMapping()
         {
+            // Time-only intervals cannot be represented in FHIR
+            // Period requires dateTime (not time), Range is for quantitative values
             var cqlType = typeof(CqlInterval<CqlTime>);
 
             var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
             var typeEntry = crosswalk.TypeEntryFor(cqlType);
-            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
-            Assert.AreEqual(FHIRAllTypes.Period, typeEntry.FhirType.Value);
-            Assert.AreEqual(FHIRAllTypes.Time, typeEntry.ElementType.FhirType.Value);
+            Assert.IsNull(typeEntry, $"CqlInterval<CqlTime> should not map to any FHIR type because FHIR Period requires dateTime and Range is for quantitative values");
         }
 
         [TestMethod]
-        public void ListOfCqlIntervalOfTime_MapToFhirType()
+        public void ListOfCqlIntervalOfTime_NoFhirMapping()
         {
+            // List of time-only intervals cannot be represented in FHIR
             var cqlType = typeof(List<CqlInterval<CqlTime>>);
 
             var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
             var typeEntry = crosswalk.TypeEntryFor(cqlType);
-            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
-            Assert.AreEqual(FHIRAllTypes.List, typeEntry.FhirType.Value);
-            Assert.IsNotNull(typeEntry.ElementType, "List element type should not be null");
-            Assert.AreEqual(FHIRAllTypes.Period, typeEntry.ElementType.FhirType.Value);
-            Assert.AreEqual(FHIRAllTypes.Time, typeEntry.ElementType.ElementType.FhirType.Value);
+            Assert.IsNull(typeEntry, $"List<CqlInterval<CqlTime>> should not map to any FHIR type because the element type CqlInterval<CqlTime> has no FHIR representation");
         }
 
         [TestMethod]

@@ -161,7 +161,9 @@ namespace Hl7.Cql.Packaging
                         case CqlPrimitiveType.Ratio:
                             return new CqlTypeToFhirMapping(FHIRAllTypes.Ratio, cqlType);
                         case CqlPrimitiveType.Time:
-                            return new CqlTypeToFhirMapping(FHIRAllTypes.Period, cqlType, TypeEntryFor(FHIRAllTypes.Time));
+                            // Time-only intervals cannot be represented in FHIR
+                            // Period requires dateTime (not time), Range is for quantitative values
+                            return null;
                         case CqlPrimitiveType.Any:
                         case CqlPrimitiveType.Boolean:
                         case CqlPrimitiveType.Code:
