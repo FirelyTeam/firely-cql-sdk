@@ -74,10 +74,13 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsFalse(result);
         }
 
+        [TestMethod]
         public void NullContains5()
         {
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("null contains 5");
-            var @in = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Contains>();
+            var contains = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Contains>();
+            var result = Run<bool?>(contains, lib);
+            Assert.IsFalse(result);
         }
 
         [TestMethod]

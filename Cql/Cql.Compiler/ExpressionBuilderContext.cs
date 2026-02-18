@@ -328,6 +328,10 @@ partial class ExpressionBuilderContext
                 {
                     return [left, right, e.GetPrecision()];
                 }
+
+                // For cases where left is neither a list nor an interval (e.g., null),
+                // return the operands as-is and let method binding handle it
+                return [left, right];
             }
 
             throw this.NewExpressionBuildingException($"Contains expects two arguments, but got {e.operand.Length}");
