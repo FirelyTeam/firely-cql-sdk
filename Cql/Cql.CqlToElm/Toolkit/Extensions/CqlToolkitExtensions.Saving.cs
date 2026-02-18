@@ -86,11 +86,18 @@ public record SaveElmFilesToDirectoryOptions(
         var directory = Directory;
         var writeIndented = WriteIndented;
         var directoryPreparationStrategy = DirectoryPreparationStrategy;
-        var preparedDirectories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         var logger = cqlToolkit.CreateLogger();
+        bool directoryPrepared = false;
 
         foreach (var (libraryIdentifier, elmLibrary) in cqlToolkit.GetCqlToolkitResults())
         {
+            // Prepare top-level directory if not already prepared (only once)
+            if (!directoryPrepared)
+            {
+                (directoryPreparationStrategy ?? Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists)(directory);
+                directoryPrepared = true;
+            }
+
             // Determine target directory based on subdirectory preservation
             DirectoryInfo targetDirectory = directory;
             if (SubdirectoryPreserver is not null)
@@ -99,13 +106,12 @@ public record SaveElmFilesToDirectoryOptions(
                 if (found && !string.IsNullOrEmpty(relativePath))
                 {
                     targetDirectory = new DirectoryInfo(Path.Combine(directory.FullName, relativePath));
+                    // Ensure subdirectory exists
+                    if (!targetDirectory.Exists)
+                    {
+                        targetDirectory.Create();
+                    }
                 }
-            }
-
-            // Prepare directory if not already prepared
-            if (preparedDirectories.Add(targetDirectory.FullName))
-            {
-                (directoryPreparationStrategy ?? Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists)(targetDirectory);
             }
 
             var fileName = Path.Combine(targetDirectory.FullName, $"{libraryIdentifier}.json");

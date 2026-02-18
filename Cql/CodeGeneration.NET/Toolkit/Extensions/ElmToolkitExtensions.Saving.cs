@@ -164,13 +164,34 @@ public record SaveAssemblyBinariesToDirectoryOptions(
             return;
         }
 
-        var preparedDllDirectories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-        var preparedPdbDirectories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
+        bool dllDirectoryPrepared = false;
+        bool pdbDirectoryPrepared = false;
         bool hasAnyDebugSymbols = elmToAssemblyResults.Any(t => t.debugSymbolsBinary is { Length: > 0 });
 
         foreach (var (libraryIdentifier, _, _, assemblyBytes, debugSymbolsBytes) in elmToAssemblyResults)
         {
+            // Prepare top-level DLL directory if not already prepared (only once)
+            if (!dllDirectoryPrepared)
+            {
+                (dllDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(dllDirectory);
+                dllDirectoryPrepared = true;
+            }
+
+            // Prepare top-level PDB directory if not already prepared (only once)
+            if (hasAnyDebugSymbols && pdbDirectory is not null && !pdbDirectoryPrepared)
+            {
+                if (dllDirectory.FullName == pdbDirectory.FullName
+                    && pdbDirectoryPreparationStrategy != DirectoryPreparationStrategy.Recreate)
+                {
+                    // We do not want to recreate the pdb directory if it is the same as the dll directory
+                }
+                else
+                {
+                    (pdbDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(pdbDirectory);
+                }
+                pdbDirectoryPrepared = true;
+            }
+
             // Determine target directories based on subdirectory preservation
             DirectoryInfo targetDllDirectory = dllDirectory;
             DirectoryInfo? targetPdbDirectory = pdbDirectory;
@@ -181,30 +202,21 @@ public record SaveAssemblyBinariesToDirectoryOptions(
                 if (found && !string.IsNullOrEmpty(relativePath))
                 {
                     targetDllDirectory = new DirectoryInfo(Path.Combine(dllDirectory.FullName, relativePath));
+                    // Ensure subdirectory exists
+                    if (!targetDllDirectory.Exists)
+                    {
+                        targetDllDirectory.Create();
+                    }
+
                     if (pdbDirectory is not null)
                     {
                         targetPdbDirectory = new DirectoryInfo(Path.Combine(pdbDirectory.FullName, relativePath));
+                        // Ensure subdirectory exists
+                        if (!targetPdbDirectory.Exists)
+                        {
+                            targetPdbDirectory.Create();
+                        }
                     }
-                }
-            }
-
-            // Prepare the DLL directory if not already prepared
-            if (preparedDllDirectories.Add(targetDllDirectory.FullName))
-            {
-                (dllDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(targetDllDirectory);
-            }
-
-            // Prepare the PDB directory if not already prepared
-            if (hasAnyDebugSymbols && targetPdbDirectory is not null)
-            {
-                if (targetDllDirectory.FullName == targetPdbDirectory.FullName
-                    && pdbDirectoryPreparationStrategy != DirectoryPreparationStrategy.Recreate)
-                {
-                    // We do not want to recreate the pdb directory if it is the same as the dll directory
-                }
-                else if (preparedPdbDirectories.Add(targetPdbDirectory.FullName))
-                {
-                    (pdbDirectoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(targetPdbDirectory);
                 }
             }
 
@@ -255,11 +267,18 @@ public record SaveCSharpFilesToDirectoryOptions(
     {
         var directory = Directory;
         var directoryPreparationStrategy = DirectoryPreparationStrategy;
-        var preparedDirectories = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
+        bool directoryPrepared = false;
 
         foreach (var (libraryIdentifier, _, csharpSourceCode) in elmToolkit.GetElmToCSharpResults())
         {
+            // Prepare top-level directory if not already prepared (only once)
+            if (!directoryPrepared)
+            {
+                (directoryPreparationStrategy ?? Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists)(directory);
+                directoryPrepared = true;
+            }
+
             // Determine target directory based on subdirectory preservation
             DirectoryInfo targetDirectory = directory;
             if (SubdirectoryPreserver is not null)
@@ -268,13 +287,12 @@ public record SaveCSharpFilesToDirectoryOptions(
                 if (found && !string.IsNullOrEmpty(relativePath))
                 {
                     targetDirectory = new DirectoryInfo(Path.Combine(directory.FullName, relativePath));
+                    // Ensure subdirectory exists
+                    if (!targetDirectory.Exists)
+                    {
+                        targetDirectory.Create();
+                    }
                 }
-            }
-
-            // Prepare directory if not already prepared
-            if (preparedDirectories.Add(targetDirectory.FullName))
-            {
-                (directoryPreparationStrategy ?? Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists)(targetDirectory);
             }
 
             var fileName = Path.Combine(targetDirectory.FullName, $"{libraryIdentifier}.g.cs");
