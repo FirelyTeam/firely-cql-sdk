@@ -6,9 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
+using Hl7.Cql.Runtime;
 
-namespace Hl7.Cql.Runtime;
+namespace Hl7.Cql.Toolkit;
 
 /// <summary>
 /// Preserves the subdirectory structure of libraries by mapping their versioned identifiers 

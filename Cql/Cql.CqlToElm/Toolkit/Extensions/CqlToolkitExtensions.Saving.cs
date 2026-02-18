@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 

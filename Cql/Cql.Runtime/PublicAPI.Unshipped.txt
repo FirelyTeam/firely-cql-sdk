@@ -1,3 +1,5 @@
 Hl7.Cql.Runtime.CqlContext.DontUseCaching() -> void
 Hl7.Cql.Runtime.CqlContext.UseNewCache() -> void
+Hl7.Cql.Toolkit.SubdirectoryPreserver
+Hl7.Cql.Toolkit.SubdirectoryPreserver.SubdirectoryPreserver() -> void
 

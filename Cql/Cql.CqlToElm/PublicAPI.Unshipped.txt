@@ -1,8 +1,8 @@
 #nullable enable
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.AddCqlLibrariesFromDirectoryOptions(Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions! original) -> void
-Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.AddCqlLibrariesFromDirectoryOptions(System.IO.DirectoryInfo! Directory, System.IO.EnumerationOptions? EnumerationOptions, System.Func<System.IO.FileInfo!, bool>? FilePredicate) -> void
-Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.Deconstruct(out System.IO.DirectoryInfo! Directory, out System.IO.EnumerationOptions? EnumerationOptions, out System.Func<System.IO.FileInfo!, bool>? FilePredicate) -> void
+Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.AddCqlLibrariesFromDirectoryOptions(System.IO.DirectoryInfo! Directory, System.IO.EnumerationOptions? EnumerationOptions, System.Func<System.IO.FileInfo!, bool>? FilePredicate, Hl7.Cql.Toolkit.SubdirectoryPreserver? SubdirectoryPreserver = null) -> void
+Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.Deconstruct(out System.IO.DirectoryInfo! Directory, out System.IO.EnumerationOptions? EnumerationOptions, out System.Func<System.IO.FileInfo!, bool>? FilePredicate, out Hl7.Cql.Toolkit.SubdirectoryPreserver? SubdirectoryPreserver) -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.Directory.get -> System.IO.DirectoryInfo!
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.Directory.init -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.EnumerationOptions.get -> System.IO.EnumerationOptions?
@@ -11,14 +11,18 @@ Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.FilePatt
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.FilePattern.init -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.FilePredicate.get -> System.Func<System.IO.FileInfo!, bool>?
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.FilePredicate.init -> void
+Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.SubdirectoryPreserver.get -> Hl7.Cql.Toolkit.SubdirectoryPreserver?
+Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.SubdirectoryPreserver.init -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions
-Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.Deconstruct(out System.IO.DirectoryInfo! Directory, out bool WriteIndented, out Hl7.Cql.Runtime.IO.DirectoryInfoHandler? DirectoryPreparationStrategy) -> void
+Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.Deconstruct(out System.IO.DirectoryInfo! Directory, out bool WriteIndented, out Hl7.Cql.Runtime.IO.DirectoryInfoHandler? DirectoryPreparationStrategy, out Hl7.Cql.Toolkit.SubdirectoryPreserver? SubdirectoryPreserver) -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.Directory.get -> System.IO.DirectoryInfo!
 Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.Directory.init -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.DirectoryPreparationStrategy.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler?
 Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.DirectoryPreparationStrategy.init -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.SaveElmFilesToDirectoryOptions(Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions! original) -> void
-Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.SaveElmFilesToDirectoryOptions(System.IO.DirectoryInfo! Directory, bool WriteIndented, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? DirectoryPreparationStrategy) -> void
+Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.SaveElmFilesToDirectoryOptions(System.IO.DirectoryInfo! Directory, bool WriteIndented, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? DirectoryPreparationStrategy, Hl7.Cql.Toolkit.SubdirectoryPreserver? SubdirectoryPreserver = null) -> void
+Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.SubdirectoryPreserver.get -> Hl7.Cql.Toolkit.SubdirectoryPreserver?
+Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.SubdirectoryPreserver.init -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.WriteIndented.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.WriteIndented.init -> void
 override Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.Equals(object? obj) -> bool
@@ -30,7 +34,9 @@ override Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.ToSt
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.operator !=(Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions? left, Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions? right) -> bool
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.operator ==(Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions? left, Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions? right) -> bool
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibrariesFromDirectory(Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions! opt) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
+static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibrariesFromDirectory(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.IO.DirectoryInfo! directory, System.IO.EnumerationOptions? options = null, System.Func<System.IO.FileInfo!, bool>? filePredicate = null, Hl7.Cql.Toolkit.SubdirectoryPreserver? subdirectoryPreserver = null) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.SaveElmFilesToDirectory(Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions! opt) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
+static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.SaveElmFilesToDirectory(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.IO.DirectoryInfo! directory, bool writeIndented = false, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null, Hl7.Cql.Toolkit.SubdirectoryPreserver? subdirectoryPreserver = null) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.operator !=(Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions? left, Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions? right) -> bool
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions.operator ==(Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions? left, Hl7.Cql.CqlToElm.Toolkit.Extensions.SaveElmFilesToDirectoryOptions? right) -> bool
 virtual Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.<Clone>$() -> Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions!
