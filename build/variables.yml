@@ -22,7 +22,7 @@ variables:
 
   # Console logger verbosity for test runs. Can be overridden at queue time.
   # Valid values: quiet, minimal, normal, detailed, diagnostic
-  testConsoleLoggerVerbosity: 'normal'
+  testConsoleLoggerVerbosity: 'detailed'
 
   # Excluded tests (not run in any stage)
   excludedTestProjects: |
