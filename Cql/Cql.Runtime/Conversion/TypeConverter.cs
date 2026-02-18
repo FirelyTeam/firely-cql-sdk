@@ -215,6 +215,9 @@ namespace Hl7.Cql.Conversion
             AddConversion<string, long?>(s => ConvertStringToLong(s));
             AddConversion<string, decimal?>(s => ConvertStringToDecimal(s));
             AddConversion<string, CqlQuantity?>(s => ConvertStringToQuantity(s));
+            AddConversion<string, CqlDate?>(s => ConvertStringToDate(s));
+            AddConversion<string, CqlDateTime?>(s => ConvertStringToDateTime(s));
+            AddConversion<string, CqlTime?>(s => ConvertStringToTime(s));
             return this;
         }
 
@@ -256,6 +259,18 @@ namespace Hl7.Cql.Conversion
         private static CqlQuantity? ConvertStringToQuantity(string? s) =>
             s == null ? null :
             CqlQuantity.TryParse(s, out CqlQuantity? value) ? value : null;
+
+        private static CqlDate? ConvertStringToDate(string? s) =>
+            s == null ? null :
+            CqlDate.TryParse(s, out CqlDate? value) ? value : null;
+
+        private static CqlDateTime? ConvertStringToDateTime(string? s) =>
+            s == null ? null :
+            CqlDateTime.TryParse(s, out CqlDateTime? value) ? value : null;
+
+        private static CqlTime? ConvertStringToTime(string? s) =>
+            s == null ? null :
+            CqlTime.TryParse(s, out CqlTime? value) ? value : null;
 
         internal virtual void CaptureAvailableConverters()
         {

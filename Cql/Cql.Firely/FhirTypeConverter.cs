@@ -382,26 +382,6 @@ namespace Hl7.Cql.Fhir
         {
             converter.AddConversion<byte[], string>(binary => Encoding.UTF8.GetString(binary));
             converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
-
-            // TODO: this is a performance problem
-            converter.AddConversion<string, CqlDate?>(str =>
-            {
-                if (CqlDate.TryParse(str, out var date))
-                    return date!;
-                else return null;
-            });
-            converter.AddConversion<string, CqlDateTime?>(str =>
-            {
-                if (CqlDateTime.TryParse(str, out var dateTime))
-                    return dateTime;
-                else return null;
-            });
-            converter.AddConversion<string, CqlTime?>(str =>
-            {
-                if (CqlTime.TryParse(str, out var time))
-                    return time;
-                else return null;
-            });
             converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
             converter.AddConversion<string, M.FhirUri>(str => new M.FhirUri(str));
             converter.AddConversion<string, M.FhirString>(str => new M.FhirString(str));
