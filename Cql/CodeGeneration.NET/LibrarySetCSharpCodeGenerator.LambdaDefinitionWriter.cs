@@ -238,7 +238,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             // Check if the constant's declared type is nullable before extracting the underlying type
             var isNullableConstantType = Nullable.GetUnderlyingType(constant.Type) != null;
             var isNullableWithValue = isNullableConstantType && constant.Value != null;
-            
+
             var type = constant.Value?.GetType() ?? constant.Type;
             type = Nullable.GetUnderlyingType(type) ?? type;
 
@@ -256,7 +256,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     var v when v.IsObjectNullOrDefault()       => DefaultExpressionForType(),
                     var v                                      => FormattableString.Invariant($"{v}"),
                 };
-                
+
                 // If the constant is nullable but has a value, add type cast to preserve nullable type
                 // This is needed for "is null" pattern to work correctly in generated C#
                 if (isNullableWithValue)
@@ -654,11 +654,13 @@ internal partial class LibrarySetCSharpCodeGenerator
                 var rightCode = BuildExpression(right);
                 string binaryString = @operator switch
                 {
-                    // (constant value is null) --> false
-                    "is" when rightCode == "null" && left is ConstantExpression { Value: ValueType } => "false",
-                    // (null is null) --> true
-                    "is" when rightCode == "null" && left is ConstantExpression { Value: null } => "true",
-                    _                                                                           => $"{leftCode} {@operator} {rightCode}"
+                    // (constant value is null/default) --> false
+                    "is" when (rightCode == "null" || rightCode == "default") && left is ConstantExpression { Value: ValueType } => "false",
+                    // (null is null/default) --> true
+                    "is" when (rightCode == "null" || rightCode == "default") && left is ConstantExpression { Value: null } => "true",
+                    // Replace 'default' with 'null' for 'is' pattern (CS8505: default literal not valid as pattern)
+                    "is" when rightCode == "default" => $"{leftCode} is null",
+                    _                                 => $"{leftCode} {@operator} {rightCode}"
                 };
                 return binaryString;
             }
