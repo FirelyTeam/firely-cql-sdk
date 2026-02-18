@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
 using Hl7.Cql.Abstractions.Infrastructure;
@@ -404,27 +405,8 @@ namespace Hl7.Cql.Fhir
         }
 
         // CQL conversion helper methods that return null on invalid input
-        private static bool? ConvertStringToBoolean(string? s)
-        {
-            if (s == null) return null;
-            switch (s.ToLower(CultureInfo.InvariantCulture))
-            {
-                case "true":
-                case "t":
-                case "yes":
-                case "y":
-                case "1":
-                    return true;
-                case "false":
-                case "f":
-                case "no":
-                case "n":
-                case "0":
-                    return false;
-                default:
-                    return null;
-            }
-        }
+        private static bool? ConvertStringToBoolean(string? s) =>
+            CqlOperators.ConvertStringToBooleanImpl(s);
 
         private static int? ConvertStringToInteger(string? s) =>
             s == null ? null :

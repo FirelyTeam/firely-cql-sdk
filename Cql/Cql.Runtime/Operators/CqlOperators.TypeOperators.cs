@@ -84,7 +84,9 @@ namespace Hl7.Cql.Operators
 
         public string? ConvertRatioToString(CqlRatio? r) => r?.ToString();
 
-        public bool? ConvertStringToBoolean(string? s)
+        public bool? ConvertStringToBoolean(string? s) => ConvertStringToBooleanImpl(s);
+
+        internal static bool? ConvertStringToBooleanImpl(string? s)
         {
             if (s == null) return null;
             switch (s.ToLower(CultureInfo.InvariantCulture))
