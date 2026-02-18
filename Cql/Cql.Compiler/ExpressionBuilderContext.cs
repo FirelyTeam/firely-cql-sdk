@@ -1649,7 +1649,7 @@ internal partial class ExpressionBuilderContext
         if (operand.Type.IsValueType && operand.Type.IsNullableValueType(out _) == false)
             return Expression.Constant(false, typeof(bool));
 
-        var compare = Expression.Equal(operand, Expression.Constant(null));
+        var compare = Expression.Equal(operand, NullExpression.ForType(operand.Type));
         var asNullableBool = compare.NewAssignToTypeExpression<bool?>();
         return asNullableBool;
     }
