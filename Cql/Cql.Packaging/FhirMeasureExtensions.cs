@@ -129,7 +129,7 @@ internal static class FhirMeasureExtensions
                         throw new InvalidOperationException(
                             $"Definition {def.name} has a @population annotation whose value is {tuple.Population}.  @population must be one of: {string.Join(", ", Populations.Keys)}");
 
-                    var rate = $"rate-{tuple.Group}";
+                    var rate = $"{tuple.Group}";
                     var groupsForRate = fhirMeasure.Group?
                                                    .Where(g => g.ElementId == rate)
                                                    .ToArray() ?? [];

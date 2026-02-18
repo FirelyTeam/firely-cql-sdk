@@ -359,4 +359,125 @@ public class CqlContextOperatorTests
     }
 
     #endregion
+
+    #region Log
+
+    [TestMethod]
+    public void Log_ValidInput_ReturnsExpectedValue()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Log(8m, 2m);
+
+        // Assert
+        result.Should().Be(3m);
+    }
+
+    [TestMethod]
+    public void Log_BaseOne_ReturnsNull()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Log(2m, 1m);
+
+        // Assert
+        result.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Log_ArgumentOneAndBaseOne_ReturnsNull()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Log(1m, 1m);
+
+        // Assert
+        result.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Log_ArgumentZero_ReturnsNull()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Log(0m, 2m);
+
+        // Assert
+        result.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Log_NegativeArgument_ReturnsNull()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Log(-1m, 2m);
+
+        // Assert
+        result.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Log_BaseZero_ReturnsNull()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Log(2m, 0m);
+
+        // Assert
+        result.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Log_NegativeBase_ReturnsNull()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Log(2m, -1m);
+
+        // Assert
+        result.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Log_NullArgument_ReturnsNull()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Log(null, 2m);
+
+        // Assert
+        result.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Log_NullBase_ReturnsNull()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Log(2m, null);
+
+        // Assert
+        result.Should().BeNull();
+    }
+
+    #endregion
 }
