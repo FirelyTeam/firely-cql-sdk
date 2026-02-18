@@ -312,7 +312,7 @@ stages:
             inputs:
               command: 'test'
               projects: '${{ parameters.multiTargetTestProjects }}'
-              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net8.0'
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net8.0'
               publishTestResults: false
 
           - task: PublishTestResults@2
@@ -362,7 +362,7 @@ stages:
             inputs:
               command: 'test'
               projects: '${{ parameters.multiTargetTestProjects }}'
-              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net10.0'
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net10.0'
               publishTestResults: false
 
           - task: PublishTestResults@2
@@ -412,7 +412,7 @@ stages:
             inputs:
               command: 'test'
               projects: '${{ parameters.net10IntegrationTestProjects }}'
-              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/integration-net10.0'
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/integration-net10.0'
               publishTestResults: false
 
           - task: PublishTestResults@2
