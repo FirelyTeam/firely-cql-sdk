@@ -224,7 +224,7 @@ public class CqlToFhirProgram
                     return ExitCodes.MixedFhirAndSpecificDirs.Code;
                 }
 
-                if ((hasLibrariesDir && !hasMeasuresDir) || (!hasLibrariesDir && hasMeasuresDir))
+                if (hasLibrariesDir != hasMeasuresDir)
                 {
                     logger.LogError("Both --libraries and --measures must be specified together. Use --fhir if you want all resources in one directory.");
                     return ExitCodes.IncompleteLibrariesMeasuresDirs.Code;
