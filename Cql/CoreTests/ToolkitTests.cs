@@ -599,4 +599,46 @@ public class ToolkitTests
         // This demonstrates that the invocation toolkit can distinguish between 
         // different large tuple signatures and find the correct definitions
     }
+
+    /// <summary>
+    /// Tests that Interval[null, null] returns null.
+    /// See https://github.com/FirelyTeam/firely-cql-sdk/issues/543
+    /// </summary>
+    [TestMethod]
+    public void Interval_Null_Null_Returns_Null()
+    {
+        // Arrange: Create CQL library with Interval[null, null] for different types
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library Test version '1.0.0'
+            
+            define "NullInterval": Interval[null, null]
+            define "NullIntervalAsDate": Interval[null as Date, null as Date]
+            define "NullIntervalAsInteger": Interval[null as Integer, null as Integer]
+            define "NullIntervalAsDecimal": Interval[null as Decimal, null as Decimal]
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+
+        var cqlContext = FhirCqlContext.ForBundle();
+        
+        // Act: Invoke all definitions
+        var nullInterval = librarySetInvoker.InvokeLibraryDefinition(
+            cqlContext, cqlLibraryString.LibraryIdentifier, "NullInterval");
+        var nullIntervalAsDate = librarySetInvoker.InvokeLibraryDefinition(
+            cqlContext, cqlLibraryString.LibraryIdentifier, "NullIntervalAsDate");
+        var nullIntervalAsInteger = librarySetInvoker.InvokeLibraryDefinition(
+            cqlContext, cqlLibraryString.LibraryIdentifier, "NullIntervalAsInteger");
+        var nullIntervalAsDecimal = librarySetInvoker.InvokeLibraryDefinition(
+            cqlContext, cqlLibraryString.LibraryIdentifier, "NullIntervalAsDecimal");
+
+        // Assert: All should return null
+        nullInterval.Should().BeNull("Interval[null, null] should return null");
+        nullIntervalAsDate.Should().BeNull("Interval[null as Date, null as Date] should return null");
+        nullIntervalAsInteger.Should().BeNull("Interval[null as Integer, null as Integer] should return null");
+        nullIntervalAsDecimal.Should().BeNull("Interval[null as Decimal, null as Decimal] should return null");
+    }
 }
