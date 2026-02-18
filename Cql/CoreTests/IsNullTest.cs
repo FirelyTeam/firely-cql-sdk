@@ -52,19 +52,10 @@ public class IsNullTest
         Assert.IsNotNull(definitions);
         Assert.IsTrue(definitions.Libraries.Any());
 
-        try
-        {
-            var result = InvokeLibrary(elmLibrary, "IsNull_Integer");
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType<bool?>(result);
-            Assert.AreEqual(false, result);
-        }
-        catch (InvalidOperationException ex) when (ex.Data.Contains("SourceCode"))
-        {
-            Console.WriteLine("Generated C# source code:");
-            Console.WriteLine(ex.Data["SourceCode"]);
-            throw;
-        }
+        var result = InvokeLibrary(elmLibrary, "IsNull_Integer");
+        Assert.IsNotNull(result);
+        Assert.IsInstanceOfType<bool?>(result);
+        Assert.AreEqual(false, result);
     }
 
     [TestMethod]

@@ -235,6 +235,10 @@ internal partial class LibrarySetCSharpCodeGenerator
             ConstantExpression constant)
         {
             string text;
+            // Check if the constant's declared type is nullable before extracting the underlying type
+            var isNullableConstantType = Nullable.GetUnderlyingType(constant.Type) != null;
+            var isNullableWithValue = isNullableConstantType && constant.Value != null;
+            
             var type = constant.Value?.GetType() ?? constant.Type;
             type = Nullable.GetUnderlyingType(type) ?? type;
 
@@ -252,6 +256,13 @@ internal partial class LibrarySetCSharpCodeGenerator
                     var v when v.IsObjectNullOrDefault()       => DefaultExpressionForType(),
                     var v                                      => FormattableString.Invariant($"{v}"),
                 };
+                
+                // If the constant is nullable but has a value, add type cast to preserve nullable type
+                // This is needed for "is null" pattern to work correctly in generated C#
+                if (isNullableWithValue)
+                {
+                    text = $"({TypeToCSharpConverter.ToCSharp(constant.Type)}){text}";
+                }
             }
             else
             {
@@ -634,15 +645,19 @@ internal partial class LibrarySetCSharpCodeGenerator
             }
             else
             {
-                // WORKAROUND: Always use '==' for null comparisons instead of 'is' pattern
-                // to avoid C# compilation errors with value types
-                var @operator = BinaryOperatorFor(binary.NodeType);
+                var @operator = binary.NodeType == ExpressionType.Equal && right is ConstantExpression
+                                    ? "is"
+                                    : BinaryOperatorFor(binary.NodeType);
 
                 var leftCode = BuildExpression(left);
                 leftCode = leftCode.ParenthesizeIfNeeded();
                 var rightCode = BuildExpression(right);
                 string binaryString = @operator switch
                 {
+                    // (constant value is null) --> false
+                    "is" when rightCode == "null" && left is ConstantExpression { Value: ValueType } => "false",
+                    // (null is null) --> true
+                    "is" when rightCode == "null" && left is ConstantExpression { Value: null } => "true",
                     _                                                                           => $"{leftCode} {@operator} {rightCode}"
                 };
                 return binaryString;
