@@ -384,6 +384,7 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
             converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
             
+            // TODO: this is a performance problem
             // CQL string conversions - return null on invalid input
             converter.AddConversion<string, bool?>(s => ConvertStringToBoolean(s));
             converter.AddConversion<string, int?>(s => ConvertStringToInteger(s));
@@ -406,19 +407,12 @@ namespace Hl7.Cql.Fhir
         private static bool? ConvertStringToBoolean(string? s)
         {
             if (s == null) return null;
+            // Per CQL spec, only "true" and "false" (case-insensitive) are valid
             switch (s.ToLower(CultureInfo.InvariantCulture))
             {
                 case "true":
-                case "t":
-                case "yes":
-                case "y":
-                case "1":
                     return true;
                 case "false":
-                case "f":
-                case "no":
-                case "n":
-                case "0":
                     return false;
                 default:
                     return null;
