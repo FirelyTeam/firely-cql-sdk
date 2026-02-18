@@ -62,8 +62,7 @@ namespace Hl7.Cql.Conversion
         public static TypeConverter Create() =>
             new TypeConverter()
                 .ConvertNetTypes()
-                .ConvertsIsoToCqlPrimitives()
-                .ConvertsCqlTypes();
+                .ConvertsIsoToCqlPrimitives();
 
         /// <summary>
         /// Returns <see langword="true"/> if this converter is able to convert <paramref name="from"/> to <paramref name="to"/>.
@@ -202,75 +201,6 @@ namespace Hl7.Cql.Conversion
             AddConversion<CqlTime, TimeIso8601>(cqlTime => cqlTime.Value);
             return this;
         }
-
-        /// <summary>
-        /// Provides CQL-specific type conversions, particularly for string conversions that may fail and return null.
-        /// </summary>
-        /// <returns>This instance.</returns>
-        private TypeConverter ConvertsCqlTypes()
-        {
-            // String to primitive type conversions - return null on invalid input
-            AddConversion<string, bool?>(s => ConvertStringToBoolean(s));
-            AddConversion<string, int?>(s => ConvertStringToInteger(s));
-            AddConversion<string, long?>(s => ConvertStringToLong(s));
-            AddConversion<string, decimal?>(s => ConvertStringToDecimal(s));
-            AddConversion<string, CqlQuantity?>(s => ConvertStringToQuantity(s));
-            AddConversion<string, CqlDate?>(s => ConvertStringToDate(s));
-            AddConversion<string, CqlDateTime?>(s => ConvertStringToDateTime(s));
-            AddConversion<string, CqlTime?>(s => ConvertStringToTime(s));
-            return this;
-        }
-
-        // CQL conversion methods that return null on invalid input
-        private static bool? ConvertStringToBoolean(string? s)
-        {
-            if (s == null) return null;
-            switch (s.ToLower(CultureInfo.InvariantCulture))
-            {
-                case "true":
-                case "t":
-                case "yes":
-                case "y":
-                case "1":
-                    return true;
-                case "false":
-                case "f":
-                case "no":
-                case "n":
-                case "0":
-                    return false;
-                default:
-                    return null;
-            }
-        }
-
-        private static int? ConvertStringToInteger(string? s) =>
-            s == null ? null :
-            int.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value) ? value : null;
-
-        private static long? ConvertStringToLong(string? s) =>
-            s == null ? null :
-            long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out long value) ? value : null;
-
-        private static decimal? ConvertStringToDecimal(string? s) =>
-            s == null ? null :
-            decimal.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal value) ? value : null;
-
-        private static CqlQuantity? ConvertStringToQuantity(string? s) =>
-            s == null ? null :
-            CqlQuantity.TryParse(s, out CqlQuantity? value) ? value : null;
-
-        private static CqlDate? ConvertStringToDate(string? s) =>
-            s == null ? null :
-            CqlDate.TryParse(s, out CqlDate? value) ? value : null;
-
-        private static CqlDateTime? ConvertStringToDateTime(string? s) =>
-            s == null ? null :
-            CqlDateTime.TryParse(s, out CqlDateTime? value) ? value : null;
-
-        private static CqlTime? ConvertStringToTime(string? s) =>
-            s == null ? null :
-            CqlTime.TryParse(s, out CqlTime? value) ? value : null;
 
         internal virtual void CaptureAvailableConverters()
         {
