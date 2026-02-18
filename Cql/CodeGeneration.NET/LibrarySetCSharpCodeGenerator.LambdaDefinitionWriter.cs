@@ -634,19 +634,15 @@ internal partial class LibrarySetCSharpCodeGenerator
             }
             else
             {
-                var @operator = binary.NodeType == ExpressionType.Equal && right is ConstantExpression
-                                    ? "is"
-                                    : BinaryOperatorFor(binary.NodeType);
+                // WORKAROUND: Always use '==' for null comparisons instead of 'is' pattern
+                // to avoid C# compilation errors with value types
+                var @operator = BinaryOperatorFor(binary.NodeType);
 
                 var leftCode = BuildExpression(left);
                 leftCode = leftCode.ParenthesizeIfNeeded();
                 var rightCode = BuildExpression(right);
                 string binaryString = @operator switch
                 {
-                    // (constant value is null) --> false
-                    "is" when rightCode == "null" && left is ConstantExpression { Value: ValueType } => "false",
-                    // (null is null) --> true
-                    "is" when rightCode == "null" && left is ConstantExpression { Value: null } => "true",
                     _                                                                           => $"{leftCode} {@operator} {rightCode}"
                 };
                 return binaryString;

@@ -8,11 +8,16 @@
 
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Library = Hl7.Cql.Elm.Library;
 
@@ -47,10 +52,19 @@ public class IsNullTest
         Assert.IsNotNull(definitions);
         Assert.IsTrue(definitions.Libraries.Any());
 
-        var result = InvokeLibrary(elmLibrary, "IsNull_Integer");
-        Assert.IsNotNull(result);
-        Assert.IsInstanceOfType<bool?>(result);
-        Assert.AreEqual(false, result);
+        try
+        {
+            var result = InvokeLibrary(elmLibrary, "IsNull_Integer");
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType<bool?>(result);
+            Assert.AreEqual(false, result);
+        }
+        catch (InvalidOperationException ex) when (ex.Data.Contains("SourceCode"))
+        {
+            Console.WriteLine("Generated C# source code:");
+            Console.WriteLine(ex.Data["SourceCode"]);
+            throw;
+        }
     }
 
     [TestMethod]
@@ -157,17 +171,20 @@ public class IsNullTest
                         .AddElmLibraries([elmLibrary])
                         .CompileToAssemblies();
 
-        var (libraryIdentifier, _, _, assemblyBinary, debugSymbols) = elmToolkit.GetElmToAssemblyResults().First();
+        var results = elmToolkit.GetElmToAssemblyResults().First();
+        var libraryIdentifier = results.libraryIdentifier;
+        var assemblyBinary = results.assemblyBinary;
+        var debugSymbols = results.debugSymbolsBinary;
         var assembly = new AssemblyBinary(assemblyBinary, debugSymbols);
 
         var invoker = new InvocationToolkit()
                        .AddAssemblyBinaries([assembly])
                        .CreateLibrarySetInvoker();
 
-        var result = invoker.InvokeLibraryDefinition(
-            FhirCqlContext.ForBundle(),
-            libraryIdentifier,
-            definition);
+        var libraryInvoker = invoker.LibraryInvokers[libraryIdentifier];
+        var result = libraryInvoker.Invoke<object>(
+            definition,
+            FhirCqlContext.ForBundle());
 
         return result;
     }
