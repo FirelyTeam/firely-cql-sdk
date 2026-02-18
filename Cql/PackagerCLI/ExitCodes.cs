@@ -67,7 +67,7 @@ internal static class ExitCodes
     internal static class PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb
     {
         public const int Code = 9;
-        public const string Message = "9  - If --debug-symbols is PortablePdb, then (--dll with --pdb) or (--fhir) must be specified";
+        public const string Message = "9  - If --debug-symbols is PortablePdb, then (--dll with --pdb) or (--fhir) or (--libraries with --measures) must be specified";
     }
 
     internal static class LibraryExtractionError

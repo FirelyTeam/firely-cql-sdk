@@ -57,14 +57,24 @@ public class CqlToFhirProgram
             var elmOpt = elmOptions.Value;
             var packOpt = packagingOptions.Value;
 
-            switch (opt.ElmOutDir, opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
+            switch (opt.ElmOutDir, opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir, opt.LibrariesOutDir, opt.MeasuresOutDir)
             {
-                case (null, null, null, null):
+                case (null, null, null, null, null, null):
                     logger.LogInformation("Exiting. No output directories specified.");
                     return ExitCodes.NoOutputDirs.Code;
+
+                case (_, _, _, not null, not null, _):
+                case (_, _, _, not null, _, not null):
+                    logger.LogError("Cannot mix --fhir with --libraries or --measures. Use either --fhir alone for all resources, or both --libraries and --measures for separate directories.");
+                    return ExitCodes.MixedFhirAndSpecificDirs.Code;
+
+                case (_, _, _, null, not null, null):
+                case (_, _, _, null, null, not null):
+                    logger.LogError("Both --libraries and --measures must be specified together. Use --fhir if you want all resources in one directory.");
+                    return ExitCodes.IncompleteLibrariesMeasuresDirs.Code;
             }
 
-            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir) is var exitCode and not ExitCodes.Success.Code)
+            if (pdbOptionsValidator.GetExitCodeForInvalidPdbConfiguration(elmOpt.DebugSymbolsFormat, opt.PdbOutDir, opt.DllOutDir, opt.FhirOutDir, opt.LibrariesOutDir, opt.MeasuresOutDir) is var exitCode and not ExitCodes.Success.Code)
             {
                 return exitCode;
             }
@@ -213,23 +223,6 @@ public class CqlToFhirProgram
 
             if (opt.FhirOutDir is not null || opt.LibrariesOutDir is not null || opt.MeasuresOutDir is not null)
             {
-                // Validate mutual exclusivity: either --fhir alone, or both --libraries and --measures
-                bool hasFhir = opt.FhirOutDir is not null;
-                bool hasLibrariesDir = opt.LibrariesOutDir is not null;
-                bool hasMeasuresDir = opt.MeasuresOutDir is not null;
-
-                if (hasFhir && (hasLibrariesDir || hasMeasuresDir))
-                {
-                    logger.LogError("Cannot mix --fhir with --libraries or --measures. Use either --fhir alone for all resources, or both --libraries and --measures for separate directories.");
-                    return ExitCodes.MixedFhirAndSpecificDirs.Code;
-                }
-
-                if (hasLibrariesDir != hasMeasuresDir)
-                {
-                    logger.LogError("Both --libraries and --measures must be specified together. Use --fhir if you want all resources in one directory.");
-                    return ExitCodes.IncompleteLibrariesMeasuresDirs.Code;
-                }
-
                 var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
                     .AddPackagingInputs(cqlToolkit, elmToolkit);
 
