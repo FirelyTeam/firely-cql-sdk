@@ -28,6 +28,7 @@ public record CqlToFhirCommand
     string? CSharpNamespace,
     bool? JsonPretty,
     bool? ExitOnError,
+    bool? FlattenDirHierarchy,
     DebugSymbolsFormat? DebugSymbols)
 {
     public const string Name =
@@ -39,17 +40,17 @@ public record CqlToFhirCommand
         Program.Disclaimer +
         NewLine + NewLine + NewLine +
         "Exit Codes:" + NewLine +
-        "  " + ExitCodes.Success.Message + NewLine +
-        "  " + ExitCodes.NoCqlLibsInDir.Message + NewLine +
-        "  " + ExitCodes.NoElmLibsCompiled.Message + NewLine +
-        "  " + ExitCodes.CantPackageNoCqlElmMatches.Message + NewLine +
-        "  " + ExitCodes.NoOutputDirs.Message + NewLine +
-        "  " + ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.Message + NewLine +
-        "  " + ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.Message + NewLine +
-        "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Message + NewLine +
-        "  " + ExitCodes.NoCqlLibsConvertedToElm.Message + NewLine +
-        "  " + ExitCodes.MixedFhirAndSpecificDirs.Message + NewLine +
-        "  " + ExitCodes.IncompleteLibrariesMeasuresDirs.Message;
+        "  " + ExitCodes.Success.CodeWithMessage + NewLine +
+        "  " + ExitCodes.NoCqlLibsInDir.CodeWithMessage + NewLine +
+        "  " + ExitCodes.NoElmLibsCompiled.CodeWithMessage + NewLine +
+        "  " + ExitCodes.CantPackageNoCqlElmMatches.CodeWithMessage + NewLine +
+        "  " + ExitCodes.NoOutputDirs.CodeWithMessage + NewLine +
+        "  " + ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.CodeWithMessage + NewLine +
+        "  " + ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.CodeWithMessage + NewLine +
+        "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.CodeWithMessage + NewLine +
+        "  " + ExitCodes.NoCqlLibsConvertedToElm.CodeWithMessage + NewLine +
+        "  " + ExitCodes.MixedFhirAndSpecificDirs.CodeWithMessage + NewLine +
+        "  " + ExitCodes.IncompleteLibrariesMeasuresDirs.CodeWithMessage;
 
     public static Command CreateCommand() =>
         new Command(Name, Description)
@@ -148,6 +149,13 @@ public record CqlToFhirCommand
             """
             The C# namespace to use for generated code.
             (Used with --cs or --dll)
+            """),
+
+        Option<bool>(
+            "--flatten-dir-hierarchy",
+            """
+            Flatten the output directory structure, ignoring subdirectories from the input.
+            By default, subdirectory structure is preserved from input to output directories.
             """)
     ];
 
@@ -161,6 +169,7 @@ public record CqlToFhirCommand
         (Fhir, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FhirOutDir)]),
         (Libraries, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.LibrariesOutDir)]),
         (Measures, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.MeasuresOutDir)]),
+        (FlattenDirHierarchy, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FlattenDirHierarchy)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),

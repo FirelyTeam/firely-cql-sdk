@@ -112,7 +112,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             // Get the library identifier for building attachment IDs
             if (string.IsNullOrWhiteSpace(library.Name) || string.IsNullOrWhiteSpace(library.Version))
             {
-                logger.LogError("Library must have both Name and Version properties.");
+                logger.LogError(ExitCodes.InvalidLibraryMissingNameOrVersion.ExitingMessage);
                 return ExitCodes.InvalidLibraryMissingNameOrVersion.Code;
             }
 
