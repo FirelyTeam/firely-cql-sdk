@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 /// </summary>
 public static partial class CqlToolkitExtensions
 {
-    private static ILogger CreateLogger(this CqlToolkit cqlToolkit) =>
+    internal static ILogger CreateLogger(this CqlToolkit cqlToolkit) =>
         cqlToolkit.CreateLogger(typeof(CqlToolkitExtensions));
 
     /// <summary>

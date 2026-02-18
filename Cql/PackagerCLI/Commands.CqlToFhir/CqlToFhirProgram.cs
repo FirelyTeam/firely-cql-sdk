@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -235,11 +236,12 @@ public class CqlToFhirProgram
                 packagingToolkit
                     .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
-                    .SaveFhirResourcesToDirectories(
-                        librariesDir,
-                        measuresDir,
-                        packOpt.JsonPretty,
-                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
+                    .SaveFhirResourcesToDirectory(
+                        new SaveFhirResourcesToDirectoriesOptions(
+                            librariesDir,
+                            measuresDir,
+                            packOpt.JsonPretty,
+                            DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json")));
 
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;
