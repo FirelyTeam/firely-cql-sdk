@@ -77,5 +77,95 @@ namespace Hl7.Cql.CqlToElm.Test
             q.value.Should().Be(0.5m);
             q.unit.Should().Be("kg");
         }
+
+        [TestMethod]
+        public void Convert_InvalidString_to_Integer_ReturnsNull()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 'foo' to Integer");
+            var convert = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Elm.Convert>();
+            var result = Run(convert, library);
+            result.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Convert_ValidString_to_Integer_ReturnsValue()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert '123' to Integer");
+            var convert = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Elm.Convert>();
+            var result = Run(convert, library);
+            result.Should().Be(123);
+        }
+
+        [TestMethod]
+        public void Convert_TrueString_to_Boolean_ReturnsTrue()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 'true' to Boolean");
+            var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
+            var result = Run(toBoolean, library);
+            result.Should().Be(true);
+        }
+
+        [TestMethod]
+        public void Convert_TrueStringWithCapitalization_to_Boolean_ReturnsTrue()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 'True' to Boolean");
+            var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
+            var result = Run(toBoolean, library);
+            result.Should().Be(true);
+        }
+
+        [TestMethod]
+        public void Convert_FalseString_to_Boolean_ReturnsFalse()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 'false' to Boolean");
+            var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
+            var result = Run(toBoolean, library);
+            result.Should().Be(false);
+        }
+
+        [TestMethod]
+        public void Convert_YesString_to_Boolean_ReturnsTrue()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 'yes' to Boolean");
+            var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
+            var result = Run(toBoolean, library);
+            result.Should().Be(true);
+        }
+
+        [TestMethod]
+        public void Convert_OneString_to_Boolean_ReturnsTrue()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert '1' to Boolean");
+            var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
+            var result = Run(toBoolean, library);
+            result.Should().Be(true);
+        }
+
+        [TestMethod]
+        public void Convert_NoString_to_Boolean_ReturnsFalse()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 'no' to Boolean");
+            var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
+            var result = Run(toBoolean, library);
+            result.Should().Be(false);
+        }
+
+        [TestMethod]
+        public void Convert_ZeroString_to_Boolean_ReturnsFalse()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert '0' to Boolean");
+            var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
+            var result = Run(toBoolean, library);
+            result.Should().Be(false);
+        }
+
+        [TestMethod]
+        public void Convert_InvalidString_to_Boolean_ReturnsNull()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 'foo' to Boolean");
+            var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
+            var result = Run(toBoolean, library);
+            result.Should().BeNull();
+        }
     }
 }
