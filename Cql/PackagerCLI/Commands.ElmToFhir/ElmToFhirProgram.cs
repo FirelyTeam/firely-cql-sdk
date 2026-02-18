@@ -177,7 +177,9 @@ internal sealed class ElmToFhirProgram
 
                 CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                                         .SetIgnoreEnumerationExceptions()
-                                        .AddCqlLibrariesFromDirectory(opt.CqlInDir, subdirectoryPreserver: subdirectoryPreserver);
+                                        .AddCqlLibrariesFromDirectory(
+                                            opt.CqlInDir,
+                                            subdirectoryPreserver: subdirectoryPreserver);
 
                 if (cqlToolkit.ArtifactsById.Count == 0)
                 {
