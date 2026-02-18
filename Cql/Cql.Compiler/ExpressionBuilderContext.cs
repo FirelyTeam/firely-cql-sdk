@@ -204,7 +204,8 @@ partial class ExpressionBuilderContext
                                                                          TranslateTypes(GetTypeArgs(element))),
 
                     // Special case for intervals with null boundaries. See https://github.com/FirelyTeam/firely-cql-sdk/issues/543
-                    Interval { low: Null, high: Null } => Expression.Constant(null, typeof(CqlInterval<object>)),
+                    // Return a null expression that can be converted to the proper interval type by ConvertToResultType()
+                    Interval { low: Null, high: Null } => NullExpression.Object,
 
                     // All other Elm types matches on type name to the ICqlOperators method name
                     _ => _cqlOperatorsBinder.BindToMethod(element.GetType().Name, TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
