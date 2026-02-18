@@ -31,6 +31,18 @@ internal static class LibraryJsonSerializer
     private static readonly JsonDocumentOptions _jsonDocumentOptions = BuildJsonDocumentOptions();
 
     /// <summary>
+    /// Parses the specified JSON string and returns a corresponding JsonNode representation.
+    /// </summary>
+    /// <param name="json">The JSON string to parse. Cannot be null or empty. The string must contain valid JSON.</param>
+    /// <returns>A JsonNode representing the parsed JSON data.</returns>
+    /// <exception cref="InvalidOperationException">Thrown if the JSON string cannot be parsed into a JsonNode.</exception>
+    internal static JsonNode ParseToJsonNode(string json)
+    {
+        return JsonNode.Parse(json, documentOptions: _jsonDocumentOptions) ??
+               throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
+    }
+
+    /// <summary>
     /// Deserializes a Library from a JsonNode.
     /// </summary>
     /// <param name="node">The JSON node to deserialize.</param>

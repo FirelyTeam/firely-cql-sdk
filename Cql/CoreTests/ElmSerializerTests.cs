@@ -7,9 +7,10 @@
  */
 
 using Hl7.Cql.Elm;
+using Hl7.Cql.Elm.Serialization;
 using Hl7.Fhir.Model;
-using Library = Hl7.Cql.Elm.Library;
 using Annotation = Hl7.Cql.Elm.Annotation;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests
 {
@@ -41,7 +42,9 @@ namespace CoreTests
             // value), sometimes they are not for accessLevel. That's acceptable.
             "Unexpected key 'accessLevel' (value '\"Public\"') found in actual object.",
             //now removing empty values due to JAVA ELM having many empty arrays in the output
-            @"Expected key 'relationship' (value '[]') not found in actual object. At $.library.statements.def[6].expression.else.element[0].value."
+            "(value '[]') not found in actual object.",
+// Java ELM includes default boolean values, but we omit them
+"Expected key 'strict' (value 'false') not found in actual object."
         };
 
         [TestMethod]
@@ -51,12 +54,32 @@ namespace CoreTests
             var lib = Library.ParseFromJson(originalElm);
             var elm = lib.SerializeToJson();
 
-            var expected = JsonNode.Parse(originalElm);
-            var actual = JsonNode.Parse(elm);
+            var expected = LibraryJsonSerializer.ParseToJsonNode(originalElm);
+            var actual = LibraryJsonSerializer.ParseToJsonNode(elm);
             var errors = CompareNode(expected, actual);
             errors.RemoveAll(acceptable);
 
             Assert.AreEqual(0, errors.Count, message: string.Join("\n", errors));
+
+            static bool acceptable(string s)
+            {
+                return AcceptableErrors.Any(s.Contains);
+            }
+        }
+
+        [TestMethod]
+        public void Elm_Deserialize_Deep()
+        {
+            var originalElm = File.ReadAllText(Path.Combine("Input", "ELM", "Libs", "CMS133FHIRCataracts2040BCVA90Days.json"));
+            var lib = Library.ParseFromJson(originalElm);
+            var elm = lib.SerializeToJson();
+
+            var expected = LibraryJsonSerializer.ParseToJsonNode(originalElm);
+            var actual = LibraryJsonSerializer.ParseToJsonNode(elm);
+            var errors = CompareNode(expected, actual);
+            errors.RemoveAll(acceptable);
+
+            Assert.AreEqual(0, errors.Count, message: string.Join("\n", errors)); // We reach here now at least, but with 4580 errors. Acceptable?
 
             static bool acceptable(string s)
             {

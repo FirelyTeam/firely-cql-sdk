@@ -40,10 +40,28 @@ public static partial class CqlToolkitExtensions
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
-        Func<FileInfo, bool>? filePredicate = null)
+        Func<FileInfo, bool>? filePredicate = null) =>
+        AddCqlLibrariesFromDirectory(
+            cqlToolkit,
+            new AddCqlLibrariesFromDirectoryOptions(
+                directory,
+                options,
+                filePredicate));
+
+    /// <summary>
+    /// Adds all CQL library files from the specified directory to the provided CqlToolkit instance.
+    /// </summary>
+    /// <remarks>Only files with a ".cql" extension are considered. An optional file predicate can be provided
+    /// to further filter which files are added.</remarks>
+    /// <param name="cqlToolkit">The CqlToolkit instance to which the discovered CQL libraries will be added.</param>
+    /// <param name="opt">An options object that specifies the directory to search, file enumeration options, and an optional predicate to
+    /// filter files.</param>
+    /// <returns>The CqlToolkit instance with the added CQL libraries from the specified directory.</returns>
+    public static CqlToolkit AddCqlLibrariesFromDirectory(
+        CqlToolkit cqlToolkit,
+        AddCqlLibrariesFromDirectoryOptions opt)
     {
-        var files = directory.EnumerateFiles("*.cql", options ?? Defaults.EnumerationOptions);
-        if (filePredicate is not null) files = files.Where(filePredicate);
+        var files = opt.GetFilesToAdd();
         return cqlToolkit.AddCqlLibraryFiles(files);
     }
 
@@ -74,5 +92,38 @@ public static partial class CqlToolkitExtensions
                                     logMessage("Could not load CQL from file: {file}", fileInfo.FullName))); // Log errors
 
         return cqlToolkit.AddCqlLibraries(cqlLibraries);
+    }
+}
+
+/// <summary>
+/// Represents options for adding CQL libraries from a directory, including directory selection, file enumeration
+/// behavior, and file filtering.
+/// </summary>
+/// <remarks>Use this record to configure which CQL files are discovered and added from a directory. The options
+/// allow customization of file search patterns and filtering logic.</remarks>
+/// <param name="Directory">The directory from which to search for CQL library files. Must not be null.</param>
+/// <param name="EnumerationOptions">The options that control how the directory is enumerated. If null, default enumeration options are used.</param>
+/// <param name="FilePredicate">A predicate used to filter files within the directory. Only files for which this function returns true will be
+/// included. If null, all matching files are included.</param>
+public record AddCqlLibrariesFromDirectoryOptions(
+    DirectoryInfo Directory,
+    EnumerationOptions? EnumerationOptions,
+    Func<FileInfo, bool>? FilePredicate)
+{
+    /// <summary>
+    /// Gets the file name pattern used to match files for processing.
+    /// </summary>
+    /// <remarks>The pattern should follow standard file system wildcard conventions. For example, "*.cql"
+    /// matches all files with the ".cql" extension.</remarks>
+    public string FilePattern { get; init; } = "*.cql";
+
+    internal IEnumerable<FileInfo> GetFilesToAdd()
+    {
+        var directory = Directory;
+        var options = EnumerationOptions;
+        var filePredicate = FilePredicate;
+        var files = directory.EnumerateFiles(FilePattern, options ?? Defaults.EnumerationOptions);
+        if (filePredicate is not null) files = files.Where(filePredicate);
+        return files;
     }
 }

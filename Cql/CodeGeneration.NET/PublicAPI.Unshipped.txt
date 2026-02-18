@@ -1,1 +1,64 @@
 #nullable enable
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.AddElmFilesFromDirectoryOptions(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions! original) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.AddElmFilesFromDirectoryOptions(System.IO.DirectoryInfo! Directory, System.IO.EnumerationOptions? EnumerationOptions, System.Func<System.IO.FileInfo!, bool>? FilePredicate) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.Deconstruct(out System.IO.DirectoryInfo! Directory, out System.IO.EnumerationOptions? EnumerationOptions, out System.Func<System.IO.FileInfo!, bool>? FilePredicate) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.Directory.get -> System.IO.DirectoryInfo!
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.Directory.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.EnumerationOptions.get -> System.IO.EnumerationOptions?
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.EnumerationOptions.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.FilePattern.get -> string!
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.FilePattern.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.FilePredicate.get -> System.Func<System.IO.FileInfo!, bool>?
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.FilePredicate.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.Deconstruct(out System.IO.DirectoryInfo! DllDirectory, out System.IO.DirectoryInfo? PdbDirectory, out Hl7.Cql.Runtime.IO.DirectoryInfoHandler? DllDirectoryPreparationStrategy, out Hl7.Cql.Runtime.IO.DirectoryInfoHandler? PdbDirectoryPreparationStrategy) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.DllDirectory.get -> System.IO.DirectoryInfo!
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.DllDirectory.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.DllDirectoryPreparationStrategy.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler?
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.DllDirectoryPreparationStrategy.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.PdbDirectory.get -> System.IO.DirectoryInfo?
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.PdbDirectory.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.PdbDirectoryPreparationStrategy.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler?
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.PdbDirectoryPreparationStrategy.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.SaveAssemblyBinariesToDirectoryOptions(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions! original) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.SaveAssemblyBinariesToDirectoryOptions(System.IO.DirectoryInfo! DllDirectory, System.IO.DirectoryInfo? PdbDirectory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? DllDirectoryPreparationStrategy, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? PdbDirectoryPreparationStrategy) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.Deconstruct(out System.IO.DirectoryInfo! Directory, out Hl7.Cql.Runtime.IO.DirectoryInfoHandler? DirectoryPreparationStrategy) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.Directory.get -> System.IO.DirectoryInfo!
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.Directory.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.DirectoryPreparationStrategy.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler?
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.DirectoryPreparationStrategy.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.SaveCSharpFilesToDirectoryOptions(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions! original) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.SaveCSharpFilesToDirectoryOptions(System.IO.DirectoryInfo! Directory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? DirectoryPreparationStrategy) -> void
+override Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.Equals(object? obj) -> bool
+override Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.GetHashCode() -> int
+override Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.ToString() -> string!
+override Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.Equals(object? obj) -> bool
+override Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.GetHashCode() -> int
+override Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.ToString() -> string!
+override Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.Equals(object? obj) -> bool
+override Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.GetHashCode() -> int
+override Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.ToString() -> string!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.operator !=(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions? left, Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions? right) -> bool
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.operator ==(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions? left, Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions? right) -> bool
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.AddElmFilesFromDirectory(Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions! opt) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveAssemblyBinariesToDirectory(Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions! opt) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveAssemblyBinariesToDirectory(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, System.IO.DirectoryInfo! dllDirectory, System.IO.DirectoryInfo? pdbDirectory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? dllDirectoryPreparationStrategy = null, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveCSharpFilesToDirectory(Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions! opt) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.operator !=(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions? left, Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions? right) -> bool
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.operator ==(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions? left, Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions? right) -> bool
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.operator !=(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions? left, Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions? right) -> bool
+static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.operator ==(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions? left, Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions? right) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions!
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.Equals(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions? other) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.AddElmFilesFromDirectoryOptions.PrintMembers(System.Text.StringBuilder! builder) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions!
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.Equals(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions? other) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveAssemblyBinariesToDirectoryOptions.PrintMembers(System.Text.StringBuilder! builder) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions!
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.Equals(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions? other) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.PrintMembers(System.Text.StringBuilder! builder) -> bool

@@ -13,8 +13,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
-using Microsoft.Extensions.Logging.Abstractions;
 using System.Diagnostics;
+using static Hl7.Cql.Elm.Library;
 using DateTime = System.DateTime;
 using Library = Hl7.Cql.Elm.Library;
 
@@ -23,7 +23,7 @@ namespace CoreTests.Packaging;
 [TestClass]
 public class LibraryPackagerTests
 {
-    private static readonly FhirTypeResolver TypeResolver = new (ModelInfo.ModelInspector);
+    private static readonly FhirTypeResolver TypeResolver = new(ModelInfo.ModelInspector);
     private readonly CqlTypeToFhirTypeMapper _mapper = new(TypeResolver);
 
     private static readonly VersionedIdentifier VersionedIdentifier = new() { id = "test-lib", system = "name.space", version = "1.2.3" };
@@ -65,8 +65,8 @@ public class LibraryPackagerTests
             library.Content.ToDictionary(c => c.ElementId, c => (c.ContentType, c.Data));
 
         string id = new CqlVersionedLibraryIdentifier(
-            CqlLibraryIdentifier.NewVerbatim(VersionedIdentifier.id),
-            CqlLibraryVersion.NewVerbatim(VersionedIdentifier.version))
+                CqlLibraryIdentifier.NewVerbatim(VersionedIdentifier.id),
+                CqlLibraryVersion.NewVerbatim(VersionedIdentifier.version))
             .ToString();
 
         Assert.AreEqual(("application/elm+json", ElmBytes), RemoveByElementId($"{id}+elm"));
@@ -92,17 +92,19 @@ public class LibraryPackagerTests
         var versionedIdentifier = VersionedIdentifier;
         var elmLibrary = new Library(versionedIdentifier);
         // Act
-        var library = LibraryPackager.CreateLibraryResource(
-            NullLogger.Instance,
+        var library = Hl7.Fhir.Model.Library.Create(
             typeCrosswalk: _mapper,
             elmLibrary: elmLibrary,
             elmBytes: ElmBytes,
             cqlBytes: CqlBytes,
             assemblyBytes: AssemblyBytes,
             debugSymbols: DebugSymbolBytes,
-            cSharpSourceCodeById: [new (CSharpFileName, CSharpString)],
+            cSharpSourceCodeById: [new(CSharpFileName, CSharpString)],
             elmLibrarySet: new LibrarySet("", [elmLibrary]),
-            resourceCanonicalBuilder: (_, _, _) => TestUrl,
+            resourceCanonicalBuilder: (
+                _,
+                _,
+                _) => TestUrl,
             elmFileLastWriteTimeUtc: Date);
         Assert.IsNotNull(library);
         return library;
@@ -116,10 +118,9 @@ public class LibraryPackagerTests
     public void ElmParameterToFhir_ParameterTypeCanBeDerivedFromDifferentSources(string filename, FHIRAllTypes expectedType)
     {
         // Arrange
-        var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
+        var elmLibrary = LoadFromJson(new FileInfo(filename));
         // Act
-        var library = LibraryPackager.CreateLibraryResource(
-            NullLogger.Instance,
+        var library = Hl7.Fhir.Model.Library.Create(
             typeCrosswalk: _mapper,
             elmLibrary: elmLibrary,
             elmBytes: File.ReadAllBytes(filename),
@@ -127,8 +128,11 @@ public class LibraryPackagerTests
             assemblyBytes: [],
             debugSymbols: [],
             cSharpSourceCodeById: [],
-            elmLibrarySet: new LibrarySet("", [elmLibrary] ),
-            resourceCanonicalBuilder: (_, _, _) => "");
+            elmLibrarySet: new LibrarySet("", [elmLibrary]),
+            resourceCanonicalBuilder: (
+                _,
+                _,
+                _) => "");
 
         // Assert
         Assert.IsNotNull(library);
@@ -143,11 +147,10 @@ public class LibraryPackagerTests
     public void ElmContextToFhir_LibraryTypeIsBasedOnContext(string filename, bool contextExpected)
     {
         // Arrange
-        var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
-        var fhirHelpers = Library.LoadFromJson(new FileInfo("Input/ELM/HL7/FHIRHelpers-4.0.1.json"));
+        var elmLibrary = LoadFromJson(new FileInfo(filename));
+        var fhirHelpers = LoadFromJson(new FileInfo("Input/ELM/HL7/FHIRHelpers-4.0.1.json"));
         // Act
-        var library = LibraryPackager.CreateLibraryResource(
-            NullLoggerFactory.Instance.CreateLogger("Dummy"),
+        var library = Hl7.Fhir.Model.Library.Create(
             typeCrosswalk: _mapper,
             elmLibrary: elmLibrary,
             elmBytes: File.ReadAllBytes(filename),
@@ -155,11 +158,15 @@ public class LibraryPackagerTests
             assemblyBytes: [],
             debugSymbols: [],
             cSharpSourceCodeById: [],
-            elmLibrarySet: new LibrarySet("", [elmLibrary, fhirHelpers] ), resourceCanonicalBuilder: (_,_,_) => "");
+            elmLibrarySet: new LibrarySet(
+                "",
+                [elmLibrary, fhirHelpers]),
+                resourceCanonicalBuilder: (_, _, _) => "");
 
         // Assert
         Assert.IsNotNull(library);
         var subjectType = library.Subject as CodeableConcept;
-        subjectType?.Coding?.Any(coding => "http://hl7.org/fhir/resource-types".Equals(coding.System) && "Patient".Equals(coding.Code)).Should().Be(contextExpected);
+        subjectType?.Coding?.Any(coding => "http://hl7.org/fhir/resource-types".Equals(coding.System) && "Patient".Equals(coding.Code)).Should()
+                   .Be(contextExpected);
     }
 }

@@ -26,6 +26,6 @@ public sealed record GlobalCommand(string? Profile)
 
     private static string CalcProfile(string? profile) =>
         profile
-        ?? Environment.GetEnvironmentVariable($"{PackagerCliServiceCollectionExtensions.EnvironmentVariablePrefix}_PROFILE")
+        ?? GetEnvironmentVariable($"{PackagerCliServiceCollectionExtensions.EnvironmentVariablePrefix}_PROFILE")
         ?? "";
 }

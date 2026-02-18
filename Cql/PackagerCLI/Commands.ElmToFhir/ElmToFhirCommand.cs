@@ -21,6 +21,8 @@ internal record ElmToFhirCommand
     DirectoryInfo? Dll,
     DirectoryInfo? Pdb,
     DirectoryInfo? Fhir,
+    DirectoryInfo? Libraries,
+    DirectoryInfo? Measures,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
     string? CSharpNamespace,
@@ -35,7 +37,21 @@ internal record ElmToFhirCommand
         "Start from ELM and convert to one or more of the following outputs: C#, DLL, PDB, FHIR Resources. " +
         "When outputing to FHIR Resources, the CQL matchinging against the ELM based on their versioned " +
         "identifier must be supplied as well." +
-        Program.Disclaimer;
+        Program.Disclaimer +
+        NewLine + NewLine + NewLine +
+        "Exit Codes:" + NewLine +
+        "  " + ExitCodes.Success.Message + NewLine +
+        "  " + ExitCodes.NoElmLibsInDir.Message + NewLine +
+        "  " + ExitCodes.NoElmLibsCompiled.Message + NewLine +
+        "  " + ExitCodes.CantPackageNoCqlElmMatches.Message + NewLine +
+        "  " + ExitCodes.NoOutputDirs.Message + NewLine +
+        "  " + ExitCodes.NoCqlDirRequiredForFhir.Message + NewLine +
+        "  " + ExitCodes.NoCqlLibsInDirWhenFhirRequested.Message + NewLine +
+        "  " + ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.Message + NewLine +
+        "  " + ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.Message + NewLine +
+        "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Message + NewLine +
+        "  " + ExitCodes.MixedFhirAndSpecificDirs.Message + NewLine +
+        "  " + ExitCodes.IncompleteLibrariesMeasuresDirs.Message;
 
     public static readonly Option[] Options =
     [
@@ -78,6 +94,21 @@ internal record ElmToFhirCommand
             "--fhir",
             """
             FHIR Resource output directory which contains the FHIR library files in JSON format "Library-*.json" and FHIR measures in JSON format "Measure-*.json".
+            Cannot be used with --libraries or --measures (mutually exclusive).
+            """),
+
+        Option<DirectoryInfo>(
+            "--libraries",
+            """
+            FHIR Libraries output directory which contains the FHIR library files in JSON format "Library-*.json".
+            Must be used together with --measures. Cannot be combined with --fhir.
+            """),
+
+        Option<DirectoryInfo>(
+            "--measures",
+            """
+            FHIR Measures output directory which contains the FHIR measure files in JSON format "Measure-*.json".
+            Must be used together with --libraries. Cannot be combined with --fhir.
             """),
 
         Option<string>(
@@ -131,6 +162,8 @@ internal record ElmToFhirCommand
         (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
         (Pdb, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.PdbOutDir)]),
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
+        (Libraries, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.LibrariesOutDir)]),
+        (Measures, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.MeasuresOutDir)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
         (CSharpNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),

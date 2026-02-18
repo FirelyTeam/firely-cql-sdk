@@ -8,8 +8,10 @@
 
 using Hl7.Cql.Packager.Commands.CqlToFhir;
 using Hl7.Cql.Packager.Commands.ElmToFhir;
+using Hl7.Cql.Packager.Commands.ExtractLibraryAttachments;
 using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
+using Hl7.Cql.Packager.Commands.ReplaceLibraryAttachments;
 
 namespace Hl7.Cql.Packager;
 
@@ -26,10 +28,10 @@ public class Program
     private const string JavaToolVersion = "3.29.0";
 
     internal static readonly string Disclaimer =
-        Environment.NewLine +
-        Environment.NewLine +
+        NewLine +
+        NewLine +
         "DISCLAIMER:" +
-        Environment.NewLine +
+        NewLine +
         "The cql command is a very early addition and only supports basic cql translation. " +
         "It is not yet production ready. " +
         $"If you find issues, please start from the ELM produced by the Java v{JavaToolVersion} tooling instead " +
@@ -48,7 +50,7 @@ public class Program
                 {
                     Name = Process.GetCurrentProcess().ProcessName, // Use the name of the executable as the command name
             }
-                //.AddOptions(ElmToFhirCommand.Options)
+                //.AddOptions(ElmToFhirCommand.EnumerationOptions)
                 .AddGlobalOptions(LoggingCommand.Options)
                 .AddGlobalOptions(GlobalCommand.Options)
                 //.SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler))
@@ -56,6 +58,8 @@ public class Program
 
         rootCommand.AddCommand(ElmToFhirCommand.CreateCommand());
         rootCommand.AddCommand(CqlToFhirCommand.CreateCommand());
+        rootCommand.AddCommand(ExtractLibraryAttachmentsCommand.CreateCommand());
+        rootCommand.AddCommand(ReplaceLibraryAttachmentsCommand.CreateCommand());
 
         var systemConsole = new SystemConsole();
         var result = rootCommand.Invoke(args, systemConsole);

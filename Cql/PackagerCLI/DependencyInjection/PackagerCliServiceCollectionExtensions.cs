@@ -35,7 +35,7 @@ internal static class PackagerCliServiceCollectionExtensions
         var buildConfiguration = typeof(Program).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?.ToLowerInvariant();
         buildConfiguration ??= "release";
 
-        var curDirName = Environment.CurrentDirectory;
+        var curDirName = CurrentDirectory;
         var asmFileInfo = new FileInfo(Path.GetFullPath(typeof(Program).Assembly.Location));
         var asmDirName = asmFileInfo.DirectoryName!;
         var asmFileNameNoExt = asmFileInfo.Name[..^4]; // Trim ".dll"
@@ -79,6 +79,7 @@ internal static class PackagerCliServiceCollectionExtensions
                 bool b            => b ? "true" : "false",
                 string s          => s,
                 DirectoryInfo di  => di.FullName,
+                FileInfo fi       => fi.FullName,
                 DateTimeOffset dt => dt.ToString("u", CultureInfo.InvariantCulture),
                 Enum e            => e.ToString(),
                 { } o             => throw new NotSupportedException($"Unsupported type: {o.GetType()}"),

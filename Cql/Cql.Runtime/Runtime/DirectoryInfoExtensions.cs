@@ -33,4 +33,20 @@ internal static class DirectoryInfoExtensions
         if (dir.Exists) dir.Delete(true);
         dir.Create();
     }
+
+    /// <summary>
+    /// Compares two directory paths to determine if they refer to the same directory.
+    /// Uses normalized full paths with OS-appropriate case sensitivity.
+    /// </summary>
+    public static bool IsSameDirectory(this DirectoryInfo dir1, DirectoryInfo dir2)
+    {
+        var comparison = OperatingSystem.IsWindows()
+            ? StringComparison.OrdinalIgnoreCase
+            : StringComparison.Ordinal;
+
+        return string.Equals(
+            Path.GetFullPath(dir1.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+            Path.GetFullPath(dir2.FullName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar),
+            comparison);
+    }
 }

@@ -122,6 +122,7 @@
 						projectDir
 							.EnumerateDirectories("*", SearchOption.TopDirectoryOnly)
 							.Where(di => Char.IsNumber(di.Name[0]))
+							.Where(di => di.Name != "bin" && di.Name != "obj")
 							.ToArray();
 					if (exampleDirs.Length == 0)
 					{
