@@ -203,7 +203,7 @@ internal static class FhirLibraryExtensions
                     var resourceUrl = resourceCanonicalBuilder("Library", include.path, include.version);
                     var ra = new RelatedArtifact
                     {
-                        Display = $"Library {include.localIdentifier}",
+                        Display = $"Library {include.path}",
                         Type = RelatedArtifact.RelatedArtifactType.DependsOn,
                         Resource = resourceUrl,
                     };
