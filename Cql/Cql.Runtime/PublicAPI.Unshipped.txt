@@ -1,5 +1,8 @@
 Hl7.Cql.Runtime.CqlContext.DontUseCaching() -> void
 Hl7.Cql.Runtime.CqlContext.UseNewCache() -> void
+Hl7.Cql.Runtime.IO.DirectoryPostProcessingStrategy
+Hl7.Cql.Runtime.IO.DirectoryPostProcessingStrategy.DeleteEmptySubdirectories.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
+Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler(string searchPattern = "*", System.IO.EnumerationOptions? enumerationOptions = null, System.Func<System.IO.FileInfo, bool>? fileSelector = null) -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler
 Hl7.Cql.Toolkit.SubdirectoryPreserver
 Hl7.Cql.Toolkit.SubdirectoryPreserver.SubdirectoryPreserver() -> void
 

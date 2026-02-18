@@ -23,18 +23,21 @@ public static partial class ElmToolkitExtensions
     /// <param name="directory">The directory where the C# source files will be saved.</param>
     /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
     /// <param name="subdirectoryPreserver">Optional subdirectory preserver to maintain directory structure.</param>
+    /// <param name="directoryPostProcessingStrategy">An optional delegate that is invoked on the directory after all files have been saved.</param>
     /// <returns>The ElmToolkit instance.</returns>
     public static ElmToolkit SaveCSharpFilesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
-        SubdirectoryPreserver? subdirectoryPreserver = null) =>
+        SubdirectoryPreserver? subdirectoryPreserver = null,
+        DirectoryInfoHandler? directoryPostProcessingStrategy = null) =>
         SaveCSharpFilesToDirectory(
             elmToolkit,
             new SaveCSharpFilesToDirectoryOptions(
                 directory,
                 directoryPreparationStrategy,
-                subdirectoryPreserver));
+                subdirectoryPreserver,
+                directoryPostProcessingStrategy));
 
     /// <summary>
     /// Saves all generated C# source files contained in the specified ElmToolkit to the target directory.
@@ -60,19 +63,22 @@ public static partial class ElmToolkitExtensions
     /// <param name="directory">The directory where the assembly binaries and debug symbols (if provided) will be saved.</param>
     /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
     /// <param name="subdirectoryPreserver">Optional subdirectory preserver to maintain directory structure.</param>
+    /// <param name="directoryPostProcessingStrategy">An optional delegate that is invoked on the directory after all files have been saved.</param>
     /// <returns>The ElmToolkit instance.</returns>
     public static ElmToolkit SaveAssemblyBinariesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
-        SubdirectoryPreserver? subdirectoryPreserver = null) =>
+        SubdirectoryPreserver? subdirectoryPreserver = null,
+        DirectoryInfoHandler? directoryPostProcessingStrategy = null) =>
         SaveAssemblyBinariesToDirectory(
             elmToolkit,
             directory,
             directory,
             directoryPreparationStrategy,
             directoryPreparationStrategy,
-            subdirectoryPreserver);
+            subdirectoryPreserver,
+            directoryPostProcessingStrategy);
 
     /// <summary>
     /// Saves the generated assembly binaries and debug symbols to the specified directory.
@@ -83,6 +89,7 @@ public static partial class ElmToolkitExtensions
     /// <param name="dllDirectoryPreparationStrategy">Optional strategy for preparing the dll directory.</param>
     /// <param name="pdbDirectoryPreparationStrategy">Optional strategy for preparing the pdb directory.</param>
     /// <param name="subdirectoryPreserver">Optional subdirectory preserver to maintain directory structure.</param>
+    /// <param name="directoryPostProcessingStrategy">An optional delegate that is invoked on both directories after all files have been saved.</param>
     /// <returns>The ElmToolkit instance.</returns>
     public static ElmToolkit SaveAssemblyBinariesToDirectory(
         this ElmToolkit elmToolkit,
@@ -90,7 +97,8 @@ public static partial class ElmToolkitExtensions
         DirectoryInfo? pdbDirectory,
         DirectoryInfoHandler? dllDirectoryPreparationStrategy = null,
         DirectoryInfoHandler? pdbDirectoryPreparationStrategy = null,
-        SubdirectoryPreserver? subdirectoryPreserver = null) =>
+        SubdirectoryPreserver? subdirectoryPreserver = null,
+        DirectoryInfoHandler? directoryPostProcessingStrategy = null) =>
         SaveAssemblyBinariesToDirectory(
             elmToolkit,
             new SaveAssemblyBinariesToDirectoryOptions(
@@ -98,7 +106,8 @@ public static partial class ElmToolkitExtensions
                 pdbDirectory,
                 dllDirectoryPreparationStrategy,
                 pdbDirectoryPreparationStrategy,
-                subdirectoryPreserver));
+                subdirectoryPreserver,
+                directoryPostProcessingStrategy));
 
     /// <summary>
     /// Saves all generated assembly binaries and debug symbols contained in the specified ElmToolkit to the target directories.
@@ -131,12 +140,14 @@ public static partial class ElmToolkitExtensions
 /// <param name="PdbDirectoryPreparationStrategy">An optional strategy for preparing the debug symbol directory before saving files. If null, the default strategy is
 /// used.</param>
 /// <param name="SubdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
+/// <param name="DirectoryPostProcessingStrategy">An optional delegate that is invoked on both directories after all files have been saved.</param>
 public record SaveAssemblyBinariesToDirectoryOptions(
     DirectoryInfo DllDirectory,
     DirectoryInfo? PdbDirectory,
     DirectoryInfoHandler? DllDirectoryPreparationStrategy,
     DirectoryInfoHandler? PdbDirectoryPreparationStrategy,
-    SubdirectoryPreserver? SubdirectoryPreserver = null)
+    SubdirectoryPreserver? SubdirectoryPreserver = null,
+    DirectoryInfoHandler? DirectoryPostProcessingStrategy = null)
 {
     internal void Save(ElmToolkit elmToolkit)
     {
@@ -163,7 +174,7 @@ public record SaveAssemblyBinariesToDirectoryOptions(
             // Determine target directories based on subdirectory preservation
             DirectoryInfo targetDllDirectory = dllDirectory;
             DirectoryInfo? targetPdbDirectory = pdbDirectory;
-            
+
             if (SubdirectoryPreserver is not null)
             {
                 var (relativePath, found) = SubdirectoryPreserver.TryGetRelativePath(libraryIdentifier);
@@ -208,6 +219,16 @@ public record SaveAssemblyBinariesToDirectoryOptions(
                 logger.LogInformation("Saved debug symbols to file: {file}", pdbFileName);
             }
         }
+
+        // Post-process directories after all files have been saved
+        if (DirectoryPostProcessingStrategy is not null)
+        {
+            DirectoryPostProcessingStrategy(dllDirectory);
+            if (pdbDirectory is not null && pdbDirectory.FullName != dllDirectory.FullName)
+            {
+                DirectoryPostProcessingStrategy(pdbDirectory);
+            }
+        }
     }
 }
 
@@ -222,10 +243,12 @@ public record SaveAssemblyBinariesToDirectoryOptions(
 /// <param name="DirectoryPreparationStrategy">An optional strategy for preparing the target directory before saving files. If null, the default strategy creates
 /// the directory if it does not exist.</param>
 /// <param name="SubdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
+/// <param name="DirectoryPostProcessingStrategy">An optional delegate that is invoked on the directory after all files have been saved.</param>
 public record SaveCSharpFilesToDirectoryOptions(
     DirectoryInfo Directory,
     DirectoryInfoHandler? DirectoryPreparationStrategy,
-    SubdirectoryPreserver? SubdirectoryPreserver = null)
+    SubdirectoryPreserver? SubdirectoryPreserver = null,
+    DirectoryInfoHandler? DirectoryPostProcessingStrategy = null)
 {
     internal void Save(ElmToolkit elmToolkit)
     {
@@ -256,6 +279,12 @@ public record SaveCSharpFilesToDirectoryOptions(
             var fileName = Path.Combine(targetDirectory.FullName, $"{libraryIdentifier}.g.cs");
             File.WriteAllText(fileName, csharpSourceCode);
             logger.LogInformation("Saved C# source code to file: {file}", fileName);
+        }
+
+        // Post-process the directory after all files have been saved
+        if (DirectoryPostProcessingStrategy is not null)
+        {
+            DirectoryPostProcessingStrategy(directory);
         }
     }
 }

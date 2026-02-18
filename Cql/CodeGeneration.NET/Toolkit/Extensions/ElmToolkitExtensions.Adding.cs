@@ -239,7 +239,7 @@ public record AddElmFilesFromDirectoryOptions(
         var directory = Directory;
         var options = EnumerationOptions;
         var filePredicate = FilePredicate;
-        var files = directory.EnumerateFiles(FilePattern, options ?? Defaults.EnumerationOptions);
+        var files = directory.EnumerateFiles(FilePattern, options ?? Defaults.EnumerationOptionsRecurseSubdirectories);
         if (filePredicate is not null) files = files.Where(filePredicate);
         return files;
     }

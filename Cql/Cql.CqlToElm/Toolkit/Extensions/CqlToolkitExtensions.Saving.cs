@@ -25,20 +25,23 @@ public static partial class CqlToolkitExtensions
     /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
     /// <param name="directoryPreparationStrategy">The directory preparation strategy.</param>
     /// <param name="subdirectoryPreserver">Optional subdirectory preserver to maintain directory structure.</param>
+    /// <param name="directoryPostProcessingStrategy">An optional delegate that is invoked on the directory after all files have been saved.</param>
     /// <returns>The <see cref="CqlToolkit"/> instance.</returns>
     public static CqlToolkit SaveElmFilesToDirectory(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
-        SubdirectoryPreserver? subdirectoryPreserver = null) =>
+        SubdirectoryPreserver? subdirectoryPreserver = null,
+        DirectoryInfoHandler? directoryPostProcessingStrategy = null) =>
         SaveElmFilesToDirectory(
             cqlToolkit,
             new SaveElmFilesToDirectoryOptions(
                 directory,
                 writeIndented,
                 directoryPreparationStrategy,
-                subdirectoryPreserver));
+                subdirectoryPreserver,
+                directoryPostProcessingStrategy));
 
     /// <summary>
     /// Saves all ELM (Expression Logical Model) libraries contained in the specified CQL toolkit to JSON files in the
@@ -70,11 +73,13 @@ public static partial class CqlToolkitExtensions
 /// <param name="DirectoryPreparationStrategy">An optional delegate that defines how the target directory should be prepared before saving files. If null, the
 /// default strategy creates the directory if it does not exist.</param>
 /// <param name="SubdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
+/// <param name="DirectoryPostProcessingStrategy">An optional delegate that is invoked on the directory after all files have been saved.</param>
 public record SaveElmFilesToDirectoryOptions(
     DirectoryInfo Directory,
     bool WriteIndented,
     DirectoryInfoHandler? DirectoryPreparationStrategy,
-    SubdirectoryPreserver? SubdirectoryPreserver = null)
+    SubdirectoryPreserver? SubdirectoryPreserver = null,
+    DirectoryInfoHandler? DirectoryPostProcessingStrategy = null)
 {
     internal void Save(CqlToolkit cqlToolkit)
     {
@@ -106,6 +111,12 @@ public record SaveElmFilesToDirectoryOptions(
             var fileName = Path.Combine(targetDirectory.FullName, $"{libraryIdentifier}.json");
             File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
             logger.LogInformation("Saved ELM to file: {file}", fileName);
+        }
+
+        // Post-process the directory after all files have been saved
+        if (DirectoryPostProcessingStrategy is not null)
+        {
+            DirectoryPostProcessingStrategy(directory);
         }
     }
 }

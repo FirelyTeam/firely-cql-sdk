@@ -25,10 +25,11 @@ public static class DirectoryPreparationStrategy
 
     /// <summary>
     /// Creates a <see cref="DirectoryInfoHandler"/> that deletes files in the directory based on the specified search pattern and options.
+    /// If the directory does not exist, it will be created.
     /// </summary>
     /// <param name="searchPattern">The search string to match against the names of files in the directory. The default pattern is "*".</param>
-    /// <param name="enumerationOptions">The options to use for enumeration. If null, default options are used.</param>
-    /// <param name="fileSelector">A function to select which files to delete. If null, all files are selected.</param>
+    /// <param name="enumerationOptions">The options to use for enumeration. If null, default options are used which recurse into subdirectories.</param>
+    /// <param name="fileSelector">A function to select which files to delete. If null, all files matching the search pattern are selected.</param>
     /// <returns>A <see cref="DirectoryInfoHandler"/> that deletes files in the directory.</returns>
     public static DirectoryInfoHandler CreateFileDeletionDirectoryHandler(
         string searchPattern = "*",
@@ -38,12 +39,13 @@ public static class DirectoryPreparationStrategy
         {
             if (d.Exists)
             {
-                enumerationOptions ??= Defaults.EnumerationOptions;
+                enumerationOptions ??= Defaults.EnumerationOptionsRecurseSubdirectories;
                 fileSelector ??= IncludeFile;
                 foreach (var file in d.EnumerateFiles(searchPattern, enumerationOptions).Where(fileSelector))
                     file.Delete();
             }
             else d.Create();
+
             static bool IncludeFile(FileInfo fi) => true;
         };
 }

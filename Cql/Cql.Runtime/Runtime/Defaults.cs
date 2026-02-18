@@ -10,7 +10,7 @@ namespace Hl7.Cql.Runtime;
 
 internal static class Defaults
 {
-    public static EnumerationOptions EnumerationOptions { get; } = new()
+    public static EnumerationOptions EnumerationOptionsRecurseSubdirectories { get; } = new()
     {
         RecurseSubdirectories = true
     };
