@@ -47,23 +47,23 @@ internal sealed class ElmToFhirProgram
             switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir, opt.LibrariesOutDir, opt.MeasuresOutDir)
             {
                 case (null, null, null, null, null):
-                    logger.LogInformation("Exiting. No output directories specified.");
+                    logger.LogError(ExitCodes.NoOutputDirs.ExitingMessage);
                     return ExitCodes.NoOutputDirs.Code;
 
                 case (_, _, not null, _, _) when opt.CqlInDir is not { Exists: true }:
                 case (_, _, _, not null, _) when opt.CqlInDir is not { Exists: true }:
                 case (_, _, _, _, not null) when opt.CqlInDir is not { Exists: true }:
-                    logger.LogInformation("Exiting. CQL input directory required when outputting FHIR.");
+                    logger.LogError(ExitCodes.NoCqlDirRequiredForFhir.ExitingMessage);
                     return ExitCodes.NoCqlDirRequiredForFhir.Code;
 
                 case (_, _, not null, not null, _):
                 case (_, _, not null, _, not null):
-                    logger.LogError("Cannot mix --fhir with --libraries or --measures. Use either --fhir alone for all resources, or both --libraries and --measures for separate directories.");
+                    logger.LogError(ExitCodes.MixedFhirAndSpecificDirs.ExitingMessage);
                     return ExitCodes.MixedFhirAndSpecificDirs.Code;
 
                 case (_, _, null, not null, null):
                 case (_, _, null, null, not null):
-                    logger.LogError("Both --libraries and --measures must be specified together. Use --fhir if you want all resources in one directory.");
+                    logger.LogError(ExitCodes.IncompleteLibrariesMeasuresDirs.ExitingMessage);
                     return ExitCodes.IncompleteLibrariesMeasuresDirs.Code;
             }
 
@@ -88,7 +88,7 @@ internal sealed class ElmToFhirProgram
                                         subdirectoryPreserver: subdirectoryPreserver);
             if (elmToolkit.ArtifactsById.Count == 0)
             {
-                logger.LogInformation($"Exiting. No ELM libraries found in directory {opt.ElmInDir}.");
+                logger.LogError(ExitCodes.NoElmLibsInDir.ExitingMessageWithPlaceholder, opt.ElmInDir);
                 return ExitCodes.NoElmLibsInDir.Code;
             }
 
@@ -106,7 +106,7 @@ internal sealed class ElmToFhirProgram
                                     .ToList();
             if (elmToolkitResults.Count == 0)
             {
-                logger.LogInformation("Exiting. No ELM libraries compiled.");
+                logger.LogError(ExitCodes.NoElmLibsCompiled.ExitingMessage);
                 return ExitCodes.NoElmLibsCompiled.Code;
             }
 
@@ -176,7 +176,7 @@ internal sealed class ElmToFhirProgram
 
                 if (cqlToolkit.ArtifactsById.Count == 0)
                 {
-                    logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
+                    logger.LogError(ExitCodes.NoCqlLibsInDirWhenFhirRequested.ExitingMessageWithPlaceholder, opt.CqlInDir);
                     return ExitCodes.NoCqlLibsInDirWhenFhirRequested.Code;
                 }
 

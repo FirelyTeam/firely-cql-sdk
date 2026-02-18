@@ -26,13 +26,13 @@ public sealed class PdbOptionsValidator(
         switch (debugInformationFormat, pdbDir, dllDir, hasFhirOutput)
         {
             case (not DebugSymbolsFormat.PortablePdb, { }, _, _):
-                logger.LogInformation("Exiting. If --pdb is specified, then --debug-symbols must be PortablePdb.");
+                logger.LogError(ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.ExitingMessage);
                 return ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.Code;
             case (DebugSymbolsFormat.PortablePdb, { }, null, _):
-                logger.LogInformation("Exiting. If --pdb is specified, then --dll is required.");
+                logger.LogError(ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.ExitingMessage);
                 return ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.Code;
             case (DebugSymbolsFormat.PortablePdb, null, _, false):
-                logger.LogInformation("Exiting. If --debug-symbols is PortablePdb, then (--dll with --pdb) or (--fhir) or (--libraries with --measures) must be specified.");
+                logger.LogError(ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.ExitingMessage);
                 return ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Code;
             default:
                 return ExitCodes.Success.Code;

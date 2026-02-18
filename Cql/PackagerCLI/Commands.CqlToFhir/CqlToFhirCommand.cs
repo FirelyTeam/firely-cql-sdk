@@ -40,17 +40,17 @@ public record CqlToFhirCommand
         Program.Disclaimer +
         NewLine + NewLine + NewLine +
         "Exit Codes:" + NewLine +
-        "  " + ExitCodes.Success.Message + NewLine +
-        "  " + ExitCodes.NoCqlLibsInDir.Message + NewLine +
-        "  " + ExitCodes.NoElmLibsCompiled.Message + NewLine +
-        "  " + ExitCodes.CantPackageNoCqlElmMatches.Message + NewLine +
-        "  " + ExitCodes.NoOutputDirs.Message + NewLine +
-        "  " + ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.Message + NewLine +
-        "  " + ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.Message + NewLine +
-        "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.Message + NewLine +
-        "  " + ExitCodes.NoCqlLibsConvertedToElm.Message + NewLine +
-        "  " + ExitCodes.MixedFhirAndSpecificDirs.Message + NewLine +
-        "  " + ExitCodes.IncompleteLibrariesMeasuresDirs.Message;
+        "  " + ExitCodes.Success.CodeWithMessage + NewLine +
+        "  " + ExitCodes.NoCqlLibsInDir.CodeWithMessage + NewLine +
+        "  " + ExitCodes.NoElmLibsCompiled.CodeWithMessage + NewLine +
+        "  " + ExitCodes.CantPackageNoCqlElmMatches.CodeWithMessage + NewLine +
+        "  " + ExitCodes.NoOutputDirs.CodeWithMessage + NewLine +
+        "  " + ExitCodes.PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb.CodeWithMessage + NewLine +
+        "  " + ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.CodeWithMessage + NewLine +
+        "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.CodeWithMessage + NewLine +
+        "  " + ExitCodes.NoCqlLibsConvertedToElm.CodeWithMessage + NewLine +
+        "  " + ExitCodes.MixedFhirAndSpecificDirs.CodeWithMessage + NewLine +
+        "  " + ExitCodes.IncompleteLibrariesMeasuresDirs.CodeWithMessage;
 
     public static Command CreateCommand() =>
         new Command(Name, Description)
