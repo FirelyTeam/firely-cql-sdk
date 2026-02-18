@@ -25,7 +25,7 @@
 
 	<Target
 		Name="Download CQL to ELM CLI"
-		Condition="'$(TargetFramework)' == 'net10.0' Or '$(TargetFramework)' == ''"
+		Condition="'$(CqlToElmEnabled)'=='true' And ('$(TargetFramework)' == 'net10.0' Or '$(TargetFramework)' == '')"
 		BeforeTargets="PreBuildEvent">
 		<Exec Command="$(DownloadJavaDependenciesScript)" ContinueOnError="false" />
 	</Target>
