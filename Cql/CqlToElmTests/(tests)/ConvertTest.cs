@@ -77,5 +77,23 @@ namespace Hl7.Cql.CqlToElm.Test
             q.value.Should().Be(0.5m);
             q.unit.Should().Be("kg");
         }
+
+        [TestMethod]
+        public void Convert_InvalidString_to_Integer_ReturnsNull()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 'foo' to Integer");
+            var convert = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Elm.Convert>();
+            var result = Run(convert, library);
+            result.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Convert_ValidString_to_Integer_ReturnsValue()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert '123' to Integer");
+            var convert = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Elm.Convert>();
+            var result = Run(convert, library);
+            result.Should().Be(123);
+        }
     }
 }
