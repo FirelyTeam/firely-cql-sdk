@@ -168,10 +168,6 @@ stages:
                 certificateProfileName: '${{ parameters.certificateProfileName }}'
                 packagePaths: $(Build.ArtifactStagingDirectory)/NuGetPackages/*.nupkg
 
-                  azureServiceConnectionForSigning: 'AzureTrustedSigningPrincipal'
-      trustedSigningAccountEndpoint: 'https://weu.codesigning.azure.net/'
-      trustedSigningAccountName: 'FirelyCodeSigning'
-      certificateProfileName: 'FirelyCodeSigning'
 
           # Prepare trimmed build artifacts (only bin/obj directories) for test stage
           - task: PowerShell@2
