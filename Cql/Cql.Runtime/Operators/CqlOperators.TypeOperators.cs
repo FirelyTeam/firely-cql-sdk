@@ -90,46 +90,14 @@ namespace Hl7.Cql.Operators
         {
             if (s == null) return null;
             
-            // Optimize for common cases first, avoid allocating a lowercase string
-            switch (s.Length)
-            {
-                case 1:
-                    switch (s[0])
-                    {
-                        case 't':
-                        case 'T':
-                        case 'y':
-                        case 'Y':
-                        case '1':
-                            return true;
-                        case 'f':
-                        case 'F':
-                        case 'n':
-                        case 'N':
-                        case '0':
-                            return false;
-                        default:
-                            return null;
-                    }
-                case 2:
-                    if (s.Equals("no", StringComparison.OrdinalIgnoreCase))
-                        return false;
-                    return null;
-                case 3:
-                    if (s.Equals("yes", StringComparison.OrdinalIgnoreCase))
-                        return true;
-                    return null;
-                case 4:
-                    if (s.Equals("true", StringComparison.OrdinalIgnoreCase))
-                        return true;
-                    return null;
-                case 5:
-                    if (s.Equals("false", StringComparison.OrdinalIgnoreCase))
-                        return false;
-                    return null;
-                default:
-                    return null;
-            }
+            // Per CQL specification, only "true" and "false" (case-insensitive) are valid
+            // See: https://cql.hl7.org/09-b-cqlreference.html#convert
+            if (s.Equals("true", StringComparison.OrdinalIgnoreCase))
+                return true;
+            if (s.Equals("false", StringComparison.OrdinalIgnoreCase))
+                return false;
+            
+            return null;
         }
 
         public int? ConvertStringToInteger(string? s)
