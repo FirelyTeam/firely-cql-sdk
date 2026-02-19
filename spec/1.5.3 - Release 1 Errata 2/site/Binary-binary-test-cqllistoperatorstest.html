@@ -1,0 +1,1227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>CQL Tests - List Operators - Clinical Quality Language Specification v1.5.3</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/project.css" rel="stylesheet"/>
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+  	<link href="assets/css/cqf.css" rel="stylesheet" />
+    <link href="assets/css/cql.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script src="assets/js/prism.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"11.65"}
+    h3,h4,h5,h6{--heading-prefix:"11.65"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <a id="logo" no-external="true" href="index.html"><img alt="Clinical Quality Language" src="assets/images/cql-logo.png" width="100" height="75"/> </a>
+<div id="family-nav">
+   <a id="family-logo" no-external="true" href="http://www.hl7.org/">
+    <img height="75" alt="visit the hl7 website" width="100" src="assets/images/hl7-logo.png"/>
+  </a>
+</div>
+
+<!-- TODO: Push this into the base template, but it requires a "trusted" template -->
+<script type="text/javascript" src="assets/js/cql.js"> </script>
+
+
+        <div id="ig-status">
+          <p><span style="font-size:12pt;font-weight:bold">Clinical Quality Language Specification</span>
+            <br/>
+            <span style="display:inline-block;">1.5.3 - Release 1 Errata 2
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="index.html" class="dropdown-toggle">Documentation</a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="01-introduction.html">Chapter 1 - Introduction</a>
+      </li>
+      <li>
+        <a href="02-authorsguide.html">Chapter 2 - Author's Guide</a>
+      </li>
+      <li>
+        <a href="03-developersguide.html">Chapter 3 - Developer's Guide</a>
+      </li>
+      <li>
+        <a href="04-logicalspecification.html">Chapter 4 - Logical Specification</a>
+      </li>
+      <li>
+        <a href="05-languagesemantics.html">Chapter 5 - Language Semantics</a>
+      </li>
+      <li>
+        <a href="06-translationsemantics.html">Chapter 6 - Translation Semantics</a>
+      </li>
+      <li>
+        <a href="07-physicalrepresentation.html">Chapter 7 - Physical Representation</a>
+      </li>
+      <li>
+        <a href="08-a-cqlsyntax.html">Appendix A - CQL Syntax</a>
+      </li>
+      <li>
+        <a href="09-b-cqlreference.html">Appendix B - CQL Reference</a>
+      </li>
+      <li>
+        <a href="10-c-referenceimplementations.html">Appendix C - Reference Implementations</a>
+      </li>
+      <li>
+        <a href="11-d-references.html">Appendix D - References</a>
+      </li>
+      <li>
+        <a href="12-e-acronyms.html">Appendix E - Acronyms</a>
+      </li>
+      <li>
+        <a href="13-f-glossary.html">Appendix F - Glossary</a>
+      </li>
+      <li>
+        <a href="14-g-formattingconventions.html">Appendix G - Formatting Conventions</a>
+      </li>
+      <li>
+        <a href="15-h-timeintervalcalculations.html">Appendix H - Time Interval Calculations</a>
+      </li>
+      <li>
+        <a href="16-i-fhirpathtranslation.html">Appendix I - FHIRPath Translation</a>
+      </li>
+      <li>
+        <a href="17-j-listoftables.html">Appendix J - List Of Tables</a>
+      </li>
+      <li>
+        <a href="18-k-listoffigures.html">Appendix K - List Of Figures</a>
+      </li>
+      <li>
+        <a href="19-l-cqlsyntaxdiagrams.html">Appendix L - CQL Syntax Diagrams</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="02-authorsguide.html">Author's Guide</a>
+  </li>
+  <li>
+    <a href="03-developersguide.html">Developer's Guide</a>
+  </li>
+  <li>
+    <a href="09-b-cqlreference.html">CQL Reference</a>
+  </li>
+  <li>
+    <a href="grammar.html">Grammar</a>
+  </li>
+  <li>
+    <a href="elm.html">ELM</a>
+  </li>
+  <li>
+    <a href="examples.html">Examples</a>
+  </li>
+  <li>
+    <a href="tests.html">Tests</a>
+  </li>
+  <li>
+    <a href="downloads.html">Downloads</a>
+  </li>
+  <li>
+    <a href="changes.html">Changes</a>
+  </li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='artifacts.html'><b>Artifacts Summary</b></a></li><li><b>CQL Tests - List Operators</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">Publication Build: This will be filled in by the publication tooling</p><!--EndReleaseHeader-->
+
+  
+
+
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+
+  <li class="active">
+    <a href="#">Narrative Content</a>
+  </li>
+
+
+
+  
+    <li>
+      <a href="Binary-binary-test-cqllistoperatorstest.xml.html">XML</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="Binary-binary-test-cqllistoperatorstest.json.html">JSON</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="Binary-binary-test-cqllistoperatorstest.ttl.html">TTL</a>
+    </li>
+  
+
+
+
+</ul>
+
+
+  <a name="root"> </a>
+
+
+  <h2 id="root">Binary: CQL Tests - List Operators</h2>
+
+
+
+  
+
+
+  <!-- insert intro if present -->
+  
+
+
+
+  <div>
+  <pre class="xml">
+    <code>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+	name="CqlListOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#list-operators-2"&gt;
+	&lt;group name="Sort"&gt;
+		&lt;test name="simpleSortAsc"&gt;
+			&lt;expression&gt;({4, 5, 1, 6, 2, 1}) sL sort asc&lt;/expression&gt;
+			&lt;output&gt;{1, 1, 2, 4, 5, 6}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="simpleSortDesc"&gt;
+			&lt;expression&gt;({4, 5, 1, 6, 2, 1}) sL sort desc&lt;/expression&gt;
+			&lt;output&gt;{6, 5, 4, 2, 1, 1}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="simpleSortStringAsc"&gt;
+			&lt;expression&gt;({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort asc&lt;/expression&gt;
+			&lt;output&gt;{'Armadillo', 'Wolf', 'aardvark', 'alligator', 'back', 'iguana', 'zebra'}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="simpleSortStringDesc"&gt;
+			&lt;expression&gt;({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort desc&lt;/expression&gt;
+			&lt;output&gt;{'zebra', 'iguana', 'back', 'alligator', 'aardvark', 'Wolf', 'Armadillo'}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SortDatesAsc"&gt;
+			&lt;expression&gt;({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort asc&lt;/expression&gt;
+			&lt;output&gt;{DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5), DateTime(2012, 10, 5, 10)}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SortDatesDesc"&gt;
+			&lt;expression&gt;({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort desc&lt;/expression&gt;
+			&lt;output&gt;{DateTime(2012, 10, 5, 10), DateTime(2012, 10, 5), DateTime(2012, 1, 1, 12), DateTime(2012, 1, 1)}&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Contains"&gt;
+		&lt;test name="ContainsABNullHasNull"&gt;
+			&lt;expression&gt;{ 'a', 'b', null } contains null&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ContainsNullFirst"&gt;
+			&lt;expression&gt;{ null, 'b', 'c' } contains 'a'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ContainsABCHasA"&gt;
+			&lt;expression&gt;{ 'a', 'b', 'c' } contains 'a'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ContainsJan2012True"&gt;
+			&lt;expression&gt;{ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 1, 1) } contains DateTime(2012, 1, 1)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ContainsJan2012False"&gt;
+			&lt;expression&gt;{ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 1) } contains DateTime(2012, 1, 1)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ContainsTimeTrue"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 } contains @T05:59:59.999&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ContainsTimeFalse"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 } contains @T08:59:59.999&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ContainsNullLeft"&gt;
+			&lt;expression&gt;null contains 'a'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Descendents"&gt;
+		&lt;test name="DescendentsEmptyList"&gt;
+			&lt;expression&gt;(null).descendents()&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;!-- TODO: how to call without fhirpath syntax --&gt;
+	&lt;/group&gt;
+	&lt;group name="Distinct"&gt;
+		&lt;test name="DistinctEmptyList"&gt;
+			&lt;expression&gt;distinct {}&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DistinctNullNullNull"&gt;
+			&lt;expression&gt;distinct { null, null, null}&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DistinctANullANull"&gt;
+			&lt;expression&gt;distinct { 'a', null, 'a', null}&lt;/expression&gt;
+			&lt;output&gt;{'a'}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Distinct112233"&gt;
+			&lt;expression&gt;distinct { 1, 1, 2, 2, 3, 3}&lt;/expression&gt;
+			&lt;output&gt;{1,2,3}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Distinct123123"&gt;
+			&lt;expression&gt;distinct { 1, 2, 3, 1, 2, 3}&lt;/expression&gt;
+			&lt;output&gt;{1,2,3}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DistinctAABBCC"&gt;
+			&lt;expression&gt;distinct { 'a', 'a', 'b', 'b', 'c', 'c'}&lt;/expression&gt;
+			&lt;output&gt;{'a','b','c'}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DistinctABCABC"&gt;
+			&lt;expression&gt;distinct { 'a', 'b', 'c', 'a', 'b', 'c'}&lt;/expression&gt;
+			&lt;output&gt;{'a','b','c'}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DistinctDateTime"&gt;
+			&lt;expression&gt;distinct { DateTime(2012, 10, 5), DateTime(2012, 1, 1), DateTime(2012, 1, 1)}&lt;/expression&gt;
+			&lt;output&gt;{ DateTime(2012, 10, 5), DateTime(2012, 1, 1)}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DistinctTime"&gt;
+			&lt;expression&gt;distinct { @T15:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;{ @T15:59:59.999, @T20:59:59.999 }&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Equal"&gt;
+		&lt;test name="EqualNullNull"&gt;
+			&lt;expression&gt;{null} = {null}&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EqualEmptyListNull"&gt;
+			&lt;expression&gt;{} = null&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EqualNullEmptyList"&gt;
+			&lt;expression&gt;null = {}&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EqualEmptyListAndEmptyList"&gt;
+			&lt;expression&gt;{} = {}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Equal12And123"&gt;
+			&lt;expression&gt;{ 1, 2 } = { 1, 2, 3 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Equal123And12"&gt;
+			&lt;expression&gt;{ 1, 2, 3 } = { 1, 2 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Equal123And123"&gt;
+			&lt;expression&gt;{ 1, 2, 3 } = { 1, 2, 3 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EqualDateTimeTrue"&gt;
+			&lt;expression&gt;{DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} = {DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EqualDateTimeFalse"&gt;
+			&lt;expression&gt;{DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} = {DateTime(2012, 1, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EqualTimeTrue"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EqualTimeFalse"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999, @T20:59:59.999 } = { @T10:59:59.999, @T20:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Except"&gt;
+		&lt;test name="ExceptEmptyListAndEmptyList"&gt;
+			&lt;expression&gt;Except({}, {})&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Except1234And23"&gt;
+			&lt;expression&gt;{ 1, 2, 3, 4 } except { 2, 3 }&lt;/expression&gt;
+			&lt;output&gt;{ 1, 4 }&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Except23And1234"&gt;
+			&lt;expression&gt;{ 2, 3 } except { 1, 2, 3, 4 }&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ExceptDateTimeList"&gt;
+			&lt;expression&gt;{ DateTime(2012, 5, 10), DateTime(2014, 12, 10), DateTime(2010, 1, 1)} except {DateTime(2014, 12, 10), DateTime(2010, 1, 1) }&lt;/expression&gt;
+			&lt;output&gt;{@2012-05-10}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ExceptTimeList"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999, @T12:59:59.999 } except { @T20:59:59.999, @T12:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;{@T15:59:59.999}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ExceptNullRight"&gt;
+			&lt;expression&gt;{ 1, 4 } except null&lt;/expression&gt;
+			&lt;output&gt;{1, 4}&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Exists"&gt;
+		&lt;test name="ExistsEmpty"&gt;
+			&lt;expression&gt;Exists({})&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ExistsListNull"&gt;
+			&lt;expression&gt;Exists({ null })&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Exists1"&gt;
+			&lt;expression&gt;Exists({ 1 })&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Exists12"&gt;
+			&lt;expression&gt;Exists({ 1, 2 })&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ExistsDateTime"&gt;
+			&lt;expression&gt;Exists({ DateTime(2012, 5, 10), DateTime(2014, 12, 10) })&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ExistsTime"&gt;
+			&lt;expression&gt;Exists({ @T15:59:59.999, @T20:59:59.999 })&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ExistsNull"&gt;
+			&lt;expression&gt;Exists(null)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Flatten"&gt;
+		&lt;test name="FlattenEmpty"&gt;
+			&lt;expression&gt;Flatten({{},{}})&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="FlattenListNullAndNull"&gt;
+			&lt;expression&gt;Flatten({{null}, {null}})&lt;/expression&gt;
+			&lt;output&gt;{null, null}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="FlattenList12And34"&gt;
+			&lt;expression&gt;Flatten({{1,2}, {3,4}})&lt;/expression&gt;
+			&lt;output&gt;{1,2,3,4}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="FlattenDateTime"&gt;
+			&lt;expression&gt;Flatten({ {DateTime(2012, 5, 10)}, {DateTime(2014, 12, 10)} })&lt;/expression&gt;
+			&lt;output&gt;{ DateTime(2012, 5, 10), DateTime(2014, 12, 10) }&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="FlattenTime"&gt;
+			&lt;expression&gt;Flatten({ {@T15:59:59.999}, {@T20:59:59.999} })&lt;/expression&gt;
+			&lt;output&gt;{ @T15:59:59.999, @T20:59:59.999 }&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="First"&gt;
+		&lt;test name="FirstEmpty"&gt;
+			&lt;expression&gt;First({})&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="FirstNull1"&gt;
+			&lt;expression&gt;First({ null, 1 })&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="First1Null"&gt;
+			&lt;expression&gt;First({ 1, null })&lt;/expression&gt;
+			&lt;output&gt;1&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="First12"&gt;
+			&lt;expression&gt;First({ 1, 2 })&lt;/expression&gt;
+			&lt;output&gt;1&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="FirstDateTime"&gt;
+			&lt;expression&gt;First({ DateTime(2012, 5, 10), DateTime(2014, 12, 10) })&lt;/expression&gt;
+			&lt;output&gt;DateTime(2012, 5, 10)&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="FirstTime"&gt;
+			&lt;expression&gt;First({ @T15:59:59.999, @T20:59:59.999 })&lt;/expression&gt;
+			&lt;output&gt;@T15:59:59.999&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="In"&gt;
+		&lt;test name="InNullEmpty"&gt;
+			&lt;expression&gt;null in {}&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="InNullAnd1Null"&gt;
+			&lt;expression&gt;null in { 1, null }&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="In1Null"&gt;
+			&lt;expression&gt;1 in null&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="In1And12"&gt;
+			&lt;expression&gt;1 in { 1, 2 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="In3And12"&gt;
+			&lt;expression&gt;3 in { 1, 2 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="InDateTimeTrue"&gt;
+			&lt;expression&gt;DateTime(2012, 5, 10) in { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="InDateTimeFalse"&gt;
+			&lt;expression&gt;DateTime(2012, 6, 10) in { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="InTimeTrue"&gt;
+			&lt;expression&gt;@T15:59:59.999 in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="InTimeFalse"&gt;
+			&lt;expression&gt;@T16:59:59.999 in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Includes"&gt;
+		&lt;test name="IncludesEmptyAndEmpty"&gt;
+			&lt;expression&gt;{} includes {}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludesListNullAndListNull"&gt;
+			&lt;expression&gt;{null} includes {null}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Includes123AndEmpty"&gt;
+			&lt;expression&gt;{1, 2, 3} includes {}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Includes123And2"&gt;
+			&lt;expression&gt;{1, 2, 3} includes {2}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Includes123And4"&gt;
+			&lt;expression&gt;{1, 2, 3} includes {4}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludesDateTimeTrue"&gt;
+			&lt;expression&gt;{DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} includes {DateTime(2012, 5, 10)}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludesDateTimeFalse"&gt;
+			&lt;expression&gt;{DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} includes {DateTime(2012, 5, 11)}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludesTimeTrue"&gt;
+			&lt;expression&gt;{ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } includes @T15:59:59.999&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludesTimeFalse"&gt;
+			&lt;expression&gt;{ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } includes @T16:59:59.999&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludesNullLeft"&gt;
+			&lt;expression&gt;null includes {2}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;!-- this test is going to the ContainsEvaluator --&gt;
+		&lt;test name="IncludesNullRight"&gt;
+			&lt;expression&gt;{'s', 'a', 'm'} includes null&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="IncludedIn"&gt;
+		&lt;test name="IncludedInEmptyAndEmpty"&gt;
+			&lt;expression&gt;{} included in {}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludedInListNullAndListNull"&gt;
+			&lt;expression&gt;{ null } included in { null }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludedInEmptyAnd123"&gt;
+			&lt;expression&gt;{} included in { 1, 2, 3 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludedIn2And123"&gt;
+			&lt;expression&gt;{ 2 } included in { 1, 2, 3 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludedIn4And123"&gt;
+			&lt;expression&gt;{ 4 } included in { 1, 2, 3 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludedInDateTimeTrue"&gt;
+			&lt;expression&gt;{ DateTime(2012, 5, 10)} included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludedInDateTimeFalse"&gt;
+			&lt;expression&gt;{DateTime(2012, 5, 11)} included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludedInTimeTrue"&gt;
+			&lt;expression&gt;@T15:59:59.999 included in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludedInTimeFalse"&gt;
+			&lt;expression&gt;@T16:59:59.999 included in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;!-- the following expression is going to the InEvaluator --&gt;
+		&lt;test name="IncludedInNullLeft"&gt;
+			&lt;expression&gt;null included in {2}&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IncludedInNullRight"&gt;
+			&lt;expression&gt;{'s', 'a', 'm'} included in null&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Indexer"&gt;
+		&lt;test name="IndexerNull1List"&gt;
+			&lt;expression&gt;(null as List&amp;lt;System.Any&amp;gt;)[1]&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;!-- Cast is required due to ambiguity with Indexer(String) and Indexer(List&amp;lt;Any&amp;gt;) --&gt;
+		&lt;test name="Indexer0Of12"&gt;
+			&lt;expression&gt;{ 1, 2 }[0]&lt;/expression&gt;
+			&lt;output&gt;1&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Indexer1Of12"&gt;
+			&lt;expression&gt;{ 1, 2 }[1]&lt;/expression&gt;
+			&lt;output&gt;2&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Indexer2Of12"&gt;
+			&lt;expression&gt;{ 1, 2 }[2]&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IndexerNeg1Of12"&gt;
+			&lt;expression&gt;{ 1, 2 }[-1]&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IndexerDateTime"&gt;
+			&lt;expression&gt;{ DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) }[1]&lt;/expression&gt;
+			&lt;output&gt;DateTime(2012, 5, 10)&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IndexerTime"&gt;
+			&lt;expression&gt;{ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }[1]&lt;/expression&gt;
+			&lt;output&gt;@T15:59:59.999&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="IndexOf"&gt;
+		&lt;test name="IndexOfEmptyNull"&gt;
+			&lt;expression&gt;IndexOf({}, null)&lt;/expression&gt;
+			&lt;output&gt;-1&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IndexOfNullEmpty"&gt;
+			&lt;expression&gt;IndexOf(null, {})&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IndexOfNullIn1Null"&gt;
+			&lt;expression&gt;IndexOf({ 1, null }, null)&lt;/expression&gt;
+			&lt;output&gt;1&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IndexOf1In12"&gt;
+			&lt;expression&gt;IndexOf({ 1, 2 }, 1)&lt;/expression&gt;
+			&lt;output&gt;0&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IndexOf2In12"&gt;
+			&lt;expression&gt;IndexOf({ 1, 2 }, 2)&lt;/expression&gt;
+			&lt;output&gt;1&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IndexOf3In12"&gt;
+			&lt;expression&gt;IndexOf({ 1, 2 }, 3)&lt;/expression&gt;
+			&lt;output&gt;-1&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IndexOfDateTime"&gt;
+			&lt;expression&gt;IndexOf({ DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) }, DateTime(2014, 12, 10))&lt;/expression&gt;
+			&lt;output&gt;2&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IndexOfTime"&gt;
+			&lt;expression&gt;IndexOf({ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }, @T15:59:59.999)&lt;/expression&gt;
+			&lt;output&gt;1&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Intersect"&gt;
+		&lt;test name="IntersectEmptyListAndEmptyList"&gt;
+			&lt;expression&gt;{} intersect {}&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Intersect1234And23"&gt;
+			&lt;expression&gt;{ 1, 2, 3, 4 } intersect { 2, 3 }&lt;/expression&gt;
+			&lt;output&gt;{ 2, 3 }&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Intersect23And1234"&gt;
+			&lt;expression&gt;{2, 3} intersect { 1, 2, 3, 4 }&lt;/expression&gt;
+			&lt;output&gt;{ 2, 3 }&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IntersectDateTime"&gt;
+			&lt;expression&gt;{ DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) } intersect { DateTime(2012, 5, 10), DateTime(2014, 12, 10), DateTime(2000, 5, 5) }&lt;/expression&gt;
+			&lt;output&gt;{@2012-05-10, @2014-12-10}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="IntersectTime"&gt;
+			&lt;expression&gt;{ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } intersect { @T01:29:15.156, @T15:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;{@T15:59:59.999, @T20:59:59.999}&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Last"&gt;
+		&lt;test name="LastEmpty"&gt;
+			&lt;expression&gt;Last({})&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LastNull1"&gt;
+			&lt;expression&gt;Last({null, 1})&lt;/expression&gt;
+			&lt;output&gt;1&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Last1Null"&gt;
+			&lt;expression&gt;Last({1, null})&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Last12"&gt;
+			&lt;expression&gt;Last({1, 2})&lt;/expression&gt;
+			&lt;output&gt;2&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LastDateTime"&gt;
+			&lt;expression&gt;Last({DateTime(2012, 5, 10), DateTime(2014, 12, 10)})&lt;/expression&gt;
+			&lt;output&gt;DateTime(2014, 12, 10)&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LastTime"&gt;
+			&lt;expression&gt;Last({ @T15:59:59.999, @T20:59:59.999 })&lt;/expression&gt;
+			&lt;output&gt;@T20:59:59.999&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Length"&gt;
+		&lt;test name="LengthEmptyList"&gt;
+			&lt;expression&gt;Length({})&lt;/expression&gt;
+			&lt;output&gt;0&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LengthNull1"&gt;
+			&lt;expression&gt;Length({null, 1})&lt;/expression&gt;
+			&lt;output&gt;2&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Length1Null"&gt;
+			&lt;expression&gt;Length({1, null})&lt;/expression&gt;
+			&lt;output&gt;2&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Length12"&gt;
+			&lt;expression&gt;Length({1, 2})&lt;/expression&gt;
+			&lt;output&gt;2&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LengthDateTime"&gt;
+			&lt;expression&gt;Length({DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)})&lt;/expression&gt;
+			&lt;output&gt;3&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LengthTime"&gt;
+			&lt;expression&gt;Length({ @T15:59:59.999, @T20:59:59.999, @T15:59:59.999, @T20:59:59.999, @T15:59:59.999, @T20:59:59.999 })&lt;/expression&gt;
+			&lt;output&gt;6&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LengthNullList"&gt;
+			&lt;expression&gt;Length(null as String)&lt;/expression&gt;
+			&lt;output&gt;0&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Equivalent"&gt;
+		&lt;test name="EquivalentEmptyAndEmpty"&gt;
+			&lt;expression&gt;{} ~ {}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivalentABCAndABC"&gt;
+			&lt;expression&gt;{ 'a', 'b', 'c' } ~ { 'a', 'b', 'c' }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivalentABCAndAB"&gt;
+			&lt;expression&gt;{ 'a', 'b', 'c' } ~ { 'a', 'b' }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivalentABCAnd123"&gt;
+			&lt;expression&gt;{ 'a', 'b', 'c' } ~ { 1, 2, 3 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+			&lt;!-- TODO: make Translator resolve isolated Equivalent operator signatures --&gt;
+		&lt;/test&gt;
+		&lt;test name="Equivalent123AndABC"&gt;
+			&lt;expression&gt;{ 1, 2, 3 } ~ { 'a', 'b', 'c' }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+			&lt;!-- TODO: make Translator resolve isolated Equivalent operator signatures --&gt;
+		&lt;/test&gt;
+		&lt;test name="Equivalent123AndString123"&gt;
+			&lt;expression&gt;{ 1, 2, 3 } ~ { '1', '2', '3' }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+			&lt;!-- TODO: make Translator resolve isolated Equivalent operator signatures --&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivalentDateTimeTrue"&gt;
+			&lt;expression&gt;{DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null} ~ {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivalentDateTimeNull"&gt;
+			&lt;expression&gt;{DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ~ {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null}&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivalentDateTimeFalse"&gt;
+			&lt;expression&gt;{DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} ~ {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 1)}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivalentTimeTrue"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999 } ~ { @T15:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivalentTimeNull"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999 } ~ { @T15:59:59.999, @T20:59:59.999, null }&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivalentTimeFalse"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999 } ~ { @T15:59:59.999, @T20:59:59.995 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="NotEqual"&gt;
+		&lt;test name="NotEqualEmptyAndEmpty"&gt;
+			&lt;expression&gt;{} != {}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="NotEqualABCAndABC"&gt;
+			&lt;expression&gt;{ 'a', 'b', 'c' } != { 'a', 'b', 'c' }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="NotEqualABCAndAB"&gt;
+			&lt;expression&gt;{ 'a', 'b', 'c' } != { 'a', 'b' }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="NotEqualABCAnd123"&gt;
+			&lt;expression&gt;{ 'a', 'b', 'c' } != { 1, 2, 3 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+			&lt;!-- TODO: make Translator resolve isolated Equivalent operator signatures --&gt;
+		&lt;/test&gt;
+		&lt;test name="NotEqual123AndABC"&gt;
+			&lt;expression&gt;{ 1, 2, 3 } != { 'a', 'b', 'c' }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+			&lt;!-- TODO: make Translator resolve isolated Equivalent operator signatures --&gt;
+		&lt;/test&gt;
+		&lt;test name="NotEqual123AndString123"&gt;
+			&lt;expression&gt;{ 1, 2, 3 } != { '1', '2', '3' }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+			&lt;!-- TODO: make Translator resolve isolated Equivalent operator signatures --&gt;
+		&lt;/test&gt;
+		&lt;test name="NotEqualDateTimeTrue"&gt;
+			&lt;expression&gt;{DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} != {DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 1, 0, 0, 0, 0)}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="NotEqualDateTimeFalse"&gt;
+			&lt;expression&gt;{DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)} != {DateTime(2001, 9, 11, 0, 0, 0, 0), DateTime(2012, 5, 10, 0, 0, 0, 0), DateTime(2014, 12, 10, 0, 0, 0, 0)}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="NotEqualTimeTrue"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="NotEqualTimeFalse"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:49.999 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="ProperContains"&gt;
+		&lt;test name="ProperContainsNullRightFalse"&gt;
+			&lt;expression&gt;{'s', 'u', 'n'} properly includes null&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperContainsNullRightTrue"&gt;
+			&lt;expression&gt;{'s', 'u', 'n', null} properly includes null&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperContainsTimeTrue"&gt;
+			&lt;expression&gt;{ @T15:59:59, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperContainsTimeNull"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="ProperIn"&gt;
+		&lt;test name="ProperInNullRightFalse"&gt;
+			&lt;expression&gt;null properly included in {'s', 'u', 'n'}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperInNullRightTrue"&gt;
+			&lt;expression&gt;null properly included in {'s', 'u', 'n', null}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperInTimeTrue"&gt;
+			&lt;expression&gt;@T15:59:59 properly included in { @T15:59:59, @T20:59:59.999, @T20:59:49.999 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperInTimeNull"&gt;
+			&lt;expression&gt;@T15:59:59 properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 }&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="ProperlyIncludes"&gt;
+		&lt;test name="ProperIncludesEmptyAndEmpty"&gt;
+			&lt;expression&gt;{} properly includes {}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludesListNullAndListNull"&gt;
+			&lt;expression&gt;{null} properly includes {null}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludes123AndEmpty"&gt;
+			&lt;expression&gt;{1, 2, 3} properly includes {}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludes123And2"&gt;
+			&lt;expression&gt;{1, 2, 3} properly includes {2}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludes123And4"&gt;
+			&lt;expression&gt;{1, 2, 3} properly includes {4}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludesDateTimeTrue"&gt;
+			&lt;expression&gt;{DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly includes {DateTime(2012, 5, 10), DateTime(2014, 12, 10)}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludesDateTimeFalse"&gt;
+			&lt;expression&gt;{DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly includes {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludesTimeTrue"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes { @T15:59:59.999, @T20:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludesTimeFalse"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes { @T15:59:59.999, @T20:59:59.999, @T14:59:22.999 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperlyIncludesNullLeft"&gt;
+			&lt;expression&gt;null properly includes {2}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="ProperlyIncludedIn"&gt;
+		&lt;test name="ProperIncludedInEmptyAndEmpty"&gt;
+			&lt;expression&gt;{} properly included in {}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludedInListNullAndListNull"&gt;
+			&lt;expression&gt;{null} properly included in {null}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludedInEmptyAnd123"&gt;
+			&lt;expression&gt;{} properly included in {1, 2, 3}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludedIn2And123"&gt;
+			&lt;expression&gt;{2} properly included in {1, 2, 3}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludedIn4And123"&gt;
+			&lt;expression&gt;{4} properly included in {1, 2, 3}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludedInDateTimeTrue"&gt;
+			&lt;expression&gt;{DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)}&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludedInDateTimeFalse"&gt;
+			&lt;expression&gt;{DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)}&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludedInTimeTrue"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999 } properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperIncludedInTimeFalse"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999, @T14:59:22.999 } properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="ProperlyIncludedInNulRight"&gt;
+			&lt;expression&gt;{'s', 'u', 'n'} properly included in null&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="SingletonFrom"&gt;
+		&lt;test name="SingletonFromEmpty"&gt;
+			&lt;expression&gt;singleton from {}&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SingletonFromListNull"&gt;
+			&lt;expression&gt;singleton from {null}&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SingletonFrom1"&gt;
+			&lt;expression&gt;singleton from { 1 }&lt;/expression&gt;
+			&lt;output&gt;1&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SingletonFrom12"&gt;
+			&lt;expression invalid="true"&gt;singleton from { 1, 2 }&lt;/expression&gt;
+			&lt;!-- EXPECT: Expected a list with at most one element, but found a list with multiple elements. --&gt;
+		&lt;/test&gt;
+		&lt;test name="SingletonFromDateTime"&gt;
+			&lt;expression&gt;singleton from { DateTime(2012, 5, 10) }&lt;/expression&gt;
+			&lt;output&gt;DateTime(2012, 5, 10)&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SingletonFromTime"&gt;
+			&lt;expression&gt;singleton from { @T15:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;@T15:59:59.999&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Skip"&gt;
+		&lt;test name="SkipNull"&gt;
+			&lt;expression&gt;Skip(null, 3)&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SkipEven"&gt;
+			&lt;expression&gt;Skip({1,2,3,4,5}, 2)&lt;/expression&gt;
+			&lt;output&gt;{3, 4, 5}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SkipOdd"&gt;
+			&lt;expression&gt;Skip({1,2,3,4,5}, 3)&lt;/expression&gt;
+			&lt;output&gt;{4, 5}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SkipNone"&gt;
+			&lt;expression&gt;Skip({1,2,3,4,5}, 0)&lt;/expression&gt;
+			&lt;output&gt;{1,2,3,4,5}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SkipAll"&gt;
+			&lt;expression&gt;Skip({1,2,3,4,5}, 5)&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Tail"&gt;
+		&lt;test name="TailNull"&gt;
+			&lt;expression&gt;Tail(null)&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TailEven"&gt;
+			&lt;expression&gt;Tail({1,2,3,4})&lt;/expression&gt;
+			&lt;output&gt;{2,3,4}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TailOdd"&gt;
+			&lt;expression&gt;Tail({1,2,3,4,5})&lt;/expression&gt;
+			&lt;output&gt;{2,3,4,5}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TailEmpty"&gt;
+			&lt;expression&gt;Tail({})&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TailOneElement"&gt;
+			&lt;expression&gt;Tail({1})&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Take"&gt;
+		&lt;test name="TakeNull"&gt;
+			&lt;expression&gt;Take(null, 3)&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TakeNullEmpty"&gt;
+			&lt;expression&gt;Take({1,2,3}, null as Integer)&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TakeEmpty"&gt;
+			&lt;expression&gt;Take({1,2,3}, 0)&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TakeEven"&gt;
+			&lt;expression&gt;Take({1,2,3,4}, 2)&lt;/expression&gt;
+			&lt;output&gt;{1, 2}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TakeOdd"&gt;
+			&lt;expression&gt;Take({1,2,3,4}, 3)&lt;/expression&gt;
+			&lt;output&gt;{1, 2, 3}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TakeAll"&gt;
+			&lt;expression&gt;Take({1,2,3,4}, 4)&lt;/expression&gt;
+			&lt;output&gt;{1, 2, 3, 4}&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Union"&gt;
+		&lt;test name="UnionEmptyAndEmpty"&gt;
+			&lt;expression&gt;{} union {}&lt;/expression&gt;
+			&lt;output&gt;{}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UnionListNullAndListNull"&gt;
+			&lt;expression&gt;{ null } union { null }&lt;/expression&gt;
+			&lt;output&gt;{null, null}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Union123AndEmpty"&gt;
+			&lt;expression&gt;{ 1, 2, 3 } union {}&lt;/expression&gt;
+			&lt;output&gt;{1, 2, 3}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Union123And2"&gt;
+			&lt;expression&gt;{ 1, 2, 3 } union { 2 }&lt;/expression&gt;
+			&lt;output&gt;{1, 2, 3, 2}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="Union123And4"&gt;
+			&lt;expression&gt;{ 1, 2, 3 } union { 4 }&lt;/expression&gt;
+			&lt;output&gt;{1, 2, 3, 4}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UnionDateTime"&gt;
+			&lt;expression&gt;{ DateTime(2001, 9, 11)} union {DateTime(2012, 5, 10), DateTime(2014, 12, 10) }&lt;/expression&gt;
+			&lt;output&gt;{@2001-09-11, @2012-05-10, @2014-12-10}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UnionTime"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T20:59:59.999, @T12:59:59.999 } union { @T10:59:59.999 }&lt;/expression&gt;
+			&lt;output&gt;{@T15:59:59.999, @T20:59:59.999, @T12:59:59.999, @T10:59:59.999}&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Sort"&gt;
+		&lt;test name="intList"&gt;
+			&lt;expression&gt;{ 3, 2, 1 }&lt;/expression&gt;
+			&lt;output&gt;{3, 2, 1}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="decimalList"&gt;
+			&lt;expression&gt;{ 3.8, 2.4, 1.9 }&lt;/expression&gt;
+			&lt;output&gt;{3.8, 2.4, 1.9}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="quantityList"&gt;
+			&lt;expression&gt;{ 19.99 'lbs', 17.33 'lbs', 10.66 'lbs' }&lt;/expression&gt;
+			&lt;output&gt;{19.99 'lbs', 17.33 'lbs', 10.66 'lbs'}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="dateTimeList"&gt;
+			&lt;expression&gt;{ DateTime(2016), DateTime(2015), DateTime(2010) }&lt;/expression&gt;
+			&lt;output&gt;{@2016, @2015, @2010}&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="timeList"&gt;
+			&lt;expression&gt;{ @T15:59:59.999, @T15:12:59.999, @T15:12:13.999 }&lt;/expression&gt;
+			&lt;output&gt;{@T15:59:59.999, @T15:12:59.999, @T15:12:13.999}&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+&lt;/tests&gt;
+</code>
+  </pre>
+</div>
+
+
+  
+
+  <!-- insert notes if present -->
+  
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+          IG &#169; 2014+ <a style="color:var(--footer-hyperlink-text-color)" href="http://www.hl7.org/Special/committees/dss/index.cfm">Clinical Decision Support WG</a>.  Package hl7.cql#1.5.3 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Mar 7, 2025 16:06+1100">2025-03-07</span>
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="qa.html">QA Report</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" rel="license" href="license.html">License</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" rel="history" href="http://cql.hl7.org/history.html">Version History</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>
+                     
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

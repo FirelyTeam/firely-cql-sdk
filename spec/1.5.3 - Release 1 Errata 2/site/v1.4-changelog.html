@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>V1.4 Change Log - Clinical Quality Language Specification v1.5.3</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/project.css" rel="stylesheet"/>
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+  	<link href="assets/css/cqf.css" rel="stylesheet" />
+    <link href="assets/css/cql.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script src="assets/js/prism.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"10.4"}
+    h3,h4,h5,h6{--heading-prefix:"10.4"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <a id="logo" no-external="true" href="index.html"><img alt="Clinical Quality Language" src="assets/images/cql-logo.png" width="100" height="75"/> </a>
+<div id="family-nav">
+   <a id="family-logo" no-external="true" href="http://www.hl7.org/">
+    <img height="75" alt="visit the hl7 website" width="100" src="assets/images/hl7-logo.png"/>
+  </a>
+</div>
+
+<!-- TODO: Push this into the base template, but it requires a "trusted" template -->
+<script type="text/javascript" src="assets/js/cql.js"> </script>
+
+
+        <div id="ig-status">
+          <p><span style="font-size:12pt;font-weight:bold">Clinical Quality Language Specification</span>
+            <br/>
+            <span style="display:inline-block;">1.5.3 - Release 1 Errata 2
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="index.html" class="dropdown-toggle">Documentation</a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="01-introduction.html">Chapter 1 - Introduction</a>
+      </li>
+      <li>
+        <a href="02-authorsguide.html">Chapter 2 - Author's Guide</a>
+      </li>
+      <li>
+        <a href="03-developersguide.html">Chapter 3 - Developer's Guide</a>
+      </li>
+      <li>
+        <a href="04-logicalspecification.html">Chapter 4 - Logical Specification</a>
+      </li>
+      <li>
+        <a href="05-languagesemantics.html">Chapter 5 - Language Semantics</a>
+      </li>
+      <li>
+        <a href="06-translationsemantics.html">Chapter 6 - Translation Semantics</a>
+      </li>
+      <li>
+        <a href="07-physicalrepresentation.html">Chapter 7 - Physical Representation</a>
+      </li>
+      <li>
+        <a href="08-a-cqlsyntax.html">Appendix A - CQL Syntax</a>
+      </li>
+      <li>
+        <a href="09-b-cqlreference.html">Appendix B - CQL Reference</a>
+      </li>
+      <li>
+        <a href="10-c-referenceimplementations.html">Appendix C - Reference Implementations</a>
+      </li>
+      <li>
+        <a href="11-d-references.html">Appendix D - References</a>
+      </li>
+      <li>
+        <a href="12-e-acronyms.html">Appendix E - Acronyms</a>
+      </li>
+      <li>
+        <a href="13-f-glossary.html">Appendix F - Glossary</a>
+      </li>
+      <li>
+        <a href="14-g-formattingconventions.html">Appendix G - Formatting Conventions</a>
+      </li>
+      <li>
+        <a href="15-h-timeintervalcalculations.html">Appendix H - Time Interval Calculations</a>
+      </li>
+      <li>
+        <a href="16-i-fhirpathtranslation.html">Appendix I - FHIRPath Translation</a>
+      </li>
+      <li>
+        <a href="17-j-listoftables.html">Appendix J - List Of Tables</a>
+      </li>
+      <li>
+        <a href="18-k-listoffigures.html">Appendix K - List Of Figures</a>
+      </li>
+      <li>
+        <a href="19-l-cqlsyntaxdiagrams.html">Appendix L - CQL Syntax Diagrams</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="02-authorsguide.html">Author's Guide</a>
+  </li>
+  <li>
+    <a href="03-developersguide.html">Developer's Guide</a>
+  </li>
+  <li>
+    <a href="09-b-cqlreference.html">CQL Reference</a>
+  </li>
+  <li>
+    <a href="grammar.html">Grammar</a>
+  </li>
+  <li>
+    <a href="elm.html">ELM</a>
+  </li>
+  <li>
+    <a href="examples.html">Examples</a>
+  </li>
+  <li>
+    <a href="tests.html">Tests</a>
+  </li>
+  <li>
+    <a href="downloads.html">Downloads</a>
+  </li>
+  <li>
+    <a href="changes.html">Changes</a>
+  </li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='changes.html'><b>Changes</b></a></li><li><b>V1.4 Change Log</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<style type="text/css">
+h2:before{color:silver;counter-increment:section;content:var(--heading-prefix) " ";}
+h3:before{color:silver;counter-increment:sub-section;content:var(--heading-prefix) "." counter(sub-section) " ";}
+h4:before{color:silver;counter-increment:composite;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) " ";}
+h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";}
+h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
+</style>
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">Publication Build: This will be filled in by the publication tooling</p><!--EndReleaseHeader-->
+  <h2>V1.4 Change Log</h2>
+  
+
+
+
+
+
+  <!--NOTE: This is a hack, ideally we wouldn't have to have this fragment-pageTable template adjustment, but I don't
+  know how to set the statusClass (see Zulip: https://chat.fhir.org/#narrow/stream/179252-IG-creation/topic/How.20to.20set.20page.20status.20class.3F) -->
+  
+  <table class="colsi">
+  
+    <tr>
+  
+      <td>
+        <i>Page standards status:</i> <a href="http://hl7.org/fhir/R4/versions.html#std-process" title="Standard Status">Informative</a>
+        
+      </td>
+  
+  
+    <!--NOTE: Another hack, to avoid the errors associated with using the fmm extension, which the QA reports is not usable on pages, even though it works -->
+    
+      <td>
+        <a href="http://hl7.org/fhir/versions.html#maturity">Maturity Level</a>: N/A
+      </td>
+    
+  
+    </tr>
+  </table>
+
+
+
+
+
+
+
+
+    <p><!-- white space is critical inside of capture --></p>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#stu-4-reconciliation-changes" id="markdown-toc-stu-4-reconciliation-changes">STU 4 Reconciliation Changes</a></li>
+  <li><a href="#stu-4-ballot-changes" id="markdown-toc-stu-4-ballot-changes">STU 4 Ballot Changes</a></li>
+</ul>
+
+</div>
+
+<p><strong>1.4 Change Log</strong></p>
+
+<h3 id="stu-4-reconciliation-changes">STU 4 Reconciliation Changes</h3>
+
+<ul>
+  <li>STU4B#21: Extracting a time component now normalizes the date time prior to extraction (Non-Substantive)</li>
+  <li>STU4B#22: Added definitional and referential identifier categories to the grammar to resolve ambiguity (Substantive)</li>
+  <li>STU4B#23: Updated semantics of list operators to treat null elements as equal for the purposes of membership determination (Substantive)</li>
+  <li>STU4B#24: Added schemas and tests to the NPM publication package (Non-Substantive)</li>
+  <li>STU4B#25: Documented missing overloads of terminology membership operators (Non-Substantive)</li>
+  <li>STU4B#26: Documented missing overloads of terminology membership operators (Non-Substantive)</li>
+  <li>STU4B#27: Changed ToDateTime(Date) to leave time components unspecified (Substantive)</li>
+  <li>STU4B#28: Enabled search feature in the published specification (Non-Substantive)</li>
+  <li>STU4B#29: Added contextTargetRelationship to model information to support identifying target context elements (Substantive)</li>
+  <li>STU4B#30: Updated reference implementation and tooling sections (Non-Substantive)</li>
+  <li>STU4B#31: Adding warning about string overloads for terminology membership testing (Non-Substantive)</li>
+  <li>STU4B#32: Added target element to model information (Substantive)</li>
+  <li>STU4B#33: Added uncertainty duration calculation examples (Non-Substantive)</li>
+  <li>STU4B#34: Clarified duration calculation formula usage (Non-Substantive)</li>
+  <li>STU4B#35: Changed timing phrase translations to add null check when the translation constructs an interval from a nullable element (Substantive)</li>
+  <li>STU4B#36: Added Precision, LowBoundary, and HighBoundary operators fro Decimal, DateTime, Time, and DateTime types (Substantive)</li>
+  <li>STU4B#37: Allowed ToDate to take full DateTime strings; time portion of the string is ignored (Non-Substantive)</li>
+  <li>STU4B#38: Added missing rationale for absence of relative ratio comparison operators (Non-Substantive)</li>
+  <li>STU4B#39: Added an example of point extraction from an interval with an open boundary (Non-Substantive)</li>
+  <li>STU4B#40: Improved examples throughout (Non-Substantive)</li>
+  <li>STU4B#41: Added example of expand with intervals with null boundaries (Non-Substantive)</li>
+  <li>STU4B#42: Added result to WidthIsNull example (Non-Substantive)</li>
+  <li>STU4B#43: Added example of Width of interval with null boundaries (Non-Substantive)</li>
+  <li>STU4B#46: Added expected result for example (Non-Substantive)</li>
+  <li>STU4B#47: Corrected use of slash as a separator in the operator precedence tables (Non-Substantive)</li>
+  <li>STU4B#48: Corrected distinct example (Non-Substantive)</li>
+  <li>STU4B#49: Added expected result for example (Non-Substantive)</li>
+  <li>STU4B#50: Defined qualified identifiers prior to usage (Non-Substantive)</li>
+  <li>STU4B#51: Defined unqualified identifiers prior to usage (Non-Substantive)</li>
+  <li>STU4B#52: Verified correct usage of time literals and formatting strings throughout (Non-Substantive)</li>
+  <li>STU4B#53: Added description of seconds and milliseconds precision handling to relative comparison operators throughout (Non-Substantive)</li>
+  <li>STU4B#54: Changed language of seconds and milliseconds precision handling to combined rather than considered throughout (Non-Substantive)</li>
+  <li>STU4B#58: Updated referenced to XML Schema Reg Ex to PCRE (Non-Substantive)</li>
+  <li>STU4B#60: Corrected empty set result to null (Non-Substantive)</li>
+  <li>STU4B#63: Added a description of all informative sections of the specification (Non-Substantive)</li>
+  <li>STU4B#64: Added removal of T from formatting strings as a breaking change (Non-Substantive)</li>
+  <li>STU4B#65: Added description of return type of codes element in retrieve documentation (Non-Substantive)</li>
+  <li>STU4B#66: Added description of return type of dateRange element in retrieve documentation (Non-Substantive)</li>
+  <li>STU4B#67: Clarified documentation for codeProperty and valueSetProperty in retrieve (Non-Substantive)</li>
+  <li>STU4B#68: Added formal description of simple path traversal expression (Non-Substantive)</li>
+  <li>STU4B#69: Added example of valueSetProperty usage in retrieve documentation (Non-Substantive)</li>
+  <li>STU4B#70: Changed "Unspecified" context name to "Unfiltered" (Substantive)</li>
+  <li>STU4B#71: Clarified that model information specifies default context; Unfiltered if no context or default is specified (Non-Substantive)</li>
+  <li>STU4B#72: Added documentation to explain why cross-context queries are not supported (Non-Substantive)</li>
+  <li>STU4B#73: Clarified example wording (Non-Substantive)</li>
+  <li>STU4B#74: Clarified structural versus instance data constraints in data requirements discussion (Non-Substantive)</li>
+  <li>STU4B#75: Corrected typo (Non-Substantive)</li>
+  <li>STU4B#76: Corrected errors in related context retrieve example (Non-Substantive)</li>
+  <li>STU4B#77: Updated related context retrieve example to ensure it is complete (Non-Substantive)</li>
+  <li>STU4B#78: Clarified related context retrieve behavior when the context expression results in null (Non-Substantive)</li>
+  <li>STU4B#79: Required related context retrieve expression to return a singleton (Substantive)</li>
+  <li>STU4B#80: Incorporated test schema into translation tooling (Non-Substantive)</li>
+  <li>STU4B#81: Documented test schema attributes (Non-Substantive)</li>
+  <li>STU4B#82: Added description element to test cases and groups (Non-Substantive)</li>
+  <li>STU4B#83: Added reference element to test cases and groups (Non-Substantive)</li>
+  <li>STU4B#84: Added a name element to test cases and groups (Non-Substantive)</li>
+  <li>STU4B#85: Documented what portions of the specification are covered by test cases (Non-Substantive)</li>
+  <li>STU4B#86: Clarified expand documentation to use intervals of size per rather than unit intervals (Non-Substantive)</li>
+  <li>STU4B#87: Added Ratio overload of ToQuantity operator (Substantive)</li>
+  <li>STU4B#88: Clarified that local identifiers for included libraries must be unqualified (Non-Substantive)</li>
+  <li>STU4B#89: Documented that namespaces are represented in the ELM VersionedIdentifier system element (Non-Substantive)</li>
+  <li>STU4B#90: Clarified use of context throughout (Non-Substantive)</li>
+  <li>STU4B#91: Clarified use of context throughout (Non-Substantive)</li>
+  <li>STU4B#92: Clarified that dateProperty cannot be a Time in the retrieve documentation (Non-Substantive)</li>
+  <li>STU4B#93: Relaxed the requirement that both low and high date property elements are present in a retrieve, only one or the other is required, but both are allowed (Non-Substantive)</li>
+  <li>STU4B#94: Removed the scope attribute from the Retrieve in ELM (Substantive)</li>
+  <li>STU4B#95: Clarified decimal equality semantics throughout (Non-Substantive)</li>
+  <li>STU4B#96: Clarified decimal equivalent semantics throughout (Non-Substantive)</li>
+  <li>STU4B#97: Reordered documentation of constant offset in minimum operator documentation (Non-Substantive)</li>
+  <li>STU4B#98: Reordered documentation of constant offset in maximum operator documentation (Non-Substantive)</li>
+  <li>STU4B#99: Clarified default per construction behavior for collapse (Non-Substantive)</li>
+  <li>STU4B#100: Clarified default per value versus default per unit (default UCUM unit '1') for collapse (Non-Substantive)</li>
+  <li>STU4B#101: Clarified default per value versus default per unit (default UCUM unit '1') for expand (Non-Substantive)</li>
+  <li>STU4B#102: Clarified default per constructioni behavior for expand (Non-Substantive)</li>
+  <li>STU4B#103: Clarified overlaps before documentation (no longer uses properly to define the behavior) (Non-Substantive)</li>
+  <li>STU4B#104: Clarified overlaps after documentation (no longer uses properly to define the behavior) (Non-Substantive)</li>
+  <li>STU4B#105: Fixed rendering of calculate age at overloads in logical specification (Non-Substantive)</li>
+  <li>STU4B#106: Documented number formatting strings throughout (Non-Substantive)</li>
+  <li>STU4B#107: Documented number formatting strings throughout (Non-Substantive)</li>
+  <li>STU4B#108: Added related context retrieve documentation to model information discussion (Non-Substantive)</li>
+  <li>STU4B#109: Code paths specified in retrieves can now use literal indexers (Substantive)</li>
+  <li>STU4B#110: Using Combine on an empty list now results in an empty string, rather than null (Non-Substantive)</li>
+  <li>STU4B#111: Changed reference to XML Schema 1.1 Reg Ex to PCRE (Non-Substantive)</li>
+  <li>STU4B#112: Corrected expand documentation to describe impact of precision rounding as broadening, rather than narrowing (Non-Substantive)</li>
+  <li>STU4B#113: Documented short-circuit behavior for if conditional expression (Non-Substantive)</li>
+  <li>STU4B#114: ConvertQuantity operator now throws an error if the implementation does not support the conversion (Substantive)</li>
+  <li>STU4B#115: Added examples for Practitioner and Unfiltered context (Non-Substantive)</li>
+  <li>STU4B#116: Updated examples for related context retrieves (Non-Substantive)</li>
+  <li>STU4B#117: Corrected typo (Non-Substantive)</li>
+  <li>STU4B#118: Improved naming of InDemographic expression in examples throughout (Non-Substantive)</li>
+  <li>STU4B#120: Added example of size operator on an interval with open boundaries (Non-Substantive)</li>
+  <li>STU4B#121: Clarified dofault context selection behavior (Non-Substantive)</li>
+  <li>STU4B#125: Corrected readability of some introductory text (Non-Substantive)</li>
+  <li>STU4B#126: Added description of the adoption level of CQL to introductory text (Non-Substantive)</li>
+  <li>STU4B#127: Added note about conventions being enforced by downstream implementation guides (Non-Substantive)</li>
+  <li>STU4B#128: Added note about conventions being enforced by downstream implementation guides (Non-Substantive)</li>
+  <li>STU4B#129: Aligned examples with QDM 5.5 data types (Non-Substantive)</li>
+  <li>STU4B#131: Expanded test cases (Non-Substantive)</li>
+  <li>STU4B#132: Corrected typo (Non-Substantive)</li>
+  <li>STU4B#133: Corrected typo (Non-Substantive)</li>
+  <li>STU4B#134: Added link to downloaded spec to the downloads page (Non-Substantive)</li>
+  <li>STU4B#135: Updated link to QI-Core implementation guide (Non-Substantive)</li>
+  <li>STU4B#136: Corrected broken links in introductory text (Non-Substantive)</li>
+  <li>STU4B#138: Changed name of Unspecified context to Unfiltered (Substantive)</li>
+  <li>STU4B#139: Documented that model information defines relationship of context expression results to the context (Non-Substantive)</li>
+  <li>STU4B#140: Added note about conventions being enforced by downstream implementation guides (Non-Substantive)</li>
+  <li>STU4B#141: Corrected typo (Non-Substantive)</li>
+  <li>STU4B#142: Add clarifying example for relationship clauses versus the where clause (Non-Substantive)</li>
+  <li>STU4B#143: Added examples of negative difference and duration calculations (Non-Substantive)</li>
+  <li>STU4B#144: Corrected typo (Non-Substantive)</li>
+  <li>STU4B#145: Corrected typo (Non-Substantive)</li>
+  <li>STU4B#146: Clarified that timing relationships use duration semantics rather than difference (Non-Substantive)</li>
+  <li>STU4B#147: Added introductory text describing where to find discussions on more advanced content (Non-Substantive)</li>
+</ul>
+
+<h3 id="stu-4-ballot-changes">STU 4 Ballot Changes</h3>
+
+<ul>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1648[#1648]: ToDate signatures (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1679[#1679]: Ratio clarifications (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1680[#1680]: Ratio comparison (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1683[#1683]: Inconsistent interval notation in examples (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1684[#1684]: Clarify interval operator result examples (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1688[#1688]: ToDate signatures (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1689[#1689]: Clarify Age calculation signatures, behaviors, and descriptions (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1701[#1701]: Correct In(CodeSystem) example (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1702[#1702]: SplitOnMatches signature (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1703[#1703]: Clarify expand semantics (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1705[#1705]: Combine in the presence of nulls (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1706[#1706]: Consistent Width semantics (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1707[#1707]: Size for intervals (Compatible-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1708[#1708]: Expand uses width, not count (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1709[#1709]: Collapse uses width, not count (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1710[#1710]: Code equivalence for post-coordinated expressions (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1711[#1711]: Fix operator precedence of expand (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1712[#1712]: Align string equivalence with FHIRPath (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1713[#1713]: Clarify distinct in the presence of nulls (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1714[#1714]: Clarify type inference for singleton queries (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1715[#1715]: Fix Ratio as a child rather than its own section (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1716[#1716]: Non-patient context (Non-Compatible, substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1717[#1717]: CQL test suite (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1719[#1719]: Namespaces for libraries (Compatible, substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1720[#1720]: Qualifiers in retrieve code paths (Compatible, substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1721[#1721]: Consistent referenced library versions (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1722[#1722]: Update FHIRPath usage and translation sections (Non-compatible)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1723[#1723]: Define seconds as a Decimal (Non-compatible)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1724[#1724]: Removed timezone offset from Time; Changed timezone keyword to timezoneoffset (Non-compatible)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1725[#1725]: Update recommended regex flavor to PCRE (Non-Substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1726[#1726]: Note that implies allows short-circuit evaluation (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1727[#1727]: Add unit conversion for quantities (Compatible, substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1728[#1728]: Divide-by-zero and arithmetic overflow/underflow semantics (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1731[#1731]: Overlaps with open null boundaries (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1732[#1732]: Maximum/Minimum insufficiently specified (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1734[#1734]: Overlaps logical descriptions (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1751[#1751]: Clarify semantics for partial ordering (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1761[#1761]: DateMax example is incorrect (Non-substantive)</li>
+  <li>http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1766[#1766]: Add valuesetProperty element to Retrieve (Compatible, Substantive)</li>
+  <li>Added support for related-context queries (Compatible, Substantive)</li>
+</ul>
+
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+          IG &#169; 2014+ <a style="color:var(--footer-hyperlink-text-color)" href="http://www.hl7.org/Special/committees/dss/index.cfm">Clinical Decision Support WG</a>.  Package hl7.cql#1.5.3 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Mar 7, 2025 16:06+1100">2025-03-07</span>
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="qa.html">QA Report</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" rel="license" href="license.html">License</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" rel="history" href="http://cql.hl7.org/history.html">Version History</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>
+                     
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

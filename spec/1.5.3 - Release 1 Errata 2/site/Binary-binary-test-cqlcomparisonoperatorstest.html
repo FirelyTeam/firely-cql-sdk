@@ -1,0 +1,1090 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>CQL Tests - Comparison Operators - Clinical Quality Language Specification v1.5.3</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/project.css" rel="stylesheet"/>
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+  	<link href="assets/css/cqf.css" rel="stylesheet" />
+    <link href="assets/css/cql.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script src="assets/js/prism.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"11.60"}
+    h3,h4,h5,h6{--heading-prefix:"11.60"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <a id="logo" no-external="true" href="index.html"><img alt="Clinical Quality Language" src="assets/images/cql-logo.png" width="100" height="75"/> </a>
+<div id="family-nav">
+   <a id="family-logo" no-external="true" href="http://www.hl7.org/">
+    <img height="75" alt="visit the hl7 website" width="100" src="assets/images/hl7-logo.png"/>
+  </a>
+</div>
+
+<!-- TODO: Push this into the base template, but it requires a "trusted" template -->
+<script type="text/javascript" src="assets/js/cql.js"> </script>
+
+
+        <div id="ig-status">
+          <p><span style="font-size:12pt;font-weight:bold">Clinical Quality Language Specification</span>
+            <br/>
+            <span style="display:inline-block;">1.5.3 - Release 1 Errata 2
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="index.html" class="dropdown-toggle">Documentation</a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="01-introduction.html">Chapter 1 - Introduction</a>
+      </li>
+      <li>
+        <a href="02-authorsguide.html">Chapter 2 - Author's Guide</a>
+      </li>
+      <li>
+        <a href="03-developersguide.html">Chapter 3 - Developer's Guide</a>
+      </li>
+      <li>
+        <a href="04-logicalspecification.html">Chapter 4 - Logical Specification</a>
+      </li>
+      <li>
+        <a href="05-languagesemantics.html">Chapter 5 - Language Semantics</a>
+      </li>
+      <li>
+        <a href="06-translationsemantics.html">Chapter 6 - Translation Semantics</a>
+      </li>
+      <li>
+        <a href="07-physicalrepresentation.html">Chapter 7 - Physical Representation</a>
+      </li>
+      <li>
+        <a href="08-a-cqlsyntax.html">Appendix A - CQL Syntax</a>
+      </li>
+      <li>
+        <a href="09-b-cqlreference.html">Appendix B - CQL Reference</a>
+      </li>
+      <li>
+        <a href="10-c-referenceimplementations.html">Appendix C - Reference Implementations</a>
+      </li>
+      <li>
+        <a href="11-d-references.html">Appendix D - References</a>
+      </li>
+      <li>
+        <a href="12-e-acronyms.html">Appendix E - Acronyms</a>
+      </li>
+      <li>
+        <a href="13-f-glossary.html">Appendix F - Glossary</a>
+      </li>
+      <li>
+        <a href="14-g-formattingconventions.html">Appendix G - Formatting Conventions</a>
+      </li>
+      <li>
+        <a href="15-h-timeintervalcalculations.html">Appendix H - Time Interval Calculations</a>
+      </li>
+      <li>
+        <a href="16-i-fhirpathtranslation.html">Appendix I - FHIRPath Translation</a>
+      </li>
+      <li>
+        <a href="17-j-listoftables.html">Appendix J - List Of Tables</a>
+      </li>
+      <li>
+        <a href="18-k-listoffigures.html">Appendix K - List Of Figures</a>
+      </li>
+      <li>
+        <a href="19-l-cqlsyntaxdiagrams.html">Appendix L - CQL Syntax Diagrams</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="02-authorsguide.html">Author's Guide</a>
+  </li>
+  <li>
+    <a href="03-developersguide.html">Developer's Guide</a>
+  </li>
+  <li>
+    <a href="09-b-cqlreference.html">CQL Reference</a>
+  </li>
+  <li>
+    <a href="grammar.html">Grammar</a>
+  </li>
+  <li>
+    <a href="elm.html">ELM</a>
+  </li>
+  <li>
+    <a href="examples.html">Examples</a>
+  </li>
+  <li>
+    <a href="tests.html">Tests</a>
+  </li>
+  <li>
+    <a href="downloads.html">Downloads</a>
+  </li>
+  <li>
+    <a href="changes.html">Changes</a>
+  </li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='artifacts.html'><b>Artifacts Summary</b></a></li><li><b>CQL Tests - Comparison Operators</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">Publication Build: This will be filled in by the publication tooling</p><!--EndReleaseHeader-->
+
+  
+
+
+
+
+
+
+
+
+<ul class="nav nav-tabs">
+
+  <li class="active">
+    <a href="#">Narrative Content</a>
+  </li>
+
+
+
+  
+    <li>
+      <a href="Binary-binary-test-cqlcomparisonoperatorstest.xml.html">XML</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="Binary-binary-test-cqlcomparisonoperatorstest.json.html">JSON</a>
+    </li>
+  
+
+
+  
+    <li>
+      <a href="Binary-binary-test-cqlcomparisonoperatorstest.ttl.html">TTL</a>
+    </li>
+  
+
+
+
+</ul>
+
+
+  <a name="root"> </a>
+
+
+  <h2 id="root">Binary: CQL Tests - Comparison Operators</h2>
+
+
+
+  
+
+
+  <!-- insert intro if present -->
+  
+
+
+
+  <div>
+  <pre class="xml">
+    <code>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+	name="CqlComparisonOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#comparison-operators-4"&gt;
+	&lt;group name="Between"&gt;
+		&lt;test name="BetweenIntTrue"&gt;
+			&lt;expression&gt;4 between 2 and 6&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Equal"&gt;
+		&lt;test name="SimpleEqTrueTrue"&gt;
+			&lt;expression&gt;true = true&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqTrueFalse"&gt;
+			&lt;expression&gt;true = false&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqFalseFalse"&gt;
+			&lt;expression&gt;false = false&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqFalseTrue"&gt;
+			&lt;expression&gt;false = true&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqNullNull"&gt;
+			&lt;expression&gt;null = null&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqTrueNull"&gt;
+			&lt;expression&gt;true = null&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqNullTrue"&gt;
+			&lt;expression&gt;null = true&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqInt1Int1"&gt;
+			&lt;expression&gt;1 = 1&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqInt1Int2"&gt;
+			&lt;expression&gt;1 = 2&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqStringAStringA"&gt;
+			&lt;expression&gt;'a' = 'a'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqStringAStringB"&gt;
+			&lt;expression&gt;'a' = 'b'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqFloat1Float1"&gt;
+			&lt;expression&gt;1.0 = 1.0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqFloat1Float2"&gt;
+			&lt;expression&gt;1.0 = 2.0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqFloat1Int1"&gt;
+			&lt;expression&gt;1.0 = 1&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleEqFloat1Int2"&gt;
+			&lt;expression&gt;1.0 = 2&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="QuantityEqCM1CM1"&gt;
+			&lt;expression&gt;1'cm' = 1'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="QuantityEqCM1M01"&gt;
+			&lt;expression&gt;1'cm' = 0.01'm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly --&gt;
+		&lt;/test&gt;
+		&lt;test name="QuantityEqDiffPrecision"&gt;
+			&lt;expression&gt;2.0'cm' = 2.00'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TupleEqJohnJohn"&gt;
+			&lt;expression&gt;Tuple { Id : 1, Name : 'John' } = Tuple { Id : 1, Name : 'John' }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TupleEqJohnJane"&gt;
+			&lt;expression&gt;Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'Jane' }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TupleEqJohn1John2"&gt;
+			&lt;expression&gt;Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'John' }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TupleEqDateTimeTrue"&gt;
+			&lt;expression&gt;Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TupleEqDateTimeFalse"&gt;
+			&lt;expression&gt;Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 5, 0, 0, 0) }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TupleEqTimeTrue"&gt;
+			&lt;expression&gt;Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.541 }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TupleEqTimeFalse"&gt;
+			&lt;expression&gt;Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.540 }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeEqTodayToday"&gt;
+			&lt;expression&gt;Today() = Today()&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeEqTodayYesterday"&gt;
+			&lt;expression&gt;Today() = Today() - 1 days&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeEqJanJan"&gt;
+			&lt;expression&gt;DateTime(2014, 1, 5, 5, 0, 0, 0, 0) = DateTime(2014, 1, 5, 5, 0, 0, 0, 0)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeEqJanJuly"&gt;
+			&lt;expression&gt;DateTime(2014, 1, 5, 5, 0, 0, 0, 0) = DateTime(2014, 7, 5, 5, 0, 0, 0, 0)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeEqNull"&gt;
+			&lt;expression&gt;DateTime(null) = DateTime(null)&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeUTC"&gt;
+			&lt;expression&gt;@2014-01-25T14:30:14.559+01:00 = @2014-01-25T14:30:14.559+01:00&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeEq10A10A"&gt;
+			&lt;expression&gt;@T10:00:00.000 = @T10:00:00.000&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeEq10A10P"&gt;
+			&lt;expression&gt;@T10:00:00.000 = @T22:00:00.000&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Greater"&gt;
+		&lt;test name="GreaterZZ"&gt;
+			&lt;expression&gt;0 &amp;gt; 0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterZ1"&gt;
+			&lt;expression&gt;0 &amp;gt; 1&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterZNeg1"&gt;
+			&lt;expression&gt;0 &amp;gt; -1&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterDecZZ"&gt;
+			&lt;expression&gt;0.0 &amp;gt; 0.0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterDecZ1"&gt;
+			&lt;expression&gt;0.0 &amp;gt; 1.0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterDecZNeg1"&gt;
+			&lt;expression&gt;0.0 &amp;gt; -1.0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterCM0CM0"&gt;
+			&lt;expression&gt;0'cm' &amp;gt; 0'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterCM0CM1"&gt;
+			&lt;expression&gt;0'cm' &amp;gt; 1'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterCM0NegCM1"&gt;
+			&lt;expression&gt;0'cm' &amp;gt; -1'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterM1CM1"&gt;
+			&lt;expression&gt;1'm' &amp;gt; 1'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly --&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterM1CM10"&gt;
+			&lt;expression&gt;1'm' &amp;gt; 10'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly --&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterAA"&gt;
+			&lt;expression&gt;'a' &amp;gt; 'a'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterAB"&gt;
+			&lt;expression&gt;'a' &amp;gt; 'b'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterBA"&gt;
+			&lt;expression&gt;'b' &amp;gt; 'a'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterAThanAA"&gt;
+			&lt;expression&gt;'a' &amp;gt; 'aa'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterAAThanA"&gt;
+			&lt;expression&gt;'aa' &amp;gt; 'a'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterJackJill"&gt;
+			&lt;expression&gt;'Jack' &amp;gt; 'Jill'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeGreaterTrue"&gt;
+			&lt;expression&gt;DateTime(2012, 2, 12) &amp;gt; DateTime(2012, 2, 10)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeGreaterFalse"&gt;
+			&lt;expression&gt;DateTime(2012, 2, 12) &amp;gt; DateTime(2012, 2, 13)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeGreaterTrue"&gt;
+			&lt;expression&gt;@T10:00:00.001 &amp;gt; @T10:00:00.000&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeGreaterFalse"&gt;
+			&lt;expression&gt;@T10:00:00.000 &amp;gt; @T10:00:00.001&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyGreaterNull"&gt;
+			&lt;expression&gt;DateTime(2014) &amp;gt; DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyGreaterTrue"&gt;
+			&lt;expression&gt;DateTime(2015) &amp;gt; DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyGreaterFalse"&gt;
+			&lt;expression&gt;DateTime(2013) &amp;gt; DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Greater Or Equal"&gt;
+		&lt;test name="GreaterOrEqualZZ"&gt;
+			&lt;expression&gt;0 &amp;gt;= 0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualZ1"&gt;
+			&lt;expression&gt;0 &amp;gt;= 1&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualZNeg1"&gt;
+			&lt;expression&gt;0 &amp;gt;= -1&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualDecZZ"&gt;
+			&lt;expression&gt;0.0 &amp;gt;= 0.0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualDecZ1"&gt;
+			&lt;expression&gt;0.0 &amp;gt;= 1.0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualDecZNeg1"&gt;
+			&lt;expression&gt;0.0 &amp;gt;= -1.0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualCM0CM0"&gt;
+			&lt;expression&gt;0'cm' &amp;gt;= 0'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualCM0CM1"&gt;
+			&lt;expression&gt;0'cm' &amp;gt;= 1'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualCM0NegCM1"&gt;
+			&lt;expression&gt;0'cm' &amp;gt;= -1'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualM1CM1"&gt;
+			&lt;expression&gt;1'm' &amp;gt;= 1'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly; note, only passes by coincidence --&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualM1CM10"&gt;
+			&lt;expression&gt;1'm' &amp;gt;= 10'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly --&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualAA"&gt;
+			&lt;expression&gt;'a' &amp;gt;= 'a'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualAB"&gt;
+			&lt;expression&gt;'a' &amp;gt;= 'b'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualBA"&gt;
+			&lt;expression&gt;'b' &amp;gt;= 'a'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualAThanAA"&gt;
+			&lt;expression&gt;'a' &amp;gt;= 'aa'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualAAThanA"&gt;
+			&lt;expression&gt;'aa' &amp;gt;= 'a'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="GreaterOrEqualJackJill"&gt;
+			&lt;expression&gt;'Jack' &amp;gt;= 'Jill'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeGreaterEqTrue"&gt;
+			&lt;expression&gt;DateTime(2012, 2, 12, 0, 0, 0, 0) &amp;gt;= DateTime(2012, 2, 10, 0, 0, 0, 0)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeGreaterEqTrue2"&gt;
+			&lt;expression&gt;DateTime(2012, 2, 12, 0, 0, 0, 0) &amp;gt;= DateTime(2012, 2, 12, 0, 0, 0, 0)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeGreaterEqFalse"&gt;
+			&lt;expression&gt;DateTime(2012, 2, 12, 0, 0, 0, 0) &amp;gt;= DateTime(2012, 2, 13, 0, 0, 0, 0)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeGreaterEqTrue"&gt;
+			&lt;expression&gt;@T10:00:00.001 &amp;gt;= @T10:00:00.000&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeGreaterEqTrue2"&gt;
+			&lt;expression&gt;@T10:00:00.000 &amp;gt;= @T10:00:00.000&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeGreaterEqFalse"&gt;
+			&lt;expression&gt;@T10:00:00.000 &amp;gt;= @T10:00:00.001&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyGreaterEqualNull"&gt;
+			&lt;expression&gt;DateTime(2014) &amp;gt;= DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyGreaterEqualTrue"&gt;
+			&lt;expression&gt;DateTime(2015) &amp;gt;= DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyGreaterEqualFalse"&gt;
+			&lt;expression&gt;DateTime(2013) &amp;gt;= DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Less"&gt;
+		&lt;test name="LessZZ"&gt;
+			&lt;expression&gt;0 &amp;lt; 0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessZ1"&gt;
+			&lt;expression&gt;0 &amp;lt; 1&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessZNeg1"&gt;
+			&lt;expression&gt;0 &amp;lt; -1&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessDecZZ"&gt;
+			&lt;expression&gt;0.0 &amp;lt; 0.0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessDecZ1"&gt;
+			&lt;expression&gt;0.0 &amp;lt; 1.0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessDecZNeg1"&gt;
+			&lt;expression&gt;0.0 &amp;lt; -1.0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessCM0CM0"&gt;
+			&lt;expression&gt;0'cm' &amp;lt; 0'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessCM0CM1"&gt;
+			&lt;expression&gt;0'cm' &amp;lt; 1'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessCM0NegCM1"&gt;
+			&lt;expression&gt;0'cm' &amp;lt; -1'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessM1CM1"&gt;
+			&lt;expression&gt;1'm' &amp;lt; 1'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly; note, only works by coincidence --&gt;
+		&lt;/test&gt;
+		&lt;test name="LessM1CM10"&gt;
+			&lt;expression&gt;1'm' &amp;lt; 10'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly --&gt;
+		&lt;/test&gt;
+		&lt;test name="LessAA"&gt;
+			&lt;expression&gt;'a' &amp;lt; 'a'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessAB"&gt;
+			&lt;expression&gt;'a' &amp;lt; 'b'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessBA"&gt;
+			&lt;expression&gt;'b' &amp;lt; 'a'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessAThanAA"&gt;
+			&lt;expression&gt;'a' &amp;lt; 'aa'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessAAThanA"&gt;
+			&lt;expression&gt;'aa' &amp;lt; 'a'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessJackJill"&gt;
+			&lt;expression&gt;'Jack' &amp;lt; 'Jill'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeLessTrue"&gt;
+			&lt;expression&gt;DateTime(2012, 2, 9) &amp;lt; DateTime(2012, 2, 10)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeLessFalse"&gt;
+			&lt;expression&gt;DateTime(2012, 2, 14) &amp;lt; DateTime(2012, 2, 13)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeLessTrue"&gt;
+			&lt;expression&gt;@T10:00:00.001 &amp;lt; @T10:00:00.002&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeLessFalse"&gt;
+			&lt;expression&gt;@T10:10:00.000 &amp;lt; @T10:00:00.001&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyLessNull"&gt;
+			&lt;expression&gt;DateTime(2014) &amp;lt; DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyLessTrue"&gt;
+			&lt;expression&gt;DateTime(2013) &amp;lt; DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyLessFalse"&gt;
+			&lt;expression&gt;DateTime(2015) &amp;lt; DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Less Or Equal"&gt;
+		&lt;test name="LessOrEqualZZ"&gt;
+			&lt;expression&gt;0 &amp;lt;= 0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualZ1"&gt;
+			&lt;expression&gt;0 &amp;lt;= 1&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualZNeg1"&gt;
+			&lt;expression&gt;0 &amp;lt;= -1&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualDecZZ"&gt;
+			&lt;expression&gt;0.0 &amp;lt;= 0.0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualDecZ1"&gt;
+			&lt;expression&gt;0.0 &amp;lt;= 1.0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualDecZNeg1"&gt;
+			&lt;expression&gt;0.0 &amp;lt;= -1.0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualCM0CM0"&gt;
+			&lt;expression&gt;0'cm' &amp;lt;= 0'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualCM0CM1"&gt;
+			&lt;expression&gt;0'cm' &amp;lt;= 1'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualCM0NegCM1"&gt;
+			&lt;expression&gt;0'cm' &amp;lt;= -1'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualM1CM1"&gt;
+			&lt;expression&gt;1'm' &amp;lt;= 1'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly --&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualM1CM10"&gt;
+			&lt;expression&gt;1'm' &amp;lt;= 10'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly --&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualAA"&gt;
+			&lt;expression&gt;'a' &amp;lt;= 'a'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualAB"&gt;
+			&lt;expression&gt;'a' &amp;lt;= 'b'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualBA"&gt;
+			&lt;expression&gt;'b' &amp;lt;= 'a'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualAThanAA"&gt;
+			&lt;expression&gt;'a' &amp;lt;= 'aa'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualAAThanA"&gt;
+			&lt;expression&gt;'aa' &amp;lt;= 'a'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="LessOrEqualJackJill"&gt;
+			&lt;expression&gt;'Jack' &amp;lt;= 'Jill'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeLessEqTrue"&gt;
+			&lt;expression&gt;DateTime(2012, 2, 9, 0, 0, 0, 0) &amp;lt;= DateTime(2012, 2, 10, 0, 0, 0, 0)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeLessEqTrue2"&gt;
+			&lt;expression&gt;DateTime(2012, 2, 12, 0, 0, 0, 0) &amp;lt;= DateTime(2012, 2, 12, 0, 0, 0, 0)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeLessEqFalse"&gt;
+			&lt;expression&gt;DateTime(2012, 2, 12, 1, 0, 0, 0) &amp;lt;= DateTime(2012, 2, 12, 0, 0, 0, 0)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeLessEqTrue"&gt;
+			&lt;expression&gt;@T10:00:00.001 &amp;lt;= @T10:00:00.002&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeLessEqTrue2"&gt;
+			&lt;expression&gt;@T10:00:00.000 &amp;lt;= @T10:00:00.000&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeLessEqFalse"&gt;
+			&lt;expression&gt;@T10:00:00.002 &amp;lt;= @T10:00:00.001&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyLessEqualNull"&gt;
+			&lt;expression&gt;DateTime(2014) &amp;lt;= DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyLessEqualTrue"&gt;
+			&lt;expression&gt;DateTime(2013) &amp;lt;= DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="UncertaintyLessEqualFalse"&gt;
+			&lt;expression&gt;DateTime(2015) &amp;lt;= DateTime(2014, 2, 15)&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Equivalent"&gt;
+		&lt;test name="EquivTrueTrue"&gt;
+			&lt;expression&gt;true ~ true&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivTrueFalse"&gt;
+			&lt;expression&gt;true ~ false&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivFalseFalse"&gt;
+			&lt;expression&gt;false ~ false&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivFalseTrue"&gt;
+			&lt;expression&gt;false ~ true&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivNullNull"&gt;
+			&lt;expression&gt;null ~ null&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivTrueNull"&gt;
+			&lt;expression&gt;true ~ null&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivNullTrue"&gt;
+			&lt;expression&gt;null ~ true&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivInt1Int1"&gt;
+			&lt;expression&gt;1 ~ 1&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivInt1Int2"&gt;
+			&lt;expression&gt;1 ~ 2&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivStringAStringA"&gt;
+			&lt;expression&gt;'a' ~ 'a'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivStringAStringB"&gt;
+			&lt;expression&gt;'a' ~ 'b'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivFloat1Float1"&gt;
+			&lt;expression&gt;1.0 ~ 1.0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivFloat1Float2"&gt;
+			&lt;expression&gt;1.0 ~ 2.0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivFloat1Int1"&gt;
+			&lt;expression&gt;1.0 ~ 1&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivFloat1Int2"&gt;
+			&lt;expression&gt;1.0 ~ 2&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivEqCM1CM1"&gt;
+			&lt;expression&gt;1'cm' ~ 1'cm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivEqCM1M01"&gt;
+			&lt;expression&gt;1'cm' ~ 0.01'm'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly --&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivTupleJohnJohn"&gt;
+			&lt;expression&gt;Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 1, Name : 'John' }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivTupleJohnJohnWithNulls"&gt;
+			&lt;expression&gt;Tuple { Id : 1, Name : 'John', Position: null } ~ Tuple { Id : 1, Name : 'John', Position: null }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivTupleJohnJane"&gt;
+			&lt;expression&gt;Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'Jane' }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivTupleJohn1John2"&gt;
+			&lt;expression&gt;Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'John' }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivDateTimeTodayToday"&gt;
+			&lt;expression&gt;Today() ~ Today()&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivDateTimeTodayYesterday"&gt;
+			&lt;expression&gt;Today() ~ Today() - 1 days&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivTime10A10A"&gt;
+			&lt;expression&gt;@T10:00:00.000 ~ @T10:00:00.000&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="EquivTime10A10P"&gt;
+			&lt;expression&gt;@T10:00:00.000 ~ @T22:00:00.000&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+	&lt;group name="Not Equal"&gt;
+		&lt;test name="SimpleNotEqTrueTrue"&gt;
+			&lt;expression&gt;true != true&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqTrueFalse"&gt;
+			&lt;expression&gt;true != false&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqFalseFalse"&gt;
+			&lt;expression&gt;false != false&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqFalseTrue"&gt;
+			&lt;expression&gt;false != true&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqNullNull"&gt;
+			&lt;expression&gt;null != null&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqTrueNull"&gt;
+			&lt;expression&gt;true != null&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqNullTrue"&gt;
+			&lt;expression&gt;null != true&lt;/expression&gt;
+			&lt;output&gt;null&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqInt1Int1"&gt;
+			&lt;expression&gt;1 != 1&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqInt1Int2"&gt;
+			&lt;expression&gt;1 != 2&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqStringAStringA"&gt;
+			&lt;expression&gt;'a' != 'a'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqStringAStringB"&gt;
+			&lt;expression&gt;'a' != 'b'&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqFloat1Float1"&gt;
+			&lt;expression&gt;1.0 != 1.0&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqFloat1Float2"&gt;
+			&lt;expression&gt;1.0 != 2.0&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqFloat1Int1"&gt;
+			&lt;expression&gt;1.0 != 1&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="SimpleNotEqFloat1Int2"&gt;
+			&lt;expression&gt;1.0 != 2&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="QuantityNotEqCM1CM1"&gt;
+			&lt;expression&gt;1'cm' != 1'cm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="QuantityNotEqCM1M01"&gt;
+			&lt;expression&gt;1'cm' != 0.01'm'&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+			&lt;!-- TODO: make Engine convert units properly --&gt;
+		&lt;/test&gt;
+		&lt;test name="TupleNotEqJohnJohn"&gt;
+			&lt;expression&gt;Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 1, Name : 'John' }&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TupleNotEqJohnJane"&gt;
+			&lt;expression&gt;Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'Jane' }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TupleNotEqJohn1John2"&gt;
+			&lt;expression&gt;Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'John' }&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeNotEqTodayToday"&gt;
+			&lt;expression&gt;Today() != Today()&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="DateTimeNotEqTodayYesterday"&gt;
+			&lt;expression&gt;Today() != Today() - 1 days&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeNotEq10A10A"&gt;
+			&lt;expression&gt;@T10:00:00.000 != @T10:00:00.000&lt;/expression&gt;
+			&lt;output&gt;false&lt;/output&gt;
+		&lt;/test&gt;
+		&lt;test name="TimeNotEq10A10P"&gt;
+			&lt;expression&gt;@T10:00:00.000 != @T22:00:00.000&lt;/expression&gt;
+			&lt;output&gt;true&lt;/output&gt;
+		&lt;/test&gt;
+	&lt;/group&gt;
+&lt;/tests&gt;
+</code>
+  </pre>
+</div>
+
+
+  
+
+  <!-- insert notes if present -->
+  
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+          IG &#169; 2014+ <a style="color:var(--footer-hyperlink-text-color)" href="http://www.hl7.org/Special/committees/dss/index.cfm">Clinical Decision Support WG</a>.  Package hl7.cql#1.5.3 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Mar 7, 2025 16:06+1100">2025-03-07</span>
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="qa.html">QA Report</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" rel="license" href="license.html">License</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" rel="history" href="http://cql.hl7.org/history.html">Version History</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>
+                     
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+

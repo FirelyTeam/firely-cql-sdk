@@ -1,0 +1,236 @@
+{
+   "library" : {
+      "identifier" : {
+         "id" : "Example.RelatedContextRetrieve_CQL",
+         "system": "http://example.org/measures",
+				 "version": "0.1.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localIdentifier" : "QDM",
+            "uri" : "urn:healthit-gov:qdm:v5_5",
+            "version" : "5.5"
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "name" : "SNOMED",
+            "id" : "1.2.3.4.5",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "name" : "Estimated Due Date Exam",
+            "id" : "TBD",
+            "accessLevel" : "Public"
+         }, {
+            "name" : "Live Delivery",
+            "id" : "TBD",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "name" : "Mother Relationship",
+            "id" : "Mother",
+            "accessLevel" : "Public",
+            "codeSystem" : {
+               "name" : "SNOMED"
+            }
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{urn:healthit-gov:qdm:v5_5}Patient",
+                  "templateId" : "Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "Mother",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{urn:healthit-gov:qdm:v5_5}RelatedPerson",
+                  "codeProperty" : "code",
+                  "type" : "Retrieve",
+                  "codes" : {
+                     "type" : "ToList",
+                     "operand" : {
+                        "name" : "Mother Relationship",
+                        "type" : "CodeRef"
+                     }
+                  }
+               }
+            }
+         }, {
+            "name" : "Birth Date",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "Start",
+               "operand" : {
+                  "path" : "relevantPeriod",
+                  "type" : "Property",
+                  "source" : {
+                     "type" : "Last",
+                     "source" : {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "Delivery",
+                           "expression" : {
+                              "dataType" : "{urn:healthit-gov:qdm:v5_5}PositiveEncounterPerformed",
+                              "templateId" : "PositiveEncounterPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Live Delivery",
+                                 "type" : "ValueSetRef"
+                              }
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "sort" : {
+                           "by" : [ {
+                              "direction" : "asc",
+                              "type" : "ByExpression",
+                              "expression" : {
+                                 "type" : "Start",
+                                 "operand" : {
+                                    "name" : "relevantPeriod",
+                                    "type" : "IdentifierRef"
+                                 }
+                              }
+                           } ]
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "name" : "Estimated Due Date",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "strict" : false,
+               "type" : "As",
+               "operand" : {
+                  "path" : "result",
+                  "type" : "Property",
+                  "source" : {
+                     "type" : "Last",
+                     "source" : {
+                        "type" : "Query",
+                        "source" : [ {
+                           "alias" : "Exam",
+                           "expression" : {
+                              "dataType" : "{urn:healthit-gov:qdm:v5_5}PositivePhysicalExamPerformed",
+                              "templateId" : "PositivePhysicalExamPerformed",
+                              "codeProperty" : "code",
+                              "type" : "Retrieve",
+                              "codes" : {
+                                 "name" : "Estimated Due Date Exam",
+                                 "type" : "ValueSetRef"
+                              },
+                              "context" : {
+															  "path": "linkedPatientId",
+																"type": "Property",
+																"source": {
+                                  "name" : "Mother",
+                                  "type" : "ExpressionRef"
+                              	}
+															}
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "type" : "SameAs",
+                           "operand" : [ {
+                              "type" : "End",
+                              "operand" : {
+                                 "path" : "relevantPeriod",
+                                 "scope" : "Exam",
+                                 "type" : "Property"
+                              }
+                           }, {
+                              "type" : "Subtract",
+                              "operand" : [ {
+                                 "name" : "Birth Date",
+                                 "type" : "ExpressionRef"
+                              }, {
+                                 "value" : 1,
+                                 "unit" : "year",
+                                 "type" : "Quantity"
+                              } ]
+                           } ]
+                        },
+                        "sort" : {
+                           "by" : [ {
+                              "direction" : "asc",
+                              "type" : "ByExpression",
+                              "expression" : {
+                                 "type" : "Start",
+                                 "operand" : {
+                                    "name" : "relevantPeriod",
+                                    "type" : "IdentifierRef"
+                                 }
+                              }
+                           } ]
+                        }
+                     }
+                  }
+               },
+               "asTypeSpecifier" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         }, {
+            "name" : "Gestational Age in Days at Birth",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "TruncatedDivide",
+               "operand" : [ {
+                  "type" : "Subtract",
+                  "operand" : [ {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "280",
+                     "type" : "Literal"
+                  }, {
+                     "precision" : "Day",
+                     "type" : "DurationBetween",
+                     "operand" : [ {
+                        "name" : "Estimated Due Date",
+                        "type" : "ExpressionRef"
+                     }, {
+                        "name" : "Birth Date",
+                        "type" : "ExpressionRef"
+                     } ]
+                  } ]
+               }, {
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "7",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

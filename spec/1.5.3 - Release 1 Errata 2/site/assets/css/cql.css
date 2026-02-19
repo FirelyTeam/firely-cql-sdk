@@ -1,0 +1,156 @@
+/* FHIR family-specific colors */
+:root {
+    --navbar-bg-color: #105EAB; /* 2. Header container color */
+    --footer-container-bg-color: #707070; /* 4. Footer container color */
+    --btn-hover-color: #0c23da;  /* 6. Menu button hover color */
+    --btn-active-color: #0c23da;
+}
+
+.kw {
+    font-family: monospace;
+    color: blue;
+    background-color: inherit;
+}
+.sym {
+    font-family: monospace;
+    color: grey;
+    background-color: inherit;
+}
+.id {
+    font-family: monospace;
+    color: maroon;
+    background-color: inherit;
+}
+.lit {
+    font-family: monospace;
+    color: maroon;
+    background-color: inherit;
+}
+.com {
+    font-family: monospace;
+    color: green;
+    background-color: inherit;
+}
+
+.stu {
+  padding-left: 3px;
+  padding-right: 3px;
+  border: 1px grey solid;
+  font-weight: bold;
+  color: black;
+  background-color: #fff5e6
+}
+
+table.colstu {
+	width: 100%;
+}
+
+table.colstu td {
+  border: 1px grey solid;
+	border-spacing: 0;
+	padding: 5px;
+	border-collapse: collapse;
+	background-color: #fff5e6;
+}
+
+table.colsd {
+	width: 100%;
+}
+
+table.colsd td {
+  border: 1px grey solid;
+	border-spacing: 0;
+	padding: 5px;
+	border-collapse: collapse;
+	background-color: #efefef;
+}
+
+table.colsn {
+	width: 100%;
+}
+
+table.colsn td {
+  border: 1px grey solid;
+	border-spacing: 0;
+	padding: 5px;
+	border-collapse: collapse;
+	background-color: #e6ffff;
+}
+
+table.colse {
+	width: 100%;
+}
+
+table.colse td {
+  border: 1px grey solid;
+	border-spacing: 0;
+	padding: 5px;
+	border-collapse: collapse;
+	background-color: #e6e6e6;
+}
+
+table.colsi {
+	width: 100%;
+}
+
+table.colsi td {
+  border: 1px grey solid;
+	border-spacing: 0;
+	padding: 5px;
+	border-collapse: collapse;
+	background-color: #ffffe6;
+}
+
+table.std-status-inf {
+	width: 100%;
+}
+
+table.std-status-inf td {
+  border: 1px grey solid;
+	border-spacing: 0;
+	padding: 5px;
+	border-collapse: collapse;
+	background-color: #ffffe6;
+}
+
+table.std-status-stu {
+	width: 100%;
+}
+
+table.std-status-stu td {
+  border: 1px grey solid;
+	border-spacing: 0;
+	padding: 5px;
+	border-collapse: collapse;
+	background-color: #fff5e6;
+}
+
+.note-to-balloters {
+    margin: 5px;
+    padding: 10px;
+    border-left-style: solid;
+    background-color: #fff2ff;
+    border-left-color: #ffa0ff;
+  }
+  
+  /* -------------------- note styles ------------- */
+  .note-danger {
+    background-color: #ffdddd;
+    border-left: 6px solid #f44336;
+  }
+  
+  .note-success {
+    background-color: #ddffdd;
+    border-left: 6px solid #4CAF50;
+  }
+  
+  .note-info {
+    background-color: #e7f3fe;
+    border-left: 6px solid #2196F3;
+  }
+  
+  .note-warning {
+    background-color: #ffffcc;
+    border-left: 6px solid #ffeb3b;
+  }
+  

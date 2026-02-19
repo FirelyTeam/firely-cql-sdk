@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <title>V1.5 Change Log - Clinical Quality Language Specification v1.5.3</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="author" content="http://hl7.org/fhir"/>
+
+    <link href="fhir.css" rel="stylesheet"/>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap-fhir.css" rel="stylesheet"/>
+
+    <!-- Project extras -->
+    <link href="assets/css/project.css" rel="stylesheet"/>
+    <link href="assets/css/pygments-manni.css" rel="stylesheet"/>
+    <link href="assets/css/jquery-ui.css" rel="stylesheet"/>
+  	<link href="assets/css/prism.css" rel="stylesheet" />
+  	<link href="assets/css/cqf.css" rel="stylesheet" />
+    <link href="assets/css/cql.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="fhir-table-scripts.js"> </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="fhir-logo" sizes="144x144" href="assets/ico/icon-fhir-144.png"/>
+    <link rel="fhir-logo" sizes="114x114" href="assets/ico/icon-fhir-114.png"/>
+    <link rel="fhir-logo" sizes="72x72" href="assets/ico/icon-fhir-72.png"/>
+    <link rel="fhir-logo" href="assets/ico/icon-fhir-57.png"/>
+    <link rel="shortcut icon" href="assets/ico/favicon.png"/>
+  </head>
+  <body onload="document.body.style.opacity='1'">
+
+	  <script src="assets/js/prism.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid.js"></script>
+    <script type="text/javascript" src="assets/js/mermaid-init.js"></script>
+    <style type="text/css">h2{--heading-prefix:"10.5"}
+    h3,h4,h5,h6{--heading-prefix:"10.5"}</style>
+    <div id="segment-header" class="segment">  <!-- segment-header -->
+      <div class="container">  <!-- container -->
+
+        <a id="logo" no-external="true" href="index.html"><img alt="Clinical Quality Language" src="assets/images/cql-logo.png" width="100" height="75"/> </a>
+<div id="family-nav">
+   <a id="family-logo" no-external="true" href="http://www.hl7.org/">
+    <img height="75" alt="visit the hl7 website" width="100" src="assets/images/hl7-logo.png"/>
+  </a>
+</div>
+
+<!-- TODO: Push this into the base template, but it requires a "trusted" template -->
+<script type="text/javascript" src="assets/js/cql.js"> </script>
+
+
+        <div id="ig-status">
+          <p><span style="font-size:12pt;font-weight:bold">Clinical Quality Language Specification</span>
+            <br/>
+            <span style="display:inline-block;">1.5.3 - Release 1 Errata 2
+
+
+            </span>
+          </p>
+        </div>
+      </div> <!-- /container -->
+    </div>  <!-- /segment-header -->
+
+    <div id="segment-navbar" class="segment">  <!-- segment-navbar -->
+      <div id="stripe"> </div>
+      <div class="container">  <!-- container -->
+        <!-- HEADER CONTENT -->
+
+        <nav class="navbar navbar-inverse">
+          <!--status-bar-->
+          <div class="container">
+            <button data-target=".navbar-inverse-collapse" class="navbar-toggle" data-toggle="collapse" type="button">
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+              <span class="icon-bar"> </span>
+            </button>
+            <a class="navbar-brand hidden" href="http://hl7.org/fhir/R4/index.html">FHIR</a>
+            <div class="nav-collapse collapse navbar-inverse-collapse">
+              <ul xmlns="http://www.w3.org/1999/xhtml" class="nav navbar-nav">
+  <li class="dropdown">
+    <a data-toggle="dropdown" href="index.html" class="dropdown-toggle">Documentation</a>
+    <ul class="dropdown-menu">
+      <li>
+        <a href="01-introduction.html">Chapter 1 - Introduction</a>
+      </li>
+      <li>
+        <a href="02-authorsguide.html">Chapter 2 - Author's Guide</a>
+      </li>
+      <li>
+        <a href="03-developersguide.html">Chapter 3 - Developer's Guide</a>
+      </li>
+      <li>
+        <a href="04-logicalspecification.html">Chapter 4 - Logical Specification</a>
+      </li>
+      <li>
+        <a href="05-languagesemantics.html">Chapter 5 - Language Semantics</a>
+      </li>
+      <li>
+        <a href="06-translationsemantics.html">Chapter 6 - Translation Semantics</a>
+      </li>
+      <li>
+        <a href="07-physicalrepresentation.html">Chapter 7 - Physical Representation</a>
+      </li>
+      <li>
+        <a href="08-a-cqlsyntax.html">Appendix A - CQL Syntax</a>
+      </li>
+      <li>
+        <a href="09-b-cqlreference.html">Appendix B - CQL Reference</a>
+      </li>
+      <li>
+        <a href="10-c-referenceimplementations.html">Appendix C - Reference Implementations</a>
+      </li>
+      <li>
+        <a href="11-d-references.html">Appendix D - References</a>
+      </li>
+      <li>
+        <a href="12-e-acronyms.html">Appendix E - Acronyms</a>
+      </li>
+      <li>
+        <a href="13-f-glossary.html">Appendix F - Glossary</a>
+      </li>
+      <li>
+        <a href="14-g-formattingconventions.html">Appendix G - Formatting Conventions</a>
+      </li>
+      <li>
+        <a href="15-h-timeintervalcalculations.html">Appendix H - Time Interval Calculations</a>
+      </li>
+      <li>
+        <a href="16-i-fhirpathtranslation.html">Appendix I - FHIRPath Translation</a>
+      </li>
+      <li>
+        <a href="17-j-listoftables.html">Appendix J - List Of Tables</a>
+      </li>
+      <li>
+        <a href="18-k-listoffigures.html">Appendix K - List Of Figures</a>
+      </li>
+      <li>
+        <a href="19-l-cqlsyntaxdiagrams.html">Appendix L - CQL Syntax Diagrams</a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href="02-authorsguide.html">Author's Guide</a>
+  </li>
+  <li>
+    <a href="03-developersguide.html">Developer's Guide</a>
+  </li>
+  <li>
+    <a href="09-b-cqlreference.html">CQL Reference</a>
+  </li>
+  <li>
+    <a href="grammar.html">Grammar</a>
+  </li>
+  <li>
+    <a href="elm.html">ELM</a>
+  </li>
+  <li>
+    <a href="examples.html">Examples</a>
+  </li>
+  <li>
+    <a href="tests.html">Tests</a>
+  </li>
+  <li>
+    <a href="downloads.html">Downloads</a>
+  </li>
+  <li>
+    <a href="changes.html">Changes</a>
+  </li>
+</ul>
+
+            </div>  <!-- /.nav-collapse -->
+          </div>  <!-- /.container -->
+        </nav>  <!-- /.navbar -->
+      <!-- /HEADER CONTENT -->
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-navbar -->
+    <!--status-bar-->
+
+    <div id="segment-breadcrumb" class="segment">  <!-- segment-breadcrumb -->
+      <div class="container">  <!-- container -->
+        <ul class="breadcrumb">
+          <li><a href='toc.html'><b>Table of Contents</b></a></li><li><a href='changes.html'><b>Changes</b></a></li><li><b>V1.5 Change Log</b></li>
+
+        </ul>
+      </div>  <!-- /container -->
+    </div>  <!-- /segment-breadcrumb -->
+
+    <a name="top"> </a>
+    <div id="segment-content" class="segment">  <!-- segment-content -->
+      <div class="container">  <!-- container -->
+        <div class="row">
+          <div class="inner-wrapper">
+
+<style type="text/css">
+h2:before{color:silver;counter-increment:section;content:var(--heading-prefix) " ";}
+h3:before{color:silver;counter-increment:sub-section;content:var(--heading-prefix) "." counter(sub-section) " ";}
+h4:before{color:silver;counter-increment:composite;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) " ";}
+h5:before{color:silver;counter-increment:detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) " ";}
+h6:before{color:silver;counter-increment:more-detail;content:var(--heading-prefix) "." counter(sub-section) "." counter(composite) "." counter(detail) "." counter(more-detail)" ";}
+</style>
+<div class="col-12">
+  <!--ReleaseHeader--><p id="publish-box">Publication Build: This will be filled in by the publication tooling</p><!--EndReleaseHeader-->
+  <h2>V1.5 Change Log</h2>
+  
+
+
+
+
+
+  <!--NOTE: This is a hack, ideally we wouldn't have to have this fragment-pageTable template adjustment, but I don't
+  know how to set the statusClass (see Zulip: https://chat.fhir.org/#narrow/stream/179252-IG-creation/topic/How.20to.20set.20page.20status.20class.3F) -->
+  
+  <table class="colsi">
+  
+    <tr>
+  
+      <td>
+        <i>Page standards status:</i> <a href="http://hl7.org/fhir/R4/versions.html#std-process" title="Standard Status">Informative</a>
+        
+      </td>
+  
+  
+    <!--NOTE: Another hack, to avoid the errors associated with using the fmm extension, which the QA reports is not usable on pages, even though it works -->
+    
+      <td>
+        <a href="http://hl7.org/fhir/versions.html#maturity">Maturity Level</a>: N/A
+      </td>
+    
+  
+    </tr>
+  </table>
+
+
+
+
+
+
+
+
+    <p><!-- white space is critical inside of capture --></p>
+<div class="markdown-toc">
+<ul id="markdown-toc">
+  <li><a href="#ballot-changes-v150" id="markdown-toc-ballot-changes-v150">Ballot Changes (v.1.5.0)</a></li>
+  <li><a href="#release-changes-v151" id="markdown-toc-release-changes-v151">Release Changes (v1.5.1)</a></li>
+  <li><a href="#errata-1-changes-v152" id="markdown-toc-errata-1-changes-v152">Errata 1 Changes (v1.5.2)</a></li>
+  <li><a href="#errata-2-changes-v153" id="markdown-toc-errata-2-changes-v153">Errata 2 Changes (v1.5.3)</a></li>
+</ul>
+
+</div>
+
+<p><strong>1.5 Change Log</strong></p>
+
+<h3 id="ballot-changes-v150">Ballot Changes (v.1.5.0)</h3>
+
+<h4 id="normative-changes">Normative Changes</h4>
+
+<h5 id="compatible-substantive">Compatible, Substantive</h5>
+
+<ul>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1877">STU4#1877</a>: Added support for modular arithmetic for quantities</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1896">STU4#1896</a>: Added an overload of expand to take a single interval</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1917">STU4#1917</a>: Added a text/cql.identifier media type to support referencing the name of a defined CQL expression</li>
+</ul>
+
+<h5 id="non-substantive">Non-Substantive</h5>
+
+<ul>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1909">STU4#1909</a>: Added guidance on local terminology identifiers</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1911">STU4#1911</a>: Clarified that unit conversion is supported with ConvertQuantity</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1912">STU4#1912</a>: Clarified representation of seconds and milliseconds as a Decimal for the purposes of comparison</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1916">STU4#1916</a>: Added guidance on direct-reference code usage</li>
+</ul>
+
+<h5 id="errata">Errata</h5>
+
+<ul>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1875">STU3#1875</a>: Corrected error in Exists documentation</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1857">STU4#1857</a>: Corrected error in ToString documentation</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1858">STU4#1858</a>: Clarified relationship between CQL calendar duration units and UCUM definite-duration units</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1862">STU4#1862</a>: Corrected rendering of formatting strings footnote throughout</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1863">STU4#1863</a>: Clarified role of date and time token definitions in the grammar</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1864">STU4#1864</a>: Updated typographical conventions for formatting strings throughout</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1865">STU4#1865</a>: Clarified ranges for date/time formatting strings</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1866">STU4#1866</a>: Clarified date/time arithmetic conversion semantics between UCUM and calendar duration units</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1867">STU4#1867</a>: Clarified date/time arithmetic semantics for precisions above seconds</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1869">STU4#1869</a>: Clarified date/time literal rules for timezoneoffset</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1876">STU4#1876</a>: Fixed test for exists</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1878">STU4#1878</a>: Clarified collapse and expand semantics with respect to per argument and interval boundary alignment</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1881">STU4#1881</a>: Added point keyword to appropriate keyword lists</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1882">STU4#1882</a>: Clarified semantics and behavior of terminology comparisons in retrieves</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1883">STU4#1883</a>: Clarified inconsistent null semantics for point and singleton overloads of includes and included in as synonyms for in and contains</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1884">STU4#1884</a>: Documented ToConcept(List<code>) overload</code></li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1897">STU4#1897</a>: Clarified semantics and behavior of interval in and contains in the presence of interval boundaries that are both open and null</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1913">STU4#1913</a>: Removed note about timezoneoffset in Time ELM operator</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1914">STU4#1914</a>: Fixed rendering of footnote to formatting strings throughout</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1915">STU4#1915</a>: Added guidance on local identifiers for code system, value set, and code declarations (duplicate of STU4#1909)</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1919">STU4#1919</a>: Added missing Description header in documentation of ConvertQuantity and HighBoundary operators</li>
+</ul>
+
+<h4 id="trial-use-ballot-changes">Trial-Use Ballot Changes</h4>
+
+<h5 id="compatible-substantive-1">Compatible, Substantive</h5>
+
+<ul>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1907">STU4#1907</a>: Added an aggregate clause to the query construct</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1908">STU4#1908</a>: Added the ability to pass value sets and code systems as reference-type arguments</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1910">STU4#1910</a>: Added support for specifying search paths in the Retrieve</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1918">STU4#1918</a>: Added support for comment annotations that result in tags in the ELM output</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1920">STU4#1920</a>: Added a fluent keyword to support fluent-style function invocation</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1921">STU4#1921</a>: Added support for specifying include and reverseInclude elements in the Retrieve</li>
+  <li><a href="http://www.hl7.org/dstucomments/showdetail_comment.cfm?commentid=1923">STU4#1923</a>: Added System.Long to support 64-bit integers</li>
+</ul>
+
+<h3 id="release-changes-v151">Release Changes (v1.5.1)</h3>
+
+<h4 id="normative-changes-1">Normative Changes</h4>
+
+<h5 id="non-substantive-1">Non-substantive</h5>
+
+<ul>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27058">J#FHIR-27058</a>: Clarified allowed terminology operations in the terminology target of a retrieve <a href="https://github.com/HL7/cql/search?q=27058&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27059">J#FHIR-27059</a>: Clarified equality and equivalent behavior between UCUM and calendar units <a href="https://github.com/HL7/cql/search?q=adea3ea&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27060">J#FHIR-27060</a>: Added discussion of quantity equivalent, equivalent, and comparison operators with respect to calendar and definite quantity duration units to the Appendix B reference documentation and logical specification. <a href="https://github.com/HL7/cql/search?q=27060&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27062">J#FHIR-27062</a>: Added implementer's note about models that may define implicit conversions from UCUM time-valued durations to CQL calendar durations <a href="https://github.com/HL7/cql/search?q=27062&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27076">J#FHIR-27076</a>: Allowed declarations in any order <a href="https://github.com/HL7/cql/search?q=27076&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27081">J#FHIR-27081</a>: Updated test reference specification to 1.5 <a href="https://github.com/HL7/cql/search?q=27081&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27090">J#FHIR-27090</a>: Added descriptions to the lists of tables and figures <a href="https://github.com/HL7/cql/search?q=27090&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27099">J#FHIR-27099</a>: Additional examples of time interval calculations to better illustrate semantics <a href="https://github.com/HL7/cql/search?q=27099&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27440">J#FHIR-27440</a>: Clarified description of tokens <a href="https://github.com/HL7/cql/search?q=27440&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27448">J#FHIR-27448</a>: Clarified description of escaping <a href="https://github.com/HL7/cql/search?q=27448&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27450">J#FHIR-27450</a>: Clarified description of date and time literals <a href="https://github.com/HL7/cql/search?q=27450&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27452">J#FHIR-27452</a>: Clarified description of binding <a href="https://github.com/HL7/cql/search?q=27452&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27453">J#FHIR-27453</a>: Clarified description of value set names <a href="https://github.com/HL7/cql/search?q=27453&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27454">J#FHIR-27454</a>: Clarified description of code systems <a href="https://github.com/HL7/cql/search?q=27454&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27455">J#FHIR-27455</a>: Clarified description of structured value selector semantics <a href="https://github.com/HL7/cql/search?q=27455&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27456">J#FHIR-27456</a>: Clarified description of point from semantics <a href="https://github.com/HL7/cql/search?q=27456&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27457">J#FHIR-27457</a>: Clarified return types in Table 2-H <a href="https://github.com/HL7/cql/search?q=27457&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27458">J#FHIR-27458</a>: Clarified description of duration units <a href="https://github.com/HL7/cql/search?q=27458&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27459">J#FHIR-27459</a>: Clarified description of calendar semantics <a href="https://github.com/HL7/cql/search?q=27459&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27461">J#FHIR-27461</a>: Clarified description of calendar months <a href="https://github.com/HL7/cql/search?q=27461&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27466">J#FHIR-27466</a>: Clarified description of quoted identifiers <a href="https://github.com/HL7/cql/search?q=27466&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27467">J#FHIR-27467</a>: Clarified description or return clause <a href="https://github.com/HL7/cql/search?q=27467&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27468">J#FHIR-27468</a>: Clarified description of sort clause <a href="https://github.com/HL7/cql/search?q=27468&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27469">J#FHIR-27469</a>: Added reference to Arithmetic Operators section <a href="https://github.com/HL7/cql/search?q=27469&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27488">J#FHIR-27488</a>: Clarified library containership semantics <a href="https://github.com/HL7/cql/search?q=27488&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27489">J#FHIR-27489</a>: Clarified context definition scope <a href="https://github.com/HL7/cql/search?q=27489&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27490">J#FHIR-27490</a>: Clarified description of function definitions <a href="https://github.com/HL7/cql/search?q=27490&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27503">J#FHIR-27503</a>: Clarified description of expression semantics <a href="https://github.com/HL7/cql/search?q=27503&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27505">J#FHIR-27505</a>: Document justification for called syntax <a href="https://github.com/HL7/cql/search?q=27505&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27508">J#FHIR-27508</a>: Clarified description of context declaration <a href="https://github.com/HL7/cql/search?q=27508&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27510">J#FHIR-27510</a>: Added links to and definition of symbols introduced in the retrieve terminology discussion. <a href="https://github.com/HL7/cql/search?q=27510&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27511">J#FHIR-27511</a>: Improved documentation of retrieve evaluation semantics <a href="https://github.com/HL7/cql/search?q=27511&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27512">J#FHIR-27512</a>: Clarified best practice for context declarations and cross-context expression references <a href="https://github.com/HL7/cql/search?q=27512&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27513">J#FHIR-27513</a>: Clarified retrieve expression documentation <a href="https://github.com/HL7/cql/search?q=27513&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27515">J#FHIR-27515</a>: Clarified description of null comparison semantics <a href="https://github.com/HL7/cql/search?q=27515&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27516">J#FHIR-27516</a>: Clarified description of distinct semantics <a href="https://github.com/HL7/cql/search?q=27516&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27517">J#FHIR-27517</a>: Clarified description of unsorted semantics <a href="https://github.com/HL7/cql/search?q=27517&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27518">J#FHIR-27518</a>: Clarified null sorting behavior documentation <a href="https://github.com/HL7/cql/search?q=27518&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27520">J#FHIR-27520</a>: Added reference to Timing Relationships discussion <a href="https://github.com/HL7/cql/search?q=27520&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27943">J#FHIR-27943</a>: Clarify decimal precision implementation expectations <a href="https://github.com/HL7/cql/search?q=27943&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-28072">J#FHIR-28072</a>: Same as 27060 <a href="https://github.com/HL7/cql/search?q=e5074be&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-28074">J#FHIR-28074</a>: Clarified decimal comparison semantics <a href="https://github.com/HL7/cql/search?q=48d8635&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-28113">J#FHIR-28113</a>: Clarified timezone offset normalization behavior for date extractors <a href="https://github.com/HL7/cql/search?q=28113&amp;type=commits">View changes</a></li>
+</ul>
+
+<h4 id="trial-use-changes">Trial-Use Changes</h4>
+
+<h5 id="non-substantive-2">Non-substantive</h5>
+
+<ul>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27067">J#FHIR-27067</a>: Changed text for multi-line comments to not use the @@ delimiter <a href="https://github.com/HL7/cql/search?q=27067&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27073">J#FHIR-27073</a>: Simplified and expanded aggregate clause discussion <a href="https://github.com/HL7/cql/search?q=27073&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27074">J#FHIR-27074</a>: Expanded documentation of the aggregate clause <a href="https://github.com/HL7/cql/search?q=27074&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27075">J#FHIR-27075</a>: Clarified documentation of multiple-argument fluent functions <a href="https://github.com/HL7/cql/search?q=27075&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27077">J#FHIR-27077</a>: Expanded search path documentation <a href="https://github.com/HL7/cql/search?q=27077&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27078">J#FHIR-27078</a>: Clarified that search parameter elements are Trial-Use <a href="https://github.com/HL7/cql/search?q=655b234&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27079">J#FHIR-27079</a>: Clarified that include and reverseInclude are Trial-Use <a href="https://github.com/HL7/cql/search?q=655b234&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27102">J#FHIR-27102</a>: Expanded documentation of fluent functions <a href="https://github.com/HL7/cql/search?q=27102&amp;type=commits">View changes</a></li>
+</ul>
+
+<h4 id="informative-changes">Informative Changes</h4>
+
+<h5 id="non-substantive-3">Non-substantive</h5>
+
+<ul>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27080">J#FHIR-27080</a>: Clarified trial-use vs normative changes in the change log <a href="https://github.com/HL7/cql/search?q=27080&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27439">J#FHIR-27439</a>: Updated reference implementation references <a href="https://github.com/HL7/cql/search?q=27439&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27441">J#FHIR-27441</a>: Clarified description of expressions <a href="https://github.com/HL7/cql/search?q=27441&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27442">J#FHIR-27442</a>: Clarified description of organization <a href="https://github.com/HL7/cql/search?q=27442&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27444">J#FHIR-27444</a>: Clarified description of clauses <a href="https://github.com/HL7/cql/search?q=c2139a4&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27445">J#FHIR-27445</a>: Clarified description of meaningful <a href="https://github.com/HL7/cql/search?q=27445&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27446">J#FHIR-27446</a>: Added references to Comparison and Logical operators <a href="https://github.com/HL7/cql/search?q=27446&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27447">J#FHIR-27447</a>: Added references to Arithmetic operators <a href="https://github.com/HL7/cql/search?q=27447&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27465">J#FHIR-27465</a>: Clarified description of terminology example <a href="https://github.com/HL7/cql/search?q=27465&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27473">J#FHIR-27473</a>: Added libraryId and libraryVersion to error annotation information <a href="https://github.com/HL7/cql/search?q=b0dbd73&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27476">J#FHIR-27476</a>: Improved image resolution of Figure 1-A <a href="https://github.com/HL7/cql/search?q=27476&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27479">J#FHIR-27479</a>: Documented community adoption and added language capabilities listing <a href="https://github.com/HL7/cql/search?q=27479&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27480">J#FHIR-27480</a>: Added captions for tables and figures throughout <a href="https://github.com/HL7/cql/search?q=27480&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27482">J#FHIR-27482</a>: Improved quality of Figure 1-A <a href="https://github.com/HL7/cql/search?q=f18392f&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27484">J#FHIR-27484</a>: Clarified documentation of target scope <a href="https://github.com/HL7/cql/search?q=27484&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27485">J#FHIR-27485</a>: Added missing link to HQMF specification <a href="https://github.com/HL7/cql/search?q=27485&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27486">J#FHIR-27486</a>: Added description of ANTLR4 <a href="https://github.com/HL7/cql/search?q=27486&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27487">J#FHIR-27487</a>: Added missing links to referenced specifications <a href="https://github.com/HL7/cql/search?q=27487&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27492">J#FHIR-27492</a>: Added example data model with version <a href="https://github.com/HL7/cql/search?q=27492&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27494">J#FHIR-27494</a>: Clarified description of terminology example <a href="https://github.com/HL7/cql/search?q=27494&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27495">J#FHIR-27495</a>: Clarified reference to QUICK and QI-Core <a href="https://github.com/HL7/cql/search?q=27495&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27496">J#FHIR-27496</a>: Clarified documentation of target domain <a href="https://github.com/HL7/cql/search?q=27496&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27497">J#FHIR-27497</a>: Clarified documentation of architectural layers <a href="https://github.com/HL7/cql/search?q=27497&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27498">J#FHIR-27498</a>: Improved content and documentation of Figure 1-B <a href="https://github.com/HL7/cql/search?q=27498&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27499">J#FHIR-27499</a>: Improved documentation of justification for ELM <a href="https://github.com/HL7/cql/search?q=27499&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27500">J#FHIR-27500</a>: Clarified justification for parentheses <a href="https://github.com/HL7/cql/search?q=27500&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27502">J#FHIR-27502</a>: Clarified documentation of language background <a href="https://github.com/HL7/cql/search?q=27502&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27504">J#FHIR-27504</a>: Clarified documentation of include declarations <a href="https://github.com/HL7/cql/search?q=27504&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27507">J#FHIR-27507</a>: Added reference to Terminology operators <a href="https://github.com/HL7/cql/search?q=27507&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27509">J#FHIR-27509</a>: Added a diagram to more clearly illustrate the notion of contexts <a href="https://github.com/HL7/cql/search?q=27059&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27514">J#FHIR-27514</a>: Added syntax diagrams as an Appendix and linked throughout <a href="https://github.com/HL7/cql/search?q=27514&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27519">J#FHIR-27519</a>: Added simple patient information model to illustrate example queries <a href="https://github.com/HL7/cql/search?q=27519&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27522">J#FHIR-27522</a>: Added use of quoted-identifiers to examples throughout <a href="https://github.com/HL7/cql/search?q=27522&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27894">J#FHIR-27894</a>: Added target attributes to support additional mapping capabilities in model info <a href="https://github.com/HL7/cql/search?q=27894&amp;type=commits">View changes</a></li>
+</ul>
+
+<h4 id="errata-1">Errata</h4>
+
+<ul>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27061">J#FHIR-27061</a>: Same as 28438 <a href="https://github.com/HL7/cql/search?q=f2e7fb2&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27063">J#FHIR-27063</a>: Corrected examples of "last day of month" behavior for date arithmetic <a href="https://github.com/HL7/cql/search?q=39ca51e&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27064">J#FHIR-27064</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27064&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27068">J#FHIR-27068</a>: Corrected example <a href="https://github.com/HL7/cql/search?q=27068&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27070">J#FHIR-27070</a>: Updated references to initial patient population to initial population throughout <a href="https://github.com/HL7/cql/search?q=27070&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27100">J#FHIR-27100</a>: Corrected inconsistent timezone offset range <a href="https://github.com/HL7/cql/search?q=27100&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27443">J#FHIR-27443</a>: Fixed comma <a href="https://github.com/HL7/cql/search?q=27443&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27449">J#FHIR-27449</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27449&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27451">J#FHIR-27451</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27451&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27460">J#FHIR-27460</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27460&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27463">J#FHIR-27463</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27463&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27464">J#FHIR-27464</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27464&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27470">J#FHIR-27470</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27470&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27471">J#FHIR-27471</a>: Fixed formatting <a href="https://github.com/HL7/cql/search?q=27471&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27472">J#FHIR-27472</a>: Fixed formatting <a href="https://github.com/HL7/cql/search?q=27472&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27475">J#FHIR-27475</a>: Fixed hyperlinks <a href="https://github.com/HL7/cql/search?q=27475&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27477">J#FHIR-27477</a>: Fixed section reference <a href="https://github.com/HL7/cql/search?q=27477&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27478">J#FHIR-27478</a>: Corrected chapter reference <a href="https://github.com/HL7/cql/search?q=27478&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27481">J#FHIR-27481</a>: Added references to Table 1-A <a href="https://github.com/HL7/cql/search?q=27481&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27483">J#FHIR-27483</a>: Fixed typo <a href="https://github.com/HL7/cql/search?q=27483&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27493">J#FHIR-27493</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27493&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27506">J#FHIR-27506</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27506&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27521">J#FHIR-27521</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27521&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27523">J#FHIR-27523</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27523&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27524">J#FHIR-27524</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27524&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27525">J#FHIR-27525</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27525&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27526">J#FHIR-27526</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27526&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27527">J#FHIR-27527</a>: Fixed capitalization <a href="https://github.com/HL7/cql/search?q=27527&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27528">J#FHIR-27528</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27528&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27529">J#FHIR-27529</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27529&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27530">J#FHIR-27530</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27530&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-27531">J#FHIR-27531</a>: Fixed spelling <a href="https://github.com/HL7/cql/search?q=27531&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-28438">J#FHIR-28438</a>: Aligned with FHIRPath to consider calendar durations above weeks, rather than above seconds, uncomparable with definite-time duration <a href="https://github.com/HL7/cql/search?q=f2e7fb2&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-29552">J#FHIR-29552</a>: Provided example of access to interval properties <a href="https://github.com/HL7/cql/search?q=29552&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-29931">J#FHIR-29931</a>: Corrected media types for cql.identifier and cql.expression to cql-identifier and cql-expression based on IANA feedback <a href="https://github.com/HL7/cql/search?q=29931&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-29932">J#FHIR-29932</a>: Fixed backwards compatibility for TimezoneFrom <a href="https://github.com/HL7/cql/search?q=29932&amp;type=commits">View changes</a></li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-29934">J#FHIR-29934</a>: Corrected type of target attribute in model info <a href="https://github.com/HL7/cql/search?q=29934&amp;type=commits">View changes</a></li>
+</ul>
+
+<h3 id="errata-1-changes-v152">Errata 1 Changes (v1.5.2)</h3>
+
+<h4 id="trial-use-changes-1">Trial-Use Changes</h4>
+
+<h5 id="compatible-substantive-2">Compatible, Substantive</h5>
+
+<ul>
+  <li><a href="https://jira.hl7.org/browse/FHIR-32666">FHIR-32666</a>: Add version parameter for media types</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-34804">FHIR-34804</a>: Improve backwards compatibility support for terminology types</li>
+</ul>
+
+<h4 id="normative-changes-2">Normative Changes</h4>
+
+<h5 id="non-substantive-4">Non-substantive</h5>
+
+<ul>
+  <li><a href="https://jira.hl7.org/browse/FHIR-35869">FHIR-35869</a>: Inconsistent description of ToDateTime operator</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-32951">FHIR-32951</a>: Function-style invocation of keyword operators is not documented</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-32950">FHIR-32950</a>: Interval overload of between is not documented</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-35926">FHIR-35926</a>: Clarify Quantity Predecessor/Successor behavior</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-35925">FHIR-35925</a>: Correct missing quantity overloads in Logical Specification</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-35917">FHIR-35917</a>: Fix missing IdentifierRef documentation</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-35915">FHIR-35915</a>: Clarify interval computation semantics with open null boundaries</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-35909">FHIR-35909</a>: Add a clarifying example to the uncertainty calculation discussion</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-35905">FHIR-35905</a>: Clarify the result of a DateTime with all null components</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-35904">FHIR-35904</a>: Clarify equality semantics exception for nulls</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-32971">FHIR-32971</a>: Use codeSystemEx and valueSetEx elements in value set membership operations</li>
+</ul>
+
+<h4 id="informative-changes-1">Informative Changes</h4>
+
+<ul>
+  <li><a href="https://jira.hl7.org/browse/FHIR-28127">FHIR-28127</a>: Incorrect test case for single-source query sort</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-31883">FHIR-31883</a>: Diagram of interval operators uses "begins"</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-35881">FHIR-35881</a>: Document that test cases are built to be run with an evaluation timestamp of UTC</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-35918">FHIR-35918</a>: Add a best-practice about the use of equivalent rather than equal for terminology comparison</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-34199">FHIR-34199</a>: Document cql-options that affect language behavior</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-32679">FHIR-32679</a>: Compile specific behavior differences between 1.3/1.4/1.5</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-30081">FHIR-30081</a>: Errors in test cases</li>
+</ul>
+
+<h3 id="errata-2-changes-v153">Errata 2 Changes (v1.5.3)</h3>
+
+<h4 id="non-substantive-5">Non-substantive</h4>
+
+<ul>
+  <li><a href="https://jira.hl7.org/browse/FHIR-48757">FHIR-48757</a>: Corrected precedence of FHIRPath | and infix set operators</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-48530">FHIR-48530</a>: Clarified timezone offset defaulting semantics in the DateTime type</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-48482">FHIR-48482</a>: Clarified seconds and milliseconds are a single precision in duration and difference calculations</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46707">FHIR-46707</a>: Publication uplift to latest tooling (no material changes)</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46675">FHIR-46675</a>: Clarified during operator synonyms in the reference</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46483">FHIR-46483</a>: Corrected spelling of descendants operator as specified in FHIRPath</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46437">FHIR-46437</a>: Added documentation about accessibility of $this and $index elements in sort expressions</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46436">FHIR-46436</a>: Clarified identifier hiding semantics</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46435">FHIR-46435</a>: Clarified implicit system model resolution semantics</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46434">FHIR-46434</a>: Corrected inconsistent descriptions of combine semantics</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46426">FHIR-46426</a>: Added missing mapping for union in FHIRPath</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46363">FHIR-46363</a>: Clarified semantics of null for list membership determination in IndexOf and Equal</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46362">FHIR-46362</a>: Clarified behavior of equivalent with respect to empty lists and strings</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46360">FHIR-46360</a>: Clarified concept equivalence semantics</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46345">FHIR-46345</a>: Clarified implicit system model resolution semantics</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46283">FHIR-46283</a>: Clarified null behavior for properly includes and included in</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46051">FHIR-46051</a>: Corrected description of meets and overlaps operators</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-46053">FHIR-46053</a>: Clarified semantics of is operator and linked to type testing discussion</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-45987">FHIR-45987</a>: Clarified round semantics</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-45913">FHIR-45913</a>: Fixed formatting of implicit conversions table</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-45911">FHIR-45911</a>: Added missing equivalent and not-equivalent symbols to the symbols table</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-44921">FHIR-44921</a>: Clarified tuple equality semantics with missing elements</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-44830">FHIR-44830</a>: Corrected day formatting range (01..31)</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-44783">FHIR-44783</a>: Clarified type compatibility in conversion precedence</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-44780">FHIR-44780</a>: Added missing Long overloads for ToQuantity conversions</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-44826">FHIR-44826</a>: Clarified regular expression matching behavior</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-41489">FHIR-41489</a>: Corrected inconsistent statements about overflow/underflow with successor and predecessor</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-40225">FHIR-40225</a>: Clarified query type inference and null evaluation semantics</li>
+  <li><a href="https://jira.hl7.org/browse/FHIR-36050">FHIR-36050</a>: Corrected links to raw g4 grammar files</li>
+</ul>
+
+
+
+
+</div>
+        </div>  <!-- /inner-wrapper -->
+      </div>  <!-- /row -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-content -->
+
+  <script type="text/javascript" src="assets/js/jquery.js"> </script>     <!-- note keep space here, otherwise it will be transformed to empty tag -> fails -->
+  <script type="text/javascript" src="assets/js/jquery-ui.min.js"> </script>
+
+  <script type="text/javascript" src="assets/js/window-hash.js"> </script>
+  <a name="bottom"> </a>
+  <div id="segment-footer" igtool="footer" class="segment">  <!-- segment-footer -->
+    <div class="container">  <!-- container -->
+
+      <div class="inner-wrapper">
+        <p>
+          IG &#169; 2014+ <a style="color:var(--footer-hyperlink-text-color)" href="http://www.hl7.org/Special/committees/dss/index.cfm">Clinical Decision Support WG</a>.  Package hl7.cql#1.5.3 based on <a style="color: var(--footer-hyperlink-text-color)" href="http://hl7.org/fhir/R4/">FHIR 4.0.1</a>. Generated <span title="Fri, Mar 7, 2025 16:06+1100">2025-03-07</span>
+          <br/>
+          <span style="color: var(--footer-highlight-text-color)">
+                      Links: <a style="color: var(--footer-hyperlink-text-color)" href="toc.html">Table of Contents</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" href="qa.html">QA Report</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" rel="license" href="license.html">License</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" rel="history" href="http://cql.hl7.org/history.html">Version History</a> |
+                 <a style="color: var(--footer-hyperlink-text-color)" target="_blank" href="http://hl7.org/fhir-issues">Propose a change</a>
+                     
+          </span>
+        </p>
+      </div>  <!-- /inner-wrapper -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-footer -->
+  
+  <div id="segment-post-footer" class="segment hidden">  <!-- segment-post-footer -->
+    <div class="container">  <!-- container -->
+    </div>  <!-- /container -->
+  </div>  <!-- /segment-post-footer -->
+
+  <!-- JS and analytics only. -->
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="assets/js/bootstrap.min.js"> </script>
+  <script type="text/javascript" src="assets/js/respond.min.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard.min.js"> </script>
+  <script type="text/javascript" src="assets/js/clipboard-btn.js"> </script>
+  <script type="text/javascript" src="assets/js/anchor-hover.js"> </script>
+  <!-- Analytics Below
+  ================================================== -->
+  </body>
+</html>
+
