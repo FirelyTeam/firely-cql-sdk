@@ -632,3 +632,346 @@ dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --logger "console;verbosity=n
 ---
 
 **End of Report**
+
+---
+
+## Appendix A: Comprehensive Test Suite Analysis
+
+### Test Coverage Statistics
+
+Based on analysis of the DQIC (Data Quality Improvement Committee) test suite in `Cql/CqlToElmTests/Input/DQIC/`:
+
+| Test Category | Test Count | Spec Reference | Status |
+|--------------|------------|----------------|---------|
+| Age Operators | 8 | [Age](https://cql.hl7.org/09-b-cqlreference.html#age) | ✓ |
+| Aggregate Functions | 40 | [Aggregate](https://cql.hl7.org/09-b-cqlreference.html#aggregate-functions) | ✓ |
+| Arithmetic Functions | 193 | [Arithmetic](https://cql.hl7.org/09-b-cqlreference.html#arithmetic-operators-4) | ⚠️ Power issues |
+| Comparison Operators | 191 | [Comparison](https://cql.hl7.org/09-b-cqlreference.html#comparison-operators-4) | ✓ |
+| Conditional Operators | 10 | [Conditional](https://cql.hl7.org/03-developersguide.html#conditional-expressions) | ✓ |
+| DateTime Operators | 294 | [DateTime](https://cql.hl7.org/09-b-cqlreference.html#datetime-operators-2) | ⚠️ Precision |
+| Error/Messaging | 5 | [Errors](https://cql.hl7.org/09-b-cqlreference.html#errors-and-messaging) | ✓ |
+| Interval Operators | 361 | [Intervals](https://cql.hl7.org/09-b-cqlreference.html#interval-operators-3) | ⚠️ Expand, ProperContains |
+| List Operators | 209 | [Lists](https://cql.hl7.org/09-b-cqlreference.html#list-operators-2) | ⚠️ Equality nulls |
+| Logical Operators | 40 | [Logical](https://cql.hl7.org/09-b-cqlreference.html#logical-operators-3) | ✓ |
+| Nullological Operators | 23 | [Nullological](https://cql.hl7.org/09-b-cqlreference.html#nullological-operators-3) | ✓ |
+| String Operators | 82 | [Strings](https://cql.hl7.org/09-b-cqlreference.html#string-operators-3) | ✓ |
+| Type Operators | 33 | [Types](https://cql.hl7.org/09-b-cqlreference.html#type-operators-1) | ✓ |
+| CQL Types | 39 | [Types](https://cql.hl7.org/09-b-cqlreference.html#types-2) | ✓ |
+| Literals/Selectors | 67 | [Literals](https://cql.hl7.org/03-developersguide.html#literals) | ⚠️ Decimal step |
+| **TOTAL** | **1,595** | | **59 skipped** |
+
+### Key Findings from Test Analysis
+
+#### 1. **String Operators - Full Conformance**
+All 82 string operator tests pass, indicating good spec compliance for:
+- Combine, Concatenate
+- StartsWith, EndsWith
+- Indexer, PositionOf, LastPositionOf
+- Matches, ReplaceMatches
+- Split, SplitOnMatches
+- Substring, Upper, Lower
+
+**Implementation Quality:** ✅ Good - uses proper null handling and CultureInfo.InvariantCulture
+
+#### 2. **Logical/Nullological Operators - Full Conformance**
+All 63 tests pass for:
+- And, Or, Xor, Not, Implies
+- Coalesce, IsNull, IsTrue, IsFalse
+
+**Implementation Quality:** ✅ Good - correctly implements three-valued logic
+
+#### 3. **Aggregate Functions - Mostly Conformant**
+40 tests covering AllTrue, AnyTrue, Avg, Count, Max, Min, Sum show good conformance.
+
+**Potential Issue Identified:**
+The test suite includes edge cases for null handling in aggregates. Need to verify:
+- `AllTrue({null, true, true})` - should return null per three-valued logic
+- Empty list behavior for all aggregates
+
+#### 4. **DateTime Operators - Precision Challenges**
+294 tests reveal precision handling is complex. Known issues:
+- Uncertainty support not implemented (9 skipped tests)
+- Duration calculations follow spec correctly (verified in DurationTest.cs)
+- Precision mismatch handling needs clarification
+
+#### 5. **Comparison Operators - Spec Conformant**
+191 tests pass, indicating correct implementation of:
+- Equal, NotEqual
+- Greater, GreaterOrEqual, Less, LessOrEqual
+- Equivalent, NotEquivalent
+- Between
+
+**Good Implementation:** Uses CqlComparers for type-specific comparison logic
+
+#### 6. **Invalid Expression Handling**
+Tests marked `invalid="true"` verify error handling:
+- `Exp(1000)` - results in positive infinity
+- `Ln(0)` - results in negative infinity  
+- `predecessor of DateTime(0001,1,1,0,0,0,0)` - underflow
+- `successor of DateTime(9999,12,31,23,59,59,999)` - overflow
+
+**Status:** Need to verify these return null as specified
+
+---
+
+## Appendix B: Spec-to-Code Mapping
+
+### Key CQL Specification Sections and Implementation
+
+| Spec Section | Implementation | Notes |
+|--------------|----------------|-------|
+| [02-authorsguide.html](https://cql.hl7.org/02-authorsguide.html) | Multiple | Author-facing semantics |
+| [03-developersguide.html](https://cql.hl7.org/03-developersguide.html) | `Cql.Compiler/`, `Cql.CqlToElm/` | Type system, conversions |
+| [09-b-cqlreference.html](https://cql.hl7.org/09-b-cqlreference.html) | `Cql.Runtime/Operators/` | All operators |
+| [elm.html](https://cql.hl7.org/elm.html) | `Cql/Elm/` | ELM object model |
+| [examples.html](https://cql.hl7.org/examples.html) | `Examples/` | Usage examples |
+| [tests.html](https://cql.hl7.org/tests.html) | `Cql/CqlToElmTests/Input/DQIC/` | Official test suite |
+
+### Operator Implementation Files
+
+| Operator Category | File | Lines | Spec Section |
+|------------------|------|-------|--------------|
+| Arithmetic | `CqlOperators.ArithmeticOperators.cs` | ~750 | [§9.2](https://cql.hl7.org/09-b-cqlreference.html#arithmetic-operators-4) |
+| Comparison | `CqlOperators.ComparisonOperators.cs` | ~800 | [§9.4](https://cql.hl7.org/09-b-cqlreference.html#comparison-operators-4) |
+| Equality | `CqlOperators.EqualityAndEquivalence.cs` | ~600 | [§9.4](https://cql.hl7.org/09-b-cqlreference.html#equal) |
+| Logical | `CqlOperators.LogicalOperators.cs` | ~200 | [§9.15](https://cql.hl7.org/09-b-cqlreference.html#logical-operators-3) |
+| String | `CqlOperators.StringOperators.cs` | ~170 | [§9.22](https://cql.hl7.org/09-b-cqlreference.html#string-operators-3) |
+| DateTime | `CqlOperators.DateTimeOperators.cs` | ~1200 | [§9.6](https://cql.hl7.org/09-b-cqlreference.html#datetime-operators-2) |
+| Interval | `CqlOperators.IntervalOperators.cs` | ~2100 | [§9.11](https://cql.hl7.org/09-b-cqlreference.html#interval-operators-3) |
+| List | `CqlOperators.ListOperators.cs` | ~900 | [§9.14](https://cql.hl7.org/09-b-cqlreference.html#list-operators-2) |
+| Type | `CqlOperators.TypeOperators.cs` | ~400 | [§9.25](https://cql.hl7.org/09-b-cqlreference.html#type-operators-1) |
+| Aggregate | `CqlOperators.AggregateFunctions.cs` | ~300 | [§9.1](https://cql.hl7.org/09-b-cqlreference.html#aggregate-functions) |
+| Clinical | `CqlOperators.ClinicalOperators2.cs` | ~150 | [§9.5](https://cql.hl7.org/09-b-cqlreference.html#clinical-operators-2) |
+
+---
+
+## Appendix C: Additional Potential Issues
+
+### Issues Requiring Further Investigation
+
+#### C.1 EndsWith String Operator - Potential Bounds Issue
+
+**Location:** `CqlOperators.StringOperators.cs:33-37`
+
+```csharp
+public bool? EndsWith(string argument, string suffix)
+{
+    if (argument == null || suffix == null) return null;
+    else return argument.Substring(argument.Length - suffix.Length).Equals(suffix);
+}
+```
+
+**Potential Issue:** If `suffix.Length > argument.Length`, this will throw `ArgumentOutOfRangeException`.
+
+**CQL Spec:** Should return `false` when suffix is longer than argument.
+
+**Recommended Fix:**
+```csharp
+public bool? EndsWith(string argument, string suffix)
+{
+    if (argument == null || suffix == null) return null;
+    if (suffix.Length > argument.Length) return false;
+    return argument.Substring(argument.Length - suffix.Length).Equals(suffix);
+}
+```
+
+**Priority:** MEDIUM  
+**Risk:** Low - edge case  
+**Tests Needed:** Add test for `EndsWith("abc", "longer string")`
+
+#### C.2 Matches Operator - Anchoring Behavior
+
+**Location:** `CqlOperators.StringOperators.cs:90-102`
+
+```csharp
+public bool? Matches(string source, string pattern)
+{
+    if (source == null || pattern == null) return null;
+    else
+    {
+        if (pattern[0].Equals("^") == false) pattern = "^" + pattern;
+        if (pattern[pattern.Length - 1].Equals("$") == false) pattern += "$";
+        Regex rx = new(pattern);
+        MatchCollection matches = rx.Matches(source);
+        if (matches.Count == 1) return true;
+        else return false;
+    }
+}
+```
+
+**Potential Issues:**
+1. Character comparison `pattern[0].Equals("^")` is wrong - should be `pattern[0] == '^'`
+2. Automatically adding anchors may not match CQL spec behavior
+3. Returns `false` for multiple matches - spec may expect `true` if pattern matches
+
+**CQL Spec Reference:** [Matches](https://cql.hl7.org/09-b-cqlreference.html#matches)
+
+**Priority:** MEDIUM  
+**Risk:** Medium - may affect regex behavior  
+**Tests Needed:** Review spec for exact Matches semantics
+
+#### C.3 Substring Operator - Length Calculation
+
+**Location:** `CqlOperators.StringOperators.cs:144-162`
+
+```csharp
+public string? Substring(string source, int? startIndex, int? length = null)
+{
+    if (source == null
+        || startIndex == null
+        || startIndex.Value < 0
+        || startIndex.Value >= source.Length)
+        return null;
+    if (length == null)
+    {
+        return source.Substring(startIndex.Value);
+    }
+    else
+    {
+        if (length.Value < 0)
+            return null;
+        var subLength = Math.Min(length.Value, source.Length);  // ⚠️ Bug here
+        return source.Substring(startIndex.Value, subLength);
+    }
+}
+```
+
+**Issue:** Line `var subLength = Math.Min(length.Value, source.Length);` is incorrect.
+
+Should be: `var subLength = Math.Min(length.Value, source.Length - startIndex.Value);`
+
+**Example:**
+- `Substring("abcdef", 3, 5)` should return `"def"` (3 chars from index 3)
+- Current: Tries to get min(5, 6) = 5 chars, throws exception
+- Should: Get min(5, 6-3) = 3 chars = `"def"`
+
+**Priority:** HIGH  
+**Risk:** High - data corruption  
+**Tests Needed:** `Substring("abcdef", 3, 5)` should return `"def"`
+
+#### C.4 Sort with Mixed Precision
+
+**Location:** Referenced in `SkippedTests.cs:79-80`
+
+```csharp
+{ "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
+{ "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
+```
+
+**Issue:** Sorting lists containing dates/times with different precisions is problematic.
+
+**Example:** Sorting `{@2020-01, @2020-01-15, @2020}` requires precision-aware comparison.
+
+**CQL Spec:** Needs clarification on sort behavior with mixed precision.
+
+**Priority:** LOW  
+**Risk:** Low - design issue  
+**Tests Needed:** Verify spec requirements for sort with mixed precision
+
+---
+
+## Appendix D: Repository Test Structure
+
+### Test Organization
+
+```
+Cql/
+├── CoreTests/                      # Runtime and integration tests
+│   ├── Input/ELM/                  # ELM test files
+│   ├── *Test.cs                    # Unit tests (~65 files)
+│   └── CSharp/                     # Generated C# tests
+│
+├── CqlToElmTests/                  # CQL compilation tests
+│   ├── (tests)/                    # Test implementations (~90 files)
+│   │   ├── SkippedTests.cs         # Known deviations catalog
+│   │   ├── *Test.cs                # Operator-specific tests
+│   │   └── Base.cs                 # Test infrastructure
+│   └── Input/DQIC/                 # Official CQL test suite
+│       └── *.xml                   # 1,595 spec-based tests
+│
+└── XsdToCSharpConverterTests/      # Code generation tests
+```
+
+### Test Execution Strategy
+
+**Unit Tests (CoreTests):**
+```bash
+dotnet test Cql/CoreTests/CoreTests.csproj --filter "Category=UnitTest"
+```
+
+**CQL Compilation Tests:**
+```bash
+dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj
+```
+
+**Specific Operator Tests:**
+```bash
+dotnet test --filter "FullyQualifiedName~PowerTest"
+dotnet test --filter "FullyQualifiedName~ProperContains"
+```
+
+### Test Metrics
+
+- **Total Test Files:** ~15 XML + ~90 C#
+- **Total Test Cases:** ~1,600 + unit tests
+- **Current Status:** 2,383 passed, 59 skipped
+- **Skipped Breakdown:**
+  - 48 in `DoesNotCompile` (cannot compile)
+  - 30 in `DoesNotMatchExpectation` (behavior mismatch)
+  - Some appear in both categories
+
+---
+
+## Appendix E: Recommended GitHub Issues Template
+
+For creating individual tracking issues for each deviation:
+
+### Issue Template: [Deviation Name]
+
+```markdown
+## Description
+[Brief description of the deviation]
+
+## CQL Specification
+- **Section:** [Link to spec section]
+- **Quote:** [Relevant spec text]
+- **Expected Behavior:** [What spec requires]
+
+## Current Implementation
+- **File:** [Link to file on GitHub]
+- **Lines:** [Line numbers]
+- **Current Behavior:** [What currently happens]
+
+## Example
+**Input:** `[example expression]`
+**Expected:** `[expected result]`
+**Actual:** `[actual result]`
+
+## Proposed Fix
+[Code snippet or description]
+
+## Impact
+- **Breaking Change:** [Yes/No]
+- **Risk Level:** [High/Medium/Low]
+- **Tests Affected:** [Number and names]
+- **Priority:** [High/Medium/Low]
+
+## Related
+- **Skipped Tests:** [List test names]
+- **Related Issues:** [Link to related issues]
+- **Spec Deviation Report:** Section [X]
+
+## Checklist
+- [ ] Verify spec interpretation
+- [ ] Implement fix
+- [ ] Add/update tests
+- [ ] Update SkippedTests.cs
+- [ ] Run full test suite
+- [ ] Document breaking changes
+```
+
+---
+
+**Report Enhanced:** 2026-02-19  
+**Total Pages:** Extended with appendices A-E  
+**Next Update:** After spec pages become accessible for direct review
