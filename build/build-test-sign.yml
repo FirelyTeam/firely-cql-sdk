@@ -238,36 +238,58 @@ stages:
               includesymbols: true
               includesource: true
 
-          # Prepare trimmed build artifacts (only bin/obj directories) for test stage
-          - task: PowerShell@2
-            displayName: 'Stage build outputs for artifact'
-            inputs:
-              targetType: 'inline'
-              script: |
-                $sourceRoot = "$(Build.SourcesDirectory)"
-                $stagingRoot = "$(Build.ArtifactStagingDirectory)/BuildOutput"
-                New-Item -ItemType Directory -Path $stagingRoot -Force | Out-Null
-                Write-Host "Staging bin/obj directories from '$sourceRoot' into '$stagingRoot'"
-                
-                # Find all bin and obj directories and copy them preserving relative paths
-                Get-ChildItem -Path $sourceRoot -Recurse -Directory | Where-Object { $_.Name -eq 'bin' -or $_.Name -eq 'obj' } | ForEach-Object {
-                  $relativePath = $_.FullName.Substring($sourceRoot.Length).TrimStart('\', '/')
-                  $destinationParent = Join-Path $stagingRoot (Split-Path $relativePath -Parent)
-                  New-Item -ItemType Directory -Path $destinationParent -Force | Out-Null
-                  Copy-Item -Path $_.FullName -Destination $destinationParent -Recurse -Force
-                  Write-Host "  Copied: $relativePath"
-                }
-                
-                # Calculate size
-                $size = (Get-ChildItem -Path $stagingRoot -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB
-                Write-Host "Total artifact size: $([math]::Round($size, 2)) MB"
+          # Publish test projects for test stage (Vonk-style: self-contained output for direct DLL testing)
+          # This uses 'dotnet publish' so all dependencies are materialized in the output directory,
+          # allowing test agents to run 'dotnet test' on DLLs without needing NuGet restore.
+          - pwsh: |
+              $stagingRoot = "$(Build.ArtifactStagingDirectory)/TestPublishOutput"
 
-          # Publish build artifacts for test stage (only bin/obj directories)
+              # Publish multi-target test projects for net8.0
+              $projects = "${{ parameters.multiTargetTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                Write-Host "##[section]Publishing $proj for net8.0"
+                dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net8.0 --property:PublishDir=$stagingRoot/net8.0
+                if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net8.0"; exit 1 }
+              }
+
+              # Publish multi-target test projects for net10.0
+              foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                Write-Host "##[section]Publishing $proj for net10.0"
+                dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net10.0 --property:PublishDir=$stagingRoot/net10.0
+                if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net10.0"; exit 1 }
+              }
+
+              # Publish integration test projects for net10.0
+              $integrationProjects = "${{ parameters.net10IntegrationTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              foreach ($proj in $integrationProjects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                Write-Host "##[section]Publishing $proj for net10.0 (integration)"
+                dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net10.0 --property:PublishDir=$stagingRoot/integration-net10.0
+                if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net10.0 (integration)"; exit 1 }
+              }
+
+              # Summary
+              foreach ($subdir in @('net8.0', 'net10.0', 'integration-net10.0')) {
+                $dir = Join-Path $stagingRoot $subdir
+                if (Test-Path $dir) {
+                  $count = (Get-ChildItem -Path $dir -File | Measure-Object).Count
+                  $size = (Get-ChildItem -Path $dir -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB
+                  Write-Host "  $subdir : $count files, $([math]::Round($size, 2)) MB"
+                }
+              }
+            displayName: 'Publish test projects for test stage'
+            workingDirectory: '$(Build.SourcesDirectory)'
+
           - task: PublishPipelineArtifact@1
-            displayName: 'Publish Build Artifacts'
+            displayName: 'Publish Test Output Artifacts'
             inputs:
-              targetPath: '$(Build.ArtifactStagingDirectory)/BuildOutput'
-              artifact: 'BuildOutput'
+              targetPath: '$(Build.ArtifactStagingDirectory)/TestPublishOutput'
+              artifact: 'TestPublishOutput'
               publishLocation: 'pipeline'
 
           # Publish NuGet packages
@@ -301,46 +323,34 @@ stages:
               version: '8.0.x'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
-
-          # Download build artifacts
+          # Download published test output (self-contained, no NuGet restore needed)
           - task: DownloadPipelineArtifact@2
-            displayName: 'Download Build Artifacts'
+            displayName: 'Download Test Publish Output'
             inputs:
               buildType: 'current'
-              artifactName: 'BuildOutput'
-              targetPath: '$(Build.SourcesDirectory)'
+              artifactName: 'TestPublishOutput'
+              targetPath: '$(Pipeline.Workspace)/TestPublishOutput'
 
           - pwsh: |
-              Write-Host "Working directory: $(Get-Location)"
-              $projects = $env:TEST_PROJECTS.Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              $testDir = "$(Pipeline.Workspace)/TestPublishOutput/net8.0"
+              Write-Host "Test directory: $testDir"
+
+              # Derive test DLL names from configured project paths
+              $projects = "${{ parameters.multiTargetTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
               $failed = $false
               foreach ($proj in $projects) {
-                $proj = $proj.Trim()
-                if (-not (Test-Path $proj)) {
-                  Write-Host "##[warning]Project file not found: $proj"
+                $projName = [System.IO.Path]::GetFileNameWithoutExtension($proj.Trim())
+                $dll = Join-Path $testDir "$projName.dll"
+                if (-not (Test-Path $dll)) {
+                  Write-Host "##[error]Test DLL not found: $dll"
+                  Write-Host "  Available DLLs in $testDir :"
+                  Get-ChildItem -Path $testDir -Filter '*.dll' | ForEach-Object { Write-Host "    $($_.Name)" }
                   $failed = $true
                   continue
                 }
-                Write-Host "##[section]Testing: $proj"
-                $projDir = Split-Path $proj -Parent
-                $binDir = Join-Path $projDir 'bin/${{ parameters.buildConfiguration }}/net8.0'
-                if (Test-Path $binDir) {
-                  $dlls = Get-ChildItem $binDir -Filter '*.dll' | Select-Object -ExpandProperty Name
-                  Write-Host "  Found $($dlls.Count) DLLs in $binDir"
-                } else {
-                  Write-Host "##[warning]bin directory not found: $binDir"
-                  Write-Host "  Available dirs under $(Join-Path $projDir 'bin'):"
-                  if (Test-Path (Join-Path $projDir 'bin')) {
-                    Get-ChildItem (Join-Path $projDir 'bin') -Recurse -Directory | ForEach-Object { Write-Host "    $($_.FullName)" }
-                  } else {
-                    Write-Host "    No bin directory at all!"
-                  }
-                }
+                Write-Host "##[section]Testing: $projName.dll"
                 $testArgs = @(
-                  'test', $proj,
-                  '--configuration', '${{ parameters.buildConfiguration }}',
-                  '--no-build',
-                  '--framework', 'net8.0',
+                  'test', $dll,
                   '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
                   '--logger:trx',
                   '--collect:XPlat Code Coverage',
@@ -353,9 +363,7 @@ stages:
               }
               if ($failed) { exit 1 }
             displayName: 'Run tests on .NET 8'
-            workingDirectory: '$(Build.SourcesDirectory)'
             env:
-              TEST_PROJECTS: '${{ parameters.multiTargetTestProjects }}'
               RESULTS_DIR: '$(Agent.TempDirectory)/TestResults/net8.0'
 
           - task: PublishTestResults@2
@@ -391,46 +399,34 @@ stages:
               version: '${{ parameters.dotNetCoreVersion }}'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
-
-          # Download build artifacts
+          # Download published test output (self-contained, no NuGet restore needed)
           - task: DownloadPipelineArtifact@2
-            displayName: 'Download Build Artifacts'
+            displayName: 'Download Test Publish Output'
             inputs:
               buildType: 'current'
-              artifactName: 'BuildOutput'
-              targetPath: '$(Build.SourcesDirectory)'
+              artifactName: 'TestPublishOutput'
+              targetPath: '$(Pipeline.Workspace)/TestPublishOutput'
 
           - pwsh: |
-              Write-Host "Working directory: $(Get-Location)"
-              $projects = $env:TEST_PROJECTS.Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              $testDir = "$(Pipeline.Workspace)/TestPublishOutput/net10.0"
+              Write-Host "Test directory: $testDir"
+
+              # Derive test DLL names from configured project paths
+              $projects = "${{ parameters.multiTargetTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
               $failed = $false
               foreach ($proj in $projects) {
-                $proj = $proj.Trim()
-                if (-not (Test-Path $proj)) {
-                  Write-Host "##[warning]Project file not found: $proj"
+                $projName = [System.IO.Path]::GetFileNameWithoutExtension($proj.Trim())
+                $dll = Join-Path $testDir "$projName.dll"
+                if (-not (Test-Path $dll)) {
+                  Write-Host "##[error]Test DLL not found: $dll"
+                  Write-Host "  Available DLLs in $testDir :"
+                  Get-ChildItem -Path $testDir -Filter '*.dll' | ForEach-Object { Write-Host "    $($_.Name)" }
                   $failed = $true
                   continue
                 }
-                Write-Host "##[section]Testing: $proj"
-                $projDir = Split-Path $proj -Parent
-                $binDir = Join-Path $projDir 'bin/${{ parameters.buildConfiguration }}/net10.0'
-                if (Test-Path $binDir) {
-                  $dlls = Get-ChildItem $binDir -Filter '*.dll' | Select-Object -ExpandProperty Name
-                  Write-Host "  Found $($dlls.Count) DLLs in $binDir"
-                } else {
-                  Write-Host "##[warning]bin directory not found: $binDir"
-                  Write-Host "  Available dirs under $(Join-Path $projDir 'bin'):"
-                  if (Test-Path (Join-Path $projDir 'bin')) {
-                    Get-ChildItem (Join-Path $projDir 'bin') -Recurse -Directory | ForEach-Object { Write-Host "    $($_.FullName)" }
-                  } else {
-                    Write-Host "    No bin directory at all!"
-                  }
-                }
+                Write-Host "##[section]Testing: $projName.dll"
                 $testArgs = @(
-                  'test', $proj,
-                  '--configuration', '${{ parameters.buildConfiguration }}',
-                  '--no-build',
-                  '--framework', 'net10.0',
+                  'test', $dll,
                   '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
                   '--logger:trx',
                   '--collect:XPlat Code Coverage',
@@ -443,9 +439,7 @@ stages:
               }
               if ($failed) { exit 1 }
             displayName: 'Run tests on .NET 10'
-            workingDirectory: '$(Build.SourcesDirectory)'
             env:
-              TEST_PROJECTS: '${{ parameters.multiTargetTestProjects }}'
               RESULTS_DIR: '$(Agent.TempDirectory)/TestResults/net10.0'
 
           - task: PublishTestResults@2
@@ -481,32 +475,34 @@ stages:
               version: '${{ parameters.dotNetCoreVersion }}'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
-
-          # Download build artifacts
+          # Download published test output (self-contained, no NuGet restore needed)
           - task: DownloadPipelineArtifact@2
-            displayName: 'Download Build Artifacts'
+            displayName: 'Download Test Publish Output'
             inputs:
               buildType: 'current'
-              artifactName: 'BuildOutput'
-              targetPath: '$(Build.SourcesDirectory)'
+              artifactName: 'TestPublishOutput'
+              targetPath: '$(Pipeline.Workspace)/TestPublishOutput'
 
           - pwsh: |
-              Write-Host "Working directory: $(Get-Location)"
-              $projects = $env:TEST_PROJECTS.Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              $testDir = "$(Pipeline.Workspace)/TestPublishOutput/integration-net10.0"
+              Write-Host "Test directory: $testDir"
+
+              # Derive test DLL names from configured project paths
+              $projects = "${{ parameters.net10IntegrationTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
               $failed = $false
               foreach ($proj in $projects) {
-                $proj = $proj.Trim()
-                if (-not (Test-Path $proj)) {
-                  Write-Host "##[warning]Project file not found: $proj"
+                $projName = [System.IO.Path]::GetFileNameWithoutExtension($proj.Trim())
+                $dll = Join-Path $testDir "$projName.dll"
+                if (-not (Test-Path $dll)) {
+                  Write-Host "##[error]Test DLL not found: $dll"
+                  Write-Host "  Available DLLs in $testDir :"
+                  Get-ChildItem -Path $testDir -Filter '*.dll' | ForEach-Object { Write-Host "    $($_.Name)" }
                   $failed = $true
                   continue
                 }
-                Write-Host "##[section]Testing: $proj"
+                Write-Host "##[section]Testing: $projName.dll"
                 $testArgs = @(
-                  'test', $proj,
-                  '--configuration', '${{ parameters.buildConfiguration }}',
-                  '--no-build',
-                  '--framework', 'net10.0',
+                  'test', $dll,
                   '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
                   '--logger:trx',
                   '--collect:XPlat Code Coverage',
@@ -519,9 +515,7 @@ stages:
               }
               if ($failed) { exit 1 }
             displayName: 'Run integration tests on .NET 10'
-            workingDirectory: '$(Build.SourcesDirectory)'
             env:
-              TEST_PROJECTS: '${{ parameters.net10IntegrationTestProjects }}'
               RESULTS_DIR: '$(Agent.TempDirectory)/TestResults/integration-net10.0'
 
           - task: PublishTestResults@2
