@@ -135,15 +135,6 @@ stages:
               ${{ else }}:
                 arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
 
-          # Sign assemblies (only on release tags or develop branch)
-          - task: UseDotNet@2
-            displayName: 'Install .NET 8 runtime for signing'
-            condition: and(succeeded(), eq('${{ parameters.shouldSign }}', 'true'), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
-            inputs:
-              packageType: runtime
-              version: 8.x
-              includePreviewVersions: false
-
           # Package solution (NuGet packages already restored, no need to restore again)
           - task: DotNetCoreCLI@2
             displayName: 'Package solution'
