@@ -418,20 +418,6 @@ stages:
               artifactName: 'BuildOutput'
               targetPath: '$(Build.SourcesDirectory)'
 
-          # Restore NuGet packages so dotnet test --no-build can resolve targets
-          - task: NuGetAuthenticate@1
-            displayName: 'NuGet Authenticate'
-            inputs:
-              nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
-
-          - task: DotNetCoreCLI@2
-            displayName: 'Restore integration test projects'
-            inputs:
-              command: 'restore'
-              projects: '${{ parameters.net10IntegrationTestProjects }}'
-              feedsToUse: 'config'
-              nugetConfigPath: 'NuGet.config'
-
           - task: DotNetCoreCLI@2
             displayName: 'Run integration tests on .NET 10'
             inputs:
