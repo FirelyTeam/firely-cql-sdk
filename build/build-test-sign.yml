@@ -135,92 +135,6 @@ stages:
               ${{ else }}:
                 arguments: '--configuration ${{ parameters.buildConfiguration }} --no-restore'
 
-          # Sign assemblies (only on release tags or develop branch)
-          - task: UseDotNet@2
-            displayName: 'Install .NET 8 runtime for signing'
-            condition: and(succeeded(), eq('${{ parameters.shouldSign }}', 'true'), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
-            inputs:
-              packageType: runtime
-              version: 8.x
-              includePreviewVersions: false
-
-          - task: AzureCLI@2
-            displayName: 'Sign assemblies with Azure Trusted Signing'
-            condition: and(succeeded(), eq('${{ parameters.shouldSign }}', 'true'), ne('${{ parameters.azureServiceConnectionForSigning }}', ''))
-            inputs:
-              azureSubscription: '${{ parameters.azureServiceConnectionForSigning }}'
-              scriptType: 'pscore'
-              scriptLocation: 'inlineScript'
-              addSpnToEnvironment: true
-              inlineScript: |
-                # Install dotnet sign tool
-                Write-Host "Installing dotnet sign tool..."
-                dotnet tool install --global sign --version 0.9.1-beta.25379.1
-
-                if ($LASTEXITCODE -ne 0) {
-                  Write-Error "Failed to install dotnet sign tool"
-                  exit 1
-                }
-
-                # Get list of files to sign
-                $filesToSign = @()
-                $patterns = "${{ parameters.filesForSigning }}" -split ','
-                $excludePatterns = "${{ parameters.filesToExcludeForSigning }}" -split ','
-
-                foreach ($pattern in $patterns) {
-                  $pattern = $pattern.Trim()
-                  if ($pattern) {
-                    $files = Get-ChildItem -Path $pattern -Recurse -ErrorAction SilentlyContinue
-                    foreach ($file in $files) {
-                      $excluded = $false
-                      foreach ($excludePattern in $excludePatterns) {
-                        $excludePattern = $excludePattern.Trim()
-                        if ($excludePattern -and $file.FullName -like "*$excludePattern*") {
-                          $excluded = $true
-                          break
-                        }
-                      }
-                      if (-not $excluded) {
-                        $filesToSign += $file.FullName
-                      }
-                    }
-                  }
-                }
-
-                if ($filesToSign.Count -eq 0) {
-                  Write-Host "No files to sign"
-                  exit 0
-                }
-
-                Write-Host "Found $($filesToSign.Count) file(s) to sign:"
-                $filesToSign | ForEach-Object { Write-Host "  $_" }
-
-                # Sign each file
-                foreach ($file in $filesToSign) {
-                  Write-Host "`nSigning file: $file"
-
-                  $signArgs = @(
-                    'code',
-                    'trusted-signing',
-                    $file,
-                    '--trusted-signing-account', '${{ parameters.trustedSigningAccountName }}',
-                    '--trusted-signing-certificate-profile', '${{ parameters.certificateProfileName }}',
-                    '--trusted-signing-endpoint', '${{ parameters.trustedSigningAccountEndpoint }}',
-                    '--azure-credential-type', 'azure-cli'
-                  )
-
-                  & sign @signArgs
-
-                  if ($LASTEXITCODE -ne 0) {
-                    Write-Error "Failed to sign file: $file"
-                    exit 1
-                  }
-
-                  Write-Host "Successfully signed: $file"
-                }
-
-                Write-Host "`nAll files signed successfully!"
-
           # Package solution (NuGet packages already restored, no need to restore again)
           - task: DotNetCoreCLI@2
             displayName: 'Package solution'
@@ -234,6 +148,17 @@ stages:
                 buildProperties: 'VersionSuffix=$(Build.BuildNumber)'
               includesymbols: true
               includesource: true
+
+          # Sign NuGet packages with Azure Trusted Signing (skip for PRs)
+          - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+            - template: codesign-nuget-package-using-trusted-signing.yml@templates
+              parameters:
+                azureServiceConnection: '${{ parameters.azureServiceConnectionForSigning }}'
+                trustedSigningAccountEndpoint: '${{ parameters.trustedSigningAccountEndpoint }}'
+                trustedSigningAccountName: '${{ parameters.trustedSigningAccountName }}'
+                certificateProfileName: '${{ parameters.certificateProfileName }}'
+                packagePaths: $(Build.ArtifactStagingDirectory)/NuGetPackages/*.nupkg
+
 
           # Prepare trimmed build artifacts (only bin/obj directories) for test stage
           - task: PowerShell@2

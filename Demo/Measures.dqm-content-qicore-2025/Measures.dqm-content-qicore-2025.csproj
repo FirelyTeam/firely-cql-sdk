@@ -10,7 +10,7 @@
 		<ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />
 		<ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\CLI\CLI.csproj" />
-		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelyNetVersion)" />
 		<!-- Ensure the PackagerCLI is build first, so that the ElmToCSharp targets file succeeds -->
 		<ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />
 	</ItemGroup>
