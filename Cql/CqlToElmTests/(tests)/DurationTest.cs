@@ -32,7 +32,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
-                Assert.AreEqual(31, result);
+                Assert.AreEqual(30, result);
             }
         }
 
@@ -56,7 +56,98 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
-                Assert.AreEqual(31, result);
+                Assert.AreEqual(30, result);
+            }
+        }
+        //https://cql.hl7.org/15-h-timeintervalcalculations.html#calculating-duration-in-days
+        [TestMethod]
+        public void Duration_Between_Days_Scenario_1_Ex1()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library DurationTest version '1.0.0'
+
+                define private Duration_Between_Days: duration in days between @2012-01-31T12:30:00Z and @2012-02-01T09:30:00Z
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(DurationBetween));
+            {
+                var diff = (DurationBetween)library.statements[0].expression;
+                Assert.AreEqual(DateTimePrecision.Day, diff.precision);
+
+                var result = Run(diff, library);
+                Assert.IsInstanceOfType(result, typeof(int?));
+                Assert.AreEqual(0, result);
+            }
+        }
+        [TestMethod]
+        public void Duration_Between_Days_Scenario_1_Ex2()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library DurationTest version '1.0.0'
+
+                define private Duration_Between_Days: duration in days between @2012-01-31T12:30:00Z and @2012-02-01T14:00:00Z
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(DurationBetween));
+            {
+                var diff = (DurationBetween)library.statements[0].expression;
+                Assert.AreEqual(DateTimePrecision.Day, diff.precision);
+
+                var result = Run(diff, library);
+                Assert.IsInstanceOfType(result, typeof(int?));
+                Assert.AreEqual(1, result);
+            }
+        }
+
+        [TestMethod]
+        public void Duration_Between_Days_Scenario_1_Ex3()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library DurationTest version '1.0.0'
+
+                define private Duration_Between_Days: duration in days between @2011-12-05T05:00:00Z and @2011-12-04T08:45:00Z
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(DurationBetween));
+            {
+                var diff = (DurationBetween)library.statements[0].expression;
+                Assert.AreEqual(DateTimePrecision.Day, diff.precision);
+
+                var result = Run(diff, library);
+                Assert.IsInstanceOfType(result, typeof(int?));
+                Assert.AreEqual(0, result);
+            }
+        }
+
+        [TestMethod]
+        public void Duration_Between_Days_Scenario_1_Ex4()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library DurationTest version '1.0.0'
+
+                define private Duration_Between_Days: duration in days between @2011-12-05T05:00:00Z and @2011-12-04T01:30:00Z
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(DurationBetween));
+            {
+                var diff = (DurationBetween)library.statements[0].expression;
+                Assert.AreEqual(DateTimePrecision.Day, diff.precision);
+
+                var result = Run(diff, library);
+                Assert.IsInstanceOfType(result, typeof(int?));
+                Assert.AreEqual(-1, result);
             }
         }
 

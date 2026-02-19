@@ -3850,7 +3850,7 @@ namespace CoreTests
             var rtx = GetNewContext();
             var startDate = new CqlDate(2025, 1, 1);
             var endDate = new CqlDate(2025, 1, 10);
-            int expected = 10;
+            int expected = 9; // 9 days elapsed from Jan 1 to Jan 10
             var actual = rtx.Operators.DurationBetween(startDate, endDate, "day");
             Assert.IsNotNull(actual);
             Assert.AreEqual(expected, actual);
@@ -3862,7 +3862,7 @@ namespace CoreTests
             var rtx = GetNewContext();
             var startDate = new CqlDate(2025, 1, 1);
             var endDate = new CqlDate(2025, 1, 1);
-            int expected = 1;
+            int expected = 0; // 0 days elapsed on the same day
             var actual = rtx.Operators.DurationBetween(startDate, endDate, "day");
             Assert.IsNotNull(actual);
             Assert.AreEqual(expected, actual);
