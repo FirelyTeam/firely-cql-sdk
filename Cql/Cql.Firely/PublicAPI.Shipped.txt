@@ -48,4 +48,4 @@ static Hl7.Cql.Fhir.Serialization.FhirJsonDeserializationUtility.CreateFhirJsonS
 static Hl7.Cql.Fhir.ValueSetExtensions.ToValueSetDictionary(this System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.ValueSet!>! values) -> Hl7.Cql.ValueSets.IValueSetDictionary!
 static Hl7.Cql.Fhir.ValueSetExtensions.ToValueSetDictionaryAsync(this System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.ValueSet!>! values) -> System.Threading.Tasks.Task<Hl7.Cql.ValueSets.IValueSetDictionary!>!
 static readonly Hl7.Cql.Fhir.FhirCqlContextOptions.Default -> Hl7.Cql.Fhir.FhirCqlContextOptions!
-static readonly Hl7.Cql.Fhir.FhirTypeResolver.Default -> Hl7.Cql.Fhir.FhirTypeResolver!
+static readonly Hl7.Cql.Fhir.FhirTypeResolver.Default -> Hl7.Cql.Fhir.FhirTypeResolver!static Hl7.Cql.Fhir.FhirTypeConverter.Default.get -> Hl7.Cql.Conversion.TypeConverter!
