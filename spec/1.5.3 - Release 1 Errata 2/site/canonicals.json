@@ -1,9 +1,0 @@
-[
-  {
-    "id" : "hl7.cql",
-    "type" : "ImplementationGuide",
-    "url" : "http://cql.hl7.org/ImplementationGuide/hl7.cql",
-    "version" : "1.5.3",
-    "name" : "CQL"
-  }
-]

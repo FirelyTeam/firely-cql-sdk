@@ -1,2 +1,0 @@
-# Mark markdown files as documentation
-*.md linguist-documentation=true linguist-detectable=false
