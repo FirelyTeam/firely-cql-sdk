@@ -213,11 +213,18 @@ namespace Hl7.Cql.Primitives
 
                 case "week":        return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
                 case "day":
-                    int days = (int)secondDto.Subtract(firstDto).TotalDays;
-                    // Per https://cql.hl7.org/15-h-timeintervalcalculations.html
-                    if ((secondDto.Date >= firstDto.Date) && (secondDto.TimeOfDay >= firstDto.TimeOfDay))
-                        days += 1;
-                    return days;
+                        return  (int)secondDto.Subtract(firstDto).TotalDays;
+                //{
+                //    var span = secondDto.Subtract(firstDto);
+                //    var asInt = (int)span.TotalDays;
+                //    var decimalPortion = span.TotalDays - asInt;
+                //    var possiblyNextDay = firstDto.AddDays(decimalPortion);
+                //    var crossedBoundary = possiblyNextDay.Day != firstDto.Day;
+                //    System.Diagnostics.Debug.WriteLine($"Duration day calc: {firstDto:yyyy-MM-dd HH:mm} to {secondDto:yyyy-MM-dd HH:mm}, TotalDays={span.TotalDays:F4}, asInt={asInt}, decimal={decimalPortion:F4}, possiblyNext.Day={possiblyNextDay.Day}, first.Day={firstDto.Day}, crossed={crossedBoundary}, result={asInt + (crossedBoundary ? 1 : 0)}");
+                //    if (crossedBoundary)
+                //        return asInt + 1;
+                //    else return asInt;
+                //}
                 case "hour":        return (int)secondDto.Subtract(firstDto).TotalHours;
                 case "minute":      return (int)secondDto.Subtract(firstDto).TotalMinutes;
                 case "second":      return (int)secondDto.Subtract(firstDto).TotalSeconds;
