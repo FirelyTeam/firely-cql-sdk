@@ -390,4 +390,194 @@ public class CqlDateTimeTests
         var result = dateTime.Subtract(quantity);
         Assert.IsNull(result, "Subtracting years from minimum datetime should return null to prevent overflow");
     }
+
+    // Tests for UCUM unit "a" (year) - Regression tests for bug where Math.Sign was used instead of value
+    [TestMethod]
+    public void Add_UCUM_Year_Single()
+    {
+        var dt = new CqlDateTime(2020, 1, 1, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(1, "a"); // UCUM year
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        // 1 year = 365.25 days
+        Assert.AreEqual(2020, result.Value.Year);
+        Assert.AreEqual(12, result.Value.Month);
+        Assert.AreEqual(31, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Add_UCUM_Year_Multiple()
+    {
+        var dt = new CqlDateTime(2021, 11, 21, 12, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(2, "a"); // UCUM year - THIS WAS THE BUG
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        // 2 years = 730.5 days
+        // 2021-11-21 12:00 + 730.5 days = 2023-11-20 24:00 = 2023-11-21 00:00
+        Assert.AreEqual(2023, result.Value.Year, "Adding 2 UCUM years should add 730.5 days, not 365.25 days");
+        Assert.AreEqual(11, result.Value.Month);
+        Assert.AreEqual(21, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Add_UCUM_Year_Three()
+    {
+        var dt = new CqlDateTime(2020, 6, 15, 8, 30, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(3, "a");
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        // 3 years = 1095.75 days
+        Assert.AreEqual(2023, result.Value.Year, "Adding 3 UCUM years should multiply correctly");
+        Assert.AreEqual(6, result.Value.Month);
+        Assert.AreEqual(14, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Add_UCUM_Year_Negative()
+    {
+        var dt = new CqlDateTime(2023, 11, 21, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(-2, "a");
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        // -2 years = -730.5 days
+        Assert.AreEqual(2021, result.Value.Year, "Adding negative UCUM years should work correctly");
+        Assert.AreEqual(11, result.Value.Month);
+        Assert.AreEqual(21, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Subtract_UCUM_Year_Multiple()
+    {
+        var dt = new CqlDateTime(2023, 11, 21, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(2, "a");
+        var result = dt.Subtract(quantity);
+        Assert.IsNotNull(result);
+        // Subtracting 2 years = -730.5 days
+        Assert.AreEqual(2021, result.Value.Year, "Subtracting 2 UCUM years should work correctly");
+        Assert.AreEqual(11, result.Value.Month);
+        Assert.AreEqual(21, result.Value.Day);
+    }
+
+    // Tests for UCUM unit "mo" (month) - Regression tests for bug where Math.Sign was used instead of value
+    [TestMethod]
+    public void Add_UCUM_Month_Single()
+    {
+        var dt = new CqlDateTime(2020, 1, 1, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(1, "mo"); // UCUM month
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        // 1 month = 30 days (UCUM average)
+        Assert.AreEqual(2020, result.Value.Year);
+        Assert.AreEqual(1, result.Value.Month);
+        Assert.AreEqual(31, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Add_UCUM_Month_Multiple()
+    {
+        var dt = new CqlDateTime(2020, 1, 1, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(2, "mo"); // UCUM month - THIS WAS THE BUG
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        // 2 months = 60 days
+        // 2020-01-01 + 60 days = 2020-03-01
+        Assert.AreEqual(2020, result.Value.Year, "Adding 2 UCUM months should add 60 days, not 30 days");
+        Assert.AreEqual(3, result.Value.Month);
+        Assert.AreEqual(1, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Add_UCUM_Month_Six()
+    {
+        var dt = new CqlDateTime(2020, 1, 15, 12, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(6, "mo");
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        // 6 months = 180 days
+        Assert.AreEqual(2020, result.Value.Year, "Adding 6 UCUM months should multiply correctly");
+        Assert.AreEqual(7, result.Value.Month);
+        Assert.AreEqual(13, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Add_UCUM_Month_Negative()
+    {
+        var dt = new CqlDateTime(2020, 3, 1, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(-2, "mo");
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        // -2 months = -60 days
+        Assert.AreEqual(2020, result.Value.Year, "Adding negative UCUM months should work correctly");
+        Assert.AreEqual(1, result.Value.Month);
+        Assert.AreEqual(1, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Subtract_UCUM_Month_Multiple()
+    {
+        var dt = new CqlDateTime(2020, 3, 1, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(2, "mo");
+        var result = dt.Subtract(quantity);
+        Assert.IsNotNull(result);
+        // Subtracting 2 months = -60 days
+        Assert.AreEqual(2020, result.Value.Year, "Subtracting 2 UCUM months should work correctly");
+        Assert.AreEqual(1, result.Value.Month);
+        Assert.AreEqual(1, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Add_UCUM_Year_Decimal()
+    {
+        var dt = new CqlDateTime(2020, 1, 1, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(1.5m, "a");
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        // 1.5 years = 547.875 days ≈ 547 days (truncated)
+        Assert.IsNotNull(result, "Adding decimal UCUM years should work");
+        Assert.AreEqual(2021, result.Value.Year);
+        Assert.AreEqual(7, result.Value.Month);
+    }
+
+    [TestMethod]
+    public void Add_UCUM_Month_Decimal()
+    {
+        var dt = new CqlDateTime(2020, 1, 1, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(2.5m, "mo");
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        // 2.5 months = 75 days
+        // 2020-01-01 + 75 days = 2020-03-16
+        Assert.AreEqual(2020, result.Value.Year, "Adding decimal UCUM months should work");
+        Assert.AreEqual(3, result.Value.Month);
+        Assert.AreEqual(16, result.Value.Day);
+    }
+
+    [TestMethod]
+    public void Add_UCUM_Year_WithTimezone()
+    {
+        // Test with timezone offset to ensure it's preserved
+        var dt = new CqlDateTime(2021, 11, 21, 12, 0, 0, 0, -5, 0); // EST timezone
+        var quantity = new CqlQuantity(2, "a");
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2023, result.Value.Year);
+        Assert.AreEqual(11, result.Value.Month);
+        Assert.AreEqual(21, result.Value.Day);
+        Assert.AreEqual(-5, result.Value.OffsetHour);
+    }
+
+    [TestMethod]
+    public void Add_UCUM_Month_WithTimezone()
+    {
+        // Test with timezone offset to ensure it's preserved
+        var dt = new CqlDateTime(2020, 1, 1, 6, 30, 0, 0, 5, 30); // IST timezone
+        var quantity = new CqlQuantity(2, "mo");
+        var result = dt.Add(quantity);
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2020, result.Value.Year);
+        Assert.AreEqual(3, result.Value.Month);
+        Assert.AreEqual(1, result.Value.Day);
+        Assert.AreEqual(5, result.Value.OffsetHour);
+        Assert.AreEqual(30, result.Value.OffsetMinute);
+    }
 }
