@@ -9,6 +9,9 @@ variables:
   GITHUB_PACKAGES_APIKEY: $(GitHubPushPackagesAPIKey) # key is set in variable group APIKeys
   NUGET_APIKEY: $(NuGetFhirPackagesAPIKey) # key is set in variable group APIKeys
 
+  # Test console logger verbosity (quiet, minimal, normal, detailed)
+  testConsoleLoggerVerbosity: 'normal'
+
   # Test Project Configuration
   # Multi-target tests (run on both .NET 8 and .NET 10 in parallel)
   multiTargetTestProjects: |
