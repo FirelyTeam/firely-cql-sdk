@@ -174,9 +174,9 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-4959295622034925684L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS138FHIRTobaccoScrnCessation-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -550,10 +550,10 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             bool? d_(Procedure TobaccoCessationCounseling) {
                 CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
                 CqlDateTime r_ = context.Operators.Start(q_);
-                CqlQuantity s_ = context.Operators.Quantity(6m, "months");
+                CqlQuantity s_ = context.Operators.Quantity((decimal?)6m, "months");
                 CqlDateTime t_ = context.Operators.Subtract(r_, s_);
                 CqlDateTime v_ = context.Operators.End(q_);
-                CqlInterval<CqlDateTime> w_ = context.Operators.Interval(t_, v_, true, true);
+                CqlInterval<CqlDateTime> w_ = context.Operators.Interval(t_, v_, (bool?)true, (bool?)true);
 
                 object x_() {
 
@@ -637,10 +637,10 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 CqlDateTime az_ = context.Operators.Start(ay_);
                 CqlInterval<CqlDateTime> ba_ = this.Measurement_Period(context);
                 CqlDateTime bb_ = context.Operators.Start(ba_);
-                CqlQuantity bc_ = context.Operators.Quantity(6m, "months");
+                CqlQuantity bc_ = context.Operators.Quantity((decimal?)6m, "months");
                 CqlDateTime bd_ = context.Operators.Subtract(bb_, bc_);
                 CqlDateTime bf_ = context.Operators.End(ba_);
-                CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(bd_, bf_, true, true);
+                CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(bd_, bf_, (bool?)true, (bool?)true);
                 bool? bh_ = context.Operators.In<CqlDateTime>(az_, bg_, "day");
                 return bh_;
             }
@@ -690,10 +690,10 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 CqlDateTime z_ = context.Operators.Convert<CqlDateTime>(y_);
                 CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
                 CqlDateTime ab_ = context.Operators.Start(aa_);
-                CqlQuantity ac_ = context.Operators.Quantity(6m, "months");
+                CqlQuantity ac_ = context.Operators.Quantity((decimal?)6m, "months");
                 CqlDateTime ad_ = context.Operators.Subtract(ab_, ac_);
                 CqlDateTime af_ = context.Operators.End(aa_);
-                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ad_, af_, true, true);
+                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ad_, af_, (bool?)true, (bool?)true);
                 bool? ah_ = context.Operators.In<CqlDateTime>(z_, ag_, "day");
                 IEnumerable<Task> ai_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
@@ -758,10 +758,10 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             bool? h_(MedicationRequest TakingCessationPharmacotherapy) {
                 CqlInterval<CqlDateTime> y_ = this.Measurement_Period(context);
                 CqlDateTime z_ = context.Operators.Start(y_);
-                CqlQuantity aa_ = context.Operators.Quantity(6m, "months");
+                CqlQuantity aa_ = context.Operators.Quantity((decimal?)6m, "months");
                 CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
                 CqlDateTime ad_ = context.Operators.End(y_);
-                CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ab_, ad_, true, true);
+                CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ab_, ad_, (bool?)true, (bool?)true);
                 CqlInterval<CqlDate> af_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, TakingCessationPharmacotherapy);
                 CqlDate ag_ = af_?.low;
                 CqlDateTime ah_ = context.Operators.ConvertDateToDateTime(ag_);

@@ -35,7 +35,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 CqlDateTime c_ = context.Operators.Convert<CqlDateTime>(b_);
                 FhirDateTime d_ = period?.EndElement;
                 CqlDateTime e_ = context.Operators.Convert<CqlDateTime>(d_);
-                CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, false, true);
+                CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, (bool?)false, (bool?)true);
                 return f_;
             }
             else
@@ -44,7 +44,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(g_);
                 FhirDateTime i_ = period?.EndElement;
                 CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
-                CqlInterval<CqlDateTime> k_ = context.Operators.Interval(h_, j_, true, true);
+                CqlInterval<CqlDateTime> k_ = context.Operators.Interval(h_, j_, (bool?)true, (bool?)true);
                 return k_;
             };
         }
@@ -107,31 +107,31 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                     if (c_())
                     {
                         CqlQuantity w_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> x_ = context.Operators.Interval(default, w_, true, false);
+                        CqlInterval<CqlQuantity> x_ = context.Operators.Interval(default, w_, (bool?)true, (bool?)false);
                         return x_;
                     }
                     else if (d_())
                     {
                         CqlQuantity y_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> z_ = context.Operators.Interval(default, y_, true, true);
+                        CqlInterval<CqlQuantity> z_ = context.Operators.Interval(default, y_, (bool?)true, (bool?)true);
                         return z_;
                     }
                     else if (e_())
                     {
                         CqlQuantity aa_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, default, true, true);
+                        CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, default, (bool?)true, (bool?)true);
                         return ab_;
                     }
                     else if (f_())
                     {
                         CqlQuantity ac_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, default, false, true);
+                        CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, default, (bool?)false, (bool?)true);
                         return ad_;
                     }
                     else
                     {
                         CqlQuantity ae_ = this.ToQuantity(context, quantity);
-                        CqlInterval<CqlQuantity> ag_ = context.Operators.Interval(ae_, ae_, true, true);
+                        CqlInterval<CqlQuantity> ag_ = context.Operators.Interval(ae_, ae_, (bool?)true, (bool?)true);
                         return ag_;
                     };
                 }
@@ -160,7 +160,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 CqlQuantity c_ = this.ToQuantity(context, b_);
                 Quantity d_ = range?.High;
                 CqlQuantity e_ = this.ToQuantity(context, d_);
-                CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
+                CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, (bool?)true, (bool?)true);
                 return f_;
             };
         }

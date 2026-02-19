@@ -293,7 +293,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                     bool? t_ = context.Operators.And(p_, s_);
                     DataType u_ = BloodGlucoseLab?.Value;
                     CqlQuantity v_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, u_ as Quantity);
-                    CqlQuantity w_ = context.Operators.Quantity(200m, "mg/dL");
+                    CqlQuantity w_ = context.Operators.Quantity((decimal?)200m, "mg/dL");
                     bool? x_ = context.Operators.GreaterOrEqual(v_, w_);
                     bool? y_ = context.Operators.And(t_, x_);
                     return y_;
@@ -343,14 +343,14 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     {
         CqlDateTime a_ = context.Operators.Start(Period);
         CqlDateTime b_ = context.Operators.End(Period);
-        CqlQuantity d_ = context.Operators.Quantity(10m, "days");
+        CqlQuantity d_ = context.Operators.Quantity((decimal?)10m, "days");
         CqlDateTime e_ = context.Operators.Add(a_, d_);
         CqlDateTime[] f_ = [
             b_,
             e_,
         ];
         CqlDateTime g_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)f_);
-        CqlInterval<CqlDateTime> h_ = context.Operators.Interval(a_, g_, true, true);
+        CqlInterval<CqlDateTime> h_ = context.Operators.Interval(a_, g_, (bool?)true, (bool?)true);
         return h_;
     }
 
@@ -362,8 +362,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
         (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? b_(int? DayIndex) {
             CqlDateTime e_ = context.Operators.Start(Period);
-            CqlQuantity f_ = context.Operators.Quantity(24m, "hours");
-            int? g_ = context.Operators.Subtract(DayIndex, 1);
+            CqlQuantity f_ = context.Operators.Quantity((decimal?)24m, "hours");
+            int? g_ = context.Operators.Subtract(DayIndex, (int?)1);
             CqlQuantity h_ = context.Operators.ConvertIntegerToQuantity(g_);
             CqlQuantity i_ = context.Operators.Multiply(f_, h_);
             CqlDateTime j_ = context.Operators.Add(e_, i_);
@@ -372,8 +372,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
                 bool n_() {
                     CqlDateTime o_ = context.Operators.Start(Period);
-                    CqlQuantity p_ = context.Operators.Quantity(24m, "hours");
-                    int? q_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity p_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    int? q_ = context.Operators.Subtract(DayIndex, (int?)1);
                     CqlQuantity r_ = context.Operators.ConvertIntegerToQuantity(q_);
                     CqlQuantity s_ = context.Operators.Multiply(p_, r_);
                     CqlDateTime t_ = context.Operators.Add(o_, s_);
@@ -386,8 +386,8 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 if (n_())
                 {
                     CqlDateTime x_ = context.Operators.Start(Period);
-                    CqlQuantity y_ = context.Operators.Quantity(24m, "hours");
-                    int? z_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity y_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    int? z_ = context.Operators.Subtract(DayIndex, (int?)1);
                     CqlQuantity aa_ = context.Operators.ConvertIntegerToQuantity(z_);
                     CqlQuantity ab_ = context.Operators.Multiply(y_, aa_);
                     CqlDateTime ac_ = context.Operators.Add(x_, ab_);
@@ -396,7 +396,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 else
                 {
                     CqlDateTime ad_ = context.Operators.Start(Period);
-                    CqlQuantity ae_ = context.Operators.Quantity(24m, "hours");
+                    CqlQuantity ae_ = context.Operators.Quantity((decimal?)24m, "hours");
                     CqlQuantity af_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
                     CqlQuantity ag_ = context.Operators.Multiply(ae_, af_);
                     CqlDateTime ah_ = context.Operators.Add(ad_, ag_);
@@ -404,7 +404,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 };
             }
 
-            CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_(), true, false);
+            CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_(), (bool?)true, (bool?)false);
             (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? m_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, l_);
             return m_;
         }
@@ -421,7 +421,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         CqlDateTime a_ = context.Operators.Start(Period);
         CqlDateTime b_ = context.Operators.End(Period);
         int? c_ = context.Operators.DurationBetween(a_, b_, "day");
-        CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
+        CqlInterval<int?> d_ = context.Operators.Interval((int?)1, c_, (bool?)true, (bool?)true);
         CqlInterval<int?>[] e_ = [
             d_,
         ];
@@ -480,7 +480,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                         bool? ag_ = context.Operators.Equal(af_, "final");
                         DataType ah_ = BloodGlucoseLab1?.Value;
                         CqlQuantity ai_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ah_ as Quantity);
-                        CqlQuantity aj_ = context.Operators.Quantity(300m, "mg/dL");
+                        CqlQuantity aj_ = context.Operators.Quantity((decimal?)300m, "mg/dL");
                         bool? ak_ = context.Operators.Greater(ai_, aj_);
                         bool? al_ = context.Operators.And(ag_, ak_);
                         DataType am_ = BloodGlucoseLab1?.Effective;
@@ -501,7 +501,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                         bool? at_ = context.Operators.Equal(as_, "final");
                         DataType au_ = BloodGlucoseLab2?.Value;
                         CqlQuantity av_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, au_ as Quantity);
-                        CqlQuantity aw_ = context.Operators.Quantity(200m, "mg/dL");
+                        CqlQuantity aw_ = context.Operators.Quantity((decimal?)200m, "mg/dL");
                         bool? ax_ = context.Operators.GreaterOrEqual(av_, aw_);
                         bool? ay_ = context.Operators.And(at_, ax_);
                         DataType az_ = BloodGlucoseLab2?.Effective;
@@ -571,11 +571,11 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                     bool? r_ = EncounterDay?.hasSevereResult;
                     bool? s_ = EncounterDay?.hasNoResult;
                     IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> t_ = EncounterWithResultDays?.relevantDays;
-                    int? v_ = context.Operators.Subtract(p_, 2);
+                    int? v_ = context.Operators.Subtract(p_, (int?)2);
                     (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? w_ = context.Operators.Indexer<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(t_, v_);
                     bool? x_ = w_?.hasElevatedResult;
                     bool? y_ = context.Operators.And(s_, x_);
-                    int? ab_ = context.Operators.Subtract(p_, 3);
+                    int? ab_ = context.Operators.Subtract(p_, (int?)3);
                     (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)? ac_ = context.Operators.Indexer<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?>(t_, ab_);
                     bool? ad_ = ac_?.hasElevatedResult;
                     bool? ae_ = context.Operators.And(y_, ad_);

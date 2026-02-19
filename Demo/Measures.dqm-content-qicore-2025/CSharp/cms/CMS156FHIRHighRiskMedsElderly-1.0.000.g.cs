@@ -288,9 +288,9 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3839642862747079336L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS156FHIRHighRiskMedsElderly-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -1120,11 +1120,11 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             IEnumerable<CqlTime> bl_ = context.Operators.Select<string, CqlTime>(bj_, bk_);
             int? bm_ = context.Operators.Count<CqlTime>(bl_);
             decimal? bn_ = context.Operators.ConvertIntegerToDecimal(bm_);
-            decimal? bo_ = context.Operators.Multiply(ab_, (bc_ ?? bn_) ?? 1.0m);
+            decimal? bo_ = context.Operators.Multiply(ab_, (bc_ ?? bn_) ?? (decimal?)1.0m);
             decimal? bp_ = context.Operators.Divide(n_, bo_);
             UnsignedInt br_ = f_?.NumberOfRepeatsAllowedElement;
             int? bs_ = br_?.Value;
-            int? bt_ = context.Operators.Add(1, bs_ ?? 0);
+            int? bt_ = context.Operators.Add((int?)1, bs_ ?? (int?)0);
             decimal? bu_ = context.Operators.ConvertIntegerToDecimal(bt_);
             decimal? bv_ = context.Operators.Multiply(j_ ?? bp_, bu_);
             return bv_;
@@ -1178,7 +1178,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
             IEnumerable<decimal?> i_ = context.Operators.Select<MedicationRequest, decimal?>(g_, h_);
             decimal? j_ = context.Operators.Sum(i_);
-            decimal? k_ = context.Operators.ConvertIntegerToDecimal(90);
+            decimal? k_ = context.Operators.ConvertIntegerToDecimal((int?)90);
             bool? l_ = context.Operators.Greater(j_, k_);
             return l_;
         });
@@ -1371,77 +1371,77 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
             if (b_())
             {
-                CqlQuantity bj_ = context.Operators.Quantity(0.05m, "mg/mL");
+                CqlQuantity bj_ = context.Operators.Quantity((decimal?)0.05m, "mg/mL");
                 return bj_;
             }
             else if (c_())
             {
-                CqlQuantity bk_ = context.Operators.Quantity(0.0625m, "mg");
+                CqlQuantity bk_ = context.Operators.Quantity((decimal?)0.0625m, "mg");
                 return bk_;
             }
             else if (d_())
             {
-                CqlQuantity bl_ = context.Operators.Quantity(0.1m, "mg/mL");
+                CqlQuantity bl_ = context.Operators.Quantity((decimal?)0.1m, "mg/mL");
                 return bl_;
             }
             else if (e_())
             {
-                CqlQuantity bm_ = context.Operators.Quantity(0.125m, "mg");
+                CqlQuantity bm_ = context.Operators.Quantity((decimal?)0.125m, "mg");
                 return bm_;
             }
             else if (f_())
             {
-                CqlQuantity bn_ = context.Operators.Quantity(0.25m, "mg");
+                CqlQuantity bn_ = context.Operators.Quantity((decimal?)0.25m, "mg");
                 return bn_;
             }
             else if (g_())
             {
-                CqlQuantity bo_ = context.Operators.Quantity(0.25m, "mg/mL");
+                CqlQuantity bo_ = context.Operators.Quantity((decimal?)0.25m, "mg/mL");
                 return bo_;
             }
             else if (h_())
             {
-                CqlQuantity bp_ = context.Operators.Quantity(3m, "mg");
+                CqlQuantity bp_ = context.Operators.Quantity((decimal?)3m, "mg");
                 return bp_;
             }
             else if (i_())
             {
-                CqlQuantity bq_ = context.Operators.Quantity(6m, "mg");
+                CqlQuantity bq_ = context.Operators.Quantity((decimal?)6m, "mg");
                 return bq_;
             }
             else if (j_())
             {
-                CqlQuantity br_ = context.Operators.Quantity(10m, "mg");
+                CqlQuantity br_ = context.Operators.Quantity((decimal?)10m, "mg");
                 return br_;
             }
             else if (k_())
             {
-                CqlQuantity bs_ = context.Operators.Quantity(10m, "mg/mL");
+                CqlQuantity bs_ = context.Operators.Quantity((decimal?)10m, "mg/mL");
                 return bs_;
             }
             else if (l_())
             {
-                CqlQuantity bt_ = context.Operators.Quantity(25m, "mg");
+                CqlQuantity bt_ = context.Operators.Quantity((decimal?)25m, "mg");
                 return bt_;
             }
             else if (m_())
             {
-                CqlQuantity bu_ = context.Operators.Quantity(50m, "mg");
+                CqlQuantity bu_ = context.Operators.Quantity((decimal?)50m, "mg");
                 return bu_;
             }
             else if (n_())
             {
-                CqlQuantity bv_ = context.Operators.Quantity(75m, "mg");
+                CqlQuantity bv_ = context.Operators.Quantity((decimal?)75m, "mg");
                 return bv_;
             }
             else if (o_())
             {
-                CqlQuantity bw_ = context.Operators.Quantity(100m, "mg");
+                CqlQuantity bw_ = context.Operators.Quantity((decimal?)100m, "mg");
                 return bw_;
             }
             else if (p_())
             {
-                CqlQuantity bx_ = context.Operators.Quantity(150m, "mg");
+                CqlQuantity bx_ = context.Operators.Quantity((decimal?)150m, "mg");
                 return bx_;
             }
             else
@@ -1489,7 +1489,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
             bool? g_(MedicationRequest DigoxinOrdered) {
                 CqlQuantity ak_ = this.averageDailyDose(context, DigoxinOrdered);
-                CqlQuantity al_ = context.Operators.Quantity(0.125m, "mg/d");
+                CqlQuantity al_ = context.Operators.Quantity((decimal?)0.125m, "mg/d");
                 bool? am_ = context.Operators.Greater(ak_, al_);
                 return am_;
             }
@@ -1528,7 +1528,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
             bool? q_(MedicationRequest DoxepinOrdered) {
                 CqlQuantity bc_ = this.averageDailyDose(context, DoxepinOrdered);
-                CqlQuantity bd_ = context.Operators.Quantity(6m, "mg/d");
+                CqlQuantity bd_ = context.Operators.Quantity((decimal?)6m, "mg/d");
                 bool? be_ = context.Operators.Greater(bc_, bd_);
                 return be_;
             }
@@ -1842,10 +1842,10 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, AntipsychoticTreatedDiagnoses);
                 CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
                 CqlDateTime ab_ = context.Operators.Start(aa_);
-                CqlQuantity ac_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity ac_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDateTime ad_ = context.Operators.Subtract(ab_, ac_);
                 CqlDateTime ae_ = this.Antipsychotic_Index_Prescription_Start_Date(context);
-                CqlInterval<CqlDateTime> af_ = context.Operators.Interval(ad_, ae_, true, true);
+                CqlInterval<CqlDateTime> af_ = context.Operators.Interval(ad_, ae_, (bool?)true, (bool?)true);
                 bool? ag_ = context.Operators.Overlaps(z_, af_, default);
                 return ag_;
             }
@@ -1869,10 +1869,10 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BenzodiazepineTreatedDiagnoses);
                 CqlInterval<CqlDateTime> ai_ = this.Measurement_Period(context);
                 CqlDateTime aj_ = context.Operators.Start(ai_);
-                CqlQuantity ak_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity ak_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDateTime al_ = context.Operators.Subtract(aj_, ak_);
                 CqlDateTime am_ = this.Benzodiazepine_Index_Prescription_Start_Date(context);
-                CqlInterval<CqlDateTime> an_ = context.Operators.Interval(al_, am_, true, true);
+                CqlInterval<CqlDateTime> an_ = context.Operators.Interval(al_, am_, (bool?)true, (bool?)true);
                 bool? ao_ = context.Operators.Overlaps(ah_, an_, default);
                 return ao_;
             }

@@ -29,9 +29,9 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-3752229714359495963L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -115,9 +115,9 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
     {
         CqlDate a_ = context.Operators.DateFrom(StartValue);
-        CqlQuantity c_ = context.Operators.Quantity(1m, "day");
+        CqlQuantity c_ = context.Operators.Quantity((decimal?)1m, "day");
         CqlDate d_ = context.Operators.Add(a_, c_);
-        CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, true, true);
+        CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, (bool?)true, (bool?)true);
         return e_;
     }
 
@@ -132,9 +132,9 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
         CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, d_);
         CqlDateTime f_ = context.Operators.Start(e_);
         CqlDate g_ = context.Operators.DateFrom(f_);
-        CqlQuantity h_ = context.Operators.Quantity(1m, "day");
+        CqlQuantity h_ = context.Operators.Quantity((decimal?)1m, "day");
         CqlDate i_ = context.Operators.Add(g_, h_);
-        CqlInterval<CqlDate> j_ = context.Operators.Interval(c_, i_, true, true);
+        CqlInterval<CqlDate> j_ = context.Operators.Interval(c_, i_, (bool?)true, (bool?)true);
         return j_;
     }
 
@@ -147,9 +147,9 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
         CqlDate c_ = context.Operators.DateFrom(b_);
         CqlDateTime d_ = this.StartOfFirstICU(context, Encounter);
         CqlDate e_ = context.Operators.DateFrom(d_);
-        CqlQuantity f_ = context.Operators.Quantity(1m, "day");
+        CqlQuantity f_ = context.Operators.Quantity((decimal?)1m, "day");
         CqlDate g_ = context.Operators.Add(e_, f_);
-        CqlInterval<CqlDate> h_ = context.Operators.Interval(c_, g_, true, true);
+        CqlInterval<CqlDate> h_ = context.Operators.Interval(c_, g_, (bool?)true, (bool?)true);
         return h_;
     }
 

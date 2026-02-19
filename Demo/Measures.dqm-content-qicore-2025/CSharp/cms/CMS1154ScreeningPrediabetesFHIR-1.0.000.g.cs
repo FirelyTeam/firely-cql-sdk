@@ -128,9 +128,9 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-5866298817992680085L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS1154ScreeningPrediabetesFHIR-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -369,7 +369,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             Observation a_ = this.Most_Recent_BMI(context);
             DataType b_ = a_?.Value;
             CqlQuantity c_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, b_ as Quantity);
-            CqlQuantity d_ = context.Operators.Quantity(25m, "kg/m2");
+            CqlQuantity d_ = context.Operators.Quantity((decimal?)25m, "kg/m2");
             bool? e_ = context.Operators.GreaterOrEqual(c_, d_);
             bool? f_ = this.Patient_is_not_Asian(context);
             bool? g_ = context.Operators.And(e_, f_);
@@ -383,7 +383,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             Observation a_ = this.Most_Recent_BMI(context);
             DataType b_ = a_?.Value;
             CqlQuantity c_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, b_ as Quantity);
-            CqlQuantity d_ = context.Operators.Quantity(23m, "kg/m2");
+            CqlQuantity d_ = context.Operators.Quantity((decimal?)23m, "kg/m2");
             bool? e_ = context.Operators.GreaterOrEqual(c_, d_);
             bool? f_ = this.Patient_is_Asian(context);
             bool? g_ = context.Operators.And(e_, f_);
@@ -501,10 +501,10 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(2077423446850315487L, () => {
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
-            CqlQuantity c_ = context.Operators.Quantity(2m, "years");
+            CqlQuantity c_ = context.Operators.Quantity((decimal?)2m, "years");
             CqlDateTime d_ = context.Operators.Subtract(b_, c_);
             CqlDateTime f_ = context.Operators.Start(a_);
-            CqlInterval<CqlDateTime> g_ = context.Operators.Interval(d_, f_, true, false);
+            CqlInterval<CqlDateTime> g_ = context.Operators.Interval(d_, f_, (bool?)true, (bool?)false);
             return g_;
         });
 

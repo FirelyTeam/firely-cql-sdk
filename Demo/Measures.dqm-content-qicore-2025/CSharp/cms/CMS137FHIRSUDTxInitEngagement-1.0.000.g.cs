@@ -85,9 +85,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-213861832508738093L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS137FHIRSUDTxInitEngagement-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -161,7 +161,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     bool? ac_ = context.Operators.And(w_, ab_);
                     CqlDateTime ae_ = context.Operators.Start(x_);
                     CqlDateTime ag_ = context.Operators.End(t_);
-                    CqlQuantity ah_ = context.Operators.Quantity(47m, "days");
+                    CqlQuantity ah_ = context.Operators.Quantity((decimal?)47m, "days");
                     CqlDateTime ai_ = context.Operators.Subtract(ag_, ah_);
                     bool? aj_ = context.Operators.SameOrBefore(ae_, ai_, "day");
                     bool? ak_ = context.Operators.And(ac_, aj_);
@@ -306,12 +306,12 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aw_);
                     CqlDateTime ay_ = context.Operators.Start(ax_);
                     CqlDate az_ = context.Operators.DateFrom(ay_);
-                    CqlQuantity ba_ = context.Operators.Quantity(60m, "days");
+                    CqlQuantity ba_ = context.Operators.Quantity((decimal?)60m, "days");
                     CqlDate bb_ = context.Operators.Subtract(az_, ba_);
                     CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aw_);
                     CqlDateTime be_ = context.Operators.Start(bd_);
                     CqlDate bf_ = context.Operators.DateFrom(be_);
-                    CqlInterval<CqlDate> bg_ = context.Operators.Interval(bb_, bf_, true, false);
+                    CqlInterval<CqlDate> bg_ = context.Operators.Interval(bb_, bf_, (bool?)true, (bool?)false);
                     CqlDate bh_ = bg_?.low;
                     CqlDateTime bi_ = context.Operators.ConvertDateToDateTime(bh_);
                     CqlInterval<CqlDateTime> bk_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aw_);
@@ -321,7 +321,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> bq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aw_);
                     CqlDateTime br_ = context.Operators.Start(bq_);
                     CqlDate bs_ = context.Operators.DateFrom(br_);
-                    CqlInterval<CqlDate> bt_ = context.Operators.Interval(bo_, bs_, true, false);
+                    CqlInterval<CqlDate> bt_ = context.Operators.Interval(bo_, bs_, (bool?)true, (bool?)false);
                     CqlDate bu_ = bt_?.high;
                     CqlDateTime bv_ = context.Operators.ConvertDateToDateTime(bu_);
                     CqlInterval<CqlDateTime> bx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aw_);
@@ -331,7 +331,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> cd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aw_);
                     CqlDateTime ce_ = context.Operators.Start(cd_);
                     CqlDate cf_ = context.Operators.DateFrom(ce_);
-                    CqlInterval<CqlDate> cg_ = context.Operators.Interval(cb_, cf_, true, false);
+                    CqlInterval<CqlDate> cg_ = context.Operators.Interval(cb_, cf_, (bool?)true, (bool?)false);
                     bool? ch_ = cg_?.lowClosed;
                     CqlInterval<CqlDateTime> cj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aw_);
                     CqlDateTime ck_ = context.Operators.Start(cj_);
@@ -340,7 +340,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> cp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aw_);
                     CqlDateTime cq_ = context.Operators.Start(cp_);
                     CqlDate cr_ = context.Operators.DateFrom(cq_);
-                    CqlInterval<CqlDate> cs_ = context.Operators.Interval(cn_, cr_, true, false);
+                    CqlInterval<CqlDate> cs_ = context.Operators.Interval(cn_, cr_, (bool?)true, (bool?)false);
                     bool? ct_ = cs_?.highClosed;
                     CqlInterval<CqlDateTime> cu_ = context.Operators.Interval(bi_, bv_, ch_, ct_);
                     bool? cv_ = context.Operators.In<CqlDateTime>(av_, cu_, "day");
@@ -403,12 +403,12 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> ew_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ev_);
                     CqlDateTime ex_ = context.Operators.Start(ew_);
                     CqlDate ey_ = context.Operators.DateFrom(ex_);
-                    CqlQuantity ez_ = context.Operators.Quantity(60m, "days");
+                    CqlQuantity ez_ = context.Operators.Quantity((decimal?)60m, "days");
                     CqlDate fa_ = context.Operators.Subtract(ey_, ez_);
                     CqlInterval<CqlDateTime> fc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ev_);
                     CqlDateTime fd_ = context.Operators.Start(fc_);
                     CqlDate fe_ = context.Operators.DateFrom(fd_);
-                    CqlInterval<CqlDate> ff_ = context.Operators.Interval(fa_, fe_, true, false);
+                    CqlInterval<CqlDate> ff_ = context.Operators.Interval(fa_, fe_, (bool?)true, (bool?)false);
                     CqlDate fg_ = ff_?.low;
                     CqlDateTime fh_ = context.Operators.ConvertDateToDateTime(fg_);
                     CqlInterval<CqlDateTime> fj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ev_);
@@ -418,7 +418,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> fp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ev_);
                     CqlDateTime fq_ = context.Operators.Start(fp_);
                     CqlDate fr_ = context.Operators.DateFrom(fq_);
-                    CqlInterval<CqlDate> fs_ = context.Operators.Interval(fn_, fr_, true, false);
+                    CqlInterval<CqlDate> fs_ = context.Operators.Interval(fn_, fr_, (bool?)true, (bool?)false);
                     CqlDate ft_ = fs_?.high;
                     CqlDateTime fu_ = context.Operators.ConvertDateToDateTime(ft_);
                     CqlInterval<CqlDateTime> fw_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ev_);
@@ -428,7 +428,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> gc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ev_);
                     CqlDateTime gd_ = context.Operators.Start(gc_);
                     CqlDate ge_ = context.Operators.DateFrom(gd_);
-                    CqlInterval<CqlDate> gf_ = context.Operators.Interval(ga_, ge_, true, false);
+                    CqlInterval<CqlDate> gf_ = context.Operators.Interval(ga_, ge_, (bool?)true, (bool?)false);
                     bool? gg_ = gf_?.lowClosed;
                     CqlInterval<CqlDateTime> gi_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ev_);
                     CqlDateTime gj_ = context.Operators.Start(gi_);
@@ -437,7 +437,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> go_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ev_);
                     CqlDateTime gp_ = context.Operators.Start(go_);
                     CqlDate gq_ = context.Operators.DateFrom(gp_);
-                    CqlInterval<CqlDate> gr_ = context.Operators.Interval(gm_, gq_, true, false);
+                    CqlInterval<CqlDate> gr_ = context.Operators.Interval(gm_, gq_, (bool?)true, (bool?)false);
                     bool? gs_ = gr_?.highClosed;
                     CqlInterval<CqlDateTime> gt_ = context.Operators.Interval(fh_, fu_, gg_, gs_);
                     bool? gu_ = context.Operators.In<CqlDateTime>(eu_, gt_, "day");
@@ -530,12 +530,12 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> io_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, in_);
                     CqlDateTime ip_ = context.Operators.Start(io_);
                     CqlDate iq_ = context.Operators.DateFrom(ip_);
-                    CqlQuantity ir_ = context.Operators.Quantity(60m, "days");
+                    CqlQuantity ir_ = context.Operators.Quantity((decimal?)60m, "days");
                     CqlDate is_ = context.Operators.Subtract(iq_, ir_);
                     CqlInterval<CqlDateTime> iu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, in_);
                     CqlDateTime iv_ = context.Operators.Start(iu_);
                     CqlDate iw_ = context.Operators.DateFrom(iv_);
-                    CqlInterval<CqlDate> ix_ = context.Operators.Interval(is_, iw_, true, false);
+                    CqlInterval<CqlDate> ix_ = context.Operators.Interval(is_, iw_, (bool?)true, (bool?)false);
                     CqlDate iy_ = ix_?.low;
                     CqlDateTime iz_ = context.Operators.ConvertDateToDateTime(iy_);
                     CqlInterval<CqlDateTime> jb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, in_);
@@ -545,7 +545,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> jh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, in_);
                     CqlDateTime ji_ = context.Operators.Start(jh_);
                     CqlDate jj_ = context.Operators.DateFrom(ji_);
-                    CqlInterval<CqlDate> jk_ = context.Operators.Interval(jf_, jj_, true, false);
+                    CqlInterval<CqlDate> jk_ = context.Operators.Interval(jf_, jj_, (bool?)true, (bool?)false);
                     CqlDate jl_ = jk_?.high;
                     CqlDateTime jm_ = context.Operators.ConvertDateToDateTime(jl_);
                     CqlInterval<CqlDateTime> jo_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, in_);
@@ -555,7 +555,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> ju_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, in_);
                     CqlDateTime jv_ = context.Operators.Start(ju_);
                     CqlDate jw_ = context.Operators.DateFrom(jv_);
-                    CqlInterval<CqlDate> jx_ = context.Operators.Interval(js_, jw_, true, false);
+                    CqlInterval<CqlDate> jx_ = context.Operators.Interval(js_, jw_, (bool?)true, (bool?)false);
                     bool? jy_ = jx_?.lowClosed;
                     CqlInterval<CqlDateTime> ka_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, in_);
                     CqlDateTime kb_ = context.Operators.Start(ka_);
@@ -564,7 +564,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> kg_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, in_);
                     CqlDateTime kh_ = context.Operators.Start(kg_);
                     CqlDate ki_ = context.Operators.DateFrom(kh_);
-                    CqlInterval<CqlDate> kj_ = context.Operators.Interval(ke_, ki_, true, false);
+                    CqlInterval<CqlDate> kj_ = context.Operators.Interval(ke_, ki_, (bool?)true, (bool?)false);
                     bool? kk_ = kj_?.highClosed;
                     CqlInterval<CqlDateTime> kl_ = context.Operators.Interval(iz_, jm_, jy_, kk_);
                     bool? km_ = context.Operators.In<CqlDateTime>(im_, kl_, "day");
@@ -759,9 +759,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, v_);
                     CqlDateTime ab_ = context.Operators.Start(aa_);
                     CqlDate ac_ = context.Operators.DateFrom(ab_);
-                    CqlQuantity ad_ = context.Operators.Quantity(14m, "days");
+                    CqlQuantity ad_ = context.Operators.Quantity((decimal?)14m, "days");
                     CqlDate ae_ = context.Operators.Add(ac_, ad_);
-                    CqlInterval<CqlDate> af_ = context.Operators.Interval(y_, ae_, true, false);
+                    CqlInterval<CqlDate> af_ = context.Operators.Interval(y_, ae_, (bool?)true, (bool?)false);
                     bool? ag_ = context.Operators.In<CqlDate>(u_, af_, default);
                     object ah_ = context.Operators.LateBoundProperty<object>(PsychosocialVisitProcedure, "id");
                     string ai_ = context.Operators.LateBoundProperty<string>(ah_, "value");
@@ -872,9 +872,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> dd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cy_);
                     CqlDateTime de_ = context.Operators.Start(dd_);
                     CqlDate df_ = context.Operators.DateFrom(de_);
-                    CqlQuantity dg_ = context.Operators.Quantity(14m, "days");
+                    CqlQuantity dg_ = context.Operators.Quantity((decimal?)14m, "days");
                     CqlDate dh_ = context.Operators.Add(df_, dg_);
-                    CqlInterval<CqlDate> di_ = context.Operators.Interval(db_, dh_, true, false);
+                    CqlInterval<CqlDate> di_ = context.Operators.Interval(db_, dh_, (bool?)true, (bool?)false);
                     bool? dj_ = context.Operators.In<CqlDate>(cx_, di_, default);
                     object dk_ = context.Operators.LateBoundProperty<object>(PsychosocialVisitEncounter, "id");
                     string dl_ = context.Operators.LateBoundProperty<string>(dk_, "value");
@@ -990,9 +990,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> bx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bs_);
                     CqlDateTime by_ = context.Operators.Start(bx_);
                     CqlDate bz_ = context.Operators.DateFrom(by_);
-                    CqlQuantity ca_ = context.Operators.Quantity(14m, "days");
+                    CqlQuantity ca_ = context.Operators.Quantity((decimal?)14m, "days");
                     CqlDate cb_ = context.Operators.Add(bz_, ca_);
-                    CqlInterval<CqlDate> cc_ = context.Operators.Interval(bv_, cb_, true, false);
+                    CqlInterval<CqlDate> cc_ = context.Operators.Interval(bv_, cb_, (bool?)true, (bool?)false);
                     bool? cd_ = context.Operators.In<CqlDate>(br_, cc_, default);
                     return cd_;
                 }
@@ -1103,9 +1103,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ct_);
                     CqlDateTime cz_ = context.Operators.Start(cy_);
                     CqlDate da_ = context.Operators.DateFrom(cz_);
-                    CqlQuantity db_ = context.Operators.Quantity(14m, "days");
+                    CqlQuantity db_ = context.Operators.Quantity((decimal?)14m, "days");
                     CqlDate dc_ = context.Operators.Add(da_, db_);
-                    CqlInterval<CqlDate> dd_ = context.Operators.Interval(cw_, dc_, true, false);
+                    CqlInterval<CqlDate> dd_ = context.Operators.Interval(cw_, dc_, (bool?)true, (bool?)false);
                     bool? de_ = context.Operators.In<CqlDate>(cs_, dd_, default);
                     return de_;
                 }
@@ -1293,9 +1293,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.toInterval(context, ag_());
                     CqlDateTime ai_ = context.Operators.Start(ah_);
                     CqlDate aj_ = context.Operators.DateFrom(ai_);
-                    CqlQuantity ak_ = context.Operators.Quantity(34m, "days");
+                    CqlQuantity ak_ = context.Operators.Quantity((decimal?)34m, "days");
                     CqlDate al_ = context.Operators.Add(InitiationTreatmentDate, ak_);
-                    CqlInterval<CqlDate> am_ = context.Operators.Interval(InitiationTreatmentDate, al_, false, true);
+                    CqlInterval<CqlDate> am_ = context.Operators.Interval(InitiationTreatmentDate, al_, (bool?)false, (bool?)true);
                     bool? an_ = context.Operators.In<CqlDate>(aj_, am_, default);
                     bool? ao_ = context.Operators.Not((bool?)(InitiationTreatmentDate is null));
                     bool? ap_ = context.Operators.And(an_, ao_);
@@ -1304,7 +1304,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlDateTime as_ = context.Operators.Start(ar_);
                     CqlDate at_ = context.Operators.DateFrom(as_);
                     CqlDate av_ = context.Operators.Add(InitiationTreatmentDate, ak_);
-                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitiationTreatmentDate, av_, false, true);
+                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitiationTreatmentDate, av_, (bool?)false, (bool?)true);
                     bool? ax_ = context.Operators.In<CqlDate>(at_, aw_, default);
                     bool? az_ = context.Operators.And(ax_, ao_);
                     bool? ba_ = context.Operators.Or(ap_, az_);
@@ -1366,9 +1366,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> cz_ = QICoreCommon_4_0_000.Instance.toInterval(context, cy_ as object);
                     CqlDateTime da_ = context.Operators.Start(cz_);
                     CqlDate db_ = context.Operators.DateFrom(da_);
-                    CqlQuantity dc_ = context.Operators.Quantity(34m, "days");
+                    CqlQuantity dc_ = context.Operators.Quantity((decimal?)34m, "days");
                     CqlDate dd_ = context.Operators.Add(InitiationTreatmentDate, dc_);
-                    CqlInterval<CqlDate> de_ = context.Operators.Interval(InitiationTreatmentDate, dd_, false, true);
+                    CqlInterval<CqlDate> de_ = context.Operators.Interval(InitiationTreatmentDate, dd_, (bool?)false, (bool?)true);
                     bool? df_ = context.Operators.In<CqlDate>(db_, de_, default);
                     bool? dg_ = context.Operators.Not((bool?)(InitiationTreatmentDate is null));
                     bool? dh_ = context.Operators.And(df_, dg_);
@@ -1440,9 +1440,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_ as object);
                     CqlDateTime ar_ = context.Operators.Start(aq_);
                     CqlDate as_ = context.Operators.DateFrom(ar_);
-                    CqlQuantity at_ = context.Operators.Quantity(34m, "days");
+                    CqlQuantity at_ = context.Operators.Quantity((decimal?)34m, "days");
                     CqlDate au_ = context.Operators.Add(InitiationTreatmentDate, at_);
-                    CqlInterval<CqlDate> av_ = context.Operators.Interval(InitiationTreatmentDate, au_, false, true);
+                    CqlInterval<CqlDate> av_ = context.Operators.Interval(InitiationTreatmentDate, au_, (bool?)false, (bool?)true);
                     bool? aw_ = context.Operators.In<CqlDate>(as_, av_, default);
                     bool? ax_ = context.Operators.Not((bool?)(InitiationTreatmentDate is null));
                     bool? ay_ = context.Operators.And(aw_, ax_);
@@ -1537,9 +1537,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> bj_ = QICoreCommon_4_0_000.Instance.toInterval(context, bi_());
                     CqlDateTime bk_ = context.Operators.Start(bj_);
                     CqlDate bl_ = context.Operators.DateFrom(bk_);
-                    CqlQuantity bm_ = context.Operators.Quantity(34m, "days");
+                    CqlQuantity bm_ = context.Operators.Quantity((decimal?)34m, "days");
                     CqlDate bn_ = context.Operators.Add(InitiationTreatmentDate, bm_);
-                    CqlInterval<CqlDate> bo_ = context.Operators.Interval(InitiationTreatmentDate, bn_, false, true);
+                    CqlInterval<CqlDate> bo_ = context.Operators.Interval(InitiationTreatmentDate, bn_, (bool?)false, (bool?)true);
                     bool? bp_ = context.Operators.In<CqlDate>(bl_, bo_, default);
                     bool? bq_ = context.Operators.Not((bool?)(InitiationTreatmentDate is null));
                     bool? br_ = context.Operators.And(bp_, bq_);
@@ -1612,7 +1612,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(13, 17, true, true);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)13, (int?)17, (bool?)true, (bool?)true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             return j_;
         });
@@ -1629,7 +1629,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(18, 64, true, true);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)18, (int?)64, (bool?)true, (bool?)true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             return j_;
         });

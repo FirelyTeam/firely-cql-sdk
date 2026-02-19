@@ -85,9 +85,9 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(6882228545884779471L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS951FHIRKidneyHealthEval-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -229,7 +229,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)18, (int?)85, (bool?)true, (bool?)true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             bool? k_ = this.Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period(context);
             bool? l_ = context.Operators.And(j_, k_);
@@ -462,13 +462,13 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
                 CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
                 CqlDateTime p_ = context.Operators.Start(o_);
-                CqlQuantity q_ = context.Operators.Quantity(4m, "days");
+                CqlQuantity q_ = context.Operators.Quantity((decimal?)4m, "days");
                 CqlDateTime r_ = context.Operators.Subtract(p_, q_);
                 object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
                 CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.toInterval(context, t_);
                 CqlDateTime v_ = context.Operators.End(u_);
                 CqlDateTime x_ = context.Operators.Add(v_, q_);
-                CqlInterval<CqlDateTime> y_ = context.Operators.Interval(r_, x_, true, true);
+                CqlInterval<CqlDateTime> y_ = context.Operators.Interval(r_, x_, (bool?)true, (bool?)true);
                 DataType z_ = tuple_celfnsuejxkbgcpwlebsiij?.UrineAlbuminTest?.Effective;
                 object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
                 CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.toInterval(context, aa_);

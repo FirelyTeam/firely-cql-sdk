@@ -119,9 +119,9 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-6811430900502275599L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS154FHIRAppropriateTxforURI-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -248,9 +248,9 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> bg_ = this.Measurement_Period(context);
                 CqlDateTime bh_ = context.Operators.Start(bg_);
                 CqlDateTime bj_ = context.Operators.End(bg_);
-                CqlQuantity bk_ = context.Operators.Quantity(3m, "days");
+                CqlQuantity bk_ = context.Operators.Quantity((decimal?)3m, "days");
                 CqlDateTime bl_ = context.Operators.Subtract(bj_, bk_);
-                CqlInterval<CqlDateTime> bm_ = context.Operators.Interval(bh_, bl_, true, true);
+                CqlInterval<CqlDateTime> bm_ = context.Operators.Interval(bh_, bl_, (bool?)true, (bool?)true);
                 bool? bn_ = context.Operators.In<CqlDateTime>(bf_, bm_, "day");
                 return bn_;
             }
@@ -455,9 +455,9 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     CqlDateTime am_ = context.Operators.Start(al_);
                     CqlInterval<CqlDateTime> ao_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ak_);
                     CqlDateTime ap_ = context.Operators.Start(ao_);
-                    CqlQuantity aq_ = context.Operators.Quantity(3m, "days");
+                    CqlQuantity aq_ = context.Operators.Quantity((decimal?)3m, "days");
                     CqlDateTime ar_ = context.Operators.Add(ap_, aq_);
-                    CqlInterval<CqlDateTime> as_ = context.Operators.Interval(am_, ar_, true, true);
+                    CqlInterval<CqlDateTime> as_ = context.Operators.Interval(am_, ar_, (bool?)true, (bool?)true);
                     bool? at_ = context.Operators.In<CqlDateTime>(aj_, as_, default);
                     CqlInterval<CqlDateTime> av_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ak_);
                     CqlDateTime aw_ = context.Operators.Start(av_);
@@ -529,7 +529,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 CqlDateTime l_ = context.Operators.Start(k_);
                 CqlDate m_ = context.Operators.DateFrom(l_);
                 int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
-                CqlInterval<int?> o_ = context.Operators.Interval(18, 64, true, true);
+                CqlInterval<int?> o_ = context.Operators.Interval((int?)18, (int?)64, (bool?)true, (bool?)true);
                 bool? p_ = context.Operators.In<int?>(n_, o_, default);
                 return p_;
             }

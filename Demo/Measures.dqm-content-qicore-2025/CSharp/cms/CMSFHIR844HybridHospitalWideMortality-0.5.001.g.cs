@@ -95,9 +95,9 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(8194214586127820629L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMSFHIR844HybridHospitalWideMortality-0.5.001", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -147,7 +147,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     CqlDateTime ab_ = context.Operators.Start(aa_);
                     CqlDate ac_ = context.Operators.DateFrom(ab_);
                     int? ad_ = context.Operators.CalculateAgeAt(y_, ac_, "year");
-                    CqlInterval<int?> ae_ = context.Operators.Interval(65, 94, true, true);
+                    CqlInterval<int?> ae_ = context.Operators.Interval((int?)65, (int?)94, (bool?)true, (bool?)true);
                     bool? af_ = context.Operators.In<int?>(ad_, ae_, default);
                     bool? ag_ = context.Operators.And(u_, af_);
                     CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
@@ -1793,12 +1793,12 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     Period ag_ = z_?.Period;
                     CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ag_);
                     CqlDateTime ai_ = context.Operators.Start(ah_);
-                    CqlQuantity aj_ = context.Operators.Quantity(60m, "minutes");
+                    CqlQuantity aj_ = context.Operators.Quantity((decimal?)60m, "minutes");
                     CqlDateTime ak_ = context.Operators.Subtract(ai_, aj_);
                     Period am_ = z_?.Period;
                     CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, am_);
                     CqlDateTime ao_ = context.Operators.Start(an_);
-                    CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, true, true);
+                    CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, (bool?)true, (bool?)true);
                     bool? aq_ = context.Operators.In<CqlDateTime>(ae_, ap_, default);
                     Period as_ = z_?.Period;
                     CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, as_);
@@ -1983,12 +1983,12 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
                     Period cd_ = bv_?.Period;
                     CqlInterval<CqlDateTime> ce_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cd_);
                     CqlDateTime cf_ = context.Operators.Start(ce_);
-                    CqlQuantity cg_ = context.Operators.Quantity(60m, "minutes");
+                    CqlQuantity cg_ = context.Operators.Quantity((decimal?)60m, "minutes");
                     CqlDateTime ch_ = context.Operators.Subtract(cf_, cg_);
                     Period cj_ = bv_?.Period;
                     CqlInterval<CqlDateTime> ck_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cj_);
                     CqlDateTime cl_ = context.Operators.Start(ck_);
-                    CqlInterval<CqlDateTime> cm_ = context.Operators.Interval(ch_, cl_, true, true);
+                    CqlInterval<CqlDateTime> cm_ = context.Operators.Interval(ch_, cl_, (bool?)true, (bool?)true);
                     bool? cn_ = context.Operators.In<CqlDateTime>(cb_, cm_, default);
                     Period cp_ = bv_?.Period;
                     CqlInterval<CqlDateTime> cq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cp_);

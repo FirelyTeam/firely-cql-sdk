@@ -100,9 +100,9 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-6927895824144681510L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS314FHIRHIVViralSuppression-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -164,7 +164,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 CqlDateTime j_ = context.Operators.Start(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.Start(k_);
-                CqlQuantity m_ = context.Operators.Quantity(90m, "days");
+                CqlQuantity m_ = context.Operators.Quantity((decimal?)90m, "days");
                 CqlDateTime n_ = context.Operators.Add(l_, m_);
                 bool? o_ = context.Operators.Before(j_, n_, "day");
                 bool? p_ = this.isVerified(context, HIVDx);
@@ -218,9 +218,9 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
                 CqlDateTime ak_ = context.Operators.Start(aj_);
                 CqlDateTime am_ = context.Operators.Start(aj_);
-                CqlQuantity an_ = context.Operators.Quantity(240m, "days");
+                CqlQuantity an_ = context.Operators.Quantity((decimal?)240m, "days");
                 CqlDateTime ao_ = context.Operators.Add(am_, an_);
-                CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, true, true);
+                CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, (bool?)true, (bool?)true);
                 Period aq_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aq_);
                 bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
@@ -398,7 +398,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             Observation a_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period(context);
             DataType b_ = a_?.Value;
             object c_ = FHIRHelpers_4_4_000.Instance.ToValue(context, b_);
-            CqlQuantity d_ = context.Operators.Quantity(200m, "{copies}/mL");
+            CqlQuantity d_ = context.Operators.Quantity((decimal?)200m, "{copies}/mL");
             bool? e_ = context.Operators.Less(c_ as CqlQuantity, d_);
             DataType g_ = a_?.Value;
             object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);

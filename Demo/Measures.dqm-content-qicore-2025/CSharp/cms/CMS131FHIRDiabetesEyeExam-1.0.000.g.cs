@@ -116,9 +116,9 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1372366969867876817L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS131FHIRDiabetesEyeExam-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -186,7 +186,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             CqlDateTime f_ = context.Operators.End(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)18, (int?)75, (bool?)true, (bool?)true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
             bool? l_ = context.Operators.Exists<Encounter>(k_);
@@ -315,10 +315,10 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             bool? d_(Observation RetinalExam) {
                 CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
                 CqlDateTime h_ = context.Operators.Start(g_);
-                CqlQuantity i_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity i_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDateTime j_ = context.Operators.Subtract(h_, i_);
                 CqlDateTime l_ = context.Operators.End(g_);
-                CqlInterval<CqlDateTime> m_ = context.Operators.Interval(j_, l_, true, true);
+                CqlInterval<CqlDateTime> m_ = context.Operators.Interval(j_, l_, (bool?)true, (bool?)true);
                 DataType n_ = RetinalExam?.Effective;
                 object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
                 CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
@@ -432,11 +432,11 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
                 bool? l_ = context.Operators.Equivalent(i_ as CqlConcept, k_);
                 CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
                 CqlDateTime n_ = context.Operators.Start(m_);
-                CqlQuantity o_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity o_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlDateTime r_ = context.Operators.End(m_);
                 CqlDateTime t_ = context.Operators.Subtract(r_, o_);
-                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, true, true);
+                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, (bool?)true, (bool?)true);
                 DataType v_ = RightEyeNoRetinopathy?.Effective;
                 object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                 CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
@@ -467,11 +467,11 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
                 bool? l_ = context.Operators.Equivalent(i_ as CqlConcept, k_);
                 CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
                 CqlDateTime n_ = context.Operators.Start(m_);
-                CqlQuantity o_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity o_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlDateTime r_ = context.Operators.End(m_);
                 CqlDateTime t_ = context.Operators.Subtract(r_, o_);
-                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, true, true);
+                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, (bool?)true, (bool?)true);
                 DataType v_ = LeftEyeNoRetinopathy?.Effective;
                 object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                 CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);

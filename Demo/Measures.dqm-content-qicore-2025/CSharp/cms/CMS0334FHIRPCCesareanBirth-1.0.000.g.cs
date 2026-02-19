@@ -82,9 +82,9 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(5698456684161873684L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS0334FHIRPCCesareanBirth-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -127,7 +127,7 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             bool? b_(Encounter DeliveryEncounter) {
                 int? d_ = PCMaternal_5_25_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
                 CqlQuantity e_ = PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
-                CqlQuantity f_ = context.Operators.Quantity(37m, "weeks");
+                CqlQuantity f_ = context.Operators.Quantity((decimal?)37m, "weeks");
                 bool? g_ = context.Operators.GreaterOrEqual(e_, f_);
                 bool? h_ = context.Operators.And((bool?)(d_ is null), g_);
                 return h_;
@@ -315,9 +315,9 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
 
             CqlDateTime u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_());
             CqlDateTime v_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter);
-            CqlQuantity w_ = context.Operators.Quantity(42m, "weeks");
+            CqlQuantity w_ = context.Operators.Quantity((decimal?)42m, "weeks");
             CqlDateTime x_ = context.Operators.Subtract(v_, w_);
-            CqlInterval<CqlDateTime> z_ = context.Operators.Interval(x_, v_, true, false);
+            CqlInterval<CqlDateTime> z_ = context.Operators.Interval(x_, v_, (bool?)true, (bool?)false);
             bool? aa_ = context.Operators.In<CqlDateTime>(u_, z_, default);
             bool? ac_ = context.Operators.Not((bool?)(v_ is null));
             bool? ad_ = context.Operators.And(aa_, ac_);
@@ -450,9 +450,9 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
 
             CqlDateTime l_ = QICoreCommon_4_0_000.Instance.earliest(context, k_());
             CqlDateTime m_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter);
-            CqlQuantity n_ = context.Operators.Quantity(42m, "weeks");
+            CqlQuantity n_ = context.Operators.Quantity((decimal?)42m, "weeks");
             CqlDateTime o_ = context.Operators.Subtract(m_, n_);
-            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, m_, true, false);
+            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, m_, (bool?)true, (bool?)false);
             bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, default);
             bool? t_ = context.Operators.Not((bool?)(m_ is null));
             bool? u_ = context.Operators.And(r_, t_);
@@ -598,9 +598,9 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
 
             CqlDateTime l_ = QICoreCommon_4_0_000.Instance.earliest(context, k_());
             CqlDateTime m_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter);
-            CqlQuantity n_ = context.Operators.Quantity(42m, "weeks");
+            CqlQuantity n_ = context.Operators.Quantity((decimal?)42m, "weeks");
             CqlDateTime o_ = context.Operators.Subtract(m_, n_);
-            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, m_, true, false);
+            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, m_, (bool?)true, (bool?)false);
             bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, default);
             bool? t_ = context.Operators.Not((bool?)(m_ is null));
             bool? u_ = context.Operators.And(r_, t_);
@@ -746,9 +746,9 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
 
             CqlDateTime l_ = QICoreCommon_4_0_000.Instance.earliest(context, k_());
             CqlDateTime m_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TheEncounter);
-            CqlQuantity n_ = context.Operators.Quantity(42m, "weeks");
+            CqlQuantity n_ = context.Operators.Quantity((decimal?)42m, "weeks");
             CqlDateTime o_ = context.Operators.Subtract(m_, n_);
-            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, m_, true, false);
+            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, m_, (bool?)true, (bool?)false);
             bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, default);
             bool? t_ = context.Operators.Not((bool?)(m_ is null));
             bool? u_ = context.Operators.And(r_, t_);

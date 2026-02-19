@@ -35,7 +35,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
             if (onset is FhirDateTime)
             {
                 CqlDateTime b_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, onset as FhirDateTime);
-                CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
+                CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, (bool?)true, (bool?)true);
                 return d_;
             }
             else if (onset is Period)
@@ -44,7 +44,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 CqlDateTime f_ = context.Operators.Convert<CqlDateTime>(e_);
                 FhirDateTime g_ = context.Operators.LateBoundProperty<FhirDateTime>(onset, "end");
                 CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(g_);
-                CqlInterval<CqlDateTime> i_ = context.Operators.Interval(f_, h_, true, true);
+                CqlInterval<CqlDateTime> i_ = context.Operators.Interval(f_, h_, (bool?)true, (bool?)true);
                 return i_;
             }
             else if (onset is FhirString)
@@ -66,9 +66,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Date ab_ = v_?.BirthDateElement;
                         CqlDate ac_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ab_);
                         CqlDate ae_ = context.Operators.Add(ac_, y_);
-                        CqlQuantity af_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity af_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate ag_ = context.Operators.Add(ae_, af_);
-                        CqlInterval<CqlDate> ah_ = context.Operators.Interval(z_, ag_, true, false);
+                        CqlInterval<CqlDate> ah_ = context.Operators.Interval(z_, ag_, (bool?)true, (bool?)false);
                         return ah_;
                     }
                     else if (onset is Range)
@@ -84,9 +84,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Quantity ar_ = (onset as Range)?.High;
                         CqlQuantity as_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ar_);
                         CqlDate at_ = context.Operators.Add(aq_, as_);
-                        CqlQuantity au_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity au_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate av_ = context.Operators.Add(at_, au_);
-                        CqlInterval<CqlDate> aw_ = context.Operators.Interval(an_, av_, true, false);
+                        CqlInterval<CqlDate> aw_ = context.Operators.Interval(an_, av_, (bool?)true, (bool?)false);
                         return aw_;
                     }
                     else
@@ -109,9 +109,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Date bd_ = ax_?.BirthDateElement;
                         CqlDate be_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bd_);
                         CqlDate bg_ = context.Operators.Add(be_, ba_);
-                        CqlQuantity bh_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity bh_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate bi_ = context.Operators.Add(bg_, bh_);
-                        CqlInterval<CqlDate> bj_ = context.Operators.Interval(bb_, bi_, true, false);
+                        CqlInterval<CqlDate> bj_ = context.Operators.Interval(bb_, bi_, (bool?)true, (bool?)false);
                         return bj_;
                     }
                     else if (onset is Range)
@@ -127,9 +127,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Quantity bt_ = (onset as Range)?.High;
                         CqlQuantity bu_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, bt_);
                         CqlDate bv_ = context.Operators.Add(bs_, bu_);
-                        CqlQuantity bw_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity bw_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate bx_ = context.Operators.Add(bv_, bw_);
-                        CqlInterval<CqlDate> by_ = context.Operators.Interval(bp_, bx_, true, false);
+                        CqlInterval<CqlDate> by_ = context.Operators.Interval(bp_, bx_, (bool?)true, (bool?)false);
                         return by_;
                     }
                     else
@@ -152,9 +152,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Date cf_ = bz_?.BirthDateElement;
                         CqlDate cg_ = FHIRHelpers_4_0_001.Instance.ToDate(context, cf_);
                         CqlDate ci_ = context.Operators.Add(cg_, cc_);
-                        CqlQuantity cj_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity cj_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate ck_ = context.Operators.Add(ci_, cj_);
-                        CqlInterval<CqlDate> cl_ = context.Operators.Interval(cd_, ck_, true, false);
+                        CqlInterval<CqlDate> cl_ = context.Operators.Interval(cd_, ck_, (bool?)true, (bool?)false);
                         return cl_;
                     }
                     else if (onset is Range)
@@ -170,9 +170,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Quantity cv_ = (onset as Range)?.High;
                         CqlQuantity cw_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cv_);
                         CqlDate cx_ = context.Operators.Add(cu_, cw_);
-                        CqlQuantity cy_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity cy_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate cz_ = context.Operators.Add(cx_, cy_);
-                        CqlInterval<CqlDate> da_ = context.Operators.Interval(cr_, cz_, true, false);
+                        CqlInterval<CqlDate> da_ = context.Operators.Interval(cr_, cz_, (bool?)true, (bool?)false);
                         return da_;
                     }
                     else
@@ -194,9 +194,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Date dh_ = db_?.BirthDateElement;
                         CqlDate di_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dh_);
                         CqlDate dk_ = context.Operators.Add(di_, de_);
-                        CqlQuantity dl_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity dl_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate dm_ = context.Operators.Add(dk_, dl_);
-                        CqlInterval<CqlDate> dn_ = context.Operators.Interval(df_, dm_, true, false);
+                        CqlInterval<CqlDate> dn_ = context.Operators.Interval(df_, dm_, (bool?)true, (bool?)false);
                         return dn_;
                     }
                     else if (onset is Range)
@@ -212,9 +212,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Quantity dx_ = (onset as Range)?.High;
                         CqlQuantity dy_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, dx_);
                         CqlDate dz_ = context.Operators.Add(dw_, dy_);
-                        CqlQuantity ea_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity ea_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate eb_ = context.Operators.Add(dz_, ea_);
-                        CqlInterval<CqlDate> ec_ = context.Operators.Interval(dt_, eb_, true, false);
+                        CqlInterval<CqlDate> ec_ = context.Operators.Interval(dt_, eb_, (bool?)true, (bool?)false);
                         return ec_;
                     }
                     else
@@ -241,7 +241,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
             if (abatement is FhirDateTime)
             {
                 CqlDateTime b_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, abatement as FhirDateTime);
-                CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
+                CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, (bool?)true, (bool?)true);
                 return d_;
             }
             else if (abatement is Period)
@@ -250,7 +250,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 CqlDateTime f_ = context.Operators.Convert<CqlDateTime>(e_);
                 FhirDateTime g_ = context.Operators.LateBoundProperty<FhirDateTime>(abatement, "end");
                 CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(g_);
-                CqlInterval<CqlDateTime> i_ = context.Operators.Interval(f_, h_, true, true);
+                CqlInterval<CqlDateTime> i_ = context.Operators.Interval(f_, h_, (bool?)true, (bool?)true);
                 return i_;
             }
             else if (abatement is FhirString)
@@ -272,9 +272,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Date ab_ = v_?.BirthDateElement;
                         CqlDate ac_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ab_);
                         CqlDate ae_ = context.Operators.Add(ac_, y_);
-                        CqlQuantity af_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity af_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate ag_ = context.Operators.Add(ae_, af_);
-                        CqlInterval<CqlDate> ah_ = context.Operators.Interval(z_, ag_, true, false);
+                        CqlInterval<CqlDate> ah_ = context.Operators.Interval(z_, ag_, (bool?)true, (bool?)false);
                         return ah_;
                     }
                     else if (abatement is Range)
@@ -290,9 +290,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Quantity ar_ = (abatement as Range)?.High;
                         CqlQuantity as_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ar_);
                         CqlDate at_ = context.Operators.Add(aq_, as_);
-                        CqlQuantity au_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity au_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate av_ = context.Operators.Add(at_, au_);
-                        CqlInterval<CqlDate> aw_ = context.Operators.Interval(an_, av_, true, false);
+                        CqlInterval<CqlDate> aw_ = context.Operators.Interval(an_, av_, (bool?)true, (bool?)false);
                         return aw_;
                     }
                     else
@@ -315,9 +315,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Date bd_ = ax_?.BirthDateElement;
                         CqlDate be_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bd_);
                         CqlDate bg_ = context.Operators.Add(be_, ba_);
-                        CqlQuantity bh_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity bh_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate bi_ = context.Operators.Add(bg_, bh_);
-                        CqlInterval<CqlDate> bj_ = context.Operators.Interval(bb_, bi_, true, false);
+                        CqlInterval<CqlDate> bj_ = context.Operators.Interval(bb_, bi_, (bool?)true, (bool?)false);
                         return bj_;
                     }
                     else if (abatement is Range)
@@ -333,9 +333,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Quantity bt_ = (abatement as Range)?.High;
                         CqlQuantity bu_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, bt_);
                         CqlDate bv_ = context.Operators.Add(bs_, bu_);
-                        CqlQuantity bw_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity bw_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate bx_ = context.Operators.Add(bv_, bw_);
-                        CqlInterval<CqlDate> by_ = context.Operators.Interval(bp_, bx_, true, false);
+                        CqlInterval<CqlDate> by_ = context.Operators.Interval(bp_, bx_, (bool?)true, (bool?)false);
                         return by_;
                     }
                     else
@@ -358,9 +358,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Date cf_ = bz_?.BirthDateElement;
                         CqlDate cg_ = FHIRHelpers_4_0_001.Instance.ToDate(context, cf_);
                         CqlDate ci_ = context.Operators.Add(cg_, cc_);
-                        CqlQuantity cj_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity cj_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate ck_ = context.Operators.Add(ci_, cj_);
-                        CqlInterval<CqlDate> cl_ = context.Operators.Interval(cd_, ck_, true, false);
+                        CqlInterval<CqlDate> cl_ = context.Operators.Interval(cd_, ck_, (bool?)true, (bool?)false);
                         return cl_;
                     }
                     else if (abatement is Range)
@@ -376,9 +376,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Quantity cv_ = (abatement as Range)?.High;
                         CqlQuantity cw_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, cv_);
                         CqlDate cx_ = context.Operators.Add(cu_, cw_);
-                        CqlQuantity cy_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity cy_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate cz_ = context.Operators.Add(cx_, cy_);
-                        CqlInterval<CqlDate> da_ = context.Operators.Interval(cr_, cz_, true, false);
+                        CqlInterval<CqlDate> da_ = context.Operators.Interval(cr_, cz_, (bool?)true, (bool?)false);
                         return da_;
                     }
                     else
@@ -400,9 +400,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Date dh_ = db_?.BirthDateElement;
                         CqlDate di_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dh_);
                         CqlDate dk_ = context.Operators.Add(di_, de_);
-                        CqlQuantity dl_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity dl_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate dm_ = context.Operators.Add(dk_, dl_);
-                        CqlInterval<CqlDate> dn_ = context.Operators.Interval(df_, dm_, true, false);
+                        CqlInterval<CqlDate> dn_ = context.Operators.Interval(df_, dm_, (bool?)true, (bool?)false);
                         return dn_;
                     }
                     else if (abatement is Range)
@@ -418,9 +418,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                         Quantity dx_ = (abatement as Range)?.High;
                         CqlQuantity dy_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, dx_);
                         CqlDate dz_ = context.Operators.Add(dw_, dy_);
-                        CqlQuantity ea_ = context.Operators.Quantity(1m, "year");
+                        CqlQuantity ea_ = context.Operators.Quantity((decimal?)1m, "year");
                         CqlDate eb_ = context.Operators.Add(dz_, ea_);
-                        CqlInterval<CqlDate> ec_ = context.Operators.Interval(dt_, eb_, true, false);
+                        CqlInterval<CqlDate> ec_ = context.Operators.Interval(dt_, eb_, (bool?)true, (bool?)false);
                         return ec_;
                     }
                     else
@@ -448,7 +448,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         DataType d_ = condition?.Abatement;
         CqlInterval<CqlDateTime> e_ = this.Normalize_Abatement(context, d_);
         CqlDateTime f_ = context.Operators.End(e_);
-        CqlInterval<CqlDateTime> g_ = context.Operators.Interval(c_, f_, true, true);
+        CqlInterval<CqlDateTime> g_ = context.Operators.Interval(c_, f_, (bool?)true, (bool?)true);
         return g_;
     }
 
@@ -461,7 +461,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
             if (choice is FhirDateTime)
             {
                 CqlDateTime b_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, choice as FhirDateTime);
-                CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
+                CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, (bool?)true, (bool?)true);
                 return d_;
             }
             else if (choice is Date)
@@ -469,7 +469,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 CqlDate e_ = FHIRHelpers_4_0_001.Instance.ToDate(context, choice as Date);
                 CqlDateTime f_ = context.Operators.ConvertDateToDateTime(e_);
                 CqlDateTime h_ = context.Operators.ConvertDateToDateTime(e_);
-                CqlInterval<CqlDateTime> i_ = context.Operators.Interval(f_, h_, true, true);
+                CqlInterval<CqlDateTime> i_ = context.Operators.Interval(f_, h_, (bool?)true, (bool?)true);
                 return i_;
             }
             else if (choice is Period)
@@ -478,13 +478,13 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 CqlDateTime k_ = context.Operators.Convert<CqlDateTime>(j_);
                 FhirDateTime l_ = context.Operators.LateBoundProperty<FhirDateTime>(choice, "end");
                 CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(l_);
-                CqlInterval<CqlDateTime> n_ = context.Operators.Interval(k_, m_, true, true);
+                CqlInterval<CqlDateTime> n_ = context.Operators.Interval(k_, m_, (bool?)true, (bool?)true);
                 return n_;
             }
             else if (choice is Instant)
             {
                 CqlDateTime o_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, choice as Instant);
-                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, o_, true, true);
+                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(o_, o_, (bool?)true, (bool?)true);
                 return q_;
             }
             else if (choice is Age)
@@ -497,9 +497,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 Date x_ = r_?.BirthDateElement;
                 CqlDate y_ = FHIRHelpers_4_0_001.Instance.ToDate(context, x_);
                 CqlDate aa_ = context.Operators.Add(y_, u_);
-                CqlQuantity ab_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity ab_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate ac_ = context.Operators.Add(aa_, ab_);
-                CqlInterval<CqlDate> ad_ = context.Operators.Interval(v_, ac_, true, false);
+                CqlInterval<CqlDate> ad_ = context.Operators.Interval(v_, ac_, (bool?)true, (bool?)false);
                 CqlDate ae_ = ad_?.low;
                 CqlDateTime af_ = context.Operators.ConvertDateToDateTime(ae_);
                 Date ah_ = r_?.BirthDateElement;
@@ -509,7 +509,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 CqlDate an_ = FHIRHelpers_4_0_001.Instance.ToDate(context, am_);
                 CqlDate ap_ = context.Operators.Add(an_, u_);
                 CqlDate ar_ = context.Operators.Add(ap_, ab_);
-                CqlInterval<CqlDate> as_ = context.Operators.Interval(ak_, ar_, true, false);
+                CqlInterval<CqlDate> as_ = context.Operators.Interval(ak_, ar_, (bool?)true, (bool?)false);
                 CqlDate at_ = as_?.high;
                 CqlDateTime au_ = context.Operators.ConvertDateToDateTime(at_);
                 Date aw_ = r_?.BirthDateElement;
@@ -519,7 +519,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 CqlDate bc_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bb_);
                 CqlDate be_ = context.Operators.Add(bc_, u_);
                 CqlDate bg_ = context.Operators.Add(be_, ab_);
-                CqlInterval<CqlDate> bh_ = context.Operators.Interval(az_, bg_, true, false);
+                CqlInterval<CqlDate> bh_ = context.Operators.Interval(az_, bg_, (bool?)true, (bool?)false);
                 bool? bi_ = bh_?.lowClosed;
                 Date bk_ = r_?.BirthDateElement;
                 CqlDate bl_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bk_);
@@ -528,7 +528,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 CqlDate bq_ = FHIRHelpers_4_0_001.Instance.ToDate(context, bp_);
                 CqlDate bs_ = context.Operators.Add(bq_, u_);
                 CqlDate bu_ = context.Operators.Add(bs_, ab_);
-                CqlInterval<CqlDate> bv_ = context.Operators.Interval(bn_, bu_, true, false);
+                CqlInterval<CqlDate> bv_ = context.Operators.Interval(bn_, bu_, (bool?)true, (bool?)false);
                 bool? bw_ = bv_?.highClosed;
                 CqlInterval<CqlDateTime> bx_ = context.Operators.Interval(af_, au_, bi_, bw_);
                 return bx_;
@@ -546,9 +546,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 Quantity ch_ = (choice as Range)?.High;
                 CqlQuantity ci_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ch_);
                 CqlDate cj_ = context.Operators.Add(cg_, ci_);
-                CqlQuantity ck_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity ck_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate cl_ = context.Operators.Add(cj_, ck_);
-                CqlInterval<CqlDate> cm_ = context.Operators.Interval(cd_, cl_, true, false);
+                CqlInterval<CqlDate> cm_ = context.Operators.Interval(cd_, cl_, (bool?)true, (bool?)false);
                 CqlDate cn_ = cm_?.low;
                 CqlDateTime co_ = context.Operators.ConvertDateToDateTime(cn_);
                 Date cq_ = by_?.BirthDateElement;
@@ -560,7 +560,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 CqlQuantity cz_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ch_);
                 CqlDate da_ = context.Operators.Add(cx_, cz_);
                 CqlDate dc_ = context.Operators.Add(da_, ck_);
-                CqlInterval<CqlDate> dd_ = context.Operators.Interval(cu_, dc_, true, false);
+                CqlInterval<CqlDate> dd_ = context.Operators.Interval(cu_, dc_, (bool?)true, (bool?)false);
                 CqlDate de_ = dd_?.high;
                 CqlDateTime df_ = context.Operators.ConvertDateToDateTime(de_);
                 Date dh_ = by_?.BirthDateElement;
@@ -572,7 +572,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 CqlQuantity dq_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ch_);
                 CqlDate dr_ = context.Operators.Add(do_, dq_);
                 CqlDate dt_ = context.Operators.Add(dr_, ck_);
-                CqlInterval<CqlDate> du_ = context.Operators.Interval(dl_, dt_, true, false);
+                CqlInterval<CqlDate> du_ = context.Operators.Interval(dl_, dt_, (bool?)true, (bool?)false);
                 bool? dv_ = du_?.lowClosed;
                 Date dx_ = by_?.BirthDateElement;
                 CqlDate dy_ = FHIRHelpers_4_0_001.Instance.ToDate(context, dx_);
@@ -583,7 +583,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 CqlQuantity eg_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ch_);
                 CqlDate eh_ = context.Operators.Add(ee_, eg_);
                 CqlDate ej_ = context.Operators.Add(eh_, ck_);
-                CqlInterval<CqlDate> ek_ = context.Operators.Interval(eb_, ej_, true, false);
+                CqlInterval<CqlDate> ek_ = context.Operators.Interval(eb_, ej_, (bool?)true, (bool?)false);
                 bool? el_ = ek_?.highClosed;
                 CqlInterval<CqlDateTime> em_ = context.Operators.Interval(co_, df_, dv_, el_);
                 return em_;
@@ -662,7 +662,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? i_((CqlTupleMetadata, IEnumerable<CqlDate> SortedDates)? SortedDates) {
             IEnumerable<CqlDate> n_ = SortedDates?.SortedDates;
-            (CqlTupleMetadata, IEnumerable<CqlDate> SortedList, int? AnchorIndex)? o_ = (CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD, n_, 0);
+            (CqlTupleMetadata, IEnumerable<CqlDate> SortedList, int? AnchorIndex)? o_ = (CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD, n_, (int?)0);
             (CqlTupleMetadata, IEnumerable<CqlDate> SortedList, int? AnchorIndex)?[] p_ = [
                 o_,
             ];
@@ -676,19 +676,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                     IEnumerable<CqlDate> ah_ = AnchorList?.SortedList;
                     int? ai_ = AnchorList?.AnchorIndex;
                     CqlDate aj_ = context.Operators.Indexer<CqlDate>(ah_, ai_);
-                    CqlQuantity ak_ = context.Operators.Quantity(1m, "day");
+                    CqlQuantity ak_ = context.Operators.Quantity((decimal?)1m, "day");
                     CqlDate al_ = context.Operators.Add(aj_ as CqlDate, ak_);
                     CqlDate ao_ = context.Operators.Indexer<CqlDate>(ah_, ai_);
-                    CqlQuantity ap_ = context.Operators.Quantity(30m, "days");
+                    CqlQuantity ap_ = context.Operators.Quantity((decimal?)30m, "days");
                     CqlDate aq_ = context.Operators.Add(ao_ as CqlDate, ap_);
-                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(al_, aq_, true, true);
+                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(al_, aq_, (bool?)true, (bool?)true);
                     bool? as_ = context.Operators.In<CqlDate>(X, ar_, default);
                     bool? at_ = context.Operators.Not(as_);
                     return at_;
                 }
 
                 IEnumerable<CqlDate> y_ = context.Operators.Where<CqlDate>(DateList, x_);
-                int? aa_ = context.Operators.Add(v_, 1);
+                int? aa_ = context.Operators.Add(v_, (int?)1);
                 (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ab_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, w_ as CqlDate, y_, aa_);
                 (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] ac_ = [
                     ab_,
@@ -719,19 +719,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                 IEnumerable<CqlDate> bn_ = FirstList?.NewList;
                                 int? bo_ = FirstList?.IndexofNewDate;
                                 CqlDate bp_ = context.Operators.Indexer<CqlDate>(bn_, bo_);
-                                CqlQuantity bq_ = context.Operators.Quantity(1m, "day");
+                                CqlQuantity bq_ = context.Operators.Quantity((decimal?)1m, "day");
                                 CqlDate br_ = context.Operators.Add(bp_ as CqlDate, bq_);
                                 CqlDate bu_ = context.Operators.Indexer<CqlDate>(bn_, bo_);
-                                CqlQuantity bv_ = context.Operators.Quantity(30m, "days");
+                                CqlQuantity bv_ = context.Operators.Quantity((decimal?)30m, "days");
                                 CqlDate bw_ = context.Operators.Add(bu_ as CqlDate, bv_);
-                                CqlInterval<CqlDate> bx_ = context.Operators.Interval(br_, bw_, true, true);
+                                CqlInterval<CqlDate> bx_ = context.Operators.Interval(br_, bw_, (bool?)true, (bool?)true);
                                 bool? by_ = context.Operators.In<CqlDate>(X, bx_, default);
                                 bool? bz_ = context.Operators.Not(by_);
                                 return bz_;
                             }
 
                             IEnumerable<CqlDate> be_ = context.Operators.Where<CqlDate>(az_, bd_);
-                            int? bg_ = context.Operators.Add(ba_, 1);
+                            int? bg_ = context.Operators.Add(ba_, (int?)1);
                             (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? bh_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, bb_ as CqlDate, be_, bg_);
                             (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] bi_ = [
                                 bh_,
@@ -762,19 +762,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                             IEnumerable<CqlDate> ct_ = SecondList?.NewList;
                                             int? cu_ = SecondList?.IndexofNewDate;
                                             CqlDate cv_ = context.Operators.Indexer<CqlDate>(ct_, cu_);
-                                            CqlQuantity cw_ = context.Operators.Quantity(1m, "day");
+                                            CqlQuantity cw_ = context.Operators.Quantity((decimal?)1m, "day");
                                             CqlDate cx_ = context.Operators.Add(cv_ as CqlDate, cw_);
                                             CqlDate da_ = context.Operators.Indexer<CqlDate>(ct_, cu_);
-                                            CqlQuantity db_ = context.Operators.Quantity(30m, "days");
+                                            CqlQuantity db_ = context.Operators.Quantity((decimal?)30m, "days");
                                             CqlDate dc_ = context.Operators.Add(da_ as CqlDate, db_);
-                                            CqlInterval<CqlDate> dd_ = context.Operators.Interval(cx_, dc_, true, true);
+                                            CqlInterval<CqlDate> dd_ = context.Operators.Interval(cx_, dc_, (bool?)true, (bool?)true);
                                             bool? de_ = context.Operators.In<CqlDate>(X, dd_, default);
                                             bool? df_ = context.Operators.Not(de_);
                                             return df_;
                                         }
 
                                         IEnumerable<CqlDate> ck_ = context.Operators.Where<CqlDate>(cf_, cj_);
-                                        int? cm_ = context.Operators.Add(cg_, 1);
+                                        int? cm_ = context.Operators.Add(cg_, (int?)1);
                                         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? cn_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, ch_ as CqlDate, ck_, cm_);
                                         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] co_ = [
                                             cn_,
@@ -805,19 +805,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                         IEnumerable<CqlDate> dz_ = ThirdList?.NewList;
                                                         int? ea_ = ThirdList?.IndexofNewDate;
                                                         CqlDate eb_ = context.Operators.Indexer<CqlDate>(dz_, ea_);
-                                                        CqlQuantity ec_ = context.Operators.Quantity(1m, "day");
+                                                        CqlQuantity ec_ = context.Operators.Quantity((decimal?)1m, "day");
                                                         CqlDate ed_ = context.Operators.Add(eb_ as CqlDate, ec_);
                                                         CqlDate eg_ = context.Operators.Indexer<CqlDate>(dz_, ea_);
-                                                        CqlQuantity eh_ = context.Operators.Quantity(30m, "days");
+                                                        CqlQuantity eh_ = context.Operators.Quantity((decimal?)30m, "days");
                                                         CqlDate ei_ = context.Operators.Add(eg_ as CqlDate, eh_);
-                                                        CqlInterval<CqlDate> ej_ = context.Operators.Interval(ed_, ei_, true, true);
+                                                        CqlInterval<CqlDate> ej_ = context.Operators.Interval(ed_, ei_, (bool?)true, (bool?)true);
                                                         bool? ek_ = context.Operators.In<CqlDate>(X, ej_, default);
                                                         bool? el_ = context.Operators.Not(ek_);
                                                         return el_;
                                                     }
 
                                                     IEnumerable<CqlDate> dq_ = context.Operators.Where<CqlDate>(dl_, dp_);
-                                                    int? ds_ = context.Operators.Add(dm_, 1);
+                                                    int? ds_ = context.Operators.Add(dm_, (int?)1);
                                                     (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? dt_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, dn_ as CqlDate, dq_, ds_);
                                                     (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] du_ = [
                                                         dt_,
@@ -848,19 +848,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                     IEnumerable<CqlDate> ff_ = FourthList?.NewList;
                                                                     int? fg_ = FourthList?.IndexofNewDate;
                                                                     CqlDate fh_ = context.Operators.Indexer<CqlDate>(ff_, fg_);
-                                                                    CqlQuantity fi_ = context.Operators.Quantity(1m, "day");
+                                                                    CqlQuantity fi_ = context.Operators.Quantity((decimal?)1m, "day");
                                                                     CqlDate fj_ = context.Operators.Add(fh_ as CqlDate, fi_);
                                                                     CqlDate fm_ = context.Operators.Indexer<CqlDate>(ff_, fg_);
-                                                                    CqlQuantity fn_ = context.Operators.Quantity(30m, "days");
+                                                                    CqlQuantity fn_ = context.Operators.Quantity((decimal?)30m, "days");
                                                                     CqlDate fo_ = context.Operators.Add(fm_ as CqlDate, fn_);
-                                                                    CqlInterval<CqlDate> fp_ = context.Operators.Interval(fj_, fo_, true, true);
+                                                                    CqlInterval<CqlDate> fp_ = context.Operators.Interval(fj_, fo_, (bool?)true, (bool?)true);
                                                                     bool? fq_ = context.Operators.In<CqlDate>(X, fp_, default);
                                                                     bool? fr_ = context.Operators.Not(fq_);
                                                                     return fr_;
                                                                 }
 
                                                                 IEnumerable<CqlDate> ew_ = context.Operators.Where<CqlDate>(er_, ev_);
-                                                                int? ey_ = context.Operators.Add(es_, 1);
+                                                                int? ey_ = context.Operators.Add(es_, (int?)1);
                                                                 (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ez_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, et_ as CqlDate, ew_, ey_);
                                                                 (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] fa_ = [
                                                                     ez_,
@@ -891,19 +891,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                 IEnumerable<CqlDate> gl_ = FifthList?.NewList;
                                                                                 int? gm_ = FifthList?.IndexofNewDate;
                                                                                 CqlDate gn_ = context.Operators.Indexer<CqlDate>(gl_, gm_);
-                                                                                CqlQuantity go_ = context.Operators.Quantity(1m, "day");
+                                                                                CqlQuantity go_ = context.Operators.Quantity((decimal?)1m, "day");
                                                                                 CqlDate gp_ = context.Operators.Add(gn_ as CqlDate, go_);
                                                                                 CqlDate gs_ = context.Operators.Indexer<CqlDate>(gl_, gm_);
-                                                                                CqlQuantity gt_ = context.Operators.Quantity(30m, "days");
+                                                                                CqlQuantity gt_ = context.Operators.Quantity((decimal?)30m, "days");
                                                                                 CqlDate gu_ = context.Operators.Add(gs_ as CqlDate, gt_);
-                                                                                CqlInterval<CqlDate> gv_ = context.Operators.Interval(gp_, gu_, true, true);
+                                                                                CqlInterval<CqlDate> gv_ = context.Operators.Interval(gp_, gu_, (bool?)true, (bool?)true);
                                                                                 bool? gw_ = context.Operators.In<CqlDate>(X, gv_, default);
                                                                                 bool? gx_ = context.Operators.Not(gw_);
                                                                                 return gx_;
                                                                             }
 
                                                                             IEnumerable<CqlDate> gc_ = context.Operators.Where<CqlDate>(fx_, gb_);
-                                                                            int? ge_ = context.Operators.Add(fy_, 1);
+                                                                            int? ge_ = context.Operators.Add(fy_, (int?)1);
                                                                             (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? gf_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, fz_ as CqlDate, gc_, ge_);
                                                                             (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] gg_ = [
                                                                                 gf_,
@@ -934,19 +934,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                             IEnumerable<CqlDate> hr_ = SixthList?.NewList;
                                                                                             int? hs_ = SixthList?.IndexofNewDate;
                                                                                             CqlDate ht_ = context.Operators.Indexer<CqlDate>(hr_, hs_);
-                                                                                            CqlQuantity hu_ = context.Operators.Quantity(1m, "day");
+                                                                                            CqlQuantity hu_ = context.Operators.Quantity((decimal?)1m, "day");
                                                                                             CqlDate hv_ = context.Operators.Add(ht_ as CqlDate, hu_);
                                                                                             CqlDate hy_ = context.Operators.Indexer<CqlDate>(hr_, hs_);
-                                                                                            CqlQuantity hz_ = context.Operators.Quantity(30m, "days");
+                                                                                            CqlQuantity hz_ = context.Operators.Quantity((decimal?)30m, "days");
                                                                                             CqlDate ia_ = context.Operators.Add(hy_ as CqlDate, hz_);
-                                                                                            CqlInterval<CqlDate> ib_ = context.Operators.Interval(hv_, ia_, true, true);
+                                                                                            CqlInterval<CqlDate> ib_ = context.Operators.Interval(hv_, ia_, (bool?)true, (bool?)true);
                                                                                             bool? ic_ = context.Operators.In<CqlDate>(X, ib_, default);
                                                                                             bool? id_ = context.Operators.Not(ic_);
                                                                                             return id_;
                                                                                         }
 
                                                                                         IEnumerable<CqlDate> hi_ = context.Operators.Where<CqlDate>(hd_, hh_);
-                                                                                        int? hk_ = context.Operators.Add(he_, 1);
+                                                                                        int? hk_ = context.Operators.Add(he_, (int?)1);
                                                                                         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? hl_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, hf_ as CqlDate, hi_, hk_);
                                                                                         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] hm_ = [
                                                                                             hl_,
@@ -977,19 +977,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                                         IEnumerable<CqlDate> ix_ = SeventhList?.NewList;
                                                                                                         int? iy_ = SeventhList?.IndexofNewDate;
                                                                                                         CqlDate iz_ = context.Operators.Indexer<CqlDate>(ix_, iy_);
-                                                                                                        CqlQuantity ja_ = context.Operators.Quantity(1m, "day");
+                                                                                                        CqlQuantity ja_ = context.Operators.Quantity((decimal?)1m, "day");
                                                                                                         CqlDate jb_ = context.Operators.Add(iz_ as CqlDate, ja_);
                                                                                                         CqlDate je_ = context.Operators.Indexer<CqlDate>(ix_, iy_);
-                                                                                                        CqlQuantity jf_ = context.Operators.Quantity(30m, "days");
+                                                                                                        CqlQuantity jf_ = context.Operators.Quantity((decimal?)30m, "days");
                                                                                                         CqlDate jg_ = context.Operators.Add(je_ as CqlDate, jf_);
-                                                                                                        CqlInterval<CqlDate> jh_ = context.Operators.Interval(jb_, jg_, true, true);
+                                                                                                        CqlInterval<CqlDate> jh_ = context.Operators.Interval(jb_, jg_, (bool?)true, (bool?)true);
                                                                                                         bool? ji_ = context.Operators.In<CqlDate>(X, jh_, default);
                                                                                                         bool? jj_ = context.Operators.Not(ji_);
                                                                                                         return jj_;
                                                                                                     }
 
                                                                                                     IEnumerable<CqlDate> io_ = context.Operators.Where<CqlDate>(ij_, in_);
-                                                                                                    int? iq_ = context.Operators.Add(ik_, 1);
+                                                                                                    int? iq_ = context.Operators.Add(ik_, (int?)1);
                                                                                                     (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ir_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, il_ as CqlDate, io_, iq_);
                                                                                                     (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] is_ = [
                                                                                                         ir_,
@@ -1020,19 +1020,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                                                     IEnumerable<CqlDate> kd_ = EighthList?.NewList;
                                                                                                                     int? ke_ = EighthList?.IndexofNewDate;
                                                                                                                     CqlDate kf_ = context.Operators.Indexer<CqlDate>(kd_, ke_);
-                                                                                                                    CqlQuantity kg_ = context.Operators.Quantity(1m, "day");
+                                                                                                                    CqlQuantity kg_ = context.Operators.Quantity((decimal?)1m, "day");
                                                                                                                     CqlDate kh_ = context.Operators.Add(kf_ as CqlDate, kg_);
                                                                                                                     CqlDate kk_ = context.Operators.Indexer<CqlDate>(kd_, ke_);
-                                                                                                                    CqlQuantity kl_ = context.Operators.Quantity(30m, "days");
+                                                                                                                    CqlQuantity kl_ = context.Operators.Quantity((decimal?)30m, "days");
                                                                                                                     CqlDate km_ = context.Operators.Add(kk_ as CqlDate, kl_);
-                                                                                                                    CqlInterval<CqlDate> kn_ = context.Operators.Interval(kh_, km_, true, true);
+                                                                                                                    CqlInterval<CqlDate> kn_ = context.Operators.Interval(kh_, km_, (bool?)true, (bool?)true);
                                                                                                                     bool? ko_ = context.Operators.In<CqlDate>(X, kn_, default);
                                                                                                                     bool? kp_ = context.Operators.Not(ko_);
                                                                                                                     return kp_;
                                                                                                                 }
 
                                                                                                                 IEnumerable<CqlDate> ju_ = context.Operators.Where<CqlDate>(jp_, jt_);
-                                                                                                                int? jw_ = context.Operators.Add(jq_, 1);
+                                                                                                                int? jw_ = context.Operators.Add(jq_, (int?)1);
                                                                                                                 (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? jx_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, jr_ as CqlDate, ju_, jw_);
                                                                                                                 (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] jy_ = [
                                                                                                                     jx_,
@@ -1063,19 +1063,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                                                                 IEnumerable<CqlDate> lj_ = NinethList?.NewList;
                                                                                                                                 int? lk_ = NinethList?.IndexofNewDate;
                                                                                                                                 CqlDate ll_ = context.Operators.Indexer<CqlDate>(lj_, lk_);
-                                                                                                                                CqlQuantity lm_ = context.Operators.Quantity(1m, "day");
+                                                                                                                                CqlQuantity lm_ = context.Operators.Quantity((decimal?)1m, "day");
                                                                                                                                 CqlDate ln_ = context.Operators.Add(ll_ as CqlDate, lm_);
                                                                                                                                 CqlDate lq_ = context.Operators.Indexer<CqlDate>(lj_, lk_);
-                                                                                                                                CqlQuantity lr_ = context.Operators.Quantity(30m, "days");
+                                                                                                                                CqlQuantity lr_ = context.Operators.Quantity((decimal?)30m, "days");
                                                                                                                                 CqlDate ls_ = context.Operators.Add(lq_ as CqlDate, lr_);
-                                                                                                                                CqlInterval<CqlDate> lt_ = context.Operators.Interval(ln_, ls_, true, true);
+                                                                                                                                CqlInterval<CqlDate> lt_ = context.Operators.Interval(ln_, ls_, (bool?)true, (bool?)true);
                                                                                                                                 bool? lu_ = context.Operators.In<CqlDate>(X, lt_, default);
                                                                                                                                 bool? lv_ = context.Operators.Not(lu_);
                                                                                                                                 return lv_;
                                                                                                                             }
 
                                                                                                                             IEnumerable<CqlDate> la_ = context.Operators.Where<CqlDate>(kv_, kz_);
-                                                                                                                            int? lc_ = context.Operators.Add(kw_, 1);
+                                                                                                                            int? lc_ = context.Operators.Add(kw_, (int?)1);
                                                                                                                             (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ld_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, kx_ as CqlDate, la_, lc_);
                                                                                                                             (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] le_ = [
                                                                                                                                 ld_,
@@ -1106,19 +1106,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                                                                             IEnumerable<CqlDate> mp_ = TenthList?.NewList;
                                                                                                                                             int? mq_ = TenthList?.IndexofNewDate;
                                                                                                                                             CqlDate mr_ = context.Operators.Indexer<CqlDate>(mp_, mq_);
-                                                                                                                                            CqlQuantity ms_ = context.Operators.Quantity(1m, "day");
+                                                                                                                                            CqlQuantity ms_ = context.Operators.Quantity((decimal?)1m, "day");
                                                                                                                                             CqlDate mt_ = context.Operators.Add(mr_ as CqlDate, ms_);
                                                                                                                                             CqlDate mw_ = context.Operators.Indexer<CqlDate>(mp_, mq_);
-                                                                                                                                            CqlQuantity mx_ = context.Operators.Quantity(30m, "days");
+                                                                                                                                            CqlQuantity mx_ = context.Operators.Quantity((decimal?)30m, "days");
                                                                                                                                             CqlDate my_ = context.Operators.Add(mw_ as CqlDate, mx_);
-                                                                                                                                            CqlInterval<CqlDate> mz_ = context.Operators.Interval(mt_, my_, true, true);
+                                                                                                                                            CqlInterval<CqlDate> mz_ = context.Operators.Interval(mt_, my_, (bool?)true, (bool?)true);
                                                                                                                                             bool? na_ = context.Operators.In<CqlDate>(X, mz_, default);
                                                                                                                                             bool? nb_ = context.Operators.Not(na_);
                                                                                                                                             return nb_;
                                                                                                                                         }
 
                                                                                                                                         IEnumerable<CqlDate> mg_ = context.Operators.Where<CqlDate>(mb_, mf_);
-                                                                                                                                        int? mi_ = context.Operators.Add(mc_, 1);
+                                                                                                                                        int? mi_ = context.Operators.Add(mc_, (int?)1);
                                                                                                                                         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? mj_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, md_ as CqlDate, mg_, mi_);
                                                                                                                                         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] mk_ = [
                                                                                                                                             mj_,
@@ -1149,19 +1149,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                                                                                         IEnumerable<CqlDate> nq_ = EleventhList?.NewList;
                                                                                                                                                         int? nr_ = EleventhList?.IndexofNewDate;
                                                                                                                                                         CqlDate ns_ = context.Operators.Indexer<CqlDate>(nq_, nr_);
-                                                                                                                                                        CqlQuantity nt_ = context.Operators.Quantity(1m, "day");
+                                                                                                                                                        CqlQuantity nt_ = context.Operators.Quantity((decimal?)1m, "day");
                                                                                                                                                         CqlDate nu_ = context.Operators.Add(ns_ as CqlDate, nt_);
                                                                                                                                                         CqlDate nx_ = context.Operators.Indexer<CqlDate>(nq_, nr_);
-                                                                                                                                                        CqlQuantity ny_ = context.Operators.Quantity(30m, "days");
+                                                                                                                                                        CqlQuantity ny_ = context.Operators.Quantity((decimal?)30m, "days");
                                                                                                                                                         CqlDate nz_ = context.Operators.Add(nx_ as CqlDate, ny_);
-                                                                                                                                                        CqlInterval<CqlDate> oa_ = context.Operators.Interval(nu_, nz_, true, true);
+                                                                                                                                                        CqlInterval<CqlDate> oa_ = context.Operators.Interval(nu_, nz_, (bool?)true, (bool?)true);
                                                                                                                                                         bool? ob_ = context.Operators.In<CqlDate>(X, oa_, default);
                                                                                                                                                         bool? oc_ = context.Operators.Not(ob_);
                                                                                                                                                         return oc_;
                                                                                                                                                     }
 
                                                                                                                                                     IEnumerable<CqlDate> nm_ = context.Operators.Where<CqlDate>(nh_, nl_);
-                                                                                                                                                    int? no_ = context.Operators.Add(ni_, 1);
+                                                                                                                                                    int? no_ = context.Operators.Add(ni_, (int?)1);
                                                                                                                                                     (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? np_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, nj_ as CqlDate, nm_, no_);
                                                                                                                                                     return np_;
                                                                                                                                                 };

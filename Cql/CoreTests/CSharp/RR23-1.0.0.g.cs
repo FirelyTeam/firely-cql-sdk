@@ -61,9 +61,9 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     [CqlParameterDefinition("Measurement Period")]
     public object Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<object>(3305136097504393406L, () => {
-            CqlDate a_ = context.Operators.Date(2023, 1, 1);
-            CqlDate b_ = context.Operators.Date(2023, 12, 31);
-            CqlInterval<CqlDate> c_ = context.Operators.Interval(a_, b_, true, true);
+            CqlDate a_ = context.Operators.Date((int?)2023, (int?)1, (int?)1);
+            CqlDate b_ = context.Operators.Date((int?)2023, (int?)12, (int?)31);
+            CqlInterval<CqlDate> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)true);
             object d_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", c_);
             return d_;
         });
@@ -155,10 +155,10 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
                     DataType s_ = SD?.Occurrence;
                     CqlDateTime t_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-                    CqlQuantity u_ = context.Operators.Quantity(7m, "days");
+                    CqlQuantity u_ = context.Operators.Quantity((decimal?)7m, "days");
                     CqlDateTime v_ = context.Operators.Subtract(t_, u_);
                     CqlDateTime x_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
-                    CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, false);
+                    CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, (bool?)true, (bool?)false);
                     bool? z_ = context.Operators.In<CqlDateTime>(r_ as CqlDateTime, y_, default);
                     CqlDateTime ab_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
                     bool? ac_ = context.Operators.Not((bool?)(ab_ is null));

@@ -67,9 +67,9 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(5445798036144351774L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS157FHIRPainIntensityQuantified-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -97,10 +97,10 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
             bool? c_(Procedure ChemoAdministration) {
                 CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
                 CqlDateTime f_ = context.Operators.Start(e_);
-                CqlQuantity g_ = context.Operators.Quantity(31m, "days");
+                CqlQuantity g_ = context.Operators.Quantity((decimal?)31m, "days");
                 CqlDateTime h_ = context.Operators.Subtract(f_, g_);
                 CqlDateTime j_ = context.Operators.End(e_);
-                CqlInterval<CqlDateTime> k_ = context.Operators.Interval(h_, j_, true, true);
+                CqlInterval<CqlDateTime> k_ = context.Operators.Interval(h_, j_, (bool?)true, (bool?)true);
 
                 object l_() {
 
@@ -279,11 +279,11 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 CqlDateTime ab_ = context.Operators.Start(aa_);
                 CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
                 CqlDateTime ae_ = context.Operators.End(ad_);
-                CqlQuantity af_ = context.Operators.Quantity(30m, "days");
+                CqlQuantity af_ = context.Operators.Quantity((decimal?)30m, "days");
                 CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
                 CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
                 CqlDateTime aj_ = context.Operators.End(ai_);
-                CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ag_, aj_, true, true);
+                CqlInterval<CqlDateTime> ak_ = context.Operators.Interval(ag_, aj_, (bool?)true, (bool?)true);
                 bool? al_ = context.Operators.In<CqlDateTime>(ab_, ak_, "day");
                 CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
                 CqlDateTime ao_ = context.Operators.End(an_);
@@ -361,7 +361,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 CqlInterval<CqlDateTime> az_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
                 CqlDateTime ba_ = context.Operators.End(az_);
                 CqlDateTime bc_ = context.Operators.Add(ba_, af_);
-                CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ax_, bc_, true, true);
+                CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ax_, bc_, (bool?)true, (bool?)true);
                 bool? be_ = context.Operators.In<CqlDateTime>(au_, bd_, "day");
                 CqlInterval<CqlDateTime> bg_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, w_);
                 CqlDateTime bh_ = context.Operators.End(bg_);
@@ -689,11 +689,11 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                             Period y_ = RadiationManagementEncounter?.Period;
                             CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                             CqlDateTime aa_ = context.Operators.Start(z_);
-                            CqlQuantity ab_ = context.Operators.Quantity(6m, "days");
+                            CqlQuantity ab_ = context.Operators.Quantity((decimal?)6m, "days");
                             CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
                             CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                             CqlDateTime af_ = context.Operators.Start(ae_);
-                            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ac_, af_, true, true);
+                            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ac_, af_, (bool?)true, (bool?)true);
                             bool? ah_ = context.Operators.In<CqlDateTime>(x_, ag_, "day");
                             CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
                             CqlDateTime ak_ = context.Operators.Start(aj_);

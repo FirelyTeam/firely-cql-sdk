@@ -251,7 +251,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(5, 11, true, true);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)5, (int?)11, (bool?)true, (bool?)true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             return j_;
         });
@@ -268,7 +268,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(12, 20, true, false);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)12, (int?)20, (bool?)true, (bool?)false);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             return j_;
         });

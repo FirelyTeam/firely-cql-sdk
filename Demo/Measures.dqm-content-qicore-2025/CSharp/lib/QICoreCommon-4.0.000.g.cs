@@ -960,7 +960,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlInterval<CqlDateTime> a_() {
             if (choice is CqlDateTime)
             {
-                CqlInterval<CqlDateTime> b_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, true, true);
+                CqlInterval<CqlDateTime> b_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, (bool?)true, (bool?)true);
                 return b_;
             }
             else if (choice is CqlInterval<CqlDateTime>)
@@ -978,9 +978,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 string j_ = i_?.Value;
                 CqlDate k_ = context.Operators.ConvertStringToDate(j_);
                 CqlDate l_ = context.Operators.Add(k_, choice as CqlQuantity);
-                CqlQuantity m_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity m_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate n_ = context.Operators.Add(l_, m_);
-                CqlInterval<CqlDate> o_ = context.Operators.Interval(g_, n_, true, false);
+                CqlInterval<CqlDate> o_ = context.Operators.Interval(g_, n_, (bool?)true, (bool?)false);
                 CqlDate p_ = o_?.low;
                 CqlDateTime q_ = context.Operators.ConvertDateToDateTime(p_);
                 Date s_ = c_?.BirthDateElement;
@@ -992,7 +992,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate z_ = context.Operators.ConvertStringToDate(y_);
                 CqlDate aa_ = context.Operators.Add(z_, choice as CqlQuantity);
                 CqlDate ac_ = context.Operators.Add(aa_, m_);
-                CqlInterval<CqlDate> ad_ = context.Operators.Interval(v_, ac_, true, false);
+                CqlInterval<CqlDate> ad_ = context.Operators.Interval(v_, ac_, (bool?)true, (bool?)false);
                 CqlDate ae_ = ad_?.high;
                 CqlDateTime af_ = context.Operators.ConvertDateToDateTime(ae_);
                 Date ah_ = c_?.BirthDateElement;
@@ -1004,7 +1004,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate ao_ = context.Operators.ConvertStringToDate(an_);
                 CqlDate ap_ = context.Operators.Add(ao_, choice as CqlQuantity);
                 CqlDate ar_ = context.Operators.Add(ap_, m_);
-                CqlInterval<CqlDate> as_ = context.Operators.Interval(ak_, ar_, true, false);
+                CqlInterval<CqlDate> as_ = context.Operators.Interval(ak_, ar_, (bool?)true, (bool?)false);
                 bool? at_ = as_?.lowClosed;
                 Date av_ = c_?.BirthDateElement;
                 string aw_ = av_?.Value;
@@ -1015,7 +1015,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate bc_ = context.Operators.ConvertStringToDate(bb_);
                 CqlDate bd_ = context.Operators.Add(bc_, choice as CqlQuantity);
                 CqlDate bf_ = context.Operators.Add(bd_, m_);
-                CqlInterval<CqlDate> bg_ = context.Operators.Interval(ay_, bf_, true, false);
+                CqlInterval<CqlDate> bg_ = context.Operators.Interval(ay_, bf_, (bool?)true, (bool?)false);
                 bool? bh_ = bg_?.highClosed;
                 CqlInterval<CqlDateTime> bi_ = context.Operators.Interval(q_, af_, at_, bh_);
                 return bi_;
@@ -1033,9 +1033,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate bs_ = context.Operators.ConvertStringToDate(br_);
                 object bt_ = context.Operators.LateBoundProperty<object>(choice, "high");
                 CqlDate bu_ = context.Operators.Add(bs_, bt_ as CqlQuantity);
-                CqlQuantity bv_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity bv_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate bw_ = context.Operators.Add(bu_, bv_);
-                CqlInterval<CqlDate> bx_ = context.Operators.Interval(bo_, bw_, true, false);
+                CqlInterval<CqlDate> bx_ = context.Operators.Interval(bo_, bw_, (bool?)true, (bool?)false);
                 CqlDate by_ = bx_?.low;
                 CqlDateTime bz_ = context.Operators.ConvertDateToDateTime(by_);
                 Date cb_ = bj_?.BirthDateElement;
@@ -1047,7 +1047,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate cj_ = context.Operators.ConvertStringToDate(ci_);
                 CqlDate cl_ = context.Operators.Add(cj_, bt_ as CqlQuantity);
                 CqlDate cn_ = context.Operators.Add(cl_, bv_);
-                CqlInterval<CqlDate> co_ = context.Operators.Interval(cf_, cn_, true, false);
+                CqlInterval<CqlDate> co_ = context.Operators.Interval(cf_, cn_, (bool?)true, (bool?)false);
                 CqlDate cp_ = co_?.high;
                 CqlDateTime cq_ = context.Operators.ConvertDateToDateTime(cp_);
                 Date cs_ = bj_?.BirthDateElement;
@@ -1059,7 +1059,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate da_ = context.Operators.ConvertStringToDate(cz_);
                 CqlDate dc_ = context.Operators.Add(da_, bt_ as CqlQuantity);
                 CqlDate de_ = context.Operators.Add(dc_, bv_);
-                CqlInterval<CqlDate> df_ = context.Operators.Interval(cw_, de_, true, false);
+                CqlInterval<CqlDate> df_ = context.Operators.Interval(cw_, de_, (bool?)true, (bool?)false);
                 bool? dg_ = df_?.lowClosed;
                 Date di_ = bj_?.BirthDateElement;
                 string dj_ = di_?.Value;
@@ -1070,7 +1070,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate dq_ = context.Operators.ConvertStringToDate(dp_);
                 CqlDate ds_ = context.Operators.Add(dq_, bt_ as CqlQuantity);
                 CqlDate du_ = context.Operators.Add(ds_, bv_);
-                CqlInterval<CqlDate> dv_ = context.Operators.Interval(dm_, du_, true, false);
+                CqlInterval<CqlDate> dv_ = context.Operators.Interval(dm_, du_, (bool?)true, (bool?)false);
                 bool? dw_ = dv_?.highClosed;
                 CqlInterval<CqlDateTime> dx_ = context.Operators.Interval(bz_, cq_, dg_, dw_);
                 return dx_;
@@ -1099,7 +1099,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlInterval<CqlDateTime> a_() {
             if (choice is CqlDateTime)
             {
-                CqlInterval<CqlDateTime> b_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, true, true);
+                CqlInterval<CqlDateTime> b_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, (bool?)true, (bool?)true);
                 return b_;
             }
             else if (choice is CqlInterval<CqlDateTime>)
@@ -1117,9 +1117,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 string j_ = i_?.Value;
                 CqlDate k_ = context.Operators.ConvertStringToDate(j_);
                 CqlDate l_ = context.Operators.Add(k_, choice as CqlQuantity);
-                CqlQuantity m_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity m_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate n_ = context.Operators.Add(l_, m_);
-                CqlInterval<CqlDate> o_ = context.Operators.Interval(g_, n_, true, false);
+                CqlInterval<CqlDate> o_ = context.Operators.Interval(g_, n_, (bool?)true, (bool?)false);
                 CqlDate p_ = o_?.low;
                 CqlDateTime q_ = context.Operators.ConvertDateToDateTime(p_);
                 Date s_ = c_?.BirthDateElement;
@@ -1131,7 +1131,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate z_ = context.Operators.ConvertStringToDate(y_);
                 CqlDate aa_ = context.Operators.Add(z_, choice as CqlQuantity);
                 CqlDate ac_ = context.Operators.Add(aa_, m_);
-                CqlInterval<CqlDate> ad_ = context.Operators.Interval(v_, ac_, true, false);
+                CqlInterval<CqlDate> ad_ = context.Operators.Interval(v_, ac_, (bool?)true, (bool?)false);
                 CqlDate ae_ = ad_?.high;
                 CqlDateTime af_ = context.Operators.ConvertDateToDateTime(ae_);
                 Date ah_ = c_?.BirthDateElement;
@@ -1143,7 +1143,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate ao_ = context.Operators.ConvertStringToDate(an_);
                 CqlDate ap_ = context.Operators.Add(ao_, choice as CqlQuantity);
                 CqlDate ar_ = context.Operators.Add(ap_, m_);
-                CqlInterval<CqlDate> as_ = context.Operators.Interval(ak_, ar_, true, false);
+                CqlInterval<CqlDate> as_ = context.Operators.Interval(ak_, ar_, (bool?)true, (bool?)false);
                 bool? at_ = as_?.lowClosed;
                 Date av_ = c_?.BirthDateElement;
                 string aw_ = av_?.Value;
@@ -1154,7 +1154,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate bc_ = context.Operators.ConvertStringToDate(bb_);
                 CqlDate bd_ = context.Operators.Add(bc_, choice as CqlQuantity);
                 CqlDate bf_ = context.Operators.Add(bd_, m_);
-                CqlInterval<CqlDate> bg_ = context.Operators.Interval(ay_, bf_, true, false);
+                CqlInterval<CqlDate> bg_ = context.Operators.Interval(ay_, bf_, (bool?)true, (bool?)false);
                 bool? bh_ = bg_?.highClosed;
                 CqlInterval<CqlDateTime> bi_ = context.Operators.Interval(q_, af_, at_, bh_);
                 return bi_;
@@ -1172,9 +1172,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate bs_ = context.Operators.ConvertStringToDate(br_);
                 object bt_ = context.Operators.LateBoundProperty<object>(choice, "high");
                 CqlDate bu_ = context.Operators.Add(bs_, bt_ as CqlQuantity);
-                CqlQuantity bv_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity bv_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate bw_ = context.Operators.Add(bu_, bv_);
-                CqlInterval<CqlDate> bx_ = context.Operators.Interval(bo_, bw_, true, false);
+                CqlInterval<CqlDate> bx_ = context.Operators.Interval(bo_, bw_, (bool?)true, (bool?)false);
                 CqlDate by_ = bx_?.low;
                 CqlDateTime bz_ = context.Operators.ConvertDateToDateTime(by_);
                 Date cb_ = bj_?.BirthDateElement;
@@ -1186,7 +1186,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate cj_ = context.Operators.ConvertStringToDate(ci_);
                 CqlDate cl_ = context.Operators.Add(cj_, bt_ as CqlQuantity);
                 CqlDate cn_ = context.Operators.Add(cl_, bv_);
-                CqlInterval<CqlDate> co_ = context.Operators.Interval(cf_, cn_, true, false);
+                CqlInterval<CqlDate> co_ = context.Operators.Interval(cf_, cn_, (bool?)true, (bool?)false);
                 CqlDate cp_ = co_?.high;
                 CqlDateTime cq_ = context.Operators.ConvertDateToDateTime(cp_);
                 Date cs_ = bj_?.BirthDateElement;
@@ -1198,7 +1198,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate da_ = context.Operators.ConvertStringToDate(cz_);
                 CqlDate dc_ = context.Operators.Add(da_, bt_ as CqlQuantity);
                 CqlDate de_ = context.Operators.Add(dc_, bv_);
-                CqlInterval<CqlDate> df_ = context.Operators.Interval(cw_, de_, true, false);
+                CqlInterval<CqlDate> df_ = context.Operators.Interval(cw_, de_, (bool?)true, (bool?)false);
                 bool? dg_ = df_?.lowClosed;
                 Date di_ = bj_?.BirthDateElement;
                 string dj_ = di_?.Value;
@@ -1209,7 +1209,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate dq_ = context.Operators.ConvertStringToDate(dp_);
                 CqlDate ds_ = context.Operators.Add(dq_, bt_ as CqlQuantity);
                 CqlDate du_ = context.Operators.Add(ds_, bv_);
-                CqlInterval<CqlDate> dv_ = context.Operators.Interval(dm_, du_, true, false);
+                CqlInterval<CqlDate> dv_ = context.Operators.Interval(dm_, du_, (bool?)true, (bool?)false);
                 bool? dw_ = dv_?.highClosed;
                 CqlInterval<CqlDateTime> dx_ = context.Operators.Interval(bz_, cq_, dg_, dw_);
                 return dx_;
@@ -1274,7 +1274,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object r_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
                 object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                 object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, true, true);
+                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, (bool?)true, (bool?)true);
                 return v_;
             }
             else if (c_())
@@ -1291,9 +1291,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate ag_ = context.Operators.ConvertStringToDate(af_);
                 object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                 CqlDate aj_ = context.Operators.Add(ag_, ai_ as CqlQuantity);
-                CqlQuantity ak_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity ak_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate al_ = context.Operators.Add(aj_, ak_);
-                CqlInterval<CqlDate> am_ = context.Operators.Interval(ac_, al_, true, false);
+                CqlInterval<CqlDate> am_ = context.Operators.Interval(ac_, al_, (bool?)true, (bool?)false);
                 CqlDate an_ = am_?.low;
                 CqlDateTime ao_ = context.Operators.ConvertDateToDateTime(an_);
                 Date aq_ = w_?.BirthDateElement;
@@ -1307,7 +1307,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                 CqlDate bc_ = context.Operators.Add(az_, bb_ as CqlQuantity);
                 CqlDate be_ = context.Operators.Add(bc_, ak_);
-                CqlInterval<CqlDate> bf_ = context.Operators.Interval(av_, be_, true, false);
+                CqlInterval<CqlDate> bf_ = context.Operators.Interval(av_, be_, (bool?)true, (bool?)false);
                 CqlDate bg_ = bf_?.high;
                 CqlDateTime bh_ = context.Operators.ConvertDateToDateTime(bg_);
                 Date bj_ = w_?.BirthDateElement;
@@ -1321,7 +1321,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                 CqlDate bv_ = context.Operators.Add(bs_, bu_ as CqlQuantity);
                 CqlDate bx_ = context.Operators.Add(bv_, ak_);
-                CqlInterval<CqlDate> by_ = context.Operators.Interval(bo_, bx_, true, false);
+                CqlInterval<CqlDate> by_ = context.Operators.Interval(bo_, bx_, (bool?)true, (bool?)false);
                 bool? bz_ = by_?.lowClosed;
                 Date cb_ = w_?.BirthDateElement;
                 string cc_ = cb_?.Value;
@@ -1334,7 +1334,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                 CqlDate cn_ = context.Operators.Add(ck_, cm_ as CqlQuantity);
                 CqlDate cp_ = context.Operators.Add(cn_, ak_);
-                CqlInterval<CqlDate> cq_ = context.Operators.Interval(cg_, cp_, true, false);
+                CqlInterval<CqlDate> cq_ = context.Operators.Interval(cg_, cp_, (bool?)true, (bool?)false);
                 bool? cr_ = cq_?.highClosed;
                 CqlInterval<CqlDateTime> cs_ = context.Operators.Interval(ao_, bh_, bz_, cr_);
                 return cs_;
@@ -1355,9 +1355,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object dg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
                 object dh_ = context.Operators.LateBoundProperty<object>(dg_, "high");
                 CqlDate di_ = context.Operators.Add(de_, dh_ as CqlQuantity);
-                CqlQuantity dj_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity dj_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate dk_ = context.Operators.Add(di_, dj_);
-                CqlInterval<CqlDate> dl_ = context.Operators.Interval(da_, dk_, true, false);
+                CqlInterval<CqlDate> dl_ = context.Operators.Interval(da_, dk_, (bool?)true, (bool?)false);
                 CqlDate dm_ = dl_?.low;
                 CqlDateTime dn_ = context.Operators.ConvertDateToDateTime(dm_);
                 Date dp_ = ct_?.BirthDateElement;
@@ -1373,7 +1373,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object ec_ = context.Operators.LateBoundProperty<object>(eb_, "high");
                 CqlDate ed_ = context.Operators.Add(dz_, ec_ as CqlQuantity);
                 CqlDate ef_ = context.Operators.Add(ed_, dj_);
-                CqlInterval<CqlDate> eg_ = context.Operators.Interval(dv_, ef_, true, false);
+                CqlInterval<CqlDate> eg_ = context.Operators.Interval(dv_, ef_, (bool?)true, (bool?)false);
                 CqlDate eh_ = eg_?.high;
                 CqlDateTime ei_ = context.Operators.ConvertDateToDateTime(eh_);
                 Date ek_ = ct_?.BirthDateElement;
@@ -1389,7 +1389,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object ex_ = context.Operators.LateBoundProperty<object>(ew_, "high");
                 CqlDate ey_ = context.Operators.Add(eu_, ex_ as CqlQuantity);
                 CqlDate fa_ = context.Operators.Add(ey_, dj_);
-                CqlInterval<CqlDate> fb_ = context.Operators.Interval(eq_, fa_, true, false);
+                CqlInterval<CqlDate> fb_ = context.Operators.Interval(eq_, fa_, (bool?)true, (bool?)false);
                 bool? fc_ = fb_?.lowClosed;
                 Date fe_ = ct_?.BirthDateElement;
                 string ff_ = fe_?.Value;
@@ -1404,7 +1404,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object fr_ = context.Operators.LateBoundProperty<object>(fq_, "high");
                 CqlDate fs_ = context.Operators.Add(fo_, fr_ as CqlQuantity);
                 CqlDate fu_ = context.Operators.Add(fs_, dj_);
-                CqlInterval<CqlDate> fv_ = context.Operators.Interval(fk_, fu_, true, false);
+                CqlInterval<CqlDate> fv_ = context.Operators.Interval(fk_, fu_, (bool?)true, (bool?)false);
                 bool? fw_ = fv_?.highClosed;
                 CqlInterval<CqlDateTime> fx_ = context.Operators.Interval(dn_, ei_, fc_, fw_);
                 return fx_;
@@ -1416,7 +1416,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object ga_ = context.Operators.LateBoundProperty<object>(fz_, "low");
                 object gc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fy_);
                 object gd_ = context.Operators.LateBoundProperty<object>(gc_, "high");
-                CqlInterval<CqlDateTime> ge_ = context.Operators.Interval(ga_ as CqlDateTime, gd_ as CqlDateTime, true, false);
+                CqlInterval<CqlDateTime> ge_ = context.Operators.Interval(ga_ as CqlDateTime, gd_ as CqlDateTime, (bool?)true, (bool?)false);
                 return ge_;
             }
             else
@@ -1473,7 +1473,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object r_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
                 object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                 object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, true, true);
+                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, (bool?)true, (bool?)true);
                 return v_;
             }
             else if (c_())
@@ -1490,9 +1490,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDate ag_ = context.Operators.ConvertStringToDate(af_);
                 object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                 CqlDate aj_ = context.Operators.Add(ag_, ai_ as CqlQuantity);
-                CqlQuantity ak_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity ak_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate al_ = context.Operators.Add(aj_, ak_);
-                CqlInterval<CqlDate> am_ = context.Operators.Interval(ac_, al_, true, false);
+                CqlInterval<CqlDate> am_ = context.Operators.Interval(ac_, al_, (bool?)true, (bool?)false);
                 CqlDate an_ = am_?.low;
                 CqlDateTime ao_ = context.Operators.ConvertDateToDateTime(an_);
                 Date aq_ = w_?.BirthDateElement;
@@ -1506,7 +1506,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                 CqlDate bc_ = context.Operators.Add(az_, bb_ as CqlQuantity);
                 CqlDate be_ = context.Operators.Add(bc_, ak_);
-                CqlInterval<CqlDate> bf_ = context.Operators.Interval(av_, be_, true, false);
+                CqlInterval<CqlDate> bf_ = context.Operators.Interval(av_, be_, (bool?)true, (bool?)false);
                 CqlDate bg_ = bf_?.high;
                 CqlDateTime bh_ = context.Operators.ConvertDateToDateTime(bg_);
                 Date bj_ = w_?.BirthDateElement;
@@ -1520,7 +1520,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                 CqlDate bv_ = context.Operators.Add(bs_, bu_ as CqlQuantity);
                 CqlDate bx_ = context.Operators.Add(bv_, ak_);
-                CqlInterval<CqlDate> by_ = context.Operators.Interval(bo_, bx_, true, false);
+                CqlInterval<CqlDate> by_ = context.Operators.Interval(bo_, bx_, (bool?)true, (bool?)false);
                 bool? bz_ = by_?.lowClosed;
                 Date cb_ = w_?.BirthDateElement;
                 string cc_ = cb_?.Value;
@@ -1533,7 +1533,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                 CqlDate cn_ = context.Operators.Add(ck_, cm_ as CqlQuantity);
                 CqlDate cp_ = context.Operators.Add(cn_, ak_);
-                CqlInterval<CqlDate> cq_ = context.Operators.Interval(cg_, cp_, true, false);
+                CqlInterval<CqlDate> cq_ = context.Operators.Interval(cg_, cp_, (bool?)true, (bool?)false);
                 bool? cr_ = cq_?.highClosed;
                 CqlInterval<CqlDateTime> cs_ = context.Operators.Interval(ao_, bh_, bz_, cr_);
                 return cs_;
@@ -1554,9 +1554,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object dg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
                 object dh_ = context.Operators.LateBoundProperty<object>(dg_, "high");
                 CqlDate di_ = context.Operators.Add(de_, dh_ as CqlQuantity);
-                CqlQuantity dj_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity dj_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate dk_ = context.Operators.Add(di_, dj_);
-                CqlInterval<CqlDate> dl_ = context.Operators.Interval(da_, dk_, true, false);
+                CqlInterval<CqlDate> dl_ = context.Operators.Interval(da_, dk_, (bool?)true, (bool?)false);
                 CqlDate dm_ = dl_?.low;
                 CqlDateTime dn_ = context.Operators.ConvertDateToDateTime(dm_);
                 Date dp_ = ct_?.BirthDateElement;
@@ -1572,7 +1572,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object ec_ = context.Operators.LateBoundProperty<object>(eb_, "high");
                 CqlDate ed_ = context.Operators.Add(dz_, ec_ as CqlQuantity);
                 CqlDate ef_ = context.Operators.Add(ed_, dj_);
-                CqlInterval<CqlDate> eg_ = context.Operators.Interval(dv_, ef_, true, false);
+                CqlInterval<CqlDate> eg_ = context.Operators.Interval(dv_, ef_, (bool?)true, (bool?)false);
                 CqlDate eh_ = eg_?.high;
                 CqlDateTime ei_ = context.Operators.ConvertDateToDateTime(eh_);
                 Date ek_ = ct_?.BirthDateElement;
@@ -1588,7 +1588,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object ex_ = context.Operators.LateBoundProperty<object>(ew_, "high");
                 CqlDate ey_ = context.Operators.Add(eu_, ex_ as CqlQuantity);
                 CqlDate fa_ = context.Operators.Add(ey_, dj_);
-                CqlInterval<CqlDate> fb_ = context.Operators.Interval(eq_, fa_, true, false);
+                CqlInterval<CqlDate> fb_ = context.Operators.Interval(eq_, fa_, (bool?)true, (bool?)false);
                 bool? fc_ = fb_?.lowClosed;
                 Date fe_ = ct_?.BirthDateElement;
                 string ff_ = fe_?.Value;
@@ -1603,7 +1603,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object fr_ = context.Operators.LateBoundProperty<object>(fq_, "high");
                 CqlDate fs_ = context.Operators.Add(fo_, fr_ as CqlQuantity);
                 CqlDate fu_ = context.Operators.Add(fs_, dj_);
-                CqlInterval<CqlDate> fv_ = context.Operators.Interval(fk_, fu_, true, false);
+                CqlInterval<CqlDate> fv_ = context.Operators.Interval(fk_, fu_, (bool?)true, (bool?)false);
                 bool? fw_ = fv_?.highClosed;
                 CqlInterval<CqlDateTime> fx_ = context.Operators.Interval(dn_, ei_, fc_, fw_);
                 return fx_;
@@ -1615,7 +1615,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 object ga_ = context.Operators.LateBoundProperty<object>(fz_, "low");
                 object gc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fy_);
                 object gd_ = context.Operators.LateBoundProperty<object>(gc_, "high");
-                CqlInterval<CqlDateTime> ge_ = context.Operators.Interval(ga_ as CqlDateTime, gd_ as CqlDateTime, true, false);
+                CqlInterval<CqlDateTime> ge_ = context.Operators.Interval(ga_ as CqlDateTime, gd_ as CqlDateTime, (bool?)true, (bool?)false);
                 return ge_;
             }
             else
@@ -1664,7 +1664,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDateTime w_ = context.Operators.Start(v_);
                 CqlInterval<CqlDateTime> x_ = this.ToAbatementInterval(context, condition);
                 CqlDateTime y_ = context.Operators.End(x_);
-                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, true, true);
+                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, (bool?)true, (bool?)true);
                 return z_;
             }
             else
@@ -1684,7 +1684,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                             object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
                             CqlInterval<CqlDateTime> ak_ = this.ToInterval(context, aj_);
                             CqlDateTime al_ = context.Operators.Start(ak_);
-                            CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, abatementDate, true, false);
+                            CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, abatementDate, (bool?)true, (bool?)false);
                             return am_;
                         }
                         else
@@ -1693,7 +1693,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                             object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
                             CqlInterval<CqlDateTime> ap_ = this.ToInterval(context, ao_);
                             CqlDateTime aq_ = context.Operators.Start(ap_);
-                            CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(aq_, abatementDate, true, true);
+                            CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(aq_, abatementDate, (bool?)true, (bool?)true);
                             return ar_;
                         };
                     }
@@ -1747,7 +1747,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 CqlDateTime w_ = context.Operators.Start(v_);
                 CqlInterval<CqlDateTime> x_ = this.abatementInterval(context, condition);
                 CqlDateTime y_ = context.Operators.End(x_);
-                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, true, true);
+                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, (bool?)true, (bool?)true);
                 return z_;
             }
             else
@@ -1767,7 +1767,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                             object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
                             CqlInterval<CqlDateTime> ak_ = this.toInterval(context, aj_);
                             CqlDateTime al_ = context.Operators.Start(ak_);
-                            CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, abatementDate, true, false);
+                            CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, abatementDate, (bool?)true, (bool?)false);
                             return am_;
                         }
                         else
@@ -1776,7 +1776,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                             object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
                             CqlInterval<CqlDateTime> ap_ = this.toInterval(context, ao_);
                             CqlDateTime aq_ = context.Operators.Start(ap_);
-                            CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(aq_, abatementDate, true, true);
+                            CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(aq_, abatementDate, (bool?)true, (bool?)true);
                             return ar_;
                         };
                     }
@@ -2100,7 +2100,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlDateTime a_ = context.Operators.Start(Period);
         CqlDateTime b_ = context.Operators.End(Period);
         int? c_ = context.Operators.DurationBetween(a_, b_, "day");
-        CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
+        CqlInterval<int?> d_ = context.Operators.Interval((int?)1, c_, (bool?)true, (bool?)true);
         CqlInterval<int?>[] e_ = [
             d_,
         ];
@@ -2124,7 +2124,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         CqlDateTime a_ = context.Operators.Start(Period);
         CqlDateTime b_ = context.Operators.End(Period);
         int? c_ = context.Operators.DurationBetween(a_, b_, "day");
-        CqlInterval<int?> d_ = context.Operators.Interval(1, c_, true, true);
+        CqlInterval<int?> d_ = context.Operators.Interval((int?)1, c_, (bool?)true, (bool?)true);
         CqlInterval<int?>[] e_ = [
             d_,
         ];
@@ -2150,8 +2150,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
         (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? b_(int? DayIndex) {
             CqlDateTime e_ = context.Operators.Start(Period);
-            CqlQuantity f_ = context.Operators.Quantity(24m, "hours");
-            int? g_ = context.Operators.Subtract(DayIndex, 1);
+            CqlQuantity f_ = context.Operators.Quantity((decimal?)24m, "hours");
+            int? g_ = context.Operators.Subtract(DayIndex, (int?)1);
             CqlQuantity h_ = context.Operators.ConvertIntegerToQuantity(g_);
             CqlQuantity i_ = context.Operators.Multiply(f_, h_);
             CqlDateTime j_ = context.Operators.Add(e_, i_);
@@ -2160,8 +2160,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
                 bool n_() {
                     CqlDateTime o_ = context.Operators.Start(Period);
-                    CqlQuantity p_ = context.Operators.Quantity(24m, "hours");
-                    int? q_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity p_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    int? q_ = context.Operators.Subtract(DayIndex, (int?)1);
                     CqlQuantity r_ = context.Operators.ConvertIntegerToQuantity(q_);
                     CqlQuantity s_ = context.Operators.Multiply(p_, r_);
                     CqlDateTime t_ = context.Operators.Add(o_, s_);
@@ -2174,8 +2174,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 if (n_())
                 {
                     CqlDateTime x_ = context.Operators.Start(Period);
-                    CqlQuantity y_ = context.Operators.Quantity(24m, "hours");
-                    int? z_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity y_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    int? z_ = context.Operators.Subtract(DayIndex, (int?)1);
                     CqlQuantity aa_ = context.Operators.ConvertIntegerToQuantity(z_);
                     CqlQuantity ab_ = context.Operators.Multiply(y_, aa_);
                     CqlDateTime ac_ = context.Operators.Add(x_, ab_);
@@ -2184,7 +2184,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 else
                 {
                     CqlDateTime ad_ = context.Operators.Start(Period);
-                    CqlQuantity ae_ = context.Operators.Quantity(24m, "hours");
+                    CqlQuantity ae_ = context.Operators.Quantity((decimal?)24m, "hours");
                     CqlQuantity af_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
                     CqlQuantity ag_ = context.Operators.Multiply(ae_, af_);
                     CqlDateTime ah_ = context.Operators.Add(ad_, ag_);
@@ -2192,7 +2192,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 };
             }
 
-            CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_(), true, false);
+            CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_(), (bool?)true, (bool?)false);
             (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? m_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, l_);
             return m_;
         }
@@ -2211,8 +2211,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
         (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? b_(int? DayIndex) {
             CqlDateTime e_ = context.Operators.Start(Period);
-            CqlQuantity f_ = context.Operators.Quantity(24m, "hours");
-            int? g_ = context.Operators.Subtract(DayIndex, 1);
+            CqlQuantity f_ = context.Operators.Quantity((decimal?)24m, "hours");
+            int? g_ = context.Operators.Subtract(DayIndex, (int?)1);
             CqlQuantity h_ = context.Operators.ConvertIntegerToQuantity(g_);
             CqlQuantity i_ = context.Operators.Multiply(f_, h_);
             CqlDateTime j_ = context.Operators.Add(e_, i_);
@@ -2221,8 +2221,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
                 bool n_() {
                     CqlDateTime o_ = context.Operators.Start(Period);
-                    CqlQuantity p_ = context.Operators.Quantity(24m, "hours");
-                    int? q_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity p_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    int? q_ = context.Operators.Subtract(DayIndex, (int?)1);
                     CqlQuantity r_ = context.Operators.ConvertIntegerToQuantity(q_);
                     CqlQuantity s_ = context.Operators.Multiply(p_, r_);
                     CqlDateTime t_ = context.Operators.Add(o_, s_);
@@ -2235,8 +2235,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 if (n_())
                 {
                     CqlDateTime x_ = context.Operators.Start(Period);
-                    CqlQuantity y_ = context.Operators.Quantity(24m, "hours");
-                    int? z_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity y_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    int? z_ = context.Operators.Subtract(DayIndex, (int?)1);
                     CqlQuantity aa_ = context.Operators.ConvertIntegerToQuantity(z_);
                     CqlQuantity ab_ = context.Operators.Multiply(y_, aa_);
                     CqlDateTime ac_ = context.Operators.Add(x_, ab_);
@@ -2245,7 +2245,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 else
                 {
                     CqlDateTime ad_ = context.Operators.Start(Period);
-                    CqlQuantity ae_ = context.Operators.Quantity(24m, "hours");
+                    CqlQuantity ae_ = context.Operators.Quantity((decimal?)24m, "hours");
                     CqlQuantity af_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
                     CqlQuantity ag_ = context.Operators.Multiply(ae_, af_);
                     CqlDateTime ah_ = context.Operators.Add(ad_, ag_);
@@ -2253,7 +2253,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 };
             }
 
-            CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_(), true, false);
+            CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_(), (bool?)true, (bool?)false);
             (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? m_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, l_);
             return m_;
         }

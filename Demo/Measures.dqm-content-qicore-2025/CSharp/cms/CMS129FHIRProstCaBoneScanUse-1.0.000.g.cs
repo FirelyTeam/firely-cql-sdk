@@ -107,9 +107,9 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8140283047952446050L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS129FHIRProstCaBoneScanUse-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -569,7 +569,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                             object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
                             CqlInterval<CqlDateTime> ao_ = QICoreCommon_4_0_000.Instance.toInterval(context, an_);
                             CqlDateTime ap_ = context.Operators.Start(ao_);
-                            CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(al_, ap_, true, true);
+                            CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(al_, ap_, (bool?)true, (bool?)true);
                             return aq_;
                         };
                     }
@@ -616,7 +616,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             bool? i_(Observation LastPSATest) {
                 DataType av_ = LastPSATest?.Value;
                 object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                CqlQuantity ax_ = context.Operators.Quantity(10m, "ng/mL");
+                CqlQuantity ax_ = context.Operators.Quantity((decimal?)10m, "ng/mL");
                 bool? ay_ = context.Operators.Less(aw_ as CqlQuantity, ax_);
                 return ay_;
             }

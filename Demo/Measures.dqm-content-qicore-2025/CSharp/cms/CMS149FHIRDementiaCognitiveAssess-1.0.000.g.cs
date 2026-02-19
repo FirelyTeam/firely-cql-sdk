@@ -85,9 +85,9 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(6329736721056217217L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS149FHIRDementiaCognitiveAssess-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -296,11 +296,11 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                     Period s_ = EncounterDementia?.Period;
                     CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, s_);
                     CqlDateTime u_ = context.Operators.End(t_);
-                    CqlQuantity v_ = context.Operators.Quantity(12m, "months");
+                    CqlQuantity v_ = context.Operators.Quantity((decimal?)12m, "months");
                     CqlDateTime w_ = context.Operators.Subtract(u_, v_);
                     CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, s_);
                     CqlDateTime z_ = context.Operators.End(y_);
-                    CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(w_, z_, true, true);
+                    CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(w_, z_, (bool?)true, (bool?)true);
                     bool? ab_ = context.Operators.In<CqlDateTime>(r_, aa_, "day");
                     CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, s_);
                     CqlDateTime ae_ = context.Operators.End(ad_);

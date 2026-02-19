@@ -109,9 +109,9 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-            int? d_ = context.Operators.Subtract(c_, 2);
-            decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
-            CqlDateTime f_ = context.Operators.DateTime(d_, 10, 1, 0, 0, 0, 0, e_);
+            int? d_ = context.Operators.Subtract(c_, (int?)2);
+            decimal? e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
+            CqlDateTime f_ = context.Operators.DateTime(d_, (int?)10, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
             return f_;
         });
 
@@ -122,7 +122,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             CqlDateTime a_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period(context);
             CqlInterval<CqlDateTime> b_ = this.Measurement_Period(context);
             CqlDateTime c_ = context.Operators.End(b_);
-            CqlInterval<CqlDateTime> d_ = context.Operators.Interval(a_, c_, true, true);
+            CqlInterval<CqlDateTime> d_ = context.Operators.Interval(a_, c_, (bool?)true, (bool?)true);
             return d_;
         });
 
@@ -156,21 +156,21 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             CqlDate f_ = context.Operators.DateFrom(e_);
             CqlDateTime h_ = context.Operators.End(b_);
             CqlDate i_ = context.Operators.DateFrom(h_);
-            CqlQuantity j_ = context.Operators.Quantity(2m, "years");
+            CqlQuantity j_ = context.Operators.Quantity((decimal?)2m, "years");
             CqlDate k_ = context.Operators.Subtract(i_, j_);
-            CqlInterval<CqlDate> l_ = context.Operators.Interval(f_, k_, true, true);
-            bool? m_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, d_, l_, 0);
+            CqlInterval<CqlDate> l_ = context.Operators.Interval(f_, k_, (bool?)true, (bool?)true);
+            bool? m_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, d_, l_, (int?)0);
             CqlDateTime p_ = context.Operators.End(b_);
             CqlDate q_ = context.Operators.DateFrom(p_);
             CqlDateTime s_ = context.Operators.Start(b_);
             CqlDate t_ = context.Operators.DateFrom(s_);
-            CqlQuantity u_ = context.Operators.Quantity(1m, "year");
+            CqlQuantity u_ = context.Operators.Quantity((decimal?)1m, "year");
             CqlDate v_ = context.Operators.Subtract(t_, u_);
             CqlDateTime x_ = context.Operators.End(b_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             CqlDate aa_ = context.Operators.Subtract(y_, u_);
-            CqlInterval<CqlDate> ab_ = context.Operators.Interval(v_, aa_, true, true);
-            bool? ac_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, q_, ab_, 45);
+            CqlInterval<CqlDate> ab_ = context.Operators.Interval(v_, aa_, (bool?)true, (bool?)true);
+            bool? ac_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, q_, ab_, (int?)45);
             bool? ad_ = context.Operators.And(m_, ac_);
             CqlDateTime ag_ = context.Operators.End(b_);
             CqlDate ah_ = context.Operators.DateFrom(ag_);
@@ -178,8 +178,8 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             CqlDate ak_ = context.Operators.DateFrom(aj_);
             CqlDateTime am_ = context.Operators.End(b_);
             CqlDate an_ = context.Operators.DateFrom(am_);
-            CqlInterval<CqlDate> ao_ = context.Operators.Interval(ak_, an_, true, true);
-            bool? ap_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, ah_, ao_, 45);
+            CqlInterval<CqlDate> ao_ = context.Operators.Interval(ak_, an_, (bool?)true, (bool?)true);
+            bool? ap_ = NCQAHealthPlanEnrollment_1_0_0.Instance.Health_Plan_Enrollment_Criteria(context, a_, ah_, ao_, (int?)45);
             bool? aq_ = context.Operators.And(ad_, ap_);
             return aq_;
         });
@@ -196,7 +196,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             CqlDateTime f_ = context.Operators.End(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(52, 74, true, true);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)52, (int?)74, (bool?)true, (bool?)true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             Code<AdministrativeGender> l_ = a_?.GenderElement;
             AdministrativeGender? m_ = l_?.Value;

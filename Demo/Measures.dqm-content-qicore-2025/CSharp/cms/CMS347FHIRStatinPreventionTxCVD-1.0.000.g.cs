@@ -190,9 +190,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-7207067547160678946L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
             object d_ = context.ResolveParameter("CMS347FHIRStatinPreventionTxCVD-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -442,7 +442,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(20, 75, true, true);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)20, (int?)75, (bool?)true, (bool?)true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             return j_;
         });
@@ -457,7 +457,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             bool? c_(Observation LDL190) {
                 DataType e_ = LDL190?.Value;
                 object f_ = FHIRHelpers_4_4_000.Instance.ToValue(context, e_);
-                CqlQuantity g_ = context.Operators.Quantity(190m, "mg/dL");
+                CqlQuantity g_ = context.Operators.Quantity((decimal?)190m, "mg/dL");
                 bool? h_ = context.Operators.GreaterOrEqual(f_ as CqlQuantity, g_);
                 DataType i_ = LDL190?.Effective;
                 object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
@@ -568,7 +568,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(40, 75, true, true);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)40, (int?)75, (bool?)true, (bool?)true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             bool? k_ = this.Has_Diabetes_Diagnosis(context);
             bool? l_ = context.Operators.And(j_, k_);
@@ -613,7 +613,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             bool? h_(Observation AtRiskCVD) {
                 DataType k_ = AtRiskCVD?.Value;
                 object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
-                CqlQuantity m_ = context.Operators.Quantity(20m, "%");
+                CqlQuantity m_ = context.Operators.Quantity((decimal?)20m, "%");
                 bool? n_ = context.Operators.GreaterOrEqual(l_ as CqlQuantity, m_);
                 CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
                 DataType p_ = AtRiskCVD?.Effective;
@@ -651,7 +651,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(40, 75, true, true);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)40, (int?)75, (bool?)true, (bool?)true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             bool? k_ = this.Ten_Year_CVD_Risk_is_High(context);
             bool? l_ = context.Operators.And(j_, k_);

@@ -35,7 +35,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
             if (choice is FhirDateTime)
             {
                 CqlDateTime b_ = FHIRHelpers_4_4_000.Instance.ToDateTime(context, choice as FhirDateTime);
-                CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, true, true);
+                CqlInterval<CqlDateTime> d_ = context.Operators.Interval(b_, b_, (bool?)true, (bool?)true);
                 return d_;
             }
             else if (choice is Period)
@@ -46,7 +46,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
             else if (choice is Instant)
             {
                 CqlDateTime f_ = FHIRHelpers_4_4_000.Instance.ToDateTime(context, choice as Instant);
-                CqlInterval<CqlDateTime> h_ = context.Operators.Interval(f_, f_, true, true);
+                CqlInterval<CqlDateTime> h_ = context.Operators.Interval(f_, f_, (bool?)true, (bool?)true);
                 return h_;
             }
             else if (choice is Age)
@@ -59,9 +59,9 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
                 Date o_ = i_?.BirthDateElement;
                 CqlDate p_ = FHIRHelpers_4_4_000.Instance.ToDate(context, o_);
                 CqlDate r_ = context.Operators.Add(p_, l_);
-                CqlQuantity s_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity s_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate t_ = context.Operators.Add(r_, s_);
-                CqlInterval<CqlDate> u_ = context.Operators.Interval(m_, t_, true, false);
+                CqlInterval<CqlDate> u_ = context.Operators.Interval(m_, t_, (bool?)true, (bool?)false);
                 CqlDate v_ = u_?.low;
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
                 Date y_ = i_?.BirthDateElement;
@@ -71,7 +71,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
                 CqlDate ae_ = FHIRHelpers_4_4_000.Instance.ToDate(context, ad_);
                 CqlDate ag_ = context.Operators.Add(ae_, l_);
                 CqlDate ai_ = context.Operators.Add(ag_, s_);
-                CqlInterval<CqlDate> aj_ = context.Operators.Interval(ab_, ai_, true, false);
+                CqlInterval<CqlDate> aj_ = context.Operators.Interval(ab_, ai_, (bool?)true, (bool?)false);
                 CqlDate ak_ = aj_?.high;
                 CqlDateTime al_ = context.Operators.ConvertDateToDateTime(ak_);
                 Date an_ = i_?.BirthDateElement;
@@ -81,7 +81,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
                 CqlDate at_ = FHIRHelpers_4_4_000.Instance.ToDate(context, as_);
                 CqlDate av_ = context.Operators.Add(at_, l_);
                 CqlDate ax_ = context.Operators.Add(av_, s_);
-                CqlInterval<CqlDate> ay_ = context.Operators.Interval(aq_, ax_, true, false);
+                CqlInterval<CqlDate> ay_ = context.Operators.Interval(aq_, ax_, (bool?)true, (bool?)false);
                 bool? az_ = ay_?.lowClosed;
                 Date bb_ = i_?.BirthDateElement;
                 CqlDate bc_ = FHIRHelpers_4_4_000.Instance.ToDate(context, bb_);
@@ -90,7 +90,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
                 CqlDate bh_ = FHIRHelpers_4_4_000.Instance.ToDate(context, bg_);
                 CqlDate bj_ = context.Operators.Add(bh_, l_);
                 CqlDate bl_ = context.Operators.Add(bj_, s_);
-                CqlInterval<CqlDate> bm_ = context.Operators.Interval(be_, bl_, true, false);
+                CqlInterval<CqlDate> bm_ = context.Operators.Interval(be_, bl_, (bool?)true, (bool?)false);
                 bool? bn_ = bm_?.highClosed;
                 CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(w_, al_, az_, bn_);
                 return bo_;
@@ -108,9 +108,9 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
                 Quantity by_ = (choice as Range)?.High;
                 CqlQuantity bz_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, by_);
                 CqlDate ca_ = context.Operators.Add(bx_, bz_);
-                CqlQuantity cb_ = context.Operators.Quantity(1m, "year");
+                CqlQuantity cb_ = context.Operators.Quantity((decimal?)1m, "year");
                 CqlDate cc_ = context.Operators.Add(ca_, cb_);
-                CqlInterval<CqlDate> cd_ = context.Operators.Interval(bu_, cc_, true, false);
+                CqlInterval<CqlDate> cd_ = context.Operators.Interval(bu_, cc_, (bool?)true, (bool?)false);
                 CqlDate ce_ = cd_?.low;
                 CqlDateTime cf_ = context.Operators.ConvertDateToDateTime(ce_);
                 Date ch_ = bp_?.BirthDateElement;
@@ -122,7 +122,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
                 CqlQuantity cq_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, by_);
                 CqlDate cr_ = context.Operators.Add(co_, cq_);
                 CqlDate ct_ = context.Operators.Add(cr_, cb_);
-                CqlInterval<CqlDate> cu_ = context.Operators.Interval(cl_, ct_, true, false);
+                CqlInterval<CqlDate> cu_ = context.Operators.Interval(cl_, ct_, (bool?)true, (bool?)false);
                 CqlDate cv_ = cu_?.high;
                 CqlDateTime cw_ = context.Operators.ConvertDateToDateTime(cv_);
                 Date cy_ = bp_?.BirthDateElement;
@@ -134,7 +134,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
                 CqlQuantity dh_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, by_);
                 CqlDate di_ = context.Operators.Add(df_, dh_);
                 CqlDate dk_ = context.Operators.Add(di_, cb_);
-                CqlInterval<CqlDate> dl_ = context.Operators.Interval(dc_, dk_, true, false);
+                CqlInterval<CqlDate> dl_ = context.Operators.Interval(dc_, dk_, (bool?)true, (bool?)false);
                 bool? dm_ = dl_?.lowClosed;
                 Date do_ = bp_?.BirthDateElement;
                 CqlDate dp_ = FHIRHelpers_4_4_000.Instance.ToDate(context, do_);
@@ -145,7 +145,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
                 CqlQuantity dx_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, by_);
                 CqlDate dy_ = context.Operators.Add(dv_, dx_);
                 CqlDate ea_ = context.Operators.Add(dy_, cb_);
-                CqlInterval<CqlDate> eb_ = context.Operators.Interval(ds_, ea_, true, false);
+                CqlInterval<CqlDate> eb_ = context.Operators.Interval(ds_, ea_, (bool?)true, (bool?)false);
                 bool? ec_ = eb_?.highClosed;
                 CqlInterval<CqlDateTime> ed_ = context.Operators.Interval(cf_, cw_, dm_, ec_);
                 return ed_;
@@ -179,7 +179,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
         FhirDateTime d_ = period?.EndElement;
         CqlDateTime e_ = FHIRHelpers_4_4_000.Instance.ToDateTime(context, d_);
         CqlDate f_ = context.Operators.DateFrom(e_);
-        CqlInterval<CqlDate> g_ = context.Operators.Interval(c_, f_, true, true);
+        CqlInterval<CqlDate> g_ = context.Operators.Interval(c_, f_, (bool?)true, (bool?)true);
         return g_;
     }
 

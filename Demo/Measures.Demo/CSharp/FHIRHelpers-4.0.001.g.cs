@@ -42,7 +42,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
                 CqlDateTime c_ = context.Operators.Convert<CqlDateTime>(b_);
                 FhirDateTime d_ = period?.EndElement;
                 CqlDateTime e_ = context.Operators.Convert<CqlDateTime>(d_);
-                CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
+                CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, (bool?)true, (bool?)true);
                 return f_;
             };
         }
@@ -66,7 +66,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
                 CqlQuantity c_ = this.ToQuantity(context, b_);
                 Quantity d_ = range?.High;
                 CqlQuantity e_ = this.ToQuantity(context, d_);
-                CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
+                CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, (bool?)true, (bool?)true);
                 return f_;
             };
         }

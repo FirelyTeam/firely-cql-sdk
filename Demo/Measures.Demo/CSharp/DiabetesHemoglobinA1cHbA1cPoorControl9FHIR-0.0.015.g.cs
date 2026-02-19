@@ -175,7 +175,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, false);
+            CqlInterval<int?> i_ = context.Operators.Interval((int?)18, (int?)75, (bool?)true, (bool?)false);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
             IEnumerable<Encounter> l_ = this.Telehealth_Services(context);
@@ -262,7 +262,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             Observation a_ = this.Most_Recent_HbA1c(context);
             DataType b_ = a_?.Value;
             CqlQuantity c_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, b_ as Quantity);
-            CqlQuantity d_ = context.Operators.Quantity(9m, "%");
+            CqlQuantity d_ = context.Operators.Quantity((decimal?)9m, "%");
             bool? e_ = context.Operators.Greater(c_, d_);
             return e_;
         });
