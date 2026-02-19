@@ -310,26 +310,17 @@ stages:
           - task: DotNetCoreCLI@2
             displayName: 'Run tests on .NET 8'
             inputs:
-              command: 'test'
-              projects: '${{ parameters.multiTargetTestProjects }}'
-              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net8.0'
-              publishTestResults: false
-
-          - task: PublishTestResults@2
-            displayName: 'Publish .NET 8 test results'
-            condition: succeededOrFailed()
-            inputs:
-              testResultsFormat: 'VSTest'
-              testResultsFiles: '$(Agent.TempDirectory)/TestResults/net8.0/**/*.trx'
+              command: test
+              projects: $(multiTargetTestProjects)
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --collect "XPlat Code Coverage"'
+              publishTestResults: true
               testRunTitle: 'Tests on .NET 8'
-              mergeTestResults: true
-              failTaskOnFailedTests: true
 
           - task: PublishCodeCoverageResults@2
             displayName: 'Publish .NET 8 code coverage'
             condition: succeededOrFailed()
             inputs:
-              summaryFileLocation: '$(Agent.TempDirectory)/TestResults/net8.0/**/coverage.cobertura.xml'
+              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
               pathToSources: '$(Build.SourcesDirectory)'
 
       - job: TestNet10
@@ -360,26 +351,17 @@ stages:
           - task: DotNetCoreCLI@2
             displayName: 'Run tests on .NET 10'
             inputs:
-              command: 'test'
-              projects: '${{ parameters.multiTargetTestProjects }}'
-              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net10.0'
-              publishTestResults: false
-
-          - task: PublishTestResults@2
-            displayName: 'Publish .NET 10 test results'
-            condition: succeededOrFailed()
-            inputs:
-              testResultsFormat: 'VSTest'
-              testResultsFiles: '$(Agent.TempDirectory)/TestResults/net10.0/**/*.trx'
+              command: test
+              projects: $(multiTargetTestProjects)
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --collect "XPlat Code Coverage"'
+              publishTestResults: true
               testRunTitle: 'Tests on .NET 10'
-              mergeTestResults: true
-              failTaskOnFailedTests: true
 
           - task: PublishCodeCoverageResults@2
             displayName: 'Publish .NET 10 code coverage'
             condition: succeededOrFailed()
             inputs:
-              summaryFileLocation: '$(Agent.TempDirectory)/TestResults/net10.0/**/coverage.cobertura.xml'
+              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
               pathToSources: '$(Build.SourcesDirectory)'
 
       - job: TestIntegrationNet10
@@ -410,26 +392,17 @@ stages:
           - task: DotNetCoreCLI@2
             displayName: 'Run integration tests on .NET 10'
             inputs:
-              command: 'test'
-              projects: '${{ parameters.net10IntegrationTestProjects }}'
-              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/integration-net10.0'
-              publishTestResults: false
-
-          - task: PublishTestResults@2
-            displayName: 'Publish integration test results'
-            condition: succeededOrFailed()
-            inputs:
-              testResultsFormat: 'VSTest'
-              testResultsFiles: '$(Agent.TempDirectory)/TestResults/integration-net10.0/**/*.trx'
+              command: test
+              projects: $(net10IntegrationTestProjects)
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --collect "XPlat Code Coverage"'
+              publishTestResults: true
               testRunTitle: 'Integration Tests on .NET 10'
-              mergeTestResults: true
-              failTaskOnFailedTests: true
 
           - task: PublishCodeCoverageResults@2
             displayName: 'Publish integration test code coverage'
             condition: succeededOrFailed()
             inputs:
-              summaryFileLocation: '$(Agent.TempDirectory)/TestResults/integration-net10.0/**/coverage.cobertura.xml'
+              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
               pathToSources: '$(Build.SourcesDirectory)'
       # Compare test results across frameworks
       - job: CompareTestResults

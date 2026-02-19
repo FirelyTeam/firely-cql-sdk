@@ -8,7 +8,16 @@
 
 namespace Hl7.Cql.Runtime;
 
-internal static class Defaults
+/// <summary>
+/// Provides default configuration options for common runtime operations.
+/// </summary>
+public static class Defaults
 {
-    public static EnumerationOptions EnumerationOptions { get; } = new();
+    /// <summary>
+    /// Gets the default enumeration options that recurse into subdirectories.
+    /// </summary>
+    public static EnumerationOptions EnumerationOptionsRecurseSubdirectories { get; } = new()
+    {
+        RecurseSubdirectories = true
+    };
 }

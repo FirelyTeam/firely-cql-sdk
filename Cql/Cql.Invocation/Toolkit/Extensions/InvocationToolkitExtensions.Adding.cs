@@ -64,7 +64,7 @@ partial class InvocationToolkitExtensions
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
-        var files = directory.EnumerateFiles("*.dll", options ?? Defaults.EnumerationOptions);
+        var files = directory.EnumerateFiles("*.dll", options ?? Defaults.EnumerationOptionsRecurseSubdirectories);
         if (filePredicate is not null) files = files.Where(filePredicate);
         return invocationToolkit.AddAssemblyBinaryFiles(files);
     }

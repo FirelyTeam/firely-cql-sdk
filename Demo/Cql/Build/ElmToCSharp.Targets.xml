@@ -51,6 +51,8 @@
 			<PackagerCLIArgs Condition="'$(CSharpDirectory)'!=''">$(PackagerCLIArgs) --cs "$(CSharpDirectory)"</PackagerCLIArgs>
 			<PackagerCliArgs Condition="'$(DllDirectory)'!=''">$(PackagerCLIArgs) --dll "$(DllDirectory)"</PackagerCliArgs>
 			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(LibrariesDirectory)'!=''">$(PackagerCLIArgs) --libraries "$(LibrariesDirectory)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(MeasuresDirectory)'!=''">$(PackagerCLIArgs) --measures "$(MeasuresDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(JsonPretty)'!=''">$(PackagerCLIArgs) --json-pretty "$(JsonPretty)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(Profile)'!=''">$(PackagerCLIArgs) --profile "$(Profile)"</PackagerCLIArgs>
 			<PackagerCLICommand>"$(PackagerCLI)" elm $(PackagerClIArgs)</PackagerCLICommand>
