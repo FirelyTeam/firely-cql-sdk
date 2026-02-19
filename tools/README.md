@@ -6,6 +6,9 @@ Utility scripts for the Firely CQL SDK.
 
 Converts the CQL specification from HTML to Markdown format for AI parsing.
 
+**Created in:** PR for "Experimental - Using AI to verify codebase conformance with CQL spec"  
+**Branch:** `copilot/validate-cql-conformance`
+
 ### Purpose
 
 The official CQL specification website contains 1,752 files (40MB) including HTML, CSS, JavaScript, images, and other web assets. This makes it difficult for AI agents to parse and analyze the specification content.
@@ -101,3 +104,17 @@ The script:
 
 - Python 3.6+
 - No additional packages required (uses standard library only)
+
+## Background
+
+This tool was created as part of the CQL specification conformance analysis work. The original issue requested using AI to verify codebase conformance with the CQL specification.
+
+During the analysis, it became clear that the full specification folder with 1,752 files (40MB) including CSS, JavaScript, and images was impractical for AI agents to parse. This condensation tool solves that problem by extracting just the text content.
+
+**Related Work:**
+- **Issue:** "Experimental - Using AI to verify codebase conformance with CQL spec"
+- **Branch:** `copilot/validate-cql-conformance`
+- **Analysis Results:** See `spec-report/` directory for detailed conformance findings
+- **Condensed Spec:** See `spec-condensed/` directory for the AI-friendly version
+
+The condensed specification enabled efficient analysis that identified 7 spec violations with detailed fix recommendations, all documented in the spec-report directory.
