@@ -238,7 +238,51 @@ stages:
               includesymbols: true
               includesource: true
 
-          # Stage bin/obj directories for test jobs (tests need source tree structure at runtime)
+          # Publish test projects for test stage (Vonk-style: self-contained output for direct DLL testing)
+          # Uses 'dotnet publish' so all dependencies are in the output directory,
+          # allowing test agents to run 'dotnet test' on DLLs without MSBuild/NuGet.
+          - pwsh: |
+              $stagingRoot = "$(Build.ArtifactStagingDirectory)/TestPublishOutput"
+
+              # Publish multi-target test projects for net8.0
+              $projects = "${{ parameters.multiTargetTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                Write-Host "##[section]Publishing $proj for net8.0"
+                dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net8.0 --property:PublishDir=$stagingRoot/net8.0
+                if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net8.0"; exit 1 }
+              }
+
+              # Publish multi-target test projects for net10.0
+              foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                Write-Host "##[section]Publishing $proj for net10.0"
+                dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net10.0 --property:PublishDir=$stagingRoot/net10.0
+                if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net10.0"; exit 1 }
+              }
+
+              # Summary
+              foreach ($subdir in @('net8.0', 'net10.0')) {
+                $dir = Join-Path $stagingRoot $subdir
+                if (Test-Path $dir) {
+                  $count = (Get-ChildItem -Path $dir -File | Measure-Object).Count
+                  $size = (Get-ChildItem -Path $dir -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB
+                  Write-Host "  $subdir : $count files, $([math]::Round($size, 2)) MB"
+                }
+              }
+            displayName: 'Publish test projects for test stage'
+            workingDirectory: '$(Build.SourcesDirectory)'
+
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish Test Output Artifacts'
+            inputs:
+              targetPath: '$(Build.ArtifactStagingDirectory)/TestPublishOutput'
+              artifact: 'TestPublishOutput'
+              publishLocation: 'pipeline'
+
+          # Stage bin/obj directories for integration tests (they need source tree + --no-build on csproj)
           - task: PowerShell@2
             displayName: 'Stage build outputs for integration test artifact'
             inputs:
@@ -259,7 +303,7 @@ stages:
                 Write-Host "Total artifact size: $([math]::Round($size, 2)) MB"
 
           - task: PublishPipelineArtifact@1
-            displayName: 'Publish Build Output (for test jobs)'
+            displayName: 'Publish Build Output (for integration tests)'
             inputs:
               targetPath: '$(Build.ArtifactStagingDirectory)/BuildOutput'
               artifact: 'BuildOutput'
@@ -285,6 +329,7 @@ stages:
         pool:
           vmImage: 'windows-latest'
         steps:
+          # Checkout for source tree access (LibrarySetsDirs uses FindParentDirectoryContaining)
           - checkout: self
 
           - task: UseDotNet@2
@@ -295,18 +340,18 @@ stages:
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
           - task: DownloadPipelineArtifact@2
-            displayName: 'Download Build Artifacts'
+            displayName: 'Download Test Publish Output'
             inputs:
               buildType: 'current'
-              artifactName: 'BuildOutput'
-              targetPath: '$(Build.SourcesDirectory)'
+              artifactName: 'TestPublishOutput'
+              targetPath: '$(Pipeline.Workspace)/TestPublishOutput'
 
           - task: DotNetCoreCLI@2
             displayName: 'Run tests on .NET 8'
             inputs:
               command: test
-              projects: '${{ parameters.multiTargetTestProjects }}'
-              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
+              projects: '$(Pipeline.Workspace)/TestPublishOutput/net8.0/*Tests.dll'
+              arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
               testRunTitle: 'Tests on .NET 8'
 
           - task: PublishCodeCoverageResults@2
@@ -320,6 +365,7 @@ stages:
         pool:
           vmImage: 'windows-latest'
         steps:
+          # Checkout for source tree access (LibrarySetsDirs uses FindParentDirectoryContaining)
           - checkout: self
 
           - task: UseDotNet@2
@@ -330,18 +376,18 @@ stages:
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
           - task: DownloadPipelineArtifact@2
-            displayName: 'Download Build Artifacts'
+            displayName: 'Download Test Publish Output'
             inputs:
               buildType: 'current'
-              artifactName: 'BuildOutput'
-              targetPath: '$(Build.SourcesDirectory)'
+              artifactName: 'TestPublishOutput'
+              targetPath: '$(Pipeline.Workspace)/TestPublishOutput'
 
           - task: DotNetCoreCLI@2
             displayName: 'Run tests on .NET 10'
             inputs:
               command: test
-              projects: '${{ parameters.multiTargetTestProjects }}'
-              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
+              projects: '$(Pipeline.Workspace)/TestPublishOutput/net10.0/*Tests.dll'
+              arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
               testRunTitle: 'Tests on .NET 10'
 
           - task: PublishCodeCoverageResults@2
