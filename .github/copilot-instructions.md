@@ -49,6 +49,7 @@ This document contains development guidelines and instructions for maintaining c
 
 ### 1.2 Instruction for PR AI
 1.2.1 When I ask you to update or improve the Pull Request description, follow these requirements:
+
    1.2.1.1 **Analyze the entire set of commits in this PR's branch**
 
    1.2.1.2 **Incorporate all changes made across the full diff**, not just the snippet I'm currently discussing
@@ -56,6 +57,7 @@ This document contains development guidelines and instructions for maintaining c
    1.2.1.3 **Summarize the full scope and intent of the work** done throughout the branch
 
    1.2.1.4 The PR description should always reflect:
+   
       1.2.1.4.1 the whole branch history
 
       1.2.1.4.2 the complete set of code changes
@@ -76,11 +78,13 @@ This document contains development guidelines and instructions for maintaining c
 1.3.1 When user provides memory-based instructions (e.g., "remember", "never do", "always do"), add them to this copilot instructions file
 
 1.3.2 After updating the instructions, confirm the update by:
+
    1.3.2.1 If the instruction already existed: State "This instruction already exists in section [heading number]"
 
    1.3.2.2 If newly added: State "Added to copilot instructions as section [heading number]"
 
 1.3.3 When making changes to this file, increment the version number according to semantic versioning:
+
    1.3.3.1 **Major version** (x.0.0): Structural changes or major reorganization
 
    1.3.3.2 **Minor version** (x.y.0): New instructions or sections added
@@ -132,6 +136,7 @@ This document contains development guidelines and instructions for maintaining c
 
 ### 3.1 SDK Projects
 3.1.1 Core SDK projects are located in the `Cql/` directory:
+
    3.1.1.1 `Cql.Abstractions` - Base abstractions and interfaces
 
    3.1.1.2 `Cql.Runtime` - Runtime and execution engine
