@@ -162,21 +162,16 @@ public class IsNullTest
                         .AddElmLibraries([elmLibrary])
                         .CompileToAssemblies();
 
-        var results = elmToolkit.GetElmToAssemblyResults().First();
-        var libraryIdentifier = results.libraryIdentifier;
-        var assemblyBinary = results.assemblyBinary;
-        var debugSymbols = results.debugSymbolsBinary;
+        var (libraryIdentifier, _, _, assemblyBinary, debugSymbols) = elmToolkit.GetElmToAssemblyResults().First();
         var assembly = new AssemblyBinary(assemblyBinary, debugSymbols);
 
         var invoker = new InvocationToolkit()
                        .AddAssemblyBinaries([assembly])
                        .CreateLibrarySetInvoker();
 
-        var libraryInvoker = invoker.LibraryInvokers[libraryIdentifier];
-        var result = libraryInvoker.Invoke<object>(
-            definition,
-            FhirCqlContext.ForBundle());
-
-        return result;
+        return invoker.InvokeLibraryDefinition(
+            FhirCqlContext.ForBundle(),
+            libraryIdentifier,
+            definition);
     }
 }

@@ -362,6 +362,17 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void Integer_Equals_Null_CodeGen()
+        {
+            // Verifies that comparing a constant integer with null compiles correctly through
+            // C# code generation (no redundant "(int?) is null" patterns emitted).
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("1 = null");
+            var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            var result = Run<bool?>(equal, lib);
+            Assert.IsNull(result); // In CQL three-valued logic, 1 = null is null
+        }
+
+        [TestMethod]
         public void Null_Equals_Integer()
         {
             var library = CreateCqlToolkit().MakeLibraryFromExpression("null = 1");
