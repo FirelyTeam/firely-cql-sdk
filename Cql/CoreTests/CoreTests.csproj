@@ -9,7 +9,6 @@
 
 	<PropertyGroup>
 		<IsPackable>false</IsPackable>
-		<EnableMSTestRunner>true</EnableMSTestRunner>
 		<Nullable>disable</Nullable>
 		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks> <!-- Unsafe needed in order to test CSharpFormatter on pointer types -->

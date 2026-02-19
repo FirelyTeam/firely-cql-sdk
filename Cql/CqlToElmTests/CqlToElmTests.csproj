@@ -5,7 +5,6 @@
 	<PropertyGroup>
 		<TargetFrameworks>net10.0</TargetFrameworks>
 		<IsPackable>false</IsPackable>
-		<EnableMSTestRunner>true</EnableMSTestRunner>
 		<RootNamespace>Hl7.Cql.CqlToElm.Test</RootNamespace>
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>

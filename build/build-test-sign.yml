@@ -307,26 +307,13 @@ stages:
               artifactName: 'BuildOutput'
               targetPath: '$(Build.SourcesDirectory)'
 
-          - pwsh: |
-              $projects = $env:TEST_PROJECTS -split '\r?\n' | Where-Object { $_.Trim() } | ForEach-Object { $_.Trim() }
-              $config = ${{ parameters.buildConfiguration }}
-              $exitCode = 0
-              foreach ($proj in $projects) {
-                $projectDir = Split-Path $proj -Parent
-                $projectName = [System.IO.Path]::GetFileNameWithoutExtension($proj)
-                $dllPath = "$projectDir/bin/$config/net8.0/$projectName.dll"
-                if (-not (Test-Path $dllPath)) {
-                  Write-Host "Skipping: $proj (no net8.0 build found)"
-                  continue
-                }
-                Write-Host "Testing: $proj"
-                dotnet $dllPath --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --report-trx --results-directory "$(Agent.TempDirectory)/TestResults/net8.0" --collect 'XPlat Code Coverage'
-                if ($LASTEXITCODE -ne 0) { $exitCode = $LASTEXITCODE }
-              }
-              exit $exitCode
+          - task: DotNetCoreCLI@2
             displayName: 'Run tests on .NET 8'
-            env:
-              TEST_PROJECTS: $(multiTargetTestProjects)
+            inputs:
+              command: 'test'
+              projects: '${{ parameters.multiTargetTestProjects }}'
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net8.0'
+              publishTestResults: false
 
           - task: PublishTestResults@2
             displayName: 'Publish .NET 8 test results'
@@ -370,26 +357,13 @@ stages:
               artifactName: 'BuildOutput'
               targetPath: '$(Build.SourcesDirectory)'
 
-          - pwsh: |
-              $projects = $env:TEST_PROJECTS -split '\r?\n' | Where-Object { $_.Trim() } | ForEach-Object { $_.Trim() }
-              $config = ${{ parameters.buildConfiguration }}
-              $exitCode = 0
-              foreach ($proj in $projects) {
-                $projectDir = Split-Path $proj -Parent
-                $projectName = [System.IO.Path]::GetFileNameWithoutExtension($proj)
-                $dllPath = "$projectDir/bin/$config/net10.0/$projectName.dll"
-                if (-not (Test-Path $dllPath)) {
-                  Write-Host "Skipping: $proj (no net10.0 build found)"
-                  continue
-                }
-                Write-Host "Testing: $proj"
-                dotnet $dllPath --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --report-trx --results-directory "$(Agent.TempDirectory)/TestResults/net10.0" --collect 'XPlat Code Coverage'
-                if ($LASTEXITCODE -ne 0) { $exitCode = $LASTEXITCODE }
-              }
-              exit $exitCode
+          - task: DotNetCoreCLI@2
             displayName: 'Run tests on .NET 10'
-            env:
-              TEST_PROJECTS: $(multiTargetTestProjects)
+            inputs:
+              command: 'test'
+              projects: '${{ parameters.multiTargetTestProjects }}'
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/net10.0'
+              publishTestResults: false
 
           - task: PublishTestResults@2
             displayName: 'Publish .NET 10 test results'
@@ -433,18 +407,13 @@ stages:
               artifactName: 'BuildOutput'
               targetPath: '$(Build.SourcesDirectory)'
 
-          - pwsh: |
-              $projects = $env:TEST_PROJECTS -split '\r?\n' | Where-Object { $_.Trim() } | ForEach-Object { $_.Trim() }
-              $exitCode = 0
-              foreach ($proj in $projects) {
-                Write-Host "Testing: $proj"
-                dotnet test "$proj" --configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --logger trx '--collect:XPlat Code Coverage' --results-directory "$(Agent.TempDirectory)/TestResults/integration-net10.0"
-                if ($LASTEXITCODE -ne 0) { $exitCode = $LASTEXITCODE }
-              }
-              exit $exitCode
+          - task: DotNetCoreCLI@2
             displayName: 'Run integration tests on .NET 10'
-            env:
-              TEST_PROJECTS: $(net10IntegrationTestProjects)
+            inputs:
+              command: 'test'
+              projects: '${{ parameters.net10IntegrationTestProjects }}'
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger trx --collect:"XPlat Code Coverage" --results-directory $(Agent.TempDirectory)/TestResults/integration-net10.0'
+              publishTestResults: false
 
           - task: PublishTestResults@2
             displayName: 'Publish integration test results'
