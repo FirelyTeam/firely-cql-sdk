@@ -263,18 +263,8 @@ stages:
                 if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net10.0"; exit 1 }
               }
 
-              # Publish integration test projects for net10.0
-              $integrationProjects = "${{ parameters.net10IntegrationTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
-              foreach ($proj in $integrationProjects) {
-                $proj = $proj.Trim()
-                if (-not $proj) { continue }
-                Write-Host "##[section]Publishing $proj for net10.0 (integration)"
-                dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net10.0 --property:PublishDir=$stagingRoot/integration-net10.0
-                if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net10.0 (integration)"; exit 1 }
-              }
-
               # Summary
-              foreach ($subdir in @('net8.0', 'net10.0', 'integration-net10.0')) {
+              foreach ($subdir in @('net8.0', 'net10.0')) {
                 $dir = Join-Path $stagingRoot $subdir
                 if (Test-Path $dir) {
                   $count = (Get-ChildItem -Path $dir -File | Measure-Object).Count
@@ -290,6 +280,33 @@ stages:
             inputs:
               targetPath: '$(Build.ArtifactStagingDirectory)/TestPublishOutput'
               artifact: 'TestPublishOutput'
+              publishLocation: 'pipeline'
+
+          # Stage bin/obj directories for integration tests (they need source tree structure at runtime)
+          - task: PowerShell@2
+            displayName: 'Stage build outputs for integration test artifact'
+            inputs:
+              targetType: 'inline'
+              script: |
+                $sourceRoot = "$(Build.SourcesDirectory)"
+                $stagingRoot = "$(Build.ArtifactStagingDirectory)/BuildOutput"
+                New-Item -ItemType Directory -Path $stagingRoot -Force | Out-Null
+                Write-Host "Staging bin/obj directories from '$sourceRoot' into '$stagingRoot'"
+                Get-ChildItem -Path $sourceRoot -Recurse -Directory | Where-Object { $_.Name -eq 'bin' -or $_.Name -eq 'obj' } | ForEach-Object {
+                  $relativePath = $_.FullName.Substring($sourceRoot.Length).TrimStart('\', '/')
+                  $destinationParent = Join-Path $stagingRoot (Split-Path $relativePath -Parent)
+                  New-Item -ItemType Directory -Path $destinationParent -Force | Out-Null
+                  Copy-Item -Path $_.FullName -Destination $destinationParent -Recurse -Force
+                  Write-Host "  Copied: $relativePath"
+                }
+                $size = (Get-ChildItem -Path $stagingRoot -Recurse -File | Measure-Object -Property Length -Sum).Sum / 1MB
+                Write-Host "Total artifact size: $([math]::Round($size, 2)) MB"
+
+          - task: PublishPipelineArtifact@1
+            displayName: 'Publish Build Output (for integration tests)'
+            inputs:
+              targetPath: '$(Build.ArtifactStagingDirectory)/BuildOutput'
+              artifact: 'BuildOutput'
               publishLocation: 'pipeline'
 
           # Publish NuGet packages
@@ -382,7 +399,9 @@ stages:
         pool:
           vmImage: 'windows-latest'
         steps:
-          - checkout: none
+          # Integration tests need source tree (FindParentDirectoryContaining for CMS Resources)
+          - checkout: self
+            submodules: ${{ parameters.checkoutSubmodules }}
 
           - task: UseDotNet@2
             displayName: 'Install .NET 10 SDK'
@@ -391,19 +410,34 @@ stages:
               version: '${{ parameters.dotNetCoreVersion }}'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
+          # Download bin/obj from build stage
           - task: DownloadPipelineArtifact@2
-            displayName: 'Download Test Publish Output'
+            displayName: 'Download Build Artifacts'
             inputs:
               buildType: 'current'
-              artifactName: 'TestPublishOutput'
-              targetPath: '$(Pipeline.Workspace)/TestPublishOutput'
+              artifactName: 'BuildOutput'
+              targetPath: '$(Build.SourcesDirectory)'
+
+          # Restore NuGet packages so dotnet test --no-build can resolve targets
+          - task: NuGetAuthenticate@1
+            displayName: 'NuGet Authenticate'
+            inputs:
+              nuGetServiceConnections: '${{ parameters.nuGetServiceConnections }}'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Restore integration test projects'
+            inputs:
+              command: 'restore'
+              projects: '${{ parameters.net10IntegrationTestProjects }}'
+              feedsToUse: 'config'
+              nugetConfigPath: 'NuGet.config'
 
           - task: DotNetCoreCLI@2
             displayName: 'Run integration tests on .NET 10'
             inputs:
               command: test
-              projects: '$(Pipeline.Workspace)/TestPublishOutput/integration-net10.0/IntegrationRunner.dll'
-              arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
+              projects: '${{ parameters.net10IntegrationTestProjects }}'
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
               testRunTitle: 'Integration Tests on .NET 10'
 
           - task: PublishCodeCoverageResults@2
