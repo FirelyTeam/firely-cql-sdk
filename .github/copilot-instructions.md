@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.4.0
+**Version:** 2.4.1
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
@@ -376,7 +376,9 @@ string formatted = identifier.ToString();
 
 8.1.3 **DO NOT** rely on external URLs (cql.hl7.org) as they may be blocked or unavailable
 
-8.1.4 The condensed spec contains all specification content without web assets (CSS, JS, images)
+8.1.4 **IMPORTANT**: If external spec URLs (cql.hl7.org) become accessible during your work, clearly notify the user that the external specification is now reachable. This indicates the local spec in the repository may need updating.
+
+8.1.5 The condensed spec contains all specification content without web assets (CSS, JS, images)
 
 ### 8.2 When to Check Specification
 8.2.1 **Before implementing any CQL operator or function**: Verify behavior against `/spec/condensed/09-b-cqlreference.md`
