@@ -312,10 +312,8 @@ stages:
         pool:
           vmImage: 'windows-latest'
         steps:
-          - checkout: self
-            submodules: ${{ parameters.checkoutSubmodules }}
+          - checkout: none
 
-          # Only install .NET 8 SDK for running tests
           - task: UseDotNet@2
             displayName: 'Install .NET 8 SDK'
             inputs:
@@ -323,7 +321,6 @@ stages:
               version: '8.0.x'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
-          # Download published test output (self-contained, no NuGet restore needed)
           - task: DownloadPipelineArtifact@2
             displayName: 'Download Test Publish Output'
             inputs:
@@ -331,67 +328,27 @@ stages:
               artifactName: 'TestPublishOutput'
               targetPath: '$(Pipeline.Workspace)/TestPublishOutput'
 
-          - pwsh: |
-              $testDir = "$(Pipeline.Workspace)/TestPublishOutput/net8.0"
-              Write-Host "Test directory: $testDir"
-
-              # Derive test DLL names from configured project paths
-              $projects = "${{ parameters.multiTargetTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
-              $failed = $false
-              foreach ($proj in $projects) {
-                $projName = [System.IO.Path]::GetFileNameWithoutExtension($proj.Trim())
-                $dll = Join-Path $testDir "$projName.dll"
-                if (-not (Test-Path $dll)) {
-                  Write-Host "##[error]Test DLL not found: $dll"
-                  Write-Host "  Available DLLs in $testDir :"
-                  Get-ChildItem -Path $testDir -Filter '*.dll' | ForEach-Object { Write-Host "    $($_.Name)" }
-                  $failed = $true
-                  continue
-                }
-                Write-Host "##[section]Testing: $projName.dll"
-                $testArgs = @(
-                  'test', $dll,
-                  '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
-                  '--logger:trx',
-                  '--collect:XPlat Code Coverage',
-                  '--results-directory', "$env:RESULTS_DIR"
-                )
-                Write-Host "##[command]dotnet $($testArgs -join ' ')"
-                & dotnet @testArgs 2>&1 | ForEach-Object { Write-Host $_ }
-                Write-Host "dotnet test exit code: $LASTEXITCODE"
-                if ($LASTEXITCODE -ne 0) { $failed = $true }
-              }
-              if ($failed) { exit 1 }
+          - task: DotNetCoreCLI@2
             displayName: 'Run tests on .NET 8'
-            env:
-              RESULTS_DIR: '$(Agent.TempDirectory)/TestResults/net8.0'
-
-          - task: PublishTestResults@2
-            displayName: 'Publish .NET 8 test results'
-            condition: succeededOrFailed()
             inputs:
-              testResultsFormat: 'VSTest'
-              testResultsFiles: '$(Agent.TempDirectory)/TestResults/net8.0/**/*.trx'
+              command: test
+              projects: '$(Pipeline.Workspace)/TestPublishOutput/net8.0/*Tests.dll'
+              arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
               testRunTitle: 'Tests on .NET 8'
-              mergeTestResults: true
-              failTaskOnFailedTests: true
 
           - task: PublishCodeCoverageResults@2
             displayName: 'Publish .NET 8 code coverage'
             condition: succeededOrFailed()
             inputs:
-              summaryFileLocation: '$(Agent.TempDirectory)/TestResults/net8.0/**/coverage.cobertura.xml'
-              pathToSources: '$(Build.SourcesDirectory)'
+              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
 
       - job: TestNet10
         displayName: 'Test on .NET 10'
         pool:
           vmImage: 'windows-latest'
         steps:
-          - checkout: self
-            submodules: ${{ parameters.checkoutSubmodules }}
+          - checkout: none
 
-          # Only install .NET 10 SDK for running tests
           - task: UseDotNet@2
             displayName: 'Install .NET 10 SDK'
             inputs:
@@ -399,7 +356,6 @@ stages:
               version: '${{ parameters.dotNetCoreVersion }}'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
-          # Download published test output (self-contained, no NuGet restore needed)
           - task: DownloadPipelineArtifact@2
             displayName: 'Download Test Publish Output'
             inputs:
@@ -407,67 +363,27 @@ stages:
               artifactName: 'TestPublishOutput'
               targetPath: '$(Pipeline.Workspace)/TestPublishOutput'
 
-          - pwsh: |
-              $testDir = "$(Pipeline.Workspace)/TestPublishOutput/net10.0"
-              Write-Host "Test directory: $testDir"
-
-              # Derive test DLL names from configured project paths
-              $projects = "${{ parameters.multiTargetTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
-              $failed = $false
-              foreach ($proj in $projects) {
-                $projName = [System.IO.Path]::GetFileNameWithoutExtension($proj.Trim())
-                $dll = Join-Path $testDir "$projName.dll"
-                if (-not (Test-Path $dll)) {
-                  Write-Host "##[error]Test DLL not found: $dll"
-                  Write-Host "  Available DLLs in $testDir :"
-                  Get-ChildItem -Path $testDir -Filter '*.dll' | ForEach-Object { Write-Host "    $($_.Name)" }
-                  $failed = $true
-                  continue
-                }
-                Write-Host "##[section]Testing: $projName.dll"
-                $testArgs = @(
-                  'test', $dll,
-                  '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
-                  '--logger:trx',
-                  '--collect:XPlat Code Coverage',
-                  '--results-directory', "$env:RESULTS_DIR"
-                )
-                Write-Host "##[command]dotnet $($testArgs -join ' ')"
-                & dotnet @testArgs 2>&1 | ForEach-Object { Write-Host $_ }
-                Write-Host "dotnet test exit code: $LASTEXITCODE"
-                if ($LASTEXITCODE -ne 0) { $failed = $true }
-              }
-              if ($failed) { exit 1 }
+          - task: DotNetCoreCLI@2
             displayName: 'Run tests on .NET 10'
-            env:
-              RESULTS_DIR: '$(Agent.TempDirectory)/TestResults/net10.0'
-
-          - task: PublishTestResults@2
-            displayName: 'Publish .NET 10 test results'
-            condition: succeededOrFailed()
             inputs:
-              testResultsFormat: 'VSTest'
-              testResultsFiles: '$(Agent.TempDirectory)/TestResults/net10.0/**/*.trx'
+              command: test
+              projects: '$(Pipeline.Workspace)/TestPublishOutput/net10.0/*Tests.dll'
+              arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
               testRunTitle: 'Tests on .NET 10'
-              mergeTestResults: true
-              failTaskOnFailedTests: true
 
           - task: PublishCodeCoverageResults@2
             displayName: 'Publish .NET 10 code coverage'
             condition: succeededOrFailed()
             inputs:
-              summaryFileLocation: '$(Agent.TempDirectory)/TestResults/net10.0/**/coverage.cobertura.xml'
-              pathToSources: '$(Build.SourcesDirectory)'
+              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
 
       - job: TestIntegrationNet10
         displayName: 'Integration Tests on .NET 10'
         pool:
           vmImage: 'windows-latest'
         steps:
-          - checkout: self
-            submodules: ${{ parameters.checkoutSubmodules }}
+          - checkout: none
 
-          # Only install .NET 10 SDK for running tests
           - task: UseDotNet@2
             displayName: 'Install .NET 10 SDK'
             inputs:
@@ -475,7 +391,6 @@ stages:
               version: '${{ parameters.dotNetCoreVersion }}'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
-          # Download published test output (self-contained, no NuGet restore needed)
           - task: DownloadPipelineArtifact@2
             displayName: 'Download Test Publish Output'
             inputs:
@@ -483,57 +398,19 @@ stages:
               artifactName: 'TestPublishOutput'
               targetPath: '$(Pipeline.Workspace)/TestPublishOutput'
 
-          - pwsh: |
-              $testDir = "$(Pipeline.Workspace)/TestPublishOutput/integration-net10.0"
-              Write-Host "Test directory: $testDir"
-
-              # Derive test DLL names from configured project paths
-              $projects = "${{ parameters.net10IntegrationTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
-              $failed = $false
-              foreach ($proj in $projects) {
-                $projName = [System.IO.Path]::GetFileNameWithoutExtension($proj.Trim())
-                $dll = Join-Path $testDir "$projName.dll"
-                if (-not (Test-Path $dll)) {
-                  Write-Host "##[error]Test DLL not found: $dll"
-                  Write-Host "  Available DLLs in $testDir :"
-                  Get-ChildItem -Path $testDir -Filter '*.dll' | ForEach-Object { Write-Host "    $($_.Name)" }
-                  $failed = $true
-                  continue
-                }
-                Write-Host "##[section]Testing: $projName.dll"
-                $testArgs = @(
-                  'test', $dll,
-                  '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
-                  '--logger:trx',
-                  '--collect:XPlat Code Coverage',
-                  '--results-directory', "$env:RESULTS_DIR"
-                )
-                Write-Host "##[command]dotnet $($testArgs -join ' ')"
-                & dotnet @testArgs 2>&1 | ForEach-Object { Write-Host $_ }
-                Write-Host "dotnet test exit code: $LASTEXITCODE"
-                if ($LASTEXITCODE -ne 0) { $failed = $true }
-              }
-              if ($failed) { exit 1 }
+          - task: DotNetCoreCLI@2
             displayName: 'Run integration tests on .NET 10'
-            env:
-              RESULTS_DIR: '$(Agent.TempDirectory)/TestResults/integration-net10.0'
-
-          - task: PublishTestResults@2
-            displayName: 'Publish integration test results'
-            condition: succeededOrFailed()
             inputs:
-              testResultsFormat: 'VSTest'
-              testResultsFiles: '$(Agent.TempDirectory)/TestResults/integration-net10.0/**/*.trx'
+              command: test
+              projects: '$(Pipeline.Workspace)/TestPublishOutput/integration-net10.0/IntegrationRunner.dll'
+              arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
               testRunTitle: 'Integration Tests on .NET 10'
-              mergeTestResults: true
-              failTaskOnFailedTests: true
 
           - task: PublishCodeCoverageResults@2
             displayName: 'Publish integration test code coverage'
             condition: succeededOrFailed()
             inputs:
-              summaryFileLocation: '$(Agent.TempDirectory)/TestResults/integration-net10.0/**/coverage.cobertura.xml'
-              pathToSources: '$(Build.SourcesDirectory)'
+              summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
       # Compare test results across frameworks
       - job: CompareTestResults
         displayName: 'Compare Test Results Across Frameworks'
