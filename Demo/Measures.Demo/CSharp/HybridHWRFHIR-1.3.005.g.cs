@@ -131,9 +131,9 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-5116339458294690597L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("HybridHWRFHIR-1.3.005", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -209,11 +209,11 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                     Period cf_ = Visit?.Period;
                     CqlInterval<CqlDateTime> cg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
                     CqlDateTime ch_ = context.Operators.Start(cg_);
-                    CqlQuantity ci_ = context.Operators.Quantity((decimal?)1m, "hour");
+                    CqlQuantity ci_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime cj_ = context.Operators.Subtract(ch_, ci_);
                     CqlInterval<CqlDateTime> cl_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
                     CqlDateTime cm_ = context.Operators.Start(cl_);
-                    CqlInterval<CqlDateTime> cn_ = context.Operators.Interval(cj_, cm_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> cn_ = context.Operators.Interval(cj_, cm_, true, true);
                     bool? co_ = context.Operators.In<CqlDateTime>(ce_, cn_, default);
                     CqlInterval<CqlDateTime> cq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
                     CqlDateTime cr_ = context.Operators.Start(cq_);
@@ -239,7 +239,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 Period at_ = Visit?.Period;
                 CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, at_);
                 CqlDateTime av_ = context.Operators.Start(au_);
-                CqlQuantity aw_ = context.Operators.Quantity((decimal?)1m, "hour");
+                CqlQuantity aw_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime ax_ = context.Operators.Subtract(as_ ?? av_, aw_);
                 IEnumerable<Encounter> az_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
@@ -250,11 +250,11 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                     Period da_ = Visit?.Period;
                     CqlInterval<CqlDateTime> db_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, da_);
                     CqlDateTime dc_ = context.Operators.Start(db_);
-                    CqlQuantity dd_ = context.Operators.Quantity((decimal?)1m, "hour");
+                    CqlQuantity dd_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime de_ = context.Operators.Subtract(dc_, dd_);
                     CqlInterval<CqlDateTime> dg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, da_);
                     CqlDateTime dh_ = context.Operators.Start(dg_);
-                    CqlInterval<CqlDateTime> di_ = context.Operators.Interval(de_, dh_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> di_ = context.Operators.Interval(de_, dh_, true, true);
                     bool? dj_ = context.Operators.In<CqlDateTime>(cz_, di_, default);
                     CqlInterval<CqlDateTime> dl_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, da_);
                     CqlDateTime dm_ = context.Operators.Start(dl_);
@@ -279,7 +279,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 CqlDateTime bh_ = context.Operators.Start(bg_);
                 CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, at_);
                 CqlDateTime bk_ = context.Operators.Start(bj_);
-                CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(ax_, bh_ ?? bk_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(ax_, bh_ ?? bk_, true, true);
                 bool? bm_ = context.Operators.In<CqlDateTime>(ai_, bl_, default);
                 IEnumerable<Encounter> bo_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
@@ -290,11 +290,11 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                     Period dv_ = Visit?.Period;
                     CqlInterval<CqlDateTime> dw_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dv_);
                     CqlDateTime dx_ = context.Operators.Start(dw_);
-                    CqlQuantity dy_ = context.Operators.Quantity((decimal?)1m, "hour");
+                    CqlQuantity dy_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime dz_ = context.Operators.Subtract(dx_, dy_);
                     CqlInterval<CqlDateTime> eb_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dv_);
                     CqlDateTime ec_ = context.Operators.Start(eb_);
-                    CqlInterval<CqlDateTime> ed_ = context.Operators.Interval(dz_, ec_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> ed_ = context.Operators.Interval(dz_, ec_, true, true);
                     bool? ee_ = context.Operators.In<CqlDateTime>(du_, ed_, default);
                     CqlInterval<CqlDateTime> eg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dv_);
                     CqlDateTime eh_ = context.Operators.Start(eg_);
@@ -348,11 +348,11 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 Period et_ = Visit?.Period;
                 CqlInterval<CqlDateTime> eu_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, et_);
                 CqlDateTime ev_ = context.Operators.Start(eu_);
-                CqlQuantity ew_ = context.Operators.Quantity((decimal?)1m, "hour");
+                CqlQuantity ew_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime ex_ = context.Operators.Subtract(ev_, ew_);
                 CqlInterval<CqlDateTime> ez_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, et_);
                 CqlDateTime fa_ = context.Operators.Start(ez_);
-                CqlInterval<CqlDateTime> fb_ = context.Operators.Interval(ex_, fa_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> fb_ = context.Operators.Interval(ex_, fa_, true, true);
                 bool? fc_ = context.Operators.In<CqlDateTime>(es_, fb_, default);
                 CqlInterval<CqlDateTime> fe_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, et_);
                 CqlDateTime ff_ = context.Operators.Start(fe_);
@@ -380,7 +380,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
             CqlDateTime ab_ = context.Operators.Start(aa_);
             CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, z_);
             CqlDateTime ae_ = context.Operators.End(ad_);
-            CqlInterval<CqlDateTime> af_ = context.Operators.Interval(o_ ?? y_ ?? ab_, ae_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDateTime> af_ = context.Operators.Interval(o_ ?? y_ ?? ab_, ae_, true, true);
             return af_;
         }
 
@@ -483,13 +483,13 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 Period al_ = Encounter?.Period;
                 CqlInterval<CqlDateTime> am_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, al_);
                 CqlDateTime an_ = context.Operators.Start(am_);
-                CqlQuantity ao_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                CqlQuantity ao_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime ap_ = context.Operators.Subtract(an_, ao_);
                 CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, al_);
                 CqlDateTime as_ = context.Operators.Start(ar_);
-                CqlQuantity at_ = context.Operators.Quantity((decimal?)120m, "minutes");
+                CqlQuantity at_ = context.Operators.Quantity(120m, "minutes");
                 CqlDateTime au_ = context.Operators.Add(as_, at_);
-                CqlInterval<CqlDateTime> av_ = context.Operators.Interval(ap_, au_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> av_ = context.Operators.Interval(ap_, au_, true, true);
                 bool? aw_ = context.Operators.In<CqlDateTime>(ak_, av_, default);
                 bool? ax_ = context.Operators.And(ah_, aw_);
                 Code<ObservationStatus> ay_ = Exam?.StatusElement;
@@ -534,13 +534,13 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 Period bq_ = Encounter?.Period;
                 CqlInterval<CqlDateTime> br_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bq_);
                 CqlDateTime bs_ = context.Operators.Start(br_);
-                CqlQuantity bt_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                CqlQuantity bt_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime bu_ = context.Operators.Subtract(bs_, bt_);
                 CqlInterval<CqlDateTime> bw_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bq_);
                 CqlDateTime bx_ = context.Operators.Start(bw_);
-                CqlQuantity by_ = context.Operators.Quantity((decimal?)120m, "minutes");
+                CqlQuantity by_ = context.Operators.Quantity(120m, "minutes");
                 CqlDateTime bz_ = context.Operators.Add(bx_, by_);
-                CqlInterval<CqlDateTime> ca_ = context.Operators.Interval(bu_, bz_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> ca_ = context.Operators.Interval(bu_, bz_, true, true);
                 bool? cb_ = context.Operators.In<CqlDateTime>(bp_, ca_, default);
                 bool? cc_ = context.Operators.And(bm_, cb_);
                 Code<ObservationStatus> cd_ = Exam?.StatusElement;
@@ -606,12 +606,12 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 Period al_ = Encounter?.Period;
                 CqlInterval<CqlDateTime> am_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, al_);
                 CqlDateTime an_ = context.Operators.Start(am_);
-                CqlQuantity ao_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                CqlQuantity ao_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime ap_ = context.Operators.Subtract(an_, ao_);
                 CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, al_);
                 CqlDateTime as_ = context.Operators.Start(ar_);
                 CqlDateTime au_ = context.Operators.Add(as_, ao_);
-                CqlInterval<CqlDateTime> av_ = context.Operators.Interval(ap_, au_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> av_ = context.Operators.Interval(ap_, au_, true, true);
                 bool? aw_ = context.Operators.In<CqlDateTime>(ak_, av_, default);
                 bool? ax_ = context.Operators.And(ah_, aw_);
                 Code<ObservationStatus> ay_ = Exam?.StatusElement;
@@ -656,12 +656,12 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 Period bq_ = Encounter?.Period;
                 CqlInterval<CqlDateTime> br_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bq_);
                 CqlDateTime bs_ = context.Operators.Start(br_);
-                CqlQuantity bt_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                CqlQuantity bt_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime bu_ = context.Operators.Subtract(bs_, bt_);
                 CqlInterval<CqlDateTime> bw_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bq_);
                 CqlDateTime bx_ = context.Operators.Start(bw_);
                 CqlDateTime bz_ = context.Operators.Add(bx_, bt_);
-                CqlInterval<CqlDateTime> ca_ = context.Operators.Interval(bu_, bz_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> ca_ = context.Operators.Interval(bu_, bz_, true, true);
                 bool? cb_ = context.Operators.In<CqlDateTime>(bp_, ca_, default);
                 bool? cc_ = context.Operators.And(bm_, cb_);
                 Code<ObservationStatus> cd_ = Exam?.StatusElement;
@@ -724,12 +724,12 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 Period ah_ = Encounter?.Period;
                 CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ah_);
                 CqlDateTime aj_ = context.Operators.Start(ai_);
-                CqlQuantity ak_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                CqlQuantity ak_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime al_ = context.Operators.Subtract(aj_, ak_);
                 CqlInterval<CqlDateTime> an_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ah_);
                 CqlDateTime ao_ = context.Operators.Start(an_);
                 CqlDateTime aq_ = context.Operators.Add(ao_, ak_);
-                CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(al_, aq_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(al_, aq_, true, true);
                 bool? as_ = context.Operators.In<CqlDateTime>(ag_, ar_, default);
                 bool? at_ = context.Operators.And(ae_, as_);
                 Code<ObservationStatus> au_ = Lab?.StatusElement;
@@ -769,12 +769,12 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
                 Period bh_ = Encounter?.Period;
                 CqlInterval<CqlDateTime> bi_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bh_);
                 CqlDateTime bj_ = context.Operators.Start(bi_);
-                CqlQuantity bk_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                CqlQuantity bk_ = context.Operators.Quantity(1440m, "minutes");
                 CqlDateTime bl_ = context.Operators.Subtract(bj_, bk_);
                 CqlInterval<CqlDateTime> bn_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bh_);
                 CqlDateTime bo_ = context.Operators.Start(bn_);
                 CqlDateTime bq_ = context.Operators.Add(bo_, bk_);
-                CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bl_, bq_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bl_, bq_, true, true);
                 bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, default);
                 bool? bt_ = context.Operators.And(be_, bs_);
                 Code<ObservationStatus> bu_ = Lab?.StatusElement;
@@ -897,7 +897,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
         int? b_ = context.Operators.DateTimeComponentFrom(Value, "month");
         int? c_ = context.Operators.DateTimeComponentFrom(Value, "day");
         decimal? d_ = context.Operators.TimezoneOffsetFrom(Value);
-        CqlDateTime e_ = context.Operators.DateTime(a_, b_, c_, (int?)0, (int?)0, (int?)0, (int?)0, d_);
+        CqlDateTime e_ = context.Operators.DateTime(a_, b_, c_, 0, 0, 0, 0, d_);
         return e_;
     }
 

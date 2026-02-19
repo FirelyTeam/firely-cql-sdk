@@ -71,9 +71,9 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(2317102387341060639L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS826FHIRHHPI-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -298,9 +298,9 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                     CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
                     CqlDateTime n_ = context.Operators.Start(m_);
                     CqlDateTime p_ = context.Operators.Start(m_);
-                    CqlQuantity q_ = context.Operators.Quantity((decimal?)72m, "hours");
+                    CqlQuantity q_ = context.Operators.Quantity(72m, "hours");
                     CqlDateTime r_ = context.Operators.Add(p_, q_);
-                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
                     bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
                     return t_;
                 }
@@ -359,9 +359,9 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                     CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
                     CqlDateTime n_ = context.Operators.Start(m_);
                     CqlDateTime p_ = context.Operators.Start(m_);
-                    CqlQuantity q_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    CqlQuantity q_ = context.Operators.Quantity(24m, "hours");
                     CqlDateTime r_ = context.Operators.Add(p_, q_);
-                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
                     bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
                     return t_;
                 }
@@ -429,10 +429,10 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                     CqlDateTime l_ = context.Operators.Start(k_);
                     CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
                     CqlDateTime n_ = context.Operators.Start(m_);
-                    CqlQuantity o_ = context.Operators.Quantity((decimal?)72m, "hours");
+                    CqlQuantity o_ = context.Operators.Quantity(72m, "hours");
                     CqlDateTime p_ = context.Operators.Add(n_, o_);
                     CqlDateTime r_ = context.Operators.End(m_);
-                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
                     bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
                     return t_;
                 }
@@ -490,10 +490,10 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                     CqlDateTime l_ = context.Operators.Start(k_);
                     CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);
                     CqlDateTime n_ = context.Operators.Start(m_);
-                    CqlQuantity o_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    CqlQuantity o_ = context.Operators.Quantity(24m, "hours");
                     CqlDateTime p_ = context.Operators.Add(n_, o_);
                     CqlDateTime r_ = context.Operators.End(m_);
-                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
                     bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
                     return t_;
                 }

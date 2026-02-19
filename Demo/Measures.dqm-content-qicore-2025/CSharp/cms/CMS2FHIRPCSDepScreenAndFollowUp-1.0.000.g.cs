@@ -112,9 +112,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-5242312262230522551L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS2FHIRPCSDepScreenAndFollowUp-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -248,7 +248,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval((int?)12, (int?)16, (bool?)true, (bool?)true);
+            CqlInterval<int?> i_ = context.Operators.Interval(12, 16, true, true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             return j_;
         });
@@ -272,11 +272,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period r_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                     CqlDateTime t_ = context.Operators.Start(s_);
-                    CqlQuantity u_ = context.Operators.Quantity((decimal?)14m, "days");
+                    CqlQuantity u_ = context.Operators.Quantity(14m, "days");
                     CqlDateTime v_ = context.Operators.Subtract(t_, u_);
                     CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                     CqlDateTime y_ = context.Operators.Start(x_);
-                    CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, true, true);
                     bool? aa_ = context.Operators.In<CqlDateTime>(q_, z_, "day");
                     CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                     CqlDateTime ad_ = context.Operators.Start(ac_);
@@ -390,11 +390,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period ar_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ar_);
                     CqlDateTime at_ = context.Operators.Start(as_);
-                    CqlQuantity au_ = context.Operators.Quantity((decimal?)14m, "days");
+                    CqlQuantity au_ = context.Operators.Quantity(14m, "days");
                     CqlDateTime av_ = context.Operators.Subtract(at_, au_);
                     CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ar_);
                     CqlDateTime ay_ = context.Operators.Start(ax_);
-                    CqlInterval<CqlDateTime> az_ = context.Operators.Interval(av_, ay_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> az_ = context.Operators.Interval(av_, ay_, true, true);
                     bool? ba_ = context.Operators.In<CqlDateTime>(aq_, az_, "day");
                     CqlInterval<CqlDateTime> bc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ar_);
                     CqlDateTime bd_ = context.Operators.Start(bc_);
@@ -510,11 +510,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 Period r_ = tuple_ewmohjtdtinujhphqjvbwmmhh?.QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 CqlDateTime t_ = context.Operators.Start(s_);
-                CqlQuantity u_ = context.Operators.Quantity((decimal?)14m, "days");
+                CqlQuantity u_ = context.Operators.Quantity(14m, "days");
                 CqlDateTime v_ = context.Operators.Subtract(t_, u_);
                 CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 CqlDateTime y_ = context.Operators.Start(x_);
-                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, true, true);
                 bool? aa_ = context.Operators.In<CqlDateTime>(q_, z_, "day");
                 CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 CqlDateTime ad_ = context.Operators.Start(ac_);
@@ -600,9 +600,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 CqlDateTime aw_ = context.Operators.End(av_);
                 CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 CqlDateTime az_ = context.Operators.End(ay_);
-                CqlQuantity ba_ = context.Operators.Quantity((decimal?)2m, "days");
+                CqlQuantity ba_ = context.Operators.Quantity(2m, "days");
                 CqlDateTime bb_ = context.Operators.Add(az_, ba_);
-                CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(aw_, bb_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(aw_, bb_, true, true);
                 bool? bd_ = context.Operators.In<CqlDateTime>(at_, bc_, "day");
                 CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 CqlDateTime bg_ = context.Operators.End(bf_);
@@ -730,11 +730,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period r_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                     CqlDateTime t_ = context.Operators.Start(s_);
-                    CqlQuantity u_ = context.Operators.Quantity((decimal?)14m, "days");
+                    CqlQuantity u_ = context.Operators.Quantity(14m, "days");
                     CqlDateTime v_ = context.Operators.Subtract(t_, u_);
                     CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                     CqlDateTime y_ = context.Operators.Start(x_);
-                    CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, true, true);
                     bool? aa_ = context.Operators.In<CqlDateTime>(q_, z_, "day");
                     CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                     CqlDateTime ad_ = context.Operators.Start(ac_);
@@ -848,11 +848,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period ar_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ar_);
                     CqlDateTime at_ = context.Operators.Start(as_);
-                    CqlQuantity au_ = context.Operators.Quantity((decimal?)14m, "days");
+                    CqlQuantity au_ = context.Operators.Quantity(14m, "days");
                     CqlDateTime av_ = context.Operators.Subtract(at_, au_);
                     CqlInterval<CqlDateTime> ax_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ar_);
                     CqlDateTime ay_ = context.Operators.Start(ax_);
-                    CqlInterval<CqlDateTime> az_ = context.Operators.Interval(av_, ay_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> az_ = context.Operators.Interval(av_, ay_, true, true);
                     bool? ba_ = context.Operators.In<CqlDateTime>(aq_, az_, "day");
                     CqlInterval<CqlDateTime> bc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ar_);
                     CqlDateTime bd_ = context.Operators.Start(bc_);
@@ -968,11 +968,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 Period r_ = tuple_cgtoaqsajoehgwcararimqzsa?.QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 CqlDateTime t_ = context.Operators.Start(s_);
-                CqlQuantity u_ = context.Operators.Quantity((decimal?)14m, "days");
+                CqlQuantity u_ = context.Operators.Quantity(14m, "days");
                 CqlDateTime v_ = context.Operators.Subtract(t_, u_);
                 CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 CqlDateTime y_ = context.Operators.Start(x_);
-                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(v_, y_, true, true);
                 bool? aa_ = context.Operators.In<CqlDateTime>(q_, z_, "day");
                 CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 CqlDateTime ad_ = context.Operators.Start(ac_);
@@ -1058,9 +1058,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 CqlDateTime aw_ = context.Operators.End(av_);
                 CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 CqlDateTime az_ = context.Operators.End(ay_);
-                CqlQuantity ba_ = context.Operators.Quantity((decimal?)2m, "days");
+                CqlQuantity ba_ = context.Operators.Quantity(2m, "days");
                 CqlDateTime bb_ = context.Operators.Add(az_, ba_);
-                CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(aw_, bb_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(aw_, bb_, true, true);
                 bool? bd_ = context.Operators.In<CqlDateTime>(at_, bc_, "day");
                 CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 CqlDateTime bg_ = context.Operators.End(bf_);
@@ -1299,11 +1299,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period p_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime r_ = context.Operators.Start(q_);
-                    CqlQuantity s_ = context.Operators.Quantity((decimal?)14m, "days");
+                    CqlQuantity s_ = context.Operators.Quantity(14m, "days");
                     CqlDateTime t_ = context.Operators.Subtract(r_, s_);
                     CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime w_ = context.Operators.Start(v_);
-                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                     bool? y_ = context.Operators.In<CqlDateTime>(o_, x_, "day");
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime ab_ = context.Operators.Start(aa_);
@@ -1439,11 +1439,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     Period p_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime r_ = context.Operators.Start(q_);
-                    CqlQuantity s_ = context.Operators.Quantity((decimal?)14m, "days");
+                    CqlQuantity s_ = context.Operators.Quantity(14m, "days");
                     CqlDateTime t_ = context.Operators.Subtract(r_, s_);
                     CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime w_ = context.Operators.Start(v_);
-                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                     bool? y_ = context.Operators.In<CqlDateTime>(o_, x_, "day");
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime ab_ = context.Operators.Start(aa_);

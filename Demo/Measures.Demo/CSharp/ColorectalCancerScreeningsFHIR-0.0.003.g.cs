@@ -167,9 +167,9 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-7159507046904387638L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2021, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2022, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, default);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("ColorectalCancerScreeningsFHIR-0.0.003", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -272,7 +272,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval((int?)51, (int?)75, (bool?)true, (bool?)false);
+            CqlInterval<int?> i_ = context.Operators.Interval(51, 75, true, false);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
             IEnumerable<Encounter> l_ = this.Telehealth_Services(context);
@@ -400,10 +400,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, h_);
                 CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
                 CqlDateTime k_ = context.Operators.Start(j_);
-                CqlQuantity l_ = context.Operators.Quantity((decimal?)1m, "year");
+                CqlQuantity l_ = context.Operators.Quantity(1m, "year");
                 CqlDateTime m_ = context.Operators.Subtract(k_, l_);
                 CqlDateTime o_ = context.Operators.End(j_);
-                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, (bool?)false, (bool?)false);
+                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, false, false);
                 bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, default);
                 return q_;
             }
@@ -748,10 +748,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, h_);
                 CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
                 CqlDateTime k_ = context.Operators.End(j_);
-                CqlQuantity l_ = context.Operators.Quantity((decimal?)4m, "years");
+                CqlQuantity l_ = context.Operators.Quantity(4m, "years");
                 CqlDateTime m_ = context.Operators.Subtract(k_, l_);
                 CqlDateTime o_ = context.Operators.End(j_);
-                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
                 bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, default);
                 CqlDateTime s_ = context.Operators.End(j_);
                 bool? t_ = context.Operators.Not((bool?)(s_ is null));
@@ -905,10 +905,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
                 CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
                 CqlDateTime t_ = context.Operators.End(s_);
-                CqlQuantity u_ = context.Operators.Quantity((decimal?)3m, "years");
+                CqlQuantity u_ = context.Operators.Quantity(3m, "years");
                 CqlDateTime v_ = context.Operators.Subtract(t_, u_);
                 CqlDateTime x_ = context.Operators.End(s_);
-                CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, true);
                 bool? z_ = context.Operators.In<CqlDateTime>(r_, y_, default);
                 CqlDateTime ab_ = context.Operators.End(s_);
                 bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
@@ -988,10 +988,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
                 CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
                 CqlDateTime t_ = context.Operators.End(s_);
-                CqlQuantity u_ = context.Operators.Quantity((decimal?)3m, "years");
+                CqlQuantity u_ = context.Operators.Quantity(3m, "years");
                 CqlDateTime v_ = context.Operators.Subtract(t_, u_);
                 CqlDateTime x_ = context.Operators.End(s_);
-                CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, true);
                 bool? z_ = context.Operators.In<CqlDateTime>(r_, y_, "day");
                 CqlDateTime ab_ = context.Operators.End(s_);
                 bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
@@ -1063,10 +1063,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, l_);
                 CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
                 CqlDateTime o_ = context.Operators.End(n_);
-                CqlQuantity p_ = context.Operators.Quantity((decimal?)3m, "years");
+                CqlQuantity p_ = context.Operators.Quantity(3m, "years");
                 CqlDateTime q_ = context.Operators.Subtract(o_, p_);
                 CqlDateTime s_ = context.Operators.End(n_);
-                CqlInterval<CqlDateTime> t_ = context.Operators.Interval(q_, s_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> t_ = context.Operators.Interval(q_, s_, true, true);
                 bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, "day");
                 CqlDateTime w_ = context.Operators.End(n_);
                 bool? x_ = context.Operators.Not((bool?)(w_ is null));
@@ -1103,10 +1103,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, m_);
                 CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
                 CqlDateTime p_ = context.Operators.End(o_);
-                CqlQuantity q_ = context.Operators.Quantity((decimal?)3m, "years");
+                CqlQuantity q_ = context.Operators.Quantity(3m, "years");
                 CqlDateTime r_ = context.Operators.Subtract(p_, q_);
                 CqlDateTime t_ = context.Operators.End(o_);
-                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(r_, t_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(r_, t_, true, true);
                 bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, "day");
                 CqlDateTime x_ = context.Operators.End(o_);
                 bool? y_ = context.Operators.Not((bool?)(x_ is null));
@@ -1132,10 +1132,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime j_ = context.Operators.End(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.End(k_);
-                CqlQuantity m_ = context.Operators.Quantity((decimal?)6m, "years");
+                CqlQuantity m_ = context.Operators.Quantity(6m, "years");
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime p_ = context.Operators.End(k_);
-                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
                 bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
                 CqlDateTime t_ = context.Operators.End(k_);
                 bool? u_ = context.Operators.Not((bool?)(t_ is null));
@@ -1178,10 +1178,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime k_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 CqlDateTime m_ = context.Operators.End(l_);
-                CqlQuantity n_ = context.Operators.Quantity((decimal?)5m, "years");
+                CqlQuantity n_ = context.Operators.Quantity(5m, "years");
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlDateTime q_ = context.Operators.End(l_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
                 bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, default);
                 CqlDateTime u_ = context.Operators.End(l_);
                 bool? v_ = context.Operators.Not((bool?)(u_ is null));
@@ -1217,10 +1217,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime l_ = context.Operators.End(k_);
                 CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
                 CqlDateTime n_ = context.Operators.End(m_);
-                CqlQuantity o_ = context.Operators.Quantity((decimal?)5m, "years");
+                CqlQuantity o_ = context.Operators.Quantity(5m, "years");
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlDateTime r_ = context.Operators.End(m_);
-                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
                 bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
                 CqlDateTime v_ = context.Operators.End(m_);
                 bool? w_ = context.Operators.Not((bool?)(v_ is null));
@@ -1246,10 +1246,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime j_ = context.Operators.End(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.End(k_);
-                CqlQuantity m_ = context.Operators.Quantity((decimal?)6m, "years");
+                CqlQuantity m_ = context.Operators.Quantity(6m, "years");
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime p_ = context.Operators.End(k_);
-                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
                 bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
                 CqlDateTime t_ = context.Operators.End(k_);
                 bool? u_ = context.Operators.Not((bool?)(t_ is null));
@@ -1286,10 +1286,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime j_ = context.Operators.End(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.End(k_);
-                CqlQuantity m_ = context.Operators.Quantity((decimal?)5m, "years");
+                CqlQuantity m_ = context.Operators.Quantity(5m, "years");
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime p_ = context.Operators.End(k_);
-                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
                 bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
                 CqlDateTime t_ = context.Operators.End(k_);
                 bool? u_ = context.Operators.Not((bool?)(t_ is null));
@@ -1319,10 +1319,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime k_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 CqlDateTime m_ = context.Operators.End(l_);
-                CqlQuantity n_ = context.Operators.Quantity((decimal?)5m, "years");
+                CqlQuantity n_ = context.Operators.Quantity(5m, "years");
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlDateTime q_ = context.Operators.End(l_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
                 bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, default);
                 CqlDateTime u_ = context.Operators.End(l_);
                 bool? v_ = context.Operators.Not((bool?)(u_ is null));
@@ -1348,10 +1348,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime j_ = context.Operators.End(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.End(k_);
-                CqlQuantity m_ = context.Operators.Quantity((decimal?)11m, "years");
+                CqlQuantity m_ = context.Operators.Quantity(11m, "years");
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime p_ = context.Operators.End(k_);
-                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
                 bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
                 CqlDateTime t_ = context.Operators.End(k_);
                 bool? u_ = context.Operators.Not((bool?)(t_ is null));
@@ -1388,10 +1388,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime j_ = context.Operators.End(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.End(k_);
-                CqlQuantity m_ = context.Operators.Quantity((decimal?)10m, "years");
+                CqlQuantity m_ = context.Operators.Quantity(10m, "years");
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime p_ = context.Operators.End(k_);
-                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
                 bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
                 CqlDateTime t_ = context.Operators.End(k_);
                 bool? u_ = context.Operators.Not((bool?)(t_ is null));
@@ -1421,10 +1421,10 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
                 CqlDateTime k_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 CqlDateTime m_ = context.Operators.End(l_);
-                CqlQuantity n_ = context.Operators.Quantity((decimal?)10m, "years");
+                CqlQuantity n_ = context.Operators.Quantity(10m, "years");
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlDateTime q_ = context.Operators.End(l_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
                 bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, default);
                 CqlDateTime u_ = context.Operators.End(l_);
                 bool? v_ = context.Operators.Not((bool?)(u_ is null));

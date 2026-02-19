@@ -29,7 +29,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     [CqlParameterDefinition("AgeThreshold")]
     public int? AgeThreshold(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<int?>(24614955827976076L, () => {
-            object a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", (int?)30);
+            object a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
             return (int?)a_;
         });
 

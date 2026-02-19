@@ -275,9 +275,9 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1753348495276809643L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS133FHIRCataracts2040BCVA90Days-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -437,7 +437,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_());
                 CqlDateTime k_ = context.Operators.Start(j_);
                 CqlDateTime m_ = context.Operators.End(e_);
-                CqlQuantity n_ = context.Operators.Quantity((decimal?)92m, "days");
+                CqlQuantity n_ = context.Operators.Quantity(92m, "days");
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 bool? p_ = context.Operators.SameOrBefore(k_, o_, "day");
                 bool? q_ = context.Operators.And(h_, p_);
@@ -1039,9 +1039,9 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
 
                     CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_());
                     CqlDateTime w_ = context.Operators.End(v_);
-                    CqlQuantity x_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity x_ = context.Operators.Quantity(90m, "days");
                     CqlDateTime y_ = context.Operators.Add(w_, x_);
-                    CqlInterval<CqlDateTime> z_ = context.Operators.Interval(t_, y_, (bool?)false, (bool?)true);
+                    CqlInterval<CqlDateTime> z_ = context.Operators.Interval(t_, y_, false, true);
                     bool? aa_ = context.Operators.In<CqlDateTime>(q_, z_, "day");
 
                     object ab_() {

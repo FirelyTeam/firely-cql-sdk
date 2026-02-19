@@ -142,9 +142,9 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1345411175383824253L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS153FHIRChlamydiaScreening-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -271,7 +271,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                         CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
                         CqlDateTime w_ = context.Operators.End(v_);
                         CqlDateTime y_ = context.Operators.End(v_);
-                        CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, (bool?)true, (bool?)true);
+                        CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, true, true);
                         return z_;
                     };
                 }
@@ -591,7 +591,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             CqlDateTime f_ = context.Operators.End(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval((int?)16, (int?)24, (bool?)true, (bool?)true);
+            CqlInterval<int?> i_ = context.Operators.Interval(16, 24, true, true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
 
             List<Extension> k_() {
@@ -685,9 +685,9 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     CqlDateTime ag_ = context.Operators.Convert<CqlDateTime>(ab_);
                     CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.toInterval(context, ag_ as object);
                     CqlDateTime ai_ = context.Operators.End(ah_);
-                    CqlQuantity aj_ = context.Operators.Quantity((decimal?)6m, "days");
+                    CqlQuantity aj_ = context.Operators.Quantity(6m, "days");
                     CqlDateTime ak_ = context.Operators.Add(ai_, aj_);
-                    CqlInterval<CqlDateTime> al_ = context.Operators.Interval(ae_, ak_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> al_ = context.Operators.Interval(ae_, ak_, true, true);
                     bool? am_ = context.Operators.In<CqlDateTime>(aa_, al_, "day");
                     CqlDateTime ao_ = context.Operators.Convert<CqlDateTime>(ab_);
                     CqlInterval<CqlDateTime> ap_ = QICoreCommon_4_0_000.Instance.toInterval(context, ao_ as object);
@@ -762,9 +762,9 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     CqlDateTime ch_ = context.Operators.Convert<CqlDateTime>(cc_);
                     CqlInterval<CqlDateTime> ci_ = QICoreCommon_4_0_000.Instance.toInterval(context, ch_ as object);
                     CqlDateTime cj_ = context.Operators.End(ci_);
-                    CqlQuantity ck_ = context.Operators.Quantity((decimal?)6m, "days");
+                    CqlQuantity ck_ = context.Operators.Quantity(6m, "days");
                     CqlDateTime cl_ = context.Operators.Add(cj_, ck_);
-                    CqlInterval<CqlDateTime> cm_ = context.Operators.Interval(cf_, cl_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> cm_ = context.Operators.Interval(cf_, cl_, true, true);
                     bool? cn_ = context.Operators.In<CqlDateTime>(cb_, cm_, "day");
                     CqlDateTime cp_ = context.Operators.Convert<CqlDateTime>(cc_);
                     CqlInterval<CqlDateTime> cq_ = QICoreCommon_4_0_000.Instance.toInterval(context, cp_ as object);
@@ -914,7 +914,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             CqlDateTime f_ = context.Operators.End(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval((int?)16, (int?)20, (bool?)true, (bool?)true);
+            CqlInterval<int?> i_ = context.Operators.Interval(16, 20, true, true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             return j_;
         });
@@ -931,7 +931,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             CqlDateTime f_ = context.Operators.End(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval((int?)21, (int?)24, (bool?)true, (bool?)true);
+            CqlInterval<int?> i_ = context.Operators.Interval(21, 24, true, true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             return j_;
         });

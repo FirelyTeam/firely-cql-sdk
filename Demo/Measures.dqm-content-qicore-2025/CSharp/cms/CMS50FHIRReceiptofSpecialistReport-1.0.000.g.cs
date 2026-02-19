@@ -103,9 +103,9 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8633000620496989027L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS50FHIRReceiptofSpecialistReport-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -298,9 +298,9 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                 CqlDateTime v_ = context.Operators.Start(u_);
                 CqlDateTime x_ = context.Operators.Start(u_);
                 int? y_ = context.Operators.DateTimeComponentFrom(x_, "year");
-                CqlDate z_ = context.Operators.Date(y_, (int?)10, (int?)31);
+                CqlDate z_ = context.Operators.Date(y_, 10, 31);
                 CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
-                CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(v_, aa_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(v_, aa_, true, true);
                 bool? ac_ = context.Operators.In<CqlDateTime>(t_, ab_, "day");
                 bool? ad_ = context.Operators.And(r_, ac_);
                 return ad_;

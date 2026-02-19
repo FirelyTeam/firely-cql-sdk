@@ -57,9 +57,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(2391673490967013253L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS72FHIRSTKAntithromboticDay2-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -399,10 +399,10 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                     CqlDateTime k_ = context.Operators.Start(j_);
                     CqlInterval<CqlDateTime> l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
                     CqlDateTime m_ = context.Operators.Start(l_);
-                    CqlQuantity n_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    CqlQuantity n_ = context.Operators.Quantity(24m, "hours");
                     CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                     CqlDateTime q_ = context.Operators.End(l_);
-                    CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, false);
                     bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, default);
                     return s_;
                 }
@@ -984,7 +984,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 bool? f_(Observation INR) {
                     DataType j_ = INR?.Value;
                     object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-                    CqlQuantity l_ = context.Operators.ConvertDecimalToQuantity((decimal?)3.5m);
+                    CqlQuantity l_ = context.Operators.ConvertDecimalToQuantity(3.5m);
                     bool? m_ = context.Operators.Greater(k_ as CqlQuantity, l_);
                     Code<ObservationStatus> n_ = INR?.StatusElement;
                     ObservationStatus? o_ = n_?.Value;

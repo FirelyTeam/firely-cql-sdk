@@ -36,7 +36,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("population", "initial-population")]
     [CqlTag("description", "Patients in the IP")]
     public bool? Initial_population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3971454504690862483L, () => (bool?)true);
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(3971454504690862483L, () => true);
 
 
     [CqlExpressionDefinition("Exclusion")]
@@ -44,7 +44,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator-exclusion")]
     public bool? Exclusion(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-340095662832327621L, () => (bool?)false);
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-340095662832327621L, () => false);
 
 
     [CqlExpressionDefinition("Denominator")]
@@ -65,14 +65,14 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("group", "1")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_1(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5945716760631093539L, () => (bool?)true);
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5945716760631093539L, () => true);
 
 
     [CqlExpressionDefinition("Numerator 2")]
     [CqlTag("group", "2")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-18372347484029309L, () => (bool?)false);
+        ((ICqlContextInternals)context).GetOrCompute<bool?>(-18372347484029309L, () => false);
 
 
     #endregion Functions and Expressions

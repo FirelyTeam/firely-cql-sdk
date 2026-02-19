@@ -311,9 +311,9 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     public CqlInterval<CqlDate> calendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
     {
         CqlDate a_ = context.Operators.DateFrom(StartValue);
-        CqlQuantity c_ = context.Operators.Quantity((decimal?)1m, "day");
+        CqlQuantity c_ = context.Operators.Quantity(1m, "day");
         CqlDate d_ = context.Operators.Add(a_, c_);
-        CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, (bool?)true, (bool?)true);
+        CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, true, true);
         return e_;
     }
 

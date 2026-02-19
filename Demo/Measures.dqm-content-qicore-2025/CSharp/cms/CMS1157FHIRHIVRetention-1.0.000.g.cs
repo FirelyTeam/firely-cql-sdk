@@ -77,9 +77,9 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(7120571719777767895L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS1157FHIRHIVRetention-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -141,7 +141,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 CqlDateTime j_ = context.Operators.Start(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.Start(k_);
-                CqlQuantity m_ = context.Operators.Quantity((decimal?)240m, "days");
+                CqlQuantity m_ = context.Operators.Quantity(240m, "days");
                 CqlDateTime n_ = context.Operators.Add(l_, m_);
                 bool? o_ = context.Operators.SameOrBefore(j_, n_, "day");
                 bool? p_ = this.isVerified(context, HIVDx);
@@ -195,9 +195,9 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 CqlInterval<CqlDateTime> aj_ = this.Measurement_Period(context);
                 CqlDateTime ak_ = context.Operators.Start(aj_);
                 CqlDateTime am_ = context.Operators.Start(aj_);
-                CqlQuantity an_ = context.Operators.Quantity((decimal?)240m, "days");
+                CqlQuantity an_ = context.Operators.Quantity(240m, "days");
                 CqlDateTime ao_ = context.Operators.Add(am_, an_);
-                CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, true, true);
                 Period aq_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aq_);
                 bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
@@ -333,7 +333,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                     Period z_ = EncounterWithHIV?.Period;
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
                     CqlDateTime ab_ = context.Operators.End(aa_);
-                    CqlQuantity ac_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity ac_ = context.Operators.Quantity(90m, "days");
                     CqlDateTime ad_ = context.Operators.Add(ab_, ac_);
                     bool? ae_ = context.Operators.SameOrAfter(y_, ad_, "day");
                     CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
@@ -377,7 +377,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                     Period o_ = EncounterWithHIV?.Period;
                     CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
                     CqlDateTime q_ = context.Operators.End(p_);
-                    CqlQuantity r_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity r_ = context.Operators.Quantity(90m, "days");
                     CqlDateTime s_ = context.Operators.Add(q_, r_);
                     bool? t_ = context.Operators.SameOrAfter(n_, s_, "day");
                     bool? u_ = context.Operators.And(k_, t_);

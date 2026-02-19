@@ -21,7 +21,7 @@
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
 	  <!-- <CqlToElmEnabled Condition="'$(Configuration)' == 'Release' and '$(ContinuousIntegrationBuild)' != 'true'">true</CqlToElmEnabled> -->
 
-		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
+		<ElmToCSharpEnabled>false</ElmToCSharpEnabled>
 		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
 		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release' and '$(ContinuousIntegrationBuild)' != 'true'">true</ElmToCSharpEnabled> -->
 

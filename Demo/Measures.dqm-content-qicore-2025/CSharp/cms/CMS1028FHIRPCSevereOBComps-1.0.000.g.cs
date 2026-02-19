@@ -312,9 +312,9 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3054133947653297271L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS1028FHIRPCSevereOBComps-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -397,7 +397,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             bool? b_(Encounter DeliveryEncounter) {
                 int? d_ = PCMaternal_5_25_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
                 CqlQuantity e_ = PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
-                CqlQuantity f_ = context.Operators.Quantity((decimal?)20m, "weeks");
+                CqlQuantity f_ = context.Operators.Quantity(20m, "weeks");
                 bool? g_ = context.Operators.GreaterOrEqual(e_, f_);
                 bool? h_ = context.Operators.And((bool?)(d_ is null), g_);
                 return h_;
@@ -2219,12 +2219,12 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
             bool? b_(Encounter DeliveryEncounter) {
                 int? h_ = PCMaternal_5_25_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
-                CqlInterval<int?> i_ = context.Operators.Interval((int?)20, (int?)36, (bool?)true, (bool?)true);
+                CqlInterval<int?> i_ = context.Operators.Interval(20, 36, true, true);
                 bool? j_ = context.Operators.In<int?>(h_, i_, default);
                 CqlQuantity l_ = PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
-                CqlQuantity m_ = context.Operators.Quantity((decimal?)20m, "weeks");
+                CqlQuantity m_ = context.Operators.Quantity(20m, "weeks");
                 bool? n_ = context.Operators.GreaterOrEqual(l_, m_);
-                CqlQuantity p_ = context.Operators.Quantity((decimal?)36m, "weeks");
+                CqlQuantity p_ = context.Operators.Quantity(36m, "weeks");
                 bool? q_ = context.Operators.LessOrEqual(l_, p_);
                 bool? r_ = context.Operators.And(n_, q_);
                 bool? s_ = context.Operators.And((bool?)(h_ is null), r_);
@@ -2278,10 +2278,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime ac_ = context.Operators.Convert<CqlDateTime>(ab_);
                     CqlInterval<CqlDateTime> ad_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                     CqlDateTime ae_ = context.Operators.Start(ad_);
-                    CqlQuantity af_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                    CqlQuantity af_ = context.Operators.Quantity(1440m, "minutes");
                     CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
                     CqlDateTime ah_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                    CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, true, true);
                     bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, default);
                     Code<ObservationStatus> ak_ = Hematocrit?.StatusElement;
                     ObservationStatus? al_ = ak_?.Value;
@@ -2322,10 +2322,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime ba_ = context.Operators.Convert<CqlDateTime>(az_);
                     CqlInterval<CqlDateTime> bb_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                     CqlDateTime bc_ = context.Operators.Start(bb_);
-                    CqlQuantity bd_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                    CqlQuantity bd_ = context.Operators.Quantity(1440m, "minutes");
                     CqlDateTime be_ = context.Operators.Subtract(bc_, bd_);
                     CqlDateTime bf_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                    CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, true, true);
                     bool? bh_ = context.Operators.In<CqlDateTime>(ba_, bg_, default);
                     Code<ObservationStatus> bi_ = Hematocrit?.StatusElement;
                     ObservationStatus? bj_ = bi_?.Value;
@@ -2386,10 +2386,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime ac_ = context.Operators.Convert<CqlDateTime>(ab_);
                     CqlInterval<CqlDateTime> ad_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                     CqlDateTime ae_ = context.Operators.Start(ad_);
-                    CqlQuantity af_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                    CqlQuantity af_ = context.Operators.Quantity(1440m, "minutes");
                     CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
                     CqlDateTime ah_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                    CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, true, true);
                     bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, default);
                     Code<ObservationStatus> ak_ = WBC?.StatusElement;
                     ObservationStatus? al_ = ak_?.Value;
@@ -2430,10 +2430,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime ba_ = context.Operators.Convert<CqlDateTime>(az_);
                     CqlInterval<CqlDateTime> bb_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                     CqlDateTime bc_ = context.Operators.Start(bb_);
-                    CqlQuantity bd_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                    CqlQuantity bd_ = context.Operators.Quantity(1440m, "minutes");
                     CqlDateTime be_ = context.Operators.Subtract(bc_, bd_);
                     CqlDateTime bf_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                    CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, true, true);
                     bool? bh_ = context.Operators.In<CqlDateTime>(ba_, bg_, default);
                     Code<ObservationStatus> bi_ = WBC?.StatusElement;
                     ObservationStatus? bj_ = bi_?.Value;
@@ -2493,10 +2493,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime aa_ = QICoreCommon_4_0_000.Instance.earliest(context, z_);
                     CqlInterval<CqlDateTime> ab_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                     CqlDateTime ac_ = context.Operators.Start(ab_);
-                    CqlQuantity ad_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                    CqlQuantity ad_ = context.Operators.Quantity(1440m, "minutes");
                     CqlDateTime ae_ = context.Operators.Subtract(ac_, ad_);
                     CqlDateTime af_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                    CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ae_, af_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ae_, af_, true, true);
                     bool? ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, default);
                     Code<ObservationStatus> ai_ = HeartRate?.StatusElement;
                     ObservationStatus? aj_ = ai_?.Value;
@@ -2531,10 +2531,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime at_ = QICoreCommon_4_0_000.Instance.earliest(context, as_);
                     CqlInterval<CqlDateTime> au_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                     CqlDateTime av_ = context.Operators.Start(au_);
-                    CqlQuantity aw_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                    CqlQuantity aw_ = context.Operators.Quantity(1440m, "minutes");
                     CqlDateTime ax_ = context.Operators.Subtract(av_, aw_);
                     CqlDateTime ay_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                    CqlInterval<CqlDateTime> az_ = context.Operators.Interval(ax_, ay_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> az_ = context.Operators.Interval(ax_, ay_, true, true);
                     bool? ba_ = context.Operators.In<CqlDateTime>(at_, az_, default);
                     Code<ObservationStatus> bb_ = HeartRate?.StatusElement;
                     ObservationStatus? bc_ = bb_?.Value;
@@ -2589,10 +2589,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime af_ = QICoreCommon_4_0_000.Instance.earliest(context, ae_);
                     CqlInterval<CqlDateTime> ag_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                     CqlDateTime ah_ = context.Operators.Start(ag_);
-                    CqlQuantity ai_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                    CqlQuantity ai_ = context.Operators.Quantity(1440m, "minutes");
                     CqlDateTime aj_ = context.Operators.Subtract(ah_, ai_);
                     CqlDateTime ak_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                    CqlInterval<CqlDateTime> al_ = context.Operators.Interval(aj_, ak_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> al_ = context.Operators.Interval(aj_, ak_, true, true);
                     bool? am_ = context.Operators.In<CqlDateTime>(af_, al_, default);
                     Code<ObservationStatus> an_ = BP?.StatusElement;
                     ObservationStatus? ao_ = an_?.Value;
@@ -2667,10 +2667,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime br_ = QICoreCommon_4_0_000.Instance.earliest(context, bq_);
                     CqlInterval<CqlDateTime> bs_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
                     CqlDateTime bt_ = context.Operators.Start(bs_);
-                    CqlQuantity bu_ = context.Operators.Quantity((decimal?)1440m, "minutes");
+                    CqlQuantity bu_ = context.Operators.Quantity(1440m, "minutes");
                     CqlDateTime bv_ = context.Operators.Subtract(bt_, bu_);
                     CqlDateTime bw_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
-                    CqlInterval<CqlDateTime> bx_ = context.Operators.Interval(bv_, bw_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> bx_ = context.Operators.Interval(bv_, bw_, true, true);
                     bool? by_ = context.Operators.In<CqlDateTime>(br_, bx_, default);
                     Code<ObservationStatus> bz_ = BP?.StatusElement;
                     ObservationStatus? ca_ = bz_?.Value;

@@ -143,9 +143,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(4855730798156578906L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS136FHIRChildADHDMedFollowUp-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -170,9 +170,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-            int? d_ = context.Operators.Subtract(c_, (int?)1);
-            decimal? e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-            CqlDateTime f_ = context.Operators.DateTime(d_, (int?)3, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
+            int? d_ = context.Operators.Subtract(c_, 1);
+            decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+            CqlDateTime f_ = context.Operators.DateTime(d_, 3, 1, 0, 0, 0, 0, e_);
             return f_;
         });
 
@@ -183,9 +183,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-            decimal? d_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-            CqlDateTime e_ = context.Operators.DateTime(c_, (int?)3, (int?)1, (int?)23, (int?)59, (int?)59, (int?)0, d_);
-            CqlQuantity f_ = context.Operators.Quantity((decimal?)1m, "day");
+            decimal? d_ = context.Operators.ConvertIntegerToDecimal(0);
+            CqlDateTime e_ = context.Operators.DateTime(c_, 3, 1, 23, 59, 59, 0, d_);
+            CqlQuantity f_ = context.Operators.Quantity(1m, "day");
             CqlDateTime g_ = context.Operators.Subtract(e_, f_);
             return g_;
         });
@@ -196,7 +196,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-706599413819521966L, () => {
             CqlDateTime a_ = this.March_1_of_Year_Prior_to_Measurement_Period(context);
             CqlDateTime b_ = this.Last_Calendar_Day_of_February_of_Measurement_Period(context);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
             return c_;
         });
 
@@ -1017,12 +1017,12 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     CqlDate xd_ = context.Operators.Start(xc_);
                     CqlDateTime xe_ = context.Operators.ConvertDateToDateTime(xd_);
                     CqlDate xf_ = context.Operators.DateFrom(xe_);
-                    CqlQuantity xg_ = context.Operators.Quantity((decimal?)120m, "days");
+                    CqlQuantity xg_ = context.Operators.Quantity(120m, "days");
                     CqlDate xh_ = context.Operators.Subtract(xf_, xg_);
                     CqlDate xj_ = context.Operators.Start(xc_);
                     CqlDateTime xk_ = context.Operators.ConvertDateToDateTime(xj_);
                     CqlDate xl_ = context.Operators.DateFrom(xk_);
-                    CqlInterval<CqlDate> xm_ = context.Operators.Interval(xh_, xl_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDate> xm_ = context.Operators.Interval(xh_, xl_, true, false);
                     bool? xn_ = context.Operators.Overlaps(xb_, xm_, default);
                     return xn_;
                 }
@@ -1105,9 +1105,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
             bool? m_(Encounter ValidEncounters) {
                 CqlDate o_ = this.IPSD(context);
-                CqlQuantity p_ = context.Operators.Quantity((decimal?)6m, "months");
+                CqlQuantity p_ = context.Operators.Quantity(6m, "months");
                 CqlDate q_ = context.Operators.Subtract(o_, p_);
-                CqlInterval<CqlDate> s_ = context.Operators.Interval(q_, o_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> s_ = context.Operators.Interval(q_, o_, true, true);
                 Period t_ = ValidEncounters?.Period;
                 CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
                 CqlInterval<CqlDate> v_ = CQMCommon_4_1_000.Instance.ToDateInterval(context, u_);
@@ -1149,9 +1149,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 CqlInterval<CqlDate> f_ = CQMCommon_4_1_000.Instance.ToDateInterval(context, e_);
                 CqlDate g_ = context.Operators.Start(f_);
                 CqlDate h_ = this.IPSD(context);
-                CqlQuantity j_ = context.Operators.Quantity((decimal?)30m, "days");
+                CqlQuantity j_ = context.Operators.Quantity(30m, "days");
                 CqlDate k_ = context.Operators.Add(h_, j_);
-                CqlInterval<CqlDate> l_ = context.Operators.Interval(h_, k_, (bool?)false, (bool?)true);
+                CqlInterval<CqlDate> l_ = context.Operators.Interval(h_, k_, false, true);
                 bool? m_ = context.Operators.In<CqlDate>(g_, l_, "day");
                 bool? o_ = context.Operators.Not((bool?)(h_ is null));
                 bool? p_ = context.Operators.And(m_, o_);
@@ -1319,9 +1319,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 CqlInterval<CqlDate> g_ = CQMCommon_4_1_000.Instance.ToDateInterval(context, f_);
                 CqlDate h_ = context.Operators.Start(g_);
                 CqlDate i_ = this.IPSD(context);
-                CqlQuantity k_ = context.Operators.Quantity((decimal?)30m, "days");
+                CqlQuantity k_ = context.Operators.Quantity(30m, "days");
                 CqlDate l_ = context.Operators.Add(i_, k_);
-                CqlInterval<CqlDate> m_ = context.Operators.Interval(i_, l_, (bool?)false, (bool?)true);
+                CqlInterval<CqlDate> m_ = context.Operators.Interval(i_, l_, false, true);
                 bool? n_ = context.Operators.In<CqlDate>(h_, m_, "day");
                 bool? p_ = context.Operators.Not((bool?)(i_ is null));
                 bool? q_ = context.Operators.And(n_, p_);
@@ -1908,9 +1908,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
             CqlInterval<CqlDate> ex_(CqlInterval<CqlDate> ADHDMedication) {
                 CqlDate mz_ = this.IPSD(context);
-                CqlQuantity nb_ = context.Operators.Quantity((decimal?)300m, "days");
+                CqlQuantity nb_ = context.Operators.Quantity(300m, "days");
                 CqlDate nc_ = context.Operators.Add(mz_, nb_);
-                CqlInterval<CqlDate> nd_ = context.Operators.Interval(mz_, nc_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> nd_ = context.Operators.Interval(mz_, nc_, true, true);
                 CqlInterval<CqlDate> ne_ = context.Operators.Intersect<CqlDate>(ADHDMedication, nd_);
                 return ne_;
             }
@@ -1949,9 +1949,9 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 CqlInterval<CqlDate> f_ = CQMCommon_4_1_000.Instance.ToDateInterval(context, e_);
                 CqlDate g_ = context.Operators.Start(f_);
                 CqlDate h_ = this.IPSD(context);
-                CqlQuantity j_ = context.Operators.Quantity((decimal?)300m, "days");
+                CqlQuantity j_ = context.Operators.Quantity(300m, "days");
                 CqlDate k_ = context.Operators.Add(h_, j_);
-                CqlInterval<CqlDate> l_ = context.Operators.Interval(h_, k_, (bool?)false, (bool?)true);
+                CqlInterval<CqlDate> l_ = context.Operators.Interval(h_, k_, false, true);
                 bool? m_ = context.Operators.In<CqlDate>(g_, l_, "day");
                 bool? o_ = context.Operators.Not((bool?)(h_ is null));
                 bool? p_ = context.Operators.And(m_, o_);
@@ -2019,11 +2019,11 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 CqlInterval<CqlDate> j_ = CQMCommon_4_1_000.Instance.ToDateInterval(context, i_);
                 CqlDate k_ = context.Operators.Start(j_);
                 CqlDate l_ = this.IPSD(context);
-                CqlQuantity m_ = context.Operators.Quantity((decimal?)31m, "days");
+                CqlQuantity m_ = context.Operators.Quantity(31m, "days");
                 CqlDate n_ = context.Operators.Add(l_, m_);
-                CqlQuantity p_ = context.Operators.Quantity((decimal?)300m, "days");
+                CqlQuantity p_ = context.Operators.Quantity(300m, "days");
                 CqlDate q_ = context.Operators.Add(l_, p_);
-                CqlInterval<CqlDate> r_ = context.Operators.Interval(n_, q_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> r_ = context.Operators.Interval(n_, q_, true, true);
                 bool? s_ = context.Operators.In<CqlDate>(k_, r_, "day");
                 return s_;
             }
@@ -2067,11 +2067,11 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 CqlInterval<CqlDate> k_ = CQMCommon_4_1_000.Instance.ToDateInterval(context, j_);
                 CqlDate l_ = context.Operators.Start(k_);
                 CqlDate m_ = this.IPSD(context);
-                CqlQuantity n_ = context.Operators.Quantity((decimal?)31m, "days");
+                CqlQuantity n_ = context.Operators.Quantity(31m, "days");
                 CqlDate o_ = context.Operators.Add(m_, n_);
-                CqlQuantity q_ = context.Operators.Quantity((decimal?)300m, "days");
+                CqlQuantity q_ = context.Operators.Quantity(300m, "days");
                 CqlDate r_ = context.Operators.Add(m_, q_);
-                CqlInterval<CqlDate> s_ = context.Operators.Interval(o_, r_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> s_ = context.Operators.Interval(o_, r_, true, true);
                 bool? t_ = context.Operators.In<CqlDate>(l_, s_, "day");
                 return t_;
             }

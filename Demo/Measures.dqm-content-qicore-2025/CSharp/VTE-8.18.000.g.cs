@@ -167,9 +167,9 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
         CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, d_);
         CqlDateTime f_ = context.Operators.Start(e_);
         CqlDate g_ = context.Operators.DateFrom(f_);
-        CqlQuantity h_ = context.Operators.Quantity((decimal?)1m, "days");
+        CqlQuantity h_ = context.Operators.Quantity(1m, "days");
         CqlDate i_ = context.Operators.Add(g_, h_);
-        CqlInterval<CqlDate> j_ = context.Operators.Interval(c_, i_, (bool?)true, (bool?)true);
+        CqlInterval<CqlDate> j_ = context.Operators.Interval(c_, i_, true, true);
         return j_;
     }
 

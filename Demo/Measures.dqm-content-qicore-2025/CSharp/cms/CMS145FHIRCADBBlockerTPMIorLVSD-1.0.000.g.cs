@@ -155,9 +155,9 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-3838999943742845946L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS145FHIRCADBBlockerTPMIorLVSD-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -492,11 +492,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     Period o_ = EncounterWithCADProxy?.Period;
                     CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
                     CqlDateTime q_ = context.Operators.Start(p_);
-                    CqlQuantity r_ = context.Operators.Quantity((decimal?)3m, "years");
+                    CqlQuantity r_ = context.Operators.Quantity(3m, "years");
                     CqlDateTime s_ = context.Operators.Subtract(q_, r_);
                     CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
                     CqlDateTime v_ = context.Operators.Start(u_);
-                    CqlInterval<CqlDateTime> w_ = context.Operators.Interval(s_, v_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> w_ = context.Operators.Interval(s_, v_, true, false);
                     bool? x_ = context.Operators.In<CqlDateTime>(n_, w_, "day");
                     CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
                     CqlDateTime aa_ = context.Operators.Start(z_);
@@ -718,7 +718,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 bool? x_ = context.Operators.And(r_, w_);
                 DataType y_ = tuple_ezawxthbubhdjanfnawxfxgjj?.HeartRateExam?.Value;
                 CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);
-                CqlQuantity aa_ = context.Operators.Quantity((decimal?)50m, "/min");
+                CqlQuantity aa_ = context.Operators.Quantity(50m, "/min");
                 bool? ab_ = context.Operators.Less(z_, aa_);
                 bool? ac_ = context.Operators.And(x_, ab_);
                 IEnumerable<Observation> ad_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate"));
@@ -877,7 +877,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 }
                 else
                 {
-                    return (bool?)false;
+                    return false;
                 };
             }
 
@@ -1408,7 +1408,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 bool? x_ = context.Operators.And(r_, w_);
                 DataType y_ = tuple_dyeiilrxycxwhkhdhbjdnjgdc?.HeartRateExam?.Value;
                 CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);
-                CqlQuantity aa_ = context.Operators.Quantity((decimal?)50m, "/min");
+                CqlQuantity aa_ = context.Operators.Quantity(50m, "/min");
                 bool? ab_ = context.Operators.Less(z_, aa_);
                 bool? ac_ = context.Operators.And(x_, ab_);
                 IEnumerable<Observation> ad_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate"));
@@ -1488,7 +1488,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                     CqlDateTime i_ = context.Operators.Start(h_);
                     object j_ = context.Operators.LateBoundProperty<object>(Event, "lastOccurrence");
                     CqlDateTime k_ = context.Operators.LateBoundProperty<CqlDateTime>(j_, "value");
-                    CqlInterval<CqlDateTime> l_ = context.Operators.Interval(i_, k_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> l_ = context.Operators.Interval(i_, k_, true, true);
                     Period m_ = Visit?.Period;
                     CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                     bool? o_ = context.Operators.OverlapsAfter(l_, n_, "day");
@@ -1522,7 +1522,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
                 }
                 else
                 {
-                    return (bool?)false;
+                    return false;
                 };
             }
 

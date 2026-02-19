@@ -87,9 +87,9 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     [CqlParameterDefinition("MeasurementPeriod")]
     public object MeasurementPeriod(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<object>(-7600276400685164205L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2013, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2014, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime b_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, default);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", c_);
             return d_;
         });

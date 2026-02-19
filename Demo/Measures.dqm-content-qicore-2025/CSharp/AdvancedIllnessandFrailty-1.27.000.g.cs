@@ -208,10 +208,10 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                 CqlDateTime k_ = context.Operators.Start(j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 CqlDateTime m_ = context.Operators.Start(l_);
-                CqlQuantity n_ = context.Operators.Quantity((decimal?)1m, "year");
+                CqlQuantity n_ = context.Operators.Quantity(1m, "year");
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlDateTime q_ = context.Operators.End(l_);
-                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
                 bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, "day");
                 return s_;
             }
@@ -267,10 +267,10 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
                 CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ab_, ae_, ag_, ai_);
                 CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
                 CqlDateTime al_ = context.Operators.Start(ak_);
-                CqlQuantity am_ = context.Operators.Quantity((decimal?)1m, "year");
+                CqlQuantity am_ = context.Operators.Quantity(1m, "year");
                 CqlDateTime an_ = context.Operators.Subtract(al_, am_);
                 CqlDateTime ap_ = context.Operators.End(ak_);
-                CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(an_, ap_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(an_, ap_, true, true);
                 bool? ar_ = context.Operators.Overlaps(aj_, aq_, "day");
                 return ar_;
             }
@@ -314,7 +314,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             CqlDateTime f_ = context.Operators.End(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval((int?)66, (int?)80, (bool?)true, (bool?)true);
+            CqlInterval<int?> i_ = context.Operators.Interval(66, 80, true, true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             bool? k_ = this.Has_Criteria_Indicating_Frailty(context);
             bool? l_ = context.Operators.And(j_, k_);

@@ -269,9 +269,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1830887859865804800L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS996FHIRAptTxforSTEMI-2.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -611,11 +611,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     Period ao_ = EDwithSTEMI?.Period;
                     CqlInterval<CqlDateTime> ap_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ao_);
                     CqlDateTime aq_ = context.Operators.Start(ap_);
-                    CqlQuantity ar_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity ar_ = context.Operators.Quantity(90m, "days");
                     CqlDateTime as_ = context.Operators.Subtract(aq_, ar_);
                     CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ao_);
                     CqlDateTime av_ = context.Operators.Start(au_);
-                    CqlInterval<CqlDateTime> aw_ = context.Operators.Interval(as_, av_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> aw_ = context.Operators.Interval(as_, av_, true, true);
                     bool? ax_ = context.Operators.In<CqlDateTime>(an_, aw_, default);
                     CqlInterval<CqlDateTime> az_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ao_);
                     CqlDateTime ba_ = context.Operators.Start(az_);
@@ -733,11 +733,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlDateTime as_ = context.Operators.Start(am_);
                     CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ao_);
                     CqlDateTime av_ = context.Operators.Start(au_);
-                    CqlQuantity aw_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    CqlQuantity aw_ = context.Operators.Quantity(24m, "hours");
                     CqlDateTime ax_ = context.Operators.Subtract(av_, aw_);
                     CqlInterval<CqlDateTime> az_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ao_);
                     CqlDateTime ba_ = context.Operators.Start(az_);
-                    CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(ax_, ba_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(ax_, ba_, true, false);
                     bool? bc_ = context.Operators.In<CqlDateTime>(as_, bb_, default);
                     CqlInterval<CqlDateTime> be_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ao_);
                     CqlDateTime bf_ = context.Operators.Start(be_);
@@ -837,11 +837,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     Period m_ = EDwithSTEMI?.Period;
                     CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                     CqlDateTime o_ = context.Operators.Start(n_);
-                    CqlQuantity p_ = context.Operators.Quantity((decimal?)21m, "days");
+                    CqlQuantity p_ = context.Operators.Quantity(21m, "days");
                     CqlDateTime q_ = context.Operators.Subtract(o_, p_);
                     CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                     CqlDateTime t_ = context.Operators.Start(s_);
-                    CqlInterval<CqlDateTime> u_ = context.Operators.Interval(q_, t_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> u_ = context.Operators.Interval(q_, t_, true, false);
                     bool? v_ = context.Operators.In<CqlDateTime>(l_, u_, default);
                     CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                     CqlDateTime y_ = context.Operators.Start(x_);
@@ -1085,11 +1085,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlDateTime u_ = context.Operators.Start(t_);
                     CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime x_ = context.Operators.Start(w_);
-                    CqlQuantity y_ = context.Operators.Quantity((decimal?)24m, "hours");
+                    CqlQuantity y_ = context.Operators.Quantity(24m, "hours");
                     CqlDateTime z_ = context.Operators.Subtract(x_, y_);
                     CqlInterval<CqlDateTime> ab_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime ac_ = context.Operators.Start(ab_);
-                    CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(z_, ac_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(z_, ac_, true, false);
                     bool? ae_ = context.Operators.In<CqlDateTime>(u_, ad_, default);
                     CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime ah_ = context.Operators.Start(ag_);
@@ -1139,11 +1139,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     Period u_ = EDwSTEMI?.Period;
                     CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                     CqlDateTime w_ = context.Operators.Start(v_);
-                    CqlQuantity x_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity x_ = context.Operators.Quantity(90m, "days");
                     CqlDateTime y_ = context.Operators.Subtract(w_, x_);
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                     CqlDateTime ab_ = context.Operators.Start(aa_);
-                    CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(y_, ab_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(y_, ab_, true, true);
                     bool? ad_ = context.Operators.In<CqlDateTime>(t_, ac_, default);
                     return ad_;
                 }
@@ -1238,11 +1238,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     Period m_ = EDwithSTEMI?.Period;
                     CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                     CqlDateTime o_ = context.Operators.Start(n_);
-                    CqlQuantity p_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity p_ = context.Operators.Quantity(90m, "days");
                     CqlDateTime q_ = context.Operators.Subtract(o_, p_);
                     CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                     CqlDateTime t_ = context.Operators.Start(s_);
-                    CqlInterval<CqlDateTime> u_ = context.Operators.Interval(q_, t_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> u_ = context.Operators.Interval(q_, t_, true, false);
                     bool? v_ = context.Operators.In<CqlDateTime>(l_, u_, default);
                     CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
                     CqlDateTime y_ = context.Operators.Start(x_);
@@ -1339,11 +1339,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlInterval<CqlDateTime> br_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bi_);
                     CqlInterval<CqlDateTime> bt_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bl_);
                     CqlDateTime bu_ = context.Operators.Start(bt_);
-                    CqlQuantity bv_ = context.Operators.Quantity((decimal?)6m, "months");
+                    CqlQuantity bv_ = context.Operators.Quantity(6m, "months");
                     CqlDateTime bw_ = context.Operators.Subtract(bu_, bv_);
                     CqlInterval<CqlDateTime> by_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bl_);
                     CqlDateTime bz_ = context.Operators.End(by_);
-                    CqlInterval<CqlDateTime> ca_ = context.Operators.Interval(bw_, bz_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> ca_ = context.Operators.Interval(bw_, bz_, true, true);
                     bool? cb_ = context.Operators.Overlaps(br_, ca_, "day");
                     bool? cc_ = context.Operators.And(bp_, cb_);
                     return cc_;
@@ -1366,11 +1366,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlInterval<CqlDateTime> cl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cd_);
                     CqlInterval<CqlDateTime> cn_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cg_);
                     CqlDateTime co_ = context.Operators.Start(cn_);
-                    CqlQuantity cp_ = context.Operators.Quantity((decimal?)6m, "months");
+                    CqlQuantity cp_ = context.Operators.Quantity(6m, "months");
                     CqlDateTime cq_ = context.Operators.Subtract(co_, cp_);
                     CqlInterval<CqlDateTime> cs_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cg_);
                     CqlDateTime ct_ = context.Operators.End(cs_);
-                    CqlInterval<CqlDateTime> cu_ = context.Operators.Interval(cq_, ct_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> cu_ = context.Operators.Interval(cq_, ct_, true, true);
                     bool? cv_ = context.Operators.Overlaps(cl_, cu_, "day");
                     bool? cw_ = context.Operators.And(cj_, cv_);
                     return cw_;
@@ -1403,11 +1403,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlInterval<CqlDateTime> dn_ = QICoreCommon_4_0_000.Instance.toInterval(context, dm_);
                     CqlInterval<CqlDateTime> dp_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dg_);
                     CqlDateTime dq_ = context.Operators.Start(dp_);
-                    CqlQuantity dr_ = context.Operators.Quantity((decimal?)6m, "months");
+                    CqlQuantity dr_ = context.Operators.Quantity(6m, "months");
                     CqlDateTime ds_ = context.Operators.Subtract(dq_, dr_);
                     CqlInterval<CqlDateTime> du_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dg_);
                     CqlDateTime dv_ = context.Operators.End(du_);
-                    CqlInterval<CqlDateTime> dw_ = context.Operators.Interval(ds_, dv_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> dw_ = context.Operators.Interval(ds_, dv_, true, true);
                     bool? dx_ = context.Operators.Overlaps(dn_, dw_, "day");
                     bool? dy_ = context.Operators.And(dk_, dx_);
                     return dy_;
@@ -1426,11 +1426,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     Period eb_ = EDwSTEMI?.Period;
                     CqlInterval<CqlDateTime> ec_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, eb_);
                     CqlDateTime ed_ = context.Operators.Start(ec_);
-                    CqlQuantity ee_ = context.Operators.Quantity((decimal?)6m, "months");
+                    CqlQuantity ee_ = context.Operators.Quantity(6m, "months");
                     CqlDateTime ef_ = context.Operators.Subtract(ed_, ee_);
                     CqlInterval<CqlDateTime> eh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, eb_);
                     CqlDateTime ei_ = context.Operators.Start(eh_);
-                    CqlInterval<CqlDateTime> ej_ = context.Operators.Interval(ef_, ei_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> ej_ = context.Operators.Interval(ef_, ei_, true, false);
                     bool? ek_ = context.Operators.In<CqlDateTime>(ea_, ej_, default);
                     CqlInterval<CqlDateTime> em_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, eb_);
                     CqlDateTime en_ = context.Operators.Start(em_);
@@ -1583,11 +1583,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlInterval<CqlDateTime> ey_ = QICoreCommon_4_0_000.Instance.toInterval(context, ex_());
                     CqlInterval<CqlDateTime> fa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, et_);
                     CqlDateTime fb_ = context.Operators.Start(fa_);
-                    CqlQuantity fc_ = context.Operators.Quantity((decimal?)6m, "months");
+                    CqlQuantity fc_ = context.Operators.Quantity(6m, "months");
                     CqlDateTime fd_ = context.Operators.Subtract(fb_, fc_);
                     CqlInterval<CqlDateTime> ff_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, et_);
                     CqlDateTime fg_ = context.Operators.End(ff_);
-                    CqlInterval<CqlDateTime> fh_ = context.Operators.Interval(fd_, fg_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> fh_ = context.Operators.Interval(fd_, fg_, true, true);
                     bool? fi_ = context.Operators.Overlaps(ey_, fh_, "day");
                     bool? fj_ = context.Operators.And(ew_, fi_);
                     return fj_;
@@ -1973,9 +1973,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlInterval<CqlDateTime> ai_ = QICoreCommon_4_0_000.Instance.toInterval(context, ah_);
                     CqlDateTime aj_ = context.Operators.Start(ai_);
                     CqlDateTime ak_ = this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
-                    CqlQuantity am_ = context.Operators.Quantity((decimal?)30m, "minutes");
+                    CqlQuantity am_ = context.Operators.Quantity(30m, "minutes");
                     CqlDateTime an_ = context.Operators.Add(ak_, am_);
-                    CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(ak_, an_, (bool?)false, (bool?)true);
+                    CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(ak_, an_, false, true);
                     bool? ap_ = context.Operators.In<CqlDateTime>(aj_, ao_, default);
                     bool? ar_ = context.Operators.Not((bool?)(ak_ is null));
                     bool? as_ = context.Operators.And(ap_, ar_);
@@ -2071,9 +2071,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_());
                     CqlDateTime l_ = context.Operators.Start(k_);
                     CqlDateTime m_ = this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
-                    CqlQuantity o_ = context.Operators.Quantity((decimal?)90m, "minutes");
+                    CqlQuantity o_ = context.Operators.Quantity(90m, "minutes");
                     CqlDateTime p_ = context.Operators.Add(m_, o_);
-                    CqlInterval<CqlDateTime> q_ = context.Operators.Interval(m_, p_, (bool?)false, (bool?)true);
+                    CqlInterval<CqlDateTime> q_ = context.Operators.Interval(m_, p_, false, true);
                     bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, default);
                     bool? t_ = context.Operators.Not((bool?)(m_ is null));
                     bool? u_ = context.Operators.And(r_, t_);
@@ -2162,9 +2162,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             bool? b_(Encounter EDwithSTEMI) {
                 CqlDateTime d_ = this.currentemergencyDepartmentDepartTime(context, EDwithSTEMI);
                 CqlDateTime e_ = this.currentemergencyDepartmentArrivalTime(context, EDwithSTEMI);
-                CqlQuantity g_ = context.Operators.Quantity((decimal?)45m, "minutes");
+                CqlQuantity g_ = context.Operators.Quantity(45m, "minutes");
                 CqlDateTime h_ = context.Operators.Add(e_, g_);
-                CqlInterval<CqlDateTime> i_ = context.Operators.Interval(e_, h_, (bool?)false, (bool?)true);
+                CqlInterval<CqlDateTime> i_ = context.Operators.Interval(e_, h_, false, true);
                 bool? j_ = context.Operators.In<CqlDateTime>(d_, i_, default);
                 bool? l_ = context.Operators.Not((bool?)(e_ is null));
                 bool? m_ = context.Operators.And(j_, l_);

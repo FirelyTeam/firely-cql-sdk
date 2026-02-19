@@ -349,7 +349,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             bool? c_(Observation LDL) {
                 DataType e_ = LDL?.Value;
                 CqlQuantity f_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, e_ as Quantity);
-                CqlQuantity g_ = context.Operators.Quantity((decimal?)190m, "mg/dL");
+                CqlQuantity g_ = context.Operators.Quantity(190m, "mg/dL");
                 bool? h_ = context.Operators.GreaterOrEqual(f_, g_);
                 DataType i_ = LDL?.Effective;
                 CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
@@ -461,7 +461,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
             CqlDateTime f_ = context.Operators.Start(e_);
             int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
-            CqlInterval<int?> h_ = context.Operators.Interval((int?)40, (int?)75, (bool?)true, (bool?)true);
+            CqlInterval<int?> h_ = context.Operators.Interval(40, 75, true, true);
             bool? i_ = context.Operators.In<int?>(g_, h_, default);
             bool? j_ = this.Has_Diabetes_Diagnosis(context);
             bool? k_ = context.Operators.And(i_, j_);

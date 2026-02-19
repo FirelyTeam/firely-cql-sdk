@@ -88,9 +88,9 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(2868529862524195936L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS165FHIRControllingHighBP-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -123,9 +123,9 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
                 CqlDateTime k_ = context.Operators.Start(j_);
                 CqlDateTime m_ = context.Operators.Start(j_);
-                CqlQuantity n_ = context.Operators.Quantity((decimal?)6m, "months");
+                CqlQuantity n_ = context.Operators.Quantity(6m, "months");
                 CqlDateTime o_ = context.Operators.Add(m_, n_);
-                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(k_, o_, (bool?)true, (bool?)false);
+                CqlInterval<CqlDateTime> p_ = context.Operators.Interval(k_, o_, true, false);
                 bool? q_ = context.Operators.Overlaps(i_, p_, default);
                 return q_;
             }
@@ -146,7 +146,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             CqlDateTime f_ = context.Operators.End(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval((int?)18, (int?)85, (bool?)true, (bool?)true);
+            CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             IEnumerable<object> k_ = this.Essential_Hypertension_Diagnosis(context);
             bool? l_ = context.Operators.Exists<object>(k_);
@@ -517,7 +517,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Has_Systolic_Blood_Pressure_Less_Than_140(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<bool?>(1921186777350050006L, () => {
             CqlQuantity a_ = this.Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day(context);
-            CqlQuantity b_ = context.Operators.Quantity((decimal?)140m, "mm[Hg]");
+            CqlQuantity b_ = context.Operators.Quantity(140m, "mm[Hg]");
             bool? c_ = context.Operators.Less(a_, b_);
             return c_;
         });
@@ -578,7 +578,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Has_Diastolic_Blood_Pressure_Less_Than_90(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<bool?>(6962517168965446750L, () => {
             CqlQuantity a_ = this.Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day(context);
-            CqlQuantity b_ = context.Operators.Quantity((decimal?)90m, "mm[Hg]");
+            CqlQuantity b_ = context.Operators.Quantity(90m, "mm[Hg]");
             bool? c_ = context.Operators.Less(a_, b_);
             return c_;
         });

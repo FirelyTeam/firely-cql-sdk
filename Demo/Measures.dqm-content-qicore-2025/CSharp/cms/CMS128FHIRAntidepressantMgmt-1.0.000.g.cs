@@ -73,9 +73,9 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-3336974086985530416L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS128FHIRAntidepressantMgmt-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -100,9 +100,9 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-            int? d_ = context.Operators.Subtract(c_, (int?)1);
-            decimal? e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-            CqlDateTime f_ = context.Operators.DateTime(d_, (int?)5, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
+            int? d_ = context.Operators.Subtract(c_, 1);
+            decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+            CqlDateTime f_ = context.Operators.DateTime(d_, 5, 1, 0, 0, 0, 0, e_);
             return f_;
         });
 
@@ -113,8 +113,8 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-            decimal? d_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-            CqlDateTime e_ = context.Operators.DateTime(c_, (int?)4, (int?)30, (int?)23, (int?)59, (int?)59, (int?)0, d_);
+            decimal? d_ = context.Operators.ConvertIntegerToDecimal(0);
+            CqlDateTime e_ = context.Operators.DateTime(c_, 4, 30, 23, 59, 59, 0, d_);
             return e_;
         });
 
@@ -124,7 +124,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(5805669011297124889L, () => {
             CqlDateTime a_ = this.May_1_of_the_Year_Prior_to_the_Measurement_Period(context);
             CqlDateTime b_ = this.April_30_of_the_Measurement_Period(context);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
             return c_;
         });
 
@@ -213,10 +213,10 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MajorDepression);
                 CqlDateTime m_ = context.Operators.Start(l_);
                 CqlDate n_ = context.Operators.DateFrom(m_);
-                CqlQuantity p_ = context.Operators.Quantity((decimal?)60m, "days");
+                CqlQuantity p_ = context.Operators.Quantity(60m, "days");
                 CqlDate q_ = context.Operators.Subtract(j_, p_);
                 CqlDate t_ = context.Operators.Add(j_, p_);
-                CqlInterval<CqlDate> u_ = context.Operators.Interval(q_, t_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> u_ = context.Operators.Interval(q_, t_, true, true);
                 bool? v_ = context.Operators.In<CqlDate>(n_, u_, default);
                 bool? x_ = context.Operators.Not((bool?)(j_ is null));
                 bool? y_ = context.Operators.And(v_, x_);
@@ -270,10 +270,10 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlDateTime ai_ = context.Operators.Start(ah_);
                 CqlDate aj_ = context.Operators.DateFrom(ai_);
                 CqlDate ak_ = this.IPSD(context);
-                CqlQuantity al_ = context.Operators.Quantity((decimal?)60m, "days");
+                CqlQuantity al_ = context.Operators.Quantity(60m, "days");
                 CqlDate am_ = context.Operators.Subtract(ak_, al_);
                 CqlDate ap_ = context.Operators.Add(ak_, al_);
-                CqlInterval<CqlDate> aq_ = context.Operators.Interval(am_, ap_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> aq_ = context.Operators.Interval(am_, ap_, true, true);
                 bool? ar_ = context.Operators.In<CqlDate>(aj_, aq_, default);
                 bool? at_ = context.Operators.Not((bool?)(ak_ is null));
                 bool? au_ = context.Operators.And(ar_, at_);
@@ -361,9 +361,9 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 bool? am_ = ad_?.highClosed;
                 CqlInterval<CqlDateTime> an_ = context.Operators.Interval(af_, ai_, ak_, am_);
                 CqlInterval<CqlDate> ao_ = CQMCommon_4_1_000.Instance.ToDateInterval(context, an_);
-                CqlQuantity aq_ = context.Operators.Quantity((decimal?)105m, "days");
+                CqlQuantity aq_ = context.Operators.Quantity(105m, "days");
                 CqlDate ar_ = context.Operators.Subtract(ab_, aq_);
-                CqlInterval<CqlDate> at_ = context.Operators.Interval(ar_, ab_, (bool?)true, (bool?)false);
+                CqlInterval<CqlDate> at_ = context.Operators.Interval(ar_, ab_, true, false);
                 bool? au_ = context.Operators.Overlaps(ao_, at_, default);
                 bool? av_ = context.Operators.And(ac_, au_);
                 return av_;
@@ -413,9 +413,9 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDate> h_(MedicationDispense Antidepressant) {
                 CqlInterval<CqlDate> z_ = CumulativeMedicationDuration_6_0_000.Instance.medicationDispensePeriod(context, Antidepressant);
                 CqlDate aa_ = this.IPSD(context);
-                CqlQuantity ac_ = context.Operators.Quantity((decimal?)114m, "days");
+                CqlQuantity ac_ = context.Operators.Quantity(114m, "days");
                 CqlDate ad_ = context.Operators.Add(aa_, ac_);
-                CqlInterval<CqlDate> ae_ = context.Operators.Interval(aa_, ad_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> ae_ = context.Operators.Interval(aa_, ad_, true, true);
                 CqlInterval<CqlDate> af_ = context.Operators.Intersect<CqlDate>(z_, ae_);
                 return af_;
             }
@@ -481,9 +481,9 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
             CqlInterval<CqlDate> h_(MedicationDispense Antidepressant) {
                 CqlInterval<CqlDate> z_ = CumulativeMedicationDuration_6_0_000.Instance.medicationDispensePeriod(context, Antidepressant);
                 CqlDate aa_ = this.IPSD(context);
-                CqlQuantity ac_ = context.Operators.Quantity((decimal?)231m, "days");
+                CqlQuantity ac_ = context.Operators.Quantity(231m, "days");
                 CqlDate ad_ = context.Operators.Add(aa_, ac_);
-                CqlInterval<CqlDate> ae_ = context.Operators.Interval(aa_, ad_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> ae_ = context.Operators.Interval(aa_, ad_, true, true);
                 CqlInterval<CqlDate> af_ = context.Operators.Intersect<CqlDate>(z_, ae_);
                 return af_;
             }

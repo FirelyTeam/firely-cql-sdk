@@ -95,9 +95,9 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(6905366931702746391L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, default);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("TJCOverallFHIR-1.8.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -349,10 +349,10 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
     {
         CqlDate a_ = context.Operators.DateFrom(StartValue);
-        CqlQuantity b_ = context.Operators.Quantity((decimal?)1m, "day");
+        CqlQuantity b_ = context.Operators.Quantity(1m, "day");
         CqlDateTime c_ = context.Operators.Add(StartValue, b_);
         CqlDate d_ = context.Operators.DateFrom(c_);
-        CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, (bool?)true, (bool?)true);
+        CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, true, true);
         return e_;
     }
 

@@ -66,12 +66,12 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlInterval<CqlDateTime> ag_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ab_);
             CqlDateTime ah_ = context.Operators.End(ag_);
             CqlDate ai_ = context.Operators.DateFrom(ah_);
-            CqlInterval<CqlDate> aj_ = context.Operators.Interval(ae_, ai_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDate> aj_ = context.Operators.Interval(ae_, ai_, true, true);
             CqlDateTime ak_ = context.Operators.Start(Period);
             CqlDate al_ = context.Operators.DateFrom(ak_);
             CqlDateTime am_ = context.Operators.End(Period);
             CqlDate an_ = context.Operators.DateFrom(am_);
-            CqlInterval<CqlDate> ao_ = context.Operators.Interval(al_, an_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDate> ao_ = context.Operators.Interval(al_, an_, true, true);
             bool? ap_ = context.Operators.Overlaps(aj_, ao_, default);
             return ap_;
         }
@@ -90,12 +90,12 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlInterval<CqlDateTime> av_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, aq_ as object);
             CqlDateTime aw_ = context.Operators.End(av_);
             CqlDate ax_ = context.Operators.DateFrom(aw_);
-            CqlInterval<CqlDate> ay_ = context.Operators.Interval(at_, ax_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDate> ay_ = context.Operators.Interval(at_, ax_, true, true);
             CqlDateTime az_ = context.Operators.Start(Period);
             CqlDate ba_ = context.Operators.DateFrom(az_);
             CqlDateTime bb_ = context.Operators.End(Period);
             CqlDate bc_ = context.Operators.DateFrom(bb_);
-            CqlInterval<CqlDate> bd_ = context.Operators.Interval(ba_, bc_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDate> bd_ = context.Operators.Interval(ba_, bc_, true, true);
             bool? be_ = context.Operators.Overlaps(ay_, bd_, default);
             return be_;
         }
@@ -115,12 +115,12 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlInterval<CqlDateTime> bk_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, bf_);
             CqlDateTime bl_ = context.Operators.End(bk_);
             CqlDate bm_ = context.Operators.DateFrom(bl_);
-            CqlInterval<CqlDate> bn_ = context.Operators.Interval(bi_, bm_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDate> bn_ = context.Operators.Interval(bi_, bm_, true, true);
             CqlDateTime bo_ = context.Operators.Start(Period);
             CqlDate bp_ = context.Operators.DateFrom(bo_);
             CqlDateTime bq_ = context.Operators.End(Period);
             CqlDate br_ = context.Operators.DateFrom(bq_);
-            CqlInterval<CqlDate> bs_ = context.Operators.Interval(bp_, br_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDate> bs_ = context.Operators.Interval(bp_, br_, true, true);
             bool? bt_ = context.Operators.Overlaps(bn_, bs_, default);
             return bt_;
         }
@@ -139,12 +139,12 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlDate bw_ = context.Operators.DateFrom(bv_);
             CqlDateTime by_ = context.Operators.End(bu_);
             CqlDate bz_ = context.Operators.DateFrom(by_);
-            CqlInterval<CqlDate> ca_ = context.Operators.Interval(bw_, bz_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDate> ca_ = context.Operators.Interval(bw_, bz_, true, true);
             CqlDateTime cb_ = context.Operators.Start(Period);
             CqlDate cc_ = context.Operators.DateFrom(cb_);
             CqlDateTime cd_ = context.Operators.End(Period);
             CqlDate ce_ = context.Operators.DateFrom(cd_);
-            CqlInterval<CqlDate> cf_ = context.Operators.Interval(cc_, ce_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDate> cf_ = context.Operators.Interval(cc_, ce_, true, true);
             bool? cg_ = context.Operators.Overlaps(ca_, cf_, default);
             return cg_;
         }

@@ -89,9 +89,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8833359695928542789L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS771FHIRUrinarySymptomScoreBPH-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -191,10 +191,10 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 CqlDateTime n_ = context.Operators.Start(m_);
                 CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
                 CqlDateTime p_ = context.Operators.Start(o_);
-                CqlQuantity q_ = context.Operators.Quantity((decimal?)6m, "months");
+                CqlQuantity q_ = context.Operators.Quantity(6m, "months");
                 CqlDateTime r_ = context.Operators.Subtract(p_, q_);
                 CqlDateTime t_ = context.Operators.Start(o_);
-                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(r_, t_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(r_, t_, true, true);
                 bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, default);
                 bool? w_ = this.verificationStatusIsNotInvalid(context, NewBPHDiagnosis);
                 bool? x_ = context.Operators.And(v_, w_);
@@ -631,9 +631,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                     CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
                     CqlDateTime o_ = context.Operators.Start(n_);
                     CqlDateTime q_ = context.Operators.Start(n_);
-                    CqlQuantity r_ = context.Operators.Quantity((decimal?)1m, "month");
+                    CqlQuantity r_ = context.Operators.Quantity(1m, "month");
                     CqlDateTime s_ = context.Operators.Add(q_, r_);
-                    CqlInterval<CqlDateTime> t_ = context.Operators.Interval(o_, s_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> t_ = context.Operators.Interval(o_, s_, true, true);
                     bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, "day");
                     CqlDateTime w_ = context.Operators.Start(n_);
                     bool? x_ = context.Operators.Not((bool?)(w_ is null));
@@ -676,7 +676,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                     CqlDateTime n_ = context.Operators.Start(m_);
                     CqlDateTime o_ = USSAssessment?.effectiveDatetime;
                     int? p_ = context.Operators.DifferenceBetween(n_, o_, "month");
-                    CqlInterval<int?> q_ = context.Operators.Interval((int?)6, (int?)12, (bool?)true, (bool?)true);
+                    CqlInterval<int?> q_ = context.Operators.Interval(6, 12, true, true);
                     bool? r_ = context.Operators.In<int?>(p_, q_, default);
                     return r_;
                 }
@@ -734,9 +734,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
                     CqlDateTime s_ = context.Operators.Start(r_);
                     CqlDateTime u_ = context.Operators.Start(r_);
-                    CqlQuantity v_ = context.Operators.Quantity((decimal?)1m, "year");
+                    CqlQuantity v_ = context.Operators.Quantity(1m, "year");
                     CqlDateTime w_ = context.Operators.Add(u_, v_);
-                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(s_, w_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(s_, w_, true, true);
                     bool? y_ = context.Operators.In<CqlDateTime>(q_, x_, "day");
                     CqlDateTime aa_ = context.Operators.Start(r_);
                     bool? ab_ = context.Operators.Not((bool?)(aa_ is null));
@@ -782,9 +782,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                     CqlDateTime p_ = context.Operators.Start(o_);
                     CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime s_ = context.Operators.End(r_);
-                    CqlQuantity t_ = context.Operators.Quantity((decimal?)31m, "days");
+                    CqlQuantity t_ = context.Operators.Quantity(31m, "days");
                     CqlDateTime u_ = context.Operators.Add(s_, t_);
-                    CqlInterval<CqlDateTime> v_ = context.Operators.Interval(p_, u_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> v_ = context.Operators.Interval(p_, u_, true, true);
                     bool? w_ = context.Operators.In<CqlDateTime>(m_, v_, default);
                     Code<Encounter.EncounterStatus> x_ = UrologyHospitalServices?.StatusElement;
                     Encounter.EncounterStatus? y_ = x_?.Value;
@@ -865,7 +865,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 bool? j_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) {
                     DataType n_ = BMIExam?.Value;
                     CqlQuantity o_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, n_ as Quantity);
-                    CqlQuantity p_ = context.Operators.Quantity((decimal?)40m, "kg/m2");
+                    CqlQuantity p_ = context.Operators.Quantity(40m, "kg/m2");
                     bool? q_ = context.Operators.GreaterOrEqual(o_, p_);
                     Code<ObservationStatus> r_ = BMIExam?.StatusElement;
                     ObservationStatus? s_ = r_?.Value;

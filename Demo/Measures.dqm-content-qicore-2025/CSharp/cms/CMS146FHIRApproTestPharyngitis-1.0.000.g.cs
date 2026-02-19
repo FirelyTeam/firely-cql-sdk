@@ -119,9 +119,9 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-6776689049211967329L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS146FHIRApproTestPharyngitis-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -248,9 +248,9 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 CqlInterval<CqlDateTime> bg_ = this.Measurement_Period(context);
                 CqlDateTime bh_ = context.Operators.Start(bg_);
                 CqlDateTime bj_ = context.Operators.End(bg_);
-                CqlQuantity bk_ = context.Operators.Quantity((decimal?)3m, "days");
+                CqlQuantity bk_ = context.Operators.Quantity(3m, "days");
                 CqlDateTime bl_ = context.Operators.Subtract(bj_, bk_);
-                CqlInterval<CqlDateTime> bm_ = context.Operators.Interval(bh_, bl_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> bm_ = context.Operators.Interval(bh_, bl_, true, true);
                 bool? bn_ = context.Operators.In<CqlDateTime>(bf_, bm_, "day");
                 return bn_;
             }
@@ -304,10 +304,10 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                     CqlDateTime ag_ = context.Operators.Start(af_);
                     FhirDateTime ah_ = AntibioticOrdered?.AuthoredOnElement;
                     CqlDateTime ai_ = context.Operators.Convert<CqlDateTime>(ah_);
-                    CqlQuantity aj_ = context.Operators.Quantity((decimal?)3m, "days");
+                    CqlQuantity aj_ = context.Operators.Quantity(3m, "days");
                     CqlDateTime ak_ = context.Operators.Subtract(ai_, aj_);
                     CqlDateTime am_ = context.Operators.Convert<CqlDateTime>(ah_);
-                    CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ak_, am_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ak_, am_, true, true);
                     bool? ao_ = context.Operators.In<CqlDateTime>(ag_, an_, "day");
                     CqlDateTime aq_ = context.Operators.Convert<CqlDateTime>(ah_);
                     bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
@@ -519,12 +519,12 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 Period p_ = tuple_ffguysnebcxllexfcmjoehbij?.EncounterWithPharyngitis?.Period;
                 CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                 CqlDateTime r_ = context.Operators.End(q_);
-                CqlQuantity s_ = context.Operators.Quantity((decimal?)3m, "days");
+                CqlQuantity s_ = context.Operators.Quantity(3m, "days");
                 CqlDateTime t_ = context.Operators.Subtract(r_, s_);
                 CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                 CqlDateTime w_ = context.Operators.End(v_);
                 CqlDateTime y_ = context.Operators.Add(w_, s_);
-                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(t_, y_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(t_, y_, true, true);
                 bool? aa_ = context.Operators.In<CqlDateTime>(o_, z_, "day");
                 return aa_;
             }
@@ -551,7 +551,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 CqlDateTime l_ = context.Operators.Start(k_);
                 CqlDate m_ = context.Operators.DateFrom(l_);
                 int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
-                CqlInterval<int?> o_ = context.Operators.Interval((int?)3, (int?)17, (bool?)true, (bool?)true);
+                CqlInterval<int?> o_ = context.Operators.Interval(3, 17, true, true);
                 bool? p_ = context.Operators.In<int?>(n_, o_, default);
                 return p_;
             }
@@ -578,7 +578,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 CqlDateTime l_ = context.Operators.Start(k_);
                 CqlDate m_ = context.Operators.DateFrom(l_);
                 int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
-                CqlInterval<int?> o_ = context.Operators.Interval((int?)18, (int?)64, (bool?)true, (bool?)true);
+                CqlInterval<int?> o_ = context.Operators.Interval(18, 64, true, true);
                 bool? p_ = context.Operators.In<int?>(n_, o_, default);
                 return p_;
             }

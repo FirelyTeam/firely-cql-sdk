@@ -343,7 +343,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? bm_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? bn_ = period?.value;
-                decimal? bo_ = context.Operators.Divide((decimal?)24.0m, bn_);
+                decimal? bo_ = context.Operators.Divide(24.0m, bn_);
                 decimal? bp_ = context.Operators.Multiply(bm_, bo_);
                 return bp_;
             }
@@ -351,9 +351,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? bq_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? br_ = period?.value;
-                decimal? bs_ = context.Operators.Divide((decimal?)24.0m, br_);
+                decimal? bs_ = context.Operators.Divide(24.0m, br_);
                 decimal? bt_ = context.Operators.Multiply(bq_, bs_);
-                decimal? bu_ = context.Operators.ConvertIntegerToDecimal((int?)60);
+                decimal? bu_ = context.Operators.ConvertIntegerToDecimal(60);
                 decimal? bv_ = context.Operators.Multiply(bt_, bu_);
                 return bv_;
             }
@@ -361,9 +361,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? bw_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? bx_ = period?.value;
-                decimal? by_ = context.Operators.Divide((decimal?)24.0m, bx_);
+                decimal? by_ = context.Operators.Divide(24.0m, bx_);
                 decimal? bz_ = context.Operators.Multiply(bw_, by_);
-                decimal? ca_ = context.Operators.ConvertIntegerToDecimal((int?)60);
+                decimal? ca_ = context.Operators.ConvertIntegerToDecimal(60);
                 decimal? cb_ = context.Operators.Multiply(bz_, ca_);
                 decimal? cd_ = context.Operators.Multiply(cb_, ca_);
                 return cd_;
@@ -372,9 +372,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? ce_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? cf_ = period?.value;
-                decimal? cg_ = context.Operators.Divide((decimal?)24.0m, cf_);
+                decimal? cg_ = context.Operators.Divide(24.0m, cf_);
                 decimal? ch_ = context.Operators.Multiply(ce_, cg_);
-                decimal? ci_ = context.Operators.ConvertIntegerToDecimal((int?)24);
+                decimal? ci_ = context.Operators.ConvertIntegerToDecimal(24);
                 decimal? cj_ = context.Operators.Divide(ch_, ci_);
                 return cj_;
             }
@@ -382,9 +382,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? ck_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? cl_ = period?.value;
-                decimal? cm_ = context.Operators.Divide((decimal?)24.0m, cl_);
+                decimal? cm_ = context.Operators.Divide(24.0m, cl_);
                 decimal? cn_ = context.Operators.Multiply(ck_, cm_);
-                int? co_ = context.Operators.Multiply((int?)24, (int?)7);
+                int? co_ = context.Operators.Multiply(24, 7);
                 decimal? cp_ = context.Operators.ConvertIntegerToDecimal(co_);
                 decimal? cq_ = context.Operators.Divide(cn_, cp_);
                 return cq_;
@@ -393,9 +393,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? cr_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? cs_ = period?.value;
-                decimal? ct_ = context.Operators.Divide((decimal?)24.0m, cs_);
+                decimal? ct_ = context.Operators.Divide(24.0m, cs_);
                 decimal? cu_ = context.Operators.Multiply(cr_, ct_);
-                int? cv_ = context.Operators.Multiply((int?)24, (int?)30);
+                int? cv_ = context.Operators.Multiply(24, 30);
                 decimal? cw_ = context.Operators.ConvertIntegerToDecimal(cv_);
                 decimal? cx_ = context.Operators.Divide(cu_, cw_);
                 return cx_;
@@ -404,9 +404,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? cy_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? cz_ = period?.value;
-                decimal? da_ = context.Operators.Divide((decimal?)24.0m, cz_);
+                decimal? da_ = context.Operators.Divide(24.0m, cz_);
                 decimal? db_ = context.Operators.Multiply(cy_, da_);
-                int? dc_ = context.Operators.Multiply((int?)24, (int?)365);
+                int? dc_ = context.Operators.Multiply(24, 365);
                 decimal? dd_ = context.Operators.ConvertIntegerToDecimal(dc_);
                 decimal? de_ = context.Operators.Divide(db_, dd_);
                 return de_;
@@ -415,7 +415,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? df_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? dg_ = period?.value;
-                decimal? dh_ = context.Operators.Divide((decimal?)24.0m, dg_);
+                decimal? dh_ = context.Operators.Divide(24.0m, dg_);
                 decimal? di_ = context.Operators.Multiply(df_, dh_);
                 return di_;
             }
@@ -423,9 +423,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? dj_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? dk_ = period?.value;
-                decimal? dl_ = context.Operators.Divide((decimal?)24.0m, dk_);
+                decimal? dl_ = context.Operators.Divide(24.0m, dk_);
                 decimal? dm_ = context.Operators.Multiply(dj_, dl_);
-                decimal? dn_ = context.Operators.ConvertIntegerToDecimal((int?)60);
+                decimal? dn_ = context.Operators.ConvertIntegerToDecimal(60);
                 decimal? do_ = context.Operators.Multiply(dm_, dn_);
                 return do_;
             }
@@ -433,9 +433,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? dp_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? dq_ = period?.value;
-                decimal? dr_ = context.Operators.Divide((decimal?)24.0m, dq_);
+                decimal? dr_ = context.Operators.Divide(24.0m, dq_);
                 decimal? ds_ = context.Operators.Multiply(dp_, dr_);
-                decimal? dt_ = context.Operators.ConvertIntegerToDecimal((int?)60);
+                decimal? dt_ = context.Operators.ConvertIntegerToDecimal(60);
                 decimal? du_ = context.Operators.Multiply(ds_, dt_);
                 decimal? dw_ = context.Operators.Multiply(du_, dt_);
                 return dw_;
@@ -444,9 +444,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? dx_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? dy_ = period?.value;
-                decimal? dz_ = context.Operators.Divide((decimal?)24.0m, dy_);
+                decimal? dz_ = context.Operators.Divide(24.0m, dy_);
                 decimal? ea_ = context.Operators.Multiply(dx_, dz_);
-                decimal? eb_ = context.Operators.ConvertIntegerToDecimal((int?)24);
+                decimal? eb_ = context.Operators.ConvertIntegerToDecimal(24);
                 decimal? ec_ = context.Operators.Divide(ea_, eb_);
                 return ec_;
             }
@@ -454,9 +454,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? ed_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? ee_ = period?.value;
-                decimal? ef_ = context.Operators.Divide((decimal?)24.0m, ee_);
+                decimal? ef_ = context.Operators.Divide(24.0m, ee_);
                 decimal? eg_ = context.Operators.Multiply(ed_, ef_);
-                int? eh_ = context.Operators.Multiply((int?)24, (int?)7);
+                int? eh_ = context.Operators.Multiply(24, 7);
                 decimal? ei_ = context.Operators.ConvertIntegerToDecimal(eh_);
                 decimal? ej_ = context.Operators.Divide(eg_, ei_);
                 return ej_;
@@ -465,9 +465,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? ek_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? el_ = period?.value;
-                decimal? em_ = context.Operators.Divide((decimal?)24.0m, el_);
+                decimal? em_ = context.Operators.Divide(24.0m, el_);
                 decimal? en_ = context.Operators.Multiply(ek_, em_);
-                int? eo_ = context.Operators.Multiply((int?)24, (int?)30);
+                int? eo_ = context.Operators.Multiply(24, 30);
                 decimal? ep_ = context.Operators.ConvertIntegerToDecimal(eo_);
                 decimal? eq_ = context.Operators.Divide(en_, ep_);
                 return eq_;
@@ -476,9 +476,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? er_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? es_ = period?.value;
-                decimal? et_ = context.Operators.Divide((decimal?)24.0m, es_);
+                decimal? et_ = context.Operators.Divide(24.0m, es_);
                 decimal? eu_ = context.Operators.Multiply(er_, et_);
-                int? ev_ = context.Operators.Multiply((int?)24, (int?)365);
+                int? ev_ = context.Operators.Multiply(24, 365);
                 decimal? ew_ = context.Operators.ConvertIntegerToDecimal(ev_);
                 decimal? ex_ = context.Operators.Divide(eu_, ew_);
                 return ex_;
@@ -487,7 +487,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? ey_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? ez_ = period?.value;
-                decimal? fa_ = context.Operators.Divide((decimal?)24.0m, ez_);
+                decimal? fa_ = context.Operators.Divide(24.0m, ez_);
                 decimal? fb_ = context.Operators.Multiply(ey_, fa_);
                 return fb_;
             }
@@ -495,9 +495,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? fc_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? fd_ = period?.value;
-                decimal? fe_ = context.Operators.Divide((decimal?)24.0m, fd_);
+                decimal? fe_ = context.Operators.Divide(24.0m, fd_);
                 decimal? ff_ = context.Operators.Multiply(fc_, fe_);
-                decimal? fg_ = context.Operators.ConvertIntegerToDecimal((int?)60);
+                decimal? fg_ = context.Operators.ConvertIntegerToDecimal(60);
                 decimal? fh_ = context.Operators.Multiply(ff_, fg_);
                 return fh_;
             }
@@ -505,9 +505,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? fi_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? fj_ = period?.value;
-                decimal? fk_ = context.Operators.Divide((decimal?)24.0m, fj_);
+                decimal? fk_ = context.Operators.Divide(24.0m, fj_);
                 decimal? fl_ = context.Operators.Multiply(fi_, fk_);
-                decimal? fm_ = context.Operators.ConvertIntegerToDecimal((int?)60);
+                decimal? fm_ = context.Operators.ConvertIntegerToDecimal(60);
                 decimal? fn_ = context.Operators.Multiply(fl_, fm_);
                 decimal? fp_ = context.Operators.Multiply(fn_, fm_);
                 return fp_;
@@ -516,9 +516,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? fq_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? fr_ = period?.value;
-                decimal? fs_ = context.Operators.Divide((decimal?)24.0m, fr_);
+                decimal? fs_ = context.Operators.Divide(24.0m, fr_);
                 decimal? ft_ = context.Operators.Multiply(fq_, fs_);
-                decimal? fu_ = context.Operators.ConvertIntegerToDecimal((int?)24);
+                decimal? fu_ = context.Operators.ConvertIntegerToDecimal(24);
                 decimal? fv_ = context.Operators.Divide(ft_, fu_);
                 return fv_;
             }
@@ -526,9 +526,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? fw_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? fx_ = period?.value;
-                decimal? fy_ = context.Operators.Divide((decimal?)24.0m, fx_);
+                decimal? fy_ = context.Operators.Divide(24.0m, fx_);
                 decimal? fz_ = context.Operators.Multiply(fw_, fy_);
-                int? ga_ = context.Operators.Multiply((int?)24, (int?)7);
+                int? ga_ = context.Operators.Multiply(24, 7);
                 decimal? gb_ = context.Operators.ConvertIntegerToDecimal(ga_);
                 decimal? gc_ = context.Operators.Divide(fz_, gb_);
                 return gc_;
@@ -537,9 +537,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? gd_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? ge_ = period?.value;
-                decimal? gf_ = context.Operators.Divide((decimal?)24.0m, ge_);
+                decimal? gf_ = context.Operators.Divide(24.0m, ge_);
                 decimal? gg_ = context.Operators.Multiply(gd_, gf_);
-                int? gh_ = context.Operators.Multiply((int?)24, (int?)30);
+                int? gh_ = context.Operators.Multiply(24, 30);
                 decimal? gi_ = context.Operators.ConvertIntegerToDecimal(gh_);
                 decimal? gj_ = context.Operators.Divide(gg_, gi_);
                 return gj_;
@@ -548,9 +548,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             {
                 decimal? gk_ = context.Operators.ConvertIntegerToDecimal(frequency);
                 decimal? gl_ = period?.value;
-                decimal? gm_ = context.Operators.Divide((decimal?)24.0m, gl_);
+                decimal? gm_ = context.Operators.Divide(24.0m, gl_);
                 decimal? gn_ = context.Operators.Multiply(gk_, gm_);
-                int? go_ = context.Operators.Multiply((int?)24, (int?)365);
+                int? go_ = context.Operators.Multiply(24, 365);
                 decimal? gp_ = context.Operators.ConvertIntegerToDecimal(go_);
                 decimal? gq_ = context.Operators.Divide(gn_, gp_);
                 return gq_;
@@ -583,7 +583,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
             if (b_())
             {
-                return (decimal?)3.0m;
+                return 3.0m;
             }
             else
             {
@@ -652,7 +652,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                     DataType aq_ = ap_?.Bounds;
                     CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, aq_ as Period);
                     CqlDateTime as_ = context.Operators.End(ar_);
-                    CqlInterval<CqlDateTime> at_ = context.Operators.Interval((af_ ?? aj_) ?? al_, as_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> at_ = context.Operators.Interval((af_ ?? aj_) ?? al_, as_, true, true);
                     return at_;
                 }
                 else
@@ -724,17 +724,17 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                     List<Time> ds_ = dr_?.TimeOfDayElement;
                     int? dt_ = context.Operators.Count<Time>((IEnumerable<Time>)ds_);
                     decimal? du_ = context.Operators.ConvertIntegerToDecimal(dt_);
-                    CqlQuantity dv_ = context.Operators.ConvertDecimalToQuantity((dn_ ?? du_) ?? (decimal?)1.0m);
+                    CqlQuantity dv_ = context.Operators.ConvertDecimalToQuantity((dn_ ?? du_) ?? 1.0m);
                     CqlQuantity dw_ = context.Operators.Multiply(cg_ ?? cm_, dv_);
                     CqlQuantity dx_ = context.Operators.Divide(bz_, dw_);
                     UnsignedInt dz_ = bb_?.NumberOfRepeatsAllowedElement;
                     Integer ea_ = context.Operators.Convert<Integer>(dz_);
                     int? eb_ = FHIRHelpers_4_0_001.Instance.ToInteger(context, ea_);
-                    int? ec_ = context.Operators.Add((int?)1, eb_ ?? (int?)0);
+                    int? ec_ = context.Operators.Add(1, eb_ ?? 0);
                     CqlQuantity ed_ = context.Operators.ConvertIntegerToQuantity(ec_);
                     CqlQuantity ee_ = context.Operators.Multiply(bw_ ?? dx_, ed_);
                     CqlDateTime ef_ = context.Operators.Add((bn_ ?? br_) ?? bt_, ee_);
-                    CqlInterval<CqlDateTime> eg_ = context.Operators.Interval((ba_ ?? be_) ?? bg_, ef_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> eg_ = context.Operators.Interval((ba_ ?? be_) ?? bg_, ef_, true, true);
                     return eg_;
                 };
             }
@@ -806,11 +806,11 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             List<Time> bh_ = bg_?.TimeOfDayElement;
             int? bi_ = context.Operators.Count<Time>((IEnumerable<Time>)bh_);
             decimal? bj_ = context.Operators.ConvertIntegerToDecimal(bi_);
-            CqlQuantity bk_ = context.Operators.ConvertDecimalToQuantity((bc_ ?? bj_) ?? (decimal?)1.0m);
+            CqlQuantity bk_ = context.Operators.ConvertDecimalToQuantity((bc_ ?? bj_) ?? 1.0m);
             CqlQuantity bl_ = context.Operators.Multiply(v_ ?? ab_, bk_);
             CqlQuantity bm_ = context.Operators.Divide(o_, bl_);
             CqlDateTime bn_ = context.Operators.Add(k_, m_ ?? bm_);
-            CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(h_, bn_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(h_, bn_, true, true);
             return bo_;
         }
 
@@ -824,7 +824,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     [CqlFunctionDefinition("TherapeuticDuration")]
     public CqlQuantity TherapeuticDuration(CqlContext context, CqlConcept medication)
     {
-        CqlQuantity a_ = context.Operators.Quantity((decimal?)14m, "days");
+        CqlQuantity a_ = context.Operators.Quantity(14m, "days");
         return a_;
     }
 
@@ -864,7 +864,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                     CqlConcept x_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, w_ as CodeableConcept);
                     CqlQuantity y_ = this.TherapeuticDuration(context, x_);
                     CqlDateTime z_ = context.Operators.Add(v_, y_);
-                    CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(s_, z_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(s_, z_, true, true);
                     return aa_;
                 }
                 else
@@ -913,7 +913,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             CqlInterval<CqlDateTime> d_(CqlInterval<CqlDateTime> X) {
                 CqlInterval<CqlDateTime> j_ = context.Operators.Last<CqlInterval<CqlDateTime>>(R);
                 CqlDateTime k_ = context.Operators.End(j_);
-                CqlQuantity l_ = context.Operators.Quantity((decimal?)1m, "day");
+                CqlQuantity l_ = context.Operators.Quantity(1m, "day");
                 CqlDateTime m_ = context.Operators.Add(k_, l_);
                 CqlDateTime n_ = context.Operators.Start(X);
                 CqlDateTime[] o_ = [
@@ -930,9 +930,9 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 CqlDateTime w_ = context.Operators.Max<CqlDateTime>((IEnumerable<CqlDateTime>)v_);
                 CqlDateTime y_ = context.Operators.End(X);
                 int? z_ = context.Operators.DurationBetween(n_, y_, "day");
-                decimal? aa_ = context.Operators.ConvertIntegerToDecimal(z_ ?? (int?)0);
+                decimal? aa_ = context.Operators.ConvertIntegerToDecimal(z_ ?? 0);
                 CqlDateTime ab_ = context.Operators.Add(w_, new CqlQuantity(aa_, "day"));
-                CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(p_, ab_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(p_, ab_, true, true);
                 return ac_;
             }
 

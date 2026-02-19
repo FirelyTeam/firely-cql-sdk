@@ -107,9 +107,9 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8443783423410390790L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS69FHIRPCSBMIScreenAndFollowUp-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -263,7 +263,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? c_(Observation BMI) {
                 DataType e_ = BMI?.Value;
                 CqlQuantity f_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, e_ as Quantity);
-                CqlQuantity g_ = context.Operators.Quantity((decimal?)0m, "kg/m2");
+                CqlQuantity g_ = context.Operators.Quantity(0m, "kg/m2");
                 bool? h_ = context.Operators.Greater(f_, g_);
                 CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
                 DataType j_ = BMI?.Effective;
@@ -287,7 +287,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? b_(Observation BMI) {
                 DataType d_ = BMI?.Value;
                 CqlQuantity e_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, d_ as Quantity);
-                CqlQuantity f_ = context.Operators.Quantity((decimal?)25m, "kg/m2");
+                CqlQuantity f_ = context.Operators.Quantity(25m, "kg/m2");
                 bool? g_ = context.Operators.GreaterOrEqual(e_, f_);
                 return g_;
             }
@@ -655,7 +655,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? b_(Observation BMI) {
                 DataType d_ = BMI?.Value;
                 CqlQuantity e_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, d_ as Quantity);
-                CqlQuantity f_ = context.Operators.Quantity((decimal?)18.5m, "kg/m2");
+                CqlQuantity f_ = context.Operators.Quantity(18.5m, "kg/m2");
                 bool? g_ = context.Operators.Less(e_, f_);
                 return g_;
             }
@@ -1102,10 +1102,10 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? b_(Observation BMI) {
                 DataType l_ = BMI?.Value;
                 CqlQuantity m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity);
-                CqlQuantity n_ = context.Operators.Quantity((decimal?)18.5m, "kg/m2");
+                CqlQuantity n_ = context.Operators.Quantity(18.5m, "kg/m2");
                 bool? o_ = context.Operators.GreaterOrEqual(m_, n_);
                 CqlQuantity q_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity);
-                CqlQuantity r_ = context.Operators.Quantity((decimal?)25m, "kg/m2");
+                CqlQuantity r_ = context.Operators.Quantity(25m, "kg/m2");
                 bool? s_ = context.Operators.Less(q_, r_);
                 bool? t_ = context.Operators.And(o_, s_);
                 return t_;

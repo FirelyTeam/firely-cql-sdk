@@ -141,10 +141,10 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 CqlInterval<CqlDateTime> ag_ = CumulativeMedicationDurationFHIR4_1_0_000.Instance.MedicationPeriod(context, DementiaMed as object);
                 CqlInterval<CqlDateTime> ah_ = this.Measurement_Period(context);
                 CqlDateTime ai_ = context.Operators.Start(ah_);
-                CqlQuantity aj_ = context.Operators.Quantity((decimal?)1m, "year");
+                CqlQuantity aj_ = context.Operators.Quantity(1m, "year");
                 CqlDateTime ak_ = context.Operators.Subtract(ai_, aj_);
                 CqlDateTime am_ = context.Operators.End(ah_);
-                CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ak_, am_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ak_, am_, true, true);
                 bool? ao_ = context.Operators.Overlaps(ag_, an_, default);
                 bool? ap_ = context.Operators.And(af_, ao_);
                 return ap_;
@@ -228,10 +228,10 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                     CqlDateTime ac_ = context.Operators.Start(ab_);
                     CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
                     CqlDateTime ae_ = context.Operators.End(ad_);
-                    CqlQuantity af_ = context.Operators.Quantity((decimal?)2m, "years");
+                    CqlQuantity af_ = context.Operators.Quantity(2m, "years");
                     CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
                     CqlDateTime ai_ = context.Operators.End(ad_);
-                    CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ag_, ai_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ag_, ai_, true, true);
                     bool? ak_ = context.Operators.In<CqlDateTime>(ac_, aj_, default);
                     CqlDateTime am_ = context.Operators.End(ad_);
                     bool? an_ = context.Operators.Not((bool?)(am_ is null));
@@ -271,7 +271,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 Period o_ = tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1?.Period;
                 CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, o_);
                 CqlDateTime q_ = context.Operators.End(p_);
-                CqlQuantity r_ = context.Operators.Quantity((decimal?)1m, "day");
+                CqlQuantity r_ = context.Operators.Quantity(1m, "day");
                 CqlDateTime s_ = context.Operators.Add(q_, r_);
                 bool? t_ = context.Operators.SameOrAfter(n_, s_, "day");
                 return t_;
@@ -310,10 +310,10 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             bool? f_((CqlTupleMetadata, CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)? tuple_cgadvoxeqbmgmpcpzothiiddb) {
                 CqlDateTime l_ = context.Operators.End(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod1);
                 CqlDateTime m_ = context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2);
-                CqlQuantity n_ = context.Operators.Quantity((decimal?)1m, "day");
+                CqlQuantity n_ = context.Operators.Quantity(1m, "day");
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlDateTime r_ = context.Operators.Add(m_, n_);
-                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(o_, r_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(o_, r_, true, true);
                 bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
                 bool? v_ = context.Operators.Not((bool?)(m_ is null));
                 bool? w_ = context.Operators.And(t_, v_);
@@ -325,7 +325,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             CqlInterval<CqlDateTime> h_((CqlTupleMetadata, CqlInterval<CqlDateTime> LTCPeriod1, CqlInterval<CqlDateTime> LTCPeriod2)? tuple_cgadvoxeqbmgmpcpzothiiddb) {
                 CqlDateTime x_ = context.Operators.Start(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod1);
                 CqlDateTime y_ = context.Operators.End(tuple_cgadvoxeqbmgmpcpzothiiddb?.LTCPeriod2);
-                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(x_, y_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> z_ = context.Operators.Interval(x_, y_, true, true);
                 return z_;
             }
 
@@ -384,10 +384,10 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                     CqlDateTime t_ = context.Operators.Start(s_);
                     CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
                     CqlDateTime v_ = context.Operators.End(u_);
-                    CqlQuantity w_ = context.Operators.Quantity((decimal?)2m, "years");
+                    CqlQuantity w_ = context.Operators.Quantity(2m, "years");
                     CqlDateTime x_ = context.Operators.Subtract(v_, w_);
                     CqlDateTime z_ = context.Operators.End(u_);
-                    CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
                     bool? ab_ = context.Operators.In<CqlDateTime>(t_, aa_, default);
                     CqlDateTime ad_ = context.Operators.End(u_);
                     bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
@@ -530,7 +530,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval((int?)65, (int?)79, (bool?)true, (bool?)true);
+            CqlInterval<int?> i_ = context.Operators.Interval(65, 79, true, true);
             bool? j_ = context.Operators.In<int?>(h_, i_, default);
             bool? k_ = this.Has_Criteria_Indicating_Frailty(context);
             bool? l_ = context.Operators.And(j_, k_);

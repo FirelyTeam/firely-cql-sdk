@@ -90,9 +90,9 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-3976733998904033760L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS135FHIRACEIorARBorARNIforHF-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -306,11 +306,11 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                     Period u_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                     CqlDateTime w_ = context.Operators.Start(v_);
-                    CqlQuantity x_ = context.Operators.Quantity((decimal?)9m, "months");
+                    CqlQuantity x_ = context.Operators.Quantity(9m, "months");
                     CqlDateTime y_ = context.Operators.Subtract(w_, x_);
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                     CqlDateTime ab_ = context.Operators.Start(aa_);
-                    CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(y_, ab_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(y_, ab_, true, true);
                     bool? ad_ = context.Operators.In<CqlDateTime>(t_, ac_, default);
                     CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                     CqlDateTime ag_ = context.Operators.Start(af_);
@@ -342,11 +342,11 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                     Period au_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> av_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, au_);
                     CqlDateTime aw_ = context.Operators.Start(av_);
-                    CqlQuantity ax_ = context.Operators.Quantity((decimal?)9m, "months");
+                    CqlQuantity ax_ = context.Operators.Quantity(9m, "months");
                     CqlDateTime ay_ = context.Operators.Subtract(aw_, ax_);
                     CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, au_);
                     CqlDateTime bb_ = context.Operators.Start(ba_);
-                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ay_, bb_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ay_, bb_, true, true);
                     bool? bd_ = context.Operators.In<CqlDateTime>(at_, bc_, default);
                     CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, au_);
                     CqlDateTime bg_ = context.Operators.Start(bf_);

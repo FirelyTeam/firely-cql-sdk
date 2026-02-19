@@ -101,7 +101,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlDateTime j_ = context.Operators.Start(i_);
                 CqlDate k_ = context.Operators.DateFrom(j_);
                 int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
-                CqlInterval<int?> m_ = context.Operators.Interval((int?)8, (int?)65, (bool?)true, (bool?)false);
+                CqlInterval<int?> m_ = context.Operators.Interval(8, 65, true, false);
                 bool? n_ = context.Operators.In<int?>(l_, m_, default);
                 return n_;
             }
@@ -136,11 +136,11 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     Period ck_ = Visit?.Period;
                     CqlInterval<CqlDateTime> cl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ck_);
                     CqlDateTime cm_ = context.Operators.Start(cl_);
-                    CqlQuantity cn_ = context.Operators.Quantity((decimal?)1m, "hour");
+                    CqlQuantity cn_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime co_ = context.Operators.Subtract(cm_, cn_);
                     CqlInterval<CqlDateTime> cq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ck_);
                     CqlDateTime cr_ = context.Operators.Start(cq_);
-                    CqlInterval<CqlDateTime> cs_ = context.Operators.Interval(co_, cr_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> cs_ = context.Operators.Interval(co_, cr_, true, true);
                     bool? ct_ = context.Operators.In<CqlDateTime>(cj_, cs_, default);
                     CqlInterval<CqlDateTime> cv_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ck_);
                     CqlDateTime cw_ = context.Operators.Start(cv_);
@@ -171,7 +171,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 Period at_ = Visit?.Period;
                 CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, at_);
                 CqlDateTime av_ = context.Operators.Start(au_);
-                CqlQuantity aw_ = context.Operators.Quantity((decimal?)1m, "hour");
+                CqlQuantity aw_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime ax_ = context.Operators.Subtract(as_ ?? av_, aw_);
                 IEnumerable<Encounter> az_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -182,11 +182,11 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     Period dk_ = Visit?.Period;
                     CqlInterval<CqlDateTime> dl_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dk_);
                     CqlDateTime dm_ = context.Operators.Start(dl_);
-                    CqlQuantity dn_ = context.Operators.Quantity((decimal?)1m, "hour");
+                    CqlQuantity dn_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime do_ = context.Operators.Subtract(dm_, dn_);
                     CqlInterval<CqlDateTime> dq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dk_);
                     CqlDateTime dr_ = context.Operators.Start(dq_);
-                    CqlInterval<CqlDateTime> ds_ = context.Operators.Interval(do_, dr_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> ds_ = context.Operators.Interval(do_, dr_, true, true);
                     bool? dt_ = context.Operators.In<CqlDateTime>(dj_, ds_, default);
                     CqlInterval<CqlDateTime> dv_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dk_);
                     CqlDateTime dw_ = context.Operators.Start(dv_);
@@ -216,7 +216,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlDateTime bh_ = context.Operators.Start(bg_);
                 CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, at_);
                 CqlDateTime bk_ = context.Operators.Start(bj_);
-                CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(ax_, bh_ ?? bk_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(ax_, bh_ ?? bk_, true, true);
                 bool? bm_ = context.Operators.In<CqlDateTime>(ai_, bl_, default);
                 IEnumerable<Encounter> bo_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -227,11 +227,11 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     Period ek_ = Visit?.Period;
                     CqlInterval<CqlDateTime> el_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ek_);
                     CqlDateTime em_ = context.Operators.Start(el_);
-                    CqlQuantity en_ = context.Operators.Quantity((decimal?)1m, "hour");
+                    CqlQuantity en_ = context.Operators.Quantity(1m, "hour");
                     CqlDateTime eo_ = context.Operators.Subtract(em_, en_);
                     CqlInterval<CqlDateTime> eq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ek_);
                     CqlDateTime er_ = context.Operators.Start(eq_);
-                    CqlInterval<CqlDateTime> es_ = context.Operators.Interval(eo_, er_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> es_ = context.Operators.Interval(eo_, er_, true, true);
                     bool? et_ = context.Operators.In<CqlDateTime>(ej_, es_, default);
                     CqlInterval<CqlDateTime> ev_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ek_);
                     CqlDateTime ew_ = context.Operators.Start(ev_);
@@ -295,11 +295,11 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 Period fn_ = Visit?.Period;
                 CqlInterval<CqlDateTime> fo_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fn_);
                 CqlDateTime fp_ = context.Operators.Start(fo_);
-                CqlQuantity fq_ = context.Operators.Quantity((decimal?)1m, "hour");
+                CqlQuantity fq_ = context.Operators.Quantity(1m, "hour");
                 CqlDateTime fr_ = context.Operators.Subtract(fp_, fq_);
                 CqlInterval<CqlDateTime> ft_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fn_);
                 CqlDateTime fu_ = context.Operators.Start(ft_);
-                CqlInterval<CqlDateTime> fv_ = context.Operators.Interval(fr_, fu_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> fv_ = context.Operators.Interval(fr_, fu_, true, true);
                 bool? fw_ = context.Operators.In<CqlDateTime>(fm_, fv_, default);
                 CqlInterval<CqlDateTime> fy_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fn_);
                 CqlDateTime fz_ = context.Operators.Start(fy_);
@@ -332,7 +332,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             CqlDateTime ab_ = context.Operators.Start(aa_);
             CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
             CqlDateTime ae_ = context.Operators.End(ad_);
-            CqlInterval<CqlDateTime> af_ = context.Operators.Interval(o_ ?? y_ ?? ab_, ae_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDateTime> af_ = context.Operators.Interval(o_ ?? y_ ?? ab_, ae_, true, true);
             return af_;
         }
 
@@ -446,8 +446,8 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
         CqlDateTime a_ = this.lastTimeOfDelivery(context, TheEncounter);
         CqlDateTime b_ = this.lastEstimatedDeliveryDate(context, TheEncounter);
         int? c_ = context.Operators.DifferenceBetween(a_, b_, "day");
-        int? d_ = context.Operators.Subtract((int?)280, c_);
-        int? e_ = context.Operators.TruncatedDivide(d_, (int?)7);
+        int? d_ = context.Operators.Subtract(280, c_);
+        int? e_ = context.Operators.TruncatedDivide(d_, 7);
         return e_;
     }
 
@@ -671,9 +671,9 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
             CqlDateTime u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_());
             CqlDateTime v_ = this.lastTimeOfDelivery(context, TheEncounter);
-            CqlQuantity w_ = context.Operators.Quantity((decimal?)42m, "weeks");
+            CqlQuantity w_ = context.Operators.Quantity(42m, "weeks");
             CqlDateTime x_ = context.Operators.Subtract(v_, w_);
-            CqlInterval<CqlDateTime> z_ = context.Operators.Interval(x_, v_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDateTime> z_ = context.Operators.Interval(x_, v_, true, true);
             bool? aa_ = context.Operators.In<CqlDateTime>(u_, z_, default);
             bool? ac_ = context.Operators.Not((bool?)(v_ is null));
             bool? ad_ = context.Operators.And(aa_, ac_);
@@ -824,9 +824,9 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
             CqlDateTime k_ = QICoreCommon_4_0_000.Instance.earliest(context, j_());
             CqlDateTime l_ = this.lastTimeOfDelivery(context, TheEncounter);
-            CqlQuantity m_ = context.Operators.Quantity((decimal?)24m, "hours");
+            CqlQuantity m_ = context.Operators.Quantity(24m, "hours");
             CqlDateTime n_ = context.Operators.Subtract(l_, m_);
-            CqlInterval<CqlDateTime> p_ = context.Operators.Interval(n_, l_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDateTime> p_ = context.Operators.Interval(n_, l_, true, true);
             bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, default);
             bool? s_ = context.Operators.Not((bool?)(l_ is null));
             bool? t_ = context.Operators.And(q_, s_);

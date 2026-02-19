@@ -77,9 +77,9 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(5584088217374446953L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS986FHIRMalnutritionScore-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -1221,8 +1221,8 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     [CqlFunctionDefinition("Measure Observation 1")]
     public int? Measure_Observation_1(CqlContext context, Encounter MalnutritionRiskScreening) =>
     ((context.Operators.Contains<Encounter>(this.Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral(context), MalnutritionRiskScreening)) ?? false
-        ? (int?)1
-        : (int?)0);
+        ? 1
+        : 0);
 
 
     [CqlFunctionDefinition("Measure Observation 2")]
@@ -1246,17 +1246,17 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
             if (b_())
             {
-                return (int?)0;
+                return 0;
             }
             else if (c_())
             {
                 return ((context.Operators.Contains<Encounter>(this.Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status(context), NutritionAssessment)) ?? false
-                    ? (int?)1
-                    : (int?)0);
+                    ? 1
+                    : 0);
             }
             else
             {
-                return (int?)0;
+                return 0;
             };
         }
 
@@ -1285,7 +1285,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
             if (b_())
             {
-                return (int?)0;
+                return 0;
             }
             else if (c_())
             {
@@ -1318,15 +1318,15 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
                             if (m_())
                             {
-                                return (int?)0;
+                                return 0;
                             }
                             else if (n_())
                             {
-                                return (int?)1;
+                                return 1;
                             }
                             else
                             {
-                                return (int?)0;
+                                return 0;
                             };
                         }
 
@@ -1334,7 +1334,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     }
                     else
                     {
-                        return (int?)0;
+                        return 0;
                     };
                 }
 
@@ -1342,7 +1342,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             }
             else
             {
-                return (int?)0;
+                return 0;
             };
         }
 
@@ -1371,7 +1371,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
             if (b_())
             {
-                return (int?)0;
+                return 0;
             }
             else if (c_())
             {
@@ -1404,15 +1404,15 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
                             if (m_())
                             {
-                                return (int?)0;
+                                return 0;
                             }
                             else if (n_())
                             {
-                                return (int?)1;
+                                return 1;
                             }
                             else
                             {
-                                return (int?)0;
+                                return 0;
                             };
                         }
 
@@ -1420,7 +1420,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     }
                     else
                     {
-                        return (int?)0;
+                        return 0;
                     };
                 }
 
@@ -1428,7 +1428,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             }
             else
             {
-                return (int?)0;
+                return 0;
             };
         }
 
@@ -1477,15 +1477,15 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
 
             if (b_())
             {
-                return (int?)1;
+                return 1;
             }
             else if (c_())
             {
-                return (int?)2;
+                return 2;
             }
             else
             {
-                return (int?)4;
+                return 4;
             };
         }
 
@@ -1514,7 +1514,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     [CqlFunctionDefinition("Measure Observation Total Malnutrition Care Score as Percentage")]
     public decimal? Measure_Observation_Total_Malnutrition_Care_Score_as_Percentage(CqlContext context, Encounter QualifyingEncounter)
     {
-        decimal? a_ = context.Operators.ConvertIntegerToDecimal((int?)100);
+        decimal? a_ = context.Operators.ConvertIntegerToDecimal(100);
         int? b_ = this.Measure_Observation_Total_Malnutrition_Components_Score(context, QualifyingEncounter);
         decimal? c_ = context.Operators.ConvertIntegerToDecimal(b_);
         int? d_ = this.Total_Malnutrition_Care_Score_Eligible_Occurrences(context, QualifyingEncounter);

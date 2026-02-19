@@ -711,9 +711,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                             FhirDecimal bu_ = bt_?.ValueElement;
                                             decimal? bv_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, bu_);
                                             CqlDateTime bw_ = context.Operators.Add(bs_, new CqlQuantity(bv_, "day"));
-                                            CqlQuantity bx_ = context.Operators.Quantity((decimal?)1m, "day");
+                                            CqlQuantity bx_ = context.Operators.Quantity(1m, "day");
                                             CqlDateTime by_ = context.Operators.Subtract(bw_, bx_);
-                                            CqlInterval<CqlDateTime> bz_ = context.Operators.Interval(bp_, by_, (bool?)true, (bool?)true);
+                                            CqlInterval<CqlDateTime> bz_ = context.Operators.Interval(bp_, by_, true, true);
                                             return bz_;
                                         }
                                         else
@@ -725,9 +725,9 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                             FhirDecimal cf_ = ce_?.ValueElement;
                                             decimal? cg_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, cf_);
                                             CqlDate ch_ = context.Operators.Add(cd_, new CqlQuantity(cg_, "day"));
-                                            CqlQuantity ci_ = context.Operators.Quantity((decimal?)1m, "day");
+                                            CqlQuantity ci_ = context.Operators.Quantity(1m, "day");
                                             CqlDate cj_ = context.Operators.Subtract(ch_, ci_);
-                                            CqlInterval<CqlDate> ck_ = context.Operators.Interval(cb_, cj_, (bool?)true, (bool?)true);
+                                            CqlInterval<CqlDate> ck_ = context.Operators.Interval(cb_, cj_, true, true);
                                             CqlDate cl_ = ck_?.low;
                                             CqlDateTime cm_ = context.Operators.ConvertDateToDateTime(cl_);
                                             CqlDate co_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
@@ -736,7 +736,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                             decimal? ct_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, cs_);
                                             CqlDate cu_ = context.Operators.Add(cq_, new CqlQuantity(ct_, "day"));
                                             CqlDate cw_ = context.Operators.Subtract(cu_, ci_);
-                                            CqlInterval<CqlDate> cx_ = context.Operators.Interval(co_, cw_, (bool?)true, (bool?)true);
+                                            CqlInterval<CqlDate> cx_ = context.Operators.Interval(co_, cw_, true, true);
                                             CqlDate cy_ = cx_?.high;
                                             CqlDateTime cz_ = context.Operators.ConvertDateToDateTime(cy_);
                                             CqlDate db_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
@@ -745,7 +745,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                             decimal? dg_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, df_);
                                             CqlDate dh_ = context.Operators.Add(dd_, new CqlQuantity(dg_, "day"));
                                             CqlDate dj_ = context.Operators.Subtract(dh_, ci_);
-                                            CqlInterval<CqlDate> dk_ = context.Operators.Interval(db_, dj_, (bool?)true, (bool?)true);
+                                            CqlInterval<CqlDate> dk_ = context.Operators.Interval(db_, dj_, true, true);
                                             bool? dl_ = dk_?.lowClosed;
                                             CqlDate dn_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
                                             CqlDate dp_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ca_ as Date);
@@ -753,7 +753,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                             decimal? ds_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, dr_);
                                             CqlDate dt_ = context.Operators.Add(dp_, new CqlQuantity(ds_, "day"));
                                             CqlDate dv_ = context.Operators.Subtract(dt_, ci_);
-                                            CqlInterval<CqlDate> dw_ = context.Operators.Interval(dn_, dv_, (bool?)true, (bool?)true);
+                                            CqlInterval<CqlDate> dw_ = context.Operators.Interval(dn_, dv_, true, true);
                                             bool? dx_ = dw_?.highClosed;
                                             CqlInterval<CqlDateTime> dy_ = context.Operators.Interval(cm_, cz_, dl_, dx_);
                                             return dy_;
@@ -1909,7 +1909,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                     bool? aq_(Money DollarAmount) {
                         FhirDecimal bg_ = DollarAmount?.ValueElement;
                         decimal? bh_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, bg_);
-                        decimal? bi_ = context.Operators.ConvertIntegerToDecimal((int?)0);
+                        decimal? bi_ = context.Operators.ConvertIntegerToDecimal(0);
                         bool? bj_ = context.Operators.Greater(bh_, bi_);
                         return bj_;
                     }
@@ -3017,10 +3017,10 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                                     FhirDecimal di_ = dh_?.ValueElement;
                                     decimal? dj_ = FHIRHelpers_4_0_001.Instance.ToDecimal(context, di_);
                                     CqlDateTime dk_ = context.Operators.Add(dg_, new CqlQuantity(dj_, "day"));
-                                    CqlQuantity dl_ = context.Operators.Quantity((decimal?)1m, "day");
+                                    CqlQuantity dl_ = context.Operators.Quantity(1m, "day");
                                     CqlDateTime dm_ = context.Operators.Subtract(dk_, dl_);
                                     CqlDate dn_ = context.Operators.ConvertDateTimeToDate(dm_);
-                                    CqlInterval<CqlDate> do_ = context.Operators.Interval(dd_, dn_, (bool?)true, (bool?)true);
+                                    CqlInterval<CqlDate> do_ = context.Operators.Interval(dd_, dn_, true, true);
                                     return do_;
                                 }
                                 else
@@ -3586,7 +3586,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         }
                         else
                         {
-                            return (int?)0;
+                            return 0;
                         };
                     }
 
@@ -3885,7 +3885,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         }
                         else
                         {
-                            return (int?)0;
+                            return 0;
                         };
                     }
 

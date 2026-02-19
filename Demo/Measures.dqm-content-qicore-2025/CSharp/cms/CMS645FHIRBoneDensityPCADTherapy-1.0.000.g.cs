@@ -63,9 +63,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-734786439587116816L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS645FHIRBoneDensityPCADTherapy-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -632,12 +632,12 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     bool? n_ = context.Operators.In<CqlDateTime>(ADTDateTime, m_, "day");
                     CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
                     CqlDateTime p_ = context.Operators.Start(o_);
-                    CqlQuantity q_ = context.Operators.Quantity((decimal?)3m, "months");
+                    CqlQuantity q_ = context.Operators.Quantity(3m, "months");
                     CqlDateTime r_ = context.Operators.Subtract(p_, q_);
                     CqlDateTime t_ = context.Operators.Start(o_);
-                    CqlQuantity u_ = context.Operators.Quantity((decimal?)9m, "months");
+                    CqlQuantity u_ = context.Operators.Quantity(9m, "months");
                     CqlDateTime v_ = context.Operators.Add(t_, u_);
-                    CqlInterval<CqlDateTime> w_ = context.Operators.Interval(r_, v_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> w_ = context.Operators.Interval(r_, v_, true, true);
                     bool? x_ = context.Operators.In<CqlDateTime>(ADTDateTime, w_, "day");
                     bool? y_ = context.Operators.And(n_, x_);
                     return y_;
@@ -676,12 +676,12 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(l_);
                     CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
                     CqlDateTime r_ = context.Operators.Start(q_);
-                    CqlQuantity s_ = context.Operators.Quantity((decimal?)3m, "months");
+                    CqlQuantity s_ = context.Operators.Quantity(3m, "months");
                     CqlDateTime t_ = context.Operators.Subtract(r_, s_);
                     CqlDateTime v_ = context.Operators.Start(q_);
-                    CqlQuantity w_ = context.Operators.Quantity((decimal?)9m, "months");
+                    CqlQuantity w_ = context.Operators.Quantity(9m, "months");
                     CqlDateTime x_ = context.Operators.Add(v_, w_);
-                    CqlInterval<CqlDateTime> y_ = context.Operators.Interval(t_, x_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> y_ = context.Operators.Interval(t_, x_, true, true);
                     bool? z_ = context.Operators.In<CqlDateTime>(p_, y_, "day");
                     bool? aa_ = context.Operators.And(n_, z_);
                     Code<RequestStatus> ab_ = OrderTwelveMonthADT?.StatusElement;
@@ -747,19 +747,19 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     FhirDateTime v_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                     CqlDateTime w_ = context.Operators.Convert<CqlDateTime>(v_);
                     CqlDateTime y_ = context.Operators.Convert<CqlDateTime>(v_);
-                    CqlQuantity z_ = context.Operators.Quantity((decimal?)3m, "months");
+                    CqlQuantity z_ = context.Operators.Quantity(3m, "months");
                     CqlDateTime aa_ = context.Operators.Add(y_, z_);
-                    CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(w_, aa_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(w_, aa_, true, true);
                     bool? ac_ = context.Operators.In<CqlDateTime>(u_, ab_, "day");
                     CqlDateTime ae_ = context.Operators.Convert<CqlDateTime>(v_);
                     bool? af_ = context.Operators.Not((bool?)(ae_ is null));
                     bool? ag_ = context.Operators.And(ac_, af_);
                     CqlDateTime ai_ = context.Operators.Convert<CqlDateTime>(t_);
                     CqlDateTime ak_ = context.Operators.Convert<CqlDateTime>(v_);
-                    CqlQuantity al_ = context.Operators.Quantity((decimal?)2m, "years");
+                    CqlQuantity al_ = context.Operators.Quantity(2m, "years");
                     CqlDateTime am_ = context.Operators.Subtract(ak_, al_);
                     CqlDateTime ao_ = context.Operators.Convert<CqlDateTime>(v_);
-                    CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(am_, ao_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(am_, ao_, true, false);
                     bool? aq_ = context.Operators.In<CqlDateTime>(ai_, ap_, "day");
                     CqlDateTime as_ = context.Operators.Convert<CqlDateTime>(v_);
                     bool? at_ = context.Operators.Not((bool?)(as_ is null));
@@ -808,9 +808,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     FhirDateTime bq_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                     CqlDateTime br_ = context.Operators.Convert<CqlDateTime>(bq_);
                     CqlDateTime bt_ = context.Operators.Convert<CqlDateTime>(bq_);
-                    CqlQuantity bu_ = context.Operators.Quantity((decimal?)3m, "months");
+                    CqlQuantity bu_ = context.Operators.Quantity(3m, "months");
                     CqlDateTime bv_ = context.Operators.Add(bt_, bu_);
-                    CqlInterval<CqlDateTime> bw_ = context.Operators.Interval(br_, bv_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> bw_ = context.Operators.Interval(br_, bv_, true, true);
                     bool? bx_ = context.Operators.In<CqlDateTime>(bp_, bw_, "day");
                     CqlDateTime bz_ = context.Operators.Convert<CqlDateTime>(bq_);
                     bool? ca_ = context.Operators.Not((bool?)(bz_ is null));
@@ -819,10 +819,10 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     CqlInterval<CqlDateTime> ce_ = QICoreCommon_4_0_000.Instance.toInterval(context, cd_);
                     CqlDateTime cf_ = context.Operators.End(ce_);
                     CqlDateTime ch_ = context.Operators.Convert<CqlDateTime>(bq_);
-                    CqlQuantity ci_ = context.Operators.Quantity((decimal?)2m, "years");
+                    CqlQuantity ci_ = context.Operators.Quantity(2m, "years");
                     CqlDateTime cj_ = context.Operators.Subtract(ch_, ci_);
                     CqlDateTime cl_ = context.Operators.Convert<CqlDateTime>(bq_);
-                    CqlInterval<CqlDateTime> cm_ = context.Operators.Interval(cj_, cl_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> cm_ = context.Operators.Interval(cj_, cl_, true, false);
                     bool? cn_ = context.Operators.In<CqlDateTime>(cf_, cm_, "day");
                     CqlDateTime cp_ = context.Operators.Convert<CqlDateTime>(bq_);
                     bool? cq_ = context.Operators.Not((bool?)(cp_ is null));
@@ -884,9 +884,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     FhirDateTime o_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                     CqlDateTime p_ = context.Operators.Convert<CqlDateTime>(o_);
                     CqlDateTime r_ = context.Operators.Convert<CqlDateTime>(o_);
-                    CqlQuantity s_ = context.Operators.Quantity((decimal?)3m, "months");
+                    CqlQuantity s_ = context.Operators.Quantity(3m, "months");
                     CqlDateTime t_ = context.Operators.Add(r_, s_);
-                    CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, true, true);
                     bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, "day");
                     CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(o_);
                     bool? y_ = context.Operators.Not((bool?)(x_ is null));
@@ -946,9 +946,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     FhirDateTime p_ = OrderTwelveMonthsADT?.AuthoredOnElement;
                     CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
                     CqlDateTime s_ = context.Operators.Convert<CqlDateTime>(p_);
-                    CqlQuantity t_ = context.Operators.Quantity((decimal?)3m, "months");
+                    CqlQuantity t_ = context.Operators.Quantity(3m, "months");
                     CqlDateTime u_ = context.Operators.Add(s_, t_);
-                    CqlInterval<CqlDateTime> v_ = context.Operators.Interval(q_, u_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> v_ = context.Operators.Interval(q_, u_, true, true);
                     bool? w_ = context.Operators.In<CqlDateTime>(o_, v_, "day");
                     CqlDateTime y_ = context.Operators.Convert<CqlDateTime>(p_);
                     bool? z_ = context.Operators.Not((bool?)(y_ is null));

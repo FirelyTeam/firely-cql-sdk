@@ -41,9 +41,9 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-30370437313442716L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS816FHIRHHHypo-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -270,7 +270,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                 bool? w_ = context.Operators.And(q_, v_);
                 DataType x_ = tuple_fadhmfgiduzpspclbhmqonodh?.GlucoseTest?.Value;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                CqlQuantity z_ = context.Operators.Quantity((decimal?)40m, "mg/dL");
+                CqlQuantity z_ = context.Operators.Quantity(40m, "mg/dL");
                 bool? aa_ = context.Operators.Less(y_ as CqlQuantity, z_);
                 bool? ab_ = context.Operators.And(w_, aa_);
                 DataType ac_ = tuple_fadhmfgiduzpspclbhmqonodh?.HypoglycemicMedication?.Effective;
@@ -328,7 +328,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                 }
 
                 CqlDateTime ah_ = QICoreCommon_4_0_000.Instance.earliest(context, ag_());
-                CqlQuantity ai_ = context.Operators.Quantity((decimal?)24m, "hours");
+                CqlQuantity ai_ = context.Operators.Quantity(24m, "hours");
                 CqlDateTime aj_ = context.Operators.Subtract(ah_, ai_);
 
                 object ak_() {
@@ -381,7 +381,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                 }
 
                 CqlDateTime al_ = QICoreCommon_4_0_000.Instance.earliest(context, ak_());
-                CqlInterval<CqlDateTime> am_ = context.Operators.Interval(aj_, al_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> am_ = context.Operators.Interval(aj_, al_, true, true);
                 bool? an_ = context.Operators.In<CqlDateTime>(af_, am_, default);
 
                 object ao_() {
@@ -618,9 +618,9 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                 }
 
                 CqlDateTime s_ = QICoreCommon_4_0_000.Instance.earliest(context, r_());
-                CqlQuantity t_ = context.Operators.Quantity((decimal?)5m, "minutes");
+                CqlQuantity t_ = context.Operators.Quantity(5m, "minutes");
                 CqlDateTime u_ = context.Operators.Add(s_, t_);
-                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(q_, u_, (bool?)false, (bool?)true);
+                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(q_, u_, false, true);
                 bool? w_ = context.Operators.In<CqlDateTime>(o_, v_, default);
 
                 object x_() {
@@ -801,7 +801,7 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
                 bool? ax_ = context.Operators.And(ar_, aw_);
                 DataType ay_ = tuple_fcmdncyhjlqsajxzjwdiopqvk?.FollowupGlucoseTest?.Value;
                 object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                CqlQuantity ba_ = context.Operators.Quantity((decimal?)80m, "mg/dL");
+                CqlQuantity ba_ = context.Operators.Quantity(80m, "mg/dL");
                 bool? bb_ = context.Operators.Greater(az_ as CqlQuantity, ba_);
                 bool? bc_ = context.Operators.And(ax_, bb_);
                 return bc_;

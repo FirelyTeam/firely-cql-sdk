@@ -257,7 +257,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             bool? c_(Observation EjectionFraction) {
                 DataType w_ = EjectionFraction?.Value;
                 object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-                CqlQuantity y_ = context.Operators.Quantity((decimal?)40m, "%");
+                CqlQuantity y_ = context.Operators.Quantity(40m, "%");
                 bool? z_ = context.Operators.LessOrEqual(x_ as CqlQuantity, y_);
                 Code<ObservationStatus> aa_ = EjectionFraction?.StatusElement;
                 ObservationStatus? ab_ = aa_?.Value;
@@ -986,7 +986,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlDateTime h_ = context.Operators.Start(g_);
             FhirDateTime i_ = AllergyIntolerance?.LastOccurrenceElement;
             CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
-            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(h_, j_, (bool?)true, (bool?)true);
+            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(h_, j_, true, true);
             Period l_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
             CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
             bool? n_ = context.Operators.OverlapsAfter(k_, m_, "day");
@@ -1175,13 +1175,13 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 CqlDateTime c_ = context.Operators.Add(startDate, b_ as CqlQuantity);
                 object d_ = context.Operators.LateBoundProperty<object>(choice, "high");
                 CqlDateTime e_ = context.Operators.Add(startDate, d_ as CqlQuantity);
-                CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
                 return f_;
             }
             else if (choice is CqlQuantity)
             {
                 CqlDateTime g_ = context.Operators.Add(startDate, choice as CqlQuantity);
-                CqlInterval<CqlDateTime> h_ = context.Operators.Interval(startDate, g_, (bool?)true, (bool?)false);
+                CqlInterval<CqlDateTime> h_ = context.Operators.Interval(startDate, g_, true, false);
                 return h_;
             }
             else

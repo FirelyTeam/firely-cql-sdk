@@ -163,9 +163,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-4989734324354607034L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS56FHIRFuncStatHipReplacement-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -222,9 +222,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-            int? d_ = context.Operators.Subtract(c_, (int?)1);
-            decimal? e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-            CqlDateTime f_ = context.Operators.DateTime(d_, (int?)8, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
+            int? d_ = context.Operators.Subtract(c_, 1);
+            decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+            CqlDateTime f_ = context.Operators.DateTime(d_, 8, 1, 0, 0, 0, 0, e_);
             return f_;
         });
 
@@ -275,7 +275,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDateTime ad_ = this.August_1_Year_Prior_to_the_Measurement_Period(context);
                 CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
                 CqlDateTime af_ = context.Operators.End(ae_);
-                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ad_, af_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ad_, af_, true, true);
                 Period ah_ = ValidEncounters?.Period;
                 CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ah_);
                 bool? aj_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ag_, ai_, "day");
@@ -294,9 +294,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-            int? d_ = context.Operators.Subtract(c_, (int?)2);
-            decimal? e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-            CqlDateTime f_ = context.Operators.DateTime(d_, (int?)11, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
+            int? d_ = context.Operators.Subtract(c_, 2);
+            decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+            CqlDateTime f_ = context.Operators.DateTime(d_, 11, 1, 0, 0, 0, 0, e_);
             return f_;
         });
 
@@ -307,9 +307,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-            int? d_ = context.Operators.Subtract(c_, (int?)1);
-            decimal? e_ = context.Operators.ConvertIntegerToDecimal((int?)0);
-            CqlDateTime f_ = context.Operators.DateTime(d_, (int?)10, (int?)31, (int?)23, (int?)59, (int?)59, (int?)999, e_);
+            int? d_ = context.Operators.Subtract(c_, 1);
+            decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+            CqlDateTime f_ = context.Operators.DateTime(d_, 10, 31, 23, 59, 59, 999, e_);
             return f_;
         });
 
@@ -390,7 +390,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlDateTime h_ = context.Operators.Start(g_);
                 CqlDateTime i_ = this.November_1_Two_Years_Prior_to_the_Measurement_Period(context);
                 CqlDateTime j_ = this.October_31_Year_Prior_to_the_Measurement_Period(context);
-                CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_, true, true);
                 bool? l_ = context.Operators.In<CqlDateTime>(h_, k_, "day");
                 return l_;
             }
@@ -564,7 +564,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
                     CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_());
                     CqlDateTime r_ = context.Operators.Start(q_);
-                    CqlQuantity s_ = context.Operators.Quantity((decimal?)48m, "hours");
+                    CqlQuantity s_ = context.Operators.Quantity(48m, "hours");
                     CqlDateTime t_ = context.Operators.Subtract(r_, s_);
 
                     object u_() {
@@ -632,7 +632,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
                     CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_());
                     CqlDateTime w_ = context.Operators.Start(v_);
-                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
                     bool? y_ = context.Operators.In<CqlDateTime>(o_, x_, default);
 
                     object z_() {
@@ -1374,7 +1374,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
                     CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_());
                     CqlDateTime w_ = context.Operators.Start(v_);
-                    CqlQuantity x_ = context.Operators.Quantity((decimal?)1m, "year");
+                    CqlQuantity x_ = context.Operators.Quantity(1m, "year");
                     CqlDateTime y_ = context.Operators.Subtract(w_, x_);
 
                     object z_() {
@@ -1443,7 +1443,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_());
                     CqlDateTime ab_ = context.Operators.Start(aa_);
                     CqlDateTime ad_ = context.Operators.Add(ab_, x_);
-                    CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(y_, ad_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(y_, ad_, true, true);
                     bool? af_ = context.Operators.In<CqlDateTime>(t_, ae_, "day");
                     bool? ag_ = context.Operators.And(q_, af_);
                     return ag_;
@@ -1605,9 +1605,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_());
                 CqlDateTime o_ = context.Operators.Start(n_);
                 CqlDate p_ = context.Operators.DateFrom(o_);
-                CqlQuantity q_ = context.Operators.Quantity((decimal?)300m, "days");
+                CqlQuantity q_ = context.Operators.Quantity(300m, "days");
                 CqlDate r_ = context.Operators.Add(p_, q_);
-                CqlInterval<CqlDate> s_ = context.Operators.Interval(l_, r_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> s_ = context.Operators.Interval(l_, r_, true, true);
                 bool? t_ = context.Operators.In<CqlDate>(h_, s_, "day");
                 return t_;
             }
@@ -1869,20 +1869,20 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
                 bool? ak_(CqlDate InitialHipAssessmentHOOS) {
                     CqlDateTime ao_ = context.Operators.Start(TotalHip);
-                    CqlQuantity ap_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity ap_ = context.Operators.Quantity(90m, "days");
                     CqlDate aq_ = context.Operators.Add(InitialHipAssessmentHOOS, ap_);
-                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitialHipAssessmentHOOS, aq_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitialHipAssessmentHOOS, aq_, true, true);
                     CqlDate as_ = ar_?.low;
                     CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
                     CqlDate av_ = context.Operators.Add(InitialHipAssessmentHOOS, ap_);
-                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitialHipAssessmentHOOS, av_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitialHipAssessmentHOOS, av_, true, true);
                     CqlDate ax_ = aw_?.high;
                     CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
                     CqlDate ba_ = context.Operators.Add(InitialHipAssessmentHOOS, ap_);
-                    CqlInterval<CqlDate> bb_ = context.Operators.Interval(InitialHipAssessmentHOOS, ba_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> bb_ = context.Operators.Interval(InitialHipAssessmentHOOS, ba_, true, true);
                     bool? bc_ = bb_?.lowClosed;
                     CqlDate be_ = context.Operators.Add(InitialHipAssessmentHOOS, ap_);
-                    CqlInterval<CqlDate> bf_ = context.Operators.Interval(InitialHipAssessmentHOOS, be_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> bf_ = context.Operators.Interval(InitialHipAssessmentHOOS, be_, true, true);
                     bool? bg_ = bf_?.highClosed;
                     CqlInterval<CqlDateTime> bh_ = context.Operators.Interval(at_, ay_, bc_, bg_);
                     bool? bi_ = context.Operators.In<CqlDateTime>(ao_, bh_, "day");
@@ -1907,12 +1907,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     CqlDate br_ = context.Operators.DateFrom(bq_);
                     CqlDateTime bs_ = context.Operators.End(TotalHip);
                     CqlDate bt_ = context.Operators.DateFrom(bs_);
-                    CqlQuantity bu_ = context.Operators.Quantity((decimal?)300m, "days");
+                    CqlQuantity bu_ = context.Operators.Quantity(300m, "days");
                     CqlDate bv_ = context.Operators.Add(bt_, bu_);
                     CqlDate bx_ = context.Operators.DateFrom(bs_);
-                    CqlQuantity by_ = context.Operators.Quantity((decimal?)425m, "days");
+                    CqlQuantity by_ = context.Operators.Quantity(425m, "days");
                     CqlDate bz_ = context.Operators.Add(bx_, by_);
-                    CqlInterval<CqlDate> ca_ = context.Operators.Interval(bv_, bz_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> ca_ = context.Operators.Interval(bv_, bz_, true, true);
                     bool? cb_ = context.Operators.In<CqlDate>(br_, ca_, "day");
                     return cb_;
                 }
@@ -2043,20 +2043,20 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
                 bool? ak_(CqlDate InitialHipAssessment) {
                     CqlDateTime ao_ = context.Operators.Start(TotalHip);
-                    CqlQuantity ap_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity ap_ = context.Operators.Quantity(90m, "days");
                     CqlDate aq_ = context.Operators.Add(InitialHipAssessment, ap_);
-                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitialHipAssessment, aq_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitialHipAssessment, aq_, true, true);
                     CqlDate as_ = ar_?.low;
                     CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
                     CqlDate av_ = context.Operators.Add(InitialHipAssessment, ap_);
-                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitialHipAssessment, av_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitialHipAssessment, av_, true, true);
                     CqlDate ax_ = aw_?.high;
                     CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
                     CqlDate ba_ = context.Operators.Add(InitialHipAssessment, ap_);
-                    CqlInterval<CqlDate> bb_ = context.Operators.Interval(InitialHipAssessment, ba_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> bb_ = context.Operators.Interval(InitialHipAssessment, ba_, true, true);
                     bool? bc_ = bb_?.lowClosed;
                     CqlDate be_ = context.Operators.Add(InitialHipAssessment, ap_);
-                    CqlInterval<CqlDate> bf_ = context.Operators.Interval(InitialHipAssessment, be_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> bf_ = context.Operators.Interval(InitialHipAssessment, be_, true, true);
                     bool? bg_ = bf_?.highClosed;
                     CqlInterval<CqlDateTime> bh_ = context.Operators.Interval(at_, ay_, bc_, bg_);
                     bool? bi_ = context.Operators.In<CqlDateTime>(ao_, bh_, "day");
@@ -2081,12 +2081,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     CqlDate br_ = context.Operators.DateFrom(bq_);
                     CqlDateTime bs_ = context.Operators.End(TotalHip);
                     CqlDate bt_ = context.Operators.DateFrom(bs_);
-                    CqlQuantity bu_ = context.Operators.Quantity((decimal?)300m, "days");
+                    CqlQuantity bu_ = context.Operators.Quantity(300m, "days");
                     CqlDate bv_ = context.Operators.Add(bt_, bu_);
                     CqlDate bx_ = context.Operators.DateFrom(bs_);
-                    CqlQuantity by_ = context.Operators.Quantity((decimal?)425m, "days");
+                    CqlQuantity by_ = context.Operators.Quantity(425m, "days");
                     CqlDate bz_ = context.Operators.Add(bx_, by_);
-                    CqlInterval<CqlDate> ca_ = context.Operators.Interval(bv_, bz_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> ca_ = context.Operators.Interval(bv_, bz_, true, true);
                     bool? cb_ = context.Operators.In<CqlDate>(br_, ca_, "day");
                     return cb_;
                 }
@@ -2255,20 +2255,20 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
                 bool? ak_(CqlDate InitialHipAssessmentPROMIS10) {
                     CqlDateTime ao_ = context.Operators.Start(TotalHip);
-                    CqlQuantity ap_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity ap_ = context.Operators.Quantity(90m, "days");
                     CqlDate aq_ = context.Operators.Add(InitialHipAssessmentPROMIS10, ap_);
-                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, aq_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, aq_, true, true);
                     CqlDate as_ = ar_?.low;
                     CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
                     CqlDate av_ = context.Operators.Add(InitialHipAssessmentPROMIS10, ap_);
-                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, av_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, av_, true, true);
                     CqlDate ax_ = aw_?.high;
                     CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
                     CqlDate ba_ = context.Operators.Add(InitialHipAssessmentPROMIS10, ap_);
-                    CqlInterval<CqlDate> bb_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, ba_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> bb_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, ba_, true, true);
                     bool? bc_ = bb_?.lowClosed;
                     CqlDate be_ = context.Operators.Add(InitialHipAssessmentPROMIS10, ap_);
-                    CqlInterval<CqlDate> bf_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, be_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> bf_ = context.Operators.Interval(InitialHipAssessmentPROMIS10, be_, true, true);
                     bool? bg_ = bf_?.highClosed;
                     CqlInterval<CqlDateTime> bh_ = context.Operators.Interval(at_, ay_, bc_, bg_);
                     bool? bi_ = context.Operators.In<CqlDateTime>(ao_, bh_, "day");
@@ -2293,12 +2293,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     CqlDate br_ = context.Operators.DateFrom(bq_);
                     CqlDateTime bs_ = context.Operators.End(TotalHip);
                     CqlDate bt_ = context.Operators.DateFrom(bs_);
-                    CqlQuantity bu_ = context.Operators.Quantity((decimal?)300m, "days");
+                    CqlQuantity bu_ = context.Operators.Quantity(300m, "days");
                     CqlDate bv_ = context.Operators.Add(bt_, bu_);
                     CqlDate bx_ = context.Operators.DateFrom(bs_);
-                    CqlQuantity by_ = context.Operators.Quantity((decimal?)425m, "days");
+                    CqlQuantity by_ = context.Operators.Quantity(425m, "days");
                     CqlDate bz_ = context.Operators.Add(bx_, by_);
-                    CqlInterval<CqlDate> ca_ = context.Operators.Interval(bv_, bz_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> ca_ = context.Operators.Interval(bv_, bz_, true, true);
                     bool? cb_ = context.Operators.In<CqlDate>(br_, ca_, "day");
                     return cb_;
                 }
@@ -2467,20 +2467,20 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
                 bool? ak_(CqlDate InitialHipAssessmentOblique) {
                     CqlDateTime ao_ = context.Operators.Start(TotalHip);
-                    CqlQuantity ap_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity ap_ = context.Operators.Quantity(90m, "days");
                     CqlDate aq_ = context.Operators.Add(InitialHipAssessmentOblique, ap_);
-                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitialHipAssessmentOblique, aq_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitialHipAssessmentOblique, aq_, true, true);
                     CqlDate as_ = ar_?.low;
                     CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
                     CqlDate av_ = context.Operators.Add(InitialHipAssessmentOblique, ap_);
-                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitialHipAssessmentOblique, av_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitialHipAssessmentOblique, av_, true, true);
                     CqlDate ax_ = aw_?.high;
                     CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
                     CqlDate ba_ = context.Operators.Add(InitialHipAssessmentOblique, ap_);
-                    CqlInterval<CqlDate> bb_ = context.Operators.Interval(InitialHipAssessmentOblique, ba_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> bb_ = context.Operators.Interval(InitialHipAssessmentOblique, ba_, true, true);
                     bool? bc_ = bb_?.lowClosed;
                     CqlDate be_ = context.Operators.Add(InitialHipAssessmentOblique, ap_);
-                    CqlInterval<CqlDate> bf_ = context.Operators.Interval(InitialHipAssessmentOblique, be_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> bf_ = context.Operators.Interval(InitialHipAssessmentOblique, be_, true, true);
                     bool? bg_ = bf_?.highClosed;
                     CqlInterval<CqlDateTime> bh_ = context.Operators.Interval(at_, ay_, bc_, bg_);
                     bool? bi_ = context.Operators.In<CqlDateTime>(ao_, bh_, "day");
@@ -2505,12 +2505,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     CqlDate br_ = context.Operators.DateFrom(bq_);
                     CqlDateTime bs_ = context.Operators.End(TotalHip);
                     CqlDate bt_ = context.Operators.DateFrom(bs_);
-                    CqlQuantity bu_ = context.Operators.Quantity((decimal?)300m, "days");
+                    CqlQuantity bu_ = context.Operators.Quantity(300m, "days");
                     CqlDate bv_ = context.Operators.Add(bt_, bu_);
                     CqlDate bx_ = context.Operators.DateFrom(bs_);
-                    CqlQuantity by_ = context.Operators.Quantity((decimal?)425m, "days");
+                    CqlQuantity by_ = context.Operators.Quantity(425m, "days");
                     CqlDate bz_ = context.Operators.Add(bx_, by_);
-                    CqlInterval<CqlDate> ca_ = context.Operators.Interval(bv_, bz_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> ca_ = context.Operators.Interval(bv_, bz_, true, true);
                     bool? cb_ = context.Operators.In<CqlDate>(br_, ca_, "day");
                     return cb_;
                 }
@@ -2679,20 +2679,20 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
 
                 bool? ak_(CqlDate InitialHipAssessmentOrthogonal) {
                     CqlDateTime ao_ = context.Operators.Start(TotalHip);
-                    CqlQuantity ap_ = context.Operators.Quantity((decimal?)90m, "days");
+                    CqlQuantity ap_ = context.Operators.Quantity(90m, "days");
                     CqlDate aq_ = context.Operators.Add(InitialHipAssessmentOrthogonal, ap_);
-                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, aq_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> ar_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, aq_, true, true);
                     CqlDate as_ = ar_?.low;
                     CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
                     CqlDate av_ = context.Operators.Add(InitialHipAssessmentOrthogonal, ap_);
-                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, av_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, av_, true, true);
                     CqlDate ax_ = aw_?.high;
                     CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
                     CqlDate ba_ = context.Operators.Add(InitialHipAssessmentOrthogonal, ap_);
-                    CqlInterval<CqlDate> bb_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, ba_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> bb_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, ba_, true, true);
                     bool? bc_ = bb_?.lowClosed;
                     CqlDate be_ = context.Operators.Add(InitialHipAssessmentOrthogonal, ap_);
-                    CqlInterval<CqlDate> bf_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, be_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> bf_ = context.Operators.Interval(InitialHipAssessmentOrthogonal, be_, true, true);
                     bool? bg_ = bf_?.highClosed;
                     CqlInterval<CqlDateTime> bh_ = context.Operators.Interval(at_, ay_, bc_, bg_);
                     bool? bi_ = context.Operators.In<CqlDateTime>(ao_, bh_, "day");
@@ -2717,12 +2717,12 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     CqlDate br_ = context.Operators.DateFrom(bq_);
                     CqlDateTime bs_ = context.Operators.End(TotalHip);
                     CqlDate bt_ = context.Operators.DateFrom(bs_);
-                    CqlQuantity bu_ = context.Operators.Quantity((decimal?)300m, "days");
+                    CqlQuantity bu_ = context.Operators.Quantity(300m, "days");
                     CqlDate bv_ = context.Operators.Add(bt_, bu_);
                     CqlDate bx_ = context.Operators.DateFrom(bs_);
-                    CqlQuantity by_ = context.Operators.Quantity((decimal?)425m, "days");
+                    CqlQuantity by_ = context.Operators.Quantity(425m, "days");
                     CqlDate bz_ = context.Operators.Add(bx_, by_);
-                    CqlInterval<CqlDate> ca_ = context.Operators.Interval(bv_, bz_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDate> ca_ = context.Operators.Interval(bv_, bz_, true, true);
                     bool? cb_ = context.Operators.In<CqlDate>(br_, ca_, "day");
                     return cb_;
                 }

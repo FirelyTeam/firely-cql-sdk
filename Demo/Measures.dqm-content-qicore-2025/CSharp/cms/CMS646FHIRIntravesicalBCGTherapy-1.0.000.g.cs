@@ -127,9 +127,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8463204836362917612L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS646FHIRIntravesicalBCGTherapy-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -245,7 +245,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                         CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
                         CqlDateTime y_ = context.Operators.End(x_);
                         CqlDateTime aa_ = context.Operators.End(x_);
-                        CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(y_, aa_, (bool?)true, (bool?)true);
+                        CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(y_, aa_, true, true);
                         return ab_;
                     };
                 }
@@ -445,8 +445,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-            int? d_ = context.Operators.Subtract(c_, (int?)1);
-            CqlDate e_ = context.Operators.Date(d_, (int?)7, (int?)1);
+            int? d_ = context.Operators.Subtract(c_, 1);
+            CqlDate e_ = context.Operators.Date(d_, 7, 1);
             return e_;
         });
 
@@ -457,7 +457,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
             int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
-            CqlDate d_ = context.Operators.Date(c_, (int?)6, (int?)30);
+            CqlDate d_ = context.Operators.Date(c_, 6, 30);
             return d_;
         });
 
@@ -473,15 +473,15 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             bool? c_(Procedure FirstBladderCancerStaging) {
                 CqlDate f_ = this.July_1_of_Year_Prior_to_the_Measurement_Period(context);
                 CqlDate g_ = this.June_30_of_the_Measurement_Period(context);
-                CqlInterval<CqlDate> h_ = context.Operators.Interval(f_, g_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> h_ = context.Operators.Interval(f_, g_, true, true);
                 CqlDate i_ = h_?.low;
                 CqlDateTime j_ = context.Operators.ConvertDateToDateTime(i_);
-                CqlInterval<CqlDate> m_ = context.Operators.Interval(f_, g_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> m_ = context.Operators.Interval(f_, g_, true, true);
                 CqlDate n_ = m_?.high;
                 CqlDateTime o_ = context.Operators.ConvertDateToDateTime(n_);
-                CqlInterval<CqlDate> r_ = context.Operators.Interval(f_, g_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> r_ = context.Operators.Interval(f_, g_, true, true);
                 bool? s_ = r_?.lowClosed;
-                CqlInterval<CqlDate> v_ = context.Operators.Interval(f_, g_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> v_ = context.Operators.Interval(f_, g_, true, true);
                 bool? w_ = v_?.highClosed;
                 CqlInterval<CqlDateTime> x_ = context.Operators.Interval(j_, o_, s_, w_);
 
@@ -1294,7 +1294,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                     CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_());
                     CqlDateTime r_ = context.Operators.Start(q_);
-                    CqlQuantity s_ = context.Operators.Quantity((decimal?)6m, "months");
+                    CqlQuantity s_ = context.Operators.Quantity(6m, "months");
                     CqlDateTime t_ = context.Operators.Subtract(r_, s_);
 
                     object u_() {
@@ -1362,7 +1362,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                     CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_());
                     CqlDateTime w_ = context.Operators.Start(v_);
-                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, false);
                     bool? y_ = context.Operators.In<CqlDateTime>(o_, x_, "day");
 
                     object z_() {
@@ -1816,7 +1816,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                     CqlInterval<CqlDateTime> bk_ = QICoreCommon_4_0_000.Instance.toInterval(context, bj_());
                     CqlDateTime bl_ = context.Operators.Start(bk_);
-                    CqlQuantity bm_ = context.Operators.Quantity((decimal?)6m, "months");
+                    CqlQuantity bm_ = context.Operators.Quantity(6m, "months");
                     CqlDateTime bn_ = context.Operators.Subtract(bl_, bm_);
 
                     object bo_() {
@@ -1884,7 +1884,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                     CqlInterval<CqlDateTime> bp_ = QICoreCommon_4_0_000.Instance.toInterval(context, bo_());
                     CqlDateTime bq_ = context.Operators.Start(bp_);
-                    CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bn_, bq_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bn_, bq_, true, false);
                     bool? bs_ = context.Operators.In<CqlDateTime>(bi_, br_, default);
 
                     object bt_() {
@@ -2126,7 +2126,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                     CqlInterval<CqlDateTime> fz_ = QICoreCommon_4_0_000.Instance.toInterval(context, fy_());
                     CqlDateTime ga_ = context.Operators.Start(fz_);
-                    CqlQuantity gb_ = context.Operators.Quantity((decimal?)6m, "months");
+                    CqlQuantity gb_ = context.Operators.Quantity(6m, "months");
                     CqlDateTime gc_ = context.Operators.Subtract(ga_, gb_);
 
                     object gd_() {
@@ -2194,7 +2194,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                     CqlInterval<CqlDateTime> ge_ = QICoreCommon_4_0_000.Instance.toInterval(context, gd_());
                     CqlDateTime gf_ = context.Operators.Start(ge_);
-                    CqlInterval<CqlDateTime> gg_ = context.Operators.Interval(gc_, gf_, (bool?)true, (bool?)false);
+                    CqlInterval<CqlDateTime> gg_ = context.Operators.Interval(gc_, gf_, true, false);
                     bool? gh_ = context.Operators.In<CqlDateTime>(fx_, gg_, default);
 
                     object gi_() {
@@ -2481,9 +2481,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                     CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_());
                     CqlDateTime ab_ = context.Operators.Start(aa_);
-                    CqlQuantity ac_ = context.Operators.Quantity((decimal?)6m, "months");
+                    CqlQuantity ac_ = context.Operators.Quantity(6m, "months");
                     CqlDateTime ad_ = context.Operators.Add(ab_, ac_);
-                    CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(y_, ad_, (bool?)false, (bool?)true);
+                    CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(y_, ad_, false, true);
                     bool? af_ = context.Operators.In<CqlDateTime>(v_, ae_, "day");
 
                     object ag_() {
@@ -2768,9 +2768,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                     CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_());
                     CqlDateTime ar_ = context.Operators.Start(aq_);
-                    CqlQuantity as_ = context.Operators.Quantity((decimal?)6m, "months");
+                    CqlQuantity as_ = context.Operators.Quantity(6m, "months");
                     CqlDateTime at_ = context.Operators.Add(ar_, as_);
-                    CqlInterval<CqlDateTime> au_ = context.Operators.Interval(ao_, at_, (bool?)false, (bool?)true);
+                    CqlInterval<CqlDateTime> au_ = context.Operators.Interval(ao_, at_, false, true);
                     bool? av_ = context.Operators.In<CqlDateTime>(al_, au_, "day");
 
                     object aw_() {

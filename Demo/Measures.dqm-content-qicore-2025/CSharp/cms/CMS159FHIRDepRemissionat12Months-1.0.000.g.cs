@@ -137,9 +137,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(4515960621490826425L, () => {
-            CqlDateTime a_ = context.Operators.DateTime((int?)2026, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlDateTime b_ = context.Operators.DateTime((int?)2027, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, (decimal?)0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, (bool?)true, (bool?)false);
+            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CMS159FHIRDepRemissionat12Months-1.0.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
         });
@@ -244,12 +244,12 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(721024531417181386L, () => {
             CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
             CqlDateTime b_ = context.Operators.Start(a_);
-            CqlQuantity c_ = context.Operators.Quantity((decimal?)14m, "months");
+            CqlQuantity c_ = context.Operators.Quantity(14m, "months");
             CqlDateTime d_ = context.Operators.Subtract(b_, c_);
             CqlDateTime f_ = context.Operators.Start(a_);
-            CqlQuantity g_ = context.Operators.Quantity((decimal?)2m, "months");
+            CqlQuantity g_ = context.Operators.Quantity(2m, "months");
             CqlDateTime h_ = context.Operators.Subtract(f_, g_);
-            CqlInterval<CqlDateTime> i_ = context.Operators.Interval(d_, h_, (bool?)true, (bool?)false);
+            CqlInterval<CqlDateTime> i_ = context.Operators.Interval(d_, h_, true, false);
             return i_;
         });
 
@@ -304,11 +304,11 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     Period l_ = DepressionEncounter?.Period;
                     CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
                     CqlDateTime n_ = context.Operators.Start(m_);
-                    CqlQuantity o_ = context.Operators.Quantity((decimal?)7m, "days");
+                    CqlQuantity o_ = context.Operators.Quantity(7m, "days");
                     CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                     CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
                     CqlDateTime s_ = context.Operators.End(r_);
-                    CqlInterval<CqlDateTime> t_ = context.Operators.Interval(p_, s_, (bool?)true, (bool?)true);
+                    CqlInterval<CqlDateTime> t_ = context.Operators.Interval(p_, s_, true, true);
                     DataType u_ = DepressionAssessment?.Effective;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                     CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.toInterval(context, v_);
@@ -378,9 +378,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
                 CqlDateTime j_ = context.Operators.Start(i_);
                 CqlDate k_ = context.Operators.DateFrom(j_);
-                CqlQuantity l_ = context.Operators.Quantity((decimal?)12m, "months");
+                CqlQuantity l_ = context.Operators.Quantity(12m, "months");
                 CqlDate m_ = context.Operators.Add(k_, l_);
-                CqlQuantity n_ = context.Operators.Quantity((decimal?)60m, "days");
+                CqlQuantity n_ = context.Operators.Quantity(60m, "days");
                 CqlDate o_ = context.Operators.Subtract(m_, n_);
                 object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
                 CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
@@ -388,7 +388,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlDate t_ = context.Operators.DateFrom(s_);
                 CqlDate v_ = context.Operators.Add(t_, l_);
                 CqlDate x_ = context.Operators.Add(v_, n_);
-                CqlInterval<CqlDate> y_ = context.Operators.Interval(o_, x_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDate> y_ = context.Operators.Interval(o_, x_, true, true);
                 return y_;
             }
 
@@ -426,7 +426,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDate> bf_ = this.Measure_Assessment_Period(context);
                 CqlDate bg_ = context.Operators.End(bf_);
                 CqlDateTime bh_ = context.Operators.ConvertDateToDateTime(bg_);
-                CqlInterval<CqlDateTime> bi_ = context.Operators.Interval(be_, bh_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> bi_ = context.Operators.Interval(be_, bh_, true, true);
                 bool? bj_ = context.Operators.In<CqlDateTime>(bc_, bi_, "day");
                 bool? bk_ = context.Operators.And(az_, bj_);
                 Code<Encounter.EncounterStatus> bl_ = InpatientEncounter?.StatusElement;
@@ -450,7 +450,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDate> bu_ = this.Measure_Assessment_Period(context);
                 CqlDate bv_ = context.Operators.End(bu_);
                 CqlDateTime bw_ = context.Operators.ConvertDateToDateTime(bv_);
-                CqlInterval<CqlDateTime> bx_ = context.Operators.Interval(bt_, bw_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> bx_ = context.Operators.Interval(bt_, bw_, true, true);
                 bool? by_ = context.Operators.Overlaps(br_, bx_, "day");
                 Code<Encounter.EncounterStatus> bz_ = HospiceEncounter?.StatusElement;
                 Encounter.EncounterStatus? ca_ = bz_?.Value;
@@ -488,7 +488,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDate> cr_ = this.Measure_Assessment_Period(context);
                 CqlDate cs_ = context.Operators.End(cr_);
                 CqlDateTime ct_ = context.Operators.ConvertDateToDateTime(cs_);
-                CqlInterval<CqlDateTime> cu_ = context.Operators.Interval(cq_, ct_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> cu_ = context.Operators.Interval(cq_, ct_, true, true);
                 bool? cv_ = context.Operators.Overlaps(co_, cu_, "day");
                 bool? cw_ = context.Operators.And(cl_, cv_);
                 Code<ObservationStatus> cx_ = HospiceAssessment?.StatusElement;
@@ -518,7 +518,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDate> dh_ = this.Measure_Assessment_Period(context);
                 CqlDate di_ = context.Operators.End(dh_);
                 CqlDateTime dj_ = context.Operators.ConvertDateToDateTime(di_);
-                CqlInterval<CqlDateTime> dk_ = context.Operators.Interval(dg_, dj_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> dk_ = context.Operators.Interval(dg_, dj_, true, true);
                 bool? dl_ = context.Operators.In<CqlDateTime>(de_, dk_, "day");
                 Code<RequestStatus> dm_ = HospiceOrder?.StatusElement;
                 RequestStatus? dn_ = dm_?.Value;
@@ -622,7 +622,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDate> ee_ = this.Measure_Assessment_Period(context);
                 CqlDate ef_ = context.Operators.End(ee_);
                 CqlDateTime eg_ = context.Operators.ConvertDateToDateTime(ef_);
-                CqlInterval<CqlDateTime> eh_ = context.Operators.Interval(ed_, eg_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> eh_ = context.Operators.Interval(ed_, eg_, true, true);
                 bool? ei_ = context.Operators.Overlaps(eb_, eh_, "day");
                 Code<EventStatus> ej_ = HospicePerformed?.StatusElement;
                 EventStatus? ek_ = ej_?.Value;
@@ -653,7 +653,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDate> fr_ = this.Measure_Assessment_Period(context);
                 CqlDate fs_ = context.Operators.End(fr_);
                 CqlDateTime ft_ = context.Operators.ConvertDateToDateTime(fs_);
-                CqlInterval<CqlDateTime> fu_ = context.Operators.Interval(fq_, ft_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> fu_ = context.Operators.Interval(fq_, ft_, true, true);
                 bool? fv_ = context.Operators.Overlaps(fo_, fu_, "day");
                 bool? fw_ = this.isVerified(context, HospiceCareDiagnosis);
                 bool? fx_ = context.Operators.And(fv_, fw_);
@@ -683,7 +683,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDate> ag_ = this.Measure_Assessment_Period(context);
                 CqlDate ah_ = context.Operators.End(ag_);
                 CqlDateTime ai_ = context.Operators.ConvertDateToDateTime(ah_);
-                CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(af_, ai_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(af_, ai_, true, true);
                 bool? ak_ = context.Operators.Overlaps(ad_, aj_, "day");
                 Code<ObservationStatus> al_ = PalliativeAssessment?.StatusElement;
                 ObservationStatus? am_ = al_?.Value;
@@ -712,7 +712,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDate> au_ = this.Measure_Assessment_Period(context);
                 CqlDate av_ = context.Operators.End(au_);
                 CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(av_);
-                CqlInterval<CqlDateTime> ax_ = context.Operators.Interval(at_, aw_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> ax_ = context.Operators.Interval(at_, aw_, true, true);
                 bool? ay_ = context.Operators.Overlaps(ar_, ax_, "day");
                 bool? az_ = this.isVerified(context, PalliativeDiagnosis);
                 bool? ba_ = context.Operators.And(ay_, az_);
@@ -733,7 +733,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDate> bf_ = this.Measure_Assessment_Period(context);
                 CqlDate bg_ = context.Operators.End(bf_);
                 CqlDateTime bh_ = context.Operators.ConvertDateToDateTime(bg_);
-                CqlInterval<CqlDateTime> bi_ = context.Operators.Interval(be_, bh_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> bi_ = context.Operators.Interval(be_, bh_, true, true);
                 bool? bj_ = context.Operators.Overlaps(bc_, bi_, "day");
                 Code<Encounter.EncounterStatus> bk_ = PalliativeEncounter?.StatusElement;
                 Encounter.EncounterStatus? bl_ = bk_?.Value;
@@ -820,7 +820,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDate> bt_ = this.Measure_Assessment_Period(context);
                 CqlDate bu_ = context.Operators.End(bt_);
                 CqlDateTime bv_ = context.Operators.ConvertDateToDateTime(bu_);
-                CqlInterval<CqlDateTime> bw_ = context.Operators.Interval(bs_, bv_, (bool?)true, (bool?)true);
+                CqlInterval<CqlDateTime> bw_ = context.Operators.Interval(bs_, bv_, true, true);
                 bool? bx_ = context.Operators.Overlaps(bq_, bw_, "day");
                 Code<EventStatus> by_ = PalliativeIntervention?.StatusElement;
                 EventStatus? bz_ = by_?.Value;
@@ -1015,7 +1015,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlDateTime n_ = context.Operators.Start(m_);
                 CqlDate o_ = context.Operators.DateFrom(n_);
                 int? p_ = context.Operators.CalculateAgeAt(j_, o_, "year");
-                CqlInterval<int?> q_ = context.Operators.Interval((int?)12, (int?)17, (bool?)true, (bool?)true);
+                CqlInterval<int?> q_ = context.Operators.Interval(12, 17, true, true);
                 bool? r_ = context.Operators.In<int?>(p_, q_, default);
                 return r_;
             }
