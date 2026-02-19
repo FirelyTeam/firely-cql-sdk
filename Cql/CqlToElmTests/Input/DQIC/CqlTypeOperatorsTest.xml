@@ -54,7 +54,7 @@
 	<group name="ToBoolean">
 		<test name="StringNoToBoolean">
 			<expression>ToBoolean('NO')</expression>
-			<output>null</output>
+			<output>false</output>
 		</test>
 	</group>
 	<group name="ToConcept">
