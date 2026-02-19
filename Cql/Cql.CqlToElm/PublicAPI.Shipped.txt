@@ -147,7 +147,8 @@ virtual Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.PrintMembers(System.Text.Strin
 ~override Hl7.Cql.CqlToElm.CqlLibraryString.Equals(object obj) -> bool
 ~override Hl7.Cql.CqlToElm.CqlLibraryString.ToString() -> string
 ~override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.Equals(object obj) -> bool
-~override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.ToString() -> stringHl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions
+~override Hl7.Cql.CqlToElm.Toolkit.CqlToolkitArtifacts.ToString() -> string
+Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.AddCqlLibrariesFromDirectoryOptions(Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions! original) -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.AddCqlLibrariesFromDirectoryOptions(System.IO.DirectoryInfo! Directory, System.IO.EnumerationOptions? EnumerationOptions, System.Func<System.IO.FileInfo!, bool>? FilePredicate, Hl7.Cql.Toolkit.SubdirectoryPreserver? SubdirectoryPreserver = null) -> void
 Hl7.Cql.CqlToElm.Toolkit.Extensions.AddCqlLibrariesFromDirectoryOptions.Deconstruct(out System.IO.DirectoryInfo! Directory, out System.IO.EnumerationOptions? EnumerationOptions, out System.Func<System.IO.FileInfo!, bool>? FilePredicate, out Hl7.Cql.Toolkit.SubdirectoryPreserver? SubdirectoryPreserver) -> void

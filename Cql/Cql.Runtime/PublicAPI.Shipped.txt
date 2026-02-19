@@ -712,6 +712,7 @@ virtual Hl7.Cql.Runtime.Parsing.CqlParseErrorHandler.Invoke(Hl7.Cql.Runtime.Pars
 ~override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.DefinitionSignature.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.Parsing.CqlParseError.Equals(object obj) -> bool
+Hl7.Cql.Runtime.CqlContext.DontUseCaching() -> void
 Hl7.Cql.Runtime.CqlContext.UseNewCache() -> void
 Hl7.Cql.Runtime.Defaults
 static Hl7.Cql.Runtime.Defaults.EnumerationOptionsRecurseSubdirectories.get -> System.IO.EnumerationOptions!
