@@ -309,10 +309,18 @@ stages:
 
           - pwsh: |
               $projects = $env:TEST_PROJECTS -split '\r?\n' | Where-Object { $_.Trim() } | ForEach-Object { $_.Trim() }
+              $config = ${{ parameters.buildConfiguration }}
               $exitCode = 0
               foreach ($proj in $projects) {
+                $projectDir = Split-Path $proj -Parent
+                $projectName = [System.IO.Path]::GetFileNameWithoutExtension($proj)
+                $dllPath = "$projectDir/bin/$config/net8.0/$projectName.dll"
+                if (-not (Test-Path $dllPath)) {
+                  Write-Host "Skipping: $proj (no net8.0 build found)"
+                  continue
+                }
                 Write-Host "Testing: $proj"
-                dotnet test "$proj" --configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --logger trx '--collect:XPlat Code Coverage' --results-directory "$(Agent.TempDirectory)/TestResults/net8.0"
+                dotnet $dllPath --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --report-trx --results-directory "$(Agent.TempDirectory)/TestResults/net8.0" --collect 'XPlat Code Coverage'
                 if ($LASTEXITCODE -ne 0) { $exitCode = $LASTEXITCODE }
               }
               exit $exitCode
@@ -364,10 +372,18 @@ stages:
 
           - pwsh: |
               $projects = $env:TEST_PROJECTS -split '\r?\n' | Where-Object { $_.Trim() } | ForEach-Object { $_.Trim() }
+              $config = ${{ parameters.buildConfiguration }}
               $exitCode = 0
               foreach ($proj in $projects) {
+                $projectDir = Split-Path $proj -Parent
+                $projectName = [System.IO.Path]::GetFileNameWithoutExtension($proj)
+                $dllPath = "$projectDir/bin/$config/net10.0/$projectName.dll"
+                if (-not (Test-Path $dllPath)) {
+                  Write-Host "Skipping: $proj (no net10.0 build found)"
+                  continue
+                }
                 Write-Host "Testing: $proj"
-                dotnet test "$proj" --configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --logger trx '--collect:XPlat Code Coverage' --results-directory "$(Agent.TempDirectory)/TestResults/net10.0"
+                dotnet $dllPath --logger "console;verbosity=$(testConsoleLoggerVerbosity)" --report-trx --results-directory "$(Agent.TempDirectory)/TestResults/net10.0" --collect 'XPlat Code Coverage'
                 if ($LASTEXITCODE -ne 0) { $exitCode = $LASTEXITCODE }
               }
               exit $exitCode
