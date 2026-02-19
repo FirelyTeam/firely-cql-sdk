@@ -421,3 +421,7 @@ LibrarySets/Demo/ElmOut/
 
 # Example output directories
 Examples/**/output/
+
+# Spec source files (original HTML with CSS/JS/images, ~40MB)
+spec/source/*
+!spec/source/README.md
