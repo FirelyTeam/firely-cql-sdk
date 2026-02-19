@@ -15,29 +15,29 @@ This directory contains ready-to-use GitHub issue templates for CQL specificatio
 
 ### Critical Priority
 
-- **[issue-01-substring-length-bug.md](issue-01-substring-length-bug.md)** - [CRITICAL]
+- **[issue-01-CRITICAL-substring-length-bug.md](issue-01-CRITICAL-substring-length-bug.md)** - [CRITICAL]
   - **Bug:** Substring uses wrong length calculation
   - **Impact:** Can throw exceptions or return incorrect results
   - **Fix:** Change `source.Length` to `source.Length - startIndex`
 
 ### High Priority
 
-- **[issue-02-endswith-bounds-check.md](issue-02-endswith-bounds-check.md)** - [HIGH]
+- **[issue-02-HIGH-endswith-bounds-check.md](issue-02-HIGH-endswith-bounds-check.md)** - [HIGH]
   - **Bug:** Missing bounds check, throws on oversized suffix
   - **Impact:** Throws exceptions for valid inputs
   - **Fix:** Add bounds check and empty string handling
 
-- **[issue-03-list-equality-null-elements.md](issue-03-list-equality-null-elements.md)** - [HIGH]
+- **[issue-03-HIGH-list-equality-null-elements.md](issue-03-HIGH-list-equality-null-elements.md)** - [HIGH]
   - **Spec Violation:** Null elements should be considered equal
   - **Impact:** Incorrect equality results for lists with nulls
   - **Fix:** Treat `null == null` as `true` in list comparisons
 
-- **[issue-04-round-test-expectations.md](issue-04-round-test-expectations.md)** - [HIGH]
+- **[issue-04-HIGH-round-test-expectations.md](issue-04-HIGH-round-test-expectations.md)** - [HIGH]
   - **Test Issue:** Implementation is CORRECT, tests are WRONG
   - **Impact:** None - just fix test expectations
   - **Fix:** Update test XML to expect `-1.0` instead of `0.0`
 
-- **[issue-05-power-operator-null-return.md](issue-05-power-operator-null-return.md)** - [HIGH]
+- **[issue-05-HIGH-power-operator-null-return.md](issue-05-HIGH-power-operator-null-return.md)** - [HIGH]
   - **Bug:** Returns `0` instead of `null` for fractional results
   - **Impact:** Loses precision, violates spec
   - **Fix:** Return `null` when result cannot be represented
@@ -45,14 +45,14 @@ This directory contains ready-to-use GitHub issue templates for CQL specificatio
 
 ### Medium Priority
 
-- **[issue-06-matches-operator-anchoring.md](issue-06-matches-operator-anchoring.md)** - [MEDIUM]
+- **[issue-06-MEDIUM-matches-operator-anchoring.md](issue-06-MEDIUM-matches-operator-anchoring.md)** - [MEDIUM]
   - **Bug:** Auto-anchors patterns, violates "partial matching"
   - **Impact:** Prevents partial regex matches
   - **Fix:** Remove auto-anchoring, fix char comparison
 
 ### Low Priority
 
-- **[issue-07-unskip-expand-tests.md](issue-07-unskip-expand-tests.md)** - [LOW]
+- **[issue-07-LOW-unskip-expand-tests.md](issue-07-LOW-unskip-expand-tests.md)** - [LOW]
   - **Test Issue:** Tests are correct, just need unskipping
   - **Impact:** None - enables existing correct tests
   - **Fix:** Remove from SkippedTests, verify they pass
