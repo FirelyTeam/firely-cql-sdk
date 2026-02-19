@@ -1,9 +1,1 @@
-Hl7.Cql.Runtime.CqlContext.DontUseCaching() -> void
-Hl7.Cql.Runtime.CqlContext.UseNewCache() -> void
-Hl7.Cql.Runtime.Defaults
-static Hl7.Cql.Runtime.Defaults.EnumerationOptionsRecurseSubdirectories.get -> System.IO.EnumerationOptions!
-Hl7.Cql.Runtime.IO.DirectoryPostProcessingStrategy
-static Hl7.Cql.Runtime.IO.DirectoryPostProcessingStrategy.DeleteEmptySubdirectories.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
-Hl7.Cql.Toolkit.SubdirectoryPreserver
-Hl7.Cql.Toolkit.SubdirectoryPreserver.SubdirectoryPreserver() -> void
-
+#nullable enable
