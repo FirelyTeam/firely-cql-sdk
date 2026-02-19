@@ -311,17 +311,38 @@ stages:
               targetPath: '$(Build.SourcesDirectory)'
 
           - pwsh: |
+              Write-Host "Working directory: $(Get-Location)"
               $projects = $env:TEST_PROJECTS.Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
               $failed = $false
               foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not (Test-Path $proj)) {
+                  Write-Host "##[warning]Project file not found: $proj"
+                  $failed = $true
+                  continue
+                }
                 Write-Host "##[section]Testing: $proj"
-                dotnet test $proj --configuration ${{ parameters.buildConfiguration }} --no-build --framework net8.0 --logger "console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}" --logger trx "--collect:XPlat Code Coverage" --results-directory "$(Agent.TempDirectory)/TestResults/net8.0"
+                $testArgs = @(
+                  'test', $proj,
+                  '--configuration', '${{ parameters.buildConfiguration }}',
+                  '--no-build',
+                  '--framework', 'net8.0',
+                  '--logger', 'console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
+                  '--logger', 'trx',
+                  '--collect:XPlat Code Coverage',
+                  '--results-directory', "$env:RESULTS_DIR"
+                )
+                Write-Host "##[command]dotnet $($testArgs -join ' ')"
+                & dotnet @testArgs 2>&1 | ForEach-Object { Write-Host $_ }
+                Write-Host "dotnet test exit code: $LASTEXITCODE"
                 if ($LASTEXITCODE -ne 0) { $failed = $true }
               }
               if ($failed) { exit 1 }
             displayName: 'Run tests on .NET 8'
+            workingDirectory: '$(Build.SourcesDirectory)'
             env:
               TEST_PROJECTS: '${{ parameters.multiTargetTestProjects }}'
+              RESULTS_DIR: '$(Agent.TempDirectory)/TestResults/net8.0'
 
           - task: PublishTestResults@2
             displayName: 'Publish .NET 8 test results'
@@ -366,17 +387,38 @@ stages:
               targetPath: '$(Build.SourcesDirectory)'
 
           - pwsh: |
+              Write-Host "Working directory: $(Get-Location)"
               $projects = $env:TEST_PROJECTS.Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
               $failed = $false
               foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not (Test-Path $proj)) {
+                  Write-Host "##[warning]Project file not found: $proj"
+                  $failed = $true
+                  continue
+                }
                 Write-Host "##[section]Testing: $proj"
-                dotnet test $proj --configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger "console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}" --logger trx "--collect:XPlat Code Coverage" --results-directory "$(Agent.TempDirectory)/TestResults/net10.0"
+                $testArgs = @(
+                  'test', $proj,
+                  '--configuration', '${{ parameters.buildConfiguration }}',
+                  '--no-build',
+                  '--framework', 'net10.0',
+                  '--logger', 'console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
+                  '--logger', 'trx',
+                  '--collect:XPlat Code Coverage',
+                  '--results-directory', "$env:RESULTS_DIR"
+                )
+                Write-Host "##[command]dotnet $($testArgs -join ' ')"
+                & dotnet @testArgs 2>&1 | ForEach-Object { Write-Host $_ }
+                Write-Host "dotnet test exit code: $LASTEXITCODE"
                 if ($LASTEXITCODE -ne 0) { $failed = $true }
               }
               if ($failed) { exit 1 }
             displayName: 'Run tests on .NET 10'
+            workingDirectory: '$(Build.SourcesDirectory)'
             env:
               TEST_PROJECTS: '${{ parameters.multiTargetTestProjects }}'
+              RESULTS_DIR: '$(Agent.TempDirectory)/TestResults/net10.0'
 
           - task: PublishTestResults@2
             displayName: 'Publish .NET 10 test results'
@@ -421,17 +463,38 @@ stages:
               targetPath: '$(Build.SourcesDirectory)'
 
           - pwsh: |
+              Write-Host "Working directory: $(Get-Location)"
               $projects = $env:TEST_PROJECTS.Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
               $failed = $false
               foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not (Test-Path $proj)) {
+                  Write-Host "##[warning]Project file not found: $proj"
+                  $failed = $true
+                  continue
+                }
                 Write-Host "##[section]Testing: $proj"
-                dotnet test $proj --configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger "console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}" --logger trx "--collect:XPlat Code Coverage" --results-directory "$(Agent.TempDirectory)/TestResults/integration-net10.0"
+                $testArgs = @(
+                  'test', $proj,
+                  '--configuration', '${{ parameters.buildConfiguration }}',
+                  '--no-build',
+                  '--framework', 'net10.0',
+                  '--logger', 'console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
+                  '--logger', 'trx',
+                  '--collect:XPlat Code Coverage',
+                  '--results-directory', "$env:RESULTS_DIR"
+                )
+                Write-Host "##[command]dotnet $($testArgs -join ' ')"
+                & dotnet @testArgs 2>&1 | ForEach-Object { Write-Host $_ }
+                Write-Host "dotnet test exit code: $LASTEXITCODE"
                 if ($LASTEXITCODE -ne 0) { $failed = $true }
               }
               if ($failed) { exit 1 }
             displayName: 'Run integration tests on .NET 10'
+            workingDirectory: '$(Build.SourcesDirectory)'
             env:
               TEST_PROJECTS: '${{ parameters.net10IntegrationTestProjects }}'
+              RESULTS_DIR: '$(Agent.TempDirectory)/TestResults/integration-net10.0'
 
           - task: PublishTestResults@2
             displayName: 'Publish integration test results'
