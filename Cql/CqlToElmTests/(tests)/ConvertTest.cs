@@ -124,39 +124,39 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Convert_YesString_to_Boolean_ReturnsNull()
+        public void Convert_YesString_to_Boolean_ReturnsTrue()
         {
             var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 'yes' to Boolean");
             var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
             var result = Run(toBoolean, library);
-            result.Should().BeNull();
+            result.Should().Be(true);
         }
 
         [TestMethod]
-        public void Convert_OneString_to_Boolean_ReturnsNull()
+        public void Convert_OneString_to_Boolean_ReturnsTrue()
         {
             var library = CreateCqlToolkit().MakeLibraryFromExpression("convert '1' to Boolean");
             var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
             var result = Run(toBoolean, library);
-            result.Should().BeNull();
+            result.Should().Be(true);
         }
 
         [TestMethod]
-        public void Convert_NoString_to_Boolean_ReturnsNull()
+        public void Convert_NoString_to_Boolean_ReturnsFalse()
         {
             var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 'no' to Boolean");
             var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
             var result = Run(toBoolean, library);
-            result.Should().BeNull();
+            result.Should().Be(false);
         }
 
         [TestMethod]
-        public void Convert_ZeroString_to_Boolean_ReturnsNull()
+        public void Convert_ZeroString_to_Boolean_ReturnsFalse()
         {
             var library = CreateCqlToolkit().MakeLibraryFromExpression("convert '0' to Boolean");
             var toBoolean = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToBoolean>();
             var result = Run(toBoolean, library);
-            result.Should().BeNull();
+            result.Should().Be(false);
         }
 
         [TestMethod]
