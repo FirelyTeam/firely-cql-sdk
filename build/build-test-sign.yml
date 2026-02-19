@@ -322,6 +322,20 @@ stages:
                   continue
                 }
                 Write-Host "##[section]Testing: $proj"
+                $projDir = Split-Path $proj -Parent
+                $binDir = Join-Path $projDir 'bin/${{ parameters.buildConfiguration }}/net8.0'
+                if (Test-Path $binDir) {
+                  $dlls = Get-ChildItem $binDir -Filter '*.dll' | Select-Object -ExpandProperty Name
+                  Write-Host "  Found $($dlls.Count) DLLs in $binDir"
+                } else {
+                  Write-Host "##[warning]bin directory not found: $binDir"
+                  Write-Host "  Available dirs under $(Join-Path $projDir 'bin'):"
+                  if (Test-Path (Join-Path $projDir 'bin')) {
+                    Get-ChildItem (Join-Path $projDir 'bin') -Recurse -Directory | ForEach-Object { Write-Host "    $($_.FullName)" }
+                  } else {
+                    Write-Host "    No bin directory at all!"
+                  }
+                }
                 $testArgs = @(
                   'test', $proj,
                   '--configuration', '${{ parameters.buildConfiguration }}',
@@ -398,6 +412,20 @@ stages:
                   continue
                 }
                 Write-Host "##[section]Testing: $proj"
+                $projDir = Split-Path $proj -Parent
+                $binDir = Join-Path $projDir 'bin/${{ parameters.buildConfiguration }}/net10.0'
+                if (Test-Path $binDir) {
+                  $dlls = Get-ChildItem $binDir -Filter '*.dll' | Select-Object -ExpandProperty Name
+                  Write-Host "  Found $($dlls.Count) DLLs in $binDir"
+                } else {
+                  Write-Host "##[warning]bin directory not found: $binDir"
+                  Write-Host "  Available dirs under $(Join-Path $projDir 'bin'):"
+                  if (Test-Path (Join-Path $projDir 'bin')) {
+                    Get-ChildItem (Join-Path $projDir 'bin') -Recurse -Directory | ForEach-Object { Write-Host "    $($_.FullName)" }
+                  } else {
+                    Write-Host "    No bin directory at all!"
+                  }
+                }
                 $testArgs = @(
                   'test', $proj,
                   '--configuration', '${{ parameters.buildConfiguration }}',
