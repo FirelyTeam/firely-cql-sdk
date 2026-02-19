@@ -235,10 +235,6 @@ internal partial class LibrarySetCSharpCodeGenerator
             ConstantExpression constant)
         {
             string text;
-            // Check if the constant's declared type is nullable before extracting the underlying type
-            var isNullableConstantType = Nullable.GetUnderlyingType(constant.Type) != null;
-            var isNullableWithValue = isNullableConstantType && constant.Value != null;
-
             var type = constant.Value?.GetType() ?? constant.Type;
             type = Nullable.GetUnderlyingType(type) ?? type;
 
@@ -256,13 +252,6 @@ internal partial class LibrarySetCSharpCodeGenerator
                     var v when v.IsObjectNullOrDefault()       => DefaultExpressionForType(),
                     var v                                      => FormattableString.Invariant($"{v}"),
                 };
-
-                // If the constant is nullable but has a value, add type cast to preserve nullable type
-                // This is needed for "is null" pattern to work correctly in generated C#
-                if (isNullableWithValue)
-                {
-                    text = $"({TypeToCSharpConverter.ToCSharp(constant.Type)}){text}";
-                }
             }
             else
             {
