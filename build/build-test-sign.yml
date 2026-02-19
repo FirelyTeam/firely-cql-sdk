@@ -70,11 +70,6 @@ parameters:
   - name: testConsoleLoggerVerbosity
     type: string
     default: 'normal'
-    values:
-      - 'quiet'
-      - 'minimal'
-      - 'normal'
-      - 'detailed'
 
 stages:
   # ============================================================================
