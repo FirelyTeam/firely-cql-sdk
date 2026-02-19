@@ -327,8 +327,8 @@ stages:
                   '--configuration', '${{ parameters.buildConfiguration }}',
                   '--no-build',
                   '--framework', 'net8.0',
-                  '--logger', 'console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
-                  '--logger', 'trx',
+                  '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
+                  '--logger:trx',
                   '--collect:XPlat Code Coverage',
                   '--results-directory', "$env:RESULTS_DIR"
                 )
@@ -403,8 +403,8 @@ stages:
                   '--configuration', '${{ parameters.buildConfiguration }}',
                   '--no-build',
                   '--framework', 'net10.0',
-                  '--logger', 'console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
-                  '--logger', 'trx',
+                  '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
+                  '--logger:trx',
                   '--collect:XPlat Code Coverage',
                   '--results-directory', "$env:RESULTS_DIR"
                 )
@@ -479,8 +479,8 @@ stages:
                   '--configuration', '${{ parameters.buildConfiguration }}',
                   '--no-build',
                   '--framework', 'net10.0',
-                  '--logger', 'console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
-                  '--logger', 'trx',
+                  '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}',
+                  '--logger:trx',
                   '--collect:XPlat Code Coverage',
                   '--results-directory', "$env:RESULTS_DIR"
                 )
