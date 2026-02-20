@@ -106,9 +106,9 @@ namespace Hl7.Cql.Primitives
             {
                 dto = unit switch
                 {
-                    "a"                                     => throw new CqlArithmeticError("a", "year").ToException(),
+                    "a"                                     => throw new CqlUcumYearArithmeticError().ToException(),
                     "year" or "years"                       => dto.AddYears((int)value),
-                    "mo"                                    => throw new CqlArithmeticError("mo", "month").ToException(),
+                    "mo"                                    => throw new CqlUcumMonthArithmeticError().ToException(),
                     "month" or "months"                     => dto.AddMonths((int)value),
                     "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
                     "d" or "day" or "days"                  => dto.AddDays((int)value!),
