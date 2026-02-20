@@ -25,7 +25,7 @@ public readonly record struct CqlUcumYearArithmeticError : ICqlArithmeticError
 {
     /// <inheritdoc/>
     public string GetMessage() =>
-        "If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, " +
+        "If a definite-duration time-valued unit above days (or weeks) appears in a date/time arithmetic calculation, " +
         "the evaluation will end and signal an error to the calling environment. " +
         "Use 'year' or 'years' instead of UCUM unit 'a'.";
 }
@@ -43,7 +43,7 @@ public readonly record struct CqlUcumMonthArithmeticError : ICqlArithmeticError
 {
     /// <inheritdoc/>
     public string GetMessage() =>
-        "If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, " +
+        "If a definite-duration time-valued unit above days (or weeks) appears in a date/time arithmetic calculation, " +
         "the evaluation will end and signal an error to the calling environment. " +
         "Use 'month' or 'months' instead of UCUM unit 'mo'.";
 }

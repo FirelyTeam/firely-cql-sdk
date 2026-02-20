@@ -444,7 +444,7 @@ The Firely CQL SDK uses a struct-based error pattern (`ICqlError` + `CqlExceptio
 public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlError
 {
     public string GetMessage() =>
-        $"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic " +
+        $"If a definite-duration time-valued unit above days (or weeks) appears in a date/time arithmetic " +
         $"calculation, the evaluation will end and signal an error to the calling environment. " +
         $"Use '{CalendarEquivalent}' instead of UCUM unit '{Unit}'.";
 }

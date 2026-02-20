@@ -189,7 +189,7 @@ public class CqlDateTests
     }
 
     [TestMethod]
-    public void Add_UcumYear_ThrowsArgumentException()
+    public void Add_UcumYear_ThrowsCqlExceptionAsCqlUcumYearArithmeticError()
     {
         // Per CQL spec and FHIRPath: definite-duration UCUM unit 'a' cannot be used in date/time arithmetic above days
         var date = new CqlDate(2024, 1, 31);
@@ -197,7 +197,7 @@ public class CqlDateTests
     }
 
     [TestMethod]
-    public void Add_UcumYear_Multiple_ThrowsArgumentException()
+    public void Add_UcumYear_Multiple_ThrowsCqlExceptionAsCqlUcumYearArithmeticError()
     {
         // Regression: even with multiple years the definite-duration error must be signalled
         var date = new CqlDate(2020, 1, 15);
@@ -205,14 +205,14 @@ public class CqlDateTests
     }
 
     [TestMethod]
-    public void Subtract_UcumYear_ThrowsArgumentException()
+    public void Subtract_UcumYear_ThrowsCqlExceptionAsCqlUcumYearArithmeticError()
     {
         var date = new CqlDate(2024, 3, 15);
         Assert.ThrowsException<CqlException<CqlUcumYearArithmeticError>>(() => date.Subtract(new CqlQuantity(1m, "a")));
     }
 
     [TestMethod]
-    public void Add_UcumMonth_ThrowsArgumentException()
+    public void Add_UcumMonth_ThrowsCqlExceptionAsCqlUcumMonthArithmeticError()
     {
         // Per CQL spec and FHIRPath: definite-duration UCUM unit 'mo' cannot be used in date/time arithmetic above days
         var date = new CqlDate(2024, 1, 31);
@@ -220,7 +220,7 @@ public class CqlDateTests
     }
 
     [TestMethod]
-    public void Add_UcumMonth_Multiple_ThrowsArgumentException()
+    public void Add_UcumMonth_Multiple_ThrowsCqlExceptionAsUcumMonthArithmeticError()
     {
         // Regression: even with multiple months the definite-duration error must be signalled
         var date = new CqlDate(2020, 1, 15);
@@ -228,8 +228,9 @@ public class CqlDateTests
     }
 
     [TestMethod]
-    public void Subtract_UcumMonth_ThrowsArgumentException()
+    public void Subtract_UcumMonth_ThrowsCqlExceptionAsCqlUcumMonthArithmeticError()
     {
         var date = new CqlDate(2024, 3, 15);
         Assert.ThrowsException<CqlException<CqlUcumMonthArithmeticError>>(() => date.Subtract(new CqlQuantity(1m, "mo")));
-    }}
+    }
+}
