@@ -16,13 +16,15 @@ namespace CoreTests
     [TestClass]
     public class LibraryPreprocessorTest
     {
+        private static DirectoryInfo ElmDir => LibrarySetsDirs.Demo.ElmDir;
+
         private Library FHIRHelpers() =>
-            Library.LoadFromJson(new FileInfo(Path.Combine("..", "..", "..", "..", "..", "LibrarySets", "Demo", "Elm", "FHIRHelpers.json")));
+            Library.LoadFromJson(new FileInfo(Path.Combine(ElmDir.FullName, "FHIRHelpers.json")));
 
         [TestMethod]
         public void MATGlobal_Add_ResultTypeSpecifier()
         {
-            var file = new FileInfo(Path.Combine("..", "..", "..", "..", "..", "LibrarySets", "Demo", "Elm", "MATGlobalCommonFunctionsFHIR4.json"));
+            var file = new FileInfo(Path.Combine(ElmDir.FullName, "MATGlobalCommonFunctionsFHIR4.json"));
             file.Exists.Should().BeTrue();
 
             var lib = Library.LoadFromJson(file);
