@@ -158,8 +158,10 @@ namespace Hl7.Cql.Primitives
             {
                 dto = unit switch
                 {
-                    UCUMUnits.Year or "year" or "years"     => dto.AddYears((int)value),
-                    UCUMUnits.Month or "month" or "months"  => dto.AddMonths((int)value),
+                    UCUMUnits.Year                          => throw new ArgumentException($"It is an error to use definite-duration UCUM unit 'a' in date/time arithmetic; use 'year' or 'years' instead."),
+                    "year" or "years"                       => dto.AddYears((int)value),
+                    UCUMUnits.Month                         => throw new ArgumentException($"It is an error to use definite-duration UCUM unit 'mo' in date/time arithmetic; use 'month' or 'months' instead."),
+                    "month" or "months"                     => dto.AddMonths((int)value),
                     "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
                     "d" or "day" or "days"                  => dto.AddDays((int)value!),
                     "h" or "hour" or "hours"                => dto.AddHours(Math.Truncate((double)value)),
