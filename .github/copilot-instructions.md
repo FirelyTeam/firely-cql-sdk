@@ -449,7 +449,7 @@ catch (CqlException<CqlArithmeticError> e) { ... }
 9.2.1 **ALWAYS** create a specific `ICqlError` struct and throw it as `CqlException<TError>` for any exception that should be raised during the evaluation of a CQL expression, instead of using general .NET exceptions like `InvalidOperationException` or `ArgumentException`.
 
 9.2.2 Examples of when to use `CqlException<TError>`:
-   - Spec-mandated errors during date/time arithmetic (use `CqlArithmeticError`)
+   - Spec-mandated errors during date/time arithmetic (e.g. `CqlUcumYearArithmeticError`, `CqlUcumMonthArithmeticError`)
    - Type mismatch errors at evaluation time
    - Division by zero or other arithmetic failures
    - Any error the CQL spec says "signals an error to the calling environment"
@@ -457,10 +457,11 @@ catch (CqlException<CqlArithmeticError> e) { ... }
 9.2.3 General .NET exceptions (`ArgumentException`, `InvalidOperationException`) are still appropriate for programming errors in the primitives layer (`Cql.Abstractions`), since those types cannot reference `Cql.Runtime`.
 
 ### 9.3 Key Points
-9.3.1 Exception classes live in the `Cql.Abstractions` project, namespace `Hl7.Cql.Exceptions`
+9.3.1 Exception infrastructure (`ICqlError`, `ICqlArithmeticError`, `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`) lives in `Cql/Cql.Abstractions/Exceptions/`, namespace `Hl7.Cql.Exceptions`.
 
-9.3.2 The throw site for CQL evaluation errors is in `CqlOperators` (in `Cql.Runtime`), not in the primitive types (`CqlDate`, `CqlDateTime`, etc. in `Cql.Abstractions`)
+9.3.2 **`Cql.Abstractions` is a special project**: it uses one `Errors.cs` file **per direct folder**, containing all `ICqlError` structs used within that folder's code. The namespace of each `Errors.cs` matches the folder's namespace:
+   - `Cql.Abstractions/Exceptions/Errors.cs` → `namespace Hl7.Cql.Exceptions` (internal infrastructure errors)
+   - `Cql.Abstractions/Primitives/Errors.cs` → `namespace Hl7.Cql.Primitives` (errors thrown by primitive types like `CqlDate`, `CqlDateTime`)
+   - Add a new `FolderName/Errors.cs` when adding errors used by types in a new folder
 
-9.3.3 `Cql.Abstractions` cannot reference `Cql.Runtime` (circular dependency); primitive methods may throw general .NET exceptions for invalid input, which are caught and re-thrown as `CqlException<TError>` by the operator layer
-
-9.3.4 New evaluation exception types should be added to `Cql/Cql.Abstractions/Abstractions/Exceptions/` and registered in `Cql/Cql.Abstractions/PublicAPI.Unshipped.txt`
+9.3.3 New `ICqlError` structs should be placed in the `Errors.cs` of the folder that contains the throw site, and registered in `Cql/Cql.Abstractions/PublicAPI.Unshipped.txt`.
