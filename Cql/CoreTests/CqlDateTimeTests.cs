@@ -81,7 +81,7 @@ public class CqlDateTimeTests
         var plus1UcumMonth = baseDate.Add(new CqlQuantity(1m, "mo"));
         Assert.AreEqual(DateTimePrecision.Day, plus1UcumMonth.Value.Precision);
         Assert.IsNull(plus1UcumMonth.Value.Hour);
-        Assert.AreEqual("2022-01-31", plus1UcumMonth.ToString());
+        Assert.AreEqual("2022-02-01", plus1UcumMonth.ToString());
 
     }
 
@@ -108,7 +108,7 @@ public class CqlDateTimeTests
         var minus1UcumMonth = baseDate.Subtract(new CqlQuantity(1m, "mo"));
         Assert.AreEqual(DateTimePrecision.Day, minus1UcumMonth.Value.Precision);
         Assert.IsNull(minus1UcumMonth.Value.Hour);
-        Assert.AreEqual("2022-01-29", minus1UcumMonth.ToString());
+        Assert.AreEqual("2022-02-01", minus1UcumMonth.ToString());
 
     }
 
@@ -134,7 +134,7 @@ public class CqlDateTimeTests
         var minus1UcumYear = baseDate.Subtract(new CqlQuantity(1m, "a"));
         Assert.AreEqual(DateTimePrecision.Day, minus1UcumYear.Value.Precision);
         Assert.IsNull(minus1UcumYear.Value.Hour);
-        Assert.AreEqual("2024-02-29", minus1UcumYear.ToString());
+        Assert.AreEqual("2024-03-01", minus1UcumYear.ToString());
 
     }
 

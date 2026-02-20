@@ -186,4 +186,86 @@ public class CqlDateTests
         var result = date.Add(quantity);
         Assert.IsNull(result, "Adding 24 hours to maximum date should return null to prevent overflow");
     }
-}
+
+    [TestMethod]
+    public void Add_UcumYear_UsesCalendarMath()
+    {
+        // @2024-01-31 + 1 'a' should equal @2025-01-31 (calendar math), not @2025-01-30 (365.25 days)
+        var date = new CqlDate(2024, 1, 31);
+        var result = date.Add(new CqlQuantity(1m, "a"));
+        Assert.AreEqual(new CqlDate(2025, 1, 31), result);
+    }
+
+    [TestMethod]
+    public void Add_UcumYear_Multiple_UsesMagnitude()
+    {
+        // Regression for Math.Sign bug: adding 2 UCUM years should add 2 years, not 1 year
+        var date = new CqlDate(2020, 1, 15);
+        var result = date.Add(new CqlQuantity(2m, "a"));
+        Assert.AreEqual(new CqlDate(2022, 1, 15), result, "Adding 2 UCUM years should add 2 calendar years, not 1");
+    }
+
+    [TestMethod]
+    public void Add_UcumYear_Negative()
+    {
+        // Negative UCUM years should subtract calendar years
+        var date = new CqlDate(2024, 3, 15);
+        var result = date.Add(new CqlQuantity(-2m, "a"));
+        Assert.AreEqual(new CqlDate(2022, 3, 15), result);
+    }
+
+    [TestMethod]
+    public void Add_UcumMonth_UsesCalendarMath()
+    {
+        // @2024-01-31 + 1 'mo' should equal @2024-02-29 (calendar math, leap year), not @2024-03-01 (~30.4 days)
+        var date = new CqlDate(2024, 1, 31);
+        var result = date.Add(new CqlQuantity(1m, "mo"));
+        Assert.AreEqual(new CqlDate(2024, 2, 29), result);
+    }
+
+    [TestMethod]
+    public void Add_UcumMonth_Multiple_UsesMagnitude()
+    {
+        // Regression for Math.Sign bug: adding 2 UCUM months should add 2 months, not 1 month
+        var date = new CqlDate(2020, 1, 15);
+        var result = date.Add(new CqlQuantity(2m, "mo"));
+        Assert.AreEqual(new CqlDate(2020, 3, 15), result, "Adding 2 UCUM months should add 2 calendar months, not 1");
+    }
+
+    [TestMethod]
+    public void Add_UcumMonth_Negative()
+    {
+        // Negative UCUM months should subtract calendar months
+        var date = new CqlDate(2024, 3, 15);
+        var result = date.Add(new CqlQuantity(-2m, "mo"));
+        Assert.AreEqual(new CqlDate(2024, 1, 15), result);
+    }
+
+    [TestMethod]
+    public void Add_UcumYear_FractionalValue_Truncates()
+    {
+        // @2020-01-15 + 2.5 'a' should equal @2022-01-15 (truncates to 2 years)
+        var date = new CqlDate(2020, 1, 15);
+        var result = date.Add(new CqlQuantity(2.5m, "a"));
+        Assert.AreEqual(new CqlDate(2022, 1, 15), result);
+    }
+
+    [TestMethod]
+    public void Add_UcumYear_EquivalentToCalendarYear()
+    {
+        // UCUM 'a' should produce same result as calendar 'year'
+        var date = new CqlDate(2024, 1, 31);
+        var ucumResult = date.Add(new CqlQuantity(1m, "a"));
+        var calendarResult = date.Add(new CqlQuantity(1m, "year"));
+        Assert.AreEqual(calendarResult, ucumResult);
+    }
+
+    [TestMethod]
+    public void Add_UcumMonth_EquivalentToCalendarMonth()
+    {
+        // UCUM 'mo' should produce same result as calendar 'month'
+        var date = new CqlDate(2024, 1, 31);
+        var ucumResult = date.Add(new CqlQuantity(1m, "mo"));
+        var calendarResult = date.Add(new CqlQuantity(1m, "month"));
+        Assert.AreEqual(calendarResult, ucumResult);
+    }}
