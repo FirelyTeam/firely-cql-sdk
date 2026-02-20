@@ -13,6 +13,7 @@ namespace Hl7.Cql.Operators
     {
         #region Coalesce
 
+        /// <inheritdoc />
         public T? Coalesce<T>(IEnumerable<T>? source)
             where T : class
         {
@@ -22,6 +23,7 @@ namespace Hl7.Cql.Operators
             return t;
         }
 
+        /// <inheritdoc />
         public T? CoalesceValueTypes<T>(IEnumerable<T?>? source)
             where T : struct
         {
@@ -36,19 +38,24 @@ namespace Hl7.Cql.Operators
 
         #region IsNull
 
+        /// <inheritdoc />
         public bool? IsNull<T>(T value) where T : class => value == null;
-        public bool? IsNullValue<T>(T? value) where T : struct => value.HasValue;
+
+        /// <inheritdoc />
+        public bool? IsNullValue<T>(T? value) where T : struct => !value.HasValue;
 
         #endregion
 
         #region IsFalse
 
+        /// <inheritdoc />
         public bool? IsFalse(bool? b) => b == false;
 
         #endregion
 
         #region IsTrue
 
+        /// <inheritdoc />
         public bool? IsTrue(bool? b) => b == true;
 
         #endregion

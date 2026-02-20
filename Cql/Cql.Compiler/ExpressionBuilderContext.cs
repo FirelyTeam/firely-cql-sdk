@@ -203,10 +203,6 @@ partial class ExpressionBuilderContext
                     ExpandValueSet e => _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.CreateValueSetFacade), TranslateArgs(GetBindArgs(element)),
                                                                          TranslateTypes(GetTypeArgs(element))),
 
-                    // Special case for intervals with null boundaries. See https://github.com/FirelyTeam/firely-cql-sdk/issues/543
-                    // Return a null expression that can be converted to the proper interval type by ConvertToResultType()
-                    Interval { low: Null, high: Null } => NullExpression.Object,
-
                     // All other Elm types matches on type name to the ICqlOperators method name
                     _ => _cqlOperatorsBinder.BindToMethod(element.GetType().Name, TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
                     //@formatter:on
@@ -1647,7 +1643,7 @@ internal partial class ExpressionBuilderContext
     {
         var operand = TranslateArg(isn.operand!);
         if (operand.Type.IsValueType && operand.Type.IsNullableValueType(out _) == false)
-            return Expression.Constant(false, typeof(bool));
+            return Expression.Constant(false, typeof(bool?));
 
         var compare = Expression.Equal(operand, NullExpression.ForType(operand.Type));
         var asNullableBool = compare.NewAssignToTypeExpression<bool?>();
