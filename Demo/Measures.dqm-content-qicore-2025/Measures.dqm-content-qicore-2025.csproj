@@ -10,7 +10,7 @@
 		<ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />
 		<ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\CLI\CLI.csproj" />
-		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelyNetVersion)" />
 		<!-- Ensure the PackagerCLI is build first, so that the ElmToCSharp targets file succeeds -->
 		<ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />
 	</ItemGroup>
@@ -39,7 +39,8 @@
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
 		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
-		<ResourcesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</ResourcesDirectory>
+		<LibrariesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/Resources/libraries</LibrariesDirectory>
+		<MeasuresDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/Resources/measures</MeasuresDirectory>
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
 		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
 	</PropertyGroup>

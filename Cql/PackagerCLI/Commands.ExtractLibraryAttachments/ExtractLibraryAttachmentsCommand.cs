@@ -31,10 +31,10 @@ internal record ExtractLibraryAttachmentsCommand
         "(CQL, ELM, C#, DLL, PDB) and saves them to the specified output directories." +
         NewLine + NewLine + NewLine +
         "Exit Codes:" + NewLine +
-        "  " + ExitCodes.Success.Message + NewLine +
-        "  " + ExitCodes.NoOutputDirs.Message + NewLine +
-        "  " + ExitCodes.LibraryExtractionError.Message + NewLine +
-        "  " + ExitCodes.LibraryMissingName.Message;
+        "  " + ExitCodes.Success.CodeWithMessage + NewLine +
+        "  " + ExitCodes.NoOutputDirs.CodeWithMessage + NewLine +
+        "  " + ExitCodes.LibraryExtractionError.CodeWithMessage + NewLine +
+        "  " + ExitCodes.LibraryMissingName.CodeWithMessage;
 
     public static readonly Option[] Options =
     [

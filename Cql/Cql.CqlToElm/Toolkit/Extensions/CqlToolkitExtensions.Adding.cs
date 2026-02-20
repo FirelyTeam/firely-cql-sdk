@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
@@ -35,18 +36,21 @@ public static partial class CqlToolkitExtensions
     /// <param name="directory">The directory to search for CQL files.</param>
     /// <param name="options">The enumeration options to use when searching for files.</param>
     /// <param name="filePredicate">An optional predicate to filter the files.</param>
+    /// <param name="subdirectoryPreserver">An optional subdirectory preserver to track relative paths.</param>
     /// <returns>The updated <see cref="CqlToolkit"/>.</returns>
     public static CqlToolkit AddCqlLibrariesFromDirectory(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
-        Func<FileInfo, bool>? filePredicate = null) =>
+        Func<FileInfo, bool>? filePredicate = null,
+        SubdirectoryPreserver? subdirectoryPreserver = null) =>
         AddCqlLibrariesFromDirectory(
             cqlToolkit,
             new AddCqlLibrariesFromDirectoryOptions(
                 directory,
                 options,
-                filePredicate));
+                filePredicate,
+                subdirectoryPreserver));
 
     /// <summary>
     /// Adds all CQL library files from the specified directory to the provided CqlToolkit instance.
@@ -62,7 +66,35 @@ public static partial class CqlToolkitExtensions
         AddCqlLibrariesFromDirectoryOptions opt)
     {
         var files = opt.GetFilesToAdd();
-        return cqlToolkit.AddCqlLibraryFiles(files);
+        var logger = cqlToolkit.CreateLogger();
+        var baseDirectory = opt.Directory.FullName;
+
+        var cqlLibraries = files
+            .TrySelect(f =>
+                       {
+                           logger.LogInformation("Loading CQL from file: {file}", f);
+                           var cqlContent = File.ReadAllText(f.FullName);
+                           var cqlLibrary = CqlLibraryString.Parse(cqlContent);
+                           
+                           // Track relative path if subdirectory preserver is provided
+                           if (opt.SubdirectoryPreserver is not null)
+                           {
+                               var relativePath = Path.GetRelativePath(baseDirectory, Path.GetDirectoryName(f.FullName) ?? baseDirectory);
+                               if (relativePath == ".")
+                                   relativePath = string.Empty;
+                               opt.SubdirectoryPreserver.AddRelativePath(relativePath, cqlLibrary.LibraryIdentifier);
+                           }
+
+                           return cqlLibrary;
+                       },
+                       s => s
+                            .SetContinuation(cqlToolkit.BatchProcessExceptionContinuation)
+                            .AddLoggerExceptionHandler(
+                                logger,
+                                (fileInfo, logMessage) =>
+                                    logMessage("Could not load CQL from file: {file}", fileInfo.FullName))); // Log errors
+
+        return cqlToolkit.AddCqlLibraries(cqlLibraries);
     }
 
     /// <summary>
@@ -105,10 +137,12 @@ public static partial class CqlToolkitExtensions
 /// <param name="EnumerationOptions">The options that control how the directory is enumerated. If null, default enumeration options are used.</param>
 /// <param name="FilePredicate">A predicate used to filter files within the directory. Only files for which this function returns true will be
 /// included. If null, all matching files are included.</param>
+/// <param name="SubdirectoryPreserver">An optional subdirectory preserver to track relative paths of loaded libraries.</param>
 public record AddCqlLibrariesFromDirectoryOptions(
     DirectoryInfo Directory,
     EnumerationOptions? EnumerationOptions,
-    Func<FileInfo, bool>? FilePredicate)
+    Func<FileInfo, bool>? FilePredicate,
+    SubdirectoryPreserver? SubdirectoryPreserver = null)
 {
     /// <summary>
     /// Gets the file name pattern used to match files for processing.
@@ -122,7 +156,7 @@ public record AddCqlLibrariesFromDirectoryOptions(
         var directory = Directory;
         var options = EnumerationOptions;
         var filePredicate = FilePredicate;
-        var files = directory.EnumerateFiles(FilePattern, options ?? Defaults.EnumerationOptions);
+        var files = directory.EnumerateFiles(FilePattern, options ?? Defaults.EnumerationOptionsRecurseSubdirectories);
         if (filePredicate is not null) files = files.Where(filePredicate);
         return files;
     }

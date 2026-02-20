@@ -38,11 +38,11 @@ internal record ReplaceLibraryAttachmentsCommand
         "resource will be automatically overridden with the values from the new ELM file." +
         NewLine + NewLine + NewLine +
         "Exit Codes:" + NewLine +
-        "  " + ExitCodes.Success.Message + NewLine +
-        "  " + ExitCodes.NoInputFiles.Message + NewLine +
-        "  " + ExitCodes.InvalidLibraryJson.Message + NewLine +
-        "  " + ExitCodes.InvalidLibraryMissingNameOrVersion.Message + NewLine +
-        "  " + ExitCodes.UnknownError.Message;
+        "  " + ExitCodes.Success.CodeWithMessage + NewLine +
+        "  " + ExitCodes.NoInputFiles.CodeWithMessage + NewLine +
+        "  " + ExitCodes.InvalidLibraryJson.CodeWithMessage + NewLine +
+        "  " + ExitCodes.InvalidLibraryMissingNameOrVersion.CodeWithMessage + NewLine +
+        "  " + ExitCodes.UnknownError.CodeWithMessage;
 
     public static readonly Option[] Options =
     [

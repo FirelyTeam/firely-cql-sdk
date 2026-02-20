@@ -94,7 +94,7 @@ stages:
     ${{ else }}: # release mode
       useVersionSuffix: false
     # Only sign on release tags or develop branch (not PRs)
-    ${{ if or(startswith(variables['Build.SourceBranch'], 'refs/tags/v'), startswith(variables['Build.SourceBranch'], 'refs/heads/develop')) }}:
+    ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
       shouldSign: true
       azureServiceConnectionForSigning: 'AzureTrustedSigningPrincipal'
       trustedSigningAccountEndpoint: 'https://weu.codesigning.azure.net/'

@@ -643,11 +643,13 @@ internal partial class LibrarySetCSharpCodeGenerator
                 var rightCode = BuildExpression(right);
                 string binaryString = @operator switch
                 {
-                    // (constant value is null) --> false
-                    "is" when rightCode == "null" && left is ConstantExpression { Value: ValueType } => "false",
-                    // (null is null) --> true
-                    "is" when rightCode == "null" && left is ConstantExpression { Value: null } => "true",
-                    _                                                                           => $"{leftCode} {@operator} {rightCode}"
+                    // (constant value is null/default) --> false
+                    "is" when (rightCode == "null" || rightCode == "default") && left is ConstantExpression { Value: ValueType } => "false",
+                    // (null is null/default) --> true
+                    "is" when (rightCode == "null" || rightCode == "default") && left is ConstantExpression { Value: null } => "true",
+                    // Replace 'default' with 'null' for 'is' pattern (CS8505: default literal not valid as pattern)
+                    "is" when rightCode == "default" => $"{leftCode} is null",
+                    _                                 => $"{leftCode} {@operator} {rightCode}"
                 };
                 return binaryString;
             }

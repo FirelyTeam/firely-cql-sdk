@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
 using Hl7.Cql.Abstractions.Infrastructure;
@@ -382,27 +383,19 @@ namespace Hl7.Cql.Fhir
         {
             converter.AddConversion<byte[], string>(binary => Encoding.UTF8.GetString(binary));
             converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
-
-            // TODO: this is a performance problem
-            converter.AddConversion<string, CqlDate?>(str =>
-            {
-                if (CqlDate.TryParse(str, out var date))
-                    return date!;
-                else return null;
-            });
-            converter.AddConversion<string, CqlDateTime?>(str =>
-            {
-                if (CqlDateTime.TryParse(str, out var dateTime))
-                    return dateTime;
-                else return null;
-            });
-            converter.AddConversion<string, CqlTime?>(str =>
-            {
-                if (CqlTime.TryParse(str, out var time))
-                    return time;
-                else return null;
-            });
             converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
+            
+            // TODO: this is a performance problem
+            // CQL string conversions - return null on invalid input
+            converter.AddConversion<string, bool?>(s => ConvertStringToBoolean(s));
+            converter.AddConversion<string, int?>(s => ConvertStringToInteger(s));
+            converter.AddConversion<string, long?>(s => ConvertStringToLong(s));
+            converter.AddConversion<string, decimal?>(s => ConvertStringToDecimal(s));
+            converter.AddConversion<string, CqlQuantity?>(s => ConvertStringToQuantity(s));
+            converter.AddConversion<string, CqlDate?>(s => ConvertStringToDate(s));
+            converter.AddConversion<string, CqlDateTime?>(s => ConvertStringToDateTime(s));
+            converter.AddConversion<string, CqlTime?>(s => ConvertStringToTime(s));
+            
             converter.AddConversion<string, M.FhirUri>(str => new M.FhirUri(str));
             converter.AddConversion<string, M.FhirString>(str => new M.FhirString(str));
             converter.AddConversion<M.FhirUri, string?>(uri => uri.Value);
@@ -410,6 +403,38 @@ namespace Hl7.Cql.Fhir
 
             return converter;
         }
+
+        // CQL conversion helper methods that return null on invalid input
+        private static bool? ConvertStringToBoolean(string? s) =>
+            CqlOperators.ConvertStringToBooleanImpl(s);
+
+        private static int? ConvertStringToInteger(string? s) =>
+            s == null ? null :
+            int.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value) ? value : null;
+
+        private static long? ConvertStringToLong(string? s) =>
+            s == null ? null :
+            long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out long value) ? value : null;
+
+        private static decimal? ConvertStringToDecimal(string? s) =>
+            s == null ? null :
+            decimal.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal value) ? value : null;
+
+        private static CqlQuantity? ConvertStringToQuantity(string? s) =>
+            s == null ? null :
+            CqlQuantity.TryParse(s, out CqlQuantity? value) ? value : null;
+
+        private static CqlDate? ConvertStringToDate(string? s) =>
+            s == null ? null :
+            CqlDate.TryParse(s, out CqlDate? value) ? value : null;
+
+        private static CqlDateTime? ConvertStringToDateTime(string? s) =>
+            s == null ? null :
+            CqlDateTime.TryParse(s, out CqlDateTime? value) ? value : null;
+
+        private static CqlTime? ConvertStringToTime(string? s) =>
+            s == null ? null :
+            CqlTime.TryParse(s, out CqlTime? value) ? value : null;
 
         internal static TypeConverter ConvertCodeTypes(this TypeConverter converter, ModelInspector model)
         {

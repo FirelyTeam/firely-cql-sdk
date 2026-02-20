@@ -84,28 +84,51 @@ namespace Hl7.Cql.Operators
 
         public string? ConvertRatioToString(CqlRatio? r) => r?.ToString();
 
-        public bool? ConvertStringToBoolean(string? s)
+        public bool? ConvertStringToBoolean(string? s) => ConvertStringToBooleanImpl(s);
+
+        internal static bool? ConvertStringToBooleanImpl(string? s)
         {
             if (s == null) return null;
-            else
+            
+            // Optimize for common cases first, avoid allocating a lowercase string
+            switch (s.Length)
             {
-                switch (s.ToLower(CultureInfo.InvariantCulture))
-                {
-                    case "true":
-                    case "t":
-                    case "yes":
-                    case "y":
-                    case "1":
-                        return true;
-                    case "false":
-                    case "f":
-                    case "no":
-                    case "n":
-                    case "0":
+                case 1:
+                    switch (s[0])
+                    {
+                        case 't':
+                        case 'T':
+                        case 'y':
+                        case 'Y':
+                        case '1':
+                            return true;
+                        case 'f':
+                        case 'F':
+                        case 'n':
+                        case 'N':
+                        case '0':
+                            return false;
+                        default:
+                            return null;
+                    }
+                case 2:
+                    if (s.Equals("no", StringComparison.OrdinalIgnoreCase))
                         return false;
-                    default:
-                        return null;
-                }
+                    return null;
+                case 3:
+                    if (s.Equals("yes", StringComparison.OrdinalIgnoreCase))
+                        return true;
+                    return null;
+                case 4:
+                    if (s.Equals("true", StringComparison.OrdinalIgnoreCase))
+                        return true;
+                    return null;
+                case 5:
+                    if (s.Equals("false", StringComparison.OrdinalIgnoreCase))
+                        return false;
+                    return null;
+                default:
+                    return null;
             }
         }
 

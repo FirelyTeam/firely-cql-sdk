@@ -23,6 +23,8 @@ internal static class ResourceCanonicalBuilderFactory
             string identifier,
             string? version = null) =>
         {
+            //see https://github.com/FirelyTeam/firely-cql-sdk/issues/1188 for why we are replacing underscore with dash in URL
+            identifier = identifier.Replace('_', '-');
             string includeVersionString = string.IsNullOrEmpty(version) ? string.Empty : $"|{version}";
             var resultCanonical = fixedLibraryCanonicals is { Count: > 0 }
                                   && CqlLibraryIdentifier.TryParse(identifier, out var cqlLibraryIdentifier)

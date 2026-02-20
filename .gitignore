@@ -398,7 +398,7 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 /Demo/Cql/Build/target/**/*.*
 
 # We don't include Resources, because compiling the same C# code does not generate a deterministic binary, so it becomes very noise when they are included in the Resources
-/LibrarySets/**/Resources/*.*
+/LibrarySets/**/Resources/**/*.*
 *.bak
 *.dat
 
@@ -418,3 +418,10 @@ global.json
 *.lock
 *.lock.d/
 LibrarySets/Demo/ElmOut/
+
+# Example output directories
+Examples/**/output/
+
+# Spec source files (original HTML with CSS/JS/images, ~40MB)
+spec/source/*
+!spec/source/README.md

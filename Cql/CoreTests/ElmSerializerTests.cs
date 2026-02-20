@@ -41,10 +41,10 @@ namespace CoreTests
             // Although it seems enums are *always* serialized (even when they are set to the default
             // value), sometimes they are not for accessLevel. That's acceptable.
             "Unexpected key 'accessLevel' (value '\"Public\"') found in actual object.",
-            //now removing empty values due to JAVA ELM having many empty arrays in the output
+            // Now removing empty values due to Java ELM having many empty arrays in the output
             "(value '[]') not found in actual object.",
-// Java ELM includes default boolean values, but we omit them
-"Expected key 'strict' (value 'false') not found in actual object."
+            // Java ELM includes default boolean values, but we omit them
+            "Expected key 'strict' (value 'false') not found in actual object."
         };
 
         [TestMethod]
