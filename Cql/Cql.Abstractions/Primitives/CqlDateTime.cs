@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Iso8601;
 
@@ -159,9 +158,9 @@ namespace Hl7.Cql.Primitives
             {
                 dto = unit switch
                 {
-                    UCUMUnits.Year                          => throw new CqlArithmeticException("If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, the evaluation will end and signal an error to the calling environment. Use 'year' or 'years' instead of UCUM unit 'a'."),
+                    UCUMUnits.Year                          => throw new InvalidOperationException($"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, the evaluation will end and signal an error to the calling environment. Use 'year' or 'years' instead of UCUM unit 'a'."),
                     "year" or "years"                       => dto.AddYears((int)value),
-                    UCUMUnits.Month                         => throw new CqlArithmeticException("If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, the evaluation will end and signal an error to the calling environment. Use 'month' or 'months' instead of UCUM unit 'mo'."),
+                    UCUMUnits.Month                         => throw new InvalidOperationException($"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, the evaluation will end and signal an error to the calling environment. Use 'month' or 'months' instead of UCUM unit 'mo'."),
                     "month" or "months"                     => dto.AddMonths((int)value),
                     "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
                     "d" or "day" or "days"                  => dto.AddDays((int)value!),
