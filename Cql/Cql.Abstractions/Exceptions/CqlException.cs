@@ -14,7 +14,10 @@ namespace Hl7.Cql.Exceptions;
 /// </summary>
 public abstract class CqlException : Exception
 {
-    /// <inheritdoc cref="Exception(Exception?)"/>
+    /// <summary>
+    /// Initializes a new instance of <see cref="CqlException"/> with an optional inner exception.
+    /// </summary>
+    /// <param name="innerException">The exception that caused this exception, or <see langword="null"/>.</param>
     protected CqlException(Exception? innerException = null) : base(null, innerException) { }
 
     /// <summary>The structured error payload that produced this exception.</summary>
