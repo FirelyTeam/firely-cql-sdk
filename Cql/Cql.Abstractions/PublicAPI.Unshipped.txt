@@ -9,11 +9,6 @@ Hl7.Cql.Exceptions.CqlException<TError>.Error.get -> TError
 Hl7.Cql.Exceptions.CqlErrorExtensions
 Hl7.Cql.Exceptions.CqlErrorExtensions.ToException<TError>(this TError cqlError, System.Exception? innerException = null) -> Hl7.Cql.Exceptions.CqlException<TError>!
 Hl7.Cql.Exceptions.ICqlArithmeticError
-Hl7.Cql.Exceptions.CqlArithmeticError
-Hl7.Cql.Exceptions.CqlArithmeticError.CqlArithmeticError(string! Unit, string! CalendarEquivalent) -> void
-Hl7.Cql.Exceptions.CqlArithmeticError.Unit.get -> string!
-Hl7.Cql.Exceptions.CqlArithmeticError.CalendarEquivalent.get -> string!
-Hl7.Cql.Exceptions.CqlArithmeticError.GetMessage() -> string!
 Hl7.Cql.Exceptions.CqlUcumYearArithmeticError
 Hl7.Cql.Exceptions.CqlUcumYearArithmeticError.CqlUcumYearArithmeticError() -> void
 Hl7.Cql.Exceptions.CqlUcumYearArithmeticError.GetMessage() -> string!
