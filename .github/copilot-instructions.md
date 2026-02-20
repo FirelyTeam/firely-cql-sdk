@@ -420,16 +420,27 @@ string formatted = identifier.ToString();
 - **`CqlException`** (`Hl7.Cql.Exceptions`) — public abstract base exception; message is derived from an `ICqlError` payload
 - **`CqlException<TError>`** (`Hl7.Cql.Exceptions`) — generic concrete exception wrapping a strongly-typed `ICqlError` struct payload
 
-9.1.2 To define a new CQL evaluation error, create a `public readonly record struct` implementing `ICqlError`, then throw it with `.ToException()`:
+9.1.2 To define a new CQL evaluation error, create a `public readonly record struct` implementing `ICqlError`.
+**IMPORTANT**: The struct must accept the **metadata** (raw facts like a unit name or value) as constructor parameters, NOT a pre-built message string. `GetMessage()` is responsible for constructing the human-readable message from that metadata:
 
 ```csharp
+// ✅ CORRECT — struct holds metadata, GetMessage() constructs the message
+public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlError
+{
+    public string GetMessage() =>
+        $"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic " +
+        $"calculation, the evaluation will end and signal an error to the calling environment. " +
+        $"Use '{CalendarEquivalent}' instead of UCUM unit '{Unit}'.";
+}
+
+// ❌ WRONG — do NOT pass a pre-built message string
 public readonly record struct CqlArithmeticError(string Message) : ICqlError
 {
-    public string GetMessage() => Message;
+    public string GetMessage() => Message;  // anti-pattern
 }
 
 // Throw it:
-throw new CqlArithmeticError("...").ToException();
+throw new CqlArithmeticError("a", "year").ToException();
 // Catch it:
 catch (CqlException<CqlArithmeticError> e) { ... }
 ```

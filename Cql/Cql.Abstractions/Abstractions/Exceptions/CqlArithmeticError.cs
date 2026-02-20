@@ -18,9 +18,13 @@ namespace Hl7.Cql.Exceptions;
 /// must be used instead. Use <see cref="CqlErrorExtensions.ToException{TError}"/> to convert
 /// this error into a throwable <see cref="CqlException{TError}"/>.
 /// </remarks>
-/// <param name="Message">The human-readable message describing why the arithmetic cannot be performed.</param>
-public readonly record struct CqlArithmeticError(string Message) : ICqlError
+/// <param name="Unit">The UCUM unit string (e.g. <c>"a"</c>, <c>"mo"</c>) that caused the error.</param>
+/// <param name="CalendarEquivalent">The calendar duration unit that should be used instead (e.g. <c>"year"</c>, <c>"month"</c>).</param>
+public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlError
 {
     /// <inheritdoc/>
-    public string GetMessage() => Message;
+    public string GetMessage() =>
+        $"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, " +
+        $"the evaluation will end and signal an error to the calling environment. " +
+        $"Use '{CalendarEquivalent}' instead of UCUM unit '{Unit}'.";
 }
