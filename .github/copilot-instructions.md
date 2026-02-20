@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.5.0
+**Version:** 2.6.0
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
@@ -38,8 +38,9 @@ This document contains development guidelines and instructions for maintaining c
   - [8.2 When to Check Specification](#82-when-to-check-specification)
   - [8.3 Specification Location](#83-specification-location)
 - [9. CQL Evaluation Exceptions](#9-cql-evaluation-exceptions)
+  - [9.0 Rationale](#90-rationale)
   - [9.1 Exception Hierarchy](#91-exception-hierarchy)
-  - [9.2 When to Use CqlEvaluationException](#92-when-to-use-clevaluationexception)
+  - [9.2 When to Use CqlException](#92-when-to-use-cqlexception)
   - [9.3 Key Points](#93-key-points)
 
 ## 1. User Workflow Preferences
@@ -414,6 +415,19 @@ string formatted = identifier.ToString();
 
 ## 9. CQL Evaluation Exceptions
 
+### 9.0 Rationale
+9.0.1 **Why use `ICqlError` structs instead of plain .NET exceptions?**
+
+The Firely CQL SDK uses a struct-based error pattern (`ICqlError` + `CqlException<TError>`) rather than conventional `new SomeException("message")` throws. This design was chosen for four reasons:
+
+9.0.1.1 **Lazy message construction** — The human-readable message string is *not* constructed at the throw site. It is constructed on demand inside `GetMessage()`, only when the exception message is actually read (e.g. when logging or displaying the error). This avoids unnecessary string allocations for errors that may be caught and handled without inspecting the message.
+
+9.0.1.2 **Structured error metadata** — All the raw facts that caused the error (e.g. the UCUM unit name, the expected calendar equivalent) are stored as typed properties on the struct, not embedded in an opaque string. Callers can inspect `((CqlException<CqlUcumYearArithmeticError>)ex).Error.Unit` programmatically without parsing the message.
+
+9.0.1.3 **Strongly-typed catch clauses** — Because each error kind is its own type parameter on `CqlException<TError>`, error handlers can catch `CqlException<CqlUcumYearArithmeticError>` specifically, making catch clauses self-documenting and avoiding substring matching on message text.
+
+9.0.1.4 **Future internationalization** — Because `GetMessage()` is a method on the struct, it can be overridden or replaced with a locale-aware implementation in the future without changing throw sites. All the data needed to produce a translated message is already captured in the struct's properties. (Internationalization is not yet implemented.)
+
 ### 9.1 Exception Hierarchy
 9.1.1 Two exception types are defined in `Hl7.Cql.Abstractions` (assembly `Hl7.Cql.Abstractions`) for errors raised during CQL evaluation:
 
@@ -454,7 +468,7 @@ catch (CqlException<CqlArithmeticError> e) { ... }
    - Division by zero or other arithmetic failures
    - Any error the CQL spec says "signals an error to the calling environment"
 
-9.2.3 General .NET exceptions (`ArgumentException`, `InvalidOperationException`) are still appropriate for programming errors in the primitives layer (`Cql.Abstractions`), since those types cannot reference `Cql.Runtime`.
+9.2.3 General .NET exceptions (`ArgumentException`, `InvalidOperationException`) are still appropriate for programming errors (e.g. invalid method arguments), as opposed to errors arising from evaluating CQL expressions at runtime.
 
 ### 9.3 Key Points
 9.3.1 Exception infrastructure (`ICqlError`, `ICqlArithmeticError`, `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`) lives in `Cql/Cql.Abstractions/Exceptions/`, namespace `Hl7.Cql.Exceptions`.
