@@ -31,49 +31,49 @@ The SDK uses an `ICqlError` struct as the _payload_ of a `CqlException<TError>` 
 
 1. **Lazy message construction** — The human-readable string is _not_ built at the throw site. `GetMessage()` is only called when the exception message is actually read (e.g. when logging or displaying). This avoids unnecessary string allocations for errors that are caught and handled without ever inspecting the message.
 
-2. **Structured error metadata** — All raw facts that caused the error (e.g. a unit name, an expected calendar equivalent) are stored as typed properties on the struct. A caller can inspect `((CqlException<CqlUcumYearArithmeticError>)ex).Error` programmatically without parsing an opaque string.
+2. **Structured error metadata** — All raw facts that caused the error (e.g. a UCUM unit name, an expected calendar equivalent) are stored as typed properties on the struct, not embedded in an opaque string. A caller can inspect `((CqlException<MyCqlError>)ex).Error.Unit` programmatically without parsing the message text.
 
-3. **Strongly-typed catch clauses** — Because each error kind is its own `TError` type parameter, error handlers can write `catch (CqlException<CqlUcumYearArithmeticError>)`, making catch clauses self-documenting and avoiding substring matching on message text.
+3. **Strongly-typed catch clauses** — Because each error kind is its own `TError` type parameter, error handlers can write `catch (CqlException<MyCqlError>)`, making catch clauses self-documenting and avoiding substring matching on message text.
 
 4. **Future internationalization** — Because `GetMessage()` is a method on the struct, it can be overridden or replaced with a locale-aware implementation without changing throw sites. All the data needed to produce a translated message is already captured in the struct's properties. _(Internationalization is not yet implemented.)_
 
-### Usage pattern
+### Defining a new error type
 
-**Defining a new error type** (in the `Errors.cs` of the folder containing the throw site):
+Place the struct in the `Errors.cs` of the folder that contains the throw site. The struct must accept the **metadata** (raw facts) as constructor parameters — `GetMessage()` constructs the human-readable string from that metadata on demand.
 
 ```csharp
-// ✅ Correct — struct holds metadata, GetMessage() constructs the string
-public readonly record struct CqlUcumYearArithmeticError : ICqlArithmeticError
+// ✅ Correct — struct holds metadata; GetMessage() constructs the string lazily
+public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlArithmeticError
 {
     public string GetMessage() =>
-        "If a definite-quantity duration above days (or weeks) appears in a " +
-        "date/time arithmetic calculation, the evaluation will end and signal " +
-        "an error to the calling environment. Use 'year' or 'years' instead of UCUM unit 'a'.";
+        $"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic " +
+        $"calculation, the evaluation will end and signal an error to the calling environment. " +
+        $"Use '{CalendarEquivalent}' instead of UCUM unit '{Unit}'.";
 }
 
 // ❌ Wrong — do NOT pass a pre-built message string as a constructor argument
-public readonly record struct MyError(string Message) : ICqlError
+public readonly record struct CqlArithmeticError(string Message) : ICqlError
 {
-    public string GetMessage() => Message;   // anti-pattern
+    public string GetMessage() => Message;  // anti-pattern: message built at throw site
 }
 ```
 
-**Throwing:**
+> **Note:** When all metadata is fully encoded in the type name (e.g. `CqlUcumYearArithmeticError` always refers to unit `"a"`), a parameterless struct is acceptable. The rule is: never pass a pre-formatted message string — all variable information must be in typed properties.
+
+### Throwing and catching
 
 ```csharp
-throw new CqlUcumYearArithmeticError().ToException();
-```
+// Throwing:
+throw new CqlArithmeticError("a", "year").ToException();
 
-**Catching:**
-
-```csharp
-catch (CqlException<CqlUcumYearArithmeticError> ex)
+// Catching a specific error type:
+catch (CqlException<CqlArithmeticError> ex)
 {
-    // access structured metadata:
-    Console.WriteLine(ex.Error.GetMessage());
+    string unit = ex.Error.Unit;              // structured metadata
+    string msg  = ex.Error.GetMessage();      // human-readable string, built on demand
 }
 
-// or catch any CQL evaluation error:
+// Catching any CQL evaluation error:
 catch (CqlException ex) { ... }
 ```
 

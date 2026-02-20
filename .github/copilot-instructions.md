@@ -422,7 +422,7 @@ The Firely CQL SDK uses a struct-based error pattern (`ICqlError` + `CqlExceptio
 
 9.0.1.1 **Lazy message construction** — The human-readable message string is *not* constructed at the throw site. It is constructed on demand inside `GetMessage()`, only when the exception message is actually read (e.g. when logging or displaying the error). This avoids unnecessary string allocations for errors that may be caught and handled without inspecting the message.
 
-9.0.1.2 **Structured error metadata** — All the raw facts that caused the error (e.g. the UCUM unit name, the expected calendar equivalent) are stored as typed properties on the struct, not embedded in an opaque string. Callers can inspect `((CqlException<CqlUcumYearArithmeticError>)ex).Error.Unit` programmatically without parsing the message.
+9.0.1.2 **Structured error metadata** — All the raw facts that caused the error (e.g. the UCUM unit name, the expected calendar equivalent) are stored as typed properties on the struct, not embedded in an opaque string. Callers can inspect `((CqlException<CqlArithmeticError>)ex).Error.Unit` programmatically without parsing the message.
 
 9.0.1.3 **Strongly-typed catch clauses** — Because each error kind is its own type parameter on `CqlException<TError>`, error handlers can catch `CqlException<CqlUcumYearArithmeticError>` specifically, making catch clauses self-documenting and avoiding substring matching on message text.
 
