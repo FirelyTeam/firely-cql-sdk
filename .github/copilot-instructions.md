@@ -417,14 +417,28 @@ string formatted = identifier.ToString();
 ### 9.1 Exception Hierarchy
 9.1.1 Two exception types are defined in `Hl7.Cql.Abstractions` (assembly `Hl7.Cql.Abstractions`) for errors raised during CQL evaluation:
 
-- **`CqlEvaluationException`** (`Hl7.Cql.Exceptions`) — public abstract base for all errors that occur during the evaluation (execution) of CQL expressions
-- **`CqlArithmeticException : CqlEvaluationException`** (`Hl7.Cql.Exceptions`) — thrown when a CQL arithmetic operation cannot be performed (e.g., using definite-duration UCUM units above days in date/time arithmetic)
+- **`CqlException`** (`Hl7.Cql.Exceptions`) — public abstract base exception; message is derived from an `ICqlError` payload
+- **`CqlException<TError>`** (`Hl7.Cql.Exceptions`) — generic concrete exception wrapping a strongly-typed `ICqlError` struct payload
 
-### 9.2 When to Use CqlEvaluationException
-9.2.1 **ALWAYS** create a specific subclass of `CqlEvaluationException` for any exception that should be raised during the evaluation of a CQL expression, instead of using general .NET exceptions like `InvalidOperationException` or `ArgumentException`.
+9.1.2 To define a new CQL evaluation error, create a `public readonly record struct` implementing `ICqlError`, then throw it with `.ToException()`:
 
-9.2.2 Examples of when to use `CqlEvaluationException` subclasses:
-   - Spec-mandated errors during date/time arithmetic (use `CqlArithmeticException`)
+```csharp
+public readonly record struct CqlArithmeticError(string Message) : ICqlError
+{
+    public string GetMessage() => Message;
+}
+
+// Throw it:
+throw new CqlArithmeticError("...").ToException();
+// Catch it:
+catch (CqlException<CqlArithmeticError> e) { ... }
+```
+
+### 9.2 When to Use CqlException
+9.2.1 **ALWAYS** create a specific `ICqlError` struct and throw it as `CqlException<TError>` for any exception that should be raised during the evaluation of a CQL expression, instead of using general .NET exceptions like `InvalidOperationException` or `ArgumentException`.
+
+9.2.2 Examples of when to use `CqlException<TError>`:
+   - Spec-mandated errors during date/time arithmetic (use `CqlArithmeticError`)
    - Type mismatch errors at evaluation time
    - Division by zero or other arithmetic failures
    - Any error the CQL spec says "signals an error to the calling environment"
@@ -436,6 +450,6 @@ string formatted = identifier.ToString();
 
 9.3.2 The throw site for CQL evaluation errors is in `CqlOperators` (in `Cql.Runtime`), not in the primitive types (`CqlDate`, `CqlDateTime`, etc. in `Cql.Abstractions`)
 
-9.3.3 `Cql.Abstractions` cannot reference `Cql.Runtime` (circular dependency); primitive methods may throw general .NET exceptions for invalid input, which are caught and re-thrown as `CqlEvaluationException` subclasses by the operator layer
+9.3.3 `Cql.Abstractions` cannot reference `Cql.Runtime` (circular dependency); primitive methods may throw general .NET exceptions for invalid input, which are caught and re-thrown as `CqlException<TError>` by the operator layer
 
 9.3.4 New evaluation exception types should be added to `Cql/Cql.Abstractions/Abstractions/Exceptions/` and registered in `Cql/Cql.Abstractions/PublicAPI.Unshipped.txt`

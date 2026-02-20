@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;

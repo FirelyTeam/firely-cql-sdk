@@ -9,7 +9,7 @@
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
 
 
-using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Comparers;
 
 namespace Hl7.Cql.Elm;

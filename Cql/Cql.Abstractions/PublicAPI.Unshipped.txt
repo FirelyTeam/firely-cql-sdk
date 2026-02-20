@@ -1,7 +1,14 @@
 #nullable enable
-Hl7.Cql.Exceptions.CqlEvaluationException
-Hl7.Cql.Exceptions.CqlEvaluationException.CqlEvaluationException(string? message) -> void
-Hl7.Cql.Exceptions.CqlEvaluationException.CqlEvaluationException(string? message, System.Exception? innerException) -> void
-Hl7.Cql.Exceptions.CqlArithmeticException
-Hl7.Cql.Exceptions.CqlArithmeticException.CqlArithmeticException(string! message) -> void
-Hl7.Cql.Exceptions.CqlArithmeticException.CqlArithmeticException(string! message, System.Exception? innerException) -> void
+Hl7.Cql.Exceptions.ICqlError
+Hl7.Cql.Exceptions.ICqlError.GetMessage() -> string!
+Hl7.Cql.Exceptions.CqlException
+Hl7.Cql.Exceptions.CqlException.Error.get -> Hl7.Cql.Exceptions.ICqlError!
+Hl7.Cql.Exceptions.CqlException<TError>
+Hl7.Cql.Exceptions.CqlException<TError>.CqlException(TError error, System.Exception? innerException = null) -> void
+Hl7.Cql.Exceptions.CqlException<TError>.Error.get -> TError
+Hl7.Cql.Exceptions.CqlErrorExtensions
+Hl7.Cql.Exceptions.CqlErrorExtensions.ToException<TError>(this TError cqlError, System.Exception? innerException = null) -> Hl7.Cql.Exceptions.CqlException<TError>!
+Hl7.Cql.Exceptions.CqlArithmeticError
+Hl7.Cql.Exceptions.CqlArithmeticError.CqlArithmeticError(string! Message) -> void
+Hl7.Cql.Exceptions.CqlArithmeticError.Message.get -> string!
+Hl7.Cql.Exceptions.CqlArithmeticError.GetMessage() -> string!
