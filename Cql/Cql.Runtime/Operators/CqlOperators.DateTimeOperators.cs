@@ -10,6 +10,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Operators
 {
@@ -21,6 +22,8 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
+            if (right.unit is UCUMUnits.Year or UCUMUnits.Month)
+                throw new CqlArithmeticException($"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, the evaluation will end and signal an error to the calling environment. Use the calendar duration unit instead of UCUM unit '{right.unit}'.");
             try
             {
                 return left.Add(right);
@@ -35,6 +38,8 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
+            if (right.unit is UCUMUnits.Year or UCUMUnits.Month)
+                throw new CqlArithmeticException($"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, the evaluation will end and signal an error to the calling environment. Use the calendar duration unit instead of UCUM unit '{right.unit}'.");
             try
             {
                 return left.Add(right);
@@ -345,6 +350,8 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
+            if (right.unit is UCUMUnits.Year or UCUMUnits.Month)
+                throw new CqlArithmeticException($"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, the evaluation will end and signal an error to the calling environment. Use the calendar duration unit instead of UCUM unit '{right.unit}'.");
             try
             {
                 return left.Subtract(right);
@@ -360,6 +367,8 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
+            if (right.unit is UCUMUnits.Year or UCUMUnits.Month)
+                throw new CqlArithmeticException($"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic calculation, the evaluation will end and signal an error to the calling environment. Use the calendar duration unit instead of UCUM unit '{right.unit}'.");
             try
             {
                 return left.Subtract(right);

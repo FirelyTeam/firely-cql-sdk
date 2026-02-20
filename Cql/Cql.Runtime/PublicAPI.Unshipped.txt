@@ -1,1 +1,7 @@
 #nullable enable
+Hl7.Cql.Runtime.CqlEvaluationException
+Hl7.Cql.Runtime.CqlEvaluationException.CqlEvaluationException(string? message) -> void
+Hl7.Cql.Runtime.CqlEvaluationException.CqlEvaluationException(string? message, System.Exception? innerException) -> void
+Hl7.Cql.Runtime.CqlArithmeticException
+Hl7.Cql.Runtime.CqlArithmeticException.CqlArithmeticException(string! message) -> void
+Hl7.Cql.Runtime.CqlArithmeticException.CqlArithmeticException(string! message, System.Exception? innerException) -> void

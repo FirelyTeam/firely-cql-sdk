@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.4.1
+**Version:** 2.5.0
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
@@ -37,6 +37,10 @@ This document contains development guidelines and instructions for maintaining c
   - [8.1 Authoritative Specification Source](#81-authoritative-specification-source)
   - [8.2 When to Check Specification](#82-when-to-check-specification)
   - [8.3 Specification Location](#83-specification-location)
+- [9. CQL Evaluation Exceptions](#9-cql-evaluation-exceptions)
+  - [9.1 Exception Hierarchy](#91-exception-hierarchy)
+  - [9.2 When to Use CqlEvaluationException](#92-when-to-use-clevaluationexception)
+  - [9.3 Key Points](#93-key-points)
 
 ## 1. User Workflow Preferences
 
@@ -407,3 +411,31 @@ string formatted = identifier.ToString();
 8.3.7 **Complete list**: See `/spec/condensed/README.md` for all available specification sections
 
 8.3.8 **Conformance reports**: See `/spec/report/` for known deviations and issue templates
+
+## 9. CQL Evaluation Exceptions
+
+### 9.1 Exception Hierarchy
+9.1.1 Two exception types are defined in `Hl7.Cql.Runtime` (assembly `Hl7.Cql.Runtime`) for errors raised during CQL evaluation:
+
+- **`CqlEvaluationException`** (`Hl7.Cql.Runtime`) — public abstract base for all errors that occur during the evaluation (execution) of CQL expressions
+- **`CqlArithmeticException : CqlEvaluationException`** (`Hl7.Cql.Runtime`) — thrown when a CQL arithmetic operation cannot be performed (e.g., using definite-duration UCUM units above days in date/time arithmetic)
+
+### 9.2 When to Use CqlEvaluationException
+9.2.1 **ALWAYS** create a specific subclass of `CqlEvaluationException` for any exception that should be raised during the evaluation of a CQL expression, instead of using general .NET exceptions like `InvalidOperationException` or `ArgumentException`.
+
+9.2.2 Examples of when to use `CqlEvaluationException` subclasses:
+   - Spec-mandated errors during date/time arithmetic (use `CqlArithmeticException`)
+   - Type mismatch errors at evaluation time
+   - Division by zero or other arithmetic failures
+   - Any error the CQL spec says "signals an error to the calling environment"
+
+9.2.3 General .NET exceptions (`ArgumentException`, `InvalidOperationException`) are still appropriate for programming errors in the primitives layer (`Cql.Abstractions`), since those types cannot reference `Cql.Runtime`.
+
+### 9.3 Key Points
+9.3.1 Exception classes live in the `Cql.Runtime` project, namespace `Hl7.Cql.Runtime`
+
+9.3.2 The throw site for CQL evaluation errors is in `CqlOperators` (in `Cql.Runtime`), not in the primitive types (`CqlDate`, `CqlDateTime`, etc. in `Cql.Abstractions`)
+
+9.3.3 `Cql.Abstractions` cannot reference `Cql.Runtime` (circular dependency); primitive methods may throw general .NET exceptions for invalid input, which are caught and re-thrown as `CqlEvaluationException` subclasses by the operator layer
+
+9.3.4 New evaluation exception types should be added to `Cql/Cql.Runtime/Runtime/` and registered in `Cql/Cql.Runtime/PublicAPI.Unshipped.txt`
