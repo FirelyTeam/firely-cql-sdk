@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Runtime;
+namespace Hl7.Cql.Exceptions;
 
 /// <summary>
 /// The exception that is thrown when a CQL arithmetic operation cannot be performed.

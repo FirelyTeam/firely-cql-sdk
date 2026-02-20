@@ -8,6 +8,7 @@
 
 #nullable enable
 using System.Linq.Expressions;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
@@ -78,7 +79,7 @@ public class CqlDateTimeTests
         Assert.IsNull(plus2pt5Months.Value.Hour);
         Assert.AreEqual("2022-03-01", plus2pt5Months.ToString());
 
-        Assert.ThrowsException<ArgumentException>(() => baseDate.Add(new CqlQuantity(1m, "mo")));
+        Assert.ThrowsException<CqlArithmeticException>(() => baseDate.Add(new CqlQuantity(1m, "mo")));
 
     }
 
@@ -102,7 +103,7 @@ public class CqlDateTimeTests
         Assert.IsNull(minus2pt5Months.Value.Hour);
         Assert.AreEqual("2022-01-01", minus2pt5Months.ToString());
 
-        Assert.ThrowsException<ArgumentException>(() => baseDate.Subtract(new CqlQuantity(1m, "mo")));
+        Assert.ThrowsException<CqlArithmeticException>(() => baseDate.Subtract(new CqlQuantity(1m, "mo")));
 
     }
 
@@ -125,7 +126,7 @@ public class CqlDateTimeTests
         Assert.IsNull(minus1Year.Value.Hour);
         Assert.AreEqual("2024-03-01", minus1Year.ToString());
 
-        Assert.ThrowsException<ArgumentException>(() => baseDate.Subtract(new CqlQuantity(1m, "a")));
+        Assert.ThrowsException<CqlArithmeticException>(() => baseDate.Subtract(new CqlQuantity(1m, "a")));
 
     }
 
