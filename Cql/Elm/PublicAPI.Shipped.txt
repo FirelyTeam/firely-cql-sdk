@@ -831,7 +831,7 @@ static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, Hl7.Cql.Elm.CqlToE
 static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, string! errorMessage, Hl7.Cql.Elm.ErrorType errorType = Hl7.Cql.Elm.ErrorType.semantic, Hl7.Cql.Elm.ErrorSeverity severity = Hl7.Cql.Elm.ErrorSeverity.error) -> T!
 static Hl7.Cql.Elm.ExtensionMethods.GetErrors(this Hl7.Cql.Elm.Element! root) -> Hl7.Cql.Elm.CqlToElmError![]!
 static Hl7.Cql.Elm.Library.EqualityComparerByVersionedIdentifier.get -> System.Collections.Generic.IEqualityComparer<Hl7.Cql.Elm.Library!>!
-static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true, System.IO.EnumerationOptions? enumerationOptions = null) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream, bool validate = true, string? originalFilePath = null) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.ParseFromJson(string! json, bool validate = true) -> Hl7.Cql.Elm.Library!
