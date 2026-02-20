@@ -20,7 +20,7 @@ namespace Hl7.Cql.Exceptions;
 /// </remarks>
 /// <param name="Unit">The UCUM unit string (e.g. <c>"a"</c>, <c>"mo"</c>) that caused the error.</param>
 /// <param name="CalendarEquivalent">The calendar duration unit that should be used instead (e.g. <c>"year"</c>, <c>"month"</c>).</param>
-public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlError
+public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlArithmeticError
 {
     /// <inheritdoc/>
     public string GetMessage() =>
