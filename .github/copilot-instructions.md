@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.6.0
+**Version:** 2.6.1
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
@@ -226,6 +226,8 @@ This document contains development guidelines and instructions for maintaining c
    4.2.9.6 Use string interpolation instead of `string.Format` or concatenation
 
 4.2.10 **Local functions must use camelCase naming** - Local functions (functions defined inside methods) should start with a lowercase letter (e.g., `processItem()`, not `ProcessItem()`)
+
+4.2.11 **Always enable nullable on all new code** — Every new `.cs` file must have `#nullable enable` at the top (after any copyright header). If the project already enables nullable globally (via `<Nullable>enable</Nullable>` in props), the directive is still required in each new file for explicitness.
 
 ### 4.3 Project References
 4.3.1 When adding internal access, ensure the requesting project is appropriate for internal API usage

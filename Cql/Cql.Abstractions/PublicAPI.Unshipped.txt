@@ -18,8 +18,8 @@ Hl7.Cql.Primitives.CqlUcumYearArithmeticError.CqlUcumYearArithmeticError() -> vo
 Hl7.Cql.Primitives.CqlUcumYearArithmeticError.Equals(Hl7.Cql.Primitives.CqlUcumYearArithmeticError other) -> bool
 override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.GetHashCode() -> int
 Hl7.Cql.Primitives.CqlUcumYearArithmeticError.GetMessage() -> string!
-~override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.Equals(object? obj) -> bool
-~override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.ToString() -> string?
+~override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.ToString() -> string
 static Hl7.Cql.Primitives.CqlUcumYearArithmeticError.operator !=(Hl7.Cql.Primitives.CqlUcumYearArithmeticError left, Hl7.Cql.Primitives.CqlUcumYearArithmeticError right) -> bool
 static Hl7.Cql.Primitives.CqlUcumYearArithmeticError.operator ==(Hl7.Cql.Primitives.CqlUcumYearArithmeticError left, Hl7.Cql.Primitives.CqlUcumYearArithmeticError right) -> bool
 Hl7.Cql.Primitives.CqlUcumMonthArithmeticError
@@ -27,7 +27,7 @@ Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.CqlUcumMonthArithmeticError() -> 
 Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.Equals(Hl7.Cql.Primitives.CqlUcumMonthArithmeticError other) -> bool
 override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.GetHashCode() -> int
 Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.GetMessage() -> string!
-~override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.Equals(object? obj) -> bool
-~override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.ToString() -> string?
+~override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.ToString() -> string
 static Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.operator !=(Hl7.Cql.Primitives.CqlUcumMonthArithmeticError left, Hl7.Cql.Primitives.CqlUcumMonthArithmeticError right) -> bool
 static Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.operator ==(Hl7.Cql.Primitives.CqlUcumMonthArithmeticError left, Hl7.Cql.Primitives.CqlUcumMonthArithmeticError right) -> bool
