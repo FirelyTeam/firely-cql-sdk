@@ -3,11 +3,14 @@
 # Variables used during builds.
 
 variables:
-  buildConfiguration: '"Release"'
+  buildConfiguration: 'Release'
   vmImage: 'windows-latest'
   DOTNET_CORE_SDK: '10.0.x'
   GITHUB_PACKAGES_APIKEY: $(GitHubPushPackagesAPIKey) # key is set in variable group APIKeys
   NUGET_APIKEY: $(NuGetFhirPackagesAPIKey) # key is set in variable group APIKeys
+
+  # Test console logger verbosity (quiet, minimal, normal, detailed)
+  testConsoleLoggerVerbosity: 'normal'
 
   # Test Project Configuration
   # Multi-target tests (run on both .NET 8 and .NET 10 in parallel)
@@ -19,10 +22,6 @@ variables:
   net10IntegrationTestProjects: |
     submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj
 
-
-  # Console logger verbosity for test runs. Can be overridden at queue time.
-  # Valid values: quiet, minimal, normal, detailed, diagnostic
-  testConsoleLoggerVerbosity: 'detailed'
 
   # Excluded tests (not run in any stage)
   excludedTestProjects: |

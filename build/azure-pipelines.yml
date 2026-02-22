@@ -87,6 +87,7 @@ stages:
     multiTargetTestProjects: $(multiTargetTestProjects)
     net10IntegrationTestProjects: $(net10IntegrationTestProjects)
     buildConfiguration: $(buildConfiguration)
+    testConsoleLoggerVerbosity: $(testConsoleLoggerVerbosity)
     checkoutSubmodules: 'true'
     ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build
       useVersionSuffix: true

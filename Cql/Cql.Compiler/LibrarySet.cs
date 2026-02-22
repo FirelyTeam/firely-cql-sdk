@@ -223,17 +223,23 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
     public int Count => _libraryInfosByVersionedIdentifier.Count;
 
     /// <summary>
-    /// Loads the specified library and its dependencies from the specified directory.
+    /// Loads the specified library and all of its dependencies from the given directory.
     /// </summary>
-    /// <param name="elmDirectory">The directory containing the ELM files.</param>
-    /// <param name="libraryName">The name of the library to load.</param>
-    /// <param name="version">The version of the library to load.</param>
-    /// <returns>A collection of loaded libraries, including the specified library and its dependencies.</returns>
-    /// <remarks>Supply the name of the library in <paramref name="libraryName"/>, not the name of the file.</remarks>
+    /// <param name="elmDirectory">The directory containing the library files to load.</param>
+    /// <param name="libraryName">The name of the library to load, without the file extension.</param>
+    /// <param name="version">An optional version string specifying which version of the library to load. If not provided, the latest
+    /// available version is used.</param>
+    /// <param name="validate">A value indicating whether to validate the library upon loading. The default is <see langword="true"/>.</param>
+    /// <param name="enumerationOptions">Optional enumeration options that control how directories and files are enumerated when loading dependencies.
+    /// If null, defaults to recursing subdirectories.</param>
+    /// <returns>A read-only collection containing the loaded library and all of its dependencies.</returns>
+    /// <exception cref="FileNotFoundException">Thrown when the specified library or any of its dependencies cannot be found in the directory or its subdirectories.</exception>
     public IReadOnlyCollection<Library> LoadLibraryAndDependencies(
         DirectoryInfo elmDirectory,
         string libraryName,
-        string version = "")
+        string version = "",
+        bool validate = true,
+        EnumerationOptions? enumerationOptions = null)
     {
         // NOTE to Developer: At some point we may choose this functionality to become public.
         // When that happens, consider adding this as an extension on ElmToolkit
@@ -250,7 +256,7 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
             Library[] librariesLoaded = new Library[librariesToLoad.Count];
             Parallel.ForEach(librariesToLoadWithOrdinals, t =>
             {
-                var library = Library.LoadFromJson(elmDirectory, t.lib.lib, t.lib.version)!;
+                var library = Library.LoadFromJson(elmDirectory, t.lib.lib, t.lib.version, validate, enumerationOptions)!;
                 librariesLoaded[t.ordinal] = library;
             });
             librariesToLoad.Clear();
