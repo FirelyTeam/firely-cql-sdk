@@ -149,6 +149,7 @@ partial class ExpressionBuilderContext
                     Negate e           => Negate(e),
                     As e               => As(e),
                     Case e             => Case(e),
+                    Interval { low: Null, high: Null } => NullExpression.Object,
                     ToTime e           => ChangeType(e.operand!, _typeResolver.TimeType),
                     ToBoolean e        => ChangeType(e.operand!, typeof(bool?)),
                     ToString e         => ChangeType(e.operand!, typeof(string)),
@@ -1642,12 +1643,32 @@ internal partial class ExpressionBuilderContext
     protected Expression IsNull(IsNull isn)
     {
         var operand = TranslateArg(isn.operand!);
+        while (true)
+        {
+            if (operand is ElmAsExpression { AsType: var asType } asExpression && asType == typeof(object))
+            {
+                operand = asExpression.Expression;
+                continue;
+            }
+
+            if (operand is System.Linq.Expressions.UnaryExpression { NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked or ExpressionType.TypeAs, Type: var type } unaryExpression &&
+                type == typeof(object))
+            {
+                operand = unaryExpression.Operand;
+                continue;
+            }
+
+            break;
+        }
+
         if (operand.Type.IsValueType && operand.Type.IsNullableValueType(out _) == false)
             return Expression.Constant(false, typeof(bool?));
 
+
         var compare = Expression.Equal(operand, NullExpression.ForType(operand.Type));
-        var asNullableBool = compare.NewAssignToTypeExpression<bool?>();
-        return asNullableBool;
+        return compare;
+        //var asNullableBool = compare.NewAssignToTypeExpression<bool?>();
+        //return asNullableBool;
     }
 }
 

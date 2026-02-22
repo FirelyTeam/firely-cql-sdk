@@ -39,10 +39,7 @@ namespace Hl7.Cql.Operators
         #region IsNull
 
         /// <inheritdoc />
-        public bool? IsNull<T>(T value) where T : class => value == null;
-
-        /// <inheritdoc />
-        public bool? IsNullValue<T>(T? value) where T : struct => !value.HasValue;
+        public bool? IsNull<T>(T value) => value is null;
 
         #endregion
 

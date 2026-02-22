@@ -347,24 +347,8 @@ namespace Hl7.Cql.Operators
         /// a non-null value (true or false), which is then boxed to <c>bool?</c>.</para>
         /// </remarks>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#isnull">CQL Specification §9.B - IsNull</seealso>
-        bool?                                    IsNull<T>(T value) where T : class;
-
-        /// <summary>
-        /// Determines whether the argument is null (for value types).
-        /// </summary>
-        /// <typeparam name="T">The value type to check.</typeparam>
-        /// <param name="value">The nullable value type to check for null.</param>
-        /// <returns>True if the argument does not have a value (is null); otherwise, false. Never returns null.</returns>
-        /// <remarks>
-        /// <para>Implements the CQL 'is null' operator for value types.</para>
-        /// <para>CQL Specification: §9.B Appendix B – CQL Reference, Nullological Operators: IsNull</para>
-        /// <para>Signature: <c>is null(argument Any) Boolean</c></para>
-        /// <para><strong>Important</strong>: Although the CQL specification states this operator returns non-nullable Boolean,
-        /// the interface uses <c>bool?</c> for consistency with the binding system. The implementation always returns
-        /// a non-null value (true or false), which is then boxed to <c>bool?</c>.</para>
-        /// </remarks>
-        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#isnull">CQL Specification §9.B - IsNull</seealso>
-        bool?                                    IsNullValue<T>(T? value) where T : struct;
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        bool?                                    IsNull<T>(T value) => value is null;
 
         /// <summary>
         /// Determines whether the argument evaluates to true.
