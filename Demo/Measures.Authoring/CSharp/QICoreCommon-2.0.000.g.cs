@@ -1019,7 +1019,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
             else if (choice is Timing)
             {
-                object dy_ = context.Operators.Message<object>(null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
+                object dy_ = context.Operators.Message<object>((object)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
                 return dy_ as CqlInterval<CqlDateTime>;
             }
             else
@@ -1158,7 +1158,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
             else if (choice is Timing)
             {
-                object dy_ = context.Operators.Message<object>(null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
+                object dy_ = context.Operators.Message<object>((object)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
                 return dy_ as CqlInterval<CqlDateTime>;
             }
             else
@@ -1964,7 +1964,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         CqlInterval<int?>[] e_ = [
             d_,
         ];
-        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
+        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, (CqlQuantity)default);
 
         int? g_(CqlInterval<int?> DayNumber) {
             int? j_ = context.Operators.End(DayNumber);
@@ -1988,7 +1988,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         CqlInterval<int?>[] e_ = [
             d_,
         ];
-        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, default);
+        IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand((IEnumerable<CqlInterval<int?>>)e_, (CqlQuantity)default);
 
         int? g_(CqlInterval<int?> DayNumber) {
             int? j_ = context.Operators.End(DayNumber);

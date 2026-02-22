@@ -108,7 +108,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
             Period e_ = EncounterPeriod?.Period;
             CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, e_ as object);
             CqlDateTime g_ = context.Operators.End(f_);
-            bool? h_ = context.Operators.In<CqlDateTime>(g_, timeperiod, default);
+            bool? h_ = context.Operators.In<CqlDateTime>(g_, timeperiod, (string)default);
             return h_;
         }
 

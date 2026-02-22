@@ -560,7 +560,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 string gr_ = this.ErrorLevel(context);
                 string gs_ = period?.unit;
                 string gt_ = context.Operators.Concatenate("Unknown unit ", gs_ ?? "");
-                object gu_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownUnit", gr_, gt_);
+                object gu_ = context.Operators.Message<object>((object)null, "CMDLogic.ToDaily.UnknownUnit", gr_, gt_);
                 return gu_ as decimal?;
             };
         }
@@ -590,7 +590,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                 string e_ = this.ErrorLevel(context);
                 string f_ = frequency?.code;
                 string g_ = context.Operators.Concatenate("Unknown frequency code ", f_ ?? "");
-                object h_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", e_, g_);
+                object h_ = context.Operators.Message<object>((object)null, "CMDLogic.ToDaily.UnknownFrequencyCode", e_, g_);
                 return h_ as decimal?;
             };
         }

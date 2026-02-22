@@ -75,7 +75,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-6669692820371050143L, () => {
-            object a_ = context.ResolveParameter("SafeUseofOpioidsConcurrentPrescribingFHIR-0.0.012", "Measurement Period", null);
+            object a_ = context.ResolveParameter("SafeUseofOpioidsConcurrentPrescribingFHIR-0.0.012", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -213,7 +213,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CqlDateTime bn_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, bm_);
                     Period bo_ = InpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> bp_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, bo_);
-                    bool? bq_ = context.Operators.In<CqlDateTime>(bn_, bp_, default);
+                    bool? bq_ = context.Operators.In<CqlDateTime>(bn_, bp_, (string)default);
                     Code<MedicationRequest.MedicationrequestStatus> br_ = OpioidOrBenzodiazepineDischargeMedication?.StatusElement;
                     string bs_ = FHIRHelpers_4_0_001.Instance.ToString(context, br_);
                     bool? bt_ = context.Operators.Equal(bs_, "active");
@@ -290,7 +290,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CqlDateTime t_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, s_);
                     Period u_ = InpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
-                    bool? w_ = context.Operators.In<CqlDateTime>(t_, v_, default);
+                    bool? w_ = context.Operators.In<CqlDateTime>(t_, v_, (string)default);
                     return w_;
                 }
 
@@ -319,7 +319,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CqlDateTime af_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ae_);
                     Period ag_ = InpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ag_);
-                    bool? ai_ = context.Operators.In<CqlDateTime>(af_, ah_, default);
+                    bool? ai_ = context.Operators.In<CqlDateTime>(af_, ah_, (string)default);
                     return ai_;
                 }
 
@@ -340,7 +340,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CqlDateTime aq_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ap_);
                     Period ar_ = InpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ar_);
-                    bool? at_ = context.Operators.In<CqlDateTime>(aq_, as_, default);
+                    bool? at_ = context.Operators.In<CqlDateTime>(aq_, as_, (string)default);
                     return at_;
                 }
 
@@ -369,7 +369,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CqlInterval<CqlDateTime> ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Cancer);
                     Period ad_ = InpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ad_);
-                    bool? af_ = context.Operators.Overlaps(ac_, ae_, default);
+                    bool? af_ = context.Operators.Overlaps(ac_, ae_, (string)default);
                     return af_;
                 }
 
@@ -383,7 +383,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CqlDateTime ah_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ag_);
                     Period ai_ = InpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ai_);
-                    bool? ak_ = context.Operators.In<CqlDateTime>(ah_, aj_, default);
+                    bool? ak_ = context.Operators.In<CqlDateTime>(ah_, aj_, (string)default);
                     Code<RequestIntent> al_ = PalliativeOrHospiceCareOrder?.IntentElement;
                     string am_ = FHIRHelpers_4_0_001.Instance.ToString(context, al_);
                     bool? an_ = context.Operators.Equal(am_, "order");
@@ -401,7 +401,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     CqlInterval<CqlDateTime> aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ap_);
                     Period ar_ = InpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ar_);
-                    bool? at_ = context.Operators.Overlaps(aq_, as_, default);
+                    bool? at_ = context.Operators.Overlaps(aq_, as_, (string)default);
                     return at_;
                 }
 

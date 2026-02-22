@@ -386,7 +386,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                     }
 
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_());
-                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, default);
+                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, r_, (string)default);
                     bool? t_ = context.Operators.And(n_, s_);
                     return t_;
                 }
@@ -421,7 +421,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                     object q_ = context.Operators.LateBoundProperty<object>(ObservationSuicideRiskAssmt, "effective");
                     object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                     CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
-                    bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, default);
+                    bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, (string)default);
                     object u_ = context.Operators.LateBoundProperty<object>(ObservationSuicideRiskAssmt, "status");
                     string v_ = context.Operators.LateBoundProperty<string>(u_, "value");
                     string[] w_ = [

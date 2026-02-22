@@ -72,7 +72,7 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlDateTime am_ = context.Operators.End(Period);
             CqlDate an_ = context.Operators.DateFrom(am_);
             CqlInterval<CqlDate> ao_ = context.Operators.Interval(al_, an_, true, true);
-            bool? ap_ = context.Operators.Overlaps(aj_, ao_, default);
+            bool? ap_ = context.Operators.Overlaps(aj_, ao_, (string)default);
             return ap_;
         }
 
@@ -96,7 +96,7 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlDateTime bb_ = context.Operators.End(Period);
             CqlDate bc_ = context.Operators.DateFrom(bb_);
             CqlInterval<CqlDate> bd_ = context.Operators.Interval(ba_, bc_, true, true);
-            bool? be_ = context.Operators.Overlaps(ay_, bd_, default);
+            bool? be_ = context.Operators.Overlaps(ay_, bd_, (string)default);
             return be_;
         }
 
@@ -121,7 +121,7 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlDateTime bq_ = context.Operators.End(Period);
             CqlDate br_ = context.Operators.DateFrom(bq_);
             CqlInterval<CqlDate> bs_ = context.Operators.Interval(bp_, br_, true, true);
-            bool? bt_ = context.Operators.Overlaps(bn_, bs_, default);
+            bool? bt_ = context.Operators.Overlaps(bn_, bs_, (string)default);
             return bt_;
         }
 
@@ -145,7 +145,7 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
             CqlDateTime cd_ = context.Operators.End(Period);
             CqlDate ce_ = context.Operators.DateFrom(cd_);
             CqlInterval<CqlDate> cf_ = context.Operators.Interval(cc_, ce_, true, true);
-            bool? cg_ = context.Operators.Overlaps(ca_, cf_, default);
+            bool? cg_ = context.Operators.Overlaps(ca_, cf_, (string)default);
             return cg_;
         }
 

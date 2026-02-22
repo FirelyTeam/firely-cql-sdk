@@ -77,7 +77,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-8608999970669603967L, () => {
-            object a_ = context.ResolveParameter("AdvancedIllnessandFrailtyExclusionECQMFHIR4-5.17.000", "Measurement Period", null);
+            object a_ = context.ResolveParameter("AdvancedIllnessandFrailtyExclusionECQMFHIR4-5.17.000", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -145,7 +145,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 CqlDateTime ak_ = context.Operators.Subtract(ai_, aj_);
                 CqlDateTime am_ = context.Operators.End(ah_);
                 CqlInterval<CqlDateTime> an_ = context.Operators.Interval(ak_, am_, true, true);
-                bool? ao_ = context.Operators.Overlaps(ag_, an_, default);
+                bool? ao_ = context.Operators.Overlaps(ag_, an_, (string)default);
                 bool? ap_ = context.Operators.And(af_, ao_);
                 return ap_;
             }
@@ -171,7 +171,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 Period n_ = LongTermFacilityEncounter?.Period;
                 CqlInterval<CqlDateTime> o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, n_ as object);
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-                bool? q_ = context.Operators.Overlaps(o_, p_, default);
+                bool? q_ = context.Operators.Overlaps(o_, p_, (string)default);
                 bool? r_ = context.Operators.And(m_, q_);
                 return r_;
             }
@@ -232,7 +232,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                     CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
                     CqlDateTime ai_ = context.Operators.End(ad_);
                     CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ag_, ai_, true, true);
-                    bool? ak_ = context.Operators.In<CqlDateTime>(ac_, aj_, default);
+                    bool? ak_ = context.Operators.In<CqlDateTime>(ac_, aj_, (string)default);
                     CqlDateTime am_ = context.Operators.End(ad_);
                     bool? an_ = context.Operators.Not((bool?)(am_ is null));
                     bool? ao_ = context.Operators.And(ak_, an_);
@@ -289,7 +289,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
     public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Overlapping_Periods(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<IEnumerable<CqlInterval<CqlDateTime>>>(-25046034067202445L, () => {
             IEnumerable<CqlInterval<CqlDateTime>> a_ = this.Long_Term_Care_Periods_During_Measurement_Period(context);
-            IEnumerable<CqlInterval<CqlDateTime>> b_ = context.Operators.Collapse(a_, default);
+            IEnumerable<CqlInterval<CqlDateTime>> b_ = context.Operators.Collapse(a_, (string)default);
             return b_;
         });
 
@@ -314,7 +314,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlDateTime r_ = context.Operators.Add(m_, n_);
                 CqlInterval<CqlDateTime> s_ = context.Operators.Interval(o_, r_, true, true);
-                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, (string)default);
                 bool? v_ = context.Operators.Not((bool?)(m_ is null));
                 bool? w_ = context.Operators.And(t_, v_);
                 return w_;
@@ -341,7 +341,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             IEnumerable<CqlInterval<CqlDateTime>> a_ = this.Long_Term_Care_Overlapping_Periods(context);
             IEnumerable<CqlInterval<CqlDateTime>> b_ = this.Long_Term_Care_Adjacent_Periods(context);
             IEnumerable<CqlInterval<CqlDateTime>> c_ = context.Operators.Union<CqlInterval<CqlDateTime>>(a_, b_);
-            IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Collapse(c_, default);
+            IEnumerable<CqlInterval<CqlDateTime>> d_ = context.Operators.Collapse(c_, (string)default);
 
             int? e_(CqlInterval<CqlDateTime> LTCPeriods) {
                 CqlDateTime i_ = context.Operators.Start(LTCPeriods);
@@ -388,7 +388,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                     CqlDateTime x_ = context.Operators.Subtract(v_, w_);
                     CqlDateTime z_ = context.Operators.End(u_);
                     CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
-                    bool? ab_ = context.Operators.In<CqlDateTime>(t_, aa_, default);
+                    bool? ab_ = context.Operators.In<CqlDateTime>(t_, aa_, (string)default);
                     CqlDateTime ad_ = context.Operators.End(u_);
                     bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
                     bool? af_ = context.Operators.And(ab_, ae_);
@@ -431,7 +431,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 CqlInterval<CqlDateTime> ao_ = this.Measurement_Period(context);
                 FhirDateTime ap_ = FrailtyDeviceOrder?.AuthoredOnElement;
                 CqlInterval<CqlDateTime> aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ap_ as object);
-                bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, default);
+                bool? ar_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, aq_, (string)default);
                 bool? as_ = context.Operators.And(an_, ar_);
                 return as_;
             }
@@ -452,7 +452,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 DataType ax_ = FrailtyDeviceApplied?.Effective;
                 CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ax_);
                 CqlInterval<CqlDateTime> az_ = this.Measurement_Period(context);
-                bool? ba_ = context.Operators.Overlaps(ay_, az_, default);
+                bool? ba_ = context.Operators.Overlaps(ay_, az_, (string)default);
                 bool? bb_ = context.Operators.And(aw_, ba_);
                 return bb_;
             }
@@ -466,7 +466,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             bool? q_(Condition FrailtyDiagnosis) {
                 CqlInterval<CqlDateTime> bc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, FrailtyDiagnosis);
                 CqlInterval<CqlDateTime> bd_ = this.Measurement_Period(context);
-                bool? be_ = context.Operators.Overlaps(bc_, bd_, default);
+                bool? be_ = context.Operators.Overlaps(bc_, bd_, (string)default);
                 return be_;
             }
 
@@ -483,7 +483,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 Period bi_ = FrailtyEncounter?.Period;
                 CqlInterval<CqlDateTime> bj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bi_ as object);
                 CqlInterval<CqlDateTime> bk_ = this.Measurement_Period(context);
-                bool? bl_ = context.Operators.Overlaps(bj_, bk_, default);
+                bool? bl_ = context.Operators.Overlaps(bj_, bk_, (string)default);
                 bool? bm_ = context.Operators.And(bh_, bl_);
                 return bm_;
             }
@@ -507,7 +507,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 DataType br_ = FrailtySymptom?.Effective;
                 CqlInterval<CqlDateTime> bs_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, br_);
                 CqlInterval<CqlDateTime> bt_ = this.Measurement_Period(context);
-                bool? bu_ = context.Operators.Overlaps(bs_, bt_, default);
+                bool? bu_ = context.Operators.Overlaps(bs_, bt_, (string)default);
                 bool? bv_ = context.Operators.And(bq_, bu_);
                 return bv_;
             }
@@ -531,7 +531,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(65, 79, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             bool? k_ = this.Has_Criteria_Indicating_Frailty(context);
             bool? l_ = context.Operators.And(j_, k_);
             IEnumerable<Encounter> m_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service(context);

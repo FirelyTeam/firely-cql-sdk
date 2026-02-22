@@ -139,7 +139,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ISingleton<CMS1206FHIR
                     CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
                     CqlDateTime y_ = context.Operators.Start(x_);
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-                    bool? ab_ = context.Operators.In<CqlDateTime>(y_, aa_, default);
+                    bool? ab_ = context.Operators.In<CqlDateTime>(y_, aa_, (string)default);
                     bool? ac_ = context.Operators.And(u_, ab_);
                     return ac_;
                 }

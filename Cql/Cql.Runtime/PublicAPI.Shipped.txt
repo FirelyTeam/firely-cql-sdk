@@ -284,8 +284,7 @@ Hl7.Cql.Operators.ICqlOperators.IntervalSize(Hl7.Cql.Primitives.CqlInterval<deci
 Hl7.Cql.Operators.ICqlOperators.IntervalSize(Hl7.Cql.Primitives.CqlInterval<int?>? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.IntervalSize(Hl7.Cql.Primitives.CqlInterval<long?>? argument) -> long?
 Hl7.Cql.Operators.ICqlOperators.IsFalse(bool? b) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IsNull<T>(T! value) -> bool?
-Hl7.Cql.Operators.ICqlOperators.IsNullValue<T>(T? value) -> bool?
+Hl7.Cql.Operators.ICqlOperators.IsNull<T>(T value) -> bool?
 Hl7.Cql.Operators.ICqlOperators.IsTrue(bool? b) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Last<T>(System.Collections.Generic.IEnumerable<T>! enumerable) -> T?
 Hl7.Cql.Operators.ICqlOperators.LastPositionOf(string? argument, string? pattern) -> int?

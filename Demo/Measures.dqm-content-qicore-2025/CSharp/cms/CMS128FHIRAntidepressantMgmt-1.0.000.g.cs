@@ -217,7 +217,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlDate q_ = context.Operators.Subtract(j_, p_);
                 CqlDate t_ = context.Operators.Add(j_, p_);
                 CqlInterval<CqlDate> u_ = context.Operators.Interval(q_, t_, true, true);
-                bool? v_ = context.Operators.In<CqlDate>(n_, u_, default);
+                bool? v_ = context.Operators.In<CqlDate>(n_, u_, (string)default);
                 bool? x_ = context.Operators.Not((bool?)(j_ is null));
                 bool? y_ = context.Operators.And(v_, x_);
                 bool? z_ = context.Operators.And(k_, y_);
@@ -274,7 +274,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlDate am_ = context.Operators.Subtract(ak_, al_);
                 CqlDate ap_ = context.Operators.Add(ak_, al_);
                 CqlInterval<CqlDate> aq_ = context.Operators.Interval(am_, ap_, true, true);
-                bool? ar_ = context.Operators.In<CqlDate>(aj_, aq_, default);
+                bool? ar_ = context.Operators.In<CqlDate>(aj_, aq_, (string)default);
                 bool? at_ = context.Operators.Not((bool?)(ak_ is null));
                 bool? au_ = context.Operators.And(ar_, at_);
                 return au_;
@@ -364,7 +364,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 CqlQuantity aq_ = context.Operators.Quantity(105m, "days");
                 CqlDate ar_ = context.Operators.Subtract(ab_, aq_);
                 CqlInterval<CqlDate> at_ = context.Operators.Interval(ar_, ab_, true, false);
-                bool? au_ = context.Operators.Overlaps(ao_, at_, default);
+                bool? au_ = context.Operators.Overlaps(ao_, at_, (string)default);
                 bool? av_ = context.Operators.And(ac_, au_);
                 return av_;
             }

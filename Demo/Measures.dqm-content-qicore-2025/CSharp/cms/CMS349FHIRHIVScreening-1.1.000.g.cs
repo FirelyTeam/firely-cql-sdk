@@ -140,7 +140,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(15, 65, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
             bool? l_ = context.Operators.Exists<Encounter>(k_);
             bool? m_ = context.Operators.And(j_, l_);
@@ -181,7 +181,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
                 CqlDate u_ = context.Operators.DateFrom(t_);
                 int? v_ = context.Operators.CalculateAgeAt(p_, u_, "year");
                 CqlInterval<int?> w_ = context.Operators.Interval(15, 65, true, true);
-                bool? x_ = context.Operators.In<int?>(v_, w_, default);
+                bool? x_ = context.Operators.In<int?>(v_, w_, (string)default);
                 bool? y_ = context.Operators.And(l_, x_);
                 object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.toInterval(context, aa_);

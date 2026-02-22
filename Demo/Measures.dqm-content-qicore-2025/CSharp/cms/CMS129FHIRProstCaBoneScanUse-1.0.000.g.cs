@@ -466,7 +466,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
                     CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_());
                     CqlDateTime y_ = context.Operators.Start(x_);
-                    bool? z_ = context.Operators.Before(v_, y_, default);
+                    bool? z_ = context.Operators.Before(v_, y_, (string)default);
                     Code<ObservationStatus> aa_ = ProstateCancerStaging?.StatusElement;
                     ObservationStatus? ab_ = aa_?.Value;
                     string ac_ = context.Operators.Convert<string>(ab_);
@@ -577,7 +577,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     DataType t_ = MostRecentProstateCancerStaging?.Effective;
                     object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
-                    bool? w_ = context.Operators.Before(s_(), v_, default);
+                    bool? w_ = context.Operators.Before(s_(), v_, (string)default);
                     Code<ObservationStatus> x_ = PSATest?.StatusElement;
                     ObservationStatus? y_ = x_?.Value;
                     string z_ = context.Operators.Convert<string>(y_);
@@ -712,7 +712,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
 
                     CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.toInterval(context, x_());
                     CqlDateTime z_ = context.Operators.Start(y_);
-                    bool? aa_ = context.Operators.Before(w_, z_, default);
+                    bool? aa_ = context.Operators.Before(w_, z_, (string)default);
                     Code<ObservationStatus> ab_ = GleasonScore?.StatusElement;
                     ObservationStatus? ac_ = ab_?.Value;
                     string ad_ = context.Operators.Convert<string>(ac_);
@@ -796,7 +796,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     CqlDateTime o_ = context.Operators.Start(n_);
                     CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveProstateCancer as object);
                     CqlDateTime q_ = context.Operators.Start(p_);
-                    bool? r_ = context.Operators.After(o_, q_, default);
+                    bool? r_ = context.Operators.After(o_, q_, (string)default);
                     return r_;
                 }
 
@@ -859,7 +859,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     CqlDateTime o_ = context.Operators.Start(n_);
                     CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveProstateCancer as object);
                     CqlDateTime q_ = context.Operators.Start(p_);
-                    bool? r_ = context.Operators.After(o_, q_, default);
+                    bool? r_ = context.Operators.After(o_, q_, (string)default);
                     bool? s_ = this.isVerified(context, ProstateCancerPain);
                     bool? t_ = context.Operators.And(r_, s_);
                     return t_;
@@ -955,7 +955,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                     CqlDateTime m_ = context.Operators.Start(l_);
                     CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveProstateCancer as object);
                     CqlDateTime o_ = context.Operators.Start(n_);
-                    bool? p_ = context.Operators.After(m_, o_, default);
+                    bool? p_ = context.Operators.After(m_, o_, (string)default);
                     Code<EventStatus> q_ = SalvageTherapy?.StatusElement;
                     EventStatus? r_ = q_?.Value;
                     string s_ = context.Operators.Convert<string>(r_);

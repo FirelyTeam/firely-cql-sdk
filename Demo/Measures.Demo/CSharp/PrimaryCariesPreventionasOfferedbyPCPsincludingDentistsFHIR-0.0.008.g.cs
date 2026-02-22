@@ -79,7 +79,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-5232504333520421231L, () => {
-            object a_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR-0.0.008", "Measurement Period", null);
+            object a_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR-0.0.008", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -160,7 +160,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 CqlInterval<CqlDateTime> z_ = this.Measurement_Period(context);
                 Period aa_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aa_ as object);
-                bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, default);
+                bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(z_, ab_, (string)default);
                 Code<Encounter.EncounterStatus> ad_ = ValidEncounter?.StatusElement;
                 string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
                 bool? af_ = context.Operators.Equal(ae_, "finished");
@@ -252,7 +252,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(5, 11, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             return j_;
         });
 
@@ -269,7 +269,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(12, 20, true, false);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             return j_;
         });
 
@@ -284,7 +284,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
                 CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
                 DataType g_ = FluorideApplication?.Performed;
                 CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, g_);
-                bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, default);
+                bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, h_, (string)default);
                 Code<EventStatus> j_ = FluorideApplication?.StatusElement;
                 string k_ = FHIRHelpers_4_0_001.Instance.ToString(context, j_);
                 bool? l_ = context.Operators.Equal(k_, "completed");

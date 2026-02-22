@@ -165,7 +165,7 @@ public partial class CMS1074FHIRCTIQR_1_0_000 : ILibrary, ISingleton<CMS1074FHIR
                     CqlDateTime s_ = context.Operators.Start(r_);
                     Period t_ = InpatientEncounters?.Period;
                     CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
-                    bool? v_ = context.Operators.In<CqlDateTime>(s_, u_, default);
+                    bool? v_ = context.Operators.In<CqlDateTime>(s_, u_, (string)default);
                     bool? w_ = context.Operators.And(o_, v_);
                     object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                     CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.toInterval(context, y_);

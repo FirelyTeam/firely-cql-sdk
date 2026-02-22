@@ -443,7 +443,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(20, 75, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             return j_;
         });
 
@@ -569,7 +569,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(40, 75, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             bool? k_ = this.Has_Diabetes_Diagnosis(context);
             bool? l_ = context.Operators.And(j_, k_);
             IEnumerable<object> m_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period(context);
@@ -652,7 +652,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(40, 75, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             bool? k_ = this.Ten_Year_CVD_Risk_is_High(context);
             bool? l_ = context.Operators.And(j_, k_);
             IEnumerable<object> m_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period(context);

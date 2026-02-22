@@ -51,8 +51,8 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(8505406452986970707L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-            CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, (decimal?)default);
+            CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, (decimal?)default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("DocumentationofCurrentMedicationsFHIR-0.2.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
@@ -161,7 +161,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                     CqlDateTime n_ = context.Operators.End(m_);
                     Period o_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, o_);
-                    bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, default);
+                    bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, (string)default);
                     Code<EventStatus> r_ = MedicationsDocumented?.StatusElement;
                     EventStatus? s_ = r_?.Value;
                     string t_ = context.Operators.Convert<string>(s_);
@@ -215,7 +215,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                     CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
                     Period r_ = QualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, r_);
-                    bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, default);
+                    bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, (string)default);
                     Code<EventStatus> u_ = MedicationsNotDocumented?.StatusElement;
                     EventStatus? v_ = u_?.Value;
                     string w_ = context.Operators.Convert<string>(v_);

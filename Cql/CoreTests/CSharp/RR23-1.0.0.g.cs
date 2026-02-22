@@ -103,7 +103,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                 bool? n_ = ((CqlInterval<CqlDate>)g_)?.lowClosed;
                 bool? p_ = ((CqlInterval<CqlDate>)g_)?.highClosed;
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(i_, l_, n_, p_);
-                bool? r_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, q_, default);
+                bool? r_ = context.Operators.In<CqlDateTime>(f_ as CqlDateTime, q_, (string)default);
                 return r_;
             }
 
@@ -159,7 +159,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                     CqlDateTime v_ = context.Operators.Subtract(t_, u_);
                     CqlDateTime x_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
                     CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, false);
-                    bool? z_ = context.Operators.In<CqlDateTime>(r_ as CqlDateTime, y_, default);
+                    bool? z_ = context.Operators.In<CqlDateTime>(r_ as CqlDateTime, y_, (string)default);
                     CqlDateTime ab_ = context.Operators.LateBoundProperty<CqlDateTime>(s_, "value");
                     bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
                     bool? ad_ = context.Operators.And(z_, ac_);

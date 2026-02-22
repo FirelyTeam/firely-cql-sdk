@@ -376,7 +376,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> ax_ = this.Measurement_Period(context);
                 Period ay_ = ValidEncounters?.Period;
                 CqlInterval<CqlDateTime> az_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ay_);
-                bool? ba_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ax_, az_, default);
+                bool? ba_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ax_, az_, (string)default);
                 return ba_;
             }
 
@@ -434,7 +434,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 FhirDateTime l_ = OrderMedication1?.AuthoredOnElement;
                 CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(l_);
                 CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-                bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, default);
+                bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, (string)default);
                 MedicationRequest.DispenseRequestComponent p_ = OrderMedication1?.DispenseRequest;
                 UnsignedInt q_ = p_?.NumberOfRepeatsAllowedElement;
                 int? r_ = q_?.Value;
@@ -448,10 +448,10 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 bool? aa_ = context.Operators.Equivalent(w_, z_);
                 bool? ab_ = context.Operators.Not(aa_);
                 CqlDateTime ad_ = context.Operators.Convert<CqlDateTime>(l_);
-                bool? af_ = context.Operators.In<CqlDateTime>(ad_, n_, default);
+                bool? af_ = context.Operators.In<CqlDateTime>(ad_, n_, (string)default);
                 bool? ag_ = context.Operators.And(ab_, af_);
                 CqlDateTime ai_ = context.Operators.Convert<CqlDateTime>(x_);
-                bool? ak_ = context.Operators.In<CqlDateTime>(ai_, n_, default);
+                bool? ak_ = context.Operators.In<CqlDateTime>(ai_, n_, (string)default);
                 bool? al_ = context.Operators.And(ag_, ak_);
                 bool? am_ = context.Operators.Or(t_, al_);
                 CqlDateTime ao_ = context.Operators.Convert<CqlDateTime>(l_);
@@ -460,7 +460,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 CqlDate as_ = context.Operators.DateFrom(ar_);
                 bool? at_ = context.Operators.Equivalent(ap_, as_);
                 CqlDateTime av_ = context.Operators.Convert<CqlDateTime>(l_);
-                bool? ax_ = context.Operators.In<CqlDateTime>(av_, n_, default);
+                bool? ax_ = context.Operators.In<CqlDateTime>(av_, n_, (string)default);
                 bool? ay_ = context.Operators.And(at_, ax_);
                 CqlInterval<CqlDate> az_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OrderMedication1);
                 CqlDate ba_ = context.Operators.Start(az_);
@@ -475,11 +475,11 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 bool? bj_ = context.Operators.And(ay_, bi_);
                 CqlDate bl_ = context.Operators.Start(az_);
                 CqlDateTime bm_ = context.Operators.ConvertDateToDateTime(bl_);
-                bool? bo_ = context.Operators.In<CqlDateTime>(bm_, n_, default);
+                bool? bo_ = context.Operators.In<CqlDateTime>(bm_, n_, (string)default);
                 bool? bp_ = context.Operators.And(bj_, bo_);
                 CqlDate br_ = context.Operators.Start(bd_);
                 CqlDateTime bs_ = context.Operators.ConvertDateToDateTime(br_);
-                bool? bu_ = context.Operators.In<CqlDateTime>(bs_, n_, default);
+                bool? bu_ = context.Operators.In<CqlDateTime>(bs_, n_, (string)default);
                 bool? bv_ = context.Operators.And(bp_, bu_);
                 bool? bw_ = context.Operators.Or(am_, bv_);
                 return bw_;
@@ -1654,7 +1654,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 FhirDateTime ad_ = AntipsychoticMedication?.AuthoredOnElement;
                 CqlDateTime ae_ = context.Operators.Convert<CqlDateTime>(ad_);
                 CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-                bool? ag_ = context.Operators.In<CqlDateTime>(ae_, af_, default);
+                bool? ag_ = context.Operators.In<CqlDateTime>(ae_, af_, (string)default);
                 return ag_;
             }
 
@@ -1810,7 +1810,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 FhirDateTime ad_ = BenzodiazepineMedication?.AuthoredOnElement;
                 CqlDateTime ae_ = context.Operators.Convert<CqlDateTime>(ad_);
                 CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-                bool? ag_ = context.Operators.In<CqlDateTime>(ae_, af_, default);
+                bool? ag_ = context.Operators.In<CqlDateTime>(ae_, af_, (string)default);
                 return ag_;
             }
 
@@ -1846,7 +1846,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 CqlDateTime ad_ = context.Operators.Subtract(ab_, ac_);
                 CqlDateTime ae_ = this.Antipsychotic_Index_Prescription_Start_Date(context);
                 CqlInterval<CqlDateTime> af_ = context.Operators.Interval(ad_, ae_, true, true);
-                bool? ag_ = context.Operators.Overlaps(z_, af_, default);
+                bool? ag_ = context.Operators.Overlaps(z_, af_, (string)default);
                 return ag_;
             }
 
@@ -1873,7 +1873,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 CqlDateTime al_ = context.Operators.Subtract(aj_, ak_);
                 CqlDateTime am_ = this.Benzodiazepine_Index_Prescription_Start_Date(context);
                 CqlInterval<CqlDateTime> an_ = context.Operators.Interval(al_, am_, true, true);
-                bool? ao_ = context.Operators.Overlaps(ah_, an_, default);
+                bool? ao_ = context.Operators.Overlaps(ah_, an_, (string)default);
                 return ao_;
             }
 

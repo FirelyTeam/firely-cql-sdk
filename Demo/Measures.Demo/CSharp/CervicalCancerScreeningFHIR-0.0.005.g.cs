@@ -83,8 +83,8 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(8660301701421196239L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, (decimal?)default);
+            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, (decimal?)default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("CervicalCancerScreeningFHIR-0.0.005", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
@@ -164,7 +164,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
                 Period x_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, x_);
-                bool? z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, y_, default);
+                bool? z_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(w_, y_, (string)default);
                 bool? aa_ = context.Operators.And(v_, z_);
                 return aa_;
             }
@@ -186,7 +186,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(23, 64, true, false);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             Code<AdministrativeGender> l_ = a_?.GenderElement;
             string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
             bool? n_ = context.Operators.Equal(m_, "female");
@@ -221,7 +221,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlDateTime o_ = context.Operators.End(n_);
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
                 CqlDateTime q_ = context.Operators.End(p_);
-                bool? r_ = context.Operators.SameOrBefore(o_, q_, default);
+                bool? r_ = context.Operators.SameOrBefore(o_, q_, (string)default);
                 bool? s_ = context.Operators.And(l_, r_);
                 return s_;
             }
@@ -235,7 +235,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlDateTime u_ = context.Operators.Start(t_);
                 CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
                 CqlDateTime w_ = context.Operators.End(v_);
-                bool? x_ = context.Operators.SameOrBefore(u_, w_, default);
+                bool? x_ = context.Operators.SameOrBefore(u_, w_, (string)default);
                 return x_;
             }
 
@@ -294,7 +294,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlDateTime s_ = context.Operators.Subtract(q_, r_);
                 CqlDateTime u_ = context.Operators.End(p_);
                 CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_, u_, true, true);
-                bool? w_ = context.Operators.In<CqlDateTime>(o_, v_, default);
+                bool? w_ = context.Operators.In<CqlDateTime>(o_, v_, (string)default);
                 CqlDateTime y_ = context.Operators.End(p_);
                 bool? z_ = context.Operators.Not((bool?)(y_ is null));
                 bool? aa_ = context.Operators.And(w_, z_);
@@ -356,7 +356,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlDateTime ad_ = context.Operators.Subtract(ab_, ac_);
                 CqlDateTime af_ = context.Operators.End(aa_);
                 CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ad_, af_, true, true);
-                bool? ah_ = context.Operators.In<CqlDateTime>(z_, ag_, default);
+                bool? ah_ = context.Operators.In<CqlDateTime>(z_, ag_, (string)default);
                 CqlDateTime aj_ = context.Operators.End(aa_);
                 bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
                 bool? al_ = context.Operators.And(ah_, ak_);
@@ -444,7 +444,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlDateTime m_ = context.Operators.Subtract(k_, l_);
                 CqlDateTime o_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
-                bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, default);
+                bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, (string)default);
                 CqlDateTime s_ = context.Operators.End(j_);
                 bool? t_ = context.Operators.Not((bool?)(s_ is null));
                 bool? u_ = context.Operators.And(q_, t_);
@@ -496,7 +496,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
                 CqlDateTime x_ = context.Operators.Subtract(v_, w_);
                 CqlDateTime z_ = context.Operators.End(u_);
                 CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
-                bool? ab_ = context.Operators.In<CqlDateTime>(t_, aa_, default);
+                bool? ab_ = context.Operators.In<CqlDateTime>(t_, aa_, (string)default);
                 CqlDateTime ad_ = context.Operators.End(u_);
                 bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
                 bool? af_ = context.Operators.And(ab_, ae_);

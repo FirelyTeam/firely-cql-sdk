@@ -68,7 +68,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(859669092182870447L, () => {
-            object a_ = context.ResolveParameter("PCMaternal-5.25.000", "Measurement Period", null);
+            object a_ = context.ResolveParameter("PCMaternal-5.25.000", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -102,7 +102,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlDate k_ = context.Operators.DateFrom(j_);
                 int? l_ = context.Operators.CalculateAgeAt(g_, k_, "year");
                 CqlInterval<int?> m_ = context.Operators.Interval(8, 65, true, false);
-                bool? n_ = context.Operators.In<int?>(l_, m_, default);
+                bool? n_ = context.Operators.In<int?>(l_, m_, (string)default);
                 return n_;
             }
 
@@ -141,7 +141,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     CqlInterval<CqlDateTime> cq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ck_);
                     CqlDateTime cr_ = context.Operators.Start(cq_);
                     CqlInterval<CqlDateTime> cs_ = context.Operators.Interval(co_, cr_, true, true);
-                    bool? ct_ = context.Operators.In<CqlDateTime>(cj_, cs_, default);
+                    bool? ct_ = context.Operators.In<CqlDateTime>(cj_, cs_, (string)default);
                     CqlInterval<CqlDateTime> cv_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ck_);
                     CqlDateTime cw_ = context.Operators.Start(cv_);
                     bool? cx_ = context.Operators.Not((bool?)(cw_ is null));
@@ -187,7 +187,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     CqlInterval<CqlDateTime> dq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dk_);
                     CqlDateTime dr_ = context.Operators.Start(dq_);
                     CqlInterval<CqlDateTime> ds_ = context.Operators.Interval(do_, dr_, true, true);
-                    bool? dt_ = context.Operators.In<CqlDateTime>(dj_, ds_, default);
+                    bool? dt_ = context.Operators.In<CqlDateTime>(dj_, ds_, (string)default);
                     CqlInterval<CqlDateTime> dv_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dk_);
                     CqlDateTime dw_ = context.Operators.Start(dv_);
                     bool? dx_ = context.Operators.Not((bool?)(dw_ is null));
@@ -217,7 +217,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, at_);
                 CqlDateTime bk_ = context.Operators.Start(bj_);
                 CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(ax_, bh_ ?? bk_, true, true);
-                bool? bm_ = context.Operators.In<CqlDateTime>(ai_, bl_, default);
+                bool? bm_ = context.Operators.In<CqlDateTime>(ai_, bl_, (string)default);
                 IEnumerable<Encounter> bo_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
                 bool? bp_(Encounter LastObs) {
@@ -232,7 +232,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     CqlInterval<CqlDateTime> eq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ek_);
                     CqlDateTime er_ = context.Operators.Start(eq_);
                     CqlInterval<CqlDateTime> es_ = context.Operators.Interval(eo_, er_, true, true);
-                    bool? et_ = context.Operators.In<CqlDateTime>(ej_, es_, default);
+                    bool? et_ = context.Operators.In<CqlDateTime>(ej_, es_, (string)default);
                     CqlInterval<CqlDateTime> ev_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ek_);
                     CqlDateTime ew_ = context.Operators.Start(ev_);
                     bool? ex_ = context.Operators.Not((bool?)(ew_ is null));
@@ -300,7 +300,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 CqlInterval<CqlDateTime> ft_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fn_);
                 CqlDateTime fu_ = context.Operators.Start(ft_);
                 CqlInterval<CqlDateTime> fv_ = context.Operators.Interval(fr_, fu_, true, true);
-                bool? fw_ = context.Operators.In<CqlDateTime>(fm_, fv_, default);
+                bool? fw_ = context.Operators.In<CqlDateTime>(fm_, fv_, (string)default);
                 CqlInterval<CqlDateTime> fy_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fn_);
                 CqlDateTime fz_ = context.Operators.Start(fy_);
                 bool? ga_ = context.Operators.Not((bool?)(fz_ is null));
@@ -424,7 +424,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                     CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_());
                     CqlDateTime p_ = context.Operators.Start(o_);
                     CqlInterval<CqlDateTime> q_ = this.hospitalizationWithEDOBTriageObservation(context, EncounterWithAge);
-                    bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, default);
+                    bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, (string)default);
                     bool? s_ = context.Operators.And(m_, r_);
                     return s_;
                 }
@@ -525,10 +525,10 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
             CqlDateTime u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_());
             CqlInterval<CqlDateTime> v_ = this.hospitalizationWithEDOBTriageObservation(context, TheEncounter);
-            bool? w_ = context.Operators.In<CqlDateTime>(u_, v_, default);
+            bool? w_ = context.Operators.In<CqlDateTime>(u_, v_, (string)default);
             bool? x_ = context.Operators.And(s_, w_);
             object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
-            bool? ab_ = context.Operators.In<CqlDateTime>(z_ as CqlDateTime, v_, default);
+            bool? ab_ = context.Operators.In<CqlDateTime>(z_ as CqlDateTime, v_, (string)default);
             bool? ac_ = context.Operators.And(x_, ab_);
             return ac_;
         }
@@ -674,7 +674,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             CqlQuantity w_ = context.Operators.Quantity(42m, "weeks");
             CqlDateTime x_ = context.Operators.Subtract(v_, w_);
             CqlInterval<CqlDateTime> z_ = context.Operators.Interval(x_, v_, true, true);
-            bool? aa_ = context.Operators.In<CqlDateTime>(u_, z_, default);
+            bool? aa_ = context.Operators.In<CqlDateTime>(u_, z_, (string)default);
             bool? ac_ = context.Operators.Not((bool?)(v_ is null));
             bool? ad_ = context.Operators.And(aa_, ac_);
             bool? ae_ = context.Operators.And(s_, ad_);
@@ -827,7 +827,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
             CqlQuantity m_ = context.Operators.Quantity(24m, "hours");
             CqlDateTime n_ = context.Operators.Subtract(l_, m_);
             CqlInterval<CqlDateTime> p_ = context.Operators.Interval(n_, l_, true, true);
-            bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, default);
+            bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
             bool? s_ = context.Operators.Not((bool?)(l_ is null));
             bool? t_ = context.Operators.And(q_, s_);
             DataType u_ = EstimatedGestationalAge?.Value;
@@ -948,7 +948,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
             CqlDateTime aj_ = QICoreCommon_4_0_000.Instance.earliest(context, ai_());
             CqlInterval<CqlDateTime> ak_ = this.hospitalizationWithEDOBTriageObservation(context, TheEncounter);
-            bool? al_ = context.Operators.In<CqlDateTime>(aj_, ak_, default);
+            bool? al_ = context.Operators.In<CqlDateTime>(aj_, ak_, (string)default);
             bool? am_ = context.Operators.And(ah_, al_);
             object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
             bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
