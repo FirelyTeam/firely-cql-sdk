@@ -33,7 +33,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-3851945183777304699L, () => {
-            object a_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", null);
+            object a_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -62,7 +62,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
                 DataType n_ = HospiceInt?.Performed;
                 CqlInterval<CqlDateTime> o_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, n_);
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-                bool? q_ = context.Operators.Overlaps(o_, p_, default);
+                bool? q_ = context.Operators.Overlaps(o_, p_, (string)default);
                 return q_;
             }
 
@@ -76,7 +76,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
                 Period r_ = HospiceEnc?.Period;
                 CqlInterval<CqlDateTime> s_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, r_ as object);
                 CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-                bool? u_ = context.Operators.Overlaps(s_, t_, default);
+                bool? u_ = context.Operators.Overlaps(s_, t_, (string)default);
                 return u_;
             }
 

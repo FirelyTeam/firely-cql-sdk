@@ -219,8 +219,8 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-5789223673792619521L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, (decimal?)default);
+            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, (decimal?)default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("MATGlobalCommonFunctionsFHIR4-6.1.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
@@ -268,7 +268,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_);
                 CqlDateTime o_ = context.Operators.End(n_);
                 CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
-                bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, default);
+                bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, (string)default);
                 bool? r_ = context.Operators.And(l_, q_);
                 return r_;
             }
@@ -299,7 +299,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
             CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
             CqlDateTime u_ = context.Operators.Start(t_);
             CqlInterval<CqlDateTime> v_ = context.Operators.Interval(r_, u_, true, true);
-            bool? w_ = context.Operators.In<CqlDateTime>(m_, v_, default);
+            bool? w_ = context.Operators.In<CqlDateTime>(m_, v_, (string)default);
             CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
             CqlDateTime z_ = context.Operators.Start(y_);
             bool? aa_ = context.Operators.Not((bool?)(z_ is null));
@@ -481,7 +481,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> cl_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
                     CqlDateTime cm_ = context.Operators.Start(cl_);
                     CqlInterval<CqlDateTime> cn_ = context.Operators.Interval(cj_, cm_, true, true);
-                    bool? co_ = context.Operators.In<CqlDateTime>(ce_, cn_, default);
+                    bool? co_ = context.Operators.In<CqlDateTime>(ce_, cn_, (string)default);
                     CqlInterval<CqlDateTime> cq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
                     CqlDateTime cr_ = context.Operators.Start(cq_);
                     bool? cs_ = context.Operators.Not((bool?)(cr_ is null));
@@ -522,7 +522,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> dg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, da_);
                     CqlDateTime dh_ = context.Operators.Start(dg_);
                     CqlInterval<CqlDateTime> di_ = context.Operators.Interval(de_, dh_, true, true);
-                    bool? dj_ = context.Operators.In<CqlDateTime>(cz_, di_, default);
+                    bool? dj_ = context.Operators.In<CqlDateTime>(cz_, di_, (string)default);
                     CqlInterval<CqlDateTime> dl_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, da_);
                     CqlDateTime dm_ = context.Operators.Start(dl_);
                     bool? dn_ = context.Operators.Not((bool?)(dm_ is null));
@@ -547,7 +547,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, at_);
                 CqlDateTime bk_ = context.Operators.Start(bj_);
                 CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(ax_, bh_ ?? bk_, true, true);
-                bool? bm_ = context.Operators.In<CqlDateTime>(ai_, bl_, default);
+                bool? bm_ = context.Operators.In<CqlDateTime>(ai_, bl_, (string)default);
                 IEnumerable<Encounter> bo_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
                 bool? bp_(Encounter LastObs) {
@@ -562,7 +562,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> eb_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dv_);
                     CqlDateTime ec_ = context.Operators.Start(eb_);
                     CqlInterval<CqlDateTime> ed_ = context.Operators.Interval(dz_, ec_, true, true);
-                    bool? ee_ = context.Operators.In<CqlDateTime>(du_, ed_, default);
+                    bool? ee_ = context.Operators.In<CqlDateTime>(du_, ed_, (string)default);
                     CqlInterval<CqlDateTime> eg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dv_);
                     CqlDateTime eh_ = context.Operators.Start(eg_);
                     bool? ei_ = context.Operators.Not((bool?)(eh_ is null));
@@ -620,7 +620,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 CqlInterval<CqlDateTime> ez_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, et_);
                 CqlDateTime fa_ = context.Operators.Start(ez_);
                 CqlInterval<CqlDateTime> fb_ = context.Operators.Interval(ex_, fa_, true, true);
-                bool? fc_ = context.Operators.In<CqlDateTime>(es_, fb_, default);
+                bool? fc_ = context.Operators.In<CqlDateTime>(es_, fb_, (string)default);
                 CqlInterval<CqlDateTime> fe_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, et_);
                 CqlDateTime ff_ = context.Operators.Start(fe_);
                 bool? fg_ = context.Operators.Not((bool?)(ff_ is null));

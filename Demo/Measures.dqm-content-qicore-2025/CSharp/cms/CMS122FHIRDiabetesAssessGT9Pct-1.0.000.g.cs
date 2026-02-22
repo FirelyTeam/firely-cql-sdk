@@ -343,7 +343,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
             bool? l_ = context.Operators.Exists<Encounter>(k_);
             bool? m_ = context.Operators.And(j_, l_);

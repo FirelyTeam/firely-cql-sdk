@@ -1039,7 +1039,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                     IEnumerable<CqlInterval<CqlDateTime>> be_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(bc_, bd_);
                     IEnumerable<CqlInterval<CqlDateTime>> bf_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(be_);
-                    IEnumerable<CqlInterval<CqlDateTime>> bg_ = context.Operators.Collapse(bf_, default);
+                    IEnumerable<CqlInterval<CqlDateTime>> bg_ = context.Operators.Collapse(bf_, (string)default);
 
                     object bh_(CqlInterval<CqlDateTime> @this) {
                         CqlDateTime cn_ = context.Operators.Start(@this);
@@ -1740,7 +1740,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                     IEnumerable<CqlInterval<CqlDateTime>> bc_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(ba_, bb_);
                     IEnumerable<CqlInterval<CqlDateTime>> bd_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(bc_);
-                    IEnumerable<CqlInterval<CqlDateTime>> be_ = context.Operators.Collapse(bd_, default);
+                    IEnumerable<CqlInterval<CqlDateTime>> be_ = context.Operators.Collapse(bd_, (string)default);
 
                     object bf_(CqlInterval<CqlDateTime> @this) {
                         CqlDateTime ck_ = context.Operators.Start(@this);
@@ -1885,7 +1885,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     CqlInterval<CqlDateTime> bp_ = QICoreCommon_4_0_000.Instance.toInterval(context, bo_());
                     CqlDateTime bq_ = context.Operators.Start(bp_);
                     CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bn_, bq_, true, false);
-                    bool? bs_ = context.Operators.In<CqlDateTime>(bi_, br_, default);
+                    bool? bs_ = context.Operators.In<CqlDateTime>(bi_, br_, (string)default);
 
                     object bt_() {
 
@@ -2195,7 +2195,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     CqlInterval<CqlDateTime> ge_ = QICoreCommon_4_0_000.Instance.toInterval(context, gd_());
                     CqlDateTime gf_ = context.Operators.Start(ge_);
                     CqlInterval<CqlDateTime> gg_ = context.Operators.Interval(gc_, gf_, true, false);
-                    bool? gh_ = context.Operators.In<CqlDateTime>(fx_, gg_, default);
+                    bool? gh_ = context.Operators.In<CqlDateTime>(fx_, gg_, (string)default);
 
                     object gi_() {
 

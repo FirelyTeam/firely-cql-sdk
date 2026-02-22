@@ -230,7 +230,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             bool? k_ = this.Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period(context);
             bool? l_ = context.Operators.And(j_, k_);
             bool? m_ = this.Has_Outpatient_Visit_During_Measurement_Period(context);
@@ -472,7 +472,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 DataType z_ = tuple_celfnsuejxkbgcpwlebsiij?.UrineAlbuminTest?.Effective;
                 object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
                 CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.toInterval(context, aa_);
-                bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, ab_, default);
+                bool? ac_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(y_, ab_, (string)default);
                 return ac_;
             }
 

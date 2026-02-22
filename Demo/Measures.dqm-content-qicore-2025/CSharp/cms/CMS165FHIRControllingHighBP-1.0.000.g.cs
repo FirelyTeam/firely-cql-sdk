@@ -126,7 +126,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 CqlQuantity n_ = context.Operators.Quantity(6m, "months");
                 CqlDateTime o_ = context.Operators.Add(m_, n_);
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(k_, o_, true, false);
-                bool? q_ = context.Operators.Overlaps(i_, p_, default);
+                bool? q_ = context.Operators.Overlaps(i_, p_, (string)default);
                 return q_;
             }
 
@@ -147,7 +147,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(18, 85, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             IEnumerable<object> k_ = this.Essential_Hypertension_Diagnosis(context);
             bool? l_ = context.Operators.Exists<object>(k_);
             bool? m_ = context.Operators.And(j_, l_);
@@ -193,7 +193,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             bool? y_(object PregnancyESRDDiagnosis) {
                 CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyESRDDiagnosis);
                 CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
-                bool? ac_ = context.Operators.Overlaps(aa_, ab_, default);
+                bool? ac_ = context.Operators.Overlaps(aa_, ab_, (string)default);
                 return ac_;
             }
 
@@ -281,7 +281,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 CqlDateTime k_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
                 CqlDateTime m_ = context.Operators.End(l_);
-                bool? n_ = context.Operators.SameOrBefore(k_, m_, default);
+                bool? n_ = context.Operators.SameOrBefore(k_, m_, (string)default);
                 return n_;
             }
 
@@ -303,7 +303,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
                 CqlDateTime h_ = context.Operators.Start(g_);
                 CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
                 CqlDateTime j_ = context.Operators.End(i_);
-                bool? k_ = context.Operators.SameOrBefore(h_, j_, default);
+                bool? k_ = context.Operators.SameOrBefore(h_, j_, (string)default);
                 return k_;
             }
 

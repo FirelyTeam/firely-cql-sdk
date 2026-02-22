@@ -151,7 +151,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(24, 64, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
             List<Extension> k_() {
 
@@ -282,7 +282,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 CqlDateTime q_ = context.Operators.End(p_);
                 CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
                 CqlDateTime s_ = context.Operators.End(r_);
-                bool? t_ = context.Operators.SameOrBefore(q_, s_, default);
+                bool? t_ = context.Operators.SameOrBefore(q_, s_, (string)default);
                 return t_;
             }
 
@@ -298,7 +298,7 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
                 CqlDateTime at_ = context.Operators.Start(as_);
                 CqlInterval<CqlDateTime> au_ = this.Measurement_Period(context);
                 CqlDateTime av_ = context.Operators.End(au_);
-                bool? aw_ = context.Operators.SameOrBefore(at_, av_, default);
+                bool? aw_ = context.Operators.SameOrBefore(at_, av_, (string)default);
                 return aw_;
             }
 

@@ -552,7 +552,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_());
                     CqlDateTime s_ = context.Operators.Start(r_);
                     CqlInterval<CqlDateTime> t_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
-                    bool? u_ = context.Operators.In<CqlDateTime>(s_, t_, default);
+                    bool? u_ = context.Operators.In<CqlDateTime>(s_, t_, (string)default);
                     bool? v_ = context.Operators.And(p_, u_);
                     return v_;
                 }
@@ -668,7 +668,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_());
                     CqlDateTime p_ = context.Operators.Start(o_);
                     CqlInterval<CqlDateTime> q_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
-                    bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, default);
+                    bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, (string)default);
                     bool? s_ = context.Operators.And(m_, r_);
                     return s_;
                 }
@@ -777,7 +777,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_());
                     CqlDateTime p_ = context.Operators.Start(o_);
                     CqlInterval<CqlDateTime> q_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
-                    bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, default);
+                    bool? r_ = context.Operators.In<CqlDateTime>(p_, q_, (string)default);
                     bool? s_ = context.Operators.And(m_, r_);
                     return s_;
                 }
@@ -888,7 +888,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_());
                     CqlDateTime o_ = context.Operators.Start(n_);
                     CqlInterval<CqlDateTime> p_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TwentyWeeksPlusEncounter);
-                    bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, default);
+                    bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, (string)default);
                     bool? r_ = context.Operators.And(l_, q_);
                     return r_;
                 }
@@ -1073,7 +1073,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_());
                     CqlDateTime t_ = context.Operators.Start(s_);
                     CqlInterval<CqlDateTime> u_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, Encounter);
-                    bool? v_ = context.Operators.In<CqlDateTime>(t_, u_, default);
+                    bool? v_ = context.Operators.In<CqlDateTime>(t_, u_, (string)default);
                     bool? w_ = context.Operators.And(q_, v_);
                     return w_;
                 }
@@ -1447,7 +1447,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_());
             CqlDateTime n_ = context.Operators.Start(m_);
             CqlInterval<CqlDateTime> o_ = PCMaternal_5_25_000.Instance.hospitalizationWithEDOBTriageObservation(context, TheEncounter);
-            bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, default);
+            bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, (string)default);
             bool? q_ = context.Operators.And(k_, p_);
             return q_;
         }
@@ -2220,7 +2220,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             bool? b_(Encounter DeliveryEncounter) {
                 int? h_ = PCMaternal_5_25_000.Instance.calculatedGestationalAge(context, DeliveryEncounter);
                 CqlInterval<int?> i_ = context.Operators.Interval(20, 36, true, true);
-                bool? j_ = context.Operators.In<int?>(h_, i_, default);
+                bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
                 CqlQuantity l_ = PCMaternal_5_25_000.Instance.lastEstimatedGestationalAge(context, DeliveryEncounter);
                 CqlQuantity m_ = context.Operators.Quantity(20m, "weeks");
                 bool? n_ = context.Operators.GreaterOrEqual(l_, m_);
@@ -2282,7 +2282,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
                     CqlDateTime ah_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
                     CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, true, true);
-                    bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, default);
+                    bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, (string)default);
                     Code<ObservationStatus> ak_ = Hematocrit?.StatusElement;
                     ObservationStatus? al_ = ak_?.Value;
                     string am_ = context.Operators.Convert<string>(al_);
@@ -2326,7 +2326,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime be_ = context.Operators.Subtract(bc_, bd_);
                     CqlDateTime bf_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
                     CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, true, true);
-                    bool? bh_ = context.Operators.In<CqlDateTime>(ba_, bg_, default);
+                    bool? bh_ = context.Operators.In<CqlDateTime>(ba_, bg_, (string)default);
                     Code<ObservationStatus> bi_ = Hematocrit?.StatusElement;
                     ObservationStatus? bj_ = bi_?.Value;
                     string bk_ = context.Operators.Convert<string>(bj_);
@@ -2390,7 +2390,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime ag_ = context.Operators.Subtract(ae_, af_);
                     CqlDateTime ah_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
                     CqlInterval<CqlDateTime> ai_ = context.Operators.Interval(ag_, ah_, true, true);
-                    bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, default);
+                    bool? aj_ = context.Operators.In<CqlDateTime>(ac_, ai_, (string)default);
                     Code<ObservationStatus> ak_ = WBC?.StatusElement;
                     ObservationStatus? al_ = ak_?.Value;
                     string am_ = context.Operators.Convert<string>(al_);
@@ -2434,7 +2434,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime be_ = context.Operators.Subtract(bc_, bd_);
                     CqlDateTime bf_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
                     CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, true, true);
-                    bool? bh_ = context.Operators.In<CqlDateTime>(ba_, bg_, default);
+                    bool? bh_ = context.Operators.In<CqlDateTime>(ba_, bg_, (string)default);
                     Code<ObservationStatus> bi_ = WBC?.StatusElement;
                     ObservationStatus? bj_ = bi_?.Value;
                     string bk_ = context.Operators.Convert<string>(bj_);
@@ -2497,7 +2497,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime ae_ = context.Operators.Subtract(ac_, ad_);
                     CqlDateTime af_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
                     CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ae_, af_, true, true);
-                    bool? ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, default);
+                    bool? ah_ = context.Operators.In<CqlDateTime>(aa_, ag_, (string)default);
                     Code<ObservationStatus> ai_ = HeartRate?.StatusElement;
                     ObservationStatus? aj_ = ai_?.Value;
                     string ak_ = context.Operators.Convert<string>(aj_);
@@ -2535,7 +2535,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime ax_ = context.Operators.Subtract(av_, aw_);
                     CqlDateTime ay_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
                     CqlInterval<CqlDateTime> az_ = context.Operators.Interval(ax_, ay_, true, true);
-                    bool? ba_ = context.Operators.In<CqlDateTime>(at_, az_, default);
+                    bool? ba_ = context.Operators.In<CqlDateTime>(at_, az_, (string)default);
                     Code<ObservationStatus> bb_ = HeartRate?.StatusElement;
                     ObservationStatus? bc_ = bb_?.Value;
                     string bd_ = context.Operators.Convert<string>(bc_);
@@ -2593,7 +2593,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime aj_ = context.Operators.Subtract(ah_, ai_);
                     CqlDateTime ak_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
                     CqlInterval<CqlDateTime> al_ = context.Operators.Interval(aj_, ak_, true, true);
-                    bool? am_ = context.Operators.In<CqlDateTime>(af_, al_, default);
+                    bool? am_ = context.Operators.In<CqlDateTime>(af_, al_, (string)default);
                     Code<ObservationStatus> an_ = BP?.StatusElement;
                     ObservationStatus? ao_ = an_?.Value;
                     string ap_ = context.Operators.Convert<string>(ao_);
@@ -2671,7 +2671,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     CqlDateTime bv_ = context.Operators.Subtract(bt_, bu_);
                     CqlDateTime bw_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, TwentyWeeksPlusEncounter);
                     CqlInterval<CqlDateTime> bx_ = context.Operators.Interval(bv_, bw_, true, true);
-                    bool? by_ = context.Operators.In<CqlDateTime>(br_, bx_, default);
+                    bool? by_ = context.Operators.In<CqlDateTime>(br_, bx_, (string)default);
                     Code<ObservationStatus> bz_ = BP?.StatusElement;
                     ObservationStatus? ca_ = bz_?.Value;
                     string cb_ = context.Operators.Convert<string>(ca_);

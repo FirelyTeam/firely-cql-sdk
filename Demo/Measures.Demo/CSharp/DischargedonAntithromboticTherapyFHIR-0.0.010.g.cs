@@ -81,7 +81,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1910573221940503362L, () => {
-            object a_ = context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.0.010", "Measurement Period", null);
+            object a_ = context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.0.010", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -188,7 +188,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                     CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
                     Period k_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, default);
+                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
                     return m_;
                 }
 
@@ -264,7 +264,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                     CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
                     Period k_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, default);
+                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
                     return m_;
                 }
 
@@ -368,7 +368,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                     CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
                     Period k_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, default);
+                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
                     return m_;
                 }
 

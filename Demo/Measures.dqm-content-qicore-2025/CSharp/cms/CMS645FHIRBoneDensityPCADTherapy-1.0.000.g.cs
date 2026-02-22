@@ -266,7 +266,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
                 IEnumerable<CqlInterval<CqlDateTime>> bj_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(bh_, bi_);
                 IEnumerable<CqlInterval<CqlDateTime>> bk_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(bj_);
-                IEnumerable<CqlInterval<CqlDateTime>> bl_ = context.Operators.Collapse(bk_, default);
+                IEnumerable<CqlInterval<CqlDateTime>> bl_ = context.Operators.Collapse(bk_, (string)default);
 
                 object bm_(CqlInterval<CqlDateTime> @this) {
                     CqlDateTime dl_ = context.Operators.Start(@this);
@@ -331,7 +331,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
                 IEnumerable<CqlInterval<CqlDateTime>> ce_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(cc_, cd_);
                 IEnumerable<CqlInterval<CqlDateTime>> cf_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(ce_);
-                IEnumerable<CqlInterval<CqlDateTime>> cg_ = context.Operators.Collapse(cf_, default);
+                IEnumerable<CqlInterval<CqlDateTime>> cg_ = context.Operators.Collapse(cf_, (string)default);
 
                 object ch_(CqlInterval<CqlDateTime> @this) {
                     CqlDateTime dy_ = context.Operators.Start(@this);
@@ -474,7 +474,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
                 IEnumerable<CqlInterval<CqlDateTime>> bb_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(az_, ba_);
                 IEnumerable<CqlInterval<CqlDateTime>> bc_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(bb_);
-                IEnumerable<CqlInterval<CqlDateTime>> bd_ = context.Operators.Collapse(bc_, default);
+                IEnumerable<CqlInterval<CqlDateTime>> bd_ = context.Operators.Collapse(bc_, (string)default);
 
                 object be_(CqlInterval<CqlDateTime> @this) {
                     CqlDateTime cr_ = context.Operators.Start(@this);
@@ -539,7 +539,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
                 IEnumerable<CqlInterval<CqlDateTime>> bw_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(bu_, bv_);
                 IEnumerable<CqlInterval<CqlDateTime>> bx_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(bw_);
-                IEnumerable<CqlInterval<CqlDateTime>> by_ = context.Operators.Collapse(bx_, default);
+                IEnumerable<CqlInterval<CqlDateTime>> by_ = context.Operators.Collapse(bx_, (string)default);
 
                 object bz_(CqlInterval<CqlDateTime> @this) {
                     CqlDateTime de_ = context.Operators.Start(@this);

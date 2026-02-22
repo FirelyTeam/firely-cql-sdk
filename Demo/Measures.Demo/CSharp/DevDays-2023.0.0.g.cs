@@ -44,7 +44,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(7096341437342020688L, () => {
-            object a_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
+            object a_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -83,7 +83,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
                 DataType i_ = c?.Onset;
                 CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_ as FhirDateTime);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, default);
+                bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, (string)default);
                 bool? m_ = context.Operators.And(h_, l_);
                 return m_;
             }
@@ -114,7 +114,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
                 DataType i_ = c?.Onset;
                 CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_ as FhirDateTime);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, default);
+                bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, (string)default);
                 bool? m_ = context.Operators.And(h_, l_);
                 return m_;
             }

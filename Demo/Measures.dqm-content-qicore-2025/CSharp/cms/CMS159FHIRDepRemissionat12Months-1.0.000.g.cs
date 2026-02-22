@@ -267,7 +267,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     Period j_ = ValidEncounter?.Period;
                     CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
                     CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Depression);
-                    bool? m_ = context.Operators.Overlaps(k_, l_, default);
+                    bool? m_ = context.Operators.Overlaps(k_, l_, (string)default);
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
                     CqlDateTime p_ = context.Operators.End(o_);
                     CqlInterval<CqlDateTime> q_ = this.Denominator_Identification_Period(context);
@@ -1016,7 +1016,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 CqlDate o_ = context.Operators.DateFrom(n_);
                 int? p_ = context.Operators.CalculateAgeAt(j_, o_, "year");
                 CqlInterval<int?> q_ = context.Operators.Interval(12, 17, true, true);
-                bool? r_ = context.Operators.In<int?>(p_, q_, default);
+                bool? r_ = context.Operators.In<int?>(p_, q_, (string)default);
                 return r_;
             }
 

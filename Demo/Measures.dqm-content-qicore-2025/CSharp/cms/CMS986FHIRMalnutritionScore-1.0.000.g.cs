@@ -554,7 +554,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     DataType p_ = MalnutritionRiskScreening?.Effective;
                     object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
-                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, default);
+                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, (string)default);
                     bool? t_ = context.Operators.And(n_, s_);
                     DataType u_ = MalnutritionRiskScreening?.Value;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
@@ -598,7 +598,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     DataType p_ = MalnutritionRiskScreening?.Effective;
                     object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
-                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, default);
+                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, (string)default);
                     bool? t_ = context.Operators.And(n_, s_);
                     DataType u_ = MalnutritionRiskScreening?.Value;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
@@ -679,7 +679,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             DataType o_ = NutritionAssessment?.Effective;
             object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
             CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
-            bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, default);
+            bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, (string)default);
             bool? s_ = context.Operators.And(m_, r_);
             DataType t_ = NutritionAssessment?.Value;
             object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
@@ -775,7 +775,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     DataType p_ = NutritionAssessment?.Effective;
                     object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
-                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, default);
+                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, (string)default);
                     bool? t_ = context.Operators.And(n_, s_);
                     DataType u_ = NutritionAssessment?.Value;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
@@ -881,7 +881,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     DataType p_ = NutritionAssessment?.Effective;
                     object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
-                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, default);
+                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, (string)default);
                     bool? t_ = context.Operators.And(n_, s_);
                     DataType u_ = NutritionAssessment?.Value;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
@@ -983,7 +983,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     DataType p_ = NutritionAssessment?.Effective;
                     object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
                     CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
-                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, default);
+                    bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, (string)default);
                     bool? t_ = context.Operators.And(n_, s_);
                     DataType u_ = NutritionAssessment?.Value;
                     object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
@@ -1097,7 +1097,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
             bool? c_(Condition MalnutritionDiagnosis) {
                 CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MalnutritionDiagnosis as object);
                 CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
-                bool? g_ = context.Operators.Overlaps(e_, f_, default);
+                bool? g_ = context.Operators.Overlaps(e_, f_, (string)default);
                 bool? h_ = this.isVerified(context, MalnutritionDiagnosis as object);
                 bool? i_ = context.Operators.And(g_, h_);
                 return i_;
@@ -1202,7 +1202,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                     object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                     CqlDateTime q_ = QICoreCommon_4_0_000.Instance.earliest(context, p_ as object);
                     CqlInterval<CqlDateTime> r_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
-                    bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, default);
+                    bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, (string)default);
                     bool? t_ = context.Operators.And(n_, s_);
                     return t_;
                 }

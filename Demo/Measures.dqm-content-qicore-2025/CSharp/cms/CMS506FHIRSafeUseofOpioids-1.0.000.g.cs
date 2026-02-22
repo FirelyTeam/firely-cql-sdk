@@ -802,7 +802,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                     object bt_ = context.Operators.LateBoundProperty<object>(PalliativeOrHospiceCare, "authoredOn");
                     CqlDateTime bu_ = context.Operators.LateBoundProperty<CqlDateTime>(bt_, "value");
                     CqlInterval<CqlDateTime> bv_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
-                    bool? bw_ = context.Operators.In<CqlDateTime>(bs_ ?? bu_, bv_, default);
+                    bool? bw_ = context.Operators.In<CqlDateTime>(bs_ ?? bu_, bv_, (string)default);
                     return bw_;
                 }
 

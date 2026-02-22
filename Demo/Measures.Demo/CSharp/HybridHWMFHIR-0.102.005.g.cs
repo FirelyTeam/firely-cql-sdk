@@ -118,8 +118,8 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(4314633830159632744L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, (decimal?)default);
+            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, (decimal?)default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("HybridHWMFHIR-0.102.005", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
@@ -220,7 +220,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 CqlDate ah_ = context.Operators.DateFrom(ag_);
                 int? ai_ = context.Operators.CalculateAgeAt(ad_, ah_, "year");
                 CqlInterval<int?> aj_ = context.Operators.Interval(65, 94, true, true);
-                bool? ak_ = context.Operators.In<int?>(ai_, aj_, default);
+                bool? ak_ = context.Operators.In<int?>(ai_, aj_, (string)default);
                 bool? al_ = context.Operators.And(z_, ak_);
                 return al_;
             }
@@ -271,7 +271,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 CqlQuantity at_ = context.Operators.Quantity(120m, "minutes");
                 CqlDateTime au_ = context.Operators.Add(as_, at_);
                 CqlInterval<CqlDateTime> av_ = context.Operators.Interval(ap_, au_, true, true);
-                bool? aw_ = context.Operators.In<CqlDateTime>(ak_, av_, default);
+                bool? aw_ = context.Operators.In<CqlDateTime>(ak_, av_, (string)default);
                 bool? ax_ = context.Operators.And(ah_, aw_);
                 Code<ObservationStatus> ay_ = Exam?.StatusElement;
                 string az_ = FHIRHelpers_4_0_001.Instance.ToString(context, ay_);
@@ -322,7 +322,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 CqlQuantity by_ = context.Operators.Quantity(120m, "minutes");
                 CqlDateTime bz_ = context.Operators.Add(bx_, by_);
                 CqlInterval<CqlDateTime> ca_ = context.Operators.Interval(bu_, bz_, true, true);
-                bool? cb_ = context.Operators.In<CqlDateTime>(bp_, ca_, default);
+                bool? cb_ = context.Operators.In<CqlDateTime>(bp_, ca_, (string)default);
                 bool? cc_ = context.Operators.And(bm_, cb_);
                 Code<ObservationStatus> cd_ = Exam?.StatusElement;
                 string ce_ = FHIRHelpers_4_0_001.Instance.ToString(context, cd_);
@@ -390,7 +390,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 CqlDateTime ao_ = context.Operators.Start(an_);
                 CqlDateTime aq_ = context.Operators.Add(ao_, ak_);
                 CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(al_, aq_, true, true);
-                bool? as_ = context.Operators.In<CqlDateTime>(ag_, ar_, default);
+                bool? as_ = context.Operators.In<CqlDateTime>(ag_, ar_, (string)default);
                 bool? at_ = context.Operators.And(ae_, as_);
                 Code<ObservationStatus> au_ = Lab?.StatusElement;
                 string av_ = FHIRHelpers_4_0_001.Instance.ToString(context, au_);
@@ -435,7 +435,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 CqlDateTime bo_ = context.Operators.Start(bn_);
                 CqlDateTime bq_ = context.Operators.Add(bo_, bk_);
                 CqlInterval<CqlDateTime> br_ = context.Operators.Interval(bl_, bq_, true, true);
-                bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, default);
+                bool? bs_ = context.Operators.In<CqlDateTime>(bg_, br_, (string)default);
                 bool? bt_ = context.Operators.And(be_, bs_);
                 Code<ObservationStatus> bu_ = Lab?.StatusElement;
                 string bv_ = FHIRHelpers_4_0_001.Instance.ToString(context, bu_);
@@ -589,7 +589,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     CqlInterval<CqlDateTime> cl_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
                     CqlDateTime cm_ = context.Operators.Start(cl_);
                     CqlInterval<CqlDateTime> cn_ = context.Operators.Interval(cj_, cm_, true, true);
-                    bool? co_ = context.Operators.In<CqlDateTime>(ce_, cn_, default);
+                    bool? co_ = context.Operators.In<CqlDateTime>(ce_, cn_, (string)default);
                     CqlInterval<CqlDateTime> cq_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, cf_);
                     CqlDateTime cr_ = context.Operators.Start(cq_);
                     bool? cs_ = context.Operators.Not((bool?)(cr_ is null));
@@ -630,7 +630,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     CqlInterval<CqlDateTime> dg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, da_);
                     CqlDateTime dh_ = context.Operators.Start(dg_);
                     CqlInterval<CqlDateTime> di_ = context.Operators.Interval(de_, dh_, true, true);
-                    bool? dj_ = context.Operators.In<CqlDateTime>(cz_, di_, default);
+                    bool? dj_ = context.Operators.In<CqlDateTime>(cz_, di_, (string)default);
                     CqlInterval<CqlDateTime> dl_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, da_);
                     CqlDateTime dm_ = context.Operators.Start(dl_);
                     bool? dn_ = context.Operators.Not((bool?)(dm_ is null));
@@ -655,7 +655,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, at_);
                 CqlDateTime bk_ = context.Operators.Start(bj_);
                 CqlInterval<CqlDateTime> bl_ = context.Operators.Interval(ax_, bh_ ?? bk_, true, true);
-                bool? bm_ = context.Operators.In<CqlDateTime>(ai_, bl_, default);
+                bool? bm_ = context.Operators.In<CqlDateTime>(ai_, bl_, (string)default);
                 IEnumerable<Encounter> bo_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
                 bool? bp_(Encounter LastObs) {
@@ -670,7 +670,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                     CqlInterval<CqlDateTime> eb_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dv_);
                     CqlDateTime ec_ = context.Operators.Start(eb_);
                     CqlInterval<CqlDateTime> ed_ = context.Operators.Interval(dz_, ec_, true, true);
-                    bool? ee_ = context.Operators.In<CqlDateTime>(du_, ed_, default);
+                    bool? ee_ = context.Operators.In<CqlDateTime>(du_, ed_, (string)default);
                     CqlInterval<CqlDateTime> eg_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, dv_);
                     CqlDateTime eh_ = context.Operators.Start(eg_);
                     bool? ei_ = context.Operators.Not((bool?)(eh_ is null));
@@ -728,7 +728,7 @@ public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHI
                 CqlInterval<CqlDateTime> ez_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, et_);
                 CqlDateTime fa_ = context.Operators.Start(ez_);
                 CqlInterval<CqlDateTime> fb_ = context.Operators.Interval(ex_, fa_, true, true);
-                bool? fc_ = context.Operators.In<CqlDateTime>(es_, fb_, default);
+                bool? fc_ = context.Operators.In<CqlDateTime>(es_, fb_, (string)default);
                 CqlInterval<CqlDateTime> fe_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, et_);
                 CqlDateTime ff_ = context.Operators.Start(fe_);
                 bool? fg_ = context.Operators.Not((bool?)(ff_ is null));
