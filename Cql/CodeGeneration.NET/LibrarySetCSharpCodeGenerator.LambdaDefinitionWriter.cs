@@ -308,26 +308,51 @@ internal partial class LibrarySetCSharpCodeGenerator
 
             IReadOnlyCollection<Expression> paramList = call.Method.IsExtensionMethod() ? call.Arguments.Skip(1).ToList() : call.Arguments;
             var methodName = PrettyMethodName(call.Method);
-            var arguments = BuildArguments(paramList);
+            var methodParameters = call.Method.GetParameters();
+            if (call.Method.IsExtensionMethod())
+                methodParameters = methodParameters.Skip(1).ToArray();
+            var arguments = BuildArguments(paramList, methodParameters);
             return $"{@object}{methodName}{arguments}";
         }
 
         private string BuildArguments(
-            IReadOnlyCollection<Expression> paramList)
+            IReadOnlyCollection<Expression> paramList,
+            IReadOnlyCollection<ParameterInfo>? methodParameters = null)
         {
             var isb = new IndentedStringBuilder();
             isb.Append("(");
 
             bool firstArg = true;
+            var paramArray = methodParameters?.ToArray();
+            var argIndex = 0;
+
             foreach (var argument in paramList)
             {
                 var argAsCode = BuildExpression(argument);
+
+                // Add type cast if argument is null/default and we have parameter type information
+                if (paramArray is not null && argIndex < paramArray.Length)
+                {
+                    var needsCast = argument switch
+                    {
+                        ConstantExpression { Value: null } => true,
+                        DefaultExpression => true,
+                        _ => false
+                    };
+
+                    if (needsCast && (argAsCode == "null" || argAsCode == "default"))
+                    {
+                        var paramType = TypeToCSharpConverter.ToCSharp(paramArray[argIndex].ParameterType);
+                        argAsCode = $"({paramType}){argAsCode}";
+                    }
+                }
 
                 if (!firstArg)
                     isb.Append(", ");
 
                 isb.Append(argAsCode);
                 firstArg = false;
+                argIndex++;
             }
 
             isb.Append(")");

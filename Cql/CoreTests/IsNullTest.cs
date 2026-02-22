@@ -26,7 +26,7 @@ namespace CoreTests;
 [TestClass]
 public class IsNullTest
 {
-    private static ServiceProvider BuildServiceProvider() => 
+    private static ServiceProvider BuildServiceProvider() =>
         ElmToolkitServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
 
     [TestMethod]
@@ -44,9 +44,9 @@ public class IsNullTest
         var elmLibrary = CreateElmLibrary(libraryString);
 
         // Act
-        var definitions = servicesScope.ServiceProvider
-                                       .GetRequiredService<LibraryExpressionBuilder>()
-                                       .ProcessLibrary(elmLibrary);
+        var libraryExpressionBuilder = servicesScope.ServiceProvider
+                                                    .GetRequiredService<LibraryExpressionBuilder>();
+        var definitions = libraryExpressionBuilder.ProcessLibrary(elmLibrary);
 
         // Assert
         Assert.IsNotNull(definitions);
@@ -145,6 +145,35 @@ public class IsNullTest
         Assert.AreEqual(true, result);
     }
 
+    [TestMethod]
+    public void IsNull_Of_Cast_To_Any_Should_Be_False()
+    {
+        // Arrange
+        using var serviceProvider = BuildServiceProvider();
+        using var servicesScope = serviceProvider.CreateScope();
+
+        var libraryString = CqlLibraryString.Parse("""
+           library IsNullTest version '1.0.0'
+
+           define "IsNull_Integer_As_Any": IsNull(1 as Any)
+           """);
+        var elmLibrary = CreateElmLibrary(libraryString);
+
+        // Act
+        var definitions = servicesScope.ServiceProvider
+                                       .GetRequiredService<LibraryExpressionBuilder>()
+                                       .ProcessLibrary(elmLibrary);
+
+        // Assert
+        Assert.IsNotNull(definitions);
+        Assert.IsTrue(definitions.Libraries.Any());
+
+        var result = InvokeLibrary(elmLibrary, "IsNull_Integer_As_Any");
+        Assert.IsNotNull(result);
+        Assert.IsInstanceOfType<bool?>(result);
+        Assert.AreEqual(false, result);
+    }
+
     private static Library CreateElmLibrary(CqlLibraryString libraryString)
     {
         var cqlToolkitConfig = new CqlToolkitConfig([CqlModel.ElmR1, CqlModel.Fhir401]);
@@ -158,7 +187,11 @@ public class IsNullTest
 
     private static object InvokeLibrary(Library elmLibrary, string definition)
     {
-        var elmToolkit = new ElmToolkit()
+        var elmToolkit = new ElmToolkit(
+#if DEBUG
+                                config:new(){DebugSymbolsFormat = DebugSymbolsFormat.Embedded}
+#endif
+                             )
                         .AddElmLibraries([elmLibrary])
                         .CompileToAssemblies();
 
