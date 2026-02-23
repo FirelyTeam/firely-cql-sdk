@@ -71,8 +71,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(8711657917987574517L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, (decimal?)default);
+            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, (decimal?)default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.0.012", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
@@ -130,7 +130,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_);
                 CqlDateTime j_ = context.Operators.End(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, default);
+                bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, (string)default);
                 bool? m_ = context.Operators.And(g_, l_);
                 return m_;
             }
@@ -226,7 +226,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
                     CqlDateTime k_ = context.Operators.Start(j_);
                     CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                    bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);
+                    bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, (string)default);
                     return m_;
                 }
 
@@ -281,7 +281,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         CqlInterval<CqlDateTime> af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, z_);
                         CqlDateTime ag_ = context.Operators.Start(af_);
                         CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ad_, ag_, true, true);
-                        bool? ai_ = context.Operators.In<CqlDateTime>(y_, ah_, default);
+                        bool? ai_ = context.Operators.In<CqlDateTime>(y_, ah_, (string)default);
                         CqlInterval<CqlDateTime> ak_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, z_);
                         CqlDateTime al_ = context.Operators.Start(ak_);
                         bool? am_ = context.Operators.Not((bool?)(al_ is null));
@@ -297,7 +297,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, w_);
                         CqlDateTime az_ = context.Operators.Start(ay_);
                         CqlInterval<CqlDateTime> ba_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                        bool? bb_ = context.Operators.In<CqlDateTime>(az_, ba_, default);
+                        bool? bb_ = context.Operators.In<CqlDateTime>(az_, ba_, (string)default);
                         bool? bc_ = context.Operators.And(aw_, bb_);
                         return bc_;
                     }
@@ -326,7 +326,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         CqlInterval<CqlDateTime> br_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bl_);
                         CqlDateTime bs_ = context.Operators.Start(br_);
                         CqlInterval<CqlDateTime> bt_ = context.Operators.Interval(bp_, bs_, true, true);
-                        bool? bu_ = context.Operators.In<CqlDateTime>(bk_, bt_, default);
+                        bool? bu_ = context.Operators.In<CqlDateTime>(bk_, bt_, (string)default);
                         CqlInterval<CqlDateTime> bw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bl_);
                         CqlDateTime bx_ = context.Operators.Start(bw_);
                         bool? by_ = context.Operators.Not((bool?)(bx_ is null));
@@ -342,7 +342,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         CqlInterval<CqlDateTime> ck_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, bi_);
                         CqlDateTime cl_ = context.Operators.Start(ck_);
                         CqlInterval<CqlDateTime> cm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                        bool? cn_ = context.Operators.In<CqlDateTime>(cl_, cm_, default);
+                        bool? cn_ = context.Operators.In<CqlDateTime>(cl_, cm_, (string)default);
                         bool? co_ = context.Operators.And(ci_, cn_);
                         return co_;
                     }
@@ -364,7 +364,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         CqlInterval<CqlDateTime> cw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, cv_);
                         CqlDateTime cx_ = context.Operators.Start(cw_);
                         CqlInterval<CqlDateTime> cy_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                        bool? cz_ = context.Operators.In<CqlDateTime>(cx_, cy_, default);
+                        bool? cz_ = context.Operators.In<CqlDateTime>(cx_, cy_, (string)default);
                         CqlInterval<CqlDateTime> db_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, cv_);
                         CqlDateTime dc_ = context.Operators.Start(db_);
                         DataType dd_ = BloodGlucoseLab?.Effective;
@@ -375,7 +375,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                         CqlQuantity dj_ = context.Operators.Quantity(5m, "minutes");
                         CqlDateTime dk_ = context.Operators.Add(di_, dj_);
                         CqlInterval<CqlDateTime> dl_ = context.Operators.Interval(df_, dk_, false, true);
-                        bool? dm_ = context.Operators.In<CqlDateTime>(dc_, dl_, default);
+                        bool? dm_ = context.Operators.In<CqlDateTime>(dc_, dl_, (string)default);
                         CqlInterval<CqlDateTime> do_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, dd_);
                         CqlDateTime dp_ = context.Operators.Start(do_);
                         bool? dq_ = context.Operators.Not((bool?)(dp_ is null));
@@ -411,7 +411,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                     CqlInterval<CqlDateTime> ei_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, eh_);
                     CqlDateTime ej_ = context.Operators.Start(ei_);
                     CqlInterval<CqlDateTime> ek_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
-                    bool? el_ = context.Operators.In<CqlDateTime>(ej_, ek_, default);
+                    bool? el_ = context.Operators.In<CqlDateTime>(ej_, ek_, (string)default);
                     DataType em_ = BloodGlucoseLab?.Value;
                     CqlQuantity en_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, em_ as Quantity);
                     CqlQuantity eo_ = context.Operators.Quantity(40m, "mg/dL");

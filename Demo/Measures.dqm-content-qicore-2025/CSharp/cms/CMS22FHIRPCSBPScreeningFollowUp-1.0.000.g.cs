@@ -363,7 +363,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity p_ = context.Operators.Quantity(1m, "mm[Hg]");
                 CqlQuantity q_ = context.Operators.Quantity(120m, "mm[Hg]");
                 CqlInterval<CqlQuantity> r_ = context.Operators.Interval(p_, q_, true, false);
-                bool? s_ = context.Operators.In<CqlQuantity>(o_ as CqlQuantity, r_, default);
+                bool? s_ = context.Operators.In<CqlQuantity>(o_ as CqlQuantity, r_, (string)default);
 
                 bool? u_(Observation BloodPressure) {
                     DataType bg_ = BloodPressure?.Effective;
@@ -415,7 +415,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
                 CqlQuantity ag_ = context.Operators.Quantity(80m, "mm[Hg]");
                 CqlInterval<CqlQuantity> ah_ = context.Operators.Interval(p_, ag_, true, false);
-                bool? ai_ = context.Operators.In<CqlQuantity>(ae_ as CqlQuantity, ah_, default);
+                bool? ai_ = context.Operators.In<CqlQuantity>(ae_ as CqlQuantity, ah_, (string)default);
                 bool? aj_ = context.Operators.And(s_, ai_);
                 return aj_;
             }
@@ -484,7 +484,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity p_ = context.Operators.Quantity(120m, "mm[Hg]");
                 CqlQuantity q_ = context.Operators.Quantity(129m, "mm[Hg]");
                 CqlInterval<CqlQuantity> r_ = context.Operators.Interval(p_, q_, true, true);
-                bool? s_ = context.Operators.In<CqlQuantity>(o_ as CqlQuantity, r_, default);
+                bool? s_ = context.Operators.In<CqlQuantity>(o_ as CqlQuantity, r_, (string)default);
 
                 bool? u_(Observation BloodPressure) {
                     DataType bg_ = BloodPressure?.Effective;
@@ -537,7 +537,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity af_ = context.Operators.Quantity(1m, "mm[Hg]");
                 CqlQuantity ag_ = context.Operators.Quantity(80m, "mm[Hg]");
                 CqlInterval<CqlQuantity> ah_ = context.Operators.Interval(af_, ag_, true, false);
-                bool? ai_ = context.Operators.In<CqlQuantity>(ae_ as CqlQuantity, ah_, default);
+                bool? ai_ = context.Operators.In<CqlQuantity>(ae_ as CqlQuantity, ah_, (string)default);
                 bool? aj_ = context.Operators.And(s_, ai_);
                 return aj_;
             }
@@ -733,7 +733,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> bu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bo_);
                     CqlDateTime bv_ = context.Operators.Start(bu_);
                     CqlInterval<CqlDateTime> bw_ = context.Operators.Interval(bs_, bv_, true, true);
-                    bool? bx_ = context.Operators.In<CqlDateTime>(bn_, bw_, default);
+                    bool? bx_ = context.Operators.In<CqlDateTime>(bn_, bw_, (string)default);
                     CqlInterval<CqlDateTime> bz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bo_);
                     CqlDateTime ca_ = context.Operators.Start(bz_);
                     bool? cb_ = context.Operators.Not((bool?)(ca_ is null));
@@ -794,7 +794,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> dc_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cw_);
                     CqlDateTime dd_ = context.Operators.Start(dc_);
                     CqlInterval<CqlDateTime> de_ = context.Operators.Interval(da_, dd_, true, true);
-                    bool? df_ = context.Operators.In<CqlDateTime>(cv_, de_, default);
+                    bool? df_ = context.Operators.In<CqlDateTime>(cv_, de_, (string)default);
                     CqlInterval<CqlDateTime> dh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cw_);
                     CqlDateTime di_ = context.Operators.Start(dh_);
                     bool? dj_ = context.Operators.Not((bool?)(di_ is null));
@@ -855,7 +855,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> ek_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ee_);
                     CqlDateTime el_ = context.Operators.Start(ek_);
                     CqlInterval<CqlDateTime> em_ = context.Operators.Interval(ei_, el_, true, true);
-                    bool? en_ = context.Operators.In<CqlDateTime>(ed_, em_, default);
+                    bool? en_ = context.Operators.In<CqlDateTime>(ed_, em_, (string)default);
                     CqlInterval<CqlDateTime> ep_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ee_);
                     CqlDateTime eq_ = context.Operators.Start(ep_);
                     bool? er_ = context.Operators.Not((bool?)(eq_ is null));
@@ -916,7 +916,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> fs_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fm_);
                     CqlDateTime ft_ = context.Operators.Start(fs_);
                     CqlInterval<CqlDateTime> fu_ = context.Operators.Interval(fq_, ft_, true, true);
-                    bool? fv_ = context.Operators.In<CqlDateTime>(fl_, fu_, default);
+                    bool? fv_ = context.Operators.In<CqlDateTime>(fl_, fu_, (string)default);
                     CqlInterval<CqlDateTime> fx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fm_);
                     CqlDateTime fy_ = context.Operators.Start(fx_);
                     bool? fz_ = context.Operators.Not((bool?)(fy_ is null));
@@ -1330,7 +1330,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity r_ = context.Operators.Quantity(130m, "mm[Hg]");
                 CqlQuantity s_ = context.Operators.Quantity(139m, "mm[Hg]");
                 CqlInterval<CqlQuantity> t_ = context.Operators.Interval(r_, s_, true, true);
-                bool? u_ = context.Operators.In<CqlQuantity>(q_ as CqlQuantity, t_, default);
+                bool? u_ = context.Operators.In<CqlQuantity>(q_ as CqlQuantity, t_, (string)default);
 
                 bool? w_(Observation BloodPressure) {
                     DataType cn_ = BloodPressure?.Effective;
@@ -1383,7 +1383,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 CqlQuantity ah_ = context.Operators.Quantity(80m, "mm[Hg]");
                 CqlQuantity ai_ = context.Operators.Quantity(89m, "mm[Hg]");
                 CqlInterval<CqlQuantity> aj_ = context.Operators.Interval(ah_, ai_, true, true);
-                bool? ak_ = context.Operators.In<CqlQuantity>(ag_ as CqlQuantity, aj_, default);
+                bool? ak_ = context.Operators.In<CqlQuantity>(ag_ as CqlQuantity, aj_, (string)default);
                 bool? al_ = context.Operators.Or(u_, ak_);
 
                 bool? an_(Observation BloodPressure) {

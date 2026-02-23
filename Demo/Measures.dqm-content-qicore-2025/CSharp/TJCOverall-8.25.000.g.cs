@@ -57,7 +57,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(5065781295884409926L, () => {
-            object a_ = context.ResolveParameter("TJCOverall-8.25.000", "Measurement Period", null);
+            object a_ = context.ResolveParameter("TJCOverall-8.25.000", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -292,7 +292,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                     object l_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
                     CqlDateTime m_ = context.Operators.LateBoundProperty<CqlDateTime>(l_, "value");
                     CqlInterval<CqlDateTime> n_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
-                    bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, default);
+                    bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, (string)default);
                     return o_;
                 }
 

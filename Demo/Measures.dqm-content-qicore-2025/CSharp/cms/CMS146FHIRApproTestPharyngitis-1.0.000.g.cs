@@ -552,7 +552,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 CqlDate m_ = context.Operators.DateFrom(l_);
                 int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
                 CqlInterval<int?> o_ = context.Operators.Interval(3, 17, true, true);
-                bool? p_ = context.Operators.In<int?>(n_, o_, default);
+                bool? p_ = context.Operators.In<int?>(n_, o_, (string)default);
                 return p_;
             }
 
@@ -579,7 +579,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 CqlDate m_ = context.Operators.DateFrom(l_);
                 int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
                 CqlInterval<int?> o_ = context.Operators.Interval(18, 64, true, true);
-                bool? p_ = context.Operators.In<int?>(n_, o_, default);
+                bool? p_ = context.Operators.In<int?>(n_, o_, (string)default);
                 return p_;
             }
 

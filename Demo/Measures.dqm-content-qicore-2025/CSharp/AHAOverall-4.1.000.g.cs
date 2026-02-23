@@ -99,7 +99,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(6517944951610092532L, () => {
-            object a_ = context.ResolveParameter("AHAOverall-4.1.000", "Measurement Period", null);
+            object a_ = context.ResolveParameter("AHAOverall-4.1.000", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -324,7 +324,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     Period n_ = HFOutpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.End(o_);
-                    bool? q_ = context.Operators.Before(m_, p_, default);
+                    bool? q_ = context.Operators.Before(m_, p_, (string)default);
                     return q_;
                 }
 
@@ -361,7 +361,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                     CqlDateTime w_ = context.Operators.End(v_);
                     CqlDate x_ = context.Operators.DateFrom(w_);
-                    bool? y_ = context.Operators.SameOrBefore(t_, x_, default);
+                    bool? y_ = context.Operators.SameOrBefore(t_, x_, (string)default);
                     return y_;
                 }
 
@@ -512,7 +512,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                     CqlDateTime w_ = context.Operators.End(v_);
                     CqlDate x_ = context.Operators.DateFrom(w_);
-                    bool? y_ = context.Operators.SameOrBefore(t_, x_, default);
+                    bool? y_ = context.Operators.SameOrBefore(t_, x_, (string)default);
                     return y_;
                 }
 
@@ -647,7 +647,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     Period p_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime r_ = context.Operators.End(q_);
-                    bool? s_ = context.Operators.Before(o_, r_, default);
+                    bool? s_ = context.Operators.Before(o_, r_, (string)default);
                     return s_;
                 }
 
@@ -1067,7 +1067,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
 
             IEnumerable<CqlInterval<CqlDateTime>> s_ = context.Operators.Select<object, CqlInterval<CqlDateTime>>(q_, r_);
             IEnumerable<CqlInterval<CqlDateTime>> t_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(s_);
-            IEnumerable<CqlInterval<CqlDateTime>> u_ = context.Operators.Collapse(t_, default);
+            IEnumerable<CqlInterval<CqlDateTime>> u_ = context.Operators.Collapse(t_, (string)default);
 
             object v_(CqlInterval<CqlDateTime> @this) {
                 CqlDateTime bh_ = context.Operators.Start(@this);

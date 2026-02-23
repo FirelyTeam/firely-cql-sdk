@@ -207,7 +207,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
         object f_ = context.Operators.LateBoundProperty<object>(observation, "effective");
         object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
         CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-        bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, default);
+        bool? i_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(e_, h_, (string)default);
         bool? j_ = context.Operators.And(d_, i_);
 
         bool? k_() {
@@ -301,7 +301,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                     CqlQuantity q_ = context.Operators.Quantity(72m, "hours");
                     CqlDateTime r_ = context.Operators.Add(p_, q_);
                     CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
-                    bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                    bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, (string)default);
                     return t_;
                 }
 
@@ -362,7 +362,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                     CqlQuantity q_ = context.Operators.Quantity(24m, "hours");
                     CqlDateTime r_ = context.Operators.Add(p_, q_);
                     CqlInterval<CqlDateTime> s_ = context.Operators.Interval(n_, r_, true, true);
-                    bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                    bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, (string)default);
                     return t_;
                 }
 
@@ -433,7 +433,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                     CqlDateTime p_ = context.Operators.Add(n_, o_);
                     CqlDateTime r_ = context.Operators.End(m_);
                     CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-                    bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                    bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, (string)default);
                     return t_;
                 }
 
@@ -494,7 +494,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
                     CqlDateTime p_ = context.Operators.Add(n_, o_);
                     CqlDateTime r_ = context.Operators.End(m_);
                     CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-                    bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                    bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, (string)default);
                     return t_;
                 }
 

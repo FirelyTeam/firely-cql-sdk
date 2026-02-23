@@ -71,7 +71,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
             CqlDate m_ = context.Operators.Subtract(k_, l_);
             CqlDate p_ = context.Operators.Add(k_, l_);
             CqlInterval<CqlDate> q_ = context.Operators.Interval(m_, p_, true, true);
-            bool? r_ = context.Operators.In<CqlDate>(j_, q_, default);
+            bool? r_ = context.Operators.In<CqlDate>(j_, q_, (string)default);
             bool? t_ = context.Operators.Not((bool?)(k_ is null));
             bool? u_ = context.Operators.And(r_, t_);
             return u_;
@@ -215,12 +215,12 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         bool? a_() {
 
             bool b_() {
-                bool? c_ = context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default);
+                bool? c_ = context.Operators.In<CqlDate>(AnchorDate, participationPeriod, (string)default);
                 bool? d_ = context.Operators.Not(c_);
                 return d_ ?? false;
             }
 
-            if ((context.Operators.In<CqlDate>(AnchorDate, participationPeriod, default)) ?? false)
+            if ((context.Operators.In<CqlDate>(AnchorDate, participationPeriod, (string)default)) ?? false)
             {
                 IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> e_ = this.All_Coverage_Info(context, Coverage, participationPeriod);
 
@@ -241,7 +241,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
                 IEnumerable<CqlInterval<CqlDate>> j_ = context.Operators.Flatten<CqlInterval<CqlDate>>(i_);
 
                 bool? k_(CqlInterval<CqlDate> FinalInterval) {
-                    bool? q_ = context.Operators.In<CqlDate>(AnchorDate, FinalInterval, default);
+                    bool? q_ = context.Operators.In<CqlDate>(AnchorDate, FinalInterval, (string)default);
                     return q_;
                 }
 
@@ -274,7 +274,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
                     CqlDateTime af_ = context.Operators.End(ab_);
                     CqlDate ag_ = context.Operators.DateFrom(af_);
                     CqlInterval<CqlDate> ah_ = context.Operators.Interval(ad_, ag_, true, true);
-                    bool? ai_ = context.Operators.In<CqlDate>(AnchorDate, ah_, default);
+                    bool? ai_ = context.Operators.In<CqlDate>(AnchorDate, ah_, (string)default);
                     return ai_;
                 }
 

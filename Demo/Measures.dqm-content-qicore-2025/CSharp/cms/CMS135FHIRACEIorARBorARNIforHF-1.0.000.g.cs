@@ -311,7 +311,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                     CqlDateTime ab_ = context.Operators.Start(aa_);
                     CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(y_, ab_, true, true);
-                    bool? ad_ = context.Operators.In<CqlDateTime>(t_, ac_, default);
+                    bool? ad_ = context.Operators.In<CqlDateTime>(t_, ac_, (string)default);
                     CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
                     CqlDateTime ag_ = context.Operators.Start(af_);
                     bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
@@ -347,7 +347,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                     CqlInterval<CqlDateTime> ba_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, au_);
                     CqlDateTime bb_ = context.Operators.Start(ba_);
                     CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ay_, bb_, true, true);
-                    bool? bd_ = context.Operators.In<CqlDateTime>(at_, bc_, default);
+                    bool? bd_ = context.Operators.In<CqlDateTime>(at_, bc_, (string)default);
                     CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, au_);
                     CqlDateTime bg_ = context.Operators.Start(bf_);
                     bool? bh_ = context.Operators.Not((bool?)(bg_ is null));

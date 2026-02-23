@@ -37,11 +37,13 @@ This document contains development guidelines and instructions for maintaining c
   - [8.1 Authoritative Specification Source](#81-authoritative-specification-source)
   - [8.2 When to Check Specification](#82-when-to-check-specification)
   - [8.3 Specification Location](#83-specification-location)
-- [9. CQL Evaluation Exceptions](#9-cql-evaluation-exceptions)
-  - [9.0 Rationale](#90-rationale)
-  - [9.1 Exception Hierarchy](#91-exception-hierarchy)
-  - [9.2 When to Use CqlException](#92-when-to-use-cqlexception)
-  - [9.3 Key Points](#93-key-points)
+- [9. Nullological Operators Design Pattern](#9-nullological-operators-design-pattern)
+  - [9.1 Interface vs Implementation Return Types](#91-interface-vs-implementation-return-types)
+- [10. CQL Evaluation Exceptions](#10-cql-evaluation-exceptions)
+  - [10.0 Rationale](#100-rationale)
+  - [10.1 Exception Hierarchy](#101-exception-hierarchy)
+  - [10.2 When to Use CqlException](#102-when-to-use-cqlexception)
+  - [10.3 Key Points](#103-key-points)
 
 ## 1. User Workflow Preferences
 
@@ -415,28 +417,60 @@ string formatted = identifier.ToString();
 
 8.3.8 **Conformance reports**: See `/spec/report/` for known deviations and issue templates
 
-## 9. CQL Evaluation Exceptions
+## 9. Nullological Operators Design Pattern
 
-### 9.0 Rationale
-9.0.1 **Why use `ICqlError` structs instead of plain .NET exceptions?**
+### 9.1 Interface vs Implementation Return Types
+9.1.1 **CRITICAL**: Nullological operators (IsNull, IsTrue, IsFalse) have different return types in interface vs implementation
+
+9.1.2 **Interface (`ICqlOperators`)**: ALWAYS declare return type as `bool?` (nullable)
+   9.1.2.1 Example: `bool? IsNull<T>(T value) where T : class;`
+
+   9.1.2.2 Reason: Consistency with other CQL operators and proper binding logic
+
+   9.1.2.3 Ensures operator binding system works correctly across all operators
+
+9.1.3 **Implementation (`CqlOperators`)**: Return type is `bool` (non-nullable)
+   9.1.3.1 Example: `public bool IsNull<T>(T value) where T : class => value == null;`
+
+   9.1.3.2 Reason: CQL specification §9.B states these operators always return true or false, never null
+
+   9.1.3.3 C# automatically boxes `bool` to `bool?` when returning through interface
+
+9.1.4 **Key Point**: The implementation can return a more specific type (`bool`) that will be implicitly converted to the interface's return type (`bool?`)
+
+9.1.5 **Specification Reference**: CQL 1.5.3 §9.B (Nullological Operators)
+   9.1.5.1 `is null(argument Any) Boolean` - returns Boolean, not Boolean?
+
+   9.1.5.2 `is true(argument Boolean) Boolean` - returns Boolean, not Boolean?
+
+   9.1.5.3 `is false(argument Boolean) Boolean` - returns Boolean, not Boolean?
+
+9.1.6 **DO NOT** change interface return types to `bool` even though spec says these never return null
+
+9.1.7 **DO** keep implementation return types as `bool` to match specification semantics
+
+## 10. CQL Evaluation Exceptions
+
+### 10.0 Rationale
+10.0.1 **Why use `ICqlError` structs instead of plain .NET exceptions?**
 
 The Firely CQL SDK uses a struct-based error pattern (`ICqlError` + `CqlException<TError>`) rather than conventional `new SomeException("message")` throws. This design was chosen for four reasons:
 
-9.0.1.1 **Lazy message construction** — The human-readable message string is *not* constructed at the throw site. It is constructed on demand inside `GetMessage()`, only when the exception message is actually read (e.g. when logging or displaying the error). This avoids unnecessary string allocations for errors that may be caught and handled without inspecting the message.
+10.0.1.1 **Lazy message construction** — The human-readable message string is *not* constructed at the throw site. It is constructed on demand inside `GetMessage()`, only when the exception message is actually read (e.g. when logging or displaying the error). This avoids unnecessary string allocations for errors that may be caught and handled without inspecting the message.
 
-9.0.1.2 **Structured error metadata** — All the raw facts that caused the error (e.g. the UCUM unit name, the expected calendar equivalent) are stored as typed properties on the struct, not embedded in an opaque string. Callers can inspect `((CqlException<CqlArithmeticError>)ex).Error.Unit` programmatically without parsing the message.
+10.0.1.2 **Structured error metadata** — All the raw facts that caused the error (e.g. the UCUM unit name, the expected calendar equivalent) are stored as typed properties on the struct, not embedded in an opaque string. Callers can inspect `((CqlException<CqlArithmeticError>)ex).Error.Unit` programmatically without parsing the message.
 
-9.0.1.3 **Strongly-typed catch clauses** — Because each error kind is its own type parameter on `CqlException<TError>`, error handlers can catch `CqlException<CqlUcumYearArithmeticError>` specifically, making catch clauses self-documenting and avoiding substring matching on message text.
+10.0.1.3 **Strongly-typed catch clauses** — Because each error kind is its own type parameter on `CqlException<TError>`, error handlers can catch `CqlException<CqlUcumYearArithmeticError>` specifically, making catch clauses self-documenting and avoiding substring matching on message text.
 
-9.0.1.4 **Future internationalization** — Because `GetMessage()` is a method on the struct, it can be overridden or replaced with a locale-aware implementation in the future without changing throw sites. All the data needed to produce a translated message is already captured in the struct's properties. (Internationalization is not yet implemented.)
+10.0.1.4 **Future internationalization** — Because `GetMessage()` is a method on the struct, it can be overridden or replaced with a locale-aware implementation in the future without changing throw sites. All the data needed to produce a translated message is already captured in the struct's properties. (Internationalization is not yet implemented.)
 
-### 9.1 Exception Hierarchy
-9.1.1 Two exception types are defined in `Hl7.Cql.Abstractions` (assembly `Hl7.Cql.Abstractions`) for errors raised during CQL evaluation:
+### 10.1 Exception Hierarchy
+10.1.1 Two exception types are defined in `Hl7.Cql.Abstractions` (assembly `Hl7.Cql.Abstractions`) for errors raised during CQL evaluation:
 
 - **`CqlException`** (`Hl7.Cql.Exceptions`) — public abstract base exception; message is derived from an `ICqlError` payload
 - **`CqlException<TError>`** (`Hl7.Cql.Exceptions`) — generic concrete exception wrapping a strongly-typed `ICqlError` struct payload
 
-9.1.2 To define a new CQL evaluation error, create a `public readonly record struct` implementing `ICqlError`.
+10.1.2 To define a new CQL evaluation error, create a `public readonly record struct` implementing `ICqlError`.
 **IMPORTANT**: The struct must accept the **metadata** (raw facts like a unit name or value) as constructor parameters, NOT a pre-built message string. `GetMessage()` is responsible for constructing the human-readable message from that metadata:
 
 ```csharp
@@ -461,23 +495,23 @@ throw new CqlArithmeticError("a", "year").ToException();
 catch (CqlException<CqlArithmeticError> e) { ... }
 ```
 
-### 9.2 When to Use CqlException
-9.2.1 **ALWAYS** create a specific `ICqlError` struct and throw it as `CqlException<TError>` for any exception that should be raised during the evaluation of a CQL expression, instead of using general .NET exceptions like `InvalidOperationException` or `ArgumentException`.
+### 10.2 When to Use CqlException
+10.2.1 **ALWAYS** create a specific `ICqlError` struct and throw it as `CqlException<TError>` for any exception that should be raised during the evaluation of a CQL expression, instead of using general .NET exceptions like `InvalidOperationException` or `ArgumentException`.
 
-9.2.2 Examples of when to use `CqlException<TError>`:
+10.2.2 Examples of when to use `CqlException<TError>`:
    - Spec-mandated errors during date/time arithmetic (e.g. `CqlUcumYearArithmeticError`, `CqlUcumMonthArithmeticError`)
    - Type mismatch errors at evaluation time
    - Division by zero or other arithmetic failures
    - Any error the CQL spec says "signals an error to the calling environment"
 
-9.2.3 General .NET exceptions (`ArgumentException`, `InvalidOperationException`) are still appropriate for programming errors (e.g. invalid method arguments), as opposed to errors arising from evaluating CQL expressions at runtime.
+10.2.3 General .NET exceptions (`ArgumentException`, `InvalidOperationException`) are still appropriate for programming errors (e.g. invalid method arguments), as opposed to errors arising from evaluating CQL expressions at runtime.
 
-### 9.3 Key Points
-9.3.1 Exception infrastructure (`ICqlError`, `ICqlArithmeticError`, `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`) lives in `Cql/Cql.Abstractions/Exceptions/`, namespace `Hl7.Cql.Exceptions`.
+### 10.3 Key Points
+10.3.1 Exception infrastructure (`ICqlError`, `ICqlArithmeticError`, `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`) lives in `Cql/Cql.Abstractions/Exceptions/`, namespace `Hl7.Cql.Exceptions`.
 
-9.3.2 **`Cql.Abstractions` is a special project**: it uses one `Errors.cs` file **per direct folder**, containing all `ICqlError` structs used within that folder's code. The namespace of each `Errors.cs` matches the folder's namespace:
+10.3.2 **`Cql.Abstractions` is a special project**: it uses one `Errors.cs` file **per direct folder**, containing all `ICqlError` structs used within that folder's code. The namespace of each `Errors.cs` matches the folder's namespace:
    - `Cql.Abstractions/Exceptions/Errors.cs` → `namespace Hl7.Cql.Exceptions` (internal infrastructure errors)
    - `Cql.Abstractions/Primitives/Errors.cs` → `namespace Hl7.Cql.Primitives` (errors thrown by primitive types like `CqlDate`, `CqlDateTime`)
    - Add a new `FolderName/Errors.cs` when adding errors used by types in a new folder
 
-9.3.3 New `ICqlError` structs should be placed in the `Errors.cs` of the folder that contains the throw site, and registered in `Cql/Cql.Abstractions/PublicAPI.Unshipped.txt`.
+10.3.3 New `ICqlError` structs should be placed in the `Errors.cs` of the folder that contains the throw site, and registered in `Cql/Cql.Abstractions/PublicAPI.Unshipped.txt`.

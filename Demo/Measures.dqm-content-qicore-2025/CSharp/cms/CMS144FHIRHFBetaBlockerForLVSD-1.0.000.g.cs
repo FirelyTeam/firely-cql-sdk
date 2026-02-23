@@ -240,7 +240,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 DataType o_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
                 object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                 CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.toInterval(context, p_);
-                bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, default);
+                bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, (string)default);
                 Code<ObservationStatus> s_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.StatusElement;
                 ObservationStatus? t_ = s_?.Value;
                 string u_ = context.Operators.Convert<string>(t_);
@@ -264,13 +264,13 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                     DataType aq_ = MostRecentPriorHeartRate?.Effective;
                     object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
                     CqlInterval<CqlDateTime> as_ = QICoreCommon_4_0_000.Instance.toInterval(context, ar_);
-                    bool? at_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, as_, default);
+                    bool? at_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, as_, (string)default);
                     object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
                     CqlInterval<CqlDateTime> aw_ = QICoreCommon_4_0_000.Instance.toInterval(context, av_);
                     DataType ax_ = tuple_fufpmqdratbglhghdwfuubanf?.HeartRate?.Effective;
                     object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
                     CqlInterval<CqlDateTime> az_ = QICoreCommon_4_0_000.Instance.toInterval(context, ay_);
-                    bool? ba_ = context.Operators.Before(aw_, az_, default);
+                    bool? ba_ = context.Operators.Before(aw_, az_, (string)default);
                     bool? bb_ = context.Operators.And(at_, ba_);
                     return bb_;
                 }
@@ -634,7 +634,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                     Period p_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
                     CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
                     CqlDateTime r_ = context.Operators.End(q_);
-                    bool? s_ = context.Operators.Before(o_, r_, default);
+                    bool? s_ = context.Operators.Before(o_, r_, (string)default);
                     return s_;
                 }
 

@@ -403,7 +403,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                     CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                     CqlDateTime q_ = context.Operators.End(l_);
                     CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, false);
-                    bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, default);
+                    bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, (string)default);
                     return s_;
                 }
 
@@ -457,7 +457,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                     FhirDateTime m_ = PriorTPA?.RecordedDateElement;
                     CqlDateTime n_ = context.Operators.Convert<CqlDateTime>(m_);
                     CqlInterval<CqlDateTime> o_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, IschemicStrokeEncounter);
-                    bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, default);
+                    bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, (string)default);
                     CodeableConcept q_ = PriorTPA?.VerificationStatus;
                     CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                     bool? s_ = context.Operators.Not((bool?)(r_ is null));

@@ -633,7 +633,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                     CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_());
                     CqlDateTime w_ = context.Operators.Start(v_);
                     CqlInterval<CqlDateTime> x_ = context.Operators.Interval(t_, w_, true, true);
-                    bool? y_ = context.Operators.In<CqlDateTime>(o_, x_, default);
+                    bool? y_ = context.Operators.In<CqlDateTime>(o_, x_, (string)default);
 
                     object z_() {
 

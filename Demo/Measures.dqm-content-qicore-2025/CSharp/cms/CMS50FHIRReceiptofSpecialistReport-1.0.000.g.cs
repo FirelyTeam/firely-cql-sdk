@@ -397,7 +397,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
                     CqlDateTime t_ = context.Operators.End(s_);
                     FhirDateTime u_ = FirstReferral?.AuthoredOnElement;
                     CqlDateTime v_ = context.Operators.Convert<CqlDateTime>(u_);
-                    bool? w_ = context.Operators.After(t_, v_, default);
+                    bool? w_ = context.Operators.After(t_, v_, (string)default);
                     bool? x_ = context.Operators.And(q_, w_);
                     CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                     CqlDateTime aa_ = context.Operators.End(z_);

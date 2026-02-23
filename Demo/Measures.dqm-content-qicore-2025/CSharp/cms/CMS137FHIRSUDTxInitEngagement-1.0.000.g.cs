@@ -153,11 +153,11 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
                     Period u_ = ValidEncounters?.Period;
                     CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-                    bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, default);
+                    bool? w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, (string)default);
                     CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, SUDDiagnosis);
                     CqlDateTime y_ = context.Operators.Start(x_);
                     CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-                    bool? ab_ = context.Operators.In<CqlDateTime>(y_, aa_, default);
+                    bool? ab_ = context.Operators.In<CqlDateTime>(y_, aa_, (string)default);
                     bool? ac_ = context.Operators.And(w_, ab_);
                     CqlDateTime ae_ = context.Operators.Start(x_);
                     CqlDateTime ag_ = context.Operators.End(t_);
@@ -762,7 +762,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlQuantity ad_ = context.Operators.Quantity(14m, "days");
                     CqlDate ae_ = context.Operators.Add(ac_, ad_);
                     CqlInterval<CqlDate> af_ = context.Operators.Interval(y_, ae_, true, false);
-                    bool? ag_ = context.Operators.In<CqlDate>(u_, af_, default);
+                    bool? ag_ = context.Operators.In<CqlDate>(u_, af_, (string)default);
                     object ah_ = context.Operators.LateBoundProperty<object>(PsychosocialVisitProcedure, "id");
                     string ai_ = context.Operators.LateBoundProperty<string>(ah_, "value");
                     Id aj_ = FirstSUDEpisode?.IdElement;
@@ -875,7 +875,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlQuantity dg_ = context.Operators.Quantity(14m, "days");
                     CqlDate dh_ = context.Operators.Add(df_, dg_);
                     CqlInterval<CqlDate> di_ = context.Operators.Interval(db_, dh_, true, false);
-                    bool? dj_ = context.Operators.In<CqlDate>(cx_, di_, default);
+                    bool? dj_ = context.Operators.In<CqlDate>(cx_, di_, (string)default);
                     object dk_ = context.Operators.LateBoundProperty<object>(PsychosocialVisitEncounter, "id");
                     string dl_ = context.Operators.LateBoundProperty<string>(dk_, "value");
                     Id dm_ = FirstSUDEpisode?.IdElement;
@@ -993,7 +993,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlQuantity ca_ = context.Operators.Quantity(14m, "days");
                     CqlDate cb_ = context.Operators.Add(bz_, ca_);
                     CqlInterval<CqlDate> cc_ = context.Operators.Interval(bv_, cb_, true, false);
-                    bool? cd_ = context.Operators.In<CqlDate>(br_, cc_, default);
+                    bool? cd_ = context.Operators.In<CqlDate>(br_, cc_, (string)default);
                     return cd_;
                 }
 
@@ -1106,7 +1106,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlQuantity db_ = context.Operators.Quantity(14m, "days");
                     CqlDate dc_ = context.Operators.Add(da_, db_);
                     CqlInterval<CqlDate> dd_ = context.Operators.Interval(cw_, dc_, true, false);
-                    bool? de_ = context.Operators.In<CqlDate>(cs_, dd_, default);
+                    bool? de_ = context.Operators.In<CqlDate>(cs_, dd_, (string)default);
                     return de_;
                 }
 
@@ -1296,7 +1296,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlQuantity ak_ = context.Operators.Quantity(34m, "days");
                     CqlDate al_ = context.Operators.Add(InitiationTreatmentDate, ak_);
                     CqlInterval<CqlDate> am_ = context.Operators.Interval(InitiationTreatmentDate, al_, false, true);
-                    bool? an_ = context.Operators.In<CqlDate>(aj_, am_, default);
+                    bool? an_ = context.Operators.In<CqlDate>(aj_, am_, (string)default);
                     bool? ao_ = context.Operators.Not((bool?)(InitiationTreatmentDate is null));
                     bool? ap_ = context.Operators.And(an_, ao_);
                     object aq_ = context.Operators.LateBoundProperty<object>(ShortActingTreatment, "period");
@@ -1305,7 +1305,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlDate at_ = context.Operators.DateFrom(as_);
                     CqlDate av_ = context.Operators.Add(InitiationTreatmentDate, ak_);
                     CqlInterval<CqlDate> aw_ = context.Operators.Interval(InitiationTreatmentDate, av_, false, true);
-                    bool? ax_ = context.Operators.In<CqlDate>(at_, aw_, default);
+                    bool? ax_ = context.Operators.In<CqlDate>(at_, aw_, (string)default);
                     bool? az_ = context.Operators.And(ax_, ao_);
                     bool? ba_ = context.Operators.Or(ap_, az_);
                     return ba_;
@@ -1369,7 +1369,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlQuantity dc_ = context.Operators.Quantity(34m, "days");
                     CqlDate dd_ = context.Operators.Add(InitiationTreatmentDate, dc_);
                     CqlInterval<CqlDate> de_ = context.Operators.Interval(InitiationTreatmentDate, dd_, false, true);
-                    bool? df_ = context.Operators.In<CqlDate>(db_, de_, default);
+                    bool? df_ = context.Operators.In<CqlDate>(db_, de_, (string)default);
                     bool? dg_ = context.Operators.Not((bool?)(InitiationTreatmentDate is null));
                     bool? dh_ = context.Operators.And(df_, dg_);
                     return dh_;
@@ -1443,7 +1443,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlQuantity at_ = context.Operators.Quantity(34m, "days");
                     CqlDate au_ = context.Operators.Add(InitiationTreatmentDate, at_);
                     CqlInterval<CqlDate> av_ = context.Operators.Interval(InitiationTreatmentDate, au_, false, true);
-                    bool? aw_ = context.Operators.In<CqlDate>(as_, av_, default);
+                    bool? aw_ = context.Operators.In<CqlDate>(as_, av_, (string)default);
                     bool? ax_ = context.Operators.Not((bool?)(InitiationTreatmentDate is null));
                     bool? ay_ = context.Operators.And(aw_, ax_);
                     return ay_;
@@ -1540,7 +1540,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                     CqlQuantity bm_ = context.Operators.Quantity(34m, "days");
                     CqlDate bn_ = context.Operators.Add(InitiationTreatmentDate, bm_);
                     CqlInterval<CqlDate> bo_ = context.Operators.Interval(InitiationTreatmentDate, bn_, false, true);
-                    bool? bp_ = context.Operators.In<CqlDate>(bl_, bo_, default);
+                    bool? bp_ = context.Operators.In<CqlDate>(bl_, bo_, (string)default);
                     bool? bq_ = context.Operators.Not((bool?)(InitiationTreatmentDate is null));
                     bool? br_ = context.Operators.And(bp_, bq_);
                     return br_;
@@ -1613,7 +1613,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(13, 17, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             return j_;
         });
 
@@ -1630,7 +1630,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(18, 64, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             return j_;
         });
 

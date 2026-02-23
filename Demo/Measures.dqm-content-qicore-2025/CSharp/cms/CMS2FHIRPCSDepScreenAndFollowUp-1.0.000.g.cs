@@ -249,7 +249,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(12, 16, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             return j_;
         });
 
@@ -593,7 +593,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> an_ = QICoreCommon_4_0_000.Instance.toInterval(context, am_());
                 CqlDateTime ao_ = context.Operators.Start(an_);
                 CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-                bool? ar_ = context.Operators.In<CqlDateTime>(ao_, aq_, default);
+                bool? ar_ = context.Operators.In<CqlDateTime>(ao_, aq_, (string)default);
                 object as_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "authoredOn");
                 CqlDateTime at_ = context.Operators.LateBoundProperty<CqlDateTime>(as_, "value");
                 CqlInterval<CqlDateTime> av_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
@@ -1051,7 +1051,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 CqlInterval<CqlDateTime> an_ = QICoreCommon_4_0_000.Instance.toInterval(context, am_());
                 CqlDateTime ao_ = context.Operators.Start(an_);
                 CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-                bool? ar_ = context.Operators.In<CqlDateTime>(ao_, aq_, default);
+                bool? ar_ = context.Operators.In<CqlDateTime>(ao_, aq_, (string)default);
                 object as_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "authoredOn");
                 CqlDateTime at_ = context.Operators.LateBoundProperty<CqlDateTime>(as_, "value");
                 CqlInterval<CqlDateTime> av_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);

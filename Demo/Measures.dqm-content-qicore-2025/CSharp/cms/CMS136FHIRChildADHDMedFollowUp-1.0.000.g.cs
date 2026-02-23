@@ -474,7 +474,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 CqlDate jq_ = context.Operators.Start(jp_);
                 CqlDateTime jr_ = context.Operators.ConvertDateToDateTime(jq_);
                 CqlInterval<CqlDateTime> js_ = this.Intake_Period(context);
-                bool? jt_ = context.Operators.In<CqlDateTime>(jr_, js_, default);
+                bool? jt_ = context.Operators.In<CqlDateTime>(jr_, js_, (string)default);
                 return jt_;
             }
 
@@ -739,7 +739,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 CqlDate pb_ = context.Operators.Start(pa_);
                 CqlDateTime pc_ = context.Operators.ConvertDateToDateTime(pb_);
                 CqlInterval<CqlDateTime> pd_ = this.Intake_Period(context);
-                bool? pe_ = context.Operators.In<CqlDateTime>(pc_, pd_, default);
+                bool? pe_ = context.Operators.In<CqlDateTime>(pc_, pd_, (string)default);
                 return pe_;
             }
 
@@ -1023,7 +1023,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     CqlDateTime xk_ = context.Operators.ConvertDateToDateTime(xj_);
                     CqlDate xl_ = context.Operators.DateFrom(xk_);
                     CqlInterval<CqlDate> xm_ = context.Operators.Interval(xh_, xl_, true, false);
-                    bool? xn_ = context.Operators.Overlaps(xb_, xm_, default);
+                    bool? xn_ = context.Operators.Overlaps(xb_, xm_, (string)default);
                     return xn_;
                 }
 
@@ -1219,7 +1219,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 CqlDateTime j_ = context.Operators.Start(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.End(k_);
-                bool? m_ = context.Operators.SameOrBefore(j_, l_, default);
+                bool? m_ = context.Operators.SameOrBefore(j_, l_, (string)default);
                 return m_;
             }
 

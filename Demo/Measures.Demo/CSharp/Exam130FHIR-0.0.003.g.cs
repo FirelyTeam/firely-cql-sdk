@@ -167,8 +167,8 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-3168609378634258819L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, default);
-            CqlDateTime b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, (decimal?)default);
+            CqlDateTime b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, (decimal?)default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("Exam130FHIR-0.0.003", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
@@ -236,7 +236,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 Period l_ = TelehealthEncounter?.Period;
                 CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, l_ as object);
-                bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
+                bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, (string)default);
                 bool? o_ = context.Operators.And(j_, n_);
                 return o_;
             }
@@ -273,7 +273,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(51, 75, true, false);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
             IEnumerable<Encounter> l_ = this.Telehealth_Services(context);
             IEnumerable<Encounter> m_ = context.Operators.Union<Encounter>(k_, l_);
@@ -302,7 +302,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime f_ = context.Operators.Start(e_);
                 CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
                 CqlDateTime h_ = context.Operators.End(g_);
-                bool? i_ = context.Operators.SameOrBefore(f_, h_, default);
+                bool? i_ = context.Operators.SameOrBefore(f_, h_, (string)default);
                 return i_;
             }
 
@@ -326,7 +326,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime j_ = context.Operators.End(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.End(k_);
-                bool? m_ = context.Operators.SameOrBefore(j_, l_, default);
+                bool? m_ = context.Operators.SameOrBefore(j_, l_, (string)default);
                 bool? n_ = context.Operators.And(g_, m_);
                 return n_;
             }
@@ -347,7 +347,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime f_ = context.Operators.Start(e_);
                 CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
                 CqlDateTime h_ = context.Operators.End(g_);
-                bool? i_ = context.Operators.SameOrBefore(f_, h_, default);
+                bool? i_ = context.Operators.SameOrBefore(f_, h_, (string)default);
                 return i_;
             }
 
@@ -404,7 +404,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime m_ = context.Operators.Subtract(k_, l_);
                 CqlDateTime o_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, false, false);
-                bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, default);
+                bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, (string)default);
                 return q_;
             }
 
@@ -553,7 +553,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 DataType q_ = FecalOccult?.Effective;
                 CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
                 CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-                bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, default);
+                bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, (string)default);
                 bool? u_ = context.Operators.And(p_, t_);
                 return u_;
             }
@@ -752,7 +752,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime m_ = context.Operators.Subtract(k_, l_);
                 CqlDateTime o_ = context.Operators.End(j_);
                 CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
-                bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, default);
+                bool? q_ = context.Operators.In<CqlDateTime>(i_, p_, (string)default);
                 CqlDateTime s_ = context.Operators.End(j_);
                 bool? t_ = context.Operators.Not((bool?)(s_ is null));
                 bool? u_ = context.Operators.And(q_, t_);
@@ -909,7 +909,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime v_ = context.Operators.Subtract(t_, u_);
                 CqlDateTime x_ = context.Operators.End(s_);
                 CqlInterval<CqlDateTime> y_ = context.Operators.Interval(v_, x_, true, true);
-                bool? z_ = context.Operators.In<CqlDateTime>(r_, y_, default);
+                bool? z_ = context.Operators.In<CqlDateTime>(r_, y_, (string)default);
                 CqlDateTime ab_ = context.Operators.End(s_);
                 bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
                 bool? ad_ = context.Operators.And(z_, ac_);
@@ -1136,7 +1136,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime p_ = context.Operators.End(k_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
-                bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
+                bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, (string)default);
                 CqlDateTime t_ = context.Operators.End(k_);
                 bool? u_ = context.Operators.Not((bool?)(t_ is null));
                 bool? v_ = context.Operators.And(r_, u_);
@@ -1182,7 +1182,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlDateTime q_ = context.Operators.End(l_);
                 CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
-                bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, default);
+                bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, (string)default);
                 CqlDateTime u_ = context.Operators.End(l_);
                 bool? v_ = context.Operators.Not((bool?)(u_ is null));
                 bool? w_ = context.Operators.And(s_, v_);
@@ -1221,7 +1221,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlDateTime r_ = context.Operators.End(m_);
                 CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, (string)default);
                 CqlDateTime v_ = context.Operators.End(m_);
                 bool? w_ = context.Operators.Not((bool?)(v_ is null));
                 bool? x_ = context.Operators.And(t_, w_);
@@ -1250,7 +1250,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime p_ = context.Operators.End(k_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
-                bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
+                bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, (string)default);
                 CqlDateTime t_ = context.Operators.End(k_);
                 bool? u_ = context.Operators.Not((bool?)(t_ is null));
                 bool? v_ = context.Operators.And(r_, u_);
@@ -1290,7 +1290,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime p_ = context.Operators.End(k_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
-                bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
+                bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, (string)default);
                 CqlDateTime t_ = context.Operators.End(k_);
                 bool? u_ = context.Operators.Not((bool?)(t_ is null));
                 bool? v_ = context.Operators.And(r_, u_);
@@ -1323,7 +1323,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlDateTime q_ = context.Operators.End(l_);
                 CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
-                bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, default);
+                bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, (string)default);
                 CqlDateTime u_ = context.Operators.End(l_);
                 bool? v_ = context.Operators.Not((bool?)(u_ is null));
                 bool? w_ = context.Operators.And(s_, v_);
@@ -1352,7 +1352,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime p_ = context.Operators.End(k_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
-                bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
+                bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, (string)default);
                 CqlDateTime t_ = context.Operators.End(k_);
                 bool? u_ = context.Operators.Not((bool?)(t_ is null));
                 bool? v_ = context.Operators.And(r_, u_);
@@ -1392,7 +1392,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime n_ = context.Operators.Subtract(l_, m_);
                 CqlDateTime p_ = context.Operators.End(k_);
                 CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
-                bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, default);
+                bool? r_ = context.Operators.In<CqlDateTime>(j_, q_, (string)default);
                 CqlDateTime t_ = context.Operators.End(k_);
                 bool? u_ = context.Operators.Not((bool?)(t_ is null));
                 bool? v_ = context.Operators.And(r_, u_);
@@ -1425,7 +1425,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
                 CqlDateTime o_ = context.Operators.Subtract(m_, n_);
                 CqlDateTime q_ = context.Operators.End(l_);
                 CqlInterval<CqlDateTime> r_ = context.Operators.Interval(o_, q_, true, true);
-                bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, default);
+                bool? s_ = context.Operators.In<CqlDateTime>(k_, r_, (string)default);
                 CqlDateTime u_ = context.Operators.End(l_);
                 bool? v_ = context.Operators.Not((bool?)(u_ is null));
                 bool? w_ = context.Operators.And(s_, v_);

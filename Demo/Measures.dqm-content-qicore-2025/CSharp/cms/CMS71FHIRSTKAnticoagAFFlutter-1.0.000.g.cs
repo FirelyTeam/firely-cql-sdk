@@ -181,7 +181,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     Period ab_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ab_);
                     CqlDateTime ad_ = context.Operators.Start(ac_);
-                    bool? ae_ = context.Operators.Before(aa_, ad_, default);
+                    bool? ae_ = context.Operators.Before(aa_, ad_, (string)default);
                     bool? af_ = context.Operators.And(x_, ae_);
                     return af_;
                 }
@@ -219,7 +219,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     Period ce_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> cf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ce_);
                     CqlDateTime cg_ = context.Operators.Start(cf_);
-                    bool? ch_ = context.Operators.Before(cd_, cg_, default);
+                    bool? ch_ = context.Operators.Before(cd_, cg_, (string)default);
                     bool? ci_ = context.Operators.And(bz_, ch_);
                     bool? cj_ = context.Operators.Implies(bm_, ci_);
                     return cj_;
@@ -302,7 +302,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     Period cx_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cx_);
                     CqlDateTime cz_ = context.Operators.End(cy_);
-                    bool? da_ = context.Operators.SameOrBefore(cw_, cz_, default);
+                    bool? da_ = context.Operators.SameOrBefore(cw_, cz_, (string)default);
                     bool? db_ = context.Operators.And(cu_, da_);
                     return db_;
                 }
@@ -341,7 +341,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     Period eu_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> ev_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, eu_);
                     CqlDateTime ew_ = context.Operators.Start(ev_);
-                    bool? ex_ = context.Operators.Before(et_, ew_, default);
+                    bool? ex_ = context.Operators.Before(et_, ew_, (string)default);
                     bool? ey_ = context.Operators.And(ep_, ex_);
                     bool? ez_ = context.Operators.Implies(ec_, ey_);
                     return ez_;
@@ -391,7 +391,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     Period ah_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ah_);
                     CqlDateTime aj_ = context.Operators.End(ai_);
-                    bool? ak_ = context.Operators.SameOrBefore(ag_, aj_, default);
+                    bool? ak_ = context.Operators.SameOrBefore(ag_, aj_, (string)default);
                     bool? al_ = context.Operators.And(ac_, ak_);
                     bool? am_ = context.Operators.Implies(p_, al_);
                     return am_;
@@ -515,7 +515,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     object l_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
                     CqlDateTime m_ = context.Operators.LateBoundProperty<CqlDateTime>(l_, "value");
                     CqlInterval<CqlDateTime> n_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, Encounter);
-                    bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, default);
+                    bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, (string)default);
                     return o_;
                 }
 
@@ -641,7 +641,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     CqlDateTime as_ = context.Operators.Convert<CqlDateTime>(ar_);
                     Period at_ = Encounter?.Period;
                     CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, at_);
-                    bool? av_ = context.Operators.In<CqlDateTime>(as_, au_, default);
+                    bool? av_ = context.Operators.In<CqlDateTime>(as_, au_, (string)default);
                     bool? aw_ = context.Operators.And(aq_, av_);
                     IEnumerable<Task> ax_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
@@ -820,7 +820,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     CqlDateTime j_ = context.Operators.LateBoundProperty<CqlDateTime>(i_, "value");
                     Period k_ = Encounter?.Period;
                     CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, default);
+                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
                     return m_;
                 }
 

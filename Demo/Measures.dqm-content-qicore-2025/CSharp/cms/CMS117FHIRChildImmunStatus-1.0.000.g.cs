@@ -802,14 +802,14 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDate r_ = context.Operators.DateFrom(q_);
                 CqlQuantity s_ = context.Operators.Quantity(1m, "day");
                 CqlDate t_ = context.Operators.Add(r_, s_);
-                bool? u_ = context.Operators.SameOrAfter(o_, t_, default);
+                bool? u_ = context.Operators.SameOrAfter(o_, t_, (string)default);
                 CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_cnghazroxajthpiccbiajbrxv?.PolioVaccination3 as CqlDate);
                 CqlDateTime w_ = QICoreCommon_4_0_000.Instance.earliest(context, v_);
                 CqlDate x_ = context.Operators.DateFrom(w_);
                 CqlDateTime z_ = QICoreCommon_4_0_000.Instance.earliest(context, m_);
                 CqlDate aa_ = context.Operators.DateFrom(z_);
                 CqlDate ac_ = context.Operators.Add(aa_, s_);
-                bool? ad_ = context.Operators.SameOrAfter(x_, ac_, default);
+                bool? ad_ = context.Operators.SameOrAfter(x_, ac_, (string)default);
                 bool? ae_ = context.Operators.And(u_, ad_);
                 return ae_;
             }
@@ -892,7 +892,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime t_ = QICoreCommon_4_0_000.Instance.earliest(context, (s_ as CqlDateTime) as object);
                 CqlDate u_ = context.Operators.DateFrom(t_);
                 CqlInterval<CqlDate> v_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
-                bool? w_ = context.Operators.In<CqlDate>(u_, v_, default);
+                bool? w_ = context.Operators.In<CqlDate>(u_, v_, (string)default);
                 return w_;
             }
 
@@ -918,7 +918,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime ad_ = QICoreCommon_4_0_000.Instance.earliest(context, ac_ as object);
                 CqlDate ae_ = context.Operators.DateFrom(ad_);
                 CqlInterval<CqlDate> af_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
-                bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, default);
+                bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, (string)default);
                 return ag_;
             }
 
@@ -1323,14 +1323,14 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDate r_ = context.Operators.DateFrom(q_);
                 CqlQuantity s_ = context.Operators.Quantity(1m, "day");
                 CqlDate t_ = context.Operators.Add(r_, s_);
-                bool? u_ = context.Operators.SameOrAfter(o_, t_, default);
+                bool? u_ = context.Operators.SameOrAfter(o_, t_, (string)default);
                 CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_eztgahauwggsdgadcgqnnipgw?.HepatitisBVaccination3 as CqlDate);
                 CqlDateTime w_ = QICoreCommon_4_0_000.Instance.earliest(context, v_);
                 CqlDate x_ = context.Operators.DateFrom(w_);
                 CqlDateTime z_ = QICoreCommon_4_0_000.Instance.earliest(context, m_);
                 CqlDate aa_ = context.Operators.DateFrom(z_);
                 CqlDate ac_ = context.Operators.Add(aa_, s_);
-                bool? ad_ = context.Operators.SameOrAfter(x_, ac_, default);
+                bool? ad_ = context.Operators.SameOrAfter(x_, ac_, (string)default);
                 bool? ae_ = context.Operators.And(u_, ad_);
                 return ae_;
             }
@@ -1420,21 +1420,21 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDate r_ = context.Operators.DateFrom(q_);
                 CqlQuantity s_ = context.Operators.Quantity(1m, "day");
                 CqlDate t_ = context.Operators.Add(r_, s_);
-                bool? u_ = context.Operators.SameOrAfter(o_, t_, default);
+                bool? u_ = context.Operators.SameOrAfter(o_, t_, (string)default);
                 CqlDateTime w_ = QICoreCommon_4_0_000.Instance.earliest(context, p_);
                 CqlDate x_ = context.Operators.DateFrom(w_);
                 CqlDateTime y_ = context.Operators.ConvertDateToDateTime(tuple_hdfambzgbwdpfetgqnfbceeeg?.NewBornVaccine3 as CqlDate);
                 CqlDateTime z_ = QICoreCommon_4_0_000.Instance.earliest(context, y_);
                 CqlDate aa_ = context.Operators.DateFrom(z_);
                 CqlDate ac_ = context.Operators.Add(aa_, s_);
-                bool? ad_ = context.Operators.SameOrAfter(x_, ac_, default);
+                bool? ad_ = context.Operators.SameOrAfter(x_, ac_, (string)default);
                 bool? ae_ = context.Operators.And(u_, ad_);
                 CqlDateTime ag_ = QICoreCommon_4_0_000.Instance.earliest(context, m_);
                 CqlDate ah_ = context.Operators.DateFrom(ag_);
                 CqlDateTime aj_ = QICoreCommon_4_0_000.Instance.earliest(context, y_);
                 CqlDate ak_ = context.Operators.DateFrom(aj_);
                 CqlDate am_ = context.Operators.Add(ak_, s_);
-                bool? an_ = context.Operators.SameOrAfter(ah_, am_, default);
+                bool? an_ = context.Operators.SameOrAfter(ah_, am_, (string)default);
                 bool? ao_ = context.Operators.And(ae_, an_);
                 return ao_;
             }
@@ -1497,7 +1497,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime t_ = QICoreCommon_4_0_000.Instance.earliest(context, (s_ as CqlDateTime) as object);
                 CqlDate u_ = context.Operators.DateFrom(t_);
                 CqlInterval<CqlDate> v_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
-                bool? w_ = context.Operators.In<CqlDate>(u_, v_, default);
+                bool? w_ = context.Operators.In<CqlDate>(u_, v_, (string)default);
                 return w_;
             }
 
@@ -1523,7 +1523,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime ad_ = QICoreCommon_4_0_000.Instance.earliest(context, ac_ as object);
                 CqlDate ae_ = context.Operators.DateFrom(ad_);
                 CqlInterval<CqlDate> af_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
-                bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, default);
+                bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, (string)default);
                 return ag_;
             }
 
@@ -1656,14 +1656,14 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDate s_ = context.Operators.DateFrom(r_);
                 CqlQuantity t_ = context.Operators.Quantity(1m, "day");
                 CqlDate u_ = context.Operators.Add(s_, t_);
-                bool? v_ = context.Operators.SameOrAfter(p_, u_, default);
+                bool? v_ = context.Operators.SameOrAfter(p_, u_, (string)default);
                 CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination3 as CqlDate);
                 CqlDateTime x_ = QICoreCommon_4_0_000.Instance.earliest(context, w_);
                 CqlDate y_ = context.Operators.DateFrom(x_);
                 CqlDateTime aa_ = QICoreCommon_4_0_000.Instance.earliest(context, n_);
                 CqlDate ab_ = context.Operators.DateFrom(aa_);
                 CqlDate ad_ = context.Operators.Add(ab_, t_);
-                bool? ae_ = context.Operators.SameOrAfter(y_, ad_, default);
+                bool? ae_ = context.Operators.SameOrAfter(y_, ad_, (string)default);
                 bool? af_ = context.Operators.And(v_, ae_);
                 CqlDateTime ag_ = context.Operators.ConvertDateToDateTime(tuple_ddpdeojhpyesfhgcocbnoippp?.PneumococcalVaccination4 as CqlDate);
                 CqlDateTime ah_ = QICoreCommon_4_0_000.Instance.earliest(context, ag_);
@@ -1671,7 +1671,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime ak_ = QICoreCommon_4_0_000.Instance.earliest(context, w_);
                 CqlDate al_ = context.Operators.DateFrom(ak_);
                 CqlDate an_ = context.Operators.Add(al_, t_);
-                bool? ao_ = context.Operators.SameOrAfter(ai_, an_, default);
+                bool? ao_ = context.Operators.SameOrAfter(ai_, an_, (string)default);
                 bool? ap_ = context.Operators.And(af_, ao_);
                 return ap_;
             }
@@ -1729,7 +1729,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime t_ = QICoreCommon_4_0_000.Instance.earliest(context, (s_ as CqlDateTime) as object);
                 CqlDate u_ = context.Operators.DateFrom(t_);
                 CqlInterval<CqlDate> v_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
-                bool? w_ = context.Operators.In<CqlDate>(u_, v_, default);
+                bool? w_ = context.Operators.In<CqlDate>(u_, v_, (string)default);
                 return w_;
             }
 
@@ -1755,7 +1755,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDateTime ad_ = QICoreCommon_4_0_000.Instance.earliest(context, ac_ as object);
                 CqlDate ae_ = context.Operators.DateFrom(ad_);
                 CqlInterval<CqlDate> af_ = this.Date_of_First_Birthday_to_Date_of_Second_Birthday(context);
-                bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, default);
+                bool? ag_ = context.Operators.In<CqlDate>(ae_, af_, (string)default);
                 return ag_;
             }
 
@@ -2112,7 +2112,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
                 CqlDate q_ = context.Operators.DateFrom(p_);
                 CqlQuantity r_ = context.Operators.Quantity(1m, "day");
                 CqlDate s_ = context.Operators.Add(q_, r_);
-                bool? t_ = context.Operators.SameOrAfter(n_, s_, default);
+                bool? t_ = context.Operators.SameOrAfter(n_, s_, (string)default);
                 return t_;
             }
 

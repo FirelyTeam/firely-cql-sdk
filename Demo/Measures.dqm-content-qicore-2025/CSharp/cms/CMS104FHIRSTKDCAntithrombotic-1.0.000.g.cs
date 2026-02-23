@@ -153,7 +153,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     CqlDateTime as_ = context.Operators.Convert<CqlDateTime>(ar_);
                     Period at_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, at_);
-                    bool? av_ = context.Operators.In<CqlDateTime>(as_, au_, default);
+                    bool? av_ = context.Operators.In<CqlDateTime>(as_, au_, (string)default);
                     bool? aw_ = context.Operators.And(aq_, av_);
                     IEnumerable<Task> ax_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
@@ -332,7 +332,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     CqlDateTime j_ = context.Operators.LateBoundProperty<CqlDateTime>(i_, "value");
                     Period k_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, default);
+                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
                     return m_;
                 }
 
@@ -426,7 +426,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     CqlDateTime j_ = context.Operators.Convert<CqlDateTime>(i_);
                     Period k_ = IschemicStrokeEncounter?.Period;
                     CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, default);
+                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
                     return m_;
                 }
 

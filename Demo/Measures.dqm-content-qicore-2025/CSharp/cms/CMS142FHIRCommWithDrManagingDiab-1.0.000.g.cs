@@ -292,7 +292,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                     DataType n_ = MacularExam?.Effective;
                     object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
                     CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
-                    bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, default);
+                    bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, (string)default);
                     return q_;
                 }
 
@@ -352,7 +352,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                     Period n_ = EncounterDiabeticRetinopathy?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.Start(o_);
-                    bool? q_ = context.Operators.After(m_, p_, default);
+                    bool? q_ = context.Operators.After(m_, p_, (string)default);
                     CqlDateTime s_ = context.Operators.Convert<CqlDateTime>(l_);
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
                     bool? u_ = context.Operators.In<CqlDateTime>(s_, t_, "day");
@@ -396,7 +396,7 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                     Period n_ = EncounterDiabeticRetinopathy?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.Start(o_);
-                    bool? q_ = context.Operators.After(m_, p_, default);
+                    bool? q_ = context.Operators.After(m_, p_, (string)default);
                     CqlDateTime s_ = context.Operators.Convert<CqlDateTime>(l_);
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
                     bool? u_ = context.Operators.In<CqlDateTime>(s_, t_, "day");
@@ -440,10 +440,10 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                     Period n_ = EncounterDiabeticRetinopathy?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
                     CqlDateTime p_ = context.Operators.Start(o_);
-                    bool? q_ = context.Operators.After(m_, p_, default);
+                    bool? q_ = context.Operators.After(m_, p_, (string)default);
                     CqlDateTime s_ = context.Operators.Convert<CqlDateTime>(l_);
                     CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-                    bool? u_ = context.Operators.In<CqlDateTime>(s_, t_, default);
+                    bool? u_ = context.Operators.In<CqlDateTime>(s_, t_, (string)default);
                     bool? v_ = context.Operators.And(q_, u_);
                     return v_;
                 }

@@ -91,7 +91,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-4520572191774736726L, () => {
-            object a_ = context.ResolveParameter("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.0.015", "Measurement Period", null);
+            object a_ = context.ResolveParameter("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.0.015", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -154,7 +154,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
                 Period i_ = TelehealthEncounter?.Period;
                 CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_ as object);
-                bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, default);
+                bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(h_, j_, (string)default);
                 bool? l_ = context.Operators.And(g_, k_);
                 return l_;
             }
@@ -176,7 +176,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, false);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             IEnumerable<Encounter> k_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
             IEnumerable<Encounter> l_ = this.Telehealth_Services(context);
             IEnumerable<Encounter> m_ = context.Operators.Union<Encounter>(k_, l_);
@@ -188,7 +188,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
             bool? r_(Condition Diabetes) {
                 CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Diabetes);
                 CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-                bool? x_ = context.Operators.Overlaps(v_, w_, default);
+                bool? x_ = context.Operators.Overlaps(v_, w_, (string)default);
                 return x_;
             }
 
@@ -225,7 +225,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 DataType l_ = RecentHbA1c?.Effective;
                 CqlDateTime m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, l_);
                 CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-                bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, default);
+                bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, (string)default);
                 bool? p_ = context.Operators.And(k_, o_);
                 return p_;
             }
@@ -286,7 +286,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
                 DataType k_ = NoHbA1c?.Effective;
                 CqlDateTime l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, k_);
                 CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
-                bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, default);
+                bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, (string)default);
                 bool? o_ = context.Operators.And(j_, n_);
                 return o_;
             }

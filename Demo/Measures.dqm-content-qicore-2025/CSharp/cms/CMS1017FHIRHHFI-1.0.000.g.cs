@@ -298,7 +298,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     FhirDateTime l_ = FallsDocumentation?.RecordedDateElement;
                     CqlDateTime m_ = context.Operators.Convert<CqlDateTime>(l_);
                     CqlInterval<CqlDateTime> n_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
-                    bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, default);
+                    bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, (string)default);
                     return o_;
                 }
 
@@ -556,7 +556,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
                     CqlDateTime o_ = context.Operators.Start(n_);
                     CqlInterval<CqlDateTime> p_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
-                    bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, default);
+                    bool? q_ = context.Operators.In<CqlDateTime>(o_, p_, (string)default);
                     DataType r_ = BMI?.Value;
                     CqlQuantity s_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, r_ as Quantity);
                     bool? t_ = context.Operators.Not((bool?)(s_ is null));
@@ -941,7 +941,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     CqlInterval<CqlDateTime> ae_ = QICoreCommon_4_0_000.Instance.toInterval(context, ad_);
                     CqlDateTime af_ = context.Operators.Start(ae_);
                     CqlInterval<CqlDateTime> ag_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
-                    bool? ah_ = context.Operators.In<CqlDateTime>(af_, ag_, default);
+                    bool? ah_ = context.Operators.In<CqlDateTime>(af_, ag_, (string)default);
                     Code<MedicationAdministration.MedicationAdministrationStatusCodes> ai_ = Anticoagulants?.StatusElement;
                     MedicationAdministration.MedicationAdministrationStatusCodes? aj_ = ai_?.Value;
                     string ak_ = context.Operators.Convert<string>(aj_);
@@ -1801,7 +1801,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, e_);
             CqlDateTime g_ = context.Operators.End(f_);
             CqlInterval<CqlDateTime> h_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
-            bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, default);
+            bool? i_ = context.Operators.In<CqlDateTime>(g_, h_, (string)default);
             return i_;
         }
 

@@ -193,26 +193,50 @@ The `build-test-sign.yml` template creates a two-stage pipeline optimized for ef
 - Builds entire solution targeting both net8.0 and net10.0 (single build)
 - Conditionally signs assemblies using Azure Trusted Signing (`shouldSign` parameter)
 - Packages NuGet packages with proper version suffix
-- Publishes build artifacts (BuildOutput) for test jobs
+- Publishes two test artifacts (see below)
+
+#### Test Artifacts
+
+The build stage produces two separate artifacts for the test stage:
+
+**`TestPublishOutput`** (for CoreTests / CqlToElmTests):
+- Created via `dotnet publish --no-build` per framework, producing flat directories (`net8.0/`, `net10.0/`) with all DLLs and dependencies.
+- Test agents run `dotnet test` directly on the published `*Tests.dll` files — **no MSBuild or NuGet resolution needed at test time**. This avoids the risk of `dotnet test --no-build` on a `.csproj` silently producing no output when SDK targets can't resolve on the agent.
+
+**`BuildOutput`** (for IntegrationRunner):
+- Contains the `bin/` and `obj/` directories from the source tree, overlaid onto a fresh checkout on the test agent.
+- The IntegrationRunner cannot use flat published DLLs because its test code uses `FindParentDirectoryContaining("IntegrationRunner")` to walk up the directory tree at runtime and locate `CMS Resources/` (FHIR Library JSON files). This requires the original source tree layout to be present.
+
+#### Why Test Jobs Need `checkout: self`
+
+Several test projects locate test data by walking up the directory tree from the working directory to find the solution root:
+
+- **CoreTests**: `LibrarySetsDirs` calls `FindParentDirectoryContaining("*.sln")` to locate the solution directory, then accesses `LibrarySets/dqm-content-qicore-2025/Elm/` and `LibrarySets/Demo/` for ELM test data.
+- **IntegrationRunner**: `CqlLibraryFactoryFactory` calls `FindParentDirectoryContaining("IntegrationRunner")` to locate `CMS Resources/` containing ~80 FHIR Library JSON files.
+
+Because of this, all test jobs use `checkout: self` to ensure the source tree (including `LibrarySets/` and submodule directories) is present at runtime, even though the actual test binaries come from pre-built artifacts.
 
 **Test Stage** (three parallel jobs):
 
 **Job 1: TestNet8**
+- Checks out source tree (for `LibrarySets/` directory access)
 - Installs only .NET 8 SDK
-- Downloads BuildOutput artifact
-- Tests multi-target projects (CoreTests, CqlToElmTests) on .NET 8
+- Downloads `TestPublishOutput` artifact (published DLLs)
+- Runs `dotnet test` on `*Tests.dll` for .NET 8
 - Publishes test results as "Tests on .NET 8"
 
 **Job 2: TestNet10**
+- Checks out source tree (for `LibrarySets/` directory access)
 - Installs only .NET 10 SDK
-- Downloads BuildOutput artifact
-- Tests multi-target projects (CoreTests, CqlToElmTests) on .NET 10
+- Downloads `TestPublishOutput` artifact (published DLLs)
+- Runs `dotnet test` on `*Tests.dll` for .NET 10
 - Publishes test results as "Tests on .NET 10"
 
 **Job 3: IntegrationTests**
+- Checks out source tree **with submodules** (for `CMS Resources/` access)
 - Installs only .NET 10 SDK
-- Downloads BuildOutput artifact
-- Tests IntegrationRunner on .NET 10
+- Downloads `BuildOutput` artifact (bin/obj overlaid onto source tree)
+- Runs `dotnet test --no-build` on the `.csproj` for .NET 10
 - Publishes test results as "Integration Tests on .NET 10"
 
 **Job 4: CompareTestResults**

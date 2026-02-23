@@ -245,7 +245,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             }
             else if (b_())
             {
-                object o_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
+                object o_ = context.Operators.Message<object>((object)null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
                 return o_ as CqlQuantity;
             }
             else if (c_())
@@ -273,7 +273,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 string af_ = ae_?.Value;
                 string ag_ = context.Operators.Concatenate(ad_ ?? "", af_ ?? "");
                 string ah_ = context.Operators.Concatenate(ag_ ?? "", ")");
-                object ai_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ah_);
+                object ai_ = context.Operators.Message<object>((object)null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ah_);
                 return ai_ as CqlQuantity;
             };
         }
@@ -332,7 +332,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 string ab_ = aa_?.Value;
                 string ac_ = context.Operators.Concatenate(z_ ?? "", ab_ ?? "");
                 string ad_ = context.Operators.Concatenate(ac_ ?? "", ")");
-                object ae_ = context.Operators.Message<object>(null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ad_);
+                object ae_ = context.Operators.Message<object>((object)null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ad_);
                 return ae_ as CqlQuantity;
             };
         }

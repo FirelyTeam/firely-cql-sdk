@@ -170,7 +170,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                     CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
                     CqlDateTime l_ = context.Operators.Start(k_);
                     CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
-                    bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, default);
+                    bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, (string)default);
                     List<Encounter.LocationComponent> o_ = InpatientEncounter?.Location;
 
                     bool? p_(Encounter.LocationComponent EncounterLocation) {
@@ -192,7 +192,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                         CqlDateTime ae_ = context.Operators.Start(ad_);
                         Period af_ = EncounterLocation?.Period;
                         CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, af_);
-                        bool? ah_ = context.Operators.In<CqlDateTime>(ae_, ag_, default);
+                        bool? ah_ = context.Operators.In<CqlDateTime>(ae_, ag_, (string)default);
                         bool? ai_ = context.Operators.And(aa_, ah_);
                         return ai_;
                     }
@@ -317,7 +317,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                     CqlDateTime bs_ = context.Operators.Start(br_);
                     Period bt_ = EncounterLocation?.Period;
                     CqlInterval<CqlDateTime> bu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bt_);
-                    bool? bv_ = context.Operators.In<CqlDateTime>(bs_, bu_, default);
+                    bool? bv_ = context.Operators.In<CqlDateTime>(bs_, bu_, (string)default);
                     bool? bw_ = context.Operators.And(bo_, bv_);
                     return bw_;
                 }
@@ -330,12 +330,12 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 CqlInterval<CqlDateTime> t_ = QICoreCommon_4_0_000.Instance.toInterval(context, s_);
                 CqlDateTime u_ = context.Operators.Start(t_);
                 CqlInterval<CqlDateTime> v_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, tuple_htckrtcfdeaiwittzheehxihp?.InpatientHospitalization);
-                bool? w_ = context.Operators.In<CqlDateTime>(u_, v_, default);
+                bool? w_ = context.Operators.In<CqlDateTime>(u_, v_, (string)default);
                 DataType x_ = tuple_htckrtcfdeaiwittzheehxihp?.OpioidGiven?.Effective;
                 object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                 CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.toInterval(context, y_);
                 CqlDateTime aa_ = context.Operators.Start(z_);
-                bool? ac_ = context.Operators.In<CqlDateTime>(aa_, v_, default);
+                bool? ac_ = context.Operators.In<CqlDateTime>(aa_, v_, (string)default);
                 bool? ad_ = context.Operators.And(w_, ac_);
                 object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                 CqlInterval<CqlDateTime> ag_ = QICoreCommon_4_0_000.Instance.toInterval(context, af_);
@@ -349,7 +349,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 CqlInterval<CqlDateTime> aq_ = QICoreCommon_4_0_000.Instance.toInterval(context, ap_);
                 CqlDateTime ar_ = context.Operators.Start(aq_);
                 CqlInterval<CqlDateTime> as_ = context.Operators.Interval(an_, ar_, true, false);
-                bool? at_ = context.Operators.In<CqlDateTime>(ah_, as_, default);
+                bool? at_ = context.Operators.In<CqlDateTime>(ah_, as_, (string)default);
                 object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                 CqlInterval<CqlDateTime> aw_ = QICoreCommon_4_0_000.Instance.toInterval(context, av_);
                 CqlDateTime ax_ = context.Operators.Start(aw_);

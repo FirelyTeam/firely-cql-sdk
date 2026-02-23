@@ -166,7 +166,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 }
 
                 CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_());
-                bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
+                bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, (string)default);
                 Code<EventStatus> o_ = ChemoAdministration?.StatusElement;
                 EventStatus? p_ = o_?.Value;
                 string q_ = context.Operators.Convert<string>(p_);

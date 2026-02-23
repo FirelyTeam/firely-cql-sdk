@@ -276,7 +276,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                     };
                 }
 
-                bool? q_ = context.Operators.SameOrBefore(o_, p_(), default);
+                bool? q_ = context.Operators.SameOrBefore(o_, p_(), (string)default);
                 bool? r_ = context.Operators.And(l_, q_);
                 return r_;
             }
@@ -309,7 +309,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             bool? s_(object SexualActivityDiagnosis) {
                 CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, SexualActivityDiagnosis);
                 CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-                bool? x_ = context.Operators.Overlaps(v_, w_, default);
+                bool? x_ = context.Operators.Overlaps(v_, w_, (string)default);
                 return x_;
             }
 
@@ -363,7 +363,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 bool? ai_ = z_?.highClosed;
                 CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ab_, ae_, ag_, ai_);
                 CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
-                bool? al_ = context.Operators.Overlaps(aj_, ak_, default);
+                bool? al_ = context.Operators.Overlaps(aj_, ak_, (string)default);
                 return al_;
             }
 
@@ -592,7 +592,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(16, 24, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
 
             List<Extension> k_() {
 
@@ -710,7 +710,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 FhirDateTime au_ = PregnancyTest?.AuthoredOnElement;
                 CqlDateTime av_ = context.Operators.Convert<CqlDateTime>(au_);
                 CqlInterval<CqlDateTime> aw_ = QICoreCommon_4_0_000.Instance.toInterval(context, av_ as object);
-                bool? ax_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(at_, aw_, default);
+                bool? ax_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(at_, aw_, (string)default);
                 return ax_;
             }
 
@@ -787,7 +787,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 FhirDateTime cv_ = PregnancyTestOrder?.AuthoredOnElement;
                 CqlDateTime cw_ = context.Operators.Convert<CqlDateTime>(cv_);
                 CqlInterval<CqlDateTime> cx_ = QICoreCommon_4_0_000.Instance.toInterval(context, cw_ as object);
-                bool? cy_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cu_, cx_, default);
+                bool? cy_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(cu_, cx_, (string)default);
                 return cy_;
             }
 
@@ -915,7 +915,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(16, 20, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             return j_;
         });
 
@@ -932,7 +932,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(21, 24, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             return j_;
         });
 
