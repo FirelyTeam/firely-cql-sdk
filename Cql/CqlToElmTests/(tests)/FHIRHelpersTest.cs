@@ -25,7 +25,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void FHIRHelpers_To_Expressions()
         {
             var cql = File.ReadAllText(Path.Combine("Input", "FHIRHelpers-4.0.1.cql"));
