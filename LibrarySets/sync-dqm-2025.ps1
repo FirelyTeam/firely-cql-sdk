@@ -123,7 +123,7 @@ if (Test-Path $cms832File) {
     $fileContents = Get-Content -Raw -Path $cms832File
     $newFileContents = $fileContents -replace 'CrLabObsCategory:\s*CreatinineTestByTime\.category,', "CrLabObsCategory2: CreatinineTestByTime.category, // Modified by $scriptName`: Renamed duplicate CrLabObsCategory"
     Set-Content -Path $cms832File -Value $newFileContents -Force
-        Write-Host "Updated CMS832FHIRHHAKI.cql successfully."    
+    Write-Host "Updated CMS832FHIRHHAKI.cql successfully."
 } else {
     Write-Host "CMS832FHIRHHAKI.cql not found in $finalCql"
 }
