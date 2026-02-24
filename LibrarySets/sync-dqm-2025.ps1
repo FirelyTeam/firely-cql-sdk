@@ -111,7 +111,7 @@ if (Test-Path $cms69File) {
     Write-Host "CMS69FHIRPCSBMIScreenAndFollowUp.cql not found in $finalCql"
 }
 # -----------------------------
-# UPDATE CMS832FHIRHHAKI-1.0.000.cql
+# UPDATE CMS832FHIRHHAKI.cql
 # -----------------------------
 $cms832File = Join-Path $finalCql "CMS832FHIRHHAKI.cql"
 $cms832Backup = Join-Path $finalCql "CMS832FHIRHHAKI.cql.original"
