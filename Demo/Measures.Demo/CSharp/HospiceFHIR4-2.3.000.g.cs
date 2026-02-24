@@ -56,7 +56,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(3162054828375168680L, () => {
-            object a_ = context.ResolveParameter("HospiceFHIR4-2.3.000", "Measurement Period", null);
+            object a_ = context.ResolveParameter("HospiceFHIR4-2.3.000", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -101,7 +101,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 CqlInterval<CqlDateTime> aj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ai_ as object);
                 CqlDateTime ak_ = context.Operators.End(aj_);
                 CqlInterval<CqlDateTime> al_ = this.Measurement_Period(context);
-                bool? am_ = context.Operators.In<CqlDateTime>(ak_, al_, default);
+                bool? am_ = context.Operators.In<CqlDateTime>(ak_, al_, (string)default);
                 bool? an_ = context.Operators.And(ah_, am_);
                 return an_;
             }
@@ -126,7 +126,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 CqlInterval<CqlDateTime> aw_ = this.Measurement_Period(context);
                 FhirDateTime ax_ = HospiceOrder?.AuthoredOnElement;
                 CqlInterval<CqlDateTime> ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ax_ as object);
-                bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, ay_, default);
+                bool? az_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(aw_, ay_, (string)default);
                 bool? ba_ = context.Operators.And(av_, az_);
                 return ba_;
             }
@@ -143,7 +143,7 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
                 DataType be_ = HospicePerformed?.Performed;
                 CqlInterval<CqlDateTime> bf_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, be_);
                 CqlInterval<CqlDateTime> bg_ = this.Measurement_Period(context);
-                bool? bh_ = context.Operators.Overlaps(bf_, bg_, default);
+                bool? bh_ = context.Operators.Overlaps(bf_, bg_, (string)default);
                 bool? bi_ = context.Operators.And(bd_, bh_);
                 return bi_;
             }

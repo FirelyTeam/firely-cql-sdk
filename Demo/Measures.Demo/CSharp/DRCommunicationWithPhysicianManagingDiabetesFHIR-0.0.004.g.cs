@@ -122,7 +122,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(2299050010152453010L, () => {
-            object a_ = context.ResolveParameter("DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004", "Measurement Period", null);
+            object a_ = context.ResolveParameter("DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -194,7 +194,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
                 Period r_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, r_);
-                bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, default);
+                bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(q_, s_, (string)default);
                 Code<Encounter.EncounterStatus> u_ = QualifyingEncounter?.StatusElement;
                 string v_ = FHIRHelpers_4_0_001.Instance.ToString(context, u_);
                 bool? w_ = context.Operators.Equal(v_, "finished");
@@ -225,7 +225,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                     CqlInterval<CqlDateTime> o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, DiabeticRetinopathy);
                     Period p_ = ValidQualifyingEncounter?.Period;
                     CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, p_);
-                    bool? r_ = context.Operators.Overlaps(o_, q_, default);
+                    bool? r_ = context.Operators.Overlaps(o_, q_, (string)default);
                     bool? s_ = context.Operators.And(n_, r_);
                     return s_;
                 }
@@ -322,7 +322,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
                     Period n_ = EncounterDiabeticRetinopathy?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
-                    bool? p_ = context.Operators.In<CqlDateTime>(m_(), o_, default);
+                    bool? p_ = context.Operators.In<CqlDateTime>(m_(), o_, (string)default);
                     return p_;
                 }
 
@@ -412,7 +412,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
                     Period o_ = EncounterDiabeticRetinopathy?.Period;
                     CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, o_);
-                    bool? q_ = context.Operators.In<CqlDateTime>(n_(), p_, default);
+                    bool? q_ = context.Operators.In<CqlDateTime>(n_(), p_, (string)default);
                     return q_;
                 }
 
@@ -501,7 +501,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
                     Period n_ = EncounterDiabeticRetinopathy?.Period;
                     CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
-                    bool? p_ = context.Operators.In<CqlDateTime>(m_(), o_, default);
+                    bool? p_ = context.Operators.In<CqlDateTime>(m_(), o_, (string)default);
                     return p_;
                 }
 
@@ -586,7 +586,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                     CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, l_);
                     DataType n_ = MacularExam?.Effective;
                     CqlInterval<CqlDateTime> o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, n_);
-                    bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, default);
+                    bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, o_, (string)default);
                     return p_;
                 }
 
@@ -645,7 +645,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                     Period o_ = EncounterDiabeticRetinopathy?.Period;
                     CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, o_);
                     CqlDateTime q_ = context.Operators.Start(p_);
-                    bool? r_ = context.Operators.After(n_, q_, default);
+                    bool? r_ = context.Operators.After(n_, q_, (string)default);
                     return r_;
                 }
 
@@ -686,7 +686,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                     Period p_ = EncounterDiabeticRetinopathy?.Period;
                     CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, p_);
                     CqlDateTime r_ = context.Operators.Start(q_);
-                    bool? s_ = context.Operators.After(o_, r_, default);
+                    bool? s_ = context.Operators.After(o_, r_, (string)default);
                     return s_;
                 }
 
@@ -726,7 +726,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                     Period o_ = EncounterDiabeticRetinopathy?.Period;
                     CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, o_);
                     CqlDateTime q_ = context.Operators.Start(p_);
-                    bool? r_ = context.Operators.After(n_, q_, default);
+                    bool? r_ = context.Operators.After(n_, q_, (string)default);
                     return r_;
                 }
 

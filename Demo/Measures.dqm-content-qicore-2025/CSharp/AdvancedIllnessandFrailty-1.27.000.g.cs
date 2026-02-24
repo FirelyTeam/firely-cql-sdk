@@ -82,7 +82,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-892027430157829280L, () => {
-            object a_ = context.ResolveParameter("AdvancedIllnessandFrailty-1.27.000", "Measurement Period", null);
+            object a_ = context.ResolveParameter("AdvancedIllnessandFrailty-1.27.000", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -315,7 +315,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(66, 80, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             bool? k_ = this.Has_Criteria_Indicating_Frailty(context);
             bool? l_ = context.Operators.And(j_, k_);
             bool? m_ = this.Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period(context);

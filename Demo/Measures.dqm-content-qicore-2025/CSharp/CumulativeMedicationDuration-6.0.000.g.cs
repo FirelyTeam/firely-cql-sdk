@@ -648,7 +648,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 string gr_ = this.ErrorLevel(context);
                 string gs_ = period?.unit;
                 string gt_ = context.Operators.Concatenate("Unknown unit ", gs_ ?? "");
-                object gu_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownUnit", gr_, gt_);
+                object gu_ = context.Operators.Message<object>((object)null, "CMDLogic.ToDaily.UnknownUnit", gr_, gt_);
                 return gu_ as decimal?;
             };
         }
@@ -1210,7 +1210,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                 string fm_ = this.ErrorLevel(context);
                 string fn_ = frequency?.code;
                 string fo_ = context.Operators.Concatenate("Unknown frequency code ", fn_ ?? "");
-                object fp_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", fm_, fo_);
+                object fp_ = context.Operators.Message<object>((object)null, "CMDLogic.ToDaily.UnknownFrequencyCode", fm_, fo_);
                 return fp_ as decimal?;
             };
         }

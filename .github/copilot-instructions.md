@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.3.1
+**Version:** 2.5.0
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
@@ -33,6 +33,12 @@ This document contains development guidelines and instructions for maintaining c
 - [7. FHIR Library Resource Handling](#7-fhir-library-resource-handling)
   - [7.1 Library.Name vs Library.Id](#71-libraryname-vs-libraryid)
   - [7.2 Library Identifier Construction](#72-library-identifier-construction)
+- [8. CQL Specification Conformance](#8-cql-specification-conformance)
+  - [8.1 Authoritative Specification Source](#81-authoritative-specification-source)
+  - [8.2 When to Check Specification](#82-when-to-check-specification)
+  - [8.3 Specification Location](#83-specification-location)
+- [9. Nullological Operators Design Pattern](#9-nullological-operators-design-pattern)
+  - [9.1 Interface vs Implementation Return Types](#91-interface-vs-implementation-return-types)
 
 ## 1. User Workflow Preferences
 
@@ -49,6 +55,7 @@ This document contains development guidelines and instructions for maintaining c
 
 ### 1.2 Instruction for PR AI
 1.2.1 When I ask you to update or improve the Pull Request description, follow these requirements:
+
    1.2.1.1 **Analyze the entire set of commits in this PR's branch**
 
    1.2.1.2 **Incorporate all changes made across the full diff**, not just the snippet I'm currently discussing
@@ -56,6 +63,7 @@ This document contains development guidelines and instructions for maintaining c
    1.2.1.3 **Summarize the full scope and intent of the work** done throughout the branch
 
    1.2.1.4 The PR description should always reflect:
+   
       1.2.1.4.1 the whole branch history
 
       1.2.1.4.2 the complete set of code changes
@@ -76,11 +84,13 @@ This document contains development guidelines and instructions for maintaining c
 1.3.1 When user provides memory-based instructions (e.g., "remember", "never do", "always do"), add them to this copilot instructions file
 
 1.3.2 After updating the instructions, confirm the update by:
+
    1.3.2.1 If the instruction already existed: State "This instruction already exists in section [heading number]"
 
    1.3.2.2 If newly added: State "Added to copilot instructions as section [heading number]"
 
 1.3.3 When making changes to this file, increment the version number according to semantic versioning:
+
    1.3.3.1 **Major version** (x.0.0): Structural changes or major reorganization
 
    1.3.3.2 **Minor version** (x.y.0): New instructions or sections added
@@ -132,6 +142,7 @@ This document contains development guidelines and instructions for maintaining c
 
 ### 3.1 SDK Projects
 3.1.1 Core SDK projects are located in the `Cql/` directory:
+
    3.1.1.1 `Cql.Abstractions` - Base abstractions and interfaces
 
    3.1.1.2 `Cql.Runtime` - Runtime and execution engine
@@ -357,3 +368,76 @@ var identifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(lib
 // Using the identifier (automatically formats as "name-version")
 string formatted = identifier.ToString();
 ```
+
+## 8. CQL Specification Conformance
+
+### 8.1 Authoritative Specification Source
+8.1.1 **CRITICAL**: Always use `/spec/condensed/` as the authoritative CQL specification for all development work
+
+8.1.2 The condensed specification is a markdown version of the official CQL 1.5.3 Release 1 Errata 2 specification
+
+8.1.3 **DO NOT** rely on external URLs (cql.hl7.org) as they may be blocked or unavailable
+
+8.1.4 **IMPORTANT**: If external spec URLs (cql.hl7.org) become accessible during your work, clearly notify the user that the external specification is now reachable. This indicates the local spec in the repository may need updating.
+
+8.1.5 The condensed spec contains all specification content without web assets (CSS, JS, images)
+
+### 8.2 When to Check Specification
+8.2.1 **Before implementing any CQL operator or function**: Verify behavior against `/spec/condensed/09-b-cqlreference.md`
+
+8.2.2 **During code reviews**: Check that implementation matches specification requirements
+
+8.2.3 **When fixing bugs**: Confirm the expected behavior from the specification before making changes
+
+8.2.4 **When writing tests**: Ensure test expectations align with specification examples and semantics
+
+8.2.5 **When adding new features**: Verify feature requirements and edge cases from the specification
+
+### 8.3 Specification Location
+8.3.1 **Main CQL reference**: `/spec/condensed/09-b-cqlreference.md` (operator and function definitions)
+
+8.3.2 **Language semantics**: `/spec/condensed/05-languagesemantics.md`
+
+8.3.3 **Type system**: `/spec/condensed/03-developersguide.md`
+
+8.3.4 **ELM specification**: `/spec/condensed/elm.md`
+
+8.3.5 **Test examples**: `/spec/condensed/tests.md`
+
+8.3.6 **Time interval calculations**: `/spec/condensed/15-h-timeintervalcalculations.md`
+
+8.3.7 **Complete list**: See `/spec/condensed/README.md` for all available specification sections
+
+8.3.8 **Conformance reports**: See `/spec/report/` for known deviations and issue templates
+
+## 9. Nullological Operators Design Pattern
+
+### 9.1 Interface vs Implementation Return Types
+9.1.1 **CRITICAL**: Nullological operators (IsNull, IsTrue, IsFalse) have different return types in interface vs implementation
+
+9.1.2 **Interface (`ICqlOperators`)**: ALWAYS declare return type as `bool?` (nullable)
+   9.1.2.1 Example: `bool? IsNull<T>(T value) where T : class;`
+
+   9.1.2.2 Reason: Consistency with other CQL operators and proper binding logic
+
+   9.1.2.3 Ensures operator binding system works correctly across all operators
+
+9.1.3 **Implementation (`CqlOperators`)**: Return type is `bool` (non-nullable)
+   9.1.3.1 Example: `public bool IsNull<T>(T value) where T : class => value == null;`
+
+   9.1.3.2 Reason: CQL specification §9.B states these operators always return true or false, never null
+
+   9.1.3.3 C# automatically boxes `bool` to `bool?` when returning through interface
+
+9.1.4 **Key Point**: The implementation can return a more specific type (`bool`) that will be implicitly converted to the interface's return type (`bool?`)
+
+9.1.5 **Specification Reference**: CQL 1.5.3 §9.B (Nullological Operators)
+   9.1.5.1 `is null(argument Any) Boolean` - returns Boolean, not Boolean?
+
+   9.1.5.2 `is true(argument Boolean) Boolean` - returns Boolean, not Boolean?
+
+   9.1.5.3 `is false(argument Boolean) Boolean` - returns Boolean, not Boolean?
+
+9.1.6 **DO NOT** change interface return types to `bool` even though spec says these never return null
+
+9.1.7 **DO** keep implementation return types as `bool` to match specification semantics

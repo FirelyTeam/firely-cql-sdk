@@ -62,7 +62,8 @@ namespace Hl7.Cql.Conversion
         public static TypeConverter Create() =>
             new TypeConverter()
                 .ConvertNetTypes()
-                .ConvertsIsoToCqlPrimitives();
+                .ConvertsIsoToCqlPrimitives()
+                .ConvertCqlIntervalOfTypeToCqlIntervalOfObject();
 
         /// <summary>
         /// Returns <see langword="true"/> if this converter is able to convert <paramref name="from"/> to <paramref name="to"/>.
@@ -182,6 +183,30 @@ namespace Hl7.Cql.Conversion
             AddConversion<Uri, string>(uri => uri.AbsoluteUri);
             AddConversion<string, Uri>(@string => new Uri(@string));
             return this;
+        }
+
+        private TypeConverter ConvertCqlIntervalOfTypeToCqlIntervalOfObject()
+        {
+            AddConverter(CqlIntervalOfTypeToCqlIntervalOfObjectConverter.Instance);
+            return this;
+        }
+
+        private class CqlIntervalOfTypeToCqlIntervalOfObjectConverter : ITypeConverterEntry
+        {
+            public static readonly CqlIntervalOfTypeToCqlIntervalOfObjectConverter Instance = new CqlIntervalOfTypeToCqlIntervalOfObjectConverter();
+
+            public bool Handles(Type from, Type to)
+            {
+                var handle = to == typeof(CqlInterval<object>)
+                                                          && from != to
+                                                          && from.IsImplementingGenericTypeDefinition(typeof(CqlInterval<>));
+                return handle;
+            }
+
+            public object? Convert(object? instance, Type to)
+            {
+                return (instance as ICqlInterval)?.ToCqlIntervalOfObject();
+            }
         }
 
         /// <summary>

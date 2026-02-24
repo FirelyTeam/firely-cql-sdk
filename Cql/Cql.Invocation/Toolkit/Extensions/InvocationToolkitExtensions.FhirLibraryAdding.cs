@@ -36,7 +36,7 @@ partial class InvocationToolkitExtensions
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
         var logger = invocationToolkit.LoggerFactory.CreateLogger(typeof(InvocationToolkitExtensions));
-        var files = directory.EnumerateFiles("Library-*.json", options ?? Defaults.EnumerationOptions);
+        var files = directory.EnumerateFiles("Library-*.json", options ?? Defaults.EnumerationOptionsRecurseSubdirectories);
 
         if (filePredicate is not null)
             files = files

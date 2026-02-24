@@ -184,7 +184,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 bool? g_(CqlInterval<CqlDate> I) {
 
                     bool? j_(CqlInterval<CqlDate> J) {
-                        bool? o_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, default);
+                        bool? o_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, (string)default);
                         return o_;
                     }
 
@@ -233,7 +233,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 bool? g_(CqlInterval<CqlDateTime> I) {
 
                     bool? j_(CqlInterval<CqlDateTime> J) {
-                        bool? o_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, default);
+                        bool? o_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, (string)default);
                         return o_;
                     }
 
@@ -245,7 +245,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 }
 
                 IEnumerable<CqlInterval<CqlDateTime>> h_ = context.Operators.Where<CqlInterval<CqlDateTime>>(intervals, g_);
-                IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Collapse(h_, default);
+                IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Collapse(h_, (string)default);
                 return i_;
             };
         }
@@ -1046,7 +1046,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             int? ci_ = i?.StartMinute;
             int? cj_ = i?.StartSecond;
             int? ck_ = i?.StartMillisecond;
-            CqlDateTime cl_ = context.Operators.DateTime(ce_, cf_, cg_, ch_, ci_, cj_, ck_, default);
+            CqlDateTime cl_ = context.Operators.DateTime(ce_, cf_, cg_, ch_, ci_, cj_, ck_, (decimal?)default);
             int? cm_ = i?.EndYear;
             int? cn_ = i?.EndMonth;
             int? co_ = i?.EndDay;
@@ -1054,7 +1054,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             int? cq_ = i?.EndMinute;
             int? cr_ = i?.EndSecond;
             int? cs_ = i?.EndMillisecond;
-            CqlDateTime ct_ = context.Operators.DateTime(cm_, cn_, co_, cp_, cq_, cr_, cs_, default);
+            CqlDateTime ct_ = context.Operators.DateTime(cm_, cn_, co_, cp_, cq_, cr_, cs_, (decimal?)default);
             CqlInterval<CqlDateTime> cu_ = context.Operators.Interval(cl_, ct_, true, true);
             return cu_;
         }

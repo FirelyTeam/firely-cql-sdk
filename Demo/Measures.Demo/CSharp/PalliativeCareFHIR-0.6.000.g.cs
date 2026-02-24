@@ -61,7 +61,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-7635985198364237165L, () => {
-            object a_ = context.ResolveParameter("PalliativeCareFHIR-0.6.000", "Measurement Period", null);
+            object a_ = context.ResolveParameter("PalliativeCareFHIR-0.6.000", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -111,7 +111,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 DataType ab_ = PalliativeAssessment?.Effective;
                 CqlInterval<CqlDateTime> ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ab_);
                 CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
-                bool? ae_ = context.Operators.Overlaps(ac_, ad_, default);
+                bool? ae_ = context.Operators.Overlaps(ac_, ad_, (string)default);
                 bool? af_ = context.Operators.And(aa_, ae_);
                 return af_;
             }
@@ -128,7 +128,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 Period an_ = PalliativeEncounter?.Period;
                 CqlInterval<CqlDateTime> ao_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, an_ as object);
                 CqlInterval<CqlDateTime> ap_ = this.Measurement_Period(context);
-                bool? aq_ = context.Operators.Overlaps(ao_, ap_, default);
+                bool? aq_ = context.Operators.Overlaps(ao_, ap_, (string)default);
                 bool? ar_ = context.Operators.And(am_, aq_);
                 return ar_;
             }
@@ -150,7 +150,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
                 DataType aw_ = PalliativeIntervention?.Performed;
                 CqlInterval<CqlDateTime> ax_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, aw_);
                 CqlInterval<CqlDateTime> ay_ = this.Measurement_Period(context);
-                bool? az_ = context.Operators.Overlaps(ax_, ay_, default);
+                bool? az_ = context.Operators.Overlaps(ax_, ay_, (string)default);
                 bool? ba_ = context.Operators.And(av_, az_);
                 return ba_;
             }

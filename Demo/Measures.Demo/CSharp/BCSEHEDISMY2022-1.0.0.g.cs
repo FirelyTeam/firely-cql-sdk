@@ -85,7 +85,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(4791158273458427164L, () => {
-            object a_ = context.ResolveParameter("BCSEHEDISMY2022-1.0.0", "Measurement Period", null);
+            object a_ = context.ResolveParameter("BCSEHEDISMY2022-1.0.0", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 
@@ -136,7 +136,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
                 Period d_ = C?.Period;
                 CqlInterval<CqlDateTime> e_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, d_ as object);
                 CqlInterval<CqlDateTime> f_ = this.Participation_Period(context);
-                bool? g_ = context.Operators.Overlaps(e_, f_, default);
+                bool? g_ = context.Operators.Overlaps(e_, f_, (string)default);
                 return g_;
             }
 
@@ -197,7 +197,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(52, 74, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             Code<AdministrativeGender> l_ = a_?.GenderElement;
             AdministrativeGender? m_ = l_?.Value;
             string n_ = context.Operators.Convert<string>(m_);
@@ -229,7 +229,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
                 CqlDateTime g_ = context.Operators.Start(f_);
                 CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
                 CqlDateTime i_ = context.Operators.End(h_);
-                bool? j_ = context.Operators.SameOrBefore(g_, i_, default);
+                bool? j_ = context.Operators.SameOrBefore(g_, i_, (string)default);
                 return j_;
             }
 
@@ -291,7 +291,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
                 CqlDateTime af_ = context.Operators.End(ae_);
                 CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
                 CqlDateTime ah_ = context.Operators.End(ag_);
-                bool? ai_ = context.Operators.SameOrBefore(af_, ah_, default);
+                bool? ai_ = context.Operators.SameOrBefore(af_, ah_, (string)default);
                 return ai_;
             }
 
@@ -312,7 +312,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
                 CqlDateTime g_ = context.Operators.Start(f_);
                 CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
                 CqlDateTime i_ = context.Operators.End(h_);
-                bool? j_ = context.Operators.SameOrBefore(g_, i_, default);
+                bool? j_ = context.Operators.SameOrBefore(g_, i_, (string)default);
                 return j_;
             }
 
@@ -374,7 +374,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
                 CqlDateTime af_ = context.Operators.End(ae_);
                 CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
                 CqlDateTime ah_ = context.Operators.End(ag_);
-                bool? ai_ = context.Operators.SameOrBefore(af_, ah_, default);
+                bool? ai_ = context.Operators.SameOrBefore(af_, ah_, (string)default);
                 return ai_;
             }
 
@@ -395,7 +395,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
                 CqlDateTime g_ = context.Operators.Start(f_);
                 CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
                 CqlDateTime i_ = context.Operators.End(h_);
-                bool? j_ = context.Operators.SameOrBefore(g_, i_, default);
+                bool? j_ = context.Operators.SameOrBefore(g_, i_, (string)default);
                 return j_;
             }
 
@@ -457,7 +457,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
                 CqlDateTime af_ = context.Operators.End(ae_);
                 CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
                 CqlDateTime ah_ = context.Operators.End(ag_);
-                bool? ai_ = context.Operators.SameOrBefore(af_, ah_, default);
+                bool? ai_ = context.Operators.SameOrBefore(af_, ah_, (string)default);
                 return ai_;
             }
 
@@ -516,7 +516,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
                 CqlInterval<CqlDateTime> g_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, f_);
                 CqlDateTime h_ = context.Operators.End(g_);
                 CqlInterval<CqlDateTime> i_ = this.Participation_Period(context);
-                bool? j_ = context.Operators.In<CqlDateTime>(h_, i_, default);
+                bool? j_ = context.Operators.In<CqlDateTime>(h_, i_, (string)default);
                 return j_;
             }
 

@@ -687,7 +687,7 @@
 		</test>
 		<test name="DurationInDaysA">
 			<expression>days between @2017-03-12T00:00:00-07:00 and @2017-03-13T00:00:00-06:00</expression>
-			<output>1</output>
+			<output>0</output>
 		</test>
 		<test name="DurationInHoursAA">
 			<expression>hours between DateTime(2017, 3, 12, 1, 0, 0, 0, -7.0) and DateTime(2017, 3, 12, 3, 0, 0, 0, -6.0)</expression>
@@ -699,7 +699,7 @@
 		</test>
 		<test name="DurationInDaysAA">
 			<expression>days between DateTime(2017, 3, 12, 0, 0, 0, 0, -7.0) and DateTime(2017, 3, 13, 0, 0, 0, 0, -6.0)</expression>
-			<output>1</output>
+			<output>0</output>
 		</test>
 	</group>
 	<group name="Now">

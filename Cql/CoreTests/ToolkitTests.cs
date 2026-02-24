@@ -8,6 +8,7 @@
 
 #nullable enable
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm;
@@ -46,7 +47,7 @@ public class ToolkitTests
         using var librarySetInvoker =
             new CqlToolkit()
                 .AddCqlLibraries(cqlNestedTuples)
-                .CreateLibrarySetInvoker();
+                .CreateLibrarySetInvoker(ElmToolkitConfig);
 
         // Act
         var results = librarySetInvoker
@@ -116,7 +117,7 @@ public class ToolkitTests
         };
         // END WORKAROUND
 
-        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
 
         librarySetInvoker.LibraryInvokers[cqlMeasuresExample]
                          .Definitions["Initial population"]
@@ -143,7 +144,7 @@ public class ToolkitTests
         var cqlToolkit = new CqlToolkit()
             .AddCqlLibraries(cqlLibraryString);
 
-        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
 
         var cqlContext = FhirCqlContext.ForBundle();
         var result =
@@ -174,7 +175,7 @@ public class ToolkitTests
         var cqlToolkit = new CqlToolkit()
             .AddCqlLibraries(cqlLibraryString);
 
-        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act & Assert: Test for expressions
@@ -232,7 +233,7 @@ public class ToolkitTests
         var cqlToolkit = new CqlToolkit()
             .AddCqlLibraries(cqlLibraryString);
 
-        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act: Get expressions and functions using the new method
@@ -286,7 +287,7 @@ public class ToolkitTests
         var cqlToolkit = new CqlToolkit()
             .AddCqlLibraries(cqlLibraryString);
 
-        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act: Get all definitions, then filter to check what we get
@@ -316,7 +317,7 @@ public class ToolkitTests
         var cqlToolkit = new CqlToolkit()
             .AddCqlLibraries(cqlLibraryString);
 
-        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act
@@ -353,7 +354,7 @@ public class ToolkitTests
         var elmLibrary = Library.LoadFromJson(elmFile);
 
         // Act: Generate C# code and compile to assembly using ElmToolkit
-        var elmToolkit = new ElmToolkit()
+        var elmToolkit = new ElmToolkit(config: ElmToolkitConfig)
                          .AddElmLibraries([elmLibrary])
                          .CompileToAssemblies();
 
@@ -415,14 +416,14 @@ public class ToolkitTests
                 item7 Boolean,
                 item8 Decimal,
                 item9 String
-            }): 
+            }):
                 'Processed: ' + largeTuple.item1 + ', ' + largeTuple.item9
             """);
 
         var cqlToolkit = new CqlToolkit()
             .AddCqlLibraries(cqlLibraryString);
 
-        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
         var ctx = FhirCqlContext.ForBundle();
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
@@ -438,8 +439,8 @@ public class ToolkitTests
         parameterType.Should().NotBeNull("Parameter should have a type");
 
         // Let's examine what type the CQL compiler actually generated
-        var underlyingType = parameterType.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>) 
-                           ? parameterType.GetGenericArguments()[0] 
+        var underlyingType = parameterType.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                           ? parameterType.GetGenericArguments()[0]
                            : parameterType;
 
         // Verify this is indeed a large tuple with nested structure
@@ -453,7 +454,7 @@ public class ToolkitTests
         ], ["item1", "item2", "item3", "item4", "item5", "item6", "item7", "item8", "item9"]);
 
         // Create the large tuple (9 items) that will have the nested structure
-        var largeTuple9 = (metadata, "first", (int?)42, (bool?)true, (decimal?)3.14m, "middle", 
+        var largeTuple9 = (metadata, "first", (int?)42, (bool?)true, (decimal?)3.14m, "middle",
                           (int?)100, (bool?)false, (decimal?)99.99m, "last");
 
         // Verify the created tuple matches the expected underlying type
@@ -465,11 +466,11 @@ public class ToolkitTests
         // Assert: Function should execute successfully with large tuple
         result.Should().NotBeNull("Function invocation should return a result");
         result.Should().Be("Processed: first, last", "Function should process the large tuple correctly");
-        
+
         // Verify that large tuple signature matching works properly for finding definitions
         var signature = processTupleFunction.DefinitionSignature;
         var foundBySignature = libraryInvoker.Definitions.GetValueOrDefault(signature);
-        
+
         foundBySignature.Should().Be(processTupleFunction, "Should be able to find function by its signature");
         foundBySignature!.DefinitionSignature.ParameterTypes.Should().HaveCount(1, "Signature should show one parameter");
         foundBySignature.DefinitionSignature.ParameterTypes[0].Should().Be(parameterType, "Signature should include correct parameter type");
@@ -496,7 +497,7 @@ public class ToolkitTests
         var cqlToolkit = new CqlToolkit()
             .AddCqlLibraries(cqlLibraryString);
 
-        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act: Find the function and inspect its signature
@@ -508,10 +509,10 @@ public class ToolkitTests
         processFunction!.Parameters.Should().HaveCount(1, "Function should have exactly one parameter");
 
         var parameterType = processFunction.Parameters[0].Type;
-        
+
         // Get underlying type (removing Nullable wrapper if present)
-        var underlyingType = parameterType!.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>) 
-                           ? parameterType.GetGenericArguments()[0] 
+        var underlyingType = parameterType!.IsGenericType && parameterType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                           ? parameterType.GetGenericArguments()[0]
                            : parameterType;
 
         // Verify this is a large tuple that uses nested ValueTuple structures
@@ -521,9 +522,9 @@ public class ToolkitTests
         // Verify the function signature can be used for lookup
         var signature = processFunction.DefinitionSignature;
         var foundBySignature = libraryInvoker.Definitions.GetValueOrDefault(signature);
-        
+
         foundBySignature.Should().Be(processFunction, "Should be able to find very large tuple function by its signature");
-        
+
         // The fact that we can create a function with 15 tuple items and find it by signature
         // demonstrates that large tuple signature discovery works correctly with the invocation toolkit
     }
@@ -553,7 +554,7 @@ public class ToolkitTests
         var cqlToolkit = new CqlToolkit()
             .AddCqlLibraries(cqlLibraryString);
 
-        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlLibraryString];
 
         // Act: Find both functions and verify they have different signatures
@@ -595,8 +596,111 @@ public class ToolkitTests
 
         foundBySignature9.Should().Be(tuple9Function, "Should find ProcessTuple9 by its signature");
         foundBySignature10.Should().Be(tuple10Function, "Should find ProcessTuple10 by its signature");
-        
-        // This demonstrates that the invocation toolkit can distinguish between 
+
+        // This demonstrates that the invocation toolkit can distinguish between
         // different large tuple signatures and find the correct definitions
     }
+
+    /// <summary>
+    /// Tests that Interval[null, null] returns null.
+    /// See https://github.com/FirelyTeam/firely-cql-sdk/issues/543
+    /// </summary>
+    [TestMethod]
+    public void Interval_Untyped_Null_Null_Returns_Null()
+    {
+        // Arrange
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library Test version '1.0.0'
+            define "NullInterval": Interval[null, null]
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
+
+        // Act
+        var result = librarySetInvoker.InvokeLibraryDefinition(
+            FhirCqlContext.ForBundle(), cqlLibraryString.LibraryIdentifier, "NullInterval");
+
+        // Assert
+        result.Should().BeNull("Interval[null, null] should return null");
+    }
+
+    [TestMethod]
+    public void Interval_Date_Null_Null_Returns_Null()
+    {
+        // Arrange
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library Test version '1.0.0'
+            define "NullIntervalAsDate": Interval[null as Date, null as Date]
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
+
+        // Act
+        var result = librarySetInvoker.InvokeLibraryDefinition(
+            FhirCqlContext.ForBundle(), cqlLibraryString.LibraryIdentifier, "NullIntervalAsDate");
+
+        // Assert
+        result.Should().BeNull("Interval[null as Date, null as Date] should return null");
+    }
+
+    [TestMethod]
+    public void Interval_Integer_Null_Null_Returns_Null()
+    {
+        // Arrange
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library Test version '1.0.0'
+            define "NullIntervalAsInteger": Interval[null as Integer, null as Integer]
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
+
+        // Act
+        var result = librarySetInvoker.InvokeLibraryDefinition(
+            FhirCqlContext.ForBundle(), cqlLibraryString.LibraryIdentifier, "NullIntervalAsInteger");
+
+        // Assert
+        result.Should().BeNull("Interval[null as Integer, null as Integer] should return null");
+    }
+
+    [TestMethod]
+    public void Interval_Decimal_Null_Null_Returns_Null()
+    {
+        // Arrange
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library Test version '1.0.0'
+            define "NullIntervalAsDecimal": Interval[null as Decimal, null as Decimal]
+            """);
+
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries(cqlLibraryString);
+
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker(ElmToolkitConfig);
+
+        // Act
+        var result = librarySetInvoker.InvokeLibraryDefinition(
+            FhirCqlContext.ForBundle(), cqlLibraryString.LibraryIdentifier, "NullIntervalAsDecimal");
+
+        // Assert
+        result.Should().BeNull("Interval[null as Decimal, null as Decimal] should return null");
+    }
+
+    private static readonly ElmToolkitConfig ElmToolkitConfig =
+            new ElmToolkitConfig()
+#if DEBUG
+            { DebugSymbolsFormat = DebugSymbolsFormat.Embedded }
+#endif
+        ;
 }

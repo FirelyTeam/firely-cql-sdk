@@ -6,7 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
@@ -22,18 +24,24 @@ public static partial class CqlToolkitExtensions
     /// <param name="directory">The directory to save the ELM files to.</param>
     /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
     /// <param name="directoryPreparationStrategy">The directory preparation strategy.</param>
+    /// <param name="subdirectoryPreserver">Optional subdirectory preserver to maintain directory structure.</param>
+    /// <param name="directoryPostProcessingStrategy">An optional delegate that is invoked on the directory after all files have been saved.</param>
     /// <returns>The <see cref="CqlToolkit"/> instance.</returns>
     public static CqlToolkit SaveElmFilesToDirectory(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
         bool writeIndented = false,
-        DirectoryInfoHandler? directoryPreparationStrategy = null) =>
+        DirectoryInfoHandler? directoryPreparationStrategy = null,
+        SubdirectoryPreserver? subdirectoryPreserver = null,
+        DirectoryInfoHandler? directoryPostProcessingStrategy = null) =>
         SaveElmFilesToDirectory(
             cqlToolkit,
             new SaveElmFilesToDirectoryOptions(
                 directory,
                 writeIndented,
-                directoryPreparationStrategy));
+                directoryPreparationStrategy,
+                subdirectoryPreserver,
+                directoryPostProcessingStrategy));
 
     /// <summary>
     /// Saves all ELM (Expression Logical Model) libraries contained in the specified CQL toolkit to JSON files in the
@@ -64,29 +72,58 @@ public static partial class CqlToolkitExtensions
 /// <param name="WriteIndented">true to write the ELM JSON files with indented formatting; otherwise, false for compact formatting.</param>
 /// <param name="DirectoryPreparationStrategy">An optional delegate that defines how the target directory should be prepared before saving files. If null, the
 /// default strategy creates the directory if it does not exist.</param>
+/// <param name="SubdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
+/// <param name="DirectoryPostProcessingStrategy">An optional delegate that is invoked on the directory after all files have been saved.</param>
 public record SaveElmFilesToDirectoryOptions(
     DirectoryInfo Directory,
     bool WriteIndented,
-    DirectoryInfoHandler? DirectoryPreparationStrategy)
+    DirectoryInfoHandler? DirectoryPreparationStrategy,
+    SubdirectoryPreserver? SubdirectoryPreserver = null,
+    DirectoryInfoHandler? DirectoryPostProcessingStrategy = null)
 {
     internal void Save(CqlToolkit cqlToolkit)
     {
         var directory = Directory;
         var writeIndented = WriteIndented;
         var directoryPreparationStrategy = DirectoryPreparationStrategy;
-        var prepElmDir = true;
         var logger = cqlToolkit.CreateLogger();
+        bool directoryPrepared = false;
 
         foreach (var (libraryIdentifier, elmLibrary) in cqlToolkit.GetCqlToolkitResults())
         {
-            if (prepElmDir)
+            // Prepare top-level directory if not already prepared (only once)
+            if (!directoryPrepared)
             {
-                prepElmDir = false;
                 (directoryPreparationStrategy ?? Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists)(directory);
+                directoryPrepared = true;
             }
-            var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.json");
+
+            // Determine target directory based on subdirectory preservation
+            DirectoryInfo targetDirectory = directory;
+            if (SubdirectoryPreserver is not null)
+            {
+                var (relativePath, found) = SubdirectoryPreserver.TryGetRelativePath(libraryIdentifier);
+                if (found && !string.IsNullOrEmpty(relativePath))
+                {
+                    targetDirectory = new DirectoryInfo(Path.Combine(directory.FullName, relativePath));
+                    // Ensure subdirectory exists
+                    if (!targetDirectory.Exists)
+                    {
+                        targetDirectory.Create();
+                    }
+                }
+            }
+
+            var fileName = Path.Combine(targetDirectory.FullName, $"{libraryIdentifier}.json");
             File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
             logger.LogInformation("Saved ELM to file: {file}", fileName);
+        }
+
+        // Post-process the directory after all files have been saved
+        var postProcessingStrategy = DirectoryPostProcessingStrategy ?? (SubdirectoryPreserver is not null ? Runtime.IO.DirectoryPostProcessingStrategy.DeleteEmptySubdirectories : null);
+        if (postProcessingStrategy is not null)
+        {
+            postProcessingStrategy(directory);
         }
     }
 }

@@ -8,12 +8,28 @@
 
 namespace Hl7.Cql.Primitives
 {
+    internal interface ICqlInterval
+    {
+        bool IsIntervalOfObject { get; }
+        CqlInterval<object> ToCqlIntervalOfObject();
+    }
+
     /// <summary>
     /// Implements the System Interval type.
     /// </summary>
     [CqlPrimitiveType(CqlPrimitiveType.Interval)]
-    public class CqlInterval<T>
+    public sealed class CqlInterval<T> : ICqlInterval
     {
+        bool ICqlInterval.IsIntervalOfObject => typeof(T) == typeof(object);
+
+        CqlInterval<object> ICqlInterval.ToCqlIntervalOfObject()
+        {
+            if (typeof(T) == typeof(object))
+                return Unsafe.As<CqlInterval<object>>(this);
+
+            return new CqlInterval<object>(low, high, lowClosed, highClosed);
+        }
+
         /// <summary>
         /// Returns a null point interval of this type.
         /// This instance is provided as a convenience for test cases, but should not be used otherwise.

@@ -95,8 +95,8 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(6905366931702746391L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, (decimal?)default);
+            CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, (decimal?)default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("TJCOverallFHIR-1.8.000", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
@@ -300,7 +300,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                     FhirDateTime j_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
                     CqlDateTime k_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, (i_ as FhirDateTime) ?? j_);
                     CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
-                    bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, default);
+                    bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, (string)default);
                     return m_;
                 }
 
@@ -330,7 +330,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                     FhirDateTime l_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
                     CqlDateTime m_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, l_);
                     CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
-                    bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, default);
+                    bool? o_ = context.Operators.In<CqlDateTime>(k_ ?? m_, n_, (string)default);
                     return o_;
                 }
 

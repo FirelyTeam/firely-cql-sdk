@@ -53,7 +53,7 @@ public partial class AdultOutpatientEncounters_4_19_000 : ILibrary, ISingleton<A
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(4241500979845946323L, () => {
-            object a_ = context.ResolveParameter("AdultOutpatientEncounters-4.19.000", "Measurement Period", null);
+            object a_ = context.ResolveParameter("AdultOutpatientEncounters-4.19.000", "Measurement Period", (object)null);
             return (CqlInterval<CqlDateTime>)a_;
         });
 

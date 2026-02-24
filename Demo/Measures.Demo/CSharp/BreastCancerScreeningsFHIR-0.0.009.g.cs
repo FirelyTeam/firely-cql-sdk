@@ -73,8 +73,8 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-2207426731370318965L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, default);
-            CqlDateTime b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, default);
+            CqlDateTime a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, (decimal?)default);
+            CqlDateTime b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, (decimal?)default);
             CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
             object d_ = context.ResolveParameter("BreastCancerScreeningsFHIR-0.0.009", "Measurement Period", c_);
             return (CqlInterval<CqlDateTime>)d_;
@@ -142,7 +142,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 Period l_ = TelehealthEncounter?.Period;
                 CqlInterval<CqlDateTime> m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, l_ as object);
-                bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, default);
+                bool? n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, (string)default);
                 bool? o_ = context.Operators.And(j_, n_);
                 return o_;
             }
@@ -179,7 +179,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
             CqlDate g_ = context.Operators.DateFrom(f_);
             int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
             CqlInterval<int?> i_ = context.Operators.Interval(51, 74, true, false);
-            bool? j_ = context.Operators.In<int?>(h_, i_, default);
+            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
             Code<AdministrativeGender> l_ = a_?.GenderElement;
             string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
             bool? n_ = context.Operators.Equal(m_, "female");
@@ -231,7 +231,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime q_ = context.Operators.Start(p_);
                 CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
                 CqlDateTime s_ = context.Operators.End(r_);
-                bool? t_ = context.Operators.SameOrBefore(q_, s_, default);
+                bool? t_ = context.Operators.SameOrBefore(q_, s_, (string)default);
                 return t_;
             }
 
@@ -255,7 +255,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime j_ = context.Operators.End(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.End(k_);
-                bool? m_ = context.Operators.SameOrBefore(j_, l_, default);
+                bool? m_ = context.Operators.SameOrBefore(j_, l_, (string)default);
                 bool? n_ = context.Operators.And(g_, m_);
                 return n_;
             }
@@ -295,7 +295,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime q_ = context.Operators.Start(p_);
                 CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
                 CqlDateTime s_ = context.Operators.End(r_);
-                bool? t_ = context.Operators.SameOrBefore(q_, s_, default);
+                bool? t_ = context.Operators.SameOrBefore(q_, s_, (string)default);
                 return t_;
             }
 
@@ -319,7 +319,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime j_ = context.Operators.End(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.End(k_);
-                bool? m_ = context.Operators.SameOrBefore(j_, l_, default);
+                bool? m_ = context.Operators.SameOrBefore(j_, l_, (string)default);
                 bool? n_ = context.Operators.And(g_, m_);
                 return n_;
             }
@@ -340,7 +340,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime f_ = context.Operators.Start(e_);
                 CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
                 CqlDateTime h_ = context.Operators.End(g_);
-                bool? i_ = context.Operators.SameOrBefore(f_, h_, default);
+                bool? i_ = context.Operators.SameOrBefore(f_, h_, (string)default);
                 return i_;
             }
 
@@ -364,7 +364,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime j_ = context.Operators.End(i_);
                 CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
                 CqlDateTime l_ = context.Operators.End(k_);
-                bool? m_ = context.Operators.SameOrBefore(j_, l_, default);
+                bool? m_ = context.Operators.SameOrBefore(j_, l_, (string)default);
                 bool? n_ = context.Operators.And(g_, m_);
                 return n_;
             }
@@ -441,7 +441,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlDateTime r_ = context.Operators.End(m_);
                 CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, (string)default);
                 CqlDateTime v_ = context.Operators.End(m_);
                 bool? w_ = context.Operators.Not((bool?)(v_ is null));
                 bool? x_ = context.Operators.And(t_, w_);
@@ -480,7 +480,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime p_ = context.Operators.Subtract(n_, o_);
                 CqlDateTime r_ = context.Operators.End(m_);
                 CqlInterval<CqlDateTime> s_ = context.Operators.Interval(p_, r_, true, true);
-                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, default);
+                bool? t_ = context.Operators.In<CqlDateTime>(l_, s_, (string)default);
                 CqlDateTime v_ = context.Operators.End(m_);
                 bool? w_ = context.Operators.Not((bool?)(v_ is null));
                 bool? x_ = context.Operators.And(t_, w_);
@@ -545,7 +545,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime q_ = context.Operators.Subtract(o_, p_);
                 CqlDateTime s_ = context.Operators.End(n_);
                 CqlInterval<CqlDateTime> t_ = context.Operators.Interval(q_, s_, true, true);
-                bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, default);
+                bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, (string)default);
                 CqlDateTime w_ = context.Operators.End(n_);
                 bool? x_ = context.Operators.Not((bool?)(w_ is null));
                 bool? y_ = context.Operators.And(u_, x_);
@@ -585,7 +585,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
                 CqlDateTime q_ = context.Operators.Subtract(o_, p_);
                 CqlDateTime s_ = context.Operators.End(n_);
                 CqlInterval<CqlDateTime> t_ = context.Operators.Interval(q_, s_, true, true);
-                bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, default);
+                bool? u_ = context.Operators.In<CqlDateTime>(m_, t_, (string)default);
                 CqlDateTime w_ = context.Operators.End(n_);
                 bool? x_ = context.Operators.Not((bool?)(w_ is null));
                 bool? y_ = context.Operators.And(u_, x_);

@@ -115,7 +115,35 @@ namespace Hl7.Cql.Operators
         int?                                     Ceiling(int? argument);
         long?                                    Ceiling(long? argument);
         IEnumerable<object>                      Children(object o);
+
+        /// <summary>
+        /// Returns the first non-null result in a list of arguments.
+        /// </summary>
+        /// <typeparam name="T">The type of the elements in the source collection.</typeparam>
+        /// <param name="source">A collection of values to check for non-null elements.</param>
+        /// <returns>The first non-null element in the collection, or null if all elements are null or the source is null.</returns>
+        /// <remarks>
+        /// <para>Implements the CQL Coalesce operator.</para>
+        /// <para>CQL Specification: §9.B Appendix B – CQL Reference, Nullological Operators: Coalesce</para>
+        /// <para>Signature: <c>Coalesce&lt;T&gt;(arguments List&lt;T&gt;) T</c></para>
+        /// <para>If all arguments evaluate to null, the result is null.</para>
+        /// </remarks>
+        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#coalesce">CQL Specification §9.B - Coalesce</seealso>
         T?                                       Coalesce<T>(IEnumerable<T>? source) where T : class;
+
+        /// <summary>
+        /// Returns the first non-null result in a list of nullable value type arguments.
+        /// </summary>
+        /// <typeparam name="T">The value type of the elements in the source collection.</typeparam>
+        /// <param name="source">A collection of nullable value type values to check for non-null elements.</param>
+        /// <returns>The first non-null element in the collection, or null if all elements are null or the source is null.</returns>
+        /// <remarks>
+        /// <para>Implements the CQL Coalesce operator for value types.</para>
+        /// <para>CQL Specification: §9.B Appendix B – CQL Reference, Nullological Operators: Coalesce</para>
+        /// <para>Signature: <c>Coalesce&lt;T&gt;(arguments List&lt;T&gt;) T</c></para>
+        /// <para>If all arguments evaluate to null, the result is null.</para>
+        /// </remarks>
+        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#coalesce">CQL Specification §9.B - Coalesce</seealso>
         T?                                       CoalesceValueTypes<T>(IEnumerable<T?>? source) where T : struct;
         bool?                                    CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument);
         bool?                                    CodeInValueSet(CqlCode? code, CqlValueSet? valueSet);
@@ -287,9 +315,55 @@ namespace Hl7.Cql.Operators
         decimal?                                 IntervalSize(CqlInterval<decimal?>? argument);
         int?                                     IntervalSize(CqlInterval<int?>? argument);
         long?                                    IntervalSize(CqlInterval<long?>? argument);
+
+        /// <summary>
+        /// Determines whether the argument evaluates to false.
+        /// </summary>
+        /// <param name="b">The Boolean value to check.</param>
+        /// <returns>True if the argument evaluates to false; otherwise, false (including when the argument is null). Never returns null.</returns>
+        /// <remarks>
+        /// <para>Implements the CQL 'is false' operator.</para>
+        /// <para>CQL Specification: §9.B Appendix B – CQL Reference, Nullological Operators: IsFalse</para>
+        /// <para>Signature: <c>is false(argument Boolean) Boolean</c></para>
+        /// <para><strong>Important</strong>: Although the CQL specification states this operator returns non-nullable Boolean,
+        /// the interface uses <c>bool?</c> for consistency with the binding system. The implementation always returns
+        /// a non-null value (true or false), which is then boxed to <c>bool?</c>. If the argument is null, returns false.</para>
+        /// </remarks>
+        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#isfalse">CQL Specification §9.B - IsFalse</seealso>
         bool?                                    IsFalse(bool? b);
-        bool?                                    IsNull<T>(T value) where T : class;
-        bool?                                    IsNullValue<T>(T? value) where T : struct;
+
+        /// <summary>
+        /// Determines whether the argument is null (for reference types).
+        /// </summary>
+        /// <typeparam name="T">The reference type to check.</typeparam>
+        /// <param name="value">The value to check for null.</param>
+        /// <returns>True if the argument evaluates to null; otherwise, false. Never returns null.</returns>
+        /// <remarks>
+        /// <para>Implements the CQL 'is null' operator for reference types.</para>
+        /// <para>CQL Specification: §9.B Appendix B – CQL Reference, Nullological Operators: IsNull</para>
+        /// <para>Signature: <c>is null(argument Any) Boolean</c></para>
+        /// <para><strong>Important</strong>: Although the CQL specification states this operator returns non-nullable Boolean,
+        /// the interface uses <c>bool?</c> for consistency with the binding system. The implementation always returns
+        /// a non-null value (true or false), which is then boxed to <c>bool?</c>.</para>
+        /// </remarks>
+        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#isnull">CQL Specification §9.B - IsNull</seealso>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        bool?                                    IsNull<T>(T value) => value is null;
+
+        /// <summary>
+        /// Determines whether the argument evaluates to true.
+        /// </summary>
+        /// <param name="b">The Boolean value to check.</param>
+        /// <returns>True if the argument evaluates to true; otherwise, false (including when the argument is null). Never returns null.</returns>
+        /// <remarks>
+        /// <para>Implements the CQL 'is true' operator.</para>
+        /// <para>CQL Specification: §9.B Appendix B – CQL Reference, Nullological Operators: IsTrue</para>
+        /// <para>Signature: <c>is true(argument Boolean) Boolean</c></para>
+        /// <para><strong>Important</strong>: Although the CQL specification states this operator returns non-nullable Boolean,
+        /// the interface uses <c>bool?</c> for consistency with the binding system. The implementation always returns
+        /// a non-null value (true or false), which is then boxed to <c>bool?</c>. If the argument is null, returns false.</para>
+        /// </remarks>
+        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#istrue">CQL Specification §9.B - IsTrue</seealso>
         bool?                                    IsTrue(bool? b);
         T?                                       Last<T>(IEnumerable<T> enumerable);
         int?                                     LastPositionOf(string? argument, string? pattern);

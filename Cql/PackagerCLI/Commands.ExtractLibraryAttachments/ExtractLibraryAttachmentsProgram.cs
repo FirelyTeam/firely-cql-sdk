@@ -27,7 +27,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
             // Validate at least one output directory is specified
             if (opt is { CqlOutDir: null, ElmOutDir: null, CSharpOutDir: null, DllOutDir: null, PdbOutDir: null })
             {
-                logger.LogError("Exiting. At least one output directory must be specified.");
+                logger.LogError(ExitCodes.NoOutputDirs.ExitingMessage);
                 return ExitCodes.NoOutputDirs.Code;
             }
 
@@ -38,7 +38,7 @@ internal sealed class ExtractLibraryAttachmentsProgram
 
             if (string.IsNullOrWhiteSpace(fhirLibrary.Name))
             {
-                logger.LogError("FHIR Library must have a Name property.");
+                logger.LogError(ExitCodes.LibraryMissingName.ExitingMessage);
                 return ExitCodes.LibraryMissingName.Code;
             }
 
