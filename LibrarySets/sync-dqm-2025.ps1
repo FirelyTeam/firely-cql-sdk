@@ -110,6 +110,23 @@ if (Test-Path $cms69File) {
 } else {
     Write-Host "CMS69FHIRPCSBMIScreenAndFollowUp.cql not found in $finalCql"
 }
+# -----------------------------
+# UPDATE CMS832FHIRHHAKI-1.0.000.cql
+# -----------------------------
+$cms832File = Join-Path $finalCql "CMS832FHIRHHAKI.cql"
+$cms832Backup = Join-Path $finalCql "CMS832FHIRHHAKI.cql.original"
+
+if (Test-Path $cms832File) {
+    Write-Host "Backing up CMS832FHIRHHAKI.cql to CMS832FHIRHHAKI.cql.original"
+    Copy-Item -Path $cms832File -Destination $cms832Backup -Force
+
+    $fileContents = Get-Content -Raw -Path $cms832File
+    $newFileContents = $fileContents -replace 'CrLabObsCategory:\s*CreatinineTestByTime\.category,', "CrLabObsCategory2: CreatinineTestByTime.category, // Modified by $scriptName`: Renamed duplicate CrLabObsCategory"
+    Set-Content -Path $cms832File -Value $newFileContents -Force
+        Write-Host "Updated CMS832FHIRHHAKI.cql successfully."    
+} else {
+    Write-Host "CMS832FHIRHHAKI.cql not found in $finalCql"
+}
 
 # -----------------------------
 # RUN JAVA CQL COMPILER
