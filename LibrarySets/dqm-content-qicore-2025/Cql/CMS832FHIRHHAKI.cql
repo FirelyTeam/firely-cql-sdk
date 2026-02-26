@@ -242,7 +242,7 @@ define "Qualifying Creatinine Lab Result By Time":
       CrLabObsId: CrLabId,
       CrLabObsCategory: if CreatinineTestByTime.isLaboratory ( ) then 'laboratory' 
         else CreatinineTestByTime.isLaboratory ( ),
-      CrLabObsCategory: CreatinineTestByTime.category,
+      CrLabObsCategory2: CreatinineTestByTime.category, // Modified by sync-dqm-2025.ps1: Renamed duplicate CrLabObsCategory
       CrLabObsStatus: CreatinineTestByTime.status,
       CrLabResult: CrResult,
       CrLabResultUnit: CrResultUnit,
