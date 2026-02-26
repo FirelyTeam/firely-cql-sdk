@@ -1,1 +1,33 @@
 #nullable enable
+Hl7.Cql.Exceptions.ICqlError
+Hl7.Cql.Exceptions.ICqlError.GetMessage() -> string!
+Hl7.Cql.Exceptions.ICqlArithmeticError
+Hl7.Cql.Exceptions.CqlException
+Hl7.Cql.Exceptions.CqlException.CqlException(System.Exception? innerException = null) -> void
+Hl7.Cql.Exceptions.CqlException.Error.get -> Hl7.Cql.Exceptions.ICqlError!
+abstract Hl7.Cql.Exceptions.CqlException.GetError() -> Hl7.Cql.Exceptions.ICqlError!
+override Hl7.Cql.Exceptions.CqlException.Message.get -> string!
+Hl7.Cql.Exceptions.CqlException<TError>
+Hl7.Cql.Exceptions.CqlException<TError>.CqlException(TError error, System.Exception? innerException = null) -> void
+Hl7.Cql.Exceptions.CqlException<TError>.Error.get -> TError
+override Hl7.Cql.Exceptions.CqlException<TError>.GetError() -> Hl7.Cql.Exceptions.ICqlError!
+Hl7.Cql.Exceptions.CqlErrorExtensions
+static Hl7.Cql.Exceptions.CqlErrorExtensions.ToException<TError>(this TError cqlError, System.Exception? innerException = null) -> Hl7.Cql.Exceptions.CqlException<TError>!
+Hl7.Cql.Primitives.CqlUcumYearArithmeticError
+Hl7.Cql.Primitives.CqlUcumYearArithmeticError.CqlUcumYearArithmeticError() -> void
+Hl7.Cql.Primitives.CqlUcumYearArithmeticError.Equals(Hl7.Cql.Primitives.CqlUcumYearArithmeticError other) -> bool
+override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.GetHashCode() -> int
+Hl7.Cql.Primitives.CqlUcumYearArithmeticError.GetMessage() -> string!
+~override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.ToString() -> string
+static Hl7.Cql.Primitives.CqlUcumYearArithmeticError.operator !=(Hl7.Cql.Primitives.CqlUcumYearArithmeticError left, Hl7.Cql.Primitives.CqlUcumYearArithmeticError right) -> bool
+static Hl7.Cql.Primitives.CqlUcumYearArithmeticError.operator ==(Hl7.Cql.Primitives.CqlUcumYearArithmeticError left, Hl7.Cql.Primitives.CqlUcumYearArithmeticError right) -> bool
+Hl7.Cql.Primitives.CqlUcumMonthArithmeticError
+Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.CqlUcumMonthArithmeticError() -> void
+Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.Equals(Hl7.Cql.Primitives.CqlUcumMonthArithmeticError other) -> bool
+override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.GetHashCode() -> int
+Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.GetMessage() -> string!
+~override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.ToString() -> string
+static Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.operator !=(Hl7.Cql.Primitives.CqlUcumMonthArithmeticError left, Hl7.Cql.Primitives.CqlUcumMonthArithmeticError right) -> bool
+static Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.operator ==(Hl7.Cql.Primitives.CqlUcumMonthArithmeticError left, Hl7.Cql.Primitives.CqlUcumMonthArithmeticError right) -> bool

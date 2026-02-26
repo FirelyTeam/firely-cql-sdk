@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Iso8601;
 
 namespace Hl7.Cql.Primitives
@@ -105,9 +106,9 @@ namespace Hl7.Cql.Primitives
             {
                 dto = unit switch
                 {
-                    "a"                                     => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerYearDouble),
+                    UCUMUnits.Year                          => throw new CqlUcumYearArithmeticError().ToException(),
                     "year" or "years"                       => dto.AddYears((int)value),
-                    "mo"                                    => dto.AddDays(Math.Sign(value) * UCUMUnits.DaysPerMonthDouble),
+                    UCUMUnits.Month                         => throw new CqlUcumMonthArithmeticError().ToException(),
                     "month" or "months"                     => dto.AddMonths((int)value),
                     "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
                     "d" or "day" or "days"                  => dto.AddDays((int)value!),

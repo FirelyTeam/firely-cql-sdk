@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure.Diagramming;
 using Hl7.Cql.Compiler.Infrastructure.Graphs;

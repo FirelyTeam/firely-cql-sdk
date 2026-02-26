@@ -8,7 +8,7 @@
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible constructors
 
-using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Runtime;
 using System.Text.Json.Serialization;
 
