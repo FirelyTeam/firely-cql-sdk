@@ -93,14 +93,14 @@ stages:
       useVersionSuffix: true
     ${{ else }}: # release mode
       useVersionSuffix: false
-    # Only sign on release tags or develop branch (not PRs)
-    ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+    # Only sign on release tags (v* tag)
+    ${{ if startswith(variables['Build.SourceBranch'], 'refs/tags/v') }}:
       shouldSign: true
       azureServiceConnectionForSigning: 'AzureTrustedSigningPrincipal'
       trustedSigningAccountEndpoint: 'https://weu.codesigning.azure.net/'
       trustedSigningAccountName: 'FirelyCodeSigning'
       certificateProfileName: 'FirelyCodeSigning'
-    ${{ else }}:
+    ${{ else }}: # non-tag builds: skip signing
       shouldSign: false
       azureServiceConnectionForSigning: ''
       trustedSigningAccountEndpoint: ''

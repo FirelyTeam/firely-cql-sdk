@@ -152,8 +152,8 @@ stages:
               includesymbols: true
               includesource: true
 
-          # Sign NuGet packages with Azure Trusted Signing (skip for PRs)
-          - ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
+          # Sign NuGet packages with Azure Trusted Signing (only on v* tag releases)
+          - ${{ if startswith(variables['Build.SourceBranch'], 'refs/tags/v') }}:
             - template: codesign-nuget-package-using-trusted-signing.yml@templates
               parameters:
                 azureServiceConnection: '${{ parameters.azureServiceConnectionForSigning }}'
