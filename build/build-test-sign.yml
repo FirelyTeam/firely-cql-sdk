@@ -10,7 +10,7 @@
 # - Build once, sign and pack on same agent (no artifact download overhead)
 # - Tests run in parallel after build
 # - Java dependencies are cached across builds
-# - Signing only happens on release tags or develop branch
+# - Signing only happens on v* tag releases (controlled via shouldSign parameter)
 # - .NET SDKs are only installed where needed (test jobs only install what they need)
 #
 # Usage: Include this template in azure-pipelines.yml for complete build/test/sign pipeline
@@ -152,8 +152,8 @@ stages:
               includesymbols: true
               includesource: true
 
-          # Sign NuGet packages with Azure Trusted Signing (only on v* tag releases)
-          - ${{ if startswith(variables['Build.SourceBranch'], 'refs/tags/v') }}:
+          # Sign NuGet packages with Azure Trusted Signing (controlled by shouldSign parameter)
+          - ${{ if eq(parameters.shouldSign, true) }}:
             - template: codesign-nuget-package-using-trusted-signing.yml@templates
               parameters:
                 azureServiceConnection: '${{ parameters.azureServiceConnectionForSigning }}'
