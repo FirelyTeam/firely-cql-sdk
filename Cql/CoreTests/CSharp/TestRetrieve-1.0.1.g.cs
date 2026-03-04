@@ -12,11 +12,11 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
 [CqlLibrary("TestRetrieve", "1.0.1")]
 public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_1>
 {
-    #region ValueSets
+    #region ValueSets (11)
 
     [CqlValueSetDefinition("HIV", valueSetId: "2.16.840.1.113883.3.464.1003.120.12.1003", valueSetVersion: null)]
     public CqlValueSet HIV(CqlContext _) => _HIV;
@@ -64,7 +64,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion ValueSets
 
-    #region Codes
+    #region Codes (1)
 
     [CqlCodeDefinition("Encounter for palliative care", codeId: "Z51.5", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
     public CqlCode Encounter_for_palliative_care(CqlContext _) => _Encounter_for_palliative_care;
@@ -72,7 +72,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion Codes
 
-    #region CodeSystems
+    #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("ICD-10", codeSystemId: "http://hl7.org/fhir/sid/icd-10-cm", codeSystemVersion: null)]
     public CqlCodeSystem ICD_10(CqlContext _) => _ICD_10;
@@ -82,50 +82,70 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     #endregion CodeSystems
 
-    #region Parameters
+    #region Parameters (1)
 
     [CqlParameterDefinition("MeasurementPeriod")]
     public object MeasurementPeriod(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<object>(-7600276400685164205L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, (decimal?)default);
-            CqlDateTime b_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, (decimal?)default);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-            object d_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", c_);
-            return d_;
-        });
+        context.GetOrCompute(_cacheIndex_MeasurementPeriod, MeasurementPeriod_Compute);
+
+    private static readonly long _cacheIndex_MeasurementPeriod = -7600276400685164205L;
+
+    private object MeasurementPeriod_Compute(CqlContext context)
+    {
+        CqlDateTime a_ = context.Operators.DateTime(2013, 1, 1, 0, 0, 0, 0, (decimal?)default);
+        CqlDateTime b_ = context.Operators.DateTime(2014, 1, 1, 0, 0, 0, 0, (decimal?)default);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+        object d_ = context.ResolveParameter("TestRetrieve-1.0.1", "MeasurementPeriod", c_);
+        return d_;
+    }
 
 
     #endregion Parameters
 
-    #region Functions and Expressions
+    #region Functions and Expressions (3)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(-2290543591551071229L, () => {
-            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-            return b_;
-        });
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+
+    private static readonly long _cacheIndex_Patient = -2290543591551071229L;
+
+    private Patient Patient_Compute(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        return b_;
+    }
 
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Patient> InDemographic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Patient>>(6267391033452327865L, () => {
-            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute);
+
+    private static readonly long _cacheIndex_InDemographic = 6267391033452327865L;
+
+    private IEnumerable<Patient> InDemographic_Compute(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("SexuallyActive")]
     public bool? SexuallyActive(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(430680482037105811L, () => {
-            IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-            bool? b_ = context.Operators.Exists<Condition>(a_);
-            IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
-            bool? d_ = context.Operators.Exists<ServiceRequest>(c_);
-            bool? e_ = context.Operators.Or(b_, d_);
-            return e_;
-        });
+        context.GetOrCompute(_cacheIndex_SexuallyActive, SexuallyActive_Compute);
+
+    private static readonly long _cacheIndex_SexuallyActive = 430680482037105811L;
+
+    private bool? SexuallyActive_Compute(CqlContext context)
+    {
+        IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? b_ = context.Operators.Exists<Condition>(a_);
+        IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
+        bool? d_ = context.Operators.Exists<ServiceRequest>(c_);
+        bool? e_ = context.Operators.Or(b_, d_);
+        return e_;
+    }
 
 
     #endregion Functions and Expressions

@@ -12,11 +12,11 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
 public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_1_0_1>
 {
-    #region ValueSets
+    #region ValueSets (6)
 
     [CqlValueSetDefinition("Female Administrative Sex", valueSetId: "2.16.840.1.113883.3.560.100.2", valueSetVersion: null)]
     public CqlValueSet Female_Administrative_Sex(CqlContext _) => _Female_Administrative_Sex;
@@ -44,14 +44,19 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #endregion ValueSets
 
-    #region Functions and Expressions
+    #region Functions and Expressions (1)
 
     [CqlExpressionDefinition("InDemographic")]
     public IEnumerable<Observation> InDemographic(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Observation>>(1057832894862877646L, () => {
-            IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute);
+
+    private static readonly long _cacheIndex_InDemographic = 1057832894862877646L;
+
+    private IEnumerable<Observation> InDemographic_Compute(CqlContext context)
+    {
+        IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        return a_;
+    }
 
 
     #endregion Functions and Expressions

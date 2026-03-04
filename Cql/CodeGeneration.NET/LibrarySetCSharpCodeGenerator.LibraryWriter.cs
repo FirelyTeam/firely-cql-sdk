@@ -144,25 +144,32 @@ partial class LibrarySetCSharpCodeGenerator
         private ElmLibrary? _library;
         public IndentedStringBuilder ISB { get; private set; } = new();
 
+        private static string GetDefinitionRegion(CqlDefinition definition) =>
+            definition switch
+            {
+                // CqlFunctionDefinition is a CqlExpressionDefinition
+                // We combine them into one region otherwise we would have too many segments switching between Function and Expression
+                CqlExpressionDefinition => "Functions and Expressions",
+
+                // Extract the region name from the definition type name e.g. Cql[Parameter]Definition => Parameters
+                _ => $"{definition.GetType().Name["Cql".Length..^"Definition".Length]}s"
+            };
+
         private void AppendMethods()
         {
             string lastDefinitionRegion = "";
+
+            // Pre-compute region counts for the region header
+            var regionCounts = _definitions
+                .GroupBy(GetDefinitionRegion)
+                .ToDictionary(g => g.Key, g => g.Count());
 
             // Assumption: definitions are already sorted by definition type
             foreach (var definition in _definitions)
             {
                 // Assumption: type name will be Cql....Definition
                 Debug.Assert(definition.GetType().Name is { } name && name.StartsWith("Cql") && name.EndsWith("Definition"));
-                string definitionRegion =
-                    definition switch
-                    {
-                        // CqlFunctionDefinition is a CqlExpressionDefinition
-                        // We combine them into one region otherwise we would have too many segments switching between Function and Expression
-                        CqlExpressionDefinition => "Functions and Expressions",
-
-                        // Extract the region name from the definition type name e.g. Cql[Parameter]Definition => Parameters
-                        _ => $"{definition.GetType().Name["Cql".Length..^"Definition".Length]}s"
-                    };
+                string definitionRegion = GetDefinitionRegion(definition);
 
                 if (lastDefinitionRegion != definitionRegion)
                 {
@@ -175,9 +182,10 @@ partial class LibrarySetCSharpCodeGenerator
                              """);
                     }
 
+                    var count = regionCounts[definitionRegion];
                     ISB.AppendLine(
                         $"""
-                         #region {definitionRegion}
+                         #region {definitionRegion} ({count})
 
                          """);
                 }

@@ -58,7 +58,7 @@ internal sealed class LibraryInstanceInvoker_5_0 : LibraryInstanceInvoker
     /// </summary>
     public static bool SupportsVersion(Version cqlToolVersion) =>
         cqlToolVersion >= new Version(5, 0, 0, 0)
-        && cqlToolVersion < new Version(5, 1, 0, 0);
+        && cqlToolVersion < new Version(6, 0, 0, 0);
 }
 
 file sealed class DefinitionInvoker_5_0(

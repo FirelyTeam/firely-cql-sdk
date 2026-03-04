@@ -12,11 +12,11 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
 [CqlLibrary("CMS131FHIRDiabetesEyeExam", "1.0.000")]
 public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CMS131FHIRDiabetesEyeExam_1_0_000>
 {
-    #region ValueSets
+    #region ValueSets (12)
 
     [CqlValueSetDefinition("Annual Wellness Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", valueSetVersion: null)]
     public CqlValueSet Annual_Wellness_Visit(CqlContext _) => _Annual_Wellness_Visit;
@@ -68,7 +68,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     #endregion ValueSets
 
-    #region Codes
+    #region Codes (5)
 
     [CqlCodeDefinition("Anophthalmos of bilateral eyes (disorder)", codeId: "15665641000119103", codeSystem: "http://snomed.info/sct")]
     public CqlCode Anophthalmos_of_bilateral_eyes__disorder_(CqlContext _) => _Anophthalmos_of_bilateral_eyes__disorder_;
@@ -92,7 +92,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     #endregion Codes
 
-    #region CodeSystems
+    #region CodeSystems (2)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
     public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
@@ -111,457 +111,567 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
     #endregion CodeSystems
 
-    #region Parameters
+    #region Parameters (1)
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1372366969867876817L, () => {
-            CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-            CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-            object d_ = context.ResolveParameter("CMS131FHIRDiabetesEyeExam-1.0.000", "Measurement Period", c_);
-            return (CqlInterval<CqlDateTime>)d_;
-        });
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+
+    private static readonly long _cacheIndex_Measurement_Period = -1372366969867876817L;
+
+    private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
+    {
+        CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+        object d_ = context.ResolveParameter("CMS131FHIRDiabetesEyeExam-1.0.000", "Measurement Period", c_);
+        return (CqlInterval<CqlDateTime>)d_;
+    }
 
 
     #endregion Parameters
 
-    #region Functions and Expressions
+    #region Functions and Expressions (21)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(8754168965339112623L, () => {
-            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-            return b_;
-        });
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+
+    private static readonly long _cacheIndex_Patient = 8754168965339112623L;
+
+    private Patient Patient_Compute(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        return b_;
+    }
 
 
     [CqlExpressionDefinition("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(7474887545424351166L, () => {
-            CqlValueSet a_ = this.Office_Visit(context);
-            IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            CqlValueSet c_ = this.Annual_Wellness_Visit(context);
-            IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-            CqlValueSet f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
-            IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            CqlValueSet h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
-            IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
-            IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-            CqlValueSet l_ = this.Home_Healthcare_Services(context);
-            IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            CqlValueSet n_ = this.Ophthalmological_Services(context);
-            IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
-            IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-            CqlValueSet r_ = this.Telephone_Visits(context);
-            IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-            IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
-            IEnumerable<Encounter> u_ = Status_1_15_000.Instance.isEncounterPerformed(context, t_);
+        context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-            bool? v_(Encounter ValidEncounters) {
-                CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-                Period y_ = ValidEncounters?.Period;
-                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-                bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
-                return aa_;
-            }
+    private static readonly long _cacheIndex_Qualifying_Encounters = 7474887545424351166L;
 
-            IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(u_, v_);
-            return w_;
-        });
+    private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Office_Visit(context);
+        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet c_ = this.Annual_Wellness_Visit(context);
+        IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
+        CqlValueSet f_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
+        IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
+        IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
+        IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
+        CqlValueSet l_ = this.Home_Healthcare_Services(context);
+        IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet n_ = this.Ophthalmological_Services(context);
+        IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
+        IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
+        CqlValueSet r_ = this.Telephone_Visits(context);
+        IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
+        IEnumerable<Encounter> u_ = Status_1_15_000.Instance.isEncounterPerformed(context, t_);
+
+        bool? v_(Encounter ValidEncounters) {
+            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+            Period y_ = ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
+            bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, "day");
+            return aa_;
+        }
+
+        IEnumerable<Encounter> w_ = context.Operators.Where<Encounter>(u_, v_);
+        return w_;
+    }
 
 
     [CqlExpressionDefinition("Initial Population")]
     public bool? Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-6877642258673002907L, () => {
-            Patient a_ = this.Patient(context);
-            Date b_ = a_?.BirthDateElement;
-            string c_ = b_?.Value;
-            CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-            CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
-            CqlDateTime f_ = context.Operators.End(e_);
-            CqlDate g_ = context.Operators.DateFrom(f_);
-            int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-            CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
-            bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-            IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
-            bool? l_ = context.Operators.Exists<Encounter>(k_);
-            bool? m_ = context.Operators.And(j_, l_);
-            CqlValueSet n_ = this.Diabetes(context);
-            IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            object p_(Condition X) => X as object;
-            IEnumerable<object> q_ = context.Operators.Select<Condition, object>(o_, p_);
-            IEnumerable<object> r_ = Status_1_15_000.Instance.verified(context, q_);
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-            bool? s_(object DiabetesDx) {
-                CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDx);
-                CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
-                bool? y_ = context.Operators.Overlaps(w_, x_, "day");
-                return y_;
-            }
+    private static readonly long _cacheIndex_Initial_Population = -6877642258673002907L;
 
-            IEnumerable<object> t_ = context.Operators.Where<object>(r_, s_);
-            bool? u_ = context.Operators.Exists<object>(t_);
-            bool? v_ = context.Operators.And(m_, u_);
-            return v_;
-        });
+    private bool? Initial_Population_Compute(CqlContext context)
+    {
+        Patient a_ = this.Patient(context);
+        Date b_ = a_?.BirthDateElement;
+        string c_ = b_?.Value;
+        CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+        CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
+        CqlDateTime f_ = context.Operators.End(e_);
+        CqlDate g_ = context.Operators.DateFrom(f_);
+        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+        CqlInterval<int?> i_ = context.Operators.Interval(18, 75, true, true);
+        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        IEnumerable<Encounter> k_ = this.Qualifying_Encounters(context);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
+        bool? m_ = context.Operators.And(j_, l_);
+        CqlValueSet n_ = this.Diabetes(context);
+        IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        object p_(Condition X) => X as object;
+        IEnumerable<object> q_ = context.Operators.Select<Condition, object>(o_, p_);
+        IEnumerable<object> r_ = Status_1_15_000.Instance.verified(context, q_);
+
+        bool? s_(object DiabetesDx) {
+            CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDx);
+            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+            bool? y_ = context.Operators.Overlaps(w_, x_, "day");
+            return y_;
+        }
+
+        IEnumerable<object> t_ = context.Operators.Where<object>(r_, s_);
+        bool? u_ = context.Operators.Exists<object>(t_);
+        bool? v_ = context.Operators.And(m_, u_);
+        return v_;
+    }
 
 
     [CqlExpressionDefinition("Denominator")]
     public bool? Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-4946724370846126806L, () => {
-            bool? a_ = this.Initial_Population(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+
+    private static readonly long _cacheIndex_Denominator = -4946724370846126806L;
+
+    private bool? Denominator_Compute(CqlContext context)
+    {
+        bool? a_ = this.Initial_Population(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("Bilateral Absence of Eyes")]
     public bool? Bilateral_Absence_of_Eyes(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(1524813797823961047L, () => {
-            CqlCode a_ = this.Anophthalmos_of_bilateral_eyes__disorder_(context);
-            IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-            IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
-            IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-            IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+        context.GetOrCompute(_cacheIndex_Bilateral_Absence_of_Eyes, Bilateral_Absence_of_Eyes_Compute);
 
-            bool? i_(object BilateralAbsenceEyes) {
-                CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BilateralAbsenceEyes);
-                CqlDateTime m_ = context.Operators.Start(l_);
-                CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-                CqlDateTime o_ = context.Operators.End(n_);
-                bool? p_ = context.Operators.SameOrBefore(m_, o_, "day");
-                return p_;
-            }
+    private static readonly long _cacheIndex_Bilateral_Absence_of_Eyes = 1524813797823961047L;
 
-            IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
-            bool? k_ = context.Operators.Exists<object>(j_);
-            return k_;
-        });
+    private bool? Bilateral_Absence_of_Eyes_Compute(CqlContext context)
+    {
+        CqlCode a_ = this.Anophthalmos_of_bilateral_eyes__disorder_(context);
+        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+        IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
+        IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
+        IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+
+        bool? i_(object BilateralAbsenceEyes) {
+            CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BilateralAbsenceEyes);
+            CqlDateTime m_ = context.Operators.Start(l_);
+            CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
+            CqlDateTime o_ = context.Operators.End(n_);
+            bool? p_ = context.Operators.SameOrBefore(m_, o_, "day");
+            return p_;
+        }
+
+        IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
+        bool? k_ = context.Operators.Exists<object>(j_);
+        return k_;
+    }
 
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(6402464688092136939L, () => {
-            bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-            bool? b_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
-            bool? c_ = context.Operators.Or(a_, b_);
-            bool? d_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
-            bool? e_ = context.Operators.Or(c_, d_);
-            bool? f_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
-            bool? g_ = context.Operators.Or(e_, f_);
-            bool? h_ = this.Bilateral_Absence_of_Eyes(context);
-            bool? i_ = context.Operators.Or(g_, h_);
-            return i_;
-        });
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+
+    private static readonly long _cacheIndex_Denominator_Exclusions = 6402464688092136939L;
+
+    private bool? Denominator_Exclusions_Compute(CqlContext context)
+    {
+        bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
+        bool? b_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
+        bool? c_ = context.Operators.Or(a_, b_);
+        bool? d_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
+        bool? e_ = context.Operators.Or(c_, d_);
+        bool? f_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
+        bool? g_ = context.Operators.Or(e_, f_);
+        bool? h_ = this.Bilateral_Absence_of_Eyes(context);
+        bool? i_ = context.Operators.Or(g_, h_);
+        return i_;
+    }
 
 
     [CqlExpressionDefinition("Diabetic Retinopathy Overlapping Measurement Period")]
     public bool? Diabetic_Retinopathy_Overlapping_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1188348194717143934L, () => {
-            CqlValueSet a_ = this.Diabetic_Retinopathy(context);
-            IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-            IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        context.GetOrCompute(_cacheIndex_Diabetic_Retinopathy_Overlapping_Measurement_Period, Diabetic_Retinopathy_Overlapping_Measurement_Period_Compute);
 
-            bool? g_(object Retinopathy) {
-                CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Retinopathy);
-                CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-                bool? l_ = context.Operators.Overlaps(j_, k_, "day");
-                return l_;
-            }
+    private static readonly long _cacheIndex_Diabetic_Retinopathy_Overlapping_Measurement_Period = -1188348194717143934L;
 
-            IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
-            bool? i_ = context.Operators.Exists<object>(h_);
-            return i_;
-        });
+    private bool? Diabetic_Retinopathy_Overlapping_Measurement_Period_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Diabetic_Retinopathy(context);
+        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+
+        bool? g_(object Retinopathy) {
+            CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Retinopathy);
+            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
+            bool? l_ = context.Operators.Overlaps(j_, k_, "day");
+            return l_;
+        }
+
+        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
+        bool? i_ = context.Operators.Exists<object>(h_);
+        return i_;
+    }
 
 
     [CqlExpressionDefinition("Retinal Exam in Measurement Period")]
     public bool? Retinal_Exam_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(8451818952942615611L, () => {
-            CqlValueSet a_ = this.Retinal_or_Dilated_Eye_Exam(context);
-            IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<Observation> c_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, b_);
+        context.GetOrCompute(_cacheIndex_Retinal_Exam_in_Measurement_Period, Retinal_Exam_in_Measurement_Period_Compute);
 
-            bool? d_(Observation RetinalExam) {
-                CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
-                DataType h_ = RetinalExam?.Effective;
-                object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-                CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
-                bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
-                return k_;
-            }
+    private static readonly long _cacheIndex_Retinal_Exam_in_Measurement_Period = 8451818952942615611L;
 
-            IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
-            bool? f_ = context.Operators.Exists<Observation>(e_);
-            return f_;
-        });
+    private bool? Retinal_Exam_in_Measurement_Period_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Retinal_or_Dilated_Eye_Exam(context);
+        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+        IEnumerable<Observation> c_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, b_);
+
+        bool? d_(Observation RetinalExam) {
+            CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
+            DataType h_ = RetinalExam?.Effective;
+            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
+            CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
+            bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(g_, j_, "day");
+            return k_;
+        }
+
+        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+        bool? f_ = context.Operators.Exists<Observation>(e_);
+        return f_;
+    }
 
 
     [CqlExpressionDefinition("Retinal Exam in Measurement Period or Year Prior")]
     public bool? Retinal_Exam_in_Measurement_Period_or_Year_Prior(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(4931343330646639316L, () => {
-            CqlValueSet a_ = this.Retinal_or_Dilated_Eye_Exam(context);
-            IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<Observation> c_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, b_);
+        context.GetOrCompute(_cacheIndex_Retinal_Exam_in_Measurement_Period_or_Year_Prior, Retinal_Exam_in_Measurement_Period_or_Year_Prior_Compute);
 
-            bool? d_(Observation RetinalExam) {
-                CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
-                CqlDateTime h_ = context.Operators.Start(g_);
-                CqlQuantity i_ = context.Operators.Quantity(1m, "year");
-                CqlDateTime j_ = context.Operators.Subtract(h_, i_);
-                CqlDateTime l_ = context.Operators.End(g_);
-                CqlInterval<CqlDateTime> m_ = context.Operators.Interval(j_, l_, true, true);
-                DataType n_ = RetinalExam?.Effective;
-                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-                CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
-                bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
-                return q_;
-            }
+    private static readonly long _cacheIndex_Retinal_Exam_in_Measurement_Period_or_Year_Prior = 4931343330646639316L;
 
-            IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
-            bool? f_ = context.Operators.Exists<Observation>(e_);
-            return f_;
-        });
+    private bool? Retinal_Exam_in_Measurement_Period_or_Year_Prior_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Retinal_or_Dilated_Eye_Exam(context);
+        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+        IEnumerable<Observation> c_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, b_);
+
+        bool? d_(Observation RetinalExam) {
+            CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
+            CqlDateTime h_ = context.Operators.Start(g_);
+            CqlQuantity i_ = context.Operators.Quantity(1m, "year");
+            CqlDateTime j_ = context.Operators.Subtract(h_, i_);
+            CqlDateTime l_ = context.Operators.End(g_);
+            CqlInterval<CqlDateTime> m_ = context.Operators.Interval(j_, l_, true, true);
+            DataType n_ = RetinalExam?.Effective;
+            object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
+            bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(m_, p_, "day");
+            return q_;
+        }
+
+        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+        bool? f_ = context.Operators.Exists<Observation>(e_);
+        return f_;
+    }
 
 
     [CqlExpressionDefinition("Autonomous Eye Exam in Measurement Period")]
     public bool? Autonomous_Eye_Exam_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(3553745899802313510L, () => {
-            CqlCode a_ = this.Eye_Diabetic_retinopathy_screening_Autonomous_artificial_intelligence(context);
-            IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-            IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
+        context.GetOrCompute(_cacheIndex_Autonomous_Eye_Exam_in_Measurement_Period, Autonomous_Eye_Exam_in_Measurement_Period_Compute);
 
-            bool? e_(Observation AutonomousEyeExam) {
-                DataType h_ = AutonomousEyeExam?.Value;
-                object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-                CqlValueSet j_ = this.Autonomous_Eye_Exam_Result_or_Finding(context);
-                bool? k_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, j_);
-                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-                DataType m_ = AutonomousEyeExam?.Effective;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-                bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
-                bool? q_ = context.Operators.And(k_, p_);
-                return q_;
-            }
+    private static readonly long _cacheIndex_Autonomous_Eye_Exam_in_Measurement_Period = 3553745899802313510L;
 
-            IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-            bool? g_ = context.Operators.Exists<Observation>(f_);
-            return g_;
-        });
+    private bool? Autonomous_Eye_Exam_in_Measurement_Period_Compute(CqlContext context)
+    {
+        CqlCode a_ = this.Eye_Diabetic_retinopathy_screening_Autonomous_artificial_intelligence(context);
+        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+        IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
+
+        bool? e_(Observation AutonomousEyeExam) {
+            DataType h_ = AutonomousEyeExam?.Value;
+            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
+            CqlValueSet j_ = this.Autonomous_Eye_Exam_Result_or_Finding(context);
+            bool? k_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, j_);
+            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+            DataType m_ = AutonomousEyeExam?.Effective;
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
+            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+            bool? q_ = context.Operators.And(k_, p_);
+            return q_;
+        }
+
+        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
+        bool? g_ = context.Operators.Exists<Observation>(f_);
+        return g_;
+    }
 
 
     [CqlExpressionDefinition("Has Left Eye Retinopathy")]
     public bool? Has_Left_Eye_Retinopathy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-3611092800924631981L, () => {
-            CqlCode a_ = this.Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
-            IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-            IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
+        context.GetOrCompute(_cacheIndex_Has_Left_Eye_Retinopathy, Has_Left_Eye_Retinopathy_Compute);
 
-            bool? e_(Observation LeftEyeRetinopathy) {
-                DataType h_ = LeftEyeRetinopathy?.Value;
-                object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-                CqlValueSet j_ = this.Diabetic_Retinopathy_Severity_Level(context);
-                bool? k_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, j_);
-                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-                DataType m_ = LeftEyeRetinopathy?.Effective;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-                bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
-                bool? q_ = context.Operators.And(k_, p_);
-                return q_;
-            }
+    private static readonly long _cacheIndex_Has_Left_Eye_Retinopathy = -3611092800924631981L;
 
-            IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-            bool? g_ = context.Operators.Exists<Observation>(f_);
-            return g_;
-        });
+    private bool? Has_Left_Eye_Retinopathy_Compute(CqlContext context)
+    {
+        CqlCode a_ = this.Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
+        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+        IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
+
+        bool? e_(Observation LeftEyeRetinopathy) {
+            DataType h_ = LeftEyeRetinopathy?.Value;
+            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
+            CqlValueSet j_ = this.Diabetic_Retinopathy_Severity_Level(context);
+            bool? k_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, j_);
+            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+            DataType m_ = LeftEyeRetinopathy?.Effective;
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
+            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+            bool? q_ = context.Operators.And(k_, p_);
+            return q_;
+        }
+
+        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
+        bool? g_ = context.Operators.Exists<Observation>(f_);
+        return g_;
+    }
 
 
     [CqlExpressionDefinition("Has Right Eye Retinopathy")]
     public bool? Has_Right_Eye_Retinopathy(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-2867486777848299255L, () => {
-            CqlCode a_ = this.Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
-            IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-            IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
+        context.GetOrCompute(_cacheIndex_Has_Right_Eye_Retinopathy, Has_Right_Eye_Retinopathy_Compute);
 
-            bool? e_(Observation RightEyeRetinopathy) {
-                DataType h_ = RightEyeRetinopathy?.Value;
-                object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-                CqlValueSet j_ = this.Diabetic_Retinopathy_Severity_Level(context);
-                bool? k_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, j_);
-                CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
-                DataType m_ = RightEyeRetinopathy?.Effective;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
-                bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
-                bool? q_ = context.Operators.And(k_, p_);
-                return q_;
-            }
+    private static readonly long _cacheIndex_Has_Right_Eye_Retinopathy = -2867486777848299255L;
 
-            IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-            bool? g_ = context.Operators.Exists<Observation>(f_);
-            return g_;
-        });
+    private bool? Has_Right_Eye_Retinopathy_Compute(CqlContext context)
+    {
+        CqlCode a_ = this.Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
+        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+        IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
+
+        bool? e_(Observation RightEyeRetinopathy) {
+            DataType h_ = RightEyeRetinopathy?.Value;
+            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
+            CqlValueSet j_ = this.Diabetic_Retinopathy_Severity_Level(context);
+            bool? k_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, j_);
+            CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
+            DataType m_ = RightEyeRetinopathy?.Effective;
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
+            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
+            bool? q_ = context.Operators.And(k_, p_);
+            return q_;
+        }
+
+        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
+        bool? g_ = context.Operators.Exists<Observation>(f_);
+        return g_;
+    }
 
 
     [CqlExpressionDefinition("Has Right Eye No Retinopathy in Year Prior")]
     public bool? Has_Right_Eye_No_Retinopathy_in_Year_Prior(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-1307124294398025800L, () => {
-            CqlCode a_ = this.Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
-            IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-            IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
+        context.GetOrCompute(_cacheIndex_Has_Right_Eye_No_Retinopathy_in_Year_Prior, Has_Right_Eye_No_Retinopathy_in_Year_Prior_Compute);
 
-            bool? e_(Observation RightEyeNoRetinopathy) {
-                DataType h_ = RightEyeNoRetinopathy?.Value;
-                object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-                CqlCode j_ = this.No_apparent_retinopathy(context);
-                CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-                bool? l_ = context.Operators.Equivalent(i_ as CqlConcept, k_);
-                CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
-                CqlDateTime n_ = context.Operators.Start(m_);
-                CqlQuantity o_ = context.Operators.Quantity(1m, "year");
-                CqlDateTime p_ = context.Operators.Subtract(n_, o_);
-                CqlDateTime r_ = context.Operators.End(m_);
-                CqlDateTime t_ = context.Operators.Subtract(r_, o_);
-                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, true, true);
-                DataType v_ = RightEyeNoRetinopathy?.Effective;
-                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
-                bool? y_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, x_, "day");
-                bool? z_ = context.Operators.And(l_, y_);
-                return z_;
-            }
+    private static readonly long _cacheIndex_Has_Right_Eye_No_Retinopathy_in_Year_Prior = -1307124294398025800L;
 
-            IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-            bool? g_ = context.Operators.Exists<Observation>(f_);
-            return g_;
-        });
+    private bool? Has_Right_Eye_No_Retinopathy_in_Year_Prior_Compute(CqlContext context)
+    {
+        CqlCode a_ = this.Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
+        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+        IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
+
+        bool? e_(Observation RightEyeNoRetinopathy) {
+            DataType h_ = RightEyeNoRetinopathy?.Value;
+            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
+            CqlCode j_ = this.No_apparent_retinopathy(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(i_ as CqlConcept, k_);
+            CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+            CqlDateTime n_ = context.Operators.Start(m_);
+            CqlQuantity o_ = context.Operators.Quantity(1m, "year");
+            CqlDateTime p_ = context.Operators.Subtract(n_, o_);
+            CqlDateTime r_ = context.Operators.End(m_);
+            CqlDateTime t_ = context.Operators.Subtract(r_, o_);
+            CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, true, true);
+            DataType v_ = RightEyeNoRetinopathy?.Effective;
+            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+            CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
+            bool? y_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, x_, "day");
+            bool? z_ = context.Operators.And(l_, y_);
+            return z_;
+        }
+
+        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
+        bool? g_ = context.Operators.Exists<Observation>(f_);
+        return g_;
+    }
 
 
     [CqlExpressionDefinition("Has Left Eye No Retinopathy in Year Prior")]
     public bool? Has_Left_Eye_No_Retinopathy_in_Year_Prior(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7916633526503722236L, () => {
-            CqlCode a_ = this.Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
-            IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-            IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
+        context.GetOrCompute(_cacheIndex_Has_Left_Eye_No_Retinopathy_in_Year_Prior, Has_Left_Eye_No_Retinopathy_in_Year_Prior_Compute);
 
-            bool? e_(Observation LeftEyeNoRetinopathy) {
-                DataType h_ = LeftEyeNoRetinopathy?.Value;
-                object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-                CqlCode j_ = this.No_apparent_retinopathy(context);
-                CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
-                bool? l_ = context.Operators.Equivalent(i_ as CqlConcept, k_);
-                CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
-                CqlDateTime n_ = context.Operators.Start(m_);
-                CqlQuantity o_ = context.Operators.Quantity(1m, "year");
-                CqlDateTime p_ = context.Operators.Subtract(n_, o_);
-                CqlDateTime r_ = context.Operators.End(m_);
-                CqlDateTime t_ = context.Operators.Subtract(r_, o_);
-                CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, true, true);
-                DataType v_ = LeftEyeNoRetinopathy?.Effective;
-                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
-                bool? y_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, x_, "day");
-                bool? z_ = context.Operators.And(l_, y_);
-                return z_;
-            }
+    private static readonly long _cacheIndex_Has_Left_Eye_No_Retinopathy_in_Year_Prior = -7916633526503722236L;
 
-            IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-            bool? g_ = context.Operators.Exists<Observation>(f_);
-            return g_;
-        });
+    private bool? Has_Left_Eye_No_Retinopathy_in_Year_Prior_Compute(CqlContext context)
+    {
+        CqlCode a_ = this.Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(context);
+        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
+        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+        IEnumerable<Observation> d_ = Status_1_15_000.Instance.isPhysicalExamPerformed(context, c_);
+
+        bool? e_(Observation LeftEyeNoRetinopathy) {
+            DataType h_ = LeftEyeNoRetinopathy?.Value;
+            object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
+            CqlCode j_ = this.No_apparent_retinopathy(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(i_ as CqlConcept, k_);
+            CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+            CqlDateTime n_ = context.Operators.Start(m_);
+            CqlQuantity o_ = context.Operators.Quantity(1m, "year");
+            CqlDateTime p_ = context.Operators.Subtract(n_, o_);
+            CqlDateTime r_ = context.Operators.End(m_);
+            CqlDateTime t_ = context.Operators.Subtract(r_, o_);
+            CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, true, true);
+            DataType v_ = LeftEyeNoRetinopathy?.Effective;
+            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+            CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
+            bool? y_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(u_, x_, "day");
+            bool? z_ = context.Operators.And(l_, y_);
+            return z_;
+        }
+
+        IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
+        bool? g_ = context.Operators.Exists<Observation>(f_);
+        return g_;
+    }
 
 
     [CqlExpressionDefinition("Retinal Exam Finding with Retinopathy Severity Level in Measurement Period")]
     public bool? Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-8220918818850205263L, () => {
-            bool? a_ = this.Has_Left_Eye_Retinopathy(context);
-            bool? b_ = this.Has_Right_Eye_Retinopathy(context);
-            bool? c_ = context.Operators.And(a_, b_);
-            bool? e_ = this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
-            bool? f_ = context.Operators.And(a_, e_);
-            bool? g_ = context.Operators.Or(c_, f_);
-            bool? i_ = this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
-            bool? j_ = context.Operators.And(b_, i_);
-            bool? k_ = context.Operators.Or(g_, j_);
-            return k_;
-        });
+        context.GetOrCompute(_cacheIndex_Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period, Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period_Compute);
+
+    private static readonly long _cacheIndex_Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period = -8220918818850205263L;
+
+    private bool? Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period_Compute(CqlContext context)
+    {
+        bool? a_ = this.Has_Left_Eye_Retinopathy(context);
+        bool? b_ = this.Has_Right_Eye_Retinopathy(context);
+        bool? c_ = context.Operators.And(a_, b_);
+        bool? e_ = this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
+        bool? f_ = context.Operators.And(a_, e_);
+        bool? g_ = context.Operators.Or(c_, f_);
+        bool? i_ = this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
+        bool? j_ = context.Operators.And(b_, i_);
+        bool? k_ = context.Operators.Or(g_, j_);
+        return k_;
+    }
 
 
     [CqlExpressionDefinition("Retinal Exam Finding with No Retinopathy Severity Level in Year Prior")]
     public bool? Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-5641069459776211341L, () => {
-            bool? a_ = this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
-            bool? b_ = this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
-            bool? c_ = context.Operators.And(a_, b_);
-            return c_;
-        });
+        context.GetOrCompute(_cacheIndex_Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior, Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior_Compute);
+
+    private static readonly long _cacheIndex_Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior = -5641069459776211341L;
+
+    private bool? Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior_Compute(CqlContext context)
+    {
+        bool? a_ = this.Has_Left_Eye_No_Retinopathy_in_Year_Prior(context);
+        bool? b_ = this.Has_Right_Eye_No_Retinopathy_in_Year_Prior(context);
+        bool? c_ = context.Operators.And(a_, b_);
+        return c_;
+    }
 
 
     [CqlExpressionDefinition("Numerator")]
     public bool? Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(1807750687989057360L, () => {
-            bool? a_ = this.Diabetic_Retinopathy_Overlapping_Measurement_Period(context);
-            bool? b_ = this.Retinal_Exam_in_Measurement_Period(context);
-            bool? c_ = context.Operators.And(a_, b_);
-            bool? e_ = context.Operators.Not(a_);
-            bool? f_ = this.Retinal_Exam_in_Measurement_Period_or_Year_Prior(context);
-            bool? g_ = context.Operators.And(e_, f_);
-            bool? h_ = context.Operators.Or(c_, g_);
-            bool? i_ = this.Autonomous_Eye_Exam_in_Measurement_Period(context);
-            bool? j_ = context.Operators.Or(h_, i_);
-            bool? k_ = this.Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(context);
-            bool? l_ = context.Operators.Or(j_, k_);
-            bool? m_ = this.Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(context);
-            bool? n_ = context.Operators.Or(l_, m_);
-            return n_;
-        });
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
+
+    private static readonly long _cacheIndex_Numerator = 1807750687989057360L;
+
+    private bool? Numerator_Compute(CqlContext context)
+    {
+        bool? a_ = this.Diabetic_Retinopathy_Overlapping_Measurement_Period(context);
+        bool? b_ = this.Retinal_Exam_in_Measurement_Period(context);
+        bool? c_ = context.Operators.And(a_, b_);
+        bool? e_ = context.Operators.Not(a_);
+        bool? f_ = this.Retinal_Exam_in_Measurement_Period_or_Year_Prior(context);
+        bool? g_ = context.Operators.And(e_, f_);
+        bool? h_ = context.Operators.Or(c_, g_);
+        bool? i_ = this.Autonomous_Eye_Exam_in_Measurement_Period(context);
+        bool? j_ = context.Operators.Or(h_, i_);
+        bool? k_ = this.Retinal_Exam_Finding_with_Retinopathy_Severity_Level_in_Measurement_Period(context);
+        bool? l_ = context.Operators.Or(j_, k_);
+        bool? m_ = this.Retinal_Exam_Finding_with_No_Retinopathy_Severity_Level_in_Year_Prior(context);
+        bool? n_ = context.Operators.Or(l_, m_);
+        return n_;
+    }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(-2126485817556375875L, () => {
-            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+
+    private static readonly long _cacheIndex_SDE_Ethnicity = -2126485817556375875L;
+
+    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    {
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>>(-8062047007454936636L, () => {
-            IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+
+    private static readonly long _cacheIndex_SDE_Payer = -8062047007454936636L;
+
+    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
+    {
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(8758770137911828662L, () => {
-            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+
+    private static readonly long _cacheIndex_SDE_Race = 8758770137911828662L;
+
+    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    {
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(8145108545693145561L, () => {
-            CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+
+    private static readonly long _cacheIndex_SDE_Sex = 8145108545693145561L;
+
+    private CqlCode SDE_Sex_Compute(CqlContext context)
+    {
+        CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
+        return a_;
+    }
 
 
     #endregion Functions and Expressions

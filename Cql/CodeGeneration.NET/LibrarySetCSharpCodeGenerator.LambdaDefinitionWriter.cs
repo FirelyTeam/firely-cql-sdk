@@ -67,13 +67,30 @@ internal partial class LibrarySetCSharpCodeGenerator
                 var libraryVersionedIdentifier = LibraryWriter.LibraryName.ToString();
                 var definitionName = ld.Name;
                 var cacheKey = LibraryWriter.LibrarySetWriter.CacheKeyGenerator.GenerateCacheKey(libraryVersionedIdentifier, definitionName);
-                
+                var cacheIndexFieldName = $"_cacheIndex_{methodName}";
+                var computeMethodName = $"{methodName}_Compute";
+
+                // Public method delegates to context.GetOrCompute with a private compute method (no closure)
                 ISB.AppendLine($"{lambdaParameters} =>");
                 using (ISB.Indent())
                 {
-                    ISB.AppendLine($"((ICqlContextInternals)context).GetOrCompute<{returnType}>({cacheKey}L, () => {lambdaBody});");
+                    ISB.AppendLine($"context.GetOrCompute({cacheIndexFieldName}, {computeMethodName});");
                 }
                 ISB.AppendLine();
+
+                // Static cache index field
+                ISB.AppendLine($"private static readonly long {cacheIndexFieldName} = {cacheKey}L;");
+                ISB.AppendLine();
+
+                // Private compute method containing the actual logic
+                var semicolon = transformedLambda.Body is BlockExpression ? "" : ";";
+                var lambdaOperator = transformedLambda.Body is BlockExpression ? "" : " =>";
+                ISB.AppendLine(
+                    $"""
+                     private {returnType} {computeMethodName}{lambdaParameters}{lambdaOperator}
+                     {lambdaBody}{semicolon}
+
+                     """);
             }
             else
             {

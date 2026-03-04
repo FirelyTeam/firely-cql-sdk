@@ -12,19 +12,24 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
 [CqlLibrary("CqlBooleanTest", "1.0.000")]
 public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTest_1_0_000>
 {
-    #region Functions and Expressions
+    #region Functions and Expressions (1)
 
     [CqlExpressionDefinition("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<bool?>(-7966027749533621960L, () => {
-            bool? a_ = context.Operators.Equal(1, 1);
-            bool? b_ = context.Operators.Equal(a_, true);
-            return b_;
-        });
+        context.GetOrCompute(_cacheIndex_SomethingTrueEqualsTrue, SomethingTrueEqualsTrue_Compute);
+
+    private static readonly long _cacheIndex_SomethingTrueEqualsTrue = -7966027749533621960L;
+
+    private bool? SomethingTrueEqualsTrue_Compute(CqlContext context)
+    {
+        bool? a_ = context.Operators.Equal(1, 1);
+        bool? b_ = context.Operators.Equal(a_, true);
+        return b_;
+    }
 
 
     #endregion Functions and Expressions

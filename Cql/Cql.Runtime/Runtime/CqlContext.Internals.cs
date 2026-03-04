@@ -108,4 +108,41 @@ partial class CqlContext : ICqlContextInternals
 
         return (T)cachedValue!;
     }
+
+    /// <summary>
+    /// Gets or computes a cached value for the specified cache key using a context-aware factory function.
+    /// </summary>
+    /// <typeparam name="T">The type of the cached value.</typeparam>
+    /// <param name="cacheKey">The unique key identifying the cached value.</param>
+    /// <param name="factory">A function that accepts the <see cref="CqlContext"/> and computes the value if it's not in the cache.</param>
+    /// <returns>The cached or newly computed value.</returns>
+    /// <remarks>
+    /// This overload avoids capturing the context in a closure by passing it as an explicit parameter
+    /// to the factory function, reducing heap allocations on every definition call.
+    /// This method is thread-safe and can be called concurrently from multiple threads.
+    /// If caching is disabled (cache is null), the factory function is called without caching the result.
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public T GetOrCompute<T>(long cacheKey, Func<CqlContext, T> factory)
+    {
+        Interlocked.Increment(ref _cacheCallCount);
+
+        var cache = _cache;
+        if (cache is null)
+        {
+            // Caching disabled
+            Interlocked.Increment(ref _cacheFactoryInvocations);
+            return factory(this);
+        }
+
+        // Use GetOrAdd for lock-free read and atomic add
+        // Note: We box the result, so null values are preserved correctly
+        var cachedValue = cache.GetOrAdd(cacheKey, _ =>
+        {
+            Interlocked.Increment(ref _cacheFactoryInvocations);
+            return factory(this)!;
+        });
+
+        return (T)cachedValue!;
+    }
 }
