@@ -14,9 +14,10 @@
     <File Path=".github/copilot-instructions.md" />
     <File Path=".gitignore" />
     <File Path=".gitmodules" />
-    <File Path="build-elm.ps1" />
     <File Path="build-local-nuget.ps1" />
     <File Path="build-publicapi.ps1" />
+    <File Path="build.ps1" />
+    <File Path="build.sh" />
     <File Path="cql-base.props" />
     <File Path="LICENSE" />
     <File Path="NuGet.config" />
@@ -105,6 +106,6 @@
     </Project>
   </Folder>
   <Properties Name="ExtensibilityGlobals" Scope="PostLoad">
-    <Property Name="FileExplorer" Value="build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\" />
+    <Property Name="FileExplorer" Value="build\|docs\|LibrarySets\|" />
   </Properties>
 </Solution>

@@ -70,6 +70,8 @@ if [ -z "$FRAMEWORK" ]; then
     echo "  3. .NET 10 / Debug"
     echo "  4. .NET 10 / Release"
     echo ""
+    echo -e "  \033[90mPress Ctrl+C to exit\033[0m"
+    echo ""
     read -p "Enter choice (1-4): " choice
 
     case $choice in
@@ -104,6 +106,8 @@ if [ -z "$ENABLE_CQL_TO_ELM" ] && [ -z "$ENABLE_ELM_TO_CSHARP" ]; then
     echo "  2. CqlToElm only (converts CQL files to ELM JSON)"
     echo "  3. ElmToCSharp only (generates C# code from ELM)"
     echo "  4. Both enabled (CqlToElm + ElmToCSharp)"
+    echo ""
+    echo -e "  \033[90mPress Ctrl+C to exit\033[0m"
     echo ""
     read -p "Enter choice (1-4, default: 1): " codegen_choice
 
@@ -164,17 +168,16 @@ SOLUTION_FILE="Cql-Sdk-All.sln"
 echo -e "\033[90mCommand: dotnet build \"$SOLUTION_FILE\" ${PROPERTIES[*]}${RESET}"
 echo ""
 
-dotnet build "$SOLUTION_FILE" "${PROPERTIES[@]}"
-
-if [ $? -eq 0 ]; then
+if dotnet build "$SOLUTION_FILE" "${PROPERTIES[@]}"; then
     echo ""
     echo -e "${GREEN}==========================================================================="
     echo "Build completed successfully!"
     echo -e "===========================================================================${RESET}"
 else
+    EXIT_CODE=$?
     echo ""
     echo -e "${RED}==========================================================================="
-    echo "Build failed!"
+    echo "Build failed with exit code $EXIT_CODE"
     echo -e "===========================================================================${RESET}"
-    exit 1
+    exit $EXIT_CODE
 fi
