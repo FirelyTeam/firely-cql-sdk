@@ -109,30 +109,70 @@ Write-Host "  ElmToCSharp:      $(if ($EnableElmToCSharp) { 'Enabled' } else { '
 Write-Host ""
 
 # Build MSBuild properties
-$properties = @(
+$baseProperties = @(
     "/p:Configuration=$Configuration"
     "/p:TargetFramework=$Framework"
 )
 
+$codeGenProperties = @()
 if ($EnableCqlToElm) {
-    $properties += "/p:CqlToElmEnabled=true"
+    $codeGenProperties += "/p:CqlToElmEnabled=true"
 }
-
 if ($EnableElmToCSharp) {
-    $properties += "/p:ElmToCSharpEnabled=true"
+    $codeGenProperties += "/p:ElmToCSharpEnabled=true"
 }
 
 # Execute build
-Write-Host "Building solution..." -ForegroundColor Blue
-Write-Host ""
+$slnf = "Cql-Sdk.slnf"
+$sln  = "Cql-Sdk-All.sln"
 
-$solutionFile = "Cql-Sdk-All.sln"
-$buildCommand = "dotnet build `"$solutionFile`" $($properties -join ' ')"
+if ($EnableElmToCSharp) {
+    # Phase 1: build the core SDK solution (Cql-Sdk.slnf) without ElmToCSharp.
+    # This ensures PackagerCLI and all its dependencies are fully compiled and
+    # at rest before any Demo/Measures project launches the packager.
+    Write-Host "Phase 1: Building core SDK solution (Cql-Sdk.slnf)..." -ForegroundColor Blue
+    Write-Host ""
+    $phase1Properties = $baseProperties + ($codeGenProperties | Where-Object { $_ -notmatch "ElmToCSharpEnabled" })
+    $phase1Command = "dotnet build `"$slnf`" $($phase1Properties -join ' ')"
+    Write-Host "Command: $phase1Command" -ForegroundColor DarkGray
+    Write-Host ""
 
-Write-Host "Command: $buildCommand" -ForegroundColor DarkGray
-Write-Host ""
+    & dotnet build $slnf $phase1Properties
 
-& dotnet build $solutionFile $properties
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host ""
+        Write-Host "===========================================================================" -ForegroundColor Red
+        Write-Host "Phase 1 failed with exit code $LASTEXITCODE" -ForegroundColor Red
+        Write-Host "===========================================================================" -ForegroundColor Red
+        exit $LASTEXITCODE
+    }
+
+    Write-Host ""
+    Write-Host "Phase 1 completed successfully." -ForegroundColor Green
+    Write-Host ""
+
+    # Phase 2: build the full solution (Cql-Sdk-All.sln) with ElmToCSharp enabled,
+    # serialised with -maxcpucount:1. PackagerCLI is already up-to-date so MSBuild
+    # skips it — no DLL copies race with the running packager.
+    # Only one GenerateCSharp fires at a time.
+    $phase2Properties = $baseProperties + $codeGenProperties
+    Write-Host "Phase 2: Building full solution with ElmToCSharp (serialised)..." -ForegroundColor Blue
+    Write-Host ""
+    $phase2Command = "dotnet build `"$sln`" $($phase2Properties -join ' ') -maxcpucount:1"
+    Write-Host "Command: $phase2Command" -ForegroundColor DarkGray
+    Write-Host ""
+
+    & dotnet build $sln $phase2Properties -maxcpucount:1
+} else {
+    $allProperties = $baseProperties + $codeGenProperties
+    Write-Host "Building solution..." -ForegroundColor Blue
+    Write-Host ""
+    $buildCommand = "dotnet build `"$sln`" $($allProperties -join ' ')"
+    Write-Host "Command: $buildCommand" -ForegroundColor DarkGray
+    Write-Host ""
+
+    & dotnet build $sln $allProperties
+}
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host ""

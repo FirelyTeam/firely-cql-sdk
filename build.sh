@@ -146,38 +146,90 @@ echo "  ElmToCSharp:      $([ "$ENABLE_ELM_TO_CSHARP" = "true" ] && echo "Enable
 echo ""
 
 # Build MSBuild properties
-PROPERTIES=(
+BASE_PROPERTIES=(
     "/p:Configuration=$CONFIGURATION"
     "/p:TargetFramework=$FRAMEWORK"
 )
 
+CODEGEN_PROPERTIES=()
 if [ "$ENABLE_CQL_TO_ELM" = "true" ]; then
-    PROPERTIES+=("/p:CqlToElmEnabled=true")
+    CODEGEN_PROPERTIES+=("/p:CqlToElmEnabled=true")
 fi
-
 if [ "$ENABLE_ELM_TO_CSHARP" = "true" ]; then
-    PROPERTIES+=("/p:ElmToCSharpEnabled=true")
+    CODEGEN_PROPERTIES+=("/p:ElmToCSharpEnabled=true")
 fi
 
 # Execute build
-echo -e "${BLUE}Building solution...${RESET}"
-echo ""
+SLNF="Cql-Sdk.slnf"
+SLN="Cql-Sdk-All.sln"
 
-SOLUTION_FILE="Cql-Sdk-All.sln"
+if [ "$ENABLE_ELM_TO_CSHARP" = "true" ]; then
+    # Phase 1: build the core SDK solution (Cql-Sdk.slnf) without ElmToCSharp.
+    # This ensures PackagerCLI and all its dependencies are fully compiled and
+    # at rest before any Demo/Measures project launches the packager.
+    PHASE1_PROPERTIES=("${BASE_PROPERTIES[@]}")
+    for prop in "${CODEGEN_PROPERTIES[@]}"; do
+        [[ "$prop" != *"ElmToCSharpEnabled"* ]] && PHASE1_PROPERTIES+=("$prop")
+    done
 
-echo -e "\033[90mCommand: dotnet build \"$SOLUTION_FILE\" ${PROPERTIES[*]}${RESET}"
-echo ""
-
-if dotnet build "$SOLUTION_FILE" "${PROPERTIES[@]}"; then
+    echo -e "${BLUE}Phase 1: Building core SDK solution (Cql-Sdk.slnf)...${RESET}"
     echo ""
-    echo -e "${GREEN}==========================================================================="
-    echo "Build completed successfully!"
-    echo -e "===========================================================================${RESET}"
+    echo -e "\033[90mCommand: dotnet build \"$SLNF\" ${PHASE1_PROPERTIES[*]}${RESET}"
+    echo ""
+
+    if ! dotnet build "$SLNF" "${PHASE1_PROPERTIES[@]}"; then
+        EXIT_CODE=$?
+        echo ""
+        echo -e "${RED}==========================================================================="
+        echo "Phase 1 failed with exit code $EXIT_CODE"
+        echo -e "===========================================================================${RESET}"
+        exit $EXIT_CODE
+    fi
+
+    echo ""
+    echo -e "${GREEN}Phase 1 completed successfully.${RESET}"
+    echo ""
+
+    # Phase 2: build again with ElmToCSharp enabled, serialised with -maxcpucount:1.
+    # PackagerCLI is already up-to-date so MSBuild skips it — no DLL copies race
+    # with the running packager. Only one GenerateCSharp fires at a time.
+    PHASE2_PROPERTIES=("${BASE_PROPERTIES[@]}" "${CODEGEN_PROPERTIES[@]}")
+
+    echo -e "${BLUE}Phase 2: Building solution with ElmToCSharp (serialised)...${RESET}"
+    echo ""
+    echo -e "\033[90mCommand: dotnet build \"$SLN\" ${PHASE2_PROPERTIES[*]} -maxcpucount:1${RESET}"
+    echo ""
+
+    if dotnet build "$SLN" "${PHASE2_PROPERTIES[@]}" -maxcpucount:1; then
+        echo ""
+        echo -e "${GREEN}==========================================================================="
+        echo "Build completed successfully!"
+        echo -e "===========================================================================${RESET}"
+    else
+        EXIT_CODE=$?
+        echo ""
+        echo -e "${RED}==========================================================================="
+        echo "Build failed with exit code $EXIT_CODE"
+        echo -e "===========================================================================${RESET}"
+        exit $EXIT_CODE
+    fi
 else
-    EXIT_CODE=$?
+    ALL_PROPERTIES=("${BASE_PROPERTIES[@]}" "${CODEGEN_PROPERTIES[@]}")
+
+    echo -e "\033[90mCommand: dotnet build \"$SLN\" ${ALL_PROPERTIES[*]}${RESET}"
     echo ""
-    echo -e "${RED}==========================================================================="
-    echo "Build failed with exit code $EXIT_CODE"
-    echo -e "===========================================================================${RESET}"
-    exit $EXIT_CODE
+
+    if dotnet build "$SLN" "${ALL_PROPERTIES[@]}"; then
+        echo ""
+        echo -e "${GREEN}==========================================================================="
+        echo "Build completed successfully!"
+        echo -e "===========================================================================${RESET}"
+    else
+        EXIT_CODE=$?
+        echo ""
+        echo -e "${RED}==========================================================================="
+        echo "Build failed with exit code $EXIT_CODE"
+        echo -e "===========================================================================${RESET}"
+        exit $EXIT_CODE
+    fi
 fi
