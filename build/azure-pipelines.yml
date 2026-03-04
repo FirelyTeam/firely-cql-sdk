@@ -109,7 +109,6 @@ stages:
     signingKeyFileName: 'cql-sdk.snk'
     filesForSigning: >-
       $(Build.SourcesDirectory)\Cql\*\bin\Release\*\Hl7.Cql*.dll,
-      $(Build.SourcesDirectory)\Cql\*\bin\Release\*\Ncqa.Cql*.dll,
       $(Build.SourcesDirectory)*\bin\Release\*\Cql.*.dll,
       $(Build.SourcesDirectory)*\bin\Release\*\PackagerCLI.dll
     filesToExcludeForSigning: >-

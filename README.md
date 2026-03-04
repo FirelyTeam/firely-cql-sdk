@@ -108,7 +108,7 @@ The SDK includes comprehensive tools for testing against both .NET 8 and .NET 10
 **Test Categories:**
 - **Multi-Target Tests**: CoreTests and CqlToElmTests run on both .NET 8 and .NET 10
 - **.NET 10 Only**: IntegrationRunner and Test.Measures.Demo run only on .NET 10
-- **Excluded**: XsdToCSharpConverterTests, Ncqa.HT.DeckTests, Ncqa.HT.MeasuresTests
+- **Excluded**: XsdToCSharpConverterTests
 
 **Local Testing Scripts:**
 ```powershell

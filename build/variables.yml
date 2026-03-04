@@ -26,6 +26,4 @@ variables:
   # Excluded tests (not run in any stage)
   excludedTestProjects: |
     !**/XsdToCSharpConverterTests.csproj  # internal tooling, not for production
-    !**/Ncqa.HT.DeckTests.csproj          # will be re-added when fixed
-    !**/Ncqa.HT.MeasuresTests.csproj      # will be re-added when fixed
     !Demo/Test.Measures.Demo/Test.Measures.Demo.csproj # needs the Demo project to generate resources

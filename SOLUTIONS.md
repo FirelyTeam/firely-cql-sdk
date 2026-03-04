@@ -46,11 +46,7 @@ The repository contains the following solution files:
 | | CqlSdkExamples | Examples/CqlSdkExamples/CqlSdkExamples.csproj | net8.0;net10.0 | Executable |
 | **IntegrationRunner.slnf** | IntegrationRunner | submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj | net10.0 | Test |
 | | CodeGen | submodules/Firely.Cql.Sdk.Integration.Runner/CodeGen/CodeGen.csproj | net10.0 | Executable |
-| **Cql-Sdk-All.sln** | *(includes all above projects, plus NCQA submodule projects:)* | | | |
-| | BuildArtifacts | submodules/Ncqa.DQIC/BuildArtifacts/BuildArtifacts.csproj | net10.0 | Library |
-| | Ncqa.HT.DeckTests | submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj | net10.0 | Test |
-| | Ncqa.HT.Infrastructure | submodules/Ncqa.DQIC/Ncqa.HT.Infrastructure/Ncqa.HT.Infrastructure.csproj | net10.0 | Library |
-| | Ncqa.HT.MeasuresTests | submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj | net10.0 | Test |
+| **Cql-Sdk-All.sln** | *(includes all above projects)* | | | |
 | **Tools** (not in solution filters) | XsdToCSharpConverter | tools/XsdToCSharpConverter/XsdToCSharpConverter.csproj | net10.0 | Executable |
 | | XsdToCSharpConverterTests | tools/XsdToCSharpConverterTests/XsdToCSharpConverterTests.csproj | net10.0 | Test |
 
@@ -69,7 +65,6 @@ The following projects target .NET 10 only:
 - Benchmarks
 - Tools (XsdToCSharpConverter, XsdToCSharpConverterTests)
 - Integration test projects (IntegrationRunner, CodeGen)
-- NCQA submodule projects (BuildArtifacts, Ncqa.HT.*)
 
 ## Build Recommendations
 
