@@ -135,7 +135,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 4553600017420016945L;
+    private const long _cacheIndex_Patient = 4553600017420016945L;
 
     private Patient Patient_Compute(CqlContext context)
     {

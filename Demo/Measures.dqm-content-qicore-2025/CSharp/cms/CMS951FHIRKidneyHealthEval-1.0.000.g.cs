@@ -86,7 +86,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 6882228545884779471L;
+    private const long _cacheIndex_Measurement_Period = 6882228545884779471L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -106,7 +106,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -8450989434262156067L;
+    private const long _cacheIndex_Patient = -8450989434262156067L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -120,7 +120,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 7472409706051213406L;
+    private const long _cacheIndex_SDE_Ethnicity = 7472409706051213406L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -133,7 +133,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 3148642837823731225L;
+    private const long _cacheIndex_SDE_Payer = 3148642837823731225L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -146,7 +146,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 2411070522859842048L;
+    private const long _cacheIndex_SDE_Race = 2411070522859842048L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -159,7 +159,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -4506924992633843455L;
+    private const long _cacheIndex_SDE_Sex = -4506924992633843455L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -172,7 +172,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period, Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period = 4413285161491285925L;
+    private const long _cacheIndex_Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period = 4413285161491285925L;
 
     private bool? Has_Active_Diabetes_Overlaps_Start_Of_Measurement_Period_Compute(CqlContext context)
     {
@@ -214,7 +214,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Outpatient_Visit_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Outpatient_Visit_During_Measurement_Period, Has_Outpatient_Visit_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Outpatient_Visit_During_Measurement_Period = -8081576470686619857L;
+    private const long _cacheIndex_Has_Outpatient_Visit_During_Measurement_Period = -8081576470686619857L;
 
     private bool? Has_Outpatient_Visit_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -262,7 +262,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -4328991269781702988L;
+    private const long _cacheIndex_Initial_Population = -4328991269781702988L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -288,7 +288,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 3305269774394203605L;
+    private const long _cacheIndex_Denominator = 3305269774394203605L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -301,7 +301,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period, Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period = -6246371642167180446L;
+    private const long _cacheIndex_Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period = -6246371642167180446L;
 
     private bool? Has_CKD_Stage_5_Or_ESRD_Diagnosis_Overlaps_Measurement_Period_Compute(CqlContext context)
     {
@@ -348,7 +348,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = -7824115192377706118L;
+    private const long _cacheIndex_Denominator_Exclusions = -7824115192377706118L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -365,7 +365,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Estimated_Glomerular_Filtration_Rate_Performed_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Estimated_Glomerular_Filtration_Rate_Performed_During_Measurement_Period, Has_Estimated_Glomerular_Filtration_Rate_Performed_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Estimated_Glomerular_Filtration_Rate_Performed_During_Measurement_Period = -6091572313026659366L;
+    private const long _cacheIndex_Has_Estimated_Glomerular_Filtration_Rate_Performed_During_Measurement_Period = -6091572313026659366L;
 
     private bool? Has_Estimated_Glomerular_Filtration_Rate_Performed_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -405,7 +405,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period, Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period = -6651005342975886335L;
+    private const long _cacheIndex_Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period = -6651005342975886335L;
 
     private bool? Has_Urine_Albumin_Creatinine_Ratio_Test_Performed_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -449,7 +449,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Observation> Urine_Albumin_Test_Performed_During_The_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Urine_Albumin_Test_Performed_During_The_Measurement_Period, Urine_Albumin_Test_Performed_During_The_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Urine_Albumin_Test_Performed_During_The_Measurement_Period = 8799928069211774153L;
+    private const long _cacheIndex_Urine_Albumin_Test_Performed_During_The_Measurement_Period = 8799928069211774153L;
 
     private IEnumerable<Observation> Urine_Albumin_Test_Performed_During_The_Measurement_Period_Compute(CqlContext context)
     {
@@ -488,7 +488,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Observation> Urine_Creatinine_Test_Performed_During_The_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Urine_Creatinine_Test_Performed_During_The_Measurement_Period, Urine_Creatinine_Test_Performed_During_The_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Urine_Creatinine_Test_Performed_During_The_Measurement_Period = 28564471191613805L;
+    private const long _cacheIndex_Urine_Creatinine_Test_Performed_During_The_Measurement_Period = 28564471191613805L;
 
     private IEnumerable<Observation> Urine_Creatinine_Test_Performed_During_The_Measurement_Period_Compute(CqlContext context)
     {
@@ -527,7 +527,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart, Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart_Compute);
 
-    private static readonly long _cacheIndex_Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart = 7006324779853778799L;
+    private const long _cacheIndex_Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart = 7006324779853778799L;
 
     private bool? Has_Urine_Albumin_Test_And_Urine_Creatine_Test_Less_Than_Or_Equal_To_Four_Days_Apart_Compute(CqlContext context)
     {
@@ -579,7 +579,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Kidney_Panel_Performed_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Kidney_Panel_Performed_During_Measurement_Period, Kidney_Panel_Performed_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Kidney_Panel_Performed_During_Measurement_Period = 8084330152642717281L;
+    private const long _cacheIndex_Kidney_Panel_Performed_During_Measurement_Period = 8084330152642717281L;
 
     private bool? Kidney_Panel_Performed_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -596,7 +596,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 8512118468873299101L;
+    private const long _cacheIndex_Numerator = 8512118468873299101L;
 
     private bool? Numerator_Compute(CqlContext context)
     {

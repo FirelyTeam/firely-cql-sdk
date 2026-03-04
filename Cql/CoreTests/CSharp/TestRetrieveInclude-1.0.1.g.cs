@@ -50,7 +50,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
     public IEnumerable<Observation> InDemographic(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute);
 
-    private static readonly long _cacheIndex_InDemographic = 1057832894862877646L;
+    private const long _cacheIndex_InDemographic = 1057832894862877646L;
 
     private IEnumerable<Observation> InDemographic_Compute(CqlContext context)
     {

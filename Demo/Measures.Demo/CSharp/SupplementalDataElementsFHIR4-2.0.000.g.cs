@@ -42,7 +42,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -795627643300423179L;
+    private const long _cacheIndex_Patient = -795627643300423179L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -56,7 +56,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -4520261593046211730L;
+    private const long _cacheIndex_SDE_Ethnicity = -4520261593046211730L;
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -126,7 +126,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 4904475433496785684L;
+    private const long _cacheIndex_SDE_Payer = 4904475433496785684L;
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -150,7 +150,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -3244725327672300567L;
+    private const long _cacheIndex_SDE_Race = -3244725327672300567L;
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -220,7 +220,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -2169573021106346265L;
+    private const long _cacheIndex_SDE_Sex = -2169573021106346265L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

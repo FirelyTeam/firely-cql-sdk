@@ -22,7 +22,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 651719980278808684L;
+    private const long _cacheIndex_Patient = 651719980278808684L;
 
     private Patient Patient_Compute(CqlContext context)
     {

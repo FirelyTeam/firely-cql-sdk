@@ -108,7 +108,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -8443783423410390790L;
+    private const long _cacheIndex_Measurement_Period = -8443783423410390790L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -128,7 +128,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -7017834528525676842L;
+    private const long _cacheIndex_Patient = -7017834528525676842L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -142,7 +142,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<Encounter> Qualifying_Encounter_During_Day_Of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounter_During_Day_Of_Measurement_Period, Qualifying_Encounter_During_Day_Of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounter_During_Day_Of_Measurement_Period = -2606809622907269520L;
+    private const long _cacheIndex_Qualifying_Encounter_During_Day_Of_Measurement_Period = -2606809622907269520L;
 
     private IEnumerable<Encounter> Qualifying_Encounter_During_Day_Of_Measurement_Period_Compute(CqlContext context)
     {
@@ -177,7 +177,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -6455816025953421212L;
+    private const long _cacheIndex_Initial_Population = -6455816025953421212L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -207,7 +207,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -7017586087803133019L;
+    private const long _cacheIndex_Denominator = -7017586087803133019L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -220,7 +220,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public bool? Is_Pregnant_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Is_Pregnant_During_Measurement_Period, Is_Pregnant_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Is_Pregnant_During_Measurement_Period = -3728150604244617674L;
+    private const long _cacheIndex_Is_Pregnant_During_Measurement_Period = -3728150604244617674L;
 
     private bool? Is_Pregnant_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -276,7 +276,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 4225706093378547189L;
+    private const long _cacheIndex_Denominator_Exclusions = 4225706093378547189L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -293,7 +293,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<Observation> BMI_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_BMI_During_Measurement_Period, BMI_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_BMI_During_Measurement_Period = 8421605896850534429L;
+    private const long _cacheIndex_BMI_During_Measurement_Period = 8421605896850534429L;
 
     private IEnumerable<Observation> BMI_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -323,7 +323,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<Observation> Documented_High_BMI_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Documented_High_BMI_During_Measurement_Period, Documented_High_BMI_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Documented_High_BMI_During_Measurement_Period = 6429687211226404328L;
+    private const long _cacheIndex_Documented_High_BMI_During_Measurement_Period = 6429687211226404328L;
 
     private IEnumerable<Observation> Documented_High_BMI_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -346,7 +346,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<object> High_BMI_Interventions_Ordered(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_High_BMI_Interventions_Ordered, High_BMI_Interventions_Ordered_Compute);
 
-    private static readonly long _cacheIndex_High_BMI_Interventions_Ordered = -485185337184598823L;
+    private const long _cacheIndex_High_BMI_Interventions_Ordered = -485185337184598823L;
 
     private IEnumerable<object> High_BMI_Interventions_Ordered_Compute(CqlContext context)
     {
@@ -432,7 +432,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<Procedure> High_BMI_Interventions_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_High_BMI_Interventions_Performed, High_BMI_Interventions_Performed_Compute);
 
-    private static readonly long _cacheIndex_High_BMI_Interventions_Performed = 7771502893532171407L;
+    private const long _cacheIndex_High_BMI_Interventions_Performed = 7771502893532171407L;
 
     private IEnumerable<Procedure> High_BMI_Interventions_Performed_Compute(CqlContext context)
     {
@@ -610,7 +610,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<Observation> High_BMI_And_Follow_Up_Provided(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_High_BMI_And_Follow_Up_Provided, High_BMI_And_Follow_Up_Provided_Compute);
 
-    private static readonly long _cacheIndex_High_BMI_And_Follow_Up_Provided = 3190705409215180525L;
+    private const long _cacheIndex_High_BMI_And_Follow_Up_Provided = 3190705409215180525L;
 
     private IEnumerable<Observation> High_BMI_And_Follow_Up_Provided_Compute(CqlContext context)
     {
@@ -711,7 +711,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<Observation> Documented_Low_BMI_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Documented_Low_BMI_During_Measurement_Period, Documented_Low_BMI_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Documented_Low_BMI_During_Measurement_Period = -8900815521314324594L;
+    private const long _cacheIndex_Documented_Low_BMI_During_Measurement_Period = -8900815521314324594L;
 
     private IEnumerable<Observation> Documented_Low_BMI_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -734,7 +734,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<object> Low_BMI_Interventions_Ordered(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Low_BMI_Interventions_Ordered, Low_BMI_Interventions_Ordered_Compute);
 
-    private static readonly long _cacheIndex_Low_BMI_Interventions_Ordered = -1769934396676519667L;
+    private const long _cacheIndex_Low_BMI_Interventions_Ordered = -1769934396676519667L;
 
     private IEnumerable<object> Low_BMI_Interventions_Ordered_Compute(CqlContext context)
     {
@@ -824,7 +824,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<Procedure> Low_BMI_Interventions_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Low_BMI_Interventions_Performed, Low_BMI_Interventions_Performed_Compute);
 
-    private static readonly long _cacheIndex_Low_BMI_Interventions_Performed = -4502765490759027233L;
+    private const long _cacheIndex_Low_BMI_Interventions_Performed = -4502765490759027233L;
 
     private IEnumerable<Procedure> Low_BMI_Interventions_Performed_Compute(CqlContext context)
     {
@@ -1077,7 +1077,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<Observation> Low_BMI_And_Follow_Up_Provided(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Low_BMI_And_Follow_Up_Provided, Low_BMI_And_Follow_Up_Provided_Compute);
 
-    private static readonly long _cacheIndex_Low_BMI_And_Follow_Up_Provided = -7253344149275877513L;
+    private const long _cacheIndex_Low_BMI_And_Follow_Up_Provided = -7253344149275877513L;
 
     private IEnumerable<Observation> Low_BMI_And_Follow_Up_Provided_Compute(CqlContext context)
     {
@@ -1178,7 +1178,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public bool? Has_Normal_BMI(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Normal_BMI, Has_Normal_BMI_Compute);
 
-    private static readonly long _cacheIndex_Has_Normal_BMI = -5047732812496197000L;
+    private const long _cacheIndex_Has_Normal_BMI = -5047732812496197000L;
 
     private bool? Has_Normal_BMI_Compute(CqlContext context)
     {
@@ -1213,7 +1213,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -1047200998746777891L;
+    private const long _cacheIndex_Numerator = -1047200998746777891L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -1232,7 +1232,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<object> Medical_Reason_For_Not_Documenting_A_Follow_Up_Plan_For_Low_Or_High_BMI(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Medical_Reason_For_Not_Documenting_A_Follow_Up_Plan_For_Low_Or_High_BMI, Medical_Reason_For_Not_Documenting_A_Follow_Up_Plan_For_Low_Or_High_BMI_Compute);
 
-    private static readonly long _cacheIndex_Medical_Reason_For_Not_Documenting_A_Follow_Up_Plan_For_Low_Or_High_BMI = -2121890904857911378L;
+    private const long _cacheIndex_Medical_Reason_For_Not_Documenting_A_Follow_Up_Plan_For_Low_Or_High_BMI = -2121890904857911378L;
 
     private IEnumerable<object> Medical_Reason_For_Not_Documenting_A_Follow_Up_Plan_For_Low_Or_High_BMI_Compute(CqlContext context)
     {
@@ -1364,7 +1364,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<Observation> Medical_Reason_Or_Patient_Reason_For_Not_Performing_BMI_Exam(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Medical_Reason_Or_Patient_Reason_For_Not_Performing_BMI_Exam, Medical_Reason_Or_Patient_Reason_For_Not_Performing_BMI_Exam_Compute);
 
-    private static readonly long _cacheIndex_Medical_Reason_Or_Patient_Reason_For_Not_Performing_BMI_Exam = 2600735192836884261L;
+    private const long _cacheIndex_Medical_Reason_Or_Patient_Reason_For_Not_Performing_BMI_Exam = 2600735192836884261L;
 
     private IEnumerable<Observation> Medical_Reason_Or_Patient_Reason_For_Not_Performing_BMI_Exam_Compute(CqlContext context)
     {
@@ -1453,7 +1453,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public bool? Denominator_Exceptions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exceptions = 8738725800645268169L;
+    private const long _cacheIndex_Denominator_Exceptions = 8738725800645268169L;
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -1470,7 +1470,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 3500699169556971302L;
+    private const long _cacheIndex_SDE_Ethnicity = 3500699169556971302L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1483,7 +1483,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -3750332539194761427L;
+    private const long _cacheIndex_SDE_Payer = -3750332539194761427L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1496,7 +1496,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 6715964416781495466L;
+    private const long _cacheIndex_SDE_Race = 6715964416781495466L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1509,7 +1509,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -4885014868042591606L;
+    private const long _cacheIndex_SDE_Sex = -4885014868042591606L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

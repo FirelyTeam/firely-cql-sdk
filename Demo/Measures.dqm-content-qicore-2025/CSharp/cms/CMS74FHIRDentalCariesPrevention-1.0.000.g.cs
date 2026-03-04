@@ -46,7 +46,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 3459411623385782866L;
+    private const long _cacheIndex_Measurement_Period = 3459411623385782866L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -66,7 +66,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 5569230345433797234L;
+    private const long _cacheIndex_Patient = 5569230345433797234L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -80,7 +80,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters = -1335537517400099656L;
+    private const long _cacheIndex_Qualifying_Encounters = -1335537517400099656L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -105,7 +105,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -3404065433003864595L;
+    private const long _cacheIndex_Initial_Population = -3404065433003864595L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -130,7 +130,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 9163392405658072408L;
+    private const long _cacheIndex_Denominator = 9163392405658072408L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -143,7 +143,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 7868563991812526633L;
+    private const long _cacheIndex_Denominator_Exclusions = 7868563991812526633L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -156,7 +156,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 8189944364767768999L;
+    private const long _cacheIndex_Numerator = 8189944364767768999L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -321,7 +321,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public bool? Stratification_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
-    private static readonly long _cacheIndex_Stratification_1 = 6383227092078244640L;
+    private const long _cacheIndex_Stratification_1 = 6383227092078244640L;
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
@@ -343,7 +343,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public bool? Stratification_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
-    private static readonly long _cacheIndex_Stratification_2 = 7132016695278820787L;
+    private const long _cacheIndex_Stratification_2 = 7132016695278820787L;
 
     private bool? Stratification_2_Compute(CqlContext context)
     {
@@ -365,7 +365,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public bool? Stratification_3(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_3, Stratification_3_Compute);
 
-    private static readonly long _cacheIndex_Stratification_3 = 6092906886529512472L;
+    private const long _cacheIndex_Stratification_3 = 6092906886529512472L;
 
     private bool? Stratification_3_Compute(CqlContext context)
     {
@@ -387,7 +387,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -3908866002830981138L;
+    private const long _cacheIndex_SDE_Ethnicity = -3908866002830981138L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -400,7 +400,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -7258492887071442421L;
+    private const long _cacheIndex_SDE_Payer = -7258492887071442421L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -413,7 +413,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 8315400797531393439L;
+    private const long _cacheIndex_SDE_Race = 8315400797531393439L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -426,7 +426,7 @@ public partial class CMS74FHIRDentalCariesPrevention_1_0_000 : ILibrary, ISingle
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -7364382078820048309L;
+    private const long _cacheIndex_SDE_Sex = -7364382078820048309L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

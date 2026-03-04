@@ -69,7 +69,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 859669092182870447L;
+    private const long _cacheIndex_Measurement_Period = 859669092182870447L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -86,7 +86,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 3137100805743588519L;
+    private const long _cacheIndex_Patient = 3137100805743588519L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -100,7 +100,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
     public IEnumerable<Encounter> Encounter_With_Age_Range(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Age_Range, Encounter_With_Age_Range_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Age_Range = -1742568757353030109L;
+    private const long _cacheIndex_Encounter_With_Age_Range = -1742568757353030109L;
 
     private IEnumerable<Encounter> Encounter_With_Age_Range_Compute(CqlContext context)
     {
@@ -362,7 +362,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
     public IEnumerable<Encounter> Delivery_Encounter_With_Age_Range(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounter_With_Age_Range, Delivery_Encounter_With_Age_Range_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounter_With_Age_Range = 6284105905977930602L;
+    private const long _cacheIndex_Delivery_Encounter_With_Age_Range = 6284105905977930602L;
 
     private IEnumerable<Encounter> Delivery_Encounter_With_Age_Range_Compute(CqlContext context)
     {
@@ -770,7 +770,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
     public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Variable_Calculated_Gestational_Age, Variable_Calculated_Gestational_Age_Compute);
 
-    private static readonly long _cacheIndex_Variable_Calculated_Gestational_Age = 5194648618977956313L;
+    private const long _cacheIndex_Variable_Calculated_Gestational_Age = 5194648618977956313L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age_Compute(CqlContext context)
     {

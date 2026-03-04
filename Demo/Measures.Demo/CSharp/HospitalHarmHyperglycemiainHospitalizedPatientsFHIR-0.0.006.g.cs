@@ -64,7 +64,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 7229425209739707094L;
+    private const long _cacheIndex_Measurement_Period = 7229425209739707094L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -81,7 +81,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -7064636126919639898L;
+    private const long _cacheIndex_Patient = -7064636126919639898L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -95,7 +95,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 3665060999434607160L;
+    private const long _cacheIndex_SDE_Ethnicity = 3665060999434607160L;
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -108,7 +108,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -6483302258536386303L;
+    private const long _cacheIndex_SDE_Payer = -6483302258536386303L;
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -121,7 +121,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 5851744314889379873L;
+    private const long _cacheIndex_SDE_Race = 5851744314889379873L;
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -134,7 +134,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -4575297161029434069L;
+    private const long _cacheIndex_SDE_Sex = -4575297161029434069L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -147,7 +147,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Encounter_During_Measurement_Period, Inpatient_Encounter_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Encounter_During_Measurement_Period = 1514258567180264524L;
+    private const long _cacheIndex_Inpatient_Encounter_During_Measurement_Period = 1514258567180264524L;
 
     private IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -161,7 +161,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters = 1141502000733248456L;
+    private const long _cacheIndex_Qualifying_Encounters = 1141502000733248456L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -188,7 +188,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> Qualifying_Encounters_With_Hospitalization_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters_With_Hospitalization_Period, Qualifying_Encounters_With_Hospitalization_Period_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters_With_Hospitalization_Period = -4834500073043937916L;
+    private const long _cacheIndex_Qualifying_Encounters_With_Hospitalization_Period = -4834500073043937916L;
 
     private IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> Qualifying_Encounters_With_Hospitalization_Period_Compute(CqlContext context)
     {
@@ -210,7 +210,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<Encounter> Qualifying_Encounters_With_Existing_Diabetes_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters_With_Existing_Diabetes_Diagnosis, Qualifying_Encounters_With_Existing_Diabetes_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters_With_Existing_Diabetes_Diagnosis = -5618647880876658695L;
+    private const long _cacheIndex_Qualifying_Encounters_With_Existing_Diabetes_Diagnosis = -5618647880876658695L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_With_Existing_Diabetes_Diagnosis_Compute(CqlContext context)
     {
@@ -258,7 +258,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<Encounter> Qualifying_Encounters_With_Hypoglycemic_Medication(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters_With_Hypoglycemic_Medication, Qualifying_Encounters_With_Hypoglycemic_Medication_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters_With_Hypoglycemic_Medication = 6975104613581080996L;
+    private const long _cacheIndex_Qualifying_Encounters_With_Hypoglycemic_Medication = 6975104613581080996L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_With_Hypoglycemic_Medication_Compute(CqlContext context)
     {
@@ -332,7 +332,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<Encounter> Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab, Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab = -683012518414920298L;
+    private const long _cacheIndex_Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab = -683012518414920298L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_With_Elevated_Blood_Glucose_Lab_Compute(CqlContext context)
     {
@@ -382,7 +382,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 8241298423647171943L;
+    private const long _cacheIndex_Initial_Population = 8241298423647171943L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -399,7 +399,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 4368623145748242140L;
+    private const long _cacheIndex_Denominator = 4368623145748242140L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -512,7 +512,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> Pertinent_Encounters_With_Days(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pertinent_Encounters_With_Days, Pertinent_Encounters_With_Days_Compute);
 
-    private static readonly long _cacheIndex_Pertinent_Encounters_With_Days = -9104963593437595L;
+    private const long _cacheIndex_Pertinent_Encounters_With_Days = -9104963593437595L;
 
     private IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> relevantDays)?> Pertinent_Encounters_With_Days_Compute(CqlContext context)
     {
@@ -537,7 +537,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?> Pertinent_Encounters_With_Glucose_Result_Days(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pertinent_Encounters_With_Glucose_Result_Days, Pertinent_Encounters_With_Glucose_Result_Days_Compute);
 
-    private static readonly long _cacheIndex_Pertinent_Encounters_With_Glucose_Result_Days = 9202032992156266560L;
+    private const long _cacheIndex_Pertinent_Encounters_With_Glucose_Result_Days = 9202032992156266560L;
 
     private IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoResult)?> relevantDays)?> Pertinent_Encounters_With_Glucose_Result_Days_Compute(CqlContext context)
     {
@@ -631,7 +631,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> Pertinent_Encounters_With_Hyperglycemic_Event_Days(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pertinent_Encounters_With_Hyperglycemic_Event_Days, Pertinent_Encounters_With_Hyperglycemic_Event_Days_Compute);
 
-    private static readonly long _cacheIndex_Pertinent_Encounters_With_Hyperglycemic_Event_Days = -8343402975753121456L;
+    private const long _cacheIndex_Pertinent_Encounters_With_Hyperglycemic_Event_Days = -8343402975753121456L;
 
     private IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> relevantPeriod, IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?> eligibleEventDays)?> Pertinent_Encounters_With_Hyperglycemic_Event_Days_Compute(CqlContext context)
     {
@@ -685,7 +685,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 3908218439360313143L;
+    private const long _cacheIndex_Numerator = 3908218439360313143L;
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {

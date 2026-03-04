@@ -132,7 +132,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -5116339458294690597L;
+    private const long _cacheIndex_Measurement_Period = -5116339458294690597L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -152,7 +152,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 6978520332954750863L;
+    private const long _cacheIndex_Patient = 6978520332954750863L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -166,7 +166,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 3863893702232154208L;
+    private const long _cacheIndex_SDE_Ethnicity = 3863893702232154208L;
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -179,7 +179,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 4334872870767342449L;
+    private const long _cacheIndex_SDE_Payer = 4334872870767342449L;
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -192,7 +192,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -2623361780825266308L;
+    private const long _cacheIndex_SDE_Race = -2623361780825266308L;
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -205,7 +205,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -5266470640062806604L;
+    private const long _cacheIndex_SDE_Sex = -5266470640062806604L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -435,7 +435,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     public IEnumerable<Encounter> Inpatient_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Encounters, Inpatient_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Encounters = -6130767509005028317L;
+    private const long _cacheIndex_Inpatient_Encounters = -6130767509005028317L;
 
     private IEnumerable<Encounter> Inpatient_Encounters_Compute(CqlContext context)
     {
@@ -491,7 +491,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 5576653315478341361L;
+    private const long _cacheIndex_Initial_Population = 5576653315478341361L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -858,7 +858,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     public IEnumerable<string> Results(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Results, Results_Compute);
 
-    private static readonly long _cacheIndex_Results = -389831831665564238L;
+    private const long _cacheIndex_Results = -389831831665564238L;
 
     private IEnumerable<string> Results_Compute(CqlContext context)
     {

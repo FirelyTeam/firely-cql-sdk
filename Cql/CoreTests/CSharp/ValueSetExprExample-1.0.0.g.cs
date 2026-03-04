@@ -42,7 +42,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public string ChosenSubCategory(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute);
 
-    private static readonly long _cacheIndex_ChosenSubCategory = -6797237956357043470L;
+    private const long _cacheIndex_ChosenSubCategory = -6797237956357043470L;
 
     private string ChosenSubCategory_Compute(CqlContext context)
     {
@@ -55,7 +55,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public CqlCode ChosenCode(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ChosenCode, ChosenCode_Compute);
 
-    private static readonly long _cacheIndex_ChosenCode = 4576364196465695553L;
+    private const long _cacheIndex_ChosenCode = 4576364196465695553L;
 
     private CqlCode ChosenCode_Compute(CqlContext context)
     {
@@ -72,7 +72,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public CqlValueSet ValueSetA(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ValueSetA, ValueSetA_Compute);
 
-    private static readonly long _cacheIndex_ValueSetA = 3635379538251128517L;
+    private const long _cacheIndex_ValueSetA = 3635379538251128517L;
 
     private CqlValueSet ValueSetA_Compute(CqlContext context)
     {
@@ -116,7 +116,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public CqlValueSet ValueSetB(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ValueSetB, ValueSetB_Compute);
 
-    private static readonly long _cacheIndex_ValueSetB = 1902915641396550611L;
+    private const long _cacheIndex_ValueSetB = 1902915641396550611L;
 
     private CqlValueSet ValueSetB_Compute(CqlContext context)
     {
@@ -160,7 +160,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public string Result(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Result, Result_Compute);
 
-    private static readonly long _cacheIndex_Result = 2591165112630919659L;
+    private const long _cacheIndex_Result = 2591165112630919659L;
 
     private string Result_Compute(CqlContext context)
     {

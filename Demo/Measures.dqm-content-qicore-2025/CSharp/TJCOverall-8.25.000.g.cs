@@ -58,7 +58,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 5065781295884409926L;
+    private const long _cacheIndex_Measurement_Period = 5065781295884409926L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -75,7 +75,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -7914836517776615362L;
+    private const long _cacheIndex_Patient = -7914836517776615362L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -89,7 +89,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_With_Age(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Non_Elective_Inpatient_Encounter_With_Age, Non_Elective_Inpatient_Encounter_With_Age_Compute);
 
-    private static readonly long _cacheIndex_Non_Elective_Inpatient_Encounter_With_Age = -5301151410846989508L;
+    private const long _cacheIndex_Non_Elective_Inpatient_Encounter_With_Age = -5301151410846989508L;
 
     private IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_With_Age_Compute(CqlContext context)
     {
@@ -124,7 +124,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounter, Ischemic_Stroke_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Ischemic_Stroke_Encounter = -6504890826907683419L;
+    private const long _cacheIndex_Ischemic_Stroke_Encounter = -6504890826907683419L;
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounter_Compute(CqlContext context)
     {
@@ -145,7 +145,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     public IEnumerable<Encounter> Ischemic_Stroke_Encounters_With_Discharge_Disposition(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition, Ischemic_Stroke_Encounters_With_Discharge_Disposition_Compute);
 
-    private static readonly long _cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition = -504688316559473445L;
+    private const long _cacheIndex_Ischemic_Stroke_Encounters_With_Discharge_Disposition = -504688316559473445L;
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounters_With_Discharge_Disposition_Compute(CqlContext context)
     {
@@ -189,7 +189,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Intervention_Comfort_Measures, Intervention_Comfort_Measures_Compute);
 
-    private static readonly long _cacheIndex_Intervention_Comfort_Measures = 8089168431957467543L;
+    private const long _cacheIndex_Intervention_Comfort_Measures = 8089168431957467543L;
 
     private IEnumerable<object> Intervention_Comfort_Measures_Compute(CqlContext context)
     {
@@ -248,7 +248,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     public IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Hospitalization(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization, Encounter_With_Comfort_Measures_During_Hospitalization_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization = 8391212529694341440L;
+    private const long _cacheIndex_Encounter_With_Comfort_Measures_During_Hospitalization = 8391212529694341440L;
 
     private IEnumerable<Encounter> Encounter_With_Comfort_Measures_During_Hospitalization_Compute(CqlContext context)
     {

@@ -46,7 +46,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -2694172219689873332L;
+    private const long _cacheIndex_Measurement_Period = -2694172219689873332L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -63,7 +63,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -7178226346798116108L;
+    private const long _cacheIndex_Patient = -7178226346798116108L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -77,7 +77,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters = -717334110039717768L;
+    private const long _cacheIndex_Qualifying_Encounters = -717334110039717768L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {

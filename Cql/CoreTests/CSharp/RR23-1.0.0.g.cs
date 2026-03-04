@@ -62,7 +62,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     public object Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 3305136097504393406L;
+    private const long _cacheIndex_Measurement_Period = 3305136097504393406L;
 
     private object Measurement_Period_Compute(CqlContext context)
     {
@@ -82,7 +82,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -3348112132702101490L;
+    private const long _cacheIndex_Patient = -3348112132702101490L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -100,7 +100,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     public IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Injury_due_to_falling_rock_within_measurement_period, Injury_due_to_falling_rock_within_measurement_period_Compute);
 
-    private static readonly long _cacheIndex_Injury_due_to_falling_rock_within_measurement_period = 6330377113132342568L;
+    private const long _cacheIndex_Injury_due_to_falling_rock_within_measurement_period = 6330377113132342568L;
 
     private IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period_Compute(CqlContext context)
     {
@@ -131,7 +131,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     public Condition Latest_injury_due_to_falling_rock(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Latest_injury_due_to_falling_rock, Latest_injury_due_to_falling_rock_Compute);
 
-    private static readonly long _cacheIndex_Latest_injury_due_to_falling_rock = -4330520114394964250L;
+    private const long _cacheIndex_Latest_injury_due_to_falling_rock = -4330520114394964250L;
 
     private Condition Latest_injury_due_to_falling_rock_Compute(CqlContext context)
     {
@@ -157,7 +157,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     public IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock, Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Compute);
 
-    private static readonly long _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = 8767411941886803436L;
+    private const long _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = 8767411941886803436L;
 
     private IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Compute(CqlContext context)
     {

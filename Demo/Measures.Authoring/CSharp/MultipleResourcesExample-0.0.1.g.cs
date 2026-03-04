@@ -52,7 +52,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 8337256495588297023L;
+    private const long _cacheIndex_Patient = 8337256495588297023L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -66,7 +66,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     public IEnumerable<Observation> Smoking_status_observation(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Smoking_status_observation, Smoking_status_observation_Compute);
 
-    private static readonly long _cacheIndex_Smoking_status_observation = -4432068073053488285L;
+    private const long _cacheIndex_Smoking_status_observation = -4432068073053488285L;
 
     private IEnumerable<Observation> Smoking_status_observation_Compute(CqlContext context)
     {
@@ -94,7 +94,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Lung_cancer_diagnosis, Lung_cancer_diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Lung_cancer_diagnosis = 8408096397658502118L;
+    private const long _cacheIndex_Lung_cancer_diagnosis = 8408096397658502118L;
 
     private IEnumerable<Condition> Lung_cancer_diagnosis_Compute(CqlContext context)
     {

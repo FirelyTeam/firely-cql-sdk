@@ -74,7 +74,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -6711178551512193567L;
+    private const long _cacheIndex_Measurement_Period = -6711178551512193567L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -94,7 +94,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 8112107951287448751L;
+    private const long _cacheIndex_Patient = 8112107951287448751L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -108,7 +108,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18, Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18 = -1650556549303795711L;
+    private const long _cacheIndex_Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18 = -1650556549303795711L;
 
     private IEnumerable<Encounter> Inpatient_Encounter_With_Age_Greater_Than_Or_Equal_To_18_Compute(CqlContext context)
     {
@@ -137,7 +137,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<MedicationRequest> Opioid_At_Discharge(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Opioid_At_Discharge, Opioid_At_Discharge_Compute);
 
-    private static readonly long _cacheIndex_Opioid_At_Discharge = 5633346317000929987L;
+    private const long _cacheIndex_Opioid_At_Discharge = 5633346317000929987L;
 
     private IEnumerable<MedicationRequest> Opioid_At_Discharge_Compute(CqlContext context)
     {
@@ -208,7 +208,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<MedicationRequest> Benzodiazepine_At_Discharge(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Benzodiazepine_At_Discharge, Benzodiazepine_At_Discharge_Compute);
 
-    private static readonly long _cacheIndex_Benzodiazepine_At_Discharge = -7244176487788219701L;
+    private const long _cacheIndex_Benzodiazepine_At_Discharge = -7244176487788219701L;
 
     private IEnumerable<MedicationRequest> Benzodiazepine_At_Discharge_Compute(CqlContext context)
     {
@@ -280,7 +280,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge, Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge = -1484108012641628654L;
+    private const long _cacheIndex_Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge = -1484108012641628654L;
 
     private IEnumerable<Encounter> Inpatient_Encounters_With_An_Opioid_Or_Benzodiazepine_At_Discharge_Compute(CqlContext context)
     {
@@ -315,7 +315,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -8403253536875342235L;
+    private const long _cacheIndex_Initial_Population = -8403253536875342235L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -328,7 +328,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 8706893806779564920L;
+    private const long _cacheIndex_Denominator = 8706893806779564920L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -342,7 +342,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -7195865355092763235L;
+    private const long _cacheIndex_Numerator = -7195865355092763235L;
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -411,7 +411,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain, Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain = -8801150840158867846L;
+    private const long _cacheIndex_Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain = -8801150840158867846L;
 
     private IEnumerable<Encounter> Inpatient_Encounter_With_Encounter_Diagnosis_Of_Cancer_Pain_Compute(CqlContext context)
     {
@@ -491,7 +491,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<MedicationRequest> Medications_For_Opioid_Use_Disorder(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Medications_For_Opioid_Use_Disorder, Medications_For_Opioid_Use_Disorder_Compute);
 
-    private static readonly long _cacheIndex_Medications_For_Opioid_Use_Disorder = 8810620530117923890L;
+    private const long _cacheIndex_Medications_For_Opioid_Use_Disorder = 8810620530117923890L;
 
     private IEnumerable<MedicationRequest> Medications_For_Opioid_Use_Disorder_Compute(CqlContext context)
     {
@@ -562,7 +562,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<MedicationRequest> Treatment_For_Opioid_Use_Disorders(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Treatment_For_Opioid_Use_Disorders, Treatment_For_Opioid_Use_Disorders_Compute);
 
-    private static readonly long _cacheIndex_Treatment_For_Opioid_Use_Disorders = -3469107966402147759L;
+    private const long _cacheIndex_Treatment_For_Opioid_Use_Disorders = -3469107966402147759L;
 
     private IEnumerable<MedicationRequest> Treatment_For_Opioid_Use_Disorders_Compute(CqlContext context)
     {
@@ -698,7 +698,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Intervention_Palliative_Or_Hospice_Care(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Intervention_Palliative_Or_Hospice_Care, Intervention_Palliative_Or_Hospice_Care_Compute);
 
-    private static readonly long _cacheIndex_Intervention_Palliative_Or_Hospice_Care = -8472319639264910238L;
+    private const long _cacheIndex_Intervention_Palliative_Or_Hospice_Care = -8472319639264910238L;
 
     private IEnumerable<object> Intervention_Palliative_Or_Hospice_Care_Compute(CqlContext context)
     {
@@ -745,7 +745,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Denominator_Exclusion(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusion, Denominator_Exclusion_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusion = 7742790657479996528L;
+    private const long _cacheIndex_Denominator_Exclusion = 7742790657479996528L;
 
     private IEnumerable<Encounter> Denominator_Exclusion_Compute(CqlContext context)
     {
@@ -912,7 +912,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -8233428871904802123L;
+    private const long _cacheIndex_SDE_Ethnicity = -8233428871904802123L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -925,7 +925,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 6431907323170134029L;
+    private const long _cacheIndex_SDE_Payer = 6431907323170134029L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -938,7 +938,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -4462710836571348549L;
+    private const long _cacheIndex_SDE_Race = -4462710836571348549L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -951,7 +951,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 1755239228573560717L;
+    private const long _cacheIndex_SDE_Sex = 1755239228573560717L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

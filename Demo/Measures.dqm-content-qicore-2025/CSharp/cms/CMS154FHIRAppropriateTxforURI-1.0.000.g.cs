@@ -120,7 +120,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -6811430900502275599L;
+    private const long _cacheIndex_Measurement_Period = -6811430900502275599L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -140,7 +140,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -9118331668445394872L;
+    private const long _cacheIndex_Patient = -9118331668445394872L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -154,7 +154,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -6271755292419861640L;
+    private const long _cacheIndex_SDE_Ethnicity = -6271755292419861640L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -167,7 +167,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -4865201966087926368L;
+    private const long _cacheIndex_SDE_Payer = -4865201966087926368L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -180,7 +180,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 7512533384005297550L;
+    private const long _cacheIndex_SDE_Race = 7512533384005297550L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -193,7 +193,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 2523205904150552682L;
+    private const long _cacheIndex_SDE_Sex = 2523205904150552682L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -206,7 +206,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters = -8184800519206240530L;
+    private const long _cacheIndex_Qualifying_Encounters = -8184800519206240530L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -299,7 +299,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Encounter_with_Upper_Respiratory_Infection(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_with_Upper_Respiratory_Infection, Encounter_with_Upper_Respiratory_Infection_Compute);
 
-    private static readonly long _cacheIndex_Encounter_with_Upper_Respiratory_Infection = -3687519631180147673L;
+    private const long _cacheIndex_Encounter_with_Upper_Respiratory_Infection = -3687519631180147673L;
 
     private IEnumerable<Encounter> Encounter_with_Upper_Respiratory_Infection_Compute(CqlContext context)
     {
@@ -342,7 +342,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -5632040505747419286L;
+    private const long _cacheIndex_Initial_Population = -5632040505747419286L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -373,7 +373,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Encounters_and_Assessments_with_Hospice_Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_and_Assessments_with_Hospice_Patient, Encounters_and_Assessments_with_Hospice_Patient_Compute);
 
-    private static readonly long _cacheIndex_Encounters_and_Assessments_with_Hospice_Patient = -6262491148793906459L;
+    private const long _cacheIndex_Encounters_and_Assessments_with_Hospice_Patient = -6262491148793906459L;
 
     private IEnumerable<Encounter> Encounters_and_Assessments_with_Hospice_Patient_Compute(CqlContext context)
     {
@@ -393,7 +393,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -4108508898050543235L;
+    private const long _cacheIndex_Denominator = -4108508898050543235L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -406,7 +406,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = -1983622220391695028L;
+    private const long _cacheIndex_Denominator_Exclusions = -1983622220391695028L;
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -474,7 +474,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -2125790364497770499L;
+    private const long _cacheIndex_Numerator = -2125790364497770499L;
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -550,7 +550,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Stratification_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
-    private static readonly long _cacheIndex_Stratification_1 = 3245442145778577805L;
+    private const long _cacheIndex_Stratification_1 = 3245442145778577805L;
 
     private IEnumerable<Encounter> Stratification_1_Compute(CqlContext context)
     {
@@ -589,7 +589,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Stratification_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
-    private static readonly long _cacheIndex_Stratification_2 = -727425837425859133L;
+    private const long _cacheIndex_Stratification_2 = -727425837425859133L;
 
     private IEnumerable<Encounter> Stratification_2_Compute(CqlContext context)
     {
@@ -621,7 +621,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Stratification_3(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_3, Stratification_3_Compute);
 
-    private static readonly long _cacheIndex_Stratification_3 = -5746511768018411774L;
+    private const long _cacheIndex_Stratification_3 = -5746511768018411774L;
 
     private IEnumerable<Encounter> Stratification_3_Compute(CqlContext context)
     {

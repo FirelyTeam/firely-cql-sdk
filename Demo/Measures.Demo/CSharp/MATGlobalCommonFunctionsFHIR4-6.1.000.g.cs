@@ -220,7 +220,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -5789223673792619521L;
+    private const long _cacheIndex_Measurement_Period = -5789223673792619521L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -240,7 +240,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -988373218840019440L;
+    private const long _cacheIndex_Patient = -988373218840019440L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -264,7 +264,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Encounter, Inpatient_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Encounter = -1760786125302252719L;
+    private const long _cacheIndex_Inpatient_Encounter = -1760786125302252719L;
 
     private IEnumerable<Encounter> Inpatient_Encounter_Compute(CqlContext context)
     {

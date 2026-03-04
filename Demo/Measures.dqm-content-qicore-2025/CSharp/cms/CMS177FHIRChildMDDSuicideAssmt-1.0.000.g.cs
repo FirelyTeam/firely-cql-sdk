@@ -80,7 +80,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 8755168546983360421L;
+    private const long _cacheIndex_Measurement_Period = 8755168546983360421L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -100,7 +100,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 5323727449356102700L;
+    private const long _cacheIndex_Patient = 5323727449356102700L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -114,7 +114,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -2001458593093813737L;
+    private const long _cacheIndex_SDE_Ethnicity = -2001458593093813737L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -127,7 +127,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -7256827302783747340L;
+    private const long _cacheIndex_SDE_Payer = -7256827302783747340L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -140,7 +140,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -2246690249441990185L;
+    private const long _cacheIndex_SDE_Race = -2246690249441990185L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -153,7 +153,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 8732306134938989179L;
+    private const long _cacheIndex_SDE_Sex = 8732306134938989179L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -166,7 +166,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Encounter_With_Condition_Major_Depressive_Disorder(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Condition_Major_Depressive_Disorder, Encounter_With_Condition_Major_Depressive_Disorder_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Condition_Major_Depressive_Disorder = 8107967900919985246L;
+    private const long _cacheIndex_Encounter_With_Condition_Major_Depressive_Disorder = 8107967900919985246L;
 
     private IEnumerable<Encounter> Encounter_With_Condition_Major_Depressive_Disorder_Compute(CqlContext context)
     {
@@ -238,7 +238,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Encounter_With_Reason_Major_Depressive_Disorder(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Reason_Major_Depressive_Disorder, Encounter_With_Reason_Major_Depressive_Disorder_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Reason_Major_Depressive_Disorder = 720527832511942766L;
+    private const long _cacheIndex_Encounter_With_Reason_Major_Depressive_Disorder = 720527832511942766L;
 
     private IEnumerable<Encounter> Encounter_With_Reason_Major_Depressive_Disorder_Compute(CqlContext context)
     {
@@ -299,7 +299,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Major_Depressive_Disorder_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Major_Depressive_Disorder_Encounter, Major_Depressive_Disorder_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Major_Depressive_Disorder_Encounter = 3689749010899809839L;
+    private const long _cacheIndex_Major_Depressive_Disorder_Encounter = 3689749010899809839L;
 
     private IEnumerable<Encounter> Major_Depressive_Disorder_Encounter_Compute(CqlContext context)
     {
@@ -314,7 +314,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 7797060179689319226L;
+    private const long _cacheIndex_Initial_Population = 7797060179689319226L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -350,7 +350,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 572249356221058848L;
+    private const long _cacheIndex_Denominator = 572249356221058848L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -363,7 +363,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Encounter_With_Procedure_For_Suicide_Risk_Assessment(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Procedure_For_Suicide_Risk_Assessment, Encounter_With_Procedure_For_Suicide_Risk_Assessment_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Procedure_For_Suicide_Risk_Assessment = 4638551457840909626L;
+    private const long _cacheIndex_Encounter_With_Procedure_For_Suicide_Risk_Assessment = 4638551457840909626L;
 
     private IEnumerable<Encounter> Encounter_With_Procedure_For_Suicide_Risk_Assessment_Compute(CqlContext context)
     {
@@ -466,7 +466,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Encounter_With_Observation_For_Suicide_Risk_Assessment(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Observation_For_Suicide_Risk_Assessment, Encounter_With_Observation_For_Suicide_Risk_Assessment_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Observation_For_Suicide_Risk_Assessment = -6020880057812522378L;
+    private const long _cacheIndex_Encounter_With_Observation_For_Suicide_Risk_Assessment = -6020880057812522378L;
 
     private IEnumerable<Encounter> Encounter_With_Observation_For_Suicide_Risk_Assessment_Compute(CqlContext context)
     {
@@ -514,7 +514,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 3556269054093713636L;
+    private const long _cacheIndex_Numerator = 3556269054093713636L;
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {

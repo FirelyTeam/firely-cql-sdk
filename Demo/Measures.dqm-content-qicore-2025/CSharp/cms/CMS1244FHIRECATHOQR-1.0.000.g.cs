@@ -104,7 +104,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 1514351667965499189L;
+    private const long _cacheIndex_Measurement_Period = 1514351667965499189L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -124,7 +124,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -5007770230675133735L;
+    private const long _cacheIndex_Patient = -5007770230675133735L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -138,7 +138,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Evaluation_and_Management(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Evaluation_and_Management, ED_Evaluation_and_Management_Compute);
 
-    private static readonly long _cacheIndex_ED_Evaluation_and_Management = -8498519959231902913L;
+    private const long _cacheIndex_ED_Evaluation_and_Management = -8498519959231902913L;
 
     private IEnumerable<Encounter> ED_Evaluation_and_Management_Compute(CqlContext context)
     {
@@ -168,7 +168,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Triage(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Triage, ED_Triage_Compute);
 
-    private static readonly long _cacheIndex_ED_Triage = -2369979132436776259L;
+    private const long _cacheIndex_ED_Triage = -2369979132436776259L;
 
     private IEnumerable<Encounter> ED_Triage_Compute(CqlContext context)
     {
@@ -203,7 +203,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Triage_Excluding_Those_Prior_To_ED_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters, ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Compute);
 
-    private static readonly long _cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters = -3557059114495163485L;
+    private const long _cacheIndex_ED_Triage_Excluding_Those_Prior_To_ED_Encounters = -3557059114495163485L;
 
     private IEnumerable<Encounter> ED_Triage_Excluding_Those_Prior_To_ED_Encounters_Compute(CqlContext context)
     {
@@ -259,7 +259,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 8043475470187039484L;
+    private const long _cacheIndex_Initial_Population = 8043475470187039484L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -274,7 +274,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 7769120724938359430L;
+    private const long _cacheIndex_Denominator = 7769120724938359430L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -391,7 +391,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Triage_Before_Evaluation_Management(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Triage_Before_Evaluation_Management, ED_Triage_Before_Evaluation_Management_Compute);
 
-    private static readonly long _cacheIndex_ED_Triage_Before_Evaluation_Management = -2895778111572727986L;
+    private const long _cacheIndex_ED_Triage_Before_Evaluation_Management = -2895778111572727986L;
 
     private IEnumerable<Encounter> ED_Triage_Before_Evaluation_Management_Compute(CqlContext context)
     {
@@ -447,7 +447,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Triage_and_Evaluation_Management(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Triage_and_Evaluation_Management, ED_Triage_and_Evaluation_Management_Compute);
 
-    private static readonly long _cacheIndex_ED_Triage_and_Evaluation_Management = -7784186630710248603L;
+    private const long _cacheIndex_ED_Triage_and_Evaluation_Management = -7784186630710248603L;
 
     private IEnumerable<Encounter> ED_Triage_and_Evaluation_Management_Compute(CqlContext context)
     {
@@ -505,7 +505,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Time_to_Treatment_Room_Greater_Than_60_Minutes(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes, Time_to_Treatment_Room_Greater_Than_60_Minutes_Compute);
 
-    private static readonly long _cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes = 8589694032106636874L;
+    private const long _cacheIndex_Time_to_Treatment_Room_Greater_Than_60_Minutes = 8589694032106636874L;
 
     private IEnumerable<Encounter> Time_to_Treatment_Room_Greater_Than_60_Minutes_Compute(CqlContext context)
     {
@@ -529,7 +529,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Arrival_Left_Without_Being_Seen(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Arrival_Left_Without_Being_Seen, ED_Arrival_Left_Without_Being_Seen_Compute);
 
-    private static readonly long _cacheIndex_ED_Arrival_Left_Without_Being_Seen = -1788122869814405320L;
+    private const long _cacheIndex_ED_Arrival_Left_Without_Being_Seen = -1788122869814405320L;
 
     private IEnumerable<Encounter> ED_Arrival_Left_Without_Being_Seen_Compute(CqlContext context)
     {
@@ -590,7 +590,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<ServiceRequest> ED_To_Inpatient_Order(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_To_Inpatient_Order, ED_To_Inpatient_Order_Compute);
 
-    private static readonly long _cacheIndex_ED_To_Inpatient_Order = -8235323389346960348L;
+    private const long _cacheIndex_ED_To_Inpatient_Order = -8235323389346960348L;
 
     private IEnumerable<ServiceRequest> ED_To_Inpatient_Order_Compute(CqlContext context)
     {
@@ -778,7 +778,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Decision_to_Admit_Encounter_Order(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Decision_to_Admit_Encounter_Order, Decision_to_Admit_Encounter_Order_Compute);
 
-    private static readonly long _cacheIndex_Decision_to_Admit_Encounter_Order = 749891334126782508L;
+    private const long _cacheIndex_Decision_to_Admit_Encounter_Order = 749891334126782508L;
 
     private IEnumerable<Encounter> Decision_to_Admit_Encounter_Order_Compute(CqlContext context)
     {
@@ -855,7 +855,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<object> Assessment_In_ED(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Assessment_In_ED, Assessment_In_ED_Compute);
 
-    private static readonly long _cacheIndex_Assessment_In_ED = -2770964050305353667L;
+    private const long _cacheIndex_Assessment_In_ED = -2770964050305353667L;
 
     private IEnumerable<object> Assessment_In_ED_Compute(CqlContext context)
     {
@@ -881,7 +881,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Decision_to_Admit_Using_Assessment(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Decision_to_Admit_Using_Assessment, Decision_to_Admit_Using_Assessment_Compute);
 
-    private static readonly long _cacheIndex_Decision_to_Admit_Using_Assessment = 5843420632977074130L;
+    private const long _cacheIndex_Decision_to_Admit_Using_Assessment = 5843420632977074130L;
 
     private IEnumerable<Encounter> Decision_to_Admit_Using_Assessment_Compute(CqlContext context)
     {
@@ -945,7 +945,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<ServiceRequest> Inpatient_Or_Bed_Assignment_Encounter_Order(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Or_Bed_Assignment_Encounter_Order, Inpatient_Or_Bed_Assignment_Encounter_Order_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Or_Bed_Assignment_Encounter_Order = -1053802276613658725L;
+    private const long _cacheIndex_Inpatient_Or_Bed_Assignment_Encounter_Order = -1053802276613658725L;
 
     private IEnumerable<ServiceRequest> Inpatient_Or_Bed_Assignment_Encounter_Order_Compute(CqlContext context)
     {
@@ -978,7 +978,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes, Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes_Compute);
 
-    private static readonly long _cacheIndex_Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes = 5181621130666177995L;
+    private const long _cacheIndex_Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes = 5181621130666177995L;
 
     private IEnumerable<Encounter> Time_of_Admit_Order_Or_Bed_Assignment_to_Departure_Greater_Than_241_Minutes_Compute(CqlContext context)
     {
@@ -1044,7 +1044,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure, Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure_Compute);
 
-    private static readonly long _cacheIndex_Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure = 4586384400018440955L;
+    private const long _cacheIndex_Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure = 4586384400018440955L;
 
     private IEnumerable<Encounter> Admitted_to_Inpatient_241_Minutes_or_More_Before_Departure_Compute(CqlContext context)
     {
@@ -1077,7 +1077,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Boarded_Time_Greater_Than_240_Minutes, Boarded_Time_Greater_Than_240_Minutes_Compute);
 
-    private static readonly long _cacheIndex_Boarded_Time_Greater_Than_240_Minutes = 6909252192339620427L;
+    private const long _cacheIndex_Boarded_Time_Greater_Than_240_Minutes = 6909252192339620427L;
 
     private IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_Compute(CqlContext context)
     {
@@ -1096,7 +1096,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Observation_Status(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Observation_Status, ED_Observation_Status_Compute);
 
-    private static readonly long _cacheIndex_ED_Observation_Status = 7518040729675102322L;
+    private const long _cacheIndex_ED_Observation_Status = 7518040729675102322L;
 
     private IEnumerable<Encounter> ED_Observation_Status_Compute(CqlContext context)
     {
@@ -1135,7 +1135,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay, Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Compute);
 
-    private static readonly long _cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay = 5943507332585823609L;
+    private const long _cacheIndex_Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay = 5943507332585823609L;
 
     private IEnumerable<Encounter> Boarded_Time_Greater_Than_240_Minutes_and_No_Observation_Stay_Compute(CqlContext context)
     {
@@ -1168,7 +1168,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes, ED_Length_of_Stay_Greater_Than_480_Minutes_Compute);
 
-    private static readonly long _cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes = 997941685269438763L;
+    private const long _cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes = 997941685269438763L;
 
     private IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_Compute(CqlContext context)
     {
@@ -1192,7 +1192,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay, ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Compute);
 
-    private static readonly long _cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay = -8859002859181274170L;
+    private const long _cacheIndex_ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay = -8859002859181274170L;
 
     private IEnumerable<Encounter> ED_Length_of_Stay_Greater_Than_480_Minutes_and_No_Observation_Stay_Compute(CqlContext context)
     {
@@ -1225,7 +1225,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 4971354970454751926L;
+    private const long _cacheIndex_Numerator = 4971354970454751926L;
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -1244,7 +1244,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years, ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Compute);
 
-    private static readonly long _cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years = 5925777047380369906L;
+    private const long _cacheIndex_ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years = 5925777047380369906L;
 
     private IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_Less_Than_18_Years_Compute(CqlContext context)
     {
@@ -1272,7 +1272,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Pediatric_With_No_Mental_Health_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis, Pediatric_With_No_Mental_Health_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis = -208256387275009242L;
+    private const long _cacheIndex_Pediatric_With_No_Mental_Health_Diagnosis = -208256387275009242L;
 
     private IEnumerable<Encounter> Pediatric_With_No_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -1294,7 +1294,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_18_Years_and_Older(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older, ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Compute);
 
-    private static readonly long _cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older = -5331314089026339565L;
+    private const long _cacheIndex_ED_Encounter_or_Triage_of_Patients_18_Years_and_Older = -5331314089026339565L;
 
     private IEnumerable<Encounter> ED_Encounter_or_Triage_of_Patients_18_Years_and_Older_Compute(CqlContext context)
     {
@@ -1322,7 +1322,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Adult_With_No_Mental_Health_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Adult_With_No_Mental_Health_Diagnosis, Adult_With_No_Mental_Health_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Adult_With_No_Mental_Health_Diagnosis = -9198098665733055182L;
+    private const long _cacheIndex_Adult_With_No_Mental_Health_Diagnosis = -9198098665733055182L;
 
     private IEnumerable<Encounter> Adult_With_No_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -1344,7 +1344,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Pediatric_With_Mental_Health_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pediatric_With_Mental_Health_Diagnosis, Pediatric_With_Mental_Health_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Pediatric_With_Mental_Health_Diagnosis = 892056070909937912L;
+    private const long _cacheIndex_Pediatric_With_Mental_Health_Diagnosis = 892056070909937912L;
 
     private IEnumerable<Encounter> Pediatric_With_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -1365,7 +1365,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Adult_With_Mental_Health_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Adult_With_Mental_Health_Diagnosis, Adult_With_Mental_Health_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Adult_With_Mental_Health_Diagnosis = -558307240570505674L;
+    private const long _cacheIndex_Adult_With_Mental_Health_Diagnosis = -558307240570505674L;
 
     private IEnumerable<Encounter> Adult_With_Mental_Health_Diagnosis_Compute(CqlContext context)
     {
@@ -1386,7 +1386,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Stratification_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
-    private static readonly long _cacheIndex_Stratification_1 = 5942352318045369146L;
+    private const long _cacheIndex_Stratification_1 = 5942352318045369146L;
 
     private IEnumerable<Encounter> Stratification_1_Compute(CqlContext context)
     {
@@ -1399,7 +1399,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Stratification_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
-    private static readonly long _cacheIndex_Stratification_2 = -7992318308575810951L;
+    private const long _cacheIndex_Stratification_2 = -7992318308575810951L;
 
     private IEnumerable<Encounter> Stratification_2_Compute(CqlContext context)
     {
@@ -1412,7 +1412,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Stratification_3(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_3, Stratification_3_Compute);
 
-    private static readonly long _cacheIndex_Stratification_3 = 6500512355801734679L;
+    private const long _cacheIndex_Stratification_3 = 6500512355801734679L;
 
     private IEnumerable<Encounter> Stratification_3_Compute(CqlContext context)
     {
@@ -1425,7 +1425,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<Encounter> Stratification_4(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_4, Stratification_4_Compute);
 
-    private static readonly long _cacheIndex_Stratification_4 = 4102676335102210626L;
+    private const long _cacheIndex_Stratification_4 = 4102676335102210626L;
 
     private IEnumerable<Encounter> Stratification_4_Compute(CqlContext context)
     {
@@ -1438,7 +1438,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -2764988004099448273L;
+    private const long _cacheIndex_SDE_Ethnicity = -2764988004099448273L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1451,7 +1451,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 3188438233448661594L;
+    private const long _cacheIndex_SDE_Payer = 3188438233448661594L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1464,7 +1464,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -1014595823694878083L;
+    private const long _cacheIndex_SDE_Race = -1014595823694878083L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1477,7 +1477,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 7666189415205594029L;
+    private const long _cacheIndex_SDE_Sex = 7666189415205594029L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

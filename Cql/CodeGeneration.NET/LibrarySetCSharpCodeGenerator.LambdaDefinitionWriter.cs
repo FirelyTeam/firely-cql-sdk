@@ -78,8 +78,8 @@ internal partial class LibrarySetCSharpCodeGenerator
                 }
                 ISB.AppendLine();
 
-                // Static cache index field
-                ISB.AppendLine($"private static readonly long {cacheIndexFieldName} = {cacheKey}L;");
+                // Const cache index field (value is a compile-time literal)
+                ISB.AppendLine($"private const long {cacheIndexFieldName} = {cacheKey}L;");
                 ISB.AppendLine();
 
                 // Private compute method containing the actual logic

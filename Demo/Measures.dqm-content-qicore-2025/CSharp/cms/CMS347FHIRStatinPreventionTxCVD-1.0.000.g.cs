@@ -191,7 +191,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -7207067547160678946L;
+    private const long _cacheIndex_Measurement_Period = -7207067547160678946L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -211,7 +211,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -1637618704618923893L;
+    private const long _cacheIndex_Patient = -1637618704618923893L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -255,7 +255,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public IEnumerable<object> ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period, ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period = 4164245924017961109L;
+    private const long _cacheIndex_ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period = 4164245924017961109L;
 
     private IEnumerable<object> ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -390,7 +390,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public IEnumerable<Encounter> Qualifying_Encounter_During_Day_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounter_During_Day_of_Measurement_Period, Qualifying_Encounter_During_Day_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounter_During_Day_of_Measurement_Period = -4982836334381235869L;
+    private const long _cacheIndex_Qualifying_Encounter_During_Day_of_Measurement_Period = -4982836334381235869L;
 
     private IEnumerable<Encounter> Qualifying_Encounter_During_Day_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -443,7 +443,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Initial_Population_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population_1, Initial_Population_1_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population_1 = -5589325867242629197L;
+    private const long _cacheIndex_Initial_Population_1 = -5589325867242629197L;
 
     private bool? Initial_Population_1_Compute(CqlContext context)
     {
@@ -460,7 +460,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Patients_Aged_20_to_75_at_Start_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patients_Aged_20_to_75_at_Start_of_Measurement_Period, Patients_Aged_20_to_75_at_Start_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Patients_Aged_20_to_75_at_Start_of_Measurement_Period = 5090397957371956718L;
+    private const long _cacheIndex_Patients_Aged_20_to_75_at_Start_of_Measurement_Period = 5090397957371956718L;
 
     private bool? Patients_Aged_20_to_75_at_Start_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -482,7 +482,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public IEnumerable<Observation> LDL_Result_Greater_Than_or_Equal_To_190(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_LDL_Result_Greater_Than_or_Equal_To_190, LDL_Result_Greater_Than_or_Equal_To_190_Compute);
 
-    private static readonly long _cacheIndex_LDL_Result_Greater_Than_or_Equal_To_190 = 7693972953396668631L;
+    private const long _cacheIndex_LDL_Result_Greater_Than_or_Equal_To_190 = 7693972953396668631L;
 
     private IEnumerable<Observation> LDL_Result_Greater_Than_or_Equal_To_190_Compute(CqlContext context)
     {
@@ -525,7 +525,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public IEnumerable<Condition> Hypercholesterolemia_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hypercholesterolemia_Diagnosis, Hypercholesterolemia_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Hypercholesterolemia_Diagnosis = 7380748297549208520L;
+    private const long _cacheIndex_Hypercholesterolemia_Diagnosis = 7380748297549208520L;
 
     private IEnumerable<Condition> Hypercholesterolemia_Diagnosis_Compute(CqlContext context)
     {
@@ -552,7 +552,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD, Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD_Compute);
 
-    private static readonly long _cacheIndex_Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD = 7452783206447913949L;
+    private const long _cacheIndex_Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD = 7452783206447913949L;
 
     private bool? Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD_Compute(CqlContext context)
     {
@@ -574,7 +574,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Initial_Population_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population_2, Initial_Population_2_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population_2 = 7791455736897779744L;
+    private const long _cacheIndex_Initial_Population_2 = 7791455736897779744L;
 
     private bool? Initial_Population_2_Compute(CqlContext context)
     {
@@ -590,7 +590,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Has_Diabetes_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Diabetes_Diagnosis, Has_Diabetes_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_Diabetes_Diagnosis = -7228677731738464025L;
+    private const long _cacheIndex_Has_Diabetes_Diagnosis = -7228677731738464025L;
 
     private bool? Has_Diabetes_Diagnosis_Compute(CqlContext context)
     {
@@ -616,7 +616,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Patients_Aged_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patients_Aged_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia, Patients_Aged_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia_Compute);
 
-    private static readonly long _cacheIndex_Patients_Aged_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia = -7748908522122343608L;
+    private const long _cacheIndex_Patients_Aged_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia = -7748908522122343608L;
 
     private bool? Patients_Aged_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia_Compute(CqlContext context)
     {
@@ -652,7 +652,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Initial_Population_3(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population_3, Initial_Population_3_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population_3 = -5962631845156090878L;
+    private const long _cacheIndex_Initial_Population_3 = -5962631845156090878L;
 
     private bool? Initial_Population_3_Compute(CqlContext context)
     {
@@ -668,7 +668,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Ten_Year_CVD_Risk_is_High(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Ten_Year_CVD_Risk_is_High, Ten_Year_CVD_Risk_is_High_Compute);
 
-    private static readonly long _cacheIndex_Ten_Year_CVD_Risk_is_High = -1620907926587819717L;
+    private const long _cacheIndex_Ten_Year_CVD_Risk_is_High = -1620907926587819717L;
 
     private bool? Ten_Year_CVD_Risk_is_High_Compute(CqlContext context)
     {
@@ -714,7 +714,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes, Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes_Compute);
 
-    private static readonly long _cacheIndex_Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes = -2486612621262715549L;
+    private const long _cacheIndex_Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes = -2486612621262715549L;
 
     private bool? Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes_Compute(CqlContext context)
     {
@@ -750,7 +750,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Initial_Population_4(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population_4, Initial_Population_4_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population_4 = 4506315181127075026L;
+    private const long _cacheIndex_Initial_Population_4 = 4506315181127075026L;
 
     private bool? Initial_Population_4_Compute(CqlContext context)
     {
@@ -766,7 +766,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Denominator_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_1, Denominator_1_Compute);
 
-    private static readonly long _cacheIndex_Denominator_1 = 4893874749146704577L;
+    private const long _cacheIndex_Denominator_1 = 4893874749146704577L;
 
     private bool? Denominator_1_Compute(CqlContext context)
     {
@@ -779,7 +779,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Denominator_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_2, Denominator_2_Compute);
 
-    private static readonly long _cacheIndex_Denominator_2 = 7264294075618126345L;
+    private const long _cacheIndex_Denominator_2 = 7264294075618126345L;
 
     private bool? Denominator_2_Compute(CqlContext context)
     {
@@ -792,7 +792,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Denominator_3(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_3, Denominator_3_Compute);
 
-    private static readonly long _cacheIndex_Denominator_3 = -3579989683173250922L;
+    private const long _cacheIndex_Denominator_3 = -3579989683173250922L;
 
     private bool? Denominator_3_Compute(CqlContext context)
     {
@@ -805,7 +805,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Denominator_4(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_4, Denominator_4_Compute);
 
-    private static readonly long _cacheIndex_Denominator_4 = -8057960277412130980L;
+    private const long _cacheIndex_Denominator_4 = -8057960277412130980L;
 
     private bool? Denominator_4_Compute(CqlContext context)
     {
@@ -818,7 +818,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = -6138367636183201895L;
+    private const long _cacheIndex_Denominator_Exclusions = -6138367636183201895L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -851,7 +851,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Has_Allergy_to_Statin(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Allergy_to_Statin, Has_Allergy_to_Statin_Compute);
 
-    private static readonly long _cacheIndex_Has_Allergy_to_Statin = 7583771530994218922L;
+    private const long _cacheIndex_Has_Allergy_to_Statin = 7583771530994218922L;
 
     private bool? Has_Allergy_to_Statin_Compute(CqlContext context)
     {
@@ -883,7 +883,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Has_Hepatitis_or_Liver_Disease_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Hepatitis_or_Liver_Disease_Diagnosis, Has_Hepatitis_or_Liver_Disease_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_Hepatitis_or_Liver_Disease_Diagnosis = 4789068474233169409L;
+    private const long _cacheIndex_Has_Hepatitis_or_Liver_Disease_Diagnosis = 4789068474233169409L;
 
     private bool? Has_Hepatitis_or_Liver_Disease_Diagnosis_Compute(CqlContext context)
     {
@@ -915,7 +915,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Has_Statin_Associated_Muscle_Symptoms(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Statin_Associated_Muscle_Symptoms, Has_Statin_Associated_Muscle_Symptoms_Compute);
 
-    private static readonly long _cacheIndex_Has_Statin_Associated_Muscle_Symptoms = 5745765587194939659L;
+    private const long _cacheIndex_Has_Statin_Associated_Muscle_Symptoms = 5745765587194939659L;
 
     private bool? Has_Statin_Associated_Muscle_Symptoms_Compute(CqlContext context)
     {
@@ -941,7 +941,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Has_ESRD_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_ESRD_Diagnosis, Has_ESRD_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_ESRD_Diagnosis = -5357553850084823202L;
+    private const long _cacheIndex_Has_ESRD_Diagnosis = -5357553850084823202L;
 
     private bool? Has_ESRD_Diagnosis_Compute(CqlContext context)
     {
@@ -967,7 +967,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Has_Adverse_Reaction_to_Statin(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Adverse_Reaction_to_Statin, Has_Adverse_Reaction_to_Statin_Compute);
 
-    private static readonly long _cacheIndex_Has_Adverse_Reaction_to_Statin = -1649441142218493680L;
+    private const long _cacheIndex_Has_Adverse_Reaction_to_Statin = -1649441142218493680L;
 
     private bool? Has_Adverse_Reaction_to_Statin_Compute(CqlContext context)
     {
@@ -994,7 +994,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Has_Medical_Reason_for_Not_Ordering_Statin_Therapy(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Medical_Reason_for_Not_Ordering_Statin_Therapy, Has_Medical_Reason_for_Not_Ordering_Statin_Therapy_Compute);
 
-    private static readonly long _cacheIndex_Has_Medical_Reason_for_Not_Ordering_Statin_Therapy = -2900473731418674548L;
+    private const long _cacheIndex_Has_Medical_Reason_for_Not_Ordering_Statin_Therapy = -2900473731418674548L;
 
     private bool? Has_Medical_Reason_for_Not_Ordering_Statin_Therapy_Compute(CqlContext context)
     {
@@ -1061,7 +1061,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Denominator_Exceptions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exceptions = 8214109954115230834L;
+    private const long _cacheIndex_Denominator_Exceptions = 8214109954115230834L;
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -1088,7 +1088,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public IEnumerable<MedicationRequest> Statin_Therapy_Ordered_during_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Statin_Therapy_Ordered_during_Measurement_Period, Statin_Therapy_Ordered_during_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Statin_Therapy_Ordered_during_Measurement_Period = -207764515466019993L;
+    private const long _cacheIndex_Statin_Therapy_Ordered_during_Measurement_Period = -207764515466019993L;
 
     private IEnumerable<MedicationRequest> Statin_Therapy_Ordered_during_Measurement_Period_Compute(CqlContext context)
     {
@@ -1218,7 +1218,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public IEnumerable<MedicationRequest> Medication_Active_during_the_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Medication_Active_during_the_Measurement_Period, Medication_Active_during_the_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Medication_Active_during_the_Measurement_Period = -2813718820927620392L;
+    private const long _cacheIndex_Medication_Active_during_the_Measurement_Period = -2813718820927620392L;
 
     private IEnumerable<MedicationRequest> Medication_Active_during_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -1342,7 +1342,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 7343972711925249427L;
+    private const long _cacheIndex_Numerator = 7343972711925249427L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -1359,7 +1359,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -4265701889138765309L;
+    private const long _cacheIndex_SDE_Ethnicity = -4265701889138765309L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1372,7 +1372,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 4981223420342236931L;
+    private const long _cacheIndex_SDE_Payer = 4981223420342236931L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1385,7 +1385,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 7829354466262601679L;
+    private const long _cacheIndex_SDE_Race = 7829354466262601679L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1398,7 +1398,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -4537898652197643190L;
+    private const long _cacheIndex_SDE_Sex = -4537898652197643190L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

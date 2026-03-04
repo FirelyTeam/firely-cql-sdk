@@ -86,7 +86,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -7499856264790728684L;
+    private const long _cacheIndex_Measurement_Period = -7499856264790728684L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -106,7 +106,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -7409433686009501412L;
+    private const long _cacheIndex_Patient = -7409433686009501412L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -120,7 +120,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public bool? Has_Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period, Has_Qualifying_Encounter_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period = -44229219208618081L;
+    private const long _cacheIndex_Has_Qualifying_Encounter_During_Measurement_Period = -44229219208618081L;
 
     private bool? Has_Qualifying_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -210,7 +210,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public bool? Has_HIV_Diagnosis_Before_End_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period, Has_HIV_Diagnosis_Before_End_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period = -7292671796849614126L;
+    private const long _cacheIndex_Has_HIV_Diagnosis_Before_End_of_Measurement_Period = -7292671796849614126L;
 
     private bool? Has_HIV_Diagnosis_Before_End_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -240,7 +240,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 4471597997769822028L;
+    private const long _cacheIndex_Initial_Population = 4471597997769822028L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -265,7 +265,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -2657190060784088045L;
+    private const long _cacheIndex_Denominator = -2657190060784088045L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -278,7 +278,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public bool? Has_Chlamydia_Testing(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Chlamydia_Testing, Has_Chlamydia_Testing_Compute);
 
-    private static readonly long _cacheIndex_Has_Chlamydia_Testing = -8881862878889127322L;
+    private const long _cacheIndex_Has_Chlamydia_Testing = -8881862878889127322L;
 
     private bool? Has_Chlamydia_Testing_Compute(CqlContext context)
     {
@@ -366,7 +366,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public bool? Has_Gonorrhea_Testing(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Gonorrhea_Testing, Has_Gonorrhea_Testing_Compute);
 
-    private static readonly long _cacheIndex_Has_Gonorrhea_Testing = -8502615815305729511L;
+    private const long _cacheIndex_Has_Gonorrhea_Testing = -8502615815305729511L;
 
     private bool? Has_Gonorrhea_Testing_Compute(CqlContext context)
     {
@@ -454,7 +454,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public bool? Has_Syphilis_Testing(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Syphilis_Testing, Has_Syphilis_Testing_Compute);
 
-    private static readonly long _cacheIndex_Has_Syphilis_Testing = 7686213639457514893L;
+    private const long _cacheIndex_Has_Syphilis_Testing = 7686213639457514893L;
 
     private bool? Has_Syphilis_Testing_Compute(CqlContext context)
     {
@@ -542,7 +542,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 5205330117834525639L;
+    private const long _cacheIndex_Numerator = 5205330117834525639L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -559,7 +559,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 1798453950093290862L;
+    private const long _cacheIndex_SDE_Ethnicity = 1798453950093290862L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -572,7 +572,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -7550824248673390558L;
+    private const long _cacheIndex_SDE_Payer = -7550824248673390558L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -585,7 +585,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -6756198988775072204L;
+    private const long _cacheIndex_SDE_Race = -6756198988775072204L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -598,7 +598,7 @@ public partial class CMS1188FHIRHIVSTITesting_1_0_000 : ILibrary, ISingleton<CMS
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -5848999743963259095L;
+    private const long _cacheIndex_SDE_Sex = -5848999743963259095L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

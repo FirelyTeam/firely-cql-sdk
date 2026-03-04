@@ -66,7 +66,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 719764501864672615L;
+    private const long _cacheIndex_Measurement_Period = 719764501864672615L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -86,7 +86,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 2189845128463297569L;
+    private const long _cacheIndex_Patient = 2189845128463297569L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -100,7 +100,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -6003790436015656796L;
+    private const long _cacheIndex_SDE_Ethnicity = -6003790436015656796L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -113,7 +113,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -4785729452146541078L;
+    private const long _cacheIndex_SDE_Payer = -4785729452146541078L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -126,7 +126,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -1336836600272145395L;
+    private const long _cacheIndex_SDE_Race = -1336836600272145395L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -139,7 +139,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 1972549228661881347L;
+    private const long _cacheIndex_SDE_Sex = 1972549228661881347L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -152,7 +152,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters = 328906296102285067L;
+    private const long _cacheIndex_Qualifying_Encounters = 328906296102285067L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -195,7 +195,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -5606214897224660078L;
+    private const long _cacheIndex_Initial_Population = -5606214897224660078L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -220,7 +220,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -711802206382753402L;
+    private const long _cacheIndex_Denominator = -711802206382753402L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -233,7 +233,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public IEnumerable<object> Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period, Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period = 8002013089842405493L;
+    private const long _cacheIndex_Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period = 8002013089842405493L;
 
     private IEnumerable<object> Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period_Compute(CqlContext context)
     {
@@ -259,7 +259,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 1328021931932343539L;
+    private const long _cacheIndex_Denominator_Exclusions = 1328021931932343539L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -275,7 +275,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Observation> BMI_Percentile_in_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_BMI_Percentile_in_Measurement_Period, BMI_Percentile_in_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_BMI_Percentile_in_Measurement_Period = 7174644324396894712L;
+    private const long _cacheIndex_BMI_Percentile_in_Measurement_Period = 7174644324396894712L;
 
     private IEnumerable<Observation> BMI_Percentile_in_Measurement_Period_Compute(CqlContext context)
     {
@@ -304,7 +304,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Observation> Height_in_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Height_in_Measurement_Period, Height_in_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Height_in_Measurement_Period = -5308286006825359213L;
+    private const long _cacheIndex_Height_in_Measurement_Period = -5308286006825359213L;
 
     private IEnumerable<Observation> Height_in_Measurement_Period_Compute(CqlContext context)
     {
@@ -333,7 +333,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public IEnumerable<Observation> Weight_in_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Weight_in_Measurement_Period, Weight_in_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Weight_in_Measurement_Period = 282172865202226206L;
+    private const long _cacheIndex_Weight_in_Measurement_Period = 282172865202226206L;
 
     private IEnumerable<Observation> Weight_in_Measurement_Period_Compute(CqlContext context)
     {
@@ -362,7 +362,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public bool? Numerator_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
 
-    private static readonly long _cacheIndex_Numerator_1 = -7859477461501522855L;
+    private const long _cacheIndex_Numerator_1 = -7859477461501522855L;
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
@@ -382,7 +382,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public bool? Numerator_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
 
-    private static readonly long _cacheIndex_Numerator_2 = -6185469553368083075L;
+    private const long _cacheIndex_Numerator_2 = -6185469553368083075L;
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
@@ -471,7 +471,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public bool? Numerator_3(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_3, Numerator_3_Compute);
 
-    private static readonly long _cacheIndex_Numerator_3 = 2009784203490838187L;
+    private const long _cacheIndex_Numerator_3 = 2009784203490838187L;
 
     private bool? Numerator_3_Compute(CqlContext context)
     {
@@ -560,7 +560,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public bool? Stratification_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
-    private static readonly long _cacheIndex_Stratification_1 = 1520144116127633675L;
+    private const long _cacheIndex_Stratification_1 = 1520144116127633675L;
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
@@ -582,7 +582,7 @@ public partial class CMS155FHIRWgtAssessCounseling_1_0_000 : ILibrary, ISingleto
     public bool? Stratification_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
-    private static readonly long _cacheIndex_Stratification_2 = -4851904811856659463L;
+    private const long _cacheIndex_Stratification_2 = -4851904811856659463L;
 
     private bool? Stratification_2_Compute(CqlContext context)
     {

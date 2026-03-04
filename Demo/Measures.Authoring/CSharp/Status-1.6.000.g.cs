@@ -65,7 +65,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 2429725487134773543L;
+    private const long _cacheIndex_Patient = 2429725487134773543L;
 
     private Patient Patient_Compute(CqlContext context)
     {

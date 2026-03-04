@@ -78,7 +78,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 5584088217374446953L;
+    private const long _cacheIndex_Measurement_Period = 5584088217374446953L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -98,7 +98,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 6989979488914168588L;
+    private const long _cacheIndex_Patient = 6989979488914168588L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -112,7 +112,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -148605947143256609L;
+    private const long _cacheIndex_SDE_Ethnicity = -148605947143256609L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -125,7 +125,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer_Type, SDE_Payer_Type_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer_Type = -6146604132247170046L;
+    private const long _cacheIndex_SDE_Payer_Type = -6146604132247170046L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type_Compute(CqlContext context)
     {
@@ -138,7 +138,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -4989583145170396544L;
+    private const long _cacheIndex_SDE_Race = -4989583145170396544L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -151,7 +151,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 6146617802936438746L;
+    private const long _cacheIndex_SDE_Sex = 6146617802936438746L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -164,7 +164,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -7162108857230760093L;
+    private const long _cacheIndex_Initial_Population = -7162108857230760093L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -211,7 +211,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Measure_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measure_Population, Measure_Population_Compute);
 
-    private static readonly long _cacheIndex_Measure_Population = -8783856775724922190L;
+    private const long _cacheIndex_Measure_Population = -8783856775724922190L;
 
     private IEnumerable<Encounter> Measure_Population_Compute(CqlContext context)
     {
@@ -224,7 +224,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Discharge_for_Hospice_Care(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Discharge_for_Hospice_Care, Encounters_with_Discharge_for_Hospice_Care_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Discharge_for_Hospice_Care = -3797569175861737006L;
+    private const long _cacheIndex_Encounters_with_Discharge_for_Hospice_Care = -3797569175861737006L;
 
     private IEnumerable<Encounter> Encounters_with_Discharge_for_Hospice_Care_Compute(CqlContext context)
     {
@@ -248,7 +248,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<CqlDateTime> Intervention_Hospice_Care(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Intervention_Hospice_Care, Intervention_Hospice_Care_Compute);
 
-    private static readonly long _cacheIndex_Intervention_Hospice_Care = 6747077452182961779L;
+    private const long _cacheIndex_Intervention_Hospice_Care = 6747077452182961779L;
 
     private IEnumerable<CqlDateTime> Intervention_Hospice_Care_Compute(CqlContext context)
     {
@@ -389,7 +389,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Hospice_during_Eligible_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Hospice_during_Eligible_Encounter, Encounters_with_Hospice_during_Eligible_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Hospice_during_Eligible_Encounter = 3658264545879597102L;
+    private const long _cacheIndex_Encounters_with_Hospice_during_Eligible_Encounter = 3658264545879597102L;
 
     private IEnumerable<Encounter> Encounters_with_Hospice_during_Eligible_Encounter_Compute(CqlContext context)
     {
@@ -419,7 +419,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Measure_Population_Exclusion(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measure_Population_Exclusion, Measure_Population_Exclusion_Compute);
 
-    private static readonly long _cacheIndex_Measure_Population_Exclusion = -1681637017260605467L;
+    private const long _cacheIndex_Measure_Population_Exclusion = -1681637017260605467L;
 
     private IEnumerable<Encounter> Measure_Population_Exclusion_Compute(CqlContext context)
     {
@@ -434,7 +434,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<CqlDateTime> Intervention_Dietitian_Referral(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Intervention_Dietitian_Referral, Intervention_Dietitian_Referral_Compute);
 
-    private static readonly long _cacheIndex_Intervention_Dietitian_Referral = -5066876506533589319L;
+    private const long _cacheIndex_Intervention_Dietitian_Referral = -5066876506533589319L;
 
     private IEnumerable<CqlDateTime> Intervention_Dietitian_Referral_Compute(CqlContext context)
     {
@@ -575,7 +575,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Dietitian_Referral(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Dietitian_Referral, Encounters_with_Dietitian_Referral_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Dietitian_Referral = -1502847048600689300L;
+    private const long _cacheIndex_Encounters_with_Dietitian_Referral = -1502847048600689300L;
 
     private IEnumerable<Encounter> Encounters_with_Dietitian_Referral_Compute(CqlContext context)
     {
@@ -605,7 +605,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk, Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk = 9218522296561208176L;
+    private const long _cacheIndex_Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk = 9218522296561208176L;
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_Not_At_Risk_Compute(CqlContext context)
     {
@@ -654,7 +654,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_At_Risk, Encounters_with_Malnutrition_Risk_Screening_At_Risk_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Malnutrition_Risk_Screening_At_Risk = -1346925088563852433L;
+    private const long _cacheIndex_Encounters_with_Malnutrition_Risk_Screening_At_Risk = -1346925088563852433L;
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk_Compute(CqlContext context)
     {
@@ -703,7 +703,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening, Encounters_with_Malnutrition_Risk_Screening_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Malnutrition_Risk_Screening = 9202831662767776523L;
+    private const long _cacheIndex_Encounters_with_Malnutrition_Risk_Screening = 9202831662767776523L;
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_Compute(CqlContext context)
     {
@@ -718,7 +718,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral, Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral = -6167490468395476571L;
+    private const long _cacheIndex_Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral = -6167490468395476571L;
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_or_with_Dietitian_Referral_Compute(CqlContext context)
     {
@@ -733,7 +733,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral, Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral = 5264016786480719304L;
+    private const long _cacheIndex_Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral = 5264016786480719304L;
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Not_At_Risk_Screening_and_without_Dietitian_Referral_Compute(CqlContext context)
     {
@@ -748,7 +748,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral, Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral = 8495605916755909275L;
+    private const long _cacheIndex_Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral = 8495605916755909275L;
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Risk_Screening_At_Risk_or_with_Dietitian_Referral_Compute(CqlContext context)
     {
@@ -856,7 +856,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status, Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status = 2491156004312218307L;
+    private const long _cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status = 2491156004312218307L;
 
     private IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_And_Identified_Status_Compute(CqlContext context)
     {
@@ -967,7 +967,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished, Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished = 3470386145325675084L;
+    private const long _cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished = 3470386145325675084L;
 
     private IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Moderately_Or_Severely_Malnourished_Compute(CqlContext context)
     {
@@ -1074,7 +1074,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished, Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished = -467060107624116912L;
+    private const long _cacheIndex_Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished = -467060107624116912L;
 
     private IEnumerable<Encounter> Encounter_With_Most_Recent_Nutrition_Assessment_Status_of_Not_or_Mildly_Malnourished_Compute(CqlContext context)
     {
@@ -1207,7 +1207,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Condition> Has_Malnutrition_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Malnutrition_Diagnosis, Has_Malnutrition_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_Malnutrition_Diagnosis = 5295155027843881410L;
+    private const long _cacheIndex_Has_Malnutrition_Diagnosis = 5295155027843881410L;
 
     private IEnumerable<Condition> Has_Malnutrition_Diagnosis_Compute(CqlContext context)
     {
@@ -1232,7 +1232,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis, Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis = -7777489324715066466L;
+    private const long _cacheIndex_Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis = -7777489324715066466L;
 
     private IEnumerable<Encounter> Encounters_With_Encounter_Diagnosis_Of_Malnutrition_Diagnosis_Compute(CqlContext context)
     {
@@ -1282,7 +1282,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Malnutrition_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Malnutrition_Diagnosis, Encounters_with_Malnutrition_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Malnutrition_Diagnosis = 6975114635827873763L;
+    private const long _cacheIndex_Encounters_with_Malnutrition_Diagnosis = 6975114635827873763L;
 
     private IEnumerable<Encounter> Encounters_with_Malnutrition_Diagnosis_Compute(CqlContext context)
     {
@@ -1314,7 +1314,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> Encounters_with_Nutrition_Care_Plan(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounters_with_Nutrition_Care_Plan, Encounters_with_Nutrition_Care_Plan_Compute);
 
-    private static readonly long _cacheIndex_Encounters_with_Nutrition_Care_Plan = -6486910016594734001L;
+    private const long _cacheIndex_Encounters_with_Nutrition_Care_Plan = -6486910016594734001L;
 
     private IEnumerable<Encounter> Encounters_with_Nutrition_Care_Plan_Compute(CqlContext context)
     {

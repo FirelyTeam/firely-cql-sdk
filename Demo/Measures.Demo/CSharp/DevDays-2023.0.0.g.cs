@@ -45,7 +45,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 7096341437342020688L;
+    private const long _cacheIndex_Measurement_Period = 7096341437342020688L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -62,7 +62,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 9124584184355502557L;
+    private const long _cacheIndex_Patient = 9124584184355502557L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -76,7 +76,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public IEnumerable<Condition> Jet_engine_conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Jet_engine_conditions, Jet_engine_conditions_Compute);
 
-    private static readonly long _cacheIndex_Jet_engine_conditions = 2800937253784641656L;
+    private const long _cacheIndex_Jet_engine_conditions = 2800937253784641656L;
 
     private IEnumerable<Condition> Jet_engine_conditions_Compute(CqlContext context)
     {
@@ -112,7 +112,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public IEnumerable<Condition> Subsequent_encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Subsequent_encounters, Subsequent_encounters_Compute);
 
-    private static readonly long _cacheIndex_Subsequent_encounters = 33888561033543232L;
+    private const long _cacheIndex_Subsequent_encounters = 33888561033543232L;
 
     private IEnumerable<Condition> Subsequent_encounters_Compute(CqlContext context)
     {
@@ -148,7 +148,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public bool? Initial_population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_population, Initial_population_Compute);
 
-    private static readonly long _cacheIndex_Initial_population = 6175140352612506819L;
+    private const long _cacheIndex_Initial_population = 6175140352612506819L;
 
     private bool? Initial_population_Compute(CqlContext context)
     {
@@ -162,7 +162,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 1694005781377430274L;
+    private const long _cacheIndex_Numerator = 1694005781377430274L;
 
     private bool? Numerator_Compute(CqlContext context)
     {

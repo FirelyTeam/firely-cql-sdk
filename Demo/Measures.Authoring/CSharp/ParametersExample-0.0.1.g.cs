@@ -30,7 +30,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public int? AgeThreshold(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_AgeThreshold, AgeThreshold_Compute);
 
-    private static readonly long _cacheIndex_AgeThreshold = 24614955827976076L;
+    private const long _cacheIndex_AgeThreshold = 24614955827976076L;
 
     private int? AgeThreshold_Compute(CqlContext context)
     {
@@ -47,7 +47,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -2419106794441990221L;
+    private const long _cacheIndex_Patient = -2419106794441990221L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -61,7 +61,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public CqlDate CurrentDate(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_CurrentDate, CurrentDate_Compute);
 
-    private static readonly long _cacheIndex_CurrentDate = 1522499957662536051L;
+    private const long _cacheIndex_CurrentDate = 1522499957662536051L;
 
     private CqlDate CurrentDate_Compute(CqlContext context)
     {
@@ -74,7 +74,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public Patient Patient_Filter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient_Filter, Patient_Filter_Compute);
 
-    private static readonly long _cacheIndex_Patient_Filter = 7766613094596543236L;
+    private const long _cacheIndex_Patient_Filter = 7766613094596543236L;
 
     private Patient Patient_Filter_Compute(CqlContext context)
     {
@@ -113,7 +113,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public Date Patient_Birthdate(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient_Birthdate, Patient_Birthdate_Compute);
 
-    private static readonly long _cacheIndex_Patient_Birthdate = -274790349316496141L;
+    private const long _cacheIndex_Patient_Birthdate = -274790349316496141L;
 
     private Date Patient_Birthdate_Compute(CqlContext context)
     {
@@ -127,7 +127,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public int? Patient_Age_in_Years(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient_Age_in_Years, Patient_Age_in_Years_Compute);
 
-    private static readonly long _cacheIndex_Patient_Age_in_Years = 5272699714539778757L;
+    private const long _cacheIndex_Patient_Age_in_Years = 5272699714539778757L;
 
     private int? Patient_Age_in_Years_Compute(CqlContext context)
     {
@@ -143,7 +143,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient_Older_Than_AgeThreshold, Patient_Older_Than_AgeThreshold_Compute);
 
-    private static readonly long _cacheIndex_Patient_Older_Than_AgeThreshold = -6736663683244303383L;
+    private const long _cacheIndex_Patient_Older_Than_AgeThreshold = -6736663683244303383L;
 
     private bool? Patient_Older_Than_AgeThreshold_Compute(CqlContext context)
     {

@@ -72,7 +72,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -1238750488277271729L;
+    private const long _cacheIndex_Measurement_Period = -1238750488277271729L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -92,7 +92,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 6002561165017354265L;
+    private const long _cacheIndex_Patient = 6002561165017354265L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -106,7 +106,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters = 8620195041208317359L;
+    private const long _cacheIndex_Qualifying_Encounters = 8620195041208317359L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -147,7 +147,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 2298964704118148484L;
+    private const long _cacheIndex_Initial_Population = 2298964704118148484L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -172,7 +172,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -733171021098403886L;
+    private const long _cacheIndex_Denominator = -733171021098403886L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -185,7 +185,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public bool? Has_HIV_Test_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_HIV_Test_Performed, Has_HIV_Test_Performed_Compute);
 
-    private static readonly long _cacheIndex_Has_HIV_Test_Performed = 2944446001550422107L;
+    private const long _cacheIndex_Has_HIV_Test_Performed = 2944446001550422107L;
 
     private bool? Has_HIV_Test_Performed_Compute(CqlContext context)
     {
@@ -246,7 +246,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -5319234006087607187L;
+    private const long _cacheIndex_Numerator = -5319234006087607187L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -290,7 +290,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 6404461629041927873L;
+    private const long _cacheIndex_Denominator_Exclusions = 6404461629041927873L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -320,7 +320,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public bool? Patient_Expired(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient_Expired, Patient_Expired_Compute);
 
-    private static readonly long _cacheIndex_Patient_Expired = 2804529335998646238L;
+    private const long _cacheIndex_Patient_Expired = 2804529335998646238L;
 
     private bool? Patient_Expired_Compute(CqlContext context)
     {
@@ -338,7 +338,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public bool? Denominator_Exceptions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exceptions = 196913329891557527L;
+    private const long _cacheIndex_Denominator_Exceptions = 196913329891557527L;
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -351,7 +351,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 3719733758870457014L;
+    private const long _cacheIndex_SDE_Ethnicity = 3719733758870457014L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -364,7 +364,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -4297719452549950995L;
+    private const long _cacheIndex_SDE_Payer = -4297719452549950995L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -377,7 +377,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 8108146241635492532L;
+    private const long _cacheIndex_SDE_Race = 8108146241635492532L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -390,7 +390,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 7227666871515292594L;
+    private const long _cacheIndex_SDE_Sex = 7227666871515292594L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

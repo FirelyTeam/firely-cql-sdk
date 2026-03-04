@@ -88,7 +88,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     public object MeasurementPeriod(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_MeasurementPeriod, MeasurementPeriod_Compute);
 
-    private static readonly long _cacheIndex_MeasurementPeriod = -7600276400685164205L;
+    private const long _cacheIndex_MeasurementPeriod = -7600276400685164205L;
 
     private object MeasurementPeriod_Compute(CqlContext context)
     {
@@ -108,7 +108,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -2290543591551071229L;
+    private const long _cacheIndex_Patient = -2290543591551071229L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -122,7 +122,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     public IEnumerable<Patient> InDemographic(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute);
 
-    private static readonly long _cacheIndex_InDemographic = 6267391033452327865L;
+    private const long _cacheIndex_InDemographic = 6267391033452327865L;
 
     private IEnumerable<Patient> InDemographic_Compute(CqlContext context)
     {
@@ -135,7 +135,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     public bool? SexuallyActive(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SexuallyActive, SexuallyActive_Compute);
 
-    private static readonly long _cacheIndex_SexuallyActive = 430680482037105811L;
+    private const long _cacheIndex_SexuallyActive = 430680482037105811L;
 
     private bool? SexuallyActive_Compute(CqlContext context)
     {

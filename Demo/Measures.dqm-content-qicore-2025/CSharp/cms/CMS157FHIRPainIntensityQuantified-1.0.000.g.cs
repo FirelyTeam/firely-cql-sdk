@@ -68,7 +68,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 5445798036144351774L;
+    private const long _cacheIndex_Measurement_Period = 5445798036144351774L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -88,7 +88,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 669900998892653617L;
+    private const long _cacheIndex_Patient = 669900998892653617L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -102,7 +102,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period, Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period = -6279289550066187025L;
+    private const long _cacheIndex_Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period = -6279289550066187025L;
 
     private IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -203,7 +203,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy, Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy_Compute);
 
-    private static readonly long _cacheIndex_Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy = 2050822187251213769L;
+    private const long _cacheIndex_Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy = 2050822187251213769L;
 
     private IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy_Compute(CqlContext context)
     {
@@ -545,7 +545,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<Encounter> Initial_Population_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population_1, Initial_Population_1_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population_1 = 6943285436870065662L;
+    private const long _cacheIndex_Initial_Population_1 = 6943285436870065662L;
 
     private IEnumerable<Encounter> Initial_Population_1_Compute(CqlContext context)
     {
@@ -558,7 +558,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<Encounter> Denominator_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_1, Denominator_1_Compute);
 
-    private static readonly long _cacheIndex_Denominator_1 = 5218841999648045884L;
+    private const long _cacheIndex_Denominator_1 = 5218841999648045884L;
 
     private IEnumerable<Encounter> Denominator_1_Compute(CqlContext context)
     {
@@ -571,7 +571,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis, Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis = 8751664804723539959L;
+    private const long _cacheIndex_Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis = 8751664804723539959L;
 
     private IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis_Compute(CqlContext context)
     {
@@ -622,7 +622,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<Encounter> Initial_Population_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population_2, Initial_Population_2_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population_2 = 5292503655619133850L;
+    private const long _cacheIndex_Initial_Population_2 = 5292503655619133850L;
 
     private IEnumerable<Encounter> Initial_Population_2_Compute(CqlContext context)
     {
@@ -635,7 +635,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<Encounter> Denominator_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_2, Denominator_2_Compute);
 
-    private static readonly long _cacheIndex_Denominator_2 = -8485148921491715243L;
+    private const long _cacheIndex_Denominator_2 = -8485148921491715243L;
 
     private IEnumerable<Encounter> Denominator_2_Compute(CqlContext context)
     {
@@ -648,7 +648,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<Observation> Standard_Pain_Assessment_with_Result(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Standard_Pain_Assessment_with_Result, Standard_Pain_Assessment_with_Result_Compute);
 
-    private static readonly long _cacheIndex_Standard_Pain_Assessment_with_Result = -6362953295150502911L;
+    private const long _cacheIndex_Standard_Pain_Assessment_with_Result = -6362953295150502911L;
 
     private IEnumerable<Observation> Standard_Pain_Assessment_with_Result_Compute(CqlContext context)
     {
@@ -671,7 +671,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<Encounter> Numerator_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
 
-    private static readonly long _cacheIndex_Numerator_1 = -6851193730119213038L;
+    private const long _cacheIndex_Numerator_1 = -6851193730119213038L;
 
     private IEnumerable<Encounter> Numerator_1_Compute(CqlContext context)
     {
@@ -705,7 +705,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<Encounter> Numerator_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
 
-    private static readonly long _cacheIndex_Numerator_2 = -3723168001165270308L;
+    private const long _cacheIndex_Numerator_2 = -3723168001165270308L;
 
     private IEnumerable<Encounter> Numerator_2_Compute(CqlContext context)
     {
@@ -791,7 +791,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -4766569364205240576L;
+    private const long _cacheIndex_SDE_Ethnicity = -4766569364205240576L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -804,7 +804,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 9094594467394759244L;
+    private const long _cacheIndex_SDE_Payer = 9094594467394759244L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -817,7 +817,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -7396799417959384540L;
+    private const long _cacheIndex_SDE_Race = -7396799417959384540L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -830,7 +830,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 5032108411701830267L;
+    private const long _cacheIndex_SDE_Sex = 5032108411701830267L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

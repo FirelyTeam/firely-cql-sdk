@@ -42,7 +42,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 4263348478441094468L;
+    private const long _cacheIndex_Patient = 4263348478441094468L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -56,7 +56,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -5377255478558118731L;
+    private const long _cacheIndex_SDE_Ethnicity = -5377255478558118731L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -179,7 +179,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 441587053582915267L;
+    private const long _cacheIndex_SDE_Payer = 441587053582915267L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -205,7 +205,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 611400612990559444L;
+    private const long _cacheIndex_SDE_Race = 611400612990559444L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -330,7 +330,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -4862447719526612531L;
+    private const long _cacheIndex_SDE_Sex = -4862447719526612531L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

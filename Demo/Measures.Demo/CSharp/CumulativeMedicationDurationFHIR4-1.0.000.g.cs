@@ -170,7 +170,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     public string ErrorLevel(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ErrorLevel, ErrorLevel_Compute);
 
-    private static readonly long _cacheIndex_ErrorLevel = -3474294828027834309L;
+    private const long _cacheIndex_ErrorLevel = -3474294828027834309L;
 
     private string ErrorLevel_Compute(CqlContext context)
     {
@@ -187,7 +187,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 489454038755907576L;
+    private const long _cacheIndex_Patient = 489454038755907576L;
 
     private Patient Patient_Compute(CqlContext context)
     {

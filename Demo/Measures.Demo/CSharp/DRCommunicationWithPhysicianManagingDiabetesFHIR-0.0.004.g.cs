@@ -123,7 +123,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 2299050010152453010L;
+    private const long _cacheIndex_Measurement_Period = 2299050010152453010L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -140,7 +140,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -2934060612400956580L;
+    private const long _cacheIndex_Patient = -2934060612400956580L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -154,7 +154,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -6149379624920616075L;
+    private const long _cacheIndex_SDE_Ethnicity = -6149379624920616075L;
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -167,7 +167,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 2973477727710290925L;
+    private const long _cacheIndex_SDE_Payer = 2973477727710290925L;
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -180,7 +180,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -1854590241274919068L;
+    private const long _cacheIndex_SDE_Race = -1854590241274919068L;
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -193,7 +193,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -1804008870246239687L;
+    private const long _cacheIndex_SDE_Sex = -1804008870246239687L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -206,7 +206,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounter_During_Measurement_Period, Qualifying_Encounter_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounter_During_Measurement_Period = -7238938956640270872L;
+    private const long _cacheIndex_Qualifying_Encounter_During_Measurement_Period = -7238938956640270872L;
 
     private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -246,7 +246,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Encounter> Diabetic_Retinopathy_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Diabetic_Retinopathy_Encounter, Diabetic_Retinopathy_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Diabetic_Retinopathy_Encounter = -4682493263808070969L;
+    private const long _cacheIndex_Diabetic_Retinopathy_Encounter = -4682493263808070969L;
 
     private IEnumerable<Encounter> Diabetic_Retinopathy_Encounter_Compute(CqlContext context)
     {
@@ -315,7 +315,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy, Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy_Compute);
 
-    private static readonly long _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy = -4896089256406335881L;
+    private const long _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy = -4896089256406335881L;
 
     private IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy_Compute(CqlContext context)
     {
@@ -409,7 +409,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema, Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema_Compute);
 
-    private static readonly long _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema = -3194015953203176546L;
+    private const long _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema = -3194015953203176546L;
 
     private IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema_Compute(CqlContext context)
     {
@@ -504,7 +504,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema, Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema_Compute);
 
-    private static readonly long _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema = 2568311099187060350L;
+    private const long _cacheIndex_Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema = 2568311099187060350L;
 
     private IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema_Compute(CqlContext context)
     {
@@ -598,7 +598,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public bool? Denominator_Exceptions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exceptions = -6954175433017395973L;
+    private const long _cacheIndex_Denominator_Exceptions = -6954175433017395973L;
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -618,7 +618,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 6971120082248542534L;
+    private const long _cacheIndex_Initial_Population = 6971120082248542534L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -641,7 +641,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Observation> Macular_Exam_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Macular_Exam_Performed, Macular_Exam_Performed_Compute);
 
-    private static readonly long _cacheIndex_Macular_Exam_Performed = 6692052034929260966L;
+    private const long _cacheIndex_Macular_Exam_Performed = 6692052034929260966L;
 
     private IEnumerable<Observation> Macular_Exam_Performed_Compute(CqlContext context)
     {
@@ -692,7 +692,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 3149268625791439418L;
+    private const long _cacheIndex_Denominator = 3149268625791439418L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -708,7 +708,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Level_of_Severity_of_Retinopathy_Findings_Communicated, Level_of_Severity_of_Retinopathy_Findings_Communicated_Compute);
 
-    private static readonly long _cacheIndex_Level_of_Severity_of_Retinopathy_Findings_Communicated = 8122295655089432951L;
+    private const long _cacheIndex_Level_of_Severity_of_Retinopathy_Findings_Communicated = 8122295655089432951L;
 
     private IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated_Compute(CqlContext context)
     {
@@ -753,7 +753,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Macular_Edema_Absence_Communicated(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Macular_Edema_Absence_Communicated, Macular_Edema_Absence_Communicated_Compute);
 
-    private static readonly long _cacheIndex_Macular_Edema_Absence_Communicated = -7171052550869229836L;
+    private const long _cacheIndex_Macular_Edema_Absence_Communicated = -7171052550869229836L;
 
     private IEnumerable<Communication> Macular_Edema_Absence_Communicated_Compute(CqlContext context)
     {
@@ -799,7 +799,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public IEnumerable<Communication> Macular_Edema_Presence_Communicated(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Macular_Edema_Presence_Communicated, Macular_Edema_Presence_Communicated_Compute);
 
-    private static readonly long _cacheIndex_Macular_Edema_Presence_Communicated = -1727020035896491417L;
+    private const long _cacheIndex_Macular_Edema_Presence_Communicated = -1727020035896491417L;
 
     private IEnumerable<Communication> Macular_Edema_Presence_Communicated_Compute(CqlContext context)
     {
@@ -844,7 +844,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Results_of_Dilated_Macular_or_Fundus_Exam_Communicated, Results_of_Dilated_Macular_or_Fundus_Exam_Communicated_Compute);
 
-    private static readonly long _cacheIndex_Results_of_Dilated_Macular_or_Fundus_Exam_Communicated = 5948642944193482956L;
+    private const long _cacheIndex_Results_of_Dilated_Macular_or_Fundus_Exam_Communicated = 5948642944193482956L;
 
     private bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated_Compute(CqlContext context)
     {
@@ -864,7 +864,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -8004091241498353870L;
+    private const long _cacheIndex_Numerator = -8004091241498353870L;
 
     private bool? Numerator_Compute(CqlContext context)
     {

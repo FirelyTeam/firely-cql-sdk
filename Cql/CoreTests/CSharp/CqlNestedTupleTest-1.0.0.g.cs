@@ -22,7 +22,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
     public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Result, Result_Compute);
 
-    private static readonly long _cacheIndex_Result = -5211663732441812733L;
+    private const long _cacheIndex_Result = -5211663732441812733L;
 
     private (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result_Compute(CqlContext context)
     {

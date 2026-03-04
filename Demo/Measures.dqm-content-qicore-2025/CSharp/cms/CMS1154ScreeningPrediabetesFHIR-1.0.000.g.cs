@@ -129,7 +129,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -5866298817992680085L;
+    private const long _cacheIndex_Measurement_Period = -5866298817992680085L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -149,7 +149,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -7421968764374336798L;
+    private const long _cacheIndex_Patient = -7421968764374336798L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -199,7 +199,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public IEnumerable<object> Has_Advanced_Illness_or_Limited_Life_Expectancy(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Advanced_Illness_or_Limited_Life_Expectancy, Has_Advanced_Illness_or_Limited_Life_Expectancy_Compute);
 
-    private static readonly long _cacheIndex_Has_Advanced_Illness_or_Limited_Life_Expectancy = 1509290388530786869L;
+    private const long _cacheIndex_Has_Advanced_Illness_or_Limited_Life_Expectancy = 1509290388530786869L;
 
     private IEnumerable<object> Has_Advanced_Illness_or_Limited_Life_Expectancy_Compute(CqlContext context)
     {
@@ -232,7 +232,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public IEnumerable<Encounter> Preventive_Care_Outpatient_Visits_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Preventive_Care_Outpatient_Visits_During_Measurement_Period, Preventive_Care_Outpatient_Visits_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Preventive_Care_Outpatient_Visits_During_Measurement_Period = -1867213146648226874L;
+    private const long _cacheIndex_Preventive_Care_Outpatient_Visits_During_Measurement_Period = -1867213146648226874L;
 
     private IEnumerable<Encounter> Preventive_Care_Outpatient_Visits_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -262,7 +262,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public IEnumerable<Encounter> Office_Visit_During_the_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Office_Visit_During_the_Measurement_Period, Office_Visit_During_the_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Office_Visit_During_the_Measurement_Period = -5330974653624701193L;
+    private const long _cacheIndex_Office_Visit_During_the_Measurement_Period = -5330974653624701193L;
 
     private IEnumerable<Encounter> Office_Visit_During_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -291,7 +291,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Aged_35_to_70_at_Start_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Aged_35_to_70_at_Start_of_Measurement_Period, Aged_35_to_70_at_Start_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Aged_35_to_70_at_Start_of_Measurement_Period = 6123212858979409007L;
+    private const long _cacheIndex_Aged_35_to_70_at_Start_of_Measurement_Period = 6123212858979409007L;
 
     private bool? Aged_35_to_70_at_Start_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -320,7 +320,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period, Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period = -7763358644582279625L;
+    private const long _cacheIndex_Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period = -7763358644582279625L;
 
     private bool? Patients_Aged_35_to_70_with_an_Office_Visit_During_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -341,7 +341,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public Observation Most_Recent_BMI(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Most_Recent_BMI, Most_Recent_BMI_Compute);
 
-    private static readonly long _cacheIndex_Most_Recent_BMI = 6452276778631599383L;
+    private const long _cacheIndex_Most_Recent_BMI = 6452276778631599383L;
 
     private Observation Most_Recent_BMI_Compute(CqlContext context)
     {
@@ -380,7 +380,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Patient_is_Asian(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient_is_Asian, Patient_is_Asian_Compute);
 
-    private static readonly long _cacheIndex_Patient_is_Asian = 7986858896242549351L;
+    private const long _cacheIndex_Patient_is_Asian = 7986858896242549351L;
 
     private bool? Patient_is_Asian_Compute(CqlContext context)
     {
@@ -403,7 +403,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Patient_is_not_Asian(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient_is_not_Asian, Patient_is_not_Asian_Compute);
 
-    private static readonly long _cacheIndex_Patient_is_not_Asian = -1757457377914612541L;
+    private const long _cacheIndex_Patient_is_not_Asian = -1757457377914612541L;
 
     private bool? Patient_is_not_Asian_Compute(CqlContext context)
     {
@@ -417,7 +417,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian, Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian_Compute);
 
-    private static readonly long _cacheIndex_Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian = 5419091062142640358L;
+    private const long _cacheIndex_Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian = 5419091062142640358L;
 
     private bool? Most_Recent_BMI_Equal_to_or_Greater_Than_25_and_Is_Not_Asian_Compute(CqlContext context)
     {
@@ -436,7 +436,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian, Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian_Compute);
 
-    private static readonly long _cacheIndex_Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian = -2883356292628113588L;
+    private const long _cacheIndex_Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian = -2883356292628113588L;
 
     private bool? Most_Recent_BMI_Equal_to_or_Greater_Than_23_and_Is_Asian_Compute(CqlContext context)
     {
@@ -455,7 +455,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 5820967484384018458L;
+    private const long _cacheIndex_Initial_Population = 5820967484384018458L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -472,7 +472,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 709014718321169443L;
+    private const long _cacheIndex_Denominator = 709014718321169443L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -485,7 +485,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public IEnumerable<Observation> Glycemic_Laboratory_Test_Performed_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Glycemic_Laboratory_Test_Performed_During_Measurement_Period, Glycemic_Laboratory_Test_Performed_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Glycemic_Laboratory_Test_Performed_During_Measurement_Period = 4588430099918846418L;
+    private const long _cacheIndex_Glycemic_Laboratory_Test_Performed_During_Measurement_Period = 4588430099918846418L;
 
     private IEnumerable<Observation> Glycemic_Laboratory_Test_Performed_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -520,7 +520,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 260898604472239881L;
+    private const long _cacheIndex_Numerator = 260898604472239881L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -534,7 +534,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Has_Pregnancy_Observation_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Pregnancy_Observation_During_Measurement_Period, Has_Pregnancy_Observation_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Pregnancy_Observation_During_Measurement_Period = -3816791241199783336L;
+    private const long _cacheIndex_Has_Pregnancy_Observation_During_Measurement_Period = -3816791241199783336L;
 
     private bool? Has_Pregnancy_Observation_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -564,7 +564,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public IEnumerable<object> Has_Pregnancy_Diagnosis_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Pregnancy_Diagnosis_During_Measurement_Period, Has_Pregnancy_Diagnosis_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Pregnancy_Diagnosis_During_Measurement_Period = -3677172026540839592L;
+    private const long _cacheIndex_Has_Pregnancy_Diagnosis_During_Measurement_Period = -3677172026540839592L;
 
     private IEnumerable<object> Has_Pregnancy_Diagnosis_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -590,7 +590,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public CqlInterval<CqlDateTime> Look_Back_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Look_Back_Period, Look_Back_Period_Compute);
 
-    private static readonly long _cacheIndex_Look_Back_Period = 2077423446850315487L;
+    private const long _cacheIndex_Look_Back_Period = 2077423446850315487L;
 
     private CqlInterval<CqlDateTime> Look_Back_Period_Compute(CqlContext context)
     {
@@ -608,7 +608,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public IEnumerable<object> Prediabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Prediabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period, Prediabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period_Compute);
 
-    private static readonly long _cacheIndex_Prediabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period = 2046368973321817443L;
+    private const long _cacheIndex_Prediabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period = 2046368973321817443L;
 
     private IEnumerable<object> Prediabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period_Compute(CqlContext context)
     {
@@ -634,7 +634,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public IEnumerable<object> Diabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Diabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period, Diabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period_Compute);
 
-    private static readonly long _cacheIndex_Diabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period = -6618366694283717709L;
+    private const long _cacheIndex_Diabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period = -6618366694283717709L;
 
     private IEnumerable<object> Diabetes_Diagnosis_Overlaps_2_Year_Look_Back_Period_Compute(CqlContext context)
     {
@@ -660,7 +660,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period, Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period = -5111289342832184703L;
+    private const long _cacheIndex_Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period = -5111289342832184703L;
 
     private bool? Has_Glycemic_Laboratory_Test_Performed_During_2_Year_Look_Back_Period_Compute(CqlContext context)
     {
@@ -696,7 +696,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = -7543466091754023904L;
+    private const long _cacheIndex_Denominator_Exclusions = -7543466091754023904L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -723,7 +723,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 8978605305610805484L;
+    private const long _cacheIndex_SDE_Ethnicity = 8978605305610805484L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -736,7 +736,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -6630685495481277238L;
+    private const long _cacheIndex_SDE_Payer = -6630685495481277238L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -749,7 +749,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 7698772050861812561L;
+    private const long _cacheIndex_SDE_Race = 7698772050861812561L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -762,7 +762,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -8717201137091475486L;
+    private const long _cacheIndex_SDE_Sex = -8717201137091475486L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

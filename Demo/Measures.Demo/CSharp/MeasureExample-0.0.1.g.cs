@@ -22,7 +22,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 573802528633067256L;
+    private const long _cacheIndex_Patient = 573802528633067256L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -43,7 +43,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Initial_population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_population, Initial_population_Compute);
 
-    private static readonly long _cacheIndex_Initial_population = 3971454504690862483L;
+    private const long _cacheIndex_Initial_population = 3971454504690862483L;
 
     private bool? Initial_population_Compute(CqlContext context) =>
     true;
@@ -56,7 +56,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Exclusion(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Exclusion, Exclusion_Compute);
 
-    private static readonly long _cacheIndex_Exclusion = -340095662832327621L;
+    private const long _cacheIndex_Exclusion = -340095662832327621L;
 
     private bool? Exclusion_Compute(CqlContext context) =>
     false;
@@ -69,7 +69,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 4268609403665627099L;
+    private const long _cacheIndex_Denominator = 4268609403665627099L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -87,7 +87,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Numerator_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
 
-    private static readonly long _cacheIndex_Numerator_1 = -5945716760631093539L;
+    private const long _cacheIndex_Numerator_1 = -5945716760631093539L;
 
     private bool? Numerator_1_Compute(CqlContext context) =>
     true;
@@ -99,7 +99,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Numerator_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
 
-    private static readonly long _cacheIndex_Numerator_2 = -18372347484029309L;
+    private const long _cacheIndex_Numerator_2 = -18372347484029309L;
 
     private bool? Numerator_2_Compute(CqlContext context) =>
     false;

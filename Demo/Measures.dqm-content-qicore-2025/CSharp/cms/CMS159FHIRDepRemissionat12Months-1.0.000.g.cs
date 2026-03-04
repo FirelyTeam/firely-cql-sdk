@@ -138,7 +138,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 4515960621490826425L;
+    private const long _cacheIndex_Measurement_Period = 4515960621490826425L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -158,7 +158,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -5174828440479377737L;
+    private const long _cacheIndex_Patient = -5174828440479377737L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -172,7 +172,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public IEnumerable<Observation> Depression_Assessments_Greater_Than_9(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Depression_Assessments_Greater_Than_9, Depression_Assessments_Greater_Than_9_Compute);
 
-    private static readonly long _cacheIndex_Depression_Assessments_Greater_Than_9 = -2809144784699197651L;
+    private const long _cacheIndex_Depression_Assessments_Greater_Than_9 = -2809144784699197651L;
 
     private IEnumerable<Observation> Depression_Assessments_Greater_Than_9_Compute(CqlContext context)
     {
@@ -235,7 +235,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public IEnumerable<object> Depression_Diagnoses(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Depression_Diagnoses, Depression_Diagnoses_Compute);
 
-    private static readonly long _cacheIndex_Depression_Diagnoses = 5150113982553371070L;
+    private const long _cacheIndex_Depression_Diagnoses = 5150113982553371070L;
 
     private IEnumerable<object> Depression_Diagnoses_Compute(CqlContext context)
     {
@@ -263,7 +263,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public CqlInterval<CqlDateTime> Denominator_Identification_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Identification_Period, Denominator_Identification_Period_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Identification_Period = 721024531417181386L;
+    private const long _cacheIndex_Denominator_Identification_Period = 721024531417181386L;
 
     private CqlInterval<CqlDateTime> Denominator_Identification_Period_Compute(CqlContext context)
     {
@@ -283,7 +283,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public IEnumerable<Encounter> Depression_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Depression_Encounter, Depression_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Depression_Encounter = 4681658861661132345L;
+    private const long _cacheIndex_Depression_Encounter = 4681658861661132345L;
 
     private IEnumerable<Encounter> Depression_Encounter_Compute(CqlContext context)
     {
@@ -326,7 +326,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public Observation Index_Depression_Assessment(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Index_Depression_Assessment, Index_Depression_Assessment_Compute);
 
-    private static readonly long _cacheIndex_Index_Depression_Assessment = 499571989574502589L;
+    private const long _cacheIndex_Index_Depression_Assessment = 499571989574502589L;
 
     private Observation Index_Depression_Assessment_Compute(CqlContext context)
     {
@@ -377,7 +377,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -677507915104673588L;
+    private const long _cacheIndex_Initial_Population = -677507915104673588L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -400,7 +400,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 4924516395329346969L;
+    private const long _cacheIndex_Denominator = 4924516395329346969L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -413,7 +413,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public CqlInterval<CqlDate> Measure_Assessment_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measure_Assessment_Period, Measure_Assessment_Period_Compute);
 
-    private static readonly long _cacheIndex_Measure_Assessment_Period = -6986502766962251939L;
+    private const long _cacheIndex_Measure_Assessment_Period = -6986502766962251939L;
 
     private CqlInterval<CqlDate> Measure_Assessment_Period_Compute(CqlContext context)
     {
@@ -453,7 +453,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period, Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period = 7215323320960060348L;
+    private const long _cacheIndex_Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period = 7215323320960060348L;
 
     private bool? Has_Hospice_Services_prior_to_or_during_the_Measure_Assessment_Period_Compute(CqlContext context)
     {
@@ -726,7 +726,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period, Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period = -8447769728516516106L;
+    private const long _cacheIndex_Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period = -8447769728516516106L;
 
     private bool? Has_Palliative_Care_prior_to_or_during_the_Measure_Assessment_Period_Compute(CqlContext context)
     {
@@ -907,7 +907,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Patient_Expired(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient_Expired, Patient_Expired_Compute);
 
-    private static readonly long _cacheIndex_Patient_Expired = -1624622703135801016L;
+    private const long _cacheIndex_Patient_Expired = -1624622703135801016L;
 
     private bool? Patient_Expired_Compute(CqlContext context)
     {
@@ -926,7 +926,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Has_Mental_Health_Disorder_Diagnoses(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Mental_Health_Disorder_Diagnoses, Has_Mental_Health_Disorder_Diagnoses_Compute);
 
-    private static readonly long _cacheIndex_Has_Mental_Health_Disorder_Diagnoses = 3318310671059399184L;
+    private const long _cacheIndex_Has_Mental_Health_Disorder_Diagnoses = 3318310671059399184L;
 
     private bool? Has_Mental_Health_Disorder_Diagnoses_Compute(CqlContext context)
     {
@@ -972,7 +972,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 2559139784615991071L;
+    private const long _cacheIndex_Denominator_Exclusions = 2559139784615991071L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -991,7 +991,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 1707994593624416448L;
+    private const long _cacheIndex_Numerator = 1707994593624416448L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -1048,7 +1048,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -4985592431128511125L;
+    private const long _cacheIndex_SDE_Ethnicity = -4985592431128511125L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1061,7 +1061,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 4176559840175856802L;
+    private const long _cacheIndex_SDE_Payer = 4176559840175856802L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1074,7 +1074,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -7339446756539217987L;
+    private const long _cacheIndex_SDE_Race = -7339446756539217987L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1087,7 +1087,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -1428577257306360309L;
+    private const long _cacheIndex_SDE_Sex = -1428577257306360309L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -1100,7 +1100,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Stratification_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
-    private static readonly long _cacheIndex_Stratification_1 = 1010167823931080299L;
+    private const long _cacheIndex_Stratification_1 = 1010167823931080299L;
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
@@ -1136,7 +1136,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     public bool? Stratification_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
-    private static readonly long _cacheIndex_Stratification_2 = -7436411683980352410L;
+    private const long _cacheIndex_Stratification_2 = -7436411683980352410L;
 
     private bool? Stratification_2_Compute(CqlContext context)
     {

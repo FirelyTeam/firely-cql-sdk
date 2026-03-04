@@ -75,7 +75,7 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 8038487315504585569L;
+    private const long _cacheIndex_Patient = 8038487315504585569L;
 
     private Patient Patient_Compute(CqlContext context)
     {

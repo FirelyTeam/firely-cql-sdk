@@ -128,7 +128,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -8463204836362917612L;
+    private const long _cacheIndex_Measurement_Period = -8463204836362917612L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -148,7 +148,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -4290830187024678405L;
+    private const long _cacheIndex_Patient = -4290830187024678405L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -224,7 +224,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public IEnumerable<object> Bladder_Cancer_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Bladder_Cancer_Diagnosis, Bladder_Cancer_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Bladder_Cancer_Diagnosis = 1627099199367917222L;
+    private const long _cacheIndex_Bladder_Cancer_Diagnosis = 1627099199367917222L;
 
     private IEnumerable<object> Bladder_Cancer_Diagnosis_Compute(CqlContext context)
     {
@@ -281,7 +281,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public Procedure First_Bladder_Cancer_Staging_Procedure(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_First_Bladder_Cancer_Staging_Procedure, First_Bladder_Cancer_Staging_Procedure_Compute);
 
-    private static readonly long _cacheIndex_First_Bladder_Cancer_Staging_Procedure = -6479804162207901342L;
+    private const long _cacheIndex_First_Bladder_Cancer_Staging_Procedure = -6479804162207901342L;
 
     private Procedure First_Bladder_Cancer_Staging_Procedure_Compute(CqlContext context)
     {
@@ -463,7 +463,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public CqlDate July_1_of_Year_Prior_to_the_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_July_1_of_Year_Prior_to_the_Measurement_Period, July_1_of_Year_Prior_to_the_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_July_1_of_Year_Prior_to_the_Measurement_Period = 4355411619980945622L;
+    private const long _cacheIndex_July_1_of_Year_Prior_to_the_Measurement_Period = 4355411619980945622L;
 
     private CqlDate July_1_of_Year_Prior_to_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -480,7 +480,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public CqlDate June_30_of_the_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_June_30_of_the_Measurement_Period, June_30_of_the_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_June_30_of_the_Measurement_Period = -1046525714915697033L;
+    private const long _cacheIndex_June_30_of_the_Measurement_Period = -1046525714915697033L;
 
     private CqlDate June_30_of_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -496,7 +496,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period, First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period = 89116089794995532L;
+    private const long _cacheIndex_First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period = 89116089794995532L;
 
     private Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -598,7 +598,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public bool? Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG, Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG_Compute);
 
-    private static readonly long _cacheIndex_Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG = 7659224977212191128L;
+    private const long _cacheIndex_Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG = 7659224977212191128L;
 
     private bool? Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_T1__Tis__Ta_HG_Compute(CqlContext context)
     {
@@ -651,7 +651,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public bool? Has_Qualifying_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Qualifying_Encounter, Has_Qualifying_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Has_Qualifying_Encounter = 6803347589664215006L;
+    private const long _cacheIndex_Has_Qualifying_Encounter = 6803347589664215006L;
 
     private bool? Has_Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -687,7 +687,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -1514878663221881824L;
+    private const long _cacheIndex_Initial_Population = -1514878663221881824L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -702,7 +702,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 7894348376586324006L;
+    private const long _cacheIndex_Denominator = 7894348376586324006L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -715,7 +715,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public IEnumerable<object> Acute_Tuberculosis_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Acute_Tuberculosis_Diagnosis, Acute_Tuberculosis_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Acute_Tuberculosis_Diagnosis = 2327826037250116643L;
+    private const long _cacheIndex_Acute_Tuberculosis_Diagnosis = 2327826037250116643L;
 
     private IEnumerable<object> Acute_Tuberculosis_Diagnosis_Compute(CqlContext context)
     {
@@ -965,7 +965,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public IEnumerable<MedicationRequest> Immunosuppressive_Drugs(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Immunosuppressive_Drugs, Immunosuppressive_Drugs_Compute);
 
-    private static readonly long _cacheIndex_Immunosuppressive_Drugs = -1231276537500245830L;
+    private const long _cacheIndex_Immunosuppressive_Drugs = -1231276537500245830L;
 
     private IEnumerable<MedicationRequest> Immunosuppressive_Drugs_Compute(CqlContext context)
     {
@@ -1218,7 +1218,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public IEnumerable<Procedure> Cystectomy_Done(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Cystectomy_Done, Cystectomy_Done_Compute);
 
-    private static readonly long _cacheIndex_Cystectomy_Done = 4990480937945600756L;
+    private const long _cacheIndex_Cystectomy_Done = 4990480937945600756L;
 
     private IEnumerable<Procedure> Cystectomy_Done_Compute(CqlContext context)
     {
@@ -1530,7 +1530,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public bool? Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging, Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging_Compute);
 
-    private static readonly long _cacheIndex_Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging = -2614027900018808318L;
+    private const long _cacheIndex_Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging = -2614027900018808318L;
 
     private bool? Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging_Compute(CqlContext context)
     {
@@ -1723,7 +1723,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public bool? Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging, Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging_Compute);
 
-    private static readonly long _cacheIndex_Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging = 52129356822395367L;
+    private const long _cacheIndex_Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging = 52129356822395367L;
 
     private bool? Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging_Compute(CqlContext context)
     {
@@ -2378,7 +2378,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public bool? Denominator_Exclusion(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusion, Denominator_Exclusion_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusion = -2497759738663303621L;
+    private const long _cacheIndex_Denominator_Exclusion = -2497759738663303621L;
 
     private bool? Denominator_Exclusion_Compute(CqlContext context)
     {
@@ -2402,7 +2402,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public IEnumerable<MedicationAdministration> BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging, BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging_Compute);
 
-    private static readonly long _cacheIndex_BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging = -4719968472254698824L;
+    private const long _cacheIndex_BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging = -4719968472254698824L;
 
     private IEnumerable<MedicationAdministration> BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging_Compute(CqlContext context)
     {
@@ -2677,7 +2677,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public bool? Denominator_Exception(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exception, Denominator_Exception_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exception = -8232522769382720446L;
+    private const long _cacheIndex_Denominator_Exception = -8232522769382720446L;
 
     private bool? Denominator_Exception_Compute(CqlContext context)
     {
@@ -2691,7 +2691,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public MedicationAdministration First_BCG_Administered(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_First_BCG_Administered, First_BCG_Administered_Compute);
 
-    private static readonly long _cacheIndex_First_BCG_Administered = 5246817831198828715L;
+    private const long _cacheIndex_First_BCG_Administered = 5246817831198828715L;
 
     private MedicationAdministration First_BCG_Administered_Compute(CqlContext context)
     {
@@ -2989,7 +2989,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -5650740766836730728L;
+    private const long _cacheIndex_Numerator = -5650740766836730728L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -3003,7 +3003,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -3031213782846199448L;
+    private const long _cacheIndex_SDE_Ethnicity = -3031213782846199448L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -3016,7 +3016,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -2765886446978909849L;
+    private const long _cacheIndex_SDE_Payer = -2765886446978909849L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -3029,7 +3029,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -2209043468229436943L;
+    private const long _cacheIndex_SDE_Race = -2209043468229436943L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -3042,7 +3042,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -4292175789313964661L;
+    private const long _cacheIndex_SDE_Sex = -4292175789313964661L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

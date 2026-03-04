@@ -62,7 +62,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -7635985198364237165L;
+    private const long _cacheIndex_Measurement_Period = -7635985198364237165L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -79,7 +79,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 7402591205230841493L;
+    private const long _cacheIndex_Patient = 7402591205230841493L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -93,7 +93,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
     public bool? Palliative_Care_in_the_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Palliative_Care_in_the_Measurement_Period, Palliative_Care_in_the_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Palliative_Care_in_the_Measurement_Period = -8977964396406550542L;
+    private const long _cacheIndex_Palliative_Care_in_the_Measurement_Period = -8977964396406550542L;
 
     private bool? Palliative_Care_in_the_Measurement_Period_Compute(CqlContext context)
     {

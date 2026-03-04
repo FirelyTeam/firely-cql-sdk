@@ -96,7 +96,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 6905366931702746391L;
+    private const long _cacheIndex_Measurement_Period = 6905366931702746391L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -116,7 +116,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -527641375573182733L;
+    private const long _cacheIndex_Patient = -527641375573182733L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -130,7 +130,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Non_Elective_Inpatient_Encounter, Non_Elective_Inpatient_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Non_Elective_Inpatient_Encounter = -6514317087613886639L;
+    private const long _cacheIndex_Non_Elective_Inpatient_Encounter = -6514317087613886639L;
 
     private IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_Compute(CqlContext context)
     {
@@ -159,7 +159,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public IEnumerable<Encounter> All_Stroke_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_All_Stroke_Encounter, All_Stroke_Encounter_Compute);
 
-    private static readonly long _cacheIndex_All_Stroke_Encounter = 9081602270573019451L;
+    private const long _cacheIndex_All_Stroke_Encounter = 9081602270573019451L;
 
     private IEnumerable<Encounter> All_Stroke_Encounter_Compute(CqlContext context)
     {
@@ -188,7 +188,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_with_Principal_Diagnosis_and_Age, Encounter_with_Principal_Diagnosis_and_Age_Compute);
 
-    private static readonly long _cacheIndex_Encounter_with_Principal_Diagnosis_and_Age = 8314958543275766337L;
+    private const long _cacheIndex_Encounter_with_Principal_Diagnosis_and_Age = 8314958543275766337L;
 
     private IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age_Compute(CqlContext context)
     {
@@ -225,7 +225,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounter, Ischemic_Stroke_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Ischemic_Stroke_Encounter = 3386773370828368879L;
+    private const long _cacheIndex_Ischemic_Stroke_Encounter = 3386773370828368879L;
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounter_Compute(CqlContext context)
     {
@@ -249,7 +249,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Ischemic_Stroke_Encounters_with_Discharge_Disposition, Ischemic_Stroke_Encounters_with_Discharge_Disposition_Compute);
 
-    private static readonly long _cacheIndex_Ischemic_Stroke_Encounters_with_Discharge_Disposition = -3331621253114112533L;
+    private const long _cacheIndex_Ischemic_Stroke_Encounters_with_Discharge_Disposition = -3331621253114112533L;
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition_Compute(CqlContext context)
     {
@@ -293,7 +293,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Intervention_Comfort_Measures, Intervention_Comfort_Measures_Compute);
 
-    private static readonly long _cacheIndex_Intervention_Comfort_Measures = -541982402983301016L;
+    private const long _cacheIndex_Intervention_Comfort_Measures = -541982402983301016L;
 
     private IEnumerable<object> Intervention_Comfort_Measures_Compute(CqlContext context)
     {
@@ -331,7 +331,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public IEnumerable<Encounter> Comfort_Measures_during_Hospitalization(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Comfort_Measures_during_Hospitalization, Comfort_Measures_during_Hospitalization_Compute);
 
-    private static readonly long _cacheIndex_Comfort_Measures_during_Hospitalization = -8966607307601606654L;
+    private const long _cacheIndex_Comfort_Measures_during_Hospitalization = -8966607307601606654L;
 
     private IEnumerable<Encounter> Comfort_Measures_during_Hospitalization_Compute(CqlContext context)
     {
@@ -364,7 +364,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization, Encounter_with_Comfort_Measures_during_Hospitalization_Compute);
 
-    private static readonly long _cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization = -8352941911875374690L;
+    private const long _cacheIndex_Encounter_with_Comfort_Measures_during_Hospitalization = -8352941911875374690L;
 
     private IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization_Compute(CqlContext context)
     {

@@ -80,7 +80,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -5232504333520421231L;
+    private const long _cacheIndex_Measurement_Period = -5232504333520421231L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -97,7 +97,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 4190361726064702105L;
+    private const long _cacheIndex_Patient = 4190361726064702105L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -111,7 +111,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -6622296303304161156L;
+    private const long _cacheIndex_SDE_Ethnicity = -6622296303304161156L;
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -124,7 +124,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -50476958257965485L;
+    private const long _cacheIndex_SDE_Payer = -50476958257965485L;
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -137,7 +137,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -6948817799037019688L;
+    private const long _cacheIndex_SDE_Race = -6948817799037019688L;
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -150,7 +150,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -4983878855298530089L;
+    private const long _cacheIndex_SDE_Sex = -4983878855298530089L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -163,7 +163,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters = 4103331164239369877L;
+    private const long _cacheIndex_Qualifying_Encounters = 4103331164239369877L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -212,7 +212,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -7185471959036891163L;
+    private const long _cacheIndex_Initial_Population = -7185471959036891163L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -244,7 +244,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -1484238347279104325L;
+    private const long _cacheIndex_Denominator = -1484238347279104325L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -257,7 +257,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = -4728281303266581468L;
+    private const long _cacheIndex_Denominator_Exclusions = -4728281303266581468L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -270,7 +270,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public bool? Stratification_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
-    private static readonly long _cacheIndex_Stratification_1 = 6122213997756509795L;
+    private const long _cacheIndex_Stratification_1 = 6122213997756509795L;
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
@@ -299,7 +299,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public bool? Stratification_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
-    private static readonly long _cacheIndex_Stratification_2 = 7289994774689214165L;
+    private const long _cacheIndex_Stratification_2 = 7289994774689214165L;
 
     private bool? Stratification_2_Compute(CqlContext context)
     {
@@ -321,7 +321,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public bool? Stratification_3(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_3, Stratification_3_Compute);
 
-    private static readonly long _cacheIndex_Stratification_3 = 5150854429997070313L;
+    private const long _cacheIndex_Stratification_3 = 5150854429997070313L;
 
     private bool? Stratification_3_Compute(CqlContext context)
     {
@@ -343,7 +343,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -143491126941760825L;
+    private const long _cacheIndex_Numerator = -143491126941760825L;
 
     private bool? Numerator_Compute(CqlContext context)
     {

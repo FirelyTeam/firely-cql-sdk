@@ -22,7 +22,7 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 5222118206952088808L;
+    private const long _cacheIndex_Patient = 5222118206952088808L;
 
     private Patient Patient_Compute(CqlContext context)
     {

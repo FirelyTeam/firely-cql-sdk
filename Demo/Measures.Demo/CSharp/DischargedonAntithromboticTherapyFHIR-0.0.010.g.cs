@@ -82,7 +82,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -1910573221940503362L;
+    private const long _cacheIndex_Measurement_Period = -1910573221940503362L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -99,7 +99,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -4089929577116492787L;
+    private const long _cacheIndex_Patient = -4089929577116492787L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -113,7 +113,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -6108063201567256093L;
+    private const long _cacheIndex_Denominator = -6108063201567256093L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -126,7 +126,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Antithrombotic_Not_Given_at_Discharge, Antithrombotic_Not_Given_at_Discharge_Compute);
 
-    private static readonly long _cacheIndex_Antithrombotic_Not_Given_at_Discharge = -7841829350546192526L;
+    private const long _cacheIndex_Antithrombotic_Not_Given_at_Discharge = -7841829350546192526L;
 
     private IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge_Compute(CqlContext context)
     {
@@ -199,7 +199,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_No_Antithrombotic_At_Discharge, Encounter_With_No_Antithrombotic_At_Discharge_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_No_Antithrombotic_At_Discharge = 3872100787539645286L;
+    private const long _cacheIndex_Encounter_With_No_Antithrombotic_At_Discharge = 3872100787539645286L;
 
     private IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge_Compute(CqlContext context)
     {
@@ -232,7 +232,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge, Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute);
 
-    private static readonly long _cacheIndex_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge = -1129270284953313235L;
+    private const long _cacheIndex_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge = -1129270284953313235L;
 
     private IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute(CqlContext context)
     {
@@ -285,7 +285,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge, Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge = -1426572148313240824L;
+    private const long _cacheIndex_Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge = -1426572148313240824L;
 
     private IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute(CqlContext context)
     {
@@ -318,7 +318,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exceptions = 6673240317773714005L;
+    private const long _cacheIndex_Denominator_Exceptions = 6673240317773714005L;
 
     private IEnumerable<Encounter> Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -333,7 +333,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 8298600534596146791L;
+    private const long _cacheIndex_Denominator_Exclusions = 8298600534596146791L;
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -348,7 +348,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -1154461465892404559L;
+    private const long _cacheIndex_Initial_Population = -1154461465892404559L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -361,7 +361,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Antithrombotic_Therapy_at_Discharge, Antithrombotic_Therapy_at_Discharge_Compute);
 
-    private static readonly long _cacheIndex_Antithrombotic_Therapy_at_Discharge = -8311745687764367551L;
+    private const long _cacheIndex_Antithrombotic_Therapy_at_Discharge = -8311745687764367551L;
 
     private IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge_Compute(CqlContext context)
     {
@@ -414,7 +414,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 899507397485408094L;
+    private const long _cacheIndex_Numerator = 899507397485408094L;
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -447,7 +447,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 2387045540434942064L;
+    private const long _cacheIndex_SDE_Ethnicity = 2387045540434942064L;
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -460,7 +460,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -8335395049973550212L;
+    private const long _cacheIndex_SDE_Payer = -8335395049973550212L;
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -473,7 +473,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -8392710765314873892L;
+    private const long _cacheIndex_SDE_Race = -8392710765314873892L;
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -486,7 +486,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 418011448807512549L;
+    private const long _cacheIndex_SDE_Sex = 418011448807512549L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

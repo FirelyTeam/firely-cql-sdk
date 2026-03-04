@@ -108,7 +108,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -8140283047952446050L;
+    private const long _cacheIndex_Measurement_Period = -8140283047952446050L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -128,7 +128,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 4406994424031691662L;
+    private const long _cacheIndex_Patient = 4406994424031691662L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -142,7 +142,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -3741220856752493112L;
+    private const long _cacheIndex_SDE_Ethnicity = -3741220856752493112L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -155,7 +155,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -2432525633866877819L;
+    private const long _cacheIndex_SDE_Payer = -2432525633866877819L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -168,7 +168,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 3157958782746268240L;
+    private const long _cacheIndex_SDE_Race = 3157958782746268240L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -181,7 +181,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 5879459535837422408L;
+    private const long _cacheIndex_SDE_Sex = 5879459535837422408L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -226,7 +226,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public IEnumerable<Condition> Prostate_Cancer_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Prostate_Cancer_Diagnosis, Prostate_Cancer_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Prostate_Cancer_Diagnosis = 7069960912159893930L;
+    private const long _cacheIndex_Prostate_Cancer_Diagnosis = 7069960912159893930L;
 
     private IEnumerable<Condition> Prostate_Cancer_Diagnosis_Compute(CqlContext context)
     {
@@ -251,7 +251,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 6349217679780301784L;
+    private const long _cacheIndex_Initial_Population = 6349217679780301784L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -265,7 +265,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public Procedure First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period, First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period = 2835648534723621959L;
+    private const long _cacheIndex_First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period = 2835648534723621959L;
 
     private Procedure First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -431,7 +431,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public Observation Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a, Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a_Compute);
 
-    private static readonly long _cacheIndex_Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a = -4176122043776704687L;
+    private const long _cacheIndex_Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a = -4176122043776704687L;
 
     private Observation Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a_Compute(CqlContext context)
     {
@@ -586,7 +586,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public bool? Most_Recent_PSA_Test_Result_is_Low(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Most_Recent_PSA_Test_Result_is_Low, Most_Recent_PSA_Test_Result_is_Low_Compute);
 
-    private static readonly long _cacheIndex_Most_Recent_PSA_Test_Result_is_Low = 7161242736514616586L;
+    private const long _cacheIndex_Most_Recent_PSA_Test_Result_is_Low = 7161242736514616586L;
 
     private bool? Most_Recent_PSA_Test_Result_is_Low_Compute(CqlContext context)
     {
@@ -687,7 +687,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public bool? Most_Recent_Gleason_Score_is_Low(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Most_Recent_Gleason_Score_is_Low, Most_Recent_Gleason_Score_is_Low_Compute);
 
-    private static readonly long _cacheIndex_Most_Recent_Gleason_Score_is_Low = 7358005442362079522L;
+    private const long _cacheIndex_Most_Recent_Gleason_Score_is_Low = 7358005442362079522L;
 
     private bool? Most_Recent_Gleason_Score_is_Low_Compute(CqlContext context)
     {
@@ -826,7 +826,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 1246872489746454659L;
+    private const long _cacheIndex_Denominator = 1246872489746454659L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -849,7 +849,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public IEnumerable<Observation> Bone_Scan_Study_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Bone_Scan_Study_Performed, Bone_Scan_Study_Performed_Compute);
 
-    private static readonly long _cacheIndex_Bone_Scan_Study_Performed = 288628587474938786L;
+    private const long _cacheIndex_Bone_Scan_Study_Performed = 288628587474938786L;
 
     private IEnumerable<Observation> Bone_Scan_Study_Performed_Compute(CqlContext context)
     {
@@ -907,7 +907,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 7820927283973067551L;
+    private const long _cacheIndex_Numerator = 7820927283973067551L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -922,7 +922,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public bool? Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Diagnosis_of_Pain_related_to_Prostate_Cancer, Has_Diagnosis_of_Pain_related_to_Prostate_Cancer_Compute);
 
-    private static readonly long _cacheIndex_Has_Diagnosis_of_Pain_related_to_Prostate_Cancer = 1074005850507574754L;
+    private const long _cacheIndex_Has_Diagnosis_of_Pain_related_to_Prostate_Cancer = 1074005850507574754L;
 
     private bool? Has_Diagnosis_of_Pain_related_to_Prostate_Cancer_Compute(CqlContext context)
     {
@@ -961,7 +961,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public bool? Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis, Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis = 814682402894497576L;
+    private const long _cacheIndex_Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis = 814682402894497576L;
 
     private bool? Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis_Compute(CqlContext context)
     {
@@ -1065,7 +1065,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public bool? Has_Bone_Scan_Study_Performed_with_Documented_Reason(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Bone_Scan_Study_Performed_with_Documented_Reason, Has_Bone_Scan_Study_Performed_with_Documented_Reason_Compute);
 
-    private static readonly long _cacheIndex_Has_Bone_Scan_Study_Performed_with_Documented_Reason = -57594536143353413L;
+    private const long _cacheIndex_Has_Bone_Scan_Study_Performed_with_Documented_Reason = -57594536143353413L;
 
     private bool? Has_Bone_Scan_Study_Performed_with_Documented_Reason_Compute(CqlContext context)
     {
@@ -1090,7 +1090,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
     public bool? Denominator_Exceptions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exceptions = -2111890706368566952L;
+    private const long _cacheIndex_Denominator_Exceptions = -2111890706368566952L;
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {

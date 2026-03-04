@@ -78,7 +78,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -8915744558003842889L;
+    private const long _cacheIndex_Measurement_Period = -8915744558003842889L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -95,7 +95,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -910321882205837424L;
+    private const long _cacheIndex_Patient = -910321882205837424L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -109,7 +109,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public bool? Has_Criteria_Indicating_Frailty(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Criteria_Indicating_Frailty, Has_Criteria_Indicating_Frailty_Compute);
 
-    private static readonly long _cacheIndex_Has_Criteria_Indicating_Frailty = 3620167446593460806L;
+    private const long _cacheIndex_Has_Criteria_Indicating_Frailty = 3620167446593460806L;
 
     private bool? Has_Criteria_Indicating_Frailty_Compute(CqlContext context)
     {
@@ -177,7 +177,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public IEnumerable<CqlDate> Outpatient_Encounters_with_Advanced_Illness(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Outpatient_Encounters_with_Advanced_Illness, Outpatient_Encounters_with_Advanced_Illness_Compute);
 
-    private static readonly long _cacheIndex_Outpatient_Encounters_with_Advanced_Illness = -2766277875631390399L;
+    private const long _cacheIndex_Outpatient_Encounters_with_Advanced_Illness = -2766277875631390399L;
 
     private IEnumerable<CqlDate> Outpatient_Encounters_with_Advanced_Illness_Compute(CqlContext context)
     {
@@ -241,7 +241,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Nonacute_Inpatient_Discharge_with_Advanced_Illness, Nonacute_Inpatient_Discharge_with_Advanced_Illness_Compute);
 
-    private static readonly long _cacheIndex_Nonacute_Inpatient_Discharge_with_Advanced_Illness = -1708232231082040117L;
+    private const long _cacheIndex_Nonacute_Inpatient_Discharge_with_Advanced_Illness = -1708232231082040117L;
 
     private IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness_Compute(CqlContext context)
     {
@@ -286,7 +286,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public IEnumerable<CqlDate> Outpatient_Encounters_or_Discharges_with_Advanced_Illness(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Outpatient_Encounters_or_Discharges_with_Advanced_Illness, Outpatient_Encounters_or_Discharges_with_Advanced_Illness_Compute);
 
-    private static readonly long _cacheIndex_Outpatient_Encounters_or_Discharges_with_Advanced_Illness = -7890521861787029028L;
+    private const long _cacheIndex_Outpatient_Encounters_or_Discharges_with_Advanced_Illness = -7890521861787029028L;
 
     private IEnumerable<CqlDate> Outpatient_Encounters_or_Discharges_with_Advanced_Illness_Compute(CqlContext context)
     {
@@ -332,7 +332,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public bool? Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service, Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service_Compute);
 
-    private static readonly long _cacheIndex_Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service = -2682727164653422667L;
+    private const long _cacheIndex_Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service = -2682727164653422667L;
 
     private bool? Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service_Compute(CqlContext context)
     {
@@ -366,7 +366,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public bool? Acute_Inpatient_Encounter_with_Advanced_Illness(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Acute_Inpatient_Encounter_with_Advanced_Illness, Acute_Inpatient_Encounter_with_Advanced_Illness_Compute);
 
-    private static readonly long _cacheIndex_Acute_Inpatient_Encounter_with_Advanced_Illness = 7466754000505614877L;
+    private const long _cacheIndex_Acute_Inpatient_Encounter_with_Advanced_Illness = 7466754000505614877L;
 
     private bool? Acute_Inpatient_Encounter_with_Advanced_Illness_Compute(CqlContext context)
     {
@@ -405,7 +405,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public bool? Acute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Acute_Inpatient_Discharge_with_Advanced_Illness, Acute_Inpatient_Discharge_with_Advanced_Illness_Compute);
 
-    private static readonly long _cacheIndex_Acute_Inpatient_Discharge_with_Advanced_Illness = -132452363031990196L;
+    private const long _cacheIndex_Acute_Inpatient_Discharge_with_Advanced_Illness = -132452363031990196L;
 
     private bool? Acute_Inpatient_Discharge_with_Advanced_Illness_Compute(CqlContext context)
     {
@@ -442,7 +442,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public bool? Dementia_Medications_In_Year_Before_or_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Dementia_Medications_In_Year_Before_or_During_Measurement_Period, Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Dementia_Medications_In_Year_Before_or_During_Measurement_Period = -6328015377898273548L;
+    private const long _cacheIndex_Dementia_Medications_In_Year_Before_or_During_Measurement_Period = -6328015377898273548L;
 
     private bool? Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -506,7 +506,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80, Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Compute);
 
-    private static readonly long _cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80 = 3948105317562077147L;
+    private const long _cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80 = 3948105317562077147L;
 
     private bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Compute(CqlContext context)
     {
@@ -547,7 +547,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80, Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Compute);
 
-    private static readonly long _cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80 = -3586192422471449037L;
+    private const long _cacheIndex_Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80 = -3586192422471449037L;
 
     private bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Compute(CqlContext context)
     {

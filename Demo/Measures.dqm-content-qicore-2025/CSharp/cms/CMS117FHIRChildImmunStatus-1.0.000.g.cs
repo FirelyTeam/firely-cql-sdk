@@ -290,7 +290,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 4169139436206072456L;
+    private const long _cacheIndex_Measurement_Period = 4169139436206072456L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -310,7 +310,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -3255434830720907340L;
+    private const long _cacheIndex_Patient = -3255434830720907340L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -324,7 +324,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters = 3890715647931438728L;
+    private const long _cacheIndex_Qualifying_Encounters = 3890715647931438728L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -390,7 +390,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 1840103070889693489L;
+    private const long _cacheIndex_Initial_Population = 1840103070889693489L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -414,7 +414,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 6100922097112111507L;
+    private const long _cacheIndex_Denominator = 6100922097112111507L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -427,7 +427,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public CqlDate Date_of_Second_Birthday(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Date_of_Second_Birthday, Date_of_Second_Birthday_Compute);
 
-    private static readonly long _cacheIndex_Date_of_Second_Birthday = -8905780261144196986L;
+    private const long _cacheIndex_Date_of_Second_Birthday = -8905780261144196986L;
 
     private CqlDate Date_of_Second_Birthday_Compute(CqlContext context)
     {
@@ -447,7 +447,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public CqlInterval<CqlDate> First_Two_Years(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_First_Two_Years, First_Two_Years_Compute);
 
-    private static readonly long _cacheIndex_First_Two_Years = -5417161313911528722L;
+    private const long _cacheIndex_First_Two_Years = -5417161313911528722L;
 
     private CqlInterval<CqlDate> First_Two_Years_Compute(CqlContext context)
     {
@@ -467,7 +467,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Severe_Combined_Immunodeficiency(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Severe_Combined_Immunodeficiency, Has_Severe_Combined_Immunodeficiency_Compute);
 
-    private static readonly long _cacheIndex_Has_Severe_Combined_Immunodeficiency = 9038569657881816316L;
+    private const long _cacheIndex_Has_Severe_Combined_Immunodeficiency = 9038569657881816316L;
 
     private bool? Has_Severe_Combined_Immunodeficiency_Compute(CqlContext context)
     {
@@ -496,7 +496,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Immunodeficiency(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Immunodeficiency, Has_Immunodeficiency_Compute);
 
-    private static readonly long _cacheIndex_Has_Immunodeficiency = -6514596558769833938L;
+    private const long _cacheIndex_Has_Immunodeficiency = -6514596558769833938L;
 
     private bool? Has_Immunodeficiency_Compute(CqlContext context)
     {
@@ -525,7 +525,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_HIV(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_HIV, Has_HIV_Compute);
 
-    private static readonly long _cacheIndex_Has_HIV = 2919788375854472653L;
+    private const long _cacheIndex_Has_HIV = 2919788375854472653L;
 
     private bool? Has_HIV_Compute(CqlContext context)
     {
@@ -554,7 +554,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia, Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Compute);
 
-    private static readonly long _cacheIndex_Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia = 8404119248587868221L;
+    private const long _cacheIndex_Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia = 8404119248587868221L;
 
     private bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Compute(CqlContext context)
     {
@@ -583,7 +583,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Intussusception(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Intussusception, Has_Intussusception_Compute);
 
-    private static readonly long _cacheIndex_Has_Intussusception = 5536229043570992142L;
+    private const long _cacheIndex_Has_Intussusception = 5536229043570992142L;
 
     private bool? Has_Intussusception_Compute(CqlContext context)
     {
@@ -612,7 +612,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 4709410818624606766L;
+    private const long _cacheIndex_Denominator_Exclusions = 4709410818624606766L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -635,7 +635,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old, Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Compute);
 
-    private static readonly long _cacheIndex_Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old = -2143539727822132663L;
+    private const long _cacheIndex_Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old = -2143539727822132663L;
 
     private CqlInterval<CqlDate> Vaccine_Administration_Interval___42_Days_up_to_2_Years_Old_Compute(CqlContext context)
     {
@@ -657,7 +657,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_DTaP_Immunizations_or_Procedures, DTaP_Immunizations_or_Procedures_Compute);
 
-    private static readonly long _cacheIndex_DTaP_Immunizations_or_Procedures = 3604694627530575211L;
+    private const long _cacheIndex_DTaP_Immunizations_or_Procedures = 3604694627530575211L;
 
     private IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -722,7 +722,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Four_DTaP_Vaccinations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Four_DTaP_Vaccinations, Four_DTaP_Vaccinations_Compute);
 
-    private static readonly long _cacheIndex_Four_DTaP_Vaccinations = 6243834148034002710L;
+    private const long _cacheIndex_Four_DTaP_Vaccinations = 6243834148034002710L;
 
     private IEnumerable<CqlDate> Four_DTaP_Vaccinations_Compute(CqlContext context)
     {
@@ -776,7 +776,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> DTaP_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_DTaP_Numerator_Inclusion_Conditions, DTaP_Numerator_Inclusion_Conditions_Compute);
 
-    private static readonly long _cacheIndex_DTaP_Numerator_Inclusion_Conditions = 3639701423704147375L;
+    private const long _cacheIndex_DTaP_Numerator_Inclusion_Conditions = 3639701423704147375L;
 
     private IEnumerable<object> DTaP_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -809,7 +809,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Polio_Immunizations_or_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Polio_Immunizations_or_Procedures, Polio_Immunizations_or_Procedures_Compute);
 
-    private static readonly long _cacheIndex_Polio_Immunizations_or_Procedures = 417576683605254862L;
+    private const long _cacheIndex_Polio_Immunizations_or_Procedures = 417576683605254862L;
 
     private IEnumerable<CqlDate> Polio_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -874,7 +874,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Three_Polio_Vaccinations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Three_Polio_Vaccinations, Three_Polio_Vaccinations_Compute);
 
-    private static readonly long _cacheIndex_Three_Polio_Vaccinations = 4897392299194826373L;
+    private const long _cacheIndex_Three_Polio_Vaccinations = 4897392299194826373L;
 
     private IEnumerable<CqlDate> Three_Polio_Vaccinations_Compute(CqlContext context)
     {
@@ -928,7 +928,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Polio_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Polio_Numerator_Inclusion_Conditions, Polio_Numerator_Inclusion_Conditions_Compute);
 
-    private static readonly long _cacheIndex_Polio_Numerator_Inclusion_Conditions = 7826064777224418101L;
+    private const long _cacheIndex_Polio_Numerator_Inclusion_Conditions = 7826064777224418101L;
 
     private IEnumerable<object> Polio_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -958,7 +958,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public CqlDate Date_of_First_Birthday(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Date_of_First_Birthday, Date_of_First_Birthday_Compute);
 
-    private static readonly long _cacheIndex_Date_of_First_Birthday = 3716909235403770431L;
+    private const long _cacheIndex_Date_of_First_Birthday = 3716909235403770431L;
 
     private CqlDate Date_of_First_Birthday_Compute(CqlContext context)
     {
@@ -978,7 +978,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Date_of_First_Birthday_to_Date_of_Second_Birthday, Date_of_First_Birthday_to_Date_of_Second_Birthday_Compute);
 
-    private static readonly long _cacheIndex_Date_of_First_Birthday_to_Date_of_Second_Birthday = 8282639147346491549L;
+    private const long _cacheIndex_Date_of_First_Birthday_to_Date_of_Second_Birthday = 8282639147346491549L;
 
     private CqlInterval<CqlDate> Date_of_First_Birthday_to_Date_of_Second_Birthday_Compute(CqlContext context)
     {
@@ -993,7 +993,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> One_MMR_Vaccination(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_One_MMR_Vaccination, One_MMR_Vaccination_Compute);
 
-    private static readonly long _cacheIndex_One_MMR_Vaccination = 156261906265107921L;
+    private const long _cacheIndex_One_MMR_Vaccination = 156261906265107921L;
 
     private IEnumerable<CqlDate> One_MMR_Vaccination_Compute(CqlContext context)
     {
@@ -1058,7 +1058,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> MMR_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_MMR_Numerator_Inclusion_Conditions, MMR_Numerator_Inclusion_Conditions_Compute);
 
-    private static readonly long _cacheIndex_MMR_Numerator_Inclusion_Conditions = -514019637682845694L;
+    private const long _cacheIndex_MMR_Numerator_Inclusion_Conditions = -514019637682845694L;
 
     private IEnumerable<object> MMR_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -1088,7 +1088,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Measles_Indicators(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measles_Indicators, Measles_Indicators_Compute);
 
-    private static readonly long _cacheIndex_Measles_Indicators = 8441168455424622173L;
+    private const long _cacheIndex_Measles_Indicators = 8441168455424622173L;
 
     private IEnumerable<object> Measles_Indicators_Compute(CqlContext context)
     {
@@ -1118,7 +1118,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Mumps_Indicators(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Mumps_Indicators, Mumps_Indicators_Compute);
 
-    private static readonly long _cacheIndex_Mumps_Indicators = -5597829872438947286L;
+    private const long _cacheIndex_Mumps_Indicators = -5597829872438947286L;
 
     private IEnumerable<object> Mumps_Indicators_Compute(CqlContext context)
     {
@@ -1146,7 +1146,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Rubella_Indicators(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Rubella_Indicators, Rubella_Indicators_Compute);
 
-    private static readonly long _cacheIndex_Rubella_Indicators = -7817904464631049752L;
+    private const long _cacheIndex_Rubella_Indicators = -7817904464631049752L;
 
     private IEnumerable<object> Rubella_Indicators_Compute(CqlContext context)
     {
@@ -1174,7 +1174,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hib_3_Dose_Immunizations_or_Procedures, Hib_3_Dose_Immunizations_or_Procedures_Compute);
 
-    private static readonly long _cacheIndex_Hib_3_Dose_Immunizations_or_Procedures = -2629041367058582986L;
+    private const long _cacheIndex_Hib_3_Dose_Immunizations_or_Procedures = -2629041367058582986L;
 
     private IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -1239,7 +1239,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hib_4_Dose_Immunizations_or_Procedures, Hib_4_Dose_Immunizations_or_Procedures_Compute);
 
-    private static readonly long _cacheIndex_Hib_4_Dose_Immunizations_or_Procedures = -4666232502681983773L;
+    private const long _cacheIndex_Hib_4_Dose_Immunizations_or_Procedures = -4666232502681983773L;
 
     private IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -1304,7 +1304,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hib_3_or_4_Dose_Immunizations, Hib_3_or_4_Dose_Immunizations_Compute);
 
-    private static readonly long _cacheIndex_Hib_3_or_4_Dose_Immunizations = -674850233977361458L;
+    private const long _cacheIndex_Hib_3_or_4_Dose_Immunizations = -674850233977361458L;
 
     private IEnumerable<CqlDate> Hib_3_or_4_Dose_Immunizations_Compute(CqlContext context)
     {
@@ -1319,7 +1319,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Appropriate_Number_of_Hib_Immunizations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Appropriate_Number_of_Hib_Immunizations, Has_Appropriate_Number_of_Hib_Immunizations_Compute);
 
-    private static readonly long _cacheIndex_Has_Appropriate_Number_of_Hib_Immunizations = 5542750103430990637L;
+    private const long _cacheIndex_Has_Appropriate_Number_of_Hib_Immunizations = 5542750103430990637L;
 
     private bool? Has_Appropriate_Number_of_Hib_Immunizations_Compute(CqlContext context)
     {
@@ -1375,7 +1375,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Hib_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hib_Numerator_Inclusion_Conditions, Hib_Numerator_Inclusion_Conditions_Compute);
 
-    private static readonly long _cacheIndex_Hib_Numerator_Inclusion_Conditions = 8608192977694466541L;
+    private const long _cacheIndex_Hib_Numerator_Inclusion_Conditions = 8608192977694466541L;
 
     private IEnumerable<object> Hib_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -1405,7 +1405,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hepatitis_B_Immunizations_or_Procedures, Hepatitis_B_Immunizations_or_Procedures_Compute);
 
-    private static readonly long _cacheIndex_Hepatitis_B_Immunizations_or_Procedures = 1973141662449076015L;
+    private const long _cacheIndex_Hepatitis_B_Immunizations_or_Procedures = 1973141662449076015L;
 
     private IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -1470,7 +1470,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Three_Hepatitis_B_Vaccinations, Three_Hepatitis_B_Vaccinations_Compute);
 
-    private static readonly long _cacheIndex_Three_Hepatitis_B_Vaccinations = 1495990690705974579L;
+    private const long _cacheIndex_Three_Hepatitis_B_Vaccinations = 1495990690705974579L;
 
     private IEnumerable<CqlDate> Three_Hepatitis_B_Vaccinations_Compute(CqlContext context)
     {
@@ -1524,7 +1524,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> NewBorn_Vaccine_Requirement(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_NewBorn_Vaccine_Requirement, NewBorn_Vaccine_Requirement_Compute);
 
-    private static readonly long _cacheIndex_NewBorn_Vaccine_Requirement = -5347679566276507507L;
+    private const long _cacheIndex_NewBorn_Vaccine_Requirement = -5347679566276507507L;
 
     private IEnumerable<CqlDate> NewBorn_Vaccine_Requirement_Compute(CqlContext context)
     {
@@ -1576,7 +1576,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Meets_HepB_Vaccination_Requirement, Meets_HepB_Vaccination_Requirement_Compute);
 
-    private static readonly long _cacheIndex_Meets_HepB_Vaccination_Requirement = -1645875262351447058L;
+    private const long _cacheIndex_Meets_HepB_Vaccination_Requirement = -1645875262351447058L;
 
     private IEnumerable<CqlDate> Meets_HepB_Vaccination_Requirement_Compute(CqlContext context)
     {
@@ -1638,7 +1638,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Hepatitis_B_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions, Hepatitis_B_Numerator_Inclusion_Conditions_Compute);
 
-    private static readonly long _cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions = 7662563679654604977L;
+    private const long _cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions = 7662563679654604977L;
 
     private IEnumerable<object> Hepatitis_B_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -1673,7 +1673,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> One_Chicken_Pox_Vaccination(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_One_Chicken_Pox_Vaccination, One_Chicken_Pox_Vaccination_Compute);
 
-    private static readonly long _cacheIndex_One_Chicken_Pox_Vaccination = -8423925841763101892L;
+    private const long _cacheIndex_One_Chicken_Pox_Vaccination = -8423925841763101892L;
 
     private IEnumerable<CqlDate> One_Chicken_Pox_Vaccination_Compute(CqlContext context)
     {
@@ -1738,7 +1738,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Varicella_Zoster_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions, Varicella_Zoster_Numerator_Inclusion_Conditions_Compute);
 
-    private static readonly long _cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions = -4280058124122922461L;
+    private const long _cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions = -4280058124122922461L;
 
     private IEnumerable<object> Varicella_Zoster_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -1773,7 +1773,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pneumococcal_Conjugate_Immunizations_or_Procedures, Pneumococcal_Conjugate_Immunizations_or_Procedures_Compute);
 
-    private static readonly long _cacheIndex_Pneumococcal_Conjugate_Immunizations_or_Procedures = 4378322687267757945L;
+    private const long _cacheIndex_Pneumococcal_Conjugate_Immunizations_or_Procedures = 4378322687267757945L;
 
     private IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -1838,7 +1838,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Four_Pneumococcal_Conjugate_Vaccinations, Four_Pneumococcal_Conjugate_Vaccinations_Compute);
 
-    private static readonly long _cacheIndex_Four_Pneumococcal_Conjugate_Vaccinations = -4797540516230867295L;
+    private const long _cacheIndex_Four_Pneumococcal_Conjugate_Vaccinations = -4797540516230867295L;
 
     private IEnumerable<CqlDate> Four_Pneumococcal_Conjugate_Vaccinations_Compute(CqlContext context)
     {
@@ -1900,7 +1900,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions, Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Compute);
 
-    private static readonly long _cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions = -4666451470684867839L;
+    private const long _cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions = -4666451470684867839L;
 
     private IEnumerable<object> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -1930,7 +1930,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> One_Hepatitis_A_Vaccinations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_One_Hepatitis_A_Vaccinations, One_Hepatitis_A_Vaccinations_Compute);
 
-    private static readonly long _cacheIndex_One_Hepatitis_A_Vaccinations = -8296023591192323560L;
+    private const long _cacheIndex_One_Hepatitis_A_Vaccinations = -8296023591192323560L;
 
     private IEnumerable<CqlDate> One_Hepatitis_A_Vaccinations_Compute(CqlContext context)
     {
@@ -1995,7 +1995,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Hepatitis_A_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions, Hepatitis_A_Numerator_Inclusion_Conditions_Compute);
 
-    private static readonly long _cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions = 8952629932293432625L;
+    private const long _cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions = 8952629932293432625L;
 
     private IEnumerable<object> Hepatitis_A_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -2030,7 +2030,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Rotavirus_2_Dose_Immunizations_or_Procedures, Rotavirus_2_Dose_Immunizations_or_Procedures_Compute);
 
-    private static readonly long _cacheIndex_Rotavirus_2_Dose_Immunizations_or_Procedures = 7665404411040489453L;
+    private const long _cacheIndex_Rotavirus_2_Dose_Immunizations_or_Procedures = 7665404411040489453L;
 
     private IEnumerable<CqlDate> Rotavirus_2_Dose_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -2096,7 +2096,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Rotavirus_3_Dose_Immunizations_or_Procedures, Rotavirus_3_Dose_Immunizations_or_Procedures_Compute);
 
-    private static readonly long _cacheIndex_Rotavirus_3_Dose_Immunizations_or_Procedures = -2704249126383813516L;
+    private const long _cacheIndex_Rotavirus_3_Dose_Immunizations_or_Procedures = -2704249126383813516L;
 
     private IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -2161,7 +2161,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Rotavirus_2_or_3_Dose_Immunizations, Rotavirus_2_or_3_Dose_Immunizations_Compute);
 
-    private static readonly long _cacheIndex_Rotavirus_2_or_3_Dose_Immunizations = 5526688681713129333L;
+    private const long _cacheIndex_Rotavirus_2_or_3_Dose_Immunizations = 5526688681713129333L;
 
     private IEnumerable<CqlDate> Rotavirus_2_or_3_Dose_Immunizations_Compute(CqlContext context)
     {
@@ -2176,7 +2176,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Has_Appropriate_Number_of_Rotavirus_Immunizations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Appropriate_Number_of_Rotavirus_Immunizations, Has_Appropriate_Number_of_Rotavirus_Immunizations_Compute);
 
-    private static readonly long _cacheIndex_Has_Appropriate_Number_of_Rotavirus_Immunizations = -5340818168674935883L;
+    private const long _cacheIndex_Has_Appropriate_Number_of_Rotavirus_Immunizations = -5340818168674935883L;
 
     private bool? Has_Appropriate_Number_of_Rotavirus_Immunizations_Compute(CqlContext context)
     {
@@ -2232,7 +2232,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Rotavirus_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Rotavirus_Numerator_Inclusion_Conditions, Rotavirus_Numerator_Inclusion_Conditions_Compute);
 
-    private static readonly long _cacheIndex_Rotavirus_Numerator_Inclusion_Conditions = 5452965153709958714L;
+    private const long _cacheIndex_Rotavirus_Numerator_Inclusion_Conditions = 5452965153709958714L;
 
     private IEnumerable<object> Rotavirus_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -2262,7 +2262,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old, Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Compute);
 
-    private static readonly long _cacheIndex_Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old = 6360531842329858811L;
+    private const long _cacheIndex_Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old = 6360531842329858811L;
 
     private CqlInterval<CqlDate> Vaccine_Administration_Interval___180_Days_up_to_2_Years_Old_Compute(CqlContext context)
     {
@@ -2284,7 +2284,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Influenza_Immunizations_or_Procedures, Influenza_Immunizations_or_Procedures_Compute);
 
-    private static readonly long _cacheIndex_Influenza_Immunizations_or_Procedures = 1828458576964917662L;
+    private const long _cacheIndex_Influenza_Immunizations_or_Procedures = 1828458576964917662L;
 
     private IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures_Compute(CqlContext context)
     {
@@ -2349,7 +2349,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> Two_Influenza_Vaccinations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Two_Influenza_Vaccinations, Two_Influenza_Vaccinations_Compute);
 
-    private static readonly long _cacheIndex_Two_Influenza_Vaccinations = -8964713766866174121L;
+    private const long _cacheIndex_Two_Influenza_Vaccinations = -8964713766866174121L;
 
     private IEnumerable<CqlDate> Two_Influenza_Vaccinations_Compute(CqlContext context)
     {
@@ -2395,7 +2395,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<CqlDate> LAIV_Vaccinations(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_LAIV_Vaccinations, LAIV_Vaccinations_Compute);
 
-    private static readonly long _cacheIndex_LAIV_Vaccinations = -941360384475517972L;
+    private const long _cacheIndex_LAIV_Vaccinations = -941360384475517972L;
 
     private IEnumerable<CqlDate> LAIV_Vaccinations_Compute(CqlContext context)
     {
@@ -2462,7 +2462,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination, Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Compute);
 
-    private static readonly long _cacheIndex_Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination = -5305512655750921341L;
+    private const long _cacheIndex_Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination = -5305512655750921341L;
 
     private bool? Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination_Compute(CqlContext context)
     {
@@ -2479,7 +2479,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<object> Influenza_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Influenza_Numerator_Inclusion_Conditions, Influenza_Numerator_Inclusion_Conditions_Compute);
 
-    private static readonly long _cacheIndex_Influenza_Numerator_Inclusion_Conditions = 1126846549515768438L;
+    private const long _cacheIndex_Influenza_Numerator_Inclusion_Conditions = 1126846549515768438L;
 
     private IEnumerable<object> Influenza_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
@@ -2509,7 +2509,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -1317748112751385423L;
+    private const long _cacheIndex_Numerator = -1317748112751385423L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -2592,7 +2592,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 524785351674798207L;
+    private const long _cacheIndex_SDE_Ethnicity = 524785351674798207L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -2605,7 +2605,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -9208410771258428013L;
+    private const long _cacheIndex_SDE_Payer = -9208410771258428013L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -2618,7 +2618,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 1692700376086300175L;
+    private const long _cacheIndex_SDE_Race = 1692700376086300175L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -2631,7 +2631,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 5331407242333771865L;
+    private const long _cacheIndex_SDE_Sex = 5331407242333771865L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

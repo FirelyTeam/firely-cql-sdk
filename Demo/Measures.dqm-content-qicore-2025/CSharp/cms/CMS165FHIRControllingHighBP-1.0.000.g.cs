@@ -89,7 +89,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 2868529862524195936L;
+    private const long _cacheIndex_Measurement_Period = 2868529862524195936L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -109,7 +109,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 6112448456681977422L;
+    private const long _cacheIndex_Patient = 6112448456681977422L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -123,7 +123,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<object> Essential_Hypertension_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Essential_Hypertension_Diagnosis, Essential_Hypertension_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Essential_Hypertension_Diagnosis = -2787967750483016207L;
+    private const long _cacheIndex_Essential_Hypertension_Diagnosis = -2787967750483016207L;
 
     private IEnumerable<object> Essential_Hypertension_Diagnosis_Compute(CqlContext context)
     {
@@ -154,7 +154,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 8113727830882407662L;
+    private const long _cacheIndex_Initial_Population = 8113727830882407662L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -182,7 +182,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 6479199307429863337L;
+    private const long _cacheIndex_Denominator = 6479199307429863337L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -195,7 +195,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<object> Pregnancy_or_Renal_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pregnancy_or_Renal_Diagnosis, Pregnancy_or_Renal_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Pregnancy_or_Renal_Diagnosis = 4765202894533631670L;
+    private const long _cacheIndex_Pregnancy_or_Renal_Diagnosis = 4765202894533631670L;
 
     private IEnumerable<object> Pregnancy_or_Renal_Diagnosis_Compute(CqlContext context)
     {
@@ -236,7 +236,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Procedure> End_Stage_Renal_Disease_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_End_Stage_Renal_Disease_Procedures, End_Stage_Renal_Disease_Procedures_Compute);
 
-    private static readonly long _cacheIndex_End_Stage_Renal_Disease_Procedures = 3683699906216537332L;
+    private const long _cacheIndex_End_Stage_Renal_Disease_Procedures = 3683699906216537332L;
 
     private IEnumerable<Procedure> End_Stage_Renal_Disease_Procedures_Compute(CqlContext context)
     {
@@ -329,7 +329,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Encounter> End_Stage_Renal_Disease_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_End_Stage_Renal_Disease_Encounter, End_Stage_Renal_Disease_Encounter_Compute);
 
-    private static readonly long _cacheIndex_End_Stage_Renal_Disease_Encounter = 4726818240219101239L;
+    private const long _cacheIndex_End_Stage_Renal_Disease_Encounter = 4726818240219101239L;
 
     private IEnumerable<Encounter> End_Stage_Renal_Disease_Encounter_Compute(CqlContext context)
     {
@@ -356,7 +356,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = -4301715289763151594L;
+    private const long _cacheIndex_Denominator_Exclusions = -4301715289763151594L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -405,7 +405,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<Observation> Qualifying_Blood_Pressure_Reading(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Blood_Pressure_Reading, Qualifying_Blood_Pressure_Reading_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Blood_Pressure_Reading = -8682094712061780687L;
+    private const long _cacheIndex_Qualifying_Blood_Pressure_Reading = -8682094712061780687L;
 
     private IEnumerable<Observation> Qualifying_Blood_Pressure_Reading_Compute(CqlContext context)
     {
@@ -487,7 +487,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<CqlDate> Blood_Pressure_Days(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Blood_Pressure_Days, Blood_Pressure_Days_Compute);
 
-    private static readonly long _cacheIndex_Blood_Pressure_Days = -7659304312371477324L;
+    private const long _cacheIndex_Blood_Pressure_Days = -7659304312371477324L;
 
     private IEnumerable<CqlDate> Blood_Pressure_Days_Compute(CqlContext context)
     {
@@ -511,7 +511,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public CqlDate Most_Recent_Blood_Pressure_Day(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Most_Recent_Blood_Pressure_Day, Most_Recent_Blood_Pressure_Day_Compute);
 
-    private static readonly long _cacheIndex_Most_Recent_Blood_Pressure_Day = 4534147842878071812L;
+    private const long _cacheIndex_Most_Recent_Blood_Pressure_Day = 4534147842878071812L;
 
     private CqlDate Most_Recent_Blood_Pressure_Day_Compute(CqlContext context)
     {
@@ -526,7 +526,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public CqlQuantity Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day, Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day_Compute);
 
-    private static readonly long _cacheIndex_Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day = -6268987121419031654L;
+    private const long _cacheIndex_Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day = -6268987121419031654L;
 
     private CqlQuantity Lowest_Systolic_Reading_on_Most_Recent_Blood_Pressure_Day_Compute(CqlContext context)
     {
@@ -582,7 +582,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Has_Systolic_Blood_Pressure_Less_Than_140(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Systolic_Blood_Pressure_Less_Than_140, Has_Systolic_Blood_Pressure_Less_Than_140_Compute);
 
-    private static readonly long _cacheIndex_Has_Systolic_Blood_Pressure_Less_Than_140 = 1921186777350050006L;
+    private const long _cacheIndex_Has_Systolic_Blood_Pressure_Less_Than_140 = 1921186777350050006L;
 
     private bool? Has_Systolic_Blood_Pressure_Less_Than_140_Compute(CqlContext context)
     {
@@ -597,7 +597,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public CqlQuantity Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day, Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day_Compute);
 
-    private static readonly long _cacheIndex_Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day = -3841442510623089316L;
+    private const long _cacheIndex_Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day = -3841442510623089316L;
 
     private CqlQuantity Lowest_Diastolic_Reading_on_Most_Recent_Blood_Pressure_Day_Compute(CqlContext context)
     {
@@ -653,7 +653,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Has_Diastolic_Blood_Pressure_Less_Than_90(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Diastolic_Blood_Pressure_Less_Than_90, Has_Diastolic_Blood_Pressure_Less_Than_90_Compute);
 
-    private static readonly long _cacheIndex_Has_Diastolic_Blood_Pressure_Less_Than_90 = 6962517168965446750L;
+    private const long _cacheIndex_Has_Diastolic_Blood_Pressure_Less_Than_90 = 6962517168965446750L;
 
     private bool? Has_Diastolic_Blood_Pressure_Less_Than_90_Compute(CqlContext context)
     {
@@ -668,7 +668,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 7136638974270185813L;
+    private const long _cacheIndex_Numerator = 7136638974270185813L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -683,7 +683,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 5921252105043752311L;
+    private const long _cacheIndex_SDE_Ethnicity = 5921252105043752311L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -696,7 +696,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 5350607861850346144L;
+    private const long _cacheIndex_SDE_Payer = 5350607861850346144L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -709,7 +709,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -4146332498096444483L;
+    private const long _cacheIndex_SDE_Race = -4146332498096444483L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -722,7 +722,7 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 5891651533490106217L;
+    private const long _cacheIndex_SDE_Sex = 5891651533490106217L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

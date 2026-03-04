@@ -72,7 +72,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 8711657917987574517L;
+    private const long _cacheIndex_Measurement_Period = 8711657917987574517L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -92,7 +92,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 7709480296934025770L;
+    private const long _cacheIndex_Patient = 7709480296934025770L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -106,7 +106,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 5954463937489644418L;
+    private const long _cacheIndex_SDE_Payer = 5954463937489644418L;
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -119,7 +119,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -1271471911845668063L;
+    private const long _cacheIndex_SDE_Race = -1271471911845668063L;
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -132,7 +132,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 1712791761748354914L;
+    private const long _cacheIndex_SDE_Sex = 1712791761748354914L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -145,7 +145,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Encounter_During_Measurement_Period, Inpatient_Encounter_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Encounter_During_Measurement_Period = 7119230769913456010L;
+    private const long _cacheIndex_Inpatient_Encounter_During_Measurement_Period = 7119230769913456010L;
 
     private IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -174,7 +174,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounter, Qualifying_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounter = -6318677756698785293L;
+    private const long _cacheIndex_Qualifying_Encounter = -6318677756698785293L;
 
     private IEnumerable<Encounter> Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -201,7 +201,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hypoglycemic_Medication_Administration, Hypoglycemic_Medication_Administration_Compute);
 
-    private static readonly long _cacheIndex_Hypoglycemic_Medication_Administration = -1419347126236055493L;
+    private const long _cacheIndex_Hypoglycemic_Medication_Administration = -1419347126236055493L;
 
     private IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration_Compute(CqlContext context)
     {
@@ -257,7 +257,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<Encounter> Qualifying_Encounter_with_Hypoglycemic_Medication_Administration(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounter_with_Hypoglycemic_Medication_Administration, Qualifying_Encounter_with_Hypoglycemic_Medication_Administration_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounter_with_Hypoglycemic_Medication_Administration = -2889112349305435855L;
+    private const long _cacheIndex_Qualifying_Encounter_with_Hypoglycemic_Medication_Administration = -2889112349305435855L;
 
     private IEnumerable<Encounter> Qualifying_Encounter_with_Hypoglycemic_Medication_Administration_Compute(CqlContext context)
     {
@@ -290,7 +290,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -8827280791602122766L;
+    private const long _cacheIndex_Initial_Population = -8827280791602122766L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -303,7 +303,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -934546296167487755L;
+    private const long _cacheIndex_Denominator = -934546296167487755L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -316,7 +316,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<Encounter> Severe_Hypoglycemic_Harm_Event(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Severe_Hypoglycemic_Harm_Event, Severe_Hypoglycemic_Harm_Event_Compute);
 
-    private static readonly long _cacheIndex_Severe_Hypoglycemic_Harm_Event = 3959577614040153490L;
+    private const long _cacheIndex_Severe_Hypoglycemic_Harm_Event = 3959577614040153490L;
 
     private IEnumerable<Encounter> Severe_Hypoglycemic_Harm_Event_Compute(CqlContext context)
     {
@@ -494,7 +494,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -7641061183783562118L;
+    private const long _cacheIndex_Numerator = -7641061183783562118L;
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -507,7 +507,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -3471174387060058517L;
+    private const long _cacheIndex_SDE_Ethnicity = -3471174387060058517L;
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {

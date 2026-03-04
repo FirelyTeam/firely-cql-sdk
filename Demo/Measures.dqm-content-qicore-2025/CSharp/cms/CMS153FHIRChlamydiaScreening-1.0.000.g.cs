@@ -143,7 +143,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -1345411175383824253L;
+    private const long _cacheIndex_Measurement_Period = -1345411175383824253L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -163,7 +163,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -3673209837379419933L;
+    private const long _cacheIndex_Patient = -3673209837379419933L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -177,7 +177,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -838269432678333816L;
+    private const long _cacheIndex_SDE_Ethnicity = -838269432678333816L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -190,7 +190,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -6881693602031443699L;
+    private const long _cacheIndex_SDE_Payer = -6881693602031443699L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -203,7 +203,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 2266474229895085448L;
+    private const long _cacheIndex_SDE_Race = 2266474229895085448L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -216,7 +216,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 510276223678970139L;
+    private const long _cacheIndex_SDE_Sex = 510276223678970139L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -229,7 +229,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters = -3867250165514011721L;
+    private const long _cacheIndex_Qualifying_Encounters = -3867250165514011721L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -275,7 +275,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Has_Assessments_Identifying_Sexual_Activity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Assessments_Identifying_Sexual_Activity, Has_Assessments_Identifying_Sexual_Activity_Compute);
 
-    private static readonly long _cacheIndex_Has_Assessments_Identifying_Sexual_Activity = 2115328169786990818L;
+    private const long _cacheIndex_Has_Assessments_Identifying_Sexual_Activity = 2115328169786990818L;
 
     private bool? Has_Assessments_Identifying_Sexual_Activity_Compute(CqlContext context)
     {
@@ -331,7 +331,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Has_Diagnoses_Identifying_Sexual_Activity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Diagnoses_Identifying_Sexual_Activity, Has_Diagnoses_Identifying_Sexual_Activity_Compute);
 
-    private static readonly long _cacheIndex_Has_Diagnoses_Identifying_Sexual_Activity = 2632990418126780023L;
+    private const long _cacheIndex_Has_Diagnoses_Identifying_Sexual_Activity = 2632990418126780023L;
 
     private bool? Has_Diagnoses_Identifying_Sexual_Activity_Compute(CqlContext context)
     {
@@ -368,7 +368,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Has_Active_Contraceptive_Medications(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Active_Contraceptive_Medications, Has_Active_Contraceptive_Medications_Compute);
 
-    private static readonly long _cacheIndex_Has_Active_Contraceptive_Medications = 3164491970648369952L;
+    private const long _cacheIndex_Has_Active_Contraceptive_Medications = 3164491970648369952L;
 
     private bool? Has_Active_Contraceptive_Medications_Compute(CqlContext context)
     {
@@ -427,7 +427,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Has_Ordered_Contraceptive_Medications(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Ordered_Contraceptive_Medications, Has_Ordered_Contraceptive_Medications_Compute);
 
-    private static readonly long _cacheIndex_Has_Ordered_Contraceptive_Medications = -6685451883001229759L;
+    private const long _cacheIndex_Has_Ordered_Contraceptive_Medications = -6685451883001229759L;
 
     private bool? Has_Ordered_Contraceptive_Medications_Compute(CqlContext context)
     {
@@ -481,7 +481,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy, Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy_Compute);
 
-    private static readonly long _cacheIndex_Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy = -2561976657898182732L;
+    private const long _cacheIndex_Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy = -2561976657898182732L;
 
     private bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy_Compute(CqlContext context)
     {
@@ -514,7 +514,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Has_Laboratory_Tests_Identifying_Sexual_Activity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Laboratory_Tests_Identifying_Sexual_Activity, Has_Laboratory_Tests_Identifying_Sexual_Activity_Compute);
 
-    private static readonly long _cacheIndex_Has_Laboratory_Tests_Identifying_Sexual_Activity = 379598359555302312L;
+    private const long _cacheIndex_Has_Laboratory_Tests_Identifying_Sexual_Activity = 379598359555302312L;
 
     private bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_Compute(CqlContext context)
     {
@@ -543,7 +543,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Has_Diagnostic_Studies_Identifying_Sexual_Activity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Diagnostic_Studies_Identifying_Sexual_Activity, Has_Diagnostic_Studies_Identifying_Sexual_Activity_Compute);
 
-    private static readonly long _cacheIndex_Has_Diagnostic_Studies_Identifying_Sexual_Activity = 5539533142023325111L;
+    private const long _cacheIndex_Has_Diagnostic_Studies_Identifying_Sexual_Activity = 5539533142023325111L;
 
     private bool? Has_Diagnostic_Studies_Identifying_Sexual_Activity_Compute(CqlContext context)
     {
@@ -570,7 +570,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Has_Procedures_Identifying_Sexual_Activity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Procedures_Identifying_Sexual_Activity, Has_Procedures_Identifying_Sexual_Activity_Compute);
 
-    private static readonly long _cacheIndex_Has_Procedures_Identifying_Sexual_Activity = 6254113099437797292L;
+    private const long _cacheIndex_Has_Procedures_Identifying_Sexual_Activity = 6254113099437797292L;
 
     private bool? Has_Procedures_Identifying_Sexual_Activity_Compute(CqlContext context)
     {
@@ -659,7 +659,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 9135200379284452517L;
+    private const long _cacheIndex_Initial_Population = 9135200379284452517L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -737,7 +737,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -2228011371027617572L;
+    private const long _cacheIndex_Denominator = -2228011371027617572L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -750,7 +750,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Has_Pregnancy_Test_Exclusion(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Pregnancy_Test_Exclusion, Has_Pregnancy_Test_Exclusion_Compute);
 
-    private static readonly long _cacheIndex_Has_Pregnancy_Test_Exclusion = -1820798381545666754L;
+    private const long _cacheIndex_Has_Pregnancy_Test_Exclusion = -1820798381545666754L;
 
     private bool? Has_Pregnancy_Test_Exclusion_Compute(CqlContext context)
     {
@@ -892,7 +892,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 3697874071608603199L;
+    private const long _cacheIndex_Denominator_Exclusions = 3697874071608603199L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -928,7 +928,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 7679949648353288652L;
+    private const long _cacheIndex_Numerator = 7679949648353288652L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -1007,7 +1007,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Stratification_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_1, Stratification_1_Compute);
 
-    private static readonly long _cacheIndex_Stratification_1 = -5101421012347047082L;
+    private const long _cacheIndex_Stratification_1 = -5101421012347047082L;
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
@@ -1029,7 +1029,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
     public bool? Stratification_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stratification_2, Stratification_2_Compute);
 
-    private static readonly long _cacheIndex_Stratification_2 = 3239130432549093830L;
+    private const long _cacheIndex_Stratification_2 = 3239130432549093830L;
 
     private bool? Stratification_2_Compute(CqlContext context)
     {

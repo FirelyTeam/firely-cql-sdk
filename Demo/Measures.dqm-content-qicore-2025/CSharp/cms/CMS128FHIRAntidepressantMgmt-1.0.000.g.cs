@@ -74,7 +74,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -3336974086985530416L;
+    private const long _cacheIndex_Measurement_Period = -3336974086985530416L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -94,7 +94,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -2851133471298809693L;
+    private const long _cacheIndex_Patient = -2851133471298809693L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -108,7 +108,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_May_1_of_the_Year_Prior_to_the_Measurement_Period, May_1_of_the_Year_Prior_to_the_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_May_1_of_the_Year_Prior_to_the_Measurement_Period = 2260567419969860535L;
+    private const long _cacheIndex_May_1_of_the_Year_Prior_to_the_Measurement_Period = 2260567419969860535L;
 
     private CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -126,7 +126,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public CqlDateTime April_30_of_the_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_April_30_of_the_Measurement_Period, April_30_of_the_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_April_30_of_the_Measurement_Period = 274231522783341163L;
+    private const long _cacheIndex_April_30_of_the_Measurement_Period = 274231522783341163L;
 
     private CqlDateTime April_30_of_the_Measurement_Period_Compute(CqlContext context)
     {
@@ -143,7 +143,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public CqlInterval<CqlDateTime> Intake_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Intake_Period, Intake_Period_Compute);
 
-    private static readonly long _cacheIndex_Intake_Period = 5805669011297124889L;
+    private const long _cacheIndex_Intake_Period = 5805669011297124889L;
 
     private CqlInterval<CqlDateTime> Intake_Period_Compute(CqlContext context)
     {
@@ -158,7 +158,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public CqlDate IPSD(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_IPSD, IPSD_Compute);
 
-    private static readonly long _cacheIndex_IPSD = -1010214378857822330L;
+    private const long _cacheIndex_IPSD = -1010214378857822330L;
 
     private CqlDate IPSD_Compute(CqlContext context)
     {
@@ -232,7 +232,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public bool? Has_IPSD_and_Major_Depression_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_IPSD_and_Major_Depression_Diagnosis, Has_IPSD_and_Major_Depression_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_IPSD_and_Major_Depression_Diagnosis = 7846530698326160153L;
+    private const long _cacheIndex_Has_IPSD_and_Major_Depression_Diagnosis = 7846530698326160153L;
 
     private bool? Has_IPSD_and_Major_Depression_Diagnosis_Compute(CqlContext context)
     {
@@ -269,7 +269,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounters, Qualifying_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounters = -5099802547552683180L;
+    private const long _cacheIndex_Qualifying_Encounters = -5099802547552683180L;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Compute(CqlContext context)
     {
@@ -329,7 +329,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -8837015647708587567L;
+    private const long _cacheIndex_Initial_Population = -8837015647708587567L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -355,7 +355,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 2673262951145358635L;
+    private const long _cacheIndex_Denominator = 2673262951145358635L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -368,7 +368,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = -6056780603594220787L;
+    private const long _cacheIndex_Denominator_Exclusions = -6056780603594220787L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -435,7 +435,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD, Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD_Compute);
 
-    private static readonly long _cacheIndex_Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD = -7118600492049709655L;
+    private const long _cacheIndex_Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD = -7118600492049709655L;
 
     private IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD_Compute(CqlContext context)
     {
@@ -490,7 +490,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days, Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days_Compute);
 
-    private static readonly long _cacheIndex_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days = -2653868503490197179L;
+    private const long _cacheIndex_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days = -2653868503490197179L;
 
     private bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days_Compute(CqlContext context)
     {
@@ -505,7 +505,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public bool? Numerator_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
 
-    private static readonly long _cacheIndex_Numerator_1 = 3518313745077296512L;
+    private const long _cacheIndex_Numerator_1 = 3518313745077296512L;
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
@@ -518,7 +518,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD, Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD_Compute);
 
-    private static readonly long _cacheIndex_Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD = 42974837852135066L;
+    private const long _cacheIndex_Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD = 42974837852135066L;
 
     private IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD_Compute(CqlContext context)
     {
@@ -573,7 +573,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days, Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days_Compute);
 
-    private static readonly long _cacheIndex_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days = -1810768940264149742L;
+    private const long _cacheIndex_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days = -1810768940264149742L;
 
     private bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days_Compute(CqlContext context)
     {
@@ -588,7 +588,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public bool? Numerator_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
 
-    private static readonly long _cacheIndex_Numerator_2 = 949383832859615730L;
+    private const long _cacheIndex_Numerator_2 = 949383832859615730L;
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
@@ -601,7 +601,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -3720173879420837916L;
+    private const long _cacheIndex_SDE_Ethnicity = -3720173879420837916L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -614,7 +614,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 4996892276186901500L;
+    private const long _cacheIndex_SDE_Payer = 4996892276186901500L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -627,7 +627,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -6643813119908974830L;
+    private const long _cacheIndex_SDE_Race = -6643813119908974830L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -640,7 +640,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 4969765333250476527L;
+    private const long _cacheIndex_SDE_Sex = 4969765333250476527L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

@@ -313,7 +313,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 3054133947653297271L;
+    private const long _cacheIndex_Measurement_Period = 3054133947653297271L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -333,7 +333,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -5457495244187790411L;
+    private const long _cacheIndex_Patient = -5457495244187790411L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -347,7 +347,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -5576198982135139213L;
+    private const long _cacheIndex_Initial_Population = -5576198982135139213L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -360,7 +360,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -7145789266820812834L;
+    private const long _cacheIndex_SDE_Ethnicity = -7145789266820812834L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -373,7 +373,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -7165095462465786372L;
+    private const long _cacheIndex_SDE_Payer = -7165095462465786372L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -386,7 +386,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 3939123815481697149L;
+    private const long _cacheIndex_SDE_Race = 3939123815481697149L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -399,7 +399,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -8324784854847133132L;
+    private const long _cacheIndex_SDE_Sex = -8324784854847133132L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -412,7 +412,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks, Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks = -3825030991784224793L;
+    private const long _cacheIndex_Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks = -3825030991784224793L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Calculated_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Compute(CqlContext context)
     {
@@ -433,7 +433,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks, Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks = -3284729660759741894L;
+    private const long _cacheIndex_Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks = -3284729660759741894L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Estimated_Gestational_Age_Assessment_Greater_Than_Or_Equal_To_20_Weeks_Compute(CqlContext context)
     {
@@ -457,7 +457,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding, Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding = 7658504009465578179L;
+    private const long _cacheIndex_Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding = 7658504009465578179L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Gestational_Age_Greater_Than_Or_Equal_To_20_Weeks_Based_On_Coding_Compute(CqlContext context)
     {
@@ -510,7 +510,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation, Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation = 3347643640353888106L;
+    private const long _cacheIndex_Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation = 3347643640353888106L;
 
     private IEnumerable<Encounter> Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation_Compute(CqlContext context)
     {
@@ -527,7 +527,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion, Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion = 8753301857394103144L;
+    private const long _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion = 8753301857394103144L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Diagnosis_Or_Procedure_Excluding_Blood_Transfusion_Compute(CqlContext context)
     {
@@ -632,7 +632,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Expiration(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Expiration, Delivery_Encounters_With_Expiration_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Expiration = -2794498871676819460L;
+    private const long _cacheIndex_Delivery_Encounters_With_Expiration = -2794498871676819460L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Expiration_Compute(CqlContext context)
     {
@@ -656,7 +656,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Blood_Transfusion(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Blood_Transfusion, Delivery_Encounters_With_Blood_Transfusion_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Blood_Transfusion = -4889528417638675949L;
+    private const long _cacheIndex_Delivery_Encounters_With_Blood_Transfusion = -4889528417638675949L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Blood_Transfusion_Compute(CqlContext context)
     {
@@ -758,7 +758,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications, Delivery_Encounters_With_Severe_Obstetric_Complications_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications = -4447466805798696921L;
+    private const long _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications = -4447466805798696921L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Compute(CqlContext context)
     {
@@ -775,7 +775,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Hysterectomy(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Hysterectomy, Delivery_Encounters_With_Hysterectomy_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Hysterectomy = 275066854734087907L;
+    private const long _cacheIndex_Delivery_Encounters_With_Hysterectomy = 275066854734087907L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Hysterectomy_Compute(CqlContext context)
     {
@@ -877,7 +877,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Procedure> Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures, Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute);
 
-    private static readonly long _cacheIndex_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures = 6534466364735929020L;
+    private const long _cacheIndex_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures = 6534466364735929020L;
 
     private IEnumerable<Procedure> Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute(CqlContext context)
     {
@@ -897,7 +897,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures, Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures = 1425442155955483845L;
+    private const long _cacheIndex_Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures = 1425442155955483845L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Cardiac_Conversion__Tracheostomy_Or_Ventilation_Procedures_Compute(CqlContext context)
     {
@@ -998,7 +998,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC, SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute);
 
-    private static readonly long _cacheIndex_SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC = -8875041619738305098L;
+    private const long _cacheIndex_SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC = -8875041619738305098L;
 
     private IEnumerable<Encounter> SOC_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute(CqlContext context)
     {
@@ -1067,7 +1067,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis, SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis = 3618491577793208763L;
+    private const long _cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis = 3618491577793208763L;
 
     private IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis_Compute(CqlContext context)
     {
@@ -1091,7 +1091,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures, SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures_Compute);
 
-    private static readonly long _cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures = 3788569516996412836L;
+    private const long _cacheIndex_SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures = 3788569516996412836L;
 
     private IEnumerable<Encounter> SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures_Compute(CqlContext context)
     {
@@ -1426,7 +1426,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?> SDE_SOC_Diagnoses_Detail(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_SOC_Diagnoses_Detail, SDE_SOC_Diagnoses_Detail_Compute);
 
-    private static readonly long _cacheIndex_SDE_SOC_Diagnoses_Detail = 4046600195098257904L;
+    private const long _cacheIndex_SDE_SOC_Diagnoses_Detail = 4046600195098257904L;
 
     private IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?> SDE_SOC_Diagnoses_Detail_Compute(CqlContext context)
     {
@@ -1651,7 +1651,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?> SDE_SOC_Procedure_Detail(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_SOC_Procedure_Detail, SDE_SOC_Procedure_Detail_Compute);
 
-    private static readonly long _cacheIndex_SDE_SOC_Procedure_Detail = 8235823818015250910L;
+    private const long _cacheIndex_SDE_SOC_Procedure_Detail = 8235823818015250910L;
 
     private IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?> SDE_SOC_Procedure_Detail_Compute(CqlContext context)
     {
@@ -1692,7 +1692,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Numerator_Exclusions_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_Exclusions_1, Numerator_Exclusions_1_Compute);
 
-    private static readonly long _cacheIndex_Numerator_Exclusions_1 = 4610162010644944656L;
+    private const long _cacheIndex_Numerator_Exclusions_1 = 4610162010644944656L;
 
     private IEnumerable<Encounter> Numerator_Exclusions_1_Compute(CqlContext context)
     {
@@ -1705,7 +1705,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions, Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions = -1362199374808908541L;
+    private const long _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions = -1362199374808908541L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Compute(CqlContext context)
     {
@@ -1720,7 +1720,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Numerator_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
 
-    private static readonly long _cacheIndex_Numerator_1 = 2154861158412903177L;
+    private const long _cacheIndex_Numerator_1 = 2154861158412903177L;
 
     private IEnumerable<Encounter> Numerator_1_Compute(CqlContext context)
     {
@@ -1733,7 +1733,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> SDE_Variable_Calculated_Gestational_Age(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Variable_Calculated_Gestational_Age, SDE_Variable_Calculated_Gestational_Age_Compute);
 
-    private static readonly long _cacheIndex_SDE_Variable_Calculated_Gestational_Age = 5206916030657376427L;
+    private const long _cacheIndex_SDE_Variable_Calculated_Gestational_Age = 5206916030657376427L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> SDE_Variable_Calculated_Gestational_Age_Compute(CqlContext context)
     {
@@ -1746,7 +1746,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 3545937530845238352L;
+    private const long _cacheIndex_Denominator = 3545937530845238352L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -1759,7 +1759,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only, Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only_Compute);
 
-    private static readonly long _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only = -6698400742453710905L;
+    private const long _cacheIndex_Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only = -6698400742453710905L;
 
     private IEnumerable<Encounter> Delivery_Encounters_With_Severe_Obstetric_Complications_Excluding_Blood_Transfusions_Only_Compute(CqlContext context)
     {
@@ -1774,7 +1774,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Numerator_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
 
-    private static readonly long _cacheIndex_Numerator_2 = -5124973891290010877L;
+    private const long _cacheIndex_Numerator_2 = -5124973891290010877L;
 
     private IEnumerable<Encounter> Numerator_2_Compute(CqlContext context)
     {
@@ -1787,7 +1787,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC, SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute);
 
-    private static readonly long _cacheIndex_SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC = 297141924601029635L;
+    private const long _cacheIndex_SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC = 297141924601029635L;
 
     private IEnumerable<Encounter> SOC_Excluding_Blood_Transfusions_Only_With_Hysterectomy_Or_Blood_Transfusion_With_Placenta_Increta_Or_Placenta_Percreta_Without_Additional_SOC_Compute(CqlContext context)
     {
@@ -1856,7 +1856,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Numerator_Exclusions_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_Exclusions_2, Numerator_Exclusions_2_Compute);
 
-    private static readonly long _cacheIndex_Numerator_Exclusions_2 = 572767974419411069L;
+    private const long _cacheIndex_Numerator_Exclusions_2 = 572767974419411069L;
 
     private IEnumerable<Encounter> Numerator_Exclusions_2_Compute(CqlContext context)
     {
@@ -1869,7 +1869,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Anemia(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Anemia, Risk_Variable_Anemia_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Anemia = -2083763165921546841L;
+    private const long _cacheIndex_Risk_Variable_Anemia = -2083763165921546841L;
 
     private IEnumerable<Encounter> Risk_Variable_Anemia_Compute(CqlContext context)
     {
@@ -1891,7 +1891,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Asthma(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Asthma, Risk_Variable_Asthma_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Asthma = -5379207509324332143L;
+    private const long _cacheIndex_Risk_Variable_Asthma = -5379207509324332143L;
 
     private IEnumerable<Encounter> Risk_Variable_Asthma_Compute(CqlContext context)
     {
@@ -1913,7 +1913,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Autoimmune_Disease(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Autoimmune_Disease, Risk_Variable_Autoimmune_Disease_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Autoimmune_Disease = -5937282448078859714L;
+    private const long _cacheIndex_Risk_Variable_Autoimmune_Disease = -5937282448078859714L;
 
     private IEnumerable<Encounter> Risk_Variable_Autoimmune_Disease_Compute(CqlContext context)
     {
@@ -1935,7 +1935,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Bariatric_Surgery(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Bariatric_Surgery, Risk_Variable_Bariatric_Surgery_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Bariatric_Surgery = -2423664243366207310L;
+    private const long _cacheIndex_Risk_Variable_Bariatric_Surgery = -2423664243366207310L;
 
     private IEnumerable<Encounter> Risk_Variable_Bariatric_Surgery_Compute(CqlContext context)
     {
@@ -1957,7 +1957,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Bleeding_Disorder(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Bleeding_Disorder, Risk_Variable_Bleeding_Disorder_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Bleeding_Disorder = -8509688049165530264L;
+    private const long _cacheIndex_Risk_Variable_Bleeding_Disorder = -8509688049165530264L;
 
     private IEnumerable<Encounter> Risk_Variable_Bleeding_Disorder_Compute(CqlContext context)
     {
@@ -1979,7 +1979,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Cardiac_Disease(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Cardiac_Disease, Risk_Variable_Cardiac_Disease_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Cardiac_Disease = -8095896995695945254L;
+    private const long _cacheIndex_Risk_Variable_Cardiac_Disease = -8095896995695945254L;
 
     private IEnumerable<Encounter> Risk_Variable_Cardiac_Disease_Compute(CqlContext context)
     {
@@ -2001,7 +2001,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Economic_Housing_Instability(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Economic_Housing_Instability, Risk_Variable_Economic_Housing_Instability_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Economic_Housing_Instability = -6636764886588028803L;
+    private const long _cacheIndex_Risk_Variable_Economic_Housing_Instability = -6636764886588028803L;
 
     private IEnumerable<Encounter> Risk_Variable_Economic_Housing_Instability_Compute(CqlContext context)
     {
@@ -2023,7 +2023,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Gastrointestinal_Disease(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Gastrointestinal_Disease, Risk_Variable_Gastrointestinal_Disease_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Gastrointestinal_Disease = -3103034770768645482L;
+    private const long _cacheIndex_Risk_Variable_Gastrointestinal_Disease = -3103034770768645482L;
 
     private IEnumerable<Encounter> Risk_Variable_Gastrointestinal_Disease_Compute(CqlContext context)
     {
@@ -2045,7 +2045,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Gestational_Diabetes(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Gestational_Diabetes, Risk_Variable_Gestational_Diabetes_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Gestational_Diabetes = 206032062126845318L;
+    private const long _cacheIndex_Risk_Variable_Gestational_Diabetes = 206032062126845318L;
 
     private IEnumerable<Encounter> Risk_Variable_Gestational_Diabetes_Compute(CqlContext context)
     {
@@ -2067,7 +2067,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_HIV(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_HIV, Risk_Variable_HIV_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_HIV = -4069930958637116991L;
+    private const long _cacheIndex_Risk_Variable_HIV = -4069930958637116991L;
 
     private IEnumerable<Encounter> Risk_Variable_HIV_Compute(CqlContext context)
     {
@@ -2089,7 +2089,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Hypertension(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Hypertension, Risk_Variable_Hypertension_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Hypertension = 5731977825712945515L;
+    private const long _cacheIndex_Risk_Variable_Hypertension = 5731977825712945515L;
 
     private IEnumerable<Encounter> Risk_Variable_Hypertension_Compute(CqlContext context)
     {
@@ -2111,7 +2111,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Long_Term_Anticoagulant_Use(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Long_Term_Anticoagulant_Use, Risk_Variable_Long_Term_Anticoagulant_Use_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Long_Term_Anticoagulant_Use = -954649318659483405L;
+    private const long _cacheIndex_Risk_Variable_Long_Term_Anticoagulant_Use = -954649318659483405L;
 
     private IEnumerable<Encounter> Risk_Variable_Long_Term_Anticoagulant_Use_Compute(CqlContext context)
     {
@@ -2133,7 +2133,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<IEnumerable<object>> Risk_Variable_Maternal_Age(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Maternal_Age, Risk_Variable_Maternal_Age_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Maternal_Age = -8312435409408998474L;
+    private const long _cacheIndex_Risk_Variable_Maternal_Age = -8312435409408998474L;
 
     private IEnumerable<IEnumerable<object>> Risk_Variable_Maternal_Age_Compute(CqlContext context)
     {
@@ -2166,7 +2166,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Mental_Health_Disorder(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Mental_Health_Disorder, Risk_Variable_Mental_Health_Disorder_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Mental_Health_Disorder = 1367857587353400870L;
+    private const long _cacheIndex_Risk_Variable_Mental_Health_Disorder = 1367857587353400870L;
 
     private IEnumerable<Encounter> Risk_Variable_Mental_Health_Disorder_Compute(CqlContext context)
     {
@@ -2188,7 +2188,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Morbid_Obesity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Morbid_Obesity, Risk_Variable_Morbid_Obesity_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Morbid_Obesity = 5806686215926746319L;
+    private const long _cacheIndex_Risk_Variable_Morbid_Obesity = 5806686215926746319L;
 
     private IEnumerable<Encounter> Risk_Variable_Morbid_Obesity_Compute(CqlContext context)
     {
@@ -2210,7 +2210,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Multiple_Pregnancy(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Multiple_Pregnancy, Risk_Variable_Multiple_Pregnancy_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Multiple_Pregnancy = -4567379069071164473L;
+    private const long _cacheIndex_Risk_Variable_Multiple_Pregnancy = -4567379069071164473L;
 
     private IEnumerable<Encounter> Risk_Variable_Multiple_Pregnancy_Compute(CqlContext context)
     {
@@ -2232,7 +2232,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Neuromuscular_Disease(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Neuromuscular_Disease, Risk_Variable_Neuromuscular_Disease_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Neuromuscular_Disease = 5155414161172668380L;
+    private const long _cacheIndex_Risk_Variable_Neuromuscular_Disease = 5155414161172668380L;
 
     private IEnumerable<Encounter> Risk_Variable_Neuromuscular_Disease_Compute(CqlContext context)
     {
@@ -2254,7 +2254,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Obstetrical_VTE(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Obstetrical_VTE, Risk_Variable_Obstetrical_VTE_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Obstetrical_VTE = 8002780570606629712L;
+    private const long _cacheIndex_Risk_Variable_Obstetrical_VTE = 8002780570606629712L;
 
     private IEnumerable<Encounter> Risk_Variable_Obstetrical_VTE_Compute(CqlContext context)
     {
@@ -2276,7 +2276,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Other_Preeclampsia(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Other_Preeclampsia, Risk_Variable_Other_Preeclampsia_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Other_Preeclampsia = 400760625912716477L;
+    private const long _cacheIndex_Risk_Variable_Other_Preeclampsia = 400760625912716477L;
 
     private IEnumerable<Encounter> Risk_Variable_Other_Preeclampsia_Compute(CqlContext context)
     {
@@ -2298,7 +2298,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Placenta_Previa(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Placenta_Previa, Risk_Variable_Placenta_Previa_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Placenta_Previa = -5422546948143661752L;
+    private const long _cacheIndex_Risk_Variable_Placenta_Previa = -5422546948143661752L;
 
     private IEnumerable<Encounter> Risk_Variable_Placenta_Previa_Compute(CqlContext context)
     {
@@ -2320,7 +2320,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Placental_Abruption(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Placental_Abruption, Risk_Variable_Placental_Abruption_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Placental_Abruption = -2361396028848159868L;
+    private const long _cacheIndex_Risk_Variable_Placental_Abruption = -2361396028848159868L;
 
     private IEnumerable<Encounter> Risk_Variable_Placental_Abruption_Compute(CqlContext context)
     {
@@ -2342,7 +2342,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Placental_Accreta_Spectrum(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Placental_Accreta_Spectrum, Risk_Variable_Placental_Accreta_Spectrum_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Placental_Accreta_Spectrum = -8609058513657276022L;
+    private const long _cacheIndex_Risk_Variable_Placental_Accreta_Spectrum = -8609058513657276022L;
 
     private IEnumerable<Encounter> Risk_Variable_Placental_Accreta_Spectrum_Compute(CqlContext context)
     {
@@ -2367,7 +2367,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Preexisting_Diabetes(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Preexisting_Diabetes, Risk_Variable_Preexisting_Diabetes_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Preexisting_Diabetes = 2480635706309875362L;
+    private const long _cacheIndex_Risk_Variable_Preexisting_Diabetes = 2480635706309875362L;
 
     private IEnumerable<Encounter> Risk_Variable_Preexisting_Diabetes_Compute(CqlContext context)
     {
@@ -2389,7 +2389,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Previous_Cesarean(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Previous_Cesarean, Risk_Variable_Previous_Cesarean_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Previous_Cesarean = -1169825321704637143L;
+    private const long _cacheIndex_Risk_Variable_Previous_Cesarean = -1169825321704637143L;
 
     private IEnumerable<Encounter> Risk_Variable_Previous_Cesarean_Compute(CqlContext context)
     {
@@ -2411,7 +2411,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Pulmonary_Hypertension(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Pulmonary_Hypertension, Risk_Variable_Pulmonary_Hypertension_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Pulmonary_Hypertension = -3317765136302774959L;
+    private const long _cacheIndex_Risk_Variable_Pulmonary_Hypertension = -3317765136302774959L;
 
     private IEnumerable<Encounter> Risk_Variable_Pulmonary_Hypertension_Compute(CqlContext context)
     {
@@ -2433,7 +2433,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Renal_Disease(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Renal_Disease, Risk_Variable_Renal_Disease_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Renal_Disease = -4691150063242294087L;
+    private const long _cacheIndex_Risk_Variable_Renal_Disease = -4691150063242294087L;
 
     private IEnumerable<Encounter> Risk_Variable_Renal_Disease_Compute(CqlContext context)
     {
@@ -2455,7 +2455,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Severe_Preeclampsia(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Severe_Preeclampsia, Risk_Variable_Severe_Preeclampsia_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Severe_Preeclampsia = -2818804355851963914L;
+    private const long _cacheIndex_Risk_Variable_Severe_Preeclampsia = -2818804355851963914L;
 
     private IEnumerable<Encounter> Risk_Variable_Severe_Preeclampsia_Compute(CqlContext context)
     {
@@ -2477,7 +2477,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Substance_Abuse(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Substance_Abuse, Risk_Variable_Substance_Abuse_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Substance_Abuse = 8129261552102530514L;
+    private const long _cacheIndex_Risk_Variable_Substance_Abuse = 8129261552102530514L;
 
     private IEnumerable<Encounter> Risk_Variable_Substance_Abuse_Compute(CqlContext context)
     {
@@ -2499,7 +2499,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Thyrotoxicosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Thyrotoxicosis, Risk_Variable_Thyrotoxicosis_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Thyrotoxicosis = 6827710231932231924L;
+    private const long _cacheIndex_Risk_Variable_Thyrotoxicosis = 6827710231932231924L;
 
     private IEnumerable<Encounter> Risk_Variable_Thyrotoxicosis_Compute(CqlContext context)
     {
@@ -2521,7 +2521,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<Encounter> Risk_Variable_Preterm_Birth(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Preterm_Birth, Risk_Variable_Preterm_Birth_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Preterm_Birth = 2797503933073693423L;
+    private const long _cacheIndex_Risk_Variable_Preterm_Birth = 2797503933073693423L;
 
     private IEnumerable<Encounter> Risk_Variable_Preterm_Birth_Compute(CqlContext context)
     {
@@ -2575,7 +2575,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Risk_Variable_First_Hematocrit_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test, Risk_Variable_First_Hematocrit_Lab_Test_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test = -6532381667130087125L;
+    private const long _cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test = -6532381667130087125L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Risk_Variable_First_Hematocrit_Lab_Test_Compute(CqlContext context)
     {
@@ -2688,7 +2688,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test, Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test = 3288506537083407272L;
+    private const long _cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test = 3288506537083407272L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?> Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Compute(CqlContext context)
     {
@@ -2801,7 +2801,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?> Risk_Variable_Heart_Rate(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Heart_Rate, Risk_Variable_Heart_Rate_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Heart_Rate = -7231162851022711395L;
+    private const long _cacheIndex_Risk_Variable_Heart_Rate = -7231162851022711395L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?> Risk_Variable_Heart_Rate_Compute(CqlContext context)
     {
@@ -2902,7 +2902,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?> Risk_Variable_Systolic_Blood_Pressure(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Systolic_Blood_Pressure, Risk_Variable_Systolic_Blood_Pressure_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Systolic_Blood_Pressure = 4446916058428857482L;
+    private const long _cacheIndex_Risk_Variable_Systolic_Blood_Pressure = 4446916058428857482L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?> Risk_Variable_Systolic_Blood_Pressure_Compute(CqlContext context)
     {

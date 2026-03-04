@@ -55,7 +55,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -7496935743061075012L;
+    private const long _cacheIndex_Measurement_Period = -7496935743061075012L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -75,7 +75,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -4767839273629787073L;
+    private const long _cacheIndex_Patient = -4767839273629787073L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -89,7 +89,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounter, Qualifying_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounter = -7346840467972461308L;
+    private const long _cacheIndex_Qualifying_Encounter = -7346840467972461308L;
 
     private IEnumerable<Encounter> Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -129,7 +129,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<MedicationAdministration> Opioid_Administration(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Opioid_Administration, Opioid_Administration_Compute);
 
-    private static readonly long _cacheIndex_Opioid_Administration = 8985121007387053906L;
+    private const long _cacheIndex_Opioid_Administration = 8985121007387053906L;
 
     private IEnumerable<MedicationAdministration> Opioid_Administration_Compute(CqlContext context)
     {
@@ -180,7 +180,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Encounter_With_Opioid_Administration_Outside_Of_Operating_Room(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Opioid_Administration_Outside_Of_Operating_Room, Encounter_With_Opioid_Administration_Outside_Of_Operating_Room_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Opioid_Administration_Outside_Of_Operating_Room = -2842666379935109002L;
+    private const long _cacheIndex_Encounter_With_Opioid_Administration_Outside_Of_Operating_Room = -2842666379935109002L;
 
     private IEnumerable<Encounter> Encounter_With_Opioid_Administration_Outside_Of_Operating_Room_Compute(CqlContext context)
     {
@@ -244,7 +244,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -4560790684055662395L;
+    private const long _cacheIndex_Initial_Population = -4560790684055662395L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -257,7 +257,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -5947658479433857118L;
+    private const long _cacheIndex_Denominator = -5947658479433857118L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -270,7 +270,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<MedicationAdministration> Non_Enteral_Opioid_Antagonist_Administration(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Non_Enteral_Opioid_Antagonist_Administration, Non_Enteral_Opioid_Antagonist_Administration_Compute);
 
-    private static readonly long _cacheIndex_Non_Enteral_Opioid_Antagonist_Administration = -4076388615638109566L;
+    private const long _cacheIndex_Non_Enteral_Opioid_Antagonist_Administration = -4076388615638109566L;
 
     private IEnumerable<MedicationAdministration> Non_Enteral_Opioid_Antagonist_Administration_Compute(CqlContext context)
     {
@@ -324,7 +324,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration, Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration = -8872899499043941012L;
+    private const long _cacheIndex_Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration = -8872899499043941012L;
 
     private IEnumerable<Encounter> Encounter_With_NonOperating_Room_Opioid_And_Antagonist_Administration_Compute(CqlContext context)
     {
@@ -423,7 +423,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -446362921718484696L;
+    private const long _cacheIndex_Numerator = -446362921718484696L;
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -436,7 +436,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -8298349004878973388L;
+    private const long _cacheIndex_SDE_Ethnicity = -8298349004878973388L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -449,7 +449,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -1509794374290297893L;
+    private const long _cacheIndex_SDE_Payer = -1509794374290297893L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -462,7 +462,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 2611777138581899658L;
+    private const long _cacheIndex_SDE_Race = 2611777138581899658L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -475,7 +475,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -4798689236628573622L;
+    private const long _cacheIndex_SDE_Sex = -4798689236628573622L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

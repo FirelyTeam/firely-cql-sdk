@@ -276,7 +276,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -1753348495276809643L;
+    private const long _cacheIndex_Measurement_Period = -1753348495276809643L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -296,7 +296,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -14077989710860312L;
+    private const long _cacheIndex_Patient = -14077989710860312L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -310,7 +310,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Cataract_Surgery_Between_January_and_September_of_Measurement_Period, Cataract_Surgery_Between_January_and_September_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Cataract_Surgery_Between_January_and_September_of_Measurement_Period = -471982616688789783L;
+    private const long _cacheIndex_Cataract_Surgery_Between_January_and_September_of_Measurement_Period = -471982616688789783L;
 
     private IEnumerable<Procedure> Cataract_Surgery_Between_January_and_September_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -473,7 +473,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public IEnumerable<Procedure> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 156850899568859544L;
+    private const long _cacheIndex_Initial_Population = 156850899568859544L;
 
     private IEnumerable<Procedure> Initial_Population_Compute(CqlContext context)
     {
@@ -501,7 +501,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public IEnumerable<Procedure> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -7754270258949913857L;
+    private const long _cacheIndex_Denominator = -7754270258949913857L;
 
     private IEnumerable<Procedure> Denominator_Compute(CqlContext context)
     {
@@ -545,7 +545,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public IEnumerable<Procedure> Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery, Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery_Compute);
 
-    private static readonly long _cacheIndex_Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery = 6166762621108457820L;
+    private const long _cacheIndex_Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery = 6166762621108457820L;
 
     private IEnumerable<Procedure> Cataract_Surgeries_in_Patients_with_Significant_Ocular_Conditions_Impacting_the_Visual_Outcome_of_Surgery_Compute(CqlContext context)
     {
@@ -915,7 +915,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public IEnumerable<Procedure> Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = -3599080278286777202L;
+    private const long _cacheIndex_Denominator_Exclusions = -3599080278286777202L;
 
     private IEnumerable<Procedure> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -928,7 +928,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public IEnumerable<Procedure> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 8787873102356196514L;
+    private const long _cacheIndex_Numerator = 8787873102356196514L;
 
     private IEnumerable<Procedure> Numerator_Compute(CqlContext context)
     {
@@ -1184,7 +1184,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 410851233763199253L;
+    private const long _cacheIndex_SDE_Ethnicity = 410851233763199253L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1197,7 +1197,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 8606949024631205076L;
+    private const long _cacheIndex_SDE_Payer = 8606949024631205076L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1210,7 +1210,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -2789265792709226923L;
+    private const long _cacheIndex_SDE_Race = -2789265792709226923L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1223,7 +1223,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -5892648424074902819L;
+    private const long _cacheIndex_SDE_Sex = -5892648424074902819L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

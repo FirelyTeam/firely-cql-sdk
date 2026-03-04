@@ -96,7 +96,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 8194214586127820629L;
+    private const long _cacheIndex_Measurement_Period = 8194214586127820629L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -116,7 +116,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -7320496347043068873L;
+    private const long _cacheIndex_Patient = -7320496347043068873L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -130,7 +130,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<Encounter> Inpatient_Encounters(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Encounters, Inpatient_Encounters_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Encounters = -8287851696712078710L;
+    private const long _cacheIndex_Inpatient_Encounters = -8287851696712078710L;
 
     private IEnumerable<Encounter> Inpatient_Encounters_Compute(CqlContext context)
     {
@@ -188,7 +188,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -3847774137403444691L;
+    private const long _cacheIndex_Initial_Population = -3847774137403444691L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -201,7 +201,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Body_Temperature(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Body_Temperature, SDE_Encounter_With_First_Body_Temperature_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_First_Body_Temperature = -7526006116561995512L;
+    private const long _cacheIndex_SDE_Encounter_With_First_Body_Temperature = -7526006116561995512L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Body_Temperature_Compute(CqlContext context)
     {
@@ -300,7 +300,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Heart_Rate(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Heart_Rate, SDE_Encounter_With_First_Heart_Rate_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_First_Heart_Rate = 139345589104903829L;
+    private const long _cacheIndex_SDE_Encounter_With_First_Heart_Rate = 139345589104903829L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Heart_Rate_Compute(CqlContext context)
     {
@@ -399,7 +399,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Oxygen_Saturation(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Oxygen_Saturation, SDE_Encounter_With_First_Oxygen_Saturation_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_First_Oxygen_Saturation = -8371025803682788439L;
+    private const long _cacheIndex_SDE_Encounter_With_First_Oxygen_Saturation = -8371025803682788439L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Oxygen_Saturation_Compute(CqlContext context)
     {
@@ -500,7 +500,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Systolic_Blood_Pressure(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Systolic_Blood_Pressure, SDE_Encounter_With_First_Systolic_Blood_Pressure_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_First_Systolic_Blood_Pressure = -3207799827161922512L;
+    private const long _cacheIndex_SDE_Encounter_With_First_Systolic_Blood_Pressure = -3207799827161922512L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Systolic_Blood_Pressure_Compute(CqlContext context)
     {
@@ -650,7 +650,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Bicarbonate_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Bicarbonate_Lab_Test, SDE_Encounter_With_First_Bicarbonate_Lab_Test_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_First_Bicarbonate_Lab_Test = -5916718293760283523L;
+    private const long _cacheIndex_SDE_Encounter_With_First_Bicarbonate_Lab_Test = -5916718293760283523L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Bicarbonate_Lab_Test_Compute(CqlContext context)
     {
@@ -849,7 +849,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Creatinine_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Creatinine_Lab_Test, SDE_Encounter_With_First_Creatinine_Lab_Test_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_First_Creatinine_Lab_Test = -5779842121506852161L;
+    private const long _cacheIndex_SDE_Encounter_With_First_Creatinine_Lab_Test = -5779842121506852161L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Creatinine_Lab_Test_Compute(CqlContext context)
     {
@@ -1048,7 +1048,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Hematocrit_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Hematocrit_Lab_Test, SDE_Encounter_With_First_Hematocrit_Lab_Test_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_First_Hematocrit_Lab_Test = -6738782626327138842L;
+    private const long _cacheIndex_SDE_Encounter_With_First_Hematocrit_Lab_Test = -6738782626327138842L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Hematocrit_Lab_Test_Compute(CqlContext context)
     {
@@ -1247,7 +1247,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Platelet_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Platelet_Lab_Test, SDE_Encounter_With_First_Platelet_Lab_Test_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_First_Platelet_Lab_Test = -354840183162715779L;
+    private const long _cacheIndex_SDE_Encounter_With_First_Platelet_Lab_Test = -354840183162715779L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Platelet_Lab_Test_Compute(CqlContext context)
     {
@@ -1446,7 +1446,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Sodium_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Sodium_Lab_Test, SDE_Encounter_With_First_Sodium_Lab_Test_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_First_Sodium_Lab_Test = 1704795996816869661L;
+    private const long _cacheIndex_SDE_Encounter_With_First_Sodium_Lab_Test = 1704795996816869661L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)?> SDE_Encounter_With_First_Sodium_Lab_Test_Compute(CqlContext context)
     {
@@ -1645,7 +1645,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)?> SDE_Encounter_With_First_White_Blood_Cells_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_White_Blood_Cells_Lab_Test, SDE_Encounter_With_First_White_Blood_Cells_Lab_Test_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_First_White_Blood_Cells_Lab_Test = -5465861473556378136L;
+    private const long _cacheIndex_SDE_Encounter_With_First_White_Blood_Cells_Lab_Test = -5465861473556378136L;
 
     private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)?> SDE_Encounter_With_First_White_Blood_Cells_Lab_Test_Compute(CqlContext context)
     {
@@ -1844,7 +1844,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<Encounter> SDE_Encounter_With_Oxygen_60_Minutes_Or_Less_Prior_To_ED_Admission_Or_During_ED(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_Oxygen_60_Minutes_Or_Less_Prior_To_ED_Admission_Or_During_ED, SDE_Encounter_With_Oxygen_60_Minutes_Or_Less_Prior_To_ED_Admission_Or_During_ED_Compute);
 
-    private static readonly long _cacheIndex_SDE_Encounter_With_Oxygen_60_Minutes_Or_Less_Prior_To_ED_Admission_Or_During_ED = 3300392010812223033L;
+    private const long _cacheIndex_SDE_Encounter_With_Oxygen_60_Minutes_Or_Less_Prior_To_ED_Admission_Or_During_ED = 3300392010812223033L;
 
     private IEnumerable<Encounter> SDE_Encounter_With_Oxygen_60_Minutes_Or_Less_Prior_To_ED_Admission_Or_During_ED_Compute(CqlContext context)
     {
@@ -2175,7 +2175,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -1728215249426117575L;
+    private const long _cacheIndex_SDE_Ethnicity = -1728215249426117575L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -2188,7 +2188,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 5599464314516997004L;
+    private const long _cacheIndex_SDE_Payer = 5599464314516997004L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -2201,7 +2201,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 6826702992571169488L;
+    private const long _cacheIndex_SDE_Race = 6826702992571169488L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -2214,7 +2214,7 @@ public partial class CMSFHIR844HybridHospitalWideMortality_0_5_001 : ILibrary, I
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 6983970667873048157L;
+    private const long _cacheIndex_SDE_Sex = 6983970667873048157L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

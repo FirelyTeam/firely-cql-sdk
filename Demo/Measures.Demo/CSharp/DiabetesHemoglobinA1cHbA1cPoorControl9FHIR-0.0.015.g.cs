@@ -92,7 +92,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -4520572191774736726L;
+    private const long _cacheIndex_Measurement_Period = -4520572191774736726L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -109,7 +109,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -96714460827714486L;
+    private const long _cacheIndex_Patient = -96714460827714486L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -123,7 +123,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -3210909341707875286L;
+    private const long _cacheIndex_SDE_Ethnicity = -3210909341707875286L;
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -136,7 +136,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 6472043097227869305L;
+    private const long _cacheIndex_SDE_Payer = 6472043097227869305L;
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -149,7 +149,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 1081731389205157072L;
+    private const long _cacheIndex_SDE_Race = 1081731389205157072L;
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -162,7 +162,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 24160423480485928L;
+    private const long _cacheIndex_SDE_Sex = 24160423480485928L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -175,7 +175,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public IEnumerable<Encounter> Telehealth_Services(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Telehealth_Services, Telehealth_Services_Compute);
 
-    private static readonly long _cacheIndex_Telehealth_Services = -7812937394997141013L;
+    private const long _cacheIndex_Telehealth_Services = -7812937394997141013L;
 
     private IEnumerable<Encounter> Telehealth_Services_Compute(CqlContext context)
     {
@@ -203,7 +203,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 4777067260090291340L;
+    private const long _cacheIndex_Initial_Population = 4777067260090291340L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -243,7 +243,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 5966859978094494253L;
+    private const long _cacheIndex_Denominator = 5966859978094494253L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -256,7 +256,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public Observation Most_Recent_HbA1c(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Most_Recent_HbA1c, Most_Recent_HbA1c_Compute);
 
-    private static readonly long _cacheIndex_Most_Recent_HbA1c = -4567984027037238177L;
+    private const long _cacheIndex_Most_Recent_HbA1c = -4567984027037238177L;
 
     private Observation Most_Recent_HbA1c_Compute(CqlContext context)
     {
@@ -299,7 +299,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public bool? Has_Most_Recent_HbA1c_Without_Result(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Most_Recent_HbA1c_Without_Result, Has_Most_Recent_HbA1c_Without_Result_Compute);
 
-    private static readonly long _cacheIndex_Has_Most_Recent_HbA1c_Without_Result = -1347253088235380747L;
+    private const long _cacheIndex_Has_Most_Recent_HbA1c_Without_Result = -1347253088235380747L;
 
     private bool? Has_Most_Recent_HbA1c_Without_Result_Compute(CqlContext context)
     {
@@ -315,7 +315,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public bool? Has_Most_Recent_Elevated_HbA1c(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Most_Recent_Elevated_HbA1c, Has_Most_Recent_Elevated_HbA1c_Compute);
 
-    private static readonly long _cacheIndex_Has_Most_Recent_Elevated_HbA1c = 3997567915707425043L;
+    private const long _cacheIndex_Has_Most_Recent_Elevated_HbA1c = 3997567915707425043L;
 
     private bool? Has_Most_Recent_Elevated_HbA1c_Compute(CqlContext context)
     {
@@ -332,7 +332,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public bool? Has_No_Record_Of_HbA1c(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_No_Record_Of_HbA1c, Has_No_Record_Of_HbA1c_Compute);
 
-    private static readonly long _cacheIndex_Has_No_Record_Of_HbA1c = -862787414718942807L;
+    private const long _cacheIndex_Has_No_Record_Of_HbA1c = -862787414718942807L;
 
     private bool? Has_No_Record_Of_HbA1c_Compute(CqlContext context)
     {
@@ -367,7 +367,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 4507231574648418488L;
+    private const long _cacheIndex_Numerator = 4507231574648418488L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -384,7 +384,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = -2165724986521333321L;
+    private const long _cacheIndex_Denominator_Exclusions = -2165724986521333321L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {

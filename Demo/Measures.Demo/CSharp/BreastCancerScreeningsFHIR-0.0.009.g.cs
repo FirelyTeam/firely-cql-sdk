@@ -74,7 +74,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -2207426731370318965L;
+    private const long _cacheIndex_Measurement_Period = -2207426731370318965L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -94,7 +94,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 5570106870785194822L;
+    private const long _cacheIndex_Patient = 5570106870785194822L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -108,7 +108,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 3199891238918059275L;
+    private const long _cacheIndex_SDE_Ethnicity = 3199891238918059275L;
 
     private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -121,7 +121,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 5445575742970110470L;
+    private const long _cacheIndex_SDE_Payer = 5445575742970110470L;
 
     private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -134,7 +134,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -232079090114154694L;
+    private const long _cacheIndex_SDE_Race = -232079090114154694L;
 
     private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
     {
@@ -147,7 +147,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 7084186765858753302L;
+    private const long _cacheIndex_SDE_Sex = 7084186765858753302L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -160,7 +160,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public IEnumerable<Encounter> Telehealth_Services(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Telehealth_Services, Telehealth_Services_Compute);
 
-    private static readonly long _cacheIndex_Telehealth_Services = -7813635683541175529L;
+    private const long _cacheIndex_Telehealth_Services = -7813635683541175529L;
 
     private IEnumerable<Encounter> Telehealth_Services_Compute(CqlContext context)
     {
@@ -191,7 +191,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public int? Age_at_start_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Age_at_start_of_Measurement_Period, Age_at_start_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Age_at_start_of_Measurement_Period = 7644643045620551999L;
+    private const long _cacheIndex_Age_at_start_of_Measurement_Period = 7644643045620551999L;
 
     private int? Age_at_start_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -211,7 +211,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -6792269563159157682L;
+    private const long _cacheIndex_Initial_Population = -6792269563159157682L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -242,7 +242,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 7510229845399598539L;
+    private const long _cacheIndex_Denominator = 7510229845399598539L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -255,7 +255,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public IEnumerable<Condition> Right_Mastectomy_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Right_Mastectomy_Diagnosis, Right_Mastectomy_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Right_Mastectomy_Diagnosis = 2315704434442719000L;
+    private const long _cacheIndex_Right_Mastectomy_Diagnosis = 2315704434442719000L;
 
     private IEnumerable<Condition> Right_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -299,7 +299,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public IEnumerable<Procedure> Right_Mastectomy_Procedure(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Right_Mastectomy_Procedure, Right_Mastectomy_Procedure_Compute);
 
-    private static readonly long _cacheIndex_Right_Mastectomy_Procedure = 6490593119952607665L;
+    private const long _cacheIndex_Right_Mastectomy_Procedure = 6490593119952607665L;
 
     private IEnumerable<Procedure> Right_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -329,7 +329,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public IEnumerable<Condition> Left_Mastectomy_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Left_Mastectomy_Diagnosis, Left_Mastectomy_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Left_Mastectomy_Diagnosis = -5706647408619357406L;
+    private const long _cacheIndex_Left_Mastectomy_Diagnosis = -5706647408619357406L;
 
     private IEnumerable<Condition> Left_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -373,7 +373,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public IEnumerable<Procedure> Left_Mastectomy_Procedure(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Left_Mastectomy_Procedure, Left_Mastectomy_Procedure_Compute);
 
-    private static readonly long _cacheIndex_Left_Mastectomy_Procedure = 7379586125197607600L;
+    private const long _cacheIndex_Left_Mastectomy_Procedure = 7379586125197607600L;
 
     private IEnumerable<Procedure> Left_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -403,7 +403,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Diagnosis, Bilateral_Mastectomy_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Bilateral_Mastectomy_Diagnosis = -2442296618649008220L;
+    private const long _cacheIndex_Bilateral_Mastectomy_Diagnosis = -2442296618649008220L;
 
     private IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
@@ -428,7 +428,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Procedure, Bilateral_Mastectomy_Procedure_Compute);
 
-    private static readonly long _cacheIndex_Bilateral_Mastectomy_Procedure = 4919458562761610194L;
+    private const long _cacheIndex_Bilateral_Mastectomy_Procedure = 4919458562761610194L;
 
     private IEnumerable<Procedure> Bilateral_Mastectomy_Procedure_Compute(CqlContext context)
     {
@@ -458,7 +458,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 9107634671931457698L;
+    private const long _cacheIndex_Denominator_Exclusions = 9107634671931457698L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -505,7 +505,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public bool? Observation_with_status(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Observation_with_status, Observation_with_status_Compute);
 
-    private static readonly long _cacheIndex_Observation_with_status = 1405724507471036994L;
+    private const long _cacheIndex_Observation_with_status = 1405724507471036994L;
 
     private bool? Observation_with_status_Compute(CqlContext context)
     {
@@ -549,7 +549,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public bool? Diagnostic_Report_with_status(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Diagnostic_Report_with_status, Diagnostic_Report_with_status_Compute);
 
-    private static readonly long _cacheIndex_Diagnostic_Report_with_status = 6907193818074381608L;
+    private const long _cacheIndex_Diagnostic_Report_with_status = 6907193818074381608L;
 
     private bool? Diagnostic_Report_with_status_Compute(CqlContext context)
     {
@@ -593,7 +593,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -57300270904157551L;
+    private const long _cacheIndex_Numerator = -57300270904157551L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -608,7 +608,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public bool? Final_Numerator_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Final_Numerator_Population, Final_Numerator_Population_Compute);
 
-    private static readonly long _cacheIndex_Final_Numerator_Population = -3698449656444778429L;
+    private const long _cacheIndex_Final_Numerator_Population = -3698449656444778429L;
 
     private bool? Final_Numerator_Population_Compute(CqlContext context)
     {
@@ -628,7 +628,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public bool? Observation_without_appropriate_status(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Observation_without_appropriate_status, Observation_without_appropriate_status_Compute);
 
-    private static readonly long _cacheIndex_Observation_without_appropriate_status = 6819886229452016587L;
+    private const long _cacheIndex_Observation_without_appropriate_status = 6819886229452016587L;
 
     private bool? Observation_without_appropriate_status_Compute(CqlContext context)
     {
@@ -673,7 +673,7 @@ public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<B
     public bool? Diagnostic_Report_without_appropriate_status(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Diagnostic_Report_without_appropriate_status, Diagnostic_Report_without_appropriate_status_Compute);
 
-    private static readonly long _cacheIndex_Diagnostic_Report_without_appropriate_status = -7830090240520039054L;
+    private const long _cacheIndex_Diagnostic_Report_without_appropriate_status = -7830090240520039054L;
 
     private bool? Diagnostic_Report_without_appropriate_status_Compute(CqlContext context)
     {

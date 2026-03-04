@@ -38,7 +38,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 8773371835216757249L;
+    private const long _cacheIndex_Measurement_Period = 8773371835216757249L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -55,7 +55,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -6064100381930538164L;
+    private const long _cacheIndex_Patient = -6064100381930538164L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -116,7 +116,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions, Admission_Without_VTE_Or_Obstetrical_Conditions_Compute);
 
-    private static readonly long _cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions = -1660812742436512091L;
+    private const long _cacheIndex_Admission_Without_VTE_Or_Obstetrical_Conditions = -1660812742436512091L;
 
     private IEnumerable<Encounter> Admission_Without_VTE_Or_Obstetrical_Conditions_Compute(CqlContext context)
     {
@@ -144,7 +144,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions, Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions = -8789342914136935360L;
+    private const long _cacheIndex_Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions = -8789342914136935360L;
 
     private IEnumerable<Encounter> Encounter_With_Age_Range_And_Without_VTE_Diagnosis_Or_Obstetrical_Conditions_Compute(CqlContext context)
     {
@@ -173,7 +173,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -6262669387061031876L;
+    private const long _cacheIndex_Initial_Population = -6262669387061031876L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {

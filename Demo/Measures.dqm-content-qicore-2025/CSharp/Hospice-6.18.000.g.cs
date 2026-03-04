@@ -80,7 +80,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 2116253259980977327L;
+    private const long _cacheIndex_Measurement_Period = 2116253259980977327L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -97,7 +97,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -5253891409149354845L;
+    private const long _cacheIndex_Patient = -5253891409149354845L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -111,7 +111,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
     public bool? Has_Hospice_Services(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Hospice_Services, Has_Hospice_Services_Compute);
 
-    private static readonly long _cacheIndex_Has_Hospice_Services = -926256737360152106L;
+    private const long _cacheIndex_Has_Hospice_Services = -926256737360152106L;
 
     private bool? Has_Hospice_Services_Compute(CqlContext context)
     {

@@ -72,7 +72,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 2317102387341060639L;
+    private const long _cacheIndex_Measurement_Period = 2317102387341060639L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -92,7 +92,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -6346933923748629508L;
+    private const long _cacheIndex_Patient = -6346933923748629508L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -106,7 +106,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 2571141115465897964L;
+    private const long _cacheIndex_SDE_Ethnicity = 2571141115465897964L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -119,7 +119,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 4542203258087567110L;
+    private const long _cacheIndex_SDE_Payer = 4542203258087567110L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -132,7 +132,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 916331710562642310L;
+    private const long _cacheIndex_SDE_Race = 916331710562642310L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -145,7 +145,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -4357180558056656651L;
+    private const long _cacheIndex_SDE_Sex = -4357180558056656651L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -158,7 +158,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_Age_18_And_Older(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Age_18_And_Older, Encounter_With_Age_18_And_Older_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Age_18_And_Older = 6169017664680275999L;
+    private const long _cacheIndex_Encounter_With_Age_18_And_Older = 6169017664680275999L;
 
     private IEnumerable<Encounter> Encounter_With_Age_18_And_Older_Compute(CqlContext context)
     {
@@ -198,7 +198,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -449283199020342393L;
+    private const long _cacheIndex_Initial_Population = -449283199020342393L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -211,7 +211,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 4359915985773488282L;
+    private const long _cacheIndex_Denominator = 4359915985773488282L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -224,7 +224,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator, Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator = -4239474303649750716L;
+    private const long _cacheIndex_Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator = -4239474303649750716L;
 
     private IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Compute(CqlContext context)
     {
@@ -290,7 +290,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Observation> Clinical_Skin_Exams_With_Pressure_Injury(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Clinical_Skin_Exams_With_Pressure_Injury, Clinical_Skin_Exams_With_Pressure_Injury_Compute);
 
-    private static readonly long _cacheIndex_Clinical_Skin_Exams_With_Pressure_Injury = -5876015133709045265L;
+    private const long _cacheIndex_Clinical_Skin_Exams_With_Pressure_Injury = -5876015133709045265L;
 
     private IEnumerable<Observation> Clinical_Skin_Exams_With_Pressure_Injury_Compute(CqlContext context)
     {
@@ -313,7 +313,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Observation> Simple_Skin_Exams_With_Pressure_Injury(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Simple_Skin_Exams_With_Pressure_Injury, Simple_Skin_Exams_With_Pressure_Injury_Compute);
 
-    private static readonly long _cacheIndex_Simple_Skin_Exams_With_Pressure_Injury = -7016031869166170929L;
+    private const long _cacheIndex_Simple_Skin_Exams_With_Pressure_Injury = -7016031869166170929L;
 
     private IEnumerable<Observation> Simple_Skin_Exams_With_Pressure_Injury_Compute(CqlContext context)
     {
@@ -336,7 +336,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<object> Skin_Exams_With_Pressure_Injury(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Skin_Exams_With_Pressure_Injury, Skin_Exams_With_Pressure_Injury_Compute);
 
-    private static readonly long _cacheIndex_Skin_Exams_With_Pressure_Injury = 8086493818571836473L;
+    private const long _cacheIndex_Skin_Exams_With_Pressure_Injury = 8086493818571836473L;
 
     private IEnumerable<object> Skin_Exams_With_Pressure_Injury_Compute(CqlContext context)
     {
@@ -351,7 +351,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours, Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours = 5043614029930533099L;
+    private const long _cacheIndex_Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours = 5043614029930533099L;
 
     private IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Skin_Exam_Within_First_72_Hours_Compute(CqlContext context)
     {
@@ -390,7 +390,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours, Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours = 3850884323497267267L;
+    private const long _cacheIndex_Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours = 3850884323497267267L;
 
     private IEnumerable<Encounter> Encounter_With_Deep_Tissue_Pressure_Injury_POA_By_Indicator_Or_Skin_Exam_Within_First_72_Hours_Compute(CqlContext context)
     {
@@ -405,7 +405,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator, Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator = -6152202812380421187L;
+    private const long _cacheIndex_Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator = -6152202812380421187L;
 
     private IEnumerable<Encounter> Encounter_With_Stage_2__3__4__Or_Unstageable_Pressure_Injury_Present_On_Admission_By_POA_Indicator_Compute(CqlContext context)
     {
@@ -427,7 +427,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours, Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours = 5278639121058776597L;
+    private const long _cacheIndex_Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours = 5278639121058776597L;
 
     private IEnumerable<Encounter> Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_By_Skin_Exam_Within_24_Hours_Compute(CqlContext context)
     {
@@ -466,7 +466,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA, Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA = 6588617838832343877L;
+    private const long _cacheIndex_Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA = 6588617838832343877L;
 
     private IEnumerable<Encounter> Encounter_With_Stage_2__3__4_Or_Unstageable_Pressure_Injury_POA_Compute(CqlContext context)
     {
@@ -481,7 +481,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 3156263698685668797L;
+    private const long _cacheIndex_Denominator_Exclusions = 3156263698685668797L;
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -496,7 +496,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator, Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator = 4407821689885354987L;
+    private const long _cacheIndex_Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator = 4407821689885354987L;
 
     private IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_Not_POA_By_Indicator_Compute(CqlContext context)
     {
@@ -518,7 +518,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours, Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours = -7554246963882016003L;
+    private const long _cacheIndex_Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours = -7554246963882016003L;
 
     private IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_By_Skin_Exam_After_First_72_Hours_Compute(CqlContext context)
     {
@@ -557,7 +557,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_New_Deep_Tissue_Pressure_Injury, Encounter_With_New_Deep_Tissue_Pressure_Injury_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_New_Deep_Tissue_Pressure_Injury = -1777515951725356205L;
+    private const long _cacheIndex_Encounter_With_New_Deep_Tissue_Pressure_Injury = -1777515951725356205L;
 
     private IEnumerable<Encounter> Encounter_With_New_Deep_Tissue_Pressure_Injury_Compute(CqlContext context)
     {
@@ -572,7 +572,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator, Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator = -4328292310400368312L;
+    private const long _cacheIndex_Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator = -4328292310400368312L;
 
     private IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Not_POA_By_Indicator_Compute(CqlContext context)
     {
@@ -594,7 +594,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours, Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours = 1070787627883960698L;
+    private const long _cacheIndex_Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours = 1070787627883960698L;
 
     private IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_By_Skin_Exam_After_First_24_Hours_Compute(CqlContext context)
     {
@@ -633,7 +633,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury, Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury = -1951425826462199341L;
+    private const long _cacheIndex_Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury = -1951425826462199341L;
 
     private IEnumerable<Encounter> Encounter_With_New_Stage_2__3__4_Or_Unstageable_Pressure_Injury_Compute(CqlContext context)
     {
@@ -648,7 +648,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -7282528919652117368L;
+    private const long _cacheIndex_Numerator = -7282528919652117368L;
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {

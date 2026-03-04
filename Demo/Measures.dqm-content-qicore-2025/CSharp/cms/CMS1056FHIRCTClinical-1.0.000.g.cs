@@ -45,7 +45,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -8822704689904462449L;
+    private const long _cacheIndex_Measurement_Period = -8822704689904462449L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -65,7 +65,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 500914463904215899L;
+    private const long _cacheIndex_Patient = 500914463904215899L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -79,7 +79,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 4957801798233376164L;
+    private const long _cacheIndex_SDE_Ethnicity = 4957801798233376164L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -92,7 +92,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -812470990971465069L;
+    private const long _cacheIndex_SDE_Payer = -812470990971465069L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -105,7 +105,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 4947102460982236647L;
+    private const long _cacheIndex_SDE_Race = 4947102460982236647L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -118,7 +118,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -762916749423880858L;
+    private const long _cacheIndex_SDE_Sex = -762916749423880858L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -131,7 +131,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public IEnumerable<Observation> Patients_with_Qualifying_CTScan(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patients_with_Qualifying_CTScan, Patients_with_Qualifying_CTScan_Compute);
 
-    private static readonly long _cacheIndex_Patients_with_Qualifying_CTScan = 886279353610282139L;
+    private const long _cacheIndex_Patients_with_Qualifying_CTScan = 886279353610282139L;
 
     private IEnumerable<Observation> Patients_with_Qualifying_CTScan_Compute(CqlContext context)
     {
@@ -177,7 +177,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public IEnumerable<Observation> Patients_with_Qualifying_CTScan_with_Values(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patients_with_Qualifying_CTScan_with_Values, Patients_with_Qualifying_CTScan_with_Values_Compute);
 
-    private static readonly long _cacheIndex_Patients_with_Qualifying_CTScan_with_Values = 1274571944206341593L;
+    private const long _cacheIndex_Patients_with_Qualifying_CTScan_with_Values = 1274571944206341593L;
 
     private IEnumerable<Observation> Patients_with_Qualifying_CTScan_with_Values_Compute(CqlContext context)
     {
@@ -205,7 +205,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -1303672111766905753L;
+    private const long _cacheIndex_Initial_Population = -1303672111766905753L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -219,7 +219,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -8809240417321514086L;
+    private const long _cacheIndex_Denominator = -8809240417321514086L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -233,7 +233,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public bool? Denominator_Exclusion(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusion, Denominator_Exclusion_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusion = -1291566460350360691L;
+    private const long _cacheIndex_Denominator_Exclusion = -1291566460350360691L;
 
     private bool? Denominator_Exclusion_Compute(CqlContext context)
     {
@@ -258,7 +258,7 @@ public partial class CMS1056FHIRCTClinical_1_0_000 : ILibrary, ISingleton<CMS105
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -6773635990642865625L;
+    private const long _cacheIndex_Numerator = -6773635990642865625L;
 
     private bool? Numerator_Compute(CqlContext context)
     {

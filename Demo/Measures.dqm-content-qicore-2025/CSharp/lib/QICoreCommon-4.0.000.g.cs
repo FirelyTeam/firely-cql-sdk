@@ -400,7 +400,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -4143263978380686161L;
+    private const long _cacheIndex_Patient = -4143263978380686161L;
 
     private Patient Patient_Compute(CqlContext context)
     {

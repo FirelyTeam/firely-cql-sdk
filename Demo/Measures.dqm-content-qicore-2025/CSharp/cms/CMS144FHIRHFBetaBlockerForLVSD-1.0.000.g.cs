@@ -96,7 +96,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 2616853413637305416L;
+    private const long _cacheIndex_Measurement_Period = 2616853413637305416L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -116,7 +116,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -7772502128286363363L;
+    private const long _cacheIndex_Patient = -7772502128286363363L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -130,7 +130,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 38685777630265383L;
+    private const long _cacheIndex_Initial_Population = 38685777630265383L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -143,7 +143,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = -3472072733239199912L;
+    private const long _cacheIndex_Denominator = -3472072733239199912L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -159,7 +159,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = -6398594374452645514L;
+    private const long _cacheIndex_Denominator_Exclusions = -6398594374452645514L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -178,7 +178,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Beta_Blocker_Therapy_for_LVSD_Ordered(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Beta_Blocker_Therapy_for_LVSD_Ordered, Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Compute);
 
-    private static readonly long _cacheIndex_Has_Beta_Blocker_Therapy_for_LVSD_Ordered = 6987738993386788375L;
+    private const long _cacheIndex_Has_Beta_Blocker_Therapy_for_LVSD_Ordered = 6987738993386788375L;
 
     private bool? Has_Beta_Blocker_Therapy_for_LVSD_Ordered_Compute(CqlContext context)
     {
@@ -200,7 +200,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD, Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Compute);
 
-    private static readonly long _cacheIndex_Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD = 5558459301105956202L;
+    private const long _cacheIndex_Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD = 5558459301105956202L;
 
     private bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD_Compute(CqlContext context)
     {
@@ -249,7 +249,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = -1342263068743286196L;
+    private const long _cacheIndex_Numerator = -1342263068743286196L;
 
     private bool? Numerator_Compute(CqlContext context)
     {
@@ -264,7 +264,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Consecutive_Heart_Rates_Less_than_50(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Consecutive_Heart_Rates_Less_than_50, Has_Consecutive_Heart_Rates_Less_than_50_Compute);
 
-    private static readonly long _cacheIndex_Has_Consecutive_Heart_Rates_Less_than_50 = 3630379547903955739L;
+    private const long _cacheIndex_Has_Consecutive_Heart_Rates_Less_than_50 = 3630379547903955739L;
 
     private bool? Has_Consecutive_Heart_Rates_Less_than_50_Compute(CqlContext context)
     {
@@ -352,7 +352,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD, Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Compute);
 
-    private static readonly long _cacheIndex_Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD = 3729703187196194264L;
+    private const long _cacheIndex_Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD = 3729703187196194264L;
 
     private bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD_Compute(CqlContext context)
     {
@@ -434,7 +434,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Arrhythmia_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Arrhythmia_Diagnosis, Has_Arrhythmia_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_Arrhythmia_Diagnosis = -3739507375172224545L;
+    private const long _cacheIndex_Has_Arrhythmia_Diagnosis = -3739507375172224545L;
 
     private bool? Has_Arrhythmia_Diagnosis_Compute(CqlContext context)
     {
@@ -460,7 +460,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Hypotension_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Hypotension_Diagnosis, Has_Hypotension_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_Hypotension_Diagnosis = 4435963098547719524L;
+    private const long _cacheIndex_Has_Hypotension_Diagnosis = 4435963098547719524L;
 
     private bool? Has_Hypotension_Diagnosis_Compute(CqlContext context)
     {
@@ -486,7 +486,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Asthma_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Asthma_Diagnosis, Has_Asthma_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_Asthma_Diagnosis = 7044985707602635307L;
+    private const long _cacheIndex_Has_Asthma_Diagnosis = 7044985707602635307L;
 
     private bool? Has_Asthma_Diagnosis_Compute(CqlContext context)
     {
@@ -512,7 +512,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy, Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Compute);
 
-    private static readonly long _cacheIndex_Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy = -7483912433006805992L;
+    private const long _cacheIndex_Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy = -7483912433006805992L;
 
     private bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Compute(CqlContext context)
     {
@@ -543,7 +543,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Bradycardia_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Bradycardia_Diagnosis, Has_Bradycardia_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_Bradycardia_Diagnosis = -5143505920815233861L;
+    private const long _cacheIndex_Has_Bradycardia_Diagnosis = -5143505920815233861L;
 
     private bool? Has_Bradycardia_Diagnosis_Compute(CqlContext context)
     {
@@ -569,7 +569,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient, Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_Compute);
 
-    private static readonly long _cacheIndex_Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient = -5160006020200830972L;
+    private const long _cacheIndex_Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient = -5160006020200830972L;
 
     private bool? Has_Allergy_or_Intolerance_to_Beta_Blocker_Therapy_Ingredient_Compute(CqlContext context)
     {
@@ -597,7 +597,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Atrioventricular_Block_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Atrioventricular_Block_Diagnosis, Has_Atrioventricular_Block_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Has_Atrioventricular_Block_Diagnosis = -4112486325081879223L;
+    private const long _cacheIndex_Has_Atrioventricular_Block_Diagnosis = -4112486325081879223L;
 
     private bool? Has_Atrioventricular_Block_Diagnosis_Compute(CqlContext context)
     {
@@ -623,7 +623,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Diagnosis_of_Cardiac_Pacer_in_Situ, Has_Diagnosis_of_Cardiac_Pacer_in_Situ_Compute);
 
-    private static readonly long _cacheIndex_Has_Diagnosis_of_Cardiac_Pacer_in_Situ = -7896197255889390503L;
+    private const long _cacheIndex_Has_Diagnosis_of_Cardiac_Pacer_in_Situ = -7896197255889390503L;
 
     private bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ_Compute(CqlContext context)
     {
@@ -649,7 +649,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Has_Cardiac_Pacer_Device_Implanted(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Cardiac_Pacer_Device_Implanted, Has_Cardiac_Pacer_Device_Implanted_Compute);
 
-    private static readonly long _cacheIndex_Has_Cardiac_Pacer_Device_Implanted = 4538725901971682005L;
+    private const long _cacheIndex_Has_Cardiac_Pacer_Device_Implanted = 4538725901971682005L;
 
     private bool? Has_Cardiac_Pacer_Device_Implanted_Compute(CqlContext context)
     {
@@ -759,7 +759,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Atrioventricular_Block_without_Cardiac_Pacer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Atrioventricular_Block_without_Cardiac_Pacer, Atrioventricular_Block_without_Cardiac_Pacer_Compute);
 
-    private static readonly long _cacheIndex_Atrioventricular_Block_without_Cardiac_Pacer = -2169364810011637587L;
+    private const long _cacheIndex_Atrioventricular_Block_without_Cardiac_Pacer = -2169364810011637587L;
 
     private bool? Atrioventricular_Block_without_Cardiac_Pacer_Compute(CqlContext context)
     {
@@ -778,7 +778,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public bool? Denominator_Exceptions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exceptions = 1031791878532453465L;
+    private const long _cacheIndex_Denominator_Exceptions = 1031791878532453465L;
 
     private bool? Denominator_Exceptions_Compute(CqlContext context)
     {
@@ -807,7 +807,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -6906981998527120373L;
+    private const long _cacheIndex_SDE_Ethnicity = -6906981998527120373L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -820,7 +820,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 5786546152402859203L;
+    private const long _cacheIndex_SDE_Payer = 5786546152402859203L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -833,7 +833,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -8643694095353757601L;
+    private const long _cacheIndex_SDE_Race = -8643694095353757601L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -846,7 +846,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 8624947786324799592L;
+    private const long _cacheIndex_SDE_Sex = 8624947786324799592L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

@@ -104,7 +104,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = -8633000620496989027L;
+    private const long _cacheIndex_Measurement_Period = -8633000620496989027L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -124,7 +124,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 993086970170150705L;
+    private const long _cacheIndex_Patient = 993086970170150705L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -138,7 +138,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public bool? Has_Encounter_during_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Encounter_during_Measurement_Period, Has_Encounter_during_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Encounter_during_Measurement_Period = 6342340037644257345L;
+    private const long _cacheIndex_Has_Encounter_during_Measurement_Period = 6342340037644257345L;
 
     private bool? Has_Encounter_during_Measurement_Period_Compute(CqlContext context)
     {
@@ -183,7 +183,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public bool? Has_Intervention_during_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Intervention_during_Measurement_Period, Has_Intervention_during_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Has_Intervention_during_Measurement_Period = 1165576977205401652L;
+    private const long _cacheIndex_Has_Intervention_during_Measurement_Period = 1165576977205401652L;
 
     private bool? Has_Intervention_during_Measurement_Period_Compute(CqlContext context)
     {
@@ -295,7 +295,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public ServiceRequest First_Referral_during_First_10_Months_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_First_Referral_during_First_10_Months_of_Measurement_Period, First_Referral_during_First_10_Months_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_First_Referral_during_First_10_Months_of_Measurement_Period = -6349200580831879765L;
+    private const long _cacheIndex_First_Referral_during_First_10_Months_of_Measurement_Period = -6349200580831879765L;
 
     private ServiceRequest First_Referral_during_First_10_Months_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -349,7 +349,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public bool? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = -7184150108548928081L;
+    private const long _cacheIndex_Initial_Population = -7184150108548928081L;
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
@@ -367,7 +367,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public bool? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 5090247856032037412L;
+    private const long _cacheIndex_Denominator = 5090247856032037412L;
 
     private bool? Denominator_Compute(CqlContext context)
     {
@@ -380,7 +380,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -3766651685399998887L;
+    private const long _cacheIndex_SDE_Ethnicity = -3766651685399998887L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -393,7 +393,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 2101280260375690497L;
+    private const long _cacheIndex_SDE_Payer = 2101280260375690497L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -406,7 +406,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 4493470933035843420L;
+    private const long _cacheIndex_SDE_Race = 4493470933035843420L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -419,7 +419,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -7763885849007845267L;
+    private const long _cacheIndex_SDE_Sex = -7763885849007845267L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
@@ -432,7 +432,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public bool? Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop, Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop_Compute);
 
-    private static readonly long _cacheIndex_Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop = 216167620418217975L;
+    private const long _cacheIndex_Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop = 216167620418217975L;
 
     private bool? Referring_Clinician_Receives_Consultant_Report_to_Close_Referral_Loop_Compute(CqlContext context)
     {
@@ -493,7 +493,7 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
     public bool? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 8962450575396821569L;
+    private const long _cacheIndex_Numerator = 8962450575396821569L;
 
     private bool? Numerator_Compute(CqlContext context)
     {

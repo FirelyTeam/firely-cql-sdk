@@ -100,7 +100,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 6517944951610092532L;
+    private const long _cacheIndex_Measurement_Period = 6517944951610092532L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -117,7 +117,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -3100901233771399594L;
+    private const long _cacheIndex_Patient = -3100901233771399594L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -131,7 +131,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public IEnumerable<Encounter> Outpatient_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Outpatient_Encounter, Outpatient_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Outpatient_Encounter = -6041966605676774732L;
+    private const long _cacheIndex_Outpatient_Encounter = -6041966605676774732L;
 
     private IEnumerable<Encounter> Outpatient_Encounter_Compute(CqlContext context)
     {
@@ -222,7 +222,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Heart_Failure_Outpatient_Encounter, Heart_Failure_Outpatient_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Heart_Failure_Outpatient_Encounter = 2956605661681219693L;
+    private const long _cacheIndex_Heart_Failure_Outpatient_Encounter = 2956605661681219693L;
 
     private IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_Compute(CqlContext context)
     {
@@ -272,7 +272,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public IEnumerable<object> Moderate_or_Severe_LVSD_Findings(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Moderate_or_Severe_LVSD_Findings, Moderate_or_Severe_LVSD_Findings_Compute);
 
-    private static readonly long _cacheIndex_Moderate_or_Severe_LVSD_Findings = -4227547430957034610L;
+    private const long _cacheIndex_Moderate_or_Severe_LVSD_Findings = -4227547430957034610L;
 
     private IEnumerable<object> Moderate_or_Severe_LVSD_Findings_Compute(CqlContext context)
     {
@@ -336,7 +336,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD, Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD_Compute);
 
-    private static readonly long _cacheIndex_Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD = 5061391783387072208L;
+    private const long _cacheIndex_Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD = 5061391783387072208L;
 
     private IEnumerable<Encounter> Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD_Compute(CqlContext context)
     {
@@ -374,7 +374,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public bool? Has_Heart_Transplant_Complications(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Heart_Transplant_Complications, Has_Heart_Transplant_Complications_Compute);
 
-    private static readonly long _cacheIndex_Has_Heart_Transplant_Complications = 6060037146234108555L;
+    private const long _cacheIndex_Has_Heart_Transplant_Complications = 6060037146234108555L;
 
     private bool? Has_Heart_Transplant_Complications_Compute(CqlContext context)
     {
@@ -424,7 +424,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public bool? Has_Left_Ventricular_Assist_Device(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Left_Ventricular_Assist_Device, Has_Left_Ventricular_Assist_Device_Compute);
 
-    private static readonly long _cacheIndex_Has_Left_Ventricular_Assist_Device = 5321459225267215221L;
+    private const long _cacheIndex_Has_Left_Ventricular_Assist_Device = 5321459225267215221L;
 
     private bool? Has_Left_Ventricular_Assist_Device_Compute(CqlContext context)
     {
@@ -535,7 +535,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public bool? Has_Left_Ventricular_Assist_Device_Complications(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Left_Ventricular_Assist_Device_Complications, Has_Left_Ventricular_Assist_Device_Complications_Compute);
 
-    private static readonly long _cacheIndex_Has_Left_Ventricular_Assist_Device_Complications = 1302866891469071395L;
+    private const long _cacheIndex_Has_Left_Ventricular_Assist_Device_Complications = 1302866891469071395L;
 
     private bool? Has_Left_Ventricular_Assist_Device_Complications_Compute(CqlContext context)
     {
@@ -584,7 +584,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public IEnumerable<Encounter> Outpatient_Encounter_or_Patient_Provider_Interaction(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Outpatient_Encounter_or_Patient_Provider_Interaction, Outpatient_Encounter_or_Patient_Provider_Interaction_Compute);
 
-    private static readonly long _cacheIndex_Outpatient_Encounter_or_Patient_Provider_Interaction = 7004331100707194591L;
+    private const long _cacheIndex_Outpatient_Encounter_or_Patient_Provider_Interaction = 7004331100707194591L;
 
     private IEnumerable<Encounter> Outpatient_Encounter_or_Patient_Provider_Interaction_Compute(CqlContext context)
     {
@@ -601,7 +601,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Outpatient_Encounter_During_Measurement_Period, Qualifying_Outpatient_Encounter_During_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Outpatient_Encounter_During_Measurement_Period = -7380487324297278152L;
+    private const long _cacheIndex_Qualifying_Outpatient_Encounter_During_Measurement_Period = -7380487324297278152L;
 
     private IEnumerable<Encounter> Qualifying_Outpatient_Encounter_During_Measurement_Period_Compute(CqlContext context)
     {
@@ -627,7 +627,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public bool? Has_Heart_Transplant(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Heart_Transplant, Has_Heart_Transplant_Compute);
 
-    private static readonly long _cacheIndex_Has_Heart_Transplant = 6513985918444010793L;
+    private const long _cacheIndex_Has_Heart_Transplant = 6513985918444010793L;
 
     private bool? Has_Heart_Transplant_Compute(CqlContext context)
     {
@@ -738,7 +738,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     public bool? Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period, Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period = -4441809613322863868L;
+    private const long _cacheIndex_Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period = -4441809613322863868L;
 
     private bool? Is_Adult_With_Two_Qualifying_Outpatient_Encounters_and_One_Heart_Failure_Outpatient_Encounter_During_the_Measurement_Period_Compute(CqlContext context)
     {

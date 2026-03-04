@@ -22,7 +22,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
     public bool? SomethingTrueEqualsTrue(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SomethingTrueEqualsTrue, SomethingTrueEqualsTrue_Compute);
 
-    private static readonly long _cacheIndex_SomethingTrueEqualsTrue = -7966027749533621960L;
+    private const long _cacheIndex_SomethingTrueEqualsTrue = -7966027749533621960L;
 
     private bool? SomethingTrueEqualsTrue_Compute(CqlContext context)
     {

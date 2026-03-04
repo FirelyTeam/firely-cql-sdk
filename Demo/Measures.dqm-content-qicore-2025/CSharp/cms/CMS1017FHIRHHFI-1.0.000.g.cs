@@ -147,7 +147,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 7239015735015004398L;
+    private const long _cacheIndex_Measurement_Period = 7239015735015004398L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -167,7 +167,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = -2859982306975276846L;
+    private const long _cacheIndex_Patient = -2859982306975276846L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -181,7 +181,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounter, Qualifying_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounter = 6631354683532865594L;
+    private const long _cacheIndex_Qualifying_Encounter = 6631354683532865594L;
 
     private IEnumerable<Encounter> Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -214,7 +214,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population = 8909640820178408265L;
+    private const long _cacheIndex_Initial_Population = 8909640820178408265L;
 
     private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
     {
@@ -227,7 +227,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-    private static readonly long _cacheIndex_Denominator = 8325884910617275031L;
+    private const long _cacheIndex_Denominator = 8325884910617275031L;
 
     private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
     {
@@ -268,7 +268,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Encounter_With_A_Fall_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_A_Fall_Diagnosis, Encounter_With_A_Fall_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_A_Fall_Diagnosis = -4260035697956895772L;
+    private const long _cacheIndex_Encounter_With_A_Fall_Diagnosis = -4260035697956895772L;
 
     private IEnumerable<Encounter> Encounter_With_A_Fall_Diagnosis_Compute(CqlContext context)
     {
@@ -317,7 +317,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Encounter_With_A_Fall_Event(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_A_Fall_Event, Encounter_With_A_Fall_Event_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_A_Fall_Event = 867772196484577946L;
+    private const long _cacheIndex_Encounter_With_A_Fall_Event = 867772196484577946L;
 
     private IEnumerable<Encounter> Encounter_With_A_Fall_Event_Compute(CqlContext context)
     {
@@ -352,7 +352,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Encounter_Where_A_Fall_Occurred(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_Where_A_Fall_Occurred, Encounter_Where_A_Fall_Occurred_Compute);
 
-    private static readonly long _cacheIndex_Encounter_Where_A_Fall_Occurred = 795907075661115072L;
+    private const long _cacheIndex_Encounter_Where_A_Fall_Occurred = 795907075661115072L;
 
     private IEnumerable<Encounter> Encounter_Where_A_Fall_Occurred_Compute(CqlContext context)
     {
@@ -449,7 +449,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Encounter_With_A_Fall_Not_Present_On_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_A_Fall_Not_Present_On_Admission, Encounter_With_A_Fall_Not_Present_On_Admission_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_A_Fall_Not_Present_On_Admission = -6325763340603139774L;
+    private const long _cacheIndex_Encounter_With_A_Fall_Not_Present_On_Admission = -6325763340603139774L;
 
     private IEnumerable<Encounter> Encounter_With_A_Fall_Not_Present_On_Admission_Compute(CqlContext context)
     {
@@ -470,7 +470,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Encounter_Where_A_Fall_And_Major_Injury_Occurred_Not_POA(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_Where_A_Fall_And_Major_Injury_Occurred_Not_POA, Encounter_Where_A_Fall_And_Major_Injury_Occurred_Not_POA_Compute);
 
-    private static readonly long _cacheIndex_Encounter_Where_A_Fall_And_Major_Injury_Occurred_Not_POA = 4813225188493827856L;
+    private const long _cacheIndex_Encounter_Where_A_Fall_And_Major_Injury_Occurred_Not_POA = 4813225188493827856L;
 
     private IEnumerable<Encounter> Encounter_Where_A_Fall_And_Major_Injury_Occurred_Not_POA_Compute(CqlContext context)
     {
@@ -514,7 +514,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Encounter_Where_A_Fall_And_Moderate_Injury_Occurred_Not_POA(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_Where_A_Fall_And_Moderate_Injury_Occurred_Not_POA, Encounter_Where_A_Fall_And_Moderate_Injury_Occurred_Not_POA_Compute);
 
-    private static readonly long _cacheIndex_Encounter_Where_A_Fall_And_Moderate_Injury_Occurred_Not_POA = 9037820097058256858L;
+    private const long _cacheIndex_Encounter_Where_A_Fall_And_Moderate_Injury_Occurred_Not_POA = 9037820097058256858L;
 
     private IEnumerable<Encounter> Encounter_Where_A_Fall_And_Moderate_Injury_Occurred_Not_POA_Compute(CqlContext context)
     {
@@ -558,7 +558,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-    private static readonly long _cacheIndex_Numerator = 75500722536813452L;
+    private const long _cacheIndex_Numerator = 75500722536813452L;
 
     private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
     {
@@ -573,7 +573,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Encounter_With_A_Fall_Present_On_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_A_Fall_Present_On_Admission, Encounter_With_A_Fall_Present_On_Admission_Compute);
 
-    private static readonly long _cacheIndex_Encounter_With_A_Fall_Present_On_Admission = -6633124270615127096L;
+    private const long _cacheIndex_Encounter_With_A_Fall_Present_On_Admission = -6633124270615127096L;
 
     private IEnumerable<Encounter> Encounter_With_A_Fall_Present_On_Admission_Compute(CqlContext context)
     {
@@ -595,7 +595,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 9090268816274383848L;
+    private const long _cacheIndex_Denominator_Exclusions = 9090268816274383848L;
 
     private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -608,7 +608,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Numerator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_Exclusions, Numerator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Numerator_Exclusions = 7919091718784135074L;
+    private const long _cacheIndex_Numerator_Exclusions = 7919091718784135074L;
 
     private IEnumerable<Encounter> Numerator_Exclusions_Compute(CqlContext context)
     {
@@ -621,7 +621,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<CqlQuantity> Risk_Variable_Body_Mass_Index__BMI_(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Body_Mass_Index__BMI_, Risk_Variable_Body_Mass_Index__BMI__Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Body_Mass_Index__BMI_ = -8832772703149002861L;
+    private const long _cacheIndex_Risk_Variable_Body_Mass_Index__BMI_ = -8832772703149002861L;
 
     private IEnumerable<CqlQuantity> Risk_Variable_Body_Mass_Index__BMI__Compute(CqlContext context)
     {
@@ -678,7 +678,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)?> Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication, Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication = 7202944664208919231L;
+    private const long _cacheIndex_Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication = 7202944664208919231L;
 
     private IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)?> Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication_Compute(CqlContext context)
     {
@@ -859,7 +859,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Abnormal_Weight_Loss_or_Malnutrition_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Abnormal_Weight_Loss_or_Malnutrition_Present_on_Admission, Risk_Variable_Encounter_with_Abnormal_Weight_Loss_or_Malnutrition_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Abnormal_Weight_Loss_or_Malnutrition_Present_on_Admission = 1687786406611411202L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Abnormal_Weight_Loss_or_Malnutrition_Present_on_Admission = 1687786406611411202L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Abnormal_Weight_Loss_or_Malnutrition_Present_on_Admission_Compute(CqlContext context)
     {
@@ -884,7 +884,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Anticoagulant_Active_at_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Anticoagulant_Active_at_Admission, Risk_Variable_Encounter_with_Anticoagulant_Active_at_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Anticoagulant_Active_at_Admission = 2537708922668979649L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Anticoagulant_Active_at_Admission = 2537708922668979649L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Anticoagulant_Active_at_Admission_Compute(CqlContext context)
     {
@@ -998,7 +998,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Anticoagulant_Administration_During_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Anticoagulant_Administration_During_Encounter, Risk_Variable_Encounter_with_Anticoagulant_Administration_During_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Anticoagulant_Administration_During_Encounter = -5616865709202141790L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Anticoagulant_Administration_During_Encounter = -5616865709202141790L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Anticoagulant_Administration_During_Encounter_Compute(CqlContext context)
     {
@@ -1069,7 +1069,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Antidepressant_Active_at_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Antidepressant_Active_at_Admission, Risk_Variable_Encounter_with_Antidepressant_Active_at_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Antidepressant_Active_at_Admission = -3270489974385968258L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Antidepressant_Active_at_Admission = -3270489974385968258L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Antidepressant_Active_at_Admission_Compute(CqlContext context)
     {
@@ -1183,7 +1183,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Antihypertensive_Active_at_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Antihypertensive_Active_at_Admission, Risk_Variable_Encounter_with_Antihypertensive_Active_at_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Antihypertensive_Active_at_Admission = 77730647164612247L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Antihypertensive_Active_at_Admission = 77730647164612247L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Antihypertensive_Active_at_Admission_Compute(CqlContext context)
     {
@@ -1297,7 +1297,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_CNS_Depressant_Active_at_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_CNS_Depressant_Active_at_Admission, Risk_Variable_Encounter_with_CNS_Depressant_Active_at_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_CNS_Depressant_Active_at_Admission = 5774110077431550078L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_CNS_Depressant_Active_at_Admission = 5774110077431550078L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_CNS_Depressant_Active_at_Admission_Compute(CqlContext context)
     {
@@ -1411,7 +1411,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Diuretic_Active_at_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Diuretic_Active_at_Admission, Risk_Variable_Encounter_with_Diuretic_Active_at_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Diuretic_Active_at_Admission = -101143292205297395L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Diuretic_Active_at_Admission = -101143292205297395L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Diuretic_Active_at_Admission_Compute(CqlContext context)
     {
@@ -1525,7 +1525,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Opioid_Medication_Active_at_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Opioid_Medication_Active_at_Admission, Risk_Variable_Encounter_with_Opioid_Medication_Active_at_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Opioid_Medication_Active_at_Admission = 2482244248561422898L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Opioid_Medication_Active_at_Admission = 2482244248561422898L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Opioid_Medication_Active_at_Admission_Compute(CqlContext context)
     {
@@ -1639,7 +1639,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Coagulation_Disorder_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Coagulation_Disorder_Present_on_Admission, Risk_Variable_Encounter_with_Coagulation_Disorder_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Coagulation_Disorder_Present_on_Admission = 1980631045349188772L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Coagulation_Disorder_Present_on_Admission = 1980631045349188772L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Coagulation_Disorder_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1661,7 +1661,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Delirium_or_Dementia_or_Other_Psychosis_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Delirium_or_Dementia_or_Other_Psychosis_Present_on_Admission, Risk_Variable_Encounter_with_Delirium_or_Dementia_or_Other_Psychosis_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Delirium_or_Dementia_or_Other_Psychosis_Present_on_Admission = 3816316150793516446L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Delirium_or_Dementia_or_Other_Psychosis_Present_on_Admission = 3816316150793516446L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Delirium_or_Dementia_or_Other_Psychosis_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1683,7 +1683,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Depression_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Depression_Present_on_Admission, Risk_Variable_Encounter_with_Depression_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Depression_Present_on_Admission = 4214772090319590937L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Depression_Present_on_Admission = 4214772090319590937L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Depression_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1705,7 +1705,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Epilepsy_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Epilepsy_Present_on_Admission, Risk_Variable_Encounter_with_Epilepsy_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Epilepsy_Present_on_Admission = 7000000165091156417L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Epilepsy_Present_on_Admission = 7000000165091156417L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Epilepsy_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1727,7 +1727,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Leukemia_or_Lymphoma_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Leukemia_or_Lymphoma_Present_on_Admission, Risk_Variable_Encounter_with_Leukemia_or_Lymphoma_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Leukemia_or_Lymphoma_Present_on_Admission = 7398759844787738930L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Leukemia_or_Lymphoma_Present_on_Admission = 7398759844787738930L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Leukemia_or_Lymphoma_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1749,7 +1749,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Liver_Disease_Moderate_to_Severe_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Liver_Disease_Moderate_to_Severe_Present_on_Admission, Risk_Variable_Encounter_with_Liver_Disease_Moderate_to_Severe_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Liver_Disease_Moderate_to_Severe_Present_on_Admission = -3901620165660556613L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Liver_Disease_Moderate_to_Severe_Present_on_Admission = -3901620165660556613L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Liver_Disease_Moderate_to_Severe_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1771,7 +1771,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Malignant_Bone_Disease_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Malignant_Bone_Disease_Present_on_Admission, Risk_Variable_Encounter_with_Malignant_Bone_Disease_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Malignant_Bone_Disease_Present_on_Admission = -6519893641608176887L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Malignant_Bone_Disease_Present_on_Admission = -6519893641608176887L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Malignant_Bone_Disease_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1793,7 +1793,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Neurologic_Disorder_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Neurologic_Disorder_Present_on_Admission, Risk_Variable_Encounter_with_Neurologic_Disorder_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Neurologic_Disorder_Present_on_Admission = -7749071699323752421L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Neurologic_Disorder_Present_on_Admission = -7749071699323752421L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Neurologic_Disorder_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1815,7 +1815,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Obesity_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Obesity_Present_on_Admission, Risk_Variable_Encounter_with_Obesity_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Obesity_Present_on_Admission = 1111109168538456667L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Obesity_Present_on_Admission = 1111109168538456667L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Obesity_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1837,7 +1837,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Osteoporosis_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Osteoporosis_Present_on_Admission, Risk_Variable_Encounter_with_Osteoporosis_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Osteoporosis_Present_on_Admission = -1864719601187372501L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Osteoporosis_Present_on_Admission = -1864719601187372501L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Osteoporosis_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1859,7 +1859,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Peripheral_Neuropathy_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Peripheral_Neuropathy_Present_on_Admission, Risk_Variable_Encounter_with_Peripheral_Neuropathy_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Peripheral_Neuropathy_Present_on_Admission = -8941770802708293932L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Peripheral_Neuropathy_Present_on_Admission = -8941770802708293932L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Peripheral_Neuropathy_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1881,7 +1881,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Stroke_Present_on_Admission(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Stroke_Present_on_Admission, Risk_Variable_Encounter_with_Stroke_Present_on_Admission_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Stroke_Present_on_Admission = 7549789774069722028L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Stroke_Present_on_Admission = 7549789774069722028L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Stroke_Present_on_Admission_Compute(CqlContext context)
     {
@@ -1903,7 +1903,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Suicide_Attempt(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Encounter_with_Suicide_Attempt, Risk_Variable_Encounter_with_Suicide_Attempt_Compute);
 
-    private static readonly long _cacheIndex_Risk_Variable_Encounter_with_Suicide_Attempt = -9085156353756314203L;
+    private const long _cacheIndex_Risk_Variable_Encounter_with_Suicide_Attempt = -9085156353756314203L;
 
     private IEnumerable<Encounter> Risk_Variable_Encounter_with_Suicide_Attempt_Compute(CqlContext context)
     {
@@ -1942,7 +1942,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = -7188146491602681279L;
+    private const long _cacheIndex_SDE_Ethnicity = -7188146491602681279L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -1955,7 +1955,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = -6065141591157605130L;
+    private const long _cacheIndex_SDE_Payer = -6065141591157605130L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -1968,7 +1968,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = -2041073189866593713L;
+    private const long _cacheIndex_SDE_Race = -2041073189866593713L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -1981,7 +1981,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = -8546165489307990724L;
+    private const long _cacheIndex_SDE_Sex = -8546165489307990724L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {

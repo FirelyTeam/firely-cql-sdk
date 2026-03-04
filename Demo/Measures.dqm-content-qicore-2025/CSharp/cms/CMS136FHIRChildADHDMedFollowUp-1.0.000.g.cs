@@ -144,7 +144,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Measurement_Period = 4855730798156578906L;
+    private const long _cacheIndex_Measurement_Period = 4855730798156578906L;
 
     private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
     {
@@ -164,7 +164,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public Patient Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-    private static readonly long _cacheIndex_Patient = 4641227550436577792L;
+    private const long _cacheIndex_Patient = 4641227550436577792L;
 
     private Patient Patient_Compute(CqlContext context)
     {
@@ -178,7 +178,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlDateTime March_1_of_Year_Prior_to_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_March_1_of_Year_Prior_to_Measurement_Period, March_1_of_Year_Prior_to_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_March_1_of_Year_Prior_to_Measurement_Period = 3709971840043392196L;
+    private const long _cacheIndex_March_1_of_Year_Prior_to_Measurement_Period = 3709971840043392196L;
 
     private CqlDateTime March_1_of_Year_Prior_to_Measurement_Period_Compute(CqlContext context)
     {
@@ -196,7 +196,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlDateTime Last_Calendar_Day_of_February_of_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Last_Calendar_Day_of_February_of_Measurement_Period, Last_Calendar_Day_of_February_of_Measurement_Period_Compute);
 
-    private static readonly long _cacheIndex_Last_Calendar_Day_of_February_of_Measurement_Period = -4226591970914106183L;
+    private const long _cacheIndex_Last_Calendar_Day_of_February_of_Measurement_Period = -4226591970914106183L;
 
     private CqlDateTime Last_Calendar_Day_of_February_of_Measurement_Period_Compute(CqlContext context)
     {
@@ -215,7 +215,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlInterval<CqlDateTime> Intake_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Intake_Period, Intake_Period_Compute);
 
-    private static readonly long _cacheIndex_Intake_Period = -706599413819521966L;
+    private const long _cacheIndex_Intake_Period = -706599413819521966L;
 
     private CqlInterval<CqlDateTime> Intake_Period_Compute(CqlContext context)
     {
@@ -230,7 +230,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<(CqlTupleMetadata, CqlDate startDate)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication, ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Compute);
 
-    private static readonly long _cacheIndex_ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication = 3223880368776900477L;
+    private const long _cacheIndex_ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication = 3223880368776900477L;
 
     private IEnumerable<(CqlTupleMetadata, CqlDate startDate)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Compute(CqlContext context)
     {
@@ -1089,7 +1089,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_First_ADHD_Medication_Prescribed_During_Intake_Period, First_ADHD_Medication_Prescribed_During_Intake_Period_Compute);
 
-    private static readonly long _cacheIndex_First_ADHD_Medication_Prescribed_During_Intake_Period = -4639298654653847318L;
+    private const long _cacheIndex_First_ADHD_Medication_Prescribed_During_Intake_Period = -4639298654653847318L;
 
     private CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period_Compute(CqlContext context)
     {
@@ -1118,7 +1118,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlDate IPSD(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_IPSD, IPSD_Compute);
 
-    private static readonly long _cacheIndex_IPSD = 2995733269230836253L;
+    private const long _cacheIndex_IPSD = 2995733269230836253L;
 
     private CqlDate IPSD_Compute(CqlContext context)
     {
@@ -1131,7 +1131,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Encounter, Qualifying_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Encounter = -1279258466511628036L;
+    private const long _cacheIndex_Qualifying_Encounter = -1279258466511628036L;
 
     private IEnumerable<Encounter> Qualifying_Encounter_Compute(CqlContext context)
     {
@@ -1169,7 +1169,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Stay_with_Qualifying_Diagnosis, Inpatient_Stay_with_Qualifying_Diagnosis_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Stay_with_Qualifying_Diagnosis = 7411720648034793077L;
+    private const long _cacheIndex_Inpatient_Stay_with_Qualifying_Diagnosis = 7411720648034793077L;
 
     private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_Compute(CqlContext context)
     {
@@ -1192,7 +1192,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase, Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase = -8156220072775179379L;
+    private const long _cacheIndex_Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase = -8156220072775179379L;
 
     private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Initiation_Phase_Compute(CqlContext context)
     {
@@ -1222,7 +1222,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Initial_Population_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population_1, Initial_Population_1_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population_1 = -1620489078424121883L;
+    private const long _cacheIndex_Initial_Population_1 = -1620489078424121883L;
 
     private bool? Initial_Population_1_Compute(CqlContext context)
     {
@@ -1261,7 +1261,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Denominator_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_1, Denominator_1_Compute);
 
-    private static readonly long _cacheIndex_Denominator_1 = -8386680003894831035L;
+    private const long _cacheIndex_Denominator_1 = -8386680003894831035L;
 
     private bool? Denominator_1_Compute(CqlContext context)
     {
@@ -1274,7 +1274,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<object> Narcolepsy_Exclusion(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Narcolepsy_Exclusion, Narcolepsy_Exclusion_Compute);
 
-    private static readonly long _cacheIndex_Narcolepsy_Exclusion = -3383504585349343618L;
+    private const long _cacheIndex_Narcolepsy_Exclusion = -3383504585349343618L;
 
     private IEnumerable<object> Narcolepsy_Exclusion_Compute(CqlContext context)
     {
@@ -1302,7 +1302,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Denominator_Exclusions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
 
-    private static readonly long _cacheIndex_Denominator_Exclusions = 4235625962082214445L;
+    private const long _cacheIndex_Denominator_Exclusions = 4235625962082214445L;
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
@@ -1318,7 +1318,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Qualifying_Numerator_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Qualifying_Numerator_Encounter, Qualifying_Numerator_Encounter_Compute);
 
-    private static readonly long _cacheIndex_Qualifying_Numerator_Encounter = 9160626202490665926L;
+    private const long _cacheIndex_Qualifying_Numerator_Encounter = 9160626202490665926L;
 
     private IEnumerable<Encounter> Qualifying_Numerator_Encounter_Compute(CqlContext context)
     {
@@ -1391,7 +1391,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Encounter_During_Initiation_Phase(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_During_Initiation_Phase, Encounter_During_Initiation_Phase_Compute);
 
-    private static readonly long _cacheIndex_Encounter_During_Initiation_Phase = 5455347647867241726L;
+    private const long _cacheIndex_Encounter_During_Initiation_Phase = 5455347647867241726L;
 
     private IEnumerable<Encounter> Encounter_During_Initiation_Phase_Compute(CqlContext context)
     {
@@ -1422,7 +1422,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Numerator_1(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_1, Numerator_1_Compute);
 
-    private static readonly long _cacheIndex_Numerator_1 = -1892291096978746434L;
+    private const long _cacheIndex_Numerator_1 = -1892291096978746434L;
 
     private bool? Numerator_1_Compute(CqlContext context)
     {
@@ -1436,7 +1436,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase, ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Compute);
 
-    private static readonly long _cacheIndex_ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase = -1527460206037085161L;
+    private const long _cacheIndex_ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase = -1527460206037085161L;
 
     private IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Compute(CqlContext context)
     {
@@ -2019,7 +2019,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public int? ADHD_Cumulative_Medication_Duration(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ADHD_Cumulative_Medication_Duration, ADHD_Cumulative_Medication_Duration_Compute);
 
-    private static readonly long _cacheIndex_ADHD_Cumulative_Medication_Duration = -3886580344192465847L;
+    private const long _cacheIndex_ADHD_Cumulative_Medication_Duration = -3886580344192465847L;
 
     private int? ADHD_Cumulative_Medication_Duration_Compute(CqlContext context)
     {
@@ -2033,7 +2033,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days, Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days_Compute);
 
-    private static readonly long _cacheIndex_Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days = -1384948008237186285L;
+    private const long _cacheIndex_Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days = -1384948008237186285L;
 
     private bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days_Compute(CqlContext context)
     {
@@ -2047,7 +2047,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase, Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase_Compute);
 
-    private static readonly long _cacheIndex_Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase = -2133610025250707462L;
+    private const long _cacheIndex_Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase = -2133610025250707462L;
 
     private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_During_Continuation_and_Maintenance_Phase_Compute(CqlContext context)
     {
@@ -2077,7 +2077,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Initial_Population_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population_2, Initial_Population_2_Compute);
 
-    private static readonly long _cacheIndex_Initial_Population_2 = -2621416679819002185L;
+    private const long _cacheIndex_Initial_Population_2 = -2621416679819002185L;
 
     private bool? Initial_Population_2_Compute(CqlContext context)
     {
@@ -2118,7 +2118,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Denominator_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator_2, Denominator_2_Compute);
 
-    private static readonly long _cacheIndex_Denominator_2 = -9201339036072555475L;
+    private const long _cacheIndex_Denominator_2 = -9201339036072555475L;
 
     private bool? Denominator_2_Compute(CqlContext context)
     {
@@ -2131,7 +2131,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase, Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Compute);
 
-    private static readonly long _cacheIndex_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase = 1910591399646290016L;
+    private const long _cacheIndex_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase = 1910591399646290016L;
 
     private IEnumerable<CqlDate> Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Compute(CqlContext context)
     {
@@ -2173,7 +2173,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase, Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Compute);
 
-    private static readonly long _cacheIndex_Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase = 9168811075567996819L;
+    private const long _cacheIndex_Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase = 9168811075567996819L;
 
     private bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Compute(CqlContext context)
     {
@@ -2188,7 +2188,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<CqlDate> Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase, Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Compute);
 
-    private static readonly long _cacheIndex_Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase = 4453205296495751162L;
+    private const long _cacheIndex_Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase = 4453205296495751162L;
 
     private IEnumerable<CqlDate> Virtual_Encounter_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Compute(CqlContext context)
     {
@@ -2231,7 +2231,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public bool? Numerator_2(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator_2, Numerator_2_Compute);
 
-    private static readonly long _cacheIndex_Numerator_2 = -2855501864183294304L;
+    private const long _cacheIndex_Numerator_2 = -2855501864183294304L;
 
     private bool? Numerator_2_Compute(CqlContext context)
     {
@@ -2271,7 +2271,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
-    private static readonly long _cacheIndex_SDE_Ethnicity = 7798486612078586507L;
+    private const long _cacheIndex_SDE_Ethnicity = 7798486612078586507L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
     {
@@ -2284,7 +2284,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
-    private static readonly long _cacheIndex_SDE_Payer = 7363118988704722449L;
+    private const long _cacheIndex_SDE_Payer = 7363118988704722449L;
 
     private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
     {
@@ -2297,7 +2297,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
-    private static readonly long _cacheIndex_SDE_Race = 2276067258728685427L;
+    private const long _cacheIndex_SDE_Race = 2276067258728685427L;
 
     private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
     {
@@ -2310,7 +2310,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     public CqlCode SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
-    private static readonly long _cacheIndex_SDE_Sex = 5817697175571891270L;
+    private const long _cacheIndex_SDE_Sex = 5817697175571891270L;
 
     private CqlCode SDE_Sex_Compute(CqlContext context)
     {
