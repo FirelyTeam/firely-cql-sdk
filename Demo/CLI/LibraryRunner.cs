@@ -153,7 +153,8 @@ namespace CLI
             Dictionary<string, Exception> errors = new Dictionary<string, Exception>();
 
             // Get expressions from the library set (excluding functions for simplicity in demo)
-            var expressions = librarySetInvoker.SelectExpressions().ToList();
+            librarySetInvoker.LibraryInvokers.TryGetValue(_opts.LibraryIdentifier, out var libraryInvoker);
+            var expressions = libraryInvoker!.SelectExpressions().ToList();
 
             // Invoke all expressions and collect results
             var results = expressions.SelectResults(setup, new SelectResultsOptions(
