@@ -17,14 +17,14 @@ public interface ICqlContextInternals
     /// </summary>
     /// <typeparam name="T">The type of the cached value.</typeparam>
     /// <param name="cacheKey">The unique key identifying the cached value.</param>
-    /// <param name="factory">A function to compute the value if it's not in the cache.</param>
+    /// <param name="factory">A function that accepts the <see cref="CqlContext"/> and computes the value if it's not in the cache.</param>
     /// <returns>The cached or newly computed value.</returns>
     /// <remarks>
     /// This method is thread-safe and can be called concurrently from multiple threads.
     /// If caching is disabled (cache is null), the factory function is called without caching the result.
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public T GetOrCompute<T>(long cacheKey, Func<T> factory);
+    public T GetOrCompute<T>(long cacheKey, Func<CqlContext, T> factory);
 
     /// <summary>
     /// Gets the total number of calls to GetOrCompute.
@@ -86,9 +86,6 @@ partial class CqlContext : ICqlContextInternals
     /// </remarks>
     long ICqlContextInternals.CacheHits => _cacheCallCount - _cacheFactoryInvocations;
 
-    T ICqlContextInternals.GetOrCompute<T>(long cacheKey, Func<T> factory) =>
-        GetOrComputeCore(cacheKey, factory, static f => f());
-
     /// <summary>
     /// Gets or computes a cached value for the specified cache key using a context-aware factory function.
     /// </summary>
@@ -103,15 +100,7 @@ partial class CqlContext : ICqlContextInternals
     /// If caching is disabled (cache is null), the factory function is called without caching the result.
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public T GetOrCompute<T>(long cacheKey, Func<CqlContext, T> factory) =>
-        GetOrComputeCore(cacheKey, (factory, this), static s => s.Item1(s.Item2));
-
-    /// <summary>
-    /// Core implementation for <see cref="GetOrCompute{T}"/> overloads.
-    /// Uses a state-threading pattern so callers can pass context without heap closures.
-    /// </summary>
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private T GetOrComputeCore<TState, T>(long cacheKey, TState state, Func<TState, T> factoryInvoker)
+    public T GetOrCompute<T>(long cacheKey, Func<CqlContext, T> factory)
     {
         Interlocked.Increment(ref _cacheCallCount);
 
@@ -120,7 +109,7 @@ partial class CqlContext : ICqlContextInternals
         {
             // Caching disabled
             Interlocked.Increment(ref _cacheFactoryInvocations);
-            return factoryInvoker(state);
+            return factory(this);
         }
 
         // Fast path: cache hit — zero allocation.
@@ -133,7 +122,7 @@ partial class CqlContext : ICqlContextInternals
         // expression bodies are pure and side-effect free, and slightly over-counting
         // _cacheFactoryInvocations in that edge case is acceptable for statistics.
         Interlocked.Increment(ref _cacheFactoryInvocations);
-        var value = (object?)factoryInvoker(state);
+        var value = (object?)factory(this);
         return (T)cache.GetOrAdd(cacheKey, value)!;
     }
 }
