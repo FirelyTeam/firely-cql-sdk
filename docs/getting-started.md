@@ -1,5 +1,25 @@
 # Getting started with the Firely SDK CQL repository
 
+## Prerequisites
+
+### Windows: Enable Long Paths
+
+This repository contains deeply nested file paths that exceed Windows' default 260-character path limit. Before cloning or building on Windows, you must enable long path support.
+
+1. **Enable long paths in Windows** (requires administrator privileges):
+   ```powershell
+   # Run as Administrator
+   Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1
+   ```
+   Alternatively, enable it via Group Policy: *Computer Configuration → Administrative Templates → System → Filesystem → Enable Win32 long paths*.
+
+2. **Enable long paths in Git**:
+   ```bash
+   git config --system core.longpaths true
+   ```
+
+> **Note:** A system restart may be required after changing the Windows registry setting.
+
 The repository consists of two parts:
 * `Cql/` - the main body of code that produces the CQL engine itself, plus the PackagerCLI
 * `docs/` - documentation and other files that are useful to understand the codebase
