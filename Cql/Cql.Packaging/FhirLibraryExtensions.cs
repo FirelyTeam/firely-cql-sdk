@@ -1,3 +1,4 @@
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
@@ -100,8 +101,10 @@ internal static class FhirLibraryExtensions
                 fhirLibrary.Content.Add(CreateCqlAttachment(elmLibrary!.VersionedLibraryIdentifier, cqlBytes));
 
             if (assemblyBytes is { Length: > 0 } dll)
+            {
                 fhirLibrary.Content.Add(CreateDllAttachment(elmLibrary!.VersionedLibraryIdentifier, dll));
-
+                fhirLibrary.AddGeneratorToolVersionToParameters();
+            }
             if (debugSymbols is { Length: > 0 } pdb)
                 fhirLibrary.Content.Add(CreatePdbAttachment(elmLibrary!.VersionedLibraryIdentifier, pdb));
 
@@ -172,6 +175,18 @@ internal static class FhirLibraryExtensions
                 Value = new ResourceReference { Reference = "#options" },
             };
             fhirLibrary.Extension.Add(optionsExtension);
+        }
+
+        public void AddGeneratorToolVersionToParameters()
+        {
+            if (fhirLibrary.Contained.OfType<Parameters>().FirstOrDefault(p => p.Id == "options") is { } parametersResource)
+            {
+                parametersResource.Parameter.Add(new Parameters.ParameterComponent
+                {
+                    Name = ".NETGeneratorToolVersion",
+                    Value = new FhirString(LibrarySetCSharpCodeGenerator.GeneratorToolVersion)
+                });
+            }
         }
 
         private void AddDataRequirements(

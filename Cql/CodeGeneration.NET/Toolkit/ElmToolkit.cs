@@ -42,6 +42,8 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         _services = ElmToolkitServices.Create(loggerFactory, config);
     }
 
+    public static readonly Version GeneratorToolVersion = new(LibrarySetCSharpCodeGenerator.GeneratorToolVersion);
+
     private ElmToolkitArtifactsById _artifactsById;
     private readonly ElmToolkitServices _services;
 

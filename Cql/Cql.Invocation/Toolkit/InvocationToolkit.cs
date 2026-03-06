@@ -36,6 +36,9 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
         _services = LibrarySetInvokerBuilderServices.Create(loggerFactory);
     }
 
+    public static readonly Version MinSupportedGeneratorToolVersion = LibrarySetInvoker.MinSupportedGeneratorToolVersion;
+    public static readonly Version FirstUnsupportedGeneratorToolVersion = LibrarySetInvoker.FirstUnsupportedGeneratorToolVersion;
+
     /// <inheritdoc />
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public ILoggerFactory LoggerFactory { get; }

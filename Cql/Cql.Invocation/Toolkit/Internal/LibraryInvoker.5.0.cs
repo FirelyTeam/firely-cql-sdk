@@ -28,6 +28,9 @@ internal sealed class LibraryInstanceInvoker_5_0 : LibraryInstanceInvoker
                       .AsReadOnly();
     }
 
+    public static readonly Version MinSupportedGeneratorToolVersion = new(5,0,0,0);
+    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(5,1,0,0);
+
     public override IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 
     private static object GetLibraryFromStaticInstanceProperty(Type libraryType) =>
@@ -57,8 +60,8 @@ internal sealed class LibraryInstanceInvoker_5_0 : LibraryInstanceInvoker
     /// The current CQL tool version can be referenced by <see cref="LibrarySetCSharpCodeGenerator.GeneratorToolVersion"/>.
     /// </summary>
     public static bool SupportsVersion(Version cqlToolVersion) =>
-        cqlToolVersion >= new Version(5, 0, 0, 0)
-        && cqlToolVersion < new Version(5, 1, 0, 0);
+        cqlToolVersion >= MinSupportedGeneratorToolVersion
+        && cqlToolVersion < FirstUnsupportedGeneratorToolVersion;
 }
 
 file sealed class DefinitionInvoker_5_0(

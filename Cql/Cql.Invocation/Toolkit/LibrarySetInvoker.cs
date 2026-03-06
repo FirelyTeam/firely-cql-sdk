@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Invocation.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
@@ -20,6 +21,9 @@ namespace Hl7.Cql.Invocation.Toolkit;
 public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
 {
     private readonly AssemblyLoadContext _alc;
+
+    public static readonly Version MinSupportedGeneratorToolVersion = LibraryInstanceInvoker_5_0.MinSupportedGeneratorToolVersion;
+    public static readonly Version FirstUnsupportedGeneratorToolVersion = LibraryInstanceInvoker_5_0.FirstUnsupportedGeneratorToolVersion;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LibrarySetInvoker"/> class.
