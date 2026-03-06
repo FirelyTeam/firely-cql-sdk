@@ -98,15 +98,18 @@ partial class CqlContext : ICqlContextInternals
             return factory();
         }
 
-        // Use GetOrAdd for lock-free read and atomic add
-        // Note: We box the result, so null values are preserved correctly
-        var cachedValue = cache.GetOrAdd(cacheKey, _ =>
-        {
-            Interlocked.Increment(ref _cacheFactoryInvocations);
-            return factory()!;
-        });
+        // Fast path: cache hit — zero allocation.
+        if (cache.TryGetValue(cacheKey, out var existing))
+            return (T)existing!;
 
-        return (T)cachedValue!;
+        // Slow path: compute and cache without a lambda allocation.
+        // Two threads may both miss TryGetValue and both call the factory; the value
+        // that loses the GetOrAdd race is discarded. This is safe because CQL
+        // expression bodies are pure and side-effect free, and slightly over-counting
+        // _cacheFactoryInvocations in that edge case is acceptable for statistics.
+        Interlocked.Increment(ref _cacheFactoryInvocations);
+        var value = (object?)factory();
+        return (T)cache.GetOrAdd(cacheKey, value)!;
     }
 
     /// <summary>
@@ -135,14 +138,17 @@ partial class CqlContext : ICqlContextInternals
             return factory(this);
         }
 
-        // Use GetOrAdd for lock-free read and atomic add
-        // Note: We box the result, so null values are preserved correctly
-        var cachedValue = cache.GetOrAdd(cacheKey, _ =>
-        {
-            Interlocked.Increment(ref _cacheFactoryInvocations);
-            return factory(this)!;
-        });
+        // Fast path: cache hit — zero allocation.
+        if (cache.TryGetValue(cacheKey, out var existing))
+            return (T)existing!;
 
-        return (T)cachedValue!;
+        // Slow path: compute and cache without a lambda allocation.
+        // Two threads may both miss TryGetValue and both call the factory; the value
+        // that loses the GetOrAdd race is discarded. This is safe because CQL
+        // expression bodies are pure and side-effect free, and slightly over-counting
+        // _cacheFactoryInvocations in that edge case is acceptable for statistics.
+        Interlocked.Increment(ref _cacheFactoryInvocations);
+        var value = (object?)factory(this);
+        return (T)cache.GetOrAdd(cacheKey, value)!;
     }
 }
