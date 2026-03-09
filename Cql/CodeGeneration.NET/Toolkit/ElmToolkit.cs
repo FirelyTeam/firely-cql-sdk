@@ -42,6 +42,9 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         _services = ElmToolkitServices.Create(loggerFactory, config);
     }
 
+    /// <summary>
+    /// Gets the version of the .NET code generator tool used by this toolkit.
+    /// </summary>
     public static readonly Version GeneratorToolVersion = new(LibrarySetCSharpCodeGenerator.GeneratorToolVersion);
 
     private ElmToolkitArtifactsById _artifactsById;

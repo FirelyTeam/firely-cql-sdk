@@ -36,7 +36,20 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
         _services = LibrarySetInvokerBuilderServices.Create(loggerFactory);
     }
 
+    /// <summary>
+    /// Gets the minimum generator tool version supported by this invocation toolkit.
+    /// </summary>
+    /// <remarks>
+    /// This value mirrors <see cref="LibrarySetInvoker.MinSupportedGeneratorToolVersion"/>.
+    /// </remarks>
     public static readonly Version MinSupportedGeneratorToolVersion = LibrarySetInvoker.MinSupportedGeneratorToolVersion;
+
+    /// <summary>
+    /// Gets the first generator tool version that this invocation toolkit does not support for executing generated code.
+    /// </summary>
+    /// <remarks>
+    /// This value mirrors <see cref="LibrarySetInvoker.FirstUnsupportedGeneratorToolVersion"/>.
+    /// </remarks>
     public static readonly Version FirstUnsupportedGeneratorToolVersion = LibrarySetInvoker.FirstUnsupportedGeneratorToolVersion;
 
     /// <inheritdoc />
