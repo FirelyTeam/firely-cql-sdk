@@ -70,7 +70,6 @@ override Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Equals(object? obj)
 override Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.GetHashCode() -> int
 override Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ToString() -> string!
 override Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitResultArtifacts.GetHashCode() -> int
-static readonly Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.GeneratorToolVersion -> System.Version!
 static Hl7.Cql.CodeGeneration.NET.AssemblyBinary.Default.get -> Hl7.Cql.CodeGeneration.NET.AssemblyBinary!
 static Hl7.Cql.CodeGeneration.NET.AssemblyBinary.operator !=(Hl7.Cql.CodeGeneration.NET.AssemblyBinary? left, Hl7.Cql.CodeGeneration.NET.AssemblyBinary? right) -> bool
 static Hl7.Cql.CodeGeneration.NET.AssemblyBinary.operator ==(Hl7.Cql.CodeGeneration.NET.AssemblyBinary? left, Hl7.Cql.CodeGeneration.NET.AssemblyBinary? right) -> bool
