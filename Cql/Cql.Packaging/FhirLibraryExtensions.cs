@@ -1,3 +1,4 @@
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
@@ -100,8 +101,10 @@ internal static class FhirLibraryExtensions
                 fhirLibrary.Content.Add(CreateCqlAttachment(elmLibrary!.VersionedLibraryIdentifier, cqlBytes));
 
             if (assemblyBytes is { Length: > 0 } dll)
+            {
                 fhirLibrary.Content.Add(CreateDllAttachment(elmLibrary!.VersionedLibraryIdentifier, dll));
-
+                fhirLibrary.AddGeneratorToolVersionToParameters();
+            }
             if (debugSymbols is { Length: > 0 } pdb)
                 fhirLibrary.Content.Add(CreatePdbAttachment(elmLibrary!.VersionedLibraryIdentifier, pdb));
 
@@ -143,35 +146,28 @@ internal static class FhirLibraryExtensions
                 fhirLibrary.Contained.Remove(existingParameter);
             }
 
-            // Now add new options parameter
-            var optionsParameter = new Parameters();
-            optionsParameter.Id = "options";
+            var optionsParameter = fhirLibrary.AddNewOptionsParameterResource();
             optionsParameter.Parameter.AddRange(fhirParameters);
-            fhirLibrary.Contained.Add(optionsParameter);
 
-            // Add and replace existing CQL options extension, or add new one
+            fhirLibrary.EnsureCqlOptionsExtension();
+        }
 
-            // See requirement for Contained resources: https://build.fhir.org/domainresource.html#invs
-            // dom-3: If the resource is contained in another resource,
-            //        it SHALL be referred to from elsewhere in the resource
-            //        or SHALL refer to the containing resource
-            //
-            // This is done by adding an extension. (Example: https://build.fhir.org/ig/HL7/cql-ig/Library-CQLExample.json.html)
+        public void AddGeneratorToolVersionToParameters()
+        {
+            fhirLibrary.Contained ??= [];
 
-            // Find and remove existing options extension
-            var existingExtension = fhirLibrary.Extension.FirstOrDefault(e => e.Url == Constants.Hl7FhirStructureDefinitionCqlOptions);
-            if (existingExtension != null)
+            // Get or create the options parameters resource (preserving existing parameters)
+            var existingParameter =
+                fhirLibrary.Contained.OfType<Parameters>().FirstOrDefault(p => p.Id == "options");
+            var optionsParameter = existingParameter ?? fhirLibrary.AddNewOptionsParameterResource();
+
+            optionsParameter.Parameter.Add(new Parameters.ParameterComponent
             {
-                fhirLibrary.Extension.Remove(existingExtension);
-            }
+                Name = "CSharpGeneratorVersion",
+                Value = new FhirString(LibrarySetCSharpCodeGenerator.GeneratorToolVersion)
+            });
 
-            // Now add new options extensions
-            var optionsExtension = new Extension
-            {
-                Url = Constants.Hl7FhirStructureDefinitionCqlOptions,
-                Value = new ResourceReference { Reference = "#options" },
-            };
-            fhirLibrary.Extension.Add(optionsExtension);
+            fhirLibrary.EnsureCqlOptionsExtension();
         }
 
         private void AddDataRequirements(
@@ -264,6 +260,39 @@ internal static class FhirLibraryExtensions
                 fhirLibrary.Content.Add(newAttachment);
             }
         }
+    }
+
+    private static void EnsureCqlOptionsExtension(this FhirLibrary fhirLibrary)
+    {
+        // Ensure the required extension reference exists
+        // See requirement for Contained resources: https://build.fhir.org/domainresource.html#invs
+        // dom-3: If the resource is contained in another resource,
+        //        it SHALL be referred to from elsewhere in the resource
+        //        or SHALL refer to the containing resource
+        //
+        // This is done by adding an extension. (Example: https://build.fhir.org/ig/HL7/cql-ig/Library-CQLExample.json.html)
+
+        // Find and remove existing options extension
+        var existingExtension = fhirLibrary.Extension.FirstOrDefault(e => e.Url == Constants.Hl7FhirStructureDefinitionCqlOptions);
+        if (existingExtension != null)
+        {
+            fhirLibrary.Extension.Remove(existingExtension);
+        }
+
+        // Now add new options extensions
+        var optionsExtension = new Extension
+        {
+            Url = Constants.Hl7FhirStructureDefinitionCqlOptions,
+            Value = new ResourceReference { Reference = "#options" },
+        };
+        fhirLibrary.Extension.Add(optionsExtension);
+    }
+
+    private static Parameters AddNewOptionsParameterResource(this FhirLibrary fhirLibrary)
+    {
+        var newOptionsParameter = new Parameters { Id = "options" };
+        fhirLibrary.Contained.Add(newOptionsParameter);
+        return newOptionsParameter;
     }
 
     private static void AddOutParameters(

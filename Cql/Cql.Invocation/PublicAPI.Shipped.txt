@@ -81,6 +81,10 @@ override Hl7.Cql.Invocation.Toolkit.LibraryInstanceInvoker.DependencyLibraryIden
 override Hl7.Cql.Invocation.Toolkit.LibraryInstanceInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 override Hl7.Cql.Invocation.Toolkit.LibraryInvoker.ToString() -> string!
 override Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.ToString() -> string?
+static readonly Hl7.Cql.Invocation.Toolkit.InvocationToolkit.FirstUnsupportedGeneratorToolVersion -> System.Version!
+static readonly Hl7.Cql.Invocation.Toolkit.InvocationToolkit.MinSupportedGeneratorToolVersion -> System.Version!
+static readonly Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.FirstUnsupportedGeneratorToolVersion -> System.Version!
+static readonly Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.MinSupportedGeneratorToolVersion -> System.Version!
 static Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.operator !=(Hl7.Cql.Invocation.Toolkit.CqlParameterInfo left, Hl7.Cql.Invocation.Toolkit.CqlParameterInfo right) -> bool
 static Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.operator ==(Hl7.Cql.Invocation.Toolkit.CqlParameterInfo left, Hl7.Cql.Invocation.Toolkit.CqlParameterInfo right) -> bool
 static Hl7.Cql.Invocation.Toolkit.Extensions.CqlToolkitInvocationExtensions.CreateLibrarySetInvoker(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig? elmToolkitConfig = null, string! name = "") -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
