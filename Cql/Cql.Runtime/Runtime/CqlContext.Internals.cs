@@ -119,10 +119,11 @@ partial class CqlContext : ICqlContextInternals
         // Slow path: compute and cache without a lambda allocation.
         // Two threads may both miss TryGetValue and both call the factory; the value
         // that loses the GetOrAdd race is discarded. This is safe because CQL
-        // expression bodies are pure and side-effect free, and slightly over-counting
-        // _cacheFactoryInvocations in that edge case is acceptable for statistics.
-        Interlocked.Increment(ref _cacheFactoryInvocations);
+        // expression bodies are pure and side-effect free.
         var value = (object?)factory(this);
-        return (T)cache.GetOrAdd(cacheKey, value)!;
+        var cached = cache.GetOrAdd(cacheKey, value)!;
+        if (ReferenceEquals(cached, value))
+            Interlocked.Increment(ref _cacheFactoryInvocations);
+        return (T)cached;
     }
 }
