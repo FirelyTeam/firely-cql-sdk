@@ -31,12 +31,12 @@ internal sealed class LibraryInstanceInvoker_5_0 : LibraryInstanceInvoker
     /// <summary>
     /// The minimum (inclusive) CQL code generator tool version this invoker supports.
     /// </summary>
-    public static readonly Version MinSupportedGeneratorToolVersion = new(5,0,0,0);
+    public static readonly Version MinSupportedGeneratorToolVersion = new(5,1,0,0);
 
     /// <summary>
     /// The first (exclusive) CQL code generator tool version this invoker does not support.
     /// </summary>
-    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(6,0,0,0);
+    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(5,2,0,0);
 
     public override IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 
