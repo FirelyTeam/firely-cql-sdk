@@ -29,8 +29,9 @@ internal static class PackagerCLiLoggingBuilderExtensions
         loggingOptions ??= LoggingOptions.Default;
         OptionsBinder.ApplySpecialPropertyBindings(loggingOptions, loggingSection);
 
-        LogLevel minLogLevel = loggingOptions.LogFile is not null
-            ? (LogLevel)Math.Min((int)loggingOptions.FileLogLevel, (int)loggingOptions.ConsoleLogLevel)
+        var fileLogLevel = loggingOptions.LogFile is not null ? loggingOptions.FileLogLevel : LogLevel.None;
+        LogLevel minLogLevel = fileLogLevel != LogLevel.None
+            ? (LogLevel)Math.Min((int)fileLogLevel, (int)loggingOptions.ConsoleLogLevel)
             : loggingOptions.ConsoleLogLevel;
         logging.AddFilter(level => level >= minLogLevel);
 
@@ -43,11 +44,12 @@ internal static class PackagerCLiLoggingBuilderExtensions
                 if (!loggingOptions.Append)
                     File.WriteAllText(logFilePath, ""); // Create or clear the log file
                 else
-                    File.OpenText(logFilePath).Close(); // Touch the file
+                    File.Open(logFilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite).Close(); // Touch the file (create if it does not exist)
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine($"FAIL: {string.Format(CultureInfo.InvariantCulture, ExitCodes.LogFileSetupError.MessageWithPlaceholder, logFilePath)}: {ex.Message}");
+                var message = ExitCodes.LogFileSetupError.MessageWithPlaceholder.Replace("{LogFile}", logFilePath, StringComparison.Ordinal);
+                Console.Error.WriteLine($"FAIL: {message}: {ex.Message}");
                 Environment.Exit(ExitCodes.LogFileSetupError.Code);
             }
 
@@ -56,6 +58,7 @@ internal static class PackagerCLiLoggingBuilderExtensions
                          .MinimumLevel.Is(MapToSeriLogLogEventLevel(minLogLevel)!.Value)
                          .WriteTo.File(
                              logFilePath,
+                             restrictedToMinimumLevel: MapToSeriLogLogEventLevel(fileLogLevel)!.Value,
                              outputTemplate: "____{NewLine}{Level:u4}: {Message:lj}{NewLine}{Exception}",
                              formatProvider: CultureInfo.InvariantCulture)
                          .CreateLogger();
