@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Packager;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Logging;
 using Serilog;
@@ -23,8 +24,10 @@ internal static class PackagerCLiLoggingBuilderExtensions
     {
         logging.ClearProviders();
 
-        var loggingOptions = configuration.GetSection(LoggingOptions.ConfigSection).Get<LoggingOptions>();
+        var loggingSection = configuration.GetSection(LoggingOptions.ConfigSection);
+        var loggingOptions = loggingSection.Get<LoggingOptions>();
         loggingOptions ??= LoggingOptions.Default;
+        OptionsBinder.ApplySpecialPropertyBindings(loggingOptions, loggingSection);
 
         LogLevel minLogLevel = loggingOptions.LogFile is not null
             ? (LogLevel)Math.Min((int)loggingOptions.FileLogLevel, (int)loggingOptions.ConsoleLogLevel)
@@ -34,10 +37,19 @@ internal static class PackagerCLiLoggingBuilderExtensions
         if (loggingOptions.LogFile is { } logFile)
         {
             var logFilePath = logFile.FullName;
-            if (!loggingOptions.Append)
-                File.WriteAllText(logFilePath, ""); // Create or clear the log file
-            else
-                File.OpenText(logFilePath).Close(); // Touch the file
+            try
+            {
+                logFile.Directory?.Create();
+                if (!loggingOptions.Append)
+                    File.WriteAllText(logFilePath, ""); // Create or clear the log file
+                else
+                    File.OpenText(logFilePath).Close(); // Touch the file
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"FAIL: {string.Format(CultureInfo.InvariantCulture, ExitCodes.LogFileSetupError.MessageWithPlaceholder, logFilePath)}: {ex.Message}");
+                Environment.Exit(ExitCodes.LogFileSetupError.Code);
+            }
 
             Log.Logger = new LoggerConfiguration()
                          .Enrich.FromLogContext()

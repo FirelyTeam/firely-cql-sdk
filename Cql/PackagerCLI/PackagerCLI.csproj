@@ -43,6 +43,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="bin\Debug\net8.0\\build.log" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="bin\Debug\net8.0\\build.log" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="$(OutputPath)\build.log" Link="build.log" />
 	</ItemGroup>
 
