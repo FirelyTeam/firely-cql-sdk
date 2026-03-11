@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
@@ -168,5 +169,48 @@ public class LibraryPackagerTests
         var subjectType = library.Subject as CodeableConcept;
         subjectType?.Coding?.Any(coding => "http://hl7.org/fhir/resource-types".Equals(coding.System) && "Patient".Equals(coding.Code)).Should()
                    .Be(contextExpected);
+    }
+
+    [TestMethod]
+    public void CreateLibraryResource_WithAssemblyBytes_IncludesCSharpGeneratorVersion()
+    {
+        // Arrange/Act
+        var library = CreateFhirLibrary();
+
+        // Assert: when assembly bytes are provided, CSharpGeneratorVersion should be in the options parameters
+        var optionsParameter = library.Contained.OfType<Parameters>().FirstOrDefault(p => p.Id == "options");
+        optionsParameter.Should().NotBeNull("options parameters resource should be present when assembly bytes are provided");
+
+        var generatorVersionParam = optionsParameter!.Parameter.FirstOrDefault(p => p.Name == "CSharpGeneratorVersion");
+        generatorVersionParam.Should().NotBeNull("CSharpGeneratorVersion parameter should be present when assembly bytes are provided");
+
+        var paramValue = (generatorVersionParam!.Value as FhirString)?.Value;
+        paramValue.Should().Be(ElmToolkit.GeneratorToolVersion.ToString(), "CSharpGeneratorVersion should match the current generator tool version");
+    }
+
+    [TestMethod]
+    public void CreateLibraryResource_WithoutAssemblyBytes_DoesNotIncludeCSharpGeneratorVersion()
+    {
+        // Arrange
+        var versionedIdentifier = VersionedIdentifier;
+        var elmLibrary = new Library(versionedIdentifier);
+
+        // Act: create library without assembly bytes
+        var library = Hl7.Fhir.Model.Library.Create(
+            typeCrosswalk: _mapper,
+            elmLibrary: elmLibrary,
+            elmBytes: ElmBytes,
+            cqlBytes: CqlBytes,
+            assemblyBytes: [],
+            debugSymbols: [],
+            cSharpSourceCodeById: [],
+            elmLibrarySet: new LibrarySet("", [elmLibrary]),
+            resourceCanonicalBuilder: (_, _, _) => TestUrl,
+            elmFileLastWriteTimeUtc: Date);
+
+        // Assert: no CSharpGeneratorVersion when assembly bytes are not provided
+        var optionsParameter = library.Contained.OfType<Parameters>().FirstOrDefault(p => p.Id == "options");
+        var generatorVersionParam = optionsParameter?.Parameter.FirstOrDefault(p => p.Name == "CSharpGeneratorVersion");
+        generatorVersionParam.Should().BeNull("CSharpGeneratorVersion should not be present when no assembly bytes are provided");
     }
 }
