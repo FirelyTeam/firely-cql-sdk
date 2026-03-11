@@ -16,6 +16,7 @@ using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -703,4 +704,46 @@ public class ToolkitTests
             { DebugSymbolsFormat = DebugSymbolsFormat.Embedded }
 #endif
         ;
+
+    [TestMethod]
+    public void ElmToolkit_GeneratorToolVersion_IsNotNullAndHasCorrectFormat()
+    {
+        // Act
+        var version = ElmToolkit.GeneratorToolVersion;
+
+        // Assert
+        version.Should().NotBeNull();
+        version.ToString().Should().MatchRegex(@"^\d+\.\d+\.\d+\.\d+$", "GeneratorToolVersion should be in format x.x.x.x");
+    }
+
+    [TestMethod]
+    public void InvocationToolkit_VersionRange_IsConsistentWithLibrarySetInvoker()
+    {
+        // Assert: InvocationToolkit mirrors LibrarySetInvoker values
+        InvocationToolkit.MinSupportedGeneratorToolVersion.Should().Be(LibrarySetInvoker.MinSupportedGeneratorToolVersion);
+        InvocationToolkit.FirstUnsupportedGeneratorToolVersion.Should().Be(LibrarySetInvoker.FirstUnsupportedGeneratorToolVersion);
+    }
+
+    [TestMethod]
+    public void InvocationToolkit_VersionRange_IsValidRange()
+    {
+        // Assert: min < first unsupported and both are non-null
+        InvocationToolkit.MinSupportedGeneratorToolVersion.Should().NotBeNull();
+        InvocationToolkit.FirstUnsupportedGeneratorToolVersion.Should().NotBeNull();
+        InvocationToolkit.MinSupportedGeneratorToolVersion.Should().BeLessThan(InvocationToolkit.FirstUnsupportedGeneratorToolVersion);
+    }
+
+    [TestMethod]
+    public void ElmToolkit_GeneratorToolVersion_IsWithinInvocationToolkitSupportedRange()
+    {
+        // The current generator version should be supported by the invocation toolkit
+        var generatorVersion = ElmToolkit.GeneratorToolVersion;
+        var minSupported = InvocationToolkit.MinSupportedGeneratorToolVersion;
+        var firstUnsupported = InvocationToolkit.FirstUnsupportedGeneratorToolVersion;
+
+        generatorVersion.Should().BeGreaterThanOrEqualTo(minSupported,
+            "the current generator version should be within the supported range");
+        generatorVersion.Should().BeLessThan(firstUnsupported,
+            "the current generator version should be within the supported range");
+    }
 }
