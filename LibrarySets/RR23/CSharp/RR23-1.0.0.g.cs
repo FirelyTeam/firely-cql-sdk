@@ -12,23 +12,11 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "3.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
-    private RR23_1_0_0() {}
-
-    public static RR23_1_0_0 Instance { get; } = new();
-
-    #region ILibrary Implementation
-
-    public string Name => "RR23";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
-
-    #endregion ILibrary Implementation
-
-    #region ValueSets
+    #region ValueSets (2)
 
     [CqlValueSetDefinition("Injury due to falling rock", valueSetId: "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", valueSetVersion: null)]
     public CqlValueSet Injury_due_to_falling_rock(CqlContext _) => _Injury_due_to_falling_rock;
@@ -40,7 +28,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #endregion ValueSets
 
-    #region Codes
+    #region Codes (2)
 
     [CqlCodeDefinition("Tiny Umbrella", codeId: "U707", codeSystem: "http://acme.org/product-catalog")]
     public CqlCode Tiny_Umbrella(CqlContext _) => _Tiny_Umbrella;
@@ -52,160 +40,208 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     #endregion Codes
 
-    #region CodeSystems
+    #region CodeSystems (2)
 
-    [CqlCodeSystemDefinition("ACME Product Catalog")]
+    [CqlCodeSystemDefinition("ACME Product Catalog", codeSystemId: "http://acme.org/product-catalog", codeSystemVersion: null)]
     public CqlCodeSystem ACME_Product_Catalog(CqlContext _) => _ACME_Product_Catalog;
     private static readonly CqlCodeSystem _ACME_Product_Catalog =
-      new CqlCodeSystem("http://acme.org/product-catalog", null,
-          _Tiny_Umbrella);
+      new CqlCodeSystem("http://acme.org/product-catalog", null, [
+          _Tiny_Umbrella]);
 
-    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes")]
+    [CqlCodeSystemDefinition("ConditionVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-ver-status", codeSystemVersion: null)]
     public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
     private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
-      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status", null,
-          _entered_in_error);
+      new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status", null, [
+          _entered_in_error]);
 
     #endregion CodeSystems
 
-    #region Parameters
+    #region Parameters (1)
 
     [CqlParameterDefinition("Measurement Period")]
-    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
-    {
-        CqlDateTime ro_ = context.Operators.DateTime(2023, 1, 1, default, default, default, default, default);
-        CqlDateTime rp_ = context.Operators.DateTime(2023, 12, 31, default, default, default, default, default);
-        CqlInterval<CqlDateTime> rq_ = context.Operators.Interval(ro_, rp_, true, true);
-        object rr_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", rq_);
+    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
-        return (CqlInterval<CqlDateTime>)rr_;
+    private const long _cacheIndex_Measurement_Period = 3305136097504393406L;
+
+    private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
+    {
+        CqlDateTime a_ = context.Operators.DateTime(2023, 1, 1, (int?)default, (int?)default, (int?)default, (int?)default, (decimal?)default);
+        CqlDateTime b_ = context.Operators.DateTime(2023, 12, 31, (int?)default, (int?)default, (int?)default, (int?)default, (decimal?)default);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
+        object d_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", c_);
+        return (CqlInterval<CqlDateTime>)d_;
     }
 
 
     #endregion Parameters
 
-    #region Expressions
+    #region Functions and Expressions (7)
 
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context)
-    {
-        IEnumerable<Patient> rs_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient rt_ = context.Operators.SingletonFrom<Patient>(rs_);
+    public Patient Patient(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
-        return rt_;
+    private const long _cacheIndex_Patient = -3348112132702101490L;
+
+    private Patient Patient_Compute(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        return b_;
     }
 
 
     [CqlExpressionDefinition("Initial Population")]
-    public bool? Initial_Population(CqlContext context)
-    {
-        Patient ru_ = this.Patient(context);
-        Date rv_ = ru_?.BirthDateElement;
-        CqlDateTime rw_ = context.Operators.Convert<CqlDateTime>(rv_);
-        CqlInterval<CqlDateTime> rx_ = this.Measurement_Period(context);
-        CqlDateTime ry_ = context.Operators.Start(rx_);
-        int? rz_ = context.Operators.CalculateAgeAt(rw_, ry_, "year");
-        bool? sa_ = context.Operators.GreaterOrEqual(rz_, 16);
-        IEnumerable<Condition> sb_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
-        bool? sc_ = context.Operators.Exists<Condition>(sb_);
-        bool? sd_ = context.Operators.And(sa_, sc_);
+    public bool? Initial_Population(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
-        return sd_;
+    private const long _cacheIndex_Initial_Population = -7284745999438350891L;
+
+    private bool? Initial_Population_Compute(CqlContext context)
+    {
+        Patient a_ = this.Patient(context);
+        Date b_ = a_?.BirthDateElement;
+        CqlDateTime c_ = context.Operators.Convert<CqlDateTime>(b_);
+        CqlInterval<CqlDateTime> d_ = this.Measurement_Period(context);
+        CqlDateTime e_ = context.Operators.Start(d_);
+        int? f_ = context.Operators.CalculateAgeAt(c_, e_, "year");
+        bool? g_ = context.Operators.GreaterOrEqual(f_, 16);
+        IEnumerable<Condition> h_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
+        bool? i_ = context.Operators.Exists<Condition>(h_);
+        bool? j_ = context.Operators.And(g_, i_);
+        return j_;
     }
 
 
     [CqlExpressionDefinition("Denominator")]
-    public bool? Denominator(CqlContext context)
-    {
-        bool? se_ = this.Initial_Population(context);
+    public bool? Denominator(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
-        return se_;
+    private const long _cacheIndex_Denominator = 5964698863907389630L;
+
+    private bool? Denominator_Compute(CqlContext context)
+    {
+        bool? a_ = this.Initial_Population(context);
+        return a_;
     }
 
 
     [CqlExpressionDefinition("Numerator")]
-    public bool? Numerator(CqlContext context)
-    {
-        IEnumerable<SupplyDelivery> sf_ = this.Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(context);
-        bool? sg_ = context.Operators.Exists<SupplyDelivery>(sf_);
+    public bool? Numerator(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-        return sg_;
+    private const long _cacheIndex_Numerator = 7555091615263210657L;
+
+    private bool? Numerator_Compute(CqlContext context)
+    {
+        IEnumerable<SupplyDelivery> a_ = this.Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(context);
+        bool? b_ = context.Operators.Exists<SupplyDelivery>(a_);
+        return b_;
     }
 
 
     [CqlExpressionDefinition("Injury due to falling rock within measurement period")]
-    public IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period(CqlContext context)
+    public IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_Injury_due_to_falling_rock_within_measurement_period, Injury_due_to_falling_rock_within_measurement_period_Compute);
+
+    private const long _cacheIndex_Injury_due_to_falling_rock_within_measurement_period = 6330377113132342568L;
+
+    private IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period_Compute(CqlContext context)
     {
-        CqlValueSet sh_ = this.Injury_due_to_falling_rock(context);
-        IEnumerable<Condition> si_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, sh_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-        bool? sj_(Condition C)
-        {
-            DataType sl_ = C?.Onset;
-            CqlDateTime sm_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, sl_ as FhirDateTime);
-            CqlInterval<CqlDateTime> sn_ = this.Measurement_Period(context);
-            bool? so_ = context.Operators.In<CqlDateTime>(sm_, sn_, default);
+        CqlValueSet a_ = this.Injury_due_to_falling_rock(context);
+        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
-            return so_;
-        };
-        IEnumerable<Condition> sk_ = context.Operators.Where<Condition>(si_, sj_);
+        bool? c_(Condition C) {
+            DataType e_ = C?.Onset;
+            CqlDateTime f_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, e_ as FhirDateTime);
+            CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
+            bool? h_ = context.Operators.In<CqlDateTime>(f_, g_, (string)default);
+            return h_;
+        }
 
-        return sk_;
+        IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
+        return d_;
     }
 
 
     [CqlExpressionDefinition("Latest injury due to falling rock")]
-    public Condition Latest_injury_due_to_falling_rock(CqlContext context)
+    public Condition Latest_injury_due_to_falling_rock(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_Latest_injury_due_to_falling_rock, Latest_injury_due_to_falling_rock_Compute);
+
+    private const long _cacheIndex_Latest_injury_due_to_falling_rock = -4330520114394964250L;
+
+    private Condition Latest_injury_due_to_falling_rock_Compute(CqlContext context)
     {
-        IEnumerable<Condition> sp_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
-        object sq_(Condition @this)
-        {
-            DataType st_ = @this?.Onset;
-            CqlDateTime su_ = context.Operators.Convert<CqlDateTime>(st_ as FhirDateTime);
+        IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
 
-            return su_;
-        };
-        IEnumerable<Condition> sr_ = context.Operators.SortBy<Condition>(sp_, sq_, System.ComponentModel.ListSortDirection.Ascending);
-        Condition ss_ = context.Operators.Last<Condition>(sr_);
+        object b_(Condition @this) {
+            DataType e_ = @this?.Onset;
+            CqlDateTime f_ = context.Operators.Convert<CqlDateTime>(e_ as FhirDateTime);
+            return f_;
+        }
 
-        return ss_;
+        IEnumerable<Condition> c_ = context.Operators.SortBy<Condition>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
+        Condition d_ = context.Operators.Last<Condition>(c_);
+        return d_;
     }
 
 
     [CqlExpressionDefinition("Tiny Umbrella Supply within 7 days after most recent injury due to falling rock")]
-    public IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(CqlContext context)
+    public IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(CqlContext context) =>
+        context.GetOrCompute(_cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock, Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Compute);
+
+    private const long _cacheIndex_Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = 8767411941886803436L;
+
+    private IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Compute(CqlContext context)
     {
-        IEnumerable<SupplyDelivery> sv_ = context.Operators.Retrieve<SupplyDelivery>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/SupplyDelivery"));
-        bool? sw_(SupplyDelivery SD)
-        {
-            SupplyDelivery.SuppliedItemComponent sy_ = SD?.SuppliedItem;
-            DataType sz_ = sy_?.Item;
-            CqlCode ta_ = this.Tiny_Umbrella(context);
-            bool? tb_ = context.Operators.Equivalent(sz_, ta_);
-            Condition tc_ = this.Latest_injury_due_to_falling_rock(context);
-            Condition[] td_ = [
-                tc_,
+        IEnumerable<SupplyDelivery> a_ = context.Operators.Retrieve<SupplyDelivery>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/SupplyDelivery"));
+
+        bool? b_(SupplyDelivery SD) {
+            SupplyDelivery.SuppliedItemComponent d_ = SD?.SuppliedItem;
+            DataType e_ = d_?.Item;
+            CqlCode f_ = this.Tiny_Umbrella(context);
+            bool? g_ = context.Operators.Equivalent(e_, f_);
+            Condition h_ = this.Latest_injury_due_to_falling_rock(context);
+            Condition[] i_ = [
+                h_,
             ];
-            bool? te_(Condition C)
-            {
-                DataType tj_ = C?.Onset;
-                DataType tk_ = SD?.Occurrence;
-                bool? tl_ = context.Operators.Before(tj_ as FhirDateTime, tk_ as FhirDateTime, default);
 
-                return tl_;
-            };
-            IEnumerable<Condition> tf_ = context.Operators.Where<Condition>((IEnumerable<Condition>)td_, te_);
-            Condition tg_ = context.Operators.SingletonFrom<Condition>(tf_);
-            bool? th_ = context.Operators.Not((bool?)((tg_ as object) is null));
-            bool? ti_ = context.Operators.And(tb_, th_);
+            bool? j_(Condition C) {
+                DataType o_ = C?.Onset;
+                DataType p_ = SD?.Occurrence;
+                bool? q_ = context.Operators.Before(o_ as FhirDateTime, p_ as FhirDateTime, (string)default);
+                return q_;
+            }
 
-            return ti_;
-        };
-        IEnumerable<SupplyDelivery> sx_ = context.Operators.Where<SupplyDelivery>(sv_, sw_);
+            IEnumerable<Condition> k_ = context.Operators.Where<Condition>((IEnumerable<Condition>)i_, j_);
+            Condition l_ = context.Operators.SingletonFrom<Condition>(k_);
+            bool? m_ = context.Operators.Not((bool?)(l_ is null));
+            bool? n_ = context.Operators.And(g_, m_);
+            return n_;
+        }
 
-        return sx_;
+        IEnumerable<SupplyDelivery> c_ = context.Operators.Where<SupplyDelivery>(a_, b_);
+        return c_;
     }
 
 
-    #endregion Expressions
+    #endregion Functions and Expressions
+
+    #region Singleton Lifetime Members
+
+    private RR23_1_0_0() {}
+
+    public static RR23_1_0_0 Instance { get; } = new();
+
+    #endregion
+
+    #region ILibrary Implementation
+
+    public string Name => "RR23";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
+
+    #endregion ILibrary Implementation
 
 }

@@ -12,11 +12,11 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.0.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
 public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, ISingleton<DischargedonAntithromboticTherapyFHIR_0_0_010>
 {
-    #region ValueSets
+    #region ValueSets (14)
 
     [CqlValueSetDefinition("Antithrombotic Therapy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201", valueSetVersion: null)]
     public CqlValueSet Antithrombotic_Therapy(CqlContext _) => _Antithrombotic_Therapy;
@@ -76,343 +76,423 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     #endregion ValueSets
 
-    #region Parameters
+    #region Parameters (1)
 
     [CqlParameterDefinition("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlInterval<CqlDateTime>>(-1910573221940503362L, () => {
-            object a_ = context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.0.010", "Measurement Period", (object)null);
-            return (CqlInterval<CqlDateTime>)a_;
-        });
+        context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
+
+    private const long _cacheIndex_Measurement_Period = -1910573221940503362L;
+
+    private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
+    {
+        object a_ = context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.0.010", "Measurement Period", (object)null);
+        return (CqlInterval<CqlDateTime>)a_;
+    }
 
 
     #endregion Parameters
 
-    #region Functions and Expressions
+    #region Functions and Expressions (15)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<Patient>(-4089929577116492787L, () => {
-            IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-            Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
-            return b_;
-        });
+        context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
+
+    private const long _cacheIndex_Patient = -4089929577116492787L;
+
+    private Patient Patient_Compute(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        return b_;
+    }
 
 
     [CqlExpressionDefinition("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-6108063201567256093L, () => {
-            IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
+
+    private const long _cacheIndex_Denominator = -6108063201567256093L;
+
+    private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("Antithrombotic Not Given at Discharge")]
     public IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-7841829350546192526L, () => {
-            CqlValueSet a_ = this.Antithrombotic_Therapy(context);
-            IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
+        context.GetOrCompute(_cacheIndex_Antithrombotic_Not_Given_at_Discharge, Antithrombotic_Not_Given_at_Discharge_Compute);
 
-            bool? c_(MedicationRequest NoAntithromboticDischarge) {
-                FhirBoolean e_ = NoAntithromboticDischarge?.DoNotPerformElement;
-                bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
-                bool? g_ = context.Operators.IsTrue(f_);
-                List<CodeableConcept> h_ = NoAntithromboticDischarge?.ReasonCode;
+    private const long _cacheIndex_Antithrombotic_Not_Given_at_Discharge = -7841829350546192526L;
 
-                CqlConcept i_(CodeableConcept X) {
-                    CqlConcept ah_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
-                    return ah_;
-                }
+    private IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Antithrombotic_Therapy(context);
+        IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 
-                IEnumerable<CqlConcept> j_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_);
-                CqlValueSet k_ = this.Medical_Reason(context);
-                bool? l_ = context.Operators.ConceptsInValueSet(j_, k_);
+        bool? c_(MedicationRequest NoAntithromboticDischarge) {
+            FhirBoolean e_ = NoAntithromboticDischarge?.DoNotPerformElement;
+            bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
+            bool? g_ = context.Operators.IsTrue(f_);
+            List<CodeableConcept> h_ = NoAntithromboticDischarge?.ReasonCode;
 
-                CqlConcept n_(CodeableConcept X) {
-                    CqlConcept ai_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
-                    return ai_;
-                }
-
-                IEnumerable<CqlConcept> o_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, n_);
-                CqlValueSet p_ = this.Patient_Refusal(context);
-                bool? q_ = context.Operators.ConceptsInValueSet(o_, p_);
-                bool? r_ = context.Operators.Or(l_, q_);
-                bool? s_ = context.Operators.And(g_, r_);
-                List<CodeableConcept> t_ = NoAntithromboticDischarge?.Category;
-
-                bool? u_(CodeableConcept C) {
-                    CqlConcept aj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
-                    CqlCode ak_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
-                    CqlConcept al_ = context.Operators.ConvertCodeToConcept(ak_);
-                    bool? am_ = context.Operators.Equivalent(aj_, al_);
-                    CqlCode ao_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
-                    CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
-                    bool? aq_ = context.Operators.Equivalent(aj_, ap_);
-                    bool? ar_ = context.Operators.Or(am_, aq_);
-                    return ar_;
-                }
-
-                IEnumerable<CodeableConcept> v_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)t_, u_);
-                bool? w_ = context.Operators.Exists<CodeableConcept>(v_);
-                bool? x_ = context.Operators.And(s_, w_);
-                Code<MedicationRequest.MedicationrequestStatus> y_ = NoAntithromboticDischarge?.StatusElement;
-                string z_ = FHIRHelpers_4_0_001.Instance.ToString(context, y_);
-                string[] aa_ = [
-                    "completed",
-                    "cancelled",
-                ];
-                bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
-                bool? ac_ = context.Operators.And(x_, ab_);
-                Code<MedicationRequest.MedicationRequestIntent> ad_ = NoAntithromboticDischarge?.IntentElement;
-                string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
-                bool? af_ = context.Operators.Equal(ae_, "order");
-                bool? ag_ = context.Operators.And(ac_, af_);
-                return ag_;
+            CqlConcept i_(CodeableConcept X) {
+                CqlConcept ah_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+                return ah_;
             }
 
-            IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
-            return d_;
-        });
+            IEnumerable<CqlConcept> j_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_);
+            CqlValueSet k_ = this.Medical_Reason(context);
+            bool? l_ = context.Operators.ConceptsInValueSet(j_, k_);
+
+            CqlConcept n_(CodeableConcept X) {
+                CqlConcept ai_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+                return ai_;
+            }
+
+            IEnumerable<CqlConcept> o_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, n_);
+            CqlValueSet p_ = this.Patient_Refusal(context);
+            bool? q_ = context.Operators.ConceptsInValueSet(o_, p_);
+            bool? r_ = context.Operators.Or(l_, q_);
+            bool? s_ = context.Operators.And(g_, r_);
+            List<CodeableConcept> t_ = NoAntithromboticDischarge?.Category;
+
+            bool? u_(CodeableConcept C) {
+                CqlConcept aj_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
+                CqlCode ak_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
+                CqlConcept al_ = context.Operators.ConvertCodeToConcept(ak_);
+                bool? am_ = context.Operators.Equivalent(aj_, al_);
+                CqlCode ao_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
+                CqlConcept ap_ = context.Operators.ConvertCodeToConcept(ao_);
+                bool? aq_ = context.Operators.Equivalent(aj_, ap_);
+                bool? ar_ = context.Operators.Or(am_, aq_);
+                return ar_;
+            }
+
+            IEnumerable<CodeableConcept> v_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)t_, u_);
+            bool? w_ = context.Operators.Exists<CodeableConcept>(v_);
+            bool? x_ = context.Operators.And(s_, w_);
+            Code<MedicationRequest.MedicationrequestStatus> y_ = NoAntithromboticDischarge?.StatusElement;
+            string z_ = FHIRHelpers_4_0_001.Instance.ToString(context, y_);
+            string[] aa_ = [
+                "completed",
+                "cancelled",
+            ];
+            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
+            bool? ac_ = context.Operators.And(x_, ab_);
+            Code<MedicationRequest.MedicationRequestIntent> ad_ = NoAntithromboticDischarge?.IntentElement;
+            string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
+            bool? af_ = context.Operators.Equal(ae_, "order");
+            bool? ag_ = context.Operators.And(ac_, af_);
+            return ag_;
+        }
+
+        IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
+        return d_;
+    }
 
 
     [CqlExpressionDefinition("Encounter With No Antithrombotic At Discharge")]
     public IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(3872100787539645286L, () => {
-            IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
+        context.GetOrCompute(_cacheIndex_Encounter_With_No_Antithrombotic_At_Discharge, Encounter_With_No_Antithrombotic_At_Discharge_Compute);
 
-            IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
-                IEnumerable<MedicationRequest> d_ = this.Antithrombotic_Not_Given_at_Discharge(context);
+    private const long _cacheIndex_Encounter_With_No_Antithrombotic_At_Discharge = 3872100787539645286L;
 
-                bool? e_(MedicationRequest NoDischargeAntithrombotic) {
-                    FhirDateTime i_ = NoDischargeAntithrombotic?.AuthoredOnElement;
-                    CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
-                    Period k_ = IschemicStrokeEncounter?.Period;
-                    CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
-                    return m_;
-                }
+    private IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge_Compute(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
 
-                IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
-                Encounter g_(MedicationRequest NoDischargeAntithrombotic) => IschemicStrokeEncounter;
-                IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
-                return h_;
+        IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
+            IEnumerable<MedicationRequest> d_ = this.Antithrombotic_Not_Given_at_Discharge(context);
+
+            bool? e_(MedicationRequest NoDischargeAntithrombotic) {
+                FhirDateTime i_ = NoDischargeAntithrombotic?.AuthoredOnElement;
+                CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
+                Period k_ = IschemicStrokeEncounter?.Period;
+                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
+                bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
+                return m_;
             }
 
-            IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
-            return c_;
-        });
+            IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
+            Encounter g_(MedicationRequest NoDischargeAntithrombotic) => IschemicStrokeEncounter;
+            IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
+            return h_;
+        }
+
+        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        return c_;
+    }
 
 
     [CqlExpressionDefinition("Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-1129270284953313235L, () => {
-            CqlValueSet a_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy(context);
-            IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
+        context.GetOrCompute(_cacheIndex_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge, Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute);
 
-            bool? c_(MedicationRequest Pharmacological) {
-                FhirBoolean e_ = Pharmacological?.DoNotPerformElement;
-                bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
-                bool? g_ = context.Operators.IsTrue(f_);
-                bool? h_ = context.Operators.Not(g_);
-                List<CodeableConcept> i_ = Pharmacological?.Category;
+    private const long _cacheIndex_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge = -1129270284953313235L;
 
-                bool? j_(CodeableConcept C) {
-                    CqlConcept w_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
-                    CqlCode x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
-                    CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
-                    bool? z_ = context.Operators.Equivalent(w_, y_);
-                    CqlCode ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
-                    CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
-                    bool? ad_ = context.Operators.Equivalent(w_, ac_);
-                    bool? ae_ = context.Operators.Or(z_, ad_);
-                    return ae_;
-                }
+    private IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy(context);
+        IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 
-                IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
-                bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
-                bool? m_ = context.Operators.And(h_, l_);
-                Code<MedicationRequest.MedicationrequestStatus> n_ = Pharmacological?.StatusElement;
-                string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
-                string[] p_ = [
-                    "active",
-                    "completed",
-                ];
-                bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
-                bool? r_ = context.Operators.And(m_, q_);
-                Code<MedicationRequest.MedicationRequestIntent> s_ = Pharmacological?.IntentElement;
-                string t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_);
-                bool? u_ = context.Operators.Equal(t_, "order");
-                bool? v_ = context.Operators.And(r_, u_);
-                return v_;
+        bool? c_(MedicationRequest Pharmacological) {
+            FhirBoolean e_ = Pharmacological?.DoNotPerformElement;
+            bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
+            bool? g_ = context.Operators.IsTrue(f_);
+            bool? h_ = context.Operators.Not(g_);
+            List<CodeableConcept> i_ = Pharmacological?.Category;
+
+            bool? j_(CodeableConcept C) {
+                CqlConcept w_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
+                CqlCode x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
+                CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
+                bool? z_ = context.Operators.Equivalent(w_, y_);
+                CqlCode ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
+                CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
+                bool? ad_ = context.Operators.Equivalent(w_, ac_);
+                bool? ae_ = context.Operators.Or(z_, ad_);
+                return ae_;
             }
 
-            IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
-            return d_;
-        });
+            IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
+            bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
+            bool? m_ = context.Operators.And(h_, l_);
+            Code<MedicationRequest.MedicationrequestStatus> n_ = Pharmacological?.StatusElement;
+            string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
+            string[] p_ = [
+                "active",
+                "completed",
+            ];
+            bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
+            bool? r_ = context.Operators.And(m_, q_);
+            Code<MedicationRequest.MedicationRequestIntent> s_ = Pharmacological?.IntentElement;
+            string t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_);
+            bool? u_ = context.Operators.Equal(t_, "order");
+            bool? v_ = context.Operators.And(r_, u_);
+            return v_;
+        }
+
+        IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
+        return d_;
+    }
 
 
     [CqlExpressionDefinition("Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1426572148313240824L, () => {
-            IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
+        context.GetOrCompute(_cacheIndex_Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge, Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute);
 
-            IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
-                IEnumerable<MedicationRequest> d_ = this.Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(context);
+    private const long _cacheIndex_Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge = -1426572148313240824L;
 
-                bool? e_(MedicationRequest DischargePharmacological) {
-                    FhirDateTime i_ = DischargePharmacological?.AuthoredOnElement;
-                    CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
-                    Period k_ = IschemicStrokeEncounter?.Period;
-                    CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
-                    return m_;
-                }
+    private IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Compute(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
 
-                IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
-                Encounter g_(MedicationRequest DischargePharmacological) => IschemicStrokeEncounter;
-                IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
-                return h_;
+        IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
+            IEnumerable<MedicationRequest> d_ = this.Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(context);
+
+            bool? e_(MedicationRequest DischargePharmacological) {
+                FhirDateTime i_ = DischargePharmacological?.AuthoredOnElement;
+                CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
+                Period k_ = IschemicStrokeEncounter?.Period;
+                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
+                bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
+                return m_;
             }
 
-            IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
-            return c_;
-        });
+            IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
+            Encounter g_(MedicationRequest DischargePharmacological) => IschemicStrokeEncounter;
+            IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
+            return h_;
+        }
+
+        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        return c_;
+    }
 
 
     [CqlExpressionDefinition("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(6673240317773714005L, () => {
-            IEnumerable<Encounter> a_ = this.Encounter_With_No_Antithrombotic_At_Discharge(context);
-            IEnumerable<Encounter> b_ = this.Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(context);
-            IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
-            return c_;
-        });
+        context.GetOrCompute(_cacheIndex_Denominator_Exceptions, Denominator_Exceptions_Compute);
+
+    private const long _cacheIndex_Denominator_Exceptions = 6673240317773714005L;
+
+    private IEnumerable<Encounter> Denominator_Exceptions_Compute(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = this.Encounter_With_No_Antithrombotic_At_Discharge(context);
+        IEnumerable<Encounter> b_ = this.Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(context);
+        IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+        return c_;
+    }
 
 
     [CqlExpressionDefinition("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(8298600534596146791L, () => {
-            IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounters_with_Discharge_Disposition(context);
-            IEnumerable<Encounter> b_ = TJCOverallFHIR_1_8_000.Instance.Encounter_with_Comfort_Measures_during_Hospitalization(context);
-            IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
-            return c_;
-        });
+        context.GetOrCompute(_cacheIndex_Denominator_Exclusions, Denominator_Exclusions_Compute);
+
+    private const long _cacheIndex_Denominator_Exclusions = 8298600534596146791L;
+
+    private IEnumerable<Encounter> Denominator_Exclusions_Compute(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounters_with_Discharge_Disposition(context);
+        IEnumerable<Encounter> b_ = TJCOverallFHIR_1_8_000.Instance.Encounter_with_Comfort_Measures_during_Hospitalization(context);
+        IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+        return c_;
+    }
 
 
     [CqlExpressionDefinition("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(-1154461465892404559L, () => {
-            IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Encounter_with_Principal_Diagnosis_and_Age(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
+
+    private const long _cacheIndex_Initial_Population = -1154461465892404559L;
+
+    private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Encounter_with_Principal_Diagnosis_and_Age(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("Antithrombotic Therapy at Discharge")]
     public IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<MedicationRequest>>(-8311745687764367551L, () => {
-            CqlValueSet a_ = this.Antithrombotic_Therapy(context);
-            IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
+        context.GetOrCompute(_cacheIndex_Antithrombotic_Therapy_at_Discharge, Antithrombotic_Therapy_at_Discharge_Compute);
 
-            bool? c_(MedicationRequest Antithrombotic) {
-                FhirBoolean e_ = Antithrombotic?.DoNotPerformElement;
-                bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
-                bool? g_ = context.Operators.IsTrue(f_);
-                bool? h_ = context.Operators.Not(g_);
-                List<CodeableConcept> i_ = Antithrombotic?.Category;
+    private const long _cacheIndex_Antithrombotic_Therapy_at_Discharge = -8311745687764367551L;
 
-                bool? j_(CodeableConcept C) {
-                    CqlConcept w_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
-                    CqlCode x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
-                    CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
-                    bool? z_ = context.Operators.Equivalent(w_, y_);
-                    CqlCode ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
-                    CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
-                    bool? ad_ = context.Operators.Equivalent(w_, ac_);
-                    bool? ae_ = context.Operators.Or(z_, ad_);
-                    return ae_;
-                }
+    private IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge_Compute(CqlContext context)
+    {
+        CqlValueSet a_ = this.Antithrombotic_Therapy(context);
+        IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 
-                IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
-                bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
-                bool? m_ = context.Operators.And(h_, l_);
-                Code<MedicationRequest.MedicationrequestStatus> n_ = Antithrombotic?.StatusElement;
-                string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
-                string[] p_ = [
-                    "active",
-                    "completed",
-                ];
-                bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
-                bool? r_ = context.Operators.And(m_, q_);
-                Code<MedicationRequest.MedicationRequestIntent> s_ = Antithrombotic?.IntentElement;
-                string t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_);
-                bool? u_ = context.Operators.Equal(t_, "order");
-                bool? v_ = context.Operators.And(r_, u_);
-                return v_;
+        bool? c_(MedicationRequest Antithrombotic) {
+            FhirBoolean e_ = Antithrombotic?.DoNotPerformElement;
+            bool? f_ = FHIRHelpers_4_0_001.Instance.ToBoolean(context, e_);
+            bool? g_ = context.Operators.IsTrue(f_);
+            bool? h_ = context.Operators.Not(g_);
+            List<CodeableConcept> i_ = Antithrombotic?.Category;
+
+            bool? j_(CodeableConcept C) {
+                CqlConcept w_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, C);
+                CqlCode x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Community(context);
+                CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
+                bool? z_ = context.Operators.Equivalent(w_, y_);
+                CqlCode ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Discharge(context);
+                CqlConcept ac_ = context.Operators.ConvertCodeToConcept(ab_);
+                bool? ad_ = context.Operators.Equivalent(w_, ac_);
+                bool? ae_ = context.Operators.Or(z_, ad_);
+                return ae_;
             }
 
-            IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
-            return d_;
-        });
+            IEnumerable<CodeableConcept> k_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)i_, j_);
+            bool? l_ = context.Operators.Exists<CodeableConcept>(k_);
+            bool? m_ = context.Operators.And(h_, l_);
+            Code<MedicationRequest.MedicationrequestStatus> n_ = Antithrombotic?.StatusElement;
+            string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
+            string[] p_ = [
+                "active",
+                "completed",
+            ];
+            bool? q_ = context.Operators.In<string>(o_, (IEnumerable<string>)p_);
+            bool? r_ = context.Operators.And(m_, q_);
+            Code<MedicationRequest.MedicationRequestIntent> s_ = Antithrombotic?.IntentElement;
+            string t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_);
+            bool? u_ = context.Operators.Equal(t_, "order");
+            bool? v_ = context.Operators.And(r_, u_);
+            return v_;
+        }
+
+        IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(b_, c_);
+        return d_;
+    }
 
 
     [CqlExpressionDefinition("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Encounter>>(899507397485408094L, () => {
-            IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
+        context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
-            IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
-                IEnumerable<MedicationRequest> d_ = this.Antithrombotic_Therapy_at_Discharge(context);
+    private const long _cacheIndex_Numerator = 899507397485408094L;
 
-                bool? e_(MedicationRequest DischargeAntithrombotic) {
-                    FhirDateTime i_ = DischargeAntithrombotic?.AuthoredOnElement;
-                    CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
-                    Period k_ = IschemicStrokeEncounter?.Period;
-                    CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-                    bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
-                    return m_;
-                }
+    private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
+    {
+        IEnumerable<Encounter> a_ = TJCOverallFHIR_1_8_000.Instance.Ischemic_Stroke_Encounter(context);
 
-                IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
-                Encounter g_(MedicationRequest DischargeAntithrombotic) => IschemicStrokeEncounter;
-                IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
-                return h_;
+        IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
+            IEnumerable<MedicationRequest> d_ = this.Antithrombotic_Therapy_at_Discharge(context);
+
+            bool? e_(MedicationRequest DischargeAntithrombotic) {
+                FhirDateTime i_ = DischargeAntithrombotic?.AuthoredOnElement;
+                CqlDateTime j_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, i_);
+                Period k_ = IschemicStrokeEncounter?.Period;
+                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
+                bool? m_ = context.Operators.In<CqlDateTime>(j_, l_, (string)default);
+                return m_;
             }
 
-            IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
-            return c_;
-        });
+            IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
+            Encounter g_(MedicationRequest DischargeAntithrombotic) => IschemicStrokeEncounter;
+            IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
+            return h_;
+        }
+
+        IEnumerable<Encounter> c_ = context.Operators.SelectMany<Encounter, Encounter>(a_, b_);
+        return c_;
+    }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(2387045540434942064L, () => {
-            IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
+
+    private const long _cacheIndex_SDE_Ethnicity = 2387045540434942064L;
+
+    private IEnumerable<Coding> SDE_Ethnicity_Compute(CqlContext context)
+    {
+        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?>>(-8335395049973550212L, () => {
-            IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
+
+    private const long _cacheIndex_SDE_Payer = -8335395049973550212L;
+
+    private IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer_Compute(CqlContext context)
+    {
+        IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<IEnumerable<Coding>>(-8392710765314873892L, () => {
-            IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
+
+    private const long _cacheIndex_SDE_Race = -8392710765314873892L;
+
+    private IEnumerable<Coding> SDE_Race_Compute(CqlContext context)
+    {
+        IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
+        return a_;
+    }
 
 
     [CqlExpressionDefinition("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context) =>
-        ((ICqlContextInternals)context).GetOrCompute<CqlCode>(418011448807512549L, () => {
-            CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
-            return a_;
-        });
+        context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
+
+    private const long _cacheIndex_SDE_Sex = 418011448807512549L;
+
+    private CqlCode SDE_Sex_Compute(CqlContext context)
+    {
+        CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
+        return a_;
+    }
 
 
     #endregion Functions and Expressions

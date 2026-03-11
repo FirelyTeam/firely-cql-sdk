@@ -22,7 +22,7 @@ Centralized variables used across pipeline configurations:
 - **Test project configuration**:
   - `multiTargetTestProjects`: Projects tested on both .NET 8 and .NET 10 (CoreTests, CqlToElmTests)
   - `net10IntegrationTestProjects`: Projects tested only on .NET 10 (IntegrationRunner)
-  - `excludedTestProjects`: Projects excluded from all test runs (XsdToCSharpConverterTests, NCQA tests)
+  - `excludedTestProjects`: Projects excluded from all test runs (XsdToCSharpConverterTests)
 
 ### `build-test-sign.yml`
 Reusable Azure Pipelines template that implements an optimized build-once, test-parallel workflow:
@@ -103,8 +103,6 @@ All test project specifications are centralized in `variables.yml`:
 
 **Excluded Tests** (not run in pipeline):
 - `tools/XsdToCSharpConverterTests/XsdToCSharpConverterTests.csproj` - Internal tool tests
-- `submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj` - External NCQA tests
-- `submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj` - External NCQA tests
 
 ### Pipeline Integration
 
@@ -141,8 +139,6 @@ variables:
   
   excludedTestProjects: |
     !**/XsdToCSharpConverterTests.csproj
-    !**/Ncqa.HT.DeckTests.csproj
-    !**/Ncqa.HT.MeasuresTests.csproj
     # Add additional test exclusions here
 ```
 
@@ -284,7 +280,6 @@ The pipeline uses Azure Trusted Signing to sign assemblies, matching the approac
 
 **Signed Files**:
 - All `Hl7.Cql*.dll` assemblies
-- All `Ncqa.Cql*.dll` assemblies
 - All `Cql.*.dll` assemblies
 - `PackagerCLI.dll`
 - Excludes: CodeGeneration assemblies and test assemblies

@@ -23,7 +23,7 @@ at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releas
 
 ## Getting Started
 
-* Read how to [get started with the Demo solution](docs/getting-started.md) included in the repository.
+* Read how to [Getting Started](docs/getting-started.md) included in the repository.
 * There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
 * [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
 * The [CQL Engine Architecture](docs/CQL-Engine-Architecture.md) document with background documentation on the design.
@@ -88,7 +88,7 @@ The SDK depends on the following key external packages:
 ### Serialization
 - **System.Text.Json**: Version 8.0.5 - High-performance JSON serialization
 
-## Dev Start
+## Pre-release NuGet Packages
 During development, pre-releases will appear on Firely's GitHub Package feed. To use these packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
 
  - Get a Personal Access token (PAT) from [github.com][github-pat] with scope ```read:packages```
@@ -108,7 +108,7 @@ The SDK includes comprehensive tools for testing against both .NET 8 and .NET 10
 **Test Categories:**
 - **Multi-Target Tests**: CoreTests and CqlToElmTests run on both .NET 8 and .NET 10
 - **.NET 10 Only**: IntegrationRunner and Test.Measures.Demo run only on .NET 10
-- **Excluded**: XsdToCSharpConverterTests, Ncqa.HT.DeckTests, Ncqa.HT.MeasuresTests
+- **Excluded**: XsdToCSharpConverterTests
 
 **Local Testing Scripts:**
 ```powershell

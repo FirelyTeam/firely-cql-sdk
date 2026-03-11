@@ -17,14 +17,14 @@ public interface ICqlContextInternals
     /// </summary>
     /// <typeparam name="T">The type of the cached value.</typeparam>
     /// <param name="cacheKey">The unique key identifying the cached value.</param>
-    /// <param name="factory">A function to compute the value if it's not in the cache.</param>
+    /// <param name="factory">A function that accepts the <see cref="CqlContext"/> and computes the value if it's not in the cache.</param>
     /// <returns>The cached or newly computed value.</returns>
     /// <remarks>
     /// This method is thread-safe and can be called concurrently from multiple threads.
     /// If caching is disabled (cache is null), the factory function is called without caching the result.
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
-    public T GetOrCompute<T>(long cacheKey, Func<T> factory);
+    public T GetOrCompute<T>(long cacheKey, Func<CqlContext, T> factory);
 
     /// <summary>
     /// Gets the total number of calls to GetOrCompute.
@@ -86,7 +86,21 @@ partial class CqlContext : ICqlContextInternals
     /// </remarks>
     long ICqlContextInternals.CacheHits => _cacheCallCount - _cacheFactoryInvocations;
 
-    T ICqlContextInternals.GetOrCompute<T>(long cacheKey, Func<T> factory)
+    /// <summary>
+    /// Gets or computes a cached value for the specified cache key using a context-aware factory function.
+    /// </summary>
+    /// <typeparam name="T">The type of the cached value.</typeparam>
+    /// <param name="cacheKey">The unique key identifying the cached value.</param>
+    /// <param name="factory">A function that accepts the <see cref="CqlContext"/> and computes the value if it's not in the cache.</param>
+    /// <returns>The cached or newly computed value.</returns>
+    /// <remarks>
+    /// This overload avoids capturing the context in a closure by passing it as an explicit parameter
+    /// to the factory function, reducing heap allocations on every definition call.
+    /// This method is thread-safe and can be called concurrently from multiple threads.
+    /// If caching is disabled (cache is null), the factory function is called without caching the result.
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public T GetOrCompute<T>(long cacheKey, Func<CqlContext, T> factory)
     {
         Interlocked.Increment(ref _cacheCallCount);
 
@@ -95,17 +109,21 @@ partial class CqlContext : ICqlContextInternals
         {
             // Caching disabled
             Interlocked.Increment(ref _cacheFactoryInvocations);
-            return factory();
+            return factory(this);
         }
 
-        // Use GetOrAdd for lock-free read and atomic add
-        // Note: We box the result, so null values are preserved correctly
-        var cachedValue = cache.GetOrAdd(cacheKey, _ =>
-        {
-            Interlocked.Increment(ref _cacheFactoryInvocations);
-            return factory()!;
-        });
+        // Fast path: cache hit — zero allocation.
+        if (cache.TryGetValue(cacheKey, out var existing))
+            return (T)existing!;
 
-        return (T)cachedValue!;
+        // Slow path: compute and cache without a lambda allocation.
+        // Two threads may both miss TryGetValue and both call the factory; the value
+        // that loses the GetOrAdd race is discarded. This is safe because CQL
+        // expression bodies are pure and side-effect free.
+        var value = (object?)factory(this);
+        var cached = cache.GetOrAdd(cacheKey, value)!;
+        if (ReferenceEquals(cached, value))
+            Interlocked.Increment(ref _cacheFactoryInvocations);
+        return (T)cached;
     }
 }
