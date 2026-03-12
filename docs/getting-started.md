@@ -32,9 +32,8 @@ firely-cql-sdk/
 └── spec/           # CQL specification reference and conformance reports
 ```
 
-External submodule repositories (some private):
+External submodule repositories:
 * `submodules/Firely.Cql.Sdk.Integration.Runner/` — integration test runner for CMS measures
-* `submodules/NCQA/` — NCQA measures used to test the engine
 
 ## Building the SDK
 
