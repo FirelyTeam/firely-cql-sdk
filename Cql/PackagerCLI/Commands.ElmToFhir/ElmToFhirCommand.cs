@@ -52,7 +52,8 @@ internal record ElmToFhirCommand
         "  " + ExitCodes.DllDirIsRequiredWhenPdbDirIsSpecified.CodeWithMessage + NewLine +
         "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.CodeWithMessage + NewLine +
         "  " + ExitCodes.MixedFhirAndSpecificDirs.CodeWithMessage + NewLine +
-        "  " + ExitCodes.IncompleteLibrariesMeasuresDirs.CodeWithMessage;
+        "  " + ExitCodes.IncompleteLibrariesMeasuresDirs.CodeWithMessage + NewLine +
+        "  " + ExitCodes.LogFileSetupError.CodeWithMessage;
 
     public static readonly Option[] Options =
     [

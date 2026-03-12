@@ -22,134 +22,134 @@
     },
     "PackageCLI version": {
       "commandName": "Project",
-      "commandLineArgs": "--version"
+      "commandLineArgs": "--version --log-file packager.log"
     },
     "PackageCLI (empty)": {
       "commandName": "Project",
-      "commandLineArgs": ""
+      "commandLineArgs": "--log-file packager.log"
     },
     "PackageCLI cql (Demo CQL->ELM)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --elm \"$(DemoLibrarySetDir)/ElmOut\" ",
+      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --elm \"$(DemoLibrarySetDir)/ElmOut\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI cql (Demo CQL->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" ",
+      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI cql (Demo CQL->DLL with PDB in separate folder->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --pdb \"$(DemoLibrarySetDir)/DebugSymbols\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols PortablePdb",
+      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --pdb \"$(DemoLibrarySetDir)/DebugSymbols\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols PortablePdb --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI cql (Demo CQL->DLL with PDB in DLL folder->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --pdb \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols PortablePdb",
+      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --pdb \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols PortablePdb --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI cql (Demo CQL->DLL with embedded PDB->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols Embedded",
+      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols Embedded --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI elm (Demo ELM->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(DemoLibrarySetDir)/Cql\" --elm \"$(DemoLibrarySetDir)/Elm\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" ",
+      "commandLineArgs": "elm --cql \"$(DemoLibrarySetDir)/Cql\" --elm \"$(DemoLibrarySetDir)/Elm\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI elm (Demo ELM->FHIR, Command Line Args overriding AppSettings)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(DemoLibrarySetDir)/Cql\" --elm \"$(DemoLibrarySetDir)/Elm\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" --json-pretty --override-utc-date-time \"2000-01-01T00:00:00.000Z\" --console-log-level \"Debug\" --log-append --canonical-root-url \"https://fire.ly/acme/\" ",
+      "commandLineArgs": "elm --cql \"$(DemoLibrarySetDir)/Cql\" --elm \"$(DemoLibrarySetDir)/Elm\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" --json-pretty --override-utc-date-time \"2000-01-01T00:00:00.000Z\" --console-log-level \"Debug\" --log-append --canonical-root-url \"https://fire.ly/acme/\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI cql (Demo ExitCode:PdbDirSpecifiedButDebugSymbolsIsNotPortablePdb)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --pdb \"$(DemoLibrarySetDir)/DebugSymbols\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols None",
+      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --pdb \"$(DemoLibrarySetDir)/DebugSymbols\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols None --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI cql (Demo ExitCode:PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols PortablePdb",
+      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --dll \"$(DemoLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols PortablePdb --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI cql (Demo ExitCode:DllDirIsRequiredWhenPdbDirIsSpecified)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --pdb \"$(DemoLibrarySetDir)/DebugSymbols\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols PortablePdb",
+      "commandLineArgs": "cql --cql \"$(DemoLibrarySetDir)/Cql\" --fhir \"$(DemoLibrarySetDir)/Resources\" --pdb \"$(DemoLibrarySetDir)/DebugSymbols\" --cs \"$(MeasuresDemoDir)/CSharp\" --debug-symbols PortablePdb --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI cql (CoreTests CQL->C#)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(CoreTestsDir)/Input/ELM/HL7\" --cs \"$(CoreTestsDir)/CSharp\" ",
+      "commandLineArgs": "cql --cql \"$(CoreTestsDir)/Input/ELM/HL7\" --cs \"$(CoreTestsDir)/CSharp\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "CoreTests"
       }
     },
     "PackageCLI elm (Measures.Authoring)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(MeasuresAuthoringDemoDir)/input/cql\" --elm \"$(MeasuresAuthoringDemoDir)/Elm\" --fhir \"$(MeasuresAuthoringDemoDir)/Resources\" --cs \"$(MeasuresAuthoringDemoDir)/CSharp\" ",
+      "commandLineArgs": "elm --cql \"$(MeasuresAuthoringDemoDir)/input/cql\" --elm \"$(MeasuresAuthoringDemoDir)/Elm\" --fhir \"$(MeasuresAuthoringDemoDir)/Resources\" --cs \"$(MeasuresAuthoringDemoDir)/CSharp\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
     },
     "PackageCLI cql (RR23 CQL->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "cql --cql \"$(RR23LibrarySetDir)/Cql\" --elm \"$(RR23LibrarySetDir)/Elm\" --fhir \"$(RR23LibrarySetDir)/Resources\" --dll \"$(RR23LibrarySetDir)/Assemblies\" --cs \"$(RR23LibrarySetDir)/CSharp\" ",
+      "commandLineArgs": "cql --cql \"$(RR23LibrarySetDir)/Cql\" --elm \"$(RR23LibrarySetDir)/Elm\" --fhir \"$(RR23LibrarySetDir)/Resources\" --dll \"$(RR23LibrarySetDir)/Assemblies\" --cs \"$(RR23LibrarySetDir)/CSharp\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "RR23"
       }
     },
     "PackageCLI elm (Ncqa.DQIC)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(NcqaBuildArtifactsDir)/Cql\" --elm \"$(NcqaBuildArtifactsDir)/Elm\" --fhir \"$(NcqaBuildArtifactsDir)/Resources\" --cs \"$(NcqaBuildArtifactsDir)/CSharp\" ",
+      "commandLineArgs": "elm --cql \"$(NcqaBuildArtifactsDir)/Cql\" --elm \"$(NcqaBuildArtifactsDir)/Elm\" --fhir \"$(NcqaBuildArtifactsDir)/Resources\" --cs \"$(NcqaBuildArtifactsDir)/CSharp\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "NCQA.DQIC"
       }
     },
     "PackageCLI elm (dqm-content-qicore-2025)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(DqmContentQiCoreLibrarySetDir)/Cql\" --elm \"$(DqmContentQiCoreLibrarySetDir)/Elm\" --fhir \"$(DqmContentQiCoreLibrarySetDir)/Resources\" --dll \"$(DqmContentQiCoreLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDqmContentQiCoreDemoDir)/CSharp\" ",
+      "commandLineArgs": "elm --cql \"$(DqmContentQiCoreLibrarySetDir)/Cql\" --elm \"$(DqmContentQiCoreLibrarySetDir)/Elm\" --fhir \"$(DqmContentQiCoreLibrarySetDir)/Resources\" --dll \"$(DqmContentQiCoreLibrarySetDir)/Assemblies\" --cs \"$(MeasuresDqmContentQiCoreDemoDir)/CSharp\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     },
     "PackageCLI extract-library-attachments (dqm-content-qicore-2025 | All Attachments for CMS56FHIRFuncStatHipReplacement)": {
       "commandName": "Project",
-      "commandLineArgs": "extract-library-attachments --library-file \"$(DqmContentQiCoreLibrarySetDir)/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Cql\" --elm-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Elm\" --csharp-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/CSharp\" --dll-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Assemblies\" --pdb-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/DebugSymbols\" ",
+      "commandLineArgs": "extract-library-attachments --library-file \"$(DqmContentQiCoreLibrarySetDir)/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Cql\" --elm-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Elm\" --csharp-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/CSharp\" --dll-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Assemblies\" --pdb-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/DebugSymbols\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     },
     "PackageCLI extract-library-attachments (dqm-content-qicore-2025 | CQL and ELM Only for CMS56FHIRFuncStatHipReplacement)": {
       "commandName": "Project",
-      "commandLineArgs": "extract-library-attachments --library-file \"$(DqmContentQiCoreLibrarySetDir)/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Cql\" --elm-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Elm\" ",
+      "commandLineArgs": "extract-library-attachments --library-file \"$(DqmContentQiCoreLibrarySetDir)/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Cql\" --elm-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Elm\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     },
     "PackageCLI replace-library-attachments (dqm-content-qicore-2025 | Replace CQL and ELM for CMS56FHIRFuncStatHipReplacement)": {
       "commandName": "Project",
-      "commandLineArgs": "replace-library-attachments --library-file \"$(DqmContentQiCoreLibrarySetDir)/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --library-out-file \"$(DqmContentQiCoreLibrarySetDir)/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.replaced.json\" --elm-file \"$(DqmContentQiCoreLibrarySetDir)/Elm/CMS56FHIRFuncStatHipReplacement.json\" --csharp-file \"$(DqmContentQiCoreLibrarySetDir)/Extracted/CSharp/CMS56FHIRFuncStatHipReplacement-1.0.000.g.cs\" --dll-file \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Assemblies/CMS56FHIRFuncStatHipReplacement-1.0.000.dll\" ",
+      "commandLineArgs": "replace-library-attachments --library-file \"$(DqmContentQiCoreLibrarySetDir)/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --library-out-file \"$(DqmContentQiCoreLibrarySetDir)/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.replaced.json\" --elm-file \"$(DqmContentQiCoreLibrarySetDir)/Elm/CMS56FHIRFuncStatHipReplacement.json\" --csharp-file \"$(DqmContentQiCoreLibrarySetDir)/Extracted/CSharp/CMS56FHIRFuncStatHipReplacement-1.0.000.g.cs\" --dll-file \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Assemblies/CMS56FHIRFuncStatHipReplacement-1.0.000.dll\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }

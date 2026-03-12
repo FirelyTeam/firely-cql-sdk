@@ -168,6 +168,16 @@ internal static class ExitCodes
         public static string ExitingMessage => $"Exiting. {Message}";
     }
 
+    internal static class LogFileSetupError
+    {
+        public const int Code = 19;
+        public const string Message = "Failed to set up the log file";
+        public const string MessageWithPlaceholder = "Failed to set up the log file '{LogFile}'";
+        public static string CodeWithMessage => $"{Code} - {Message}";
+        public static string ExitingMessage => $"Exiting. {Message}";
+        public static string ExitingMessageWithPlaceholder => $"Exiting. {MessageWithPlaceholder}";
+    }
+
     internal static class UnknownError
     {
         public const int Code = 99;

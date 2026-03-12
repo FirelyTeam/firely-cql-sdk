@@ -18,66 +18,72 @@ public static class OptionsBinder
     /// <summary>
     /// Binds additional properties of the options class to the configuration
     /// that is not supported out of the box by the Options pattern.
-    /// e.g. DirectoryInfo properties.
+    /// e.g. DirectoryInfo and FileInfo properties.
+    /// <paramref name="configuration"/> must already be scoped to the options section.
     /// </summary>
-    private static OptionsBuilder<TOptions> BindConfigurationSpecialPropertyTypes<
+    internal static void ApplySpecialPropertyBindings<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         TOptions>(
+        TOptions options,
+        IConfiguration configuration)
+        where TOptions : class
+    {
+        var optionsType = options.GetType();
+        var properties = optionsType
+                         .GetProperties()
+                         .Where(p => p.CanWrite && p.GetIndexParameters() is [])
+                         .AsEnumerable();
+
+        foreach (var property in properties)
+        {
+            switch (Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType)
+            {
+                case
+                {
+                    Name: "DirectoryInfo"
+                } type when type == typeof(DirectoryInfo):
+
+                    var dirValue = configuration[property.Name];
+                    if (!string.IsNullOrEmpty(dirValue))
+                        property.SetValue(options, new DirectoryInfo(dirValue));
+                    break;
+
+                case
+                {
+                    Name: "FileInfo"
+                } type when type == typeof(FileInfo):
+
+                    var fileValue = configuration[property.Name];
+                    if (!string.IsNullOrEmpty(fileValue))
+                        property.SetValue(options, new FileInfo(fileValue));
+                    break;
+
+                case var type:
+                    var tryBindMethod = optionsType.GetMethod($"TryBind{property.Name}");
+                    if (tryBindMethod is { } m
+                        && m.ReturnType == typeof(bool)
+                        && m.GetParameters() is [{} p1, { IsOut: true } p2]
+                        && p1.ParameterType == typeof(IConfiguration)
+                        && p2.ParameterType.GetElementType() /* IsOut parameter will have its property type IsByRef */ == type
+                        && configuration.GetSection(property.Name) is {} configSection)
+                    {
+                        object?[] inputs = [configSection, null];
+                        var success = (bool)m.Invoke(options, inputs)!;
+                        if (success)
+                            property.SetValue(options, inputs[1]);
+                    }
+                    break;
+            }
+        }
+    }
+
+    private static OptionsBuilder<TOptions> BindConfigurationSpecialPropertyTypes<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]TOptions>(
         this OptionsBuilder<TOptions> optionsBuilder,
         string configSectionPath)
         where TOptions : class =>
         optionsBuilder
             .Configure<IConfiguration>(
-                (options, configuration) =>
-                {
-                    var optionsType = options.GetType();
-                    var properties = optionsType
-                                     .GetProperties()
-                                     .Where(p => p.CanWrite && p.GetIndexParameters() is [])
-                                     .AsEnumerable();
-
-                    foreach (var property in properties)
-                    {
-                        switch (Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType)
-                        {
-                            case
-                            {
-                                Name: "DirectoryInfo"
-                            } type when type == typeof(DirectoryInfo):
-
-                                var dirValue = configuration[$"{configSectionPath}:{property.Name}"];
-                                if (!string.IsNullOrEmpty(dirValue))
-                                    property.SetValue(options, new DirectoryInfo(dirValue));
-                                break;
-
-                            case
-                            {
-                                Name: "FileInfo"
-                            } type when type == typeof(FileInfo):
-
-                                var fileValue = configuration[$"{configSectionPath}:{property.Name}"];
-                                if (!string.IsNullOrEmpty(fileValue))
-                                    property.SetValue(options, new FileInfo(fileValue));
-                                break;
-
-                            case var type:
-                                var tryBindMethod = optionsType.GetMethod($"TryBind{property.Name}");
-                                if (tryBindMethod is { } m
-                                    && m.ReturnType == typeof(bool)
-                                    && m.GetParameters() is [{} p1, { IsOut: true } p2]
-                                    && p1.ParameterType == typeof(IConfiguration)
-                                    && p2.ParameterType.GetElementType() /* IsOut parameter will have its property type IsByRef */ == type
-                                    && configuration.GetSection(configSectionPath)?.GetSection(property.Name) is {} configSection)
-                                {
-                                    object?[] inputs = [configSection, null];
-                                    var success = (bool)m.Invoke(options, inputs)!;
-                                    if (success)
-                                        property.SetValue(options, inputs[1]);
-                                }
-                                break;
-                        }
-                    }
-                });
+                (options, configuration) => ApplySpecialPropertyBindings(options, configuration.GetSection(configSectionPath)));
 
     public static IServiceCollection AddAndBindOptions<TOptions>(this IServiceCollection services)
         where TOptions : class, IBindOptions =>
