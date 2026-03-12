@@ -139,5 +139,5 @@ The spec example `Matches('1,2three', '\\w+')` returns `false`, which seems to c
 
 ## Reference
 
-- Spec Verified Findings: `spec-report/SPEC_VERIFIED_FINDINGS.md` (Critical Finding #6)
-- Deviations Report: `spec-report/CQL_SPEC_DEVIATIONS_REPORT.md` (Appendix C.2)
+- Spec Verified Findings: `spec-report/spec-verified-findings.md` (Critical Finding #6)
+- Deviations Report: `spec-report/cql-spec-deviations-report.md` (Appendix C.2)

@@ -25,7 +25,7 @@ The repository consists of two parts:
 * `docs/` - documentation and other files that are useful to understand the codebase
   * This document, which is the main entry point for getting started with the CQL SDK.
   * A [diagram](docs/packager-cli-dependency-graph.md) showing how all the classes and their dependencies involved.
-  * A [graphic](CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
+  * A [graphic](cql-engine-v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
 * `Demo/` - a solution that demoes how to get from a CQL measure to an executable rule.
 
 It also links to external submodule repositories, but some of them are private:
@@ -66,7 +66,7 @@ take a look at the provided `"ELM to C#"` build target in the Elm project within
 * Explore the Demo solution projects to see practical examples of the CQL engine in action.
 * There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
 * [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
-* A [markdown document](CQL-Engine-Architecture.md) with background documentation on the design (converted from Word document).
+* A [markdown document](cql-engine-architecture.md) with background documentation on the design (converted from Word document).
 
 The presentation is a good place to start, but note that we have made some minor changes to the public surface, 
 so the names of the classes in the presentation will differ from the examples in the Demo project itself.

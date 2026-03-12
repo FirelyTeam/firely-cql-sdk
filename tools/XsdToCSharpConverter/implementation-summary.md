@@ -240,9 +240,9 @@ The tool is designed with extensibility in mind:
 
 All documentation has been created and updated:
 - ✅ `README.md` - Usage guide and feature documentation
-- ✅ `REFERENCE_SOURCE_COMPARISON.md` - Detailed comparison with xsd.exe
-- ✅ `IMPLEMENTATION_SUMMARY.md` - This document
-- ✅ `TESTING_GUIDE.md` - Testing procedures and validation
+- ✅ `reference-source-comparison.md` - Detailed comparison with xsd.exe
+- ✅ `implementation-summary.md` - This document
+- ✅ `testing-guide.md` - Testing procedures and validation
 
 ## Success Criteria - All Met ✅
 
