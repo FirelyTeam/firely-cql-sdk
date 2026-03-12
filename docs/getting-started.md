@@ -137,10 +137,13 @@ To build the Demo projects you need:
 
 Once prerequisites are installed, open `Cql-Sdk-Demos-Examples.slnf` in Visual Studio or run `dotnet build` to build the demo measures.
 
+See the **[Demo Projects and CQL Build Pipeline](demo-projects.md)** guide for a detailed explanation of the build scripts, MSBuild props/targets files, Java dependency management, PackagerCLI invocation, and how to configure your own measure project.
+
 ## Further Reading
 
 * [CQL Engine Architecture](cql-engine-architecture.md) — internal design and key classes
 * [Toolkit Services Dependency Diagrams](dependency-diagrams.md) — service dependency graphs
+* [Demo Projects and CQL Build Pipeline](demo-projects.md) — build scripts, Java CQL-to-ELM tooling, PackagerCLI, and MSBuild targets
 * [Technical README](technical-readme.md) — multi-targeting, code generation versioning, and CI/CD details (maintainers)
 * [DevDays 2023 presentation](https://youtu.be/CkTbgfbttJc) — introductory walkthrough
 * [Firely .NET SDK documentation](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) — CQL section
