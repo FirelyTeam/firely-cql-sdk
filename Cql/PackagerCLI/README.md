@@ -145,9 +145,10 @@ Extract attachments from a FHIR Library resource to individual files. This comma
 - `--pdb-dir <directory>` - PDB output directory for extracted portable debug symbol files "*.pdb"
 
 **Logging Options (all commands):**
-- `--log-append` - Append to existing log file instead of clearing
+- `--log-file <path>` - Path of the log file. If not specified, no file logging is performed.
+- `--log-append` - Append to existing log file instead of clearing (only relevant when `--log-file` is specified)
 - `--console-log-level <level>` - Minimum log level for console output
-- `--file-log-level <level>` - Minimum log level for file output
+- `--file-log-level <level>` - Minimum log level for file output (only relevant when `--log-file` is specified)
 
 Log levels: `Critical`, `Debug`, `Error`, `Information`, `None`, `Trace`, `Warning`
 

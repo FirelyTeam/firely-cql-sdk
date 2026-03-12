@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Packager;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Logging;
 using Serilog;
@@ -23,29 +24,50 @@ internal static class PackagerCLiLoggingBuilderExtensions
     {
         logging.ClearProviders();
 
-        var loggingOptions = configuration.GetSection(LoggingOptions.ConfigSection).Get<LoggingOptions>();
+        var loggingSection = configuration.GetSection(LoggingOptions.ConfigSection);
+        var loggingOptions = loggingSection.Get<LoggingOptions>();
         loggingOptions ??= LoggingOptions.Default;
+        OptionsBinder.ApplySpecialPropertyBindings(loggingOptions, loggingSection);
 
-        LogLevel minLogLevel = (LogLevel)Math.Min((int)loggingOptions.FileLogLevel, (int)loggingOptions.ConsoleLogLevel);
+        var fileLogLevel = loggingOptions.LogFile is not null ? loggingOptions.FileLogLevel : LogLevel.None;
+        LogLevel minLogLevel = fileLogLevel != LogLevel.None
+            ? (LogLevel)Math.Min((int)fileLogLevel, (int)loggingOptions.ConsoleLogLevel)
+            : loggingOptions.ConsoleLogLevel;
         logging.AddFilter(level => level >= minLogLevel);
 
-        var logFile = "build.log";
-        if (!loggingOptions.Append)
-            File.WriteAllText(logFile, ""); // Create or clear the log file
-        else
-            File.OpenText(logFile).Close(); // Touch the file
+        if (loggingOptions.LogFile is { } logFile)
+        {
+            var logFilePath = logFile.FullName;
+            try
+            {
+                logFile.Directory?.Create();
+                if (!loggingOptions.Append)
+                    File.WriteAllText(logFilePath, ""); // Create or clear the log file
+                else
+                    File.Open(logFilePath, FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite).Close(); // Touch the file (create if it does not exist)
+            }
+            catch (Exception ex)
+            {
+                var message = ExitCodes.LogFileSetupError.MessageWithPlaceholder.Replace("{LogFile}", logFilePath, StringComparison.Ordinal);
+                Console.Error.WriteLine($"FAIL: {message}: {ex.Message}");
+                Environment.Exit(ExitCodes.LogFileSetupError.Code);
+            }
 
-        Log.Logger = new LoggerConfiguration()
-                     .Enrich.FromLogContext()
-                     .MinimumLevel.Is(MapToSeriLogLogEventLevel(minLogLevel)!.Value)
-                     .WriteTo.File(
-                         logFile,
-                         outputTemplate: "____{NewLine}{Level:u4}: {Message:lj}{NewLine}{Exception}",
-                         formatProvider: CultureInfo.InvariantCulture)
-                     .CreateLogger();
+            Log.Logger = new LoggerConfiguration()
+                         .Enrich.FromLogContext()
+                         .MinimumLevel.Is(MapToSeriLogLogEventLevel(minLogLevel)!.Value)
+                         .WriteTo.File(
+                             logFilePath,
+                             restrictedToMinimumLevel: MapToSeriLogLogEventLevel(fileLogLevel)!.Value,
+                             outputTemplate: "____{NewLine}{Level:u4}: {Message:lj}{NewLine}{Exception}",
+                             formatProvider: CultureInfo.InvariantCulture)
+                         .CreateLogger();
+
+            logging.AddSerilog();
+        }
 
         logging.AddProvider(new ColorConsoleLoggerProvider(minLogLevel: loggingOptions.ConsoleLogLevel));
-        return logging.AddSerilog();
+        return logging;
     }
 
     private static LogEventLevel? MapToSeriLogLogEventLevel(LogLevel logLevel) =>

@@ -12,7 +12,8 @@ namespace Hl7.Cql.Packager.Commands.Logging;
 public record LoggingCommand(
     bool? LogAppend,
     LogLevel? ConsoleLogLevel,
-    LogLevel? FileLogLevel) {
+    LogLevel? FileLogLevel,
+    FileInfo? LogFile) {
 
     public static readonly Option[] Options =
     [
@@ -33,6 +34,12 @@ public record LoggingCommand(
             """
             The minimum log level to output to file
             """),
+
+        Option<FileInfo?>(
+            "--log-file",
+            """
+            The path of the log file. If not specified, no file logging is performed.
+            """),
     ];
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
@@ -40,5 +47,6 @@ public record LoggingCommand(
         (LogAppend, [LoggingOptions.ConfigSection, nameof(LoggingOptions.Append)]),
         (ConsoleLogLevel, [LoggingOptions.ConfigSection, nameof(LoggingOptions.ConsoleLogLevel)]),
         (FileLogLevel, [LoggingOptions.ConfigSection, nameof(LoggingOptions.FileLogLevel)]),
+        (LogFile, [LoggingOptions.ConfigSection, nameof(LoggingOptions.LogFile)]),
     ];
 }

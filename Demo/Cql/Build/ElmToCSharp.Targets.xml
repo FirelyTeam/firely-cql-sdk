@@ -55,6 +55,7 @@
 			<PackagerCLIArgs Condition="'$(MeasuresDirectory)'!=''">$(PackagerCLIArgs) --measures "$(MeasuresDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(JsonPretty)'!=''">$(PackagerCLIArgs) --json-pretty "$(JsonPretty)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(Profile)'!=''">$(PackagerCLIArgs) --profile "$(Profile)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(PackagerLogFile)'!=''">$(PackagerCLIArgs) --log-file "$(PackagerLogFile)"</PackagerCLIArgs>
 			<PackagerCLICommand>"$(PackagerCLI)" elm $(PackagerClIArgs)</PackagerCLICommand>
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>

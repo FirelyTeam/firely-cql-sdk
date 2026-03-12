@@ -50,7 +50,8 @@ public record CqlToFhirCommand
         "  " + ExitCodes.PdbOrFhirDirNotSpecifiedButDebugSymbolsIsPortablePdb.CodeWithMessage + NewLine +
         "  " + ExitCodes.NoCqlLibsConvertedToElm.CodeWithMessage + NewLine +
         "  " + ExitCodes.MixedFhirAndSpecificDirs.CodeWithMessage + NewLine +
-        "  " + ExitCodes.IncompleteLibrariesMeasuresDirs.CodeWithMessage;
+        "  " + ExitCodes.IncompleteLibrariesMeasuresDirs.CodeWithMessage + NewLine +
+        "  " + ExitCodes.LogFileSetupError.CodeWithMessage;
 
     public static Command CreateCommand() =>
         new Command(Name, Description)

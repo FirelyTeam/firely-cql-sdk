@@ -25,6 +25,8 @@
 		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
 		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release' and '$(ContinuousIntegrationBuild)' != 'true'">true</ElmToCSharpEnabled> -->
 
+		<PackagerLogFile>packager.log</PackagerLogFile>
+
 		<Box> __________________________________________________________________________________________&#10;/&#10;{Text}&#10;\</Box>
 
 	</PropertyGroup>
