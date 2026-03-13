@@ -126,5 +126,5 @@ This **matches the spec exactly**.
 
 ## Reference
 
-- Spec Verified Findings: `spec-report/SPEC_VERIFIED_FINDINGS.md` (Critical Finding #1)
-- Deviations Report: `spec-report/CQL_SPEC_DEVIATIONS_REPORT.md` (Deviation #3)
+- Spec Verified Findings: `spec-report/spec-verified-findings.md` (Critical Finding #1)
+- Deviations Report: `spec-report/cql-spec-deviations-report.md` (Deviation #3)

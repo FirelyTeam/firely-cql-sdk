@@ -4,7 +4,7 @@ This guide explains how to provide CQL specification content for enhanced confor
 
 ## Why We Need Spec Content
 
-The comprehensive deviations report (`CQL_SPEC_DEVIATIONS_REPORT.md`) identifies potential spec violations, but direct access to the official CQL specification at https://cql.hl7.org/ is currently blocked. Having the spec content allows for:
+The comprehensive deviations report (`cql-spec-deviations-report.md`) identifies potential spec violations, but direct access to the official CQL specification at https://cql.hl7.org/ is currently blocked. Having the spec content allows for:
 
 1. **Verification** of reported deviations against exact spec language
 2. **Discovery** of additional conformance issues

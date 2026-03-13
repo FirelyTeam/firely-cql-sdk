@@ -1,4 +1,4 @@
-# Getting started with the Firely SDK CQL repository
+# Getting started with the Firely CQL SDK
 
 ## Prerequisites
 
@@ -20,187 +20,132 @@ This repository contains deeply nested file paths that exceed Windows' default 2
 
 > **Note:** A system restart may be required after changing the Windows registry setting.
 
-The repository consists of two parts:
-* `Cql/` - the main body of code that produces the CQL engine itself, plus the PackagerCLI
-* `docs/` - documentation and other files that are useful to understand the codebase
-  * This document, which is the main entry point for getting started with the CQL SDK.
-  * A [diagram](docs/packager-cli-dependency-graph.md) showing how all the classes and their dependencies involved.
-  * A [graphic](CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
-* `Demo/` - a solution that demoes how to get from a CQL measure to an executable rule.
+## Repository Structure
 
-It also links to external submodule repositories, but some of them are private:
-* `submodules/Firely.Cql.Sdk.Integration.Runner/` - an integration test runner used to run CMS measures.
-* `submodules/NCQA/` - a private repository with NCQA measures, used to test the CQL engine.
+```
+firely-cql-sdk/
+├── Cql/            # Core SDK source — all Hl7.Cql.* packages and PackagerCLI
+├── Demo/           # Demonstrates the full CQL-to-measure pipeline with real HEDIS/CMS measures
+├── Examples/       # Runnable C# examples for common SDK scenarios
+│   └── CqlSdkExamples/   # Packaging (200s), Invocation (300s–400s), Extensions (500s)
+├── docs/           # This documentation
+└── spec/           # CQL specification reference and conformance reports
+```
 
-## The Cql-Sdl-All solution
-The `Cql-Sdk-All.sln` solution includes all the projects in the repository, _and_ the submodules.
-In most cases you will not need to build the submodules, 
-since the purpose of it is to run the integration tests in the build pipeline (still to be done).
+External submodule repositories:
+* `submodules/Firely.Cql.Sdk.Integration.Runner/` — integration test runner for CMS measures
 
-If you do you want to open this solution in Visual Studio, 
-you can do so by following the following steps:
-* Clone the repository
-* Clone the submodules by running `git submodule update`
-* Then open the `Cql-Sdk-All.sln` solution in Visual Studio and build it.
+## Building the SDK
 
-Note that you will see multiple repositories in the `Git Changes` tool window in Visual Studio.
-Each repository must be branched and committed separately.
+Build the core SDK using the `Cql-Sdk.slnf` solution filter (recommended):
 
+```bash
+dotnet build Cql-Sdk.slnf
+```
 
-## The Cql-Sdk solution
-Building the Cql solution should be as simple as doing a build in Visual Studio or running a `dotnet build 'Cql-Sdk.slnf'`.
-It builds the CQL engine into a whole bunch of assemblies, 
-plus builds the only executable in the solution, the PackagerCLI. 
+To also build demos and examples, use `Cql-Sdk-Demos-Examples.slnf`. The `Cql-Sdk-All.sln` solution includes submodule projects and requires them to be initialized first (`git submodule update`).
 
-The PackagerCLI takes CQL measures (in the form of ELM), 
-turns them into equivalent C#, 
-compiles the C# and then packages the original ELM, 
-the C# code and the binary assembly data into a FHIR Library resources.
+## Invoking CQL — The Recommended Approach
 
-It is used in the Demo project, 
-so if you'd like to see example use for it (until we write the documentation),
-take a look at the provided `"ELM to C#"` build target in the Elm project within the Demo solution.
+The primary way to execute CQL from .NET is via the **Invocation Toolkit** (`Hl7.Cql.Invocation`). It:
 
-## The Demo folder
+- Compiles CQL through ELM to a .NET assembly in a single pipeline
+- Manages assembly loading in an isolated `AssemblyLoadContext`
+- Handles version checking of generated code
+- Provides a clean API for invoking definitions, functions, and bulk expression enumeration
 
-* Explore the Demo solution projects to see practical examples of the CQL engine in action.
-* There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
-* [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
-* A [markdown document](CQL-Engine-Architecture.md) with background documentation on the design (converted from Word document).
+**Always use the invocation toolkit instead of calling generated library classes directly.** Direct calls to generated classes bypass context management, caching, and version safety.
 
-The presentation is a good place to start, but note that we have made some minor changes to the public surface, 
-so the names of the classes in the presentation will differ from the examples in the Demo project itself.
+### Example: Hello World
 
-It is important that you either build the Cql engine yourself before you try to build the Demo solution, 
-since that uses parts of the Cql solution. 
-Alternatively, you can tweak the Demo project to use the shipped NuGet packages for the Cql engine, 
-instead of referring to the projects directly.
+```csharp
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Microsoft.Extensions.Logging;
 
-### (2.x update) Thanks to feedback, the Demo projects have been updated!
-After reviewing the following high level understanding of the Demo projects, be sure to see the detailed breakdown of the Demo projects below.
+var loggerFactory = LoggerFactory.Create(b => b.AddConsole());
 
-### Demo Introduction
-The demo project showcases the process of turning a measure written in CQL into an executable function that can be called from your code. It also contains a few tests that demo the main ways to run a measure.
+var cql = (CqlLibraryString)"""
+    library HelloWorldLib version '1.0.0'
+    define "HelloWorld" : 'Hello from CQL!'
+    """;
 
-Just like with the CQL, building the solution should be a simple matter of hitting build, or `dotnet build`, but in this case, it is more instructive to break the build process into pieces to get a sense of what is going on. Basically, there are three steps:
+using var invoker = new CqlToolkit(loggerFactory)
+    .AddCqlLibraries(cql)
+    .CreateLibrarySetInvoker();
 
-### 1. Turning CQL into ELM (using Java Tooling)
+var result = invoker.InvokeLibraryDefinition(
+    FhirCqlContext.WithDataSource(),
+    cql.LibraryIdentifier,
+    "HelloWorld");
 
-Surprisingly, this is the hardest step. It takes the human-readable CQL source code and turns it into ELM, basically a serialized abstract syntax tree (just like CQL defined by HL7) that represents the source code in a more processable way. While this repository includes a .NET-based CQL to ELM converter, it is not yet mature enough for production use. Therefore, **the preferred and recommended approach** is to use the battle-tested Java-based CQL-to-ELM [command line tool](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java). The first time you run the build, it will also download all the necessary Java CQL/ELM tools.
+Console.WriteLine(result); // Hello from CQL!
+```
 
-Prerequisites:
-1. Install JDK
-2. Install [Maven](https://maven.apache.org/install.html). Be sure to set the PATH variable mentioned in the link.
-3. Install PowerShell (pwsh) - PowerShell Core 7.0 or later is recommended
-4. As of this documentation JDK 21 and Maven 3.9.5 are working - Oct 13 2023.
+### Example: Load from FHIR Resources
 
-Take a look at the `Cql` project in the Demo solution folder. Its `Build` directory contains:
-- PowerShell scripts for managing Java dependencies (`Java-Dependencies-*.ps1`)
-- MSBuild targets that invoke these scripts (`CqlToElm.Targets.xml`)
-- Maven configuration files (`pom.xml`)
+```csharp
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Fhir;
 
-The build process automatically downloads and manages the Java tooling dependencies using these scripts.
+// Load pre-packaged FHIR Library resources (containing embedded assembly binaries)
+var invocationToolkit = new InvocationToolkit()
+    .AddAssemblyBinariesInFhirLibrariesFromDirectory(new DirectoryInfo("output/fhir"));
 
- There are multiple `Measures.*` projects where the `input` folder contains a set of demo CQL files. 
- Select the `Generate-CQL-to-ELM` build configuration in the solution explorer,
- then build these projects which will generate ELM JSON files from the CQL,
- and put them into the source `Elm` folder each respective project.
+using var invoker = invocationToolkit.CreateLibrarySetInvoker();
 
+var context = FhirCqlContext.WithDataSource();
 
-### 2. Turning ELM into C# and DLLs
-The next step does quite a bit at one:
-* Take the ELM we just produced and generate [LINQ Expressions](https://learn.microsoft.com/en-us/dotnet/api/system.linq.expressions.expression?view=net-7.0) for it.
-* Take the `Expressions` and turn them into C# code. Each ELM file is converted into one class and each function within that file into a public function in that class.
-* Compile all the C# into a single assembly, and into single assemblies per CQL file.
-* For each CQL file: package the CQL, the ELM, the assembly and the C# source code into a FHIR `Library` resource.
+var results = invoker
+    .SelectExpressions()
+    .ToList()
+    .SelectResults(context)
+    .ToList();
+```
 
-All these steps are done by the `PackagerCLI` that is included in the target files of the `Cql` solution, which is invoked by the build steps for the `Cql` project, taking both the original CQL (from the `input` folder in step 1) and the ELM (from `Elm` folder from this project) as input. The generated C# is exported to the `CSharp` directory of the `Measures.*` projects, and built into a `Measures.[name].dll`. The generated `Library` resources are stored in the `Resources` folder in each respective project. The `Measures.Authoring` project has some minimal examples and can be used for your own CQL development initiatives.
+See the **[Examples project](../Examples/CqlSdkExamples/)** for complete, runnable samples:
+- **210–251**: Packaging CQL/ELM into FHIR Library resources
+- **310–340**: Invoking CQL definitions, parameters, functions, and caching
+- **400–410**: Loading and invoking from FHIR resource directories
+- **500**: Extending SDK functionality
 
-Note that although it is possible to directly execute the `Linq.Expressions` generated during the intermediate steps, this is not recommended, since they are very hard to debug and cannot be shipped efficiently as reuseable assemblies.
+## How CQL Execution Works
 
-### 3. Build the other projects
-With the measures generated, we can now build the other projects. There is one sample project `CLI` and a Test project with four unit tests.
+The SDK follows a pipeline from CQL source to .NET execution results:
 
-## Evaluating measures
-The `Test.Measures.Demo` project showcases multiple ways to use the CQL SDK to execute measures in `MeasuresTest.cs`. No matter how the CQL expressions in each CQL file are invoked, you need to create an instance of a `CqlContext` first,
-which holds the basic external inputs to the function call: 
-* The data to run the function on, either as a `Bundle` FHIR resource, or an implementation of `IDataSource`. (default: empty data)
-* The parameters passed to the measure (default: none).
-* A set of external valuesets (default: no valuesets).
-* The date to server as "today" (default: today)
+1. **CQL → ELM**: CQL text is parsed and compiled to ELM (a structured representation). The .NET `Hl7.Cql.CqlToElm` package handles this. For production use with complex measures, the Java-based [CQL-to-ELM tool](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java) may also be used.
 
-This is most easily done by calling one of the overloads of the factory method `FhirCqlContext.Create()`. When the `CqlContext` is created,
-we can now invoke the defined functions in the measure:
+2. **ELM → LINQ Expressions**: The `Hl7.Cql.Compiler` package interprets the ELM tree and produces `System.Linq.Expressions` lambdas for each CQL definition.
 
-1. Directly call the generated measure. This is shown in `BCSEHEDIS2022_Numerator`. Calling a CQL expression directly requires the measures to be known in advance as a pre-compiled assembly.
+3. **LINQ Expressions → .NET Assembly**: The `Hl7.Cql.CodeGeneration.NET` package converts the expressions to C# source code, which is then compiled to a .NET assembly by Roslyn.
 
-1. Dynamically load the packaged `Library` resources and invoke the CQL expressions dynamically. This is shown in `BCSEHEDIS2022_Numerator_FromResource`.
-2. Dynamically load ELM files, compile them and then run the expressions within the measure. This is shown in `BCSEHEDIS2022_Numerator_FromElm`.
+4. **Assembly → CQL Results**: The `Hl7.Cql.Invocation` toolkit loads the assembly, binds a `CqlContext` (containing patient data, parameters, value sets, and the reference date), and invokes individual definitions.
 
-> When using the "direct" approach, we are constructing an instance of the whole measure, and then invoking the individual expressions. The results of these expressions are cached, to speed up processing when they are called repeatedly. This means that manipulating the parameters or the Bundle contents will not change the outcome of the expressions anymore, and you will have to create a new instance of the generated measure to force re-calculation. 
+Steps 1–3 are handled automatically by the toolkits when you call `CreateLibrarySetInvoker()`. See the [CQL Engine Architecture](cql-engine-architecture.md) document for deeper background.
 
-## Demo Projects Detailed
-With the 2.x SDK update, the Demo projects have been refactored and improved thanks to feedback from the community. Through the improvements, more examples were added, common questions answered,
+## The Demo Projects
 
-### Cql Project
-The functionality in the 1.x `ELM` project has been merged to the `CQL` project. The goal of the `CQL` project is to:
+The `Demo/` folder demonstrates the complete packaging pipeline for real HEDIS and CMS measures. It uses the Java-based CQL-to-ELM tooling and MSBuild targets to go from CQL source files all the way to packaged FHIR `Library` resources and .NET assemblies.
 
-1. Pull down the JAVA cql-to-elm tooling using Maven (managed via PowerShell scripts in the `Build` directory)
-2. Invoke the cql-to-elm tooling to convert `CQL` to `ELM`
+To build the Demo projects you need:
+1. JDK (21+)
+2. [Maven](https://maven.apache.org/install.html) (3.9+)
+3. PowerShell Core 7+ (`pwsh`)
 
-Because there are now multiple `Measures.[name]` projects the build targets are located in this project to be shared amongst the others.
+Once prerequisites are installed, open `Cql-Sdk-Demos-Examples.slnf` in Visual Studio or run `dotnet build` to build the demo measures.
 
-The `Build` directory contains:
-- **Java-Dependencies-Vars.ps1**: Configuration for Java dependency versions and paths
-- **Java-Dependencies-Download.ps1**: Downloads Java dependencies via Maven (checks if JARs already exist to avoid unnecessary downloads)
-- **Java-Dependencies-Clean.ps1**: Cleans downloaded dependencies
-- **CqlToElm.Targets.xml**: MSBuild targets that invoke the PowerShell scripts and Java tooling
+See the **[Demo Projects](demo-projects.md)** guide for the project structure, pipeline stages, and how to configure your own measure project. The **[CQL Build Pipeline](build-pipeline.md)** document covers the `build.ps1`/`build.sh` scripts, all MSBuild props/targets files, and the Java dependency management in detail. To learn about the individual PackagerCLI commands and options, see the **[CQL Packager Reference](cql-packager.md)**.
 
-### CLI Project
-The `CLI` project is now standalone and is referenced by all of the `Measures.[name]` projects to reuse the functionality within. Some highlights of functionality:
+## Further Reading
 
-1. Examples for running measures both using the compiled CSharp and using Library Resource files.
-2. Multiple examples of loading dependencies: resources, value sets, etc.
-3. Example for finding missing value sets when developing CQL files.
-4. Improved file structure to allow for the use of https://github.com/cqframework/vscode-cql tooling, along with multiple patient tests, loading of input parameters, and saving output to file locations in multiple formats.
-5. Removed dependency on a single Measures project so it can be edited and use in a standalone fashion. See the launchsettings.json file for samples.
-6. Improved command line parameter examples.
-7. Comments added in various areas to help with understanding.
-
-
-### Measures.[name] Projects
-
-All the `Measures.[name]` projects are now both a library with an executable. This facilitates calling the `CLI` project tool with little effort and configuration and pre-packages and runs the `CLI` executable within the Measures project for testing.
-
-The projects have been refactored to support using vscode-cql tooling for authoring measures.
-
-### Measures.Authoring Project
-
-This project is now the defacto `demonstration` and authoring project. The idea is that you can author your own measures in this project for testing. It includes just a few samples that can easily be removed or ignored.
-
-This project can also be copied to a new project for your development. For example, you would copy the `Measures.Authoring` project to `Measures.MyMeasureProject` and then remove the examples and test data. Because of the sharing of code and build targets with the `Cql` project, a few properties edits will need to be made to the new project's `csproj` file:
-
-	<PropertyGroup>
-		<LibrarySet>Measures.Authoring</LibrarySet>
-		<!-- Directories -->
-		<CqlDirectory>$(MSBuildProjectDirectory)/input/cql</CqlDirectory>
-		<ElmDirectory>$(MSBuildProjectDirectory)/Elm</ElmDirectory>
-		<ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory>
-		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
-		<DllDirectory>$(MSBuildProjectDirectory)/Dll</DllDirectory>
-		<! -- Settings (all optional) -->
-		<JsonPretty>true</JsonPretty>
-		<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
-		<OverrideUtcDateTime>1970-01-01T00:00:00</MyMeasureProject>
-	</PropertyGroup>
-
-In most scenarios, simply changing the LibrarySet is all that is needed. See the `Measures.Demo` project for a sample on loading data from directories that are not local to your authoring project.
-
-### Measures.Demo (formerly Measures)
-
-This project contains a set of sample measures akin to older CMS and HEDIS measures. It is largely unchanged from its former version with the exception of build target configuration to load files from other directories.
-
-
-### Measures.CMS 
-
-This project contains a set of sample measures from the ongoing CMS CQL to FHIR initiatives. To maintain the size of the CQL SDK, there are no samples or tests. It is more of a testing tool for the SDK team, to see and test how other advanced measures look when compiled to CSharp. 
+* [CQL Engine Architecture](cql-engine-architecture.md) — internal design and key classes
+* [Toolkit Services Dependency Diagrams](dependency-diagrams.md) — service dependency graphs
+* [Demo Projects](demo-projects.md) — project structure and how to configure a measure project
+* [CQL Build Pipeline](build-pipeline.md) — build scripts, Java CQL-to-ELM tooling, PackagerCLI, and MSBuild targets
+* [CQL Packager Reference](cql-packager.md) — all `cql-package` commands, options, and examples
+* [Technical README](technical-readme.md) — multi-targeting, code generation versioning, and CI/CD details (maintainers)
+* [DevDays 2023 presentation](https://youtu.be/CkTbgfbttJc) — introductory walkthrough
+* More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).

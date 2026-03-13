@@ -1,4 +1,4 @@
-$solutionFile = "Cql-sdk.slnf"
+$solutionFile = "Cql-Sdk.slnf"
 $solutionPath = Resolve-Path $solutionFile
 $solutionDir = Split-Path -Parent $solutionPath
 $outputDir = Join-Path $solutionDir ".nupkgs"
@@ -16,6 +16,7 @@ Write-Host "Version Suffix: $versionSuffix"
 msbuild $solutionPath `
     /t:Restore,Build,Pack `
     /p:Configuration=$configuration `
-    /p:ElmToCSharpEnabled=false `
+    /p:CqlToolingEnabled=false `
+    /p:ElmToolingEnabled=false `
     /p:PackageOutputPath=$outputDir `
     /p:VersionSuffix=$versionSuffix

@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 	<!--
-	CQL-tooling properties used by CqlToElm.Targets.xml and ElmToCSharp.Targets.xml
+	CQL-tooling properties used by CqlTooling.Targets.xml and ElmTooling.Targets.xml
 	Include this file in your project when importing those targets, to ensure these properties are defined.
 	-->
 
@@ -17,13 +17,13 @@
 		<EmbedDebugSymbolsEnable>false</EmbedDebugSymbolsEnable>
 		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable>
 
-		<CqlToElmEnabled>false</CqlToElmEnabled>
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-	  <!-- <CqlToElmEnabled Condition="'$(Configuration)' == 'Release' and '$(ContinuousIntegrationBuild)' != 'true'">true</CqlToElmEnabled> -->
+		<CqlToolingEnabled>false</CqlToolingEnabled>
+		<!-- <CqlToolingEnabled>true</CqlToolingEnabled> -->
+	  <!-- <CqlToolingEnabled Condition="'$(Configuration)' == 'Release' and '$(ContinuousIntegrationBuild)' != 'true'">true</CqlToolingEnabled> -->
 
-		<ElmToCSharpEnabled>false</ElmToCSharpEnabled>
-		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
-		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release' and '$(ContinuousIntegrationBuild)' != 'true'">true</ElmToCSharpEnabled> -->
+		<ElmToolingEnabled>false</ElmToolingEnabled>
+		<!-- <ElmToolingEnabled>true</ElmToolingEnabled> -->
+		<!-- <ElmToolingEnabled Condition="'$(Configuration)' == 'Release' and '$(ContinuousIntegrationBuild)' != 'true'">true</ElmToolingEnabled> -->
 
 		<PackagerLogFile>packager.log</PackagerLogFile>
 

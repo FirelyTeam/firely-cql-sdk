@@ -14,24 +14,54 @@ so it is likely at this early stage that there will be deviations from other eng
 The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal performance from .NET 10's enhancements (especially in LINQ which CQL heavily relies upon) while maintaining long-term support. All SDK packages (Hl7.Cql.*) are multi-targeted and will run on either framework with identical behavior.
 
 ## Release Notes
-This is release version 2.4.0 of the engine.
+This is release version 2.5.0 of the engine.
 
-The releases notes 
-at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version will document these changes and (major) issues we have encountered.
+The release notes at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version document changes and known issues.
 
-1.* Releases will be maintained with hotfixes, but will not receive new features.
+1.x releases are maintained with hotfixes only and do not receive new features.
 
 ## Getting Started
 
-* Read how to [Getting Started](docs/getting-started.md) included in the repository.
+* Read the [Getting Started guide](docs/getting-started.md) included in the repository.
+* Explore the [Examples](Examples/CqlSdkExamples/) for runnable code samples covering packaging and invocation.
 * There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
-* [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
-* The [CQL Engine Architecture](docs/CQL-Engine-Architecture.md) document with background documentation on the design.
+* [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the Firely .NET SDK documentation.
+* The [CQL Engine Architecture](docs/cql-engine-architecture.md) document with background on the design.
 * The [Toolkit Services Dependency Diagrams](docs/dependency-diagrams.md) showing the internal dependencies of the CQL SDK toolkit services.
-* The [Technical README](docs/TECHNICAL-README.md) for maintainers contains implementation details, conditional compilation, and multi-targeting information.
+* The [Technical README](docs/technical-readme.md) for maintainers contains implementation details, conditional compilation, and multi-targeting information.
+* The [Demo Projects and CQL Build Pipeline](docs/demo-projects.md) guide covering the build scripts, Java CQL-to-ELM tooling, and PackagerCLI MSBuild targets used by the Demo projects.
 
+### Quick Start: Invoking CQL
 
-The presentation is a good place to start, but note that we have made some minor changes to the public surface, so the names of the classes in the presentation will differ from the examples in the Demo project itself.
+The recommended way to execute CQL from .NET is through the **Invocation Toolkit** (`Hl7.Cql.Invocation`). It handles compiling CQL through ELM to .NET assemblies and exposes a clean API for invoking definitions. Never call generated library classes directly — doing so bypasses caching, version checking, and context management.
+
+```csharp
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Microsoft.Extensions.Logging;
+
+var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+
+// Define inline CQL (or load from files/FHIR resources)
+var cql = (CqlLibraryString)"""
+    library HelloWorldLib version '1.0.0'
+    define "HelloWorld" : 'Hello from CQL!'
+    """;
+
+// Compile and create an invoker
+using var invoker = new CqlToolkit(loggerFactory)
+    .AddCqlLibraries(cql)
+    .CreateLibrarySetInvoker();
+
+// Execute a CQL definition
+var context = FhirCqlContext.WithDataSource();
+var result = invoker.InvokeLibraryDefinition(context, cql.LibraryIdentifier, "HelloWorld");
+Console.WriteLine(result); // Hello from CQL!
+```
+
+See the [Examples](Examples/CqlSdkExamples/) project for more complete samples including parameters, function arguments, FHIR resource loading, and caching.
 
 ## SDK Packages
 
@@ -42,7 +72,7 @@ This SDK consists of the following packages:
 - **Hl7.Cql.Abstractions**: Core interfaces and abstractions used throughout the SDK
 - **Hl7.Cql.Runtime**: Runtime execution engine for CQL expressions
 - **Hl7.Cql.Compiler**: ELM to .NET compilation
-- **Hl7.Cql.Invocation**: High-level APIs for invoking CQL libraries and expressions
+- **Hl7.Cql.Invocation**: High-level APIs for invoking CQL libraries and expressions. This is the **recommended entry point** for applications that need to execute CQL — it manages assembly loading, version checking, context lifecycle, and result enumeration. Always use this package instead of calling generated library classes directly.
 
 ### Integration & Data Packages
 - **Hl7.Cql.Firely**: FHIR integration layer
@@ -66,8 +96,8 @@ This SDK consists of the following packages:
 The SDK depends on the following key external packages:
 
 ### FHIR Support
-- **Hl7.Fhir.Base**: Version 6.0.1 - Base classes and utilities for FHIR support
-- **Hl7.Fhir.R4**: Firely SDK version - FHIR R4 POCOs and serialization support
+- **Hl7.Fhir.Base**: Version 6.0.2 - Base classes and utilities for FHIR support
+- **Hl7.Fhir.R4**: Version 6.0.2 - FHIR R4 POCOs and serialization support
 - **Fhir.Metrics**: Version 1.3.0 - FHIR units and metrics support
 
 ### Parsing & Compilation
@@ -75,18 +105,15 @@ The SDK depends on the following key external packages:
 - **Microsoft.CodeAnalysis.CSharp**: Version 4.12.0 - Roslyn C# compiler APIs
 
 ### Configuration & Logging
-- **Microsoft.Extensions.Configuration**: Version 9.0.3 - Configuration framework
-- **Microsoft.Extensions.DependencyInjection**: Version 8.0.0 - Dependency injection container
-- **Microsoft.Extensions.Logging**: Version 8.0.0 - Logging abstractions
-- **Microsoft.Extensions.Hosting**: Version 8.0.0 - Generic host for .NET applications
+- **Microsoft.Extensions.Configuration**: Version 10.0.1 - Configuration framework
+- **Microsoft.Extensions.DependencyInjection**: Version 10.0.1 - Dependency injection container
+- **Microsoft.Extensions.Logging**: Version 10.0.1 - Logging abstractions
+- **Microsoft.Extensions.Hosting**: Version 10.0.1 - Generic host for .NET applications
 
 ### Command-line Tool Dependencies
 - **Serilog.Extensions.Logging**: Version 9.0.1 - Serilog integration with Microsoft.Extensions.Logging
 - **Serilog.Sinks.File**: Version 7.0.0 - Serilog file logging sink
 - **System.CommandLine**: Version 2.0.0-beta4.22272.1 - Command-line argument parsing
-
-### Serialization
-- **System.Text.Json**: Version 8.0.5 - High-performance JSON serialization
 
 ## Pre-release NuGet Packages
 During development, pre-releases will appear on Firely's GitHub Package feed. To use these packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
@@ -133,7 +160,7 @@ Multi-framework testing is fully integrated into the Azure Pipelines CI/CD workf
 - Job 2: Tests CoreTests, CqlToElmTests, IntegrationRunner, and Test.Measures.Demo on .NET 10
 - Job 3: Compares results and reports any framework-specific differences
 
-See `build/README.md` for complete CI/CD testing documentation and configuration details.
+See [build/README.md](build/README.md) for complete CI/CD testing documentation and configuration details.
 
 ## Support 
 We actively monitor the issues coming in through the GitHub repository at [https://github.com/FirelyTeam/firely-cql-sdk/issues](https://github.com/FirelyTeam/firely-cql-sdk/issues). You are welcome to register your bugs and feature suggestions there. For questions and broader discussions, we use the [.NET FHIR Implementers chat][netsdk-zulip] and [CQL chat][cql-spec] on Zulip.

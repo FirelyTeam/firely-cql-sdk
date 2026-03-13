@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.6.1
+**Version:** 2.7.1
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
@@ -256,6 +256,22 @@ This document contains development guidelines and instructions for maintaining c
 
    4.4.5.4 Internal packages should describe what they do but not show how to use them directly
 
+4.4.6 **ALWAYS use Markdown hyperlinks when referencing other documents** — never use plain text file names or paths for cross-document references
+   4.4.6.1 Every reference to another document (README, guide, spec, etc.) must be a clickable Markdown link: `[Display Text](relative/path/to/file.md)`
+
+   4.4.6.2 Use relative paths from the referencing file's location (e.g., `[build/README.md](../build/README.md)` from `docs/`, or `[README.md](README.md)` for a sibling file)
+
+   4.4.6.3 When updating a document, scan all references to other files and ensure they are hyperlinked
+
+   4.4.6.4 When renaming or moving a document, update all hyperlinks that point to it across the repository
+
+4.4.7 **Always include a link to Firely's documentation site in every "Further Reading" section** — the link must never be removed when editing a document
+   4.4.7.1 Every `## Further Reading` section must contain a reference to [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html)
+
+   4.4.7.2 The standard wording for package READMEs is: `More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).`
+
+   4.4.7.3 When editing any document that has a `## Further Reading` section, verify that this link is still present after your changes
+
 ## 5. Build and Test
 
 ### 5.1 General Build Requirements
@@ -321,13 +337,13 @@ This document contains development guidelines and instructions for maintaining c
 
 ### 5.4 Generating ELM Files from CQL
 5.4.1 When adding CQL files (e.g., to `CoreTests\Input\ELM\HL7`), follow these steps to generate the ELM JSON files:
-   5.4.1.1 **Enable CQL to ELM conversion**: Find the commented out property `CqlToElmEnabled` in the csproj (e.g., `<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->`) and uncomment it to set `CqlToElmEnabled` to `true`
+   5.4.1.1 **Enable CQL to ELM conversion**: Find the commented out property `CqlToolingEnabled` in the csproj (e.g., `<!-- <CqlToolingEnabled>true</CqlToolingEnabled> -->`) and uncomment it to set `CqlToolingEnabled` to `true`
 
    5.4.1.2 **Build the project**: Build that particular csproj, which will generate the ELM files
 
    5.4.1.3 **Verify generation**: Confirm that all ELM files are generated for each CQL file. The directory for the ELM files can be discovered in the `ElmDirectory` property in the csproj file
 
-   5.4.1.4 **Restore setting**: Roll back step 1 by commenting out `CqlToElmEnabled=true`
+   5.4.1.4 **Restore setting**: Roll back step 1 by commenting out `CqlToolingEnabled=true`
 
 ## 6. Naming Conventions
 6.1 Use `CqlSdk` prefix for SDK-related example projects

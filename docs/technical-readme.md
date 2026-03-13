@@ -54,7 +54,7 @@ The solution also includes custom JSON converters for handling polymorphic ELM t
 - `TopLevelDefinitionConverterFactory` - Creates converters for top-level definition arrays
 - `PolymorphicTypeResolver` - Discovers type hierarchies via `[XmlInclude]` attributes
 
-See `Cql/Elm/Serialization/README.md` for complete architecture documentation.
+See [Cql/Elm/Serialization/README.md](../Cql/Elm/Serialization/README.md) for complete architecture documentation.
 
 #### Legacy Format Support
 The `LibraryJsonSerializer` includes preprocessing logic (`CorrectLegacyConstructs`) to handle legacy ELM JSON formats:
@@ -90,7 +90,7 @@ Both .NET 8 and .NET 10 now exhibit **identical behavior**:
 
 ### Custom Build Targets
 
-Custom MSBuild targets (e.g., `ElmToCSharp.Targets.xml`, `CqlToElm.Targets.xml`) that generate code or artifacts are configured to **run only once** when multi-targeting:
+Custom MSBuild targets (e.g., `ElmTooling.Targets.xml`, `CqlTooling.Targets.xml`) that generate code or artifacts are configured to **run only once** when multi-targeting:
 
 ```xml
 <!-- Use ToolTargetFramework property to specify the latest framework -->
@@ -174,7 +174,7 @@ The multi-framework testing is **fully integrated** and runs automatically on ev
 - ✅ Automatic comparison report to identify framework-specific issues
 - ✅ Early detection of framework behavioral differences
 
-**Usage:** See `build/README.md` for complete documentation and configuration details.
+**Usage:** See [build/README.md](../build/README.md) for complete documentation and configuration details.
 
 **Local Testing:** Use the provided scripts for local validation:
 ```powershell
