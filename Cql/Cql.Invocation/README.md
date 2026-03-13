@@ -21,7 +21,7 @@ The SDK can compile CQL into .NET assemblies containing generated C# classes. It
 |------|-------------|
 | `CqlToolkit` | Entry point for compiling inline CQL strings or files and producing a `LibrarySetInvoker`. |
 | `InvocationToolkit` | Entry point for loading pre-compiled FHIR Library resources and producing a `LibrarySetInvoker`. |
-| `LibrarySetInvoker` | Manages a set of compiled CQL libraries. Use `InvokeLibraryDefinition` for single definitions or `SelectExpressions().SelectResults(context)` for bulk evaluation. |
+| `LibrarySetInvoker` | Manages a set of compiled CQL libraries. Use `InvokeLibraryDefinition` for single definitions, `SelectExpressions().SelectResults(context)` for bulk evaluation across all libraries, or `SelectExpressionsForLibrary(libraryIdentifier)` to target a specific library. |
 | `LibraryInvoker` | Invoker scoped to a single CQL library. |
 | `DefinitionInvoker` | Invoker for a single CQL definition or function. |
 
@@ -53,6 +53,36 @@ var result = invoker.InvokeLibraryDefinition(
     "HelloWorld");
 
 Console.WriteLine(result); // Hello from CQL!
+```
+
+### Invoke from ELM files
+
+If you have pre-built ELM JSON files (e.g. produced by the [CQL-to-ELM translator](https://github.com/cqframework/clinical_quality_language)), load them with `ElmToolkit` and compile them in-memory to a `LibrarySetInvoker`:
+
+```csharp
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Microsoft.Extensions.Logging;
+
+var loggerFactory = LoggerFactory.Create(b => b.AddConsole());
+
+var elmDirectory = new DirectoryInfo("path/to/elm");
+
+using var librarySetInvoker = new ElmToolkit(loggerFactory)
+    .AddElmFilesFromDirectory(elmDirectory)
+    .CreateLibrarySetInvoker();
+
+var libraryIdentifier = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("MyLibrary", "1.0.0");
+
+var result = librarySetInvoker.InvokeLibraryDefinition(
+    FhirCqlContext.WithDataSource(),
+    libraryIdentifier,
+    "MyDefinition");
+
+Console.WriteLine(result);
 ```
 
 ### Invoke from packaged FHIR Library resources
