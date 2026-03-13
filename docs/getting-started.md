@@ -137,13 +137,15 @@ To build the Demo projects you need:
 
 Once prerequisites are installed, open `Cql-Sdk-Demos-Examples.slnf` in Visual Studio or run `dotnet build` to build the demo measures.
 
-See the **[Demo Projects and CQL Build Pipeline](demo-projects.md)** guide for a detailed explanation of the build scripts, MSBuild props/targets files, Java dependency management, PackagerCLI invocation, and how to configure your own measure project.
+See the **[Demo Projects](demo-projects.md)** guide for the project structure, pipeline stages, and how to configure your own measure project. The **[CQL Build Pipeline](build-pipeline.md)** document covers the `build.ps1`/`build.sh` scripts, all MSBuild props/targets files, and the Java dependency management in detail. To learn about the individual PackagerCLI commands and options, see the **[CQL Packager Reference](cql-packager.md)**.
 
 ## Further Reading
 
 * [CQL Engine Architecture](cql-engine-architecture.md) — internal design and key classes
 * [Toolkit Services Dependency Diagrams](dependency-diagrams.md) — service dependency graphs
-* [Demo Projects and CQL Build Pipeline](demo-projects.md) — build scripts, Java CQL-to-ELM tooling, PackagerCLI, and MSBuild targets
+* [Demo Projects](demo-projects.md) — project structure and how to configure a measure project
+* [CQL Build Pipeline](build-pipeline.md) — build scripts, Java CQL-to-ELM tooling, PackagerCLI, and MSBuild targets
+* [CQL Packager Reference](cql-packager.md) — all `cql-package` commands, options, and examples
 * [Technical README](technical-readme.md) — multi-targeting, code generation versioning, and CI/CD details (maintainers)
 * [DevDays 2023 presentation](https://youtu.be/CkTbgfbttJc) — introductory walkthrough
-* [Firely .NET SDK documentation](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) — CQL section
+* More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).
