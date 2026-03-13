@@ -90,7 +90,7 @@ Both .NET 8 and .NET 10 now exhibit **identical behavior**:
 
 ### Custom Build Targets
 
-Custom MSBuild targets (e.g., `ElmToCSharp.Targets.xml`, `CqlToElm.Targets.xml`) that generate code or artifacts are configured to **run only once** when multi-targeting:
+Custom MSBuild targets (e.g., `ElmTooling.Targets.xml`, `CqlTooling.Targets.xml`) that generate code or artifacts are configured to **run only once** when multi-targeting:
 
 ```xml
 <!-- Use ToolTargetFramework property to specify the latest framework -->

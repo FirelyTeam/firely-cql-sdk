@@ -74,11 +74,11 @@ Located at the repository root. Imported by every measure project **before** dec
 Also at the repository root. Imported by every measure project **after** all other properties are set. It simply forwards to the two tooling targets files:
 
 ```xml
-<Import Project="$(CqlToolingTargetsDir)CqlToElm.Targets.xml" />
-<Import Project="$(CqlToolingTargetsDir)ElmToCSharp.Targets.xml" />
+<Import Project="$(CqlToolingTargetsDir)CqlTooling.Targets.xml" />
+<Import Project="$(CqlToolingTargetsDir)ElmTooling.Targets.xml" />
 ```
 
-### `Demo/Cql/Build/CqlToElm.Targets.xml`
+### `Demo/Cql/Build/CqlTooling.Targets.xml`
 
 Handles the **CQL → ELM** step using the Java CQL-to-ELM CLI.
 
@@ -120,7 +120,7 @@ Handles the **CQL → ELM** step using the Java CQL-to-ELM CLI.
 | `ElmDirectory` | Output directory for generated `*.json` ELM files |
 | `LibrarySet` | Name of the measure library set (e.g. `Demo`) |
 
-### `Demo/Cql/Build/ElmToCSharp.Targets.xml`
+### `Demo/Cql/Build/ElmTooling.Targets.xml`
 
 Handles the **ELM → C# + FHIR resources** step using the `PackagerCLI` .NET tool.
 

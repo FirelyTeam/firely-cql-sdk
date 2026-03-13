@@ -2,7 +2,7 @@
 
 	<Import Project="..\cql-demo.props" />
 
-	<Import Project="Build\CqlToElm.Targets.xml" />
+	<Import Project="Build\CqlTooling.Targets.xml" />
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Cql\PackagerCLI\PackagerCLI.csproj" />

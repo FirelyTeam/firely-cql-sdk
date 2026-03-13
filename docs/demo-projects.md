@@ -25,8 +25,8 @@ Demo/
 ├── CLI/                        # Demo entry-point console app (loads FHIR resources, runs CQL)
 ├── Cql/                        # Library set project: CQL → ELM (Java-based)
 │   └── Build/
-│       ├── CqlToElm.Targets.xml          # MSBuild target: invoke Java CQL-to-ELM CLI
-│       ├── ElmToCSharp.Targets.xml       # MSBuild target: invoke PackagerCLI (ELM → C# + FHIR)
+│       ├── CqlTooling.Targets.xml          # MSBuild target: invoke Java CQL-to-ELM CLI
+│       ├── ElmTooling.Targets.xml          # MSBuild target: invoke PackagerCLI (ELM → C# + FHIR)
 │       ├── pom.xml                        # Maven descriptor: declares CQL-to-ELM JAR dependencies
 │       ├── Java-Dependencies-Vars.ps1/sh  # Version constants (CQL CLI version, paths)
 │       ├── Java-Dependencies-Download.ps1/sh # Downloads JARs via Maven (mutex-protected)

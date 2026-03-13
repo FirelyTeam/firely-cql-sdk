@@ -1,7 +1,7 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 	<!--
-	CQL-tooling properties used by CqlToElm.Targets.xml and ElmToCSharp.Targets.xml
+	CQL-tooling properties used by CqlTooling.Targets.xml and ElmTooling.Targets.xml
 	Include this file in your project when importing those targets, to ensure these properties are defined.
 	-->
 
