@@ -153,7 +153,13 @@ namespace CLI
             Dictionary<string, Exception> errors = new Dictionary<string, Exception>();
 
             // Get expressions from the library set (excluding functions for simplicity in demo)
-            var expressions = librarySetInvoker.SelectExpressions().ToList();
+            var expressions = librarySetInvoker.SelectExpressionsForLibrary(_opts.LibraryIdentifier).ToList();
+            if (expressions.Count == 0)
+            {
+                Console.Error.WriteLine($"No expressions found for library identifier '{_opts.LibraryIdentifier}'.");
+                Console.Error.WriteLine($"Available libraries: {string.Join(", ", librarySetInvoker.LibraryInvokers.Keys)}");
+                throw new InvalidOperationException($"No expressions available for library identifier '{_opts.LibraryIdentifier}'.");
+            }
 
             // Invoke all expressions and collect results
             var results = expressions.SelectResults(setup, new SelectResultsOptions(
