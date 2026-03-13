@@ -292,5 +292,6 @@ The CLI project (`Demo/CLI/CLI.csproj`) references `Hl7.Cql.Invocation` and `Hl7
 
 - [Getting Started](getting-started.md) — prerequisites, building the SDK, and the invocation toolkit
 - [CQL Engine Architecture](cql-engine-architecture.md) — internal design and the compilation pipeline
+- [CQL Packager Reference](cql-packager.md) — all `cql-package` commands, options, and examples
 - [`PackagerCLI` source](../Cql/PackagerCLI/) — the .NET tool that drives ELM → C# + FHIR conversion
 - [cqframework/clinical_quality_language](https://github.com/cqframework/clinical_quality_language) — upstream Java CQL-to-ELM tool
