@@ -11,7 +11,7 @@ Before building the Demo projects you need:
 | Tool | Minimum version | Notes |
 |------|-----------------|-------|
 | .NET SDK | 8.0 or 10.0 | SDK is multi-targeted |
-| JDK | 21+ | Required only when `CqlToElmEnabled=true` |
+| JDK | 21+ | Required only when `CqlToolingEnabled=true` |
 | [Apache Maven](https://maven.apache.org/install.html) | 3.9+ | Downloads CQL-to-ELM CLI JARs from Maven Central |
 | PowerShell Core (`pwsh`) | 7+ | Required on Windows; Bash equivalents cover Linux/macOS |
 
@@ -58,10 +58,10 @@ The Demo projects implement a three-stage pipeline, each stage optionally gated 
 
 ```
 CQL source files
-      │  (CqlToElmEnabled=true → Java CQL-to-ELM CLI)
+      │  (CqlToolingEnabled=true → Java CQL-to-ELM CLI)
       ▼
 ELM JSON files
-      │  (ElmToCSharpEnabled=true → PackagerCLI)
+      │  (ElmToolingEnabled=true → PackagerCLI)
       ▼
 C# source files + FHIR Library resources
       │  (standard dotnet build → Roslyn)

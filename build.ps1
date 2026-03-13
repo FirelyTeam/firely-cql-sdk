@@ -116,10 +116,10 @@ $baseProperties = @(
 
 $codeGenProperties = @()
 if ($EnableCqlToElm) {
-    $codeGenProperties += "/p:CqlToElmEnabled=true"
+    $codeGenProperties += "/p:CqlToolingEnabled=true"
 }
 if ($EnableElmToCSharp) {
-    $codeGenProperties += "/p:ElmToCSharpEnabled=true"
+    $codeGenProperties += "/p:ElmToolingEnabled=true"
 }
 
 # Execute build
@@ -132,7 +132,7 @@ if ($EnableElmToCSharp) {
     # at rest before any Demo/Measures project launches the packager.
     Write-Host "Phase 1: Building core SDK solution (Cql-Sdk.slnf)..." -ForegroundColor Blue
     Write-Host ""
-    $phase1Properties = $baseProperties + ($codeGenProperties | Where-Object { $_ -notmatch "ElmToCSharpEnabled" })
+    $phase1Properties = $baseProperties + ($codeGenProperties | Where-Object { $_ -notmatch "ElmToolingEnabled" })
     $phase1Command = "dotnet build `"$slnf`" $($phase1Properties -join ' ')"
     Write-Host "Command: $phase1Command" -ForegroundColor DarkGray
     Write-Host ""

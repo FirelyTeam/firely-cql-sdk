@@ -49,9 +49,9 @@ If you run either script without arguments it prompts interactively.
 
 When `--enable-elm-to-csharp` (or `-EnableElmToCSharp`) is specified, the script performs a **two-phase build**:
 
-1. **Phase 1** — Build `Cql-Sdk.slnf` (core SDK only, without `ElmToCSharpEnabled`). This ensures `PackagerCLI` and all its dependencies are fully compiled and on disk before any measure project tries to launch the packager executable.
+1. **Phase 1** — Build `Cql-Sdk.slnf` (core SDK only, without `ElmToolingEnabled`). This ensures `PackagerCLI` and all its dependencies are fully compiled and on disk before any measure project tries to launch the packager executable.
 
-2. **Phase 2** — Build `Cql-Sdk-All.sln` with `ElmToCSharpEnabled=true` and `-maxcpucount:1` (serialised). Because PackagerCLI is already up-to-date from Phase 1, MSBuild skips recompiling it. The `-maxcpucount:1` flag ensures only one `GenerateCSharp` target fires at a time, preventing file-write races when multiple measure projects run the packager simultaneously.
+2. **Phase 2** — Build `Cql-Sdk-All.sln` with `ElmToolingEnabled=true` and `-maxcpucount:1` (serialised). Because PackagerCLI is already up-to-date from Phase 1, MSBuild skips recompiling it. The `-maxcpucount:1` flag ensures only one `GenerateCSharp` target fires at a time, preventing file-write races when multiple measure projects run the packager simultaneously.
 
 ## MSBuild Props and Targets Files
 
@@ -63,8 +63,8 @@ Located at the repository root. Imported by every measure project **before** dec
 |----------|---------|-------------|
 | `CqlSolutionDir` | `$(MSBuildThisFileDirectory)` | Root of the repository |
 | `CqlToolingTargetsDir` | `$(CqlSolutionDir)/Demo/Cql/Build/` | Directory containing the tooling targets |
-| `CqlToElmEnabled` | `false` | Set to `true` to run the Java CQL-to-ELM step |
-| `ElmToCSharpEnabled` | `false` | Set to `true` to run the PackagerCLI ELM-to-C# step |
+| `CqlToolingEnabled` | `false` | Set to `true` to run the Java CQL-to-ELM step |
+| `ElmToolingEnabled` | `false` | Set to `true` to run the PackagerCLI ELM-to-C# step |
 | `JsonPretty` | `true` | Emit pretty-printed JSON for FHIR resources |
 | `PackagerLogFile` | `packager.log` | Packager CLI log output file name |
 | `EmbedDebugSymbolsEnable` | `true` (non-Release) | Embed PDB symbols in generated assemblies |
@@ -87,7 +87,7 @@ Handles the **CQL → ELM** step using the Java CQL-to-ELM CLI.
 1. A `BeforeTargets="PreBuildEvent"` target named `"Download CQL to ELM CLI"` runs the Maven-based download script (`Java-Dependencies-Download.ps1` on Windows, `.sh` on Unix) to fetch the `cql-to-elm-cli` and `elm-fhir` JARs into `Demo/Cql/Build/target/dependency/`. Downloads are cached; Maven is only invoked when the JAR directory is empty.
 
 2. A second target `GenerateElmFiles` (also `BeforeTargets="PreBuildEvent"`) is gated by:
-   - `CqlToElmEnabled == true`
+   - `CqlToolingEnabled == true`
    - `LibrarySet` is non-empty (so only measure projects run it, not the Cql project itself)
    - Target framework is `net10.0` or unspecified (prevents duplicate runs in multi-targeting)
 
@@ -127,7 +127,7 @@ Handles the **ELM → C# + FHIR resources** step using the `PackagerCLI` .NET to
 **How it works:**
 
 A `BeforeTargets="PreBuildEvent"` target named `GenerateCSharp` is gated by:
-- `ElmToCSharpEnabled == true`
+- `ElmToolingEnabled == true`
 - The `PackagerCLI` binary exists at `Cql/PackagerCLI/bin/$(Configuration)/$(ToolTargetFramework)/Hl7.Cql.Packager[.exe]`
 - Target framework matches `$(ToolTargetFramework)` (defaults to `net10.0`) or is unspecified
 

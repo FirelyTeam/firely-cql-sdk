@@ -8,7 +8,7 @@ msbuild $solutionFile `
     /p:TreatWarningsAsErrors=false `
     /p:GenerateDocumentationFile=true `
     /p:EmitCompilerGeneratedFiles=true `
-    /p:ElmToCSharpEnabled=false `
+    /p:ElmToolingEnabled=false `
     /p:CompilerGeneratedFilesOutputPath="$outputDir" `
     /v:m
 

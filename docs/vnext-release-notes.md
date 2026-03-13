@@ -2,6 +2,43 @@
 
 ## Breaking Changes
 
+### MSBuild properties `CqlToElmEnabled` and `ElmToCSharpEnabled` renamed
+
+The two MSBuild properties that gate the code-generation pipeline stages have been renamed to better reflect their actual scope:
+
+| Old name | New name |
+|----------|----------|
+| `CqlToElmEnabled` | `CqlToolingEnabled` |
+| `ElmToCSharpEnabled` | `ElmToolingEnabled` |
+
+`ElmToCSharpEnabled` was a misnomer — it did not only convert ELM to C#, but drove the full PackagerCLI pipeline that also produces FHIR `Library` resources. `ElmToolingEnabled` more accurately describes the step.
+
+#### Migration
+
+Update any references in your project files, build scripts, and CI pipelines:
+
+```xml
+<!-- Before -->
+<CqlToElmEnabled>true</CqlToElmEnabled>
+<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
+
+<!-- After -->
+<CqlToolingEnabled>true</CqlToolingEnabled>
+<ElmToolingEnabled>true</ElmToolingEnabled>
+```
+
+If you pass these properties on the command line:
+
+```shell
+# Before
+dotnet build /p:CqlToElmEnabled=true /p:ElmToCSharpEnabled=true
+
+# After
+dotnet build /p:CqlToolingEnabled=true /p:ElmToolingEnabled=true
+```
+
+The `build.ps1` / `build.sh` scripts at the repository root have also been updated; the `-EnableCqlToElm` / `--enable-cql-to-elm` and `-EnableElmToCSharp` / `--enable-elm-to-csharp` flags are unchanged.
+
 ### CQL Packager: File logging is no longer enabled by default
 
 Previously, the CQL Packager always wrote log output to a file named `build.log` in the current working directory.

@@ -337,13 +337,13 @@ This document contains development guidelines and instructions for maintaining c
 
 ### 5.4 Generating ELM Files from CQL
 5.4.1 When adding CQL files (e.g., to `CoreTests\Input\ELM\HL7`), follow these steps to generate the ELM JSON files:
-   5.4.1.1 **Enable CQL to ELM conversion**: Find the commented out property `CqlToElmEnabled` in the csproj (e.g., `<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->`) and uncomment it to set `CqlToElmEnabled` to `true`
+   5.4.1.1 **Enable CQL to ELM conversion**: Find the commented out property `CqlToolingEnabled` in the csproj (e.g., `<!-- <CqlToolingEnabled>true</CqlToolingEnabled> -->`) and uncomment it to set `CqlToolingEnabled` to `true`
 
    5.4.1.2 **Build the project**: Build that particular csproj, which will generate the ELM files
 
    5.4.1.3 **Verify generation**: Confirm that all ELM files are generated for each CQL file. The directory for the ELM files can be discovered in the `ElmDirectory` property in the csproj file
 
-   5.4.1.4 **Restore setting**: Roll back step 1 by commenting out `CqlToElmEnabled=true`
+   5.4.1.4 **Restore setting**: Roll back step 1 by commenting out `CqlToolingEnabled=true`
 
 ## 6. Naming Conventions
 6.1 Use `CqlSdk` prefix for SDK-related example projects

@@ -153,10 +153,10 @@ BASE_PROPERTIES=(
 
 CODEGEN_PROPERTIES=()
 if [ "$ENABLE_CQL_TO_ELM" = "true" ]; then
-    CODEGEN_PROPERTIES+=("/p:CqlToElmEnabled=true")
+    CODEGEN_PROPERTIES+=("/p:CqlToolingEnabled=true")
 fi
 if [ "$ENABLE_ELM_TO_CSHARP" = "true" ]; then
-    CODEGEN_PROPERTIES+=("/p:ElmToCSharpEnabled=true")
+    CODEGEN_PROPERTIES+=("/p:ElmToolingEnabled=true")
 fi
 
 # Execute build
@@ -169,7 +169,7 @@ if [ "$ENABLE_ELM_TO_CSHARP" = "true" ]; then
     # at rest before any Demo/Measures project launches the packager.
     PHASE1_PROPERTIES=("${BASE_PROPERTIES[@]}")
     for prop in "${CODEGEN_PROPERTIES[@]}"; do
-        [[ "$prop" != *"ElmToCSharpEnabled"* ]] && PHASE1_PROPERTIES+=("$prop")
+        [[ "$prop" != *"ElmToolingEnabled"* ]] && PHASE1_PROPERTIES+=("$prop")
     done
 
     echo -e "${BLUE}Phase 1: Building core SDK solution (Cql-Sdk.slnf)...${RESET}"

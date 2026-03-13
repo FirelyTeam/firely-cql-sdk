@@ -41,8 +41,8 @@
 		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 		<LibrariesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/Resources/libraries</LibrariesDirectory>
 		<MeasuresDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/Resources/measures</MeasuresDirectory>
-		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
+		<!-- <CqlToolingEnabled>true</CqlToolingEnabled> -->
+		<!-- <ElmToolingEnabled>true</ElmToolingEnabled> -->
 	</PropertyGroup>
 
 	<ItemGroup>

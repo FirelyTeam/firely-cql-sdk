@@ -33,7 +33,7 @@
 	</PropertyGroup>
 
 	<Target Name="GenerateCSharp"
-	        Condition="'$(ElmToCSharpEnabled)'=='true' And Exists('$(PackagerCLI)') And ('$(TargetFramework)' == '$(ToolTargetFramework)' Or '$(TargetFramework)' == '')"
+	        Condition="'$(ElmToolingEnabled)'=='true' And Exists('$(PackagerCLI)') And ('$(TargetFramework)' == '$(ToolTargetFramework)' Or '$(TargetFramework)' == '')"
 	        BeforeTargets="PreBuildEvent">
 
 		<PropertyGroup>
@@ -88,7 +88,7 @@
 	</Target>
 
 	<Target Name="TouchFiles"
-					Condition="'$(ElmToCSharpEnabled)'=='true'">
+					Condition="'$(ElmToolingEnabled)'=='true'">
 		<Touch Files="@(CqlFiles)">
 			<Output
 				TaskParameter="TouchedFiles"
@@ -101,7 +101,7 @@
 	</ItemGroup>
 
 	<Target Name="Delete CSharp"
-					Condition="'$(ElmToCSharpEnabled)'=='true'"
+					Condition="'$(ElmToolingEnabled)'=='true'"
 					AfterTargets="Clean">
 		<Message Text="$(Box.Replace({Text}, Deleting C# files))" Importance="High" />
 		<Delete Files="@(CSharpFiles)" />
@@ -112,7 +112,7 @@
 	</ItemGroup>
 
 	<Target Name="Delete Resources"
-					Condition="'$(ElmToCSharpEnabled)'=='true'"
+					Condition="'$(ElmToolingEnabled)'=='true'"
 					AfterTargets="Clean">
 		<Message Text="$(Box.Replace({Text}, Deleting Resource files))" Importance="High" />
 		<Delete Files="@(ResourceFiles)" />
@@ -127,7 +127,7 @@
 	</ItemGroup>
 
 	<Target Name="Delete Results"
-					Condition="'$(ElmToCSharpEnabled)'=='true'"
+					Condition="'$(ElmToolingEnabled)'=='true'"
 					AfterTargets="Clean">
 		<Message Text="$(Box.Replace({Text}, Deleting Test Results files))" Importance="High" />
 		<RemoveDir Directories="$(TestResultsDirectory)" />
