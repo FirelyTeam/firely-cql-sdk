@@ -1,4 +1,4 @@
-$solutionFile = "Cql-sdk.slnf"
+$solutionFile = "Cql-Sdk.slnf"
 $solutionPath = Resolve-Path $solutionFile
 $solutionDir = Split-Path -Parent $solutionPath
 $outputDir = Join-Path $solutionDir ".nupkgs"
