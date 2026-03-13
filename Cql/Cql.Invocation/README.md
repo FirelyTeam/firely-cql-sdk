@@ -108,4 +108,4 @@ var result = invoker.InvokeLibraryDefinition(context, cql.LibraryIdentifier, "Gr
 
 ## Further Reading
 
-This package is part of the [Firely CQL SDK](https://github.com/FirelyTeam/firely-cql-sdk). See the [main README](../../README.md) for an overview, the [getting started guide](../../docs/getting-started.md) for setup instructions, and the [Examples project](../../Examples/CqlSdkExamples/) for complete runnable samples.
+This package is part of the [Firely CQL SDK](https://github.com/FirelyTeam/firely-cql-sdk). See the [main README](../../README.md) for an overview, the [getting started guide](../../docs/getting-started.md) for setup instructions, and the [Examples project](../../Examples/CqlSdkExamples/) for complete runnable samples. More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).
