@@ -45,7 +45,7 @@ If you run either script without arguments it prompts interactively.
 ./build.sh --framework net10.0 --enable-cql-tooling --enable-elm-tooling
 ```
 
-### Two-Phase Build When `ElmToCSharp` Is Enabled
+### Two-Phase Build When `ElmToolingEnabled` Is True
 
 When `--enable-elm-tooling` (or `-EnableElmTooling`) is specified, the script performs a **two-phase build**:
 
