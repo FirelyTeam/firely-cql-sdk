@@ -9,10 +9,10 @@ param(
     [ValidateSet("net8.0", "net10.0")]
     [string]$Framework,
     
-    [Parameter(HelpMessage="Enable CqlToElm conversion")]
+    [Parameter(HelpMessage="Enable CQL tooling which converts CQL to ELM")]
     [switch]$EnableCqlTooling,
     
-    [Parameter(HelpMessage="Enable ElmToCSharp conversion")]
+    [Parameter(HelpMessage="Enable ELM tooling which converts ELM -> C# -> DLL -> FHIR Resources")]
     [switch]$EnableElmTooling,
     
     [Parameter(HelpMessage="Build configuration: Debug or Release")]

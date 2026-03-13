@@ -16,6 +16,7 @@ Write-Host "Version Suffix: $versionSuffix"
 msbuild $solutionPath `
     /t:Restore,Build,Pack `
     /p:Configuration=$configuration `
+    /p:CqlToolingEnabled=false `
     /p:ElmToolingEnabled=false `
     /p:PackageOutputPath=$outputDir `
     /p:VersionSuffix=$versionSuffix
