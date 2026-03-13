@@ -29,7 +29,7 @@ python3 tools/condense_spec/condense_spec.py
 - Removes CSS, JavaScript, images, navigation
 - Output: `spec/condensed/` directory
 
-**Documentation:** See `tools/condense_spec/README.md` for complete details.
+**Documentation:** See [tools/condense_spec/README.md](condense_spec/README.md) for complete details.
 
 **Created in:** PR for "Experimental - Using AI to verify codebase conformance with CQL spec"
 

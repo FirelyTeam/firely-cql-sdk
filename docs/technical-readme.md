@@ -54,7 +54,7 @@ The solution also includes custom JSON converters for handling polymorphic ELM t
 - `TopLevelDefinitionConverterFactory` - Creates converters for top-level definition arrays
 - `PolymorphicTypeResolver` - Discovers type hierarchies via `[XmlInclude]` attributes
 
-See `Cql/Elm/Serialization/README.md` for complete architecture documentation.
+See [Cql/Elm/Serialization/README.md](../Cql/Elm/Serialization/README.md) for complete architecture documentation.
 
 #### Legacy Format Support
 The `LibraryJsonSerializer` includes preprocessing logic (`CorrectLegacyConstructs`) to handle legacy ELM JSON formats:
@@ -174,7 +174,7 @@ The multi-framework testing is **fully integrated** and runs automatically on ev
 - ✅ Automatic comparison report to identify framework-specific issues
 - ✅ Early detection of framework behavioral differences
 
-**Usage:** See `build/README.md` for complete documentation and configuration details.
+**Usage:** See [build/README.md](../build/README.md) for complete documentation and configuration details.
 
 **Local Testing:** Use the provided scripts for local validation:
 ```powershell

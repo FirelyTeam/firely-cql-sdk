@@ -160,7 +160,7 @@ Multi-framework testing is fully integrated into the Azure Pipelines CI/CD workf
 - Job 2: Tests CoreTests, CqlToElmTests, IntegrationRunner, and Test.Measures.Demo on .NET 10
 - Job 3: Compares results and reports any framework-specific differences
 
-See `build/README.md` for complete CI/CD testing documentation and configuration details.
+See [build/README.md](build/README.md) for complete CI/CD testing documentation and configuration details.
 
 ## Support 
 We actively monitor the issues coming in through the GitHub repository at [https://github.com/FirelyTeam/firely-cql-sdk/issues](https://github.com/FirelyTeam/firely-cql-sdk/issues). You are welcome to register your bugs and feature suggestions there. For questions and broader discussions, we use the [.NET FHIR Implementers chat][netsdk-zulip] and [CQL chat][cql-spec] on Zulip.

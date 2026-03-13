@@ -380,9 +380,9 @@ For ongoing development:
 
 If you encounter issues not covered in this guide:
 
-1. Review implementation-summary.md for design details
-2. Check reference-source-comparison.md for xsd.exe comparison
-3. Review README.md for usage documentation
+1. Review [implementation-summary.md](implementation-summary.md) for design details
+2. Check [reference-source-comparison.md](reference-source-comparison.md) for xsd.exe comparison
+3. Review [README.md](README.md) for usage documentation
 4. Open a GitHub issue with:
    - Steps to reproduce
    - Expected vs actual behavior
