@@ -1,8 +1,10 @@
 # CQL Packager Reference
 
-`cql-package` is a .NET CLI tool that converts CQL or ELM source files into C# code, .NET assemblies, and FHIR Library/Measure resources. It is the engine that drives the ELM-to-C# stage in the [Demo build pipeline](demo-projects.md).
+`cql-package` is a .NET CLI tool that converts CQL or ELM source files into C# code, .NET assemblies, and FHIR Library/Measure resources. It is the engine that drives the ELM tooling stage described in the [build pipeline document](build-pipeline.md).
 
 ## Overview
+
+> ⚠️ **Note on CQL-to-ELM:** The built-in CQL-to-ELM compiler (`cql-package cql`) is not as mature as the Java-based [CQL-to-ELM CLI](https://github.com/cqframework/clinical_quality_language). For production use, generate ELM with the Java tooling and run `cql-package elm` instead.
 
 The packager accepts two entry points and produces up to five output artefacts:
 
