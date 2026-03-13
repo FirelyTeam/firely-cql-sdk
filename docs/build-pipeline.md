@@ -17,14 +17,14 @@ Two cross-platform build scripts at the repository root drive the multi-stage bu
 
 ```powershell
 .\build.ps1 [-Framework <net8.0|net10.0>] [-Configuration <Debug|Release>]
-            [-EnableCqlToElm] [-EnableElmToCSharp]
+            [-EnableCqlTooling] [-EnableElmTooling]
 ```
 
 **`build.sh`** (Bash):
 
 ```bash
 ./build.sh [--framework <net8.0|net10.0>] [--configuration <Debug|Release>]
-           [--enable-cql-to-elm] [--enable-elm-to-csharp]
+           [--enable-cql-tooling] [--enable-elm-tooling]
 ```
 
 If you run either script without arguments it prompts interactively.
@@ -36,18 +36,18 @@ If you run either script without arguments it prompts interactively.
 ./build.sh --framework net10.0 --configuration Debug
 
 # Regenerate ELM from CQL (requires Java + Maven), then build
-./build.sh --framework net10.0 --enable-cql-to-elm
+./build.sh --framework net10.0 --enable-cql-tooling
 
 # Regenerate C# and FHIR resources from ELM (requires PackagerCLI), then build
-./build.sh --framework net10.0 --enable-elm-to-csharp
+./build.sh --framework net10.0 --enable-elm-tooling
 
 # Full pipeline: CQL → ELM (Java) → C# + FHIR (PackagerCLI) → assembly
-./build.sh --framework net10.0 --enable-cql-to-elm --enable-elm-to-csharp
+./build.sh --framework net10.0 --enable-cql-tooling --enable-elm-tooling
 ```
 
 ### Two-Phase Build When `ElmToCSharp` Is Enabled
 
-When `--enable-elm-to-csharp` (or `-EnableElmToCSharp`) is specified, the script performs a **two-phase build**:
+When `--enable-elm-tooling` (or `-EnableElmTooling`) is specified, the script performs a **two-phase build**:
 
 1. **Phase 1** — Build `Cql-Sdk.slnf` (core SDK only, without `ElmToolingEnabled`). This ensures `PackagerCLI` and all its dependencies are fully compiled and on disk before any measure project tries to launch the packager executable.
 

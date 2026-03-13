@@ -37,7 +37,17 @@ dotnet build /p:CqlToElmEnabled=true /p:ElmToCSharpEnabled=true
 dotnet build /p:CqlToolingEnabled=true /p:ElmToolingEnabled=true
 ```
 
-The `build.ps1` / `build.sh` scripts at the repository root have also been updated; the `-EnableCqlToElm` / `--enable-cql-to-elm` and `-EnableElmToCSharp` / `--enable-elm-to-csharp` flags are unchanged.
+The `build.ps1` / `build.sh` scripts at the repository root have also been updated. The script flags follow the same rename:
+
+| Old flag (PowerShell) | New flag (PowerShell) |
+|-----------------------|-----------------------|
+| `-EnableCqlToElm` | `-EnableCqlTooling` |
+| `-EnableElmToCSharp` | `-EnableElmTooling` |
+
+| Old flag (Bash) | New flag (Bash) |
+|-----------------|-----------------|
+| `--enable-cql-to-elm` | `--enable-cql-tooling` |
+| `--enable-elm-to-csharp` | `--enable-elm-tooling` |
 
 ### CQL Packager: File logging is no longer enabled by default
 

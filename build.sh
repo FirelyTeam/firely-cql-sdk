@@ -30,11 +30,11 @@ while [[ $# -gt 0 ]]; do
             CONFIGURATION="$2"
             shift 2
             ;;
-        --enable-cql-to-elm)
+        --enable-cql-tooling)
             ENABLE_CQL_TO_ELM="true"
             shift
             ;;
-        --enable-elm-to-csharp)
+        --enable-elm-tooling)
             ENABLE_ELM_TO_CSHARP="true"
             shift
             ;;
@@ -44,8 +44,8 @@ while [[ $# -gt 0 ]]; do
             echo "Options:"
             echo "  --framework <net8.0|net10.0>    Target framework"
             echo "  --configuration <Debug|Release>  Build configuration (default: Debug)"
-            echo "  --enable-cql-to-elm              Enable CqlToElm conversion"
-            echo "  --enable-elm-to-csharp           Enable ElmToCSharp conversion"
+            echo "  --enable-cql-tooling              Enable CQL tooling (CQL-to-ELM)"
+            echo "  --enable-elm-tooling           Enable ELM tooling (ELM-to-C# and FHIR resources)"
             echo "  --help                           Show this help message"
             exit 0
             ;;
@@ -141,8 +141,8 @@ echo "Build Configuration:"
 echo -e "===========================================================================${RESET}"
 echo "  Framework:        ${FRAMEWORK}"
 echo "  Configuration:    ${CONFIGURATION}"
-echo "  CqlToElm:         $([ "$ENABLE_CQL_TO_ELM" = "true" ] && echo "Enabled" || echo "Disabled")"
-echo "  ElmToCSharp:      $([ "$ENABLE_ELM_TO_CSHARP" = "true" ] && echo "Enabled" || echo "Disabled")"
+echo "  CqlTooling:         $([ "$ENABLE_CQL_TO_ELM" = "true" ] && echo "Enabled" || echo "Disabled")"
+echo "  ElmTooling:      $([ "$ENABLE_ELM_TO_CSHARP" = "true" ] && echo "Enabled" || echo "Disabled")"
 echo ""
 
 # Build MSBuild properties

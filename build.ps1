@@ -10,10 +10,10 @@ param(
     [string]$Framework,
     
     [Parameter(HelpMessage="Enable CqlToElm conversion")]
-    [switch]$EnableCqlToElm,
+    [switch]$EnableCqlTooling,
     
     [Parameter(HelpMessage="Enable ElmToCSharp conversion")]
-    [switch]$EnableElmToCSharp,
+    [switch]$EnableElmTooling,
     
     [Parameter(HelpMessage="Build configuration: Debug or Release")]
     [ValidateSet("Debug", "Release")]
@@ -62,7 +62,7 @@ if (-not $Framework -or -not $PSBoundParameters.ContainsKey('Configuration')) {
     }
 }
 
-if (-not $EnableCqlToElm.IsPresent -and -not $EnableElmToCSharp.IsPresent) {
+if (-not $EnableCqlTooling.IsPresent -and -not $EnableElmTooling.IsPresent) {
     Write-Host ""
     Write-Host "Select code generation options:" -ForegroundColor Yellow
     Write-Host "  1. None (both disabled)"
@@ -76,24 +76,24 @@ if (-not $EnableCqlToElm.IsPresent -and -not $EnableElmToCSharp.IsPresent) {
 
     switch ($codeGenChoice) {
         "1" {
-            $EnableCqlToElm = $false
-            $EnableElmToCSharp = $false
+            $EnableCqlTooling = $false
+            $EnableElmTooling = $false
         }
         "2" {
-            $EnableCqlToElm = $true
-            $EnableElmToCSharp = $false
+            $EnableCqlTooling = $true
+            $EnableElmTooling = $false
         }
         "3" {
-            $EnableCqlToElm = $false
-            $EnableElmToCSharp = $true
+            $EnableCqlTooling = $false
+            $EnableElmTooling = $true
         }
         "4" {
-            $EnableCqlToElm = $true
-            $EnableElmToCSharp = $true
+            $EnableCqlTooling = $true
+            $EnableElmTooling = $true
         }
         default {
-            $EnableCqlToElm = $false
-            $EnableElmToCSharp = $false
+            $EnableCqlTooling = $false
+            $EnableElmTooling = $false
         }
     }
 }
@@ -104,8 +104,8 @@ Write-Host "Build Configuration:" -ForegroundColor Green
 Write-Host "===========================================================================" -ForegroundColor Green
 Write-Host "  Framework:        $Framework"
 Write-Host "  Configuration:    $Configuration"
-Write-Host "  CqlToElm:         $(if ($EnableCqlToElm) { 'Enabled' } else { 'Disabled' })"
-Write-Host "  ElmToCSharp:      $(if ($EnableElmToCSharp) { 'Enabled' } else { 'Disabled' })"
+Write-Host "  CqlTooling:         $(if ($EnableCqlTooling) { 'Enabled' } else { 'Disabled' })"
+Write-Host "  ElmTooling:      $(if ($EnableElmTooling) { 'Enabled' } else { 'Disabled' })"
 Write-Host ""
 
 # Build MSBuild properties
@@ -115,10 +115,10 @@ $baseProperties = @(
 )
 
 $codeGenProperties = @()
-if ($EnableCqlToElm) {
+if ($EnableCqlTooling) {
     $codeGenProperties += "/p:CqlToolingEnabled=true"
 }
-if ($EnableElmToCSharp) {
+if ($EnableElmTooling) {
     $codeGenProperties += "/p:ElmToolingEnabled=true"
 }
 
@@ -126,7 +126,7 @@ if ($EnableElmToCSharp) {
 $slnf = "Cql-Sdk.slnf"
 $sln  = "Cql-Sdk-All.sln"
 
-if ($EnableElmToCSharp) {
+if ($EnableElmTooling) {
     # Phase 1: build the core SDK solution (Cql-Sdk.slnf) without ElmToCSharp.
     # This ensures PackagerCLI and all its dependencies are fully compiled and
     # at rest before any Demo/Measures project launches the packager.

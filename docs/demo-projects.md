@@ -82,7 +82,7 @@ Quick reference:
 ./build.sh --framework net10.0 --configuration Debug
 
 # Full pipeline: CQL → ELM (Java) → C# + FHIR (PackagerCLI) → assembly
-./build.sh --framework net10.0 --enable-cql-to-elm --enable-elm-to-csharp
+./build.sh --framework net10.0 --enable-cql-tooling --enable-elm-tooling
 ```
 
 ## Configuring a Measure Project
