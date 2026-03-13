@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.6.1
+**Version:** 2.7.0
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
@@ -255,6 +255,15 @@ This document contains development guidelines and instructions for maintaining c
    4.4.5.3 Remove any placeholder or comment-only code blocks from documentation
 
    4.4.5.4 Internal packages should describe what they do but not show how to use them directly
+
+4.4.6 **ALWAYS use Markdown hyperlinks when referencing other documents** — never use plain text file names or paths for cross-document references
+   4.4.6.1 Every reference to another document (README, guide, spec, etc.) must be a clickable Markdown link: `[Display Text](relative/path/to/file.md)`
+
+   4.4.6.2 Use relative paths from the referencing file's location (e.g., `[build/README.md](../build/README.md)` from `docs/`, or `[README.md](README.md)` for a sibling file)
+
+   4.4.6.3 When updating a document, scan all references to other files and ensure they are hyperlinked
+
+   4.4.6.4 When renaming or moving a document, update all hyperlinks that point to it across the repository
 
 ## 5. Build and Test
 
