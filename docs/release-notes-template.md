@@ -69,8 +69,8 @@ Use this template when preparing a new Firely CQL SDK release note document or G
 
 ### Pull Requests
 
-| PR | Title |
-|----|-------|
+| PR                                                              | Title    |
+| --------------------------------------------------------------- | -------- |
 | [#NNNN](https://github.com/FirelyTeam/firely-cql-sdk/pull/NNNN) | PR title |
 ```
 
