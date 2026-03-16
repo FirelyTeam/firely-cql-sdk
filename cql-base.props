@@ -12,7 +12,7 @@
 			Keep FirelyNetVersion in sync between cql-base.props and cql-demo.props and README.md
 			The version must be the same as FirelyNetVersion in https://github.com/FirelyTeam/Vonk/blob/develop/src/Vonk.props
 			-->
-		<FirelyNetVersion>6.0.3</FirelyNetVersion>
+		<FirelyNetVersion>6.1.0</FirelyNetVersion>
 
 		<!-- https://hl7.org/fhir/R4/ -->
 		<FhirRelease>R4</FhirRelease>

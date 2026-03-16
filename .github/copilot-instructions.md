@@ -286,6 +286,8 @@ This document contains development guidelines and instructions for maintaining c
 
 4.5.4 For dependency version bumps, explicitly mention the version property name and old/new version when known (for example, `FirelyNetVersion`).
 
+4.5.5 **When bumping `VersionPrefix` (the SDK version), also update the version number in the `## Release Notes` section of `README.md`** — it contains a line like `This is release version X.Y.Z of the engine.` that must be kept in sync.
+
 ## 5. Build and Test
 
 ### 5.1 General Build Requirements
@@ -552,7 +554,7 @@ catch (CqlException<CqlArithmeticError> e) { ... }
 - Division by zero or other arithmetic failures
 - Any error the CQL spec says "signals an error to the calling environment"
 
-10.2.3 General .NET exceptions (`ArgumentException`, `InvalidOperationException`) are still appropriate for programming errors (e.g. invalid method arguments), as opposed to errors arising from evaluating CQL expressions at runtime.
+  10.2.3 General .NET exceptions (`ArgumentException`, `InvalidOperationException`) are still appropriate for programming errors (e.g. invalid method arguments), as opposed to errors arising from evaluating CQL expressions at runtime.
 
 ### 10.3 Key Points
 
@@ -564,4 +566,4 @@ catch (CqlException<CqlArithmeticError> e) { ... }
 - `Cql.Abstractions/Primitives/Errors.cs` → `namespace Hl7.Cql.Primitives` (errors thrown by primitive types like `CqlDate`, `CqlDateTime`)
 - Add a new `FolderName/Errors.cs` when adding errors used by types in a new folder
 
-10.3.3 New `ICqlError` structs should be placed in the `Errors.cs` of the folder that contains the throw site, and registered in `Cql/Cql.Abstractions/PublicAPI.Unshipped.txt`.
+  10.3.3 New `ICqlError` structs should be placed in the `Errors.cs` of the folder that contains the throw site, and registered in `Cql/Cql.Abstractions/PublicAPI.Unshipped.txt`.

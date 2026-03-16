@@ -159,7 +159,7 @@ public class ValueSetSource : IValueSetDictionary
             .WithValueSet(valueSetUri);
         external(parameters);
 
-        var second = TaskHelper.Await(() => _termService.ValueSetValidateCode(parameters.Build()));
+        var second = TaskHelper.Await(() => _termService.ValueSetValidateCode(parameters.DeepCopy()));
         return second.GetSingleValue<FhirBoolean>("result")?.Value == true;
     }
 
@@ -171,7 +171,7 @@ public class ValueSetSource : IValueSetDictionary
 
         if (_termService is not IExpandingTerminologyService ets) return false;
 
-        var expansionParameters = new ExpandParameters().WithValueSet(valueSetUri).Build();
+        var expansionParameters = new ExpandParameters().WithValueSet(valueSetUri).DeepCopy();
 
         try
         {
