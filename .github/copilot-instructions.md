@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.7.1
+**Version:** 2.8.0
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
@@ -24,6 +24,7 @@ This document contains development guidelines and instructions for maintaining c
   - [4.2 Making Changes](#42-making-changes)
   - [4.3 Project References](#43-project-references)
   - [4.4 Documentation](#44-documentation)
+   - [4.5 Release Notes](#45-release-notes)
 - [5. Build and Test](#5-build-and-test)
   - [5.1 General Build Requirements](#51-general-build-requirements)
   - [5.2 Cross-Platform Compatibility](#52-cross-platform-compatibility)
@@ -126,41 +127,31 @@ This document contains development guidelines and instructions for maintaining c
 ### 2.3 Example
 2.3.1 Example configuration:
 
-```xml
 <ItemGroup>
     <InternalsVisibleTo Include="Hl7.Cql.Runtime" Key="$(LibraryPKHash)" />
     <InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
     <InternalsVisibleTo Include="CqlSdkExamplesPreview" Key="$(LibraryPKHash)" />
-</ItemGroup>
 ```
 
 ### 2.4 Key Points
 2.4.1 Always use the `Key="$(LibraryPKHash)"` attribute for signed assemblies
-
 2.4.2 Add to existing `<ItemGroup>` containing other `InternalsVisibleTo` entries if available
 
-2.4.3 Create a new `<ItemGroup>` if none exists
 
 2.4.4 Never modify or create `AssemblyInfo.cs` files for this purpose
 
 ## 3. Project Structure
 
-### 3.1 SDK Projects
 3.1.1 Core SDK projects are located in the `Cql/` directory:
 
    3.1.1.1 `Cql.Abstractions` - Base abstractions and interfaces
 
-   3.1.1.2 `Cql.Runtime` - Runtime and execution engine
-
    3.1.1.3 `Cql.Invocation` - Core invocation and toolkit functionality
 
-   3.1.1.4 `CodeGeneration.NET` - Code generation features
 
 ### 3.2 Examples
 3.2.1 `Examples/CqlSdkExamples/` - Public examples using stable APIs
-
 3.2.2 `Examples/CqlSdkExamplesPreview/` - Preview examples with access to internal/experimental APIs
-
 ## 4. Development Guidelines
 
 ### 4.1 File Headers
@@ -169,8 +160,6 @@ This document contains development guidelines and instructions for maintaining c
 4.1.1.1 Copyright header requirements for C# source files (*.cs, excluding *.g.cs generated files)
 
 #### 4.1.2 For NEW Files (files being created)
-4.1.2.1 Use this header format with "Firely, NCQA" and the current year:
-
 ```csharp
 /*
  * Copyright (c) <CURRENT_YEAR>, Firely, NCQA and contributors
@@ -271,6 +260,15 @@ This document contains development guidelines and instructions for maintaining c
    4.4.7.2 The standard wording for package READMEs is: `More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).`
 
    4.4.7.3 When editing any document that has a `## Further Reading` section, verify that this link is still present after your changes
+
+### 4.5 Release Notes
+4.5.1 When asked to create release notes, use [docs/release-notes-template.md](../docs/release-notes-template.md) as the default structure and guidance.
+
+4.5.2 Base release notes on the full set of commits since the previous release tag and incorporate any relevant content from [docs/vnext-release-notes.md](../docs/vnext-release-notes.md).
+
+4.5.3 For public API changes, always call out the exact type/member/property/method names so developers can identify what changed.
+
+4.5.4 For dependency version bumps, explicitly mention the version property name and old/new version when known (for example, `FirelyNetVersion`).
 
 ## 5. Build and Test
 
