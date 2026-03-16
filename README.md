@@ -1,20 +1,21 @@
 [![Build Status](https://dev.azure.com/firely/firely-net-sdk/_apis/build/status%2FFirelyTeam.firely-cql-sdk?repoName=FirelyTeam%2Ffirely-cql-sdk&branchName=develop)](https://dev.azure.com/firely/firely-net-sdk/_build/latest?definitionId=143&repoName=FirelyTeam%2Ffirely-cql-sdk&branchName=develop)
 
-
 ## Introduction
+
 This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec] on the Microsoft .NET (dotnet) platform. It contains an engine for executing ELM,
 and/or turning the contents of an ELM file into a .NET assembly so it can be called statically.
 
 The engine has been tested by running it against the current NCQA HEDIS measures and CMS measures.
-There is quite some variation in how CQL is written and interpreted, 
+There is quite some variation in how CQL is written and interpreted,
 so it is likely at this early stage that there will be deviations from other engines currently available.
 
 ## Target Frameworks
 
-The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal performance from .NET 10's enhancements (especially in LINQ which CQL heavily relies upon) while maintaining long-term support. All SDK packages (Hl7.Cql.*) are multi-targeted and will run on either framework with identical behavior.
+The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal performance from .NET 10's enhancements (especially in LINQ which CQL heavily relies upon) while maintaining long-term support. All SDK packages (Hl7.Cql.\*) are multi-targeted and will run on either framework with identical behavior.
 
 ## Release Notes
-This is release version 2.5.0 of the engine.
+
+This is release version 2.6.0 of the engine.
 
 The release notes at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version document changes and known issues.
 
@@ -22,14 +23,14 @@ The release notes at [firely-cql-sdk/releases](https://github.com/FirelyTeam/fir
 
 ## Getting Started
 
-* Read the [Getting Started guide](docs/getting-started.md) included in the repository.
-* Explore the [Examples](Examples/CqlSdkExamples/) for runnable code samples covering packaging and invocation.
-* There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
-* [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the Firely .NET SDK documentation.
-* The [CQL Engine Architecture](docs/cql-engine-architecture.md) document with background on the design.
-* The [Toolkit Services Dependency Diagrams](docs/dependency-diagrams.md) showing the internal dependencies of the CQL SDK toolkit services.
-* The [Technical README](docs/technical-readme.md) for maintainers contains implementation details, conditional compilation, and multi-targeting information.
-* The [Demo Projects and CQL Build Pipeline](docs/demo-projects.md) guide covering the build scripts, Java CQL-to-ELM tooling, and PackagerCLI MSBuild targets used by the Demo projects.
+- Read the [Getting Started guide](docs/getting-started.md) included in the repository.
+- Explore the [Examples](Examples/CqlSdkExamples/) for runnable code samples covering packaging and invocation.
+- There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
+- [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the Firely .NET SDK documentation.
+- The [CQL Engine Architecture](docs/cql-engine-architecture.md) document with background on the design.
+- The [Toolkit Services Dependency Diagrams](docs/dependency-diagrams.md) showing the internal dependencies of the CQL SDK toolkit services.
+- The [Technical README](docs/technical-readme.md) for maintainers contains implementation details, conditional compilation, and multi-targeting information.
+- The [Demo Projects and CQL Build Pipeline](docs/demo-projects.md) guide covering the build scripts, Java CQL-to-ELM tooling, and PackagerCLI MSBuild targets used by the Demo projects.
 
 ### Quick Start: Invoking CQL
 
@@ -68,6 +69,7 @@ See the [Examples](Examples/CqlSdkExamples/) project for more complete samples i
 This SDK consists of the following packages:
 
 ### Core Packages
+
 - **Hl7.Cql**: The main package providing complete CQL engine functionality
 - **Hl7.Cql.Abstractions**: Core interfaces and abstractions used throughout the SDK
 - **Hl7.Cql.Runtime**: Runtime execution engine for CQL expressions
@@ -75,20 +77,24 @@ This SDK consists of the following packages:
 - **Hl7.Cql.Invocation**: High-level APIs for invoking CQL libraries and expressions. This is the **recommended entry point** for applications that need to execute CQL — it manages assembly loading, version checking, context lifecycle, and result enumeration. Always use this package instead of calling generated library classes directly.
 
 ### Integration & Data Packages
+
 - **Hl7.Cql.Firely**: FHIR integration layer
 - **Hl7.Cql.Model**: Model definitions and metadata
 - **Hl7.Cql.Packaging**: CQL packaging functionality
 
 ### Conversion & Code Generation
+
 - **Hl7.Cql.CqlToElm**: CQL to ELM conversion (early development, not production-ready)
 - **CodeGeneration.NET**: .NET code generation utilities
 - **Elm**: ELM abstractions and utilities
 
 ### Support Packages
+
 - **Hl7.Cql.Grammar**: CQL grammar definitions using ANTLR4
 - **Iso8601**: ISO 8601 date/time handling
 
 ### Tools
+
 - **PackagerCLI** (cql-package): Command-line tool for packaging CQL/ELM into FHIR resources and .NET assemblies
 
 ## External Dependencies
@@ -96,48 +102,56 @@ This SDK consists of the following packages:
 The SDK depends on the following key external packages:
 
 ### FHIR Support
-- **Hl7.Fhir.Base**: Version 6.0.2 - Base classes and utilities for FHIR support
-- **Hl7.Fhir.R4**: Version 6.0.2 - FHIR R4 POCOs and serialization support
+
+- **Hl7.Fhir.Base**: Version 6.1.0 - Base classes and utilities for FHIR support
+- **Hl7.Fhir.R4**: Version 6.1.0 - FHIR R4 POCOs and serialization support
 - **Fhir.Metrics**: Version 1.3.0 - FHIR units and metrics support
 
 ### Parsing & Compilation
+
 - **Antlr4.Runtime.Standard**: Version 4.13.1 - ANTLR4 runtime for CQL grammar parsing
 - **Microsoft.CodeAnalysis.CSharp**: Version 4.12.0 - Roslyn C# compiler APIs
 
 ### Configuration & Logging
-- **Microsoft.Extensions.Configuration**: Version 10.0.1 - Configuration framework
-- **Microsoft.Extensions.DependencyInjection**: Version 10.0.1 - Dependency injection container
-- **Microsoft.Extensions.Logging**: Version 10.0.1 - Logging abstractions
-- **Microsoft.Extensions.Hosting**: Version 10.0.1 - Generic host for .NET applications
+
+- **Microsoft.Extensions.Configuration**: Version 10.0.3 - Configuration framework
+- **Microsoft.Extensions.DependencyInjection**: Version 10.0.3 - Dependency injection container
+- **Microsoft.Extensions.Logging**: Version 10.0.3 - Logging abstractions
+- **Microsoft.Extensions.Hosting**: Version 10.0.3 - Generic host for .NET applications
 
 ### Command-line Tool Dependencies
+
 - **Serilog.Extensions.Logging**: Version 9.0.1 - Serilog integration with Microsoft.Extensions.Logging
 - **Serilog.Sinks.File**: Version 7.0.0 - Serilog file logging sink
 - **System.CommandLine**: Version 2.0.0-beta4.22272.1 - Command-line argument parsing
 
 ## Pre-release NuGet Packages
-During development, pre-releases will appear on Firely's GitHub Package feed. To use these packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
 
- - Get a Personal Access token (PAT) from [github.com][github-pat] with scope ```read:packages```
+During development, pre-releases will appear on Firely's GitHub Package feed. To use these packages you must add `https://nuget.pkg.github.com/FirelyTeam/index.json` to your NuGet sources:
 
-- Next open a console on your machine and run ```dotnet nuget add source --name github --username <USERNAME> --password <PAT> https://nuget.pkg.github.com/FirelyTeam/index.json```
+- Get a Personal Access token (PAT) from [github.com][github-pat] with scope `read:packages`
 
-```USERNAME```: your username on GitHub
-```PAT```: your Personal access token with at least the scope ```read:packages```
+- Next open a console on your machine and run `dotnet nuget add source --name github --username <USERNAME> --password <PAT> https://nuget.pkg.github.com/FirelyTeam/index.json`
+
+`USERNAME`: your username on GitHub
+`PAT`: your Personal access token with at least the scope `read:packages`
 
 Further information can be found in [docs/getting-started.md](docs/getting-started.md).
 
 ## Testing
 
 ### Multi-Framework Testing
+
 The SDK includes comprehensive tools for testing against both .NET 8 and .NET 10 to verify identical behavior across both LTS frameworks.
 
 **Test Categories:**
+
 - **Multi-Target Tests**: CoreTests and CqlToElmTests run on both .NET 8 and .NET 10
 - **.NET 10 Only**: IntegrationRunner and Test.Measures.Demo run only on .NET 10
 - **Excluded**: XsdToCSharpConverterTests
 
 **Local Testing Scripts:**
+
 ```powershell
 # Windows - Test all multi-target projects against both frameworks
 .\test-multiframework.ps1
@@ -156,16 +170,19 @@ The SDK includes comprehensive tools for testing against both .NET 8 and .NET 10
 
 **CI/CD Testing:**
 Multi-framework testing is fully integrated into the Azure Pipelines CI/CD workflow. The `multiFrameworkTests` stage runs after the main build and tests in parallel:
+
 - Job 1: Tests CoreTests and CqlToElmTests on .NET 8
 - Job 2: Tests CoreTests, CqlToElmTests, IntegrationRunner, and Test.Measures.Demo on .NET 10
 - Job 3: Compares results and reports any framework-specific differences
 
 See [build/README.md](build/README.md) for complete CI/CD testing documentation and configuration details.
 
-## Support 
+## Support
+
 We actively monitor the issues coming in through the GitHub repository at [https://github.com/FirelyTeam/firely-cql-sdk/issues](https://github.com/FirelyTeam/firely-cql-sdk/issues). You are welcome to register your bugs and feature suggestions there. For questions and broader discussions, we use the [.NET FHIR Implementers chat][netsdk-zulip] and [CQL chat][cql-spec] on Zulip.
 
 ## Contributing
+
 We are welcoming contributions!
 
 If you want to participate in this project, we're using [Git Flow][nvie] for our branch management. Please submit PRs with changes against the `develop` branch.

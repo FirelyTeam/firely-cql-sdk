@@ -1,2 +1,1 @@
 #nullable enable
-static readonly Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.GeneratorToolVersion -> System.Version!

@@ -1,5 +1,1 @@
 #nullable enable
-static readonly Hl7.Cql.Invocation.Toolkit.InvocationToolkit.FirstUnsupportedGeneratorToolVersion -> System.Version!
-static readonly Hl7.Cql.Invocation.Toolkit.InvocationToolkit.MinSupportedGeneratorToolVersion -> System.Version!
-static readonly Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.FirstUnsupportedGeneratorToolVersion -> System.Version!
-static readonly Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.MinSupportedGeneratorToolVersion -> System.Version!
