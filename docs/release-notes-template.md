@@ -16,15 +16,19 @@ Use this template when preparing a new Firely CQL SDK release note document or G
 ### CQL SDK
 
 #### New Public API
+
 - Call out exact public type/member/property/method names.
 
 #### Improvements
+
 - Summarize notable SDK/runtime/codegen changes.
 
 #### Dependency Updates
+
 - Call out version bumps that affect consumers, such as `FirelyNetVersion`.
 
 #### Potentially Breaking
+
 - Name the exact public API or behavior that changed.
 - Include developer impact.
 - Include migration guidance when applicable.
@@ -34,10 +38,12 @@ Use this template when preparing a new Firely CQL SDK release note document or G
 ### CQL Packager
 
 #### Breaking
+
 - Describe CLI or output behavior changes.
 - Include before/after examples when useful.
 
 #### Improvements
+
 - Summarize logging, packaging, and CLI quality-of-life changes.
 
 ---
@@ -45,15 +51,18 @@ Use this template when preparing a new Firely CQL SDK release note document or G
 ### Demo Projects and Build Tooling
 
 #### Breaking
+
 - Call out renamed MSBuild properties, target files, script flags, and other migration-sensitive changes.
 - Include migration snippets when applicable.
 
 #### Improvements
+
 - Summarize build reliability, examples, and documentation/tooling updates.
 
 ---
 
 ### Upgrade Checklist
+
 1. List the concrete migration steps a developer should take.
 ```
 
