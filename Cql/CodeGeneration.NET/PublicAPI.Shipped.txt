@@ -179,3 +179,5 @@ virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectory
 virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.EqualityContract.get -> System.Type!
 virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.Equals(Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions? other) -> bool
 virtual Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.SaveCSharpFilesToDirectoryOptions.PrintMembers(System.Text.StringBuilder! builder) -> bool
+
+static readonly Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.GeneratorToolVersion -> System.Version!

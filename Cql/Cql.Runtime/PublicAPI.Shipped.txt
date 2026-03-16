@@ -720,3 +720,5 @@ static Hl7.Cql.Runtime.IO.DirectoryPostProcessingStrategy.DeleteEmptySubdirector
 Hl7.Cql.Toolkit.SubdirectoryPreserver
 Hl7.Cql.Toolkit.SubdirectoryPreserver.SubdirectoryPreserver() -> void
 
+
+Hl7.Cql.Runtime.CqlContext.GetOrCompute<T>(long cacheKey, System.Func<Hl7.Cql.Runtime.CqlContext!, T>! factory) -> T
