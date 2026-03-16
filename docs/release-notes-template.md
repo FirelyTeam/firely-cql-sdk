@@ -64,6 +64,14 @@ Use this template when preparing a new Firely CQL SDK release note document or G
 ### Upgrade Checklist
 
 1. List the concrete migration steps a developer should take.
+
+---
+
+### Pull Requests
+
+| PR | Title |
+|----|-------|
+| [#NNNN](https://github.com/FirelyTeam/firely-cql-sdk/pull/NNNN) | PR title |
 ```
 
 ## Guidance
@@ -86,3 +94,4 @@ Use this template when preparing a new Firely CQL SDK release note document or G
 - Packager CLI argument changes.
 - MSBuild property, target, or script-flag renames.
 - Content previously drafted in [vnext-release-notes.md](vnext-release-notes.md).
+- All merged PRs since the previous release tag (for the PR table at the bottom).
