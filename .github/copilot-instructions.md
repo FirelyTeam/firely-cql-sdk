@@ -134,10 +134,12 @@ This document contains development guidelines and instructions for maintaining c
 
 2.3.1 Example configuration:
 
+```xml
 <ItemGroup>
     <InternalsVisibleTo Include="Hl7.Cql.Runtime" Key="$(LibraryPKHash)" />
     <InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
     <InternalsVisibleTo Include="CqlSdkExamplesPreview" Key="$(LibraryPKHash)" />
+</ItemGroup>
 ```
 
 ### 2.4 Key Points
@@ -153,7 +155,11 @@ This document contains development guidelines and instructions for maintaining c
 
 3.1.1.1 `Cql.Abstractions` - Base abstractions and interfaces
 
+3.1.1.2 `Cql.Runtime` - CQL runtime evaluation engine
+
 3.1.1.3 `Cql.Invocation` - Core invocation and toolkit functionality
+
+3.1.1.4 `CodeGeneration.NET` - .NET code generation from ELM
 
 ### 3.2 Examples
 
@@ -166,7 +172,7 @@ This document contains development guidelines and instructions for maintaining c
 
 #### 4.1.1 Overview
 
-4.1.1.1 Copyright header requirements for C# source files (_.cs, excluding _.g.cs generated files)
+4.1.1.1 Copyright header requirements for C# source files (`*.cs`, excluding `*.g.cs` generated files)
 
 #### 4.1.2 For NEW Files (files being created)
 
