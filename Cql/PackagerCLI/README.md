@@ -2,6 +2,7 @@
 
 A .NET tool that packages CQL, ELM, and build outputs into a FHIR Library resource.
 
+For documentation on commands, options, and examples see the **[CQL Packager Reference](../../docs/cql-packager.md)**.
 
 ## Overview
 
