@@ -187,4 +187,3 @@ Maven downloads JARs on first build into `Demo/Cql/Build/target/dependency/` and
 - [CQL Packager Reference](cql-packager.md) — all `cql-package` commands, options, and examples
 - [Getting Started](getting-started.md) — prerequisites and first steps
 - [cqframework/clinical_quality_language](https://github.com/cqframework/clinical_quality_language) — upstream Java CQL-to-ELM tool
-- More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).

@@ -2,13 +2,7 @@
 
 A .NET tool that packages CQL, ELM, and build outputs into a FHIR Library resource.
 
-
-## Online Documentation
-
-Please note that the public [online documentation for the CQL Packager](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql/cql-packager.html)
-is in maintained in another repository: [Online PackagerCLI docs](https://github.com/FirelyTeam/firely-docs-firely-net-sdk/tree/master/cql).
-
-Whenever making changes to the documentation, please ensure that you update the the online documentation as well.
+For documentation on commands, options, and examples see the **[CQL Packager Reference](../../docs/cql-packager.md)**.
 
 ## Overview
 
@@ -382,4 +376,4 @@ All commands return exit codes to indicate success or failure. The following exi
 
 ## Further Reading
 
-This package is part of the [Firely CQL SDK](https://github.com/FirelyTeam/firely-cql-sdk). For getting started, release notes, and contribution guidelines, see the [main README](../../README.md). More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).
+This package is part of the [Firely CQL SDK](https://github.com/FirelyTeam/firely-cql-sdk). For getting started, release notes, and contribution guidelines, see the [main README](../../README.md).

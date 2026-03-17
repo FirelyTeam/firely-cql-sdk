@@ -148,4 +148,3 @@ See the **[Demo Projects](demo-projects.md)** guide for the project structure, p
 * [CQL Packager Reference](cql-packager.md) — all `cql-package` commands, options, and examples
 * [Technical README](technical-readme.md) — multi-targeting, code generation versioning, and CI/CD details (maintainers)
 * [DevDays 2023 presentation](https://youtu.be/CkTbgfbttJc) — introductory walkthrough
-* More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).
