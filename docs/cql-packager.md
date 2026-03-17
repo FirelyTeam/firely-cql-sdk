@@ -229,4 +229,3 @@ The Java tooling version used to generate ELM files must match the version confi
 - [Demo projects and build pipeline](demo-projects.md) — how PackagerCLI integrates into the MSBuild pipeline
 - [Getting started](getting-started.md) — prerequisites and first steps
 - [cqframework/clinical_quality_language](https://github.com/cqframework/clinical_quality_language) — Java CQL-to-ELM tool
-- More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).

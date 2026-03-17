@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.8.0
+**Version:** 2.9.0
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
@@ -274,13 +274,6 @@ This document contains development guidelines and instructions for maintaining c
 4.4.6.3 When updating a document, scan all references to other files and ensure they are hyperlinked
 
 4.4.6.4 When renaming or moving a document, update all hyperlinks that point to it across the repository
-
-4.4.7 **Always include a link to Firely's documentation site in every "Further Reading" section** — the link must never be removed when editing a document
-4.4.7.1 Every `## Further Reading` section must contain a reference to [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html)
-
-4.4.7.2 The standard wording for package READMEs is: `More information can be found at [Firely's documentation site](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html).`
-
-4.4.7.3 When editing any document that has a `## Further Reading` section, verify that this link is still present after your changes
 
 ### 4.5 Release Notes
 
