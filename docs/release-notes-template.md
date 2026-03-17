@@ -19,7 +19,7 @@ Use this template when preparing a new Firely CQL SDK release note document or G
 >
 > - **Breaking changes:** _List any source-breaking or behavior-breaking changes in one line each._
 > - **Required migrations:** _List concrete steps a developer must take (e.g. rename a property, update a config value)._
-> - **Highlights:** _One-line summary of the most important new feature or improvement, if any._
+> - **Highlights:** _One-line summary of the most important new feature or improvement._
 
 ---
 
@@ -86,7 +86,7 @@ Use this template when preparing a new Firely CQL SDK release note document or G
 
 ## Guidance
 
-- The `tl;dr` section must be the very first section after the version heading. Keep it to three bullet points maximum: breaking changes, required migrations, and a single highlights line. If there are no breaking changes or required migrations, say "None" rather than omitting the bullet.
+- The `tl;dr` section must be the very first section after the version heading. Always include exactly three bullet points: breaking changes, required migrations, and a single highlights line. If there are no breaking changes, required migrations, or highlights, say "None" for that bullet rather than omitting it.
 - Keep the document concise, but allow more detail for breaking changes and migration steps.
 - For public API changes, always mention the exact API names.
 - For dependency version changes, mention both the property name and the old/new version when known.
