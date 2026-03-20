@@ -124,7 +124,7 @@ public sealed partial class ColorConsoleLogger(
             // @formatter: off
             LogLevel.Trace       => ("""""", ConsoleColor.Cyan),
             LogLevel.Debug       => ("""""", ConsoleColor.DarkCyan),
-            LogLevel.Information => ("""ℹ""", ConsoleColor.Gray),
+            LogLevel.Information => (""" """, ConsoleColor.Gray),
             LogLevel.Warning     => ("""""", ConsoleColor.Yellow),
             LogLevel.Error       => ("""""", ConsoleColor.Red),
             LogLevel.Critical    => ("""""", ConsoleColor.Magenta),
