@@ -11,8 +11,6 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
-using Hl7.Fhir.Serialization;
-using Hl7.Fhir.Validation;
 using System.Text.Json;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
@@ -44,7 +42,7 @@ partial class InvocationToolkitExtensions
                     .ToList();
 
         var assemblyBinaries = files
-                               .TrySelect(info => FhirLibraryUtilities.LoadFhirLibraryFromFileInfo(info, configureJsonSerializerOptions),
+                               .TrySelect(info => FhirLibraryUtilities.LoadFhirLibraryFromFileInfo(info, logger),
                                           s => s
                                                .SetContinuation(invocationToolkit.BatchProcessExceptionContinuation)
                                                .AddLoggerExceptionHandler(
@@ -108,8 +106,7 @@ partial class InvocationToolkitExtensions
                                     logger,
                                     libraryIdentifier,
                                     fhirFileResolver,
-                                    filePredicate,
-                                    configureJsonSerializerOptions)
+                                    filePredicate)
                                 .TrySelect(FhirLibraryUtilities.ExtractAssemblyBinary,
                                            s => s
                                                 .SetContinuation(invocationToolkit.BatchProcessExceptionContinuation)
@@ -130,8 +127,7 @@ internal static partial class FhirLibraryUtilities
         ILogger logger,
         CqlVersionedLibraryIdentifier libraryIdentifier,
         ResourceFileInfoResolver fhirFileResolver,
-        Func<FileInfo, bool>? filePredicate = null,
-        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
+        Func<FileInfo, bool>? filePredicate = null)
     {
         HashSet<string> resourceIds = new();
 
@@ -219,7 +215,7 @@ internal static partial class FhirLibraryUtilities
 
             try
             {
-                var fhirLibrary = LoadFhirLibraryFromFileInfo(file, configureJsonSerializerOptions);
+                var fhirLibrary = LoadFhirLibraryFromFileInfo(file, logger);
                 return fhirLibrary;
             }
             catch (Exception e)
@@ -270,20 +266,12 @@ internal static partial class FhirLibraryUtilities
     /// Loads a FHIR library from the specified file.
     /// </summary>
     /// <param name="file">The file to load the FHIR library from.</param>
-    /// <param name="configureJsonSerializerOptions">Optional mutator to configure JSON serializer options.</param>
+    /// <param name="logger">Optional logger for reporting deserialization issues.</param>
     /// <returns>The loaded FHIR library.</returns>
     public static FhirLibrary LoadFhirLibraryFromFileInfo(
         FileInfo file,
-        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
-    {
-        configureJsonSerializerOptions += opt =>
-        {
-            opt.Ignoring([CodedValidationException.LITERAL_INVALID_CODE]);
-            return opt;
-        };
-        using var fs = file.OpenRead();
-        return fs.DeserializeJsonToFhir<FhirLibrary>(configureJsonSerializerOptions);
-    }
+        ILogger? logger = null) =>
+        FhirLibraryDeserializationExtensions.ReadFhirLibraryFromFile(file, logger);
 
     /// <summary>
     /// Extracts the assembly binary from the specified FHIR library.
