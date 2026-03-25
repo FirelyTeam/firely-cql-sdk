@@ -34,6 +34,7 @@ internal class OptionsConsoleDumper(
         WriteLine($"{"Command Line Args",-20} : {string.Join(' ', GetCommandLineArgs()[1..])}");
         WriteLine($"{"Build",-20} : {assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration}");
         WriteLine($"{"Version",-20} : {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+')[0]}");
+        WriteLine($"{".NET Runtime",-20} : {RuntimeInformation.FrameworkDescription}");
         WriteLine("- Environment -----------------------------------");
         WriteLine($"{"Current Time",-20} : {DateTimeOffset.Now:O}");
         WriteLine($"{"Current Directory",-20} : {CurrentDirectory}");
