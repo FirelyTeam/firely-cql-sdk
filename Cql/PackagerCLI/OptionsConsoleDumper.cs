@@ -26,17 +26,20 @@ internal class OptionsConsoleDumper(
     {
         StringBuilder? sb = logger.IsEnabled(LogLevel.Information) ? new() : null;
 
-        var assembly = typeof(Program).Assembly;
-        //var attr = assembly.GetCustomAttributes();
-
-        WriteLine("- PackageCLI ------------------------------------");
-        WriteLine($"{"Path",-20} : {assembly.Location}");
-        WriteLine($"{"Command Line Args",-20} : {string.Join(' ', GetCommandLineArgs()[1..])}");
-        WriteLine($"{"Build",-20} : {assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration}");
-        WriteLine($"{"Version",-20} : {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+')[0]}");
+        WriteLine("");
+        WriteLine($"= {($"{Program.ApplicationNameAndVersion} ").PadRight(47, '=')}");
+        WriteLine("");
         WriteLine("- Environment -----------------------------------");
-        WriteLine($"{"Current Time",-20} : {DateTimeOffset.Now:O}");
-        WriteLine($"{"Current Directory",-20} : {CurrentDirectory}");
+        WriteLine($"  Path :");
+        WriteLine($"    {typeof(Program).Assembly.Location}");
+        WriteLine($"  Command Line Args :");
+        foreach (var line in FormatCommandLineArgs(GetCommandLineArgs()[1..]))
+            WriteLine(line);
+        WriteLine($"  {"Current Time",-20} : {DateTimeOffset.Now:O}");
+        WriteLine($"  {"Current Directory",-20} : {CurrentDirectory}");
+        WriteLine($"  {".NET Runtime",-20} : {RuntimeInformation.FrameworkDescription.Replace(".NET ", "")}");
+        WriteLine($"  {"OS / Architecture",-20} : {RuntimeInformation.OSDescription} / {RuntimeInformation.OSArchitecture}");
+        WriteLine("");
         WriteLine("- Configuration ---------------------------------");
         JsonSerializerOptions jsonOpt = new();
         jsonOpt.WriteIndented = true;
@@ -44,7 +47,7 @@ internal class OptionsConsoleDumper(
         jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<FileInfo>());
         jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<DirectoryInfo>());
         jsonOpt.Converters.Add(new KeyToStringDictionaryJsonConverter<CqlLibraryIdentifier, string>());
-        
+
         // Build the root object dynamically to include command-specific options
         var rootDict = new Dictionary<string, object?>
         {
@@ -83,7 +86,7 @@ internal class OptionsConsoleDumper(
         bool HasNonNullProperties(object? obj)
         {
             if (obj is null) return false;
-            
+
             var properties = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var prop in properties)
             {
@@ -94,6 +97,36 @@ internal class OptionsConsoleDumper(
                 }
             }
             return false;
+        }
+    }
+
+    private static IEnumerable<string> FormatCommandLineArgs(string[] args)
+    {
+        const string indent = "    ";
+
+        var maxArgNameLen = 0;
+        for (var i = 1; i < args.Length - 1; i++)
+        {
+            if (args[i].StartsWith("--") && !args[i + 1].StartsWith("--"))
+                maxArgNameLen = Math.Max(maxArgNameLen, args[i].Length);
+        }
+
+        if (args.Length > 0)
+            yield return $"{indent}{args[0]}";
+
+        var iArg = 1;
+        while (iArg < args.Length)
+        {
+            if (args[iArg].StartsWith("--") && iArg + 1 < args.Length && !args[iArg + 1].StartsWith("--"))
+            {
+                yield return $"{indent}{args[iArg].PadRight(maxArgNameLen)} {args[iArg + 1]}";
+                iArg += 2;
+            }
+            else
+            {
+                yield return $"{indent}{args[iArg]}";
+                iArg++;
+            }
         }
     }
 }

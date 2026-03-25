@@ -27,6 +27,25 @@ public class Program
     // * The Hl7.Cql.Packager.Program.JavaToolVersion for the Packager CLI
     private const string JavaToolVersion = "3.29.0";
 
+    private static readonly string ApplicationName = Process.GetCurrentProcess().ProcessName;
+
+    private static readonly string ApplicationVersion =
+        typeof(Program).Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
+            .InformationalVersion.Split('+')[0] ?? "Unknown";
+
+    internal static readonly string BuildConfiguration =
+        (typeof(Program).Assembly
+            .GetCustomAttribute<AssemblyConfigurationAttribute>()?
+            .Configuration) switch
+        {
+            null or "Release" => "",
+            var other => other
+        };
+
+    internal static readonly string ApplicationNameAndVersion =
+        $"{ApplicationName}{(BuildConfiguration switch { [] => "", var bc => $" ({bc})" })} v{ApplicationVersion}";
+
     internal static readonly string Disclaimer =
         NewLine +
         NewLine +
@@ -37,7 +56,15 @@ public class Program
         $"If you find issues, please start from the ELM produced by the Java v{JavaToolVersion} tooling instead " +
         "as input for the elm command.";
 
+    private static readonly string ApplicationHeader =
+        $"{ApplicationNameAndVersion} running on {RuntimeInformation.FrameworkDescription}";
+
     private static readonly string Description =
+        ApplicationHeader +
+        NewLine +
+        new string('-', ApplicationHeader.Length) +
+        NewLine +
+        NewLine +
         "Utilities for converting CQL or ELM into other artefacts, such as C#, .NET assemblies or FHIR Resources. " +
         "Pick from a command listed below, or type [command] --help for more information on it." +
         Disclaimer;
@@ -48,7 +75,7 @@ public class Program
         var rootCommand =
             new RootCommand(Description)
                 {
-                    Name = Process.GetCurrentProcess().ProcessName, // Use the name of the executable as the command name
+                    Name = Process.GetCurrentProcess().ProcessName,
             }
                 //.AddOptions(ElmToFhirCommand.EnumerationOptions)
                 .AddGlobalOptions(LoggingCommand.Options)
