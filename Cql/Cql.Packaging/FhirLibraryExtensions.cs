@@ -28,7 +28,7 @@ internal static class FhirLibraryExtensions
         /// </summary>
         public static FhirLibrary ReadLibraryFromJson(string json)
         {
-            var lib = JsonSerializer.Deserialize<FhirLibrary>(json, JsonSerializerOptions.ForFhir)
+            var lib = JsonSerializer.Deserialize<FhirLibrary>(json, JsonSerializerOptions.ForFhirIgnoringInvalidLiterals)
                       ?? throw new InvalidOperationException("Failed to deserialize FHIR library from JSON.");
             return lib;
         }
