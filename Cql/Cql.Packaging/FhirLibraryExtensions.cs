@@ -3,6 +3,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
+using Hl7.Fhir.Serialization;
 
 namespace Hl7.Cql.Packaging;
 
@@ -26,11 +27,36 @@ internal static class FhirLibraryExtensions
         /// <summary>
         /// Reads and deserializes a FHIR Library resource from JSON string.
         /// </summary>
-        public static FhirLibrary ReadLibraryFromJson(string json)
+        /// <param name="json">The JSON string to deserialize.</param>
+        /// <param name="logger">Optional logger for reporting deserialization issues.</param>
+        /// <returns>The deserialized <see cref="FhirLibrary"/>.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when deserialization fails.</exception>
+        public static FhirLibrary ReadLibraryFromJson(string json, ILogger? logger = null)
         {
-            var lib = JsonSerializer.Deserialize<FhirLibrary>(json, JsonSerializerOptions.ForFhirIgnoringInvalidLiterals)
-                      ?? throw new InvalidOperationException("Failed to deserialize FHIR library from JSON.");
-            return lib;
+            var settings = new DeserializerSettings().UsingMode(DeserializationMode.NoOverflow);
+            var parser = new BaseFhirJsonDeserializer(FhirModelInfo.ModelInspector, settings);
+
+            if (parser.TryDeserializeResource(json, out var resource, out var issues))
+            {
+                if (issues.Any())
+                {
+                    logger?.LogWarning(
+                        "Parsing JSON resource resulted in {IssueCount} issues, but deserialization succeeded. Issues: {Issues}",
+                        issues.Count(),
+                        string.Join("; ", issues.Select(i => i.Message)));
+                }
+
+                return resource as FhirLibrary
+                       ?? throw new InvalidOperationException("Deserialized resource is not a FHIR Library.");
+            }
+
+            logger?.LogError(
+                "Parsing JSON resource resulted in {IssueCount} issues, processing is skipped for this item. Issues: {Issues}",
+                issues.Count(),
+                string.Join("; ", issues.Select(i => i.Message)));
+
+            throw new InvalidOperationException(
+                $"Failed to deserialize FHIR library from JSON. Issues: {string.Join("; ", issues.Select(i => i.Message))}");
         }
 
         public static FhirLibrary Create(
