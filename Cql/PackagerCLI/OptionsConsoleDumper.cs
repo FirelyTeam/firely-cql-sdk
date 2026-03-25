@@ -30,14 +30,15 @@ internal class OptionsConsoleDumper(
         //var attr = assembly.GetCustomAttributes();
 
         WriteLine("- PackageCLI ------------------------------------");
-        WriteLine($"{"Path",-20} : {assembly.Location}");
-        WriteLine($"{"Command Line Args",-20} : {string.Join(' ', GetCommandLineArgs()[1..])}");
         WriteLine($"{"Build",-20} : {assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration}");
         WriteLine($"{"Version",-20} : {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+')[0]}");
-        WriteLine($"{".NET Runtime",-20} : {RuntimeInformation.FrameworkDescription}");
+        WriteLine($"{"Path",-20} : {assembly.Location}");
+        WriteLine($"{"Command Line Args",-20} : {string.Join(' ', GetCommandLineArgs()[1..])}");
         WriteLine("- Environment -----------------------------------");
         WriteLine($"{"Current Time",-20} : {DateTimeOffset.Now:O}");
         WriteLine($"{"Current Directory",-20} : {CurrentDirectory}");
+        WriteLine($"{".NET Runtime",-20} : {RuntimeInformation.FrameworkDescription.Replace(".NET ", "")}");
+        WriteLine($"{"OS / Architecture",-20} : {RuntimeInformation.OSDescription} / {RuntimeInformation.OSArchitecture}");
         WriteLine("- Configuration ---------------------------------");
         JsonSerializerOptions jsonOpt = new();
         jsonOpt.WriteIndented = true;
@@ -45,7 +46,7 @@ internal class OptionsConsoleDumper(
         jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<FileInfo>());
         jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<DirectoryInfo>());
         jsonOpt.Converters.Add(new KeyToStringDictionaryJsonConverter<CqlLibraryIdentifier, string>());
-        
+
         // Build the root object dynamically to include command-specific options
         var rootDict = new Dictionary<string, object?>
         {
@@ -84,7 +85,7 @@ internal class OptionsConsoleDumper(
         bool HasNonNullProperties(object? obj)
         {
             if (obj is null) return false;
-            
+
             var properties = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var prop in properties)
             {
