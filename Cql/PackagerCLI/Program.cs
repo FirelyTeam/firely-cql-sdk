@@ -32,7 +32,19 @@ public class Program
     private static readonly string ApplicationVersion =
         typeof(Program).Assembly
             .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?
-            .InformationalVersion.Split('+')[0] ?? "unknown";
+            .InformationalVersion.Split('+')[0] ?? "Unknown";
+
+    internal static readonly string BuildConfiguration =
+        (typeof(Program).Assembly
+            .GetCustomAttribute<AssemblyConfigurationAttribute>()?
+            .Configuration) switch
+        {
+            null or "Release" => "",
+            var other => other
+        };
+
+    internal static readonly string ApplicationNameAndVersion =
+        $"{ApplicationName}{(BuildConfiguration switch { [] => "", var bc => $" ({bc})" })} v{ApplicationVersion}";
 
     internal static readonly string Disclaimer =
         NewLine +
@@ -45,7 +57,7 @@ public class Program
         "as input for the elm command.";
 
     private static readonly string ApplicationHeader =
-        $"{ApplicationName} v{ApplicationVersion} running on {RuntimeInformation.FrameworkDescription}";
+        $"{ApplicationNameAndVersion} running on {RuntimeInformation.FrameworkDescription}";
 
     private static readonly string Description =
         ApplicationHeader +
