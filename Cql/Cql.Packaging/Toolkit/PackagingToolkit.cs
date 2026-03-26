@@ -9,6 +9,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Packaging.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
@@ -202,25 +203,9 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
        bool writeIndented = false,
        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
-        var jsonSerializerOptions = ServiceProvider.GetRequiredService<JsonSerializerOptions>();
-
-        var updateWriteIndented = writeIndented != jsonSerializerOptions.WriteIndented;
-        var mutateOptions = configureJsonSerializerOptions != null;
-        if (updateWriteIndented || mutateOptions)
-        {
-            // Clone the options since the instance is shared as a singleton.
-            jsonSerializerOptions = new JsonSerializerOptions(jsonSerializerOptions);
-
-            if (updateWriteIndented)
-                jsonSerializerOptions.WriteIndented = writeIndented;
-
-            if (mutateOptions)
-                jsonSerializerOptions = configureJsonSerializerOptions!(jsonSerializerOptions);
-        }
-
         foreach (var resource in fhirResources)
         {
-            var resourceJson = JsonSerializer.Serialize(resource, jsonSerializerOptions);
+            var resourceJson = FhirLibrarySerializationExtensions.WriteFhirResourceToJson(resource, writeIndented, configureJsonSerializerOptions);
             var resourceFileName = resource.GetResourceFileName();
             yield return (resourceFileName, resourceJson);
         }

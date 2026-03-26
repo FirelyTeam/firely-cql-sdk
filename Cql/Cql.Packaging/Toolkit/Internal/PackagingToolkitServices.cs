@@ -10,7 +10,6 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime.Logging;
 using Hl7.Fhir.Introspection;
-using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.Packaging.Toolkit.Internal;
@@ -31,7 +30,6 @@ internal readonly record struct PackagingToolkitServices(
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
         services.TryAddSingleton(_ => ResourceCanonicalBuilderFactory.Create(config.CanonicalRootUrl, config.FixedLibraryCanonicals));
         services.TryAddSingleton<ResourcePackager>();
-        services.TryAddSingleton((IServiceProvider _, ModelInspector modelInspector) => new JsonSerializerOptions().ForFhir(modelInspector));
         var serviceProvider = services.BuildServiceProvider();
         return ActivatorUtilities.CreateInstance<PackagingToolkitServices>(serviceProvider, serviceProvider);
     }

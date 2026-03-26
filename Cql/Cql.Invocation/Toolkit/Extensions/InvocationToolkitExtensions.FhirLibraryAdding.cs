@@ -271,7 +271,7 @@ internal static partial class FhirLibraryUtilities
     public static FhirLibrary LoadFhirLibraryFromFileInfo(
         FileInfo file,
         ILogger? logger = null) =>
-        FhirLibraryDeserializationExtensions.ReadFhirLibraryFromFile(file, logger);
+        FhirLibrarySerializationExtensions.ReadFhirLibraryFromFile(file, logger);
 
     /// <summary>
     /// Extracts the assembly binary from the specified FHIR library.

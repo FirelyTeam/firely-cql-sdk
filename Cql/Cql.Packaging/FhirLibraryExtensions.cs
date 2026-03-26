@@ -32,7 +32,7 @@ internal static class FhirLibraryExtensions
         /// <returns>The deserialized <see cref="FhirLibrary"/>.</returns>
         /// <exception cref="InvalidOperationException">Thrown when deserialization fails.</exception>
         public static FhirLibrary ReadLibraryFromJson(string json, ILogger? logger = null) =>
-            FhirLibraryDeserializationExtensions.ReadFhirLibraryFromJson(json, logger);
+            FhirLibrarySerializationExtensions.ReadFhirLibraryFromJson(json, logger);
 
         public static FhirLibrary Create(
             ElmLibrary elmLibrary,
@@ -123,7 +123,7 @@ internal static class FhirLibraryExtensions
         /// Serializes a FHIR Library resource to JSON string.
         /// </summary>
         public string WriteLibraryToJson(bool pretty = false) =>
-            JsonSerializer.Serialize(fhirLibrary, pretty ? JsonSerializerOptions.ForFhirPretty : JsonSerializerOptions.ForFhir);
+            FhirLibrarySerializationExtensions.WriteFhirResourceToJson(fhirLibrary, pretty);
 
 
         public void SetCqlOptionsParameterAndExtension(

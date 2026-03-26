@@ -8,6 +8,7 @@
 
 #nullable enable
 
+using Hl7.Cql.Abstractions;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Logging;
@@ -15,17 +16,26 @@ using Microsoft.Extensions.Logging;
 namespace Hl7.Cql.Fhir.Serialization.Extensions;
 
 /// <summary>
-/// Provides methods for deserializing FHIR <see cref="Library"/> resources from JSON.
+/// Provides methods for serializing and deserializing FHIR <see cref="Library"/> resources as JSON.
 /// </summary>
 /// <remarks>
-/// Uses <see cref="BaseFhirJsonDeserializer"/> with <see cref="DeserializationMode.NoOverflow"/>
-/// so that non-fatal issues (such as invalid canonical URLs) are tolerated and reported as
-/// warnings rather than causing an exception.
+/// Deserialization uses <see cref="BaseFhirJsonDeserializer"/> with <see cref="DeserializationMode.NoOverflow"/>
+/// so that non-fatal issues (such as invalid canonical URLs) are tolerated and reported as warnings
+/// rather than causing an exception.
+/// Serialization uses <see cref="JsonSerializer"/> with FHIR-configured <see cref="JsonSerializerOptions"/>.
 /// </remarks>
-internal static class FhirLibraryDeserializationExtensions
+internal static class FhirLibrarySerializationExtensions
 {
     private static readonly DeserializerSettings NoOverflowSettings =
         new DeserializerSettings().UsingMode(DeserializationMode.NoOverflow);
+
+    private static readonly JsonSerializerOptions SerializerOptions =
+        new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
+
+    private static readonly JsonSerializerOptions PrettySerializerOptions =
+        new JsonSerializerOptions(SerializerOptions) { WriteIndented = true };
+
+    // ── Deserialization ──────────────────────────────────────────────────────
 
     /// <summary>
     /// Deserializes a FHIR <see cref="Library"/> resource from a JSON string.
@@ -76,5 +86,30 @@ internal static class FhirLibraryDeserializationExtensions
     {
         var json = File.ReadAllText(file.FullName);
         return ReadFhirLibraryFromJson(json, logger);
+    }
+
+    // ── Serialization ────────────────────────────────────────────────────────
+
+    /// <summary>
+    /// Serializes a FHIR resource to a JSON string.
+    /// </summary>
+    /// <typeparam name="T">The type of the FHIR resource.</typeparam>
+    /// <param name="resource">The resource to serialize.</param>
+    /// <param name="writeIndented">When <see langword="true"/>, the JSON output is indented.</param>
+    /// <param name="configureOptions">
+    /// An optional mutator to further configure the <see cref="JsonSerializerOptions"/> before serialization.
+    /// When provided, the shared cached options are cloned before the mutator is applied.
+    /// </param>
+    /// <returns>The serialized JSON string.</returns>
+    public static string WriteFhirResourceToJson<T>(
+        T resource,
+        bool writeIndented = false,
+        Mutator<JsonSerializerOptions>? configureOptions = null)
+        where T : Resource
+    {
+        var options = writeIndented ? PrettySerializerOptions : SerializerOptions;
+        if (configureOptions != null)
+            options = configureOptions(new JsonSerializerOptions(options));
+        return JsonSerializer.Serialize(resource, options);
     }
 }
