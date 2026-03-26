@@ -196,16 +196,14 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// </summary>
     /// <param name="fhirResources">The collection of FHIR resources to serialize.</param>
     /// <param name="writeIndented">Specifies whether the JSON output should be indented.</param>
-    /// <param name="configureJsonSerializerOptions">Optional mutator to configure JSON serializer options.</param>
     /// <returns>A collection of tuples containing the resource file name and its JSON representation.</returns>
     public IEnumerable<(ResourceFileName resourceFileName, string resourceJson)> SerializeFhirResourcesToJson(
        IEnumerable<FhirResource> fhirResources,
-       bool writeIndented = false,
-       Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
+       bool writeIndented = false)
     {
         foreach (var resource in fhirResources)
         {
-            var resourceJson = FhirLibrarySerializationExtensions.WriteFhirResourceToJson(resource, writeIndented, configureJsonSerializerOptions);
+            var resourceJson = FhirLibrarySerializationExtensions.WriteFhirResourceToJson(resource, writeIndented);
             var resourceFileName = resource.GetResourceFileName();
             yield return (resourceFileName, resourceJson);
         }

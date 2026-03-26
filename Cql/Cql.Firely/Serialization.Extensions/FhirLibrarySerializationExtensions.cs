@@ -8,7 +8,6 @@
 
 #nullable enable
 
-using Hl7.Cql.Abstractions;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Logging;
@@ -22,18 +21,15 @@ namespace Hl7.Cql.Fhir.Serialization.Extensions;
 /// Deserialization uses <see cref="BaseFhirJsonDeserializer"/> with <see cref="DeserializationMode.NoOverflow"/>
 /// so that non-fatal issues (such as invalid canonical URLs) are tolerated and reported as warnings
 /// rather than causing an exception.
-/// Serialization uses <see cref="JsonSerializer"/> with FHIR-configured <see cref="JsonSerializerOptions"/>.
+/// Serialization uses <see cref="BaseFhirJsonSerializer"/>.
 /// </remarks>
 internal static class FhirLibrarySerializationExtensions
 {
     private static readonly DeserializerSettings NoOverflowSettings =
         new DeserializerSettings().UsingMode(DeserializationMode.NoOverflow);
 
-    private static readonly JsonSerializerOptions SerializerOptions =
-        new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
-
-    private static readonly JsonSerializerOptions PrettySerializerOptions =
-        new JsonSerializerOptions(SerializerOptions) { WriteIndented = true };
+    private static readonly BaseFhirJsonSerializer Serializer =
+        new BaseFhirJsonSerializer(ModelInfo.ModelInspector);
 
     // ── Deserialization ──────────────────────────────────────────────────────
 
@@ -91,25 +87,13 @@ internal static class FhirLibrarySerializationExtensions
     // ── Serialization ────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Serializes a FHIR resource to a JSON string.
+    /// Serializes a FHIR resource to a JSON string using <see cref="BaseFhirJsonSerializer"/>.
     /// </summary>
     /// <typeparam name="T">The type of the FHIR resource.</typeparam>
     /// <param name="resource">The resource to serialize.</param>
     /// <param name="writeIndented">When <see langword="true"/>, the JSON output is indented.</param>
-    /// <param name="configureOptions">
-    /// An optional mutator to further configure the <see cref="JsonSerializerOptions"/> before serialization.
-    /// When provided, the shared cached options are cloned before the mutator is applied.
-    /// </param>
     /// <returns>The serialized JSON string.</returns>
-    public static string WriteFhirResourceToJson<T>(
-        T resource,
-        bool writeIndented = false,
-        Mutator<JsonSerializerOptions>? configureOptions = null)
-        where T : Resource
-    {
-        var options = writeIndented ? PrettySerializerOptions : SerializerOptions;
-        if (configureOptions != null)
-            options = configureOptions(new JsonSerializerOptions(options));
-        return JsonSerializer.Serialize(resource, options);
-    }
+    public static string WriteFhirResourceToJson<T>(T resource, bool writeIndented = false)
+        where T : Resource =>
+        Serializer.SerializeToString(resource, pretty: writeIndented, filterFactory: null);
 }

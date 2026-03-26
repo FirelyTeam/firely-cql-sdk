@@ -22,7 +22,6 @@ public static partial class PackagingToolkitExtensions
     /// <param name="directory">The directory where the FHIR resources will be saved.</param>
     /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
     /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
-    /// <param name="configureJsonSerializerOptions">Optional mutator for JSON serialization options.</param>
     /// <param name="subdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
     /// <param name="directoryPostProcessingStrategy">An optional delegate that is invoked on the directory after all resources have been saved.</param>
     /// <returns>The packaging toolkit instance.</returns>
@@ -31,7 +30,6 @@ public static partial class PackagingToolkitExtensions
         DirectoryInfo directory,
         bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
-        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null,
         SubdirectoryPreserver? subdirectoryPreserver = null,
         DirectoryInfoHandler? directoryPostProcessingStrategy = null) =>
         packagingToolkit.SaveFhirResourcesToDirectory(
@@ -39,7 +37,6 @@ public static partial class PackagingToolkitExtensions
                 directory,
                 writeIndented,
                 directoryPreparationStrategy,
-                configureJsonSerializerOptions,
                 subdirectoryPreserver,
                 directoryPostProcessingStrategy));
 
@@ -85,7 +82,6 @@ public static partial class PackagingToolkitExtensions
 /// <param name="WriteIndented">true to write JSON output with indentation for readability; otherwise, false.</param>
 /// <param name="DirectoryPreparationStrategy">An optional delegate that defines how to prepare the target directory before saving resources. If null, a default
 /// preparation strategy is used.</param>
-/// <param name="ConfigureJsonSerializerOptions">An optional delegate to configure the JsonSerializerOptions used when serializing FHIR resources to JSON.</param>
 /// <param name="SubdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
 /// <param name="DirectoryPostProcessingStrategy">An optional delegate that is invoked on each top-level directory after all resources have been saved to that directory.</param>
 public record SaveFhirResourcesToDirectoriesOptions(
@@ -93,7 +89,6 @@ public record SaveFhirResourcesToDirectoriesOptions(
     DirectoryInfo MeasuresDirectory,
     bool WriteIndented = false,
     DirectoryInfoHandler? DirectoryPreparationStrategy = null,
-    Mutator<JsonSerializerOptions>? ConfigureJsonSerializerOptions = null,
     SubdirectoryPreserver? SubdirectoryPreserver = null,
     DirectoryInfoHandler? DirectoryPostProcessingStrategy = null)
 {
@@ -106,16 +101,14 @@ public record SaveFhirResourcesToDirectoriesOptions(
     /// <param name="WriteIndented">true to write JSON output with indentation for readability; otherwise, false.</param>
     /// <param name="DirectoryPreparationStrategy">An optional delegate that defines how to prepare the target directory before saving resources. If null, no
     /// special preparation is performed.</param>
-    /// <param name="ConfigureJsonSerializerOptions">An optional delegate to configure the JsonSerializerOptions used when serializing FHIR resources to JSON.</param>
     /// <param name="SubdirectoryPreserver">An optional subdirectory preserver to maintain directory structure from input.</param>
     /// <param name="DirectoryPostProcessingStrategy">An optional delegate that is invoked on the directory after all resources have been saved.</param>
     public SaveFhirResourcesToDirectoriesOptions(
         DirectoryInfo directory,
         bool WriteIndented = false,
         DirectoryInfoHandler? DirectoryPreparationStrategy = null,
-        Mutator<JsonSerializerOptions>? ConfigureJsonSerializerOptions = null,
         SubdirectoryPreserver? SubdirectoryPreserver = null,
-        DirectoryInfoHandler? DirectoryPostProcessingStrategy = null) : this(directory, directory, WriteIndented, DirectoryPreparationStrategy, ConfigureJsonSerializerOptions, SubdirectoryPreserver, DirectoryPostProcessingStrategy) {}
+        DirectoryInfoHandler? DirectoryPostProcessingStrategy = null) : this(directory, directory, WriteIndented, DirectoryPreparationStrategy, SubdirectoryPreserver, DirectoryPostProcessingStrategy) {}
 
     internal void Save(PackagingToolkit packagingToolkit)
     {
@@ -129,7 +122,7 @@ public record SaveFhirResourcesToDirectoriesOptions(
             var fhirResources = resultArtifacts.GetFhirResources();
 
             foreach (var (resourceFileName, resourceJson) in
-                     packagingToolkit.SerializeFhirResourcesToJson(fhirResources, WriteIndented, ConfigureJsonSerializerOptions))
+                     packagingToolkit.SerializeFhirResourcesToJson(fhirResources, WriteIndented))
             {
                 // Determine the base directory based on resource type
                 var (resourceType, _, _) = resourceFileName;
