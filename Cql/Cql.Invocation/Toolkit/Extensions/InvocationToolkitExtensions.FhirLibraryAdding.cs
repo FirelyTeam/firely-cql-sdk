@@ -6,12 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
-using System.Text.Json;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -22,7 +20,6 @@ partial class InvocationToolkitExtensions
     /// </summary>
     /// <param name="invocationToolkit">The invocation toolkit to add the FHIR libraries to.</param>
     /// <param name="directory">The directory containing the FHIR library files.</param>
-    /// <param name="configureJsonSerializerOptions">Optional mutator to configure JSON serializer options.</param>
     /// <param name="options">Optional enumeration options for directory enumeration.</param>
     /// <param name="filePredicate">Optional predicate to filter files.</param>
     /// <returns>The updated invocation toolkit with the added FHIR libraries.</returns>
@@ -30,8 +27,7 @@ partial class InvocationToolkitExtensions
         this InvocationToolkit invocationToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
-        Func<FileInfo, bool>? filePredicate = null,
-        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
+        Func<FileInfo, bool>? filePredicate = null)
     {
         var logger = invocationToolkit.LoggerFactory.CreateLogger(typeof(InvocationToolkitExtensions));
         var files = directory.EnumerateFiles("Library-*.json", options ?? Defaults.EnumerationOptionsRecurseSubdirectories);
@@ -78,15 +74,12 @@ partial class InvocationToolkitExtensions
     /// <param name="filePredicate">
     /// An optional predicate to filter the files to be processed. If <c>null</c>, all files are processed.
     /// </param>
-    /// <param name="configureJsonSerializerOptions">
-    /// An optional mutator to configure the <see cref="JsonSerializerOptions"/> used during processing.
-    /// </param>
     /// <returns>
     /// The updated <see cref="InvocationToolkit"/> instance with the added assembly binaries.
     /// </returns>
     /// <remarks>
     /// This method processes the specified FHIR library and its dependencies to extract assembly binaries.
-    /// It applies the provided file predicate and JSON serializer configuration during the process.
+    /// It applies the provided file predicate during the process.
     /// </remarks>
     /// <exception cref="ArgumentNullException">
     /// Thrown if <paramref name="invocationToolkit"/>, <paramref name="libraryIdentifier"/>, or <paramref name="fhirFileResolver"/> is <c>null</c>.
@@ -95,8 +88,7 @@ partial class InvocationToolkitExtensions
         this InvocationToolkit invocationToolkit,
         CqlVersionedLibraryIdentifier libraryIdentifier,
         ResourceFileInfoResolver fhirFileResolver,
-        Func<FileInfo, bool>? filePredicate = null,
-        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
+        Func<FileInfo, bool>? filePredicate = null)
     {
         var logger = invocationToolkit.LoggerFactory.CreateLogger(typeof(InvocationToolkitExtensions));
         using var logScope = logger.BeginScope("Adding FHIR Library '{lib}' and Dependencies to InvocationToolkit", libraryIdentifier);

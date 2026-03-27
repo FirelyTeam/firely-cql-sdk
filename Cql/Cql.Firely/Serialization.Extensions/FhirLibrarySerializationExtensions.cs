@@ -48,25 +48,27 @@ internal static class FhirLibrarySerializationExtensions
 
         if (parser.TryDeserializeResource(json, out var resource, out var issues))
         {
-            if (issues.Any())
+            var issueList = issues.ToList();
+            if (issueList.Count > 0)
             {
                 logger?.LogWarning(
                     "Parsing JSON resource resulted in {IssueCount} issues, but deserialization succeeded. Issues: {Issues}",
-                    issues.Count(),
-                    string.Join("; ", issues.Select(i => i.Message)));
+                    issueList.Count,
+                    string.Join("; ", issueList.Select(i => i.Message)));
             }
 
             return resource as Library
                    ?? throw new InvalidOperationException("Deserialized resource is not a FHIR Library.");
         }
 
+        var failureIssues = issues.ToList();
+        var failureMessages = string.Join("; ", failureIssues.Select(i => i.Message));
         logger?.LogError(
             "Parsing JSON resource resulted in {IssueCount} issues, processing is skipped for this item. Issues: {Issues}",
-            issues.Count(),
-            string.Join("; ", issues.Select(i => i.Message)));
+            failureIssues.Count,
+            failureMessages);
 
-        throw new InvalidOperationException(
-            $"Failed to deserialize FHIR library from JSON. Issues: {string.Join("; ", issues.Select(i => i.Message))}");
+        throw new InvalidOperationException($"Failed to deserialize FHIR library from JSON. Issues: {failureMessages}");
     }
 
     /// <summary>
