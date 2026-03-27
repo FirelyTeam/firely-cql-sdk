@@ -2,7 +2,35 @@
 
 ## Breaking Changes
 
-TBD
+### `Cql.Packaging` — `SerializeFhirResourcesToJson` signature change
+
+`PackagingToolkit.SerializeFhirResourcesToJson` no longer accepts a `configureJsonSerializerOptions` parameter. Serialization now goes through the Firely SDK's `BaseFhirJsonSerializer` directly.
+
+**Before:**
+```csharp
+toolkit.SerializeFhirResourcesToJson(resources, writeIndented: true, opts => opts.WriteIndented = true);
+```
+
+**After:**
+```csharp
+toolkit.SerializeFhirResourcesToJson(resources, writeIndented: true);
+```
+
+### `Cql.Invocation` — `AddAssemblyBinariesInFhirLibrariesFromDirectory` and `AddAssemblyBinariesFromFhirLibraryAndDependencies` signature change
+
+Both methods no longer accept a `configureJsonSerializerOptions` parameter. Deserialization now uses the Firely SDK's `BaseFhirJsonDeserializer` with `DeserializationMode.NoOverflow`.
+
+**Before:**
+```csharp
+toolkit.AddAssemblyBinariesInFhirLibrariesFromDirectory(dir, filePredicate: pred, configureJsonSerializerOptions: opts => { });
+toolkit.AddAssemblyBinariesFromFhirLibraryAndDependencies(id, resolver, filePredicate: pred, configureJsonSerializerOptions: opts => { });
+```
+
+**After:**
+```csharp
+toolkit.AddAssemblyBinariesInFhirLibrariesFromDirectory(dir, filePredicate: pred);
+toolkit.AddAssemblyBinariesFromFhirLibraryAndDependencies(id, resolver, filePredicate: pred);
+```
 
 ## Features
 
@@ -43,4 +71,11 @@ When running a command, the startup log now includes additional OS and architect
 
 ## Fixes
 
-TBD
+### FHIR Library deserialization now tolerates non-conformant FHIR ids and canonical URLs
+
+The FHIR Library JSON deserialization in `Cql.Packaging`, `Cql.Invocation`, and the PackagerCLI has been
+switched from `System.Text.Json` (with strict FHIR validation) to the Firely SDK's `BaseFhirJsonDeserializer`
+with `DeserializationMode.NoOverflow`. This resolves failures when loading FHIR Library resources that contain
+non-conformant resource ids (e.g. underscores: `Library-BCSE_Concepts-2025.1.0`) or non-standard canonical
+URL values — a common occurrence in real-world HEDIS and other measure-set bundles. Non-fatal deserialization
+issues are now reported as logger warnings rather than hard exceptions.
