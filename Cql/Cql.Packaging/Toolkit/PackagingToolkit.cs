@@ -9,6 +9,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Packaging.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
@@ -195,32 +196,14 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// </summary>
     /// <param name="fhirResources">The collection of FHIR resources to serialize.</param>
     /// <param name="writeIndented">Specifies whether the JSON output should be indented.</param>
-    /// <param name="configureJsonSerializerOptions">Optional mutator to configure JSON serializer options.</param>
     /// <returns>A collection of tuples containing the resource file name and its JSON representation.</returns>
     public IEnumerable<(ResourceFileName resourceFileName, string resourceJson)> SerializeFhirResourcesToJson(
        IEnumerable<FhirResource> fhirResources,
-       bool writeIndented = false,
-       Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
+       bool writeIndented = false)
     {
-        var jsonSerializerOptions = ServiceProvider.GetRequiredService<JsonSerializerOptions>();
-
-        var updateWriteIndented = writeIndented != jsonSerializerOptions.WriteIndented;
-        var mutateOptions = configureJsonSerializerOptions != null;
-        if (updateWriteIndented || mutateOptions)
-        {
-            // Clone the options since the instance is shared as a singleton.
-            jsonSerializerOptions = new JsonSerializerOptions(jsonSerializerOptions);
-
-            if (updateWriteIndented)
-                jsonSerializerOptions.WriteIndented = writeIndented;
-
-            if (mutateOptions)
-                jsonSerializerOptions = configureJsonSerializerOptions!(jsonSerializerOptions);
-        }
-
         foreach (var resource in fhirResources)
         {
-            var resourceJson = JsonSerializer.Serialize(resource, jsonSerializerOptions);
+            var resourceJson = FhirLibrarySerializationExtensions.WriteFhirResourceToJson(resource, writeIndented);
             var resourceFileName = resource.GetResourceFileName();
             yield return (resourceFileName, resourceJson);
         }

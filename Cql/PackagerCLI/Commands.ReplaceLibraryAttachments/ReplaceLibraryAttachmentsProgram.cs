@@ -101,7 +101,7 @@ internal sealed class ReplaceLibraryAttachmentsProgram
             FhirLibrary library;
             try
             {
-                library = FhirLibrary.ReadLibraryFromJson(libraryJson);
+                library = FhirLibrary.ReadLibraryFromJson(libraryJson, logger);
             }
             catch (Exception ex)
             {

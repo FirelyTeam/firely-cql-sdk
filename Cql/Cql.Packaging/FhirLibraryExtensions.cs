@@ -1,5 +1,6 @@
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -26,12 +27,12 @@ internal static class FhirLibraryExtensions
         /// <summary>
         /// Reads and deserializes a FHIR Library resource from JSON string.
         /// </summary>
-        public static FhirLibrary ReadLibraryFromJson(string json)
-        {
-            var lib = JsonSerializer.Deserialize<FhirLibrary>(json, JsonSerializerOptions.ForFhir)
-                      ?? throw new InvalidOperationException("Failed to deserialize FHIR library from JSON.");
-            return lib;
-        }
+        /// <param name="json">The JSON string to deserialize.</param>
+        /// <param name="logger">Optional logger for reporting deserialization issues.</param>
+        /// <returns>The deserialized <see cref="FhirLibrary"/>.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when deserialization fails.</exception>
+        public static FhirLibrary ReadLibraryFromJson(string json, ILogger? logger = null) =>
+            FhirLibrarySerializationExtensions.ReadFhirLibraryFromJson(json, logger);
 
         public static FhirLibrary Create(
             ElmLibrary elmLibrary,
@@ -122,7 +123,7 @@ internal static class FhirLibraryExtensions
         /// Serializes a FHIR Library resource to JSON string.
         /// </summary>
         public string WriteLibraryToJson(bool pretty = false) =>
-            JsonSerializer.Serialize(fhirLibrary, pretty ? JsonSerializerOptions.ForFhirPretty : JsonSerializerOptions.ForFhir);
+            FhirLibrarySerializationExtensions.WriteFhirResourceToJson(fhirLibrary, pretty);
 
 
         public void SetCqlOptionsParameterAndExtension(
