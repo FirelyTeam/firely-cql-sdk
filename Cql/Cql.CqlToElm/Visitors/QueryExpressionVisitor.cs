@@ -122,65 +122,40 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         var inc = inclusions[i];
                         var withClause = inc.withClause();
                         if (withClause is not null)
-                        {
-                            var aqs = handleAliasedQuerySource(withClause.aliasedQuerySource());
-                            Expression? suchThat = null;
-                            using (var scope = LibraryBuilder.EnterScope($"With {withClause.Locator()}"))
-                            {
-                                // add the with alias to scope while visiting the such that.
-                                if (scope.TryAdd(aqs))
-                                {
-                                    suchThat = Visit(withClause.expression());
-                                    rcs[i] = new With
-                                    {
-                                        alias = aqs.alias,
-                                        expression = aqs.expression,
-                                        suchThat = suchThat,
-                                    };
-                                }
-                                else
-                                {
-                                    rcs[i] = new With
-                                    {
-                                        alias = aqs.alias,
-                                        expression = aqs.expression,
-                                    }.AddError(MessagingProvider.IdentifierAlreadyInScope(aqs.alias));
-                                }
-                            }
-                        }
+                            rcs[i] = handleRelationshipClause(withClause.aliasedQuerySource(), withClause.expression(), withClause.Locator(), isWith: true);
                         else
                         {
                             var withoutClause = inc.withoutClause();
                             if (withoutClause is not null)
-                            {
-                                var aqs = handleAliasedQuerySource(withoutClause.aliasedQuerySource());
-                                Expression? suchThat = null;
-                                using (var scope = LibraryBuilder.EnterScope($"Without {withoutClause.Locator()}"))
-                                {
-                                    // add the without alias to scope while visiting the such that.
-                                    if (scope.TryAdd(aqs))
-                                    {
-                                        suchThat = Visit(withoutClause.expression());
-                                        rcs[i] = new Without
-                                        {
-                                            alias = aqs.alias,
-                                            expression = aqs.expression,
-                                            suchThat = suchThat,
-                                        };
-                                    }
-                                    else
-                                    {
-                                        rcs[i] = new Without
-                                        {
-                                            alias = aqs.alias,
-                                            expression = aqs.expression,
-                                        }.AddError(MessagingProvider.IdentifierAlreadyInScope(aqs.alias));
-                                    }
-                                }
-                            }
+                                rcs[i] = handleRelationshipClause(withoutClause.aliasedQuerySource(), withoutClause.expression(), withoutClause.Locator(), isWith: false);
                         }
                     }
                     return rcs;
+                }
+            }
+
+            RelationshipClause handleRelationshipClause(
+                cqlParser.AliasedQuerySourceContext aliasedQuerySourceCtx,
+                cqlParser.ExpressionContext expressionCtx,
+                string locator,
+                bool isWith)
+            {
+                var aqs = handleAliasedQuerySource(aliasedQuerySourceCtx);
+                var scopeName = isWith ? $"With {locator}" : $"Without {locator}";
+                using var scope = LibraryBuilder.EnterScope(scopeName);
+                if (scope.TryAdd(aqs))
+                {
+                    var suchThat = Visit(expressionCtx);
+                    return (isWith
+                        ? (RelationshipClause)new With { alias = aqs.alias, expression = aqs.expression, suchThat = suchThat }
+                        : new Without { alias = aqs.alias, expression = aqs.expression, suchThat = suchThat });
+                }
+                else
+                {
+                    return (isWith
+                        ? (RelationshipClause)new With { alias = aqs.alias, expression = aqs.expression }
+                        : new Without { alias = aqs.alias, expression = aqs.expression })
+                        .AddError(MessagingProvider.IdentifierAlreadyInScope(aqs.alias));
                 }
             }
 
