@@ -246,6 +246,35 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void Relationship_withoutscalarsources()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("""
+                from(true) t
+                without(false) f
+                such that t != f
+                where t
+                return t
+                """);
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.relationship.Should().HaveCount(1);
+            query.relationship[0].Should().BeOfType<Without>();
+        }
+
+        [TestMethod]
+        public void Relationship_withoutbadidentifier()
+        {
+            CreateCqlToolkit().MakeLibrary($"""
+                library Test version '1.0.0'
+
+                define f: from (true) t
+                    without(false) fl
+                    such that t != x
+                    where t is true
+                    return t
+                """, "Could not resolve identifier x in the current library.");
+        }
+
+        [TestMethod]
         public void Claims_Query()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""

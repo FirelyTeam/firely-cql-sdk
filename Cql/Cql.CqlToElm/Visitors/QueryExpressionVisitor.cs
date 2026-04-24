@@ -121,9 +121,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         var inc = inclusions[i];
                         var withClause = inc.withClause();
-                        var aqs = handleAliasedQuerySource(withClause.aliasedQuerySource());
                         if (withClause is not null)
                         {
+                            var aqs = handleAliasedQuerySource(withClause.aliasedQuerySource());
                             Expression? suchThat = null;
                             using (var scope = LibraryBuilder.EnterScope($"With {withClause.Locator()}"))
                             {
@@ -138,7 +138,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                         suchThat = suchThat,
                                     };
                                 }
-                                else {
+                                else
+                                {
                                     rcs[i] = new With
                                     {
                                         alias = aqs.alias,
@@ -146,7 +147,37 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     }.AddError(MessagingProvider.IdentifierAlreadyInScope(aqs.alias));
                                 }
                             }
-
+                        }
+                        else
+                        {
+                            var withoutClause = inc.withoutClause();
+                            if (withoutClause is not null)
+                            {
+                                var aqs = handleAliasedQuerySource(withoutClause.aliasedQuerySource());
+                                Expression? suchThat = null;
+                                using (var scope = LibraryBuilder.EnterScope($"Without {withoutClause.Locator()}"))
+                                {
+                                    // add the without alias to scope while visiting the such that.
+                                    if (scope.TryAdd(aqs))
+                                    {
+                                        suchThat = Visit(withoutClause.expression());
+                                        rcs[i] = new Without
+                                        {
+                                            alias = aqs.alias,
+                                            expression = aqs.expression,
+                                            suchThat = suchThat,
+                                        };
+                                    }
+                                    else
+                                    {
+                                        rcs[i] = new Without
+                                        {
+                                            alias = aqs.alias,
+                                            expression = aqs.expression,
+                                        }.AddError(MessagingProvider.IdentifierAlreadyInScope(aqs.alias));
+                                    }
+                                }
+                            }
                         }
                     }
                     return rcs;
