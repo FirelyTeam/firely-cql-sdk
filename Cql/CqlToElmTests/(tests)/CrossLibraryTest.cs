@@ -98,5 +98,50 @@ namespace Hl7.Cql.CqlToElm.Test
                                """,
                                "Could not resolve call to operator DoesNotExist with signature ().");
         }
+
+        [TestMethod]
+        public void FunctionRef_Across_Library_HasLibraryName()
+        {
+            var cqlToolkit = CreateCqlToolkit();
+            var foo = cqlToolkit.MakeLibrary("""
+                                         library Foo version '1.0.0'
+
+                                         define function Foo(): 'foo'
+                                         """);
+            foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
+
+            var bar = cqlToolkit.MakeLibrary("""
+                                         library Bar version '1.0.0'
+
+                                         include Foo version '1.0.0' called foo
+
+                                         define G: foo.Foo()
+                                         """);
+            var funcRef = bar.Should().BeACorrectlyInitializedLibraryWithStatementOfType<FunctionRef>();
+            funcRef.libraryName.Should().Be("foo");
+        }
+
+        [TestMethod]
+        public void FunctionRef_Across_Library_Overloaded_HasLibraryName()
+        {
+            var cqlToolkit = CreateCqlToolkit();
+            var foo = cqlToolkit.MakeLibrary("""
+                                         library Foo version '1.0.0'
+
+                                         define function MyFunc(a Integer): a * 2
+                                         define function MyFunc(a String): a + a
+                                         """);
+            foo.GetErrors().Should().BeEmpty();
+
+            var bar = cqlToolkit.MakeLibrary("""
+                                         library Bar version '1.0.0'
+
+                                         include Foo version '1.0.0' called foo
+
+                                         define G: foo.MyFunc(3)
+                                         """);
+            var funcRef = bar.Should().BeACorrectlyInitializedLibraryWithStatementOfType<FunctionRef>();
+            funcRef.libraryName.Should().Be("foo");
+        }
     }
 }

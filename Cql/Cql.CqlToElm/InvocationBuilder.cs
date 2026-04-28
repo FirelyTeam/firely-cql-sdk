@@ -103,7 +103,7 @@ namespace Hl7.Cql.CqlToElm
             var newArguments = result.Arguments
                 .Select(cr => cr.Result)
                 .ToArray();
-            var expression = ElmFactory.CreateElmNode(function, null, newArguments);
+            var expression = ElmFactory.CreateElmNode(function, library, newArguments);
             if (!result.Compatible)
                 expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments));
             var newResultType = ReplaceGenericType(function.ResultTypeSpecifier!, result.GenericInferences);
