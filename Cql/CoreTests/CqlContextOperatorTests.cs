@@ -57,7 +57,7 @@ public class CqlContextOperatorTests
     }
 
     [TestMethod]
-    public void Equal_ListsWithDifferentElementTypes_MustReturnFalse()
+    public void Equal_ListsWithIncompatibleElementTypes_ReturnsFalse()
     {
         // Arrange
         var cqlOperators = Sut();

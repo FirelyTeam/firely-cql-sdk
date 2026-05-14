@@ -13,7 +13,7 @@ partial class CqlComparers
     private class ListEqualComparer(CqlComparers elementComparer) :
         CqlComparer<IEnumerable>
     {
-        private const int IncomparableNonEqual = 1;
+        private const int TypeMismatchResult = 1;
 
         private static int CompareByRuntimeType(
             object left,
@@ -60,7 +60,7 @@ partial class CqlComparers
                     }
                     catch (InvalidCastException)
                     {
-                        compare = IncomparableNonEqual;
+                        compare = TypeMismatchResult;
                     }
                     if (compare != 0)
                         return compare;
