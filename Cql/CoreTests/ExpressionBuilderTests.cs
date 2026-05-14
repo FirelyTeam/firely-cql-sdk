@@ -155,7 +155,7 @@ namespace CoreTests
         [TestMethod]
         public void Coalesce_WithNullsAndList_ReturnsFirstNonNullList()
         {
-            // Arrange - https://github.com/FirelyTeam/firely-cql-sdk/issues/XXX
+            // Arrange
             var libraryString = CqlLibraryString.Parse("""
                 library CoalesceTest version '1.0.0'
 
