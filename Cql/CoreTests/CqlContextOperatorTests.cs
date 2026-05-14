@@ -57,6 +57,19 @@ public class CqlContextOperatorTests
     }
 
     [TestMethod]
+    public void Equal_ListsWithDifferentElementTypes_MustReturnFalse()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var isEqual = cqlOperators.Equal(new[] { "a", "b", "c" }, new[] { 1, 2, 3 });
+
+        // Assert
+        isEqual.Should().BeFalse();
+    }
+
+    [TestMethod]
     public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
     {
         // Arrange

@@ -37,7 +37,20 @@ partial class CqlComparers
                 else if (rv == null) return 1;
                 else
                 {
-                    var compare = elementComparer.Compare(lv, rv, null);
+                    int? compare;
+                    try
+                    {
+                        compare = elementComparer.Compare(lv, rv, null);
+                    }
+                    catch (Exception ex) when (ex is InvalidCastException or ArgumentException)
+                    {
+                        compare = string.Compare(
+                            lv.GetType().FullName,
+                            rv.GetType().FullName,
+                            StringComparison.Ordinal);
+                        if (compare == 0)
+                            compare = 1;
+                    }
                     if (compare != 0)
                         return compare;
                 }
@@ -54,6 +67,7 @@ partial class CqlComparers
             string? precision)
         {
             var onlyNull = true;
+            var hasUnknown = false;
             var notEmpty = false;
 
             var lit = x.GetEnumerator();
@@ -77,14 +91,25 @@ partial class CqlComparers
                 else
                 {
                     onlyNull = false;
-                    if (Comparer.Default.Compare(lv, rv) != 0)
+                    try
+                    {
+                        var equals = elementComparer.Equals(lv, rv, null);
+                        if (equals == false)
+                            return false;
+
+                        if (equals == null)
+                            hasUnknown = true;
+                    }
+                    catch (InvalidCastException)
+                    {
                         return false;
+                    }
                 }
             }
             if (rit.MoveNext()) // the 2nd list is longer than the 1st.
                 return false;
 
-            if (notEmpty && onlyNull)
+            if ((notEmpty && onlyNull) || hasUnknown)
                 return null;
             else
                 return true;
