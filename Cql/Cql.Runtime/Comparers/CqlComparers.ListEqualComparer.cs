@@ -13,6 +13,16 @@ partial class CqlComparers
     private class ListEqualComparer(CqlComparers elementComparer) :
         CqlComparer<IEnumerable>
     {
+        private static int CompareByRuntimeType(
+            object left,
+            object right)
+        {
+            return string.Compare(
+                left.GetType().AssemblyQualifiedName,
+                right.GetType().AssemblyQualifiedName,
+                StringComparison.Ordinal);
+        }
+
         protected override int? CompareValues(
             IEnumerable x,
             IEnumerable y,
@@ -37,15 +47,9 @@ partial class CqlComparers
                 else if (rv == null) return 1;
                 else
                 {
-                    var lvType = lv.GetType();
-                    var rvType = rv.GetType();
-                    if (lvType != rvType)
-                    {
-                        return string.Compare(
-                            lvType.AssemblyQualifiedName,
-                            rvType.AssemblyQualifiedName,
-                            StringComparison.Ordinal);
-                    }
+                    var typeCompare = CompareByRuntimeType(lv, rv);
+                    if (typeCompare != 0)
+                        return typeCompare;
 
                     int? compare;
                     try
@@ -54,10 +58,7 @@ partial class CqlComparers
                     }
                     catch (InvalidCastException)
                     {
-                        compare = string.Compare(
-                            lvType.AssemblyQualifiedName,
-                            rvType.AssemblyQualifiedName,
-                            StringComparison.Ordinal);
+                        compare = 1;
                     }
                     if (compare != 0)
                         return compare;
@@ -98,7 +99,7 @@ partial class CqlComparers
                 else if (rv == null) return false;
                 else
                 {
-                    if (lv.GetType() != rv.GetType())
+                    if (CompareByRuntimeType(lv, rv) != 0)
                         return false;
 
                     onlyNull = false;
