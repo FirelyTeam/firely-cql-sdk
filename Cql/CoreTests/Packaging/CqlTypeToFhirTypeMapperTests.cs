@@ -131,6 +131,6 @@ public class CqlTypeToFhirTypeMapperTests
         Assert.AreEqual(CqlPrimitiveType.Interval, result.CqlType);
         Assert.IsNotNull(result.ElementType);
         Assert.AreEqual(FHIRAllTypes.DateTime, result.ElementType.FhirType);
-        Assert.AreEqual(CqlPrimitiveType.DateTime, result.ElementType.CqlType);
+        Assert.AreEqual(CqlPrimitiveType.Time, result.ElementType.CqlType);
     }
 }
