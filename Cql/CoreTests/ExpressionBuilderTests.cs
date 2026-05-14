@@ -152,6 +152,28 @@ namespace CoreTests
             Assert.AreEqual(AdministrativeGender.Female, patient.Gender);
         }
 
+        [TestMethod]
+        public void Coalesce_WithNullsAndList_ReturnsFirstNonNullList()
+        {
+            // Arrange - https://github.com/FirelyTeam/firely-cql-sdk/issues/XXX
+            var libraryString = CqlLibraryString.Parse("""
+                library CoalesceTest version '1.0.0'
+
+                define CoalesceLastList: Coalesce(null, null, {'a'})
+                """);
+            var elmLibrary = CreateElmLibrary(libraryString);
+
+            // Act
+            var result = InvokeLibrary(elmLibrary, "CoalesceLastList");
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType<IEnumerable<string>>(result);
+            var list = ((IEnumerable<string>)result).ToList();
+            Assert.AreEqual(1, list.Count);
+            Assert.AreEqual("a", list[0]);
+        }
+
         private static Library CreateElmLibrary(CqlLibraryString libraryString)
         {
             var cqlToolkitConfig = new CqlToolkitConfig([CqlModel.ElmR1, CqlModel.Fhir401]);
