@@ -101,9 +101,6 @@ partial class CqlComparers
                 else if (rv == null) return false;
                 else
                 {
-                    if (CompareByRuntimeType(lv, rv) != 0)
-                        return false;
-
                     onlyNull = false;
                     try
                     {
