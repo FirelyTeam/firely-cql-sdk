@@ -161,7 +161,7 @@ namespace Hl7.Cql.Packaging
                         case CqlPrimitiveType.Ratio:
                             return new CqlTypeToFhirMapping(FHIRAllTypes.Ratio, cqlType);
                         case CqlPrimitiveType.Time:
-                            return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Duration));
+                            return new CqlTypeToFhirMapping(FHIRAllTypes.Period, cqlType, TypeEntryFor(FHIRAllTypes.DateTime));
                         case CqlPrimitiveType.Any:
                         case CqlPrimitiveType.Boolean:
                         case CqlPrimitiveType.Code:

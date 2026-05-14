@@ -113,4 +113,24 @@ public class CqlTypeToFhirTypeMapperTests
         Assert.AreEqual(FHIRAllTypes.String, result.FhirType);
         Assert.AreEqual(CqlPrimitiveType.Long, result.CqlType);
     }
+
+    [TestMethod]
+    public void TypeEntryFor_CqlPrimitiveTypeIntervalWithTimeElementType_ReturnsFhirPeriodAndDateTimeElement()
+    {
+        // Arrange
+        var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+        var mapper = new CqlTypeToFhirTypeMapper(typeResolver);
+        var elementType = new CqlTypeToFhirMapping(FHIRAllTypes.Time, CqlPrimitiveType.Time);
+
+        // Act
+        var result = mapper.TypeEntryFor(CqlPrimitiveType.Interval, elementType);
+
+        // Assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual(FHIRAllTypes.Period, result.FhirType);
+        Assert.AreEqual(CqlPrimitiveType.Interval, result.CqlType);
+        Assert.IsNotNull(result.ElementType);
+        Assert.AreEqual(FHIRAllTypes.DateTime, result.ElementType.FhirType);
+        Assert.AreEqual(CqlPrimitiveType.DateTime, result.ElementType.CqlType);
+    }
 }
