@@ -70,6 +70,22 @@ public class CqlContextOperatorTests
     }
 
     [TestMethod]
+    public void Equal_ListsWithCrossTypeComparableElements_ReturnsTrue()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        var enumVal = Encounter.EncounterStatus.Finished;
+        var fhirCodes = new[] { new Code<Encounter.EncounterStatus>(enumVal) };
+        var strings = new[] { "finished" };
+
+        // Act
+        var isEqual = cqlOperators.Equal(fhirCodes, strings);
+
+        // Assert
+        isEqual.Should().BeTrue();
+    }
+
+    [TestMethod]
     public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
     {
         // Arrange

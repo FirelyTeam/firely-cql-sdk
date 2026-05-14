@@ -15,16 +15,6 @@ partial class CqlComparers
     {
         private const int TypeMismatchResult = 1;
 
-        private static int CompareByRuntimeType(
-            object left,
-            object right)
-        {
-            return string.Compare(
-                left.GetType().AssemblyQualifiedName,
-                right.GetType().AssemblyQualifiedName,
-                StringComparison.Ordinal);
-        }
-
         protected override int? CompareValues(
             IEnumerable x,
             IEnumerable y,
@@ -49,10 +39,6 @@ partial class CqlComparers
                 else if (rv == null) return 1;
                 else
                 {
-                    var typeCompare = CompareByRuntimeType(lv, rv);
-                    if (typeCompare != 0)
-                        return typeCompare;
-
                     int? compare;
                     try
                     {
