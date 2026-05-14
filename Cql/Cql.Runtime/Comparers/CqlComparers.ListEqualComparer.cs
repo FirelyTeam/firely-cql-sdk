@@ -37,19 +37,27 @@ partial class CqlComparers
                 else if (rv == null) return 1;
                 else
                 {
+                    var lvType = lv.GetType();
+                    var rvType = rv.GetType();
+                    if (lvType != rvType)
+                    {
+                        return string.Compare(
+                            lvType.AssemblyQualifiedName,
+                            rvType.AssemblyQualifiedName,
+                            StringComparison.Ordinal);
+                    }
+
                     int? compare;
                     try
                     {
                         compare = elementComparer.Compare(lv, rv, null);
                     }
-                    catch (Exception ex) when (ex is InvalidCastException or ArgumentException)
+                    catch (InvalidCastException)
                     {
                         compare = string.Compare(
-                            lv.GetType().FullName,
-                            rv.GetType().FullName,
+                            lvType.AssemblyQualifiedName,
+                            rvType.AssemblyQualifiedName,
                             StringComparison.Ordinal);
-                        if (compare == 0)
-                            compare = 1;
                     }
                     if (compare != 0)
                         return compare;
@@ -90,6 +98,9 @@ partial class CqlComparers
                 else if (rv == null) return false;
                 else
                 {
+                    if (lv.GetType() != rv.GetType())
+                        return false;
+
                     onlyNull = false;
                     try
                     {
