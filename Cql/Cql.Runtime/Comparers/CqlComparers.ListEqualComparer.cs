@@ -13,6 +13,8 @@ partial class CqlComparers
     private class ListEqualComparer(CqlComparers elementComparer) :
         CqlComparer<IEnumerable>
     {
+        private const int IncomparableNonEqual = 1;
+
         private static int CompareByRuntimeType(
             object left,
             object right)
@@ -58,7 +60,7 @@ partial class CqlComparers
                     }
                     catch (InvalidCastException)
                     {
-                        compare = 1;
+                        compare = IncomparableNonEqual;
                     }
                     if (compare != 0)
                         return compare;
@@ -121,7 +123,8 @@ partial class CqlComparers
             if (rit.MoveNext()) // the 2nd list is longer than the 1st.
                 return false;
 
-            if ((notEmpty && onlyNull) || hasUnknown)
+            var allElementsNull = notEmpty && onlyNull;
+            if (allElementsNull || hasUnknown)
                 return null;
             else
                 return true;
