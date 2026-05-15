@@ -114,8 +114,10 @@ namespace Hl7.Cql.CqlToElm.Test
             library.GetErrors().Should().BeEmpty();
 
             // Locate the In expression within the query's where clause
-            var query = library.statements[0].expression as Query;
-            Assert.IsNotNull(query, $"Expected a Query but got {library.statements[0].expression?.GetType().Name ?? "null"}");
+            var testStatement = library.statements.FirstOrDefault(s => s.name == "test");
+            Assert.IsNotNull(testStatement, "Expected a 'test' statement in the library");
+            var query = testStatement.expression as Query;
+            Assert.IsNotNull(query, $"Expected a Query but got {testStatement.expression?.GetType().Name ?? "null"}");
 
             Assert.IsInstanceOfType(query.where, typeof(In));
             var inExpr = (In)query.where;
