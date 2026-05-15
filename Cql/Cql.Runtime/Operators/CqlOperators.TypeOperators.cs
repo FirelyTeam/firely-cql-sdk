@@ -8,6 +8,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators
@@ -185,7 +186,21 @@ namespace Hl7.Cql.Operators
             if (s == null)
                 return null;
             else if (CqlTime.TryParse(s, out CqlTime? value))
+            {
+                // CQL spec: Time values do not have a timezone offset component.
+                // If the parsed string contained a timezone, strip it.
+                if (value!.Value.OffsetHour.HasValue)
+                {
+                    value = new CqlTime(new TimeIso8601(
+                        value.Value.Hour,
+                        value.Value.Minute,
+                        value.Value.Second,
+                        value.Value.Millisecond,
+                        null,
+                        null));
+                }
                 return value;
+            }
             else return null;
         }
 
