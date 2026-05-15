@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Conversion;
-using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Operators;
 using Hl7.Fhir.Introspection;
@@ -433,26 +432,9 @@ namespace Hl7.Cql.Fhir
             s == null ? null :
             CqlDateTime.TryParse(s, out CqlDateTime? value) ? value : null;
 
-        private static CqlTime? ConvertStringToTime(string? s)
-        {
-            if (s == null)
-                return null;
-            if (!CqlTime.TryParse(s, out CqlTime? value))
-                return null;
-            // CQL spec: Time values do not have a timezone offset component.
-            // If the parsed string contained a timezone, strip it.
-            if (value!.Value.OffsetHour.HasValue)
-            {
-                value = new CqlTime(new TimeIso8601(
-                    value.Value.Hour,
-                    value.Value.Minute,
-                    value.Value.Second,
-                    value.Value.Millisecond,
-                    null,
-                    null));
-            }
-            return value;
-        }
+        private static CqlTime? ConvertStringToTime(string? s) =>
+            s == null ? null :
+            CqlTime.TryParse(s, out CqlTime? value) ? value : null;
 
         internal static TypeConverter ConvertCodeTypes(this TypeConverter converter, ModelInspector model)
         {
