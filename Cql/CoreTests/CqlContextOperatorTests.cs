@@ -8,7 +8,11 @@
 
 #nullable enable
 
+using Hl7.Cql.CqlToElm;
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -23,69 +27,58 @@ public class CqlContextOperatorTests
     #region Power
 
     [TestMethod]
-    public void Power_Operator_Overloads_Must_All_Return_Decimal()
+    public void Power_CqlExpressions_For_Various_Numeric_Types_Must_Return_Correct_Decimal_Values()
     {
         // Arrange
-        var powerOverloads = typeof(ICqlOperators).GetMethods().Where(m => m.Name == nameof(ICqlOperators.Power));
+        var cqlLibrary = CqlLibraryString.Parse(
+            """
+            library PowerOperatorTestValue version '1.0.0'
+
+            define "IntegerPower": 2 ^ -2
+            define "LongPower": 2L ^ -2L
+            define "DecimalPower": 2.0 ^ -2.0
+            """);
+        var cqlToolkit = new CqlToolkit().AddCqlLibraries(cqlLibrary);
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+
+        // Act
+        var integerResult = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "IntegerPower");
+        var longResult = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "LongPower");
+        var decimalResult = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "DecimalPower");
 
         // Assert
-        powerOverloads.Should().OnlyContain(overload => overload.ReturnType == typeof(decimal?));
+        integerResult.Should().BeOfType<decimal>().Which.Should().Be(0.25m);
+        longResult.Should().BeOfType<decimal>().Which.Should().Be(0.25m);
+        decimalResult.Should().BeOfType<decimal>().Which.Should().Be(0.25m);
     }
 
     [TestMethod]
-    public void Power_IntegerArguments_Must_Return_Fractional_Decimal_Result()
+    public void Power_CqlExpressions_With_NonRepresentable_Results_Must_Return_Null()
     {
         // Arrange
-        var cqlOperators = Sut();
+        var cqlLibrary = CqlLibraryString.Parse(
+            """
+            library PowerOperatorTestNull version '1.0.0'
+
+            define "IntegerOverflow": 2 ^ 1000
+            define "IntegerInfinity": 0 ^ -1
+            define "LongOverflow": 2L ^ 1000L
+            define "LongInfinity": 0L ^ -1L
+            """);
+        var cqlToolkit = new CqlToolkit().AddCqlLibraries(cqlLibrary);
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
 
         // Act
-        var result = cqlOperators.Power(2, -2);
+        var integerOverflow = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "IntegerOverflow");
+        var integerInfinity = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "IntegerInfinity");
+        var longOverflow = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "LongOverflow");
+        var longInfinity = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "LongInfinity");
 
         // Assert
-        result.Should().Be(0.25m);
-    }
-
-    [TestMethod]
-    public void Power_LongArguments_Must_Return_Fractional_Decimal_Result()
-    {
-        // Arrange
-        var cqlOperators = Sut();
-
-        // Act
-        var result = cqlOperators.Power(2L, -2L);
-
-        // Assert
-        result.Should().Be(0.25m);
-    }
-
-    [TestMethod]
-    public void Power_IntegerArguments_With_NonRepresentable_Result_Must_Return_Null()
-    {
-        // Arrange
-        var cqlOperators = Sut();
-
-        // Act
-        var overflowResult = cqlOperators.Power(2, 1000);
-        var infinityResult = cqlOperators.Power(0, -1);
-
-        // Assert
-        overflowResult.Should().BeNull();
-        infinityResult.Should().BeNull();
-    }
-
-    [TestMethod]
-    public void Power_LongArguments_With_NonRepresentable_Result_Must_Return_Null()
-    {
-        // Arrange
-        var cqlOperators = Sut();
-
-        // Act
-        var overflowResult = cqlOperators.Power(2L, 1000L);
-        var infinityResult = cqlOperators.Power(0L, -1L);
-
-        // Assert
-        overflowResult.Should().BeNull();
-        infinityResult.Should().BeNull();
+        integerOverflow.Should().BeNull();
+        integerInfinity.Should().BeNull();
+        longOverflow.Should().BeNull();
+        longInfinity.Should().BeNull();
     }
 
     #endregion
