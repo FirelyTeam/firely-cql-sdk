@@ -50,7 +50,7 @@
 	<group name="Contains">
 		<test name="ContainsABNullHasNull">
 			<expression>{ 'a', 'b', null } contains null</expression>
-			<output>null</output>
+			<output>true</output>
 		</test>
 		<test name="ContainsNullFirst">
 			<expression>{ null, 'b', 'c' } contains 'a'</expression>
@@ -129,7 +129,7 @@
 	<group name="Equal">
 		<test name="EqualNullNull">
 			<expression>{null} = {null}</expression>
-			<output>null</output>
+			<output>true</output>
 		</test>
 		<test name="EqualEmptyListNull">
 			<expression>{} as List&lt;String&gt; = null</expression>
@@ -358,7 +358,7 @@
 		<!-- this test is going to the ContainsEvaluator -->
 		<test name="IncludesNullRight">
 			<expression>{'s', 'a', 'm'} includes null</expression>
-			<output>null</output>
+			<output>false</output>
 		</test>
 	</group>
 	<group name="IncludedIn">

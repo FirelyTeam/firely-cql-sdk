@@ -2,6 +2,20 @@
 
 ## Breaking Changes
 
+### `Cql.Runtime` — `ICqlOperators.Contains<T>` list parameter is now nullable
+
+The `ICqlOperators` list overload signature now uses a nullable list parameter:
+
+**Before:**
+```csharp
+bool? Contains<T>(IEnumerable<T> list, T item);
+```
+
+**After:**
+```csharp
+bool? Contains<T>(IEnumerable<T>? list, T item);
+```
+
 ### `Cql.Runtime` / `Cql.CqlToElm` — `Power` on `Integer`/`Long` now returns `Decimal`
 
 `Power` overloads for integer and long operands now consistently produce a decimal result across runtime and CQL→ELM typing.
