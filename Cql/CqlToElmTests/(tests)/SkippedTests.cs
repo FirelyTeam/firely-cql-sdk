@@ -40,7 +40,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
             { "DescendentsEmptyList", "Not implemented" },
 
-            { "EqualNullNull", "The spec states that null elements are considered equal for list equality." },
             { "ReplaceMatchesSpaces", "The first argument should have four backslashes instead of 2" },
 
             // This compiler error should be repaired by https://github.com/FirelyTeam/firely-cql-sdk/issues/542
