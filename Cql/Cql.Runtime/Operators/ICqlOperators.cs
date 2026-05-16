@@ -469,8 +469,8 @@ namespace Hl7.Cql.Operators
         decimal?                                 PopulationVariance(IEnumerable<decimal?>? source);
         int?                                     PositionOf(string pattern, string argument);
         decimal?                                 Power(decimal? argument, decimal? exponent);
-        int?                                     Power(int? argument, int? exponent);
-        long?                                    Power(long? argument, long? exponent);
+        decimal?                                 Power(int? argument, int? exponent);
+        decimal?                                 Power(long? argument, long? exponent);
         int?                                     Precision(CqlDate? argument);
         int?                                     Precision(CqlDateTime? argument);
         int?                                     Precision(CqlTime? argument);

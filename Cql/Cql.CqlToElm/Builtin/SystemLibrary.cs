@@ -261,7 +261,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef PopulationStdDev = aggregate<PopulationStdDev>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef PopulationVariance = aggregate<PopulationVariance>(T, T).For(T, DecimalType, QuantityType);
         public static SystemFunction<PositionOf> PositionOf = binary<PositionOf>(StringType, StringType, IntegerType);
-        public static OverloadedFunctionDef Power = binary<Power>(T, T, T).For(T, IntegerType, LongType, DecimalType);
+        public static OverloadedFunctionDef Power = binary<Power>(T, T, DecimalType).For(T, IntegerType, LongType, DecimalType);
         public static OverloadedFunctionDef Precision = unary<Precision>(T, IntegerType).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Predecessor> Predecessor = unary<Predecessor>(T, T);
         public static OverloadedFunctionDef Product = aggregate<Product>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);

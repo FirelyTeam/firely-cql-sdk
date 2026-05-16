@@ -89,7 +89,11 @@ namespace Hl7.Cql.Primitives
         {
             if (TimeIso8601.TryParse(s, out var isoTime))
             {
-                time = new CqlTime(isoTime!);
+                // CQL spec: Time values do not have a timezone offset component.
+                // If the parsed string contained a timezone offset, strip it.
+                if (isoTime!.OffsetHour.HasValue)
+                    isoTime = new TimeIso8601(isoTime.Hour, isoTime.Minute, isoTime.Second, isoTime.Millisecond, null, null);
+                time = new CqlTime(isoTime);
                 return true;
             }
             else

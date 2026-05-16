@@ -54,13 +54,19 @@ internal abstract class CqlComparer<T>(
         object? x,
         object? y,
         string? precision) =>
-        Equals((T?)x, (T?)y, precision);
+            x is null || y is null
+            ? null
+            : x is T tx && y is T ty
+                ? Equals(tx, ty, precision)
+                : false;
 
     bool? ICqlComparer.EqualsValues(
         object x,
         object y,
         string? precision) =>
-        EqualsValuesShared((T)x, (T)y, precision);
+        x is T tx && y is T ty
+            ? EqualsValuesShared(tx, ty, precision)
+            : false;
 
     private bool? EqualsValuesShared(
         [DisallowNull] T x,
@@ -116,13 +122,19 @@ internal abstract class CqlComparer<T>(
         object? x,
         object? y,
         string? precision) =>
-        Equivalent((T?)x, (T?)y, precision);
+        x is null || y is null
+            ? x is null && y is null
+            : x is T tx && y is T ty
+                ? Equivalent(tx, ty, precision)
+                : false;
 
     bool IEquivalenceComparer.EquivalentValues(
         object x,
         object y,
         string? precision) =>
-        EquivalentValuesShared((T)x, (T)y, precision);
+        x is T tx && y is T ty
+            ? EquivalentValuesShared(tx, ty, precision)
+            : false;
 
     private bool EquivalentValuesShared(
         T x,
@@ -181,13 +193,23 @@ internal abstract class CqlComparer<T>(
         object? x,
         object? y,
         string? precision) =>
-        Compare((T?)x, (T?)y, precision);
+        x is null
+            ? y is null
+                ? 0
+                : 1
+            : y is null
+                ? -1
+                : x is T tx && y is T ty
+                    ? Compare(tx, ty, precision)
+                    : 1;
 
     int? ICqlComparer.CompareValues(
         object x,
         object y,
         string? precision) =>
-        CompareValuesShared((T)x, (T)y, precision);
+        x is T tx && y is T ty
+            ? CompareValuesShared(tx, ty, precision)
+            : 1;
 
     private int? CompareValuesShared(
         T x,
