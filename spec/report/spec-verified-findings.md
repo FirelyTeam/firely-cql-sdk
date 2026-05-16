@@ -63,15 +63,15 @@ This document captures the current verification status of previously reported co
 
 ## Current Summary Matrix
 
-| Item | Status | Priority | Notes |
-|------|--------|----------|-------|
-| Substring length | RESOLVED | Critical (historical) | Issue doc removed |
-| List equality nulls | RESOLVED | High (historical) | Issue doc removed |
-| Power behavior/typing | RESOLVED | High (historical) | Issue doc removed |
-| EndsWith bounds/empty suffix | OPEN | High | Runtime change needed |
-| Round negative midpoint tests | OPEN | High | Test expectation + skip cleanup needed |
-| Matches anchoring | OPEN | Medium | Runtime semantics change needed |
-| Expand skipped tests | OPEN | Low | Enable and validate test coverage |
+| Item                          | Status   | Priority              | Notes                                  |
+| ----------------------------- | -------- | --------------------- | -------------------------------------- |
+| Substring length              | RESOLVED | Critical (historical) | Issue doc removed                      |
+| List equality nulls           | RESOLVED | High (historical)     | Issue doc removed                      |
+| Power behavior/typing         | RESOLVED | High (historical)     | Issue doc removed                      |
+| EndsWith bounds/empty suffix  | OPEN     | High                  | Runtime change needed                  |
+| Round negative midpoint tests | OPEN     | High                  | Test expectation + skip cleanup needed |
+| Matches anchoring             | OPEN     | Medium                | Runtime semantics change needed        |
+| Expand skipped tests          | OPEN     | Low                   | Enable and validate test coverage      |
 
 ---
 
