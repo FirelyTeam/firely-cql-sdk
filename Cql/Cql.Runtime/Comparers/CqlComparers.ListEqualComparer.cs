@@ -13,8 +13,6 @@ partial class CqlComparers
     private class ListEqualComparer(CqlComparers elementComparer) :
         CqlComparer<IEnumerable>
     {
-        private const int TypeMismatchResult = 1;
-
         protected override int? CompareValues(
             IEnumerable x,
             IEnumerable y,
@@ -56,7 +54,6 @@ partial class CqlComparers
             string? precision)
         {
             var onlyNull = true;
-            var hasUnknown = false;
             var notEmpty = false;
 
             var lit = x.GetEnumerator();
@@ -80,26 +77,14 @@ partial class CqlComparers
                 else
                 {
                     onlyNull = false;
-                    try
-                    {
-                        var equals = elementComparer.Equals(lv, rv, null);
-                        if (equals == false)
-                            return false;
-
-                        if (equals == null)
-                            hasUnknown = true;
-                    }
-                    catch (InvalidCastException)
-                    {
+                    if (Comparer.Default.Compare(lv, rv) != 0)
                         return false;
-                    }
                 }
             }
             if (rit.MoveNext()) // the 2nd list is longer than the 1st.
                 return false;
 
-            var allElementsNull = notEmpty && onlyNull;
-            if (allElementsNull || hasUnknown)
+            if (notEmpty && onlyNull)
                 return null;
             else
                 return true;
