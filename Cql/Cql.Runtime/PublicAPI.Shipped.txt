@@ -391,8 +391,8 @@ Hl7.Cql.Operators.ICqlOperators.PopulationVariance(System.Collections.Generic.IE
 Hl7.Cql.Operators.ICqlOperators.PopulationVariance(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? source) -> Hl7.Cql.Primitives.CqlQuantity?
 Hl7.Cql.Operators.ICqlOperators.PositionOf(string! pattern, string! argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Power(decimal? argument, decimal? exponent) -> decimal?
-Hl7.Cql.Operators.ICqlOperators.Power(int? argument, int? exponent) -> int?
-Hl7.Cql.Operators.ICqlOperators.Power(long? argument, long? exponent) -> long?
+Hl7.Cql.Operators.ICqlOperators.Power(int? argument, int? exponent) -> decimal?
+Hl7.Cql.Operators.ICqlOperators.Power(long? argument, long? exponent) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Precision(decimal? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Precision(Hl7.Cql.Primitives.CqlDate? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Precision(Hl7.Cql.Primitives.CqlDateTime? argument) -> int?

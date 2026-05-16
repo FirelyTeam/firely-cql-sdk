@@ -578,13 +578,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     _ => lhs,
                 };
 
-                if (lhs.resultTypeSpecifier is not IntervalTypeSpecifier && rightPoint == CqlKeyword.Occurs)
+                // Only wrap lhs in an interval when the rhs is (and will remain) an interval.
+                // If rhs is a point type (e.g. DateTime), both operands should be passed directly.
+                if (lhs.resultTypeSpecifier is not IntervalTypeSpecifier
+                    && rightPoint == CqlKeyword.Occurs
+                    && rhs.resultTypeSpecifier is IntervalTypeSpecifier)
                 {
                     lhs = new Elm.Interval
                     {
                         low = lhs,
                         high = lhs,
-                    }.WithLocator(leftLocator).WithResultType(lhsPointType.ToIntervalType());
+                    }.WithLocator(leftLocator).WithResultType(lhs.resultTypeSpecifier.ToIntervalType());
                 }
 
                 var rhsPointType = PointType(rhs.resultTypeSpecifier)!;
@@ -602,36 +606,40 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     _ => rhs,
                 };
 
-                if (rhs.resultTypeSpecifier is not IntervalTypeSpecifier && leftPoint == CqlKeyword.Occurs)
+                // Only wrap rhs in an interval when lhs ended up as an interval (after any wrapping above).
+                // If lhs is a point type, both operands should be passed directly.
+                if (rhs.resultTypeSpecifier is not IntervalTypeSpecifier
+                    && lhs.resultTypeSpecifier is IntervalTypeSpecifier)
                 {
                     rhs = new Elm.Interval
                     {
                         low = rhs,
                         high = rhs,
-                    }.WithLocator(rightLocator).WithResultType(rhsPointType.ToIntervalType());
+                    }.WithLocator(rightLocator).WithResultType(rhs.resultTypeSpecifier.ToIntervalType());
                 }
             }
 
-            var precision = context.dateTimePrecision()?.Parse() ?? default;
+            var hasPrecision = context.dateTimePrecision() is not null;
+            var precision = hasPrecision ? context.dateTimePrecision()!.Parse() : default;
 
             return qualifier switch
             {
                 CqlKeyword.Or_Before => new SameOrBefore
                 {
                     precision = precision,
-                    precisionSpecified = true,
+                    precisionSpecified = hasPrecision,
                     operand = new[] { lhs, rhs },
                 }.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator()),
                 CqlKeyword.Or_After => new SameOrAfter
                 {
                     precision = precision,
-                    precisionSpecified = true,
+                    precisionSpecified = hasPrecision,
                     operand = new[] { lhs, rhs },
                 }.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator()),
                 CqlKeyword.As => new SameAs
                 {
                     precision = precision,
-                    precisionSpecified = true,
+                    precisionSpecified = hasPrecision,
                     operand = new[] { lhs, rhs },
                 }.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator()),
                 _ => throw new InvalidOperationException("Cannot happen, we have already checked for all possible values of qualifier.")
