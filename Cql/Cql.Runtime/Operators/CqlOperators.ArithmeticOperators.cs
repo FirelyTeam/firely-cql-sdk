@@ -680,16 +680,16 @@ namespace Hl7.Cql.Operators
 
         #region Power
 
-        public int? Power(int? argument, int? exponent)
+        public decimal? Power(int? argument, int? exponent)
         {
             if (argument == null || exponent == null) return null;
-            else return (int?)Math.Pow((double)argument, (double)exponent);
+            else return (decimal)Math.Pow((double)argument, (double)exponent);
         }
 
-        public long? Power(long? argument, long? exponent)
+        public decimal? Power(long? argument, long? exponent)
         {
             if (argument == null || exponent == null) return null;
-            else return (long?)Math.Pow((double)argument, (double)exponent);
+            else return (decimal)Math.Pow((double)argument, (double)exponent);
         }
 
         public decimal? Power(decimal? argument, decimal? exponent)

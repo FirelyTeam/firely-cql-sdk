@@ -32,13 +32,13 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var power = (Power)library.statements[0].expression;
                 Assert.IsNotNull(power.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Integer", power.resultTypeName.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", power.resultTypeName.Name);
                 Assert.IsNotNull(power.resultTypeSpecifier);
                 Assert.IsInstanceOfType(power.resultTypeSpecifier, typeof(NamedTypeSpecifier));
                 var nts = (NamedTypeSpecifier)power.resultTypeSpecifier;
                 Assert.IsNotNull(nts.name);
                 Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
                 Assert.IsNotNull(power.operand);
                 Assert.AreEqual(2, power.operand.Length);
                 {
@@ -67,8 +67,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 var lambda = CreateElmToolkit().Lambda(power);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsInstanceOfType(result, typeof(int?));
-                Assert.AreEqual(8, result);
+                Assert.IsInstanceOfType(result, typeof(decimal?));
+                Assert.AreEqual(8m, result);
             }
         }
 
@@ -88,13 +88,13 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var power = (Power)library.statements[0].expression;
                 Assert.IsNotNull(power.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Long", power.resultTypeName.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", power.resultTypeName.Name);
                 Assert.IsNotNull(power.resultTypeSpecifier);
                 Assert.IsInstanceOfType(power.resultTypeSpecifier, typeof(NamedTypeSpecifier));
                 var nts = (NamedTypeSpecifier)power.resultTypeSpecifier;
                 Assert.IsNotNull(nts.name);
                 Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
                 Assert.IsNotNull(power.operand);
                 Assert.AreEqual(2, power.operand.Length);
                 {
@@ -123,8 +123,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 var lambda = CreateElmToolkit().Lambda(power);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsInstanceOfType(result, typeof(long?));
-                Assert.AreEqual(8L, result);
+                Assert.IsInstanceOfType(result, typeof(decimal?));
+                Assert.AreEqual(8m, result);
             }
         }
 
@@ -200,13 +200,13 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var power = (Power)library.statements[0].expression;
                 Assert.IsNotNull(power.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Integer", power.resultTypeName.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", power.resultTypeName.Name);
                 Assert.IsNotNull(power.resultTypeSpecifier);
                 Assert.IsInstanceOfType(power.resultTypeSpecifier, typeof(NamedTypeSpecifier));
                 var nts = (NamedTypeSpecifier)power.resultTypeSpecifier;
                 Assert.IsNotNull(nts.name);
                 Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
                 Assert.IsNotNull(power.operand);
                 Assert.AreEqual(2, power.operand.Length);
                 {
@@ -254,13 +254,13 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var power = (Power)library.statements[0].expression;
                 Assert.IsNotNull(power.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Integer", power.resultTypeName.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", power.resultTypeName.Name);
                 Assert.IsNotNull(power.resultTypeSpecifier);
                 Assert.IsInstanceOfType(power.resultTypeSpecifier, typeof(NamedTypeSpecifier));
                 var nts = (NamedTypeSpecifier)power.resultTypeSpecifier;
                 Assert.IsNotNull(nts.name);
                 Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
                 Assert.IsNotNull(power.operand);
                 Assert.AreEqual(2, power.operand.Length);
                 {
@@ -312,13 +312,13 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var power = (Power)library.statements[0].expression;
                 Assert.IsNotNull(power.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Long", power.resultTypeName.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", power.resultTypeName.Name);
                 Assert.IsNotNull(power.resultTypeSpecifier);
                 Assert.IsInstanceOfType(power.resultTypeSpecifier, typeof(NamedTypeSpecifier));
                 var nts = (NamedTypeSpecifier)power.resultTypeSpecifier;
                 Assert.IsNotNull(nts.name);
                 Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
                 Assert.IsNotNull(power.operand);
                 Assert.AreEqual(2, power.operand.Length);
                 {
@@ -347,8 +347,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 var lambda = CreateElmToolkit().Lambda(power);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsInstanceOfType(result, typeof(long?));
-                Assert.AreEqual(-8L, result);
+                Assert.IsInstanceOfType(result, typeof(decimal?));
+                Assert.AreEqual(-8m, result);
             }
         }
 
@@ -368,13 +368,13 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var power = (Power)library.statements[0].expression;
                 Assert.IsNotNull(power.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Long", power.resultTypeName.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", power.resultTypeName.Name);
                 Assert.IsNotNull(power.resultTypeSpecifier);
                 Assert.IsInstanceOfType(power.resultTypeSpecifier, typeof(NamedTypeSpecifier));
                 var nts = (NamedTypeSpecifier)power.resultTypeSpecifier;
                 Assert.IsNotNull(nts.name);
                 Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
                 Assert.IsNotNull(power.operand);
                 Assert.AreEqual(2, power.operand.Length);
                 {
@@ -403,8 +403,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 var lambda = CreateElmToolkit().Lambda(power);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsInstanceOfType(result, typeof(long?));
-                Assert.AreEqual(-8L, result);
+                Assert.IsInstanceOfType(result, typeof(decimal?));
+                Assert.AreEqual(-8m, result);
             }
         }
 
@@ -480,13 +480,13 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var power = (Power)library.statements[0].expression;
                 Assert.IsNotNull(power.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Long", power.resultTypeName.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", power.resultTypeName.Name);
                 Assert.IsNotNull(power.resultTypeSpecifier);
                 Assert.IsInstanceOfType(power.resultTypeSpecifier, typeof(NamedTypeSpecifier));
                 var nts = (NamedTypeSpecifier)power.resultTypeSpecifier;
                 Assert.IsNotNull(nts.name);
                 Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
                 Assert.IsNotNull(power.operand);
                 Assert.AreEqual(2, power.operand.Length);
                 {
@@ -534,13 +534,13 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var power = (Power)library.statements[0].expression;
                 Assert.IsNotNull(power.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Long", power.resultTypeName.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", power.resultTypeName.Name);
                 Assert.IsNotNull(power.resultTypeSpecifier);
                 Assert.IsInstanceOfType(power.resultTypeSpecifier, typeof(NamedTypeSpecifier));
                 var nts = (NamedTypeSpecifier)power.resultTypeSpecifier;
                 Assert.IsNotNull(nts.name);
                 Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
                 Assert.IsNotNull(power.operand);
                 Assert.AreEqual(2, power.operand.Length);
                 {

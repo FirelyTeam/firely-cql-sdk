@@ -20,6 +20,46 @@ public class CqlContextOperatorTests
 {
     private static ICqlOperators Sut() => FhirCqlContext.WithDataSource().Operators; // Service under test
 
+    #region Power
+
+    [TestMethod]
+    public void Power_Operator_Overloads_Must_All_Return_Decimal()
+    {
+        // Arrange
+        var powerOverloads = typeof(ICqlOperators).GetMethods().Where(m => m.Name == nameof(ICqlOperators.Power));
+
+        // Assert
+        powerOverloads.Should().OnlyContain(overload => overload.ReturnType == typeof(decimal?));
+    }
+
+    [TestMethod]
+    public void Power_IntegerArguments_Must_Return_Fractional_Decimal_Result()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Power(2, -2);
+
+        // Assert
+        result.Should().Be(0.25m);
+    }
+
+    [TestMethod]
+    public void Power_LongArguments_Must_Return_Fractional_Decimal_Result()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.Power(2L, -2L);
+
+        // Assert
+        result.Should().Be(0.25m);
+    }
+
+    #endregion
+
     #region Equal
 
     [TestMethod]
