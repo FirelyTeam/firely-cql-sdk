@@ -30,15 +30,33 @@ partial class CqlComparers
             if (xMetadata == null || xMetadata != yMetadata)
                 return null;
 
-            // Compare the items on the tuple
+            // Tuple equality is a conjunction (three-valued AND) of element comparisons.
+            // CQL spec: equality returns true if and only if the tuples are of the same type,
+            // and the values for all elements that have values, by name, are equal,
+            // defined as a conjunction of equality comparisons.
+            // In three-valued logic: false AND null = false, null AND true = null.
+            // Handle null elements explicitly because memberComparer.Compare uses ordering
+            // semantics (null < non-null = -1) whereas equality requires null propagation.
+            // NOTE: This logic is also duplicated in LegacyTupleBaseTypeComparer
+            // (CqlToElmTests/XmlTest.cs) for testing purposes.
+            bool hasNull = false;
             for (int i = 1; i < x.Length; i++)
             {
+                if (x[i] is null || y[i] is null)
+                {
+                    if (x[i] is not null || y[i] is not null)
+                        hasNull = true; // one null, one non-null → unknown
+                    continue;           // both null → equal for this element
+                }
+
                 var compare = memberComparer.Compare(x[i], y[i], precision);
-                if (compare is null or not 0)
+                if (compare is null)
+                    hasNull = true;
+                else if (compare is not 0)
                     return compare;
             }
 
-            return 0;
+            return hasNull ? null : 0;
         }
 
         protected override bool EquivalentValues(

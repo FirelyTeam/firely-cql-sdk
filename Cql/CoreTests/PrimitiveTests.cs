@@ -3880,5 +3880,71 @@ namespace CoreTests
             Assert.AreEqual(expected, actual);
         }
         #endregion
+    
+    [TestMethod]
+    public void TupleEqual_NullElement_WithDifferentValues_ReturnsFalse()
+    {
+        var ctx = GetNewContext();
+        var metadata = new CqlTupleMetadata(
+            [typeof(int?), typeof(object)],
+            ["Id", "Name"]);
+
+        // Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : null } → false
+        var t1 = ValueTuple.Create(metadata, (int?)1, (object?)"John");
+        var t2 = ValueTuple.Create(metadata, (int?)2, (object?)null);
+
+        var result = ctx.Operators.Equal(t1, t2);
+        Assert.IsFalse(result, "Comparing tuples where Id differs should return false even with null Name");
     }
+
+    [TestMethod]
+    public void TupleEqual_NullElement_WithEqualValues_ReturnsNull()
+    {
+        var ctx = GetNewContext();
+        var metadata = new CqlTupleMetadata(
+            [typeof(int?), typeof(object)],
+            ["x", "y"]);
+
+        // { x: 1, y: null } = { x: 1, y: 2 } → null (x matches, y null vs non-null)
+        var t1 = ValueTuple.Create(metadata, (int?)1, (object?)null);
+        var t2 = ValueTuple.Create(metadata, (int?)1, (object?)2);
+
+        var result = ctx.Operators.Equal(t1, t2);
+        Assert.IsNull(result, "Comparing tuples where x matches but y is null vs non-null should return null");
+    }
+
+    [TestMethod]
+    public void TupleEqual_NullElement_MixedNullFalse_ReturnsFalse()
+    {
+        var ctx = GetNewContext();
+        var metadata = new CqlTupleMetadata(
+            [typeof(object), typeof(int?)],
+            ["x", "y"]);
+
+        // { x: 1, y: 1 } = { x: null, y: 2 } → false
+        var t1 = ValueTuple.Create(metadata, (object?)1, (int?)1);
+        var t2 = ValueTuple.Create(metadata, (object?)null, (int?)2);
+
+        var result = ctx.Operators.Equal(t1, t2);
+        Assert.IsFalse(result, "Comparing tuples where null element is paired with different non-null elements should return false");
+    }
+
+    [TestMethod]
+    public void TupleEqual_BothNullElements_ReturnsNull()
+    {
+        var ctx = GetNewContext();
+        var metadata = new CqlTupleMetadata(
+            [typeof(int?), typeof(object)],
+            ["x", "y"]);
+
+        // { x: 1, y: null } = { x: 1, y: null } → null (both y null → equal, but null propagation)
+        var t1 = ValueTuple.Create(metadata, (int?)1, (object?)null);
+        var t2 = ValueTuple.Create(metadata, (int?)1, (object?)null);
+
+        var result = ctx.Operators.Equal(t1, t2);
+        // Note: Both null elements compare as equal (continue), x matches → 0 → true
+        Assert.IsTrue(result, "Comparing tuples where both null elements match should return true");
+    }
+
+}
 }

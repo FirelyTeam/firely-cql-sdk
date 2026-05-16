@@ -166,7 +166,9 @@ namespace Hl7.Cql.CqlToElm.Test
 
     /// <summary>
     /// Legacy tuple comparer, only needed when invoking definitions directly.
-    /// When generating C#, different value tuples are generated
+    /// When generating C#, different value tuples are generated.
+    /// At runtime, <see cref="CqlComparers"/> uses its nested CqlTupleTypeComparer
+    /// (in Cql.Runtime/Comparers/CqlComparers.CqlTupleTypeComparer.cs) for ITuple-based tuples.
     /// </summary>
     file class LegacyTupleBaseTypeComparer(CqlComparers memberComparer) :
         CqlComparer<TupleBaseType?>(
@@ -194,14 +196,26 @@ namespace Hl7.Cql.CqlToElm.Test
                              YValue = foundY == null ? null : foundY.GetValue(y)
                          };
 
+            // NOTE: This null-handling logic mirrors CqlTupleTypeComparer.CompareValues
+            // in Cql.Runtime/Comparers/CqlComparers.CqlTupleTypeComparer.cs.
+            bool hasNull = false;
             foreach (var prop in joined)
             {
+                if (prop.XValue is null || prop.YValue is null)
+                {
+                    if (prop.XValue is not null || prop.YValue is not null)
+                        hasNull = true; // one null, one non-null → unknown
+                    continue;           // both null → equal for this element
+                }
+
                 var compare = memberComparer.Compare(prop.XValue, prop.YValue, precision);
-                if (compare is null or not 0)
+                if (compare is null)
+                    hasNull = true;
+                else if (compare is not 0)
                     return compare;
             }
 
-            return 0;
+            return hasNull ? null : 0;
         }
     }
 }
