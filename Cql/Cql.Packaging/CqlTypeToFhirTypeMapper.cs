@@ -359,6 +359,14 @@ namespace Hl7.Cql.Packaging
             {
                 case TypeCode.Int32:
                     return FHIRAllTypes.Integer;
+                case TypeCode.Int64:
+#if FhirReleaseR4
+                    return FHIRAllTypes.String;
+//#else FhirReleaseR5
+//                    return FHIRAllTypes.Integer64;
+#else
+                    return null;
+#endif
                 case TypeCode.Decimal:
                     return FHIRAllTypes.Decimal;
                 case TypeCode.String:
