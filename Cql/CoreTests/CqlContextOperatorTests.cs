@@ -40,11 +40,12 @@ public class CqlContextOperatorTests
             """);
         var cqlToolkit = new CqlToolkit().AddCqlLibraries(cqlLibrary);
         using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var cqlContext = FhirCqlContext.ForBundle();
 
         // Act
-        var integerResult = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "IntegerPower");
-        var longResult = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "LongPower");
-        var decimalResult = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "DecimalPower");
+        var integerResult = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "IntegerPower");
+        var longResult = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongPower");
+        var decimalResult = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "DecimalPower");
 
         // Assert
         integerResult.Should().BeOfType<decimal>().Which.Should().Be(0.25m);
@@ -67,12 +68,13 @@ public class CqlContextOperatorTests
             """);
         var cqlToolkit = new CqlToolkit().AddCqlLibraries(cqlLibrary);
         using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var cqlContext = FhirCqlContext.ForBundle();
 
         // Act
-        var integerOverflow = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "IntegerOverflow");
-        var integerInfinity = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "IntegerInfinity");
-        var longOverflow = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "LongOverflow");
-        var longInfinity = librarySetInvoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), cqlLibrary.LibraryIdentifier, "LongInfinity");
+        var integerOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "IntegerOverflow");
+        var integerInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "IntegerInfinity");
+        var longOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongOverflow");
+        var longInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongInfinity");
 
         // Assert
         integerOverflow.Should().BeNull();
