@@ -21,5 +21,35 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = Run<string?>(replace, library);
             result.Should().Be("All$that$glitters$is$not$gold");
         }
+
+        [TestMethod]
+        public void SubstringWithLength_SpecExample()
+        {
+            // Spec example: Substring('ABCDE', 2, 1) // 'C'
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Substring('ABCDE', 2, 1)");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Substring>();
+            var result = Run<string?>(expr, library);
+            result.Should().Be("C");
+        }
+
+        [TestMethod]
+        public void SubstringWithLength_LengthExceedsRemaining()
+        {
+            // Length exceeds remaining characters: Substring('abcdef', 3, 5) -> 'def'
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Substring('abcdef', 3, 5)");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Substring>();
+            var result = Run<string?>(expr, library);
+            result.Should().Be("def");
+        }
+
+        [TestMethod]
+        public void SubstringWithLength_LengthExceedsRemainingFromStart()
+        {
+            // Substring('ABC', 1, 10) -> 'BC'
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Substring('ABC', 1, 10)");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Substring>();
+            var result = Run<string?>(expr, library);
+            result.Should().Be("BC");
+        }
     }
 }
