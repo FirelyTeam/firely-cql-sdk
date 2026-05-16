@@ -2372,7 +2372,47 @@ internal partial class ExpressionBuilderContext
         if (input.Type.IsAssignableTo(typeof(TupleBaseType)) || outputType.IsAssignableTo(typeof(TupleBaseType)))
         {
             // unless they're the same type.
-            typeConversion = input.Type == outputType ? TypeConversion.ExactType : TypeConversion.NoMatch;
+            if (input.Type == outputType)
+            {
+                typeConversion = TypeConversion.ExactType;
+                return input;
+            }
+
+            // Handle conversion between compatible TupleBaseType types that differ only in element types
+            // (e.g. when an As expression converts {Id:Integer, Name:String} to {Id:Integer, Name:Any}).
+            if (input.Type.IsAssignableTo(typeof(TupleBaseType)) && outputType.IsAssignableTo(typeof(TupleBaseType)))
+            {
+                var inputProps = input.Type.GetProperties();
+                var outputProps = outputType.GetProperties();
+                if (inputProps.Length == outputProps.Length)
+                {
+                    var bindings = new List<MemberBinding>();
+                    bool allMatched = true;
+                    foreach (var outputProp in outputProps)
+                    {
+                        var inputProp = Array.Find(inputProps, p => p.Name == outputProp.Name);
+                        if (inputProp is null)
+                        {
+                            allMatched = false;
+                            break;
+                        }
+
+                        var inputAccess = Expression.Property(input, inputProp);
+                        var convertedValue = inputProp.PropertyType != outputProp.PropertyType
+                            ? ChangeType(inputAccess, outputProp.PropertyType, considerSafeUpcast: true)
+                            : (Expression)inputAccess;
+                        bindings.Add(Expression.Bind(outputProp, convertedValue));
+                    }
+
+                    if (allMatched)
+                    {
+                        typeConversion = TypeConversion.OperatorConvert;
+                        return Expression.MemberInit(Expression.New(outputType), bindings);
+                    }
+                }
+            }
+
+            typeConversion = TypeConversion.NoMatch;
             throwCannotCastIfNoMatch(typeConversion);
             return input;
         }

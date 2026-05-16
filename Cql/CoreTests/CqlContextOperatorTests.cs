@@ -8,7 +8,11 @@
 
 #nullable enable
 
+using Hl7.Cql.CqlToElm;
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -19,6 +23,67 @@ namespace CoreTests;
 public class CqlContextOperatorTests
 {
     private static ICqlOperators Sut() => FhirCqlContext.WithDataSource().Operators; // Service under test
+
+    #region Power
+
+    [TestMethod]
+    public void Power_CqlExpressions_For_Various_Numeric_Types_Must_Return_Correct_Decimal_Values()
+    {
+        // Arrange
+        var cqlLibrary = CqlLibraryString.Parse(
+            """
+            library PowerOperatorTestValue version '1.0.0'
+
+            define "IntegerPower": 2 ^ -2
+            define "LongPower": 2L ^ -2L
+            define "DecimalPower": 2.0 ^ -2.0
+            """);
+        var cqlToolkit = new CqlToolkit().AddCqlLibraries(cqlLibrary);
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var cqlContext = FhirCqlContext.ForBundle();
+
+        // Act
+        var integerResult = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "IntegerPower");
+        var longResult = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongPower");
+        var decimalResult = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "DecimalPower");
+
+        // Assert
+        integerResult.Should().BeOfType<decimal>().Which.Should().Be(0.25m);
+        longResult.Should().BeOfType<decimal>().Which.Should().Be(0.25m);
+        decimalResult.Should().BeOfType<decimal>().Which.Should().Be(0.25m);
+    }
+
+    [TestMethod]
+    public void Power_CqlExpressions_With_NonRepresentable_Results_Must_Return_Null()
+    {
+        // Arrange
+        var cqlLibrary = CqlLibraryString.Parse(
+            """
+            library PowerOperatorTestNull version '1.0.0'
+
+            define "IntegerOverflow": 2 ^ 1000
+            define "IntegerInfinity": 0 ^ -1
+            define "LongOverflow": 2L ^ 1000L
+            define "LongInfinity": 0L ^ -1L
+            """);
+        var cqlToolkit = new CqlToolkit().AddCqlLibraries(cqlLibrary);
+        using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+        var cqlContext = FhirCqlContext.ForBundle();
+
+        // Act
+        var integerOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "IntegerOverflow");
+        var integerInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "IntegerInfinity");
+        var longOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongOverflow");
+        var longInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongInfinity");
+
+        // Assert
+        integerOverflow.Should().BeNull();
+        integerInfinity.Should().BeNull();
+        longOverflow.Should().BeNull();
+        longInfinity.Should().BeNull();
+    }
+
+    #endregion
 
     #region Equal
 
@@ -54,6 +119,66 @@ public class CqlContextOperatorTests
 
         // Assert
         isEqual.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Equal_ListsWithIncompatibleElementTypes_ReturnsFalse()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var isEqual = cqlOperators.Equal(new[] { "a", "b", "c" }, new[] { 1, 2, 3 });
+
+        // Assert
+        isEqual.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void Equal_ListsWithCrossTypeComparableElements_ReturnsTrue()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        var enumVal = Encounter.EncounterStatus.Finished;
+        var fhirCodes = new[] { new Code<Encounter.EncounterStatus>(enumVal) };
+        var strings = new[] { "finished" };
+
+        // Act
+        var isEqual = cqlOperators.Equal(fhirCodes, strings);
+
+        // Assert
+        isEqual.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Equal_ListsWithMatchingNullElements_ReturnsTrue()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        int?[] left = [null, 1, 2, 3];
+        int?[] right = [null, 1, 2, 3];
+
+        // Act
+        var isEqual = cqlOperators.Equal(left, right);
+
+        // Assert
+        isEqual.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void Contains_ListWithMatchingNullElement_ReturnsTrue()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        int?[] list = [null, 1, 2, 3];
+
+        // Act
+        var contains = cqlOperators.Contains(list, default(int?));
+
+        // Assert
+        contains.Should().BeTrue();
     }
 
     [TestMethod]

@@ -1519,6 +1519,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Tuple_Equal_Tuple_Null_Equals_NotNull()
         {
+            // CQL spec: { x: 1, y: null } = { x: 1, y: 2 } → null (x equal, y null vs non-null → null)
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("{ x: 1, y: null } = { x: 1, y: 2 }");
             var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             var eq = Run<bool?>(equal, lib);
@@ -1528,10 +1529,51 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Tuple_Equal_Tuple_Null_Equals_Null()
         {
+            // CQL spec TupleEqualBothNullTrue: { x: 1, y: null } = { x: 1, y: null } → true
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("{ x: 1, y: null } = { x: 1, y: null }");
             var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             var eq = Run<bool?>(equal, lib);
             eq.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void Tuple_Equal_BothNullFalse()
+        {
+            // CQL spec TupleEqualBothNullFalse: { x: 1, y: null } = { x: 2, y: null } → false
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("{ x: 1, y: null } = { x: 2, y: null }");
+            var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            var eq = Run<bool?>(equal, lib);
+            eq.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void Tuple_Equal_MixedNullNull()
+        {
+            // CQL spec TupleEqualMixedNullNull: { x: 1, y: 1 } = { x: null, y: 1 } → null
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("{ x: 1, y: 1 } = { x: null, y: 1 }");
+            var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            var eq = Run<bool?>(equal, lib);
+            eq.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Tuple_Equal_MixedNullFalse()
+        {
+            // CQL spec TupleEqualMixedNullFalse: { x: 1, y: 1 } = { x: null, y: 2 } → false
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("{ x: 1, y: 1 } = { x: null, y: 2 }");
+            var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            var eq = Run<bool?>(equal, lib);
+            eq.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void Tuple_Equal_NullElement_With_Unequal_Element()
+        {
+            // From the issue: Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : null } → false
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : null }");
+            var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            var eq = Run<bool?>(equal, lib);
+            eq.Should().BeFalse();
         }
     }
 }

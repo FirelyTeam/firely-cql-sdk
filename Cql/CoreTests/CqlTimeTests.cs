@@ -7,6 +7,7 @@
  */
 
 #nullable enable
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 
 namespace CoreTests;
@@ -93,6 +94,60 @@ public class CqlTimeTests
         CqlTime? time = null;
         var quantity = new CqlQuantity(1, "hour");
         var result = time - quantity;
+        Assert.IsNull(result);
+    }
+
+    [TestMethod]
+    public void ConvertStringToTime_WithTimezoneOffset_StripsTimezone()
+    {
+        var ops = FhirCqlContext.WithDataSource().Operators;
+        var result = ops.ConvertStringToTime("T14:30:00.0+05:30");
+        Assert.IsNotNull(result);
+        Assert.AreEqual("14:30:00.000", result.ToString());
+        Assert.IsNull(result.Value.OffsetHour);
+        Assert.IsNull(result.Value.OffsetMinute);
+    }
+
+    [TestMethod]
+    public void ConvertStringToTime_WithUtcOffset_StripsTimezone()
+    {
+        var ops = FhirCqlContext.WithDataSource().Operators;
+        var result = ops.ConvertStringToTime("T10:00:00.0Z");
+        Assert.IsNotNull(result);
+        Assert.AreEqual("10:00:00.000", result.ToString());
+        Assert.IsNull(result.Value.OffsetHour);
+        Assert.IsNull(result.Value.OffsetMinute);
+    }
+
+    [TestMethod]
+    public void ConvertStringToTime_WithNegativeOffset_StripsTimezone()
+    {
+        var ops = FhirCqlContext.WithDataSource().Operators;
+        var result = ops.ConvertStringToTime("T08:15:30.0-04:00");
+        Assert.IsNotNull(result);
+        Assert.AreEqual("08:15:30.000", result.ToString());
+        Assert.IsNull(result.Value.OffsetHour);
+        Assert.IsNull(result.Value.OffsetMinute);
+    }
+
+    [TestMethod]
+    public void ConvertStringToTime_WithoutTimezone_PreservesTime()
+    {
+        var ops = FhirCqlContext.WithDataSource().Operators;
+        var result = ops.ConvertStringToTime("T14:30:00.0");
+        Assert.IsNotNull(result);
+        Assert.AreEqual("14:30:00.000", result.ToString());
+        Assert.AreEqual(14, result.Value.Hour);
+        Assert.AreEqual(30, result.Value.Minute);
+        Assert.AreEqual(0, result.Value.Second);
+        Assert.AreEqual(0, result.Value.Millisecond);
+    }
+
+    [TestMethod]
+    public void ConvertStringToTime_NullInput_ReturnsNull()
+    {
+        var ops = FhirCqlContext.WithDataSource().Operators;
+        var result = ops.ConvertStringToTime(null);
         Assert.IsNull(result);
     }
 }

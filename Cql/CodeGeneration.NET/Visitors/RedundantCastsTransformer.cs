@@ -109,6 +109,10 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 if (left is DefaultExpression && isNullableType)
                     return right;
 
+                // null_constant ?? x => x
+                if (left is ConstantExpression { Value: null } && isNullableType)
+                    return right;
+
                 return coalesce.Update(left, coalesce.Conversion, right);
             }
 

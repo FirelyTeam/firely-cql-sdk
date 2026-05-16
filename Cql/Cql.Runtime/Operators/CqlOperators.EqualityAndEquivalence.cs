@@ -47,8 +47,6 @@ internal partial class CqlOperators
             && leftCount != rightCount)
             return false;
 
-        var onlyNull = true;
-        var notEmpty = false;
         var lit = left!.GetEnumerator();
         using var litd = lit as IDisposable;
 
@@ -60,7 +58,6 @@ internal partial class CqlOperators
             if (!rit.MoveNext())
                 return false;
 
-            notEmpty = true;
             var lv = lit.Current;
             var rv = rit.Current;
             switch ((lv, rv))
@@ -73,17 +70,13 @@ internal partial class CqlOperators
                     return false;
 
                 case (not null, not null) when Comparer.Equals(lv!, rv!, null) is false:
-                    onlyNull = false;
                     return false;
             }
         }
         if (rit.MoveNext()) // the 2nd list is longer than the 1st.
             return false;
 
-        if (notEmpty && onlyNull)
-            return null;
-        else
-            return true;
+        return true;
     }
 
     public bool? NotEqual(object? left, object? right)

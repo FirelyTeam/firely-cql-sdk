@@ -2,6 +2,31 @@
 
 ## Breaking Changes
 
+### `Cql.Runtime` — `ICqlOperators.Contains<T>` list parameter is now nullable
+
+The `ICqlOperators` list overload signature now uses a nullable list parameter:
+
+**Before:**
+```csharp
+bool? Contains<T>(IEnumerable<T> list, T item);
+```
+
+**After:**
+```csharp
+bool? Contains<T>(IEnumerable<T>? list, T item);
+```
+
+### `Cql.Runtime` / `Cql.CqlToElm` — `Power` on `Integer`/`Long` now returns `Decimal`
+
+`Power` overloads for integer and long operands now consistently produce a decimal result across runtime and CQL→ELM typing.
+This is a breaking API/behavioral typing change for consumers that previously expected integer/long results for these overloads.
+
+**Changed signatures:**
+```csharp
+decimal? Power(int? argument, int? exponent);
+decimal? Power(long? argument, long? exponent);
+```
+
 ### `Cql.Packaging` — `SerializeFhirResourcesToJson` signature change
 
 `PackagingToolkit.SerializeFhirResourcesToJson` no longer accepts a `configureJsonSerializerOptions` parameter. Serialization now goes through the Firely SDK's `BaseFhirJsonSerializer` directly.

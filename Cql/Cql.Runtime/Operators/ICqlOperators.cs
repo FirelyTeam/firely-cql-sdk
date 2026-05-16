@@ -166,7 +166,7 @@ namespace Hl7.Cql.Operators
         bool?                                    Contains(CqlInterval<decimal?>? left,decimal? right,string? precision);
         bool?                                    Contains(CqlInterval<int?>? left,int? right,string? precision);
         bool?                                    Contains(CqlInterval<long?>? left,long? right,string? precision);
-        bool?                                    Contains<T>(IEnumerable<T> list, T item);
+        bool?                                    Contains<T>(IEnumerable<T>? list, T item);
         decimal?                                 ConvertBooleanToDecimal(bool? b);
         int?                                     ConvertBooleanToInteger(bool? b);
         long?                                    ConvertBooleanToLong(bool? b);
@@ -469,8 +469,8 @@ namespace Hl7.Cql.Operators
         decimal?                                 PopulationVariance(IEnumerable<decimal?>? source);
         int?                                     PositionOf(string pattern, string argument);
         decimal?                                 Power(decimal? argument, decimal? exponent);
-        int?                                     Power(int? argument, int? exponent);
-        long?                                    Power(long? argument, long? exponent);
+        decimal?                                 Power(int? argument, int? exponent);
+        decimal?                                 Power(long? argument, long? exponent);
         int?                                     Precision(CqlDate? argument);
         int?                                     Precision(CqlDateTime? argument);
         int?                                     Precision(CqlTime? argument);
