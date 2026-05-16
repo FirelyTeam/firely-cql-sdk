@@ -194,14 +194,17 @@ namespace Hl7.Cql.CqlToElm.Test
                              YValue = foundY == null ? null : foundY.GetValue(y)
                          };
 
+            bool hasNull = false;
             foreach (var prop in joined)
             {
                 var compare = memberComparer.Compare(prop.XValue, prop.YValue, precision);
-                if (compare is null or not 0)
+                if (compare is null)
+                    hasNull = true;
+                else if (compare is not 0)
                     return compare;
             }
 
-            return 0;
+            return hasNull ? null : 0;
         }
     }
 }
