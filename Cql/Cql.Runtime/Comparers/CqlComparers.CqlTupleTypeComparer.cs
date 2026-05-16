@@ -37,6 +37,8 @@ partial class CqlComparers
             // In three-valued logic: false AND null = false, null AND true = null.
             // Handle null elements explicitly because memberComparer.Compare uses ordering
             // semantics (null < non-null = -1) whereas equality requires null propagation.
+            // NOTE: This logic is also duplicated in LegacyTupleBaseTypeComparer
+            // (CqlToElmTests/XmlTest.cs) for testing purposes.
             bool hasNull = false;
             for (int i = 1; i < x.Length; i++)
             {
