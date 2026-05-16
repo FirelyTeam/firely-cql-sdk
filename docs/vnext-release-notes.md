@@ -2,12 +2,19 @@
 
 ## Breaking Changes
 
-### `Cql.Runtime` — minor behavioral breaking change for list `Contains` / singleton `Includes` with `null`
+### `Cql.Runtime` — `ICqlOperators.Contains<T>` list parameter is now nullable
 
-List `Contains<T>(IEnumerable<T>? list, T item)` and the singleton-list `Includes` synonym now follow the condensed CQL specification for `null` right-hand operands:
+The `ICqlOperators` list overload signature now uses a nullable list parameter:
 
-- If the list is `null`, the result is `false` (not `null`)
-- If the searched item is `null`, the result is `true` only when the list contains a `null` element; otherwise `false`
+**Before:**
+```csharp
+bool? Contains<T>(IEnumerable<T> list, T item);
+```
+
+**After:**
+```csharp
+bool? Contains<T>(IEnumerable<T>? list, T item);
+```
 
 ### `Cql.Runtime` / `Cql.CqlToElm` — `Power` on `Integer`/`Long` now returns `Decimal`
 
