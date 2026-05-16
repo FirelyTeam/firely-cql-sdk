@@ -712,5 +712,61 @@ namespace Hl7.Cql.CqlToElm.Test
 
         #endregion
 
+        #region Point operands without precision
+
+        [TestMethod]
+        public void DateTime_SameOrAfter_DateTime()
+        {
+            // Regression test: @2017-12-21T02:00:00.0 same or after @2017-12-20T11:00:00.0 failed with
+            // CannotBindToCqlOperatorError because DateTime literals were incorrectly wrapped in Interval<object>.
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library ConcurrentWithTest version '1.0.0'
+
+                define private DateTime_SameOrAfter_DateTime: @2017-12-21T02:00:00.0 same or after @2017-12-20T11:00:00.0
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(SameOrAfter));
+            {
+                var same = (SameOrAfter)library.statements[0].expression;
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", same.resultTypeName.Name);
+                Assert.IsFalse(same.precisionSpecified);
+                Assert.IsNotNull(same.operand);
+                Assert.AreEqual(2, same.operand.Length);
+                var result = Run(same, library);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        [TestMethod]
+        public void DateTime_SameOrBefore_DateTime()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library ConcurrentWithTest version '1.0.0'
+
+                define private DateTime_SameOrBefore_DateTime: @2017-12-20T11:00:00.0 same or before @2017-12-21T02:00:00.0
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(SameOrBefore));
+            {
+                var same = (SameOrBefore)library.statements[0].expression;
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", same.resultTypeName.Name);
+                Assert.IsFalse(same.precisionSpecified);
+                Assert.IsNotNull(same.operand);
+                Assert.AreEqual(2, same.operand.Length);
+                var result = Run(same, library);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        #endregion
+
     }
 }
