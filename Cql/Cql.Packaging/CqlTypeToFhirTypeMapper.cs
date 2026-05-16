@@ -362,9 +362,8 @@ namespace Hl7.Cql.Packaging
                 case TypeCode.Int64:
 #if FhirReleaseR4
                     return FHIRAllTypes.String;
-//#else FhirReleaseR5
-//                    return FHIRAllTypes.Integer64;
 #else
+                    // Integer64 is not available in this SDK surface for non-R4 builds.
                     return null;
 #endif
                 case TypeCode.Decimal:
