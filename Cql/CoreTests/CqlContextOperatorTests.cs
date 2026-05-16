@@ -122,6 +122,35 @@ public class CqlContextOperatorTests
     }
 
     [TestMethod]
+    public void Equal_ListsWithIncompatibleElementTypes_ReturnsFalse()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var isEqual = cqlOperators.Equal(new[] { "a", "b", "c" }, new[] { 1, 2, 3 });
+
+        // Assert
+        isEqual.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void Equal_ListsWithCrossTypeComparableElements_ReturnsTrue()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        var enumVal = Encounter.EncounterStatus.Finished;
+        var fhirCodes = new[] { new Code<Encounter.EncounterStatus>(enumVal) };
+        var strings = new[] { "finished" };
+
+        // Act
+        var isEqual = cqlOperators.Equal(fhirCodes, strings);
+
+        // Assert
+        isEqual.Should().BeTrue();
+    }
+
+    [TestMethod]
     public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
     {
         // Arrange
