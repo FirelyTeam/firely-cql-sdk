@@ -210,6 +210,12 @@ namespace Hl7.Cql.Packaging
 
             if (type.IsPrimitive || type.IsValueType || type == typeof(string))
             {
+#if FhirReleaseR4
+                // Longs are mapped to CQL Long, bug FHIR String. We should not put this logic in PrimitiveToFhir
+                if (type == typeof(long))
+                    return new CqlTypeToFhirMapping(FHIRAllTypes.String, CqlPrimitiveType.Long);
+#endif
+
                 var fhirType = PrimitiveToFhir(type);
                 if (fhirType == null) return null;
 
@@ -346,7 +352,6 @@ namespace Hl7.Cql.Packaging
                 _ => element.resultTypeName != null ? TypeEntryFor(element.resultTypeName.Name) : TypeEntryFor(element.resultTypeSpecifier)
             };
         }
-        private bool IsOrImplementsIEnumerableOfT(Type type) => type.IsImplementingGenericTypeDefinition(typeof(IEnumerable<>));
 
         private FHIRAllTypes? PrimitiveToFhir(Type type)
         {
@@ -361,10 +366,10 @@ namespace Hl7.Cql.Packaging
                     return FHIRAllTypes.Integer;
                 case TypeCode.Int64:
 #if FhirReleaseR4
-                    return FHIRAllTypes.String;
+                    return null;
 #else
                     // Integer64 is not available in this SDK surface for non-R4 builds.
-                    return null;
+                    return FHIRAllTypes.Integer64;
 #endif
                 case TypeCode.Decimal:
                     return FHIRAllTypes.Decimal;
