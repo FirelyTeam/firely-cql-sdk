@@ -166,7 +166,7 @@ namespace Hl7.Cql.Operators
         bool?                                    Contains(CqlInterval<decimal?>? left,decimal? right,string? precision);
         bool?                                    Contains(CqlInterval<int?>? left,int? right,string? precision);
         bool?                                    Contains(CqlInterval<long?>? left,long? right,string? precision);
-        bool?                                    Contains<T>(IEnumerable<T> list, T item);
+        bool?                                    Contains<T>(IEnumerable<T>? list, T item);
         decimal?                                 ConvertBooleanToDecimal(bool? b);
         int?                                     ConvertBooleanToInteger(bool? b);
         long?                                    ConvertBooleanToLong(bool? b);
