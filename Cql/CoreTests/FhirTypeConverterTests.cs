@@ -319,6 +319,17 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertStringToTime_WithTimezoneOffset_StripsTimezone()
+        {
+            var converted = FhirTypeConverter.Convert<CqlTime?>("T14:30:00.0+05:30");
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("14:30:00.000", converted.ToString());
+            Assert.IsNull(converted.Value.OffsetHour);
+            Assert.IsNull(converted.Value.OffsetMinute);
+        }
+
+        [TestMethod]
         public void ConvertParameters_Quantity()
         {
             var parameter = new ParameterComponent()
