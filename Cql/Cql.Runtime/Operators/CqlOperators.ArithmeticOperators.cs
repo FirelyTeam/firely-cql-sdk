@@ -705,7 +705,18 @@ namespace Hl7.Cql.Operators
         public decimal? Round(decimal? argument, int? precision)
         {
             if (argument == null) return null;
-            else return Math.Round(argument.Value, precision ?? 0, MidpointRounding.AwayFromZero);
+
+            var effectivePrecision = precision ?? 0;
+            var result = Math.Round(argument.Value, effectivePrecision, MidpointRounding.AwayFromZero);
+
+            // CQL Round returns Decimal, not Integer. When precision is 0,
+            // Math.Round produces a decimal with scale 0 (e.g. -1 instead of -1.0).
+            // Adding 0.0m ensures the result retains at least one decimal place,
+            // preserving CQL Decimal semantics for display and serialization.
+            if (effectivePrecision == 0)
+                result += 0.0m;
+
+            return result;
         }
 
         #endregion
