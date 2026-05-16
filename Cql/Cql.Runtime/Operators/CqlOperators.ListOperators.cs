@@ -18,7 +18,9 @@ namespace Hl7.Cql.Operators
         #region Contains
         public bool? Contains<T>(IEnumerable<T>? list, T item)
         {
-            if (list == null) return false;
+            if (list == null)
+                return false;
+
             if (item is null)
             {
                 foreach (var i in list)

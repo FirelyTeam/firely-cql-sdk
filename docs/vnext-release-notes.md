@@ -2,6 +2,13 @@
 
 ## Breaking Changes
 
+### `Cql.Runtime` — minor behavioral breaking change for list `Contains` / singleton `Includes` with `null`
+
+List `Contains<T>(IEnumerable<T>? list, T item)` and the singleton-list `Includes` synonym now follow the condensed CQL specification for `null` right-hand operands:
+
+- If the list is `null`, the result is `false` (not `null`)
+- If the searched item is `null`, the result is `true` only when the list contains a `null` element; otherwise `false`
+
 ### `Cql.Runtime` / `Cql.CqlToElm` — `Power` on `Integer`/`Long` now returns `Decimal`
 
 `Power` overloads for integer and long operands now consistently produce a decimal result across runtime and CQL→ELM typing.
