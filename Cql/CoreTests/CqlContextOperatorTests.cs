@@ -58,6 +58,36 @@ public class CqlContextOperatorTests
         result.Should().Be(0.25m);
     }
 
+    [TestMethod]
+    public void Power_IntegerArguments_With_NonRepresentable_Result_Must_Return_Null()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var overflowResult = cqlOperators.Power(2, 1000);
+        var infinityResult = cqlOperators.Power(0, -1);
+
+        // Assert
+        overflowResult.Should().BeNull();
+        infinityResult.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void Power_LongArguments_With_NonRepresentable_Result_Must_Return_Null()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var overflowResult = cqlOperators.Power(2L, 1000L);
+        var infinityResult = cqlOperators.Power(0L, -1L);
+
+        // Assert
+        overflowResult.Should().BeNull();
+        infinityResult.Should().BeNull();
+    }
+
     #endregion
 
     #region Equal

@@ -683,13 +683,45 @@ namespace Hl7.Cql.Operators
         public decimal? Power(int? argument, int? exponent)
         {
             if (argument == null || exponent == null) return null;
-            else return (decimal)Math.Pow((double)argument, (double)exponent);
+            var result = Math.Pow((double)argument, (double)exponent);
+
+            if (double.IsNaN(result) || double.IsInfinity(result))
+            {
+                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result could not be represented as decimal, returned null.");
+                return null;
+            }
+
+            try
+            {
+                return (decimal)result;
+            }
+            catch (OverflowException e)
+            {
+                Message(new { argument, exponent, result, e }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Ignored overflow errors from type integer power, returned null.");
+                return null;
+            }
         }
 
         public decimal? Power(long? argument, long? exponent)
         {
             if (argument == null || exponent == null) return null;
-            else return (decimal)Math.Pow((double)argument, (double)exponent);
+            var result = Math.Pow((double)argument, (double)exponent);
+
+            if (double.IsNaN(result) || double.IsInfinity(result))
+            {
+                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result could not be represented as decimal, returned null.");
+                return null;
+            }
+
+            try
+            {
+                return (decimal)result;
+            }
+            catch (OverflowException e)
+            {
+                Message(new { argument, exponent, result, e }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Ignored overflow errors from type long power, returned null.");
+                return null;
+            }
         }
 
         public decimal? Power(decimal? argument, decimal? exponent)
