@@ -136,7 +136,7 @@ namespace CoreTests
             var typeEntry = crosswalk.TypeEntryFor(cqlType);
             Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
             Assert.AreEqual(FHIRAllTypes.String, typeEntry.FhirType.Value);
-            Assert.AreEqual(CqlPrimitiveType.String, typeEntry.CqlType.Value);
+            Assert.AreEqual(CqlPrimitiveType.Long, typeEntry.CqlType.Value);
         }
 
         [TestMethod]
@@ -148,7 +148,7 @@ namespace CoreTests
             var typeEntry = crosswalk.TypeEntryFor(cqlType);
             Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
             Assert.AreEqual(FHIRAllTypes.String, typeEntry.FhirType.Value);
-            Assert.AreEqual(CqlPrimitiveType.String, typeEntry.CqlType.Value);
+            Assert.AreEqual(CqlPrimitiveType.Long, typeEntry.CqlType.Value);
         }
 
         [TestMethod]

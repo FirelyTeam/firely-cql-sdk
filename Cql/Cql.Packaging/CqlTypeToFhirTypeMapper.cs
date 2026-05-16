@@ -208,6 +208,11 @@ namespace Hl7.Cql.Packaging
                 return TypeEntryFor(CqlPrimitiveType.Tuple);
             }
 
+            if (type == typeof(long) || Nullable.GetUnderlyingType(type) == typeof(long))
+            {
+                return TypeEntryFor(CqlPrimitiveType.Long);
+            }
+
             if (type.IsPrimitive || type.IsValueType || type == typeof(string))
             {
                 var fhirType = PrimitiveToFhir(type);
