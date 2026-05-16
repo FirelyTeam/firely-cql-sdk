@@ -128,6 +128,30 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Long_MapToFhirType()
+        {
+            var cqlType = typeof(long);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(cqlType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.String, typeEntry.FhirType.Value);
+            Assert.AreEqual(CqlPrimitiveType.Long, typeEntry.CqlType.Value);
+        }
+
+        [TestMethod]
+        public void NullableLong_MapToFhirType()
+        {
+            var cqlType = typeof(long?);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(cqlType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.String, typeEntry.FhirType.Value);
+            Assert.AreEqual(CqlPrimitiveType.Long, typeEntry.CqlType.Value);
+        }
+
+        [TestMethod]
         public void Boolean_MapToFhirType()
         {
             var cqlType = typeof(bool);
