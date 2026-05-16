@@ -39,15 +39,7 @@ partial class CqlComparers
                 else if (rv == null) return 1;
                 else
                 {
-                    int? compare;
-                    try
-                    {
-                        compare = elementComparer.Compare(lv, rv, null);
-                    }
-                    catch (InvalidCastException)
-                    {
-                        compare = TypeMismatchResult;
-                    }
+                    var compare = elementComparer.Compare(lv, rv, null);
                     if (compare != 0)
                         return compare;
                 }
