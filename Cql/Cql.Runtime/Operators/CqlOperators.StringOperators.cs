@@ -156,7 +156,7 @@ namespace Hl7.Cql.Operators
             {
                 if (length.Value < 0)
                     return null;
-                var subLength = Math.Min(length.Value, source.Length);
+                var subLength = Math.Min(length.Value, source.Length - startIndex.Value);
                 return source.Substring(startIndex.Value, subLength);
             }
         }
