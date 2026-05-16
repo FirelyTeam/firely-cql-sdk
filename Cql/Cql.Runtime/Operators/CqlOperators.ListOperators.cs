@@ -19,8 +19,15 @@ namespace Hl7.Cql.Operators
         public bool? Contains<T>(IEnumerable<T> list, T item)
         {
             if (list == null) return false;
-            if (item == null) return null;
-            foreach (var i in list.Cast<object>())
+            if (item is null)
+            {
+                foreach (var i in list)
+                    if (i is null)
+                        return true;
+                return false;
+            }
+
+            foreach (var i in list.Cast<object?>())
                 if (Comparer.Compare(item, i, null) == 0)
                     return true;
             return false;
@@ -866,7 +873,7 @@ namespace Hl7.Cql.Operators
             return true;
         }
 
-        public bool? ListIncludesElement<T>(IEnumerable<T>? left, T right) => ListIncludesList(left, new T[] { right });
+        public bool? ListIncludesElement<T>(IEnumerable<T>? left, T right) => Contains(left!, right);
 
 
         #endregion

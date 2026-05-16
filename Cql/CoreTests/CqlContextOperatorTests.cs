@@ -167,6 +167,21 @@ public class CqlContextOperatorTests
     }
 
     [TestMethod]
+    public void Contains_ListWithMatchingNullElement_ReturnsTrue()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        int?[] list = [null, 1, 2, 3];
+
+        // Act
+        var contains = cqlOperators.Contains(list, default(int?));
+
+        // Assert
+        contains.Should().BeTrue();
+    }
+
+    [TestMethod]
     public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
     {
         // Arrange
