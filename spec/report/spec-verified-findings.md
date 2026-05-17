@@ -1,6 +1,6 @@
 # CQL Specification Verified Findings
 
-**Last Re-evaluated:** 2026-05-16  
+**Last Re-evaluated:** 2026-05-17  
 **CQL Version:** 1.5.3 Release 1 Errata 2  
 **Source:** Local spec files in `spec/condensed/`
 
@@ -28,7 +28,7 @@ This document captures the current verification status of previously reported co
 
 - **Spec basis:** Non-representable results should return `null`; behavior should preserve numeric semantics.
 - **Current status:** **Resolved**.
-- **Verification note:** `Power(int?, int?)` and `Power(long?, long?)` now return `decimal?`, runtime handles overflow/non-representable outcomes as `null`, and CQL-to-ELM typing is aligned to decimal.
+- **Verification note:** `Power(int?, int?)`, `Power(long?, long?)`, and `Power(decimal?, decimal?)` now all defensively return `null` for non-representable outcomes. Regression coverage includes `PowerIntegerByDecimalSmall` and decimal non-representable runtime cases.
 - **Issue doc removed:** `issue-05-high-power-operator-null-return.md`
 
 ---

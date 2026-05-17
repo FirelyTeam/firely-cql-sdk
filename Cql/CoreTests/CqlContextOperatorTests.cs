@@ -65,6 +65,8 @@ public class CqlContextOperatorTests
             define "IntegerInfinity": 0 ^ -1
             define "LongOverflow": 2L ^ 1000L
             define "LongInfinity": 0L ^ -1L
+            define "DecimalOverflow": 2.0 ^ 1000.0
+            define "DecimalInfinity": 0.0 ^ -1.0
             """);
         var cqlToolkit = new CqlToolkit().AddCqlLibraries(cqlLibrary);
         using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
@@ -73,15 +75,19 @@ public class CqlContextOperatorTests
         // Act
         var integerOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "IntegerOverflow");
         var integerInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "IntegerInfinity");
-        var longOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongOverflow");
-        var longInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongInfinity");
+            var longOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongOverflow");
+            var longInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongInfinity");
+            var decimalOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "DecimalOverflow");
+            var decimalInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "DecimalInfinity");
 
         // Assert
         integerOverflow.Should().BeNull();
-        integerInfinity.Should().BeNull();
-        longOverflow.Should().BeNull();
-        longInfinity.Should().BeNull();
-    }
+            integerInfinity.Should().BeNull();
+            longOverflow.Should().BeNull();
+            longInfinity.Should().BeNull();
+            decimalOverflow.Should().BeNull();
+            decimalInfinity.Should().BeNull();
+        }
 
     #endregion
 
