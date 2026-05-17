@@ -596,6 +596,17 @@ namespace Hl7.Cql.Operators
                         }
                     }
 
+                    if (per?.unit == "hour"
+                        && interval.low!.Precision == Iso8601.DateTimePrecision.Minute
+                        && interval.high!.Precision == Iso8601.DateTimePrecision.Minute)
+                    {
+                        var lowValue = interval.low.Value;
+                        listItem = new CqlTime(lowValue.Hour, null, null, null, lowValue.OffsetHour, lowValue.OffsetMinute);
+
+                        var highValue = interval.high.Value;
+                        highInterval = new CqlTime(highValue.Hour, null, null, null, highValue.OffsetHour, highValue.OffsetMinute);
+                    }
+
                     do
                     {
                         Units.DatePrecisionToCqlUnits.TryGetValue(listItem!.Precision.ToString(), out var cqlunits);
@@ -648,16 +659,27 @@ namespace Hl7.Cql.Operators
                     }
 
                     var listItem = interval.low!.Value;
+                    var highInterval = interval.high!.Value;
+                    var perValue = per.value ?? 1m;
+                    var needsIntegerTruncation = per.unit == "1"
+                        && decimal.Truncate(perValue) == perValue
+                        && (decimal.Truncate(listItem) != listItem || decimal.Truncate(highInterval) != highInterval);
+
+                    if (needsIntegerTruncation)
+                    {
+                        listItem = decimal.Truncate(listItem);
+                        highInterval = decimal.Truncate(highInterval);
+                    }
+
                     do
                     {
-
-
-                        var high = decimal.Add(listItem, per.value ?? 1);
-                        var listInterval = new CqlInterval<decimal?>(listItem, Predecessor(high), true, true);
+                        var next = decimal.Add(listItem, perValue);
+                        var high = needsIntegerTruncation ? decimal.Subtract(next, 1m) : Predecessor(next);
+                        var listInterval = new CqlInterval<decimal?>(listItem, high, true, true);
                         expanded.Add(listInterval);
-                        listItem = high;
+                        listItem = next;
                     }
-                    while (Comparer.Compare(listItem, interval.high!, null) <= 0);
+                    while (Comparer.Compare(listItem, highInterval, null) <= 0);
                 }
             }
 

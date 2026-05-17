@@ -1350,6 +1350,32 @@ namespace CoreTests
             }
         }
 
+        [TestMethod]
+        public void ExpandList_Interval_Decimal_Quantity_Integer_Truncates_To_IntegerPrecision()
+        {
+            List<CqlInterval<decimal?>> interval = [new CqlInterval<decimal?>(10.0m, 12.5m, true, true)];
+            var quantity = new CqlQuantity(1, "1");
+            CqlInterval<decimal>[] expected =
+            [
+                new CqlInterval<decimal>(10m, 10m, true, true),
+                new CqlInterval<decimal>(11m, 11m, true, true),
+                new CqlInterval<decimal>(12m, 12m, true, true)
+            ];
+
+            var rc = GetNewContext(); var fcq = rc.Operators;
+
+            var expand = fcq.Expand(interval, quantity).ToArray();
+            Assert.IsNotNull(expand);
+            for (var i = 0; i < expand.Length; i++)
+            {
+                var actual = expand[i];
+                var expect = expected[i];
+
+                Assert.IsTrue(actual.low == expect.low);
+                Assert.IsTrue(actual.high == expect.high);
+            }
+        }
+
         /// <summary>
         /// expand { Interval[1, 10] } per 1 day
         /// </summary>
@@ -3026,18 +3052,33 @@ namespace CoreTests
         [TestMethod]
         public void Expand_Per_Hour()
         {
-            var aStart = new CqlTime(10, 0, 0, 0, null, null);
-            var aEnd = new CqlTime(12, 30, 0, 0, null, null);
+            var aStart = new CqlTime(10, 0, null, null, null, null);
+            var aEnd = new CqlTime(12, 30, null, null, null, null);
 
             var interval = new List<CqlInterval<CqlTime>>
             {
                 new CqlInterval<CqlTime>(aStart, aEnd, true, true),
             };
             var quantity = new CqlQuantity(1, "hour");
+            CqlInterval<CqlTime>[] expected =
+            [
+                new CqlInterval<CqlTime>(new CqlTime(10, null, null, null, null, null), new CqlTime(10, null, null, null, null, null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(11, null, null, null, null, null), new CqlTime(11, null, null, null, null, null), true, true),
+                new CqlInterval<CqlTime>(new CqlTime(12, null, null, null, null, null), new CqlTime(12, null, null, null, null, null), true, true),
+            ];
 
             var rc = GetNewContext(); var fcq = rc.Operators;
 
             var expand = fcq.Expand(interval, quantity).ToArray();
+            Assert.IsNotNull(expand);
+            for (var i = 0; i < expand.Length; i++)
+            {
+                var actual = expand[i];
+                var expect = expected[i];
+
+                Assert.AreEqual(actual.low, expect.low);
+                Assert.AreEqual(actual.high, expect.high);
+            }
         }
 
         #endregion
