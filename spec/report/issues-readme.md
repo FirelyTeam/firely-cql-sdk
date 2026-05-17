@@ -18,6 +18,8 @@ Remaining open issue documents:
 - `issue-04-high-round-test-expectations.md`
 - `issue-06-medium-matches-operator-anchoring.md`
 - `issue-07-low-unskip-expand-tests.md`
+- `issue-10-high-power-decimal-overload-regression.md`
+- `issue-11-high-split-string-separator-semantics.md`
 
 ## Open Issues List
 
@@ -32,6 +34,16 @@ Remaining open issue documents:
   - **Test Issue:** Runtime behavior is correct, test expectations are not
   - **Impact:** Valid spec behavior remains skipped
   - **Fix:** Update `RoundNeg0D5` and `RoundNeg1D5` expected outputs and unskip
+
+- **[issue-10-high-power-decimal-overload-regression.md](issue-10-high-power-decimal-overload-regression.md)** - [HIGH]
+  - **Bug:** Power conformance re-opened: `Power(decimal?, decimal?)` representability handling inconsistency + active failing `PowerIntegerByDecimalSmall`
+  - **Impact:** High conformance risk in arithmetic behavior and unstable test evidence
+  - **Fix:** Align decimal overload non-representable handling with spec and investigate/fix failing conformance path
+
+- **[issue-11-high-split-string-separator-semantics.md](issue-11-high-split-string-separator-semantics.md)** - [HIGH]
+  - **Bug:** `Split` uses character-set splitting via `separator.ToCharArray()` instead of full string separator semantics
+  - **Impact:** Multi-character separator behavior diverges from CQL spec intent
+  - **Fix:** Use string-separator split semantics and add regression tests
 
 ### Medium Priority
 
@@ -49,10 +61,10 @@ Remaining open issue documents:
 
 ## Summary Statistics
 
-- **Open Issues:** 4
+- **Open Issues:** 6
 - **Resolved/Removed in this pass:** 3
 - **Critical:** 0
-- **High:** 2
+- **High:** 4
 - **Medium:** 1
 - **Low:** 1
 
@@ -65,12 +77,14 @@ Remaining open issue documents:
 ## Recommended Next Implementation Order
 
 1. **Issue #02** (HIGH) - `EndsWith` bounds and empty-suffix handling
-2. **Issue #04** (HIGH) - Round test expectation corrections
-3. **Issue #06** (MEDIUM) - `Matches` partial-matching conformance
-4. **Issue #07** (LOW) - Unskip and validate Expand tests
+2. **Issue #10** (HIGH) - Re-open Power conformance and fix active regression
+3. **Issue #11** (HIGH) - Correct `Split` string-separator semantics
+4. **Issue #04** (HIGH) - Round test expectation corrections
+5. **Issue #06** (MEDIUM) - `Matches` partial-matching conformance
+6. **Issue #07** (LOW) - Unskip and validate Expand tests
 
 ---
 
-**Last Re-evaluated:** 2026-05-16  
+**Last Re-evaluated:** 2026-05-17  
 **CQL Version:** 1.5.3 Release 1 Errata 2  
 **Spec Location:** `spec/condensed/`
