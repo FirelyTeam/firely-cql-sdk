@@ -8,7 +8,7 @@ The `ICqlOperators` list-membership overload signatures now explicitly model nul
 
 **Before:**
 ```csharp
-bool? Contains<T>(IEnumerable<T> list, T item);
+bool? Contains<T>(IEnumerable<T?>? list, T item);
 bool? In<T>(T element, IEnumerable<T> argument);
 ```
 
@@ -97,6 +97,17 @@ When running a command, the startup log now includes additional OS and architect
 ```
 
 ## Fixes
+
+### `Cql.Runtime` — `null in list` now returns correct Boolean result
+
+`In<T>` and `CodeInList` now correctly implement CQL list-membership semantics for null elements:
+
+- `null in { 1, null }` → `true` (list contains a null)
+- `null in { 1, 2, 3 }` → `false` (list has no null)
+- `null in {}` → `false` (empty list)
+- `5 in null` → `false` (null list)
+
+Previously, a null element always caused `null` to be returned, which violated the CQL spec.
 
 ### FHIR Library deserialization now tolerates non-conformant FHIR ids and canonical URLs
 

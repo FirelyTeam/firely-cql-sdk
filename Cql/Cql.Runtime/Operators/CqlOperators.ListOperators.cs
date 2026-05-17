@@ -883,7 +883,12 @@ namespace Hl7.Cql.Operators
 
         public bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument)
         {
-            if (element is null) return null;
+            if (element is null)
+            {
+                if (argument is null or IValueSetFacade)
+                    return false;
+                return argument.Any(t => t is null);
+            }
 
             return argument switch
             {
