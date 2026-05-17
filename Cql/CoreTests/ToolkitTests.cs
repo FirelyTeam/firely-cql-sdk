@@ -720,8 +720,7 @@ public class ToolkitTests
                      .ToDictionary(t => t.definitionInvoker.DefinitionName);
 
         Assert.IsNotNull(results);
-        results.TryGetValue("CrossJoinResult", out var obj);
-        Assert.IsNotNull(obj);
+        Assert.IsTrue(results.TryGetValue("CrossJoinResult", out var obj));
         Assert.IsNotNull(obj.invocationResult);
         Assert.IsInstanceOfType<System.Collections.IEnumerable>(obj.invocationResult);
         var materializedResult = ((System.Collections.IEnumerable)obj.invocationResult).Cast<object?>().ToList();
