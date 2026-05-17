@@ -46,12 +46,28 @@
 			<expression>EndsWith(null, null)</expression>
 			<output>null</output>
 		</test>
+		<test name="EndsWithEmptySuffix">
+			<expression>EndsWith('ABC', '')</expression>
+			<output>true</output>
+		</test>
+		<test name="EndsWithSuffixLongerThanArgument">
+			<expression>EndsWith('ABC', 'ABCDEFG')</expression>
+			<output>false</output>
+		</test>
 		<test name="EndsWithTrue">
 			<expression>EndsWith('Chris Schuler is the man!!', 'n!!')</expression>
 			<output>true</output>
 		</test>
 		<test name="EndsWithFalse">
 			<expression>EndsWith('Chris Schuler is the man!!', 'n!')</expression>
+			<output>false</output>
+		</test>
+		<test name="EndsWithIsTrue">
+			<expression>EndsWith('ABC', 'C')</expression>
+			<output>true</output>
+		</test>
+		<test name="EndsWithIsFalse">
+			<expression>EndsWith('ABC', 'Z')</expression>
 			<output>false</output>
 		</test>
 	</group>
