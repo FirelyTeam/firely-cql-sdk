@@ -120,7 +120,7 @@ namespace Hl7.Cql.Operators
                 return null;
             if (separator == null)
                 return new[] { stringToSplit };
-            else return stringToSplit.Split(separator.ToCharArray());
+            else return stringToSplit.Split([separator], StringSplitOptions.None);
         }
         #endregion
 

@@ -249,6 +249,18 @@
 			<expression>Split('a,b', ',')</expression>
 			<output>{'a','b'}</output>
 		</test>
+		<test name="SplitMultiCharacterSeparator">
+			<expression>Split('A--B--C', '--')</expression>
+			<output>{'A','B','C'}</output>
+		</test>
+		<test name="SplitMultiCharacterSeparatorPartialMatch">
+			<expression>Split('A::B:C', '::')</expression>
+			<output>{'A','B:C'}</output>
+		</test>
+		<test name="SplitSeparatorNotFound">
+			<expression>Split('abc', 'xyz')</expression>
+			<output>{'abc'}</output>
+		</test>
 	</group>
 	<group name="StartsWith">
 		<test name="StartsWithNull">
