@@ -188,6 +188,48 @@ public class CqlContextOperatorTests
     }
 
     [TestMethod]
+    public void In_NullElementAndListContainsNull_ReturnsTrue()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        int?[] list = [1, null];
+
+        // Act
+        var @in = cqlOperators.In(default(int?), list);
+
+        // Assert
+        @in.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void In_NullElementAndListWithoutNull_ReturnsFalse()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        int?[] list = [1, 2, 3];
+
+        // Act
+        var @in = cqlOperators.In(default(int?), list);
+
+        // Assert
+        @in.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void In_NonNullElementAndNullList_ReturnsFalse()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        IEnumerable<int?>? list = null;
+
+        // Act
+        var @in = cqlOperators.In(5, list);
+
+        // Assert
+        @in.Should().BeFalse();
+    }
+
+    [TestMethod]
     public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
     {
         // Arrange

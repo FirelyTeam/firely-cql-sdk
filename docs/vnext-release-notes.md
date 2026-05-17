@@ -2,18 +2,20 @@
 
 ## Breaking Changes
 
-### `Cql.Runtime` — `ICqlOperators.Contains<T>` list parameter is now nullable
+### `Cql.Runtime` — `ICqlOperators.Contains<T>`/`ICqlOperators.In<T>` list-membership nullability annotations updated
 
-The `ICqlOperators` list overload signature now uses a nullable list parameter:
+The `ICqlOperators` list-membership overload signatures now explicitly model nullable element and nullable list inputs:
 
 **Before:**
 ```csharp
 bool? Contains<T>(IEnumerable<T> list, T item);
+bool? In<T>(T element, IEnumerable<T> argument);
 ```
 
 **After:**
 ```csharp
-bool? Contains<T>(IEnumerable<T>? list, T item);
+bool? Contains<T>(IEnumerable<T?>? list, T? item);
+bool? In<T>(T? element, IEnumerable<T?>? argument);
 ```
 
 ### `Cql.Runtime` / `Cql.CqlToElm` — `Power` on `Integer`/`Long` now returns `Decimal`
