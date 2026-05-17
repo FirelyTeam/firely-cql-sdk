@@ -24,7 +24,7 @@ From `spec/condensed/09-b-cqlreference.md` under **Split**:
 
 The operator definition implies matching on occurrences of the separator string, not any character contained in separator.
 
-## Current Implementation
+## Updated Implementation
 
 **File:** `Cql/Cql.Runtime/Operators/CqlOperators.StringOperators.cs`
 
@@ -35,11 +35,11 @@ public IEnumerable<string>? Split(string stringToSplit, string separator)
         return null;
     if (separator == null)
         return new[] { stringToSplit };
-    else return stringToSplit.Split(separator.ToCharArray());
+    else return stringToSplit.Split([separator], StringSplitOptions.None);
 }
 ```
 
-## Why This Is Incorrect
+## Why This Was Incorrect
 
 Using `separator.ToCharArray()` changes semantics:
 
@@ -54,29 +54,34 @@ This can produce different tokenization and empty segments than string-separator
 - **Behavioral risk:** High for multi-character separators.
 - **Confidence risk:** Existing report text claims full string conformance while this mismatch exists.
 
-## Proposed Fix
+## Implemented Fix
 
-Use a true string-separator split overload, e.g.:
+Use a true string-separator split overload:
 
 ```csharp
 stringToSplit.Split(new[] { separator }, StringSplitOptions.None)
 ```
 
-Maintain current null semantics.
+Null semantics are unchanged.
 
 ## Acceptance Criteria
 
-- [ ] `Split` uses full string separator semantics (not char-array splitting)
-- [ ] Existing Split tests still pass
-- [ ] Add/adjust tests for multi-character separators
-- [ ] Verify no regressions in `SplitOnMatches` (regex variant)
-- [ ] Update conformance report status accordingly
+- [x] `Split` uses full string separator semantics (not char-array splitting)
+- [x] Existing Split tests still pass
+- [x] Add/adjust tests for multi-character separators
+- [x] Verify no regressions in `SplitOnMatches` (regex variant)
+- [x] Update conformance report status accordingly
 
 ## Suggested Test Additions
 
-- [ ] `Split('A--B--C', '--')` -> `{ 'A', 'B', 'C' }`
-- [ ] `Split('A::B:C', '::')` -> `{ 'A', 'B:C' }`
-- [ ] `Split('abc', 'xyz')` -> `{ 'abc' }`
+- [x] `Split('A--B--C', '--')` -> `{ 'A', 'B', 'C' }`
+- [x] `Split('A::B:C', '::')` -> `{ 'A', 'B:C' }`
+- [x] `Split('abc', 'xyz')` -> `{ 'abc' }`
+
+## Verification
+
+- `dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --framework net8.0` passed with updated `CqlStringOperatorsTest.xml`.
+- `SplitOnMatches` implementation is unchanged (`Regex.Split`) and no regressions were introduced by this fix.
 
 ## Related Files
 
