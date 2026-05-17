@@ -33,7 +33,10 @@ namespace Hl7.Cql.Operators
         public bool? EndsWith(string argument, string suffix)
         {
             if (argument == null || suffix == null) return null;
-            else return argument.Substring(argument.Length - suffix.Length).Equals(suffix);
+            if (suffix.Length == 0) return true;
+            if (suffix.Length > argument.Length) return false;
+
+            return argument.Substring(argument.Length - suffix.Length).Equals(suffix);
         }
 
         #endregion
@@ -113,7 +116,7 @@ namespace Hl7.Cql.Operators
                 return null;
             if (separator == null)
                 return new[] { stringToSplit };
-            else return stringToSplit.Split(separator.ToCharArray());
+            else return stringToSplit.Split([separator], StringSplitOptions.None);
         }
         #endregion
 

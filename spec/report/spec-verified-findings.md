@@ -27,9 +27,9 @@ This document captures the current verification status of previously reported co
 ### 3) Power typing/null handling alignment
 
 - **Spec basis:** Non-representable results should return `null`; behavior should preserve numeric semantics.
-- **Current status:** **Re-opened**.
-- **Verification note:** `Power(decimal?, decimal?)` still lacks non-representable defensive handling consistency compared to integer/long overloads, and `PowerIntegerByDecimalSmall` currently fails in conformance tests.
-- **Tracking doc:** [issue-10-high-power-decimal-overload-regression.md](issue-10-high-power-decimal-overload-regression.md)
+- **Current status:** **Resolved**.
+- **Verification note:** `Power(int?, int?)`, `Power(long?, long?)`, and `Power(decimal?, decimal?)` defensively return `null` for non-representable outcomes. Regression coverage includes `PowerIntegerByDecimalSmall` and decimal non-representable runtime cases.
+- **Issue doc removed:** `issue-05-high-power-operator-null-return.md`
 
 ---
 
@@ -73,7 +73,7 @@ This document captures the current verification status of previously reported co
 | ----------------------------- | -------- | --------------------- | ---------------------------------------------------------- |
 | Substring length              | RESOLVED | Critical (historical) | Issue doc removed                                          |
 | List equality nulls           | RESOLVED | High (historical)     | Issue doc removed                                          |
-| Power behavior/typing         | OPEN     | High                  | Re-opened based on current test evidence                   |
+| Power behavior/typing         | RESOLVED | High (historical)     | Decimal representability and regression coverage verified  |
 | EndsWith bounds/empty suffix  | OPEN     | High                  | Runtime change needed                                      |
 | Round negative midpoint tests | OPEN     | High                  | Test expectation + skip cleanup needed                     |
 | Matches anchoring             | OPEN     | Medium                | Runtime semantics change needed                            |
@@ -85,8 +85,7 @@ This document captures the current verification status of previously reported co
 ## Next Focus
 
 1. Complete `EndsWith` spec-edge handling.
-2. Re-open and stabilize `Power` behavior (`PowerIntegerByDecimalSmall` + decimal overload representability handling).
-3. Correct `Split` to use full string separator semantics.
-4. Correct and unskip Round negative midpoint tests.
-5. Update `Matches` to spec-aligned matching behavior.
-6. Unskip and validate Expand coverage.
+2. Correct `Split` to use full string separator semantics.
+3. Correct and unskip Round negative midpoint tests.
+4. Update `Matches` to spec-aligned matching behavior.
+5. Unskip and validate Expand coverage.
