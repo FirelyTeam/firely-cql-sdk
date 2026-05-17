@@ -108,6 +108,33 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void Multisource_without_return_infers_list_of_tuple_type()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("""
+                from ({2, 3}) A, ({5, 6}) B
+                """);
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            var listType = query.resultTypeSpecifier.Should().BeOfType<ListTypeSpecifier>().Subject;
+            var tupleType = listType.elementType.Should().BeOfType<TupleTypeSpecifier>().Subject;
+            tupleType.element.Should().HaveCount(2);
+            tupleType.element[0].name.Should().Be("A");
+            tupleType.element[0].elementType.Should().Be(SystemTypes.IntegerType);
+            tupleType.element[1].name.Should().Be("B");
+            tupleType.element[1].elementType.Should().Be(SystemTypes.IntegerType);
+        }
+
+        [TestMethod]
+        public void Multisource_duplicate_alias_reports_translation_error()
+        {
+            CreateCqlToolkit().MakeLibrary("""
+                library Test version '1.0.0'
+
+                define q:
+                  from ({2, 3}) A, ({5, 6}) A
+                """, "Identifier A is already in use in this scope.");
+        }
+
+        [TestMethod]
         public void SortCallsFunction()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""
