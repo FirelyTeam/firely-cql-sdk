@@ -59,10 +59,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         returnType = source[0].resultTypeSpecifier;
                     }
-                    else if (hasScalarSource)
-                        returnType = SystemTypes.AnyType;
                     else
-                        returnType = SystemTypes.AnyType.ToListType();
+                    {
+                        // For multi-source queries, the return type is a tuple of each source's element type
+                        var tupleElements = source.Select(s =>
+                        {
+                            var elementType = s.resultTypeSpecifier is ListTypeSpecifier list
+                                ? list.elementType
+                                : s.resultTypeSpecifier;
+                            return new TupleElementDefinition { name = s.alias, elementType = elementType };
+                        }).ToArray();
+                        var tupleType = new TupleTypeSpecifier { element = tupleElements };
+                        returnType = hasScalarSource ? tupleType : tupleType.ToListType();
+                    }
                 }
             }
             // sorting operates on the values being returned, and nothing in the main query scope,

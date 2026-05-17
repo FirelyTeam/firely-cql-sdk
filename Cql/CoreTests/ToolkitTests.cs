@@ -708,15 +708,6 @@ public class ToolkitTests
               from ({2, 3}) A, ({5, 6}) B
             """;
 
-        // Get the generated C# code for debugging
-        var cqlToolkit = new CqlToolkit().AddCqlLibraries(cql).TranslateToElm();
-        var elmToolkit = cqlToolkit.CompileToAssemblies(ElmToolkitConfig);
-        foreach (var (libraryIdentifier, _, cSharp) in elmToolkit.GetElmToCSharpResults())
-        {
-            Console.WriteLine($"=== Generated C# for {libraryIdentifier} ===");
-            Console.WriteLine(cSharp);
-        }
-
         var ctx = FhirCqlContext.ForBundle();
         using var librarySetInvoker =
             new CqlToolkit()
