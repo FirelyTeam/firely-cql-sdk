@@ -596,15 +596,42 @@ namespace Hl7.Cql.Operators
                         }
                     }
 
-                    if (per?.unit == "hour"
-                        && (interval.low!.Precision == Iso8601.DateTimePrecision.Minute
-                            || interval.high!.Precision == Iso8601.DateTimePrecision.Minute))
+                    if (per?.unit is "hour" or "minute" or "second")
                     {
-                        var lowValue = interval.low.Value;
-                        listItem = new CqlTime(lowValue.Hour, null, null, null, lowValue.OffsetHour, lowValue.OffsetMinute);
+                        var shouldTruncate = hasSubUnitComponent(listItem!, per.unit!)
+                            || hasSubUnitComponent(highInterval!, per.unit!);
+                        if (shouldTruncate)
+                        {
+                            listItem = truncateToPerUnit(listItem!, per.unit!);
+                            highInterval = truncateToPerUnit(highInterval!, per.unit!);
+                        }
+                    }
 
-                        var highValue = interval.high!.Value;
-                        highInterval = new CqlTime(highValue.Hour, null, null, null, highValue.OffsetHour, highValue.OffsetMinute);
+                    static CqlTime truncateToPerUnit(CqlTime value, string unit)
+                    {
+                        var time = value.Value;
+                        return unit switch
+                        {
+                            "hour" when value.Precision > Iso8601.DateTimePrecision.Hour =>
+                                new CqlTime(time.Hour, null, null, null, time.OffsetHour, time.OffsetMinute),
+                            "minute" when value.Precision > Iso8601.DateTimePrecision.Minute =>
+                                new CqlTime(time.Hour, time.Minute, null, null, time.OffsetHour, time.OffsetMinute),
+                            "second" when value.Precision > Iso8601.DateTimePrecision.Second =>
+                                new CqlTime(time.Hour, time.Minute, time.Second, null, time.OffsetHour, time.OffsetMinute),
+                            _ => value
+                        };
+                    }
+
+                    static bool hasSubUnitComponent(CqlTime value, string unit)
+                    {
+                        var time = value.Value;
+                        return unit switch
+                        {
+                            "hour" => (time.Minute ?? 0) != 0 || (time.Second ?? 0) != 0 || (time.Millisecond ?? 0) != 0,
+                            "minute" => (time.Second ?? 0) != 0 || (time.Millisecond ?? 0) != 0,
+                            "second" => (time.Millisecond ?? 0) != 0,
+                            _ => false
+                        };
                     }
 
                     do
@@ -661,9 +688,13 @@ namespace Hl7.Cql.Operators
                     var listItem = interval.low!.Value;
                     var highBoundary = interval.high!.Value;
                     var perValue = per.value ?? 1m;
-                    var perValueIsWholeNumber = decimal.Truncate(perValue) == perValue;
-                    var boundariesHaveFractionalParts = decimal.Truncate(listItem) != listItem || decimal.Truncate(highBoundary) != highBoundary;
-                    var needsIntegerTruncation = per.unit == "1" && perValueIsWholeNumber && boundariesHaveFractionalParts;
+                    var usesDefaultDecimalUnit = string.IsNullOrEmpty(per.unit) || per.unit == "1";
+                    var needsIntegerTruncation = usesDefaultDecimalUnit
+                        && getDecimalPrecision(perValue) == 0
+                        && (getDecimalPrecision(listItem) > 0 || getDecimalPrecision(highBoundary) > 0);
+
+                    static int getDecimalPrecision(decimal value) =>
+                        BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
 
                     if (needsIntegerTruncation)
                     {
