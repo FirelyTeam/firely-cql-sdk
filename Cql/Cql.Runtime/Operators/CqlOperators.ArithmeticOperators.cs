@@ -687,7 +687,7 @@ namespace Hl7.Cql.Operators
 
             if (double.IsNaN(result) || double.IsInfinity(result))
             {
-                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result could not be represented as decimal, returned null.");
+                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result cannot be represented as decimal; returning null.");
                 return null;
             }
 
@@ -709,7 +709,7 @@ namespace Hl7.Cql.Operators
 
             if (double.IsNaN(result) || double.IsInfinity(result))
             {
-                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result could not be represented as decimal, returned null.");
+                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result cannot be represented as decimal; returning null.");
                 return null;
             }
 
@@ -727,7 +727,23 @@ namespace Hl7.Cql.Operators
         public decimal? Power(decimal? argument, decimal? exponent)
         {
             if (argument == null || exponent == null) return null;
-            else return (decimal)Math.Pow((double)argument, (double)exponent);
+            var result = Math.Pow((double)argument, (double)exponent);
+
+            if (double.IsNaN(result) || double.IsInfinity(result))
+            {
+                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result cannot be represented as decimal; returning null.");
+                return null;
+            }
+
+            try
+            {
+                return (decimal)result;
+            }
+            catch (OverflowException e)
+            {
+                Message(new { argument, exponent, result, e }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Decimal overflow in Power operation; returning null.");
+                return null;
+            }
         }
 
         #endregion
