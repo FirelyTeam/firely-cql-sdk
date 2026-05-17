@@ -723,6 +723,9 @@ public class ToolkitTests
         results.TryGetValue("CrossJoinResult", out var obj);
         Assert.IsNotNull(obj);
         Assert.IsNotNull(obj.invocationResult);
+        Assert.IsInstanceOfType<System.Collections.IEnumerable>(obj.invocationResult);
+        var materializedResult = ((System.Collections.IEnumerable)obj.invocationResult).Cast<object?>().ToList();
+        Assert.AreEqual(4, materializedResult.Count);
     }
 
     private static readonly ElmToolkitConfig ElmToolkitConfig =
