@@ -75,18 +75,18 @@ public class CqlContextOperatorTests
         // Act
         var integerOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "IntegerOverflow");
         var integerInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "IntegerInfinity");
-            var longOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongOverflow");
-            var longInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongInfinity");
-            var decimalOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "DecimalOverflow");
-            var decimalInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "DecimalInfinity");
+        var longOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongOverflow");
+        var longInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "LongInfinity");
+        var decimalOverflow = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "DecimalOverflow");
+        var decimalInfinity = librarySetInvoker.InvokeLibraryDefinition(cqlContext, cqlLibrary.LibraryIdentifier, "DecimalInfinity");
 
         // Assert
         integerOverflow.Should().BeNull();
-            integerInfinity.Should().BeNull();
-            longOverflow.Should().BeNull();
-            longInfinity.Should().BeNull();
-            decimalOverflow.Should().BeNull();
-            decimalInfinity.Should().BeNull();
+        integerInfinity.Should().BeNull();
+        longOverflow.Should().BeNull();
+        longInfinity.Should().BeNull();
+        decimalOverflow.Should().BeNull();
+        decimalInfinity.Should().BeNull();
         }
 
     #endregion
