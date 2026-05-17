@@ -1422,6 +1422,7 @@ namespace CoreTests
 
             var expand = fcq.Expand(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
+            Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
             {
                 var actual = expand[i];
@@ -3161,6 +3162,7 @@ namespace CoreTests
 
             var expand = fcq.Expand(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
+            Assert.AreEqual(expected.Length, expand.Length);
             for (var i = 0; i < expand.Length; i++)
             {
                 var actual = expand[i];
