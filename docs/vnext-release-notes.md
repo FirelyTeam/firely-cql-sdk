@@ -2,7 +2,7 @@
 
 ## Breaking Changes
 
-### `Cql.Runtime` — `ICqlOperators.Contains<T>`/`ICqlOperators.In<T>` list-membership nullability annotations updated
+### `Cql.Runtime` — List-membership operators (`Contains<T>` and `In<T>`) nullability annotations updated
 
 The `ICqlOperators` list-membership overload signatures now explicitly model nullable element and nullable list inputs:
 
