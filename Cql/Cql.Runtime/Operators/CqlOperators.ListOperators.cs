@@ -597,13 +597,13 @@ namespace Hl7.Cql.Operators
                     }
 
                     if (per?.unit == "hour"
-                        && interval.low!.Precision == Iso8601.DateTimePrecision.Minute
-                        && interval.high!.Precision == Iso8601.DateTimePrecision.Minute)
+                        && (interval.low!.Precision == Iso8601.DateTimePrecision.Minute
+                            || interval.high!.Precision == Iso8601.DateTimePrecision.Minute))
                     {
                         var lowValue = interval.low.Value;
                         listItem = new CqlTime(lowValue.Hour, null, null, null, lowValue.OffsetHour, lowValue.OffsetMinute);
 
-                        var highValue = interval.high.Value;
+                        var highValue = interval.high!.Value;
                         highInterval = new CqlTime(highValue.Hour, null, null, null, highValue.OffsetHour, highValue.OffsetMinute);
                     }
 
@@ -659,27 +659,28 @@ namespace Hl7.Cql.Operators
                     }
 
                     var listItem = interval.low!.Value;
-                    var highInterval = interval.high!.Value;
+                    var highBoundary = interval.high!.Value;
                     var perValue = per.value ?? 1m;
-                    var needsIntegerTruncation = per.unit == "1"
-                        && decimal.Truncate(perValue) == perValue
-                        && (decimal.Truncate(listItem) != listItem || decimal.Truncate(highInterval) != highInterval);
+                    var perValueIsWholeNumber = decimal.Truncate(perValue) == perValue;
+                    var boundariesHaveFractionalParts = decimal.Truncate(listItem) != listItem || decimal.Truncate(highBoundary) != highBoundary;
+                    var needsIntegerTruncation = per.unit == "1" && perValueIsWholeNumber && boundariesHaveFractionalParts;
 
                     if (needsIntegerTruncation)
                     {
                         listItem = decimal.Truncate(listItem);
-                        highInterval = decimal.Truncate(highInterval);
+                        highBoundary = decimal.Truncate(highBoundary);
                     }
 
                     do
                     {
                         var next = decimal.Add(listItem, perValue);
+                        // Integer-per truncation uses integer predecessor semantics (N -> N-1), not decimal epsilon predecessor.
                         var high = needsIntegerTruncation ? decimal.Subtract(next, 1m) : Predecessor(next);
                         var listInterval = new CqlInterval<decimal?>(listItem, high, true, true);
                         expanded.Add(listInterval);
                         listItem = next;
                     }
-                    while (Comparer.Compare(listItem, highInterval, null) <= 0);
+                    while (Comparer.Compare(listItem, highBoundary, null) <= 0);
                 }
             }
 
