@@ -87,7 +87,7 @@ public class CqlContextOperatorTests
         longInfinity.Should().BeNull();
         decimalOverflow.Should().BeNull();
         decimalInfinity.Should().BeNull();
-        }
+    }
 
     #endregion
 

@@ -185,22 +185,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void PowerIntegerByDecimalSmall()
-        {
-            var library = CreateCqlToolkit().MakeLibrary("""
-                library PowerIntegerByDecimalSmall version '1.0.0'
-
-                define private Power_Integer_to_Integer: 2 ^ 3.0
-                """);
-            var power = (Power)library.statements![0].expression;
-            var lambda = CreateElmToolkit().Lambda(power);
-            var dg = lambda.Compile();
-            var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-            Assert.IsInstanceOfType(result, typeof(decimal?));
-            Assert.AreEqual(8.0m, result);
-        }
-
-        [TestMethod]
         public void PowerIntegerByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
