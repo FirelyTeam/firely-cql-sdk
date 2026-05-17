@@ -229,6 +229,99 @@ public class CqlContextOperatorTests
         @in.Should().BeFalse();
     }
 
+    #endregion
+
+    #region CodeInList
+
+    [TestMethod]
+    public void CodeInList_NullElementAndListContainsNull_ReturnsTrue()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        var code = new CqlCode("A", "http://example.com", null, null);
+        CqlCode?[] list = [null, code];
+
+        // Act
+        var result = cqlOperators.CodeInList(null, list!);
+
+        // Assert
+        result.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void CodeInList_NullElementAndListWithoutNull_ReturnsFalse()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        var code = new CqlCode("A", "http://example.com", null, null);
+        CqlCode[] list = [code];
+
+        // Act
+        var result = cqlOperators.CodeInList(null, list);
+
+        // Assert
+        result.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void CodeInList_NullElementAndNullList_ReturnsFalse()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+
+        // Act
+        var result = cqlOperators.CodeInList(null, null);
+
+        // Assert
+        result.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void CodeInList_NonNullElementAndNullList_ReturnsFalse()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        var code = new CqlCode("A", "http://example.com", null, null);
+
+        // Act
+        var result = cqlOperators.CodeInList(code, null);
+
+        // Assert
+        result.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void CodeInList_NonNullElementAndListContainsMatch_ReturnsTrue()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        var code = new CqlCode("A", "http://example.com", null, null);
+        CqlCode[] list = [new CqlCode("B", "http://example.com", null, null), code];
+
+        // Act
+        var result = cqlOperators.CodeInList(code, list);
+
+        // Assert
+        result.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void CodeInList_NonNullElementAndListWithoutMatch_ReturnsFalse()
+    {
+        // Arrange
+        var cqlOperators = Sut();
+        var code = new CqlCode("A", "http://example.com", null, null);
+        CqlCode[] list = [new CqlCode("B", "http://example.com", null, null)];
+
+        // Act
+        var result = cqlOperators.CodeInList(code, list);
+
+        // Assert
+        result.Should().BeFalse();
+    }
+
+    #endregion
+
     [TestMethod]
     public void Equivalent_ConceptAtLeastOneCodeEquivalent_MustBeEquivalent()
     {
@@ -292,8 +385,6 @@ public class CqlContextOperatorTests
         isEqualLessOnLeftConcept.Should().BeTrue();
         isEqualLessOnRightConcept.Should().BeTrue();
     }
-
-    #endregion
 
     #region Convert
 
