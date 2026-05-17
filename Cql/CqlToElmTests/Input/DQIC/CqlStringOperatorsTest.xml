@@ -187,9 +187,17 @@
 			<expression>Matches('http://example.com/Library/test', 'Library')</expression>
 			<output>true</output>
 		</test>
+		<test name="MatchesPartialFalse2">
+			<expression>Matches('http://example.com/test', 'Library')</expression>
+			<output>false</output>
+		</test>
 		<test name="MatchesExplicitAnchorsTrue">
 			<expression>Matches('ABC', '^ABC$')</expression>
 			<output>true</output>
+		</test>
+		<test name="MatchesExplicitAnchorsFalse">
+			<expression>Matches('XABCY', '^ABC$')</expression>
+			<output>false</output>
 		</test>
 		<test name="MatchesUnanchoredPatternBehavior">
 			<expression>Matches('ABC', 'ABC')</expression>
