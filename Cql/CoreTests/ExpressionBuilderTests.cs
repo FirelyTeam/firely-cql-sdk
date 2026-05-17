@@ -185,16 +185,6 @@ namespace CoreTests
                 """);
             var elmLibrary = CreateElmLibrary(libraryString);
 
-            // Debug: get generated C# code
-            var elmToolkit = new ElmToolkit()
-                            .AddElmLibraries([elmLibrary])
-                            .CompileToAssemblies();
-            var assemblyResult = elmToolkit.GetElmToAssemblyResults().First();
-            System.Diagnostics.Debug.WriteLine(assemblyResult.cSharp);
-            Console.WriteLine("=== Generated C# ===");
-            Console.WriteLine(assemblyResult.cSharp);
-            Console.WriteLine("=== End Generated C# ===");
-
             // Act
             var result = InvokeLibrary(elmLibrary, "Long_0_Greater_10");
 
