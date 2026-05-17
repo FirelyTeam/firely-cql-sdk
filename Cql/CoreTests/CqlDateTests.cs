@@ -44,6 +44,26 @@ public class CqlDateTests
         Assert.AreEqual(new CqlDate(2020, 2, 29), result);
     }
 
+    [DataTestMethod]
+    [DataRow(24, "h")]
+    [DataRow(24, "hour")]
+    [DataRow(24, "hours")]
+    [DataRow(1440, "min")]
+    [DataRow(1440, "minute")]
+    [DataRow(1440, "minutes")]
+    [DataRow(86400, "s")]
+    [DataRow(86400, "second")]
+    [DataRow(86400, "seconds")]
+    [DataRow(86400000, "ms")]
+    [DataRow(86400000, "millisecond")]
+    [DataRow(86400000, "milliseconds")]
+    public void Add_TimeUnits_ReturnsDateOnlyResultFromDateTimeMath(int amount, string unit)
+    {
+        var date = new CqlDate(2024, 1, 15);
+        var result = date.Add(new CqlQuantity(amount, unit));
+        Assert.AreEqual(new CqlDate(2024, 1, 16), result);
+    }
+
     [TestMethod]
     public void Subtract_Years()
     {
@@ -69,6 +89,26 @@ public class CqlDateTests
         var quantity = new CqlQuantity(1, "day");
         var result = date.Subtract(quantity);
         Assert.AreEqual(new CqlDate(2020, 2, 29), result);
+    }
+
+    [DataTestMethod]
+    [DataRow(24, "h")]
+    [DataRow(24, "hour")]
+    [DataRow(24, "hours")]
+    [DataRow(1440, "min")]
+    [DataRow(1440, "minute")]
+    [DataRow(1440, "minutes")]
+    [DataRow(86400, "s")]
+    [DataRow(86400, "second")]
+    [DataRow(86400, "seconds")]
+    [DataRow(86400000, "ms")]
+    [DataRow(86400000, "millisecond")]
+    [DataRow(86400000, "milliseconds")]
+    public void Subtract_TimeUnits_ReturnsDateOnlyResultFromDateTimeMath(int amount, string unit)
+    {
+        var date = new CqlDate(2024, 1, 15);
+        var result = date.Subtract(new CqlQuantity(amount, unit));
+        Assert.AreEqual(new CqlDate(2024, 1, 14), result);
     }
 
     [TestMethod]

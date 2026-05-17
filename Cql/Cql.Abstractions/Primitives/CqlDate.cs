@@ -100,6 +100,9 @@ namespace Hl7.Cql.Primitives
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
 
+            if (unit is "h" or "hour" or "hours" or "min" or "minute" or "minutes" or "s" or "second" or "seconds" or "ms" or "millisecond" or "milliseconds")
+                return new CqlDateTime(this).Add(quantity)?.DateOnly;
+
             var dto = Value.DateTimeOffset;
             
             try
@@ -112,10 +115,6 @@ namespace Hl7.Cql.Primitives
                     "month" or "months"                     => dto.AddMonths((int)value),
                     "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
                     "d" or "day" or "days"                  => dto.AddDays((int)value!),
-                    "h" or "hour" or "hours"                => dto.AddHours(Math.Truncate((double)value)),
-                    "min" or "minute" or "minutes"          => dto.AddMinutes(Math.Truncate((double)value)),
-                    "s" or "second" or "seconds"            => dto.AddSeconds(Math.Truncate((double)value)),
-                    "ms" or "millisecond" or "milliseconds" => dto.AddMilliseconds(Math.Truncate((double)value)),
                     _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
                 };
             }
