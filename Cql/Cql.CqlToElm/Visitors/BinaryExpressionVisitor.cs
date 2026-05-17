@@ -34,6 +34,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(terms[0]);
             var @operator = context.GetChild(1).GetText();
             var rhs = Visit(terms[1]);
+            if (@operator == "+" && ShouldPromoteDateAdditionToDateTime(lhs, rhs))
+                lhs = new ToDateTime { operand = lhs }.WithResultType(SystemTypes.DateTimeType);
 
             var invocation = @operator switch
             {
@@ -46,6 +48,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithId()
                 .WithLocator(context.Locator());
         }
+
+        private static bool ShouldPromoteDateAdditionToDateTime(Expression lhs, Expression rhs) =>
+            lhs.resultTypeSpecifier == SystemTypes.DateType
+            && rhs is Quantity { unit: { } unit }
+            && unit is "h" or "hour" or "hours"
+                or "min" or "minute" or "minutes"
+                or "s" or "second" or "seconds"
+                or "ms" or "millisecond" or "milliseconds";
 
         //    | 'difference' 'in' pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm       #differenceBetweenExpression
         public override Expression VisitDifferenceBetweenExpression([NotNull] cqlParser.DifferenceBetweenExpressionContext context) =>
