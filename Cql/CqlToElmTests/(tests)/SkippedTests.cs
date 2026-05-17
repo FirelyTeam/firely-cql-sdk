@@ -73,8 +73,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "Power2ToNeg2", "Power returns integers, not decimals" },
             { "ProperContainsTimeNull", "There is no spec language justifying null instead of false" },
             { "ProperInTimeNull", "There is no spec language justifying null instead of false" },
-            { "RoundNeg0D5", "This rounding test doesn't behave like the others" },
-            { "RoundNeg1D5", "This rounding test doesn't behave like the others" },
             { "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
             { "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
         };
