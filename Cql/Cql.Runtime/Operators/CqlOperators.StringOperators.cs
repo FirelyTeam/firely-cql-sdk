@@ -90,15 +90,8 @@ namespace Hl7.Cql.Operators
         public bool? Matches(string source, string pattern)
         {
             if (source == null || pattern == null) return null;
-            else
-            {
-                if (pattern[0].Equals("^") == false) pattern = "^" + pattern;
-                if (pattern[pattern.Length - 1].Equals("$") == false) pattern += "$";
-                Regex rx = new(pattern);
-                MatchCollection matches = rx.Matches(source);
-                if (matches.Count == 1) return true;
-                else return false;
-            }
+            Regex rx = new(pattern);
+            return rx.IsMatch(source);
         }
 
         #endregion
