@@ -68,13 +68,9 @@ namespace Hl7.Cql.CqlToElm.Test
             { "DecimalPosTwoStep", "Power returns integers, not decimals" },
             { "DecimalTenStep", "Power returns integers, not decimals" },
             { "DecimalTwoStep", "Power returns integers, not decimals" },
-            { "ExpandPer1", "The expectation should have decimal values, not integers; the test does not compile in reference cql-to-elm" },
-            { "ExpandPerHour", "The expectation does not match the same example as published in the specification" },
             { "Power2ToNeg2", "Power returns integers, not decimals" },
             { "ProperContainsTimeNull", "There is no spec language justifying null instead of false" },
             { "ProperInTimeNull", "There is no spec language justifying null instead of false" },
-            { "RoundNeg0D5", "This rounding test doesn't behave like the others" },
-            { "RoundNeg1D5", "This rounding test doesn't behave like the others" },
             { "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
             { "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
         };
