@@ -100,6 +100,10 @@ namespace Hl7.Cql.Primitives
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
 
+            DateTimeOffset addAsDateTimeOffset() =>
+                new CqlDateTime(this).Add(quantity)?.Value.DateTimeOffset
+                ?? throw new ArgumentOutOfRangeException(nameof(quantity), "Date-time arithmetic for Date value resulted in overflow.");
+
             var dto = Value.DateTimeOffset;
             
             try
@@ -113,10 +117,10 @@ namespace Hl7.Cql.Primitives
                     "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
                     "d" or "day" or "days"                  => dto.AddDays((int)value!),
                     // Assumption outside explicit CQL Date Add spec: evaluate time-based units via DateTime arithmetic and project back to Date.
-                    "h" or "hour" or "hours"                => new CqlDateTime(this).Add(quantity)?.Value.DateTimeOffset ?? throw new ArgumentOutOfRangeException(nameof(quantity)),
-                    "min" or "minute" or "minutes"          => new CqlDateTime(this).Add(quantity)?.Value.DateTimeOffset ?? throw new ArgumentOutOfRangeException(nameof(quantity)),
-                    "s" or "second" or "seconds"            => new CqlDateTime(this).Add(quantity)?.Value.DateTimeOffset ?? throw new ArgumentOutOfRangeException(nameof(quantity)),
-                    "ms" or "millisecond" or "milliseconds" => new CqlDateTime(this).Add(quantity)?.Value.DateTimeOffset ?? throw new ArgumentOutOfRangeException(nameof(quantity)),
+                    "h" or "hour" or "hours"                => addAsDateTimeOffset(),
+                    "min" or "minute" or "minutes"          => addAsDateTimeOffset(),
+                    "s" or "second" or "seconds"            => addAsDateTimeOffset(),
+                    "ms" or "millisecond" or "milliseconds" => addAsDateTimeOffset(),
                     _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
                 };
             }
