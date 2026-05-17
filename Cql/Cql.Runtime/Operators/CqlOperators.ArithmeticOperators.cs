@@ -687,7 +687,7 @@ namespace Hl7.Cql.Operators
 
             if (double.IsNaN(result) || double.IsInfinity(result))
             {
-                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result could not be represented as decimal, returned null.");
+                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result cannot be represented as decimal; returning null.");
                 return null;
             }
 
@@ -741,7 +741,7 @@ namespace Hl7.Cql.Operators
             }
             catch (OverflowException e)
             {
-                Message(new { argument, exponent, result, e }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Ignored overflow errors from type decimal power, returned null.");
+                Message(new { argument, exponent, result, e }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Decimal overflow in Power operation; returning null.");
                 return null;
             }
         }
