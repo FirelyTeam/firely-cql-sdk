@@ -174,6 +174,24 @@ namespace CoreTests
             Assert.AreEqual("a", list[0]);
         }
 
+        [TestMethod]
+        public void Long_0_Greater_10_Returns_False()
+        {
+            // Arrange
+            var libraryString = CqlLibraryString.Parse("""
+                library LongGreaterTest version '1.0.0'
+
+                define Long_0_Greater_10: 0L > 10L
+                """);
+            var elmLibrary = CreateElmLibrary(libraryString);
+
+            // Act
+            var result = InvokeLibrary(elmLibrary, "Long_0_Greater_10");
+
+            // Assert - "0L > 10L" should return false, not null
+            Assert.AreEqual(false, (bool?)result);
+        }
+
         private static Library CreateElmLibrary(CqlLibraryString libraryString)
         {
             var cqlToolkitConfig = new CqlToolkitConfig([CqlModel.ElmR1, CqlModel.Fhir401]);
