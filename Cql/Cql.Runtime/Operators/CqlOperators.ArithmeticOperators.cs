@@ -709,7 +709,7 @@ namespace Hl7.Cql.Operators
 
             if (double.IsNaN(result) || double.IsInfinity(result))
             {
-                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result could not be represented as decimal, returned null.");
+                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result cannot be represented as decimal; returning null.");
                 return null;
             }
 
@@ -731,7 +731,7 @@ namespace Hl7.Cql.Operators
 
             if (double.IsNaN(result) || double.IsInfinity(result))
             {
-                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result could not be represented as decimal, returned null.");
+                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result cannot be represented as decimal; returning null.");
                 return null;
             }
 
