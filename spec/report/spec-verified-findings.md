@@ -1,6 +1,6 @@
 # CQL Specification Verified Findings
 
-**Last Re-evaluated:** 2026-05-16  
+**Last Re-evaluated:** 2026-05-17  
 **CQL Version:** 1.5.3 Release 1 Errata 2  
 **Source:** Local spec files in `spec/condensed/`
 
@@ -28,7 +28,7 @@ This document captures the current verification status of previously reported co
 
 - **Spec basis:** Non-representable results should return `null`; behavior should preserve numeric semantics.
 - **Current status:** **Resolved**.
-- **Verification note:** `Power(int?, int?)` and `Power(long?, long?)` now return `decimal?`, runtime handles overflow/non-representable outcomes as `null`, and CQL-to-ELM typing is aligned to decimal.
+- **Verification note:** `Power(int?, int?)`, `Power(long?, long?)`, and `Power(decimal?, decimal?)` defensively return `null` for non-representable outcomes. Regression coverage includes `PowerIntegerByDecimalSmall` and decimal non-representable runtime cases.
 - **Issue doc removed:** `issue-05-high-power-operator-null-return.md`
 
 ---
@@ -59,25 +59,33 @@ This document captures the current verification status of previously reported co
 - **Why still open:** `ExpandPer1` and `ExpandPerHour` remain in skipped test metadata and are not yet verified as active passing coverage.
 - **Tracking doc:** [issue-07-low-unskip-expand-tests.md](issue-07-low-unskip-expand-tests.md)
 
+### 8) Split separator semantics use character-set splitting
+
+- **Current status:** **Open**.
+- **Why still open:** `Split` currently uses `separator.ToCharArray()` and splits by delimiter characters, not by full string separator token semantics.
+- **Tracking doc:** [issue-11-high-split-string-separator-semantics.md](issue-11-high-split-string-separator-semantics.md)
+
 ---
 
 ## Current Summary Matrix
 
-| Item                          | Status   | Priority              | Notes                                  |
-| ----------------------------- | -------- | --------------------- | -------------------------------------- |
-| Substring length              | RESOLVED | Critical (historical) | Issue doc removed                      |
-| List equality nulls           | RESOLVED | High (historical)     | Issue doc removed                      |
-| Power behavior/typing         | RESOLVED | High (historical)     | Issue doc removed                      |
-| EndsWith bounds/empty suffix  | OPEN     | High                  | Runtime change needed                  |
-| Round negative midpoint tests | OPEN     | High                  | Test expectation + skip cleanup needed |
-| Matches anchoring             | OPEN     | Medium                | Runtime semantics change needed        |
-| Expand skipped tests          | OPEN     | Low                   | Enable and validate test coverage      |
+| Item                          | Status   | Priority              | Notes                                                      |
+| ----------------------------- | -------- | --------------------- | ---------------------------------------------------------- |
+| Substring length              | RESOLVED | Critical (historical) | Issue doc removed                                          |
+| List equality nulls           | RESOLVED | High (historical)     | Issue doc removed                                          |
+| Power behavior/typing         | RESOLVED | High (historical)     | Decimal representability and regression coverage verified  |
+| EndsWith bounds/empty suffix  | OPEN     | High                  | Runtime change needed                                      |
+| Round negative midpoint tests | OPEN     | High                  | Test expectation + skip cleanup needed                     |
+| Matches anchoring             | OPEN     | Medium                | Runtime semantics change needed                            |
+| Expand skipped tests          | OPEN     | Low                   | Enable and validate test coverage                          |
+| Split separator semantics     | OPEN     | High                  | Runtime behavior does not match string separator semantics |
 
 ---
 
 ## Next Focus
 
 1. Complete `EndsWith` spec-edge handling.
-2. Correct and unskip Round negative midpoint tests.
-3. Update `Matches` to spec-aligned matching behavior.
-4. Unskip and validate Expand coverage.
+2. Correct `Split` to use full string separator semantics.
+3. Correct and unskip Round negative midpoint tests.
+4. Update `Matches` to spec-aligned matching behavior.
+5. Unskip and validate Expand coverage.
