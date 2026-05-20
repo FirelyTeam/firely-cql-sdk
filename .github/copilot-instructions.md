@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.9.3
+**Version:** 2.10.0
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
