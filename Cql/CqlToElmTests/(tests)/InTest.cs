@@ -121,6 +121,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
             Assert.IsInstanceOfType(query.where, typeof(In));
             var inExpr = (In)query.where;
+            Assert.IsNotNull(inExpr.operand, "Expected inExpr.operand to be non-null");
+            Assert.AreEqual(2, inExpr.operand.Length, "Expected inExpr.operand to have 2 elements");
 
             // Left operand: ToDateTime(@2026-05-14) — Bug 1 fix
             Assert.IsInstanceOfType(inExpr.operand[0], typeof(ToDateTime),

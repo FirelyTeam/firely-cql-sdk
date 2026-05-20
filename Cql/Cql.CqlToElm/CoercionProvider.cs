@@ -81,7 +81,7 @@ namespace Hl7.Cql.CqlToElm
             {
                 if (expression.resultTypeSpecifier is ChoiceTypeSpecifier cts && to is not ChoiceTypeSpecifier)
                 {
-                    var matching = cts.choice
+                    var matching = (cts.choice ?? Enumerable.Empty<TypeSpecifier>())
                         .Select(choice => (choice, FunctionRefForModelConversion(choice, to)))
                         .Where(t => t.Item2 is not null)
                         .ToArray();
@@ -130,7 +130,7 @@ namespace Hl7.Cql.CqlToElm
             {
                 if (expression.resultTypeSpecifier is ChoiceTypeSpecifier cts && to is not ChoiceTypeSpecifier)
                 {
-                    var matching = cts.choice
+                    var matching = (cts.choice ?? Enumerable.Empty<TypeSpecifier>())
                         .Select(choice => (choice, FunctionRefForModelConversion(choice, to)))
                         .Where(t => t.Item2 is not null)
                         .ToArray();
