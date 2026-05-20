@@ -2,18 +2,20 @@
 
 ## Breaking Changes
 
-### `Cql.Runtime` — `ICqlOperators.Contains<T>` list parameter is now nullable
+### `Cql.Runtime` — List-membership operators (`Contains<T>` and `In<T>`) nullability annotations updated
 
-The `ICqlOperators` list overload signature now uses a nullable list parameter:
+The `ICqlOperators` list-membership overload signatures now explicitly model nullable element and nullable list inputs:
 
 **Before:**
 ```csharp
-bool? Contains<T>(IEnumerable<T> list, T item);
+bool? Contains<T>(IEnumerable<T?>? list, T item);
+bool? In<T>(T element, IEnumerable<T> argument);
 ```
 
 **After:**
 ```csharp
-bool? Contains<T>(IEnumerable<T>? list, T item);
+bool? Contains<T>(IEnumerable<T?>? list, T? item);
+bool? In<T>(T? element, IEnumerable<T?>? argument);
 ```
 
 ### `Cql.Runtime` / `Cql.CqlToElm` — `Power` on `Integer`/`Long` now returns `Decimal`
@@ -95,6 +97,17 @@ When running a command, the startup log now includes additional OS and architect
 ```
 
 ## Fixes
+
+### `Cql.Runtime` — `null in list` now returns correct Boolean result
+
+`In<T>` and `CodeInList` now correctly implement CQL list-membership semantics for null elements:
+
+- `null in { 1, null }` → `true` (list contains a null)
+- `null in { 1, 2, 3 }` → `false` (list has no null)
+- `null in {}` → `false` (empty list)
+- `5 in null` → `false` (null list)
+
+Previously, a null element always caused `null` to be returned, which violated the CQL spec.
 
 ### FHIR Library deserialization now tolerates non-conformant FHIR ids and canonical URLs
 
