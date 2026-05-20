@@ -16,7 +16,7 @@ namespace Hl7.Cql.Operators
     internal partial class CqlOperators
     {
         #region Contains
-        public bool? Contains<T>(IEnumerable<T>? list, T item)
+        public bool? Contains<T>(IEnumerable<T?>? list, T? item)
         {
             if (list == null)
                 return false;
@@ -879,10 +879,11 @@ namespace Hl7.Cql.Operators
         #endregion
 
         #region In
-        public bool? In<T>(T element, IEnumerable<T> argument)
+        public bool? In<T>(T? element, IEnumerable<T?>? argument)
         {
             if ((object)element! == null)
                 return null;
+
             if (argument == null)
                 return false;
             else

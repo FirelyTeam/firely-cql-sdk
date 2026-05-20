@@ -166,7 +166,7 @@ namespace Hl7.Cql.Operators
         bool?                                    Contains(CqlInterval<decimal?>? left,decimal? right,string? precision);
         bool?                                    Contains(CqlInterval<int?>? left,int? right,string? precision);
         bool?                                    Contains(CqlInterval<long?>? left,long? right,string? precision);
-        bool?                                    Contains<T>(IEnumerable<T>? list, T item);
+        bool?                                    Contains<T>(IEnumerable<T?>? list, T? item);
         decimal?                                 ConvertBooleanToDecimal(bool? b);
         int?                                     ConvertBooleanToInteger(bool? b);
         long?                                    ConvertBooleanToLong(bool? b);
@@ -289,8 +289,8 @@ namespace Hl7.Cql.Operators
         decimal?                                 HighBoundary(decimal? input, int? precision);
         bool?                                    Implies(bool? left, bool? right);
         bool?                                    Implies(Lazy<bool?> left, Lazy<bool?> right);
-        bool?                                    In<T>(T t,CqlInterval<T>? interval,string? precision);
-        bool?                                    In<T>(T element, IEnumerable<T> argument);
+        bool?                                    In<T>(T? t, CqlInterval<T>? interval,string? precision);
+        bool?                                    In<T>(T? element, IEnumerable<T?>? argument);
         string?                                  Indexer(string? argument, int? index);
         T?                                       Indexer<T>(IEnumerable<T>? source, int? index);
         int?                                     IndexOf<T>(IEnumerable<T>? list, T element);
