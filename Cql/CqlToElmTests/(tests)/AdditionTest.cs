@@ -1150,6 +1150,31 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void AddTimeQuantityToDate_ReportsTranslationError()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                                                     library AddTimeQuantityToDate version '1.0.0'
+
+                                                     define private Three: @2023-01-01 + 1 hour
+                                                     """,
+                "*time-based*");
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Add));
+            {
+                var add = (Add)library.statements[0].expression;
+                Assert.IsNotNull(add.resultTypeName);
+                Assert.AreEqual($"{{{SystemUri}}}Date", add.resultTypeName.Name);
+                Assert.IsNotNull(add.operand);
+                Assert.AreEqual(2, add.operand.Length);
+                Assert.IsInstanceOfType(add.operand[0], typeof(Date));
+                var rhs = add.operand[1] as Quantity;
+                Assert.IsNotNull(rhs);
+                Assert.AreEqual("hour", rhs.unit);
+            }
+        }
+
+        [TestMethod]
         public void AddNullToDate()
         {
             var library = CreateCqlToolkit().MakeLibrary("""

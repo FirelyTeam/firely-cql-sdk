@@ -42,10 +42,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 "&" => InvocationBuilder.Invoke(SystemLibrary.Concatenate, lhs, rhs),
                 _   => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
             };
+
+            if (@operator == "+" && IsDateWithTimeUnitQuantity(lhs, rhs))
+                invocation.AddError(
+                    "Adding a time-based quantity to a Date value is not allowed by the CQL specification. " +
+                    "Use a date-based unit (years, months, weeks, or days), or convert the Date to a DateTime first using ToDateTime().");
+
             return invocation
                 .WithId()
                 .WithLocator(context.Locator());
         }
+
+        private static bool IsDateWithTimeUnitQuantity(Expression lhs, Expression rhs) =>
+            lhs.resultTypeSpecifier == SystemTypes.DateType
+            && rhs is Quantity { unit: { } unit }
+            && unit is "h" or "hour" or "hours"
+                or "min" or "minute" or "minutes"
+                or "s" or "second" or "seconds"
+                or "ms" or "millisecond" or "milliseconds";
 
         //    | 'difference' 'in' pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm       #differenceBetweenExpression
         public override Expression VisitDifferenceBetweenExpression([NotNull] cqlParser.DifferenceBetweenExpressionContext context) =>
