@@ -5,6 +5,7 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+using Fhir.Metrics;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
 using Hl7.Fhir.Introspection;
@@ -65,5 +66,11 @@ namespace Hl7.Cql.Fhir
         /// The default <see cref="TypeConverter"/> to use is <see cref="FhirTypeConverter.Create(ModelInspector,Nullable{int})"/>, unless otherwise overriden here.
         /// </summary>
         public TypeConverter? OverrideTypeConverter { get; init; }
+
+        /// <summary>
+        /// The <see cref="IMetricService"/> to use for UCUM unit conversions, or <see langword="null"/> to use the default service.
+        /// Inject a custom implementation here to substitute the commercial Firely UCUM service.
+        /// </summary>
+        public IMetricService? MetricService { get; init; }
     }
 }

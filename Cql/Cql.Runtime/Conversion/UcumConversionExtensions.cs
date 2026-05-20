@@ -1,9 +1,9 @@
-﻿/*
+/*
  * Copyright (c) 2023, Firely (info@fire.ly) and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/firely-net-sdk/master/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/master/LICENSE
  */
 
 using Hl7.Cql.Primitives;
@@ -14,10 +14,10 @@ namespace Hl7.Cql.Conversion
     /// <summary>
     /// Utility functions for working with Firely's UCUM library, which allows full support for conversions within the UCUM unit system.
     /// </summary>
-    internal static class Ucum
+    internal static class UcumConversionExtensions
     {
-        private static readonly Lazy<M.SystemOfUnits> _system = new(M.UCUM.Load);
-        private static readonly M.SystemOfUnits SYSTEM = _system.Value;
+        // TODO: Remove DefaultUcumMetricService once Fhir.Metrics properly implements IMetricService.TryConvertTo.
+        private static readonly M.IMetricService _defaultMetricService = new DefaultUcumMetricService();
 
         /// <summary>
         /// Bidirectional mapping between CQL calendar duration units and their UCUM equivalents.
@@ -26,41 +26,49 @@ namespace Hl7.Cql.Conversion
         private static readonly Dictionary<string, string> CalendarDurationMapping = InitializeCalendarDurationMapping();
 
         /// <summary>
-        /// Try to canonicalize the system type quantity to Umum base quantity. So a 1,000 cm will be 10 m. Or an inch will be converted to a meter.
+        /// Try to canonicalize the system type quantity to Ucum base quantity using the default metric service.
+        /// So a 1,000 cm will be 10 m. Or an inch will be converted to a meter.
         /// </summary>
         /// <param name="quantity">A system type Quantity of system Ucum</param>
         /// <param name="canonicalizedQuantity">The converted system type Quantity when the conversion was a success.</param>
         /// <returns><c>true</c> when the conversion succeeded. Or <c>false</c> otherwise.</returns>
         public static bool TryCanonicalize(this CqlQuantity quantity, out CqlQuantity? canonicalizedQuantity)
+            => TryCanonicalize(quantity, _defaultMetricService, out canonicalizedQuantity);
+
+        /// <summary>
+        /// Try to canonicalize the system type quantity to Ucum base quantity using the supplied metric service.
+        /// So a 1,000 cm will be 10 m. Or an inch will be converted to a meter.
+        /// </summary>
+        /// <param name="quantity">A system type Quantity of system Ucum</param>
+        /// <param name="service">The <see cref="M.IMetricService"/> to use for the conversion.</param>
+        /// <param name="canonicalizedQuantity">The converted system type Quantity when the conversion was a success.</param>
+        /// <returns><c>true</c> when the conversion succeeded. Or <c>false</c> otherwise.</returns>
+        public static bool TryCanonicalize(this CqlQuantity quantity, M.IMetricService service, out CqlQuantity? canonicalizedQuantity)
         {
             if (quantity is not { value: { } quantityValue, unit: { } quantityUnit })
             {
                 canonicalizedQuantity = null;
                 return false;
             }
-            // Convert CQL calendar duration units to UCUM equivalents before canonicalization
-            // This ensures units like "week" are converted to "wk" before passing to Fhir.Metrics
-            if (CalendarDurationMapping.TryGetValue(quantityUnit, out var ucumUnit))
-            {
-                quantityUnit = ucumUnit;
-            }
 
-            try
+            // Convert CQL calendar duration units to UCUM equivalents before canonicalization.
+            // This ensures units like "week" are converted to "wk" before passing to IMetricService.
+            if (CalendarDurationMapping.TryGetValue(quantityUnit, out var ucumUnit))
+                quantityUnit = ucumUnit;
+
+            // Call the decimal overload from MetricServiceExtensions explicitly to avoid extension method resolution ambiguity.
+            if (M.MetricServiceExtensions.TryCanonicalize(service, (quantityValue, quantityUnit, "http://unitsofmeasure.org"), out var canonical))
             {
-                M.Quantity metricsQuantity = quantityValue.toUnitsOfMeasureQuantity(quantityUnit);
-                metricsQuantity = SYSTEM.Canonical(metricsQuantity);
-                canonicalizedQuantity = new(metricsQuantity.Value.ToDecimal(), metricsQuantity.Metric.ToString());
+                canonicalizedQuantity = new(canonical!.Value.Item1, canonical.Value.Item2);
                 return true;
             }
-            catch (Exception ex) when (ex is ArgumentException or InvalidCastException)
-            {
-                canonicalizedQuantity = null;
-                return false;
-            }
+
+            canonicalizedQuantity = null;
+            return false;
         }
 
         /// <summary>
-        /// Try to convert a quantity to another unit.
+        /// Try to convert a quantity to another unit using the default metric service.
         /// </summary>
         /// <remarks>
         /// This method implements special handling for FHIR calendar duration units, following the FHIRPath specification
@@ -68,39 +76,54 @@ namespace Hl7.Cql.Conversion
         ///
         /// When converting between CQL calendar duration units (year, month, week, day, hour, minute, second, millisecond)
         /// and their UCUM equivalents (a, mo, wk, d, h, min, s, ms), the conversion is performed as a 1-to-1 mapping
-        /// without using the Fhir.Metrics SYSTEM conversion. This aligns with FHIR's simplification that these units
+        /// without using the metric service. This aligns with FHIR's simplification that these units
         /// are treated as equivalent for conversion purposes, even though semantically "1 a != 1 year" but "1 a ~ 1 year" in CQL.
         ///
-        /// For all other unit conversions, the standard UCUM conversion logic is applied.
+        /// For all other unit conversions, the supplied <see cref="M.IMetricService"/> is used.
         /// </remarks>
         /// <returns>false if the conversion was not possible, true otherwise.</returns>
         /// <exception cref="ArgumentException"></exception>
         public static bool TryConvert(this CqlQuantity quantity, string unit, out CqlQuantity? convertedQuantity)
-        {
-            if (quantity.value is not {} quantityValue) throw new ArgumentException("Quantity should have a value for UCUM conversion.", nameof(quantity));
-            if (quantity.unit is not {} quantityUnit) throw new ArgumentException("Quantity should have a unit for UCUM conversion.", nameof(quantity));
+            => TryConvert(quantity, unit, _defaultMetricService, out convertedQuantity);
 
-            // Special handling for FHIR calendar duration units - perform 1-to-1 mapping
-            // This follows FHIRPath's simplification for time-valued quantities
+        /// <summary>
+        /// Try to convert a quantity to another unit using the supplied metric service.
+        /// </summary>
+        /// <remarks>
+        /// This method implements special handling for FHIR calendar duration units, following the FHIRPath specification
+        /// (https://hl7.org/fhirpath/N1/#time-valued-quantities and https://fhir.hl7.org/fhir/fhirpath.html#quantity).
+        ///
+        /// When converting between CQL calendar duration units (year, month, week, day, hour, minute, second, millisecond)
+        /// and their UCUM equivalents (a, mo, wk, d, h, min, s, ms), the conversion is performed as a 1-to-1 mapping
+        /// without using the metric service. This aligns with FHIR's simplification that these units
+        /// are treated as equivalent for conversion purposes, even though semantically "1 a != 1 year" but "1 a ~ 1 year" in CQL.
+        ///
+        /// For all other unit conversions, the supplied <see cref="M.IMetricService"/> is used.
+        /// </remarks>
+        /// <returns>false if the conversion was not possible, true otherwise.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static bool TryConvert(this CqlQuantity quantity, string unit, M.IMetricService service, out CqlQuantity? convertedQuantity)
+        {
+            if (quantity.value is not { } quantityValue) throw new ArgumentException("Quantity should have a value for UCUM conversion.", nameof(quantity));
+            if (quantity.unit is not { } quantityUnit) throw new ArgumentException("Quantity should have a unit for UCUM conversion.", nameof(quantity));
+
+            // Special handling for FHIR calendar duration units - perform 1-to-1 mapping.
+            // This follows FHIRPath's simplification for time-valued quantities.
             if (HasAssumedSameCalendarUnits(quantityUnit, unit))
             {
                 convertedQuantity = new(quantityValue, unit);
                 return true;
             }
 
-            try
+            // Call the decimal overload from MetricServiceExtensions explicitly to avoid extension method resolution ambiguity.
+            if (M.MetricServiceExtensions.TryConvertTo(service, (quantityValue, quantityUnit, "http://unitsofmeasure.org"), unit, out var converted))
             {
-                M.Quantity metricsQuantity = quantityValue.toUnitsOfMeasureQuantity(quantityUnit);
-                metricsQuantity = SYSTEM.Convert(metricsQuantity, unit);
-                convertedQuantity = new(metricsQuantity.Value.ToDecimal(), metricsQuantity.Metric.ToString());
+                convertedQuantity = new(converted!.Value.Item1, converted.Value.Item2);
                 return true;
             }
-            catch (Exception ex) when (ex is ArgumentException or InvalidCastException)
-            {
-                convertedQuantity = null;
-                return false;
-            }
 
+            convertedQuantity = null;
+            return false;
         }
 
         /// <summary>
@@ -130,7 +153,7 @@ namespace Hl7.Cql.Conversion
             AddMappingSingularAndPlural("minute", "min");
             AddMappingSingularAndPlural("second", "s");
             AddMappingSingularAndPlural("millisecond", "ms");
-            
+
             return mapping;
         }
 
@@ -147,16 +170,60 @@ namespace Hl7.Cql.Conversion
         /// false.</returns>
         private static bool HasAssumedSameCalendarUnits(string fromCqlUnit, string toUcumUnit)
         {
-            var isCalendarUnitsAssumedSame =
-                CalendarDurationMapping.TryGetValue(fromCqlUnit, out var expectedToUnit)
+            return CalendarDurationMapping.TryGetValue(fromCqlUnit, out var expectedToUnit)
                 && string.Equals(expectedToUnit, toUcumUnit, StringComparison.OrdinalIgnoreCase);
-            return isCalendarUnitsAssumedSame;
         }
 
-        private static M.Quantity toUnitsOfMeasureQuantity(this decimal value, string unit)
+        /// <summary>
+        /// Default <see cref="M.IMetricService"/> implementation used when no custom service is injected.
+        /// Delegates most operations to <see cref="M.FhirMetricService"/>, and implements
+        /// <see cref="M.IMetricService.TryConvertTo"/> using <see cref="M.SystemOfUnits"/> directly,
+        /// since <see cref="M.FhirMetricService.TryConvertTo"/> throws <see cref="NotImplementedException"/>.
+        /// </summary>
+        // TODO: Remove once Fhir.Metrics properly implements IMetricService.TryConvertTo.
+#pragma warning disable CS8767 // IMetricService is compiled without full NRT annotations; delegate implementations match at runtime.
+        private sealed class DefaultUcumMetricService : M.IMetricService
         {
-            var metric = SYSTEM.Metric(unit);
-            return new M.Quantity(value, metric);
+            private static readonly Lazy<M.SystemOfUnits> _system = new(M.UCUM.Load);
+            private static readonly M.FhirMetricService _fhirService = new();
+
+            public bool TryCanonicalize((string value, string unit, string? codesystem) quantity, out (string value, string unit, string? codesystem)? canonical)
+                => _fhirService.TryCanonicalize(quantity, out canonical);
+
+            public bool TryConvertTo((string value, string unit, string? codesystem) quantity, string targetUnit, out (string value, string unit, string? codesystem)? result)
+            {
+                // FhirMetricService.TryConvertTo throws NotImplementedException; use SystemOfUnits directly.
+                try
+                {
+                    var value = M.Exponential.Exact(quantity.value);
+                    var metric = _system.Value.Metric(quantity.unit);
+                    var metricsQ = value * metric;
+                    metricsQ = _system.Value.Convert(metricsQ, targetUnit);
+                    result = (M.Exponential.DecimalToString(metricsQ.Value.ToDecimal()), metricsQ.Metric.ToString(), quantity.codesystem);
+                    return true;
+                }
+                catch (Exception ex) when (ex is ArgumentException or InvalidCastException or NotImplementedException)
+                {
+                    result = null;
+                    return false;
+                }
+            }
+
+            public bool TryAdd((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result)
+                => _fhirService.TryAdd(x, y, out result);
+
+            public bool TrySubtract((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result)
+                => _fhirService.TrySubtract(x, y, out result);
+
+            public bool TryMultiply((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result)
+                => _fhirService.TryMultiply(x, y, out result);
+
+            public bool TryDivide((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result)
+                => _fhirService.TryDivide(x, y, out result);
+
+            public bool TryCompare((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out int? result)
+                => _fhirService.TryCompare(x, y, out result);
         }
+#pragma warning restore CS8767
     }
 }

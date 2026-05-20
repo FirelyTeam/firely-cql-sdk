@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Fhir.Metrics;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
@@ -34,6 +35,10 @@ namespace Hl7.Cql.Operators
         /// <param name="unitConverter">The unit converters to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="UnitConverter"/> is used.</param>
         /// <param name="now">The value upon which <see cref="ICqlOperators.Now"/> and <see cref="ICqlOperators.Today"/> are based, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="DateTimeIso8601.UtcNow"/> is used.</param>
         /// <param name="enumComparer">The comparer to  use to compare enumerated values.</param>
+        /// <param name="metricService">
+        /// The <see cref="IMetricService"/> to use for UCUM unit conversions when <paramref name="comparer"/> or <paramref name="unitConverter"/> are not supplied,
+        /// or <see langword="null"/> to use the default service.
+        /// </param>
         /// <returns></returns>
         public static CqlOperators Create(
             TypeResolver resolver,
@@ -43,15 +48,16 @@ namespace Hl7.Cql.Operators
             IValueSetDictionary? valueSets = null,
             IUnitConverter? unitConverter = null,
             DateTimeIso8601? now = null,
-            ICqlComparer? enumComparer = null)
+            ICqlComparer? enumComparer = null,
+            IMetricService? metricService = null)
         {
             var operators = new CqlOperators(
                 resolver,
                 converter ?? TypeConverter.Create(),
                 dataSource ?? new CompositeDataSource(),
-                comparer ?? new CqlComparers(),
+                comparer ?? new CqlComparers(metricService),
                 valueSets ?? new HashValueSetDictionary(),
-                unitConverter ?? new UnitConverter(),
+                unitConverter ?? new UnitConverter(metricService),
                 now ?? DateTimeIso8601.UtcNow,
                 enumComparer ?? Comparers.EnumComparer.Default);
             return operators;

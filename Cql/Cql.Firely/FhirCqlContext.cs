@@ -50,9 +50,10 @@ namespace Hl7.Cql.Fhir
                     options.OverrideModelInspector ?? ModelInfo.ModelInspector,
                     options.OverrideFhirTypeConverterCacheSize ?? FhirTypeConverter.DefaultCacheSize);
             DateTimeIso8601? nowIso8601 = now is null ? null : new DateTimeIso8601(now.Value, DateTimePrecision.Millisecond);
-            CqlComparers comparers = new CqlComparers();
+            var metricService = options.MetricService;
+            CqlComparers comparers = new CqlComparers(metricService);
             FhirTypeResolver typeResolver = FhirTypeResolver.Default;
-            IUnitConverter unitConverter = UnitConverter.Default;
+            IUnitConverter unitConverter = metricService is not null ? new UnitConverter(metricService) : UnitConverter.Default;
             FhirEnumComparer fhirEnumComparer = FhirEnumComparer.Default;
             CqlOperators operators = CqlOperators.Create(
                 typeResolver,

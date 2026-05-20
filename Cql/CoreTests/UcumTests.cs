@@ -30,14 +30,25 @@ namespace CoreTests
             canonical.value.Should().Be(2.5M * 60.0M * 60.0M);
         }
 
-        [TestMethod, Ignore]
+        [TestMethod, Ignore("Requires a full IMetricService implementation (e.g. Firely.UCUM); the default FhirMetricService does not implement TryConvertTo.")]
         public void ConvertsUnits()
         {
             var q = new CqlQuantity(3.14M, "kg");
             var success = q.TryConvert("g", out var converted);
             success.Should().BeTrue();
             converted.unit.Should().Be("g");
-            converted.value.Should().Be(3.14M * 1000.0M * 1000.0M);
+            converted.value.Should().Be(3.14M * 1000.0M);
+        }
+
+        [TestMethod]
+        public void TryConvert_UnsupportedUnits_ReturnsFalse()
+        {
+            // The default (OSS) IMetricService cannot perform arbitrary UCUM conversions such as kg→g.
+            // TryConvert must return false gracefully; it must not throw.
+            var q = new CqlQuantity(3.14M, "kg");
+            var success = q.TryConvert("g", out var converted);
+            success.Should().BeFalse();
+            converted.Should().BeNull();
         }
 
         #region Calendar Duration Unit Conversions (FHIR simplification)
