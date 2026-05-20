@@ -1150,51 +1150,27 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void AddTimeQuantityToDate_PromotesDateToDateTime()
+        public void AddTimeQuantityToDate_ReportsTranslationError()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
                                                      library AddTimeQuantityToDate version '1.0.0'
 
                                                      define private Three: @2023-01-01 + 1 hour
-                                                     """);
+                                                     """,
+                "*time-based*");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(Add));
             {
                 var add = (Add)library.statements[0].expression;
                 Assert.IsNotNull(add.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}DateTime", add.resultTypeName.Name);
-                Assert.IsNotNull(add.resultTypeSpecifier);
-                Assert.IsInstanceOfType(add.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)add.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}DateTime", nts.name.Name);
+                Assert.AreEqual($"{{{SystemUri}}}Date", add.resultTypeName.Name);
                 Assert.IsNotNull(add.operand);
                 Assert.AreEqual(2, add.operand.Length);
-                Assert.IsInstanceOfType(add.operand[0], typeof(ToDateTime));
-                {
-                    var lhs = (ToDateTime)add.operand[0];
-                    Assert.IsNotNull(lhs.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}DateTime", lhs.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    Assert.IsNotNull(lhs.operand);
-                    Assert.IsInstanceOfType(lhs.operand, typeof(Date));
-                }
-                {
-                    var rhs = add.operand[1] as Quantity;
-                    Assert.IsNotNull(rhs);
-                    Assert.AreEqual("hour", rhs.unit);
-                }
-
-                var lambda = CreateElmToolkit().Lambda(add);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNotNull(result);
-                Assert.IsInstanceOfType(result, typeof(CqlDateTime));
+                Assert.IsInstanceOfType(add.operand[0], typeof(Date));
+                var rhs = add.operand[1] as Quantity;
+                Assert.IsNotNull(rhs);
+                Assert.AreEqual("hour", rhs.unit);
             }
         }
 

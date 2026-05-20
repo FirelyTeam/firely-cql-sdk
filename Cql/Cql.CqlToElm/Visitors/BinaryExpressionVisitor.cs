@@ -34,8 +34,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(terms[0]);
             var @operator = context.GetChild(1).GetText();
             var rhs = Visit(terms[1]);
-            if (@operator == "+" && ShouldPromoteDateAdditionToDateTime(lhs, rhs))
-                lhs = new ToDateTime { operand = lhs }.WithResultType(SystemTypes.DateTimeType);
 
             var invocation = @operator switch
             {
@@ -44,12 +42,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 "&" => InvocationBuilder.Invoke(SystemLibrary.Concatenate, lhs, rhs),
                 _   => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
             };
+
+            if (@operator == "+" && IsDateWithTimeUnitQuantity(lhs, rhs))
+                invocation.AddError(
+                    "Adding a time-based quantity to a Date value is not allowed by the CQL specification. " +
+                    "Use a date-based unit (years, months, weeks, or days), or convert the Date to a DateTime first using ToDateTime().");
+
             return invocation
                 .WithId()
                 .WithLocator(context.Locator());
         }
 
-        private static bool ShouldPromoteDateAdditionToDateTime(Expression lhs, Expression rhs) =>
+        private static bool IsDateWithTimeUnitQuantity(Expression lhs, Expression rhs) =>
             lhs.resultTypeSpecifier == SystemTypes.DateType
             && rhs is Quantity { unit: { } unit }
             && unit is "h" or "hour" or "hours"

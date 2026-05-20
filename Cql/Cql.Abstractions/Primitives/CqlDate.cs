@@ -102,7 +102,7 @@ namespace Hl7.Cql.Primitives
 
             var dto = Value.DateTimeOffset;
             const string supportedUnitsMessage = "For Date values, the quantity unit must be one of: years, months, weeks, or days.";
-            
+
             try
             {
                 dto = unit switch
