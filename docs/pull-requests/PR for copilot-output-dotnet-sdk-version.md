@@ -75,7 +75,7 @@ read at a glance.
 - Added `global using System.Runtime.InteropServices;` to support
   `RuntimeInformation` references.
 
-### `docs/vnext-release-notes.md`
+### `docs/releases/vnext-release-notes.md`
 
 - Documented both improvements under the Features section.
 
