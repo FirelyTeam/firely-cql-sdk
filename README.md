@@ -15,7 +15,7 @@ The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal perfor
 
 ## Release Notes
 
-This is release version 2.6.0 of the engine.
+This is release version 2.7.0 of the engine.
 
 The release notes at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version document changes and known issues.
 
