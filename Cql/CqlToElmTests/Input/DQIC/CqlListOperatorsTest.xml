@@ -279,11 +279,11 @@
 	<group name="In">
 		<test name="InNullEmpty">
 			<expression>null in {}</expression>
-			<output>null</output>
+			<output>false</output>
 		</test>
 		<test name="InNullAnd1Null">
 			<expression>null in { 1, null }</expression>
-			<output>null</output>
+			<output>true</output>
 		</test>
 		<test name="In1Null">
 			<expression>1 in null</expression>
@@ -401,7 +401,7 @@
 		<!-- the following expression is going to the InEvaluator -->
 		<test name="IncludedInNullLeft">
 			<expression>null included in {2}</expression>
-			<output>null</output>
+			<output>false</output>
 		</test>
 		<test name="IncludedInNullRight">
 			<expression>{'s', 'a', 'm'} included in null</expression>

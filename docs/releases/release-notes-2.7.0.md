@@ -32,6 +32,7 @@
   - `SameOrAfter`, `SameOrBefore`, and `SameAs` for `DateTime` point operands without explicit precision fixed.
   - List equality for mismatched element types and lists containing null elements now uses correct three-valued AND logic.
   - Tuple equality with null elements fixed to propagate null per spec three-valued logic.
+  - `In<T>` (list membership) null-element semantics fixed: `null in {1, null}` → `true`, `null in {1, 2}` → `false`, `5 in null` → `false`; previously a null element always yielded `null` in violation of the spec.
   - `Coalesce` code generation: fixed invalid C# `??` emission when all operands are null lists.
   - `FunctionRef` in CQL-to-ELM now correctly populates the `libraryName` field.
   - `without` relationship clause in CQL query expressions no longer throws `NullReferenceException`.
@@ -139,6 +140,7 @@
 | --- | --- |
 | [#1277](https://github.com/FirelyTeam/firely-cql-sdk/pull/1277) | Fix long literal code generation: 0L > 10L returns null instead of false |
 | [#1276](https://github.com/FirelyTeam/firely-cql-sdk/pull/1276) | Align Date+Quantity runtime/translator behavior |
+| [#1275](https://github.com/FirelyTeam/firely-cql-sdk/pull/1275) | Fix list `In` null-membership semantics |
 | [#1273](https://github.com/FirelyTeam/firely-cql-sdk/pull/1273) | Fix multi-source query typing and alias validation |
 | [#1271](https://github.com/FirelyTeam/firely-cql-sdk/pull/1271) | Align Expand precision with CQL spec |
 | [#1270](https://github.com/FirelyTeam/firely-cql-sdk/pull/1270) | Fix Split to use string-token separators |
