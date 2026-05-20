@@ -1200,7 +1200,7 @@ namespace Hl7.Cql.Operators
         #endregion
 
         #region In
-        public bool? In<T>(T t, CqlInterval<T>? interval, string? precision)
+        public bool? In<T>(T? t, CqlInterval<T>? interval, string? precision)
         {
             if (t == null) return null;
             if (interval == null) return false;
