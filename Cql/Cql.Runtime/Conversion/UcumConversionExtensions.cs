@@ -17,23 +17,16 @@ namespace Hl7.Cql.Conversion
     internal static class UcumConversionExtensions
     {
         // TODO: Remove DefaultUcumMetricService once Fhir.Metrics properly implements IMetricService.TryConvertTo.
-        private static readonly M.IMetricService _defaultMetricService = new DefaultUcumMetricService();
+        /// <summary>
+        /// The default <see cref="M.IMetricService"/> used when no custom service is injected.
+        /// </summary>
+        internal static M.IMetricService Default { get; } = new DefaultUcumMetricService();
 
         /// <summary>
         /// Bidirectional mapping between CQL calendar duration units and their UCUM equivalents.
         /// See https://github.com/FirelyTeam/firely-cql-sdk/issues/1084#issuecomment-3718899170
         /// </summary>
         private static readonly Dictionary<string, string> CalendarDurationMapping = InitializeCalendarDurationMapping();
-
-        /// <summary>
-        /// Try to canonicalize the system type quantity to Ucum base quantity using the default metric service.
-        /// So a 1,000 cm will be 10 m. Or an inch will be converted to a meter.
-        /// </summary>
-        /// <param name="quantity">A system type Quantity of system Ucum</param>
-        /// <param name="canonicalizedQuantity">The converted system type Quantity when the conversion was a success.</param>
-        /// <returns><c>true</c> when the conversion succeeded. Or <c>false</c> otherwise.</returns>
-        public static bool TryCanonicalize(this CqlQuantity quantity, out CqlQuantity? canonicalizedQuantity)
-            => TryCanonicalize(quantity, _defaultMetricService, out canonicalizedQuantity);
 
         /// <summary>
         /// Try to canonicalize the system type quantity to Ucum base quantity using the supplied metric service.
@@ -66,25 +59,6 @@ namespace Hl7.Cql.Conversion
             canonicalizedQuantity = null;
             return false;
         }
-
-        /// <summary>
-        /// Try to convert a quantity to another unit using the default metric service.
-        /// </summary>
-        /// <remarks>
-        /// This method implements special handling for FHIR calendar duration units, following the FHIRPath specification
-        /// (https://hl7.org/fhirpath/N1/#time-valued-quantities and https://fhir.hl7.org/fhir/fhirpath.html#quantity).
-        ///
-        /// When converting between CQL calendar duration units (year, month, week, day, hour, minute, second, millisecond)
-        /// and their UCUM equivalents (a, mo, wk, d, h, min, s, ms), the conversion is performed as a 1-to-1 mapping
-        /// without using the metric service. This aligns with FHIR's simplification that these units
-        /// are treated as equivalent for conversion purposes, even though semantically "1 a != 1 year" but "1 a ~ 1 year" in CQL.
-        ///
-        /// For all other unit conversions, the supplied <see cref="M.IMetricService"/> is used.
-        /// </remarks>
-        /// <returns>false if the conversion was not possible, true otherwise.</returns>
-        /// <exception cref="ArgumentException"></exception>
-        public static bool TryConvert(this CqlQuantity quantity, string unit, out CqlQuantity? convertedQuantity)
-            => TryConvert(quantity, unit, _defaultMetricService, out convertedQuantity);
 
         /// <summary>
         /// Try to convert a quantity to another unit using the supplied metric service.

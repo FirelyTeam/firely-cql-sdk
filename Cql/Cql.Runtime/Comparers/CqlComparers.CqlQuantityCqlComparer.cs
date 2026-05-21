@@ -28,7 +28,7 @@ partial class CqlComparers
 
         private ICqlComparer<string> UnitComparer { get; } = unitComparer ?? throw new ArgumentNullException(nameof(unitComparer));
 
-        private IMetricService? MetricService { get; } = metricService;
+        private IMetricService MetricService { get; } = metricService ?? UcumConversionExtensions.Default;
 
         protected override int? CompareValues(
             CqlQuantity x,
@@ -74,8 +74,6 @@ partial class CqlComparers
         }
 
         private bool TryCanonicalize(CqlQuantity quantity, out CqlQuantity? canonicalized) =>
-            MetricService is { } service
-                ? quantity.TryCanonicalize(service, out canonicalized)
-                : quantity.TryCanonicalize(out canonicalized);
+            quantity.TryCanonicalize(MetricService, out canonicalized);
     }
 }
