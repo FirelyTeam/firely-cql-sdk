@@ -59,7 +59,8 @@ namespace Hl7.Cql.Operators
                 valueSets ?? new HashValueSetDictionary(),
                 unitConverter ?? new UnitConverter(metricService),
                 now ?? DateTimeIso8601.UtcNow,
-                enumComparer ?? Comparers.EnumComparer.Default);
+                enumComparer ?? Comparers.EnumComparer.Default,
+                metricService ?? Conversion.UcumConversionExtensions.Default);
             return operators;
         }
 
@@ -71,7 +72,8 @@ namespace Hl7.Cql.Operators
             IValueSetDictionary valueSets,
             IUnitConverter unitConverter,
             DateTimeIso8601 now,
-            ICqlComparer enumComparer)
+            ICqlComparer enumComparer,
+            IMetricService metricService)
         {
             Comparer = comparer;
             ValueSets = valueSets;
@@ -83,6 +85,7 @@ namespace Hl7.Cql.Operators
             DataSource = dataSource;
             DataComparer = new ComparerBridge(this);
             EqualityComparer = new EqualityComparerBridge(this);
+            MetricService = metricService;
         }
 
         /// <summary>
@@ -99,6 +102,7 @@ namespace Hl7.Cql.Operators
         /// </summary>
         public IValueSetDictionary ValueSets { get; }
         public IUnitConverter UnitConverter { get; }
+        private IMetricService MetricService { get; }
 
         public TypeResolver TypeResolver { get; }
         public TypeConverter TypeConverter { get; }

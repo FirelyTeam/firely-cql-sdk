@@ -217,8 +217,18 @@ namespace Hl7.Cql.Operators
 
         #region CanConvertQuantity
 
-        public bool? CanConvertQuantity(CqlQuantity? argument, string? unit) =>
-            argument == null || unit == null ? null : false;
+        public bool? CanConvertQuantity(CqlQuantity? argument, string? unit)
+        {
+            if (argument == null || unit == null) return null;
+            try
+            {
+                return UnitConverter.ChangeUnits(argument, unit) is not null;
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+        }
 
         #endregion
 

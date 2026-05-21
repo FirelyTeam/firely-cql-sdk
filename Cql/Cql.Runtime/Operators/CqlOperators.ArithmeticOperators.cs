@@ -7,7 +7,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Fhir.Metrics;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators
@@ -100,12 +102,21 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.unit != right.unit)
             {
-                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
-                string? leftUnit = left.unit;
-                string? rightUnit = right.unit;
-                CompareNormalizedUnits(leftUnit, rightUnit);
+                string leftUnit = left.unit ?? string.Empty;
+                string rightUnit = right.unit ?? string.Empty;
 
-                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+                // CQL treats singular/plural calendar duration units as equivalent (e.g. day/days)
+                if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
+                    return new CqlQuantity(Add(left.value, right.value), left.unit);
+
+                // Try UCUM arithmetic for commensurable units (e.g. kg + g)
+                if (MetricServiceExtensions.TryAdd(MetricService,
+                        (left.value.Value, leftUnit, "http://unitsofmeasure.org"),
+                        (right.value.Value, rightUnit, "http://unitsofmeasure.org"),
+                        out var result))
+                    return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+
+                throw new NotSupportedException($"Arithmetic on quantities with incompatible units {left.unit} and {right.unit} is not supported.");
             }
             else
                 return new CqlQuantity(Add(left.value, right.value), left.unit);
@@ -475,12 +486,12 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.unit != right.unit)
             {
-                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
+                // CQL treats singular/plural calendar duration units as equivalent (e.g. day/days)
                 string? leftUnit = left.unit;
                 string? rightUnit = right.unit;
                 CompareNormalizedUnits(leftUnit, rightUnit);
 
-                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+                return new CqlQuantity(Modulo(left.value, right.value), leftUnit);
             }
             else
                 return new CqlQuantity(Modulo(left.value, right.value), left.unit);
@@ -809,12 +820,21 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.unit != right.unit)
             {
-                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
-                string? leftUnit = left.unit;
-                string? rightUnit = right.unit;
-                CompareNormalizedUnits(leftUnit, rightUnit);
+                string leftUnit = left.unit ?? string.Empty;
+                string rightUnit = right.unit ?? string.Empty;
 
-                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+                // CQL treats singular/plural calendar duration units as equivalent (e.g. day/days)
+                if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
+                    return new CqlQuantity(Subtract(left.value, right.value), left.unit);
+
+                // Try UCUM arithmetic for commensurable units (e.g. kg - g)
+                if (MetricServiceExtensions.TrySubtract(MetricService,
+                        (left.value.Value, leftUnit, "http://unitsofmeasure.org"),
+                        (right.value.Value, rightUnit, "http://unitsofmeasure.org"),
+                        out var result))
+                    return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+
+                throw new NotSupportedException($"Arithmetic on quantities with incompatible units {left.unit} and {right.unit} is not supported.");
             }
             else return new CqlQuantity(Subtract(left.value, right.value), left.unit);
         }

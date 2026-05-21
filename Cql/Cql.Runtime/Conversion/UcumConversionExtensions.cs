@@ -101,6 +101,16 @@ namespace Hl7.Cql.Conversion
         }
 
         /// <summary>
+        /// Returns <see langword="true"/> if both units are CQL calendar duration aliases that map to the same UCUM unit
+        /// (e.g., <c>"day"</c> and <c>"days"</c> both map to <c>"d"</c>).
+        /// </summary>
+        internal static bool AreSameCqlCalendarUnit(string? unitA, string? unitB) =>
+            unitA != null && unitB != null
+            && CalendarDurationMapping.TryGetValue(unitA, out var ucumA)
+            && CalendarDurationMapping.TryGetValue(unitB, out var ucumB)
+            && string.Equals(ucumA, ucumB, StringComparison.Ordinal);
+
+        /// <summary>
         /// Initializes the bidirectional mapping between CQL calendar duration units and UCUM units.
         /// This implements the FHIR simplification where calendar duration units are treated as equivalent
         /// for conversion purposes. See https://github.com/FirelyTeam/firely-cql-sdk/issues/1084#issuecomment-3718899170
