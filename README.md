@@ -102,8 +102,8 @@ The SDK depends on the following key external packages:
 
 ### FHIR Support
 
-- **Hl7.Fhir.Base**: Version 6.1.1 - Base classes and utilities for FHIR support
-- **Hl7.Fhir.R4**: Version 6.1.1 - FHIR R4 POCOs and serialization support
+- **Hl7.Fhir.Base**: Version 6.2.0 - Base classes and utilities for FHIR support
+- **Hl7.Fhir.R4**: Version 6.2.0 - FHIR R4 POCOs and serialization support
 - **Fhir.Metrics**: Version 1.3.0 - FHIR units and metrics support
 
 ### Parsing & Compilation
