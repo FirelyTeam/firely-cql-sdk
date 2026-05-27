@@ -82,6 +82,71 @@ public class CqlQuantityTests
         Assert.IsNull(negated);
     }
 
+    #region Add
+
+    [TestMethod]
+    public void Add_SameUnit_ReturnsSumWithSameUnit()
+    {
+        var ops = GetOperators();
+        var result = ops.Add(new CqlQuantity(1m, "mg"), new CqlQuantity(2m, "mg"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(3m, result.value);
+        Assert.AreEqual("mg", result.unit);
+    }
+
+    /// <summary>
+    /// CQL treats singular/plural calendar duration units as equivalent (e.g. "year" == "years").
+    /// The result keeps the left operand's unit.
+    /// </summary>
+    [TestMethod]
+    public void Add_CqlCalendarAlias_PluralPlusSingular_ReturnsSumWithLeftUnit()
+    {
+        var ops = GetOperators();
+        var result = ops.Add(new CqlQuantity(3m, "years"), new CqlQuantity(2m, "year"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(5m, result.value);
+        Assert.AreEqual("years", result.unit);
+    }
+
+    /// <summary>
+    /// Adding commensurable UCUM quantities (kg + g) delegates to IMetricService.TryAdd,
+    /// which canonicalises both operands and returns the result in canonical units.
+    /// </summary>
+    [TestMethod, Ignore("Requires a full IMetricService implementation (e.g. Firely.UCUM); the default FhirMetricService does not implement TryAdd.")]
+    public void Add_CommensurableUcumUnits_ReturnsSumInCanonicalUnit()
+    {
+        var ops = GetOperators();
+        var result = ops.Add(new CqlQuantity(1m, "kg"), new CqlQuantity(500m, "g"));
+        Assert.IsNotNull(result);
+        // FhirMetricService canonicalises kg and g to g; 1 kg = 1000 g + 500 g = 1500 g
+        Assert.AreEqual(1500m, result!.value);
+        Assert.AreEqual("g", result.unit);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(NotSupportedException))]
+    public void Add_IncompatibleUnits_Throws()
+    {
+        var ops = GetOperators();
+        ops.Add(new CqlQuantity(1m, "kg"), new CqlQuantity(1m, "s"));
+    }
+
+    [TestMethod]
+    public void Add_NullLeft_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Add((CqlQuantity?)null, new CqlQuantity(1m, "mg")));
+    }
+
+    [TestMethod]
+    public void Add_NullRight_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Add(new CqlQuantity(1m, "mg"), (CqlQuantity?)null));
+    }
+
+    #endregion
+
     #region Subtract
 
     [TestMethod]
@@ -120,6 +185,29 @@ public class CqlQuantityTests
     {
         var ops = GetOperators();
         Assert.IsNull(ops.Subtract(new CqlQuantity(5m, "mg"), null));
+    }
+
+    /// <summary>
+    /// Subtracting commensurable UCUM quantities (kg - g) delegates to IMetricService.TrySubtract,
+    /// which canonicalises both operands and returns the result in canonical units.
+    /// </summary>
+    [TestMethod, Ignore("Requires a full IMetricService implementation (e.g. Firely.UCUM); the default FhirMetricService does not implement TrySubtract.")]
+    public void Subtract_CommensurableUcumUnits_ReturnsDifferenceInCanonicalUnit()
+    {
+        var ops = GetOperators();
+        var result = ops.Subtract(new CqlQuantity(2m, "kg"), new CqlQuantity(500m, "g"));
+        Assert.IsNotNull(result);
+        // FhirMetricService canonicalises kg and g to g; 2 kg = 2000 g - 500 g = 1500 g
+        Assert.AreEqual(1500m, result!.value);
+        Assert.AreEqual("g", result.unit);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(NotSupportedException))]
+    public void Subtract_IncompatibleUnits_Throws()
+    {
+        var ops = GetOperators();
+        ops.Subtract(new CqlQuantity(1m, "kg"), new CqlQuantity(1m, "s"));
     }
 
     #endregion
@@ -219,6 +307,81 @@ public class CqlQuantityTests
     {
         var ops = GetOperators();
         Assert.IsNull(ops.Between(new CqlQuantity(5m, "mg"), null, new CqlQuantity(10m, "mg")));
+    }
+
+    #endregion
+
+    #region Divide
+
+    [TestMethod]
+    public void Divide_SameUnit_ReturnsQuotientWithUnitOne()
+    {
+        var ops = GetOperators();
+        var result = ops.Divide(new CqlQuantity(6m, "mg"), new CqlQuantity(2m, "mg"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(3m, result.value);
+        Assert.AreEqual(UCUMUnits.Default, result.unit);
+    }
+
+    [TestMethod]
+    public void Divide_ByScalar_ReturnsQuotientWithLeftUnit()
+    {
+        var ops = GetOperators();
+        var result = ops.Divide(new CqlQuantity(6m, "mg"), new CqlQuantity(2m, UCUMUnits.Default));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(3m, result.value);
+        Assert.AreEqual("mg", result.unit);
+    }
+
+    [TestMethod]
+    public void Divide_ByZero_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Divide(new CqlQuantity(6m, "mg"), new CqlQuantity(0m, "mg")));
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(NotSupportedException))]
+    public void Divide_DifferentNonScalarUnits_Throws()
+    {
+        var ops = GetOperators();
+        ops.Divide(new CqlQuantity(6m, "kg"), new CqlQuantity(2m, "s"));
+    }
+
+    [TestMethod]
+    public void Divide_NullLeft_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Divide((CqlQuantity?)null, new CqlQuantity(2m, "mg")));
+    }
+
+    #endregion
+
+    #region Multiply
+
+    [TestMethod]
+    public void Multiply_ByScalar_ReturnsProductWithLeftUnit()
+    {
+        var ops = GetOperators();
+        var result = ops.Multiply(new CqlQuantity(3m, "mg"), new CqlQuantity(4m, UCUMUnits.Default));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(12m, result.value);
+        Assert.AreEqual(UCUMUnits.Default, result.unit);
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(NotSupportedException))]
+    public void Multiply_BothNonScalarUnits_Throws()
+    {
+        var ops = GetOperators();
+        ops.Multiply(new CqlQuantity(3m, "kg"), new CqlQuantity(4m, "s"));
+    }
+
+    [TestMethod]
+    public void Multiply_NullLeft_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Multiply((CqlQuantity?)null, new CqlQuantity(4m, UCUMUnits.Default)));
     }
 
     #endregion
