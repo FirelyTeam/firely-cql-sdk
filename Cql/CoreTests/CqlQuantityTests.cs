@@ -8,6 +8,9 @@
 
 #nullable enable
 
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 
 namespace CoreTests;
@@ -16,6 +19,7 @@ namespace CoreTests;
 [TestCategory("UnitTest")]
 public class CqlQuantityTests
 {
+    private static ICqlOperators GetOperators() => FhirCqlContext.WithDataSource().Operators;
     [TestMethod]
     public void Negate_PositiveValue_ReturnsNegativeValue()
     {
@@ -78,4 +82,196 @@ public class CqlQuantityTests
         Assert.IsNull(negated);
     }
 
+    #region Subtract
+
+    [TestMethod]
+    public void Subtract_SameUnit_ReturnsCorrectDifference()
+    {
+        var ops = GetOperators();
+        var result = ops.Subtract(new CqlQuantity(5m, "mg"), new CqlQuantity(3m, "mg"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2m, result.value);
+        Assert.AreEqual("mg", result.unit);
+    }
+
+    /// <summary>
+    /// Regression test: previously called Add instead of Subtract in the mixed-unit branch,
+    /// so "5 days - 3 day" would return 8 instead of 2.
+    /// </summary>
+    [TestMethod]
+    public void Subtract_CqlCalendarAlias_PluralMinusSingular_ReturnsCorrectDifference()
+    {
+        var ops = GetOperators();
+        var result = ops.Subtract(new CqlQuantity(5m, "days"), new CqlQuantity(3m, "day"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2m, result.value);
+        Assert.AreEqual("days", result.unit);
+    }
+
+    [TestMethod]
+    public void Subtract_NullLeft_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Subtract((CqlQuantity?)null, new CqlQuantity(3m, "mg")));
+    }
+
+    [TestMethod]
+    public void Subtract_NullRight_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Subtract(new CqlQuantity(5m, "mg"), null));
+    }
+
+    #endregion
+
+    #region Modulo
+
+    [TestMethod]
+    public void Modulo_SameUnit_ReturnsCorrectRemainder()
+    {
+        var ops = GetOperators();
+        var result = ops.Modulo(new CqlQuantity(7m, UCUMUnits.Day), new CqlQuantity(3m, UCUMUnits.Day));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(1m, result.value);
+        Assert.AreEqual(UCUMUnits.Day, result.unit);
+    }
+
+    /// <summary>
+    /// Regression test: previously called Add instead of Modulo in the mixed-unit branch,
+    /// so "7 days % 3 day" would return 10 instead of 1.
+    /// </summary>
+    [TestMethod]
+    public void Modulo_CqlCalendarAlias_PluralModuloSingular_ReturnsCorrectRemainder()
+    {
+        var ops = GetOperators();
+        var result = ops.Modulo(new CqlQuantity(7m, "days"), new CqlQuantity(3m, "day"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(1m, result.value);
+        Assert.AreEqual("days", result.unit);
+    }
+
+    [TestMethod]
+    public void Modulo_NullLeft_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Modulo(null!, new CqlQuantity(3m, "mg")));
+    }
+
+    #endregion
+
+    #region Between
+
+    [TestMethod]
+    public void Between_CqlQuantity_SameUnit_WithinRange_ReturnsTrue()
+    {
+        var ops = GetOperators();
+        Assert.IsTrue(ops.Between(new CqlQuantity(5m, "mg"), new CqlQuantity(1m, "mg"), new CqlQuantity(10m, "mg")));
+    }
+
+    [TestMethod]
+    public void Between_CqlQuantity_SameUnit_OnLowBoundary_ReturnsTrue()
+    {
+        var ops = GetOperators();
+        Assert.IsTrue(ops.Between(new CqlQuantity(1m, "mg"), new CqlQuantity(1m, "mg"), new CqlQuantity(10m, "mg")));
+    }
+
+    [TestMethod]
+    public void Between_CqlQuantity_SameUnit_OnHighBoundary_ReturnsTrue()
+    {
+        var ops = GetOperators();
+        Assert.IsTrue(ops.Between(new CqlQuantity(10m, "mg"), new CqlQuantity(1m, "mg"), new CqlQuantity(10m, "mg")));
+    }
+
+    [TestMethod]
+    public void Between_CqlQuantity_SameUnit_BelowRange_ReturnsFalse()
+    {
+        var ops = GetOperators();
+        Assert.IsFalse(ops.Between(new CqlQuantity(0m, "mg"), new CqlQuantity(1m, "mg"), new CqlQuantity(10m, "mg")));
+    }
+
+    [TestMethod]
+    public void Between_CqlQuantity_SameUnit_AboveRange_ReturnsFalse()
+    {
+        var ops = GetOperators();
+        Assert.IsFalse(ops.Between(new CqlQuantity(11m, "mg"), new CqlQuantity(1m, "mg"), new CqlQuantity(10m, "mg")));
+    }
+
+    /// <summary>
+    /// Verifies cross-unit Between works by canonicalizing via IMetricService.
+    /// 500 g is between 400 g (= 0.4 kg) and 1000 g (= 1 kg).
+    /// </summary>
+    [TestMethod]
+    public void Between_CqlQuantity_CrossUnit_UsesCanonicalisation()
+    {
+        var ops = GetOperators();
+        Assert.IsTrue(ops.Between(new CqlQuantity(500m, "g"), new CqlQuantity(0.4m, "kg"), new CqlQuantity(1m, "kg")));
+    }
+
+    [TestMethod]
+    public void Between_CqlQuantity_NullArgument_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Between((CqlQuantity?)null, new CqlQuantity(1m, "mg"), new CqlQuantity(10m, "mg")));
+    }
+
+    [TestMethod]
+    public void Between_CqlQuantity_NullLow_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Between(new CqlQuantity(5m, "mg"), null, new CqlQuantity(10m, "mg")));
+    }
+
+    #endregion
+
+    #region CanConvertQuantity
+
+    [TestMethod]
+    public void CanConvertQuantity_NullArgument_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.CanConvertQuantity(null, "kg"));
+    }
+
+    [TestMethod]
+    public void CanConvertQuantity_NullUnit_ReturnsNull()
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.CanConvertQuantity(new CqlQuantity(1m, "kg"), null));
+    }
+
+    [TestMethod]
+    public void CanConvertQuantity_SameUnit_ReturnsTrue()
+    {
+        var ops = GetOperators();
+        Assert.IsTrue(ops.CanConvertQuantity(new CqlQuantity(1m, "kg"), "kg"));
+    }
+
+    /// <summary>
+    /// Inches to feet is a pre-configured conversion in UnitConverter, so this must return true.
+    /// </summary>
+    [TestMethod]
+    public void CanConvertQuantity_PreConfiguredLengthConversion_ReturnsTrue()
+    {
+        var ops = GetOperators();
+        Assert.IsTrue(ops.CanConvertQuantity(new CqlQuantity(12m, UCUMUnits.Inch), UCUMUnits.Foot));
+    }
+
+    /// <summary>
+    /// Days to months is a pre-configured calendar conversion in UnitConverter, so this must return true.
+    /// </summary>
+    [TestMethod]
+    public void CanConvertQuantity_PreConfiguredCalendarConversion_ReturnsTrue()
+    {
+        var ops = GetOperators();
+        Assert.IsTrue(ops.CanConvertQuantity(new CqlQuantity(30m, UCUMUnits.Day), UCUMUnits.Month));
+    }
+
+    [TestMethod]
+    public void CanConvertQuantity_IncompatibleUnits_ReturnsFalse()
+    {
+        var ops = GetOperators();
+        Assert.IsFalse(ops.CanConvertQuantity(new CqlQuantity(1m, "kg"), "s"));
+    }
+
+    #endregion
 }
