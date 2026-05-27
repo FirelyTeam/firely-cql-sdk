@@ -63,7 +63,8 @@ namespace Hl7.Cql.Fhir
                 valueSets,
                 unitConverter,
                 nowIso8601,
-                fhirEnumComparer);
+                fhirEnumComparer,
+                metricService);
 
             comparers
                 .AddIntervalComparisons(operators)

@@ -69,7 +69,7 @@ namespace Hl7.Cql.Fhir
 
         /// <summary>
         /// The <see cref="IMetricService"/> to use for UCUM unit conversions, or <see langword="null"/> to use the default service.
-        /// Inject a custom implementation here to substitute the commercial Firely UCUM service.
+        /// Inject a custom implementation here.
         /// </summary>
         public IMetricService? MetricService { get; init; }
     }
