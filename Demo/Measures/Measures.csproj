@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\cql-demo.props" />
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -11,7 +12,7 @@
     <ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Primitives\Cql.Primitives.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
-    <PackageReference Include="Hl7.Fhir.R4" Version="5.4.0" />
+    <PackageReference Include="Hl7.Fhir.R4" Version="$(FirelyNetVersion)" />
   </ItemGroup>
 
 </Project>

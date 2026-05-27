@@ -1,6 +1,6 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 /*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -16,7 +16,7 @@ namespace Hl7.Cql.Operators
     internal partial class CqlOperators
     {
         #region Contains
-        public bool? Contains<T>(IEnumerable<T>? list, T item)
+        public bool? Contains<T>(IEnumerable<T?>? list, T? item)
         {
             if (list == null)
                 return false;
@@ -879,22 +879,16 @@ namespace Hl7.Cql.Operators
         #endregion
 
         #region In
-        public bool? In<T>(T element, IEnumerable<T> argument)
-        {
-            if ((object)element! == null)
-                return null;
-            if (argument == null)
-                return false;
-            else
-            {
-                return argument.Any(t => Comparer.Compare(element, t!, null) == 0);
-            }
-
-        }
+        public bool? In<T>(T? element, IEnumerable<T?>? argument) => Contains(argument, element);
 
         public bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument)
         {
-            if (element is null) return null;
+            if (element is null)
+            {
+                if (argument is null or IValueSetFacade)
+                    return false;
+                return argument.Any(t => t is null);
+            }
 
             return argument switch
             {

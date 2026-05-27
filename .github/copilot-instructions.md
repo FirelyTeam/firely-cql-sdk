@@ -1,6 +1,6 @@
 # Copilot Instructions for Firely CQL SDK
 
-**Version:** 2.9.0
+**Version:** 2.10.0
 
 This document contains development guidelines and instructions for maintaining consistency across the Firely CQL SDK repository when using GitHub Copilot or making changes.
 
@@ -277,15 +277,31 @@ This document contains development guidelines and instructions for maintaining c
 
 ### 4.5 Release Notes
 
-4.5.1 When asked to create release notes, use [docs/release-notes-template.md](../docs/release-notes-template.md) as the default structure and guidance.
+4.5.1 When asked to create release notes, use [docs/releases/release-notes-template.md](../docs/releases/release-notes-template.md) as the default structure and guidance.
 
-4.5.2 Base release notes on the full set of commits since the previous release tag and incorporate any relevant content from [docs/vnext-release-notes.md](../docs/vnext-release-notes.md).
+4.5.2 Base release notes on the full set of commits since the previous release tag and incorporate any relevant content from [docs/releases/vnext-release-notes.md](../docs/releases/vnext-release-notes.md).
 
 4.5.3 For public API changes, always call out the exact type/member/property/method names so developers can identify what changed.
 
 4.5.4 For dependency version bumps, explicitly mention the version property name and old/new version when known (for example, `FirelyNetVersion`).
 
 4.5.5 **When bumping `VersionPrefix` (the SDK version), also update the version number in the `## Release Notes` section of `README.md`** — it contains a line like `This is release version X.Y.Z of the engine.` that must be kept in sync.
+
+4.5.6 **After creating release notes, move all content from [docs/releases/vnext-release-notes.md](../docs/releases/vnext-release-notes.md) into the release notes document** — the content in that file is pre-drafted material that belongs in the final release notes and must not be left behind.
+
+4.5.7 **After moving the vnext content, reset [docs/releases/vnext-release-notes.md](../docs/releases/vnext-release-notes.md) to the empty template** — the file must be left with only the section headings and no content, ready for the next release cycle. The empty template is:
+
+```md
+# vNext Release Notes
+
+## Breaking Changes
+
+## Features
+
+## Fixes
+```
+
+4.5.8 **Save all release notes files under `docs/releases/`** — both versioned release notes (e.g. `docs/releases/release-notes-2.7.0.md`) and `docs/releases/vnext-release-notes.md` live in this subdirectory.
 
 ## 5. Build and Test
 

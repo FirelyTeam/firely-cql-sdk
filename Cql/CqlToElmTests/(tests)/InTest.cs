@@ -91,5 +91,51 @@ namespace Hl7.Cql.CqlToElm.Test
                 """);
             library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
         }
+
+        // Integration test for the bug described in the issue: @2026-05-14 in c.onset
+        // Bug 1: Date → DateTime coercion should use ToDateTime (not As)
+        // Bug 2: Choice<..., Period, ...> → Interval<DateTime> should unwrap to Period and call FHIRHelpers.ToInterval
+        [TestMethod]
+        public void DateInFhirConditionOnset()
+        {
+            var library = CreateCqlToolkit().AddFHIRHelpers().MakeLibrary("""
+                library Test
+                using FHIR version '4.0.1'
+                include FHIRHelpers version '4.0.1'
+
+                define test:
+                    from [Condition] c
+                    where @2026-05-14 in c.onset
+                    return c.id
+                """);
+
+            // Before the fix, the CQL-to-ELM translator would produce incorrect As nodes
+            // instead of ToDateTime and FHIRHelpers.ToInterval. This test verifies the fix.
+            library.GetErrors().Should().BeEmpty();
+
+            // Locate the In expression within the query's where clause
+            var testStatement = library.statements.FirstOrDefault(s => s.name == "test");
+            Assert.IsNotNull(testStatement, "Expected a 'test' statement in the library");
+            var query = testStatement.expression as Query;
+            Assert.IsNotNull(query, $"Expected a Query but got {testStatement.expression?.GetType().Name ?? "null"}");
+
+            Assert.IsInstanceOfType(query.where, typeof(In));
+            var inExpr = (In)query.where;
+            Assert.IsNotNull(inExpr.operand, "Expected inExpr.operand to be non-null");
+            Assert.AreEqual(2, inExpr.operand.Length, "Expected inExpr.operand to have 2 elements");
+
+            // Left operand: ToDateTime(@2026-05-14) — Bug 1 fix
+            Assert.IsInstanceOfType(inExpr.operand[0], typeof(ToDateTime),
+                $"Expected ToDateTime but got {inExpr.operand[0]?.GetType().Name}");
+
+            // Right operand: FHIRHelpers.ToInterval(c.onset as FHIR.Period) — Bug 2 fix
+            Assert.IsInstanceOfType(inExpr.operand[1], typeof(FunctionRef),
+                $"Expected FunctionRef but got {inExpr.operand[1]?.GetType().Name}");
+            var fr = (FunctionRef)inExpr.operand[1];
+            Assert.AreEqual("FHIRHelpers", fr.libraryName);
+            Assert.AreEqual("ToInterval", fr.name);
+            Assert.AreEqual(1, fr.operand?.Length);
+            Assert.IsInstanceOfType(fr.operand![0], typeof(As));
+        }
     }
 }

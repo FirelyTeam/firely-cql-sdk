@@ -265,6 +265,7 @@ internal partial class LibrarySetCSharpCodeGenerator
                     Enum e                                     => $"({e.GetType().FullName}){e}", // 'e' will be the numeric value of the undefined enum
                     bool b                                     => b ? "true" : "false",
                     decimal d                                  => FormattableString.Invariant($"{d}m"),
+                    long l                                     => FormattableString.Invariant($"{l}L"),
                     int i                                      => FormattableString.Invariant($"{i}"),
                     var v when v.IsObjectNullOrDefault()       => DefaultExpressionForType(),
                     var v                                      => FormattableString.Invariant($"{v}"),

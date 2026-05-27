@@ -126,7 +126,7 @@ Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.
 Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlTime?>? left, Hl7.Cql.Primitives.CqlTime? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<int?>? left, int? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Contains(Hl7.Cql.Primitives.CqlInterval<long?>? left, long? right, string? precision) -> bool?
-Hl7.Cql.Operators.ICqlOperators.Contains<T>(System.Collections.Generic.IEnumerable<T>? list, T item) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Contains<T>(System.Collections.Generic.IEnumerable<T?>? list, T? item) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Convert<T>(object? from) -> T?
 Hl7.Cql.Operators.ICqlOperators.ConvertBooleanToDecimal(bool? b) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.ConvertBooleanToInteger(bool? b) -> int?
@@ -257,8 +257,8 @@ Hl7.Cql.Operators.ICqlOperators.HighBoundary(Hl7.Cql.Primitives.CqlDateTime? inp
 Hl7.Cql.Operators.ICqlOperators.HighBoundary(Hl7.Cql.Primitives.CqlTime? input, int? precision) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Operators.ICqlOperators.Implies(bool? left, bool? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Implies(System.Lazy<bool?>! left, System.Lazy<bool?>! right) -> bool?
-Hl7.Cql.Operators.ICqlOperators.In<T>(T element, System.Collections.Generic.IEnumerable<T>! argument) -> bool?
-Hl7.Cql.Operators.ICqlOperators.In<T>(T t, Hl7.Cql.Primitives.CqlInterval<T>? interval, string? precision) -> bool?
+Hl7.Cql.Operators.ICqlOperators.In<T>(T? element, System.Collections.Generic.IEnumerable<T?>? argument) -> bool?
+Hl7.Cql.Operators.ICqlOperators.In<T>(T? t, Hl7.Cql.Primitives.CqlInterval<T>? interval, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Indexer(string? argument, int? index) -> string?
 Hl7.Cql.Operators.ICqlOperators.Indexer<T>(System.Collections.Generic.IEnumerable<T>? source, int? index) -> T?
 Hl7.Cql.Operators.ICqlOperators.IndexOf<T>(System.Collections.Generic.IEnumerable<T>? list, T element) -> int?
