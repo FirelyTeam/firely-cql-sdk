@@ -110,11 +110,18 @@ namespace Hl7.Cql.Operators
                     return new CqlQuantity(Add(left.value, right.value), left.unit);
 
                 // Try UCUM arithmetic for commensurable units (e.g. kg + g)
-                if (MetricServiceExtensions.TryAdd(MetricService,
-                        (left.value.Value, leftUnit, "http://unitsofmeasure.org"),
-                        (right.value.Value, rightUnit, "http://unitsofmeasure.org"),
-                        out var result))
-                    return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+                try
+                {
+                    if (MetricServiceExtensions.TryAdd(MetricService,
+                            (left.value.Value, leftUnit, "http://unitsofmeasure.org"),
+                            (right.value.Value, rightUnit, "http://unitsofmeasure.org"),
+                            out var result))
+                        return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+                }
+                catch (NotImplementedException)
+                {
+                    throw new NotSupportedException($"The configured IMetricService does not implement Add for units {left.unit} and {right.unit}. Inject a full IMetricService implementation to enable cross-unit arithmetic.");
+                }
 
                 throw new NotSupportedException($"Arithmetic on quantities with incompatible units {left.unit} and {right.unit} is not supported.");
             }
@@ -156,11 +163,18 @@ namespace Hl7.Cql.Operators
             else
             {
                 // Try UCUM division for commensurable units (e.g. kg / g → dimensionless scalar)
-                if (MetricServiceExtensions.TryDivide(MetricService,
-                        (left.value.Value, left.unit, "http://unitsofmeasure.org"),
-                        (right.value.Value, right.unit, "http://unitsofmeasure.org"),
-                        out var result))
-                    return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+                try
+                {
+                    if (MetricServiceExtensions.TryDivide(MetricService,
+                            (left.value.Value, left.unit, "http://unitsofmeasure.org"),
+                            (right.value.Value, right.unit, "http://unitsofmeasure.org"),
+                            out var result))
+                        return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+                }
+                catch (NotImplementedException)
+                {
+                    throw new NotSupportedException($"The configured IMetricService does not implement Divide for units {left.unit} and {right.unit}. Inject a full IMetricService implementation to enable cross-unit arithmetic.");
+                }
 
                 throw new NotSupportedException($"Division of quantities with incompatible units {left.unit} and {right.unit} is not supported.");
             }
@@ -831,11 +845,18 @@ namespace Hl7.Cql.Operators
                     return new CqlQuantity(Subtract(left.value, right.value), left.unit);
 
                 // Try UCUM arithmetic for commensurable units (e.g. kg - g)
-                if (MetricServiceExtensions.TrySubtract(MetricService,
-                        (left.value.Value, leftUnit, "http://unitsofmeasure.org"),
-                        (right.value.Value, rightUnit, "http://unitsofmeasure.org"),
-                        out var result))
-                    return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+                try
+                {
+                    if (MetricServiceExtensions.TrySubtract(MetricService,
+                            (left.value.Value, leftUnit, "http://unitsofmeasure.org"),
+                            (right.value.Value, rightUnit, "http://unitsofmeasure.org"),
+                            out var result))
+                        return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+                }
+                catch (NotImplementedException)
+                {
+                    throw new NotSupportedException($"The configured IMetricService does not implement Subtract for units {left.unit} and {right.unit}. Inject a full IMetricService implementation to enable cross-unit arithmetic.");
+                }
 
                 throw new NotSupportedException($"Arithmetic on quantities with incompatible units {left.unit} and {right.unit} is not supported.");
             }

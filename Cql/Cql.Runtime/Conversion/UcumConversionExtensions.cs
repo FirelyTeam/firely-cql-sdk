@@ -194,34 +194,19 @@ namespace Hl7.Cql.Conversion
             }
 
             public bool TryAdd((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result)
-            {
-                try { return _fhirService.TryAdd(x, y, out result); }
-                catch (NotImplementedException) { result = null; return false; }
-            }
+                => _fhirService.TryAdd(x, y, out result);
 
             public bool TrySubtract((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result)
-            {
-                try { return _fhirService.TrySubtract(x, y, out result); }
-                catch (NotImplementedException) { result = null; return false; }
-            }
+                => _fhirService.TrySubtract(x, y, out result);
 
             public bool TryMultiply((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result)
-            {
-                try { return _fhirService.TryMultiply(x, y, out result); }
-                catch (NotImplementedException) { result = null; return false; }
-            }
+                => _fhirService.TryMultiply(x, y, out result);
 
             public bool TryDivide((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result)
-            {
-                try { return _fhirService.TryDivide(x, y, out result); }
-                catch (NotImplementedException) { result = null; return false; }
-            }
+                => _fhirService.TryDivide(x, y, out result);
 
             public bool TryCompare((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out int? result)
-            {
-                try { return _fhirService.TryCompare(x, y, out result); }
-                catch (NotImplementedException) { result = null; return false; }
-            }
+                => _fhirService.TryCompare(x, y, out result);
         }
 #pragma warning restore CS8767
     }
