@@ -150,16 +150,19 @@ namespace Hl7.Cql.Operators
             else if (right.value == 0m) return null;
             else if (left.unit == null || right.unit == null) return null;
             else if (left.unit == right.unit)
-            {
-                var newValue = left.value.Value / right.value.Value;
-                return new CqlQuantity(newValue, UCUMUnits.Default);
-            }
-            else if (right.unit != UCUMUnits.Default)
-                throw new NotSupportedException("Division of different units is not supported; only division by a numeric value (units = \"1\") is supported.");
+                return new CqlQuantity(left.value.Value / right.value.Value, UCUMUnits.Default);
+            else if (right.unit == UCUMUnits.Default)
+                return new CqlQuantity(left.value.Value / right.value.Value, left.unit);
             else
             {
-                var newValue = left.value.Value / right.value.Value;
-                return new CqlQuantity(newValue, left.unit);
+                // Try UCUM division for commensurable units (e.g. kg / g → dimensionless scalar)
+                if (MetricServiceExtensions.TryDivide(MetricService,
+                        (left.value.Value, left.unit, "http://unitsofmeasure.org"),
+                        (right.value.Value, right.unit, "http://unitsofmeasure.org"),
+                        out var result))
+                    return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+
+                throw new NotSupportedException($"Division of quantities with incompatible units {left.unit} and {right.unit} is not supported.");
             }
         }
 

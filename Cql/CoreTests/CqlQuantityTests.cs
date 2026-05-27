@@ -340,12 +340,32 @@ public class CqlQuantityTests
         Assert.IsNull(ops.Divide(new CqlQuantity(6m, "mg"), new CqlQuantity(0m, "mg")));
     }
 
+    /// <summary>
+    /// Dividing commensurable UCUM quantities (kg / g) delegates to IMetricService.TryDivide.
+    /// TryDivide canonicalises both operands first: 2 kg → 2000 g, then 2000 g / 1 g = 2000 (dimensionless).
+    /// </summary>
     [TestMethod]
-    [ExpectedException(typeof(NotSupportedException))]
-    public void Divide_DifferentNonScalarUnits_Throws()
+    public void Divide_CommensurableUcumUnits_ReturnsDimensionlessQuotient()
     {
         var ops = GetOperators();
-        ops.Divide(new CqlQuantity(6m, "kg"), new CqlQuantity(2m, "s"));
+        var result = ops.Divide(new CqlQuantity(2m, "kg"), new CqlQuantity(1m, "g"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(2000m, result!.value);
+        // FhirMetricService returns "" (empty) for the dimensionless unit when units cancel
+        Assert.AreEqual(string.Empty, result.unit);
+    }
+
+    /// <summary>
+    /// FhirMetricService.TryDivide canonicalises operands before dividing:
+    /// 6 kg → 6000 g, so 6 kg / 2 s = 3000 (g/s as compound unit).
+    /// </summary>
+    [TestMethod]
+    public void Divide_DifferentValidUcumUnits_ReturnsCompoundUnitResult()
+    {
+        var ops = GetOperators();
+        var result = ops.Divide(new CqlQuantity(6m, "kg"), new CqlQuantity(2m, "s"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(3000m, result!.value);
     }
 
     [TestMethod]
