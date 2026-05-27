@@ -109,7 +109,6 @@ namespace Hl7.Cql.Operators
                 if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
                     return new CqlQuantity(Add(left.value, right.value), left.unit);
 
-                // Try UCUM arithmetic for commensurable units (e.g. kg + g)
                 return TryUcumBinaryOp(left.value.Value, leftUnit, right.value.Value, rightUnit, MetricServiceExtensions.TryAdd, "Add");
             }
             else
@@ -149,7 +148,6 @@ namespace Hl7.Cql.Operators
                 return new CqlQuantity(left.value.Value / right.value.Value, left.unit);
             else
             {
-                // Try UCUM division for commensurable units (e.g. kg / g → dimensionless scalar)
                 return TryUcumBinaryOp(left.value.Value, left.unit, right.value.Value, right.unit, MetricServiceExtensions.TryDivide, "Divide");
             }
         }
@@ -477,12 +475,11 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.unit != right.unit)
             {
-                // CQL treats singular/plural calendar duration units as equivalent (e.g. day/days)
-                string? leftUnit = left.unit;
-                string? rightUnit = right.unit;
-                CompareNormalizedUnits(leftUnit, rightUnit);
-
-                return new CqlQuantity(Modulo(left.value, right.value), leftUnit);
+                string leftUnit = left.unit ?? string.Empty;
+                string rightUnit = right.unit ?? string.Empty;
+                if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
+                    return new CqlQuantity(Modulo(left.value, right.value), left.unit);
+                throw new NotSupportedException($"Modulo of quantities with incompatible units {left.unit} and {right.unit} is not supported.");
             }
             else
                 return new CqlQuantity(Modulo(left.value, right.value), left.unit);
@@ -515,7 +512,6 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.unit != "1" && right.unit != "1")
             {
-                // Try UCUM multiplication for unit-bearing quantities (e.g. m * m = m2)
                 return TryUcumBinaryOp(left.value.Value, left.unit!, right.value.Value, right.unit!, MetricServiceExtensions.TryMultiply, "Multiply");
             }
             else
@@ -821,7 +817,6 @@ namespace Hl7.Cql.Operators
                 if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
                     return new CqlQuantity(Subtract(left.value, right.value), left.unit);
 
-                // Try UCUM arithmetic for commensurable units (e.g. kg - g)
                 return TryUcumBinaryOp(left.value.Value, leftUnit, right.value.Value, rightUnit, MetricServiceExtensions.TrySubtract, "Subtract");
             }
             else return new CqlQuantity(Subtract(left.value, right.value), left.unit);
@@ -842,8 +837,8 @@ namespace Hl7.Cql.Operators
             try
             {
                 if (tryOp(MetricService,
-                        (leftValue, leftUnit, "http://unitsofmeasure.org"),
-                        (rightValue, rightUnit, "http://unitsofmeasure.org"),
+                        (leftValue, leftUnit, UcumConversionExtensions.UcumSystemUrl),
+                        (rightValue, rightUnit, UcumConversionExtensions.UcumSystemUrl),
                         out var result))
                     return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
             }

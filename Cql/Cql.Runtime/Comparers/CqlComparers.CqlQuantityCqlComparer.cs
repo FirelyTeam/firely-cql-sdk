@@ -44,7 +44,7 @@ partial class CqlComparers
 
             // If no direct comparison is possible, normalize the units using UCUM and
             // redo the comparison.
-            if (TryCanonicalize(x, out var left1) && TryCanonicalize(y, out var right1))
+            if (x.TryCanonicalize(MetricService, out var left1) && y.TryCanonicalize(MetricService, out var right1))
             {
                 var valueComparison = ValueComparer.Compare(left1!.value!, right1!.value!, precision);
                 return valueComparison;
@@ -73,7 +73,5 @@ partial class CqlComparers
             return value.ToString()?.GetHashCode() ?? GetHashCodeForNull();
         }
 
-        private bool TryCanonicalize(CqlQuantity quantity, out CqlQuantity? canonicalized) =>
-            quantity.TryCanonicalize(MetricService, out canonicalized);
     }
 }

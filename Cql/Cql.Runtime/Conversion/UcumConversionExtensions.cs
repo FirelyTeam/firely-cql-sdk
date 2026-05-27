@@ -16,7 +16,8 @@ namespace Hl7.Cql.Conversion
     /// </summary>
     internal static class UcumConversionExtensions
     {
-        // TODO: Remove DefaultUcumMetricService once Fhir.Metrics properly implements IMetricService.TryConvertTo.
+        internal const string UcumSystemUrl = "http://unitsofmeasure.org";
+
         /// <summary>
         /// The default <see cref="M.IMetricService"/> used when no custom service is injected.
         /// </summary>
@@ -50,7 +51,7 @@ namespace Hl7.Cql.Conversion
                 quantityUnit = ucumUnit;
 
             // Call the decimal overload from MetricServiceExtensions explicitly to avoid extension method resolution ambiguity.
-            if (M.MetricServiceExtensions.TryCanonicalize(service, (quantityValue, quantityUnit, "http://unitsofmeasure.org"), out var canonical))
+            if (M.MetricServiceExtensions.TryCanonicalize(service, (quantityValue, quantityUnit, UcumSystemUrl), out var canonical))
             {
                 canonicalizedQuantity = new(canonical!.Value.Item1, canonical.Value.Item2);
                 return true;
@@ -90,7 +91,7 @@ namespace Hl7.Cql.Conversion
             }
 
             // Call the decimal overload from MetricServiceExtensions explicitly to avoid extension method resolution ambiguity.
-            if (M.MetricServiceExtensions.TryConvertTo(service, (quantityValue, quantityUnit, "http://unitsofmeasure.org"), unit, out var converted))
+            if (M.MetricServiceExtensions.TryConvertTo(service, (quantityValue, quantityUnit, UcumSystemUrl), unit, out var converted))
             {
                 convertedQuantity = new(converted!.Value.Item1, converted.Value.Item2);
                 return true;
@@ -168,7 +169,6 @@ namespace Hl7.Cql.Conversion
 #pragma warning disable CS8767 // IMetricService is compiled without full NRT annotations; delegate implementations match at runtime.
         private sealed class DefaultUcumMetricService : M.IMetricService
         {
-            private static readonly Lazy<M.SystemOfUnits> _system = new(M.UCUM.Load);
             private static readonly M.FhirMetricService _fhirService = new();
 
             public bool TryCanonicalize((string value, string unit, string? codesystem) quantity, out (string value, string unit, string? codesystem)? canonical)
@@ -176,21 +176,9 @@ namespace Hl7.Cql.Conversion
 
             public bool TryConvertTo((string value, string unit, string? codesystem) quantity, string targetUnit, out (string value, string unit, string? codesystem)? result)
             {
-                // FhirMetricService.TryConvertTo throws NotImplementedException; use SystemOfUnits directly.
-                try
-                {
-                    var value = M.Exponential.Exact(quantity.value);
-                    var metric = _system.Value.Metric(quantity.unit);
-                    var metricsQ = value * metric;
-                    metricsQ = _system.Value.Convert(metricsQ, targetUnit);
-                    result = (M.Exponential.DecimalToString(metricsQ.Value.ToDecimal()), metricsQ.Metric.ToString(), quantity.codesystem);
-                    return true;
-                }
-                catch (Exception ex) when (ex is ArgumentException or InvalidCastException or NotImplementedException)
-                {
-                    result = null;
-                    return false;
-                }
+                // Conversions.Convert in Fhir.Metrics is not implemented; cannot convert.
+                result = null;
+                return false;
             }
 
             public bool TryAdd((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result)
