@@ -390,11 +390,13 @@ public class CqlQuantityTests
     }
 
     [TestMethod]
-    [ExpectedException(typeof(NotSupportedException))]
-    public void Multiply_BothNonScalarUnits_Throws()
+    public void Multiply_UcumUnits_ReturnsProductWithCombinedUnit()
     {
         var ops = GetOperators();
-        ops.Multiply(new CqlQuantity(3m, "kg"), new CqlQuantity(4m, "s"));
+        var result = ops.Multiply(new CqlQuantity(3m, "m"), new CqlQuantity(2m, "m"));
+        Assert.IsNotNull(result);
+        Assert.AreEqual(6m, result.value);
+        Assert.AreEqual("m2", result.unit);
     }
 
     [TestMethod]

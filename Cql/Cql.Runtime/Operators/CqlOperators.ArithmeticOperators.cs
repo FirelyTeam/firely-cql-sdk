@@ -514,7 +514,10 @@ namespace Hl7.Cql.Operators
             else if (left.value == null || right.value == null)
                 return null;
             else if (left.unit != "1" && right.unit != "1")
-                throw new NotSupportedException("Unit arithmetic is not supported.");
+            {
+                // Try UCUM multiplication for unit-bearing quantities (e.g. m * m = m2)
+                return TryUcumBinaryOp(left.value.Value, left.unit!, right.value.Value, right.unit!, MetricServiceExtensions.TryMultiply, "Multiply");
+            }
             else
                 return new CqlQuantity(Multiply(left.value, right.value), "1");
         }
