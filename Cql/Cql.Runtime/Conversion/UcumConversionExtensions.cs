@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/master/LICENSE
  */
 
+using System.Collections.Generic;
+using System.Globalization;
 using Hl7.Cql.Primitives;
 using M = Fhir.Metrics;
 
@@ -161,24 +163,43 @@ namespace Hl7.Cql.Conversion
 
         /// <summary>
         /// Default <see cref="M.IMetricService"/> implementation used when no custom service is injected.
-        /// Delegates most operations to <see cref="M.FhirMetricService"/>, and implements
-        /// <see cref="M.IMetricService.TryConvertTo"/> using <see cref="M.SystemOfUnits"/> directly,
-        /// since <see cref="M.FhirMetricService.TryConvertTo"/> throws <see cref="NotImplementedException"/>.
+        /// Delegates most operations to <see cref="M.FhirMetricService"/>, and provides a local
+        /// <see cref="M.IMetricService.TryConvertTo"/> implementation using <see cref="M.SystemOfUnits"/> directly
+        /// until <see cref="M.FhirMetricService"/> ships a working version.
         /// </summary>
-        // TODO: Remove once Fhir.Metrics properly implements IMetricService.TryConvertTo.
+        // TODO: Remove _system and TryConvertTo once Fhir.Metrics properly implements IMetricService.TryConvertTo.
 #pragma warning disable CS8767 // IMetricService is compiled without full NRT annotations; delegate implementations match at runtime.
         private sealed class DefaultUcumMetricService : M.IMetricService
         {
             private static readonly M.FhirMetricService _fhirService = new();
+            private static readonly Lazy<M.SystemOfUnits> _system = new(() => M.UCUM.Load());
 
             public bool TryCanonicalize((string value, string unit, string? codesystem) quantity, out (string value, string unit, string? codesystem)? canonical)
                 => _fhirService.TryCanonicalize(quantity, out canonical);
 
             public bool TryConvertTo((string value, string unit, string? codesystem) quantity, string targetUnit, out (string value, string unit, string? codesystem)? result)
             {
-                // Conversions.Convert in Fhir.Metrics is not implemented; cannot convert.
-                result = null;
-                return false;
+                // TODO: Remove once Fhir.Metrics properly implements IMetricService.TryConvertTo.
+                try
+                {
+                    M.Quantity src = _system.Value.Conversions.Canonical(ToQuantity(quantity));
+                    M.Quantity targetBase = _system.Value.Conversions.Canonical(ToQuantity(("1", targetUnit, quantity.codesystem)));
+                    if (!M.Quantity.SameDimension(src, targetBase)) { result = null; return false; }
+                    M.Exponential convertedValue = M.Exponential.Divide(src.Value, targetBase.Value);
+                    result = (convertedValue.ToDecimal().ToString(CultureInfo.InvariantCulture), targetUnit, quantity.codesystem);
+                    return true;
+                }
+                catch (Exception ex) when (ex is ArgumentException or InvalidCastException)
+                {
+                    result = null;
+                    return false;
+                }
+            }
+
+            private static M.Quantity ToQuantity((string value, string unit, string? codesystem) quantity)
+            {
+                M.Metric metric = quantity.unit != null ? _system.Value.Metric(quantity.unit) : new M.Metric(new List<M.Metric.Axis>());
+                return new M.Quantity(new M.Exponential(quantity.value), metric);
             }
 
             public bool TryAdd((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result)
