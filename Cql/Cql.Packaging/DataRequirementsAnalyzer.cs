@@ -198,7 +198,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         {
             if (librarySet.TryResolveDefinition<Elm.ConceptDef>(contextLibrary, conceptRef, out var cd))
             {
-                var conceptLibrary = ResolveLibraryForReference(conceptRef);
+                var conceptLibrary = ResolveLibraryForReference(conceptRef, contextLibrary);
                 return BuildCodeableConcept(cd.display, cd.code, conceptLibrary);
             }
 
@@ -234,7 +234,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         {
             if (librarySet.TryResolveDefinition<Elm.CodeDef>(contextLibrary, codeRef, out var cd))
             {
-                var codeDefLibrary = ResolveLibraryForReference(codeRef);
+                var codeDefLibrary = ResolveLibraryForReference(codeRef, contextLibrary);
                 return BuildCoding(cd.id, cd.codeSystem, cd.display, codeDefLibrary);
             }
             else
@@ -244,7 +244,10 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         private Coding BuildCoding(Elm.CodeRef codeRef, ElmLibrary codeContextLibrary)
         {
             if (librarySet.TryResolveDefinition<Elm.CodeDef>(codeContextLibrary, codeRef, out var cd))
-                return BuildCoding(cd.id, cd.codeSystem, cd.display, codeContextLibrary);
+            {
+                var codeDefLibrary = ResolveLibraryForReference(codeRef, codeContextLibrary);
+                return BuildCoding(cd.id, cd.codeSystem, cd.display, codeDefLibrary);
+            }
             else
                 throw new UnresolvedReferenceError(codeContextLibrary, codeRef).ToException();
         }
@@ -274,20 +277,20 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         /// Resolves the library where a reference's definition lives, based on its libraryName alias.
         /// If the reference has no libraryName, the contextLibrary is returned.
         /// </summary>
-        private ElmLibrary ResolveLibraryForReference(Elm.IReferenceElement reference)
+        private ElmLibrary ResolveLibraryForReference(Elm.IReferenceElement reference, ElmLibrary sourceLibrary)
         {
             var libraryAlias = reference is Elm.IGetLibraryName gln ? gln.libraryName : null;
             if (libraryAlias is null)
-                return contextLibrary;
+                return sourceLibrary;
 
-            if (librarySet.TryResolveDefinition<Elm.IncludeDef>(contextLibrary, libraryAlias, null, out var includeDef))
+            if (librarySet.TryResolveDefinition<Elm.IncludeDef>(sourceLibrary, libraryAlias, null, out var includeDef))
             {
                 var resolved = librarySet.GetLibrary(includeDef.VersionedLibraryIdentifier);
                 if (resolved is not null)
                     return resolved;
             }
 
-            return contextLibrary;
+            return sourceLibrary;
         }
     }
 }
