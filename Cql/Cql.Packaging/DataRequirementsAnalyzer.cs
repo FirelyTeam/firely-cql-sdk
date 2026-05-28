@@ -197,7 +197,10 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         private CodeableConcept BuildCodeableConcept(Elm.ConceptRef conceptRef)
         {
             if (librarySet.TryResolveDefinition<Elm.ConceptDef>(contextLibrary, conceptRef, out var cd))
-                return BuildCodeableConcept(cd.display, cd.code);
+            {
+                var conceptLibrary = ResolveLibraryForReference(conceptRef);
+                return BuildCodeableConcept(cd.display, cd.code, conceptLibrary);
+            }
 
             throw new UnresolvedReferenceError(contextLibrary, conceptRef).ToException();
         }
@@ -205,9 +208,9 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         private CodeableConcept BuildCodeableConcept(Elm.Concept concept)
             => BuildCodeableConcept(concept.display, concept.code);
 
-        private CodeableConcept BuildCodeableConcept(string display, Elm.CodeRef[] codes)
+        private CodeableConcept BuildCodeableConcept(string display, Elm.CodeRef[] codes, ElmLibrary codeContextLibrary)
         {
-            var codings = codes.Select(BuildCoding).ToList();
+            var codings = codes.Select(cr => BuildCoding(cr, codeContextLibrary)).ToList();
 
             return new CodeableConcept
             {
@@ -230,19 +233,31 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         private Coding BuildCoding(Elm.CodeRef codeRef)
         {
             if (librarySet.TryResolveDefinition<Elm.CodeDef>(contextLibrary, codeRef, out var cd))
-                return BuildCoding(cd.id, cd.codeSystem, cd.display);
+            {
+                var codeDefLibrary = ResolveLibraryForReference(codeRef);
+                return BuildCoding(cd.id, cd.codeSystem, cd.display, codeDefLibrary);
+            }
             else
                 throw new UnresolvedReferenceError(contextLibrary, codeRef).ToException();
         }
 
-        private Coding BuildCoding(Elm.Code code) => BuildCoding(code.code, code.system, code.display);
+        private Coding BuildCoding(Elm.CodeRef codeRef, ElmLibrary codeContextLibrary)
+        {
+            if (librarySet.TryResolveDefinition<Elm.CodeDef>(codeContextLibrary, codeRef, out var cd))
+                return BuildCoding(cd.id, cd.codeSystem, cd.display, codeContextLibrary);
+            else
+                throw new UnresolvedReferenceError(codeContextLibrary, codeRef).ToException();
+        }
+
+        private Coding BuildCoding(Elm.Code code) => BuildCoding(code.code, code.system, code.display, contextLibrary);
 
         private Coding BuildCoding(
             string code,
             Elm.CodeSystemRef codeSystemRef,
-            string display)
+            string display,
+            ElmLibrary codeSystemContextLibrary)
         {
-            if (librarySet.TryResolveDefinition<Elm.CodeSystemDef>(contextLibrary, codeSystemRef, out var csd))
+            if (librarySet.TryResolveDefinition<Elm.CodeSystemDef>(codeSystemContextLibrary, codeSystemRef, out var csd))
             {
                 return new Coding
                 {
@@ -252,7 +267,27 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
                 };
             }
 
-            throw new UnresolvedReferenceError(contextLibrary, codeSystemRef).ToException();
+            throw new UnresolvedReferenceError(codeSystemContextLibrary, codeSystemRef).ToException();
+        }
+
+        /// <summary>
+        /// Resolves the library where a reference's definition lives, based on its libraryName alias.
+        /// If the reference has no libraryName, the contextLibrary is returned.
+        /// </summary>
+        private ElmLibrary ResolveLibraryForReference(Elm.IReferenceElement reference)
+        {
+            var libraryAlias = reference is Elm.IGetLibraryName gln ? gln.libraryName : null;
+            if (libraryAlias is null)
+                return contextLibrary;
+
+            if (librarySet.TryResolveDefinition<Elm.IncludeDef>(contextLibrary, libraryAlias, null, out var includeDef))
+            {
+                var resolved = librarySet.GetLibrary(includeDef.VersionedLibraryIdentifier);
+                if (resolved is not null)
+                    return resolved;
+            }
+
+            return contextLibrary;
         }
     }
 }
