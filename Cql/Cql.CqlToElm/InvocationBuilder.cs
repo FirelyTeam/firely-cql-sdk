@@ -187,6 +187,37 @@ namespace Hl7.Cql.CqlToElm
                     }
                 }
             }
+            // If direct inference from argument types didn't find a compatible match,
+            // try implicit conversion targets of each argument as potential type inferences.
+            // This handles cases like Equivalent(FHIR.CodeableConcept, Code) where both can be
+            // implicitly converted to Concept but neither can be directly converted to the other.
+            if (newOperands == null && genericInferences == null)
+            {
+                for (int i = 0; i < arguments.Length; i++)
+                {
+                    var argumentType = arguments[i].resultTypeSpecifier;
+                    var operandType = operands[i].operandTypeSpecifier;
+                    if (operandType is not ParameterTypeSpecifier)
+                        continue;
+
+                    foreach (var targetType in CoercionProvider.GetImplicitConversionTargets(argumentType))
+                    {
+                        var inferences = InferGenericArgument(targetType, operandType);
+                        if (inferences.Count > 0 && !inferences.All(kvp => kvp.Value == SystemTypes.AnyType))
+                        {
+                            var replaced = ReplaceGenericArguments(operandTypes, arguments, inferences);
+                            var cost = replaced.Sum(operand => (int)operand.Cost);
+                            if (cost < lowestCost)
+                            {
+                                lowestCost = cost;
+                                newOperands = replaced;
+                                genericInferences = inferences;
+                            }
+                        }
+                    }
+                }
+            }
+
             if (newOperands != null && genericInferences != null)
             {
                 return new SignatureMatchResult(candidate, newOperands, genericInferences, flags, () => null);

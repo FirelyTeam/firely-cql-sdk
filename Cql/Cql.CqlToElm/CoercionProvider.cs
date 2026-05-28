@@ -544,6 +544,54 @@ namespace Hl7.Cql.CqlToElm
                 };
         }
 
+        /// <summary>
+        /// Returns all types that the given type can be implicitly converted to.
+        /// This includes both system-level implicit conversions (e.g., Code → Concept)
+        /// and model-level conversions (e.g., FHIR.CodeableConcept → Concept via FHIRHelpers).
+        /// </summary>
+        internal IEnumerable<TypeSpecifier> GetImplicitConversionTargets(TypeSpecifier from)
+        {
+            // System-level implicit conversions
+            if (from == SystemTypes.IntegerType)
+            {
+                yield return SystemTypes.LongType;
+                yield return SystemTypes.DecimalType;
+                yield return SystemTypes.QuantityType;
+            }
+            else if (from == SystemTypes.LongType)
+            {
+                yield return SystemTypes.DecimalType;
+                yield return SystemTypes.QuantityType;
+            }
+            else if (from == SystemTypes.DecimalType)
+            {
+                yield return SystemTypes.QuantityType;
+            }
+            else if (from == SystemTypes.DateType)
+            {
+                yield return SystemTypes.DateTimeType;
+            }
+            else if (from == SystemTypes.CodeType)
+            {
+                yield return SystemTypes.ConceptType;
+            }
+
+            // Model-level implicit conversions
+            if (from is NamedTypeSpecifier fromNts
+                && ModelProvider.TryMakeQualifiedNameFromType(fromNts, out var fromQualified)
+                && ModelProvider.TryGetConversionFunctions(fromQualified!, out var conversions))
+            {
+                foreach (var (to, _) in conversions!)
+                {
+                    var urlPrefixedName = ModelProvider.TryGetUrlPrefixedName(to);
+                    if (urlPrefixedName is not null)
+                    {
+                        yield return new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName(urlPrefixedName) };
+                    }
+                }
+            }
+        }
+
         private int ListDegree(TypeSpecifier type) =>
             type switch
             {
