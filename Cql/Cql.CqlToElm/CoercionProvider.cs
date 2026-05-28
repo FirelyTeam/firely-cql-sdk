@@ -546,7 +546,8 @@ namespace Hl7.Cql.CqlToElm
 
         /// <summary>
         /// Returns all types that the given type can be implicitly converted to.
-        /// This includes both system-level implicit conversions (e.g., Code → Concept)
+        /// This includes both system-level implicit conversions (e.g., Code → Concept,
+        /// ValueSet → List&lt;Code&gt;), structural propagation for List and Interval types,
         /// and model-level conversions (e.g., FHIR.CodeableConcept → Concept via FHIRHelpers).
         /// </summary>
         internal IEnumerable<TypeSpecifier> GetImplicitConversionTargets(TypeSpecifier from)
@@ -574,6 +575,22 @@ namespace Hl7.Cql.CqlToElm
             else if (from == SystemTypes.CodeType)
             {
                 yield return SystemTypes.ConceptType;
+            }
+            else if (from == SystemTypes.ValueSetType)
+            {
+                yield return SystemTypes.CodeType.ToListType();
+            }
+            else if (from is ListTypeSpecifier listFrom)
+            {
+                // Propagate element-level conversion targets: List<X> → List<Y> for each Y in targets(X)
+                foreach (var elementTarget in GetImplicitConversionTargets(listFrom.elementType))
+                    yield return elementTarget.ToListType();
+            }
+            else if (from is IntervalTypeSpecifier intervalFrom)
+            {
+                // Propagate point-type conversion targets: Interval<X> → Interval<Y> for each Y in targets(X)
+                foreach (var pointTarget in GetImplicitConversionTargets(intervalFrom.pointType))
+                    yield return pointTarget.ToIntervalType();
             }
 
             // Model-level implicit conversions

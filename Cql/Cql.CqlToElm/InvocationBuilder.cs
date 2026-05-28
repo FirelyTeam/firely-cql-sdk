@@ -197,8 +197,6 @@ namespace Hl7.Cql.CqlToElm
                 {
                     var argumentType = arguments[i].resultTypeSpecifier;
                     var operandType = operands[i].operandTypeSpecifier;
-                    if (operandType is not ParameterTypeSpecifier)
-                        continue;
 
                     foreach (var targetType in CoercionProvider.GetImplicitConversionTargets(argumentType))
                     {
