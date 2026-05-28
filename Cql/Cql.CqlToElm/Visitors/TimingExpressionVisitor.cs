@@ -646,25 +646,5 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
         }
 
-        private If PointInterval(Expression point) =>
-                new If
-                {
-                    condition = new IsNull
-                    {
-                        operand = point
-                    }.WithResultType(SystemTypes.BooleanType),
-                    then = new As
-                    {
-                        operand = new Null(),
-                        asTypeSpecifier = point.resultTypeSpecifier.ToIntervalType()
-                    }.WithResultType(point.resultTypeSpecifier.ToIntervalType()),
-                    @else = new Elm.Interval
-                    {
-                        low = point,
-                        high = point,
-                        lowClosed = true,
-                        highClosed = true,
-                    }.WithResultType(point.resultTypeSpecifier.ToIntervalType())
-                }.WithResultType(point.resultTypeSpecifier.ToIntervalType());
     }
 }
