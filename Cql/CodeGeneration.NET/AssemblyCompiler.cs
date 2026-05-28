@@ -225,10 +225,15 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var (name, version) = library.VersionedLibraryIdentifier;
 
-            var text = $"""
-                        [assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("{name}", "{version}")]
-                        [assembly: System.Reflection.AssemblyVersion("{version}")]
-                        """;
+            var text = version is { } ver
+                ? $"""
+                   [assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("{name}", "{ver}")]
+                   [assembly: System.Reflection.AssemblyVersion("{ver}")]
+                   """
+                : $"""
+                   [assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("{name}")]
+                   [assembly: System.Reflection.AssemblyVersion("0.0.0.0")]
+                   """;
             return text;
         }
 

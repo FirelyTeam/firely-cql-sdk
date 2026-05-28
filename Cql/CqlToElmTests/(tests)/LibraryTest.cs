@@ -797,5 +797,29 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         #endregion
+
+        #region Code Generation
+
+        [TestMethod]
+        public void CSharpGeneration_LibraryWithoutVersion()
+        {
+            // Reproduces https://github.com/FirelyTeam/firely-cql-sdk/issues/XXX
+            // A library without a version should generate valid C# without throwing ArgumentNullException.
+            var cqlToolkit = CreateCqlToolkit();
+            var lib = cqlToolkit.MakeLibrary("""
+                library NoVersionLib
+
+                define Greeting: 'Hello'
+                """);
+
+            var act = () =>
+            {
+                using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+                _ = librarySetInvoker;
+            };
+            act.Should().NotThrow();
+        }
+
+        #endregion
     }
 }
