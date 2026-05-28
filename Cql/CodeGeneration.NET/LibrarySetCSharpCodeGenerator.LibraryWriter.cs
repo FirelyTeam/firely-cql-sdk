@@ -97,7 +97,7 @@ partial class LibrarySetCSharpCodeGenerator
                  #region ILibrary Implementation
 
                  public string Name => {LibraryName!.Identifier.ToString().QuoteString()};
-                 public string Version => {LibraryName!.Version?.ToString().QuoteOrNullString()};
+                 public string Version => {(LibraryName!.Version?.ToString()).QuoteOrNullString()};
                  """);
             var dependencies =
                 LibrarySetWriter.LibrarySet
