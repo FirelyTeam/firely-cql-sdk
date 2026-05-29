@@ -10,11 +10,13 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 namespace Hl7.Cql.Compiler;
 
@@ -42,6 +44,7 @@ partial class ExpressionBuilderContext
     CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
+    TypeConverter typeConverter,
     CqlContextBinder cqlContextBinder,
     LibraryExpressionBuilderContext libraryContext,
     Dictionary<string, ParameterExpression>? operands = null // Parameters for function definitions. Used during ProcessExpressionDef.
@@ -52,6 +55,7 @@ partial class ExpressionBuilderContext
     private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;
+    private readonly TypeConverter _typeConverter = typeConverter;
     private readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
     private readonly LibraryExpressionBuilderContext _libraryContext = libraryContext;
     private readonly Dictionary<string, ParameterExpression>? _operands = operands;
@@ -337,12 +341,12 @@ partial class ExpressionBuilderContext
             {
                 if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
                     && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
-                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElemType, rightListElemType))
+                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElemType, rightListElemType, _typeConverter))
                     return [left, right];
 
                 if (left.Type.IsCqlInterval(out var leftPointType)
                     && right.Type.IsCqlInterval(out var rightPointType)
-                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftPointType, rightPointType))
+                    && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftPointType, rightPointType, _typeConverter))
                     return [left, right];
             }
 
