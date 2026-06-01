@@ -196,11 +196,8 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
 
         private CodeableConcept BuildCodeableConcept(Elm.ConceptRef conceptRef)
         {
-            if (librarySet.TryResolveDefinition<Elm.ConceptDef>(contextLibrary, conceptRef, out var cd))
-            {
-                var conceptLibrary = ResolveLibraryForReference(conceptRef, contextLibrary);
+            if (librarySet.TryResolveDefinition<Elm.ConceptDef>(contextLibrary, conceptRef, out var cd, out var conceptLibrary))
                 return BuildCodeableConcept(cd.display, cd.code, conceptLibrary);
-            }
 
             throw new UnresolvedReferenceError(contextLibrary, conceptRef).ToException();
         }
@@ -232,22 +229,16 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
 
         private Coding BuildCoding(Elm.CodeRef codeRef)
         {
-            if (librarySet.TryResolveDefinition<Elm.CodeDef>(contextLibrary, codeRef, out var cd))
-            {
-                var codeDefLibrary = ResolveLibraryForReference(codeRef, contextLibrary);
+            if (librarySet.TryResolveDefinition<Elm.CodeDef>(contextLibrary, codeRef, out var cd, out var codeDefLibrary))
                 return BuildCoding(cd.id, cd.codeSystem, cd.display, codeDefLibrary);
-            }
             else
                 throw new UnresolvedReferenceError(contextLibrary, codeRef).ToException();
         }
 
         private Coding BuildCoding(Elm.CodeRef codeRef, ElmLibrary codeContextLibrary)
         {
-            if (librarySet.TryResolveDefinition<Elm.CodeDef>(codeContextLibrary, codeRef, out var cd))
-            {
-                var codeDefLibrary = ResolveLibraryForReference(codeRef, codeContextLibrary);
+            if (librarySet.TryResolveDefinition<Elm.CodeDef>(codeContextLibrary, codeRef, out var cd, out var codeDefLibrary))
                 return BuildCoding(cd.id, cd.codeSystem, cd.display, codeDefLibrary);
-            }
             else
                 throw new UnresolvedReferenceError(codeContextLibrary, codeRef).ToException();
         }
@@ -271,26 +262,6 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
             }
 
             throw new UnresolvedReferenceError(codeSystemContextLibrary, codeSystemRef).ToException();
-        }
-
-        /// <summary>
-        /// Resolves the library where a reference's definition lives, based on its libraryName alias.
-        /// If the reference has no libraryName, the contextLibrary is returned.
-        /// </summary>
-        private ElmLibrary ResolveLibraryForReference(Elm.IReferenceElement reference, ElmLibrary sourceLibrary)
-        {
-            var libraryAlias = reference is Elm.IGetLibraryName gln ? gln.libraryName : null;
-            if (libraryAlias is null)
-                return sourceLibrary;
-
-            if (librarySet.TryResolveDefinition<Elm.IncludeDef>(sourceLibrary, libraryAlias, null, out var includeDef))
-            {
-                var resolved = librarySet.GetLibrary(includeDef.VersionedLibraryIdentifier);
-                if (resolved is not null)
-                    return resolved;
-            }
-
-            return sourceLibrary;
         }
     }
 }
