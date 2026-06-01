@@ -40,10 +40,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             { "DescendentsEmptyList", "Not implemented" },
 
-            { "ReplaceMatchesSpaces", "The first argument should have four backslashes instead of 2" },
-
-            // This compiler error should be repaired by https://github.com/FirelyTeam/firely-cql-sdk/issues/542
-            { "Issue32DateTime", "We incorrectly compile a DateTime to an interval without a point type." }
+            { "ReplaceMatchesSpaces", "The first argument should have four backslashes instead of 2" }
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
