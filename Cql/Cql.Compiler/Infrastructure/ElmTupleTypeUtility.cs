@@ -6,8 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
-using Hl7.Fhir.Model;
+using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 namespace Hl7.Cql.Compiler.Infrastructure;
 
@@ -19,8 +20,9 @@ internal static class ElmTupleTypeUtility
     /// </summary>
     /// <param name="leftType">The left operand type.</param>
     /// <param name="rightType">The right operand type.</param>
+    /// <param name="typeConverter">The type converter to check for known conversions between types.</param>
     /// <returns><c>true</c> if the types are compatible for Union operations; otherwise, <c>false</c>.</returns>
-    public static bool AreCompatibleForUnionOperation(Type leftType, Type rightType)
+    public static bool AreCompatibleForUnionOperation(Type leftType, Type rightType, TypeConverter typeConverter)
     {
         // First check for exact equality
         if (leftType == rightType)
@@ -31,7 +33,7 @@ internal static class ElmTupleTypeUtility
             return true;
 
         // Check for structural equivalence of tuple types
-        if (AreElmTupleTypesStructurallyEquivalent(leftType, rightType))
+        if (AreElmTupleTypesStructurallyEquivalent(leftType, rightType, typeConverter))
             return true;
 
         return false;
@@ -44,8 +46,9 @@ internal static class ElmTupleTypeUtility
     /// </summary>
     /// <param name="leftType">The left tuple type.</param>
     /// <param name="rightType">The right tuple type.</param>
+    /// <param name="typeConverter">The type converter to check for known conversions between types.</param>
     /// <returns><c>true</c> if both types are ELM tuple types and are structurally equivalent; otherwise, <c>false</c>.</returns>
-    private static bool AreElmTupleTypesStructurallyEquivalent(Type leftType, Type rightType)
+    private static bool AreElmTupleTypesStructurallyEquivalent(Type leftType, Type rightType, TypeConverter typeConverter)
     {
         // Check if both types are tuple-like (derive from TupleBaseType or have tuple-like properties)
         if (!leftType.IsTupleBaseType() || !rightType.IsTupleBaseType())
@@ -76,8 +79,8 @@ internal static class ElmTupleTypeUtility
         return true;
 
         // Determines whether two property types are compatible in the context of ELM tuple operations.
-        // This includes exact matches, assignability, and known CQL/FHIR type conversions.
-        static bool AreElmPropertyTypesCompatible(Type leftPropType, Type rightPropType)
+        // This includes exact matches, assignability, and type converter conversions.
+        bool AreElmPropertyTypesCompatible(Type leftPropType, Type rightPropType)
         {
             // Exact match
             if (leftPropType == rightPropType)
@@ -87,13 +90,9 @@ internal static class ElmTupleTypeUtility
             if (leftPropType.IsAssignableFrom(rightPropType) || rightPropType.IsAssignableFrom(leftPropType))
                 return true;
 
-            // Special cases for known compatible CQL types
-            // CqlDateTime and FhirDateTime are convertible
-            if ((leftPropType == typeof(CqlDateTime) && rightPropType == typeof(FhirDateTime)||
-                (rightPropType == typeof(CqlDateTime) && leftPropType == typeof(FhirDateTime))))
+            // Check if the type converter knows how to convert between these types
+            if (typeConverter.CanConvert(leftPropType, rightPropType) || typeConverter.CanConvert(rightPropType, leftPropType))
                 return true;
-
-            // Add other known convertible pairs as needed
 
             return false;
         }
