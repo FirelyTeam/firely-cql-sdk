@@ -227,13 +227,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
             };
         }
 
-        private Coding BuildCoding(Elm.CodeRef codeRef)
-        {
-            if (librarySet.TryResolveDefinition<Elm.CodeDef>(contextLibrary, codeRef, out var cd, out var codeDefLibrary))
-                return BuildCoding(cd.id, cd.codeSystem, cd.display, codeDefLibrary);
-            else
-                throw new UnresolvedReferenceError(contextLibrary, codeRef).ToException();
-        }
+        private Coding BuildCoding(Elm.CodeRef codeRef) => BuildCoding(codeRef, contextLibrary);
 
         private Coding BuildCoding(Elm.CodeRef codeRef, ElmLibrary codeContextLibrary)
         {
