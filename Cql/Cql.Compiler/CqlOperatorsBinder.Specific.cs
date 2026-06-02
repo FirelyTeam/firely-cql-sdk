@@ -79,7 +79,7 @@ partial class CqlOperatorsBinder
         if (leftListElementType != null && rightListElementType != null && leftListElementType != rightListElementType)
         {
             // Check if the element types are structurally compatible for union
-            if (ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElementType, rightListElementType))
+            if (ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElementType, rightListElementType, _typeConverter))
             {
                 // Cast both to IEnumerable<object> to allow union
                 var leftAsObjectEnumerable = left.NewTypeAsExpression<IEnumerable<object>>();
