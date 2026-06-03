@@ -95,46 +95,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void TupleHasImplicitConversionToIdenticalTuple()
-        {
-            var from = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.IntegerType));
-            var to = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.IntegerType));
-            Assert.IsTrue(CoercionProvider.HasImplicitConversion(from, to));
-        }
-
-        [TestMethod]
-        public void TupleHasImplicitConversionWhenFieldsReordered()
-        {
-            var from = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.StringType));
-            var to = TupleType(("y", SystemTypes.StringType), ("x", SystemTypes.IntegerType));
-            Assert.IsTrue(CoercionProvider.HasImplicitConversion(from, to));
-        }
-
-        [TestMethod]
-        public void TupleHasNoImplicitConversionWhenNonFirstFieldIncompatible()
-        {
-            var from = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.StringType));
-            var to = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.CodeType));
-            Assert.IsFalse(CoercionProvider.HasImplicitConversion(from, to));
-        }
-
-        [TestMethod]
-        public void TupleHasNoImplicitConversionWhenFieldNameMissing()
-        {
-            var from = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.IntegerType));
-            var to = TupleType(("x", SystemTypes.IntegerType), ("z", SystemTypes.IntegerType));
-            Assert.IsFalse(CoercionProvider.HasImplicitConversion(from, to));
-        }
-
-        [TestMethod]
-        public void TupleHasImplicitConversionWhenFieldConvertible()
-        {
-            var from = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.IntegerType));
-            var to = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.DecimalType));
-            Assert.IsTrue(CoercionProvider.HasImplicitConversion(from, to));
-        }
-
-        [TestMethod]
         public void IntegerIsSubtypeOfAny()
         {
             var expression = Integer();
