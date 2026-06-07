@@ -176,6 +176,37 @@ namespace CoreTests
             Assert.AreEqual(FHIRAllTypes.Claim, typeEntry.ElementType.FhirType);
         }
 
+        [TestMethod]
+        public void NullableValueTuple_MapToFhirType()
+        {
+            // CQL tuples are represented at runtime as value tuples whose first element is a
+            // CqlTupleMetadata. List/query results wrap these in Nullable<T>, which must still
+            // be recognized as a CQL tuple (mapping to FHIR Basic).
+            var type = typeof(ValueTuple<CqlTupleMetadata, string>?);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(type);
+            Assert.IsNotNull(typeEntry, $"Unable to express {type} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.Basic, typeEntry.FhirType.Value);
+            Assert.AreEqual(CqlPrimitiveType.Tuple, typeEntry.CqlType.Value);
+        }
+
+        [TestMethod]
+        public void ListOfTupleResult_MapToFhirType()
+        {
+            // Reproduces a query/list returning tuples, e.g. "({ 1 }) X return Tuple { key: ... }",
+            // whose runtime type is List<Nullable<ValueTuple<CqlTupleMetadata, ...>>>.
+            var type = typeof(List<ValueTuple<CqlTupleMetadata, string>?>);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(type);
+            Assert.IsNotNull(typeEntry, $"Unable to express {type} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.List, typeEntry.FhirType.Value);
+            Assert.IsNotNull(typeEntry.ElementType, "List element type should be mapped");
+            Assert.AreEqual(FHIRAllTypes.Basic, typeEntry.ElementType.FhirType);
+            Assert.AreEqual(CqlPrimitiveType.Tuple, typeEntry.ElementType.CqlType.Value);
+        }
+
         #endregion
 
 
