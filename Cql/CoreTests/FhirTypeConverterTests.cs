@@ -720,6 +720,54 @@ namespace CoreTests
 
 
         [TestMethod]
+        public void ConvertCqlCode_Coding()
+        {
+            var code = new CqlCode("123", "http://example.org", "1.0", "Example display");
+            var converted = FhirTypeConverter.Convert<Coding>(code);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("123", converted.Code);
+            Assert.AreEqual("http://example.org", converted.System);
+            Assert.AreEqual("1.0", converted.Version);
+            Assert.AreEqual("Example display", converted.Display);
+        }
+
+        [TestMethod]
+        public void ConvertCqlConcept_CodeableConcept()
+        {
+            var concept = new CqlConcept(
+                new[]
+                {
+                    new CqlCode("123", "http://example.org", "1.0", "First"),
+                    new CqlCode("456", "http://example.org", "1.0", "Second"),
+                },
+                "Concept display");
+            var converted = FhirTypeConverter.Convert<CodeableConcept>(concept);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("Concept display", converted.Text);
+            Assert.AreEqual(2, converted.Coding.Count);
+            Assert.AreEqual("123", converted.Coding[0].Code);
+            Assert.AreEqual("http://example.org", converted.Coding[0].System);
+            Assert.AreEqual("First", converted.Coding[0].Display);
+            Assert.AreEqual("456", converted.Coding[1].Code);
+            Assert.AreEqual("Second", converted.Coding[1].Display);
+        }
+
+        [TestMethod]
+        public void ConvertCqlConcept_CodeableConcept_NullCodes()
+        {
+            var concept = new CqlConcept(null, "Concept display");
+            var converted = FhirTypeConverter.Convert<CodeableConcept>(concept);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("Concept display", converted.Text);
+            Assert.IsNotNull(converted.Coding);
+            Assert.AreEqual(0, converted.Coding.Count);
+        }
+
+
+        [TestMethod]
         public void ConvertCqlIntervalDateTime_Period()
         {
             var interval = new CqlInterval<CqlDateTime>(
