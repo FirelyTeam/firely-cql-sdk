@@ -153,7 +153,7 @@ namespace CoreTests
         }
 
         // Binding a CQL Concept into a FHIR CodeableConcept (as the ExpressionBuilder must do when a
-        // measure reconciles a System Concept with a FHIR CodeableConcept, e.g. CMS108FHIRVTEProphylaxis)
+        // measure reconciles a System Concept with a FHIR CodeableConcept
         // previously threw "Cannot convert Hl7.Cql.Primitives.CqlConcept to Hl7.Fhir.Model.CodeableConcept".
         [TestMethod]
         public void Concept_To_CodeableConcept_Test()
