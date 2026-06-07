@@ -7,6 +7,11 @@
  */
 
 using Hl7.Cql.Fhir;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CqlToElm;
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -201,6 +206,35 @@ namespace CoreTests
             var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
             var typeEntry = crosswalk.TypeEntryFor(type);
             Assert.IsNotNull(typeEntry, $"Unable to express {type} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.List, typeEntry.FhirType.Value);
+            Assert.IsNotNull(typeEntry.ElementType, "List element type should be mapped");
+            Assert.AreEqual(FHIRAllTypes.Basic, typeEntry.ElementType.FhirType);
+            Assert.AreEqual(CqlPrimitiveType.Tuple, typeEntry.ElementType.CqlType.Value);
+        }
+
+        [TestMethod]
+        public void CqlLibraryTupleQueryResult_MapToFhirType()
+        {
+            var cql = (CqlLibraryString)"""
+                library Test version '1.0.0'
+                define "TupleQueryResult":
+                  ({ 1 }) X
+                    return Tuple { key: 'ExampleConcept' }
+                """;
+
+            using var librarySetInvoker = new CqlToolkit()
+                .AddCqlLibraries(cql)
+                .CreateLibrarySetInvoker();
+
+            var returnType = librarySetInvoker
+                .LibraryInvokers[cql.LibraryIdentifier]
+                .Definitions.Values
+                .Single(d => d.DefinitionName == "TupleQueryResult")
+                .ReturnType;
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(returnType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {returnType} as a FHIR type");
             Assert.AreEqual(FHIRAllTypes.List, typeEntry.FhirType.Value);
             Assert.IsNotNull(typeEntry.ElementType, "List element type should be mapped");
             Assert.AreEqual(FHIRAllTypes.Basic, typeEntry.ElementType.FhirType);
