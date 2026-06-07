@@ -152,6 +152,36 @@ namespace CoreTests
             Assert.AreEqual(AdministrativeGender.Female, patient.Gender);
         }
 
+        // Binding a CQL Concept into a FHIR CodeableConcept (as the ExpressionBuilder must do when a
+        // measure reconciles a System Concept with a FHIR CodeableConcept, e.g. CMS108FHIRVTEProphylaxis)
+        // previously threw "Cannot convert Hl7.Cql.Primitives.CqlConcept to Hl7.Fhir.Model.CodeableConcept".
+        // The library ConceptToCodeableConcept.json defines a concept and binds it to a FHIR CodeableConcept.
+        [TestMethod]
+        public void Concept_To_CodeableConcept_Test()
+        {
+            using var serviceProvider = BuildServiceProvider();
+            using var servicesScope = serviceProvider.CreateScope();
+
+            var elm = new FileInfo(Path.Combine("Input", "ELM", "Test", "ConceptToCodeableConcept.json"));
+            var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
+
+            // Act - building the library exercises the CqlConcept -> CodeableConcept conversion
+            var definitions = servicesScope.ServiceProvider
+                                           .GetRequiredService<LibraryExpressionBuilder>()
+                                           .ProcessLibrary(elmPackage);
+            Assert.IsNotNull(definitions);
+            Assert.IsTrue(definitions.Libraries.Any());
+
+            // Assert - running it yields a CodeableConcept carrying the concept's codes and display
+            var result = InvokeLibrary(elmPackage, "ConceptAsCodeableConcept");
+            Assert.IsInstanceOfType<CodeableConcept>(result);
+            var codeableConcept = (CodeableConcept)result;
+            Assert.AreEqual("Concept display", codeableConcept.Text);
+            Assert.AreEqual(1, codeableConcept.Coding.Count);
+            Assert.AreEqual("123", codeableConcept.Coding[0].Code);
+            Assert.AreEqual("http://example.org", codeableConcept.Coding[0].System);
+        }
+
         [TestMethod]
         public void Coalesce_WithNullsAndList_ReturnsFirstNonNullList()
         {
