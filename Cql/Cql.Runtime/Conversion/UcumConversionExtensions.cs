@@ -167,7 +167,7 @@ namespace Hl7.Cql.Conversion
         /// <see cref="M.IMetricService.TryConvertTo"/> implementation using <see cref="M.SystemOfUnits"/> directly
         /// until <see cref="M.FhirMetricService"/> ships a working version.
         /// </summary>
-        // TODO: Remove _system and TryConvertTo once Fhir.Metrics properly implements IMetricService.TryConvertTo.
+        // TODO(#1296): Remove _system and TryConvertTo once Fhir.Metrics properly implements IMetricService.TryConvertTo.
 #pragma warning disable CS8767 // IMetricService is compiled without full NRT annotations; delegate implementations match at runtime.
         private sealed class DefaultUcumMetricService : M.IMetricService
         {
@@ -179,7 +179,7 @@ namespace Hl7.Cql.Conversion
 
             public bool TryConvertTo((string value, string unit, string? codesystem) quantity, string targetUnit, out (string value, string unit, string? codesystem)? result)
             {
-                // TODO: Remove once Fhir.Metrics properly implements IMetricService.TryConvertTo.
+                // TODO(#1296): Remove once Fhir.Metrics properly implements IMetricService.TryConvertTo.
                 try
                 {
                     M.Quantity src = _system.Value.Conversions.Canonical(ToQuantity(quantity));
