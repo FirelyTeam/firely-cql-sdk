@@ -146,6 +146,7 @@ namespace Hl7.Cql.Runtime
             {
                 "{http://hl7.org/fhir}NotDoneRecorded" => "{http://hl7.org/fhir}dateTime",
                 "{http://hl7.org/fhir}EncounterProcedureExtension" => "{http://hl7.org/fhir}Extension",
+                "{http://hl7.org/fhir}DoNotPerformReason" => "{http://hl7.org/fhir}CodeableConcept",
                 _ => typeSpecifier
             };
 

@@ -7,7 +7,9 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
+using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 namespace Hl7.Cql.Compiler;
 
@@ -17,6 +19,7 @@ internal class ExpressionBuilder(
     CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
+    TypeConverter typeConverter,
     CqlContextBinder cqlContextBinder)
 {
     private readonly ILogger<ExpressionBuilder> _logger = logger;
@@ -24,6 +27,7 @@ internal class ExpressionBuilder(
     private readonly CqlOperatorsBinder _cqlOperatorsBinder = cqlOperatorsBinder;
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;
+    private readonly TypeConverter _typeConverter = typeConverter;
     private readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
 
     /*
@@ -41,7 +45,7 @@ internal class ExpressionBuilder(
     internal ExpressionBuilderContext NewExpressionBuilderContext(
         LibraryExpressionBuilderContext libCtx,
         Dictionary<string, ParameterExpression>? operands = null) =>
-        new(_logger, _expressionBuilderSettings, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _cqlContextBinder, libCtx, operands);
+        new(_logger, _expressionBuilderSettings, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _typeConverter, _cqlContextBinder, libCtx, operands);
 
     public void ProcessValueSetDef(LibraryExpressionBuilderContext libCtx, ValueSetDef valueSetDef) =>
         NewExpressionBuilderContext(libCtx)
