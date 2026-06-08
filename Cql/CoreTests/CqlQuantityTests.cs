@@ -380,13 +380,21 @@ public class CqlQuantityTests
     #region Multiply
 
     [TestMethod]
-    public void Multiply_ByScalar_ReturnsProductWithLeftUnit()
+    public void Multiply_ByScalar_ReturnsScalarProduct()
     {
         var ops = GetOperators();
-        var result = ops.Multiply(new CqlQuantity(3m, "mg"), new CqlQuantity(4m, UCUMUnits.Default));
-        Assert.IsNotNull(result);
-        Assert.AreEqual(12m, result.value);
-        Assert.AreEqual(UCUMUnits.Default, result.unit);
+        var unitedQuantity = new CqlQuantity(3m, "mg");
+        var scalarQuantity = new CqlQuantity(4m, UCUMUnits.Default);
+
+        var result1 = ops.Multiply(unitedQuantity, scalarQuantity);
+        Assert.IsNotNull(result1);
+        Assert.AreEqual(12m, result1.value);
+        Assert.AreEqual(UCUMUnits.Default, result1.unit);
+
+        var result2 = ops.Multiply(scalarQuantity, unitedQuantity);
+        Assert.IsNotNull(result2);
+        Assert.AreEqual(12m, result2.value);
+        Assert.AreEqual(UCUMUnits.Default, result2.unit);
     }
 
     [TestMethod]
