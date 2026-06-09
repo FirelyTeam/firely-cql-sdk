@@ -203,11 +203,7 @@ namespace Hl7.Cql.Packaging
         public CqlTypeToFhirMapping? TypeEntryFor(Type type)
         {
             // Check if the type is a CQL value tuple first, before checking other value types.
-            // CQL list elements are nullable value types (e.g. the element type of a query or list
-            // of tuples is Nullable<ValueTuple<CqlTupleMetadata, ...>>), so unwrap any nullable
-            // wrapper before testing for a value tuple.
-            var nonNullableType = Nullable.GetUnderlyingType(type) ?? type;
-            if (nonNullableType.IsCqlValueTuple())
+            if (type.IsCqlValueTuple())
             {
                 return TypeEntryFor(CqlPrimitiveType.Tuple);
             }

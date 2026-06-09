@@ -43,10 +43,11 @@ public static class TypeExtensions
     /// </returns>
     public static bool IsCqlValueTuple(this Type type)
     {
+        var nonNullableType = Nullable.GetUnderlyingType(type) ?? type;
         bool isCqlValueTuple =
-            type is { IsValueType: true, IsGenericType: true }
-            && type.IsAssignableTo(typeof(ITuple))
-            && type.GenericTypeArguments.ElementAtOrDefault(0) == typeof(CqlTupleMetadata);
+            nonNullableType is { IsValueType: true, IsGenericType: true }
+            && nonNullableType.IsAssignableTo(typeof(ITuple))
+            && nonNullableType.GenericTypeArguments.ElementAtOrDefault(0) == typeof(CqlTupleMetadata);
         return isCqlValueTuple;
     }
 
