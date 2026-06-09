@@ -202,7 +202,7 @@ namespace Hl7.Cql.Packaging
         /// <returns>the Type mapping, or null</returns>
         public CqlTypeToFhirMapping? TypeEntryFor(Type type)
         {
-            // Check if the type is a CQL value tuple first, before checking other value types
+            // Check if the type is a CQL value tuple first, before checking other value types.
             if (type.IsCqlValueTuple())
             {
                 return TypeEntryFor(CqlPrimitiveType.Tuple);

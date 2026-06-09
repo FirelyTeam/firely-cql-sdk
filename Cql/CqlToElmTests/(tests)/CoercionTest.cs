@@ -95,6 +95,46 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void TupleHasImplicitConversionToIdenticalTuple()
+        {
+            var from = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.IntegerType));
+            var to = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.IntegerType));
+            Assert.IsTrue(CoercionProvider.HasImplicitConversion(from, to));
+        }
+
+        [TestMethod]
+        public void TupleHasImplicitConversionWhenFieldsReordered()
+        {
+            var from = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.StringType));
+            var to = TupleType(("y", SystemTypes.StringType), ("x", SystemTypes.IntegerType));
+            Assert.IsTrue(CoercionProvider.HasImplicitConversion(from, to));
+        }
+
+        [TestMethod]
+        public void TupleHasNoImplicitConversionWhenNonFirstFieldIncompatible()
+        {
+            var from = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.StringType));
+            var to = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.CodeType));
+            Assert.IsFalse(CoercionProvider.HasImplicitConversion(from, to));
+        }
+
+        [TestMethod]
+        public void TupleHasNoImplicitConversionWhenFieldNameMissing()
+        {
+            var from = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.IntegerType));
+            var to = TupleType(("x", SystemTypes.IntegerType), ("z", SystemTypes.IntegerType));
+            Assert.IsFalse(CoercionProvider.HasImplicitConversion(from, to));
+        }
+
+        [TestMethod]
+        public void TupleHasImplicitConversionWhenFieldConvertible()
+        {
+            var from = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.IntegerType));
+            var to = TupleType(("x", SystemTypes.IntegerType), ("y", SystemTypes.DecimalType));
+            Assert.IsTrue(CoercionProvider.HasImplicitConversion(from, to));
+        }
+
+        [TestMethod]
         public void IntegerIsSubtypeOfAny()
         {
             var expression = Integer();
@@ -324,6 +364,48 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, fr.operand?.Length);
             Assert.IsInstanceOfType(fr.operand![0], typeof(Null));
             Assert.AreEqual(SystemTypes.DateType, fr.resultTypeSpecifier);
+        }
+
+        // Bug 1 fix: System.Date → System.DateTime should use ToDateTime (not As), because
+        // DateTime is a SimpleTypeInfo in the system model, so ImplicitCastToSimple is called.
+        [TestMethod]
+        public void DateToDateTimeProducesToDateTime()
+        {
+            var cost = CoercionProvider.GetCoercionCost(SystemTypes.DateType, SystemTypes.DateTimeType);
+            Assert.AreEqual(CoercionCost.ImplicitToSimpleType, cost);
+            var result = CoercionProvider.Coerce(Null(SystemTypes.DateType), SystemTypes.DateTimeType);
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(CoercionCost.ImplicitToSimpleType, result.Cost);
+            Assert.IsInstanceOfType(result.Result, typeof(ToDateTime));
+            Assert.AreEqual(SystemTypes.DateTimeType, result.Result.resultTypeSpecifier);
+        }
+
+        // Bug 2 fix: When the source is a ChoiceTypeSpecifier and exactly one choice type has
+        // an implicit model conversion to the target type, the expression should be cast to that
+        // choice type and then converted via the model function.
+        [TestMethod]
+        public void ChoiceWithFhirPeriodToIntervalDateTimeUsesFunctionRef()
+        {
+            var periodType = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Period") };
+            var ageType = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Age") };
+            var rangeType = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Range") };
+            var choiceType = new ChoiceTypeSpecifier(ageType, periodType, rangeType);
+            var expression = Null(choiceType);
+            var intervalDateTimeType = SystemTypes.DateTimeType.ToIntervalType();
+
+            var result = CoercionProvider.Coerce(expression, intervalDateTimeType);
+
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(CoercionCost.ImplicitToClassType, result.Cost);
+            Assert.IsInstanceOfType(result.Result, typeof(FunctionRef));
+            var fr = (FunctionRef)result.Result;
+            Assert.AreEqual("FHIRHelpers", fr.libraryName);
+            Assert.AreEqual("ToInterval", fr.name);
+            Assert.AreEqual(1, fr.operand?.Length);
+            Assert.IsInstanceOfType(fr.operand![0], typeof(As));
+            var asExpr = (As)fr.operand[0];
+            Assert.AreEqual(periodType, asExpr.asTypeSpecifier);
+            Assert.AreEqual(intervalDateTimeType, result.Result.resultTypeSpecifier);
         }
     }
 }

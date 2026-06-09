@@ -101,7 +101,8 @@ namespace Hl7.Cql.Primitives
                 return null;
 
             var dto = Value.DateTimeOffset;
-            
+            const string supportedUnitsMessage = "For Date values, the quantity unit must be one of: years, months, weeks, or days.";
+
             try
             {
                 dto = unit switch
@@ -112,11 +113,11 @@ namespace Hl7.Cql.Primitives
                     "month" or "months"                     => dto.AddMonths((int)value),
                     "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
                     "d" or "day" or "days"                  => dto.AddDays((int)value!),
-                    "h" or "hour" or "hours"                => dto.AddHours(Math.Truncate((double)value)),
-                    "min" or "minute" or "minutes"          => dto.AddMinutes(Math.Truncate((double)value)),
-                    "s" or "second" or "seconds"            => dto.AddSeconds(Math.Truncate((double)value)),
-                    "ms" or "millisecond" or "milliseconds" => dto.AddMilliseconds(Math.Truncate((double)value)),
-                    _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
+                    "h" or "hour" or "hours" or
+                    "min" or "minute" or "minutes" or
+                    "s" or "second" or "seconds" or
+                    "ms" or "millisecond" or "milliseconds" => throw new ArgumentException($"Time-based unit '{unit}' is not supported for Date values. {supportedUnitsMessage}"),
+                    _                                       => throw new ArgumentException($"Unknown date unit '{unit}' supplied. {supportedUnitsMessage}")
                 };
             }
             catch (ArgumentOutOfRangeException)

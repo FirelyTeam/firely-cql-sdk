@@ -179,13 +179,50 @@ public class CqlDateTests
         Assert.IsNull(result, "Subtracting months from minimum date should return null to prevent overflow");
     }
 
-    [TestMethod]
-    public void Add_Hours_ToMaxDate_ReturnsNull()
+    [DataTestMethod]
+    [DataRow("h")]
+    [DataRow("hour")]
+    [DataRow("hours")]
+    [DataRow("min")]
+    [DataRow("minute")]
+    [DataRow("minutes")]
+    [DataRow("s")]
+    [DataRow("second")]
+    [DataRow("seconds")]
+    [DataRow("ms")]
+    [DataRow("millisecond")]
+    [DataRow("milliseconds")]
+    public void Add_TimeBasedUnit_ThrowsArgumentException(string unit)
     {
-        var date = CqlDate.MaxValue; // 9999-12-31
-        var quantity = new CqlQuantity(24, "hour"); // Adding 24 hours would push to next day (year 10000)
-        var result = date.Add(quantity);
-        Assert.IsNull(result, "Adding 24 hours to maximum date should return null to prevent overflow");
+        var date = new CqlDate(2024, 1, 15);
+        var quantity = new CqlQuantity(1, unit);
+
+        var exception = Assert.ThrowsException<ArgumentException>(() => date.Add(quantity));
+
+        StringAssert.Contains(exception.Message, "For Date values, the quantity unit must be one of: years, months, weeks, or days.");
+    }
+
+    [DataTestMethod]
+    [DataRow("h")]
+    [DataRow("hour")]
+    [DataRow("hours")]
+    [DataRow("min")]
+    [DataRow("minute")]
+    [DataRow("minutes")]
+    [DataRow("s")]
+    [DataRow("second")]
+    [DataRow("seconds")]
+    [DataRow("ms")]
+    [DataRow("millisecond")]
+    [DataRow("milliseconds")]
+    public void Subtract_TimeBasedUnit_ThrowsArgumentException(string unit)
+    {
+        var date = new CqlDate(2024, 1, 15);
+        var quantity = new CqlQuantity(1, unit);
+
+        var exception = Assert.ThrowsException<ArgumentException>(() => date.Subtract(quantity));
+
+        StringAssert.Contains(exception.Message, "For Date values, the quantity unit must be one of: years, months, weeks, or days.");
     }
 
     [TestMethod]

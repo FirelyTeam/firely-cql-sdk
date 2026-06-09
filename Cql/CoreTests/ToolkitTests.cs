@@ -698,6 +698,35 @@ public class ToolkitTests
         result.Should().BeNull("Interval[null as Decimal, null as Decimal] should return null");
     }
 
+    [TestMethod]
+    public void TestMultiSourceQueryCrossJoin()
+    {
+        var cql = (CqlLibraryString)"""
+            library Test version '1.0.0'
+
+            define "CrossJoinResult":
+              from ({2, 3}) A, ({5, 6}) B
+            """;
+
+        var ctx = FhirCqlContext.ForBundle();
+        using var librarySetInvoker =
+            new CqlToolkit()
+                .AddCqlLibraries(cql)
+                .CreateLibrarySetInvoker(ElmToolkitConfig);
+
+        var results = librarySetInvoker
+                     .SelectExpressionsForLibrary(CqlVersionedLibraryIdentifier.Parse("Test-1.0.0"))
+                     .SelectResults(ctx)
+                     .ToDictionary(t => t.definitionInvoker.DefinitionName);
+
+        Assert.IsNotNull(results);
+        Assert.IsTrue(results.TryGetValue("CrossJoinResult", out var obj));
+        Assert.IsNotNull(obj.invocationResult);
+        Assert.IsInstanceOfType<System.Collections.IEnumerable>(obj.invocationResult);
+        var materializedResult = ((System.Collections.IEnumerable)obj.invocationResult).Cast<object?>().ToList();
+        Assert.AreEqual(4, materializedResult.Count);
+    }
+
     private static readonly ElmToolkitConfig ElmToolkitConfig =
             new ElmToolkitConfig()
 #if DEBUG

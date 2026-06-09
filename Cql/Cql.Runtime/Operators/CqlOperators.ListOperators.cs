@@ -1,6 +1,6 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 /*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -16,7 +16,7 @@ namespace Hl7.Cql.Operators
     internal partial class CqlOperators
     {
         #region Contains
-        public bool? Contains<T>(IEnumerable<T>? list, T item)
+        public bool? Contains<T>(IEnumerable<T?>? list, T? item)
         {
             if (list == null)
                 return false;
@@ -596,6 +596,44 @@ namespace Hl7.Cql.Operators
                         }
                     }
 
+                    if (per?.unit is "hour" or "minute" or "second")
+                    {
+                        var shouldTruncate = hasSubUnitComponent(listItem!, per.unit!)
+                            || hasSubUnitComponent(highInterval!, per.unit!);
+                        if (shouldTruncate)
+                        {
+                            listItem = truncateToPerUnit(listItem!, per.unit!);
+                            highInterval = truncateToPerUnit(highInterval!, per.unit!);
+                        }
+                    }
+
+                    static CqlTime truncateToPerUnit(CqlTime value, string unit)
+                    {
+                        var time = value.Value;
+                        return unit switch
+                        {
+                            "hour" when value.Precision > Iso8601.DateTimePrecision.Hour =>
+                                new CqlTime(time.Hour, null, null, null, time.OffsetHour, time.OffsetMinute),
+                            "minute" when value.Precision > Iso8601.DateTimePrecision.Minute =>
+                                new CqlTime(time.Hour, time.Minute, null, null, time.OffsetHour, time.OffsetMinute),
+                            "second" when value.Precision > Iso8601.DateTimePrecision.Second =>
+                                new CqlTime(time.Hour, time.Minute, time.Second, null, time.OffsetHour, time.OffsetMinute),
+                            _ => value
+                        };
+                    }
+
+                    static bool hasSubUnitComponent(CqlTime value, string unit)
+                    {
+                        var time = value.Value;
+                        return unit switch
+                        {
+                            "hour" => (time.Minute ?? 0) != 0 || (time.Second ?? 0) != 0 || (time.Millisecond ?? 0) != 0,
+                            "minute" => (time.Second ?? 0) != 0 || (time.Millisecond ?? 0) != 0,
+                            "second" => (time.Millisecond ?? 0) != 0,
+                            _ => false
+                        };
+                    }
+
                     do
                     {
                         Units.DatePrecisionToCqlUnits.TryGetValue(listItem!.Precision.ToString(), out var cqlunits);
@@ -648,16 +686,32 @@ namespace Hl7.Cql.Operators
                     }
 
                     var listItem = interval.low!.Value;
+                    var highBoundary = interval.high!.Value;
+                    var perValue = per.value ?? 1m;
+                    var usesDefaultDecimalUnit = string.IsNullOrEmpty(per.unit) || per.unit == "1";
+                    var needsIntegerTruncation = usesDefaultDecimalUnit
+                        && getDecimalPrecision(perValue) == 0
+                        && (getDecimalPrecision(listItem) > 0 || getDecimalPrecision(highBoundary) > 0);
+
+                    static int getDecimalPrecision(decimal value) =>
+                        BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
+
+                    if (needsIntegerTruncation)
+                    {
+                        listItem = decimal.Truncate(listItem);
+                        highBoundary = decimal.Truncate(highBoundary);
+                    }
+
                     do
                     {
-
-
-                        var high = decimal.Add(listItem, per.value ?? 1);
-                        var listInterval = new CqlInterval<decimal?>(listItem, Predecessor(high), true, true);
+                        var next = decimal.Add(listItem, perValue);
+                        // Integer-per truncation uses integer predecessor semantics (N -> N-1), not decimal epsilon predecessor.
+                        var high = needsIntegerTruncation ? decimal.Subtract(next, 1m) : Predecessor(next);
+                        var listInterval = new CqlInterval<decimal?>(listItem, high, true, true);
                         expanded.Add(listInterval);
-                        listItem = high;
+                        listItem = next;
                     }
-                    while (Comparer.Compare(listItem, interval.high!, null) <= 0);
+                    while (Comparer.Compare(listItem, highBoundary, null) <= 0);
                 }
             }
 
@@ -825,22 +879,16 @@ namespace Hl7.Cql.Operators
         #endregion
 
         #region In
-        public bool? In<T>(T element, IEnumerable<T> argument)
-        {
-            if ((object)element! == null)
-                return null;
-            if (argument == null)
-                return false;
-            else
-            {
-                return argument.Any(t => Comparer.Compare(element, t!, null) == 0);
-            }
-
-        }
+        public bool? In<T>(T? element, IEnumerable<T?>? argument) => Contains(argument, element);
 
         public bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument)
         {
-            if (element is null) return null;
+            if (element is null)
+            {
+                if (argument is null or IValueSetFacade)
+                    return false;
+                return argument.Any(t => t is null);
+            }
 
             return argument switch
             {

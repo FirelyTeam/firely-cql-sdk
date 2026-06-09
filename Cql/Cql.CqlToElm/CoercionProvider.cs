@@ -79,6 +79,15 @@ namespace Hl7.Cql.CqlToElm
 
             Expression ImplicitCastToSimple(Expression expression, TypeSpecifier to)
             {
+                if (expression.resultTypeSpecifier is ChoiceTypeSpecifier cts && to is not ChoiceTypeSpecifier)
+                {
+                    var matching = (cts.choice ?? Enumerable.Empty<TypeSpecifier>())
+                        .Select(choice => (choice, FunctionRefForModelConversion(choice, to)))
+                        .Where(t => t.Item2 is not null)
+                        .ToArray();
+                    if (matching.Length == 1)
+                        return ImplicitCastToSimple(As(expression, matching[0].choice), to);
+                }
                 var fr = FunctionRefForModelConversion(expression.resultTypeSpecifier, to);
                 if (fr is not null)
                 {
@@ -97,6 +106,12 @@ namespace Hl7.Cql.CqlToElm
                     convert = new ToDecimal { operand = expression };
                 else if (to == SystemTypes.StringType)
                     convert = new ToString { operand = expression };
+                else if (to == SystemTypes.DateTimeType)
+                    convert = new ToDateTime { operand = expression };
+                else if (to == SystemTypes.DateType)
+                    convert = new ToDate { operand = expression };
+                else if (to == SystemTypes.TimeType)
+                    convert = new ToTime { operand = expression };
                 else
                 {
                     convert = new As
@@ -113,6 +128,15 @@ namespace Hl7.Cql.CqlToElm
 
             Expression ImplicitCastToClass(Expression expression, TypeSpecifier to)
             {
+                if (expression.resultTypeSpecifier is ChoiceTypeSpecifier cts && to is not ChoiceTypeSpecifier)
+                {
+                    var matching = (cts.choice ?? Enumerable.Empty<TypeSpecifier>())
+                        .Select(choice => (choice, FunctionRefForModelConversion(choice, to)))
+                        .Where(t => t.Item2 is not null)
+                        .ToArray();
+                    if (matching.Length == 1)
+                        return ImplicitCastToClass(As(expression, matching[0].choice), to);
+                }
                 var fr = FunctionRefForModelConversion(expression.resultTypeSpecifier, to);
                 if (fr is not null)
                 {
@@ -339,18 +363,25 @@ namespace Hl7.Cql.CqlToElm
                         {
                             // written for easier debugging
                             if (IsExactMatch(fromElementType, toElementType))
-                                return true;
+                                found = true;
                             else if (IsSubtype(fromElementType, toElementType))
-                                return true;
+                                found = true;
                             else if (CanBeCast(fromElementType, toElementType))
-                                return true;
+                                found = true;
                             else if (HasImplicitConversion(fromElementType, toElementType))
-                                return true;
+                                found = true;
+                            break;
                         }
                     }
+                    // The from element either has no same-named to element, or the
+                    // matched element is not convertible: the tuples are incompatible.
                     if (!found)
                         return false;
                 }
+                // Every from element was matched and is convertible. Because the
+                // element counts are equal and element names are unique within a
+                // tuple, this also guarantees every to element is covered.
+                return true;
             }
             else if (from == SystemTypes.IntegerType
                 && (to == SystemTypes.LongType || to == SystemTypes.DecimalType || to == SystemTypes.QuantityType))
