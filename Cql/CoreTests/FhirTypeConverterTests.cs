@@ -736,11 +736,10 @@ namespace CoreTests
         public void ConvertCqlConcept_CodeableConcept()
         {
             var concept = new CqlConcept(
-                new[]
-                {
+                [
                     new CqlCode("123", "http://example.org", "1.0", "First"),
                     new CqlCode("456", "http://example.org", "1.0", "Second"),
-                },
+                ],
                 "Concept display");
             var converted = FhirTypeConverter.Convert<CodeableConcept>(concept);
 

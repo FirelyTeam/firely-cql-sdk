@@ -378,7 +378,7 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion((CqlCode f) => new M.Coding(f.system, f.code, f.display) { Version = f.version });
             converter.AddConversion((CqlConcept f) => new M.CodeableConcept
             {
-                Coding = f.codes?.Select(c => new M.Coding(c.system, c.code, c.display) { Version = c.version }).ToList() ?? new List<M.Coding>(),
+                Coding = f.codes?.Select(c => new M.Coding(c.system, c.code, c.display) { Version = c.version }).ToList() ?? [],
                 Text = f.display
             });
 
