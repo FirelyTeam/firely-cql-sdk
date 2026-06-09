@@ -27,11 +27,37 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
 
     public bool TryResolveDefinition<TDefinition>(
         Library refContext,
+        IReferenceElement reference,
+        [NotNullWhen(true)] out TDefinition? def,
+        out Library defLibrary)
+        where TDefinition : IDefinitionElement
+    {
+        var libraryAlias = reference is IGetLibraryName gln ? gln.libraryName : null;
+        def = default;
+        defLibrary = refContext;
+
+        return reference.name is not null && TryResolveDefinition(refContext, reference.name, libraryAlias, out def, out defLibrary);
+    }
+
+    public bool TryResolveDefinition<TDefinition>(
+        Library refContext,
         string name, string? libraryAlias,
         [NotNullWhen(true)] out TDefinition? def)
         where TDefinition : IDefinitionElement
     {
         var cache = GetLibraryCache(refContext, libraryAlias);
+        return cache.TryResolveDefinition(name, out def);
+    }
+
+    public bool TryResolveDefinition<TDefinition>(
+        Library refContext,
+        string name, string? libraryAlias,
+        [NotNullWhen(true)] out TDefinition? def,
+        out Library defLibrary)
+        where TDefinition : IDefinitionElement
+    {
+        var (cache, resolvedLibrary) = GetLibraryAndCache(refContext, libraryAlias);
+        defLibrary = resolvedLibrary;
         return cache.TryResolveDefinition(name, out def);
     }
 
@@ -45,20 +71,22 @@ internal class LibrarySetDefinitionCache(LibrarySet parent)
     }
 
     private LibraryCache GetLibraryCache(Library context, string? libraryAlias)
-    {
-        var contextCache = GetLibraryCache(context);
+        => GetLibraryAndCache(context, libraryAlias).cache;
 
+    private (LibraryCache cache, Library resolvedLibrary) GetLibraryAndCache(Library context, string? libraryAlias)
+    {
         if (libraryAlias is null)
-            return contextCache;
+            return (GetLibraryCache(context), context);
 
         // If a library alias is provided, we need to return the cache for
         // the alias, as defined in the includes in the context Library.
+        var contextCache = GetLibraryCache(context);
         if (!contextCache.TryResolveDefinition<IncludeDef>(libraryAlias, out var includeDef))
             throw new LibraryAliasUnresolvedError(context, libraryAlias).ToException();
 
         var aliasedLibrary = parent.GetLibrary(includeDef.VersionedLibraryIdentifier)!;
 
-        return GetLibraryCache(aliasedLibrary);
+        return (GetLibraryCache(aliasedLibrary), aliasedLibrary);
     }
 
     private record LibraryCache

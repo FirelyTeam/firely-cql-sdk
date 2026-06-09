@@ -196,8 +196,8 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
 
         private CodeableConcept BuildCodeableConcept(Elm.ConceptRef conceptRef)
         {
-            if (librarySet.TryResolveDefinition<Elm.ConceptDef>(contextLibrary, conceptRef, out var cd))
-                return BuildCodeableConcept(cd.display, cd.code);
+            if (librarySet.TryResolveDefinition<Elm.ConceptDef>(contextLibrary, conceptRef, out var cd, out var conceptLibrary))
+                return BuildCodeableConcept(cd.display, cd.code, conceptLibrary);
 
             throw new UnresolvedReferenceError(contextLibrary, conceptRef).ToException();
         }
@@ -205,9 +205,9 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         private CodeableConcept BuildCodeableConcept(Elm.Concept concept)
             => BuildCodeableConcept(concept.display, concept.code);
 
-        private CodeableConcept BuildCodeableConcept(string display, Elm.CodeRef[] codes)
+        private CodeableConcept BuildCodeableConcept(string display, Elm.CodeRef[] codes, ElmLibrary codeContextLibrary)
         {
-            var codings = codes.Select(BuildCoding).ToList();
+            var codings = codes.Select(cr => BuildCoding(cr, codeContextLibrary)).ToList();
 
             return new CodeableConcept
             {
@@ -227,22 +227,25 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
             };
         }
 
-        private Coding BuildCoding(Elm.CodeRef codeRef)
+        private Coding BuildCoding(Elm.CodeRef codeRef) => BuildCoding(codeRef, contextLibrary);
+
+        private Coding BuildCoding(Elm.CodeRef codeRef, ElmLibrary codeContextLibrary)
         {
-            if (librarySet.TryResolveDefinition<Elm.CodeDef>(contextLibrary, codeRef, out var cd))
-                return BuildCoding(cd.id, cd.codeSystem, cd.display);
+            if (librarySet.TryResolveDefinition<Elm.CodeDef>(codeContextLibrary, codeRef, out var cd, out var codeDefLibrary))
+                return BuildCoding(cd.id, cd.codeSystem, cd.display, codeDefLibrary);
             else
-                throw new UnresolvedReferenceError(contextLibrary, codeRef).ToException();
+                throw new UnresolvedReferenceError(codeContextLibrary, codeRef).ToException();
         }
 
-        private Coding BuildCoding(Elm.Code code) => BuildCoding(code.code, code.system, code.display);
+        private Coding BuildCoding(Elm.Code code) => BuildCoding(code.code, code.system, code.display, contextLibrary);
 
         private Coding BuildCoding(
             string code,
             Elm.CodeSystemRef codeSystemRef,
-            string display)
+            string display,
+            ElmLibrary codeSystemContextLibrary)
         {
-            if (librarySet.TryResolveDefinition<Elm.CodeSystemDef>(contextLibrary, codeSystemRef, out var csd))
+            if (librarySet.TryResolveDefinition<Elm.CodeSystemDef>(codeSystemContextLibrary, codeSystemRef, out var csd))
             {
                 return new Coding
                 {
@@ -252,7 +255,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
                 };
             }
 
-            throw new UnresolvedReferenceError(contextLibrary, codeSystemRef).ToException();
+            throw new UnresolvedReferenceError(codeSystemContextLibrary, codeSystemRef).ToException();
         }
     }
 }

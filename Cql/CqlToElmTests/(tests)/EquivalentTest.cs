@@ -1551,6 +1551,45 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void FhirCodeableConcept_EquivalentTo_Concept_ResolvesToEquivalent()
+        {
+            var cqlToolkit = CreateCqlToolkit().AddFHIRHelpers();
+            var library = cqlToolkit.MakeLibrary("""
+                 library EqualsTest version '1.0.0'
+                 using FHIR version '4.0.1'
+
+                 include FHIRHelpers version '4.0.1'
+
+                 define "Fhir Codeable Concept":
+                    FHIR.CodeableConcept {
+                        coding: {
+                            FHIR.Coding {
+                                system: FHIR.uri {value: 'http://loinc.org'},
+                                code: FHIR.code {value: '8480-6'},
+                                display: FHIR.string { value: 'Systolic blood pressure'}
+                            }
+                        },
+                        text: FHIR.string{value: 'FhirCodeableConcept'}
+                    }
+
+                 define "Concept1":
+                     Concept {
+                         codes: {
+                            Code { system: 'http://loinc.org', code: '8480-6', display: 'Systolic blood pressure' }
+                         },
+                         display: 'Concept1'
+                     }
+
+                 define "AreEquivalent": "Fhir Codeable Concept" ~ "Concept1"
+                 """);
+            // MakeLibrary already asserts the translation reported no errors. Verify
+            // the FHIR.CodeableConcept vs Concept type mismatch resolved to Equivalent
+            // rather than producing an unresolved-operator error.
+            var areEquivalent = library.ShouldDefine<ExpressionDef>("AreEquivalent");
+            areEquivalent.expression.Should().BeOfType<Equivalent>();
+        }
+
+        [TestMethod]
         public void FhirCode_EquivalentTo_CqlCode_String()
         {
             var cqlToolkit = CreateCqlToolkit();

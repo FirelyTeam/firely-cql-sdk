@@ -1,0 +1,111 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "3.29.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "signatureLevel" : "All",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "TestCodeSystemRetrieve",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
+         }, {
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1",
+            "annotation" : [ ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localIdentifier" : "Common",
+            "path" : "TestCodeSystemInclude",
+            "version" : "1.0.0",
+            "annotation" : [ ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient",
+            "annotation" : [ ]
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "name" : "FulfillTasks",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "annotation" : [ ],
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Task",
+                  "type" : "NamedTypeSpecifier",
+                  "annotation" : [ ]
+               }
+            },
+            "expression" : {
+               "dataType" : "{http://hl7.org/fhir}Task",
+               "templateId" : "http://hl7.org/fhir/StructureDefinition/Task",
+               "codeProperty" : "code",
+               "type" : "Retrieve",
+               "annotation" : [ ],
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Task",
+                     "type" : "NamedTypeSpecifier",
+                     "annotation" : [ ]
+                  }
+               },
+               "codes" : {
+                  "type" : "ToList",
+                  "annotation" : [ ],
+                  "signature" : [ ],
+                  "operand" : {
+                     "name" : "Fulfill Task",
+                     "libraryName" : "Common",
+                     "type" : "CodeRef",
+                     "annotation" : [ ]
+                  }
+               },
+               "include" : [ ],
+               "codeFilter" : [ ],
+               "dateFilter" : [ ],
+               "otherFilter" : [ ]
+            }
+         } ]
+      }
+   }
+}

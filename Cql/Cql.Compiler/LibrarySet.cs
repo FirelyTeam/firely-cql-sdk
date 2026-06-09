@@ -305,6 +305,23 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
         _librarySetDefinitionCache.TryResolveDefinition(refContext, reference, out def);
 
     /// <summary>
+    /// Given a reference that appears in a library, this method will attempt to resolve the definition,
+    /// also returning the library in which the definition was found.
+    /// </summary>
+    /// <param name="refContext">The library where <paramref name="reference"/> was found.</param>
+    /// <param name="reference">The reference to resolve.</param>
+    /// <param name="def">The resolved definition, or null if resolution failed.</param>
+    /// <param name="defLibrary">The library where the definition was found.</param>
+    /// <typeparam name="TDefinition">The type of definition to resolve.</typeparam>
+    internal bool TryResolveDefinition<TDefinition>(
+        Library refContext,
+        IReferenceElement reference,
+        [NotNullWhen(true)] out TDefinition? def,
+        out Library defLibrary)
+        where TDefinition : IDefinitionElement =>
+        _librarySetDefinitionCache.TryResolveDefinition(refContext, reference, out def, out defLibrary);
+
+    /// <summary>
     /// Given a reference that appears in a library, this method will attempt to resolve the definition.
     /// </summary>
     /// <param name="refContext">The library where the reference was found.</param>

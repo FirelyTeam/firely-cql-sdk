@@ -363,18 +363,25 @@ namespace Hl7.Cql.CqlToElm
                         {
                             // written for easier debugging
                             if (IsExactMatch(fromElementType, toElementType))
-                                return true;
+                                found = true;
                             else if (IsSubtype(fromElementType, toElementType))
-                                return true;
+                                found = true;
                             else if (CanBeCast(fromElementType, toElementType))
-                                return true;
+                                found = true;
                             else if (HasImplicitConversion(fromElementType, toElementType))
-                                return true;
+                                found = true;
+                            break;
                         }
                     }
+                    // The from element either has no same-named to element, or the
+                    // matched element is not convertible: the tuples are incompatible.
                     if (!found)
                         return false;
                 }
+                // Every from element was matched and is convertible. Because the
+                // element counts are equal and element names are unique within a
+                // tuple, this also guarantees every to element is covered.
+                return true;
             }
             else if (GetSystemImplicitConversionTargets(from).Any(t => t == to))
                 return true;
