@@ -66,20 +66,6 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 1.2.7 When asked for PR description output, provide raw markdown in a fenced ` ```markdown ` block
 
-1.2.8 Keep a branch-specific PR document updated throughout the session
-
-1.2.9 Use filename format: `PR for {PR number}-{branch name}.md` in `docs/pull-requests/`
-
-1.2.10 If branch name starts with numeric issue prefix (for example `90-xyz`), omit that leading numeric segment from the filename branch part
-
-1.2.11 Update the branch PR document whenever scope, implementation details, testing, or risks change
-
-1.2.12 The branch PR document must summarize complete branch history/current diff
-
-1.2.13 Do not modify historical PR documents; only the current branch PR document
-
-1.2.14 Keep the GitHub PR body synchronized with current branch PR document content
-
 ## 1.3. Managing Copilot Instructions
 
 1.3.1 When user provides memory-based instructions (e.g., "remember", "never do", "always do"), add them to this copilot instructions file immediately

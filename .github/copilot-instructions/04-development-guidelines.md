@@ -137,11 +137,11 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 4.4.8 **Heading numbering standards**
 
-4.4.8.1 All documentation headings must use hierarchical numbering (`# 1.`, `## 1.1.`, `### 1.1.1.`), except files under `docs/pull-requests/`
+4.4.8.1 All documentation headings must use hierarchical numbering (`# 1.`, `## 1.1.`, `### 1.1.1.`)
 
 4.4.8.2 Renumber sequentially whenever adding, removing, or reordering sections
 
-4.4.8.3 Avoid unnumbered headings outside `docs/pull-requests/`
+4.4.8.3 Avoid unnumbered headings
 
 4.4.8.4 In `.github/copilot-instructions.md` and its sub-documents, preserve strict numbering integrity
 
