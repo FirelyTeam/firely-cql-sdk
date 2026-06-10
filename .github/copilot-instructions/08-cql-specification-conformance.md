@@ -1,6 +1,16 @@
-## 8. CQL Specification Conformance
+# 8. CQL Specification Conformance
 
-### 8.1 Authoritative Specification Source
+Parent document: [../copilot-instructions.md](../copilot-instructions.md)
+
+## 8.0. Table of Contents
+
+- [8. CQL Specification Conformance](#8-cql-specification-conformance)
+- [8.0. Table of Contents](#80-table-of-contents)
+- [8.1. Authoritative Specification Source](#81-authoritative-specification-source)
+- [8.2. When to Check Specification](#82-when-to-check-specification)
+- [8.3. Specification Location](#83-specification-location)
+
+## 8.1. Authoritative Specification Source
 
 8.1.1 **CRITICAL**: Always use `/spec/condensed/` as the authoritative CQL specification for all development work
 
@@ -12,7 +22,7 @@
 
 8.1.5 The condensed spec contains all specification content without web assets (CSS, JS, images)
 
-### 8.2 When to Check Specification
+## 8.2. When to Check Specification
 
 8.2.1 **Before implementing any CQL operator or function**: Verify behavior against `/spec/condensed/09-b-cqlreference.md`
 
@@ -24,7 +34,7 @@
 
 8.2.5 **When adding new features**: Verify feature requirements and edge cases from the specification
 
-### 8.3 Specification Location
+## 8.3. Specification Location
 
 8.3.1 **Main CQL reference**: `/spec/condensed/09-b-cqlreference.md` (operator and function definitions)
 

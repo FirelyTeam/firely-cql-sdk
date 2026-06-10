@@ -1,6 +1,15 @@
-## 7. FHIR Library Resource Handling
+# 7. FHIR Library Resource Handling
 
-### 7.1 Library.Name vs Library.Id
+Parent document: [../copilot-instructions.md](../copilot-instructions.md)
+
+## 7.0. Table of Contents
+
+- [7. FHIR Library Resource Handling](#7-fhir-library-resource-handling)
+- [7.0. Table of Contents](#70-table-of-contents)
+- [7.1. Library.Name vs Library.Id](#71-libraryname-vs-libraryid)
+- [7.2. Library Identifier Construction](#72-library-identifier-construction)
+
+## 7.1. Library.Name vs Library.Id
 
 7.1.1 **CRITICAL**: `library.Name` and `library.Id` are NOT interchangeable and serve different purposes
 
@@ -28,7 +37,7 @@ if (string.IsNullOrWhiteSpace(library.Name))
 }
 ```
 
-### 7.2 Library Identifier Construction
+## 7.2. Library Identifier Construction
 
 7.2.1 Always use `CqlVersionedLibraryIdentifier` for parsing and formatting library names and versions:
 

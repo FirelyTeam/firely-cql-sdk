@@ -1,8 +1,16 @@
-# Copilot Instructions Sub-Documents
+# 1. Copilot Instructions Sub-Documents
+
+Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 This folder contains focused instruction documents referenced by [.github/copilot-instructions.md](../copilot-instructions.md).
 
-## Index
+## 1.0. Table of Contents
+
+- [1. Copilot Instructions Sub-Documents](#1-copilot-instructions-sub-documents)
+- [1.0. Table of Contents](#10-table-of-contents)
+- [1.1. Index](#11-index)
+
+## 1.1. Index
 
 - [01-user-workflow-preferences.md](01-user-workflow-preferences.md)
 - [02-internalsvisibleto-configuration.md](02-internalsvisibleto-configuration.md)

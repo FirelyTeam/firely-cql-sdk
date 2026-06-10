@@ -1,12 +1,24 @@
-## 4. Development Guidelines
+# 4. Development Guidelines
 
-### 4.1 File Headers
+Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
-#### 4.1.1 Overview
+## 4.0. Table of Contents
+
+- [4. Development Guidelines](#4-development-guidelines)
+- [4.0. Table of Contents](#40-table-of-contents)
+- [4.1. File Headers](#41-file-headers)
+- [4.2. Making Changes](#42-making-changes)
+- [4.3. Project References](#43-project-references)
+- [4.4. Documentation](#44-documentation)
+- [4.5. Release Notes](#45-release-notes)
+
+## 4.1. File Headers
+
+### 4.1.1. Overview
 
 4.1.1.1 Copyright header requirements for C# source files (`*.cs`, excluding `*.g.cs` generated files)
 
-#### 4.1.2 For NEW Files (files being created)
+### 4.1.2. For NEW Files (files being created)
 
 ```csharp
 /*
@@ -18,13 +30,13 @@
  */
 ```
 
-#### 4.1.3 For EXISTING Files
+### 4.1.3. For EXISTING Files
 
 4.1.3.1 **DO NOT modify existing copyright headers** in files that already have them
 4.1.3.2 Leave existing headers exactly as they are (e.g., "NCQA and contributors" should remain unchanged)
 4.1.3.3 **When making changes to a file and Firely is not listed as contributor, add it as "Firely, NCQA and contributors"**
 
-#### 4.1.4 Header Guidelines
+### 4.1.4. Header Guidelines
 
 4.1.4.1 Use the current year in the copyright notice for new files only (replace `<CURRENT_YEAR>` with the actual current year, e.g., 2026 for files created in 2026)
 
@@ -36,7 +48,7 @@
 
 4.1.4.5 **Never update or modify existing copyright headers in existing files**
 
-### 4.2 Making Changes
+## 4.2. Making Changes
 
 4.2.1 Use minimal, surgical changes - modify as few lines as possible
 
@@ -71,7 +83,7 @@
 
 4.2.11 **Always enable nullable on all new code** — Every new `.cs` file must have `#nullable enable` at the top (after any copyright header). If the project already enables nullable globally (via `<Nullable>enable</Nullable>` in props), the directive is still required in each new file for explicitness.
 
-### 4.3 Project References
+## 4.3. Project References
 
 4.3.1 When adding internal access, ensure the requesting project is appropriate for internal API usage
 
@@ -79,7 +91,7 @@
 
 4.3.3 Always validate that internal access is truly needed
 
-### 4.4 Documentation
+## 4.4. Documentation
 
 4.4.1 Update README files when adding new projects or significant features
 
@@ -135,6 +147,12 @@
 
 4.4.8.5 Never introduce duplicated heading numbers or stale TOC/rule references after edits
 
+4.4.8.6 In `.github/copilot-instructions.md` and its sub-documents, cap heading numbering at three segments maximum (for example `# 1.`, `## 1.1.`, `### 1.1.1.`)
+
+4.4.8.7 Do not create headings deeper than `###` in copilot instruction docs
+
+4.4.8.8 If more detail is needed, keep deeper numbering in body text or lists (for example `1.1.1.1`) instead of adding deeper headings
+
 4.4.9 **TOC consistency**
 
 4.4.9.1 Keep TOC format consistent in top-level docs with TOCs (for example `README.md`, `docs/getting-started.md`)
@@ -153,7 +171,7 @@
 
 4.4.10.3 Keep the parent link above main content
 
-### 4.5 Release Notes
+## 4.5. Release Notes
 
 4.5.1 When asked to create release notes, use [docs/releases/release-notes-template.md](../docs/releases/release-notes-template.md) as the default structure and guidance.
 

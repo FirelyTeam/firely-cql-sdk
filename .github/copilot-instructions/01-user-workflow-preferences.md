@@ -1,6 +1,20 @@
-## 1. User Workflow Preferences
+# 1. User Workflow Preferences
 
-### 1.1 Discuss Before Implementing
+Parent document: [../copilot-instructions.md](../copilot-instructions.md)
+
+## 1.0. Table of Contents
+
+- [1. User Workflow Preferences](#1-user-workflow-preferences)
+- [1.0. Table of Contents](#10-table-of-contents)
+- [1.1. Discuss Before Implementing](#11-discuss-before-implementing)
+- [1.2. Instruction for PR AI](#12-instruction-for-pr-ai)
+- [1.3. Managing Copilot Instructions](#13-managing-copilot-instructions)
+- [1.4. Terminal and Command Execution](#14-terminal-and-command-execution)
+- [1.5. GitHub CLI Usage](#15-github-cli-usage)
+- [1.6. Issue Formatting Standards](#16-issue-formatting-standards)
+- [1.7. Ticket Pickup Workflow](#17-ticket-pickup-workflow)
+
+## 1.1. Discuss Before Implementing
 
 1.1.1 When user asks for ideas, suggestions, or "what would be the best way to..." questions, **DISCUSS OPTIONS FIRST**
 
@@ -12,7 +26,7 @@
 
 1.1.5 User will explicitly ask to proceed with implementation when ready
 
-### 1.2 Instruction for PR AI
+## 1.2. Instruction for PR AI
 
 1.2.1 When I ask you to update or improve the Pull Request description, follow these requirements:
 
@@ -66,7 +80,7 @@
 
 1.2.14 Keep the GitHub PR body synchronized with current branch PR document content
 
-### 1.3 Managing Copilot Instructions
+## 1.3. Managing Copilot Instructions
 
 1.3.1 When user provides memory-based instructions (e.g., "remember", "never do", "always do"), add them to this copilot instructions file immediately
 
@@ -100,13 +114,13 @@
 
 1.3.7 Fix numbering mismatches before completion
 
-### 1.4 Terminal and Command Execution
+## 1.4. Terminal and Command Execution
 
 1.4.1 **CRITICAL - PowerShell Non-Interactive Mode**: When running PowerShell commands via `run_in_terminal`, **ALWAYS** use non-interactive mode by adding the `-NonInteractive` flag (e.g., `pwsh -NonInteractive -Command "..."`) to prevent commands from hanging waiting for user input
 
 1.4.2 Avoid creating interactive shells like `pwsh` or `dotnet repl` unless explicitly requested by the user
 
-### 1.5 GitHub CLI Usage
+## 1.5. GitHub CLI Usage
 
 1.5.1 For GitHub workflow tasks, always prefer the GitHub CLI (`gh`) over browser-only or raw HTTP approaches when equivalent CLI support exists
 
@@ -118,7 +132,7 @@
 
 1.5.5 Treat authentication as part of task setup when `gh` access is required
 
-### 1.6 Issue Formatting Standards
+## 1.6. Issue Formatting Standards
 
 1.6.1 Use clean markdown with real line breaks and headings
 
@@ -144,7 +158,7 @@
 
       1.6.5.7 `Acceptance Criteria`
 
-### 1.7 Ticket Pickup Workflow
+## 1.7. Ticket Pickup Workflow
 
 1.7.1 When the user says to pick up a ticket by issue number or GitHub issue URL, resolve that request to the issue number first
 

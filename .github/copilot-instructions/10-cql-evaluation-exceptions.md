@@ -1,6 +1,17 @@
-## 10. CQL Evaluation Exceptions
+# 10. CQL Evaluation Exceptions
 
-### 10.0 Rationale
+Parent document: [../copilot-instructions.md](../copilot-instructions.md)
+
+## 10.0. Table of Contents
+
+- [10. CQL Evaluation Exceptions](#10-cql-evaluation-exceptions)
+- [10.0. Table of Contents](#100-table-of-contents)
+- [10.0. Rationale](#100-rationale)
+- [10.1. Exception Hierarchy](#101-exception-hierarchy)
+- [10.2. When to Use CqlException](#102-when-to-use-cqlexception)
+- [10.3. Key Points](#103-key-points)
+
+## 10.0. Rationale
 
 10.0.1 **Why use `ICqlError` structs instead of plain .NET exceptions?**
 
@@ -14,7 +25,7 @@ The Firely CQL SDK uses a struct-based error pattern (`ICqlError` + `CqlExceptio
 
 10.0.1.4 **Future internationalization** — Because `GetMessage()` is a method on the struct, it can be overridden or replaced with a locale-aware implementation in the future without changing throw sites. All the data needed to produce a translated message is already captured in the struct's properties. (Internationalization is not yet implemented.)
 
-### 10.1 Exception Hierarchy
+## 10.1. Exception Hierarchy
 
 10.1.1 Two exception types are defined in `Hl7.Cql.Abstractions` (assembly `Hl7.Cql.Abstractions`) for errors raised during CQL evaluation:
 
@@ -46,7 +57,7 @@ throw new CqlArithmeticError("a", "year").ToException();
 catch (CqlException<CqlArithmeticError> e) { ... }
 ```
 
-### 10.2 When to Use CqlException
+## 10.2. When to Use CqlException
 
 10.2.1 **ALWAYS** create a specific `ICqlError` struct and throw it as `CqlException<TError>` for any exception that should be raised during the evaluation of a CQL expression, instead of using general .NET exceptions like `InvalidOperationException` or `ArgumentException`.
 
@@ -59,7 +70,7 @@ catch (CqlException<CqlArithmeticError> e) { ... }
 
   10.2.3 General .NET exceptions (`ArgumentException`, `InvalidOperationException`) are still appropriate for programming errors (e.g. invalid method arguments), as opposed to errors arising from evaluating CQL expressions at runtime.
 
-### 10.3 Key Points
+## 10.3. Key Points
 
 10.3.1 Exception infrastructure (`ICqlError`, `ICqlArithmeticError`, `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`) lives in `Cql/Cql.Abstractions/Exceptions/`, namespace `Hl7.Cql.Exceptions`.
 

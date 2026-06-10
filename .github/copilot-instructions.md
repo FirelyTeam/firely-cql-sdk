@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.1.0
+**Version:** 3.2.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.2.0
+  - Added a durable documentation rule for copilot instruction docs: cap heading numbering at three segments and keep deeper numbering in body text instead of deeper headings.
 - 3.1.0
   - Incorporated GitHub workflow guidance for GitHub CLI usage, issue formatting, ticket pickup, PR body synchronization, and instruction-maintenance safeguards.
   - Incorporated documentation standards for heading numbering, TOC consistency, parent-document links, and cross-document linking rules.
