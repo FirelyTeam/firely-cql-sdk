@@ -42,6 +42,50 @@ public class TestDataRequirementsAnalyzer
         actual.Should().BeEquivalentTo([FHIRAllTypes.Patient, FHIRAllTypes.ServiceRequest, FHIRAllTypes.Condition, FHIRAllTypes.Observation]);
     }
 
+    [TestMethod]
+    public void ResolveCrossLibraryCodeSystemRef()
+    {
+        // Arrange - load a library that references a code from an included library,
+        // where the code's code system is defined in the included library only.
+        var lset = new LibrarySet();
+        lset.LoadLibraryAndDependencies(new DirectoryInfo("Input/ELM/HL7"), "TestCodeSystemRetrieve");
+        var main = lset.GetLibrary("TestCodeSystemRetrieve-1.0.0");
+
+        // Act - this should not throw "Cannot resolve CodeSystemRef with name TaskCodeSystem"
+        var analyzer = new DataRequirementsAnalyzer(lset, main);
+        var dataRequirements = analyzer.Analyze();
+
+        // Assert
+        var taskRequirement = dataRequirements.FirstOrDefault(dr => dr.Type == FHIRAllTypes.Task);
+        taskRequirement.Should().NotBeNull();
+        taskRequirement!.CodeFilter.Should().HaveCount(1);
+        taskRequirement.CodeFilter[0].Code.Should().HaveCount(1);
+        taskRequirement.CodeFilter[0].Code[0].Code.Should().Be("fulfill");
+        taskRequirement.CodeFilter[0].Code[0].System.Should().Be("http://hl7.org/fhir/CodeSystem/task-code");
+    }
+
+    [TestMethod]
+    public void ResolveCrossLibraryCodeSystemRefFromConceptCodeRefAlias()
+    {
+        // Arrange - load a library with a local ConceptDef that references a code
+        // from an included library via CodeRef.libraryName.
+        var lset = new LibrarySet();
+        lset.LoadLibraryAndDependencies(new DirectoryInfo("Input/ELM/HL7"), "TestCodeSystemConceptRetrieve");
+        var main = lset.GetLibrary("TestCodeSystemConceptRetrieve-1.0.0");
+
+        // Act
+        var analyzer = new DataRequirementsAnalyzer(lset, main);
+        var dataRequirements = analyzer.Analyze();
+
+        // Assert
+        var taskRequirement = dataRequirements.FirstOrDefault(dr => dr.Type == FHIRAllTypes.Task);
+        taskRequirement.Should().NotBeNull();
+        taskRequirement!.CodeFilter.Should().HaveCount(1);
+        taskRequirement.CodeFilter[0].Code.Should().HaveCount(1);
+        taskRequirement.CodeFilter[0].Code[0].Code.Should().Be("fulfill");
+        taskRequirement.CodeFilter[0].Code[0].System.Should().Be("http://hl7.org/fhir/CodeSystem/task-code");
+    }
+
 	[TestMethod]
 	public void TestSimplifyRequirements()
     {

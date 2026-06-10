@@ -153,6 +153,46 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Concept_To_CodeableConcept_Test()
+        {
+            // Arrange
+            using var serviceProvider = BuildServiceProvider();
+            using var servicesScope = serviceProvider.CreateScope();
+
+            var libraryString = CqlLibraryString.Parse("""
+               library ConceptToCodeableConcept version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               codesystem "Example": 'http://example.org'
+
+               code "ExampleCode": '123' from "Example" display 'Example display'
+
+               concept "ExampleConcept": { "ExampleCode" } display 'Concept display'
+
+               define ConceptAsCodeableConcept:
+                   "ExampleConcept" as FHIR.CodeableConcept
+               """);
+            var elmLibrary = CreateElmLibrary(libraryString);
+
+            // Act - building the library exercises the CqlConcept -> CodeableConcept conversion
+            var definitions = servicesScope.ServiceProvider
+                                           .GetRequiredService<LibraryExpressionBuilder>()
+                                           .ProcessLibrary(elmLibrary);
+            Assert.IsNotNull(definitions);
+            Assert.IsTrue(definitions.Libraries.Any());
+
+            // Assert - running it yields a CodeableConcept carrying the concept's codes and display
+            var result = InvokeLibrary(elmLibrary, "ConceptAsCodeableConcept");
+            Assert.IsInstanceOfType<CodeableConcept>(result);
+            var codeableConcept = (CodeableConcept)result;
+            Assert.AreEqual("Concept display", codeableConcept.Text);
+            Assert.AreEqual(1, codeableConcept.Coding.Count);
+            Assert.AreEqual("123", codeableConcept.Coding[0].Code);
+            Assert.AreEqual("http://example.org", codeableConcept.Coding[0].System);
+        }
+
+        [TestMethod]
         public void Coalesce_WithNullsAndList_ReturnsFirstNonNullList()
         {
             // Arrange
