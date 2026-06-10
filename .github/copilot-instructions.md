@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.0.0
+**Version:** 3.1.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -19,8 +19,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 - Start here for every task: classify request first, open matching sub-document, then execute.
 - If multiple categories apply: read all relevant sub-docs before implementation.
 
-- Task-style preferences or behavior routing?
-  - Discuss-before-implementing, PR description expectations, instruction maintenance, terminal behavior
+- Task-style preferences or GitHub workflow task?
+  - Discuss-before-implementing, PR description expectations, branch PR document upkeep, GitHub CLI usage, issue formatting, ticket pickup, instruction maintenance, terminal behavior
   - Read [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md)
 
 - InternalsVisibleTo task?
@@ -32,7 +32,7 @@ This file is the decision-tree entry point. Route tasks here first, then open th
   - Read [03-project-structure.md](copilot-instructions/03-project-structure.md)
 
 - Code-change or documentation standards task?
-  - File headers, coding conventions, internal/public API boundaries, README and release-note policies
+  - File headers, coding conventions, internal/public API boundaries, documentation numbering, TOC consistency, parent-document links, README and release-note policies
   - Read [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md)
 
 - Build or cross-platform script task?
@@ -97,6 +97,9 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.1.0
+  - Incorporated GitHub workflow guidance for GitHub CLI usage, issue formatting, ticket pickup, PR body synchronization, and instruction-maintenance safeguards.
+  - Incorporated documentation standards for heading numbering, TOC consistency, parent-document links, and cross-document linking rules.
 - 3.0.0
   - Major reorganization: split monolithic instructions into decision tree plus focused sub-documents.
   - Added task-taxonomy-first routing and quick index.
