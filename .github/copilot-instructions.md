@@ -20,7 +20,7 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 - If multiple categories apply: read all relevant sub-docs before implementation.
 
 - Task-style preferences or GitHub workflow task?
-  - Discuss-before-implementing, PR description expectations, branch PR document upkeep, GitHub CLI usage, issue formatting, ticket pickup, instruction maintenance, terminal behavior
+  - Discuss-before-implementing, PR description expectations, GitHub CLI usage, issue formatting, ticket pickup, instruction maintenance, terminal behavior
   - Read [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md)
 
 - InternalsVisibleTo task?

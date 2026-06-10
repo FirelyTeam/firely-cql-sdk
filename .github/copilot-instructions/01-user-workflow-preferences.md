@@ -5,14 +5,14 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 ## 1.0. Table of Contents
 
 - [1. User Workflow Preferences](#1-user-workflow-preferences)
-  - [1.0. Table of Contents](#10-table-of-contents)
-  - [1.1. Discuss Before Implementing](#11-discuss-before-implementing)
-  - [1.2. Instruction for PR AI](#12-instruction-for-pr-ai)
-  - [1.3. Managing Copilot Instructions](#13-managing-copilot-instructions)
-  - [1.4. Terminal and Command Execution](#14-terminal-and-command-execution)
-  - [1.5. GitHub CLI Usage](#15-github-cli-usage)
-  - [1.6. Issue Formatting Standards](#16-issue-formatting-standards)
-  - [1.7. Ticket Pickup Workflow](#17-ticket-pickup-workflow)
+- [1.0. Table of Contents](#10-table-of-contents)
+- [1.1. Discuss Before Implementing](#11-discuss-before-implementing)
+- [1.2. Instruction for PR AI](#12-instruction-for-pr-ai)
+- [1.3. Managing Copilot Instructions](#13-managing-copilot-instructions)
+- [1.4. Terminal and Command Execution](#14-terminal-and-command-execution)
+- [1.5. GitHub CLI Usage](#15-github-cli-usage)
+- [1.6. Issue Formatting Standards](#16-issue-formatting-standards)
+- [1.7. Ticket Pickup Workflow](#17-ticket-pickup-workflow)
 
 ## 1.1. Discuss Before Implementing
 
