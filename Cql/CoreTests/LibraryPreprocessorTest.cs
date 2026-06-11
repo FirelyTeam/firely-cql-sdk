@@ -9,7 +9,12 @@
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging.Abstractions;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace CoreTests
 {
@@ -94,6 +99,41 @@ namespace CoreTests
             power.resultTypeName.Should().Be(SystemTypes.DecimalType.name);
         }
 
+        [TestMethod]
+        public void CoalesceOnNullableValueTupleList_UsesValueTypeOverload()
+        {
+            var binder = new CqlOperatorsBinder(
+                NullLogger<CqlOperatorsBinder>.Instance,
+                new TestTypeResolver(),
+                Hl7.Cql.Conversion.TypeConverter.Create());
+
+            var operand = System.Linq.Expressions.Expression.Constant(new (int? isHighRisk, int? isInconclusive, DateOnly? eventDate)?[]
+            {
+                ((int?)1, null, new DateOnly(2026, 6, 11)),
+                null
+            });
+
+            var call = (MethodCallExpression)binder.BindToMethod(nameof(ICqlOperators.Coalesce), [operand], []);
+
+            call.Method.Name.Should().Be(nameof(ICqlOperators.CoalesceValueTypes));
+            call.Method.GetGenericArguments().Single().Should().Be(typeof((int?, int?, DateOnly?)));
+        }
+
+    }
+
+    internal class TestTypeResolver : BaseTypeResolver
+    {
+        internal override Type PatientType => typeof(object);
+
+        internal override PropertyInfo? PatientBirthDateProperty => null;
+
+        internal override IEnumerable<Assembly> ModelAssemblies => [];
+
+        internal override IEnumerable<string> ModelNamespaces => [];
+
+        internal override PropertyInfo GetPrimaryCodePath(string typeSpecifier) => throw new NotImplementedException();
+
+        internal override bool ShouldUseSourceObject(Type type, string propertyName) => false;
     }
 
     class ResultTypeSpecifierChecker : BaseElmTreeWalker
