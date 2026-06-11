@@ -104,25 +104,24 @@ partial class CqlOperatorsBinder
 
     private Expression Coalesce(Expression operand)
     {
-        if (!operand.Type.IsGenericType)
-            throw new ArgumentException(
-                "Operands to this method must be generic with a single generic type parameter, e.g. IEnumerable<T>",
+        var elementType = _typeResolver.GetListElementType(operand.Type, throwError: false)
+            ?? throw new ArgumentException(
+                "Operands to this method must be list-like with a single element type, e.g. IEnumerable<T>",
                 nameof(operand));
 
-        var genericArgumentType = operand.Type.GetGenericArguments()[0];
-        if (genericArgumentType.IsValueType)
+        if (elementType.IsValueType)
         {
 
-            if (genericArgumentType.IsGenericType && genericArgumentType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (elementType.IsGenericType && elementType.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
-                var underlying = Nullable.GetUnderlyingType(genericArgumentType)!;
+                var underlying = Nullable.GetUnderlyingType(elementType)!;
                 return BindToBestMethodOverload(nameof(ICqlOperators.CoalesceValueTypes), [operand], [underlying])!;
             }
 
-            return BindToBestMethodOverload(nameof(ICqlOperators.CoalesceValueTypes), [operand], [genericArgumentType])!;
+            return BindToBestMethodOverload(nameof(ICqlOperators.CoalesceValueTypes), [operand], [elementType])!;
         }
 
-        var call = BindToBestMethodOverload(nameof(ICqlOperators.Coalesce), [operand], [genericArgumentType])!;
+        var call = BindToBestMethodOverload(nameof(ICqlOperators.Coalesce), [operand], [elementType])!;
         return call;
 
     }
