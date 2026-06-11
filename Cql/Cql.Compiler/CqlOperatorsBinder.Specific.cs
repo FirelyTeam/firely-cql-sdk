@@ -104,7 +104,7 @@ partial class CqlOperatorsBinder
 
     private Expression Coalesce(Expression operand)
     {
-        var elementType = _typeResolver.GetListElementType(operand.Type, throwError: true)
+        var elementType = _typeResolver.GetListElementType(operand.Type, throwError: false)
             ?? throw new ArgumentException(
                 "Operands to this method must be list-like with a single element type, e.g. IEnumerable<T>",
                 nameof(operand));
