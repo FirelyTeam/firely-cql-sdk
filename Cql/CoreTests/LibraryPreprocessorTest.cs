@@ -11,6 +11,7 @@ using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging.Abstractions;
 using System.Linq.Expressions;
@@ -100,23 +101,22 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void CoalesceOnNullableValueTupleList_UsesValueTypeOverload()
+        public void CoalesceOnStringList_UsesCoalesce()
         {
+            // After consolidation: all Coalesce calls route to Coalesce<T> (no reference vs value type distinction)
             var binder = new CqlOperatorsBinder(
                 NullLogger<CqlOperatorsBinder>.Instance,
                 new TestTypeResolver(),
                 Hl7.Cql.Conversion.TypeConverter.Create());
 
-            var operand = System.Linq.Expressions.Expression.Constant(new (int? isHighRisk, int? isInconclusive, DateOnly? eventDate)?[]
-            {
-                ((int?)1, null, new DateOnly(2026, 6, 11)),
-                null
-            });
+            var operand = System.Linq.Expressions.Expression.Constant(
+                new string?[] { "hello", null, "world" },
+                typeof(IEnumerable<string?>));
 
             var call = (MethodCallExpression)binder.BindToMethod(nameof(ICqlOperators.Coalesce), [operand], []);
 
-            call.Method.Name.Should().Be(nameof(ICqlOperators.CoalesceValueTypes));
-            call.Method.GetGenericArguments().Single().Should().Be(typeof((int?, int?, DateOnly?)));
+            call.Method.Name.Should().Be(nameof(ICqlOperators.Coalesce));
+            call.Method.GetGenericArguments().Single().Should().Be(typeof(string));
         }
 
     }

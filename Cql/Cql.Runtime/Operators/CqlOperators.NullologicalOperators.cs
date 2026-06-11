@@ -15,15 +15,15 @@ namespace Hl7.Cql.Operators
 
         /// <inheritdoc />
         public T? Coalesce<T>(IEnumerable<T>? source)
-            where T : class
         {
             if (source == null)
-                return null!;
+                return default!;
             var t = source.FirstOrDefault(t => t != null);
             return t;
         }
 
         /// <inheritdoc />
+        [Obsolete("Use Coalesce<T> instead. This method is retained for backward compatibility with external implementations.", false)]
         public T? CoalesceValueTypes<T>(IEnumerable<T?>? source)
             where T : struct
         {

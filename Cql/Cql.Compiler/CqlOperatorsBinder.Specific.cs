@@ -109,20 +109,15 @@ partial class CqlOperatorsBinder
                 "Operands to this method must be list-like with a single element type, e.g. IEnumerable<T>",
                 nameof(operand));
 
-        if (elementType.IsValueType)
+        // For Nullable<T>, extract the underlying type T so Coalesce<T> receives the base type
+        if (elementType.IsValueType && elementType.IsGenericType && elementType.GetGenericTypeDefinition() == typeof(Nullable<>))
         {
-
-            if (elementType.IsGenericType && elementType.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
-                var underlying = Nullable.GetUnderlyingType(elementType)!;
-                return BindToBestMethodOverload(nameof(ICqlOperators.CoalesceValueTypes), [operand], [underlying])!;
-            }
-
-            return BindToBestMethodOverload(nameof(ICqlOperators.CoalesceValueTypes), [operand], [elementType])!;
+            var underlying = Nullable.GetUnderlyingType(elementType)!;
+            return BindToBestMethodOverload(nameof(ICqlOperators.Coalesce), [operand], [underlying])!;
         }
 
-        var call = BindToBestMethodOverload(nameof(ICqlOperators.Coalesce), [operand], [elementType])!;
-        return call;
+        // Always use Coalesce<T> (now unconstrained to handle value types, reference types, and tuples)
+        return BindToBestMethodOverload(nameof(ICqlOperators.Coalesce), [operand], [elementType])!;
 
     }
 

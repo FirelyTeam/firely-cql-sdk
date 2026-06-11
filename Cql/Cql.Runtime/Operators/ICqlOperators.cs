@@ -127,9 +127,10 @@ namespace Hl7.Cql.Operators
         /// <para>CQL Specification: §9.B Appendix B – CQL Reference, Nullological Operators: Coalesce</para>
         /// <para>Signature: <c>Coalesce&lt;T&gt;(arguments List&lt;T&gt;) T</c></para>
         /// <para>If all arguments evaluate to null, the result is null.</para>
+        /// <para><strong>Note:</strong> For non-nullable value types (e.g., <c>int</c>, <c>float</c>), a no-match result returns <c>default</c> (e.g., <c>0</c>) rather than null. This method is intended for use with nullable reference types and nullable value types; consider using <see cref="CoalesceValueTypes{T}"/> explicitly for nullable value types to make the intent clear.</para>
         /// </remarks>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#coalesce">CQL Specification §9.B - Coalesce</seealso>
-        T?                                       Coalesce<T>(IEnumerable<T>? source) where T : class;
+        T?                                       Coalesce<T>(IEnumerable<T>? source);
 
         /// <summary>
         /// Returns the first non-null result in a list of nullable value type arguments.
