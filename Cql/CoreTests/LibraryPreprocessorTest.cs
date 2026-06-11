@@ -42,6 +42,57 @@ namespace CoreTests
             rtsChecker.Nodes.Should().BeEmpty();
         }
 
+        [TestMethod]
+        public void LegacyPowerIntegerResultType_IsNormalizedToDecimal()
+        {
+            var power = new Power
+            {
+                locator = "1:1-1:16",
+                operand =
+                [
+                    new Literal
+                    {
+                        value = "10",
+                        valueType = SystemTypes.IntegerType.name,
+                        resultTypeSpecifier = SystemTypes.IntegerType,
+                        resultTypeName = SystemTypes.IntegerType.name
+                    },
+                    new Literal
+                    {
+                        value = "2",
+                        valueType = SystemTypes.IntegerType.name,
+                        resultTypeSpecifier = SystemTypes.IntegerType,
+                        resultTypeName = SystemTypes.IntegerType.name
+                    }
+                ],
+                resultTypeSpecifier = SystemTypes.IntegerType,
+                resultTypeName = SystemTypes.IntegerType.name
+            };
+
+            var lib = new Library
+            {
+                identifier = new VersionedIdentifier { id = "LegacyPowerTest", version = "1.0.0" },
+                schemaIdentifier = new VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                statements =
+                [
+                    new ExpressionDef
+                    {
+                        name = "PowExpr",
+                        context = "Patient",
+                        expression = power,
+                        resultTypeSpecifier = SystemTypes.IntegerType,
+                        resultTypeName = SystemTypes.IntegerType.name
+                    }
+                ]
+            };
+
+            var corrector = new PowerResultTypeCorrector(NullLogger<PowerResultTypeCorrector>.Instance);
+            corrector.Fix(lib);
+
+            power.resultTypeSpecifier.Should().BeEquivalentTo(SystemTypes.DecimalType);
+            power.resultTypeName.Should().Be(SystemTypes.DecimalType.name);
+        }
+
     }
 
     class ResultTypeSpecifierChecker : BaseElmTreeWalker
