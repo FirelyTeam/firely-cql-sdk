@@ -14,7 +14,9 @@ namespace CoreTests;
 
 /// <summary>
 /// Golden-file tests: regenerate C# from the checked-in ELM corpora under <c>LibrarySets\</c>
-/// and verify the output is identical to the checked-in <c>.g.cs</c> files.
+/// and verify the output is identical to the checked-in <c>.g.cs</c> files, modulo line-ending
+/// differences and a trailing newline (git may rewrite line endings on checkout, so the
+/// comparison normalizes those before asserting equality).
 /// These tests guard the C# code generator against unintended output changes
 /// (e.g. while refactoring the expression-building or code-writing pipeline).
 /// When an output change is intentional, regenerate the corpus with PackagerCLI
@@ -29,20 +31,25 @@ public class CSharpGenerationGoldenTests
             LibrarySetsDirs.RR23.ElmDir,
             "RR23",
             LibrarySetsDirs.RR23.CSharpDir,
-            version: "1.0.0");
+            version: "1.0.0",
+            goldenCorpusIsComplete: true);
 
     [TestMethod]
     public void Regenerated_DqmQiCore2025_CMS56_CSharp_Matches_CheckedInFiles() =>
         AssertRegeneratedCSharpMatchesGoldenFiles(
             LibrarySetsDirs.DqmQiCore2025.ElmDir,
             "CMS56FHIRFuncStatHipReplacement",
-            LibrarySetsDirs.DqmQiCore2025.ExtractedCSharpDir);
+            LibrarySetsDirs.DqmQiCore2025.ExtractedCSharpDir,
+            // Only the top library's C# is checked in (extracted from the packaged FHIR Library
+            // resource); its dependencies are generated but have no golden counterpart.
+            goldenCorpusIsComplete: false);
 
     private static void AssertRegeneratedCSharpMatchesGoldenFiles(
         DirectoryInfo elmDir,
         string topLibraryName,
         DirectoryInfo goldenCSharpDir,
-        string version = "")
+        string version = "",
+        bool goldenCorpusIsComplete = true)
     {
         LibrarySet librarySet = new();
         librarySet.LoadLibraryAndDependencies(elmDir, topLibraryName, version);
@@ -72,6 +79,18 @@ public class CSharpGenerationGoldenTests
                 NormalizeLineEndings(golden),
                 NormalizeLineEndings(generated!),
                 $"Regenerated C# for {libraryIdentifier} differs from the checked-in {goldenFile.FullName}.");
+        }
+
+        if (goldenCorpusIsComplete)
+        {
+            // Guard against the generator emitting libraries that have no golden counterpart:
+            // a complete corpus must match the generated set exactly.
+            var goldenIdentifiers = goldenFiles.Select(f => f.Name[..^".g.cs".Length]);
+            var extraGenerated = generatedByIdentifier.Keys.Except(goldenIdentifiers).ToList();
+            Assert.AreEqual(
+                0,
+                extraGenerated.Count,
+                $"C# was generated for libraries without a checked-in golden file: {string.Join(", ", extraGenerated)}.");
         }
     }
 

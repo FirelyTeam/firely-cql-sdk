@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Runtime.ExceptionServices;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -104,7 +105,8 @@ namespace Hl7.Cql.CqlToElm.Test
             }
             catch (TargetInvocationException ex)
             {
-                throw ex.InnerException!;
+                // Rethrow the inner exception with its original stack trace preserved.
+                ExceptionDispatchInfo.Capture(ex.InnerException!).Throw();
             }
         }
 
@@ -119,7 +121,8 @@ namespace Hl7.Cql.CqlToElm.Test
             }
             catch (TargetInvocationException ex)
             {
-                throw ex.InnerException!;
+                // Rethrow the inner exception with its original stack trace preserved.
+                ExceptionDispatchInfo.Capture(ex.InnerException!).Throw();
             }
         }
 
