@@ -62,9 +62,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(or);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(or, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -118,9 +116,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(or);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(or, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -174,9 +170,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(or);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(or, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(false, result);
             }
@@ -230,9 +224,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(or);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(or, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -286,9 +278,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(or);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(or, library, FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
 
             }
@@ -342,9 +332,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(or);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(or, library, FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
             }
         }

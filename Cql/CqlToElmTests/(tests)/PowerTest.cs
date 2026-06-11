@@ -64,9 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Integer", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
                 Assert.AreEqual(8m, result);
             }
@@ -120,9 +118,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
                 Assert.AreEqual(8m, result);
             }
@@ -176,9 +172,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
                 Assert.AreEqual(8.0m, result);
             }
@@ -231,9 +225,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(lhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Integer", lhsnts.name.Name);
                 }
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
             }
         }
@@ -285,9 +277,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(rhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Integer", rhsnts.name.Name);
                 }
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
             }
         }
@@ -344,9 +334,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
                 Assert.AreEqual(-8m, result);
             }
@@ -400,9 +388,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
                 Assert.AreEqual(-8m, result);
             }
@@ -456,9 +442,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
                 Assert.AreEqual(-8.0m, result);
             }
@@ -511,9 +495,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(lhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Long", lhsnts.name.Name);
                 }
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
             }
         }
@@ -565,9 +547,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(rhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
             }
         }
@@ -624,9 +604,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
                 Assert.AreEqual(0m, result);
             }
@@ -680,9 +658,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
                 Assert.AreEqual(3125m, result);
             }
@@ -736,9 +712,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
                 Assert.AreEqual(10000000000m, result);
             }
@@ -791,9 +765,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(lhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", lhsnts.name.Name);
                 }
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
             }
         }
@@ -845,9 +817,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(rhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
-                var lambda = CreateElmToolkit().Lambda(power);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
+                var result = Run(power, library, FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
             }
         }
