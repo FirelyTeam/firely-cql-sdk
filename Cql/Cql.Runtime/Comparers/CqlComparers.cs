@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Fhir.Metrics;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 
@@ -19,7 +20,10 @@ namespace Hl7.Cql.Comparers
         /// <summary>
         /// Creates an instance with built-in comparers for system types registerred.
         /// </summary>
-        public CqlComparers() : base(
+        /// <param name="metricService">
+        /// The <see cref="IMetricService"/> to use for quantity unit conversions, or <see langword="null"/> to use the default service.
+        /// </param>
+        public CqlComparers(IMetricService? metricService = null) : base(
             equalsImplementation: CqlComparerEqualsImplementation.Compare
             )
         {
@@ -45,7 +49,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(bool), boolCqlComparer);
 
             Comparers.TryAdd(typeof(IEnumerable), new ListEqualComparer(this));
-            Comparers.TryAdd(typeof(CqlQuantity), new CqlQuantityCqlComparer(this, this));
+            Comparers.TryAdd(typeof(CqlQuantity), new CqlQuantityCqlComparer(this, this, metricService));
             Comparers.TryAdd(typeof(CqlConcept), new CqlConceptCqlComparer(this));
             Comparers.TryAdd(typeof(CqlCode), CqlCodeCqlComparer.OrdinalIgnoreCase);
             Comparers.TryAdd(typeof(CqlDate), new InterfaceCqlComparer<CqlDate>());

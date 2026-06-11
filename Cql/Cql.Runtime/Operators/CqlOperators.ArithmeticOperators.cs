@@ -7,7 +7,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Fhir.Metrics;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators
@@ -100,12 +102,14 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.unit != right.unit)
             {
-                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
-                string? leftUnit = left.unit;
-                string? rightUnit = right.unit;
-                CompareNormalizedUnits(leftUnit, rightUnit);
+                string leftUnit = left.unit ?? string.Empty;
+                string rightUnit = right.unit ?? string.Empty;
 
-                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+                // CQL treats singular/plural calendar duration units as equivalent (e.g. day/days)
+                if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
+                    return new CqlQuantity(Add(left.value, right.value), left.unit);
+
+                return TryUcumBinaryOp(left.value.Value, leftUnit, right.value.Value, rightUnit, MetricServiceExtensions.TryAdd, "Add");
             }
             else
                 return new CqlQuantity(Add(left.value, right.value), left.unit);
@@ -139,16 +143,12 @@ namespace Hl7.Cql.Operators
             else if (right.value == 0m) return null;
             else if (left.unit == null || right.unit == null) return null;
             else if (left.unit == right.unit)
-            {
-                var newValue = left.value.Value / right.value.Value;
-                return new CqlQuantity(newValue, UCUMUnits.Default);
-            }
-            else if (right.unit != UCUMUnits.Default)
-                throw new NotSupportedException("Division of different units is not supported; only division by a numeric value (units = \"1\") is supported.");
+                return new CqlQuantity(left.value.Value / right.value.Value, UCUMUnits.Default);
+            else if (right.unit == UCUMUnits.Default)
+                return new CqlQuantity(left.value.Value / right.value.Value, left.unit);
             else
             {
-                var newValue = left.value.Value / right.value.Value;
-                return new CqlQuantity(newValue, left.unit);
+                return TryUcumBinaryOp(left.value.Value, left.unit, right.value.Value, right.unit, MetricServiceExtensions.TryDivide, "Divide");
             }
         }
 
@@ -475,12 +475,11 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.unit != right.unit)
             {
-                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
-                string? leftUnit = left.unit;
-                string? rightUnit = right.unit;
-                CompareNormalizedUnits(leftUnit, rightUnit);
-
-                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+                string leftUnit = left.unit ?? string.Empty;
+                string rightUnit = right.unit ?? string.Empty;
+                if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
+                    return new CqlQuantity(Modulo(left.value, right.value), left.unit);
+                throw new NotSupportedException($"Modulo of quantities with incompatible units {left.unit} and {right.unit} is not supported.");
             }
             else
                 return new CqlQuantity(Modulo(left.value, right.value), left.unit);
@@ -512,7 +511,9 @@ namespace Hl7.Cql.Operators
             else if (left.value == null || right.value == null)
                 return null;
             else if (left.unit != "1" && right.unit != "1")
-                throw new NotSupportedException("Unit arithmetic is not supported.");
+            {
+                return TryUcumBinaryOp(left.value.Value, left.unit!, right.value.Value, right.unit!, MetricServiceExtensions.TryMultiply, "Multiply");
+            }
             else
                 return new CqlQuantity(Multiply(left.value, right.value), "1");
         }
@@ -809,14 +810,46 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.unit != right.unit)
             {
-                // Cql supports both singular and plural units such as day/days, year/years and are equivalent units
-                string? leftUnit = left.unit;
-                string? rightUnit = right.unit;
-                CompareNormalizedUnits(leftUnit, rightUnit);
+                string leftUnit = left.unit ?? string.Empty;
+                string rightUnit = right.unit ?? string.Empty;
 
-                return new CqlQuantity(Add(left.value, right.value), leftUnit);
+                // CQL treats singular/plural calendar duration units as equivalent (e.g. day/days)
+                if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
+                    return new CqlQuantity(Subtract(left.value, right.value), left.unit);
+
+                return TryUcumBinaryOp(left.value.Value, leftUnit, right.value.Value, rightUnit, MetricServiceExtensions.TrySubtract, "Subtract");
             }
             else return new CqlQuantity(Subtract(left.value, right.value), left.unit);
+        }
+
+        private delegate bool MetricBinaryOp(
+            IMetricService service,
+            (decimal value, string unit, string? codesystem) q1,
+            (decimal value, string unit, string? codesystem) q2,
+            out (decimal value, string unit, string? codesystem)? result);
+
+        private CqlQuantity? TryUcumBinaryOp(
+            decimal leftValue, string leftUnit,
+            decimal rightValue, string rightUnit,
+            MetricBinaryOp tryOp,
+            string opName)
+        {
+            try
+            {
+                if (tryOp(MetricService,
+                        (leftValue, leftUnit, UcumConversionExtensions.UcumSystemUrl),
+                        (rightValue, rightUnit, UcumConversionExtensions.UcumSystemUrl),
+                        out var result))
+                    return new CqlQuantity(result!.Value.Item1, result.Value.Item2);
+            }
+            catch (NotImplementedException)
+            {
+                throw new NotSupportedException(
+                    $"The configured IMetricService does not implement {opName} for units {leftUnit} and {rightUnit}. Inject a full IMetricService implementation to enable cross-unit arithmetic.");
+            }
+
+            throw new NotSupportedException(
+                $"Arithmetic on quantities with incompatible units {leftUnit} and {rightUnit} is not supported.");
         }
 
         #endregion

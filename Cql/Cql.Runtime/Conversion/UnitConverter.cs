@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Fhir.Metrics;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 
@@ -20,6 +21,7 @@ namespace Hl7.Cql.Conversion
 
         private readonly object SyncRoot = new();
         private IDictionary<string, IDictionary<string, Func<decimal, decimal>>> Conversions { get; } = new Dictionary<string, IDictionary<string, Func<decimal, decimal>>>();
+        private IMetricService MetricService { get; }
         private decimal Self(decimal d) => d;
 
         /// <summary>
@@ -79,7 +81,7 @@ namespace Hl7.Cql.Conversion
             {
                 // Fast built-in method failed, call the slower UCUM library
                 var q = new CqlQuantity(value, fromUnit);
-                if (q.TryConvert(toUnit, out var converted))
+                if (q.TryConvert(toUnit, MetricService, out var converted))
                     return converted!.value!.Value;
                 else
                     throw new ArgumentException($"Conversion for {fromUnit} to {toUnit} is not provided.  You can add your own using ${nameof(UseConversion)}");
@@ -108,8 +110,12 @@ namespace Hl7.Cql.Conversion
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        public UnitConverter()
+        /// <param name="metricService">
+        /// The <see cref="IMetricService"/> to use for UCUM unit conversions, or <see langword="null"/> to use the default service.
+        /// </param>
+        public UnitConverter(IMetricService? metricService = null)
         {
+            MetricService = metricService ?? UcumConversionExtensions.Default;
             InitialzeDateConversions();
             InitializeLengthUnits();
         }

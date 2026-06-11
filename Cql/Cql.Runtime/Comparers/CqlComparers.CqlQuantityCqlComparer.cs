@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Fhir.Metrics;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 
@@ -19,12 +20,15 @@ partial class CqlComparers
     /// </summary>
     private class CqlQuantityCqlComparer(
         CqlComparers valueComparer,
-        ICqlComparer<string> unitComparer) :
+        ICqlComparer<string> unitComparer,
+        IMetricService? metricService = null) :
         CqlComparer<CqlQuantity>(CqlComparerEqualsImplementation.Compare)
     {
         private CqlComparers ValueComparer { get; } = valueComparer ?? throw new ArgumentNullException(nameof(valueComparer));
 
         private ICqlComparer<string> UnitComparer { get; } = unitComparer ?? throw new ArgumentNullException(nameof(unitComparer));
+
+        private IMetricService MetricService { get; } = metricService ?? UcumConversionExtensions.Default;
 
         protected override int? CompareValues(
             CqlQuantity x,
@@ -40,7 +44,7 @@ partial class CqlComparers
 
             // If no direct comparison is possible, normalize the units using UCUM and
             // redo the comparison.
-            if (x.TryCanonicalize(out var left1) && y.TryCanonicalize(out var right1))
+            if (x.TryCanonicalize(MetricService, out var left1) && y.TryCanonicalize(MetricService, out var right1))
             {
                 var valueComparison = ValueComparer.Compare(left1!.value!, right1!.value!, precision);
                 return valueComparison;
@@ -68,5 +72,6 @@ partial class CqlComparers
         {
             return value.ToString()?.GetHashCode() ?? GetHashCodeForNull();
         }
+
     }
 }
