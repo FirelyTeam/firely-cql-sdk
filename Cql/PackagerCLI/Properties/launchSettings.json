@@ -133,6 +133,13 @@
         "CQLPACKAGE_PROFILE": "dqm-content-qicore-2025"
       }
     },
+    "PackageCLI elm (Ticket 1305 HEDIS 2025 ELM->FHIR)": {
+      "commandName": "Project",
+      "commandLineArgs": "elm --elm \"$(Hedis2025StagingDir)/elm\" --cql \"$(Hedis2025StagingDir)/cql\" --libraries \"$(Hedis2025StagingDir)/resources/libraries\" --measures \"$(Hedis2025StagingDir)/resources/measures\" --cs \"$(Hedis2025StagingDir)/csharp\" --dll \"$(Hedis2025StagingDir)/dll\" --debug-symbols Embedded --json-pretty --log-file packager.log",
+      "environmentVariables": {
+        "CQLPACKAGE_PROFILE": "Demo"
+      }
+    },
     "PackageCLI extract-library-attachments (dqm-content-qicore-2025 | All Attachments for CMS56FHIRFuncStatHipReplacement)": {
       "commandName": "Project",
       "commandLineArgs": "extract-library-attachments --library-file \"$(DqmContentQiCoreLibrarySetDir)/Replaced/Library-CMS56FHIRFuncStatHipReplacement-1.0.000.json\" --cql-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Cql\" --elm-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Elm\" --csharp-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/CSharp\" --dll-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/Assemblies\" --pdb-dir \"$(DqmContentQiCoreLibrarySetDir)/Extracted/DebugSymbols\" --log-file packager.log",
