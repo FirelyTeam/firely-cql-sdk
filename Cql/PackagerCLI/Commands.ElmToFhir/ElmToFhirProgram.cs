@@ -171,15 +171,24 @@ internal sealed class ElmToFhirProgram
                         subdirectoryPreserver: subdirectoryPreserver);
 
                 // Update status to "saved" for .NET
-                var extensions = opt.PdbOutDir is not null ? new[] { ".dll", ".pdb" } : new[] { ".dll" };
+                var librariesWithDebugSymbols = elmToAssemblyResults
+                    .Where(result => result.debugSymbolsBinary is { Length: > 0 })
+                    .Select(result => result.libraryIdentifier)
+                    .ToHashSet();
                 foreach (var libraryId in successfulLibraries)
                 {
+                    var extensions = opt.PdbOutDir is not null && librariesWithDebugSymbols.Contains(libraryId)
+                        ? new[] { ".dll", ".pdb" }
+                        : new[] { ".dll" };
                     tracker.RecordStatus(libraryId, LibraryProcessingStage.DotNet, LibraryStageStatus.Saved(extensions));
                 }
 
                 sbSummary.AppendLine(Invariant($"* Saved {elmToAssemblyResults.Count} .NET Assembly files (*.dll) to directory {opt.DllOutDir}."));
                 if (opt.PdbOutDir is not null)
-                    sbSummary.AppendLine(Invariant($"* Saved {elmToAssemblyResults.Count} Debug Symbol files (*.pdb) to directory {opt.PdbOutDir}."));
+                {
+                    var debugSymbolsCount = elmToAssemblyResults.Count(result => result.debugSymbolsBinary is { Length: > 0 });
+                    sbSummary.AppendLine(Invariant($"* Saved {debugSymbolsCount} Debug Symbol files (*.pdb) to directory {opt.PdbOutDir}."));
+                }
             }
 
             if ((opt.CqlInDir, opt.FhirOutDir ?? opt.LibrariesOutDir ?? opt.MeasuresOutDir) is (not null, not null))
