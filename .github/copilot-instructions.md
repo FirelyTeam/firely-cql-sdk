@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.2.0
+**Version:** 3.3.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -97,6 +97,8 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 
 ## 6.0. Appendix: Version History
 
+- 3.3.0
+  - Expanded code generation version management guidance: clarified that binder/compiler changes which alter generated C# (not only CodeGeneration.NET changes) require a `GeneratorToolVersion` bump, fixed the stale invoker reference, and added the requirement to regenerate checked-in `*.g.cs` files in the same pull request.
 - 3.2.0
   - Added a durable documentation rule for copilot instruction docs: cap heading numbering at three segments and keep deeper numbering in body text instead of deeper headings.
 - 3.1.0

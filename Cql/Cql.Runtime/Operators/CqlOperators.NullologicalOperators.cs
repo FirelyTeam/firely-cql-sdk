@@ -23,7 +23,7 @@ namespace Hl7.Cql.Operators
         }
 
         /// <inheritdoc />
-        [Obsolete("Use Coalesce<T> instead. This method is retained for backward compatibility with external implementations.", false)]
+        [Obsolete("Use Coalesce<T> with T = Nullable<U> instead. The class constraint on Coalesce<T> has been removed.", false)]
         public T? CoalesceValueTypes<T>(IEnumerable<T?>? source)
             where T : struct
         {

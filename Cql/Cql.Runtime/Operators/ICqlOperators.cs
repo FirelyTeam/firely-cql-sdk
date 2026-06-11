@@ -127,7 +127,7 @@ namespace Hl7.Cql.Operators
         /// <para>CQL Specification: §9.B Appendix B – CQL Reference, Nullological Operators: Coalesce</para>
         /// <para>Signature: <c>Coalesce&lt;T&gt;(arguments List&lt;T&gt;) T</c></para>
         /// <para>If all arguments evaluate to null, the result is null.</para>
-        /// <para><strong>Note:</strong> For non-nullable value types (e.g., <c>int</c>, <c>float</c>), a no-match result returns <c>default</c> (e.g., <c>0</c>) rather than null. This method is intended for use with nullable reference types and nullable value types; consider using <see cref="CoalesceValueTypes{T}"/> explicitly for nullable value types to make the intent clear.</para>
+        /// <para><strong>Note:</strong> For nullable value types use <c>T = Nullable&lt;U&gt;</c> (e.g., <c>Coalesce&lt;int?&gt;</c>), which returns null when no non-null element is found. Instantiating with a non-nullable value type (e.g., <c>Coalesce&lt;int&gt;</c>) returns <c>default</c> (e.g., <c>0</c>) in that case, which does not match CQL null semantics.</para>
         /// </remarks>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#coalesce">CQL Specification §9.B - Coalesce</seealso>
         T?                                       Coalesce<T>(IEnumerable<T>? source);
@@ -143,8 +143,10 @@ namespace Hl7.Cql.Operators
         /// <para>CQL Specification: §9.B Appendix B – CQL Reference, Nullological Operators: Coalesce</para>
         /// <para>Signature: <c>Coalesce&lt;T&gt;(arguments List&lt;T&gt;) T</c></para>
         /// <para>If all arguments evaluate to null, the result is null.</para>
+        /// <para><strong>Deprecated:</strong> Use <see cref="Coalesce{T}"/> with <c>T = Nullable&lt;U&gt;</c> instead; it is no longer constrained to reference types.</para>
         /// </remarks>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#coalesce">CQL Specification §9.B - Coalesce</seealso>
+        [Obsolete("Use Coalesce<T> with T = Nullable<U> instead. The class constraint on Coalesce<T> has been removed.", false)]
         T?                                       CoalesceValueTypes<T>(IEnumerable<T?>? source) where T : struct;
         bool?                                    CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument);
         bool?                                    CodeInValueSet(CqlCode? code, CqlValueSet? valueSet);

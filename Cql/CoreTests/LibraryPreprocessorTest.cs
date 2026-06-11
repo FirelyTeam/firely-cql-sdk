@@ -119,6 +119,53 @@ namespace CoreTests
             call.Method.GetGenericArguments().Single().Should().Be(typeof(string));
         }
 
+        [TestMethod]
+        public void CoalesceOnNullableValueTupleList_UsesCoalesceWithNullableElementType()
+        {
+            // Regression test (#1307/#1313): Coalesce over a list of nullable value tuples must bind to
+            // the unconstrained Coalesce<T> with T = the nullable tuple type, so the no-match result is null.
+            var binder = new CqlOperatorsBinder(
+                NullLogger<CqlOperatorsBinder>.Instance,
+                new TestTypeResolver(),
+                Hl7.Cql.Conversion.TypeConverter.Create());
+
+            var operand = System.Linq.Expressions.Expression.Constant(new (int? isHighRisk, int? isInconclusive, DateOnly? eventDate)?[]
+            {
+                ((int?)1, null, new DateOnly(2026, 6, 11)),
+                null
+            });
+
+            var call = (MethodCallExpression)binder.BindToMethod(nameof(ICqlOperators.Coalesce), [operand], []);
+
+            call.Method.Name.Should().Be(nameof(ICqlOperators.Coalesce));
+            call.Method.GetGenericArguments().Single().Should().Be(typeof((int?, int?, DateOnly?)?));
+        }
+
+        [TestMethod]
+        public void CoalesceOnHedisNullableTupleList_UsesCoalesceWithNullableElementType()
+        {
+            // Regression test (#1307/#1313): exact HEDIS 2025 shape that previously failed with CS0452.
+            var binder = new CqlOperatorsBinder(
+                NullLogger<CqlOperatorsBinder>.Instance,
+                new TestTypeResolver(),
+                Hl7.Cql.Conversion.TypeConverter.Create());
+
+            IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate> inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?> source =
+            [
+                (new CqlTupleMetadata(), true, false, null, new CqlDate(2026, 6, 11), new CqlDate(2026, 6, 12)),
+                null
+            ];
+
+            var operand = System.Linq.Expressions.Expression.Constant(
+                source,
+                typeof(IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate> inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?>));
+
+            var call = (MethodCallExpression)binder.BindToMethod(nameof(ICqlOperators.Coalesce), [operand], []);
+
+            call.Method.Name.Should().Be(nameof(ICqlOperators.Coalesce));
+            call.Method.GetGenericArguments().Single().Should().Be(typeof((CqlTupleMetadata, bool?, bool?, CqlInterval<CqlDate>, CqlDate, CqlDate)?));
+        }
+
     }
 
     internal class TestTypeResolver : BaseTypeResolver
