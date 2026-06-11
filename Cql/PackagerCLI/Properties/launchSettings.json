@@ -135,7 +135,7 @@
     },
     "PackageCLI elm (Ticket 1305 HEDIS 2025 ELM->FHIR)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --elm \"D:/firely-dqm-libraries/workspace/HEDIS/2025/staging/elm\" --cql \"D:/firely-dqm-libraries/workspace/HEDIS/2025/staging/cql\" --libraries \"D:/firely-dqm-libraries/workspace/HEDIS/2025/staging/resources/libraries\" --measures \"D:/firely-dqm-libraries/workspace/HEDIS/2025/staging/resources/measures\" --cs \"D:/firely-dqm-libraries/workspace/HEDIS/2025/staging/csharp\" --dll \"D:/firely-dqm-libraries/workspace/HEDIS/2025/staging/dll\" --debug-symbols Embedded --json-pretty --log-file packager.log",
+      "commandLineArgs": "elm --elm \"$(Hedis2025StagingDir)/elm\" --cql \"$(Hedis2025StagingDir)/cql\" --libraries \"$(Hedis2025StagingDir)/resources/libraries\" --measures \"$(Hedis2025StagingDir)/resources/measures\" --cs \"$(Hedis2025StagingDir)/csharp\" --dll \"$(Hedis2025StagingDir)/dll\" --debug-symbols Embedded --json-pretty --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }

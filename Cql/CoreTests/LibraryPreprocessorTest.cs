@@ -86,8 +86,9 @@ namespace CoreTests
                 ]
             };
 
-            var corrector = new PowerResultTypeCorrector(NullLogger<PowerResultTypeCorrector>.Instance);
-            corrector.Fix(lib);
+            var ls = new LibrarySet("", lib);
+            var pp = new LibraryPreprocessor(ls, NullLoggerFactory.Instance);
+            pp.PreprocessLibrary(lib);
 
             power.resultTypeSpecifier.Should().BeEquivalentTo(SystemTypes.DecimalType);
             power.resultTypeName.Should().Be(SystemTypes.DecimalType.name);
