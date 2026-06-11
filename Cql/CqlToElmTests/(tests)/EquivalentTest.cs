@@ -1522,7 +1522,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/788")]
         public void FhirCodeableConcept_EquivalentTo_Code()
         {
             var cqlToolkit = CreateCqlToolkit().AddFHIRHelpers();
