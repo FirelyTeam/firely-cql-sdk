@@ -100,29 +100,35 @@ internal sealed class ElmToFhirProgram
 
             sbSummary.AppendLine(Invariant($"* Loaded {elmToolkit.ArtifactsById.Count} ELM libraries from directory {opt.ElmInDir}."));
 
-            var elmToolkitResults = elmToolkit
-                                    .CompileToAssemblies()
-                                    .GetElmToAssemblyResults()
-                                    .ToList();
-            if (elmToolkitResults.Count == 0)
+            elmToolkit.CompileToAssemblies();
+
+            // Libraries that generated C# (includes invalid C# when AllowInvalidCSharp is enabled)
+            var elmToCSharpResults = elmToolkit.GetElmToCSharpResults().ToList();
+            // Libraries that also compiled into a .NET assembly
+            var elmToAssemblyResults = elmToolkit.GetElmToAssemblyResults().ToList();
+            if (elmToCSharpResults.Count == 0)
             {
                 logger.LogError(ExitCodes.NoElmLibsCompiled.ExitingMessage);
                 return ExitCodes.NoElmLibsCompiled.Code;
             }
 
             // Track C# and .NET results - check which libraries have successful results
-            var successfulLibraries = new HashSet<CqlVersionedLibraryIdentifier>(elmToolkitResults.Select(r => r.libraryIdentifier));
+            var cSharpLibraries = new HashSet<CqlVersionedLibraryIdentifier>(elmToCSharpResults.Select(r => r.libraryIdentifier));
+            var successfulLibraries = new HashSet<CqlVersionedLibraryIdentifier>(elmToAssemblyResults.Select(r => r.libraryIdentifier));
             foreach (var (libraryId, artifacts) in elmToolkit.ArtifactsById)
             {
-                if (successfulLibraries.Contains(libraryId))
+                if (cSharpLibraries.Contains(libraryId))
                 {
-                    // Successfully compiled to C# and assemblies
+                    // Successfully generated C#
                     tracker.RecordStatus(libraryId, LibraryProcessingStage.CSharp, LibraryStageStatus.Ok());
-                    tracker.RecordStatus(libraryId, LibraryProcessingStage.DotNet, LibraryStageStatus.Ok());
+                    tracker.RecordStatus(
+                        libraryId,
+                        LibraryProcessingStage.DotNet,
+                        successfulLibraries.Contains(libraryId) ? LibraryStageStatus.Ok() : LibraryStageStatus.Failed());
                 }
                 else
                 {
-                    // Failed to compile
+                    // Failed to generate C#
                     tracker.RecordStatus(libraryId, LibraryProcessingStage.CSharp, LibraryStageStatus.Failed());
                 }
             }
@@ -136,12 +142,22 @@ internal sealed class ElmToFhirProgram
                         subdirectoryPreserver: subdirectoryPreserver);
 
                 // Update status to "saved" for C#
-                foreach (var libraryId in successfulLibraries)
+                foreach (var libraryId in cSharpLibraries)
                 {
                     tracker.RecordStatus(libraryId, LibraryProcessingStage.CSharp, LibraryStageStatus.Saved(".g.cs"));
                 }
 
-                sbSummary.AppendLine(Invariant($"* Saved {elmToolkitResults.Count} C# files (*.g.cs) to directory {opt.CSharpOutDir}."));
+                sbSummary.AppendLine(Invariant($"* Saved {elmToCSharpResults.Count} C# files (*.g.cs) to directory {opt.CSharpOutDir}."));
+            }
+
+            // Outputs beyond C# require at least one library compiled into a .NET assembly
+            if (elmToAssemblyResults.Count == 0)
+            {
+                if ((opt.DllOutDir, opt.FhirOutDir ?? opt.LibrariesOutDir ?? opt.MeasuresOutDir) is (null, null))
+                    return ExitCodes.Success.Code;
+
+                logger.LogError(ExitCodes.NoElmLibsCompiled.ExitingMessage);
+                return ExitCodes.NoElmLibsCompiled.Code;
             }
 
             if (opt.DllOutDir is not null)
@@ -155,15 +171,24 @@ internal sealed class ElmToFhirProgram
                         subdirectoryPreserver: subdirectoryPreserver);
 
                 // Update status to "saved" for .NET
-                var extensions = opt.PdbOutDir is not null ? new[] { ".dll", ".pdb" } : new[] { ".dll" };
+                var librariesWithDebugSymbols = elmToAssemblyResults
+                    .Where(result => result.debugSymbolsBinary is { Length: > 0 })
+                    .Select(result => result.libraryIdentifier)
+                    .ToHashSet();
                 foreach (var libraryId in successfulLibraries)
                 {
+                    var extensions = opt.PdbOutDir is not null && librariesWithDebugSymbols.Contains(libraryId)
+                        ? new[] { ".dll", ".pdb" }
+                        : new[] { ".dll" };
                     tracker.RecordStatus(libraryId, LibraryProcessingStage.DotNet, LibraryStageStatus.Saved(extensions));
                 }
 
-                sbSummary.AppendLine(Invariant($"* Saved {elmToolkitResults.Count} .NET Assembly files (*.dll) to directory {opt.DllOutDir}."));
+                sbSummary.AppendLine(Invariant($"* Saved {elmToAssemblyResults.Count} .NET Assembly files (*.dll) to directory {opt.DllOutDir}."));
                 if (opt.PdbOutDir is not null)
-                    sbSummary.AppendLine(Invariant($"* Saved {elmToolkitResults.Count} Debug Symbol files (*.pdb) to directory {opt.PdbOutDir}."));
+                {
+                    var debugSymbolsCount = elmToAssemblyResults.Count(result => result.debugSymbolsBinary is { Length: > 0 });
+                    sbSummary.AppendLine(Invariant($"* Saved {debugSymbolsCount} Debug Symbol files (*.pdb) to directory {opt.PdbOutDir}."));
+                }
             }
 
             if ((opt.CqlInDir, opt.FhirOutDir ?? opt.LibrariesOutDir ?? opt.MeasuresOutDir) is (not null, not null))
