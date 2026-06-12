@@ -29,7 +29,7 @@
 #### Potentially Breaking
 
 - `ICqlOperators.Coalesce<T>` no longer has the `where T : class` constraint.
-- `ICqlOperators.CoalesceValueTypes<T>` is now deprecated (`[Obsolete]`).
+- `ICqlOperators.CoalesceValueTypes<T>` is now deprecated (`[Obsolete]`). Only use `ICqlOperators.Coalesce<T>` from now on.
 
 ---
 
@@ -66,11 +66,11 @@
 
 ### Pull Requests
 
-| PR | Title |
-| --- | --- |
-| [#1306](https://github.com/FirelyTeam/firely-cql-sdk/pull/1306) | fix: normalize legacy ELM Power result type to Decimal in preprocessor (#1305) |
-| [#1308](https://github.com/FirelyTeam/firely-cql-sdk/pull/1308) | Fix CS0452 for coalesce on nullable value tuples in generated C# (#1307) |
+| PR                                                              | Title                                                                                 |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [#1306](https://github.com/FirelyTeam/firely-cql-sdk/pull/1306) | fix: normalize legacy ELM Power result type to Decimal in preprocessor (#1305)        |
+| [#1308](https://github.com/FirelyTeam/firely-cql-sdk/pull/1308) | Fix CS0452 for coalesce on nullable value tuples in generated C# (#1307)              |
 | [#1310](https://github.com/FirelyTeam/firely-cql-sdk/pull/1310) | Fix AllowInvalidCSharp regression: save C# files even when assembly compilation fails |
-| [#1311](https://github.com/FirelyTeam/firely-cql-sdk/pull/1311) | Decouple tests from Expression.Compile() and add C# golden-file checks |
-| [#1314](https://github.com/FirelyTeam/firely-cql-sdk/pull/1314) | refactor: consolidate Coalesce binding and deprecate CoalesceValueTypes (#1313) |
-| [#1315](https://github.com/FirelyTeam/firely-cql-sdk/pull/1315) | Set next release version to 2.9.0 (#1309) |
+| [#1311](https://github.com/FirelyTeam/firely-cql-sdk/pull/1311) | Decouple tests from Expression.Compile() and add C# golden-file checks                |
+| [#1314](https://github.com/FirelyTeam/firely-cql-sdk/pull/1314) | refactor: consolidate Coalesce binding and deprecate CoalesceValueTypes (#1313)       |
+| [#1315](https://github.com/FirelyTeam/firely-cql-sdk/pull/1315) | Set next release version to 2.9.0 (#1309)                                             |
