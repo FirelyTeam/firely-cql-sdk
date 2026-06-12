@@ -39,10 +39,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 AssertListType(list.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
                 AssertList(list, new int?[] { 1 });
 
-                var lambda = CreateElmToolkit().Lambda(singletonFrom);
-                var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
-                var result = dg.DynamicInvoke(ctx);
+                var result = Run(singletonFrom, library, ctx);
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(1, result);
@@ -75,10 +73,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 var list = (List)@as.operand;
                 Assert.IsInstanceOfType(@as.operand, typeof(List));
                 AssertList(list, Array.Empty<object?>()); // empty list typed as Any
-                var lambda = CreateElmToolkit().Lambda(singletonFrom);
-                var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
-                var result = dg.DynamicInvoke(ctx);
+                var result = Run(singletonFrom, library, ctx);
                 Assert.IsNull(result);
             }
         }
@@ -108,10 +104,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(@as.operand, typeof(Null));
                 AssertListType(@as.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateElmToolkit().Lambda(singletonFrom);
-                var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
-                var result = dg.DynamicInvoke(ctx);
+                var result = Run(singletonFrom, library, ctx);
                 Assert.IsNull(result);
             }
         }
@@ -141,10 +135,9 @@ namespace Hl7.Cql.CqlToElm.Test
                 AssertListType(list.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
                 AssertList(list, new int?[] { 1, 2, 3 });
 
-                var lambda = CreateElmToolkit().Lambda(singletonFrom);
-                var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
-                Assert.ThrowsException<TargetInvocationException>(() => dg.DynamicInvoke(ctx));
+                // The invoker does not wrap exceptions, so the runtime error surfaces directly.
+                Assert.ThrowsException<InvalidOperationException>(() => Run(singletonFrom, library, ctx));
             }
         }
 

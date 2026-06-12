@@ -23,6 +23,13 @@ internal static class LibrarySetsDirs
     public static class DqmQiCore2025
     {
         public static DirectoryInfo ElmDir { get; } = GetDir("LibrarySets", "dqm-content-qicore-2025", "Elm");
+        public static DirectoryInfo ExtractedCSharpDir { get; } = GetDir("LibrarySets", "dqm-content-qicore-2025", "Extracted", "CSharp");
+    }
+
+    public static class RR23
+    {
+        public static DirectoryInfo ElmDir { get; } = GetDir("LibrarySets", "RR23", "Elm");
+        public static DirectoryInfo CSharpDir { get; } = GetDir("LibrarySets", "RR23", "CSharp");
     }
 
     private static DirectoryInfo GetDir(params string[] subPaths)

@@ -113,10 +113,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void AssertAsNull(As @as)
         {
-            var lambda = CreateElmToolkit().Lambda(@as);
-            var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
-            var result = dg.DynamicInvoke(ctx);
+            var result = Run(@as, CreateTempLibrary(), ctx);
             Assert.IsNull(result);
         }
 

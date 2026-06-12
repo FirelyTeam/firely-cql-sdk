@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Runtime.ExceptionServices;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -81,39 +82,47 @@ namespace Hl7.Cql.CqlToElm.Test
             CqlContext? ctx = null) =>
             (T?)Run(expression, library, ctx);
 
+        /// <summary>
+        /// Creates a minimal ELM library to host a single temporary expression when the caller
+        /// does not have a real <see cref="Library"/> available (see <see cref="Run(Expression, Library, CqlContext?)"/>).
+        /// </summary>
+        protected static Library CreateTempLibrary() =>
+            new()
+            {
+                identifier = new VersionedIdentifier { id = "TempLibrary", version = "1.0.0" }
+            };
+
         protected static void AssertResult<T>(Expression be, T expected)
         {
-            var lambda = CreateElmToolkit().Lambda(@be);
-            var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
 
             try
             {
-                var result = dg.DynamicInvoke(ctx);
+                var result = Run(@be, CreateTempLibrary(), ctx);
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(T));
                 Assert.AreEqual(expected, result);
             }
             catch (TargetInvocationException ex)
             {
-                throw ex.InnerException!;
+                // Rethrow the inner exception with its original stack trace preserved.
+                ExceptionDispatchInfo.Capture(ex.InnerException!).Throw();
             }
         }
 
         protected static void AssertNullResult(Expression be)
         {
-            var lambda = CreateElmToolkit().Lambda(@be);
-            var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
 
             try
             {
-                var result = dg.DynamicInvoke(ctx);
+                var result = Run(@be, CreateTempLibrary(), ctx);
                 Assert.IsNull(result);
             }
             catch (TargetInvocationException ex)
             {
-                throw ex.InnerException!;
+                // Rethrow the inner exception with its original stack trace preserved.
+                ExceptionDispatchInfo.Capture(ex.InnerException!).Throw();
             }
         }
 
@@ -185,10 +194,8 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(list.element);
             Assert.AreEqual(expectedValues.Length, list.element.Length);
 
-            var lambda = CreateElmToolkit().Lambda(list);
-            var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
-            var result = dg.DynamicInvoke(ctx);
+            var result = Run(list, CreateTempLibrary(), ctx);
             Assert.IsNotNull(result);
             Assert.IsInstanceOfType(result, typeof(IEnumerable<T?>));
             var array = ((IEnumerable<T?>)result).ToArray();
