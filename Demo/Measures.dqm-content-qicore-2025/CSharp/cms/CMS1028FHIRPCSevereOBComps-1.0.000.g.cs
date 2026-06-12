@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS1028FHIRPCSevereOBComps", "1.0.000")]
 public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<CMS1028FHIRPCSevereOBComps_1_0_000>
 {
@@ -477,24 +477,24 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             IEnumerable<CqlConcept> i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_, h_);
             CqlValueSet j_ = this._20_to_42_Plus_Weeks_Gestation(context);
             bool? k_ = context.Operators.ConceptsInValueSet(i_, j_);
-            IEnumerable<object> l_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, DeliveryEncounter);
+            IEnumerable<Condition> l_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, DeliveryEncounter);
 
-            bool? m_(object @this) {
-                object v_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_ as CodeableConcept);
+            bool? m_(Condition @this) {
+                CodeableConcept v_ = @this?.Code;
+                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
                 bool? x_ = context.Operators.Not((bool?)(w_ is null));
                 return x_;
             }
 
-            IEnumerable<object> n_ = context.Operators.Where<object>(l_, m_);
+            IEnumerable<Condition> n_ = context.Operators.Where<Condition>(l_, m_);
 
-            CqlConcept o_(object @this) {
-                object y_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_ as CodeableConcept);
+            CqlConcept o_(Condition @this) {
+                CodeableConcept y_ = @this?.Code;
+                CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
                 return z_;
             }
 
-            IEnumerable<CqlConcept> p_ = context.Operators.Select<object, CqlConcept>(n_, o_);
+            IEnumerable<CqlConcept> p_ = context.Operators.Select<Condition, CqlConcept>(n_, o_);
             bool? r_ = context.Operators.ConceptsInValueSet(p_, j_);
             bool? s_ = context.Operators.Or(k_, r_);
             bool? t_ = context.Operators.And(f_, s_);
@@ -1015,24 +1015,24 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             IEnumerable<CqlConcept> n_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)l_, m_);
             CqlValueSet o_ = this.Placenta_Increta_or_Percreta(context);
             bool? p_ = context.Operators.ConceptsInValueSet(n_, o_);
-            IEnumerable<object> q_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, SOCEncounter);
+            IEnumerable<Condition> q_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, SOCEncounter);
 
-            bool? r_(object @this) {
-                object af_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_ as CodeableConcept);
+            bool? r_(Condition @this) {
+                CodeableConcept af_ = @this?.Code;
+                CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_);
                 bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
                 return ah_;
             }
 
-            IEnumerable<object> s_ = context.Operators.Where<object>(q_, r_);
+            IEnumerable<Condition> s_ = context.Operators.Where<Condition>(q_, r_);
 
-            CqlConcept t_(object @this) {
-                object ai_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept aj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ai_ as CodeableConcept);
+            CqlConcept t_(Condition @this) {
+                CodeableConcept ai_ = @this?.Code;
+                CqlConcept aj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ai_);
                 return aj_;
             }
 
-            IEnumerable<CqlConcept> u_ = context.Operators.Select<object, CqlConcept>(s_, t_);
+            IEnumerable<CqlConcept> u_ = context.Operators.Select<Condition, CqlConcept>(s_, t_);
             bool? w_ = context.Operators.ConceptsInValueSet(u_, o_);
             bool? x_ = context.Operators.Or(p_, w_);
             IEnumerable<Encounter> y_ = this.Delivery_Encounters_With_Blood_Transfusion(context);
@@ -1448,9 +1448,9 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             bool? k_(object Complication) {
                 CqlValueSet r_ = this.Severe_Maternal_Morbidity_Diagnoses(context);
                 bool? s_ = context.Operators.ConceptInValueSet(Complication as CqlConcept, r_);
-                object t_ = CQMCommon_4_1_000.Instance.getCondition(context, Complication as ResourceReference);
-                object u_ = context.Operators.LateBoundProperty<object>(t_, "code");
-                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_ as CodeableConcept);
+                Condition t_ = CQMCommon_4_1_000.Instance.getCondition(context, Complication as ResourceReference);
+                CodeableConcept u_ = t_?.Code;
+                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
                 bool? x_ = context.Operators.ConceptInValueSet(v_, r_);
                 bool? y_ = context.Operators.Or(s_, x_);
                 return y_;
@@ -1804,24 +1804,24 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             IEnumerable<CqlConcept> n_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)l_, m_);
             CqlValueSet o_ = this.Placenta_Increta_or_Percreta(context);
             bool? p_ = context.Operators.ConceptsInValueSet(n_, o_);
-            IEnumerable<object> q_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, SOCExcludingTransfusion);
+            IEnumerable<Condition> q_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, SOCExcludingTransfusion);
 
-            bool? r_(object @this) {
-                object af_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_ as CodeableConcept);
+            bool? r_(Condition @this) {
+                CodeableConcept af_ = @this?.Code;
+                CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_);
                 bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
                 return ah_;
             }
 
-            IEnumerable<object> s_ = context.Operators.Where<object>(q_, r_);
+            IEnumerable<Condition> s_ = context.Operators.Where<Condition>(q_, r_);
 
-            CqlConcept t_(object @this) {
-                object ai_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept aj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ai_ as CodeableConcept);
+            CqlConcept t_(Condition @this) {
+                CodeableConcept ai_ = @this?.Code;
+                CqlConcept aj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ai_);
                 return aj_;
             }
 
-            IEnumerable<CqlConcept> u_ = context.Operators.Select<object, CqlConcept>(s_, t_);
+            IEnumerable<CqlConcept> u_ = context.Operators.Select<Condition, CqlConcept>(s_, t_);
             bool? w_ = context.Operators.ConceptsInValueSet(u_, o_);
             bool? x_ = context.Operators.Or(p_, w_);
             IEnumerable<Encounter> y_ = this.Delivery_Encounters_With_Blood_Transfusion(context);

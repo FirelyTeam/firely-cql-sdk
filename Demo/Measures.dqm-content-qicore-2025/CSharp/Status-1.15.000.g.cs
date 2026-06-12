@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("Status", "1.15.000")]
 public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
 {
@@ -81,28 +81,28 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
 
 
     [CqlFunctionDefinition("verified")]
-    public IEnumerable<object> verified(CqlContext context, IEnumerable<object> conditions)
+    public IEnumerable<Condition> verified(CqlContext context, IEnumerable<Condition> conditions)
     {
 
-        bool? a_(object C) {
-            object c_ = context.Operators.LateBoundProperty<object>(C, "verificationStatus");
-            CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+        bool? a_(Condition C) {
+            CodeableConcept c_ = C?.VerificationStatus;
+            CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
             bool? e_ = context.Operators.Not((bool?)(d_ is null));
-            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
             CqlCode h_ = this.confirmed(context);
             CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
             bool? j_ = context.Operators.Equivalent(g_, i_);
-            CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+            CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
             CqlCode m_ = this.unconfirmed(context);
             CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
             bool? o_ = context.Operators.Equivalent(l_, n_);
             bool? p_ = context.Operators.Or(j_, o_);
-            CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+            CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
             CqlCode s_ = this.provisional(context);
             CqlConcept t_ = context.Operators.ConvertCodeToConcept(s_);
             bool? u_ = context.Operators.Equivalent(r_, t_);
             bool? v_ = context.Operators.Or(p_, u_);
-            CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+            CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
             CqlCode y_ = this.differential(context);
             CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
             bool? aa_ = context.Operators.Equivalent(x_, z_);
@@ -111,7 +111,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
             return ac_;
         }
 
-        IEnumerable<object> b_ = context.Operators.Where<object>(conditions, a_);
+        IEnumerable<Condition> b_ = context.Operators.Where<Condition>(conditions, a_);
         return b_;
     }
 

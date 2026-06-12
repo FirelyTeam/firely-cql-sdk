@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS122FHIRDiabetesAssessGT9Pct", "1.0.000")]
 public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISingleton<CMS122FHIRDiabetesAssessGT9Pct_1_0_000>
 {
@@ -389,19 +389,19 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
         bool? m_ = context.Operators.And(j_, l_);
         CqlValueSet n_ = this.Diabetes(context);
         IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        object p_(Condition X) => X as object;
-        IEnumerable<object> q_ = context.Operators.Select<Condition, object>(o_, p_);
-        IEnumerable<object> r_ = Status_1_15_000.Instance.verified(context, q_);
+        Condition p_(Condition X) => X as Condition;
+        IEnumerable<Condition> q_ = context.Operators.Select<Condition, Condition>(o_, p_);
+        IEnumerable<Condition> r_ = Status_1_15_000.Instance.verified(context, q_);
 
-        bool? s_(object DiabetesDiagnosis) {
+        bool? s_(Condition DiabetesDiagnosis) {
             CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
             CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
             bool? y_ = context.Operators.Overlaps(w_, x_, "day");
             return y_;
         }
 
-        IEnumerable<object> t_ = context.Operators.Where<object>(r_, s_);
-        bool? u_ = context.Operators.Exists<object>(t_);
+        IEnumerable<Condition> t_ = context.Operators.Where<Condition>(r_, s_);
+        bool? u_ = context.Operators.Exists<Condition>(t_);
         bool? v_ = context.Operators.And(m_, u_);
         return v_;
     }

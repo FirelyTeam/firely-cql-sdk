@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS154FHIRAppropriateTxforURI", "1.0.000")]
 public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleton<CMS154FHIRAppropriateTxforURI_1_0_000>
 {
@@ -306,22 +306,22 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
         CqlValueSet b_ = this.Upper_Respiratory_Infection(context);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        object d_(Condition X) => X as object;
-        IEnumerable<object> e_ = context.Operators.Select<Condition, object>(c_, d_);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
-        IEnumerable<ValueTuple<Encounter, object>> g_ = context.Operators.CrossJoin<Encounter, object>(a_, f_);
+        Condition d_(Condition X) => X as Condition;
+        IEnumerable<Condition> e_ = context.Operators.Select<Condition, Condition>(c_, d_);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<ValueTuple<Encounter, Condition>> g_ = context.Operators.CrossJoin<Encounter, Condition>(a_, f_);
 
-        (CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? h_(ValueTuple<Encounter, object> _valueTuple) {
-            (CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? o_ = (CqlTupleMetadata_EVVfJAIMBNEGYhKEHLiZLhEGQ, _valueTuple.Item1, _valueTuple.Item2);
+        (CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? h_(ValueTuple<Encounter, Condition> _valueTuple) {
+            (CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? o_ = (CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce, _valueTuple.Item1, _valueTuple.Item2);
             return o_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?> i_ = context.Operators.Select<ValueTuple<Encounter, object>, (CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?>(g_, h_);
+        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?> i_ = context.Operators.Select<ValueTuple<Encounter, Condition>, (CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?>(g_, h_);
 
-        bool? j_((CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? tuple_evvfjaimbnegyhkehlizlhegq) {
-            CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, tuple_evvfjaimbnegyhkehlizlhegq?.URI);
+        bool? j_((CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? tuple_figmirinmncaavfkbmahdktce) {
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, tuple_figmirinmncaavfkbmahdktce?.URI);
             CqlDateTime q_ = context.Operators.Start(p_);
-            Period r_ = tuple_evvfjaimbnegyhkehlizlhegq?.QualifyingEncounters?.Period;
+            Period r_ = tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters?.Period;
             CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
             bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, "day");
             CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
@@ -330,9 +330,9 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
             return y_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?> k_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?>(i_, j_);
-        Encounter l_((CqlTupleMetadata, Encounter QualifyingEncounters, object URI)? tuple_evvfjaimbnegyhkehlizlhegq) => tuple_evvfjaimbnegyhkehlizlhegq?.QualifyingEncounters;
-        IEnumerable<Encounter> m_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounters, object URI)?, Encounter>(k_, l_);
+        IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?> k_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?>(i_, j_);
+        Encounter l_((CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? tuple_figmirinmncaavfkbmahdktce) => tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters;
+        IEnumerable<Encounter> m_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?, Encounter>(k_, l_);
         IEnumerable<Encounter> n_ = context.Operators.Distinct<Encounter>(m_);
         return n_;
     }
@@ -414,11 +414,10 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         IEnumerable<Encounter> b_ = this.Encounter_with_Upper_Respiratory_Infection(context);
         CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        object e_(Condition X) => X as object;
-        IEnumerable<object> f_ = context.Operators.Select<Condition, object>(d_, e_);
-        IEnumerable<object> g_ = Status_1_15_000.Instance.verified(context, f_);
-        Condition h_(object X) => X as Condition;
-        IEnumerable<Condition> i_ = context.Operators.Select<object, Condition>(g_, h_);
+        Condition e_(Condition X) => X as Condition;
+        IEnumerable<Condition> f_ = context.Operators.Select<Condition, Condition>(d_, e_);
+        IEnumerable<Condition> g_ = Status_1_15_000.Instance.verified(context, f_);
+        IEnumerable<Condition> i_ = context.Operators.Select<Condition, Condition>(g_, e_);
         IEnumerable<Encounter> j_ = Antibiotic_1_11_000.Instance.Encounter_with_Comorbid_Condition_History(context, b_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(a_, j_);
         CqlValueSet m_ = this.Antibiotic_Medications_for_Upper_Respiratory_Infection(context);
@@ -460,9 +459,9 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         CqlValueSet aa_ = this.Acute_Tonsillitis(context);
         IEnumerable<Condition> ab_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> ac_ = context.Operators.Union<Condition>(z_, ab_);
-        IEnumerable<object> ae_ = context.Operators.Select<Condition, object>(ac_, e_);
-        IEnumerable<object> af_ = Status_1_15_000.Instance.verified(context, ae_);
-        IEnumerable<Condition> ah_ = context.Operators.Select<object, Condition>(af_, h_);
+        IEnumerable<Condition> ae_ = context.Operators.Select<Condition, Condition>(ac_, e_);
+        IEnumerable<Condition> af_ = Status_1_15_000.Instance.verified(context, ae_);
+        IEnumerable<Condition> ah_ = context.Operators.Select<Condition, Condition>(af_, e_);
         IEnumerable<Encounter> ai_ = Antibiotic_1_11_000.Instance.Encounter_with_Competing_Diagnosis_History(context, b_, ah_);
         IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(t_, ai_);
         IEnumerable<Encounter> ak_ = context.Operators.Union<Encounter>(k_, aj_);
@@ -668,8 +667,8 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
 
     #region CqlTupleMetadata Properties
 
-    private static CqlTupleMetadata CqlTupleMetadata_EVVfJAIMBNEGYhKEHLiZLhEGQ = new(
-       [typeof(Encounter), typeof(object)],
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+       [typeof(Encounter), typeof(Condition)],
        ["QualifyingEncounters", "URI"]);
 
     #endregion CqlTupleMetadata Properties

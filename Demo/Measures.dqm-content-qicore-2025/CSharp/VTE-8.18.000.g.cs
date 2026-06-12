@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("VTE", "8.18.000")]
 public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 {
@@ -73,24 +73,24 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
         ];
 
         bool? b_(Encounter E) {
-            IEnumerable<object> f_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, E);
+            IEnumerable<Condition> f_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, E);
 
-            bool? g_(object @this) {
-                object q_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_ as CodeableConcept);
+            bool? g_(Condition @this) {
+                CodeableConcept q_ = @this?.Code;
+                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 bool? s_ = context.Operators.Not((bool?)(r_ is null));
                 return s_;
             }
 
-            IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
+            IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
 
-            CqlConcept i_(object @this) {
-                object t_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_ as CodeableConcept);
+            CqlConcept i_(Condition @this) {
+                CodeableConcept t_ = @this?.Code;
+                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
                 return u_;
             }
 
-            IEnumerable<CqlConcept> j_ = context.Operators.Select<object, CqlConcept>(h_, i_);
+            IEnumerable<CqlConcept> j_ = context.Operators.Select<Condition, CqlConcept>(h_, i_);
             bool? k_ = context.Operators.ConceptsInValueSet(j_, DiagnosisValueSet);
             List<CodeableConcept> l_ = E?.ReasonCode;
 
