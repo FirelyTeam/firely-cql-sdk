@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS56FHIRFuncStatHipReplacement", "1.0.000")]
 public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingleton<CMS56FHIRFuncStatHipReplacement_1_0_000>
 {
@@ -507,17 +507,17 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
 
-        bool? h_(object Dementia) {
+        bool? h_(Condition Dementia) {
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Dementia);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             bool? m_ = context.Operators.Overlaps(k_, l_, "day");
             return m_;
         }
 
-        IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
-        bool? j_ = context.Operators.Exists<object>(i_);
+        IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
+        bool? j_ = context.Operators.Exists<Condition>(i_);
         return j_;
     }
 
@@ -525,26 +525,26 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
     [CqlFunctionDefinition("isVerified")]
     [CqlTag("note", "When possible, this function should be migrated to QICoreCommon.")]
     [CqlTag("description", "\"confirmed\", \"unconfirmed\", \"provisional\", or \"differential\"")]
-    public bool? isVerified(CqlContext context, object condition)
+    public bool? isVerified(CqlContext context, Condition condition)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "verificationStatus");
-        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CodeableConcept a_ = condition?.VerificationStatus;
+        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         bool? c_ = context.Operators.Not((bool?)(b_ is null));
-        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
         CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
         bool? h_ = context.Operators.Equivalent(e_, g_);
-        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode k_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
         CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
         bool? m_ = context.Operators.Equivalent(j_, l_);
         bool? n_ = context.Operators.Or(h_, m_);
-        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
         CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
         bool? s_ = context.Operators.Equivalent(p_, r_);
         bool? t_ = context.Operators.Or(n_, s_);
-        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode w_ = QICoreCommon_4_0_000.Instance.differential(context);
         CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
         bool? y_ = context.Operators.Equivalent(v_, x_);
@@ -568,9 +568,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlValueSet e_ = this.Lower_Body_Fractures_Excluding_Ankle_and_Foot(context);
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<object> i_ = context.Operators.Union<object>(f_ as IEnumerable<object>, h_ as IEnumerable<object>);
+            IEnumerable<Condition> i_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
 
-            bool? j_(object LowerBodyFracture) {
+            bool? j_(Condition LowerBodyFracture) {
                 CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LowerBodyFracture);
                 CqlDateTime o_ = context.Operators.Start(n_);
 
@@ -782,9 +782,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return af_;
             }
 
-            IEnumerable<object> k_ = context.Operators.Where<object>(i_, j_);
-            Procedure l_(object LowerBodyFracture) => THAProcedure;
-            IEnumerable<Procedure> m_ = context.Operators.Select<object, Procedure>(k_, l_);
+            IEnumerable<Condition> k_ = context.Operators.Where<Condition>(i_, j_);
+            Procedure l_(Condition LowerBodyFracture) => THAProcedure;
+            IEnumerable<Procedure> m_ = context.Operators.Select<Condition, Procedure>(k_, l_);
             return m_;
         }
 
@@ -1129,9 +1129,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         CqlValueSet a_ = this.Malignant_Neoplasms_of_Lower_and_Unspecified_Limbs(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        IEnumerable<object> f_(object MalignantNeoplasm) {
+        IEnumerable<Condition> f_(Condition MalignantNeoplasm) {
             IEnumerable<Procedure> i_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
             bool? j_(Procedure THAProcedure) {
@@ -1208,13 +1208,13 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             }
 
             IEnumerable<Procedure> k_ = context.Operators.Where<Procedure>(i_, j_);
-            object l_(Procedure THAProcedure) => MalignantNeoplasm;
-            IEnumerable<object> m_ = context.Operators.Select<Procedure, object>(k_, l_);
+            Condition l_(Procedure THAProcedure) => MalignantNeoplasm;
+            IEnumerable<Condition> m_ = context.Operators.Select<Procedure, Condition>(k_, l_);
             return m_;
         }
 
-        IEnumerable<object> g_ = context.Operators.SelectMany<object, object>(e_, f_);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = context.Operators.SelectMany<Condition, Condition>(e_, f_);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         return h_;
     }
 
@@ -1230,9 +1230,9 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         CqlValueSet a_ = this.Mechanical_Complications_Excluding_Upper_Body(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        IEnumerable<object> f_(object MechanicalComplications) {
+        IEnumerable<Condition> f_(Condition MechanicalComplications) {
             IEnumerable<Procedure> i_ = this.Total_Hip_Arthroplasty_Procedure(context);
 
             bool? j_(Procedure THAProcedure) {
@@ -1309,13 +1309,13 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             }
 
             IEnumerable<Procedure> k_ = context.Operators.Where<Procedure>(i_, j_);
-            object l_(Procedure THAProcedure) => MechanicalComplications;
-            IEnumerable<object> m_ = context.Operators.Select<Procedure, object>(k_, l_);
+            Condition l_(Procedure THAProcedure) => MechanicalComplications;
+            IEnumerable<Condition> m_ = context.Operators.Select<Procedure, Condition>(k_, l_);
             return m_;
         }
 
-        IEnumerable<object> g_ = context.Operators.SelectMany<object, object>(e_, f_);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = context.Operators.SelectMany<Condition, Condition>(e_, f_);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         return h_;
     }
 

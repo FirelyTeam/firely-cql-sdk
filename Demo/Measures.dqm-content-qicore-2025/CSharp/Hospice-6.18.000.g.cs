@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("Hospice", "6.18.000")]
 public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 {
@@ -276,18 +276,18 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
         CqlValueSet aj_ = this.Hospice_Diagnosis(context);
         IEnumerable<Condition> ak_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> am_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> an_ = context.Operators.Union<object>(ak_ as IEnumerable<object>, am_ as IEnumerable<object>);
-        IEnumerable<object> ao_ = Status_1_15_000.Instance.verified(context, an_);
+        IEnumerable<Condition> an_ = context.Operators.Union<Condition>(ak_ as IEnumerable<Condition>, am_ as IEnumerable<Condition>);
+        IEnumerable<Condition> ao_ = Status_1_15_000.Instance.verified(context, an_);
 
-        bool? ap_(object HospiceCareDiagnosis) {
+        bool? ap_(Condition HospiceCareDiagnosis) {
             CqlInterval<CqlDateTime> dh_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
             CqlInterval<CqlDateTime> di_ = this.Measurement_Period(context);
             bool? dj_ = context.Operators.Overlaps(dh_, di_, "day");
             return dj_;
         }
 
-        IEnumerable<object> aq_ = context.Operators.Where<object>(ao_, ap_);
-        bool? ar_ = context.Operators.Exists<object>(aq_);
+        IEnumerable<Condition> aq_ = context.Operators.Where<Condition>(ao_, ap_);
+        bool? ar_ = context.Operators.Exists<Condition>(aq_);
         bool? as_ = context.Operators.Or(ai_, ar_);
         return as_;
     }

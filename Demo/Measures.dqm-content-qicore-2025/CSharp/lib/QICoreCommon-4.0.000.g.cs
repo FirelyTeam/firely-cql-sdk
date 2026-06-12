@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("QICoreCommon", "4.0.000")]
 public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_0_000>
 {
@@ -394,7 +394,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
     #endregion CodeSystems
 
-    #region Functions and Expressions (43)
+    #region Functions and Expressions (44)
 
     [CqlExpressionDefinition("Patient")]
     public Patient Patient(CqlContext context) =>
@@ -412,19 +412,19 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
     [CqlFunctionDefinition("isActive")]
     [CqlTag("description", "Returns true if the given condition has a clinical status of active, recurrence, or relapse")]
-    public bool? isActive(CqlContext context, object condition)
+    public bool? isActive(CqlContext context, Condition condition)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "clinicalStatus");
-        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CodeableConcept a_ = condition?.ClinicalStatus;
+        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode c_ = this.active(context);
         CqlConcept d_ = context.Operators.ConvertCodeToConcept(c_);
         bool? e_ = context.Operators.Equivalent(b_, d_);
-        CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode h_ = this.recurrence(context);
         CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
         bool? j_ = context.Operators.Equivalent(g_, i_);
         bool? k_ = context.Operators.Or(e_, j_);
-        CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode n_ = this.relapse(context);
         CqlConcept o_ = context.Operators.ConvertCodeToConcept(n_);
         bool? p_ = context.Operators.Equivalent(m_, o_);
@@ -435,495 +435,415 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
     [CqlFunctionDefinition("hasCategory")]
     [CqlTag("description", "Returns true if the given condition has the given category")]
-    public bool? hasCategory(CqlContext context, object condition, CqlCode category)
+    public bool? hasCategory(CqlContext context, Condition condition, CqlCode category)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = condition?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
-            return j_;
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
 
-        bool? g_(CqlConcept C) {
-            CqlConcept k_ = context.Operators.ConvertCodeToConcept(category);
-            bool? l_ = context.Operators.Equivalent(C, k_);
-            return l_;
+        bool? d_(CqlConcept C) {
+            CqlConcept h_ = context.Operators.ConvertCodeToConcept(category);
+            bool? i_ = context.Operators.Equivalent(C, h_);
+            return i_;
         }
 
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
+    }
+
+
+    [CqlFunctionDefinition("hasCategory")]
+    [CqlTag("description", "Returns true if the given observation has the given category")]
+    public bool? hasCategory(CqlContext context, Observation observation, CqlCode category)
+    {
+        List<CodeableConcept> a_ = observation?.Category;
+
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlConcept h_ = context.Operators.ConvertCodeToConcept(category);
+            bool? i_ = context.Operators.Equivalent(C, h_);
+            return i_;
+        }
+
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isProblemListItem")]
     [CqlTag("description", "Returns true if the given condition is a problem list item.")]
-    public bool? isProblemListItem(CqlContext context, object condition)
+    public bool? isProblemListItem(CqlContext context, Condition condition)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = condition?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.problem_list_item(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.problem_list_item(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isEncounterDiagnosis")]
     [CqlTag("description", "Returns true if the given condition is an encounter diagnosis")]
-    public bool? isEncounterDiagnosis(CqlContext context, object condition)
+    public bool? isEncounterDiagnosis(CqlContext context, Condition condition)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = condition?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.encounter_diagnosis(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.encounter_diagnosis(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isHealthConcern")]
     [CqlTag("description", "Returns true if the given condition is a health concern")]
-    public bool? isHealthConcern(CqlContext context, object condition)
+    public bool? isHealthConcern(CqlContext context, Condition condition)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = condition?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.health_concern(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.health_concern(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isSocialHistory")]
     [CqlTag("description", "Returns true if the given observation is a social history observation")]
-    public bool? isSocialHistory(CqlContext context, object observation)
+    public bool? isSocialHistory(CqlContext context, Observation observation)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = observation?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.social_history(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.social_history(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isVitalSign")]
     [CqlTag("description", "Returns true if the given observation is a vital sign")]
-    public bool? isVitalSign(CqlContext context, object observation)
+    public bool? isVitalSign(CqlContext context, Observation observation)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = observation?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.vital_signs(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.vital_signs(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isImaging")]
     [CqlTag("description", "Returns true if the given observation is an imaging observation")]
-    public bool? isImaging(CqlContext context, object observation)
+    public bool? isImaging(CqlContext context, Observation observation)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = observation?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.imaging(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.imaging(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isLaboratory")]
     [CqlTag("description", "Returns true if the given observation is a laboratory observation")]
-    public bool? isLaboratory(CqlContext context, object observation)
+    public bool? isLaboratory(CqlContext context, Observation observation)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = observation?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.laboratory(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.laboratory(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isProcedure")]
     [CqlTag("description", "Returns true if the given observation is a procedure observation")]
-    public bool? isProcedure(CqlContext context, object observation)
+    public bool? isProcedure(CqlContext context, Observation observation)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = observation?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.procedure(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.procedure(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isSurvey")]
     [CqlTag("description", "Returns true if the given observation is a survey observation")]
-    public bool? isSurvey(CqlContext context, object observation)
+    public bool? isSurvey(CqlContext context, Observation observation)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = observation?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.survey(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.survey(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isExam")]
     [CqlTag("description", "Returns true if the given observation is an exam observation")]
-    public bool? isExam(CqlContext context, object observation)
+    public bool? isExam(CqlContext context, Observation observation)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = observation?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.exam(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.exam(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isTherapy")]
     [CqlTag("description", "Returns true if the given observation is a therapy observation")]
-    public bool? isTherapy(CqlContext context, object observation)
+    public bool? isTherapy(CqlContext context, Observation observation)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = observation?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.therapy(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.therapy(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isActivity")]
     [CqlTag("description", "Returns true if the given observation is an activity observation")]
-    public bool? isActivity(CqlContext context, object observation)
+    public bool? isActivity(CqlContext context, Observation observation)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(observation, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = observation?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.activity(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.activity(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isCommunity")]
     [CqlTag("description", "Returns true if the given MedicationRequest has a category of Community")]
-    public bool? isCommunity(CqlContext context, object medicationRequest)
+    public bool? isCommunity(CqlContext context, MedicationRequest medicationRequest)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(medicationRequest, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = medicationRequest?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.Community(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.Community(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
     [CqlFunctionDefinition("isDischarge")]
     [CqlTag("description", "Returns true if the given MedicationRequest has a category of Discharge")]
-    public bool? isDischarge(CqlContext context, object medicationRequest)
+    public bool? isDischarge(CqlContext context, MedicationRequest medicationRequest)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(medicationRequest, "category");
-        object[] b_ = [
-            a_,
-        ];
+        List<CodeableConcept> a_ = medicationRequest?.Category;
 
-        CqlConcept c_(object @this) {
-            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+        CqlConcept b_(CodeableConcept @this) {
+            CqlConcept g_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            return g_;
+        }
+
+        IEnumerable<CqlConcept> c_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)a_, b_);
+
+        bool? d_(CqlConcept C) {
+            CqlCode h_ = this.Discharge(context);
+            CqlConcept i_ = context.Operators.ConvertCodeToConcept(h_);
+            bool? j_ = context.Operators.Equivalent(C, i_);
             return j_;
         }
 
-        IEnumerable<CqlConcept> d_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)b_, c_);
-        CqlConcept e_ = context.Operators.SingletonFrom<CqlConcept>(d_);
-        CqlConcept[] f_ = [
-            e_,
-        ];
-
-        bool? g_(CqlConcept C) {
-            CqlCode k_ = this.Discharge(context);
-            CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
-            bool? m_ = context.Operators.Equivalent(C, l_);
-            return m_;
-        }
-
-        IEnumerable<CqlConcept> h_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)f_, g_);
-        bool? i_ = context.Operators.Exists<CqlConcept>(h_);
-        return i_;
+        IEnumerable<CqlConcept> e_ = context.Operators.Where<CqlConcept>(c_, d_);
+        bool? f_ = context.Operators.Exists<CqlConcept>(e_);
+        return f_;
     }
 
 
@@ -1238,13 +1158,13 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     [CqlTag("description", "Returns an interval representing the normalized abatement of a given Condition.")]
     [CqlTag("comment", "If the abatement element of the Condition is represented as a DateTime, the result\nis an interval beginning and ending on that DateTime.\nIf the abatement is represented as a Quantity, the quantity is expected to be a calendar-duration and is interpreted as the age of the patient. The\nresult is an interval from the date the patient turned that age to immediately before one year later.\nIf the abatement is represented as a Quantity Interval, the quantities are expected to be calendar-durations and are interpreted as an age range during\nwhich the abatement occurred. The result is an interval from the date the patient turned the starting age of the quantity interval, and ending immediately\nbefore one year later than the date the patient turned the ending age of the quantity interval.")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `abatementInterval()` instead.")]
-    public CqlInterval<CqlDateTime> ToAbatementInterval(CqlContext context, object condition)
+    public CqlInterval<CqlDateTime> ToAbatementInterval(CqlContext context, Condition condition)
     {
 
         CqlInterval<CqlDateTime> a_() {
 
             bool b_() {
-                object f_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType f_ = condition?.Abatement;
                 object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
                 bool h_ = g_ is CqlDateTime;
                 return h_;
@@ -1252,7 +1172,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
 
             bool c_() {
-                object i_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType i_ = condition?.Abatement;
                 object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
                 bool k_ = j_ is CqlQuantity;
                 return k_;
@@ -1260,7 +1180,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
 
             bool d_() {
-                object l_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType l_ = condition?.Abatement;
                 object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
                 bool n_ = m_ is CqlInterval<CqlQuantity>;
                 return n_;
@@ -1268,7 +1188,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
 
             bool e_() {
-                object o_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType o_ = condition?.Abatement;
                 object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                 bool q_ = p_ is CqlInterval<CqlDateTime>;
                 return q_;
@@ -1276,7 +1196,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
             if (b_())
             {
-                object r_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType r_ = condition?.Abatement;
                 object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                 object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                 CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, true, true);
@@ -1288,7 +1208,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 Date x_ = w_?.BirthDateElement;
                 string y_ = x_?.Value;
                 CqlDate z_ = context.Operators.ConvertStringToDate(y_);
-                object aa_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType aa_ = condition?.Abatement;
                 object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                 CqlDate ac_ = context.Operators.Add(z_, ab_ as CqlQuantity);
                 Date ae_ = w_?.BirthDateElement;
@@ -1350,7 +1270,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 Date cu_ = ct_?.BirthDateElement;
                 string cv_ = cu_?.Value;
                 CqlDate cw_ = context.Operators.ConvertStringToDate(cv_);
-                object cx_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType cx_ = condition?.Abatement;
                 object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
                 object cz_ = context.Operators.LateBoundProperty<object>(cy_, "low");
                 CqlDate da_ = context.Operators.Add(cw_, cz_ as CqlQuantity);
@@ -1416,7 +1336,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             }
             else if (e_())
             {
-                object fy_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType fy_ = condition?.Abatement;
                 object fz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fy_);
                 object ga_ = context.Operators.LateBoundProperty<object>(fz_, "low");
                 object gc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fy_);
@@ -1437,13 +1357,13 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     [CqlFunctionDefinition("abatementInterval")]
     [CqlTag("description", "Returns an interval representing the normalized abatement of a given Condition.")]
     [CqlTag("comment", "If the abatement element of the Condition is represented as a DateTime, the result\nis an interval beginning and ending on that DateTime.\nIf the abatement is represented as a Quantity, the quantity is expected to be a calendar-duration and is interpreted as the age of the patient. The\nresult is an interval from the date the patient turned that age to immediately before one year later.\nIf the abatement is represented as a Quantity Interval, the quantities are expected to be calendar-durations and are interpreted as an age range during\nwhich the abatement occurred. The result is an interval from the date the patient turned the starting age of the quantity interval, and ending immediately\nbefore one year later than the date the patient turned the ending age of the quantity interval.")]
-    public CqlInterval<CqlDateTime> abatementInterval(CqlContext context, object condition)
+    public CqlInterval<CqlDateTime> abatementInterval(CqlContext context, Condition condition)
     {
 
         CqlInterval<CqlDateTime> a_() {
 
             bool b_() {
-                object f_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType f_ = condition?.Abatement;
                 object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
                 bool h_ = g_ is CqlDateTime;
                 return h_;
@@ -1451,7 +1371,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
 
             bool c_() {
-                object i_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType i_ = condition?.Abatement;
                 object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
                 bool k_ = j_ is CqlQuantity;
                 return k_;
@@ -1459,7 +1379,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
 
             bool d_() {
-                object l_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType l_ = condition?.Abatement;
                 object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
                 bool n_ = m_ is CqlInterval<CqlQuantity>;
                 return n_;
@@ -1467,7 +1387,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
 
             bool e_() {
-                object o_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType o_ = condition?.Abatement;
                 object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                 bool q_ = p_ is CqlInterval<CqlDateTime>;
                 return q_;
@@ -1475,7 +1395,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
             if (b_())
             {
-                object r_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType r_ = condition?.Abatement;
                 object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                 object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                 CqlInterval<CqlDateTime> v_ = context.Operators.Interval(s_ as CqlDateTime, u_ as CqlDateTime, true, true);
@@ -1487,7 +1407,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 Date x_ = w_?.BirthDateElement;
                 string y_ = x_?.Value;
                 CqlDate z_ = context.Operators.ConvertStringToDate(y_);
-                object aa_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType aa_ = condition?.Abatement;
                 object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                 CqlDate ac_ = context.Operators.Add(z_, ab_ as CqlQuantity);
                 Date ae_ = w_?.BirthDateElement;
@@ -1549,7 +1469,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                 Date cu_ = ct_?.BirthDateElement;
                 string cv_ = cu_?.Value;
                 CqlDate cw_ = context.Operators.ConvertStringToDate(cv_);
-                object cx_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType cx_ = condition?.Abatement;
                 object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
                 object cz_ = context.Operators.LateBoundProperty<object>(cy_, "low");
                 CqlDate da_ = context.Operators.Add(cw_, cz_ as CqlQuantity);
@@ -1615,7 +1535,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             }
             else if (e_())
             {
-                object fy_ = context.Operators.LateBoundProperty<object>(condition, "abatement");
+                DataType fy_ = condition?.Abatement;
                 object fz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fy_);
                 object ga_ = context.Operators.LateBoundProperty<object>(fz_, "low");
                 object gc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fy_);
@@ -1637,23 +1557,23 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     [CqlTag("description", "Returns an interval representing the normalized prevalence period of a given Condition.")]
     [CqlTag("comment", "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from\nonset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting \ninterval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.")]
     [CqlTag("deprecated", "This function is deprecated. Use the `prevalenceInterval()` fluent function instead")]
-    public CqlInterval<CqlDateTime> ToPrevalenceInterval(CqlContext context, object condition)
+    public CqlInterval<CqlDateTime> ToPrevalenceInterval(CqlContext context, Condition condition)
     {
 
         CqlInterval<CqlDateTime> a_() {
 
             bool b_() {
-                object c_ = context.Operators.LateBoundProperty<object>(condition, "clinicalStatus");
-                CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+                CodeableConcept c_ = condition?.ClinicalStatus;
+                CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
                 CqlCode e_ = this.active(context);
                 CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
                 bool? g_ = context.Operators.Equivalent(d_, f_);
-                CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+                CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
                 CqlCode j_ = this.recurrence(context);
                 CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
                 bool? l_ = context.Operators.Equivalent(i_, k_);
                 bool? m_ = context.Operators.Or(g_, l_);
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
                 CqlCode p_ = this.relapse(context);
                 CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
                 bool? r_ = context.Operators.Equivalent(o_, q_);
@@ -1663,7 +1583,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
             if (b_())
             {
-                object t_ = context.Operators.LateBoundProperty<object>(condition, "onset");
+                DataType t_ = condition?.Onset;
                 object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                 CqlInterval<CqlDateTime> v_ = this.ToInterval(context, u_);
                 CqlDateTime w_ = context.Operators.Start(v_);
@@ -1685,7 +1605,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                     CqlInterval<CqlDateTime> ah_() {
                         if (abatementDate is null)
                         {
-                            object ai_ = context.Operators.LateBoundProperty<object>(condition, "onset");
+                            DataType ai_ = condition?.Onset;
                             object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
                             CqlInterval<CqlDateTime> ak_ = this.ToInterval(context, aj_);
                             CqlDateTime al_ = context.Operators.Start(ak_);
@@ -1694,7 +1614,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                         }
                         else
                         {
-                            object an_ = context.Operators.LateBoundProperty<object>(condition, "onset");
+                            DataType an_ = condition?.Onset;
                             object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
                             CqlInterval<CqlDateTime> ap_ = this.ToInterval(context, ao_);
                             CqlDateTime aq_ = context.Operators.Start(ap_);
@@ -1720,23 +1640,23 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     [CqlFunctionDefinition("prevalenceInterval")]
     [CqlTag("description", "Returns an interval representing the normalized prevalence period of a given Condition.")]
     [CqlTag("comment", "Uses the ToInterval and ToAbatementInterval functions to determine the widest potential interval from\nonset to abatement as specified in the given Condition. If the condition is active, or has an abatement date the resulting \ninterval will have a closed ending boundary. Otherwise, the resulting interval will have an open ending boundary.")]
-    public CqlInterval<CqlDateTime> prevalenceInterval(CqlContext context, object condition)
+    public CqlInterval<CqlDateTime> prevalenceInterval(CqlContext context, Condition condition)
     {
 
         CqlInterval<CqlDateTime> a_() {
 
             bool b_() {
-                object c_ = context.Operators.LateBoundProperty<object>(condition, "clinicalStatus");
-                CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+                CodeableConcept c_ = condition?.ClinicalStatus;
+                CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
                 CqlCode e_ = this.active(context);
                 CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
                 bool? g_ = context.Operators.Equivalent(d_, f_);
-                CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+                CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
                 CqlCode j_ = this.recurrence(context);
                 CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
                 bool? l_ = context.Operators.Equivalent(i_, k_);
                 bool? m_ = context.Operators.Or(g_, l_);
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_ as CodeableConcept);
+                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, c_);
                 CqlCode p_ = this.relapse(context);
                 CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
                 bool? r_ = context.Operators.Equivalent(o_, q_);
@@ -1746,7 +1666,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
 
             if (b_())
             {
-                object t_ = context.Operators.LateBoundProperty<object>(condition, "onset");
+                DataType t_ = condition?.Onset;
                 object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                 CqlInterval<CqlDateTime> v_ = this.toInterval(context, u_);
                 CqlDateTime w_ = context.Operators.Start(v_);
@@ -1768,7 +1688,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                     CqlInterval<CqlDateTime> ah_() {
                         if (abatementDate is null)
                         {
-                            object ai_ = context.Operators.LateBoundProperty<object>(condition, "onset");
+                            DataType ai_ = condition?.Onset;
                             object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
                             CqlInterval<CqlDateTime> ak_ = this.toInterval(context, aj_);
                             CqlDateTime al_ = context.Operators.Start(ak_);
@@ -1777,7 +1697,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                         }
                         else
                         {
-                            object an_ = context.Operators.LateBoundProperty<object>(condition, "onset");
+                            DataType an_ = condition?.Onset;
                             object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
                             CqlInterval<CqlDateTime> ap_ = this.toInterval(context, ao_);
                             CqlDateTime aq_ = context.Operators.Start(ap_);

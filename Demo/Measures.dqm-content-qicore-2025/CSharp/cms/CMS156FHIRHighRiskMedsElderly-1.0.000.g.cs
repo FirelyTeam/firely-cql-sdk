@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS156FHIRHighRiskMedsElderly", "1.0.000")]
 public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleton<CMS156FHIRHighRiskMedsElderly_1_0_000>
 {
@@ -1648,35 +1648,35 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
 
     [CqlExpressionDefinition("Schizophrenia Diagnosis")]
-    public IEnumerable<object> Schizophrenia_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Schizophrenia_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Schizophrenia_Diagnosis, Schizophrenia_Diagnosis_Compute);
 
     private const long _cacheIndex_Schizophrenia_Diagnosis = 2608599169925942613L;
 
-    private IEnumerable<object> Schizophrenia_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Schizophrenia_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Schizophrenia(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
         return f_;
     }
 
 
     [CqlExpressionDefinition("Bipolar Disorder Diagnosis")]
-    public IEnumerable<object> Bipolar_Disorder_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Bipolar_Disorder_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Bipolar_Disorder_Diagnosis, Bipolar_Disorder_Diagnosis_Compute);
 
     private const long _cacheIndex_Bipolar_Disorder_Diagnosis = 3459923094508400090L;
 
-    private IEnumerable<object> Bipolar_Disorder_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Bipolar_Disorder_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Bipolar_Disorder(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
         return f_;
     }
 
@@ -1788,86 +1788,86 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
 
 
     [CqlExpressionDefinition("Seizure Disorder Diagnosis")]
-    public IEnumerable<object> Seizure_Disorder_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Seizure_Disorder_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Seizure_Disorder_Diagnosis, Seizure_Disorder_Diagnosis_Compute);
 
     private const long _cacheIndex_Seizure_Disorder_Diagnosis = -1131365608370837245L;
 
-    private IEnumerable<object> Seizure_Disorder_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Seizure_Disorder_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Seizure_Disorder(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
         return f_;
     }
 
 
     [CqlExpressionDefinition("REM Sleep Behavior Disorder Diagnosis")]
-    public IEnumerable<object> REM_Sleep_Behavior_Disorder_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> REM_Sleep_Behavior_Disorder_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_REM_Sleep_Behavior_Disorder_Diagnosis, REM_Sleep_Behavior_Disorder_Diagnosis_Compute);
 
     private const long _cacheIndex_REM_Sleep_Behavior_Disorder_Diagnosis = 1960016341670198298L;
 
-    private IEnumerable<object> REM_Sleep_Behavior_Disorder_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> REM_Sleep_Behavior_Disorder_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.REM_Sleep_Behavior_Disorder(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
         return f_;
     }
 
 
     [CqlExpressionDefinition("Benzodiazepine Withdrawal Diagnosis")]
-    public IEnumerable<object> Benzodiazepine_Withdrawal_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Benzodiazepine_Withdrawal_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Benzodiazepine_Withdrawal_Diagnosis, Benzodiazepine_Withdrawal_Diagnosis_Compute);
 
     private const long _cacheIndex_Benzodiazepine_Withdrawal_Diagnosis = 8657316729577408796L;
 
-    private IEnumerable<object> Benzodiazepine_Withdrawal_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Benzodiazepine_Withdrawal_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Benzodiazepine_Withdrawal(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
         return f_;
     }
 
 
     [CqlExpressionDefinition("Alcohol Withdrawal Diagnosis")]
-    public IEnumerable<object> Alcohol_Withdrawal_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Alcohol_Withdrawal_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Alcohol_Withdrawal_Diagnosis, Alcohol_Withdrawal_Diagnosis_Compute);
 
     private const long _cacheIndex_Alcohol_Withdrawal_Diagnosis = -4814865430801165110L;
 
-    private IEnumerable<object> Alcohol_Withdrawal_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Alcohol_Withdrawal_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Alcohol_Withdrawal(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
         return f_;
     }
 
 
     [CqlExpressionDefinition("Generalized Anxiety Disorder Diagnosis")]
-    public IEnumerable<object> Generalized_Anxiety_Disorder_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Generalized_Anxiety_Disorder_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Generalized_Anxiety_Disorder_Diagnosis, Generalized_Anxiety_Disorder_Diagnosis_Compute);
 
     private const long _cacheIndex_Generalized_Anxiety_Disorder_Diagnosis = -2199162515832252667L;
 
-    private IEnumerable<object> Generalized_Anxiety_Disorder_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Generalized_Anxiety_Disorder_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Generalized_Anxiety_Disorder(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
         return f_;
     }
 
@@ -1944,11 +1944,11 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
     private bool? Numerator_2_Compute(CqlContext context)
     {
         bool? a_ = this.More_than_One_Antipsychotic_Order(context);
-        IEnumerable<object> b_ = this.Schizophrenia_Diagnosis(context);
-        IEnumerable<object> c_ = this.Bipolar_Disorder_Diagnosis(context);
-        IEnumerable<object> d_ = context.Operators.Union<object>(b_, c_);
+        IEnumerable<Condition> b_ = this.Schizophrenia_Diagnosis(context);
+        IEnumerable<Condition> c_ = this.Bipolar_Disorder_Diagnosis(context);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
 
-        bool? e_(object AntipsychoticTreatedDiagnoses) {
+        bool? e_(Condition AntipsychoticTreatedDiagnoses) {
             CqlInterval<CqlDateTime> z_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, AntipsychoticTreatedDiagnoses);
             CqlInterval<CqlDateTime> aa_ = this.Measurement_Period(context);
             CqlDateTime ab_ = context.Operators.Start(aa_);
@@ -1960,22 +1960,22 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             return ag_;
         }
 
-        IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-        bool? g_ = context.Operators.Exists<object>(f_);
+        IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
+        bool? g_ = context.Operators.Exists<Condition>(f_);
         bool? h_ = context.Operators.Not(g_);
         bool? i_ = context.Operators.And(a_, h_);
         bool? j_ = this.More_than_One_Benzodiazepine_Order(context);
-        IEnumerable<object> k_ = this.Seizure_Disorder_Diagnosis(context);
-        IEnumerable<object> l_ = this.REM_Sleep_Behavior_Disorder_Diagnosis(context);
-        IEnumerable<object> m_ = context.Operators.Union<object>(k_, l_);
-        IEnumerable<object> n_ = this.Benzodiazepine_Withdrawal_Diagnosis(context);
-        IEnumerable<object> o_ = this.Alcohol_Withdrawal_Diagnosis(context);
-        IEnumerable<object> p_ = context.Operators.Union<object>(n_, o_);
-        IEnumerable<object> q_ = context.Operators.Union<object>(m_, p_);
-        IEnumerable<object> r_ = this.Generalized_Anxiety_Disorder_Diagnosis(context);
-        IEnumerable<object> s_ = context.Operators.Union<object>(q_, r_);
+        IEnumerable<Condition> k_ = this.Seizure_Disorder_Diagnosis(context);
+        IEnumerable<Condition> l_ = this.REM_Sleep_Behavior_Disorder_Diagnosis(context);
+        IEnumerable<Condition> m_ = context.Operators.Union<Condition>(k_, l_);
+        IEnumerable<Condition> n_ = this.Benzodiazepine_Withdrawal_Diagnosis(context);
+        IEnumerable<Condition> o_ = this.Alcohol_Withdrawal_Diagnosis(context);
+        IEnumerable<Condition> p_ = context.Operators.Union<Condition>(n_, o_);
+        IEnumerable<Condition> q_ = context.Operators.Union<Condition>(m_, p_);
+        IEnumerable<Condition> r_ = this.Generalized_Anxiety_Disorder_Diagnosis(context);
+        IEnumerable<Condition> s_ = context.Operators.Union<Condition>(q_, r_);
 
-        bool? t_(object BenzodiazepineTreatedDiagnoses) {
+        bool? t_(Condition BenzodiazepineTreatedDiagnoses) {
             CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BenzodiazepineTreatedDiagnoses);
             CqlInterval<CqlDateTime> ai_ = this.Measurement_Period(context);
             CqlDateTime aj_ = context.Operators.Start(ai_);
@@ -1987,8 +1987,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             return ao_;
         }
 
-        IEnumerable<object> u_ = context.Operators.Where<object>(s_, t_);
-        bool? v_ = context.Operators.Exists<object>(u_);
+        IEnumerable<Condition> u_ = context.Operators.Where<Condition>(s_, t_);
+        bool? v_ = context.Operators.Exists<Condition>(u_);
         bool? w_ = context.Operators.Not(v_);
         bool? x_ = context.Operators.And(j_, w_);
         bool? y_ = context.Operators.Or(i_, x_);

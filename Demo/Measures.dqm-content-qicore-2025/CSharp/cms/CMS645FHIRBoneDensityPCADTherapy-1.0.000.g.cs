@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS645FHIRBoneDensityPCADTherapy", "1.0.000")]
 public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingleton<CMS645FHIRBoneDensityPCADTherapy_1_0_000>
 {
@@ -591,26 +591,26 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
     [CqlFunctionDefinition("isVerified")]
     [CqlTag("description", "Returns true if the given condition either has no verification status or has a verification status of confirmed, unconfirmed, provisional, or differential")]
-    public bool? isVerified(CqlContext context, object condition)
+    public bool? isVerified(CqlContext context, Condition condition)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "verificationStatus");
-        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CodeableConcept a_ = condition?.VerificationStatus;
+        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         bool? c_ = context.Operators.Not((bool?)(b_ is null));
-        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
         CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
         bool? h_ = context.Operators.Equivalent(e_, g_);
-        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode k_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
         CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
         bool? m_ = context.Operators.Equivalent(j_, l_);
         bool? n_ = context.Operators.Or(h_, m_);
-        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
         CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
         bool? s_ = context.Operators.Equivalent(p_, r_);
         bool? t_ = context.Operators.Or(n_, s_);
-        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode w_ = QICoreCommon_4_0_000.Instance.differential(context);
         CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
         bool? y_ = context.Operators.Equivalent(v_, x_);
@@ -621,19 +621,19 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
 
     [CqlExpressionDefinition("Prostate Cancer Diagnosis")]
-    public IEnumerable<object> Prostate_Cancer_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Prostate_Cancer_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Prostate_Cancer_Diagnosis, Prostate_Cancer_Diagnosis_Compute);
 
     private const long _cacheIndex_Prostate_Cancer_Diagnosis = 7940642882909434117L;
 
-    private IEnumerable<object> Prostate_Cancer_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Prostate_Cancer_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Prostate_Cancer(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        bool? f_(object ProstateCancer) {
+        bool? f_(Condition ProstateCancer) {
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ProstateCancer);
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
             bool? j_ = context.Operators.Overlaps(h_, i_, "day");
@@ -642,7 +642,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             return l_;
         }
 
-        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
         return g_;
     }
 
@@ -660,9 +660,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
         IEnumerable<CqlDateTime> c_ = context.Operators.Union<CqlDateTime>(a_, b_);
 
         IEnumerable<CqlDateTime> d_(CqlDateTime ADTDateTime) {
-            IEnumerable<object> h_ = this.Prostate_Cancer_Diagnosis(context);
+            IEnumerable<Condition> h_ = this.Prostate_Cancer_Diagnosis(context);
 
-            bool? i_(object ProstateCancer) {
+            bool? i_(Condition ProstateCancer) {
                 CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ProstateCancer);
                 bool? n_ = context.Operators.In<CqlDateTime>(ADTDateTime, m_, "day");
                 CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
@@ -678,9 +678,9 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return y_;
             }
 
-            IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
-            CqlDateTime k_(object ProstateCancer) => ADTDateTime;
-            IEnumerable<CqlDateTime> l_ = context.Operators.Select<object, CqlDateTime>(j_, k_);
+            IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
+            CqlDateTime k_(Condition ProstateCancer) => ADTDateTime;
+            IEnumerable<CqlDateTime> l_ = context.Operators.Select<Condition, CqlDateTime>(j_, k_);
             return l_;
         }
 

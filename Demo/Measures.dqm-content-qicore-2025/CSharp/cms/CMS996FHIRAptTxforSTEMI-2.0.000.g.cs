@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS996FHIRAptTxforSTEMI", "2.0.000")]
 public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS996FHIRAptTxforSTEMI_2_0_000>
 {
@@ -376,28 +376,28 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             bool? h_ = context.Operators.ConceptsInValueSet(f_, g_);
             IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<object> m_ = context.Operators.Union<object>(j_ as IEnumerable<object>, l_ as IEnumerable<object>);
-            IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
+            IEnumerable<Condition> m_ = context.Operators.Union<Condition>(j_ as IEnumerable<Condition>, l_ as IEnumerable<Condition>);
+            IEnumerable<Condition> n_ = Status_1_15_000.Instance.verified(context, m_);
 
-            bool? o_(object DxSTEMI) {
-                IEnumerable<object> t_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, EDEncounterinMP);
+            bool? o_(Condition DxSTEMI) {
+                IEnumerable<Condition> t_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, EDEncounterinMP);
 
-                bool? u_(object @this) {
-                    object ag_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                    CqlConcept ah_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ag_ as CodeableConcept);
+                bool? u_(Condition @this) {
+                    CodeableConcept ag_ = @this?.Code;
+                    CqlConcept ah_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ag_);
                     bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
                     return ai_;
                 }
 
-                IEnumerable<object> v_ = context.Operators.Where<object>(t_, u_);
+                IEnumerable<Condition> v_ = context.Operators.Where<Condition>(t_, u_);
 
-                CqlConcept w_(object @this) {
-                    object aj_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                    CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aj_ as CodeableConcept);
+                CqlConcept w_(Condition @this) {
+                    CodeableConcept aj_ = @this?.Code;
+                    CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aj_);
                     return ak_;
                 }
 
-                IEnumerable<CqlConcept> x_ = context.Operators.Select<object, CqlConcept>(v_, w_);
+                IEnumerable<CqlConcept> x_ = context.Operators.Select<Condition, CqlConcept>(v_, w_);
                 CqlValueSet y_ = this.STEMI(context);
                 bool? z_ = context.Operators.ConceptsInValueSet(x_, y_);
                 CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DxSTEMI);
@@ -409,8 +409,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return af_;
             }
 
-            IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
-            bool? q_ = context.Operators.Exists<object>(p_);
+            IEnumerable<Condition> p_ = context.Operators.Where<Condition>(n_, o_);
+            bool? q_ = context.Operators.Exists<Condition>(p_);
             bool? r_ = context.Operators.Or(h_, q_);
             return r_;
         }
@@ -578,11 +578,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition> r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> s_ = context.Operators.Union<Condition>(p_, r_);
             IEnumerable<Condition> t_ = context.Operators.Union<Condition>(n_, s_);
-            object u_(Condition X) => X as object;
-            IEnumerable<object> v_ = context.Operators.Select<Condition, object>(t_, u_);
-            IEnumerable<object> w_ = Status_1_15_000.Instance.verified(context, v_);
+            Condition u_(Condition X) => X as Condition;
+            IEnumerable<Condition> v_ = context.Operators.Select<Condition, Condition>(t_, u_);
+            IEnumerable<Condition> w_ = Status_1_15_000.Instance.verified(context, v_);
 
-            bool? x_(object ActiveExclusionDx) {
+            bool? x_(Condition ActiveExclusionDx) {
                 CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveExclusionDx);
                 Period ac_ = EDwithSTEMI?.Period;
                 CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ac_);
@@ -590,9 +590,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return ae_;
             }
 
-            IEnumerable<object> y_ = context.Operators.Where<object>(w_, x_);
-            Encounter z_(object ActiveExclusionDx) => EDwithSTEMI;
-            IEnumerable<Encounter> aa_ = context.Operators.Select<object, Encounter>(y_, z_);
+            IEnumerable<Condition> y_ = context.Operators.Where<Condition>(w_, x_);
+            Encounter z_(Condition ActiveExclusionDx) => EDwithSTEMI;
+            IEnumerable<Encounter> aa_ = context.Operators.Select<Condition, Encounter>(y_, z_);
             return aa_;
         }
 
@@ -702,10 +702,10 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(d_);
             IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<object> j_ = context.Operators.Union<object>(f_ as IEnumerable<object>, i_ as IEnumerable<object>);
-            IEnumerable<object> k_ = Status_1_15_000.Instance.verified(context, j_);
+            IEnumerable<Condition> j_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, i_ as IEnumerable<Condition>);
+            IEnumerable<Condition> k_ = Status_1_15_000.Instance.verified(context, j_);
 
-            bool? l_(object LongTermAnticoagulant) {
+            bool? l_(Condition LongTermAnticoagulant) {
                 CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LongTermAnticoagulant);
                 CqlDateTime q_ = context.Operators.Start(p_);
                 Period r_ = EDwithSTEMI?.Period;
@@ -720,9 +720,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return ab_;
             }
 
-            IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
-            Encounter n_(object LongTermAnticoagulant) => EDwithSTEMI;
-            IEnumerable<Encounter> o_ = context.Operators.Select<object, Encounter>(m_, n_);
+            IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
+            Encounter n_(Condition LongTermAnticoagulant) => EDwithSTEMI;
+            IEnumerable<Encounter> o_ = context.Operators.Select<Condition, Encounter>(m_, n_);
             return o_;
         }
 
@@ -785,11 +785,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition> ac_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> ad_ = context.Operators.Union<Condition>(aa_, ac_);
             IEnumerable<Condition> ae_ = context.Operators.Union<Condition>(x_, ad_);
-            object af_(Condition X) => X as object;
-            IEnumerable<object> ag_ = context.Operators.Select<Condition, object>(ae_, af_);
-            IEnumerable<object> ah_ = Status_1_15_000.Instance.verified(context, ag_);
+            Condition af_(Condition X) => X as Condition;
+            IEnumerable<Condition> ag_ = context.Operators.Select<Condition, Condition>(ae_, af_);
+            IEnumerable<Condition> ah_ = Status_1_15_000.Instance.verified(context, ag_);
 
-            bool? ai_(object ExclusionDiagnosis) {
+            bool? ai_(Condition ExclusionDiagnosis) {
                 CqlInterval<CqlDateTime> am_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ExclusionDiagnosis);
                 CqlDateTime an_ = context.Operators.Start(am_);
                 Period ao_ = EDwithSTEMI?.Period;
@@ -812,9 +812,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return bi_;
             }
 
-            IEnumerable<object> aj_ = context.Operators.Where<object>(ah_, ai_);
-            Encounter ak_(object ExclusionDiagnosis) => EDwithSTEMI;
-            IEnumerable<Encounter> al_ = context.Operators.Select<object, Encounter>(aj_, ak_);
+            IEnumerable<Condition> aj_ = context.Operators.Where<Condition>(ah_, ai_);
+            Encounter ak_(Condition ExclusionDiagnosis) => EDwithSTEMI;
+            IEnumerable<Encounter> al_ = context.Operators.Select<Condition, Encounter>(aj_, ak_);
             return al_;
         }
 
@@ -1209,11 +1209,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             CqlValueSet i_ = this.Active_Peptic_Ulcer(context);
             IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_, j_);
-            object l_(Condition X) => X as object;
-            IEnumerable<object> m_ = context.Operators.Select<Condition, object>(k_, l_);
-            IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
+            Condition l_(Condition X) => X as Condition;
+            IEnumerable<Condition> m_ = context.Operators.Select<Condition, Condition>(k_, l_);
+            IEnumerable<Condition> n_ = Status_1_15_000.Instance.verified(context, m_);
 
-            bool? o_(object ExclusionCondition) {
+            bool? o_(Condition ExclusionCondition) {
                 CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ExclusionCondition);
                 CqlDateTime t_ = context.Operators.Start(s_);
                 Period u_ = EDwSTEMI?.Period;
@@ -1228,9 +1228,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return ad_;
             }
 
-            IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
-            Encounter q_(object ExclusionCondition) => EDwSTEMI;
-            IEnumerable<Encounter> r_ = context.Operators.Select<object, Encounter>(p_, q_);
+            IEnumerable<Condition> p_ = context.Operators.Where<Condition>(n_, o_);
+            Encounter q_(Condition ExclusionCondition) => EDwSTEMI;
+            IEnumerable<Encounter> r_ = context.Operators.Select<Condition, Encounter>(p_, q_);
             return r_;
         }
 
@@ -1698,11 +1698,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             bool? al_ = context.Operators.Or(ae_, ak_);
             CqlValueSet am_ = this.Hospice_Diagnosis(context);
             IEnumerable<Condition> an_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            object ao_(Condition X) => X as object;
-            IEnumerable<object> ap_ = context.Operators.Select<Condition, object>(an_, ao_);
-            IEnumerable<object> aq_ = Status_1_15_000.Instance.verified(context, ap_);
+            Condition ao_(Condition X) => X as Condition;
+            IEnumerable<Condition> ap_ = context.Operators.Select<Condition, Condition>(an_, ao_);
+            IEnumerable<Condition> aq_ = Status_1_15_000.Instance.verified(context, ap_);
 
-            bool? ar_(object HospiceCareDiagnosis) {
+            bool? ar_(Condition HospiceCareDiagnosis) {
                 CqlInterval<CqlDateTime> hg_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
                 CqlDateTime hh_ = context.Operators.End(hg_);
                 Period hi_ = EDwSTEMI?.Period;
@@ -1712,8 +1712,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return hl_;
             }
 
-            IEnumerable<object> as_ = context.Operators.Where<object>(aq_, ar_);
-            bool? at_ = context.Operators.Exists<object>(as_);
+            IEnumerable<Condition> as_ = context.Operators.Where<Condition>(aq_, ar_);
+            bool? at_ = context.Operators.Exists<Condition>(as_);
             bool? au_ = context.Operators.Or(al_, at_);
             return au_;
         }
@@ -1819,10 +1819,10 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(d_);
             IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<object> j_ = context.Operators.Union<object>(f_ as IEnumerable<object>, i_ as IEnumerable<object>);
-            IEnumerable<object> k_ = Status_1_15_000.Instance.verified(context, j_);
+            IEnumerable<Condition> j_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, i_ as IEnumerable<Condition>);
+            IEnumerable<Condition> k_ = Status_1_15_000.Instance.verified(context, j_);
 
-            bool? l_(object TPA) {
+            bool? l_(Condition TPA) {
                 CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, TPA);
                 CqlDateTime q_ = context.Operators.Start(p_);
                 Period r_ = EDwithSTEMI?.Period;
@@ -1831,9 +1831,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return t_;
             }
 
-            IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
-            Encounter n_(object TPA) => EDwithSTEMI;
-            IEnumerable<Encounter> o_ = context.Operators.Select<object, Encounter>(m_, n_);
+            IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
+            Encounter n_(Condition TPA) => EDwithSTEMI;
+            IEnumerable<Encounter> o_ = context.Operators.Select<Condition, Encounter>(m_, n_);
             return o_;
         }
 

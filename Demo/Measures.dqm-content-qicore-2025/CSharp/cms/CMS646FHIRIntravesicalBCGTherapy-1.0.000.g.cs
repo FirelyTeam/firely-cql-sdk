@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS646FHIRIntravesicalBCGTherapy", "1.0.000")]
 public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingleton<CMS646FHIRIntravesicalBCGTherapy_1_0_000>
 {
@@ -191,26 +191,26 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
 
     [CqlFunctionDefinition("isVerified")]
-    public bool? isVerified(CqlContext context, object condition)
+    public bool? isVerified(CqlContext context, Condition condition)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "verificationStatus");
-        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CodeableConcept a_ = condition?.VerificationStatus;
+        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         bool? c_ = context.Operators.Not((bool?)(b_ is null));
-        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
         CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
         bool? h_ = context.Operators.Equivalent(e_, g_);
-        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode k_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
         CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
         bool? m_ = context.Operators.Equivalent(j_, l_);
         bool? n_ = context.Operators.Or(h_, m_);
-        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
         CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
         bool? s_ = context.Operators.Equivalent(p_, r_);
         bool? t_ = context.Operators.Or(n_, s_);
-        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode w_ = QICoreCommon_4_0_000.Instance.differential(context);
         CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
         bool? y_ = context.Operators.Equivalent(v_, x_);
@@ -221,25 +221,25 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
 
     [CqlExpressionDefinition("Bladder Cancer Diagnosis")]
-    public IEnumerable<object> Bladder_Cancer_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Bladder_Cancer_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Bladder_Cancer_Diagnosis, Bladder_Cancer_Diagnosis_Compute);
 
     private const long _cacheIndex_Bladder_Cancer_Diagnosis = 1627099199367917222L;
 
-    private IEnumerable<object> Bladder_Cancer_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Bladder_Cancer_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Bladder_Cancer_for_Urology_Care(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        bool? f_(object BladderCancer) {
+        bool? f_(Condition BladderCancer) {
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BladderCancer);
             CqlDateTime i_ = context.Operators.Start(h_);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             CqlDateTime k_ = context.Operators.End(j_);
             bool? l_ = context.Operators.Before(i_, k_, "day");
-            object m_ = context.Operators.LateBoundProperty<object>(BladderCancer, "onset");
+            DataType m_ = BladderCancer?.Onset;
             object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
             CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
 
@@ -272,7 +272,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             return t_;
         }
 
-        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
         return g_;
     }
 
@@ -290,9 +290,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         IEnumerable<Procedure> c_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
         IEnumerable<Procedure> d_(Procedure BladderCancerStaging) {
-            IEnumerable<object> k_ = this.Bladder_Cancer_Diagnosis(context);
+            IEnumerable<Condition> k_ = this.Bladder_Cancer_Diagnosis(context);
 
-            bool? l_(object BladderCancer) {
+            bool? l_(Condition BladderCancer) {
 
                 object p_() {
 
@@ -365,9 +365,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return u_;
             }
 
-            IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
-            Procedure n_(object BladderCancer) => BladderCancerStaging;
-            IEnumerable<Procedure> o_ = context.Operators.Select<object, Procedure>(m_, n_);
+            IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
+            Procedure n_(Condition BladderCancer) => BladderCancerStaging;
+            IEnumerable<Procedure> o_ = context.Operators.Select<Condition, Procedure>(m_, n_);
             return o_;
         }
 
@@ -712,19 +712,19 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
 
     [CqlExpressionDefinition("Acute Tuberculosis Diagnosis")]
-    public IEnumerable<object> Acute_Tuberculosis_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Acute_Tuberculosis_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Acute_Tuberculosis_Diagnosis, Acute_Tuberculosis_Diagnosis_Compute);
 
     private const long _cacheIndex_Acute_Tuberculosis_Diagnosis = 2327826037250116643L;
 
-    private IEnumerable<object> Acute_Tuberculosis_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Acute_Tuberculosis_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Tuberculosis_for_Urology_Care(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        IEnumerable<object> f_(object ActiveTuberculosis) {
+        IEnumerable<Condition> f_(Condition ActiveTuberculosis) {
             Procedure j_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] k_ = [
                 j_,
@@ -798,7 +798,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                 CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_());
                 bool? s_ = context.Operators.OverlapsAfter(p_, r_, "day");
-                object t_ = context.Operators.LateBoundProperty<object>(ActiveTuberculosis, "onset");
+                DataType t_ = ActiveTuberculosis?.Onset;
                 object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                 CqlInterval<CqlDateTime> v_ = QICoreCommon_4_0_000.Instance.toInterval(context, u_);
 
@@ -867,7 +867,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
                 CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_());
                 bool? y_ = context.Operators.OverlapsAfter(v_, x_, "day");
-                object z_ = context.Operators.LateBoundProperty<object>(ActiveTuberculosis, "abatement");
+                DataType z_ = ActiveTuberculosis?.Abatement;
                 object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
                 CqlInterval<CqlDateTime> ab_ = QICoreCommon_4_0_000.Instance.toInterval(context, aa_);
 
@@ -944,19 +944,19 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             }
 
             IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)k_, l_);
-            object n_(Procedure FirstBladderCancerStaging) => ActiveTuberculosis;
-            IEnumerable<object> o_ = context.Operators.Select<Procedure, object>(m_, n_);
+            Condition n_(Procedure FirstBladderCancerStaging) => ActiveTuberculosis;
+            IEnumerable<Condition> o_ = context.Operators.Select<Procedure, Condition>(m_, n_);
             return o_;
         }
 
-        IEnumerable<object> g_ = context.Operators.SelectMany<object, object>(e_, f_);
+        IEnumerable<Condition> g_ = context.Operators.SelectMany<Condition, Condition>(e_, f_);
 
-        bool? h_(object ActiveTuberculosis) {
+        bool? h_(Condition ActiveTuberculosis) {
             bool? de_ = this.isVerified(context, ActiveTuberculosis);
             return de_;
         }
 
-        IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
+        IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
         return i_;
     }
 
@@ -1537,19 +1537,19 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         CqlValueSet a_ = this.HIV(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
         CqlValueSet f_ = this.Immunocompromised_Conditions(context);
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> j_ = context.Operators.Union<object>(g_ as IEnumerable<object>, i_ as IEnumerable<object>);
-        IEnumerable<object> k_ = context.Operators.Union<object>(e_, j_);
+        IEnumerable<Condition> j_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, i_ as IEnumerable<Condition>);
+        IEnumerable<Condition> k_ = context.Operators.Union<Condition>(e_, j_);
         CqlValueSet l_ = this.Mixed_Histology_Urothelial_Cell_Carcinoma_for_Urology_Care(context);
         IEnumerable<Condition> m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> p_ = context.Operators.Union<object>(m_ as IEnumerable<object>, o_ as IEnumerable<object>);
-        IEnumerable<object> q_ = context.Operators.Union<object>(k_, p_);
+        IEnumerable<Condition> p_ = context.Operators.Union<Condition>(m_ as IEnumerable<Condition>, o_ as IEnumerable<Condition>);
+        IEnumerable<Condition> q_ = context.Operators.Union<Condition>(k_, p_);
 
-        IEnumerable<object> r_(object ExclusionDiagnosis) {
+        IEnumerable<Condition> r_(Condition ExclusionDiagnosis) {
             Procedure w_ = this.First_Bladder_Cancer_Staging_Procedure(context);
             Procedure[] x_ = [
                 w_,
@@ -1625,7 +1625,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 CqlInterval<CqlDateTime> af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_());
                 CqlDateTime ag_ = context.Operators.Start(af_);
                 bool? ah_ = context.Operators.SameOrBefore(ad_, ag_, "day");
-                object ai_ = context.Operators.LateBoundProperty<object>(ExclusionDiagnosis, "onset");
+                DataType ai_ = ExclusionDiagnosis?.Onset;
                 object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
                 CqlInterval<CqlDateTime> ak_ = QICoreCommon_4_0_000.Instance.toInterval(context, aj_);
                 CqlDateTime al_ = context.Operators.Start(ak_);
@@ -1701,20 +1701,20 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             }
 
             IEnumerable<Procedure> z_ = context.Operators.Where<Procedure>((IEnumerable<Procedure>)x_, y_);
-            object aa_(Procedure FirstBladderCancerStaging) => ExclusionDiagnosis;
-            IEnumerable<object> ab_ = context.Operators.Select<Procedure, object>(z_, aa_);
+            Condition aa_(Procedure FirstBladderCancerStaging) => ExclusionDiagnosis;
+            IEnumerable<Condition> ab_ = context.Operators.Select<Procedure, Condition>(z_, aa_);
             return ab_;
         }
 
-        IEnumerable<object> s_ = context.Operators.SelectMany<object, object>(q_, r_);
+        IEnumerable<Condition> s_ = context.Operators.SelectMany<Condition, Condition>(q_, r_);
 
-        bool? t_(object ExclusionDiagnosis) {
+        bool? t_(Condition ExclusionDiagnosis) {
             bool? cn_ = this.isVerified(context, ExclusionDiagnosis);
             return cn_;
         }
 
-        IEnumerable<object> u_ = context.Operators.Where<object>(s_, t_);
-        bool? v_ = context.Operators.Exists<object>(u_);
+        IEnumerable<Condition> u_ = context.Operators.Where<Condition>(s_, t_);
+        bool? v_ = context.Operators.Exists<Condition>(u_);
         return v_;
     }
 
@@ -2382,8 +2382,8 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
 
     private bool? Denominator_Exclusion_Compute(CqlContext context)
     {
-        IEnumerable<object> a_ = this.Acute_Tuberculosis_Diagnosis(context);
-        bool? b_ = context.Operators.Exists<object>(a_);
+        IEnumerable<Condition> a_ = this.Acute_Tuberculosis_Diagnosis(context);
+        bool? b_ = context.Operators.Exists<Condition>(a_);
         IEnumerable<MedicationRequest> c_ = this.Immunosuppressive_Drugs(context);
         bool? d_ = context.Operators.Exists<MedicationRequest>(c_);
         bool? e_ = context.Operators.Or(b_, d_);

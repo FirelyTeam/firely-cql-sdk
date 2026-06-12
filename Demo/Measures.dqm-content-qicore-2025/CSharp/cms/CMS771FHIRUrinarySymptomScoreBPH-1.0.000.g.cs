@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS771FHIRUrinarySymptomScoreBPH", "1.0.000")]
 public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingleton<CMS771FHIRUrinarySymptomScoreBPH_1_0_000>
 {
@@ -172,20 +172,20 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
 
 
     [CqlFunctionDefinition("verificationStatusIsNotInvalid")]
-    public bool? verificationStatusIsNotInvalid(CqlContext context, object condition)
+    public bool? verificationStatusIsNotInvalid(CqlContext context, Condition condition)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "verificationStatus");
-        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
-        CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CodeableConcept a_ = condition?.VerificationStatus;
+        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
+        CqlConcept d_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode e_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
         CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
         bool? g_ = context.Operators.Equivalent(d_, f_);
-        CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode j_ = QICoreCommon_4_0_000.Instance.refuted(context);
         CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
         bool? l_ = context.Operators.Equivalent(i_, k_);
         bool? m_ = context.Operators.Or(g_, l_);
-        CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode p_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
         CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
         bool? r_ = context.Operators.Equivalent(o_, q_);
@@ -197,21 +197,21 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
 
 
     [CqlExpressionDefinition("Initial BPH Diagnosis Starts Within 6 Months Before the Measurement Period")]
-    public object Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(CqlContext context) =>
+    public Condition Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period, Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period_Compute);
 
     private const long _cacheIndex_Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period = 2791684942891539381L;
 
-    private object Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period_Compute(CqlContext context)
+    private Condition Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period_Compute(CqlContext context)
     {
         CqlCode a_ = this.Benign_prostatic_hyperplasia_with_lower_urinary_tract_symptoms(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
 
-        bool? h_(object NewBPHDiagnosis) {
+        bool? h_(Condition NewBPHDiagnosis) {
             CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, NewBPHDiagnosis);
             CqlDateTime n_ = context.Operators.Start(m_);
             CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
@@ -226,18 +226,18 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             return x_;
         }
 
-        IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
+        IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
 
-        object j_(object @this) {
-            object y_ = context.Operators.LateBoundProperty<object>(@this, "onset");
+        object j_(Condition @this) {
+            DataType y_ = @this?.Onset;
             object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
             CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_);
             CqlDateTime ab_ = context.Operators.Start(aa_);
             return ab_;
         }
 
-        IEnumerable<object> k_ = context.Operators.SortBy<object>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
-        object l_ = context.Operators.First<object>(k_);
+        IEnumerable<Condition> k_ = context.Operators.SortBy<Condition>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
+        Condition l_ = context.Operators.First<Condition>(k_);
         return l_;
     }
 
@@ -250,7 +250,7 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
 
     private bool? Has_Qualifying_BPH_Diagnosis_Compute(CqlContext context)
     {
-        object a_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
+        Condition a_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
         bool? b_ = context.Operators.Not((bool?)(a_ is null));
         return b_;
     }
@@ -676,12 +676,12 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> a_ = this.Urinary_Symptom_Score_Assessment(context);
 
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> b_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? USSAssessment) {
-            object g_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
-            object[] h_ = [
+            Condition g_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
+            Condition[] h_ = [
                 g_,
             ];
 
-            bool? i_(object InitialBPHDiagnosis) {
+            bool? i_(Condition InitialBPHDiagnosis) {
                 CqlDateTime m_ = USSAssessment?.effectiveDatetime;
                 CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
                 CqlDateTime o_ = context.Operators.Start(n_);
@@ -696,9 +696,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 return y_;
             }
 
-            IEnumerable<object> j_ = context.Operators.Where<object>((IEnumerable<object>)h_, i_);
-            (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? k_(object InitialBPHDiagnosis) => USSAssessment;
-            IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> l_ = context.Operators.Select<object, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(j_, k_);
+            IEnumerable<Condition> j_ = context.Operators.Where<Condition>((IEnumerable<Condition>)h_, i_);
+            (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? k_(Condition InitialBPHDiagnosis) => USSAssessment;
+            IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> l_ = context.Operators.Select<Condition, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(j_, k_);
             return l_;
         }
 
@@ -726,12 +726,12 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> a_ = this.Urinary_Symptom_Score_Assessment(context);
 
         IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> b_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? USSAssessment) {
-            object g_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
-            object[] h_ = [
+            Condition g_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
+            Condition[] h_ = [
                 g_,
             ];
 
-            bool? i_(object InitialBPHDiagnosis) {
+            bool? i_(Condition InitialBPHDiagnosis) {
                 CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
                 CqlDateTime n_ = context.Operators.Start(m_);
                 CqlDateTime o_ = USSAssessment?.effectiveDatetime;
@@ -741,9 +741,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 return r_;
             }
 
-            IEnumerable<object> j_ = context.Operators.Where<object>((IEnumerable<object>)h_, i_);
-            (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? k_(object InitialBPHDiagnosis) => USSAssessment;
-            IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> l_ = context.Operators.Select<object, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(j_, k_);
+            IEnumerable<Condition> j_ = context.Operators.Where<Condition>((IEnumerable<Condition>)h_, i_);
+            (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? k_(Condition InitialBPHDiagnosis) => USSAssessment;
+            IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> l_ = context.Operators.Select<Condition, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>(j_, k_);
             return l_;
         }
 
@@ -780,25 +780,25 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
 
 
     [CqlExpressionDefinition("Urinary Retention Diagnosis Starts Within 1 Year After Initial BPH Diagnosis")]
-    public IEnumerable<object> Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis, Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis_Compute);
 
     private const long _cacheIndex_Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis = -1921163594377125910L;
 
-    private IEnumerable<object> Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Urinary_Retention(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        IEnumerable<object> f_(object UrinaryRetention) {
-            object j_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
-            object[] k_ = [
+        IEnumerable<Condition> f_(Condition UrinaryRetention) {
+            Condition j_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
+            Condition[] k_ = [
                 j_,
             ];
 
-            bool? l_(object InitialBPHDiagnosis) {
+            bool? l_(Condition InitialBPHDiagnosis) {
                 CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UrinaryRetention);
                 CqlDateTime q_ = context.Operators.Start(p_);
                 CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InitialBPHDiagnosis);
@@ -814,38 +814,38 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
                 return ac_;
             }
 
-            IEnumerable<object> m_ = context.Operators.Where<object>((IEnumerable<object>)k_, l_);
-            object n_(object InitialBPHDiagnosis) => UrinaryRetention;
-            IEnumerable<object> o_ = context.Operators.Select<object, object>(m_, n_);
+            IEnumerable<Condition> m_ = context.Operators.Where<Condition>((IEnumerable<Condition>)k_, l_);
+            Condition n_(Condition InitialBPHDiagnosis) => UrinaryRetention;
+            IEnumerable<Condition> o_ = context.Operators.Select<Condition, Condition>(m_, n_);
             return o_;
         }
 
-        IEnumerable<object> g_ = context.Operators.SelectMany<object, object>(e_, f_);
+        IEnumerable<Condition> g_ = context.Operators.SelectMany<Condition, Condition>(e_, f_);
 
-        bool? h_(object UrinaryRetention) {
+        bool? h_(Condition UrinaryRetention) {
             bool? ad_ = this.verificationStatusIsNotInvalid(context, UrinaryRetention);
             return ad_;
         }
 
-        IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
+        IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
         return i_;
     }
 
 
     [CqlExpressionDefinition("Has Initial BPH Diagnosis Starts During or Within 30 Days After End of Hospitalization")]
-    public object Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization(CqlContext context) =>
+    public Condition Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization, Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization_Compute);
 
     private const long _cacheIndex_Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization = -6925951689891403297L;
 
-    private object Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization_Compute(CqlContext context)
+    private Condition Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization_Compute(CqlContext context)
     {
-        object a_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
-        object[] b_ = [
+        Condition a_ = this.Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(context);
+        Condition[] b_ = [
             a_,
         ];
 
-        IEnumerable<object> c_(object InitialBPHDiagnosis) {
+        IEnumerable<Condition> c_(Condition InitialBPHDiagnosis) {
             CqlValueSet f_ = this.Hospital_Services_for_Urology_Care(context);
             IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
@@ -870,31 +870,31 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             }
 
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-            object j_(Encounter UrologyHospitalServices) => InitialBPHDiagnosis;
-            IEnumerable<object> k_ = context.Operators.Select<Encounter, object>(i_, j_);
+            Condition j_(Encounter UrologyHospitalServices) => InitialBPHDiagnosis;
+            IEnumerable<Condition> k_ = context.Operators.Select<Encounter, Condition>(i_, j_);
             return k_;
         }
 
-        IEnumerable<object> d_ = context.Operators.SelectMany<object, object>((IEnumerable<object>)b_, c_);
-        object e_ = context.Operators.SingletonFrom<object>(d_);
+        IEnumerable<Condition> d_ = context.Operators.SelectMany<Condition, Condition>((IEnumerable<Condition>)b_, c_);
+        Condition e_ = context.Operators.SingletonFrom<Condition>(d_);
         return e_;
     }
 
 
     [CqlExpressionDefinition("Morbid Obesity Diagnosis On or Before Follow Up USS Assessment")]
-    public IEnumerable<object> Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment(CqlContext context) =>
+    public IEnumerable<Condition> Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment, Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment_Compute);
 
     private const long _cacheIndex_Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment = 8671836689749221414L;
 
-    private IEnumerable<object> Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment_Compute(CqlContext context)
+    private IEnumerable<Condition> Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Morbid_Obesity(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        IEnumerable<object> f_(object MorbidObesityDiagnosis) {
+        IEnumerable<Condition> f_(Condition MorbidObesityDiagnosis) {
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? j_ = this.Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(context);
             (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?[] k_ = [
                 j_,
@@ -912,19 +912,19 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
             }
 
             IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> m_ = context.Operators.Where<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)k_, l_);
-            object n_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) => MorbidObesityDiagnosis;
-            IEnumerable<object> o_ = context.Operators.Select<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, object>(m_, n_);
+            Condition n_((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment) => MorbidObesityDiagnosis;
+            IEnumerable<Condition> o_ = context.Operators.Select<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, Condition>(m_, n_);
             return o_;
         }
 
-        IEnumerable<object> g_ = context.Operators.SelectMany<object, object>(e_, f_);
+        IEnumerable<Condition> g_ = context.Operators.SelectMany<Condition, Condition>(e_, f_);
 
-        bool? h_(object MorbidObesityDiagnosis) {
+        bool? h_(Condition MorbidObesityDiagnosis) {
             bool? x_ = this.verificationStatusIsNotInvalid(context, MorbidObesityDiagnosis);
             return x_;
         }
 
-        IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
+        IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
         return i_;
     }
 
@@ -1006,8 +1006,8 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
 
     private bool? Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment_Compute(CqlContext context)
     {
-        IEnumerable<object> a_ = this.Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment(context);
-        bool? b_ = context.Operators.Exists<object>(a_);
+        IEnumerable<Condition> a_ = this.Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment(context);
+        bool? b_ = context.Operators.Exists<Condition>(a_);
         bool? c_ = this.BMI_Exam_Result_Greater_Than_or_Equal_To_40_During_Measurement_Period_and_On_or_Before_Follow_Up_USS_Assessment(context);
         bool? d_ = context.Operators.Or(b_, c_);
         return d_;
@@ -1022,9 +1022,9 @@ public partial class CMS771FHIRUrinarySymptomScoreBPH_1_0_000 : ILibrary, ISingl
 
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
-        IEnumerable<object> a_ = this.Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis(context);
-        bool? b_ = context.Operators.Exists<object>(a_);
-        object c_ = this.Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization(context);
+        IEnumerable<Condition> a_ = this.Urinary_Retention_Diagnosis_Starts_Within_1_Year_After_Initial_BPH_Diagnosis(context);
+        bool? b_ = context.Operators.Exists<Condition>(a_);
+        Condition c_ = this.Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization(context);
         bool? d_ = context.Operators.Not((bool?)(c_ is null));
         bool? e_ = context.Operators.Or(b_, d_);
         bool? f_ = this.Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment(context);
