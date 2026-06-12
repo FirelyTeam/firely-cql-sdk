@@ -166,6 +166,23 @@ namespace CoreTests
             call.Method.GetGenericArguments().Single().Should().Be(typeof((CqlTupleMetadata, bool?, bool?, CqlInterval<CqlDate>, CqlDate, CqlDate)?));
         }
 
+        [TestMethod]
+        public void CoalesceOnNonNullableValueTypeList_Throws()
+        {
+            var binder = new CqlOperatorsBinder(
+                NullLogger<CqlOperatorsBinder>.Instance,
+                new TestTypeResolver(),
+                Hl7.Cql.Conversion.TypeConverter.Create());
+
+            var operand = System.Linq.Expressions.Expression.Constant(
+                new[] { 1, 2, 3 },
+                typeof(IEnumerable<int>));
+
+            var act = () => binder.BindToMethod(nameof(ICqlOperators.Coalesce), [operand], []);
+
+            act.Should().Throw<ArgumentException>().WithMessage("*reference type or Nullable<U>*");
+        }
+
     }
 
     internal class TestTypeResolver : BaseTypeResolver

@@ -109,6 +109,11 @@ partial class CqlOperatorsBinder
                 "Operands to this method must be list-like with a single element type, e.g. IEnumerable<T>",
                 nameof(operand));
 
+        if (elementType.IsValueType && Nullable.GetUnderlyingType(elementType) is null)
+            throw new ArgumentException(
+                $"Coalesce<T> requires T to be a reference type or Nullable<U>, but found non-nullable value type '{elementType}'.",
+                nameof(operand));
+
         // Always use Coalesce<T>, which is unconstrained and handles reference types,
         // nullable value types (T = Nullable<U> returns null when no match), and tuples alike.
         return BindToBestMethodOverload(nameof(ICqlOperators.Coalesce), [operand], [elementType])!;
