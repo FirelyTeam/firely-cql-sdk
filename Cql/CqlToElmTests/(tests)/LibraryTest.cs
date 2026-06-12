@@ -797,5 +797,27 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         #endregion
+
+        #region Code Generation
+
+        [TestMethod]
+        public void CSharpGeneration_LibraryWithoutVersion()
+        {
+            var cqlToolkit = CreateCqlToolkit();
+            var lib = cqlToolkit.MakeLibrary("""
+                library NoVersionLib
+
+                define Greeting: 'Hello'
+                """);
+
+            var act = () =>
+            {
+                using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+                _ = librarySetInvoker;
+            };
+            act.Should().NotThrow();
+        }
+
+        #endregion
     }
 }

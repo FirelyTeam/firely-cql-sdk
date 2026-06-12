@@ -1,1 +1,2 @@
 #nullable enable
+Hl7.Cql.Abstractions.CqlLibraryAttribute.CqlLibraryAttribute(string! Identifier) -> void

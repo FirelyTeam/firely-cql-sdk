@@ -47,7 +47,7 @@ public readonly partial record struct CqlVersionedLibraryIdentifier(
     public static CqlVersionedLibraryIdentifier ParseFromIdentifierAndVersion(string identifier, string? version = null)
     {
         CqlLibraryIdentifier cqlLibraryIdentifier = (CqlLibraryIdentifier)identifier;
-        CqlLibraryVersion? cqlLibraryVersion = version is null ? null : (CqlLibraryVersion?)version;
+        CqlLibraryVersion? cqlLibraryVersion = string.IsNullOrEmpty(version) ? null : (CqlLibraryVersion?)version;
         return FromIdentifierAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
     }
 
