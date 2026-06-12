@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
 [CqlLibrary("CMS816FHIRHHHypo", "1.0.000")]
 public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRHHHypo_1_0_000>
 {

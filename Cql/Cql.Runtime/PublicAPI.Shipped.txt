@@ -102,7 +102,7 @@ Hl7.Cql.Operators.ICqlOperators.Ceiling(decimal? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Ceiling(int? argument) -> int?
 Hl7.Cql.Operators.ICqlOperators.Ceiling(long? argument) -> long?
 Hl7.Cql.Operators.ICqlOperators.Children(object! o) -> System.Collections.Generic.IEnumerable<object!>!
-Hl7.Cql.Operators.ICqlOperators.Coalesce<T>(System.Collections.Generic.IEnumerable<T!>? source) -> T?
+Hl7.Cql.Operators.ICqlOperators.Coalesce<T>(System.Collections.Generic.IEnumerable<T>? source) -> T?
 Hl7.Cql.Operators.ICqlOperators.CoalesceValueTypes<T>(System.Collections.Generic.IEnumerable<T?>? source) -> T?
 Hl7.Cql.Operators.ICqlOperators.CodeInList(Hl7.Cql.Primitives.CqlCode? element, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? argument) -> bool?
 Hl7.Cql.Operators.ICqlOperators.CodeInValueSet(Hl7.Cql.Primitives.CqlCode? code, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
