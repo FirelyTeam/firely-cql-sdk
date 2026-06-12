@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
@@ -209,9 +209,17 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
             bool? j_(Condition C) {
                 DataType o_ = C?.Onset;
-                DataType p_ = SD?.Occurrence;
-                bool? q_ = context.Operators.Before(o_ as FhirDateTime, p_ as FhirDateTime, (string)default);
-                return q_;
+                CqlDateTime p_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, o_ as FhirDateTime);
+                DataType q_ = SD?.Occurrence;
+                CqlDateTime r_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, q_ as FhirDateTime);
+                CqlQuantity s_ = context.Operators.Quantity(7m, "days");
+                CqlDateTime t_ = context.Operators.Subtract(r_, s_);
+                CqlDateTime v_ = FHIRHelpers_4_0_1.Instance.ToDateTime(context, q_ as FhirDateTime);
+                CqlInterval<CqlDateTime> w_ = context.Operators.Interval(t_, v_, true, false);
+                bool? x_ = context.Operators.In<CqlDateTime>(p_, w_, (string)default);
+                bool? z_ = context.Operators.Not((bool?)((q_ as FhirDateTime) is null));
+                bool? aa_ = context.Operators.And(x_, z_);
+                return aa_;
             }
 
             IEnumerable<Condition> k_ = context.Operators.Where<Condition>((IEnumerable<Condition>)i_, j_);
