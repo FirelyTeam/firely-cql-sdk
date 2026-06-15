@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS72FHIRSTKAntithromboticDay2", "1.0.000")]
 public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISingleton<CMS72FHIRSTKAntithromboticDay2_1_0_000>
 {
@@ -250,12 +250,12 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
 
 
     [CqlExpressionDefinition("Thrombolytic Therapy Medication Or Procedures")]
-    public IEnumerable<object> Thrombolytic_Therapy_Medication_Or_Procedures(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string id, object effective)?> Thrombolytic_Therapy_Medication_Or_Procedures(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Thrombolytic_Therapy_Medication_Or_Procedures, Thrombolytic_Therapy_Medication_Or_Procedures_Compute);
 
     private const long _cacheIndex_Thrombolytic_Therapy_Medication_Or_Procedures = 4283455175184797914L;
 
-    private IEnumerable<object> Thrombolytic_Therapy_Medication_Or_Procedures_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string id, object effective)?> Thrombolytic_Therapy_Medication_Or_Procedures_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Thrombolytic_tPA_Therapy(context);
         IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
@@ -336,7 +336,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
 
         IEnumerable<(CqlTupleMetadata, string id, object effective)?> q_ = context.Operators.Select<Procedure, (CqlTupleMetadata, string id, object effective)?>(o_, p_);
         IEnumerable<(CqlTupleMetadata, string id, object effective)?> r_ = context.Operators.Distinct<(CqlTupleMetadata, string id, object effective)?>(q_);
-        IEnumerable<object> s_ = context.Operators.Union<object>(k_ as IEnumerable<object>, r_ as IEnumerable<object>);
+        IEnumerable<(CqlTupleMetadata, string id, object effective)?> s_ = context.Operators.Union<(CqlTupleMetadata, string id, object effective)?>(k_ as IEnumerable<(CqlTupleMetadata, string id, object effective)?>, r_ as IEnumerable<(CqlTupleMetadata, string id, object effective)?>);
         return s_;
     }
 
@@ -352,81 +352,81 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> a_ = TJCOverall_8_25_000.Instance.Ischemic_Stroke_Encounter(context);
 
         IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter) {
-            IEnumerable<object> d_ = this.Thrombolytic_Therapy_Medication_Or_Procedures(context);
+            IEnumerable<(CqlTupleMetadata, string id, object effective)?> d_ = this.Thrombolytic_Therapy_Medication_Or_Procedures(context);
 
-            bool? e_(object ThrombolyticTherapy) {
+            bool? e_((CqlTupleMetadata, string id, object effective)? ThrombolyticTherapy) {
 
                 object i_() {
 
                     bool t_() {
-                        object z_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object z_ = ThrombolyticTherapy?.effective;
                         bool aa_ = z_ is CqlDateTime;
                         return aa_;
                     }
 
 
                     bool u_() {
-                        object ab_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object ab_ = ThrombolyticTherapy?.effective;
                         bool ac_ = ab_ is CqlInterval<CqlDateTime>;
                         return ac_;
                     }
 
 
                     bool v_() {
-                        object ad_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object ad_ = ThrombolyticTherapy?.effective;
                         bool ae_ = ad_ is CqlQuantity;
                         return ae_;
                     }
 
 
                     bool w_() {
-                        object af_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object af_ = ThrombolyticTherapy?.effective;
                         bool ag_ = af_ is CqlInterval<CqlQuantity>;
                         return ag_;
                     }
 
 
                     bool x_() {
-                        object ah_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object ah_ = ThrombolyticTherapy?.effective;
                         bool ai_ = ah_ is CqlDateTime;
                         return ai_;
                     }
 
 
                     bool y_() {
-                        object aj_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object aj_ = ThrombolyticTherapy?.effective;
                         bool ak_ = aj_ is CqlInterval<CqlDateTime>;
                         return ak_;
                     }
 
                     if (t_())
                     {
-                        object al_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object al_ = ThrombolyticTherapy?.effective;
                         return (al_ as CqlDateTime) as object;
                     }
                     else if (u_())
                     {
-                        object am_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object am_ = ThrombolyticTherapy?.effective;
                         return (am_ as CqlInterval<CqlDateTime>) as object;
                     }
                     else if (v_())
                     {
-                        object an_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object an_ = ThrombolyticTherapy?.effective;
                         return (an_ as CqlQuantity) as object;
                     }
                     else if (w_())
                     {
-                        object ao_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object ao_ = ThrombolyticTherapy?.effective;
                         return (ao_ as CqlInterval<CqlQuantity>) as object;
                     }
                     else if (x_())
                     {
-                        object ap_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object ap_ = ThrombolyticTherapy?.effective;
                         return (ap_ as CqlDateTime) as object;
                     }
                     else if (y_())
                     {
-                        object aq_ = context.Operators.LateBoundProperty<object>(ThrombolyticTherapy, "effective");
+                        object aq_ = ThrombolyticTherapy?.effective;
                         return (aq_ as CqlInterval<CqlDateTime>) as object;
                     }
                     else
@@ -447,9 +447,9 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return s_;
             }
 
-            IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            Encounter g_(object ThrombolyticTherapy) => IschemicStrokeEncounter;
-            IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
+            IEnumerable<(CqlTupleMetadata, string id, object effective)?> f_ = context.Operators.Where<(CqlTupleMetadata, string id, object effective)?>(d_, e_);
+            Encounter g_((CqlTupleMetadata, string id, object effective)? ThrombolyticTherapy) => IschemicStrokeEncounter;
+            IEnumerable<Encounter> h_ = context.Operators.Select<(CqlTupleMetadata, string id, object effective)?, Encounter>(f_, g_);
             return h_;
         }
 
@@ -469,18 +469,18 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> a_ = TJCOverall_8_25_000.Instance.Ischemic_Stroke_Encounter(context);
 
         bool? b_(Encounter IschemicStrokeEncounter) {
-            IEnumerable<object> d_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, IschemicStrokeEncounter);
+            IEnumerable<Condition> d_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, IschemicStrokeEncounter);
 
-            bool? e_(object EncounterDiagnosis) {
-                object h_ = context.Operators.LateBoundProperty<object>(EncounterDiagnosis, "code");
-                CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_ as CodeableConcept);
+            bool? e_(Condition EncounterDiagnosis) {
+                CodeableConcept h_ = EncounterDiagnosis?.Code;
+                CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
                 CqlValueSet j_ = this.Intravenous_or_Intraarterial_Thrombolytic_tPA_Therapy_Prior_to_Arrival(context);
                 bool? k_ = context.Operators.ConceptInValueSet(i_, j_);
                 return k_;
             }
 
-            IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            bool? g_ = context.Operators.Exists<object>(f_);
+            IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
+            bool? g_ = context.Operators.Exists<Condition>(f_);
             return g_;
         }
 
@@ -535,18 +535,18 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
         bool? e_(Encounter IschemicStrokeEncounter) {
-            IEnumerable<object> ai_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, IschemicStrokeEncounter);
+            IEnumerable<Condition> ai_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, IschemicStrokeEncounter);
 
-            bool? aj_(object EncounterDiagnosis) {
-                object am_ = context.Operators.LateBoundProperty<object>(EncounterDiagnosis, "code");
-                CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, am_ as CodeableConcept);
+            bool? aj_(Condition EncounterDiagnosis) {
+                CodeableConcept am_ = EncounterDiagnosis?.Code;
+                CqlConcept an_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, am_);
                 CqlValueSet ao_ = this.Intravenous_or_Intraarterial_Thrombolytic_tPA_Therapy_Prior_to_Arrival(context);
                 bool? ap_ = context.Operators.ConceptInValueSet(an_, ao_);
                 return ap_;
             }
 
-            IEnumerable<object> ak_ = context.Operators.Where<object>(ai_, aj_);
-            bool? al_ = context.Operators.Exists<object>(ak_);
+            IEnumerable<Condition> ak_ = context.Operators.Where<Condition>(ai_, aj_);
+            bool? al_ = context.Operators.Exists<Condition>(ak_);
             return al_;
         }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS1244FHIRECATHOQR", "1.0.000")]
 public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244FHIRECATHOQR_1_0_000>
 {
@@ -810,10 +810,10 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     [CqlFunctionDefinition("admitDecisionUsingAssessment")]
     public CqlDateTime admitDecisionUsingAssessment(CqlContext context, Encounter EncounterInpatient)
     {
-        IEnumerable<object> a_ = this.Assessment_In_ED(context);
+        IEnumerable<Observation> a_ = this.Assessment_In_ED(context);
 
-        bool? b_(object EDEvaluation) {
-            object i_ = context.Operators.LateBoundProperty<object>(EDEvaluation, "effective");
+        bool? b_(Observation EDEvaluation) {
+            DataType i_ = EDEvaluation?.Effective;
             object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
             CqlDateTime l_ = context.Operators.Start(k_);
@@ -821,29 +821,30 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             Period n_ = m_?.Period;
             CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
             bool? p_ = context.Operators.In<CqlDateTime>(l_, o_, (string)default);
-            object q_ = context.Operators.LateBoundProperty<object>(EDEvaluation, "status");
-            string r_ = context.Operators.LateBoundProperty<string>(q_, "value");
-            string[] s_ = [
+            Code<ObservationStatus> q_ = EDEvaluation?.StatusElement;
+            ObservationStatus? r_ = q_?.Value;
+            string s_ = context.Operators.Convert<string>(r_);
+            string[] t_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
-            bool? u_ = context.Operators.And(p_, t_);
-            return u_;
+            bool? u_ = context.Operators.In<string>(s_, (IEnumerable<string>)t_);
+            bool? v_ = context.Operators.And(p_, u_);
+            return v_;
         }
 
-        IEnumerable<object> c_ = context.Operators.Where<object>(a_, b_);
+        IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
 
-        CqlDateTime d_(object EDEvaluation) {
-            object v_ = context.Operators.LateBoundProperty<object>(EDEvaluation, "effective");
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            return y_;
+        CqlDateTime d_(Observation EDEvaluation) {
+            DataType w_ = EDEvaluation?.Effective;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.toInterval(context, x_);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            return z_;
         }
 
-        IEnumerable<CqlDateTime> e_ = context.Operators.Select<object, CqlDateTime>(c_, d_);
+        IEnumerable<CqlDateTime> e_ = context.Operators.Select<Observation, CqlDateTime>(c_, d_);
         IEnumerable<CqlDateTime> f_ = context.Operators.Distinct<CqlDateTime>(e_);
         IEnumerable<CqlDateTime> g_ = context.Operators.ListSort<CqlDateTime>(f_, System.ComponentModel.ListSortDirection.Ascending);
         CqlDateTime h_ = context.Operators.Last<CqlDateTime>(g_);
@@ -852,12 +853,12 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
 
 
     [CqlExpressionDefinition("Assessment In ED")]
-    public IEnumerable<object> Assessment_In_ED(CqlContext context) =>
+    public IEnumerable<Observation> Assessment_In_ED(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Assessment_In_ED, Assessment_In_ED_Compute);
 
     private const long _cacheIndex_Assessment_In_ED = -2770964050305353667L;
 
-    private IEnumerable<object> Assessment_In_ED_Compute(CqlContext context)
+    private IEnumerable<Observation> Assessment_In_ED_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Emergency_Department_Evaluation(context);
         IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
@@ -872,7 +873,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
         }
 
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
-        IEnumerable<object> g_ = context.Operators.Union<object>(b_ as IEnumerable<object>, f_ as IEnumerable<object>);
+        IEnumerable<Observation> g_ = context.Operators.Union<Observation>(b_ as IEnumerable<Observation>, f_ as IEnumerable<Observation>);
         return g_;
     }
 

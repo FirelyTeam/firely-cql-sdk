@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS142FHIRCommWithDrManagingDiab", "1.0.000")]
 public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingleton<CMS142FHIRCommWithDrManagingDiab_1_0_000>
 {
@@ -232,26 +232,26 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
 
 
     [CqlFunctionDefinition("isVerified")]
-    public bool? isVerified(CqlContext context, object condition)
+    public bool? isVerified(CqlContext context, Condition condition)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "verificationStatus");
-        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CodeableConcept a_ = condition?.VerificationStatus;
+        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         bool? c_ = context.Operators.Not((bool?)(b_ is null));
-        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
         CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
         bool? h_ = context.Operators.Equivalent(e_, g_);
-        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode k_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
         CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
         bool? m_ = context.Operators.Equivalent(j_, l_);
         bool? n_ = context.Operators.Or(h_, m_);
-        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
         CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
         bool? s_ = context.Operators.Equivalent(p_, r_);
         bool? t_ = context.Operators.Or(n_, s_);
-        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode w_ = QICoreCommon_4_0_000.Instance.differential(context);
         CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
         bool? y_ = context.Operators.Equivalent(v_, x_);
@@ -275,9 +275,9 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             CqlValueSet d_ = this.Diabetic_Retinopathy(context);
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<object> h_ = context.Operators.Union<object>(e_ as IEnumerable<object>, g_ as IEnumerable<object>);
+            IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
 
-            bool? i_(object DiabeticRetinopathy) {
+            bool? i_(Condition DiabeticRetinopathy) {
                 CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabeticRetinopathy);
                 Period n_ = ValidQualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
@@ -287,9 +287,9 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                 return r_;
             }
 
-            IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
-            Encounter k_(object DiabeticRetinopathy) => ValidQualifyingEncounter;
-            IEnumerable<Encounter> l_ = context.Operators.Select<object, Encounter>(j_, k_);
+            IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
+            Encounter k_(Condition DiabeticRetinopathy) => ValidQualifyingEncounter;
+            IEnumerable<Encounter> l_ = context.Operators.Select<Condition, Encounter>(j_, k_);
             return l_;
         }
 

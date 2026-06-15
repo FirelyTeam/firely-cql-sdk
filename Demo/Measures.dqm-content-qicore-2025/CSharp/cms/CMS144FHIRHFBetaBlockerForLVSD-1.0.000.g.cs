@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS144FHIRHFBetaBlockerForLVSD", "1.0.000")]
 public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISingleton<CMS144FHIRHFBetaBlockerForLVSD_1_0_000>
 {
@@ -441,17 +441,17 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         CqlValueSet a_ = this.Arrhythmia(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        bool? f_(object ArrhythmiaAlias) {
+        bool? f_(Condition ArrhythmiaAlias) {
             bool? i_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, ArrhythmiaAlias);
             bool? j_ = AHAOverall_4_1_000.Instance.isVerified(context, ArrhythmiaAlias);
             bool? k_ = context.Operators.And(i_, j_);
             return k_;
         }
 
-        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         return h_;
     }
 
@@ -467,17 +467,17 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         CqlValueSet a_ = this.Hypotension(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        bool? f_(object HypotensionAlias) {
+        bool? f_(Condition HypotensionAlias) {
             bool? i_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, HypotensionAlias);
             bool? j_ = AHAOverall_4_1_000.Instance.isVerified(context, HypotensionAlias);
             bool? k_ = context.Operators.And(i_, j_);
             return k_;
         }
 
-        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         return h_;
     }
 
@@ -493,17 +493,17 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         CqlValueSet a_ = this.Asthma(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        bool? f_(object AsthmaAlias) {
+        bool? f_(Condition AsthmaAlias) {
             bool? i_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, AsthmaAlias);
             bool? j_ = AHAOverall_4_1_000.Instance.isVerified(context, AsthmaAlias);
             bool? k_ = context.Operators.And(i_, j_);
             return k_;
         }
 
-        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         return h_;
     }
 
@@ -519,22 +519,22 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         CqlValueSet a_ = this.Allergy_to_Beta_Blocker_Therapy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
         CqlValueSet f_ = this.Intolerance_to_Beta_Blocker_Therapy(context);
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> h_ = context.Operators.Union<object>(e_ as IEnumerable<object>, g_ as IEnumerable<object>);
+        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
         IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> k_ = context.Operators.Union<object>(h_ as IEnumerable<object>, j_ as IEnumerable<object>);
+        IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, j_ as IEnumerable<Condition>);
 
-        bool? l_(object BetaBlockerAllergyOrIntoleranceDiagnosis) {
+        bool? l_(Condition BetaBlockerAllergyOrIntoleranceDiagnosis) {
             bool? o_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, BetaBlockerAllergyOrIntoleranceDiagnosis);
             bool? p_ = AHAOverall_4_1_000.Instance.isVerified(context, BetaBlockerAllergyOrIntoleranceDiagnosis);
             bool? q_ = context.Operators.And(o_, p_);
             return q_;
         }
 
-        IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
-        bool? n_ = context.Operators.Exists<object>(m_);
+        IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
+        bool? n_ = context.Operators.Exists<Condition>(m_);
         return n_;
     }
 
@@ -550,17 +550,17 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         CqlValueSet a_ = this.Bradycardia(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        bool? f_(object BradycardiaAlias) {
+        bool? f_(Condition BradycardiaAlias) {
             bool? i_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, BradycardiaAlias);
             bool? j_ = AHAOverall_4_1_000.Instance.isVerified(context, BradycardiaAlias);
             bool? k_ = context.Operators.And(i_, j_);
             return k_;
         }
 
-        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         return h_;
     }
 
@@ -604,17 +604,17 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         CqlValueSet a_ = this.Atrioventricular_Block(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        bool? f_(object AtrioventricularBlockAlias) {
+        bool? f_(Condition AtrioventricularBlockAlias) {
             bool? i_ = AHAOverall_4_1_000.Instance.overlapsHeartFailureOutpatientEncounter(context, AtrioventricularBlockAlias);
             bool? j_ = AHAOverall_4_1_000.Instance.isVerified(context, AtrioventricularBlockAlias);
             bool? k_ = context.Operators.And(i_, j_);
             return k_;
         }
 
-        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         return h_;
     }
 
@@ -630,17 +630,17 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         CqlValueSet a_ = this.Cardiac_Pacer_in_Situ(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        bool? f_(object CardiacPacerDiagnosis) {
+        bool? f_(Condition CardiacPacerDiagnosis) {
             bool? i_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, CardiacPacerDiagnosis);
             bool? j_ = AHAOverall_4_1_000.Instance.isVerified(context, CardiacPacerDiagnosis);
             bool? k_ = context.Operators.And(i_, j_);
             return k_;
         }
 
-        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         return h_;
     }
 

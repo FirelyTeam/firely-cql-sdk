@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS177FHIRChildMDDSuicideAssmt", "1.0.000")]
 public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISingleton<CMS177FHIRChildMDDSuicideAssmt_1_0_000>
 {
@@ -223,8 +223,8 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             }
 
             IEnumerable<Condition> ap_ = context.Operators.Where<Condition>(an_, ao_);
-            IEnumerable<object> aq_ = context.Operators.Union<object>(al_ as IEnumerable<object>, ap_ as IEnumerable<object>);
-            bool? ar_ = context.Operators.Exists<object>(aq_);
+            IEnumerable<Condition> aq_ = context.Operators.Union<Condition>(al_ as IEnumerable<Condition>, ap_ as IEnumerable<Condition>);
+            bool? ar_ = context.Operators.Exists<Condition>(aq_);
             bool? as_ = context.Operators.And(ah_, ar_);
             return as_;
         }
@@ -478,30 +478,31 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
             IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(d_);
             IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<object> j_ = context.Operators.Union<object>(f_ as IEnumerable<object>, i_ as IEnumerable<object>);
+            IEnumerable<Observation> j_ = context.Operators.Union<Observation>(f_ as IEnumerable<Observation>, i_ as IEnumerable<Observation>);
 
-            bool? k_(object ObservationSuicideRiskAssmt) {
+            bool? k_(Observation ObservationSuicideRiskAssmt) {
                 Period o_ = MDDEncounter?.Period;
                 CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-                object q_ = context.Operators.LateBoundProperty<object>(ObservationSuicideRiskAssmt, "effective");
+                DataType q_ = ObservationSuicideRiskAssmt?.Effective;
                 object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
                 bool? t_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(p_, s_, (string)default);
-                object u_ = context.Operators.LateBoundProperty<object>(ObservationSuicideRiskAssmt, "status");
-                string v_ = context.Operators.LateBoundProperty<string>(u_, "value");
-                string[] w_ = [
+                Code<ObservationStatus> u_ = ObservationSuicideRiskAssmt?.StatusElement;
+                ObservationStatus? v_ = u_?.Value;
+                string w_ = context.Operators.Convert<string>(v_);
+                string[] x_ = [
                     "final",
                     "corrected",
                     "amended",
                 ];
-                bool? x_ = context.Operators.In<string>(v_, (IEnumerable<string>)w_);
-                bool? y_ = context.Operators.And(t_, x_);
-                return y_;
+                bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
+                bool? z_ = context.Operators.And(t_, y_);
+                return z_;
             }
 
-            IEnumerable<object> l_ = context.Operators.Where<object>(j_, k_);
-            Encounter m_(object ObservationSuicideRiskAssmt) => MDDEncounter;
-            IEnumerable<Encounter> n_ = context.Operators.Select<object, Encounter>(l_, m_);
+            IEnumerable<Observation> l_ = context.Operators.Where<Observation>(j_, k_);
+            Encounter m_(Observation ObservationSuicideRiskAssmt) => MDDEncounter;
+            IEnumerable<Encounter> n_ = context.Operators.Select<Observation, Encounter>(l_, m_);
             return n_;
         }
 

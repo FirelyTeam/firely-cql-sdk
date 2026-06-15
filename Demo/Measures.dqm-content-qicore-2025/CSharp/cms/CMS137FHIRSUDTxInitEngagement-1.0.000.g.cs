@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS137FHIRSUDTxInitEngagement", "1.0.000")]
 public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleton<CMS137FHIRSUDTxInitEngagement_1_0_000>
 {
@@ -165,11 +165,11 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         IEnumerable<Encounter> b_(Encounter ValidEncounters) {
             CqlValueSet k_ = this.Substance_Use_Disorder(context);
             IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            object m_(Condition X) => X as object;
-            IEnumerable<object> n_ = context.Operators.Select<Condition, object>(l_, m_);
-            IEnumerable<object> o_ = Status_1_15_000.Instance.verified(context, n_);
+            Condition m_(Condition X) => X as Condition;
+            IEnumerable<Condition> n_ = context.Operators.Select<Condition, Condition>(l_, m_);
+            IEnumerable<Condition> o_ = Status_1_15_000.Instance.verified(context, n_);
 
-            bool? p_(object SUDDiagnosis) {
+            bool? p_(Condition SUDDiagnosis) {
                 CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
                 Period u_ = ValidEncounters?.Period;
                 CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
@@ -188,9 +188,9 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
                 return ak_;
             }
 
-            IEnumerable<object> q_ = context.Operators.Where<object>(o_, p_);
-            Encounter r_(object SUDDiagnosis) => ValidEncounters;
-            IEnumerable<Encounter> s_ = context.Operators.Select<object, Encounter>(q_, r_);
+            IEnumerable<Condition> q_ = context.Operators.Where<Condition>(o_, p_);
+            Encounter r_(Condition SUDDiagnosis) => ValidEncounters;
+            IEnumerable<Encounter> s_ = context.Operators.Select<Condition, Encounter>(q_, r_);
             return s_;
         }
 
@@ -394,24 +394,24 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         IEnumerable<Encounter> q_ = context.Operators.Except<Encounter>(o_, p_);
 
         bool? r_(Encounter QualifyingEncounter) {
-            IEnumerable<object> ea_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, QualifyingEncounter);
+            IEnumerable<Condition> ea_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, QualifyingEncounter);
 
-            bool? eb_(object @this) {
-                object eh_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept ei_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, eh_ as CodeableConcept);
+            bool? eb_(Condition @this) {
+                CodeableConcept eh_ = @this?.Code;
+                CqlConcept ei_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, eh_);
                 bool? ej_ = context.Operators.Not((bool?)(ei_ is null));
                 return ej_;
             }
 
-            IEnumerable<object> ec_ = context.Operators.Where<object>(ea_, eb_);
+            IEnumerable<Condition> ec_ = context.Operators.Where<Condition>(ea_, eb_);
 
-            CqlConcept ed_(object @this) {
-                object ek_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept el_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ek_ as CodeableConcept);
+            CqlConcept ed_(Condition @this) {
+                CodeableConcept ek_ = @this?.Code;
+                CqlConcept el_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ek_);
                 return el_;
             }
 
-            IEnumerable<CqlConcept> ee_ = context.Operators.Select<object, CqlConcept>(ec_, ed_);
+            IEnumerable<CqlConcept> ee_ = context.Operators.Select<Condition, CqlConcept>(ec_, ed_);
             CqlValueSet ef_ = this.Substance_Use_Disorder(context);
             bool? eg_ = context.Operators.ConceptsInValueSet(ee_, ef_);
             return eg_;
@@ -694,24 +694,24 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         IEnumerable<Encounter> l_ = Status_1_15_000.Instance.isEncounterPerformed(context, k_);
 
         bool? m_(Encounter TelehealthEncounter) {
-            IEnumerable<object> p_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, TelehealthEncounter);
+            IEnumerable<Condition> p_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, TelehealthEncounter);
 
-            bool? q_(object @this) {
-                object w_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_ as CodeableConcept);
+            bool? q_(Condition @this) {
+                CodeableConcept w_ = @this?.Code;
+                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
                 bool? y_ = context.Operators.Not((bool?)(x_ is null));
                 return y_;
             }
 
-            IEnumerable<object> r_ = context.Operators.Where<object>(p_, q_);
+            IEnumerable<Condition> r_ = context.Operators.Where<Condition>(p_, q_);
 
-            CqlConcept s_(object @this) {
-                object z_ = context.Operators.LateBoundProperty<object>(@this, "code");
-                CqlConcept aa_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, z_ as CodeableConcept);
+            CqlConcept s_(Condition @this) {
+                CodeableConcept z_ = @this?.Code;
+                CqlConcept aa_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, z_);
                 return aa_;
             }
 
-            IEnumerable<CqlConcept> t_ = context.Operators.Select<object, CqlConcept>(r_, s_);
+            IEnumerable<CqlConcept> t_ = context.Operators.Select<Condition, CqlConcept>(r_, s_);
             CqlValueSet u_ = this.Substance_Use_Disorder(context);
             bool? v_ = context.Operators.ConceptsInValueSet(t_, u_);
             return v_;

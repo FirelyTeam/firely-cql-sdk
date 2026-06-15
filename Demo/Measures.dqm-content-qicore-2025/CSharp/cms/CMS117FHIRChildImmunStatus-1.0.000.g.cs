@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS117FHIRChildImmunStatus", "1.0.000")]
 public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<CMS117FHIRChildImmunStatus_1_0_000>
 {
@@ -474,10 +474,10 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
         CqlValueSet a_ = this.Severe_Combined_Immunodeficiency(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
-        bool? g_(object SevereImmuneDisorder) {
+        bool? g_(Condition SevereImmuneDisorder) {
             CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, SevereImmuneDisorder);
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlDate l_ = context.Operators.DateFrom(k_);
@@ -486,8 +486,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return n_;
         }
 
-        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
-        bool? i_ = context.Operators.Exists<object>(h_);
+        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
+        bool? i_ = context.Operators.Exists<Condition>(h_);
         return i_;
     }
 
@@ -503,10 +503,10 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
         CqlValueSet a_ = this.Disorders_of_the_Immune_System(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
-        bool? g_(object ImmuneDisorder) {
+        bool? g_(Condition ImmuneDisorder) {
             CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ImmuneDisorder);
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlDate l_ = context.Operators.DateFrom(k_);
@@ -515,8 +515,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return n_;
         }
 
-        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
-        bool? i_ = context.Operators.Exists<object>(h_);
+        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
+        bool? i_ = context.Operators.Exists<Condition>(h_);
         return i_;
     }
 
@@ -532,10 +532,10 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
         CqlValueSet a_ = this.HIV(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
-        bool? g_(object HIVDiagnosis) {
+        bool? g_(Condition HIVDiagnosis) {
             CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDiagnosis);
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlDate l_ = context.Operators.DateFrom(k_);
@@ -544,8 +544,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return n_;
         }
 
-        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
-        bool? i_ = context.Operators.Exists<object>(h_);
+        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
+        bool? i_ = context.Operators.Exists<Condition>(h_);
         return i_;
     }
 
@@ -561,10 +561,10 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
         CqlValueSet a_ = this.Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
-        bool? g_(object LymphaticMalignantNeoplasm) {
+        bool? g_(Condition LymphaticMalignantNeoplasm) {
             CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LymphaticMalignantNeoplasm);
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlDate l_ = context.Operators.DateFrom(k_);
@@ -573,8 +573,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return n_;
         }
 
-        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
-        bool? i_ = context.Operators.Exists<object>(h_);
+        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
+        bool? i_ = context.Operators.Exists<Condition>(h_);
         return i_;
     }
 
@@ -590,10 +590,10 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
         CqlValueSet a_ = this.Intussusception(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
-        bool? g_(object IntussusceptionDisorder) {
+        bool? g_(Condition IntussusceptionDisorder) {
             CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, IntussusceptionDisorder);
             CqlDateTime k_ = context.Operators.Start(j_);
             CqlDate l_ = context.Operators.DateFrom(k_);
@@ -602,8 +602,8 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return n_;
         }
 
-        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
-        bool? i_ = context.Operators.Exists<object>(h_);
+        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
+        bool? i_ = context.Operators.Exists<Condition>(h_);
         return i_;
     }
 
@@ -773,25 +773,25 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("DTaP Numerator Inclusion Conditions")]
-    public IEnumerable<object> DTaP_Numerator_Inclusion_Conditions(CqlContext context) =>
+    public IEnumerable<Condition> DTaP_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_DTaP_Numerator_Inclusion_Conditions, DTaP_Numerator_Inclusion_Conditions_Compute);
 
     private const long _cacheIndex_DTaP_Numerator_Inclusion_Conditions = 3639701423704147375L;
 
-    private IEnumerable<object> DTaP_Numerator_Inclusion_Conditions_Compute(CqlContext context)
+    private IEnumerable<Condition> DTaP_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Anaphylactic_Reaction_to_DTaP_Vaccine(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
         CqlValueSet f_ = this.Encephalitis_Due_to_Diphtheria__Tetanus_or_Pertussis_Vaccine(context);
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> h_ = context.Operators.Union<object>(e_ as IEnumerable<object>, g_ as IEnumerable<object>);
+        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
         IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> k_ = context.Operators.Union<object>(h_ as IEnumerable<object>, j_ as IEnumerable<object>);
-        IEnumerable<object> l_ = Status_1_15_000.Instance.verified(context, k_);
+        IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, j_ as IEnumerable<Condition>);
+        IEnumerable<Condition> l_ = Status_1_15_000.Instance.verified(context, k_);
 
-        bool? m_(object DTaPConditions) {
+        bool? m_(Condition DTaPConditions) {
             CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DTaPConditions);
             CqlDateTime p_ = context.Operators.Start(o_);
             CqlDate q_ = context.Operators.DateFrom(p_);
@@ -800,7 +800,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return s_;
         }
 
-        IEnumerable<object> n_ = context.Operators.Where<object>(l_, m_);
+        IEnumerable<Condition> n_ = context.Operators.Where<Condition>(l_, m_);
         return n_;
     }
 
@@ -925,22 +925,22 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("Polio Numerator Inclusion Conditions")]
-    public IEnumerable<object> Polio_Numerator_Inclusion_Conditions(CqlContext context) =>
+    public IEnumerable<Condition> Polio_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Polio_Numerator_Inclusion_Conditions, Polio_Numerator_Inclusion_Conditions_Compute);
 
     private const long _cacheIndex_Polio_Numerator_Inclusion_Conditions = 7826064777224418101L;
 
-    private IEnumerable<object> Polio_Numerator_Inclusion_Conditions_Compute(CqlContext context)
+    private IEnumerable<Condition> Polio_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
         CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-        IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = Status_1_15_000.Instance.verified(context, g_);
 
-        bool? i_(object PolioConditions) {
+        bool? i_(Condition PolioConditions) {
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PolioConditions);
             CqlDateTime l_ = context.Operators.Start(k_);
             CqlDate m_ = context.Operators.DateFrom(l_);
@@ -949,7 +949,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return o_;
         }
 
-        IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
+        IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
         return j_;
     }
 
@@ -1055,22 +1055,22 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("MMR Numerator Inclusion Conditions")]
-    public IEnumerable<object> MMR_Numerator_Inclusion_Conditions(CqlContext context) =>
+    public IEnumerable<Condition> MMR_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_MMR_Numerator_Inclusion_Conditions, MMR_Numerator_Inclusion_Conditions_Compute);
 
     private const long _cacheIndex_MMR_Numerator_Inclusion_Conditions = -514019637682845694L;
 
-    private IEnumerable<object> MMR_Numerator_Inclusion_Conditions_Compute(CqlContext context)
+    private IEnumerable<Condition> MMR_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
         CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-        IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = Status_1_15_000.Instance.verified(context, g_);
 
-        bool? i_(object MMRConditions) {
+        bool? i_(Condition MMRConditions) {
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MMRConditions);
             CqlDateTime l_ = context.Operators.Start(k_);
             CqlDate m_ = context.Operators.DateFrom(l_);
@@ -1079,28 +1079,28 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return o_;
         }
 
-        IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
+        IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
         return j_;
     }
 
 
     [CqlExpressionDefinition("Measles Indicators")]
-    public IEnumerable<object> Measles_Indicators(CqlContext context) =>
+    public IEnumerable<Condition> Measles_Indicators(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measles_Indicators, Measles_Indicators_Compute);
 
     private const long _cacheIndex_Measles_Indicators = 8441168455424622173L;
 
-    private IEnumerable<object> Measles_Indicators_Compute(CqlContext context)
+    private IEnumerable<Condition> Measles_Indicators_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Measles(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
-        object f_(Condition X) => X as object;
-        IEnumerable<object> g_ = context.Operators.Select<Condition, object>(e_, f_);
-        IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+        Condition f_(Condition X) => X as Condition;
+        IEnumerable<Condition> g_ = context.Operators.Select<Condition, Condition>(e_, f_);
+        IEnumerable<Condition> h_ = Status_1_15_000.Instance.verified(context, g_);
 
-        bool? i_(object MeaslesDiagnosis) {
+        bool? i_(Condition MeaslesDiagnosis) {
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MeaslesDiagnosis);
             CqlDateTime l_ = context.Operators.Start(k_);
             CqlDate m_ = context.Operators.DateFrom(l_);
@@ -1109,26 +1109,26 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return o_;
         }
 
-        IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
+        IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
         return j_;
     }
 
 
     [CqlExpressionDefinition("Mumps Indicators")]
-    public IEnumerable<object> Mumps_Indicators(CqlContext context) =>
+    public IEnumerable<Condition> Mumps_Indicators(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Mumps_Indicators, Mumps_Indicators_Compute);
 
     private const long _cacheIndex_Mumps_Indicators = -5597829872438947286L;
 
-    private IEnumerable<object> Mumps_Indicators_Compute(CqlContext context)
+    private IEnumerable<Condition> Mumps_Indicators_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Mumps(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
-        bool? g_(object MumpsDiagnosis) {
+        bool? g_(Condition MumpsDiagnosis) {
             CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MumpsDiagnosis);
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlDate k_ = context.Operators.DateFrom(j_);
@@ -1137,26 +1137,26 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return m_;
         }
 
-        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
+        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
         return h_;
     }
 
 
     [CqlExpressionDefinition("Rubella Indicators")]
-    public IEnumerable<object> Rubella_Indicators(CqlContext context) =>
+    public IEnumerable<Condition> Rubella_Indicators(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Rubella_Indicators, Rubella_Indicators_Compute);
 
     private const long _cacheIndex_Rubella_Indicators = -7817904464631049752L;
 
-    private IEnumerable<object> Rubella_Indicators_Compute(CqlContext context)
+    private IEnumerable<Condition> Rubella_Indicators_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Rubella(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
-        bool? g_(object RubellaDiagnosis) {
+        bool? g_(Condition RubellaDiagnosis) {
             CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, RubellaDiagnosis);
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlDate k_ = context.Operators.DateFrom(j_);
@@ -1165,7 +1165,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return m_;
         }
 
-        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
+        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
         return h_;
     }
 
@@ -1372,22 +1372,22 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("Hib Numerator Inclusion Conditions")]
-    public IEnumerable<object> Hib_Numerator_Inclusion_Conditions(CqlContext context) =>
+    public IEnumerable<Condition> Hib_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hib_Numerator_Inclusion_Conditions, Hib_Numerator_Inclusion_Conditions_Compute);
 
     private const long _cacheIndex_Hib_Numerator_Inclusion_Conditions = 8608192977694466541L;
 
-    private IEnumerable<object> Hib_Numerator_Inclusion_Conditions_Compute(CqlContext context)
+    private IEnumerable<Condition> Hib_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
         CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_only_Haemophilus_influenzae_type_b_antigen__disorder_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-        IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = Status_1_15_000.Instance.verified(context, g_);
 
-        bool? i_(object HibReaction) {
+        bool? i_(Condition HibReaction) {
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HibReaction);
             CqlDateTime l_ = context.Operators.Start(k_);
             CqlDate m_ = context.Operators.DateFrom(l_);
@@ -1396,7 +1396,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return o_;
         }
 
-        IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
+        IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
         return j_;
     }
 
@@ -1635,27 +1635,27 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("Hepatitis B Numerator Inclusion Conditions")]
-    public IEnumerable<object> Hepatitis_B_Numerator_Inclusion_Conditions(CqlContext context) =>
+    public IEnumerable<Condition> Hepatitis_B_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions, Hepatitis_B_Numerator_Inclusion_Conditions_Compute);
 
     private const long _cacheIndex_Hepatitis_B_Numerator_Inclusion_Conditions = 7662563679654604977L;
 
-    private IEnumerable<object> Hepatitis_B_Numerator_Inclusion_Conditions_Compute(CqlContext context)
+    private IEnumerable<Condition> Hepatitis_B_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
         CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_B_virus_antigen__disorder_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
         CqlValueSet h_ = this.Hepatitis_B(context);
         IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> j_ = context.Operators.Union<object>(g_ as IEnumerable<object>, i_ as IEnumerable<object>);
+        IEnumerable<Condition> j_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, i_ as IEnumerable<Condition>);
         IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> m_ = context.Operators.Union<object>(j_ as IEnumerable<object>, l_ as IEnumerable<object>);
-        IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
+        IEnumerable<Condition> m_ = context.Operators.Union<Condition>(j_ as IEnumerable<Condition>, l_ as IEnumerable<Condition>);
+        IEnumerable<Condition> n_ = Status_1_15_000.Instance.verified(context, m_);
 
-        bool? o_(object HepBConditions) {
+        bool? o_(Condition HepBConditions) {
             CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HepBConditions);
             CqlDateTime r_ = context.Operators.Start(q_);
             CqlDate s_ = context.Operators.DateFrom(r_);
@@ -1664,7 +1664,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return u_;
         }
 
-        IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
+        IEnumerable<Condition> p_ = context.Operators.Where<Condition>(n_, o_);
         return p_;
     }
 
@@ -1735,27 +1735,27 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("Varicella Zoster Numerator Inclusion Conditions")]
-    public IEnumerable<object> Varicella_Zoster_Numerator_Inclusion_Conditions(CqlContext context) =>
+    public IEnumerable<Condition> Varicella_Zoster_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions, Varicella_Zoster_Numerator_Inclusion_Conditions_Compute);
 
     private const long _cacheIndex_Varicella_Zoster_Numerator_Inclusion_Conditions = -4280058124122922461L;
 
-    private IEnumerable<object> Varicella_Zoster_Numerator_Inclusion_Conditions_Compute(CqlContext context)
+    private IEnumerable<Condition> Varicella_Zoster_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Varicella_Zoster(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
         CqlCode f_ = this.Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder_(context);
         IEnumerable<CqlCode> g_ = context.Operators.ToList<CqlCode>(f_);
         IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> i_ = context.Operators.Union<object>(e_ as IEnumerable<object>, h_ as IEnumerable<object>);
+        IEnumerable<Condition> i_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
         IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(f_);
         IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, k_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> m_ = context.Operators.Union<object>(i_ as IEnumerable<object>, l_ as IEnumerable<object>);
-        IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
+        IEnumerable<Condition> m_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition>, l_ as IEnumerable<Condition>);
+        IEnumerable<Condition> n_ = Status_1_15_000.Instance.verified(context, m_);
 
-        bool? o_(object VaricellaZoster) {
+        bool? o_(Condition VaricellaZoster) {
             CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, VaricellaZoster);
             CqlDateTime r_ = context.Operators.Start(q_);
             CqlDate s_ = context.Operators.DateFrom(r_);
@@ -1764,7 +1764,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return u_;
         }
 
-        IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
+        IEnumerable<Condition> p_ = context.Operators.Where<Condition>(n_, o_);
         return p_;
     }
 
@@ -1897,22 +1897,22 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("Pneumococcal Conjugate Numerator Inclusion Conditions")]
-    public IEnumerable<object> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions(CqlContext context) =>
+    public IEnumerable<Condition> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions, Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Compute);
 
     private const long _cacheIndex_Pneumococcal_Conjugate_Numerator_Inclusion_Conditions = -4666451470684867839L;
 
-    private IEnumerable<object> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Compute(CqlContext context)
+    private IEnumerable<Condition> Pneumococcal_Conjugate_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
         CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-        IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = Status_1_15_000.Instance.verified(context, g_);
 
-        bool? i_(object PneumococcalReaction) {
+        bool? i_(Condition PneumococcalReaction) {
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PneumococcalReaction);
             CqlDateTime l_ = context.Operators.Start(k_);
             CqlDate m_ = context.Operators.DateFrom(l_);
@@ -1921,7 +1921,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return o_;
         }
 
-        IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
+        IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
         return j_;
     }
 
@@ -1992,27 +1992,27 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("Hepatitis A Numerator Inclusion Conditions")]
-    public IEnumerable<object> Hepatitis_A_Numerator_Inclusion_Conditions(CqlContext context) =>
+    public IEnumerable<Condition> Hepatitis_A_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions, Hepatitis_A_Numerator_Inclusion_Conditions_Compute);
 
     private const long _cacheIndex_Hepatitis_A_Numerator_Inclusion_Conditions = 8952629932293432625L;
 
-    private IEnumerable<object> Hepatitis_A_Numerator_Inclusion_Conditions_Compute(CqlContext context)
+    private IEnumerable<Condition> Hepatitis_A_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Hepatitis_A(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
         CqlCode f_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_A_virus_antigen__disorder_(context);
         IEnumerable<CqlCode> g_ = context.Operators.ToList<CqlCode>(f_);
         IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> i_ = context.Operators.Union<object>(e_ as IEnumerable<object>, h_ as IEnumerable<object>);
+        IEnumerable<Condition> i_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
         IEnumerable<CqlCode> k_ = context.Operators.ToList<CqlCode>(f_);
         IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, k_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> m_ = context.Operators.Union<object>(i_ as IEnumerable<object>, l_ as IEnumerable<object>);
-        IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
+        IEnumerable<Condition> m_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition>, l_ as IEnumerable<Condition>);
+        IEnumerable<Condition> n_ = Status_1_15_000.Instance.verified(context, m_);
 
-        bool? o_(object HepatitisADiagnosis) {
+        bool? o_(Condition HepatitisADiagnosis) {
             CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HepatitisADiagnosis);
             CqlDateTime r_ = context.Operators.Start(q_);
             CqlDate s_ = context.Operators.DateFrom(r_);
@@ -2021,7 +2021,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return u_;
         }
 
-        IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
+        IEnumerable<Condition> p_ = context.Operators.Where<Condition>(n_, o_);
         return p_;
     }
 
@@ -2229,22 +2229,22 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("Rotavirus Numerator Inclusion Conditions")]
-    public IEnumerable<object> Rotavirus_Numerator_Inclusion_Conditions(CqlContext context) =>
+    public IEnumerable<Condition> Rotavirus_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Rotavirus_Numerator_Inclusion_Conditions, Rotavirus_Numerator_Inclusion_Conditions_Compute);
 
     private const long _cacheIndex_Rotavirus_Numerator_Inclusion_Conditions = 5452965153709958714L;
 
-    private IEnumerable<object> Rotavirus_Numerator_Inclusion_Conditions_Compute(CqlContext context)
+    private IEnumerable<Condition> Rotavirus_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
         CqlCode a_ = this.Anaphylaxis_caused_by_rotavirus_vaccine__disorder_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-        IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = Status_1_15_000.Instance.verified(context, g_);
 
-        bool? i_(object RotavirusConditions) {
+        bool? i_(Condition RotavirusConditions) {
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, RotavirusConditions);
             CqlDateTime l_ = context.Operators.Start(k_);
             CqlDate m_ = context.Operators.DateFrom(l_);
@@ -2253,7 +2253,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return o_;
         }
 
-        IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
+        IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
         return j_;
     }
 
@@ -2476,22 +2476,22 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("Influenza Numerator Inclusion Conditions")]
-    public IEnumerable<object> Influenza_Numerator_Inclusion_Conditions(CqlContext context) =>
+    public IEnumerable<Condition> Influenza_Numerator_Inclusion_Conditions(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Influenza_Numerator_Inclusion_Conditions, Influenza_Numerator_Inclusion_Conditions_Compute);
 
     private const long _cacheIndex_Influenza_Numerator_Inclusion_Conditions = 1126846549515768438L;
 
-    private IEnumerable<object> Influenza_Numerator_Inclusion_Conditions_Compute(CqlContext context)
+    private IEnumerable<Condition> Influenza_Numerator_Inclusion_Conditions_Compute(CqlContext context)
     {
         CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder_(context);
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-        IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = Status_1_15_000.Instance.verified(context, g_);
 
-        bool? i_(object InfluenzaConditions) {
+        bool? i_(Condition InfluenzaConditions) {
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, InfluenzaConditions);
             CqlDateTime l_ = context.Operators.Start(k_);
             CqlDate m_ = context.Operators.DateFrom(l_);
@@ -2500,7 +2500,7 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
             return o_;
         }
 
-        IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
+        IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
         return j_;
     }
 
@@ -2515,73 +2515,73 @@ public partial class CMS117FHIRChildImmunStatus_1_0_000 : ILibrary, ISingleton<C
     {
         IEnumerable<CqlDate> a_ = this.Four_DTaP_Vaccinations(context);
         bool? b_ = context.Operators.Exists<CqlDate>(a_);
-        IEnumerable<object> c_ = this.DTaP_Numerator_Inclusion_Conditions(context);
-        bool? d_ = context.Operators.Exists<object>(c_);
+        IEnumerable<Condition> c_ = this.DTaP_Numerator_Inclusion_Conditions(context);
+        bool? d_ = context.Operators.Exists<Condition>(c_);
         bool? e_ = context.Operators.Or(b_, d_);
         IEnumerable<CqlDate> f_ = this.Three_Polio_Vaccinations(context);
         bool? g_ = context.Operators.Exists<CqlDate>(f_);
-        IEnumerable<object> h_ = this.Polio_Numerator_Inclusion_Conditions(context);
-        bool? i_ = context.Operators.Exists<object>(h_);
+        IEnumerable<Condition> h_ = this.Polio_Numerator_Inclusion_Conditions(context);
+        bool? i_ = context.Operators.Exists<Condition>(h_);
         bool? j_ = context.Operators.Or(g_, i_);
         bool? k_ = context.Operators.And(e_, j_);
         IEnumerable<CqlDate> l_ = this.One_MMR_Vaccination(context);
         bool? m_ = context.Operators.Exists<CqlDate>(l_);
-        IEnumerable<object> n_ = this.MMR_Numerator_Inclusion_Conditions(context);
-        bool? o_ = context.Operators.Exists<object>(n_);
+        IEnumerable<Condition> n_ = this.MMR_Numerator_Inclusion_Conditions(context);
+        bool? o_ = context.Operators.Exists<Condition>(n_);
         bool? p_ = context.Operators.Or(m_, o_);
-        IEnumerable<object> q_ = this.Measles_Indicators(context);
-        bool? r_ = context.Operators.Exists<object>(q_);
-        IEnumerable<object> s_ = this.Mumps_Indicators(context);
-        bool? t_ = context.Operators.Exists<object>(s_);
+        IEnumerable<Condition> q_ = this.Measles_Indicators(context);
+        bool? r_ = context.Operators.Exists<Condition>(q_);
+        IEnumerable<Condition> s_ = this.Mumps_Indicators(context);
+        bool? t_ = context.Operators.Exists<Condition>(s_);
         bool? u_ = context.Operators.And(r_, t_);
-        IEnumerable<object> v_ = this.Rubella_Indicators(context);
-        bool? w_ = context.Operators.Exists<object>(v_);
+        IEnumerable<Condition> v_ = this.Rubella_Indicators(context);
+        bool? w_ = context.Operators.Exists<Condition>(v_);
         bool? x_ = context.Operators.And(u_, w_);
         bool? y_ = context.Operators.Or(p_, x_);
         bool? z_ = context.Operators.And(k_, y_);
         bool? aa_ = this.Has_Appropriate_Number_of_Hib_Immunizations(context);
-        IEnumerable<object> ab_ = this.Hib_Numerator_Inclusion_Conditions(context);
-        bool? ac_ = context.Operators.Exists<object>(ab_);
+        IEnumerable<Condition> ab_ = this.Hib_Numerator_Inclusion_Conditions(context);
+        bool? ac_ = context.Operators.Exists<Condition>(ab_);
         bool? ad_ = context.Operators.Or(aa_, ac_);
         bool? ae_ = context.Operators.And(z_, ad_);
         IEnumerable<CqlDate> af_ = this.Three_Hepatitis_B_Vaccinations(context);
         bool? ag_ = context.Operators.Exists<CqlDate>(af_);
         IEnumerable<CqlDate> ah_ = this.Meets_HepB_Vaccination_Requirement(context);
         bool? ai_ = context.Operators.Exists<CqlDate>(ah_);
-        IEnumerable<object> aj_ = this.Hepatitis_B_Numerator_Inclusion_Conditions(context);
-        bool? ak_ = context.Operators.Exists<object>(aj_);
+        IEnumerable<Condition> aj_ = this.Hepatitis_B_Numerator_Inclusion_Conditions(context);
+        bool? ak_ = context.Operators.Exists<Condition>(aj_);
         bool? al_ = context.Operators.Or(ai_, ak_);
         bool? am_ = context.Operators.Or(ag_, al_);
         bool? an_ = context.Operators.And(ae_, am_);
         IEnumerable<CqlDate> ao_ = this.One_Chicken_Pox_Vaccination(context);
         bool? ap_ = context.Operators.Exists<CqlDate>(ao_);
-        IEnumerable<object> aq_ = this.Varicella_Zoster_Numerator_Inclusion_Conditions(context);
-        bool? ar_ = context.Operators.Exists<object>(aq_);
+        IEnumerable<Condition> aq_ = this.Varicella_Zoster_Numerator_Inclusion_Conditions(context);
+        bool? ar_ = context.Operators.Exists<Condition>(aq_);
         bool? as_ = context.Operators.Or(ap_, ar_);
         bool? at_ = context.Operators.And(an_, as_);
         IEnumerable<CqlDate> au_ = this.Four_Pneumococcal_Conjugate_Vaccinations(context);
         bool? av_ = context.Operators.Exists<CqlDate>(au_);
-        IEnumerable<object> aw_ = this.Pneumococcal_Conjugate_Numerator_Inclusion_Conditions(context);
-        bool? ax_ = context.Operators.Exists<object>(aw_);
+        IEnumerable<Condition> aw_ = this.Pneumococcal_Conjugate_Numerator_Inclusion_Conditions(context);
+        bool? ax_ = context.Operators.Exists<Condition>(aw_);
         bool? ay_ = context.Operators.Or(av_, ax_);
         bool? az_ = context.Operators.And(at_, ay_);
         IEnumerable<CqlDate> ba_ = this.One_Hepatitis_A_Vaccinations(context);
         bool? bb_ = context.Operators.Exists<CqlDate>(ba_);
-        IEnumerable<object> bc_ = this.Hepatitis_A_Numerator_Inclusion_Conditions(context);
-        bool? bd_ = context.Operators.Exists<object>(bc_);
+        IEnumerable<Condition> bc_ = this.Hepatitis_A_Numerator_Inclusion_Conditions(context);
+        bool? bd_ = context.Operators.Exists<Condition>(bc_);
         bool? be_ = context.Operators.Or(bb_, bd_);
         bool? bf_ = context.Operators.And(az_, be_);
         bool? bg_ = this.Has_Appropriate_Number_of_Rotavirus_Immunizations(context);
-        IEnumerable<object> bh_ = this.Rotavirus_Numerator_Inclusion_Conditions(context);
-        bool? bi_ = context.Operators.Exists<object>(bh_);
+        IEnumerable<Condition> bh_ = this.Rotavirus_Numerator_Inclusion_Conditions(context);
+        bool? bi_ = context.Operators.Exists<Condition>(bh_);
         bool? bj_ = context.Operators.Or(bg_, bi_);
         bool? bk_ = context.Operators.And(bf_, bj_);
         IEnumerable<CqlDate> bl_ = this.Two_Influenza_Vaccinations(context);
         bool? bm_ = context.Operators.Exists<CqlDate>(bl_);
         bool? bn_ = this.Two_Influenza_Vaccinations_Including_One_LAIV_Vaccination(context);
         bool? bo_ = context.Operators.Or(bm_, bn_);
-        IEnumerable<object> bp_ = this.Influenza_Numerator_Inclusion_Conditions(context);
-        bool? bq_ = context.Operators.Exists<object>(bp_);
+        IEnumerable<Condition> bp_ = this.Influenza_Numerator_Inclusion_Conditions(context);
+        bool? bq_ = context.Operators.Exists<Condition>(bp_);
         bool? br_ = context.Operators.Or(bo_, bq_);
         bool? bs_ = context.Operators.And(bk_, br_);
         return bs_;

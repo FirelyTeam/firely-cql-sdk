@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS871FHIRHHHyper", "1.0.000")]
 public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIRHHHyper_1_0_000>
 {
@@ -216,7 +216,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 CqlValueSet aa_ = this.Diabetes(context);
                 bool? ab_ = context.Operators.ConceptsInValueSet(z_, aa_);
                 bool? ac_ = context.Operators.Or(v_, ab_);
-                CqlInterval<CqlDateTime> ad_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesEncounter as object);
+                CqlInterval<CqlDateTime> ad_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesEncounter as Condition);
                 CqlDateTime ae_ = context.Operators.Start(ad_);
                 CqlInterval<CqlDateTime> af_ = Hospitalization?.hospitalizationPeriod;
                 CqlDateTime ag_ = context.Operators.End(af_);
@@ -251,7 +251,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 CqlConcept bh_ = context.Operators.ConvertCodeToConcept(bg_);
                 bool? bi_ = context.Operators.Equivalent(bf_, bh_);
                 bool? bj_ = context.Operators.Or(bd_, bi_);
-                CqlInterval<CqlDateTime> bk_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesProblem as object);
+                CqlInterval<CqlDateTime> bk_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesProblem as Condition);
                 CqlDateTime bl_ = context.Operators.Start(bk_);
                 CqlInterval<CqlDateTime> bm_ = Hospitalization?.hospitalizationPeriod;
                 CqlDateTime bn_ = context.Operators.End(bm_);
@@ -262,10 +262,10 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             }
 
             IEnumerable<Condition> n_ = context.Operators.Where<Condition>(l_, m_);
-            IEnumerable<object> o_ = context.Operators.Union<object>(j_ as IEnumerable<object>, n_ as IEnumerable<object>);
+            IEnumerable<Condition> o_ = context.Operators.Union<Condition>(j_ as IEnumerable<Condition>, n_ as IEnumerable<Condition>);
 
-            bool? p_(object DiabetesCondition) {
-                ResourceReference br_ = context.Operators.LateBoundProperty<ResourceReference>(DiabetesCondition, "subject");
+            bool? p_(Condition DiabetesCondition) {
+                ResourceReference br_ = DiabetesCondition?.Subject;
                 FhirString bs_ = br_?.ReferenceElement;
                 string bt_ = bs_?.Value;
                 Encounter bu_ = Hospitalization?.encounter;
@@ -276,9 +276,9 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 return by_;
             }
 
-            IEnumerable<object> q_ = context.Operators.Where<object>(o_, p_);
-            (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? r_(object DiabetesCondition) => Hospitalization;
-            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> s_ = context.Operators.Select<object, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(q_, r_);
+            IEnumerable<Condition> q_ = context.Operators.Where<Condition>(o_, p_);
+            (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)? r_(Condition DiabetesCondition) => Hospitalization;
+            IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?> s_ = context.Operators.Select<Condition, (CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?>(q_, r_);
             return s_;
         }
 

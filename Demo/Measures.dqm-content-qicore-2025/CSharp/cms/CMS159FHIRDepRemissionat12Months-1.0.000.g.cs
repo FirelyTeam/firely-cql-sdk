@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS159FHIRDepRemissionat12Months", "1.0.000")]
 public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingleton<CMS159FHIRDepRemissionat12Months_1_0_000>
 {
@@ -202,26 +202,26 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
 
 
     [CqlFunctionDefinition("isVerified")]
-    public bool? isVerified(CqlContext context, object condition)
+    public bool? isVerified(CqlContext context, Condition condition)
     {
-        object a_ = context.Operators.LateBoundProperty<object>(condition, "verificationStatus");
-        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CodeableConcept a_ = condition?.VerificationStatus;
+        CqlConcept b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         bool? c_ = context.Operators.Not((bool?)(b_ is null));
-        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode f_ = QICoreCommon_4_0_000.Instance.confirmed(context);
         CqlConcept g_ = context.Operators.ConvertCodeToConcept(f_);
         bool? h_ = context.Operators.Equivalent(e_, g_);
-        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode k_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
         CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
         bool? m_ = context.Operators.Equivalent(j_, l_);
         bool? n_ = context.Operators.Or(h_, m_);
-        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode q_ = QICoreCommon_4_0_000.Instance.provisional(context);
         CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
         bool? s_ = context.Operators.Equivalent(p_, r_);
         bool? t_ = context.Operators.Or(n_, s_);
-        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_ as CodeableConcept);
+        CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
         CqlCode w_ = QICoreCommon_4_0_000.Instance.differential(context);
         CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
         bool? y_ = context.Operators.Equivalent(v_, x_);
@@ -232,29 +232,29 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
 
 
     [CqlExpressionDefinition("Depression Diagnoses")]
-    public IEnumerable<object> Depression_Diagnoses(CqlContext context) =>
+    public IEnumerable<Condition> Depression_Diagnoses(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Depression_Diagnoses, Depression_Diagnoses_Compute);
 
     private const long _cacheIndex_Depression_Diagnoses = 5150113982553371070L;
 
-    private IEnumerable<object> Depression_Diagnoses_Compute(CqlContext context)
+    private IEnumerable<Condition> Depression_Diagnoses_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Major_Depression_Including_Remission(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
         CqlValueSet f_ = this.Dysthymia(context);
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> h_ = context.Operators.Union<object>(e_ as IEnumerable<object>, g_ as IEnumerable<object>);
+        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
         IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> k_ = context.Operators.Union<object>(h_ as IEnumerable<object>, j_ as IEnumerable<object>);
+        IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, j_ as IEnumerable<Condition>);
 
-        bool? l_(object Depression) {
+        bool? l_(Condition Depression) {
             bool? n_ = this.isVerified(context, Depression);
             return n_;
         }
 
-        IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
+        IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
         return m_;
     }
 
@@ -291,9 +291,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
         IEnumerable<Encounter> c_(Encounter ValidEncounter) {
-            IEnumerable<object> e_ = this.Depression_Diagnoses(context);
+            IEnumerable<Condition> e_ = this.Depression_Diagnoses(context);
 
-            bool? f_(object Depression) {
+            bool? f_(Condition Depression) {
                 Period j_ = ValidEncounter?.Period;
                 CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Depression);
@@ -311,9 +311,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 return x_;
             }
 
-            IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
-            Encounter h_(object Depression) => ValidEncounter;
-            IEnumerable<Encounter> i_ = context.Operators.Select<object, Encounter>(g_, h_);
+            IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+            Encounter h_(Condition Depression) => ValidEncounter;
+            IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
             return i_;
         }
 
@@ -699,9 +699,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CqlValueSet ae_ = this.Hospice_Diagnosis(context);
         IEnumerable<Condition> af_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> ah_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> ai_ = context.Operators.Union<object>(af_ as IEnumerable<object>, ah_ as IEnumerable<object>);
+        IEnumerable<Condition> ai_ = context.Operators.Union<Condition>(af_ as IEnumerable<Condition>, ah_ as IEnumerable<Condition>);
 
-        bool? aj_(object HospiceCareDiagnosis) {
+        bool? aj_(Condition HospiceCareDiagnosis) {
             CqlInterval<CqlDateTime> fo_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
             CqlInterval<CqlDateTime> fp_ = this.Denominator_Identification_Period(context);
             CqlDateTime fq_ = context.Operators.Start(fp_);
@@ -715,8 +715,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             return fx_;
         }
 
-        IEnumerable<object> ak_ = context.Operators.Where<object>(ai_, aj_);
-        bool? al_ = context.Operators.Exists<object>(ak_);
+        IEnumerable<Condition> ak_ = context.Operators.Where<Condition>(ai_, aj_);
+        bool? al_ = context.Operators.Exists<Condition>(ak_);
         bool? am_ = context.Operators.Or(ad_, al_);
         return am_;
     }
@@ -763,9 +763,9 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CqlValueSet g_ = this.Palliative_Care_Diagnosis(context);
         IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> k_ = context.Operators.Union<object>(h_ as IEnumerable<object>, j_ as IEnumerable<object>);
+        IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, j_ as IEnumerable<Condition>);
 
-        bool? l_(object PalliativeDiagnosis) {
+        bool? l_(Condition PalliativeDiagnosis) {
             CqlInterval<CqlDateTime> ar_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PalliativeDiagnosis);
             CqlInterval<CqlDateTime> as_ = this.Denominator_Identification_Period(context);
             CqlDateTime at_ = context.Operators.Start(as_);
@@ -779,8 +779,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             return ba_;
         }
 
-        IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
-        bool? n_ = context.Operators.Exists<object>(m_);
+        IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
+        bool? n_ = context.Operators.Exists<Condition>(m_);
         bool? o_ = context.Operators.Or(f_, n_);
         CqlValueSet p_ = this.Palliative_Care_Encounter(context);
         IEnumerable<Encounter> q_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
@@ -933,24 +933,24 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CqlValueSet a_ = this.Bipolar_Disorder(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
         CqlValueSet f_ = this.Personality_Disorder_Emotionally_Labile(context);
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> h_ = context.Operators.Union<object>(e_ as IEnumerable<object>, g_ as IEnumerable<object>);
+        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
         IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> k_ = context.Operators.Union<object>(h_ as IEnumerable<object>, j_ as IEnumerable<object>);
+        IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, j_ as IEnumerable<Condition>);
         CqlValueSet l_ = this.Schizophrenia_or_Psychotic_Disorder(context);
         IEnumerable<Condition> m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> n_ = context.Operators.Union<object>(k_ as IEnumerable<object>, m_ as IEnumerable<object>);
+        IEnumerable<Condition> n_ = context.Operators.Union<Condition>(k_ as IEnumerable<Condition>, m_ as IEnumerable<Condition>);
         IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> q_ = context.Operators.Union<object>(n_ as IEnumerable<object>, p_ as IEnumerable<object>);
+        IEnumerable<Condition> q_ = context.Operators.Union<Condition>(n_ as IEnumerable<Condition>, p_ as IEnumerable<Condition>);
         CqlValueSet r_ = this.Pervasive_Developmental_Disorder(context);
         IEnumerable<Condition> s_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> t_ = context.Operators.Union<object>(q_ as IEnumerable<object>, s_ as IEnumerable<object>);
+        IEnumerable<Condition> t_ = context.Operators.Union<Condition>(q_ as IEnumerable<Condition>, s_ as IEnumerable<Condition>);
         IEnumerable<Condition> v_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> w_ = context.Operators.Union<object>(t_ as IEnumerable<object>, v_ as IEnumerable<object>);
+        IEnumerable<Condition> w_ = context.Operators.Union<Condition>(t_ as IEnumerable<Condition>, v_ as IEnumerable<Condition>);
 
-        bool? x_(object MentalHealthDisorderDiagnoses) {
+        bool? x_(Condition MentalHealthDisorderDiagnoses) {
             CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MentalHealthDisorderDiagnoses);
             CqlDateTime ab_ = context.Operators.Start(aa_);
             CqlInterval<CqlDate> ac_ = this.Measure_Assessment_Period(context);
@@ -962,8 +962,8 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             return ah_;
         }
 
-        IEnumerable<object> y_ = context.Operators.Where<object>(w_, x_);
-        bool? z_ = context.Operators.Exists<object>(y_);
+        IEnumerable<Condition> y_ = context.Operators.Where<Condition>(w_, x_);
+        bool? z_ = context.Operators.Exists<Condition>(y_);
         return z_;
     }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS90FHIRFSAforHeartFailure", "1.0.000")]
 public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<CMS90FHIRFSAforHeartFailure_1_0_000>
 {
@@ -375,18 +375,18 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
         CqlValueSet j_ = this.Heart_Failure(context);
         IEnumerable<Condition> k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> n_ = context.Operators.Union<object>(k_ as IEnumerable<object>, m_ as IEnumerable<object>);
-        IEnumerable<object> o_ = Status_1_15_000.Instance.verified(context, n_);
+        IEnumerable<Condition> n_ = context.Operators.Union<Condition>(k_ as IEnumerable<Condition>, m_ as IEnumerable<Condition>);
+        IEnumerable<Condition> o_ = Status_1_15_000.Instance.verified(context, n_);
 
-        bool? p_(object HeartFailure) {
+        bool? p_(Condition HeartFailure) {
             CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HeartFailure);
             CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
             bool? y_ = context.Operators.OverlapsBefore(w_, x_, "day");
             return y_;
         }
 
-        IEnumerable<object> q_ = context.Operators.Where<object>(o_, p_);
-        bool? r_ = context.Operators.Exists<object>(q_);
+        IEnumerable<Condition> q_ = context.Operators.Where<Condition>(o_, p_);
+        bool? r_ = context.Operators.Exists<Condition>(q_);
         bool? s_ = context.Operators.And(i_, r_);
         IEnumerable<Encounter> t_ = this.Outpatient_Encounters_with_at_least_one_subsequent_Outpatient_Encounter_during_Measurement_Period(context);
         bool? u_ = context.Operators.Exists<Encounter>(t_);
@@ -422,18 +422,18 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, c_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(b_);
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> h_ = context.Operators.Union<object>(d_ as IEnumerable<object>, g_ as IEnumerable<object>);
-        IEnumerable<object> i_ = Status_1_15_000.Instance.verified(context, h_);
+        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+        IEnumerable<Condition> i_ = Status_1_15_000.Instance.verified(context, h_);
 
-        bool? j_(object SevereCognitiveImpairment) {
+        bool? j_(Condition SevereCognitiveImpairment) {
             CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, SevereCognitiveImpairment);
             CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
             bool? p_ = context.Operators.Overlaps(n_, o_, "day");
             return p_;
         }
 
-        IEnumerable<object> k_ = context.Operators.Where<object>(i_, j_);
-        bool? l_ = context.Operators.Exists<object>(k_);
+        IEnumerable<Condition> k_ = context.Operators.Where<Condition>(i_, j_);
+        bool? l_ = context.Operators.Exists<Condition>(k_);
         bool? m_ = context.Operators.Or(a_, l_);
         return m_;
     }

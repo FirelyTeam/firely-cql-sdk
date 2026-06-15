@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS125FHIRBreastCancerScreen", "1.0.000")]
 public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton<CMS125FHIRBreastCancerScreen_1_0_000>
 {
@@ -189,65 +189,58 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
 
 
     [CqlExpressionDefinition("Right Mastectomy Diagnosis")]
-    public IEnumerable<object> Right_Mastectomy_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Right_Mastectomy_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Right_Mastectomy_Diagnosis, Right_Mastectomy_Diagnosis_Compute);
 
     private const long _cacheIndex_Right_Mastectomy_Diagnosis = 6592406498959099697L;
 
-    private IEnumerable<object> Right_Mastectomy_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Right_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Status_Post_Right_Mastectomy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
         CqlValueSet f_ = this.Unilateral_Mastectomy__Unspecified_Laterality(context);
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> j_ = context.Operators.Union<object>(g_ as IEnumerable<object>, i_ as IEnumerable<object>);
+        IEnumerable<Condition> j_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, i_ as IEnumerable<Condition>);
 
-        bool? k_(object UnilateralMastectomyDiagnosis) {
-            object q_ = context.Operators.LateBoundProperty<object>(UnilateralMastectomyDiagnosis, "bodySite");
-            object[] r_ = [
-                q_,
-            ];
+        bool? k_(Condition UnilateralMastectomyDiagnosis) {
+            List<CodeableConcept> q_ = UnilateralMastectomyDiagnosis?.BodySite;
 
-            CqlConcept s_(object @this) {
-                CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+            CqlConcept r_(CodeableConcept @this) {
+                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return w_;
+            }
+
+            IEnumerable<CqlConcept> s_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)q_, r_);
+
+            bool? t_(CqlConcept S) {
+                CqlCode x_ = this.Right__qualifier_value_(context);
+                CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
+                bool? z_ = context.Operators.Equivalent(S, y_);
                 return z_;
             }
 
-            IEnumerable<CqlConcept> t_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)r_, s_);
-            CqlConcept u_ = context.Operators.SingletonFrom<CqlConcept>(t_);
-            CqlConcept[] v_ = [
-                u_,
-            ];
-
-            bool? w_(CqlConcept S) {
-                CqlCode aa_ = this.Right__qualifier_value_(context);
-                CqlConcept ab_ = context.Operators.ConvertCodeToConcept(aa_);
-                bool? ac_ = context.Operators.Equivalent(S, ab_);
-                return ac_;
-            }
-
-            IEnumerable<CqlConcept> x_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)v_, w_);
-            bool? y_ = context.Operators.Exists<CqlConcept>(x_);
-            return y_;
+            IEnumerable<CqlConcept> u_ = context.Operators.Where<CqlConcept>(s_, t_);
+            bool? v_ = context.Operators.Exists<CqlConcept>(u_);
+            return v_;
         }
 
-        IEnumerable<object> l_ = context.Operators.Where<object>(j_, k_);
-        IEnumerable<object> m_ = context.Operators.Union<object>(e_, l_);
-        IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
+        IEnumerable<Condition> l_ = context.Operators.Where<Condition>(j_, k_);
+        IEnumerable<Condition> m_ = context.Operators.Union<Condition>(e_, l_);
+        IEnumerable<Condition> n_ = Status_1_15_000.Instance.verified(context, m_);
 
-        bool? o_(object RightMastectomy) {
-            CqlInterval<CqlDateTime> ad_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, RightMastectomy);
-            CqlDateTime ae_ = context.Operators.Start(ad_);
-            CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-            CqlDateTime ag_ = context.Operators.End(af_);
-            bool? ah_ = context.Operators.SameOrBefore(ae_, ag_, (string)default);
-            return ah_;
+        bool? o_(Condition RightMastectomy) {
+            CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, RightMastectomy);
+            CqlDateTime ab_ = context.Operators.Start(aa_);
+            CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
+            CqlDateTime ad_ = context.Operators.End(ac_);
+            bool? ae_ = context.Operators.SameOrBefore(ab_, ad_, (string)default);
+            return ae_;
         }
 
-        IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
+        IEnumerable<Condition> p_ = context.Operators.Where<Condition>(n_, o_);
         return p_;
     }
 
@@ -343,65 +336,58 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
 
 
     [CqlExpressionDefinition("Left Mastectomy Diagnosis")]
-    public IEnumerable<object> Left_Mastectomy_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Left_Mastectomy_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Left_Mastectomy_Diagnosis, Left_Mastectomy_Diagnosis_Compute);
 
     private const long _cacheIndex_Left_Mastectomy_Diagnosis = -1087051068162643016L;
 
-    private IEnumerable<object> Left_Mastectomy_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Left_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Status_Post_Left_Mastectomy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
         CqlValueSet f_ = this.Unilateral_Mastectomy__Unspecified_Laterality(context);
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> j_ = context.Operators.Union<object>(g_ as IEnumerable<object>, i_ as IEnumerable<object>);
+        IEnumerable<Condition> j_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, i_ as IEnumerable<Condition>);
 
-        bool? k_(object UnilateralMastectomyDiagnosis) {
-            object q_ = context.Operators.LateBoundProperty<object>(UnilateralMastectomyDiagnosis, "bodySite");
-            object[] r_ = [
-                q_,
-            ];
+        bool? k_(Condition UnilateralMastectomyDiagnosis) {
+            List<CodeableConcept> q_ = UnilateralMastectomyDiagnosis?.BodySite;
 
-            CqlConcept s_(object @this) {
-                CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this as CodeableConcept);
+            CqlConcept r_(CodeableConcept @this) {
+                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return w_;
+            }
+
+            IEnumerable<CqlConcept> s_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)q_, r_);
+
+            bool? t_(CqlConcept S) {
+                CqlCode x_ = this.Left__qualifier_value_(context);
+                CqlConcept y_ = context.Operators.ConvertCodeToConcept(x_);
+                bool? z_ = context.Operators.Equivalent(S, y_);
                 return z_;
             }
 
-            IEnumerable<CqlConcept> t_ = context.Operators.Select<object, CqlConcept>((IEnumerable<object>)r_, s_);
-            CqlConcept u_ = context.Operators.SingletonFrom<CqlConcept>(t_);
-            CqlConcept[] v_ = [
-                u_,
-            ];
-
-            bool? w_(CqlConcept S) {
-                CqlCode aa_ = this.Left__qualifier_value_(context);
-                CqlConcept ab_ = context.Operators.ConvertCodeToConcept(aa_);
-                bool? ac_ = context.Operators.Equivalent(S, ab_);
-                return ac_;
-            }
-
-            IEnumerable<CqlConcept> x_ = context.Operators.Where<CqlConcept>((IEnumerable<CqlConcept>)v_, w_);
-            bool? y_ = context.Operators.Exists<CqlConcept>(x_);
-            return y_;
+            IEnumerable<CqlConcept> u_ = context.Operators.Where<CqlConcept>(s_, t_);
+            bool? v_ = context.Operators.Exists<CqlConcept>(u_);
+            return v_;
         }
 
-        IEnumerable<object> l_ = context.Operators.Where<object>(j_, k_);
-        IEnumerable<object> m_ = context.Operators.Union<object>(e_, l_);
-        IEnumerable<object> n_ = Status_1_15_000.Instance.verified(context, m_);
+        IEnumerable<Condition> l_ = context.Operators.Where<Condition>(j_, k_);
+        IEnumerable<Condition> m_ = context.Operators.Union<Condition>(e_, l_);
+        IEnumerable<Condition> n_ = Status_1_15_000.Instance.verified(context, m_);
 
-        bool? o_(object LeftMastectomy) {
-            CqlInterval<CqlDateTime> ad_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LeftMastectomy);
-            CqlDateTime ae_ = context.Operators.Start(ad_);
-            CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-            CqlDateTime ag_ = context.Operators.End(af_);
-            bool? ah_ = context.Operators.SameOrBefore(ae_, ag_, (string)default);
-            return ah_;
+        bool? o_(Condition LeftMastectomy) {
+            CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LeftMastectomy);
+            CqlDateTime ab_ = context.Operators.Start(aa_);
+            CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
+            CqlDateTime ad_ = context.Operators.End(ac_);
+            bool? ae_ = context.Operators.SameOrBefore(ab_, ad_, (string)default);
+            return ae_;
         }
 
-        IEnumerable<object> p_ = context.Operators.Where<object>(n_, o_);
+        IEnumerable<Condition> p_ = context.Operators.Where<Condition>(n_, o_);
         return p_;
     }
 
@@ -497,20 +483,20 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
 
 
     [CqlExpressionDefinition("Bilateral Mastectomy Diagnosis")]
-    public IEnumerable<object> Bilateral_Mastectomy_Diagnosis(CqlContext context) =>
+    public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Bilateral_Mastectomy_Diagnosis, Bilateral_Mastectomy_Diagnosis_Compute);
 
     private const long _cacheIndex_Bilateral_Mastectomy_Diagnosis = 4488951625559911591L;
 
-    private IEnumerable<object> Bilateral_Mastectomy_Diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.History_of_bilateral_mastectomy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
-        bool? g_(object BilateralMastectomyHistory) {
+        bool? g_(Condition BilateralMastectomyHistory) {
             CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BilateralMastectomyHistory);
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
@@ -519,7 +505,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             return m_;
         }
 
-        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
+        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
         return h_;
     }
 
@@ -623,20 +609,20 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        IEnumerable<object> b_ = this.Right_Mastectomy_Diagnosis(context);
-        bool? c_ = context.Operators.Exists<object>(b_);
+        IEnumerable<Condition> b_ = this.Right_Mastectomy_Diagnosis(context);
+        bool? c_ = context.Operators.Exists<Condition>(b_);
         IEnumerable<Procedure> d_ = this.Right_Mastectomy_Procedure(context);
         bool? e_ = context.Operators.Exists<Procedure>(d_);
         bool? f_ = context.Operators.Or(c_, e_);
-        IEnumerable<object> g_ = this.Left_Mastectomy_Diagnosis(context);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = this.Left_Mastectomy_Diagnosis(context);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         IEnumerable<Procedure> i_ = this.Left_Mastectomy_Procedure(context);
         bool? j_ = context.Operators.Exists<Procedure>(i_);
         bool? k_ = context.Operators.Or(h_, j_);
         bool? l_ = context.Operators.And(f_, k_);
         bool? m_ = context.Operators.Or(a_, l_);
-        IEnumerable<object> n_ = this.Bilateral_Mastectomy_Diagnosis(context);
-        bool? o_ = context.Operators.Exists<object>(n_);
+        IEnumerable<Condition> n_ = this.Bilateral_Mastectomy_Diagnosis(context);
+        bool? o_ = context.Operators.Exists<Condition>(n_);
         bool? p_ = context.Operators.Or(m_, o_);
         IEnumerable<Procedure> q_ = this.Bilateral_Mastectomy_Procedure(context);
         bool? r_ = context.Operators.Exists<Procedure>(q_);

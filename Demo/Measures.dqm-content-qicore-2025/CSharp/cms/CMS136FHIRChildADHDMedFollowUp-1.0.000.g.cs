@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS136FHIRChildADHDMedFollowUp", "1.0.000")]
 public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISingleton<CMS136FHIRChildADHDMedFollowUp_1_0_000>
 {
@@ -1271,20 +1271,20 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
 
 
     [CqlExpressionDefinition("Narcolepsy Exclusion")]
-    public IEnumerable<object> Narcolepsy_Exclusion(CqlContext context) =>
+    public IEnumerable<Condition> Narcolepsy_Exclusion(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Narcolepsy_Exclusion, Narcolepsy_Exclusion_Compute);
 
     private const long _cacheIndex_Narcolepsy_Exclusion = -3383504585349343618L;
 
-    private IEnumerable<object> Narcolepsy_Exclusion_Compute(CqlContext context)
+    private IEnumerable<Condition> Narcolepsy_Exclusion_Compute(CqlContext context)
     {
         CqlValueSet a_ = this.Narcolepsy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
-        bool? g_(object NarcolepsyDx) {
+        bool? g_(Condition NarcolepsyDx) {
             CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, NarcolepsyDx);
             CqlDateTime j_ = context.Operators.Start(i_);
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
@@ -1293,7 +1293,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             return m_;
         }
 
-        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
+        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
         return h_;
     }
 
@@ -1307,8 +1307,8 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        IEnumerable<object> b_ = this.Narcolepsy_Exclusion(context);
-        bool? c_ = context.Operators.Exists<object>(b_);
+        IEnumerable<Condition> b_ = this.Narcolepsy_Exclusion(context);
+        bool? c_ = context.Operators.Exists<Condition>(b_);
         bool? d_ = context.Operators.Or(a_, c_);
         return d_;
     }

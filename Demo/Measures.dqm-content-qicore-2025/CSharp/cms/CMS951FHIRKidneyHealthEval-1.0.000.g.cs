@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS951FHIRKidneyHealthEval", "1.0.000")]
 public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<CMS951FHIRKidneyHealthEval_1_0_000>
 {
@@ -179,21 +179,21 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         CqlValueSet a_ = this.Diabetes(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        bool? f_(object DiabetesDiagnosis) {
+        bool? f_(Condition DiabetesDiagnosis) {
             CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             bool? k_ = context.Operators.OverlapsBefore(i_, j_, "day");
-            object l_ = context.Operators.LateBoundProperty<object>(DiabetesDiagnosis, "verificationStatus");
-            CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_ as CodeableConcept);
+            CodeableConcept l_ = DiabetesDiagnosis?.VerificationStatus;
+            CqlConcept m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
             bool? n_ = context.Operators.Not((bool?)(m_ is null));
-            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_ as CodeableConcept);
+            CqlConcept p_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
             CqlCode q_ = QICoreCommon_4_0_000.Instance.refuted(context);
             CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
             bool? s_ = context.Operators.Equivalent(p_, r_);
             bool? t_ = context.Operators.Not(s_);
-            CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_ as CodeableConcept);
+            CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
             CqlCode w_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
             CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
             bool? y_ = context.Operators.Equivalent(v_, x_);
@@ -204,8 +204,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             return ac_;
         }
 
-        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         return h_;
     }
 
@@ -308,26 +308,26 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         CqlValueSet a_ = this.Chronic_Kidney_Disease__Stage_5(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
         CqlValueSet f_ = this.End_Stage_Renal_Disease(context);
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> j_ = context.Operators.Union<object>(g_ as IEnumerable<object>, i_ as IEnumerable<object>);
-        IEnumerable<object> k_ = context.Operators.Union<object>(e_, j_);
+        IEnumerable<Condition> j_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, i_ as IEnumerable<Condition>);
+        IEnumerable<Condition> k_ = context.Operators.Union<Condition>(e_, j_);
 
-        bool? l_(object CKDOrESRD) {
+        bool? l_(Condition CKDOrESRD) {
             CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, CKDOrESRD);
             CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
             bool? q_ = context.Operators.Overlaps(o_, p_, "day");
-            object r_ = context.Operators.LateBoundProperty<object>(CKDOrESRD, "verificationStatus");
-            CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_ as CodeableConcept);
+            CodeableConcept r_ = CKDOrESRD?.VerificationStatus;
+            CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
             bool? t_ = context.Operators.Not((bool?)(s_ is null));
-            CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_ as CodeableConcept);
+            CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
             CqlCode w_ = QICoreCommon_4_0_000.Instance.refuted(context);
             CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
             bool? y_ = context.Operators.Equivalent(v_, x_);
             bool? z_ = context.Operators.Not(y_);
-            CqlConcept ab_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_ as CodeableConcept);
+            CqlConcept ab_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
             CqlCode ac_ = QICoreCommon_4_0_000.Instance.entered_in_error(context);
             CqlConcept ad_ = context.Operators.ConvertCodeToConcept(ac_);
             bool? ae_ = context.Operators.Equivalent(ab_, ad_);
@@ -338,8 +338,8 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             return ai_;
         }
 
-        IEnumerable<object> m_ = context.Operators.Where<object>(k_, l_);
-        bool? n_ = context.Operators.Exists<object>(m_);
+        IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
+        bool? n_ = context.Operators.Exists<Condition>(m_);
         return n_;
     }
 

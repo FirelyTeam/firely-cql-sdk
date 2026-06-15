@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS131FHIRDiabetesEyeExam", "1.0.000")]
 public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CMS131FHIRDiabetesEyeExam_1_0_000>
 {
@@ -213,19 +213,19 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         bool? m_ = context.Operators.And(j_, l_);
         CqlValueSet n_ = this.Diabetes(context);
         IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        object p_(Condition X) => X as object;
-        IEnumerable<object> q_ = context.Operators.Select<Condition, object>(o_, p_);
-        IEnumerable<object> r_ = Status_1_15_000.Instance.verified(context, q_);
+        Condition p_(Condition X) => X as Condition;
+        IEnumerable<Condition> q_ = context.Operators.Select<Condition, Condition>(o_, p_);
+        IEnumerable<Condition> r_ = Status_1_15_000.Instance.verified(context, q_);
 
-        bool? s_(object DiabetesDx) {
+        bool? s_(Condition DiabetesDx) {
             CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDx);
             CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
             bool? y_ = context.Operators.Overlaps(w_, x_, "day");
             return y_;
         }
 
-        IEnumerable<object> t_ = context.Operators.Where<object>(r_, s_);
-        bool? u_ = context.Operators.Exists<object>(t_);
+        IEnumerable<Condition> t_ = context.Operators.Where<Condition>(r_, s_);
+        bool? u_ = context.Operators.Exists<Condition>(t_);
         bool? v_ = context.Operators.And(m_, u_);
         return v_;
     }
@@ -257,10 +257,10 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-        IEnumerable<object> h_ = Status_1_15_000.Instance.verified(context, g_);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = Status_1_15_000.Instance.verified(context, g_);
 
-        bool? i_(object BilateralAbsenceEyes) {
+        bool? i_(Condition BilateralAbsenceEyes) {
             CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BilateralAbsenceEyes);
             CqlDateTime m_ = context.Operators.Start(l_);
             CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
@@ -269,8 +269,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             return p_;
         }
 
-        IEnumerable<object> j_ = context.Operators.Where<object>(h_, i_);
-        bool? k_ = context.Operators.Exists<object>(j_);
+        IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
+        bool? k_ = context.Operators.Exists<Condition>(j_);
         return k_;
     }
 
@@ -307,18 +307,18 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         CqlValueSet a_ = this.Diabetic_Retinopathy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
-        IEnumerable<object> f_ = Status_1_15_000.Instance.verified(context, e_);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
 
-        bool? g_(object Retinopathy) {
+        bool? g_(Condition Retinopathy) {
             CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Retinopathy);
             CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
             bool? l_ = context.Operators.Overlaps(j_, k_, "day");
             return l_;
         }
 
-        IEnumerable<object> h_ = context.Operators.Where<object>(f_, g_);
-        bool? i_ = context.Operators.Exists<object>(h_);
+        IEnumerable<Condition> h_ = context.Operators.Where<Condition>(f_, g_);
+        bool? i_ = context.Operators.Exists<Condition>(h_);
         return i_;
     }
 

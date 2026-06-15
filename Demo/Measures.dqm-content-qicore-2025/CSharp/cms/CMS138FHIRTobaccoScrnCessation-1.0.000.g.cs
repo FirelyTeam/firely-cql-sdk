@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS138FHIRTobaccoScrnCessation", "1.0.000")]
 public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISingleton<CMS138FHIRTobaccoScrnCessation_1_0_000>
 {
@@ -689,10 +689,10 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(f_);
         IEnumerable<Condition> k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> l_ = context.Operators.Union<object>(h_ as IEnumerable<object>, k_ as IEnumerable<object>);
-        IEnumerable<object> m_ = Status_1_15_000.Instance.verified(context, l_);
+        IEnumerable<Condition> l_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, k_ as IEnumerable<Condition>);
+        IEnumerable<Condition> m_ = Status_1_15_000.Instance.verified(context, l_);
 
-        bool? n_(object TobaccoCounseling) {
+        bool? n_(Condition TobaccoCounseling) {
             CqlInterval<CqlDateTime> ay_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, TobaccoCounseling);
             CqlDateTime az_ = context.Operators.Start(ay_);
             CqlInterval<CqlDateTime> ba_ = this.Measurement_Period(context);
@@ -705,7 +705,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             return bh_;
         }
 
-        IEnumerable<object> o_ = context.Operators.Where<object>(m_, n_);
+        IEnumerable<Condition> o_ = context.Operators.Where<Condition>(m_, n_);
         IEnumerable<object> p_ = context.Operators.Union<object>(e_ as IEnumerable<object>, o_ as IEnumerable<object>);
         return p_;
     }

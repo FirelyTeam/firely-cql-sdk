@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CQMCommon", "4.1.000")]
 public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 {
@@ -3120,59 +3120,59 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     [CqlFunctionDefinition("EncounterDiagnosis")]
     [CqlTag("description", "Returns the Condition resource referenced by the `diagnosis.condition` element of the Encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `encounterDiagnosis()` instead.")]
-    public IEnumerable<object> EncounterDiagnosis(CqlContext context, Encounter Encounter)
+    public IEnumerable<Condition> EncounterDiagnosis(CqlContext context, Encounter Encounter)
     {
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 
-        object b_(Encounter.DiagnosisComponent D) {
+        Condition b_(Encounter.DiagnosisComponent D) {
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<object> g_ = context.Operators.Union<object>(e_ as IEnumerable<object>, f_ as IEnumerable<object>);
+            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
 
-            bool? h_(object C) {
+            bool? h_(Condition C) {
                 ResourceReference k_ = D?.Condition;
-                object l_ = context.Operators.LateBoundProperty<object>(C, "id");
-                string m_ = context.Operators.LateBoundProperty<string>(l_, "value");
+                Id l_ = C?.IdElement;
+                string m_ = l_?.Value;
                 bool? n_ = QICoreCommon_4_0_000.Instance.references(context, k_, m_);
                 return n_;
             }
 
-            IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
-            object j_ = context.Operators.SingletonFrom<object>(i_);
+            IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
+            Condition j_ = context.Operators.SingletonFrom<Condition>(i_);
             return j_;
         }
 
-        IEnumerable<object> c_ = context.Operators.Select<Encounter.DiagnosisComponent, object>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
-        IEnumerable<object> d_ = context.Operators.Distinct<object>(c_);
+        IEnumerable<Condition> c_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
+        IEnumerable<Condition> d_ = context.Operators.Distinct<Condition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("encounterDiagnosis")]
     [CqlTag("description", "Returns the Condition resources referenced by the diagnosis element of the Encounter")]
-    public IEnumerable<object> encounterDiagnosis(CqlContext context, Encounter Encounter)
+    public IEnumerable<Condition> encounterDiagnosis(CqlContext context, Encounter Encounter)
     {
         List<ResourceReference> a_ = Encounter?.ReasonReference;
 
-        object b_(ResourceReference D) {
+        Condition b_(ResourceReference D) {
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<object> g_ = context.Operators.Union<object>(e_ as IEnumerable<object>, f_ as IEnumerable<object>);
+            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
 
-            bool? h_(object C) {
-                object k_ = context.Operators.LateBoundProperty<object>(C, "id");
-                string l_ = context.Operators.LateBoundProperty<string>(k_, "value");
+            bool? h_(Condition C) {
+                Id k_ = C?.IdElement;
+                string l_ = k_?.Value;
                 bool? m_ = QICoreCommon_4_0_000.Instance.references(context, D, l_);
                 return m_;
             }
 
-            IEnumerable<object> i_ = context.Operators.Where<object>(g_, h_);
-            object j_ = context.Operators.SingletonFrom<object>(i_);
+            IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
+            Condition j_ = context.Operators.SingletonFrom<Condition>(i_);
             return j_;
         }
 
-        IEnumerable<object> c_ = context.Operators.Select<ResourceReference, object>((IEnumerable<ResourceReference>)a_, b_);
-        IEnumerable<object> d_ = context.Operators.Distinct<object>(c_);
+        IEnumerable<Condition> c_ = context.Operators.Select<ResourceReference, Condition>((IEnumerable<ResourceReference>)a_, b_);
+        IEnumerable<Condition> d_ = context.Operators.Distinct<Condition>(c_);
         return d_;
     }
 
@@ -3180,42 +3180,42 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     [CqlFunctionDefinition("GetCondition")]
     [CqlTag("description", "Returns the Condition resource for the given reference")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getCondition()` instead")]
-    public object GetCondition(CqlContext context, ResourceReference reference)
+    public Condition GetCondition(CqlContext context, ResourceReference reference)
     {
         IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
+        IEnumerable<Condition> c_ = context.Operators.Union<Condition>(a_ as IEnumerable<Condition>, b_ as IEnumerable<Condition>);
 
-        bool? d_(object C) {
-            object g_ = context.Operators.LateBoundProperty<object>(C, "id");
-            string h_ = context.Operators.LateBoundProperty<string>(g_, "value");
+        bool? d_(Condition C) {
+            Id g_ = C?.IdElement;
+            string h_ = g_?.Value;
             bool? i_ = QICoreCommon_4_0_000.Instance.references(context, reference, h_);
             return i_;
         }
 
-        IEnumerable<object> e_ = context.Operators.Where<object>(c_, d_);
-        object f_ = context.Operators.SingletonFrom<object>(e_);
+        IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
+        Condition f_ = context.Operators.SingletonFrom<Condition>(e_);
         return f_;
     }
 
 
     [CqlFunctionDefinition("getCondition")]
     [CqlTag("description", "Returns the Condition resource for the given reference")]
-    public object getCondition(CqlContext context, ResourceReference reference)
+    public Condition getCondition(CqlContext context, ResourceReference reference)
     {
         IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
+        IEnumerable<Condition> c_ = context.Operators.Union<Condition>(a_ as IEnumerable<Condition>, b_ as IEnumerable<Condition>);
 
-        bool? d_(object C) {
-            object g_ = context.Operators.LateBoundProperty<object>(C, "id");
-            string h_ = context.Operators.LateBoundProperty<string>(g_, "value");
+        bool? d_(Condition C) {
+            Id g_ = C?.IdElement;
+            string h_ = g_?.Value;
             bool? i_ = QICoreCommon_4_0_000.Instance.references(context, reference, h_);
             return i_;
         }
 
-        IEnumerable<object> e_ = context.Operators.Where<object>(c_, d_);
-        object f_ = context.Operators.SingletonFrom<object>(e_);
+        IEnumerable<Condition> e_ = context.Operators.Where<Condition>(c_, d_);
+        Condition f_ = context.Operators.SingletonFrom<Condition>(e_);
         return f_;
     }
 
@@ -3223,7 +3223,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     [CqlFunctionDefinition("PrincipalDiagnosis")]
     [CqlTag("description", "Returns the condition that is specified as the principal diagnosis for the encounter")]
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `principalDiagnosis()` instead.")]
-    public object PrincipalDiagnosis(CqlContext context, Encounter Encounter)
+    public Condition PrincipalDiagnosis(CqlContext context, Encounter Encounter)
     {
         List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 
@@ -3242,27 +3242,27 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
         IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 
-        object d_(Encounter.DiagnosisComponent PD) {
+        Condition d_(Encounter.DiagnosisComponent PD) {
             IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<object> s_ = context.Operators.Union<object>(q_ as IEnumerable<object>, r_ as IEnumerable<object>);
+            IEnumerable<Condition> s_ = context.Operators.Union<Condition>(q_ as IEnumerable<Condition>, r_ as IEnumerable<Condition>);
 
-            bool? t_(object C) {
+            bool? t_(Condition C) {
                 ResourceReference w_ = PD?.Condition;
-                object x_ = context.Operators.LateBoundProperty<object>(C, "id");
-                string y_ = context.Operators.LateBoundProperty<string>(x_, "value");
+                Id x_ = C?.IdElement;
+                string y_ = x_?.Value;
                 bool? z_ = QICoreCommon_4_0_000.Instance.references(context, w_, y_);
                 return z_;
             }
 
-            IEnumerable<object> u_ = context.Operators.Where<object>(s_, t_);
-            object v_ = context.Operators.SingletonFrom<object>(u_);
+            IEnumerable<Condition> u_ = context.Operators.Where<Condition>(s_, t_);
+            Condition v_ = context.Operators.SingletonFrom<Condition>(u_);
             return v_;
         }
 
-        IEnumerable<object> e_ = context.Operators.Select<Encounter.DiagnosisComponent, object>(c_, d_);
-        IEnumerable<object> f_ = context.Operators.Distinct<object>(e_);
-        object g_ = context.Operators.SingletonFrom<object>(f_);
+        IEnumerable<Condition> e_ = context.Operators.Select<Encounter.DiagnosisComponent, Condition>(c_, d_);
+        IEnumerable<Condition> f_ = context.Operators.Distinct<Condition>(e_);
+        Condition g_ = context.Operators.SingletonFrom<Condition>(f_);
         return g_;
     }
 
@@ -3462,9 +3462,9 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             bool? i_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, valueSet);
             object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
-            object l_ = this.getCondition(context, k_ as ResourceReference);
-            object m_ = context.Operators.LateBoundProperty<object>(l_, "code");
-            CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_ as CodeableConcept);
+            Condition l_ = this.getCondition(context, k_ as ResourceReference);
+            CodeableConcept m_ = l_?.Code;
+            CqlConcept n_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, m_);
             bool? o_ = context.Operators.ConceptInValueSet(n_, valueSet);
             bool? p_ = context.Operators.Or(i_, o_);
             return p_;
@@ -3492,9 +3492,9 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
             bool? j_ = context.Operators.ConceptInValueSet(i_ as CqlConcept, diagnosisValueSet);
             object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-            object m_ = this.getCondition(context, l_ as ResourceReference);
-            object n_ = context.Operators.LateBoundProperty<object>(m_, "code");
-            CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_ as CodeableConcept);
+            Condition m_ = this.getCondition(context, l_ as ResourceReference);
+            CodeableConcept n_ = m_?.Code;
+            CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_);
             bool? p_ = context.Operators.ConceptInValueSet(o_, diagnosisValueSet);
             bool? q_ = context.Operators.Or(j_, p_);
             bool? r_ = context.Operators.And(g_, q_);

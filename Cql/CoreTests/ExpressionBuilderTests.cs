@@ -232,6 +232,64 @@ namespace CoreTests
             Assert.AreEqual(false, (bool?)result);
         }
 
+        [TestMethod]
+        public void ChoiceType_WithSingleDistinctType_CollapsesToThatType()
+        {
+            // ELM produced by some translators contains choice types whose alternatives are all the
+            // same type, e.g. Choice<Condition, Condition> (see CMS125 "Right Mastectomy Diagnosis").
+            // Such a choice should keep the strong type instead of falling back to object.
+            var definitions = ProcessLibraryWithChoiceResult(
+                new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                    new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "Condition"),
+                    new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "Condition")));
+
+            var (_, lambda) = definitions.SelectDefinitionsByLibraryName("ChoiceTypeTest-1.0.0").Single();
+            Assert.AreEqual(typeof(IEnumerable<Condition>), lambda.ReturnType);
+        }
+
+        [TestMethod]
+        public void ChoiceType_WithDifferentTypes_MapsToObject()
+        {
+            var definitions = ProcessLibraryWithChoiceResult(
+                new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                    new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "Condition"),
+                    new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "Observation")));
+
+            var (_, lambda) = definitions.SelectDefinitionsByLibraryName("ChoiceTypeTest-1.0.0").Single();
+            Assert.AreEqual(typeof(IEnumerable<object>), lambda.ReturnType);
+        }
+
+        private static Hl7.Cql.Runtime.DefinitionDictionary<Hl7.Cql.Abstractions.CqlDefinition> ProcessLibraryWithChoiceResult(
+            Hl7.Cql.Elm.ChoiceTypeSpecifier choiceType)
+        {
+            using var serviceProvider = BuildServiceProvider();
+            using var servicesScope = serviceProvider.CreateScope();
+
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "ChoiceTypeTest", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "ChoiceList",
+                        context = "Patient",
+                        expression = new Hl7.Cql.Elm.Null
+                        {
+                            resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = choiceType },
+                        },
+                    },
+                ],
+            };
+
+            return servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmLibrary);
+        }
+
         private static Library CreateElmLibrary(CqlLibraryString libraryString)
         {
             var cqlToolkitConfig = new CqlToolkitConfig([CqlModel.ElmR1, CqlModel.Fhir401]);

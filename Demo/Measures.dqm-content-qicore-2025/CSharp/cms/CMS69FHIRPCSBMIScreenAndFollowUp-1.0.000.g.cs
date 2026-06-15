@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("CMS69FHIRPCSBMIScreenAndFollowUp", "1.0.000")]
 public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000>
 {
@@ -227,17 +227,17 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         CqlValueSet a_ = this.Pregnancy_or_Other_Related_Diagnoses(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> e_ = context.Operators.Union<object>(b_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
 
-        bool? f_(object PregnancyDiagnosis) {
+        bool? f_(Condition PregnancyDiagnosis) {
             CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDiagnosis);
             CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
             bool? p_ = context.Operators.Overlaps(n_, o_, "day");
             return p_;
         }
 
-        IEnumerable<object> g_ = context.Operators.Where<object>(e_, f_);
-        bool? h_ = context.Operators.Exists<object>(g_);
+        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        bool? h_ = context.Operators.Exists<Condition>(g_);
         IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-pregnancystatus"));
 
         bool? j_(Observation PregnantObservation) {
@@ -406,9 +406,9 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? ak_ = context.Operators.ConceptsInValueSet((IEnumerable<CqlConcept>)ai_, aj_);
             IEnumerable<Condition> am_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> ao_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<object> ap_ = context.Operators.Union<object>(am_ as IEnumerable<object>, ao_ as IEnumerable<object>);
+            IEnumerable<Condition> ap_ = context.Operators.Union<Condition>(am_ as IEnumerable<Condition>, ao_ as IEnumerable<Condition>);
 
-            bool? aq_(object OverweightObese) {
+            bool? aq_(Condition OverweightObese) {
                 CqlInterval<CqlDateTime> av_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese);
                 CqlDateTime aw_ = context.Operators.Start(av_);
                 object ax_ = context.Operators.LateBoundProperty<object>(HighInterventionsOrdered, "authoredOn");
@@ -417,8 +417,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return az_;
             }
 
-            IEnumerable<object> ar_ = context.Operators.Where<object>(ap_, aq_);
-            bool? as_ = context.Operators.Exists<object>(ar_);
+            IEnumerable<Condition> ar_ = context.Operators.Where<Condition>(ap_, aq_);
+            bool? as_ = context.Operators.Exists<Condition>(ar_);
             bool? at_ = context.Operators.Or(ak_, as_);
             return at_;
         }
@@ -453,7 +453,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             IEnumerable<Condition> k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
             bool? l_(Condition OverweightObese) {
-                CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese as object);
+                CqlInterval<CqlDateTime> q_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese as Condition);
                 CqlDateTime r_ = context.Operators.Start(q_);
 
                 object s_() {
@@ -794,9 +794,9 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? ak_ = context.Operators.ConceptsInValueSet((IEnumerable<CqlConcept>)ai_, aj_);
             IEnumerable<Condition> am_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> ao_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<object> ap_ = context.Operators.Union<object>(am_ as IEnumerable<object>, ao_ as IEnumerable<object>);
+            IEnumerable<Condition> ap_ = context.Operators.Union<Condition>(am_ as IEnumerable<Condition>, ao_ as IEnumerable<Condition>);
 
-            bool? aq_(object UnderweightDiagnosis) {
+            bool? aq_(Condition UnderweightDiagnosis) {
                 CqlInterval<CqlDateTime> av_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis);
                 CqlDateTime aw_ = context.Operators.Start(av_);
                 object ax_ = context.Operators.LateBoundProperty<object>(LowInterventionsOrdered, "authoredOn");
@@ -809,8 +809,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return be_;
             }
 
-            IEnumerable<object> ar_ = context.Operators.Where<object>(ap_, aq_);
-            bool? as_ = context.Operators.Exists<object>(ar_);
+            IEnumerable<Condition> ar_ = context.Operators.Where<Condition>(ap_, aq_);
+            bool? as_ = context.Operators.Exists<Condition>(ar_);
             bool? at_ = context.Operators.Or(ak_, as_);
             return at_;
         }
@@ -850,8 +850,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
             bool? q_(Condition UnderweightDiagnosis) {
-                bool? v_ = QICoreCommon_4_0_000.Instance.isHealthConcern(context, UnderweightDiagnosis as object);
-                CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis as object);
+                bool? v_ = QICoreCommon_4_0_000.Instance.isHealthConcern(context, UnderweightDiagnosis as Condition);
+                CqlInterval<CqlDateTime> w_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis as Condition);
                 CqlDateTime x_ = context.Operators.Start(w_);
 
                 object y_() {

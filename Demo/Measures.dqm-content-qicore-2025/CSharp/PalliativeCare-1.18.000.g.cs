@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
 [CqlLibrary("PalliativeCare", "1.18.000")]
 public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCare_1_18_000>
 {
@@ -110,18 +110,18 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
         CqlValueSet h_ = this.Palliative_Care_Diagnosis(context);
         IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<object> l_ = context.Operators.Union<object>(i_ as IEnumerable<object>, k_ as IEnumerable<object>);
-        IEnumerable<object> m_ = Status_1_15_000.Instance.verified(context, l_);
+        IEnumerable<Condition> l_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition>, k_ as IEnumerable<Condition>);
+        IEnumerable<Condition> m_ = Status_1_15_000.Instance.verified(context, l_);
 
-        bool? n_(object PalliativeDiagnosis) {
+        bool? n_(Condition PalliativeDiagnosis) {
             CqlInterval<CqlDateTime> ak_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PalliativeDiagnosis);
             CqlInterval<CqlDateTime> al_ = this.Measurement_Period(context);
             bool? am_ = context.Operators.Overlaps(ak_, al_, "day");
             return am_;
         }
 
-        IEnumerable<object> o_ = context.Operators.Where<object>(m_, n_);
-        bool? p_ = context.Operators.Exists<object>(o_);
+        IEnumerable<Condition> o_ = context.Operators.Where<Condition>(m_, n_);
+        bool? p_ = context.Operators.Exists<Condition>(o_);
         bool? q_ = context.Operators.Or(g_, p_);
         CqlValueSet r_ = this.Palliative_Care_Encounter(context);
         IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
