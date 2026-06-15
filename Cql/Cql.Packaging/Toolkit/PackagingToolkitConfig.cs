@@ -29,7 +29,7 @@ public record PackagingToolkitConfig(
         = FixedLibraryCanonicals ?? CreateDefaultFixedLibraryCanonicals();
 
     private static ReadOnlyDictionary<CqlLibraryIdentifier, string> CreateDefaultFixedLibraryCanonicals() =>
-        new Dictionary<CqlLibraryIdentifier, string> { { (CqlLibraryIdentifier)"FHIRHelpers", "https://fhir.org/guides/cqf/common/Library/FHIRHelpers" } }
+        new Dictionary<CqlLibraryIdentifier, string> { { (CqlLibraryIdentifier)"FHIRHelpers", "http://hl7.org/fhir/uv/cql/Library/FHIRHelpers" } }
             .AsReadOnly();
 
     /// <summary>
