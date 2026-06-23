@@ -11,6 +11,7 @@ using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging.Abstractions;
 using System.Linq.Expressions;
@@ -100,8 +101,29 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void CoalesceOnNullableValueTupleList_UsesValueTypeOverload()
+        public void CoalesceOnStringList_UsesCoalesce()
         {
+            // After consolidation: all Coalesce calls route to Coalesce<T> (no reference vs value type distinction)
+            var binder = new CqlOperatorsBinder(
+                NullLogger<CqlOperatorsBinder>.Instance,
+                new TestTypeResolver(),
+                Hl7.Cql.Conversion.TypeConverter.Create());
+
+            var operand = System.Linq.Expressions.Expression.Constant(
+                new string?[] { "hello", null, "world" },
+                typeof(IEnumerable<string?>));
+
+            var call = (MethodCallExpression)binder.BindToMethod(nameof(ICqlOperators.Coalesce), [operand], []);
+
+            call.Method.Name.Should().Be(nameof(ICqlOperators.Coalesce));
+            call.Method.GetGenericArguments().Single().Should().Be(typeof(string));
+        }
+
+        [TestMethod]
+        public void CoalesceOnNullableValueTupleList_UsesCoalesceWithNullableElementType()
+        {
+            // Regression test (#1307/#1313): Coalesce over a list of nullable value tuples must bind to
+            // the unconstrained Coalesce<T> with T = the nullable tuple type, so the no-match result is null.
             var binder = new CqlOperatorsBinder(
                 NullLogger<CqlOperatorsBinder>.Instance,
                 new TestTypeResolver(),
@@ -115,8 +137,50 @@ namespace CoreTests
 
             var call = (MethodCallExpression)binder.BindToMethod(nameof(ICqlOperators.Coalesce), [operand], []);
 
-            call.Method.Name.Should().Be(nameof(ICqlOperators.CoalesceValueTypes));
-            call.Method.GetGenericArguments().Single().Should().Be(typeof((int?, int?, DateOnly?)));
+            call.Method.Name.Should().Be(nameof(ICqlOperators.Coalesce));
+            call.Method.GetGenericArguments().Single().Should().Be(typeof((int?, int?, DateOnly?)?));
+        }
+
+        [TestMethod]
+        public void CoalesceOnHedisNullableTupleList_UsesCoalesceWithNullableElementType()
+        {
+            // Regression test (#1307/#1313): exact HEDIS 2025 shape that previously failed with CS0452.
+            var binder = new CqlOperatorsBinder(
+                NullLogger<CqlOperatorsBinder>.Instance,
+                new TestTypeResolver(),
+                Hl7.Cql.Conversion.TypeConverter.Create());
+
+            IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate> inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?> source =
+            [
+                (new CqlTupleMetadata(), true, false, null, new CqlDate(2026, 6, 11), new CqlDate(2026, 6, 12)),
+                null
+            ];
+
+            var operand = System.Linq.Expressions.Expression.Constant(
+                source,
+                typeof(IEnumerable<(CqlTupleMetadata, bool? isInpatient, bool? isEdVisit, CqlInterval<CqlDate> inpatientPeriod, CqlDate historyReferenceDate, CqlDate episodeDate)?>));
+
+            var call = (MethodCallExpression)binder.BindToMethod(nameof(ICqlOperators.Coalesce), [operand], []);
+
+            call.Method.Name.Should().Be(nameof(ICqlOperators.Coalesce));
+            call.Method.GetGenericArguments().Single().Should().Be(typeof((CqlTupleMetadata, bool?, bool?, CqlInterval<CqlDate>, CqlDate, CqlDate)?));
+        }
+
+        [TestMethod]
+        public void CoalesceOnNonNullableValueTypeList_Throws()
+        {
+            var binder = new CqlOperatorsBinder(
+                NullLogger<CqlOperatorsBinder>.Instance,
+                new TestTypeResolver(),
+                Hl7.Cql.Conversion.TypeConverter.Create());
+
+            var operand = System.Linq.Expressions.Expression.Constant(
+                new[] { 1, 2, 3 },
+                typeof(IEnumerable<int>));
+
+            var act = () => binder.BindToMethod(nameof(ICqlOperators.Coalesce), [operand], []);
+
+            act.Should().Throw<ArgumentException>().WithMessage("*reference type or Nullable<U>*");
         }
 
     }

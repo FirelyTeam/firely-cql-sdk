@@ -109,21 +109,14 @@ partial class CqlOperatorsBinder
                 "Operands to this method must be list-like with a single element type, e.g. IEnumerable<T>",
                 nameof(operand));
 
-        if (elementType.IsValueType)
-        {
+        if (elementType.IsValueType && Nullable.GetUnderlyingType(elementType) is null)
+            throw new ArgumentException(
+                $"Coalesce<T> requires T to be a reference type or Nullable<U>, but found non-nullable value type '{elementType}'.",
+                nameof(operand));
 
-            if (elementType.IsGenericType && elementType.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
-                var underlying = Nullable.GetUnderlyingType(elementType)!;
-                return BindToBestMethodOverload(nameof(ICqlOperators.CoalesceValueTypes), [operand], [underlying])!;
-            }
-
-            return BindToBestMethodOverload(nameof(ICqlOperators.CoalesceValueTypes), [operand], [elementType])!;
-        }
-
-        var call = BindToBestMethodOverload(nameof(ICqlOperators.Coalesce), [operand], [elementType])!;
-        return call;
-
+        // Always use Coalesce<T>, which is unconstrained and handles reference types,
+        // nullable value types (T = Nullable<U> returns null when no match), and tuples alike.
+        return BindToBestMethodOverload(nameof(ICqlOperators.Coalesce), [operand], [elementType])!;
     }
 
     private Expression Flatten(Expression operand)

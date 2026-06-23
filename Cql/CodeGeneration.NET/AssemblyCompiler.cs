@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Collections.Concurrent;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
@@ -47,6 +48,16 @@ namespace Hl7.Cql.CodeGeneration.NET
             "System.ComponentModel.Annotations.dll",
             "System.ComponentModel.TypeConverter.dll",
         ];
+
+        /// <summary>
+        /// Cache of <see cref="MetadataReference"/> instances per assembly file path. Creating a
+        /// metadata reference parses the assembly metadata, which is expensive when compiling many
+        /// small libraries in a row (e.g. one per test assertion), so cache them process-wide.
+        /// </summary>
+        private static readonly ConcurrentDictionary<string, MetadataReference> MetadataReferenceCache = new();
+
+        private static MetadataReference GetOrCreateMetadataReference(string assemblyPath) =>
+            MetadataReferenceCache.GetOrAdd(assemblyPath, static path => MetadataReference.CreateFromFile(path));
 
         private readonly Lazy<Assembly[]> _referencesLazy;
 
@@ -137,7 +148,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var metadataReferences = new List<MetadataReference>();
             AddNetCoreReferences(metadataReferences);
             foreach (var asm in assemblyReferences)
-                metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
+                metadataReferences.Add(GetOrCreateMetadataReference(asm.Location));
 
             foreach (var libraryDependency in librarySet.GetLibraryDependencies(libraryVersionedIdentifier!))
                 if (assemblies.TryGetValue(libraryDependency.VersionedLibraryIdentifier, out var referencedDll))
@@ -238,7 +249,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                          ?? throw new InvalidOperationException($"Couldn't identify system file path for the System assembly");
 
             foreach (var assemblyFileName in AssemblyFileNames)
-                metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, assemblyFileName)));
+                metadataReferences.Add(GetOrCreateMetadataReference(Path.Combine(rtPath, assemblyFileName)));
 
         }
     }

@@ -391,7 +391,34 @@ internal partial class LibrarySetCSharpCodeGenerator
             if (typeBinary.NodeType == ExpressionType.TypeIs)
             {
                 var left = BuildExpression(typeBinary.Expression);
-                var type = TypeToCSharpConverter.ToCSharp(typeBinary.TypeOperand);
+
+                // C# type patterns cannot test against nullable value types (CS8116), so test against
+                // the underlying type instead. This matches the runtime behavior of Expression.TypeIs,
+                // where a null value never matches and a non-null value matches its underlying type.
+                var typeOperand = Nullable.GetUnderlyingType(typeBinary.TypeOperand) ?? typeBinary.TypeOperand;
+
+                // Tuple types are rendered in C# tuple syntax (e.g. "(CqlTupleMetadata, int? x)?"), which
+                // is not legal in a type pattern; use the equivalent ValueTuple<...> form there instead.
+                string type;
+                if (TypeToCSharpConverter.ShouldUseTupleType(typeOperand))
+                {
+                    var elementTypes = TypeToCSharpConverter
+                        .GetTupleProperties(typeOperand)
+                        .Select(p => TypeToCSharpConverter.ToCSharp(p.Type));
+                    type = $"ValueTuple<CqlTupleMetadata, {string.Join(", ", elementTypes)}>";
+                }
+                else
+                    type = TypeToCSharpConverter.ToCSharp(typeOperand);
+
+                // A value-typed operand (e.g. a nullable value or a tuple) must be boxed for the type
+                // test to be legal C#: without boxing the compiler rejects patterns of unrelated value
+                // types (CS8121). Boxing preserves the runtime type-check semantics of Expression.TypeIs.
+                var operandType = typeBinary.Expression.Type;
+                if (operandType.IsValueType
+                    || TypeToCSharpConverter.ShouldUseTupleType(operandType)
+                    || typeOperand.IsValueType)
+                    left = $"((object){left.ParenthesizeIfNeeded()})";
+
                 return $"{left} is {type}";
             }
             else
@@ -641,8 +668,23 @@ internal partial class LibrarySetCSharpCodeGenerator
                 case ExpressionType.Convert:
                 case ExpressionType.TypeAs:
                 {
-                    var operand = BuildExpression(strippedUnary.Operand);
-                    operand = operand.ParenthesizeIfNeeded();
+                    var operandNode = strippedUnary.Operand;
+                    var operand = BuildExpression(operandNode).ParenthesizeIfNeeded();
+
+                    // The static C# type of the printed operand can be narrower than the expression's
+                    // type: boxing casts are stripped from the output, and constants typed as object
+                    // print as their underlying literal.
+                    var printedOperandType = GetPrintedType(operandNode);
+
+                    if (!HasCSharpConversion(printedOperandType, strippedUnary.Type))
+                    {
+                        // No direct C# conversion exists from the printed operand's type to the target
+                        // type (e.g. a bool constant cast to decimal?): route the cast through object to
+                        // get the unboxing semantics of Expression.Convert instead of a compile error
+                        // (CS0030).
+                        operand = $"((object){operand})";
+                    }
+
                     var typeName = TypeToCSharpConverter.ToCSharp(strippedUnary.Type);
                     return strippedUnary.NodeType == ExpressionType.TypeAs
                                ? $"{operand} as {typeName}"
@@ -707,6 +749,54 @@ internal partial class LibrarySetCSharpCodeGenerator
             }
             else
                 return method.Name;
+        }
+
+        /// <summary>
+        /// Determines the static C# type of the code printed for the given expression node.
+        /// This can be narrower than <see cref="Expression.Type"/>: boxing casts are stripped from
+        /// the output (see <see cref="StripBoxing"/>), <see cref="ElmAsExpression"/> nodes print as
+        /// their reduced form, and constants typed as object print as their underlying literal.
+        /// </summary>
+        private static Type GetPrintedType(Expression node) =>
+            node switch
+            {
+                UnaryExpression
+                    {
+                        NodeType: ExpressionType.ConvertChecked or ExpressionType.Convert or ExpressionType.TypeAs
+                    } cast
+                    when cast.Type == typeof(object) && cast.Operand.Type.IsValueType
+                    => GetPrintedType(cast.Operand),
+                ConstantExpression { Type: var constantType, Value: { } constantValue }
+                    when constantType == typeof(object)
+                    => constantValue.GetType(),
+                ElmAsExpression elmAs => GetPrintedType(elmAs.Reduce()),
+                _ => node.Type,
+            };
+
+        /// <summary>
+        /// Determines whether C# defines a conversion (identity, reference, numeric/enum, or
+        /// user-defined) between the two types, ignoring <see cref="Nullable{T}"/> wrappers.
+        /// When no such conversion exists, a cast in generated C# must go through object instead
+        /// (giving the unboxing semantics of <see cref="Expression.Convert(Expression, Type)"/>).
+        /// </summary>
+        private static bool HasCSharpConversion(Type from, Type to)
+        {
+            from = Nullable.GetUnderlyingType(from) ?? from;
+            to = Nullable.GetUnderlyingType(to) ?? to;
+
+            if (from == to || to.IsAssignableFrom(from) || from.IsAssignableFrom(to))
+                return true;
+
+            static bool IsNumericOrChar(Type t) => Type.GetTypeCode(t) is >= TypeCode.Char and <= TypeCode.Decimal;
+            if ((IsNumericOrChar(from) || from.IsEnum) && (IsNumericOrChar(to) || to.IsEnum))
+                return true;
+
+            static bool HasConversionOperator(Type declaring, Type from, Type to) =>
+                declaring.GetMethods()
+                         .Any(m => m is { IsStatic: true, Name: "op_Implicit" or "op_Explicit" }
+                                && m.ReturnType == to
+                                && m.GetParameters() is [{ ParameterType: var p }] && p == from);
+            return HasConversionOperator(from, from, to) || HasConversionOperator(to, from, to);
         }
 
         // Linq.Expressions needs an explicit conversion from a value type

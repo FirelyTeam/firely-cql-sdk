@@ -15,15 +15,21 @@ namespace Hl7.Cql.Operators
 
         /// <inheritdoc />
         public T? Coalesce<T>(IEnumerable<T>? source)
-            where T : class
         {
+            // Non-nullable value types cannot represent null, so they cannot satisfy CQL null semantics.
+            // The JIT specializes generic value-type instantiations, eliminating this check for valid T.
+            if (default(T) is not null)
+                throw new ArgumentException(
+                    $"Coalesce<T> requires T to be a reference type or Nullable<U>, but was instantiated with non-nullable value type {typeof(T)}.");
+
             if (source == null)
-                return null!;
+                return default;
             var t = source.FirstOrDefault(t => t != null);
             return t;
         }
 
         /// <inheritdoc />
+        [Obsolete("Use Coalesce<T> with T = Nullable<U> instead. The class constraint on Coalesce<T> has been removed.", false)]
         public T? CoalesceValueTypes<T>(IEnumerable<T?>? source)
             where T : struct
         {

@@ -57,26 +57,37 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 5.3. Code Generation Version Management
 
-5.3.1 **When modifying C# code generation logic, always update the `LibrarySetCSharpCodeGenerator.GeneratorToolVersion`**:
-5.3.1.1 **Locate the version**: The version is hardcoded in `CodeGeneration.NET/_CODE GENERATOR VERSION_.cs` as `GeneratorToolVersion`
+5.3.1 **What counts as a code generation change**: Any change that alters the C# emitted for CQL libraries requires a `GeneratorToolVersion` update, regardless of which project the change lives in. This includes:
+5.3.1.1 Changes in `CodeGeneration.NET` (the C# writer itself)
 
-5.3.1.2 **Apply semantic versioning**:
-5.3.1.2.1 **Major version** (x.0.0.0): Breaking changes to generated code that require new `LibraryInstanceInvoker` support
+5.3.1.2 Changes in `Cql.Compiler` that affect the expression trees being emitted — for example, `CqlOperatorsBinder` selecting a different `ICqlOperators` method or overload (e.g., binding `Coalesce<T>` instead of `CoalesceValueTypes<T>`), changed generic type arguments, or changed conversions
 
-      5.3.1.2.2 **Minor version** (x.y.0.0): Non-breaking additions like new attributes or functionality
+5.3.1.3 Changes to `ICqlOperators` signatures or constraints that flow into generated call sites
 
-      5.3.1.2.3 **Patch version** (x.y.z.0): Bug fixes that don't change the generated API
+5.3.2 **When modifying C# code generation logic, always update the `LibrarySetCSharpCodeGenerator.GeneratorToolVersion`**:
+5.3.2.1 **Locate the version**: The version is hardcoded in `CodeGeneration.NET/_CODE GENERATOR VERSION_.cs` as `GeneratorToolVersion`
 
-5.3.1.3 **Check compatibility**: Ensure `LibraryInstanceInvoker_3_0.SupportsVersion` covers the new version range
+5.3.2.2 **Apply semantic versioning**:
+5.3.2.2.1 **Major version** (x.0.0.0): Breaking changes to generated code that require new `LibraryInstanceInvoker` support
 
-5.3.1.4 **Create new invoker if needed**: For major version changes, a new `LibraryInstanceInvoker_X_Y` may be required
+      5.3.2.2.2 **Minor version** (x.y.0.0): Non-breaking additions like new attributes or functionality
 
-5.3.1.5 **Examples**:
-5.3.1.5.1 Adding `CqlFunctionParameterAttribute` → Minor version increment (3.0.0.0 → 3.1.0.0)
+      5.3.2.2.3 **Patch version** (x.y.z.0): Bug fixes that don't change the generated API
 
-      5.3.1.5.2 Changing method signatures → Major version increment (3.0.0.0 → 4.0.0.0)
+5.3.2.3 **Check compatibility**: Ensure the current `LibraryInstanceInvoker_X_Y.SupportsVersion` covers the new version (check `MinSupportedGeneratorToolVersion` and `FirstUnsupportedGeneratorToolVersion` in `Cql.Invocation/Toolkit/Internal/LibraryInvoker.X.Y.cs`)
 
-      5.3.1.5.3 Fixing identifier normalization → Patch version increment (3.0.0.0 → 3.0.1.0)
+5.3.2.4 **Create new invoker if needed**: For major version changes, a new `LibraryInstanceInvoker_X_Y` may be required
+
+5.3.2.5 **Regenerate checked-in generated code**: The version is embedded in every checked-in `*.g.cs` file via `GeneratedCodeAttribute` (e.g., `CoreTests/CSharp`, Demo library sets). Regenerate these libraries as part of the same pull request so the embedded version matches
+
+5.3.2.6 **Examples**:
+5.3.2.6.1 Adding `CqlFunctionParameterAttribute` → Minor version increment (3.0.0.0 → 3.1.0.0)
+
+      5.3.2.6.2 Changing method signatures → Major version increment (3.0.0.0 → 4.0.0.0)
+
+      5.3.2.6.3 Fixing identifier normalization → Patch version increment (3.0.0.0 → 3.0.1.0)
+
+      5.3.2.6.4 Binder emits a different `ICqlOperators` method for the same CQL (e.g., `CoalesceValueTypes<T>` → `Coalesce<T>`) → Patch version increment (5.1.0.0 → 5.1.1.0)
 
 ## 5.4. Generating ELM Files from CQL
 

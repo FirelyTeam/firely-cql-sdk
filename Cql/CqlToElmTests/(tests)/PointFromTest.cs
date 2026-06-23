@@ -38,10 +38,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 var interval = (Interval)pointFrom.operand;
                 AssertIntervalType(interval.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateElmToolkit().Lambda(pointFrom);
-                var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
-                var result = dg.DynamicInvoke(ctx);
+                var result = Run(pointFrom, library, ctx);
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(4, result);
@@ -72,10 +70,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 var interval = (Interval)pointFrom.operand;
                 AssertIntervalType(interval.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateElmToolkit().Lambda(pointFrom);
-                var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
-                var result = dg.DynamicInvoke(ctx);
+                var result = Run(pointFrom, library, ctx);
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(4, result);
@@ -108,10 +104,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(@as.operand, typeof(Null));
                 AssertIntervalType(@as.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateElmToolkit().Lambda(pointFrom);
-                var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
-                var result = dg.DynamicInvoke(ctx);
+                var result = Run(pointFrom, library, ctx);
                 Assert.IsNull(result);
             }
         }
@@ -140,10 +134,9 @@ namespace Hl7.Cql.CqlToElm.Test
                 var list = (Interval)pointFrom.operand;
                 AssertIntervalType(list.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateElmToolkit().Lambda(pointFrom);
-                var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
-                Assert.ThrowsException<TargetInvocationException>(() => dg.DynamicInvoke(ctx));
+                // The invoker does not wrap exceptions, so the runtime error surfaces directly.
+                Assert.ThrowsException<InvalidOperationException>(() => Run(pointFrom, library, ctx));
             }
         }
 
