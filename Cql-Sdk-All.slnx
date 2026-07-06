@@ -83,14 +83,8 @@
   <Folder Name="/submodules/" />
   <Folder Name="/submodules/Firely.Cql.Sdk.Integration.Runner/">
     <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/CodeGen/CodeGen.csproj" />
+    <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner.Benchmarks/IntegrationRunner.Benchmarks.csproj" />
     <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj" />
-  </Folder>
-  <Folder Name="/submodules/Ncqa/">
-    <File Path="submodules/Ncqa.DQIC/.gitignore" />
-    <Project Path="submodules/Ncqa.DQIC/BuildArtifacts/BuildArtifacts.csproj" />
-    <Project Path="submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj" />
-    <Project Path="submodules/Ncqa.DQIC/Ncqa.HT.Infrastructure/Ncqa.HT.Infrastructure.csproj" />
-    <Project Path="submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj" />
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="Cql/Benchmarks/Benchmarks.csproj" />
