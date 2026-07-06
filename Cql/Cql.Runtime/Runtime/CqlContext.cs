@@ -104,10 +104,20 @@ namespace Hl7.Cql.Runtime
         /// refreshed.</remarks>
         public void UseNewCache()
         {
-            _cache = new ConcurrentDictionary<long, object?>();
+            // A fresh cache is populated by mostly-sequential definition evaluation, so use a single
+            // lock (concurrencyLevel: 1) and pre-size it to avoid repeated resizes, which acquire
+            // all internal locks and dominated the write cost with the default settings.
+            _cache = new ConcurrentDictionary<long, object?>(concurrencyLevel: 1, capacity: CacheInitialCapacity);
             _cacheCallCount = 0;
             _cacheFactoryInvocations = 0;
         }
+
+        /// <summary>
+        /// The initial capacity of the definition/expression memoization cache. Sized to hold the
+        /// cached results of a typical measure evaluation (all definitions across all libraries in
+        /// a library set) without internal resizing.
+        /// </summary>
+        private const int CacheInitialCapacity = 1024;
 
         /// <summary>
         /// Disables caching for subsequent operations by resetting the cache state.
