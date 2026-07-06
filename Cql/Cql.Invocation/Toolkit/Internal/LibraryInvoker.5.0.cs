@@ -134,7 +134,12 @@ file sealed class DefinitionInvoker_5_0(
             var wrapper = typeof(DefinitionInvoker_5_0)
                           .GetMethod(wrapperName, BindingFlags.NonPublic | BindingFlags.Static)!
                           .MakeGenericMethod(typeArguments);
-            return (Func<CqlContext, object?[], object?>)wrapper.Invoke(null, [library, methodInfo])!;
+            return (Func<CqlContext, object?[], object?>)wrapper.Invoke(
+                null,
+                BindingFlags.DoNotWrapExceptions,
+                binder: null,
+                parameters: [library, methodInfo],
+                culture: null)!;
         }
 
         return CompileInvoker(library, methodInfo);
