@@ -173,6 +173,10 @@ stages:
               foreach ($proj in $projects) {
                 $proj = $proj.Trim()
                 if (-not $proj) { continue }
+                if ($proj -match 'Benchmark') {
+                  Write-Error "Benchmark project '$proj' is not allowed in multiTargetTestProjects."
+                  exit 1
+                }
                 Write-Host "##[section]Publishing $proj for net8.0"
                 dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net8.0 --property:PublishDir=$stagingRoot/net8.0
                 if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net8.0"; exit 1 }
@@ -343,6 +347,18 @@ stages:
               buildType: 'current'
               artifactName: 'BuildOutput'
               targetPath: '$(Build.SourcesDirectory)'
+
+          - pwsh: |
+              $projects = "${{ parameters.net10IntegrationTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                if ($proj -match 'Benchmark') {
+                  Write-Error "Benchmark project '$proj' is not allowed in net10IntegrationTestProjects."
+                  exit 1
+                }
+              }
+            displayName: 'Guard: prevent benchmark projects in integration test list'
 
           - task: DotNetCoreCLI@2
             displayName: 'Run integration tests on .NET 10'
