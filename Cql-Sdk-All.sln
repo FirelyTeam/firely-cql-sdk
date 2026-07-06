@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.3.11312.210
@@ -139,6 +139,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Measures.dqm-content-qicore-2025", "Demo\Measures.dqm-content-qicore-2025\Measures.dqm-content-qicore-2025.csproj", "{632001E4-FF3B-41BC-A3BE-15B65DF5EC37}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XsdToCSharpConverterTests", "tools\XsdToCSharpConverterTests\XsdToCSharpConverterTests.csproj", "{061FB619-DABC-4630-A4E7-E01CA45D9B75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationRunner.Benchmarks", "submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner.Benchmarks\IntegrationRunner.Benchmarks.csproj", "{1200F914-0318-41E4-80CF-29BEF88DA7FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -498,6 +500,18 @@ Global
 		{061FB619-DABC-4630-A4E7-E01CA45D9B75}.Release|x64.Build.0 = Release|Any CPU
 		{061FB619-DABC-4630-A4E7-E01CA45D9B75}.Release|x86.ActiveCfg = Release|Any CPU
 		{061FB619-DABC-4630-A4E7-E01CA45D9B75}.Release|x86.Build.0 = Release|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Debug|x64.Build.0 = Debug|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Debug|x86.Build.0 = Debug|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Release|x64.ActiveCfg = Release|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Release|x64.Build.0 = Release|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Release|x86.ActiveCfg = Release|Any CPU
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -542,9 +556,10 @@ Global
 		{A04486DA-33C8-DE9E-ECC7-89456FE7A3B5} = {0E5F5704-5289-4C65-AD4E-364CD5F60C44}
 		{632001E4-FF3B-41BC-A3BE-15B65DF5EC37} = {85401759-2C64-414D-9882-4DB1EA41C2ED}
 		{061FB619-DABC-4630-A4E7-E01CA45D9B75} = {55D1DD84-B6F3-4B15-8A5E-664C25DBF374}
+		{1200F914-0318-41E4-80CF-29BEF88DA7FE} = {0E5F5704-5289-4C65-AD4E-364CD5F60C44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		FileExplorer = build\|docs\|LibrarySets\|
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
+		FileExplorer = build\|docs\|LibrarySets\|
 	EndGlobalSection
 EndGlobal
