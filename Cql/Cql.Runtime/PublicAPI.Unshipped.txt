@@ -1,5 +1,1 @@
 #nullable enable
-*REMOVED*Hl7.Cql.Runtime.CqlContext.UseNewCache() -> void
-Hl7.Cql.Runtime.CqlContext.UseNewCache(int initialCapacity = 1024) -> void
-Hl7.Cql.Runtime.CqlContext.CacheInitialCapacity = 1024 -> int
-Hl7.Cql.Runtime.CqlContext.MinimumCacheInitialCapacity = 16 -> int
