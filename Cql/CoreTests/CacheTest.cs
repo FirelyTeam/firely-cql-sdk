@@ -294,4 +294,53 @@ public class CacheTest
         Assert.AreEqual(3, ((ICqlContextInternals)ctx).CacheMisses, "All calls should be misses without cache");
         Assert.AreEqual(0, ((ICqlContextInternals)ctx).CacheHits, "Should have no hits without cache");
     }
+
+    [TestMethod]
+    public void Cache_UseNewCacheWithCustomCapacity_ShouldCacheResults()
+    {
+        // Arrange
+        var ctx = FhirCqlContext.ForBundle();
+        ctx.UseNewCache(initialCapacity: 64);
+        var lib = CqlNestedTupleTest_1_0_0.Instance;
+
+        // Act - Call the same expression twice
+        var result1 = lib.Result(ctx);
+        var result2 = lib.Result(ctx);
+
+        // Assert - Caching still works with a non-default capacity
+        Assert.IsNotNull(result1);
+        Assert.IsNotNull(result2);
+        Assert.AreEqual(result1, result2);
+    }
+
+    [TestMethod]
+    public void Cache_UseNewCacheWithMinimumCapacity_ShouldSucceed()
+    {
+        // Arrange
+        var ctx = FhirCqlContext.ForBundle();
+
+        // Act - The minimum accepted capacity should not throw
+        ctx.UseNewCache(initialCapacity: CqlContext.MinimumCacheInitialCapacity);
+        var lib = CqlNestedTupleTest_1_0_0.Instance;
+        var result1 = lib.Result(ctx);
+        var result2 = lib.Result(ctx);
+
+        // Assert
+        Assert.AreEqual(result1, result2);
+    }
+
+    [DataTestMethod]
+    [DataRow(0)]
+    [DataRow(1)]
+    [DataRow(-1)]
+    [DataRow(int.MinValue)]
+    public void Cache_UseNewCacheWithTooSmallCapacity_ShouldThrow(int initialCapacity)
+    {
+        // Arrange
+        var ctx = FhirCqlContext.ForBundle();
+
+        // Act & Assert
+        var ex = Assert.ThrowsException<ArgumentOutOfRangeException>(() => ctx.UseNewCache(initialCapacity));
+        Assert.AreEqual("initialCapacity", ex.ParamName);
+    }
 }
