@@ -9,6 +9,7 @@
 #nullable enable
 
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Primitives;
 
 namespace CoreTests;
 
@@ -112,5 +113,96 @@ public class CqlComparersTests
 
         public int GetHashCode(object obj) =>
             comparers.GetHashCode(obj);
+    }
+
+    // Regression tests for the CqlConceptCqlComparer.CompareValues performance fix: the method
+    // used to re-sort both operands' code lists (an O(n log n) LINQ OrderBy) on every single
+    // Compare/Equals call, including every hash-collision check inside a hash-based Distinct/
+    // Union/Except over a list of concepts. The fix caches each CqlConcept instance's
+    // sorted-by-code array (keyed by reference identity via a ConditionalWeakTable, since
+    // CqlConcept.codes is init-only and can't change after construction). These tests prove the
+    // caching is purely an optimization: comparison semantics must be byte-for-byte identical to
+    // before.
+
+    private static CqlConcept Concept(params string[] codes) =>
+        new(codes.Select(c => new CqlCode(c, "sys")).ToArray(), display: null);
+
+    /// <summary>
+    /// Same codes, different insertion order -- exercises the OrderBy underneath the cache. Two
+    /// concepts with the same set of codes, regardless of original order, must compare as equal.
+    /// </summary>
+    [TestMethod]
+    public void CqlConcept_SameCodesDifferentOrder_ComparesEqual()
+    {
+        var comparers = new CqlComparers();
+
+        var x = Concept("b", "a", "c");
+        var y = Concept("c", "b", "a");
+
+        Assert.AreEqual(0, comparers.Compare(x, y, null));
+        Assert.AreEqual(true, comparers.Equals(x, y, null));
+    }
+
+    /// <summary>
+    /// Two distinct CqlConcept instances that are structurally equal (same code content) must
+    /// each still be compared/hashed correctly. This isn't about the cache being "instance
+    /// unique" (an implementation detail of the ConditionalWeakTable) -- it's about correctness:
+    /// since CqlConcept is a record, x and y here are `==`-equal .NET objects but distinct
+    /// references, so this also confirms the cache is keyed in a way that doesn't require
+    /// reference equality between compared instances to work.
+    /// </summary>
+    [TestMethod]
+    public void CqlConcept_StructurallyEqualDistinctInstances_CompareAndHashConsistently()
+    {
+        var comparers = new CqlComparers();
+
+        var x = Concept("a", "b");
+        var y = Concept("a", "b");
+
+        Assert.AreNotSame(x, y);
+        Assert.AreEqual(0, comparers.Compare(x, y, null));
+        Assert.AreEqual(true, comparers.Equals(x, y, null));
+        Assert.AreEqual(comparers.GetHashCode(x), comparers.GetHashCode(y));
+
+        // Each instance must still resolve its own correct sorted view when compared against a
+        // third, differently-ordered-but-equal concept.
+        var z = Concept("b", "a");
+        Assert.AreEqual(0, comparers.Compare(x, z, null));
+        Assert.AreEqual(0, comparers.Compare(y, z, null));
+    }
+
+    /// <summary>
+    /// Concepts with different numbers of codes must hit the early-exit length check and report a
+    /// non-zero, sign-correct comparison (matching <c>xCodes.Length - yCodes.Length</c>), not
+    /// throw or silently truncate via the removed <c>ElementAtOrDefault</c> handling.
+    /// </summary>
+    [TestMethod]
+    public void CqlConcept_DifferentLengths_ComparesByLengthDifference()
+    {
+        var comparers = new CqlComparers();
+
+        var shorter = Concept("a");
+        var longer = Concept("a", "b", "c");
+
+        Assert.AreEqual(-2, comparers.Compare(shorter, longer, null));
+        Assert.AreEqual(2, comparers.Compare(longer, shorter, null));
+        Assert.AreEqual(false, comparers.Equals(shorter, longer, null));
+    }
+
+    /// <summary>
+    /// Same length, but no codes in common -- the loop must run through comparing each sorted
+    /// pair positionally (not via equivalence/overlap) and report the first non-zero code
+    /// comparison, still not equal.
+    /// </summary>
+    [TestMethod]
+    public void CqlConcept_SameLengthNoMatchingCodes_ComparesUnequal()
+    {
+        var comparers = new CqlComparers();
+
+        var x = Concept("a", "b");
+        var y = Concept("x", "y");
+
+        Assert.AreNotEqual(0, comparers.Compare(x, y, null));
+        Assert.AreEqual(false, comparers.Equals(x, y, null));
     }
 }
