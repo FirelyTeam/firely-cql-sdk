@@ -207,12 +207,16 @@ partial class CqlComparers : CqlComparer<object>
             return hash;
         }
 
-        // Fall back to the same BaseType-walk resolution Compare/Equals/Equivalent already use
-        // (via SelectComparer), so a type only reachable via an ancestor registration can still be
-        // hashed instead of throwing here while comparing/equating it successfully elsewhere.
-        if (xType.BaseType is not null && SelectComparer(value, xType.BaseType) is { } baseComparer)
+        // Fall back to the same resolution Compare/Equals/Equivalent already use (via
+        // SelectComparer): generic-factory registrations (e.g. KeyValuePair<,>) and the BaseType
+        // walk, memoized the same way SelectComparer memoizes for its other callers. Passing xType
+        // itself (not xType.BaseType) matters: SelectComparer's own dictionary check and its
+        // memoize-on-resolve both key off the type passed in, so calling it with the BaseType would
+        // both skip the generic-factory branch entirely and memoize onto the wrong (already-registered
+        // ancestor) type instead of onto xType.
+        if (SelectComparer(value, xType) is { } resolvedComparer)
         {
-            return baseComparer.GetHashCode(value);
+            return resolvedComparer.GetHashCode(value);
         }
 
         throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(value));

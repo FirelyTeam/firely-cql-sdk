@@ -62,6 +62,27 @@ public class CqlComparersTests
     }
 
     /// <summary>
+    /// Regression test for a distinct failure mode from the BaseType-walk one above: a type
+    /// resolved via <c>ComparerFactories</c> (e.g. the built-in <c>KeyValuePair&lt;,&gt;</c>
+    /// registration), not via a directly-registered type or an ancestor. Before the fix, the
+    /// fallback only ever tried <c>xType.BaseType</c>, which for a struct like KeyValuePair walks
+    /// to <c>ValueType</c>/<c>object</c> and never retries the generic-factory branch that
+    /// Compare/Equals already use via SelectComparer -- so this threw on the very first call.
+    /// </summary>
+    [TestMethod]
+    public void KeyValuePair_GetHashCode_ResolvesViaGenericFactory_NotJustBaseTypeWalk()
+    {
+        var comparers = new CqlComparers(); // KeyValuePair<,> factory and int/string comparers are registered by the constructor
+
+        var a = new KeyValuePair<int, string>(1, "a");
+        var b = new KeyValuePair<int, string>(1, "a");
+        var c = new KeyValuePair<int, string>(2, "a");
+
+        Assert.AreEqual(comparers.GetHashCode(a), comparers.GetHashCode(b));
+        Assert.AreNotEqual(comparers.GetHashCode(a), comparers.GetHashCode(c));
+    }
+
+    /// <summary>
     /// A HashSet using CqlComparers as its comparer is exactly how CqlOperators.Distinct/Union/
     /// Except behave -- this proves an unregistered-but-inheriting type can be deduplicated via
     /// hashing end-to-end, not just via the two APIs in isolation.
