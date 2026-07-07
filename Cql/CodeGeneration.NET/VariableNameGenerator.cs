@@ -29,7 +29,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         /// <inheritdoc cref="ForNewScope(IEnumerable{ParameterExpression}?)"/>
-        private VariableNameGenerator ForNewScope(IEnumerable<string>? scopeNames)
+        public VariableNameGenerator ForNewScope(IEnumerable<string>? scopeNames)
         {
             var newGenerator = new VariableNameGenerator(_letters, Reserved.Concat(scopeNames ?? []), Postfix);
             return newGenerator;
