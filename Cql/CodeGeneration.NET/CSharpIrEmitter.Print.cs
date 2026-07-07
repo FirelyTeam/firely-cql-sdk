@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Ir;
 using Hl7.Cql.Primitives;
 
@@ -43,10 +44,14 @@ internal partial class CSharpIrEmitter
                 Enum e when Enum.IsDefined(e.GetType(), e) => $"{e.GetType().FullName}.{e}",
                 Enum e => $"({e.GetType().FullName}){e}",
                 bool b => b ? "true" : "false",
+                char c => SymbolDisplay.FormatLiteral(c, quote: true),
                 decimal d => FormattableString.Invariant($"{d}m"),
                 long l => FormattableString.Invariant($"{l}L"),
                 int i => FormattableString.Invariant($"{i}"),
                 null => "default",
+                // Boxed default struct values (e.g. default(DateTime)) have no C# literal;
+                // print "default" like the previous pipeline did.
+                var v when v.IsObjectNullOrDefault() => "default",
                 var v => FormattableString.Invariant($"{v}"),
             };
         }
@@ -69,7 +74,7 @@ internal partial class CSharpIrEmitter
     private string PrintShallow(IrExpression node, Func<IrExpression, Atom> child) =>
         node switch
         {
-            IrCall call => PrintCall(call, child),
+            IrInvoke call => PrintInvoke(call, child),
             IrDefinitionCall definitionCall => PrintDefinitionCall(definitionCall, child),
             IrProperty property => PrintProperty(property, child),
             IrCast cast => PrintCast(cast, child),
@@ -85,7 +90,7 @@ internal partial class CSharpIrEmitter
             _ => throw new NotSupportedException($"Don't know how to print an IR node of type {node.GetType().Name}."),
         };
 
-    private string PrintCall(IrCall call, Func<IrExpression, Atom> child)
+    private string PrintInvoke(IrInvoke call, Func<IrExpression, Atom> child)
     {
         var target = call.Receiver is { } receiver
             ? child(receiver).Code.ParenthesizeIfNeeded()
@@ -96,7 +101,7 @@ internal partial class CSharpIrEmitter
             : call.Method.Name;
 
         var arguments = string.Join(", ", call.Arguments.Select(a => child(a).Code));
-        return $"{target}.{methodName}({arguments})";
+        return $"{target}{(call.NullConditional ? "?." : ".")}{methodName}({arguments})";
     }
 
     private string PrintDefinitionCall(IrDefinitionCall call, Func<IrExpression, Atom> child)

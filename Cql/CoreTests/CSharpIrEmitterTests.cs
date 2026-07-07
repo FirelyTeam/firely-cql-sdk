@@ -107,8 +107,8 @@ public class CSharpIrEmitterTests
     {
         // Math.Abs(Math.Abs(-5)): the inner call must be hoisted (and named) before the outer
         // one so the outer statement can reference it by name.
-        var inner = new IrCall(null, MathAbsInt, new IrConstant(-5, typeof(int)));
-        var outer = new IrCall(null, MathAbsInt, inner);
+        var inner = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int)));
+        var outer = new IrInvoke(null, MathAbsInt, inner);
         var lambda = new IrLambda([], outer);
 
         Assert.AreEqual(
@@ -119,11 +119,11 @@ public class CSharpIrEmitterTests
     [TestMethod]
     public void Dedup_IdenticalSubexpressionHoistedOnce()
     {
-        // Two separately-constructed, but structurally identical, IrCall nodes: the emitter
+        // Two separately-constructed, but structurally identical, IrInvoke nodes: the emitter
         // dedups on printed code + type, so only one "Math.Abs(-5)" local is introduced even
         // though it is referenced twice.
-        var call1 = new IrCall(null, MathAbsInt, new IrConstant(-5, typeof(int)));
-        var call2 = new IrCall(null, MathAbsInt, new IrConstant(-5, typeof(int)));
+        var call1 = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int)));
+        var call2 = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int)));
         var array = new IrNewArray(typeof(int), call1, call2);
         var lambda = new IrLambda([], array);
 
@@ -141,7 +141,7 @@ public class CSharpIrEmitterTests
         // before returning it -- this is what pins down where the local-function-name
         // allocation happens relative to hoisting inside its body (after, per the source).
         var innerLambda = new IrLambda([p], new IrCast(p, typeof(int?), IrCastKind.Cast));
-        var call = new IrCall(null, applyFunc, innerLambda, new IrConstant(5, typeof(int)));
+        var call = new IrInvoke(null, applyFunc, innerLambda, new IrConstant(5, typeof(int)));
         var lambda = new IrLambda([], call);
 
         var expected =
@@ -177,7 +177,7 @@ public class CSharpIrEmitterTests
         // The true branch needs its own hoisted statement, so the conditional can no longer
         // print as a single-expression ternary and must become an if/else assigning a
         // declared result local instead.
-        var ifTrue = new IrCall(null, MathAbsInt, new IrConstant(-5, typeof(int)));
+        var ifTrue = new IrInvoke(null, MathAbsInt, new IrConstant(-5, typeof(int)));
         var ifFalse = new IrConstant(2, typeof(int));
         var conditional = new IrConditional(test, ifTrue, ifFalse, typeof(int));
         var lambda = new IrLambda([test], conditional);
@@ -390,7 +390,7 @@ public class CSharpIrEmitterTests
             "{\n    int? a_ = this.Foo(context);\n    return a_;\n}",
             EmitBody(new IrLambda([], localCall)));
 
-        var innerArgument = new IrCall(null, MathAbsInt, new IrConstant(-3, typeof(int)));
+        var innerArgument = new IrInvoke(null, MathAbsInt, new IrConstant(-3, typeof(int)));
         var foreignCall = new IrDefinitionCall(
             "FHIRHelpers", "4.0.1", "ToCode", isLocalLibrary: false,
             [IrContextParameter.Instance, innerArgument], typeof(string));
@@ -400,11 +400,62 @@ public class CSharpIrEmitterTests
     }
 
     [TestMethod]
+    public void Invoke_NullConditional_PrintsQuestionDot_AndWrapsValueReturnType()
+    {
+        var indexOf = typeof(string).GetMethod(nameof(string.IndexOf), [typeof(char)])!;
+        var s = new IrLocal(typeof(string), "s");
+        var call = new IrInvoke(s, indexOf, nullConditional: true, new IrConstant('x', typeof(char)));
+
+        // x?.Method() yields null when x is null, so the value return type is lifted to int?.
+        Assert.AreEqual(typeof(int?), call.Type);
+        Assert.AreEqual(
+            "{\n    int? a_ = s?.IndexOf('x');\n    return a_;\n}",
+            EmitBody(new IrLambda([s], call)));
+
+        // A null-conditional call without a receiver is rejected at construction.
+        Assert.ThrowsException<ArgumentException>(() =>
+            new IrInvoke(null, MathAbsInt, nullConditional: true, new IrConstant(1, typeof(int))));
+    }
+
+    [TestMethod]
+    public void NameHints_KeywordAndDuplicateHintsFallBackToGeneratedNames()
+    {
+        // "class" is a C# keyword and the two "x" hints collide: only the first "x" is
+        // honored; the others get generated names so the emitted code compiles.
+        var keyword = new IrLocal(typeof(int), "class");
+        var x1 = new IrLocal(typeof(int), "x");
+        var x2 = new IrLocal(typeof(int), "x");
+        var lambda = new IrLambda([keyword, x1, x2], x2);
+
+        var emitter = CreateEmitter();
+        var body = emitter.EmitBodyBlock(lambda).Replace("\r\n", "\n");
+        var names = emitter.GetParameterNames(lambda);
+
+        Assert.AreEqual("x", names[1]);
+        Assert.AreNotEqual("class", names[0]);
+        Assert.AreNotEqual("x", names[2]);
+        CollectionAssert.AllItemsAreUnique(names.ToList());
+        Assert.AreEqual($"{{\n    return {names[2]};\n}}", body);
+    }
+
+    [TestMethod]
+    public void Constant_BoxedDefaultStructValue_PrintsDefault()
+    {
+        // default(DateTime) has no C# literal; boxed default struct values print as
+        // "default", exactly like the previous pipeline's IsObjectNullOrDefault handling.
+        var constant = new IrConstant(default(DateTime), typeof(object));
+
+        Assert.AreEqual(
+            "{\n    return default;\n}",
+            EmitBody(new IrLambda([], constant)));
+    }
+
+    [TestMethod]
     public void Validation_ConstructorsThrowOnInvalidInput()
     {
-        // IrCall: argument count must match the method's parameter count.
+        // IrInvoke: argument count must match the method's parameter count.
         Assert.ThrowsException<ArgumentException>(() =>
-            new IrCall(null, MathAbsInt, new IrConstant(1, typeof(int)), new IrConstant(2, typeof(int))));
+            new IrInvoke(null, MathAbsInt, new IrConstant(1, typeof(int)), new IrConstant(2, typeof(int))));
 
         // IrCast: no C# conversion exists between bool and decimal (and neither side is
         // `object`, which would otherwise defer the check to print time).

@@ -33,29 +33,11 @@ internal sealed class IrConstant : IrExpression
 }
 
 /// <summary>
-/// The C# <c>default</c> value for a type, printed as <c>null</c> for nullable types and
-/// <c>default(T)</c> otherwise.
+/// The C# <c>default</c> value for a type, printed as <c>null</c> for any type that can hold
+/// null (reference types and <see cref="Nullable{T}"/>) and <c>default(T)</c> for other
+/// value types.
 /// </summary>
 internal sealed class IrDefault(Type type) : IrExpression
 {
     public override Type Type { get; } = type;
-}
-
-/// <summary>
-/// Throws an exception. Used only for the generator's error-recovery stubs; carries a result
-/// type so it can stand in for an expression of any type.
-/// </summary>
-internal sealed class IrThrow : IrExpression
-{
-    public IrThrow(IrExpression exception, Type resultType)
-    {
-        if (!typeof(Exception).IsAssignableFrom(exception.Type))
-            throw new ArgumentException($"Throw operand must be an Exception, not {exception.Type}.");
-        Exception = exception;
-        Type = resultType;
-    }
-
-    public IrExpression Exception { get; }
-
-    public override Type Type { get; }
 }
