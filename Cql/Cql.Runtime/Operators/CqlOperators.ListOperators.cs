@@ -8,6 +8,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 
@@ -43,6 +44,7 @@ namespace Hl7.Cql.Operators
             if (source == null)
                 return null;
             var result = new List<object?>();
+            var seen = new HashSet<object>(EqualityComparer);
             var nullAdded = false;
             foreach (object? item in source)
             {
@@ -54,15 +56,12 @@ namespace Hl7.Cql.Operators
                         nullAdded = true;
                     }
                 }
-                else if (!result!.Contains(item!, EqualityComparer!))
+                else if (seen.Add(item))
                 {
-                    result.Add(item!);
+                    result.Add(item);
                 }
             }
-            var asT = result
-                .Cast<T>()
-                .ToArray();
-            return asT;
+            return result.CastToArray<object?, T>();
         }
 
         #endregion
