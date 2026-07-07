@@ -99,15 +99,44 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// Invalidates the current cache, forcing subsequent operations to use fresh data.
         /// </summary>
+        /// <param name="initialCapacity">The initial capacity of the definition/expression memoization cache.
+        /// Sizing this to (an upper bound of) the number of definitions/expressions expected to be cached during
+        /// the evaluation avoids internal resizing of the cache. Must be at least <see cref="MinimumCacheInitialCapacity"/>.
+        /// Defaults to <see cref="CacheInitialCapacity"/>.</param>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="initialCapacity"/> is less than
+        /// <see cref="MinimumCacheInitialCapacity"/>.</exception>
         /// <remarks>Call this method to clear any cached data and ensure that future operations do not use stale
         /// information. This is useful when the underlying data source has changed and the cache needs to be
         /// refreshed.</remarks>
-        public void UseNewCache()
+        public void UseNewCache(int initialCapacity = CacheInitialCapacity)
         {
-            _cache = new ConcurrentDictionary<long, object?>();
+            if (initialCapacity < MinimumCacheInitialCapacity)
+                throw new ArgumentOutOfRangeException(
+                    nameof(initialCapacity),
+                    initialCapacity,
+                    $"The initial cache capacity must be at least {MinimumCacheInitialCapacity}.");
+
+            // A fresh cache is populated by mostly-sequential definition evaluation, so use a single
+            // lock (concurrencyLevel: 1) and pre-size it to avoid repeated resizes, which acquire
+            // all internal locks and dominated the write cost with the default settings.
+            _cache = new ConcurrentDictionary<long, object?>(concurrencyLevel: 1, capacity: initialCapacity);
             _cacheCallCount = 0;
             _cacheFactoryInvocations = 0;
         }
+
+        /// <summary>
+        /// The default initial capacity of the definition/expression memoization cache. Sized to hold the
+        /// cached results of a typical measure evaluation (all definitions across all libraries in
+        /// a library set) without internal resizing.
+        /// </summary>
+        public const int CacheInitialCapacity = 1024;
+
+        /// <summary>
+        /// The smallest initial capacity accepted by <see cref="UseNewCache(int)"/>. Values below this are
+        /// rejected because they defeat the purpose of pre-sizing the cache: it would immediately need to be
+        /// resized as definitions/expressions are evaluated.
+        /// </summary>
+        public const int MinimumCacheInitialCapacity = 16;
 
         /// <summary>
         /// Disables caching for subsequent operations by resetting the cache state.
