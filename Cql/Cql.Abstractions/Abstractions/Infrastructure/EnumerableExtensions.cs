@@ -118,6 +118,18 @@ internal static class EnumerableExtensions
             : SelectEnumerableToArray(source, sourceLength, ConvertFuncIncludeOrdinal(select));
 
     /// <summary>
+    /// Casts each element of a read-only collection into a new array, without the per-call
+    /// lambda/iterator overhead of <c>source.Cast&lt;T&gt;().ToArray()</c>.
+    /// </summary>
+    /// <typeparam name="TIn">The type of elements in the source collection.</typeparam>
+    /// <typeparam name="T">The type of elements in the resulting array.</typeparam>
+    /// <param name="source">The source read-only collection.</param>
+    /// <returns>An array that contains the elements of <paramref name="source"/> cast to <typeparamref name="T"/>.</returns>
+    [DebuggerStepThrough]
+    public static T[] CastToArray<TIn, T>(this IReadOnlyCollection<TIn> source) =>
+        source.SelectToArray(static x => (T)(object?)x!);
+
+    /// <summary>
     /// Converts a function that includes an ordinal parameter to one that excludes it.
     /// </summary>
     /// <typeparam name="TIn">The type of elements in the source collection.</typeparam>
