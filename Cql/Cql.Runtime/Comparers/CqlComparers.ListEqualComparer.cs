@@ -121,5 +121,17 @@ partial class CqlComparers
 
             return true;
         }
+
+        protected override int GetHashCodeValue(IEnumerable value)
+        {
+            int hash = typeof(IEnumerable).GetHashCode();
+            var i = 1;
+            foreach (var x in value)
+            {
+                hash ^= i++ ^ elementComparer.GetHashCode(x);
+            }
+
+            return hash;
+        }
     }
 }

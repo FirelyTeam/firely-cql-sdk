@@ -27,6 +27,18 @@ partial class CqlComparers
 
         private readonly IEqualityComparer<CqlCode> _codeEquivalenceComparerNoPrecision = NewCodeEquivalenceComparer(codeComparer, null);
 
+        /// <summary>
+        /// Caches the codes of a <see cref="CqlConcept"/>, sorted by <see cref="CqlCode.code"/>, keyed by
+        /// reference identity. <see cref="CqlConcept.codes"/> is <c>init</c>-only, so a given instance's
+        /// codes never change after construction -- the sorted array is safe to compute once and reuse
+        /// across every subsequent Compare/Equals call involving that instance (e.g. every hash-collision
+        /// check inside a hash-based Distinct/Union/Except over a list of concepts).
+        /// </summary>
+        private static readonly ConditionalWeakTable<CqlConcept, CqlCode[]> _sortedCodesCache = new();
+
+        private static CqlCode[] GetSortedCodes(CqlConcept concept) =>
+            _sortedCodesCache.GetValue(concept, static c => c.codes!.OrderBy(code => code.code).ToArray());
+
         protected override bool IsNull([NotNullWhen(false)] CqlConcept? value)
         {
             return value?.codes is null;
@@ -37,17 +49,16 @@ partial class CqlComparers
             CqlConcept y,
             string? precision)
         {
-            var xCodes = x.codes!.OrderBy(code => code.code).ToArray();
-            var yCodes = y.codes!.OrderBy(code => code.code).ToArray();
+            var xCodes = GetSortedCodes(x);
+            var yCodes = GetSortedCodes(y);
 
             if (xCodes.Length != yCodes.Length)
                 return xCodes.Length - yCodes.Length;
 
             for (int i = 0; i < xCodes.Length; i++)
             {
-                // Remark: ElementAtOrDefault(i) is used to handle the case where the two arrays are not the same length
-                var xCode = xCodes.ElementAtOrDefault(i);
-                var yCode = yCodes.ElementAtOrDefault(i);
+                var xCode = xCodes[i];
+                var yCode = yCodes[i];
                 var compare = codeComparer.Compare(xCode, yCode, precision);
                 if (compare != 0)
                     return compare;
