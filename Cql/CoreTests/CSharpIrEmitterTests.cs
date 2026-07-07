@@ -56,12 +56,19 @@ internal static class CSharpIrEmitterTestHelpers
 [TestClass]
 public class CSharpIrEmitterTests
 {
+    /// <summary>Test stand-in for the scaffolding writer's naming conventions.</summary>
+    private sealed class TestNamingConventions : ICSharpNamingConventions
+    {
+        public string TupleMetadataFieldName(Type tupleType) => "CqlTupleMetadata_TEST";
+
+        public string DefinitionTarget(IrDefinitionCall dc) => dc.IsLocalLibrary
+            ? $"this.{dc.DefinitionName}"
+            : $"{dc.LibraryName}_{dc.LibraryVersion.Replace('.', '_')}.Instance.{dc.DefinitionName}";
+    }
+
     private static CSharpIrEmitter CreateEmitter() => new(
         new TypeToCSharpConverter(),
-        tupleMetadataFieldName: t => "CqlTupleMetadata_TEST",
-        definitionTarget: dc => dc.IsLocalLibrary
-            ? $"this.{dc.DefinitionName}"
-            : $"{dc.LibraryName}_{dc.LibraryVersion.Replace('.', '_')}.Instance.{dc.DefinitionName}");
+        new TestNamingConventions());
 
     /// <summary>Emits a definition body and normalizes line endings so assertions are stable
     /// across checkouts with different <c>core.autocrlf</c> settings.</summary>

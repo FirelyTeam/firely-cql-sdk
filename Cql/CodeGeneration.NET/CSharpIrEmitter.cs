@@ -33,24 +33,18 @@ namespace Hl7.Cql.CodeGeneration.NET;
 internal partial class CSharpIrEmitter
 {
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
-    private readonly Func<Type, string> _tupleMetadataFieldName;
-    private readonly Func<IrDefinitionCall, string> _definitionTarget;
+    private readonly ICSharpNamingConventions _namingConventions;
 
     /// <param name="typeToCSharpConverter">Renders .NET types as C# type syntax.</param>
-    /// <param name="tupleMetadataFieldName">Returns the name of the generated
-    /// <c>CqlTupleMetadata_…</c> field for a tuple type (provided by the library scaffolding
-    /// writer, which emits those fields).</param>
-    /// <param name="definitionTarget">Returns the invocation target for a definition call,
-    /// e.g. <c>this.Foo</c> or <c>FHIRHelpers_4_0_001.Instance.ToCode</c> (provided by the
-    /// scaffolding writer, which owns identifier normalization and class naming).</param>
+    /// <param name="namingConventions">The generated-class naming conventions the printed
+    /// bodies must agree with (see <see cref="ICSharpNamingConventions"/>); provided by the
+    /// library scaffolding writer.</param>
     public CSharpIrEmitter(
         TypeToCSharpConverter typeToCSharpConverter,
-        Func<Type, string> tupleMetadataFieldName,
-        Func<IrDefinitionCall, string> definitionTarget)
+        ICSharpNamingConventions namingConventions)
     {
         _typeToCSharpConverter = typeToCSharpConverter;
-        _tupleMetadataFieldName = tupleMetadataFieldName;
-        _definitionTarget = definitionTarget;
+        _namingConventions = namingConventions;
     }
 
     /// <summary>

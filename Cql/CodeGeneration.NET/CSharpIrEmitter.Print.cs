@@ -102,7 +102,7 @@ internal partial class CSharpIrEmitter
     private string PrintDefinitionCall(IrDefinitionCall call, Func<IrExpression, Atom> child)
     {
         var arguments = string.Join(", ", call.Arguments.Select(a => child(a).Code));
-        return $"{_definitionTarget(call)}({arguments})";
+        return $"{_namingConventions.DefinitionTarget(call)}({arguments})";
     }
 
     private string PrintProperty(IrProperty property, Func<IrExpression, Atom> child)
@@ -199,7 +199,7 @@ internal partial class CSharpIrEmitter
     private string PrintTupleInit(IrTupleInit tupleInit, Func<IrExpression, Atom> child)
     {
         var elements = string.Join(", ", tupleInit.Elements.Select(e => child(e.Value).Code));
-        return $"({_tupleMetadataFieldName(tupleInit.Type)}, {elements})";
+        return $"({_namingConventions.TupleMetadataFieldName(tupleInit.Type)}, {elements})";
     }
 
     private string PrintNewArray(IrNewArray newArray, Func<IrExpression, Atom> child)
