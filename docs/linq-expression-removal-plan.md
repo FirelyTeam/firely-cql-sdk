@@ -111,6 +111,12 @@ as native `if`/`else`.
 
 ## Phases
 
+Phase branches are reviewed via PRs against the aggregation branch
+`feature/linq-expr-removal` (cut from develop), not against develop directly; the feature
+branch merges to develop once the migration is complete (or at a reviewed intermediate
+milestone). Phases 0–1 predate this and were merged to develop directly — they were
+standalone fixes.
+
 | Phase | Work | Status |
 |---|---|---|
 | 0 | Delete dead visitors; golden regeneration tests over `LibrarySets\` corpora | ✅ merged (#1311) |
