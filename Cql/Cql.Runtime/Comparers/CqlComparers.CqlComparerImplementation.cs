@@ -190,30 +190,17 @@ partial class CqlComparers : CqlComparer<object>
     {
         var xType = GetKeyTypeForComparers(value);
 
-        if (Comparers.TryGetValue(xType, out var comparer))
-        {
-            return comparer.GetHashCode(value);
-        }
-
-        if (value is IEnumerable<object> enumerable)
-        {
-            int hash = typeof(IEnumerable).GetHashCode();
-            var i = 1;
-            foreach (var x in enumerable)
-            {
-                hash ^= i ^ GetHashCode(x);
-            }
-
-            return hash;
-        }
-
-        // Fall back to the same resolution Compare/Equals/Equivalent already use (via
-        // SelectComparer): generic-factory registrations (e.g. KeyValuePair<,>) and the BaseType
-        // walk, memoized the same way SelectComparer memoizes for its other callers. Passing xType
-        // itself (not xType.BaseType) matters: SelectComparer's own dictionary check and its
-        // memoize-on-resolve both key off the type passed in, so calling it with the BaseType would
-        // both skip the generic-factory branch entirely and memoize onto the wrong (already-registered
-        // ancestor) type instead of onto xType.
+        // Always resolve through SelectComparer -- the exact same resolution Compare/Equals/
+        // Equivalent use (direct registration, generic-factory registrations like KeyValuePair<,>,
+        // and the BaseType walk), memoized the same way. Deliberately NOT special-cased with a
+        // direct Comparers.TryGetValue check here first: SelectComparer's Compare-path memoization
+        // can populate Comparers[xType] with ListEqualComparer for any IEnumerable type (e.g.
+        // List<int>) the first time it's merely Compared/Equals-checked, before it's ever hashed --
+        // a direct-hit fast path here would then serve that memoized entry for GetHashCode too,
+        // which only works correctly if the resolved comparer's own GetHashCodeValue is consistent
+        // with its Equals (true for ListEqualComparer, which computes a structural hash -- but this
+        // single, unconditional call site is what guarantees that invariant instead of relying on
+        // callers to special-case IEnumerable before it can be poisoned by memoization).
         if (SelectComparer(value, xType) is { } resolvedComparer)
         {
             return resolvedComparer.GetHashCode(value);

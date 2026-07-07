@@ -118,16 +118,39 @@ internal static class EnumerableExtensions
             : SelectEnumerableToArray(source, sourceLength, ConvertFuncIncludeOrdinal(select));
 
     /// <summary>
-    /// Casts each element of a read-only collection into a new array, without the per-call
-    /// lambda/iterator overhead of <c>source.Cast&lt;T&gt;().ToArray()</c>.
+    /// Casts each element of a read-only collection into a new, pre-sized array.
     /// </summary>
+    /// <remarks>
+    /// Unlike <c>source.Cast&lt;T&gt;().ToArray()</c> -- whose <c>Cast&lt;T&gt;()</c> iterator can't expose its
+    /// count, so <c>ToArray()</c> falls back to a growing/copying buffer -- this allocates the result array
+    /// once, since <paramref name="source"/>'s count is already known, and casts directly in a loop rather than
+    /// through a per-element delegate (unlike <see cref="SelectToArray{TIn,T}(IReadOnlyCollection{TIn},Func{TIn,T})"/>,
+    /// which this intentionally does not call, to avoid its per-call delegate-wrapping/invocation overhead for a
+    /// plain cast). If <typeparamref name="TIn"/> is a value type, each element is still boxed by the cast to
+    /// <see cref="object"/> before being cast to <typeparamref name="T"/> -- casting between two unrelated
+    /// generic type parameters requires going through <see cref="object"/>, regardless of implementation.
+    /// </remarks>
     /// <typeparam name="TIn">The type of elements in the source collection.</typeparam>
     /// <typeparam name="T">The type of elements in the resulting array.</typeparam>
     /// <param name="source">The source read-only collection.</param>
     /// <returns>An array that contains the elements of <paramref name="source"/> cast to <typeparamref name="T"/>.</returns>
     [DebuggerStepThrough]
-    public static T[] CastToArray<TIn, T>(this IReadOnlyCollection<TIn> source) =>
-        source.SelectToArray(static x => (T)(object?)x!);
+    public static T[] CastToArray<TIn, T>(this IReadOnlyCollection<TIn> source)
+    {
+        var result = new T[source.Count];
+        if (source is TIn[] sourceArray)
+        {
+            for (var i = 0; i < sourceArray.Length; i++)
+                result[i] = (T)(object?)sourceArray[i]!;
+        }
+        else
+        {
+            var i = 0;
+            foreach (var item in source)
+                result[i++] = (T)(object?)item!;
+        }
+        return result;
+    }
 
     /// <summary>
     /// Converts a function that includes an ordinal parameter to one that excludes it.

@@ -84,6 +84,33 @@ public class CqlComparersTests
     }
 
     /// <summary>
+    /// Regression test for a PR review finding: a value-type-element sequence like
+    /// <c>List&lt;int&gt;</c> doesn't satisfy <c>IEnumerable&lt;object&gt;</c> (no reference-type
+    /// covariance for <c>int</c>), so the <c>GetHashCodeValue</c> fallback's IEnumerable fast path
+    /// (originally checking <c>IEnumerable&lt;object&gt;</c>) would miss it, falling through to
+    /// <c>SelectComparer</c>, which resolves it to <c>ListEqualComparer</c> (registered for plain
+    /// <c>IEnumerable</c>) -- a comparer with structural Compare/Equals but no
+    /// <c>GetHashCodeValue</c> override, silently inheriting the reference-identity hash. Two
+    /// distinct-but-structurally-equal lists would then compare equal but hash differently.
+    /// </summary>
+    [TestMethod]
+    public void ValueTypeElementList_GetHashCode_IsStructurallyConsistentWithEquals()
+    {
+        var comparers = new CqlComparers();
+
+        var a = new List<int> { 1, 2, 3 };
+        var b = new List<int> { 1, 2, 3 };
+        var c = new List<int> { 1, 2, 4 };
+
+        Assert.AreNotSame(a, b);
+        Assert.AreEqual(true, comparers.Equals(a, b, null));
+        Assert.AreEqual(false, comparers.Equals(a, c, null));
+
+        Assert.AreEqual(comparers.GetHashCode(a), comparers.GetHashCode(b));
+        Assert.AreNotEqual(comparers.GetHashCode(a), comparers.GetHashCode(c));
+    }
+
+    /// <summary>
     /// A HashSet using CqlComparers as its comparer is exactly how CqlOperators.Distinct/Union/
     /// Except behave -- this proves an unregistered-but-inheriting type can be deduplicated via
     /// hashing end-to-end, not just via the two APIs in isolation.
