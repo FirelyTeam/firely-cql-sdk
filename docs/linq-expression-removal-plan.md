@@ -121,6 +121,12 @@ as native `if`/`else`.
 | 5 | Dual-pipeline flag, golden diffs across all corpora + full suites, flip default | |
 | 6 | Delete the Expression-based builder/binder/visitors/custom expressions; bump generator version | |
 
+Post-parity cleanups (once the old pipeline is gone and byte-identical output no longer
+constrains the emitter): multi-branch conditionals whose branches are all simple can print as
+C# `switch` expressions instead of `if`/`else if` chains (statement form stays as the general
+fallback for branches that hoist locals), and the printing backend itself is swappable — e.g.
+emitting Roslyn syntax trees from the IR for normalized formatting.
+
 ### Findings from phases 0–1
 
 - Routing tests through the C# path immediately exposed two real generator bugs that
