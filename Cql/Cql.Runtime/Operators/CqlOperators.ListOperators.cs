@@ -43,6 +43,7 @@ namespace Hl7.Cql.Operators
             if (source == null)
                 return null;
             var result = new List<object?>();
+            var seen = new HashSet<object>(EqualityComparer!);
             var nullAdded = false;
             foreach (object? item in source)
             {
@@ -54,7 +55,7 @@ namespace Hl7.Cql.Operators
                         nullAdded = true;
                     }
                 }
-                else if (!result!.Contains(item!, EqualityComparer!))
+                else if (seen.Add(item!))
                 {
                     result.Add(item!);
                 }

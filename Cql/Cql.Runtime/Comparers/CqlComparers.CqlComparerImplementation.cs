@@ -59,9 +59,22 @@ partial class CqlComparers : CqlComparer<object>
 
     private ICqlComparer? SelectComparer(object x, Type xType)
     {
-        ICqlComparer? comparer = null;
-
         if (Comparers.TryGetValue(xType, out var c)) return c;
+
+        var comparer = SelectComparerUncached(x, xType);
+
+        // Memoize a comparer resolved via the BaseType walk (below) onto the originally-queried
+        // type, so later comparisons of this exact type hit the dictionary directly instead of
+        // re-walking the inheritance chain every time.
+        if (comparer is not null)
+            Comparers.TryAdd(xType, comparer);
+
+        return comparer;
+    }
+
+    private ICqlComparer? SelectComparerUncached(object x, Type xType)
+    {
+        ICqlComparer? comparer = null;
 
         if (xType.IsGenericType)
         {
@@ -82,7 +95,7 @@ partial class CqlComparers : CqlComparer<object>
             comparer = listComparer;
         }
 
-        if(comparer is null && xType.BaseType is not null)
+        if (comparer is null && xType.BaseType is not null)
             comparer = SelectComparer(x, xType.BaseType);
 
         return comparer;
@@ -91,8 +104,12 @@ partial class CqlComparers : CqlComparer<object>
     private bool ShouldSwapTypes(Type xType, Type yType)
     {
         Debug.Assert(xType != yType, "xType and yType must not be the same.");
-        var shouldSwapTypes = _shouldTypeSwapPredicates.Any(p => p.ShouldSwap(xType, yType));
-        return shouldSwapTypes;
+        foreach (var p in _shouldTypeSwapPredicates)
+        {
+            if (p.ShouldSwap(xType, yType))
+                return true;
+        }
+        return false;
     }
 
     protected override bool EquivalentValues(
@@ -188,6 +205,14 @@ partial class CqlComparers : CqlComparer<object>
             }
 
             return hash;
+        }
+
+        // Fall back to the same BaseType-walk resolution Compare/Equals/Equivalent already use
+        // (via SelectComparer), so a type only reachable via an ancestor registration can still be
+        // hashed instead of throwing here while comparing/equating it successfully elsewhere.
+        if (xType.BaseType is not null && SelectComparer(value, xType.BaseType) is { } baseComparer)
+        {
+            return baseComparer.GetHashCode(value);
         }
 
         throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(value));
