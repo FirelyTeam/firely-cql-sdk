@@ -69,3 +69,4 @@
 | [#1317](https://github.com/FirelyTeam/firely-cql-sdk/pull/1317) | Collapse single-type ELM choice types to concrete type                                    |
 | [#1323](https://github.com/FirelyTeam/firely-cql-sdk/pull/1323) | Optimize RunLibrary/SelectResults hot path: value set fast path, direct-delegate invoker, cache tuning (-40%) |
 | [#1327](https://github.com/FirelyTeam/firely-cql-sdk/pull/1327) | Fix O(n²) Distinct and comparer dispatch hot paths (#1324)                                |
+| [#1330](https://github.com/FirelyTeam/firely-cql-sdk/pull/1330) | Update the next release package version from 2.9.0 to 2.9.1 (#1329)                       |
