@@ -17,8 +17,10 @@ internal sealed class IrConditional : IrExpression
 {
     public IrConditional(IrExpression test, IrExpression ifTrue, IrExpression ifFalse, Type type)
     {
-        if (test.Type != typeof(bool) && test.Type != typeof(bool?))
-            throw new ArgumentException($"Conditional test must be bool or bool?, not {test.Type}.");
+        // bool, not bool?: the builder coerces CQL's three-valued logic to bool before
+        // testing, exactly as it had to for Expression.Condition.
+        if (test.Type != typeof(bool))
+            throw new ArgumentException($"Conditional test must be bool, not {test.Type}.");
         IrTypeRules.ValidateAssignment(ifTrue, type, "Conditional true branch");
         IrTypeRules.ValidateAssignment(ifFalse, type, "Conditional false branch");
 
@@ -51,8 +53,8 @@ internal sealed class IrIfChain : IrExpression
             throw new ArgumentException("An if-chain requires at least one case.");
         foreach (var (when, then) in cases)
         {
-            if (when.Type != typeof(bool) && when.Type != typeof(bool?))
-                throw new ArgumentException($"If-chain condition must be bool or bool?, not {when.Type}.");
+            if (when.Type != typeof(bool))
+                throw new ArgumentException($"If-chain condition must be bool, not {when.Type}.");
             IrTypeRules.ValidateAssignment(then, type, "If-chain case value");
         }
         IrTypeRules.ValidateAssignment(@else, type, "If-chain else value");
