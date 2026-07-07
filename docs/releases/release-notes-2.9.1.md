@@ -4,9 +4,9 @@
 
 > **Upgrading?** Here is the short version:
 >
-> - **Breaking changes:** None.
-> - **Required migrations:** None.
-> - **Highlights:** Significant runtime performance improvements to `RunLibrary`/`SelectResults` and to `CqlComparers`/`CqlOperators` (notably `Distinct`), plus a fix for ELM choice-type handling in generated code. This release contains no correctness or behavior changes to CQL evaluation results.
+> - **Breaking changes:** The CQL Packager's default fixed canonical URL for `FHIRHelpers` changed from `https://fhir.org/guides/cqf/common/Library/FHIRHelpers` to `http://hl7.org/fhir/uv/cql/Library/FHIRHelpers`.
+> - **Required migrations:** If you rely on the Packager's previous default `FHIRHelpers` canonical, set it explicitly via `FixedLibraryCanonicals` in your Packager configuration.
+> - **Highlights:** Significant runtime performance improvements to `RunLibrary`/`SelectResults` and to `CqlComparers`/`CqlOperators` (notably `Distinct`), plus a fix for ELM choice-type handling in generated code. Aside from the `FHIRHelpers` canonical default noted above, this release contains no correctness or behavior changes to CQL evaluation results.
 
 ---
 
@@ -36,7 +36,7 @@
 
 #### Breaking
 
-- None.
+- Changed the default fixed canonical URL for `FHIRHelpers` from `https://fhir.org/guides/cqf/common/Library/FHIRHelpers` to `http://hl7.org/fhir/uv/cql/Library/FHIRHelpers` (the CQL IG canonical) in `PackagingToolkitConfig.CreateDefaultFixedLibraryCanonicals()`. The matching example in `Hl7.Cql.Packager.appsettings.json` was updated to stay consistent. If you depend on the previous default, override it explicitly via `FixedLibraryCanonicals` (#1312).
 
 #### Improvements
 
@@ -58,7 +58,8 @@
 
 ### Upgrade Checklist
 
-- No action required. This release is fully backward compatible with 2.9.0.
+1. If your build relies on the Packager's previous default `FHIRHelpers` fixed canonical (`https://fhir.org/guides/cqf/common/Library/FHIRHelpers`), set it explicitly via `FixedLibraryCanonicals` in your Packager configuration — the default is now `http://hl7.org/fhir/uv/cql/Library/FHIRHelpers`.
+2. No other action required.
 
 ---
 
@@ -66,6 +67,7 @@
 
 | PR                                                              | Title                                                                                    |
 | ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| [#1312](https://github.com/FirelyTeam/firely-cql-sdk/pull/1312) | Update default FHIRHelpers canonical URL to hl7.org/fhir/uv/cql                            |
 | [#1317](https://github.com/FirelyTeam/firely-cql-sdk/pull/1317) | Collapse single-type ELM choice types to concrete type                                    |
 | [#1323](https://github.com/FirelyTeam/firely-cql-sdk/pull/1323) | Optimize RunLibrary/SelectResults hot path: value set fast path, direct-delegate invoker, cache tuning (-40%) |
 | [#1327](https://github.com/FirelyTeam/firely-cql-sdk/pull/1327) | Fix O(n²) Distinct and comparer dispatch hot paths (#1324)                                |
