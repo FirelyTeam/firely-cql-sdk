@@ -60,9 +60,9 @@ namespace Hl7.Cql.Operators
                     result.Add(item!);
                 }
             }
-            var asT = result
-                .Cast<T>()
-                .ToArray();
+            var asT = new T[result.Count];
+            for (var i = 0; i < result.Count; i++)
+                asT[i] = (T)result[i]!;
             return asT;
         }
 
