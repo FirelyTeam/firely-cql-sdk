@@ -66,3 +66,4 @@
 | ---------------------------------------------------------------- | --------------------------------------------------------------------- |
 | [#1335](https://github.com/FirelyTeam/firely-cql-sdk/pull/1335) | Upgrade cql-to-elm tooling: Java 3.29.0 -> Kotlin-based org.cqframework 4.0.0 |
 | [#1336](https://github.com/FirelyTeam/firely-cql-sdk/pull/1336) | Update Firely .NET SDK to 6.3.0                                        |
+| [#1338](https://github.com/FirelyTeam/firely-cql-sdk/pull/1338) | Set next release version to 2.9.2 (#1337)                              |
