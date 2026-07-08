@@ -51,6 +51,133 @@
 		<Box>$(Box.Replace({Text}, | $(BoxHeader){Text}&#10;| $(BoxFooter)))</Box>
 	</PropertyGroup>
 
+	<!--
+	The Kotlin-based cql-to-elm-cli (org.cqframework:cql-to-elm-cli, v4.0.0+) always writes
+	compact (non-indented) JSON: its ElmJsonLibraryWriter has no pretty-print option, and the
+	CLI exposes no flag to configure one (unlike the old Java 3.x tooling, which pretty-printed
+	by default). This inline task reformats the generated ELM JSON files so they stay readable
+	and diffable, without touching our own Hl7.Cql.Elm serialization.
+	-->
+	<UsingTask
+		TaskName="PrettyPrintJsonFiles"
+		TaskFactory="RoslynCodeTaskFactory"
+		AssemblyFile="$(MSBuildToolsPath)/Microsoft.Build.Tasks.Core.dll">
+		<ParameterGroup>
+			<Files ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+		</ParameterGroup>
+		<Task>
+			<Using Namespace="System.Collections.Generic" />
+			<Using Namespace="System.IO" />
+			<Using Namespace="System.Text" />
+			<Code Type="Fragment" Language="cs">
+<![CDATA[
+foreach (var file in Files)
+{
+    var path = file.ItemSpec;
+    var compactJson = File.ReadAllText(path);
+    var prettyJson = PrettyPrintJson(compactJson);
+
+    // Match the line ending previously written by the Java tooling's PrintWriter.println calls.
+    File.WriteAllText(path, prettyJson + "\r\n\r\n", new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
+
+    Log.LogMessage(MessageImportance.Low, $"Pretty-printed ELM JSON: {path}");
+}
+
+// Reformats compact JSON (as emitted by the Kotlin-based cql-to-elm-cli) into indented JSON,
+// matching the style previously produced by the old Java 3.x tooling (Jackson's default pretty
+// printer): objects are indented and multi-line, but arrays use a single fixed space as their
+// separator, e.g. `"def" : [ {`, `}, {`, `} ]`, so array brackets never introduce their own
+// indent level or newline - only the objects nested inside them do.
+//
+// Written by hand, scanning character-by-character, instead of depending on a JSON library:
+// referencing one (e.g. System.Text.Json) from a RoslynCodeTaskFactory inline task requires a
+// version- and SDK-install-path-specific assembly path, which isn't reliable across machines/CI.
+static string PrettyPrintJson(string json)
+{
+    const int indentSize = 3;
+    var sb = new StringBuilder(json.Length * 2);
+    var indent = 0;
+    var inString = false;
+    var escapeNext = false;
+    var containers = new Stack<char>(); // '{' or '[', one entry per currently-open container
+
+    for (var i = 0; i < json.Length; i++)
+    {
+        var c = json[i];
+
+        if (inString)
+        {
+            sb.Append(c);
+            if (escapeNext) escapeNext = false;
+            else if (c == '\\') escapeNext = true;
+            else if (c == '"') inString = false;
+            continue;
+        }
+
+        if (char.IsWhiteSpace(c)) continue;
+
+        switch (c)
+        {
+            case '"':
+                inString = true;
+                sb.Append(c);
+                break;
+            case '{':
+                if (i + 1 < json.Length && json[i + 1] == '}')
+                {
+                    sb.Append("{ }");
+                    i++;
+                }
+                else
+                {
+                    containers.Push('{');
+                    indent++;
+                    sb.Append('{').Append("\r\n").Append(' ', indent * indentSize);
+                }
+                break;
+            case '[':
+                if (i + 1 < json.Length && json[i + 1] == ']')
+                {
+                    sb.Append("[ ]");
+                    i++;
+                }
+                else
+                {
+                    containers.Push('[');
+                    sb.Append("[ ");
+                }
+                break;
+            case '}':
+                containers.Pop();
+                indent--;
+                sb.Append("\r\n").Append(' ', indent * indentSize).Append('}');
+                break;
+            case ']':
+                containers.Pop();
+                sb.Append(" ]");
+                break;
+            case ',':
+                if (containers.Count > 0 && containers.Peek() == '[')
+                    sb.Append(", ");
+                else
+                    sb.Append(',').Append("\r\n").Append(' ', indent * indentSize);
+                break;
+            case ':':
+                sb.Append(" : ");
+                break;
+            default:
+                sb.Append(c);
+                break;
+        }
+    }
+
+    return sb.ToString();
+}
+]]>
+			</Code>
+		</Task>
+	</UsingTask>
+
 	<!-- CQL to ELM -->
 	<ItemGroup>
 		<CqlFiles Include="$(CqlDirectory)/*.cql" />
@@ -104,6 +231,13 @@
       Lines="@(OutputOfExec)"
       Overwrite="true"
       Encoding="Unicode"/>
+
+		<!-- Reformat the generated ELM JSON, since the Kotlin-based CLI only emits compact JSON -->
+		<ItemGroup>
+			<GeneratedElmFiles Include="@(CqlFiles->'$(ElmDirectory)/%(FileName).json')" />
+		</ItemGroup>
+
+		<PrettyPrintJsonFiles Files="@(GeneratedElmFiles)" />
 
 		<!-- Set a property to indicate that the task ran -->
 		<CreateProperty
