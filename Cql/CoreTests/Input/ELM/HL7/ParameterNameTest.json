@@ -1,10 +1,10 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.29.0",
+         "type" : "CqlToElmInfo",
+         "translatorVersion" : "4.0.0",
          "translatorOptions" : "EnableLocators,EnableResultTypes",
-         "signatureLevel" : "All",
-         "type" : "CqlToElmInfo"
+         "signatureLevel" : "All"
       } ],
       "identifier" : {
          "id" : "ParameterNameTest",
@@ -23,39 +23,39 @@
       },
       "statements" : {
          "def" : [ {
+            "type" : "FunctionDef",
             "locator" : "4:1-5:26",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Test Function",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
-            "type" : "FunctionDef",
             "annotation" : [ ],
             "expression" : {
+               "type" : "Add",
                "locator" : "5:3-5:26",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-               "type" : "Add",
                "annotation" : [ ],
                "signature" : [ {
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "annotation" : [ ]
                }, {
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "annotation" : [ ]
                } ],
                "operand" : [ {
+                  "type" : "OperandRef",
                   "locator" : "5:3-5:21",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "param with spaces",
-                  "type" : "OperandRef",
                   "annotation" : [ ]
                }, {
+                  "type" : "Literal",
                   "locator" : "5:25-5:26",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "10",
-                  "type" : "Literal",
                   "annotation" : [ ]
                } ]
             },
@@ -63,57 +63,57 @@
                "name" : "param with spaces",
                "annotation" : [ ],
                "operandTypeSpecifier" : {
+                  "type" : "NamedTypeSpecifier",
                   "locator" : "4:53-4:59",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier",
                   "annotation" : [ ]
                }
             }, {
                "name" : "normalParam",
                "annotation" : [ ],
                "operandTypeSpecifier" : {
+                  "type" : "NamedTypeSpecifier",
                   "locator" : "4:74-4:79",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier",
                   "annotation" : [ ]
                }
             } ]
          }, {
+            "type" : "FunctionDef",
             "locator" : "8:1-9:27",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "Another Test",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
-            "type" : "FunctionDef",
             "annotation" : [ ],
             "expression" : {
+               "type" : "Multiply",
                "locator" : "9:3-9:27",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
-               "type" : "Multiply",
                "annotation" : [ ],
                "signature" : [ {
-                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "annotation" : [ ]
                }, {
-                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "annotation" : [ ]
                } ],
                "operand" : [ {
+                  "type" : "OperandRef",
                   "locator" : "9:3-9:21",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "name" : "param-with-dashes",
-                  "type" : "OperandRef",
                   "annotation" : [ ]
                }, {
+                  "type" : "Literal",
                   "locator" : "9:25-9:27",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "value" : "2.0",
-                  "type" : "Literal",
                   "annotation" : [ ]
                } ]
             },
@@ -121,47 +121,47 @@
                "name" : "param-with-dashes",
                "annotation" : [ ],
                "operandTypeSpecifier" : {
+                  "type" : "NamedTypeSpecifier",
                   "locator" : "8:52-8:58",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
-                  "type" : "NamedTypeSpecifier",
                   "annotation" : [ ]
                }
             } ]
          }, {
+            "type" : "FunctionDef",
             "locator" : "12:1-13:11",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Keyword Test",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
-            "type" : "FunctionDef",
             "annotation" : [ ],
             "expression" : {
+               "type" : "Add",
                "locator" : "13:3-13:11",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-               "type" : "Add",
                "annotation" : [ ],
                "signature" : [ {
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "annotation" : [ ]
                }, {
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "annotation" : [ ]
                } ],
                "operand" : [ {
+                  "type" : "OperandRef",
                   "locator" : "13:3-13:7",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "int",
-                  "type" : "OperandRef",
                   "annotation" : [ ]
                }, {
+                  "type" : "Literal",
                   "locator" : "13:11",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
-                  "type" : "Literal",
                   "annotation" : [ ]
                } ]
             },
@@ -169,30 +169,30 @@
                "name" : "int",
                "annotation" : [ ],
                "operandTypeSpecifier" : {
+                  "type" : "NamedTypeSpecifier",
                   "locator" : "12:38-12:44",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier",
                   "annotation" : [ ]
                }
             }, {
                "name" : "ref",
                "annotation" : [ ],
                "operandTypeSpecifier" : {
+                  "type" : "NamedTypeSpecifier",
                   "locator" : "12:53-12:58",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier",
                   "annotation" : [ ]
                }
             }, {
                "name" : "class",
                "annotation" : [ ],
                "operandTypeSpecifier" : {
+                  "type" : "NamedTypeSpecifier",
                   "locator" : "12:69-12:75",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier",
                   "annotation" : [ ]
                }
             } ]
