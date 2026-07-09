@@ -15,7 +15,7 @@ using Hl7.Fhir.Utility;
 namespace Hl7.Cql.Compiler.Ir;
 
 /// <summary>
-/// IR counterpart of <see cref="CqlOperatorsBinder.Conversions"/>: <see cref="TryConvert"/> and
+/// IR counterpart of <see cref="CqlOperatorsBinder"/>'s <c>.Conversions.cs</c> partial: <see cref="TryConvert"/> and
 /// the <see cref="TypeConversion"/> ranking. This is a mechanical port; see the remarks on
 /// <see cref="IrCqlOperatorsBinder"/>.
 /// </summary>
