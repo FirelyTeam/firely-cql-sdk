@@ -234,11 +234,12 @@ partial class IrCqlOperatorsBinder
                              argIndexForGenericMethod++) // Try to get generic type from argument up to the second one
                         {
                             var argType = args[argIndexForGenericMethod].Type;
-                            // NOTE(phase3): ported as-is, possible upstream bug: this indexes
-                            // methodParameters with `i` (the outer retry-pass index, 0 or 1),
-                            // not `argIndexForGenericMethod`. The old CqlOperatorsBinder.Bind.cs
+                            // NOTE(phase3): ported as-is, possible upstream bug (#1341): this
+                            // indexes methodParameters with `i` (the outer retry-pass index, 0 or
+                            // 1), not `argIndexForGenericMethod`. The old CqlOperatorsBinder.Bind.cs
                             // has the same indexing, so this is faithfully preserved rather than
-                            // "fixed" during the port -- the old behavior is the contract.
+                            // "fixed" during the port -- the old behavior is the contract until
+                            // golden parity is proven; fix after phase 6, in one place.
                             var parameterType = methodParameters[i].ParameterType;
                             var argIsGeneric = argType.IsGenericType;
                             var paramIsGeneric = parameterType.IsGenericMethodParameter;
