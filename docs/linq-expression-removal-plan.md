@@ -1,6 +1,11 @@
 # Replacing System.Linq.Expressions with a typed IR
 
-Status: **phases 0–1 merged** ([#1311](https://github.com/FirelyTeam/firely-cql-sdk/pull/1311)); phase 2 in progress.
+Status: **phases 0–1 merged** ([#1311](https://github.com/FirelyTeam/firely-cql-sdk/pull/1311));
+phases 2–4 implemented and in review as a stacked PR chain
+([#1331](https://github.com/FirelyTeam/firely-cql-sdk/pull/1331) →
+[#1340](https://github.com/FirelyTeam/firely-cql-sdk/pull/1340) →
+[#1344](https://github.com/FirelyTeam/firely-cql-sdk/pull/1344), aggregating onto
+`feature/linq-expr-removal`); phase 5 not started.
 
 ## Context
 
@@ -121,9 +126,9 @@ standalone fixes.
 |---|---|---|
 | 0 | Delete dead visitors; golden regeneration tests over `LibrarySets\` corpora | ✅ merged (#1311) |
 | 1 | Decouple tests from `Expression.Compile()`; cache metadata references in `AssemblyCompiler` | ✅ merged (#1311) |
-| 2 | Typed IR nodes + validating factories; `CSharpEmitter` reproducing current output | in progress |
-| 3 | Port `CqlOperatorsBinder` + partials onto the IR (algorithm unchanged) | |
-| 4 | Port `ExpressionBuilderContext` + partials (FHIRHelpers workarounds, choice types, query machinery) | |
+| 2 | Typed IR nodes + validating factories; `CSharpEmitter` reproducing current output | ✅ in review (#1331) |
+| 3 | Port `CqlOperatorsBinder` + partials onto the IR (algorithm unchanged) | ✅ in review (#1340) |
+| 4 | Port `ExpressionBuilderContext` + partials (FHIRHelpers workarounds, choice types, query machinery) | ✅ in review (#1344) |
 | 5 | Dual-pipeline flag, golden diffs across all corpora + full suites, flip default | |
 | 6 | Delete the Expression-based builder/binder/visitors/custom expressions; bump generator version | |
 
@@ -132,6 +137,46 @@ constrains the emitter): multi-branch conditionals whose branches are all simple
 C# `switch` expressions instead of `if`/`else if` chains (statement form stays as the general
 fallback for branches that hoist locals), and the printing backend itself is swappable — e.g.
 emitting Roslyn syntax trees from the IR for normalized formatting.
+
+### Findings from phases 2–4
+
+- **The IR node set held.** The full builder port (all ELM constructs: queries, tuples,
+  retrieves, FHIR property null-propagation, definition/function calls) required **zero new
+  node kinds** and left no unresolved `FIXME(phase4-review)` markers — the ~18 kinds designed
+  in phase 2 from the `Expression.*` usage survey were sufficient. The first end-to-end
+  execution of the new pipeline (ten CQL constructs, `IrPipelineTests`) passed without a
+  single builder fix.
+- **Complication #3 (variable identity) was cheaper than predicted.** `IrLocal` reference
+  identity slotted in mechanically for `ParameterExpression` identity; the only subtlety
+  found was pre-existing (`WithToSelectManyBody` creates two same-alias parameters, #1343).
+- **More reuse than planned**: the exception-context machinery
+  (`IBuilderContext`/`ExpressionBuildingError`), the generic `DefinitionDictionary<T>`, and
+  `CqlOperatorsMethodsCache` are all Expression-free and shared by both pipelines instead of
+  duplicated.
+- **One deliberate shape change**: definition lambdas no longer carry an explicit
+  `CqlContext` parameter — the well-known `IrContextParameter.Instance` is referenced
+  directly, and `IrDefinitionCall` carries it as `arguments[0]`. Phase 5's
+  `DefinitionWriter` integration must account for this.
+- **Preserve-vs-fix policy, refined by practice**: anything that could change a *binding
+  outcome* is preserved bug-for-bug and tracked (#1341 generic-inference indexing, #1342
+  dead `Includes`/`IncludedIn` mismatch check, #1343); crash-path and diagnostics-only
+  defects may be fixed in the IR copy with a `NOTE` + issue (#1345 lists them for the old
+  binder, should it ever need the fixes before deletion).
+- **Phase-5 wiring landmine** (flagged during the LibraryDefs port): external-function
+  stubs register a `DefinitionSignature` with a synthetic leading context type inherited
+  from the old lambda shape — inert today, but whoever wires definition emission must not
+  key lookups off it.
+
+### Phase 6 checklist (accumulated `FIXME(phase6)` markers)
+
+- Unify the IR binder's `InvalidOperationException` + `FormatCannotBindMessage` with
+  `CannotBindToCqlOperatorError` (generalize the error type off `Expression[]`).
+- Relocate `CqlOperatorsMethodsCache` out of the deleted `CqlOperatorsBinder`.
+- Consolidate the duplicated assign-to-type helpers (`IrExpressionExtensions` vs. the
+  binder's private phase-3 copies).
+- Revisit `IrCodeDefinition.ReturnType` (parity-preserved `typeof(CqlCodeDefinition)`).
+- Fix the tracked upstream bugs in one place: #1341, #1342; review #1343; close #1345.
+- Remove the `NOTE(phase3)`/`NOTE(phase4)` markers as each is resolved.
 
 ### Findings from phases 0–1
 
