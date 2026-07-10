@@ -186,9 +186,10 @@ internal partial class CSharpIrEmitter
 
     private string PrintCast(IrCast cast, Func<IrExpression, Atom> child)
     {
-        // Boxing casts are dropped from the output (the C# compiler re-inserts the boxing),
-        // exactly like the old writer's StripBoxing.
-        if (cast is { Kind: IrCastKind.Cast, Type: var t } && t == typeof(object) && cast.Operand.Type.IsValueType)
+        // Casts to object are dropped from the output (the C# compiler re-inserts the
+        // boxing/upcast): the old writer's StripBoxing removed the value-typed ones and the
+        // old RedundantCastsTransformer the reference-typed ones — net effect, none survive.
+        if (cast.Type == typeof(object) && cast.Operand.Type != typeof(object))
             return child(cast.Operand).Code;
 
         var atom = child(cast.Operand);
@@ -241,13 +242,22 @@ internal partial class CSharpIrEmitter
 
     private static string PrintBinary(IrBinary binary, Func<IrExpression, Atom> child)
     {
+        // ((T?)a) ?? b, where a is a non-nullable T, reduces to just a — the old
+        // RedundantCastsTransformer's coalesce rule (the cast-then-coalesce contributes
+        // nothing once the value is known non-null).
+        if (binary is { Op: IrBinaryOp.Coalesce, Left: IrCast { Kind: IrCastKind.Cast } leftCast }
+            && Nullable.GetUnderlyingType(leftCast.Type) == leftCast.Operand.Type)
+            return child(leftCast.Operand).Code;
+
         var left = child(binary.Left).Code.ParenthesizeIfNeeded();
         var right = child(binary.Right).Code;
 
         return binary.Op switch
         {
-            IrBinaryOp.Equal when right == "null" => $"{left} is null",
-            IrBinaryOp.NotEqual when right == "null" => $"{left} is not null",
+            // "default" rewrites to "null" in patterns: a default literal is not a legal
+            // pattern (CS8505) — the old writer's rule.
+            IrBinaryOp.Equal when right is "null" or "default" => $"{left} is null",
+            IrBinaryOp.NotEqual when right is "null" or "default" => $"{left} is not null",
             IrBinaryOp.Equal => $"{left} == {right.ParenthesizeIfNeeded()}",
             IrBinaryOp.NotEqual => $"{left} != {right.ParenthesizeIfNeeded()}",
             IrBinaryOp.Coalesce => $"{left} ?? {right.ParenthesizeIfNeeded()}",
@@ -279,8 +289,20 @@ internal partial class CSharpIrEmitter
 
     private string PrintNewArray(IrNewArray newArray, Func<IrExpression, Atom> child)
     {
-        var items = string.Join(", ", newArray.Items.Select(i => child(i).Code));
-        return $"new {_typeToCSharpConverter.ToCSharp(newArray.ElementType)}[] {{ {items} }}";
+        // The old writer's collection-expression format: one element per line, each with a
+        // trailing comma.
+        if (newArray.Items.Count == 0)
+            return "[]";
+
+        var isb = new IndentedStringBuilder();
+        isb.AppendLine("[");
+        using (isb.Indent())
+        {
+            foreach (var item in newArray.Items)
+                isb.AppendLine($"{child(item).Code},");
+        }
+        isb.Append("]");
+        return isb;
     }
 
     /// <summary>

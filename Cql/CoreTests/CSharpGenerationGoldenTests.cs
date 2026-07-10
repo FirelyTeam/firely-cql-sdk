@@ -176,11 +176,13 @@ public class CSharpGenerationGoldenTests
             var generatedLine = i < generatedLines.Length ? generatedLines[i] : "<end of file>";
             if (goldenLine != generatedLine)
             {
-                var contextStart = Math.Max(0, i - 3);
-                var context = string.Join("\n", generatedLines.Skip(contextStart).Take(i - contextStart));
+                var contextStart = Math.Max(0, i - 8);
+                string Window(string[] lines) => string.Join("\n",
+                    lines.Skip(contextStart).Take(Math.Min(i + 4, lines.Length) - contextStart));
                 Assert.Fail(
                     $"Generated C# for {libraryIdentifier} differs from {goldenPath} at line {i + 1}:\n" +
-                    $"--- context (generated) ---\n{context}\n" +
+                    $"--- golden window ---\n{Window(goldenLines)}\n" +
+                    $"--- generated window ---\n{Window(generatedLines)}\n" +
                     $"--- golden    : {goldenLine}\n" +
                     $"--- generated : {generatedLine}");
             }

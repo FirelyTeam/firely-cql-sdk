@@ -115,9 +115,17 @@ internal partial class CSharpIrEmitter
         [.. lambda.Parameters.Select(p => _assignedNames.TryGetValue(p, out var n) ? n : p.NameHint ?? "?")];
 
     /// <summary>A linearized subexpression: the C# code of a simple (non-compound)
-    /// expression, plus the IR node it denotes (for type-driven peepholes).</summary>
-    private sealed record Atom(string Code, IrExpression Node)
+    /// expression, plus the IR node it denotes (for type-driven peepholes).
+    /// <para><see cref="KeyCode"/> is the code as it would print WITHOUT duplicate
+    /// elimination — a deduplicated local contributes its own (burned) name here, not its
+    /// replacement. Dedup decisions key on it, reproducing the old LocalVariableDeduper's
+    /// single-pass behavior: duplicates whose operands only become identical AFTER
+    /// replacement are NOT collapsed (no fixpoint), and every duplicate still consumed a
+    /// name from the sequence before being removed (the letter gaps in the old output).</para></summary>
+    private sealed record Atom(string Code, string KeyCode, IrExpression Node)
     {
+        public Atom(string code, IrExpression node) : this(code, code, node) { }
+
         public Type Type => Node.Type;
     }
 }
