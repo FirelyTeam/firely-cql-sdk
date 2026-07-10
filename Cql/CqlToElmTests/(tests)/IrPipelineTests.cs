@@ -50,7 +50,12 @@ public class IrPipelineTests : Base
     private static (Library library, IrDefinitionDictionary definitions) BuildIr(string cql)
     {
         var library = CreateCqlToolkit().MakeLibrary(cql);
+        return (library, BuildIrDefinitions(library));
+    }
 
+    /// <inheritdoc cref="BuildIr"/>
+    private static IrDefinitionDictionary BuildIrDefinitions(Library library)
+    {
         var typeResolver = FhirTypeResolver.Default;
         var typeConverter = FhirTypeConverter
             .Create(Hl7.Fhir.Model.ModelInfo.ModelInspector)
@@ -76,8 +81,7 @@ public class IrPipelineTests : Base
             expressionBuilder,
             libraryPreprocessorBuilder);
 
-        var definitions = libraryExpressionBuilder.ProcessLibrary(library);
-        return (library, definitions);
+        return libraryExpressionBuilder.ProcessLibrary(library);
     }
 
     /// <summary>
@@ -278,5 +282,72 @@ public class IrPipelineTests : Base
         var body = EmitDefinition(library, definitions, "X");
         AssertWellFormedBody(body);
         StringAssert.Contains(body, "Width");
+    }
+
+    /// <summary>
+    /// Phase-5 smoke test: run one CQL library end to end through BOTH C#-generation
+    /// pipelines — the existing Expression-based <c>LibrarySetCSharpCodeGenerator</c> (via the
+    /// toolkit services, see <see cref="Base.Run"/>) and the typed-IR
+    /// <c>IrLibrarySetCSharpCodeGenerator</c> — and assert the generated library files are
+    /// byte-identical (modulo line endings, like <c>CSharpGenerationGoldenTests</c>).
+    /// </summary>
+    [TestMethod]
+    public void SmokeTest_OldAndIrPipelines_GenerateIdenticalCSharp()
+    {
+        const string cql = """
+            library IrSmokeTest version '1.0.0'
+
+            codesystem "ACME": 'http://acme.org/cs'
+            valueset "Fall Injuries": 'http://acme.org/vs/falls'
+            code "Tiny": 'T1' from "ACME" display 'Tiny code'
+            concept "Tiny Concept": { "Tiny" } display 'Tiny concept'
+
+            define Constant: 1
+            define function Identity(x Integer): x
+            define UseIdentity: Identity(3)
+            define TupleValue: Tuple { x: 1, y: 2 }
+            """;
+
+        var library = CreateCqlToolkit().MakeLibrary(cql);
+        LibrarySet librarySet = new("IrSmokeTest", library);
+
+        // Old pipeline: build definitions and generate C# through the toolkit services.
+        var elmToolkit = CreateElmToolkit();
+        var oldDefinitions = elmToolkit.ProcessLibrary(library);
+        var oldCSharp = elmToolkit
+            .GetLibrarySetCSharpCodeGenerator()
+            .GenerateEachLibraryToCSharp(librarySet, oldDefinitions)
+            .Single().cSharp;
+
+        // New pipeline: same Library instance through the typed-IR builder + generator.
+        var irDefinitions = BuildIrDefinitions(library);
+        var newCSharp = new IrLibrarySetCSharpCodeGenerator(FhirTypeResolver.Default, new TypeToCSharpConverter())
+            .GenerateEachLibraryToCSharp(librarySet, irDefinitions)
+            .Single().cSharp;
+
+        AssertEqualCSharp(oldCSharp, newCSharp);
+    }
+
+    /// <summary>Asserts the two generated sources are equal (line endings normalized) and, on
+    /// mismatch, fails with the first differing line plus context — much easier to iterate on
+    /// than two multi-hundred-line strings in the failure message.</summary>
+    private static void AssertEqualCSharp(string oldCSharp, string newCSharp)
+    {
+        var oldLines = oldCSharp.Replace("\r\n", "\n").Split('\n');
+        var newLines = newCSharp.Replace("\r\n", "\n").Split('\n');
+
+        for (int i = 0; i < Math.Max(oldLines.Length, newLines.Length); i++)
+        {
+            var oldLine = i < oldLines.Length ? oldLines[i] : "<end of file>";
+            var newLine = i < newLines.Length ? newLines[i] : "<end of file>";
+            if (oldLine != newLine)
+            {
+                string Context(string[] lines) => string.Join("\n", lines.Skip(Math.Max(0, i - 2)).Take(8));
+                Assert.Fail(
+                    $"Generated C# differs at line {i + 1}.\n" +
+                    $"--- old pipeline ---\n{Context(oldLines)}\n" +
+                    $"--- new pipeline ---\n{Context(newLines)}");
+            }
+        }
     }
 }

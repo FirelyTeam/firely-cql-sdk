@@ -77,6 +77,10 @@ internal partial class CSharpIrEmitter
             return name;
         }
 
+        /// <summary>True when linearization hoisted at least one statement onto this scope —
+        /// i.e. the linearized body cannot print as a single expression.</summary>
+        public bool HasStatements => _statements.Count > 0;
+
         public void WriteStatements(IndentedStringBuilder isb)
         {
             foreach (var statement in _statements)
