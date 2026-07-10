@@ -76,11 +76,17 @@ internal partial class CSharpIrEmitter
         {
             scope.WriteStatements(isb);
             if (result is not null) // null when the tail was emitted as a return-ing if-chain
-                isb.AppendLine($"return {result.Code};");
+                isb.AppendLine(TailStatement(result));
         }
         isb.Append("}");
         return isb;
     }
+
+    /// <summary>The final statement for a block whose tail value is <paramref name="result"/>:
+    /// a <c>return</c>, except before a throw-expression (the old writer's
+    /// BuildBlockExpression rule — <c>return throw …</c> is not legal C#).</summary>
+    private static string TailStatement(Atom result) =>
+        result.Node is IrThrow ? $"{result.Code};" : $"return {result.Code};";
 
     /// <summary>
     /// Emits the body of a definition as a single C# expression when it linearizes without

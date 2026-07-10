@@ -116,10 +116,24 @@ internal partial class CSharpIrEmitter
                 case IrIfChain chain:
                     return LinearizeIfChain(chain, tailPosition);
 
+                // Pass-through composites: printed inline over their (spine-linearized)
+                // children instead of being hoisted into a local. This mirrors the old
+                // SimplifyExpressionsVisitor's dispatch exactly — Constant/Parameter/New/
+                // Member/ElmAs/Default passed straight through, Convert/TypeAs/Throw unaries
+                // and Equal/NotEqual/Coalesce binaries were not simplified — balancing
+                // unnecessary hoisting against per-line readability.
+                case IrProperty { NullConditional: false }
+                    or IrCast
+                    or IrNew
+                    or IrThrow
+                    or IrBinary { Op: IrBinaryOp.Equal or IrBinaryOp.NotEqual or IrBinaryOp.Coalesce }:
+                    return new Atom(_emitter.PrintShallow(node, child => Linearize(child)!), node);
+
                 default:
                 {
-                    // Compound node: linearize the children, print this node shallowly over
-                    // the child atoms, and hoist it into a named local (deduplicated).
+                    // Spine node (calls, constructions, null-conditional access, type tests,
+                    // logical operators): linearize the children, print this node shallowly
+                    // over the child atoms, and hoist it into a named local (deduplicated).
                     var printed = _emitter.PrintShallow(node, child => Linearize(child)!);
                     return Hoist(printed, node);
                 }
@@ -162,7 +176,7 @@ internal partial class CSharpIrEmitter
             {
                 nested.WriteStatements(isb);
                 if (result is not null)
-                    isb.AppendLine($"return {result.Code};");
+                    isb.AppendLine(TailStatement(result));
             }
             isb.AppendLine("}");
             _statements.Add(isb);
@@ -172,27 +186,56 @@ internal partial class CSharpIrEmitter
 
         private Atom LinearizeConditional(IrConditional conditional)
         {
-            var test = Linearize(conditional.Test)!;
-
-            // When neither branch needs hoisted statements the conditional prints as an
-            // inline ternary (the readable common case); otherwise it becomes an if/else
-            // statement so each branch's work stays inside its branch, preserving
-            // conditional evaluation exactly like the previous pipeline's CaseWhenThen
-            // rewrite. A branch needs hoisting if and only if it is a compound node, so
-            // this is a static test — no trial linearization (which would burn names).
-            if (IsSimple(conditional.IfTrue) && IsSimple(conditional.IfFalse))
+            // Mirrors the old SimplifyExpressionsVisitor.VisitConditional: a "simple"
+            // conditional (IfFalse is not itself a conditional, and neither branch would
+            // hoist anything) is returned UNVISITED — its entire subtree, the test included
+            // (however complex), prints as one inline ternary. Everything else flattens the
+            // else-chain into statement form.
+            if (conditional.IfFalse is not IrConditional
+                && IsInlineOnly(conditional.IfTrue)
+                && IsInlineOnly(conditional.IfFalse))
             {
-                var trueAtom = Linearize(conditional.IfTrue)!;
-                var falseAtom = Linearize(conditional.IfFalse)!;
-                return Hoist($"{test.Code} ? {trueAtom.Code} : {falseAtom.Code}", conditional);
+                return new Atom(_emitter.PrintInlineConditional(conditional, _emitter.PrintFullyInline), conditional);
             }
 
-            return EmitBranches(conditional.Type, [(test, conditional.IfTrue)], conditional.IfFalse);
+            // Flatten the else-if chain (old: ToCwt) and emit as statement form. The old
+            // pipeline wrapped this in an invoked lambda; the native if/else chain is the
+            // documented intentional divergence (docs/linq-expression-removal-plan.md).
+            var cases = new List<(Atom Test, IrExpression Then)>();
+            IrExpression current = conditional;
+            while (current is IrConditional c)
+            {
+                cases.Add((Linearize(c.Test)!, c.IfTrue));
+                current = c.IfFalse;
+            }
+            return EmitBranches(conditional.Type, cases, current);
         }
 
-        /// <summary>True for nodes that print in place without hoisting any statements.</summary>
-        private static bool IsSimple(IrExpression node) =>
-            node is IrConstant or IrDefault or IrContextParameter or IrLocal;
+        /// <summary>
+        /// True when linearizing <paramref name="node"/> would hoist no statements — the IR
+        /// equivalent of the old visitor's trial visit yielding zero assignments. Spine nodes
+        /// (calls, constructions, null-conditional access, type tests, logical operators,
+        /// lambdas, if-chains) always hoist; pass-through nodes are inline-only when all
+        /// their children are. A nested conditional counts as inline-only when it is itself
+        /// "simple" — its test is not examined, exactly like the old trial visit (which
+        /// returned simple conditionals unvisited).
+        /// </summary>
+        private static bool IsInlineOnly(IrExpression node) =>
+            node switch
+            {
+                IrConstant or IrDefault or IrContextParameter or IrLocal => true,
+                IrProperty { NullConditional: false } p => p.Receiver is null || IsInlineOnly(p.Receiver),
+                IrCast c => IsInlineOnly(c.Operand),
+                IrNew n => n.Arguments.All(IsInlineOnly),
+                IrThrow t => IsInlineOnly(t.Exception),
+                IrBinary { Op: IrBinaryOp.Equal or IrBinaryOp.NotEqual or IrBinaryOp.Coalesce } b =>
+                    IsInlineOnly(b.Left) && IsInlineOnly(b.Right),
+                IrConditional nested =>
+                    nested.IfFalse is not IrConditional
+                    && IsInlineOnly(nested.IfTrue)
+                    && IsInlineOnly(nested.IfFalse),
+                _ => false,
+            };
 
         private Atom? LinearizeIfChain(IrIfChain chain, bool tailPosition)
         {
@@ -266,7 +309,7 @@ internal partial class CSharpIrEmitter
                 var atom = branchScope.Linearize(value, tailPosition: assignTo is null);
                 branchScope.WriteStatements(isb);
                 if (atom is not null)
-                    isb.AppendLine(assignTo is null ? $"return {atom.Code};" : $"{assignTo} = {atom.Code};");
+                    isb.AppendLine(assignTo is null ? TailStatement(atom) : $"{assignTo} = {atom.Code};");
             }
             isb.AppendLine("}");
         }

@@ -100,8 +100,73 @@ internal partial class CSharpIrEmitter
             ? $"{call.Method.Name}<{string.Join(", ", call.Method.GetGenericArguments().Select(_typeToCSharpConverter.ToCSharp))}>"
             : call.Method.Name;
 
-        var arguments = string.Join(", ", call.Arguments.Select(a => child(a).Code));
+        var parameters = call.Method.GetParameters();
+        var arguments = string.Join(", ", call.Arguments.Select((a, i) =>
+        {
+            var code = child(a).Code;
+            // Null/default arguments carry a cast to the parameter type so overload intent
+            // stays visible — the old writer's BuildArguments rule.
+            if (a is IrConstant { Value: null } or IrDefault && code is "null" or "default")
+                return $"({_typeToCSharpConverter.ToCSharp(parameters[i].ParameterType)}){code}";
+            return code;
+        }));
         return $"{target}{(call.NullConditional ? "?." : ".")}{methodName}({arguments})";
+    }
+
+    /// <summary>
+    /// Prints an entire subtree as one inline expression — no hoisting at all, calls
+    /// included. Used for "simple" conditionals, which the old pipeline returned unvisited
+    /// so their whole subtree (the test included, however complex) printed inline.
+    /// </summary>
+    internal string PrintFullyInline(IrExpression node) =>
+        node switch
+        {
+            IrConstant or IrDefault or IrContextParameter => PrintSimple(node),
+            IrLocal local => _assignedNames.TryGetValue(local, out var name)
+                ? name
+                : throw new InvalidOperationException($"Local '{local}' is used before it is introduced."),
+            IrConditional conditional => PrintInlineConditional(conditional, PrintFullyInline),
+            IrLambda lambda => PrintInlineLambda(lambda),
+            IrIfChain => throw new NotSupportedException(
+                "An if-chain cannot print as an inline expression; this subtree should not have been classified inline-only."),
+            _ => PrintShallow(node, child => new Atom(PrintFullyInline(child), child)),
+        };
+
+    /// <summary>
+    /// The old writer's ternary format (BuildConditionalExpression): open paren, test on its
+    /// own line, indented <c>? ifTrue</c> / <c>: ifFalse)</c> lines.
+    /// </summary>
+    internal string PrintInlineConditional(IrConditional conditional, Func<IrExpression, string> print)
+    {
+        var isb = new IndentedStringBuilder();
+        isb.Append("(");
+        isb.AppendLine(print(conditional.Test));
+        using (isb.Indent())
+        {
+            isb.AppendLine($"? {print(conditional.IfTrue)}");
+            isb.Append($": {print(conditional.IfFalse)})");
+        }
+        return isb;
+    }
+
+    private string PrintInlineLambda(IrLambda lambda)
+    {
+        // Parameters of an inline lambda still need names; allocate them in the current
+        // emission like any other scope's parameters would be.
+        foreach (var p in lambda.Parameters)
+        {
+            if (!_assignedNames.ContainsKey(p))
+            {
+                var candidate = p.NameHint is { } hint && _usedNames.Add(hint) ? hint : null;
+                if (candidate is null)
+                    throw new NotSupportedException(
+                        "An inline lambda parameter without a usable name hint is not supported; this subtree should not have been classified inline-only.");
+                _assignedNames[p] = candidate;
+            }
+        }
+        var parameters = string.Join(", ", lambda.Parameters.Select(p => _assignedNames[p]));
+        var parameterList = lambda.Parameters.Count == 1 ? parameters : $"({parameters})";
+        return $"{parameterList} => {PrintFullyInline(lambda.Body)}";
     }
 
     private string PrintDefinitionCall(IrDefinitionCall call, Func<IrExpression, Atom> child)
@@ -121,6 +186,11 @@ internal partial class CSharpIrEmitter
 
     private string PrintCast(IrCast cast, Func<IrExpression, Atom> child)
     {
+        // Boxing casts are dropped from the output (the C# compiler re-inserts the boxing),
+        // exactly like the old writer's StripBoxing.
+        if (cast is { Kind: IrCastKind.Cast, Type: var t } && t == typeof(object) && cast.Operand.Type.IsValueType)
+            return child(cast.Operand).Code;
+
         var atom = child(cast.Operand);
         var operand = atom.Code.ParenthesizeIfNeeded();
         var typeName = _typeToCSharpConverter.ToCSharp(cast.Type);
