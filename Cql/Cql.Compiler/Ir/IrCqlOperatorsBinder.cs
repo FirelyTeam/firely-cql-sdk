@@ -80,7 +80,7 @@ internal partial class IrCqlOperatorsBinder(
             ("ListUnion"        ,0 , >=2)  => Union(args[0], args[1]),
             ("ResolveValueSet"  ,0 , >=1)  => ResolveValueSet(args[0]),
             // NOTE(phase3-review): guard tightened from the old binder's ">= 3", which indexed args[3]
-            // and so crashed with IndexOutOfRangeException on exactly 3 arguments. Only the
+            // and so crashed with IndexOutOfRangeException on exactly 3 arguments (#1345). Only the
             // crash path changes; every working call site passes 4 arguments.
             ("Retrieve"         ,0 , >=4)  => Retrieve(args[0], args[1], args[2], args[3]),
             ("Select"           ,0 , >=2)  => Select(args[0], args[1]),
