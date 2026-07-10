@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Ir;
 using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime.Hosting;
@@ -23,7 +24,8 @@ internal readonly record struct ElmToolkitServices(
     ServiceProvider ServiceProvider,
     ILogger<ElmToolkit> Logger,
     AssemblyCompiler AssemblyCompiler,
-    LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator)
+    LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator,
+    IrLibrarySetCSharpCodeGenerator IrLibrarySetCSharpCodeGenerator)
 {
     public static ElmToolkitServices Create(
         ILoggerFactory loggerFactory,
@@ -45,6 +47,7 @@ internal readonly record struct ElmToolkitServices(
         AddCqlCompilerServices(services, config.LRUCacheSize, expressionBuilderSettings);
         services.TryAddSingleton<TypeToCSharpConverter>();
         services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
+        services.TryAddSingleton<IrLibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<AssemblyCompiler>();
     }
 
@@ -80,11 +83,21 @@ internal readonly record struct ElmToolkitServices(
         services.TryAddScoped<LibraryExpressionBuilder>();
         services.TryAddScoped<ExpressionBuilder>();
 
+        // Typed-IR pipeline (docs/linq-expression-removal-plan.md), selected via
+        // ElmToolkitConfig.UseIrPipeline. Shares TypeResolver/TypeConverter/TupleBuilderCache/
+        // LibraryPreprocessorBuilder with the Expression-based pipeline above.
+        services.TryAddSingleton<IrCqlOperatorsBinder>();
+        services.TryAddSingleton<IrCqlContextBinder>();
+        services.TryAddScoped<IrExpressionBuilder>();
+        services.TryAddScoped<IrLibraryExpressionBuilder>();
+        services.TryAddScoped<IrLibrarySetExpressionBuilder>();
+
         return services;
     }
 
     public ServiceProvider ServiceProvider { get; } = ServiceProvider;
     public AssemblyCompiler AssemblyCompiler { get; } = AssemblyCompiler;
     public LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator { get; } = LibrarySetCSharpCodeGenerator;
+    public IrLibrarySetCSharpCodeGenerator IrLibrarySetCSharpCodeGenerator { get; } = IrLibrarySetCSharpCodeGenerator;
     public ElmToolkitScopedState CreateScopedState() => new(ServiceProvider.CreateScope());
 }

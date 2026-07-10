@@ -73,6 +73,43 @@ public class CSharpGenerationGoldenTests
             GenerateWithIrPipeline,
             goldenCorpusIsComplete: false);
 
+    /// <summary>
+    /// Same corpus as <see cref="IrPipeline_RR23_CSharp_Matches_CheckedInFiles"/>, but going through
+    /// the PUBLIC <see cref="ElmToolkit"/> API (<see cref="ElmToolkitConfig.UseIrPipeline"/> set to
+    /// <see langword="true"/>) rather than manually wiring the typed-IR classes. This proves the
+    /// toolkit flag selects the typed-IR pipeline end-to-end, including assembly compilation.
+    /// </summary>
+    [TestMethod]
+    public void IrPipelineViaToolkit_RR23_CSharp_Matches_CheckedInFiles()
+    {
+        ElmToolkit? elmToolkitCapture = null;
+
+        AssertGeneratedCSharpMatchesGoldenFiles(
+            LibrarySetsDirs.RR23.ElmDir,
+            "RR23",
+            LibrarySetsDirs.RR23.CSharpDir,
+            librarySet =>
+            {
+                var elmToolkit =
+                    new ElmToolkit(config: ElmToolkitConfig.Default with { UseIrPipeline = true })
+                        .AddElmLibraries(librarySet)
+                        .CompileToAssemblies();
+                elmToolkitCapture = elmToolkit;
+
+                return elmToolkit
+                    .GetElmToCSharpResults()
+                    .ToDictionary(t => t.libraryIdentifier.ToString()!, t => t.cSharp);
+            },
+            version: "1.0.0",
+            goldenCorpusIsComplete: true);
+
+        Assert.IsNotNull(elmToolkitCapture);
+        var assemblyResults = elmToolkitCapture!.GetElmToAssemblyResults().ToList();
+        Assert.AreNotEqual(0, assemblyResults.Count, "No compiled assembly results were produced via the toolkit.");
+        foreach (var (libraryIdentifier, _, _, assemblyBinary, _) in assemblyResults)
+            Assert.IsNotNull(assemblyBinary, $"AssemblyBinary was null for library {libraryIdentifier}.");
+    }
+
     private static Dictionary<string, string> GenerateWithOldPipeline(LibrarySet librarySet)
     {
         var elmToolkit =
