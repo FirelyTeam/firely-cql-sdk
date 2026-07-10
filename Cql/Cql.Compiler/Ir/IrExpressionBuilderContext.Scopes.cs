@@ -1,0 +1,132 @@
+/*
+ * Copyright (c) 2026, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Abstractions.Infrastructure;
+
+namespace Hl7.Cql.Compiler.Ir;
+
+using IrExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (Hl7.Cql.Compiler.Ir.IrExpression, Hl7.Cql.Elm.Element)>;
+
+/// <summary>
+/// IR counterpart of <c>ExpressionBuilderContext.Scopes.cs</c>: the query alias / let scope
+/// stack. This is a mechanical port; the scope dictionary values are
+/// <c>(IrExpression, Element)</c> instead of <c>(Expression, Element)</c>.
+/// </summary>
+partial class IrExpressionBuilderContext
+{
+    protected IReadOnlyDictionary<string, (IrExpression expr, Elm.Element element)> Scopes
+    {
+        get
+        {
+            _impliedAliasAndScopesStack.TryPeek(out var item);
+            return item.scopes ?? ReadOnlyDictionary<string, (IrExpression expr, Elm.Element element)>.Empty;
+        }
+    }
+
+    /// <summary>
+    /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
+    /// this value is the implied alias name that should qualify it, e.g. from DRR-E 2022:
+    /// <code>
+    ///     "PHQ-9 Assessments" PHQ
+    ///      where ...
+    ///      sort by date from start of FHIRBase."Normalize Interval"(effective) asc
+    /// </code>
+    /// The use of "effective" here is unqualified and is implied to be PHQ.effective
+    /// No idea how this is supposed to work with queries with multiple sources (e.g., with let statements)
+    /// </summary>
+    protected string? ImpliedAlias =>
+        _impliedAliasAndScopesStack.TryPeek(out var item)
+            ? item.impliedAlias
+            : null;
+
+    protected IrExpression GetScopeExpression(string elmAlias)
+    {
+        var normalized = IdentifierNormalizer.Normalize(elmAlias!)!;
+        if (!Scopes.TryGetValue(normalized, out var kv))
+            throw this.NewExpressionBuildingException(
+                $"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
+
+        return kv.expr;
+    }
+
+    protected (IrExpression, Elm.Element) GetScope(string elmAlias)
+    {
+        var normalized = IdentifierNormalizer.Normalize(elmAlias!)!;
+        if (!Scopes.TryGetValue(normalized, out var kv))
+            throw this.NewExpressionBuildingException(
+                $"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
+        return kv;
+    }
+
+    protected bool HasScope(string elmAlias) => Scopes.ContainsKey(elmAlias);
+
+    protected IPopToken PushScopes(
+        string? alias = null,
+        params IrExpressionElementPairForIdentifier[] kvps)
+    {
+        _impliedAliasAndScopesStack.TryPeek(out var peek);
+
+        var scopes = new Dictionary<string, (IrExpression, Elm.Element)>(peek.scopes ?? ReadOnlyDictionary<string, (IrExpression, Elm.Element)>.Empty);
+        alias ??= peek.impliedAlias;
+
+        if (_expressionBuilderSettings.AllowScopeRedefinition)
+        {
+            foreach (var (expr, element) in kvps)
+            {
+                string? normalizedIdentifier = IdentifierNormalizer.Normalize(expr);
+                if (string.IsNullOrWhiteSpace(normalizedIdentifier))
+                    throw this.NewExpressionBuildingException("The normalized identifier is not available.");
+
+                scopes[normalizedIdentifier] = element;
+            }
+        }
+        else
+        {
+            foreach (var (expr, element) in kvps)
+            {
+                string? normalizedIdentifier = IdentifierNormalizer.Normalize(expr);
+                if (string.IsNullOrWhiteSpace(normalizedIdentifier))
+                    throw this.NewExpressionBuildingException("The normalize identifier is not available.");
+
+                if (!scopes.TryAdd(normalizedIdentifier, element))
+                    throw this.NewExpressionBuildingException(
+                        $"Scope {expr}, normalized to {IdentifierNormalizer.Normalize(expr)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(_expressionBuilderSettings.AllowScopeRedefinition)} to true");
+            }
+        }
+
+        var prevId = peek.id;
+        _impliedAliasAndScopesStack = _impliedAliasAndScopesStack.Push((new object(), alias, scopes));
+        return new PopScopesToken(this, prevId);
+    }
+
+
+
+    private readonly record struct PopScopesToken : IPopToken
+    {
+        private readonly IrExpressionBuilderContext _owner;
+        private readonly object? _prevId;
+
+        public PopScopesToken(IrExpressionBuilderContext owner, object? prevId)
+        {
+            _owner = owner;
+            _prevId = prevId;
+        }
+
+        void IDisposable.Dispose() => Pop();
+
+        public void Pop()
+        {
+            var expectedPrevId = _owner._impliedAliasAndScopesStack.ElementAtOrDefault(1).id;
+
+            if (_prevId != expectedPrevId)
+                throw new InvalidOperationException("Popping should be called in the correct reverse order.");
+
+            _owner._impliedAliasAndScopesStack = _owner._impliedAliasAndScopesStack.Pop();
+        }
+    }
+}
