@@ -104,7 +104,7 @@ partial class IrCqlOperatorsBinder
             return call;
         }
 
-        throw new ArgumentException("Expression should be a constant CqlValueSet");
+        throw new ArgumentException($"Expression should be a 'new {nameof(CqlValueSet)}(...)' construction, but was a {expression.GetType().Name} of type {expression.Type}.");
     }
 
     private IrExpression Coalesce(IrExpression operand)
@@ -196,7 +196,7 @@ partial class IrCqlOperatorsBinder
         if (ce.Value is not Type type
             || codePropertyExpression is not IrConstant cpe
             || cpe.Type != typeof(PropertyInfo))
-            throw new ArgumentException("Second parameter to Retrieve is expected to be a constant PropertyInfo", nameof(codePropertyExpression));
+            throw new ArgumentException("Third parameter to Retrieve is expected to be a constant PropertyInfo", nameof(codePropertyExpression));
 
         if (cpe.Value is PropertyInfo pi)
         {
@@ -278,7 +278,7 @@ partial class IrCqlOperatorsBinder
         IrExpression source,
         IrExpression lambda)
     {
-        if (lambda is IrLambda lamdaExpr)
+        if (lambda is IrLambda)
         {
             var sourceType = _typeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
             var call = BindToBestMethodOverload(nameof(ICqlOperators.Where), [source, lambda], [sourceType])!;
