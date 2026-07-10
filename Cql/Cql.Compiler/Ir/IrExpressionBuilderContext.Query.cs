@@ -451,7 +451,7 @@ partial class IrExpressionBuilderContext
             var whereLambda = new IrLambda([whereLambdaParameter], suchThatBody);
             var callWhereOnSource = BindCqlOperator(nameof(ICqlOperators.Where), source, whereLambda);
 
-            // NOTE(phase4): ported as-is — this second parameter shares the alias name with
+            // NOTE(phase4): ported as-is (#1343) — this second parameter shares the alias name with
             // whereLambdaParameter but is a distinct IrLocal instance, exactly as the old builder
             // called Expression.Parameter(...) a second time here. It is never referenced in the
             // lambda body below (selectBody is rootScopeParameter, ignoring the parameter), so its
