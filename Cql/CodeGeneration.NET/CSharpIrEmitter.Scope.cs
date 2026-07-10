@@ -22,6 +22,16 @@ internal partial class CSharpIrEmitter
         private readonly CSharpIrEmitter _emitter;
         private readonly VariableNameGenerator _names;
 
+        // Hint names (original CQL alias names, e.g. a lambda parameter's NameHint) reserved
+        // in THIS LINEAGE only: copied — not shared — into each nested scope, exactly like the
+        // old VariableNameGenerator.Reserved list (ForNewScope conses onto a copy of the
+        // parent's list). A hint used by an earlier SIBLING scope (e.g. one "where" lambda's
+        // alias) is therefore free to be reused by a later, unrelated lambda with the same CQL
+        // alias — reproducing CMS56's "LowerBodyFracture" reused verbatim as the parameter of
+        // two separate (sibling) local functions in the same method. Only an ANCESTOR scope's
+        // hint (still live/capturable from a nested closure) blocks reuse.
+        private readonly HashSet<string> _reservedHints;
+
         // Statements are deferred renderers: plain declarations resolve immediately, but a
         // hoisted local function's INTERIOR renders only when the enclosing scope writes out.
         // This reproduces the old RenameVariablesVisitor naming order, which named all of a
@@ -31,10 +41,11 @@ internal partial class CSharpIrEmitter
         private readonly List<Func<string>> _statements = [];
         private readonly Dictionary<string, Atom> _dedup = [];
 
-        private Scope(CSharpIrEmitter emitter, VariableNameGenerator names)
+        private Scope(CSharpIrEmitter emitter, VariableNameGenerator names, HashSet<string> reservedHints)
         {
             _emitter = emitter;
             _names = names;
+            _reservedHints = reservedHints;
         }
 
         public static Scope CreateRoot(CSharpIrEmitter emitter, IReadOnlyList<IrLocal> parameters)
@@ -42,14 +53,17 @@ internal partial class CSharpIrEmitter
             var names = new VariableNameGenerator(
                 reserved: parameters.Select(p => p.NameHint).OfType<string>(),
                 postfix: "_");
-            var scope = new Scope(emitter, names);
+            var scope = new Scope(emitter, names, []);
             scope.NameParameters(parameters);
             return scope;
         }
 
         private Scope CreateNested(IReadOnlyList<IrLocal> parameters)
         {
-            var nested = new Scope(_emitter, _names.ForNewScope(parameters.Select(p => p.NameHint).OfType<string>()));
+            var nested = new Scope(
+                _emitter,
+                _names.ForNewScope(parameters.Select(p => p.NameHint).OfType<string>()),
+                [.. _reservedHints]); // copy, not share: see _reservedHints
             nested.NameParameters(parameters);
             return nested;
         }
@@ -65,23 +79,23 @@ internal partial class CSharpIrEmitter
 
         /// <summary>
         /// Allocates a variable name, honoring <paramref name="hint"/> only when it is legal:
-        /// not a C# keyword and not already used in this emission — duplicate hints, or a
-        /// hint colliding with a generated name, would print duplicate or shadowing
-        /// declarations (CS0100/CS0136).
+        /// not a C# keyword and not already reserved in this lineage (see
+        /// <see cref="_reservedHints"/>) — a duplicate hint still live in an ancestor scope, or
+        /// one colliding with a generated name from this lineage, would print duplicate or
+        /// shadowing declarations (CS0100/CS0136).
         /// </summary>
         private string AllocateName(string? hint)
         {
             if (hint is not null
                 && SyntaxFacts.GetKeywordKind(hint) == SyntaxKind.None
-                && _emitter._usedNames.Add(hint))
+                && _reservedHints.Add(hint))
                 return hint;
 
-            string name;
-            do
-            {
-                name = _names.Next();
-            } while (!_emitter._usedNames.Add(name));
-            return name;
+            // The generated-letter sequence (_names) is shared and monotonically increasing
+            // across the whole emission, so it never repeats a value; VariableNameGenerator's
+            // own Reserved list (threaded per-lineage via ForNewScope) already skips any name
+            // reserved by this lineage's hints, so no further legality check is needed here.
+            return _names.Next();
         }
 
         /// <summary>True when linearization hoisted at least one statement onto this scope —
@@ -204,12 +218,23 @@ internal partial class CSharpIrEmitter
 
                 var parameterList = string.Join(", ",
                     lambda.Parameters.Select(p => $"{_emitter._typeToCSharpConverter.ToCSharp(p.Type)} {_emitter._assignedNames[p]}"));
+                var returnType = _emitter._typeToCSharpConverter.ToCSharp(lambda.Body.Type);
+
+                // A body that linearizes without hoisting any statement prints expression-
+                // bodied ("=> expr;"), matching the old writer's BuildLambdaOperator, which
+                // used the block ("{ }") form only `lambda.Body is BlockExpression` — i.e. only
+                // when simplification actually produced a multi-statement block. The old
+                // BuildBlockExpression's "give local function definitions some space" rule also
+                // keyed on the body being a BlockExpression, so the expression-bodied form gets
+                // none of the surrounding blank lines either.
+                if (!nested.HasStatements && result is not null)
+                    return $"{returnType} {functionName}({parameterList}) => {result.Code};";
 
                 // Old format: blank line before the definition, opening brace on the
                 // signature line, blank line after (via the trailing newline).
                 var isb = new IndentedStringBuilder();
                 isb.AppendLine("");
-                isb.AppendLine($"{_emitter._typeToCSharpConverter.ToCSharp(lambda.Body.Type)} {functionName}({parameterList}) {{");
+                isb.AppendLine($"{returnType} {functionName}({parameterList}) {{");
                 using (isb.Indent())
                 {
                     nested.WriteStatements(isb);
@@ -305,19 +330,26 @@ internal partial class CSharpIrEmitter
                 // deferred until the function is invoked — the old lambda-wrap semantics.
                 var functionScope = CreateNested([]);
 
+                // Every case's when-condition is visited — and, for complex ones, hoisted into
+                // its own zero-parameter local function — BEFORE any if/else-if statement
+                // prints. This mirrors the old VisitCaseWhenThenExpression, which ran
+                // visitCase (and so every when-lambda) for ALL cases via one shared block
+                // visitor, collecting their hoisted statements up front, before the
+                // CaseWhenThenExpression was rendered into its block.
+                var tests = cases.Select(c => functionScope.PrintWhen(c.When)).ToList();
+
                 var isb = new IndentedStringBuilder();
                 isb.AppendLine(""); // the old writer's blank line before the function definition
                 isb.AppendLine($"{_emitter._typeToCSharpConverter.ToCSharp(resultType)} {functionName}() {{");
                 using (isb.Indent())
                 {
+                    functionScope.WriteStatements(isb); // all when-functions hoisted by PrintWhen, up front
+
                     bool first = true;
-                    foreach (var (when, then) in cases)
+                    for (int i = 0; i < cases.Count; i++)
                     {
-                        var test = functionScope.PrintWhen(when);
-                        functionScope.WriteStatements(isb); // when-functions hoisted by PrintWhen
-                        functionScope._statements.Clear();
-                        isb.AppendLine(first ? $"if ({test})" : $"else if ({test})");
-                        EmitBranchBlock(isb, then, terminator: null);
+                        isb.AppendLine(first ? $"if ({tests[i]})" : $"else if ({tests[i]})");
+                        EmitBranchBlock(isb, cases[i].Then, terminator: null);
                         first = false;
                     }
                     isb.AppendLine("else");

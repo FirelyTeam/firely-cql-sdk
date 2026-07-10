@@ -181,15 +181,42 @@ internal partial class CSharpIrEmitter
             return $"{_typeToCSharpConverter.ToCSharp(property.Member.DeclaringType!)}.{property.Member.Name}";
 
         var target = child(receiver).Code.ParenthesizeIfNeeded();
-        return $"{target}{(property.NullConditional ? "?." : ".")}{property.Member.Name}";
+
+        // The old writer's GetMemberAccessNullabilityOperator: a plain (non-null-conditional)
+        // property access still prints "?." when the receiver's static type is a nullable
+        // value type, OR a CQL tuple type — CQL tuples are represented as ordinary reference
+        // classes but are treated as always-nullable "to be consistent with the original
+        // tuple types" (the old converter's own comment), so member access on one always
+        // null-propagates regardless of the node's own NullConditional flag.
+        var nullConditional = property.NullConditional
+            || receiver.Type.IsNullableValueType(out _)
+            || _typeToCSharpConverter.ShouldUseTupleType(receiver.Type);
+        return $"{target}{(nullConditional ? "?." : ".")}{property.Member.Name}";
     }
 
     private string PrintCast(IrCast cast, Func<IrExpression, Atom> child)
     {
-        // Casts to object are dropped from the output (the C# compiler re-inserts the
-        // boxing/upcast): the old writer's StripBoxing removed the value-typed ones and the
-        // old RedundantCastsTransformer the reference-typed ones — net effect, none survive.
-        if (cast.Type == typeof(object) && cast.Operand.Type != typeof(object))
+        // Boxing casts are dropped from the output (the C# compiler re-inserts the boxing),
+        // exactly like the old writer's StripBoxing — value-typed operands unconditionally.
+        //
+        // A reference-typed cast to object is redundant C# too (an implicit reference
+        // conversion always exists), and the old RedundantCastsTransformer struck those as
+        // well — EXCEPT it could only ever see a cast that already existed as a raw
+        // Convert/TypeAs node when its single pass ran. A cast built from the ELM "as"
+        // operator was instead represented by ElmAsExpression, a lazy wrapper that only
+        // reduces to a real Convert/TypeAs (specifically TypeAs for a non-strict "as", which
+        // this always is here) at print time, i.e. AFTER RedundantCastsTransformer had already
+        // run — such a cast was invisible to it and always survived. That happens precisely
+        // when a non-strict "as"-to-object cast is nested directly around ANOTHER cast (a
+        // Choice-typed union coercion wrapping a CQL "as" cast, e.g. CMS56's case/when/then
+        // branches: "(ad_ as CqlDateTime) as object" — the inner cast node stands for the
+        // ElmAsExpression operand the outer one wrapped). Every other shape — a strict
+        // Cast/Convert to object (e.g. RR23's Operators.Convert argument,
+        // "(object)(e_ as FhirDateTime)"), or an As/Cast wrapping a plain non-cast node (e.g. a
+        // ResolveParameter argument, "c_ as object") — was always a raw Convert/TypeAs from the
+        // start and got stripped like any other redundant reference cast.
+        if (cast.Type == typeof(object)
+            && (cast.Operand.Type.IsValueType || cast.Kind != IrCastKind.As || cast.Operand is not IrCast))
             return child(cast.Operand).Code;
 
         var atom = child(cast.Operand);
@@ -242,10 +269,11 @@ internal partial class CSharpIrEmitter
 
     private static string PrintBinary(IrBinary binary, Func<IrExpression, Atom> child)
     {
-        // ((T?)a) ?? b, where a is a non-nullable T, reduces to just a — the old
-        // RedundantCastsTransformer's coalesce rule (the cast-then-coalesce contributes
-        // nothing once the value is known non-null).
-        if (binary is { Op: IrBinaryOp.Coalesce, Left: IrCast { Kind: IrCastKind.Cast } leftCast }
+        // ((T?)a) ?? b or (a as T?) ?? b, where a is a non-nullable T, reduces to just a — the
+        // old RedundantCastsTransformer's coalesce rule, which matched both Convert AND TypeAs
+        // on the left (the cast-then-coalesce contributes nothing once the value is known
+        // non-null, regardless of which cast kind produced the nullable wrapper).
+        if (binary is { Op: IrBinaryOp.Coalesce, Left: IrCast leftCast }
             && Nullable.GetUnderlyingType(leftCast.Type) == leftCast.Operand.Type)
             return child(leftCast.Operand).Code;
 
