@@ -41,7 +41,6 @@ internal partial class CSharpIrEmitter
     private readonly ICSharpNamingConventions _namingConventions;
 
     private readonly Dictionary<IrLocal, string> _assignedNames = new(ReferenceEqualityComparer.Instance);
-    private readonly HashSet<string> _usedNames = [];
 
     /// <param name="typeToCSharpConverter">Renders .NET types as C# type syntax.</param>
     /// <param name="namingConventions">The generated-class naming conventions the printed
@@ -65,7 +64,6 @@ internal partial class CSharpIrEmitter
         // Naming is scoped to one definition body: each emission starts fresh, so earlier
         // emissions can neither cause collisions nor grow the maps without bound.
         _assignedNames.Clear();
-        _usedNames.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
         var result = scope.Linearize(lambda.Body, tailPosition: true);
@@ -99,7 +97,6 @@ internal partial class CSharpIrEmitter
     public string? TryEmitExpressionBody(IrLambda lambda)
     {
         _assignedNames.Clear();
-        _usedNames.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
         var result = scope.Linearize(lambda.Body, tailPosition: true);

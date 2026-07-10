@@ -78,11 +78,15 @@ internal partial class CSharpIrEmitter
         }
 
         /// <summary>
-        /// Allocates a variable name, honoring <paramref name="hint"/> only when it is legal:
-        /// not a C# keyword and not already reserved in this lineage (see
-        /// <see cref="_reservedHints"/>) — a duplicate hint still live in an ancestor scope, or
-        /// one colliding with a generated name from this lineage, would print duplicate or
-        /// shadowing declarations (CS0100/CS0136).
+        /// Allocates a variable name, honoring <paramref name="hint"/> only when it is not a
+        /// C# keyword and not already reserved in this lineage (see
+        /// <see cref="_reservedHints"/>) — a duplicate hint still live in an ancestor scope
+        /// would print shadowing declarations (CS0136).
+        /// <para>Deliberately NOT guarded (matching the old pipeline exactly): a hint that
+        /// happens to collide with a GENERATED name (an alias literally shaped like
+        /// <c>a_</c>) is used verbatim, just as the old builder used alias names verbatim on
+        /// its ParameterExpressions — such an alias would produce the same non-compiling
+        /// output from both pipelines.</para>
         /// </summary>
         private string AllocateName(string? hint)
         {

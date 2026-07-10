@@ -151,17 +151,16 @@ internal partial class CSharpIrEmitter
 
     private string PrintInlineLambda(IrLambda lambda)
     {
-        // Parameters of an inline lambda still need names; allocate them in the current
-        // emission like any other scope's parameters would be.
+        // Parameters of an inline lambda print their name hints verbatim — exactly like the
+        // old writer, which printed a LambdaExpression's parameter names as-is with no
+        // legality or collision checks (a colliding or keyword alias would produce the same
+        // non-compiling output from both pipelines).
         foreach (var p in lambda.Parameters)
         {
             if (!_assignedNames.ContainsKey(p))
             {
-                var candidate = p.NameHint is { } hint && _usedNames.Add(hint) ? hint : null;
-                if (candidate is null)
-                    throw new NotSupportedException(
-                        "An inline lambda parameter without a usable name hint is not supported; this subtree should not have been classified inline-only.");
-                _assignedNames[p] = candidate;
+                _assignedNames[p] = p.NameHint ?? throw new NotSupportedException(
+                    "An inline lambda parameter without a name hint is not supported; this subtree should not have been classified inline-only.");
             }
         }
         var parameters = string.Join(", ", lambda.Parameters.Select(p => _assignedNames[p]));
