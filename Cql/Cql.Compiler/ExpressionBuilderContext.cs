@@ -295,8 +295,10 @@ partial class ExpressionBuilderContext
 
         object?[] IntervalArgs(Interval e)
         {
-            var low = TranslateArg(e.low!);
-            var high = TranslateArg(e.high!);
+            // Translate through object so absent endpoints become object-typed nulls,
+            // as they did before this method existed.
+            var low = TranslateArg((object?)e.low);
+            var high = TranslateArg((object?)e.high);
 
             // ELM may type an interval's points as a choice (e.g. the
             // Choice<DateTime, Interval<DateTime>> resulting from FHIRHelpers.ToValue), which
