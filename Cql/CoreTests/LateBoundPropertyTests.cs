@@ -47,5 +47,33 @@ namespace CoreTests
 
             Assert.IsNull(value);
         }
+
+        [TestMethod]
+        public void LateBoundProperty_ThrowingConversion_ReturnsNull()
+        {
+            var operators = FhirCqlContext.ForBundle().Operators;
+
+            // A ParameterComponent -> CqlDateTime conversion is registered, but its
+            // delegate throws when the component's value has no conversion to the
+            // target type (here: a CodeableConcept). Late-bound access must swallow
+            // that and return null rather than fail the whole expression.
+            var holder = new PropertyHolder
+            {
+                Performed = new Parameters.ParameterComponent
+                {
+                    Name = "example",
+                    Value = new CodeableConcept("http://example.org", "example")
+                }
+            };
+
+            var value = operators.LateBoundProperty<CqlDateTime>(holder, "Performed");
+
+            Assert.IsNull(value);
+        }
+
+        private class PropertyHolder
+        {
+            public Parameters.ParameterComponent? Performed { get; set; }
+        }
     }
 }

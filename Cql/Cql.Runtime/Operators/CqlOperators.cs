@@ -158,7 +158,20 @@ namespace Hl7.Cql.Operators
             if (value is T typed)
                 return typed;
             if (TypeConverter.CanConvert(value.GetType(), typeof(T)))
-                return TypeConverter.Convert<T>(value)!;
+            {
+                // Conversion delegates may throw on values they cannot represent in the
+                // target type. Late-bound access must stay non-throwing so that probing
+                // properties across choice/union type members degrades to null instead
+                // of failing the whole expression.
+                try
+                {
+                    return TypeConverter.Convert<T>(value)!;
+                }
+                catch
+                {
+                    return (T)(object)null!;
+                }
+            }
             return (T)(object)null!;
         }
         public T Message<T>(T source, string code, string severity, string message)
