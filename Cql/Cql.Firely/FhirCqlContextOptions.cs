@@ -50,25 +50,25 @@ namespace Hl7.Cql.Fhir
         }
 
         /// <summary>
-        /// The default LRU cache to use is in the <see cref="FhirTypeConverter"/> is <c>10000</c>, unless otherwise overriden here.
+        /// The default LRU cache to use is in the <see cref="FhirTypeConverter"/> is <c>10000</c>, unless otherwise overridden here.
         /// </summary>
         /// <remarks>Changing this value, will create a new <see cref="TypeConverter"/>, unless a custom one was provided in <see cref="OverrideTypeConverter"/>.</remarks>
         public int? OverrideFhirTypeConverterCacheSize { get; init; }
 
         /// <summary>
-        /// The default <see cref="ModelInspector"/> to use is <see cref="ModelInfo.ModelInspector"/>, unless otherwise overriden here.
+        /// The default <see cref="ModelInspector"/> to use is <see cref="ModelInfo.ModelInspector"/>, unless otherwise overridden here.
         /// </summary>
         /// <remarks>Changing this value, will create a new <see cref="TypeConverter"/>, unless a custom one was provided in <see cref="OverrideTypeConverter"/>.</remarks>
         public ModelInspector? OverrideModelInspector { get; init; }
 
         /// <summary>
-        /// The default <see cref="TypeConverter"/> to use is <see cref="FhirTypeConverter.Create(ModelInspector,Nullable{int})"/>, unless otherwise overriden here.
+        /// The default <see cref="TypeConverter"/> to use is <see cref="FhirTypeConverter.Create(ModelInspector,Nullable{int})"/>, unless otherwise overridden here.
         /// </summary>
         public TypeConverter? OverrideTypeConverter { get; init; }
 
         /// <summary>
         /// The default <see cref="IRetrieveProfileFilter"/> to use is <see cref="QICoreRetrieveProfileFilter.Default"/>,
-        /// unless otherwise overriden here. Provide an implementation returning <see langword="null"/> for every
+        /// unless otherwise overridden here. Provide an implementation returning <see langword="null"/> for every
         /// template id to disable profile-based retrieve filtering.
         /// </summary>
         public IRetrieveProfileFilter? OverrideRetrieveProfileFilter { get; init; }
