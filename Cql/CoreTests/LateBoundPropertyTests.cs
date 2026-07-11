@@ -15,13 +15,13 @@ namespace CoreTests
     [TestClass]
     public class LateBoundPropertyTests
     {
-        // Regression test for CMS2 (Depression Screening and Follow-Up).
-        // When the follow-up is a choice type surfaced as 'object' (e.g. a
-        // MedicationRequest), the generated code reads FollowUpPositiveAdultScreen.authoredOn
-        // via LateBoundProperty<object>(...), then reads its 'value' via
+        // Regression test for late-bound access to a FHIR primitive's value.
+        // When a resource is reached through a choice or union type surfaced as
+        // 'object', the generated code reads elements such as authoredOn via
+        // LateBoundProperty<object>(...), then reads their 'value' via
         // LateBoundProperty<CqlDateTime>(fhirDateTime, "value"). This used to return
         // null because the raw string value is not assignable to CqlDateTime, which
-        // caused the follow-up timing check - and therefore the Numerator - to fail.
+        // made timing checks on such elements silently evaluate to null.
         [TestMethod]
         public void LateBoundProperty_FhirDateTimeValue_ConvertsToCqlDateTime()
         {

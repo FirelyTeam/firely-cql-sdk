@@ -123,9 +123,9 @@ namespace Hl7.Cql.Operators
             // for properties such as FhirDateTime.value, use the source object itself and
             // convert it (e.g. FhirDateTime -> CqlDateTime) rather than reading and parsing
             // the primitive string value. Without this, a late-bound access - which happens
-            // when the source is a choice type surfaced as 'object', as with
-            // FollowUpPositiveAdultScreen.authoredOn in CMS2 - silently yields null because
-            // the raw string value is not assignable to T.
+            // when the source is an element reached through a choice or union type surfaced
+            // as 'object' - silently yields null because the raw string value is not
+            // assignable to T.
             if (TypeResolver.ShouldUseSourceObject(type, propertyName))
                 return ConvertOrNull<T>(source);
 
