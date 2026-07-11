@@ -65,5 +65,12 @@ namespace Hl7.Cql.Fhir
         /// The default <see cref="TypeConverter"/> to use is <see cref="FhirTypeConverter.Create(ModelInspector,Nullable{int})"/>, unless otherwise overriden here.
         /// </summary>
         public TypeConverter? OverrideTypeConverter { get; init; }
+
+        /// <summary>
+        /// The default <see cref="IRetrieveProfileFilter"/> to use is <see cref="QICoreRetrieveProfileFilter.Default"/>,
+        /// unless otherwise overriden here. Provide an implementation returning <see langword="null"/> for every
+        /// template id to disable profile-based retrieve filtering.
+        /// </summary>
+        public IRetrieveProfileFilter? OverrideRetrieveProfileFilter { get; init; }
     }
 }
