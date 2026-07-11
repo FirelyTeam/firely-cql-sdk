@@ -118,6 +118,17 @@ namespace Hl7.Cql.Operators
             if (source == null || string.IsNullOrWhiteSpace(propertyName))
                 return (T)(object)null!;
             var type = source.GetType();
+
+            // Mirror the design-time behavior in ExpressionBuilderContext.PropertyHelper:
+            // for properties such as FhirDateTime.value, use the source object itself and
+            // convert it (e.g. FhirDateTime -> CqlDateTime) rather than reading and parsing
+            // the primitive string value. Without this, a late-bound access - which happens
+            // when the source is a choice type surfaced as 'object', as with
+            // FollowUpPositiveAdultScreen.authoredOn in CMS2 - silently yields null because
+            // the raw string value is not assignable to T.
+            if (TypeResolver.ShouldUseSourceObject(type, propertyName))
+                return ConvertOrNull<T>(source);
+
             var property = type.GetProperty(propertyName);
             if (property == null)
             {
@@ -137,7 +148,18 @@ namespace Hl7.Cql.Operators
                 }
                 return (T)propertyValue;
             }
-            else return (T)(object)null!;
+            else return ConvertOrNull<T>(propertyValue);
+        }
+
+        private T ConvertOrNull<T>(object? value)
+        {
+            if (value is null)
+                return (T)(object)null!;
+            if (value is T typed)
+                return typed;
+            if (TypeConverter.CanConvert(value.GetType(), typeof(T)))
+                return TypeConverter.Convert<T>(value)!;
+            return (T)(object)null!;
         }
         public T Message<T>(T source, string code, string severity, string message)
         {
