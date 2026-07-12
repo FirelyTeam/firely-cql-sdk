@@ -928,9 +928,27 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
     {
         IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> a_ = this.Reason_For_Not_Ordering_Antithrombotic(context);
         IEnumerable<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?> b_ = this.Reason_For_Not_Administering_Antithrombotic(context);
-        IEnumerable<object> c_ = context.Operators.Union<object>(a_ as IEnumerable<object>, b_ as IEnumerable<object>);
-        (CqlTupleMetadata, string id, CqlDateTime authoredOn)? d_(object @object) => ((CqlTupleMetadata, string id, CqlDateTime authoredOn)?)@object;
-        IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> e_ = context.Operators.Select<object, (CqlTupleMetadata, string id, CqlDateTime authoredOn)?>(c_, d_);
+
+        (CqlTupleMetadata, string id, CqlDateTime authoredOn)? c_((CqlTupleMetadata, string id, FhirDateTime authoredOn)? tuple_bzzhjagbbziqiedycplbgcjbn) {
+
+            (CqlTupleMetadata, string id, CqlDateTime authoredOn)? f_() {
+                if (tuple_bzzhjagbbziqiedycplbgcjbn is null)
+                {
+                    return null as (CqlTupleMetadata, string id, CqlDateTime authoredOn)?;
+                }
+                else
+                {
+                    CqlDateTime g_ = context.Operators.Convert<CqlDateTime>(tuple_bzzhjagbbziqiedycplbgcjbn?.authoredOn);
+                    (CqlTupleMetadata, string id, CqlDateTime authoredOn)? h_ = (CqlTupleMetadata_DeYYCcJRPXYVddOGVBSgSSNfR, tuple_bzzhjagbbziqiedycplbgcjbn?.id, g_);
+                    return h_;
+                };
+            }
+
+            return f_();
+        }
+
+        IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> d_ = context.Operators.Select<(CqlTupleMetadata, string id, FhirDateTime authoredOn)?, (CqlTupleMetadata, string id, CqlDateTime authoredOn)?>(b_, c_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?> e_ = context.Operators.Union<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>(a_, d_);
         return e_;
     }
 

@@ -3336,98 +3336,116 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
 
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)?> ae_ = context.Operators.Select<MedicationAdministration, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)?>(ac_, ad_);
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)?> af_ = context.Operators.Distinct<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)?>(ae_);
-        IEnumerable<MedicationRequest> ah_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> aj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> ak_ = context.Operators.Union<MedicationRequest>(ah_, aj_);
-        IEnumerable<MedicationRequest> am_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> ao_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> ap_ = context.Operators.Union<MedicationRequest>(am_, ao_);
-        IEnumerable<MedicationRequest> aq_ = context.Operators.Union<MedicationRequest>(ak_, ap_);
-        IEnumerable<MedicationRequest> as_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> au_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> av_ = context.Operators.Union<MedicationRequest>(as_, au_);
-        IEnumerable<MedicationRequest> aw_ = context.Operators.Union<MedicationRequest>(aq_, av_);
-        IEnumerable<MedicationRequest> ay_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> ba_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> bb_ = context.Operators.Union<MedicationRequest>(ay_, ba_);
-        IEnumerable<MedicationRequest> bc_ = context.Operators.Union<MedicationRequest>(aw_, bb_);
-        IEnumerable<MedicationRequest> be_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> bg_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
-        IEnumerable<MedicationRequest> bh_ = context.Operators.Union<MedicationRequest>(be_, bg_);
-        IEnumerable<MedicationRequest> bi_ = context.Operators.Union<MedicationRequest>(bc_, bh_);
 
-        bool? bj_(MedicationRequest NoMedicationOrder) {
-            Code<MedicationRequest.MedicationRequestIntent> ea_ = NoMedicationOrder?.IntentElement;
-            MedicationRequest.MedicationRequestIntent? eb_ = ea_?.Value;
-            string ec_ = context.Operators.Convert<string>(eb_);
-            string[] ed_ = [
+        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? ag_((CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)? tuple_cumbjbeguchwelldvxijceahs) {
+
+            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? ea_() {
+                if (tuple_cumbjbeguchwelldvxijceahs is null)
+                {
+                    return null as (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?;
+                }
+                else
+                {
+                    CqlDateTime eb_ = context.Operators.Convert<CqlDateTime>(tuple_cumbjbeguchwelldvxijceahs?.authoredOn);
+                    (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? ec_ = (CqlTupleMetadata_CNeQfiIHcQEUBjZNVZiOLfdeP, tuple_cumbjbeguchwelldvxijceahs?.id, tuple_cumbjbeguchwelldvxijceahs?.medicationStatusReason, eb_);
+                    return ec_;
+                };
+            }
+
+            return ea_();
+        }
+
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> ah_ = context.Operators.Select<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, FhirDateTime authoredOn)?, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(af_, ag_);
+        IEnumerable<MedicationRequest> aj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> al_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> am_ = context.Operators.Union<MedicationRequest>(aj_, al_);
+        IEnumerable<MedicationRequest> ao_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> aq_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> ar_ = context.Operators.Union<MedicationRequest>(ao_, aq_);
+        IEnumerable<MedicationRequest> as_ = context.Operators.Union<MedicationRequest>(am_, ar_);
+        IEnumerable<MedicationRequest> au_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> aw_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> ax_ = context.Operators.Union<MedicationRequest>(au_, aw_);
+        IEnumerable<MedicationRequest> ay_ = context.Operators.Union<MedicationRequest>(as_, ax_);
+        IEnumerable<MedicationRequest> ba_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> bc_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> bd_ = context.Operators.Union<MedicationRequest>(ba_, bc_);
+        IEnumerable<MedicationRequest> be_ = context.Operators.Union<MedicationRequest>(ay_, bd_);
+        IEnumerable<MedicationRequest> bg_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> bi_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationnotrequested"));
+        IEnumerable<MedicationRequest> bj_ = context.Operators.Union<MedicationRequest>(bg_, bi_);
+        IEnumerable<MedicationRequest> bk_ = context.Operators.Union<MedicationRequest>(be_, bj_);
+
+        bool? bl_(MedicationRequest NoMedicationOrder) {
+            Code<MedicationRequest.MedicationRequestIntent> ed_ = NoMedicationOrder?.IntentElement;
+            MedicationRequest.MedicationRequestIntent? ee_ = ed_?.Value;
+            string ef_ = context.Operators.Convert<string>(ee_);
+            string[] eg_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? ee_ = context.Operators.In<string>(ec_, (IEnumerable<string>)ed_);
-            Code<MedicationRequest.MedicationrequestStatus> ef_ = NoMedicationOrder?.StatusElement;
-            MedicationRequest.MedicationrequestStatus? eg_ = ef_?.Value;
-            string eh_ = context.Operators.Convert<string>(eg_);
-            string[] ei_ = [
+            bool? eh_ = context.Operators.In<string>(ef_, (IEnumerable<string>)eg_);
+            Code<MedicationRequest.MedicationrequestStatus> ei_ = NoMedicationOrder?.StatusElement;
+            MedicationRequest.MedicationrequestStatus? ej_ = ei_?.Value;
+            string ek_ = context.Operators.Convert<string>(ej_);
+            string[] el_ = [
                 "active",
                 "completed",
             ];
-            bool? ej_ = context.Operators.In<string>(eh_, (IEnumerable<string>)ei_);
-            bool? ek_ = context.Operators.And(ee_, ej_);
-            return ek_;
+            bool? em_ = context.Operators.In<string>(ek_, (IEnumerable<string>)el_);
+            bool? en_ = context.Operators.And(eh_, em_);
+            return en_;
         }
 
-        IEnumerable<MedicationRequest> bk_ = context.Operators.Where<MedicationRequest>(bi_, bj_);
+        IEnumerable<MedicationRequest> bm_ = context.Operators.Where<MedicationRequest>(bk_, bl_);
 
-        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? bl_(MedicationRequest NoMedicationOrder) {
-            Id el_ = NoMedicationOrder?.IdElement;
-            string em_ = el_?.Value;
-            List<CodeableConcept> en_ = NoMedicationOrder?.ReasonCode;
+        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? bn_(MedicationRequest NoMedicationOrder) {
+            Id eo_ = NoMedicationOrder?.IdElement;
+            string ep_ = eo_?.Value;
+            List<CodeableConcept> eq_ = NoMedicationOrder?.ReasonCode;
 
-            CqlConcept eo_(CodeableConcept @this) {
-                CqlConcept et_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return et_;
+            CqlConcept er_(CodeableConcept @this) {
+                CqlConcept ew_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return ew_;
             }
 
-            IEnumerable<CqlConcept> ep_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)en_, eo_);
-            FhirDateTime eq_ = NoMedicationOrder?.AuthoredOnElement;
-            CqlDateTime er_ = context.Operators.Convert<CqlDateTime>(eq_);
-            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? es_ = (CqlTupleMetadata_CNeQfiIHcQEUBjZNVZiOLfdeP, em_, ep_, er_);
-            return es_;
+            IEnumerable<CqlConcept> es_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)eq_, er_);
+            FhirDateTime et_ = NoMedicationOrder?.AuthoredOnElement;
+            CqlDateTime eu_ = context.Operators.Convert<CqlDateTime>(et_);
+            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? ev_ = (CqlTupleMetadata_CNeQfiIHcQEUBjZNVZiOLfdeP, ep_, es_, eu_);
+            return ev_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> bm_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(bk_, bl_);
-        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> bn_ = context.Operators.Distinct<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(bm_);
-        IEnumerable<object> bo_ = context.Operators.Union<object>(af_ as IEnumerable<object>, bn_ as IEnumerable<object>);
-        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? bp_(object @object) => ((CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?)@object;
-        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> bq_ = context.Operators.Select<object, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(bo_, bp_);
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> bo_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(bm_, bn_);
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> bp_ = context.Operators.Distinct<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(bo_);
+        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> bq_ = context.Operators.Union<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(ah_, bp_);
         IEnumerable<MedicationRequest> bs_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
         IEnumerable<MedicationRequest> bt_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
         IEnumerable<MedicationRequest> bu_(MedicationRequest MR) {
-            IEnumerable<Medication> eu_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> ex_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? ev_(Medication M) {
-                object ez_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object fa_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> fb_ = context.Operators.Split((string)fa_, "/");
-                string fc_ = context.Operators.Last<string>(fb_);
-                bool? fd_ = context.Operators.Equal(ez_, fc_);
-                CodeableConcept fe_ = M?.Code;
-                CqlConcept ff_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fe_);
-                CqlValueSet fg_ = this.Low_Dose_Unfractionated_Heparin_for_VTE_Prophylaxis(context);
-                bool? fh_ = context.Operators.ConceptInValueSet(ff_, fg_);
-                bool? fi_ = context.Operators.And(fd_, fh_);
-                return fi_;
+            bool? ey_(Medication M) {
+                object fc_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object fd_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> fe_ = context.Operators.Split((string)fd_, "/");
+                string ff_ = context.Operators.Last<string>(fe_);
+                bool? fg_ = context.Operators.Equal(fc_, ff_);
+                CodeableConcept fh_ = M?.Code;
+                CqlConcept fi_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fh_);
+                CqlValueSet fj_ = this.Low_Dose_Unfractionated_Heparin_for_VTE_Prophylaxis(context);
+                bool? fk_ = context.Operators.ConceptInValueSet(fi_, fj_);
+                bool? fl_ = context.Operators.And(fg_, fk_);
+                return fl_;
             }
 
-            IEnumerable<Medication> ew_ = context.Operators.Where<Medication>(eu_, ev_);
-            MedicationRequest ex_(Medication M) => MR;
-            IEnumerable<MedicationRequest> ey_ = context.Operators.Select<Medication, MedicationRequest>(ew_, ex_);
-            return ey_;
+            IEnumerable<Medication> ez_ = context.Operators.Where<Medication>(ex_, ey_);
+            MedicationRequest fa_(Medication M) => MR;
+            IEnumerable<MedicationRequest> fb_ = context.Operators.Select<Medication, MedicationRequest>(ez_, fa_);
+            return fb_;
         }
 
         IEnumerable<MedicationRequest> bv_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(bt_, bu_);
@@ -3435,26 +3453,26 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<MedicationRequest> by_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
         IEnumerable<MedicationRequest> ca_(MedicationRequest MR) {
-            IEnumerable<Medication> fj_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> fm_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? fk_(Medication M) {
-                object fo_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object fp_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> fq_ = context.Operators.Split((string)fp_, "/");
-                string fr_ = context.Operators.Last<string>(fq_);
-                bool? fs_ = context.Operators.Equal(fo_, fr_);
-                CodeableConcept ft_ = M?.Code;
-                CqlConcept fu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ft_);
-                CqlValueSet fv_ = this.Low_Molecular_Weight_Heparin_for_VTE_Prophylaxis(context);
-                bool? fw_ = context.Operators.ConceptInValueSet(fu_, fv_);
-                bool? fx_ = context.Operators.And(fs_, fw_);
-                return fx_;
+            bool? fn_(Medication M) {
+                object fr_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object fs_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> ft_ = context.Operators.Split((string)fs_, "/");
+                string fu_ = context.Operators.Last<string>(ft_);
+                bool? fv_ = context.Operators.Equal(fr_, fu_);
+                CodeableConcept fw_ = M?.Code;
+                CqlConcept fx_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fw_);
+                CqlValueSet fy_ = this.Low_Molecular_Weight_Heparin_for_VTE_Prophylaxis(context);
+                bool? fz_ = context.Operators.ConceptInValueSet(fx_, fy_);
+                bool? ga_ = context.Operators.And(fv_, fz_);
+                return ga_;
             }
 
-            IEnumerable<Medication> fl_ = context.Operators.Where<Medication>(fj_, fk_);
-            MedicationRequest fm_(Medication M) => MR;
-            IEnumerable<MedicationRequest> fn_ = context.Operators.Select<Medication, MedicationRequest>(fl_, fm_);
-            return fn_;
+            IEnumerable<Medication> fo_ = context.Operators.Where<Medication>(fm_, fn_);
+            MedicationRequest fp_(Medication M) => MR;
+            IEnumerable<MedicationRequest> fq_ = context.Operators.Select<Medication, MedicationRequest>(fo_, fp_);
+            return fq_;
         }
 
         IEnumerable<MedicationRequest> cb_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(bt_, ca_);
@@ -3463,26 +3481,26 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<MedicationRequest> cf_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
         IEnumerable<MedicationRequest> ch_(MedicationRequest MR) {
-            IEnumerable<Medication> fy_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> gb_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? fz_(Medication M) {
-                object gd_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object ge_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> gf_ = context.Operators.Split((string)ge_, "/");
-                string gg_ = context.Operators.Last<string>(gf_);
-                bool? gh_ = context.Operators.Equal(gd_, gg_);
-                CodeableConcept gi_ = M?.Code;
-                CqlConcept gj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gi_);
-                CqlValueSet gk_ = this.Injectable_Factor_Xa_Inhibitor_for_VTE_Prophylaxis(context);
-                bool? gl_ = context.Operators.ConceptInValueSet(gj_, gk_);
-                bool? gm_ = context.Operators.And(gh_, gl_);
-                return gm_;
+            bool? gc_(Medication M) {
+                object gg_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object gh_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> gi_ = context.Operators.Split((string)gh_, "/");
+                string gj_ = context.Operators.Last<string>(gi_);
+                bool? gk_ = context.Operators.Equal(gg_, gj_);
+                CodeableConcept gl_ = M?.Code;
+                CqlConcept gm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gl_);
+                CqlValueSet gn_ = this.Injectable_Factor_Xa_Inhibitor_for_VTE_Prophylaxis(context);
+                bool? go_ = context.Operators.ConceptInValueSet(gm_, gn_);
+                bool? gp_ = context.Operators.And(gk_, go_);
+                return gp_;
             }
 
-            IEnumerable<Medication> ga_ = context.Operators.Where<Medication>(fy_, fz_);
-            MedicationRequest gb_(Medication M) => MR;
-            IEnumerable<MedicationRequest> gc_ = context.Operators.Select<Medication, MedicationRequest>(ga_, gb_);
-            return gc_;
+            IEnumerable<Medication> gd_ = context.Operators.Where<Medication>(gb_, gc_);
+            MedicationRequest ge_(Medication M) => MR;
+            IEnumerable<MedicationRequest> gf_ = context.Operators.Select<Medication, MedicationRequest>(gd_, ge_);
+            return gf_;
         }
 
         IEnumerable<MedicationRequest> ci_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(bt_, ch_);
@@ -3491,26 +3509,26 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<MedicationRequest> cm_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
         IEnumerable<MedicationRequest> co_(MedicationRequest MR) {
-            IEnumerable<Medication> gn_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> gq_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? go_(Medication M) {
-                object gs_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object gt_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> gu_ = context.Operators.Split((string)gt_, "/");
-                string gv_ = context.Operators.Last<string>(gu_);
-                bool? gw_ = context.Operators.Equal(gs_, gv_);
-                CodeableConcept gx_ = M?.Code;
-                CqlConcept gy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gx_);
-                CqlValueSet gz_ = this.Warfarin(context);
-                bool? ha_ = context.Operators.ConceptInValueSet(gy_, gz_);
-                bool? hb_ = context.Operators.And(gw_, ha_);
-                return hb_;
+            bool? gr_(Medication M) {
+                object gv_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object gw_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> gx_ = context.Operators.Split((string)gw_, "/");
+                string gy_ = context.Operators.Last<string>(gx_);
+                bool? gz_ = context.Operators.Equal(gv_, gy_);
+                CodeableConcept ha_ = M?.Code;
+                CqlConcept hb_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ha_);
+                CqlValueSet hc_ = this.Warfarin(context);
+                bool? hd_ = context.Operators.ConceptInValueSet(hb_, hc_);
+                bool? he_ = context.Operators.And(gz_, hd_);
+                return he_;
             }
 
-            IEnumerable<Medication> gp_ = context.Operators.Where<Medication>(gn_, go_);
-            MedicationRequest gq_(Medication M) => MR;
-            IEnumerable<MedicationRequest> gr_ = context.Operators.Select<Medication, MedicationRequest>(gp_, gq_);
-            return gr_;
+            IEnumerable<Medication> gs_ = context.Operators.Where<Medication>(gq_, gr_);
+            MedicationRequest gt_(Medication M) => MR;
+            IEnumerable<MedicationRequest> gu_ = context.Operators.Select<Medication, MedicationRequest>(gs_, gt_);
+            return gu_;
         }
 
         IEnumerable<MedicationRequest> cp_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(bt_, co_);
@@ -3519,26 +3537,26 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<MedicationRequest> ct_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
         IEnumerable<MedicationRequest> cv_(MedicationRequest MR) {
-            IEnumerable<Medication> hc_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> hf_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? hd_(Medication M) {
-                object hh_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object hi_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> hj_ = context.Operators.Split((string)hi_, "/");
-                string hk_ = context.Operators.Last<string>(hj_);
-                bool? hl_ = context.Operators.Equal(hh_, hk_);
-                CodeableConcept hm_ = M?.Code;
-                CqlConcept hn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hm_);
-                CqlValueSet ho_ = this.Rivaroxaban_for_VTE_Prophylaxis(context);
-                bool? hp_ = context.Operators.ConceptInValueSet(hn_, ho_);
-                bool? hq_ = context.Operators.And(hl_, hp_);
-                return hq_;
+            bool? hg_(Medication M) {
+                object hk_ = context.Operators.LateBoundProperty<object>(M, "id.value");
+                object hl_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
+                IEnumerable<string> hm_ = context.Operators.Split((string)hl_, "/");
+                string hn_ = context.Operators.Last<string>(hm_);
+                bool? ho_ = context.Operators.Equal(hk_, hn_);
+                CodeableConcept hp_ = M?.Code;
+                CqlConcept hq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hp_);
+                CqlValueSet hr_ = this.Rivaroxaban_for_VTE_Prophylaxis(context);
+                bool? hs_ = context.Operators.ConceptInValueSet(hq_, hr_);
+                bool? ht_ = context.Operators.And(ho_, hs_);
+                return ht_;
             }
 
-            IEnumerable<Medication> he_ = context.Operators.Where<Medication>(hc_, hd_);
-            MedicationRequest hf_(Medication M) => MR;
-            IEnumerable<MedicationRequest> hg_ = context.Operators.Select<Medication, MedicationRequest>(he_, hf_);
-            return hg_;
+            IEnumerable<Medication> hh_ = context.Operators.Where<Medication>(hf_, hg_);
+            MedicationRequest hi_(Medication M) => MR;
+            IEnumerable<MedicationRequest> hj_ = context.Operators.Select<Medication, MedicationRequest>(hh_, hi_);
+            return hj_;
         }
 
         IEnumerable<MedicationRequest> cw_ = context.Operators.SelectMany<MedicationRequest, MedicationRequest>(bt_, cv_);
@@ -3548,43 +3566,43 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<ValueTuple<MedicationRequest, Task>> da_ = context.Operators.CrossJoin<MedicationRequest, Task>(cy_, cz_);
 
         (CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)? db_(ValueTuple<MedicationRequest, Task> _valueTuple) {
-            (CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)? hr_ = (CqlTupleMetadata_IIUQMBcJhJBPgdDOLHaTTRUE, _valueTuple.Item1, _valueTuple.Item2);
-            return hr_;
+            (CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)? hu_ = (CqlTupleMetadata_IIUQMBcJhJBPgdDOLHaTTRUE, _valueTuple.Item1, _valueTuple.Item2);
+            return hu_;
         }
 
         IEnumerable<(CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?> dc_ = context.Operators.Select<ValueTuple<MedicationRequest, Task>, (CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?>(da_, db_);
 
         bool? dd_((CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)? tuple_iiuqmbcjhjbpgddolhattrue) {
-            ResourceReference hs_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.Focus;
-            bool? ht_ = QICoreCommon_4_0_000.Instance.references(context, hs_, tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject);
-            CodeableConcept hu_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.Code;
-            CqlConcept hv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hu_);
-            CqlCode hw_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
-            CqlConcept hx_ = context.Operators.ConvertCodeToConcept(hw_);
-            bool? hy_ = context.Operators.Equivalent(hv_, hx_);
-            bool? hz_ = context.Operators.And(ht_, hy_);
-            Code<MedicationRequest.MedicationrequestStatus> ia_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.StatusElement;
-            MedicationRequest.MedicationrequestStatus? ib_ = ia_?.Value;
-            string ic_ = context.Operators.Convert<string>(ib_);
-            bool? id_ = context.Operators.Equal(ic_, "active");
-            bool? ie_ = context.Operators.And(hz_, id_);
-            return ie_;
+            ResourceReference hv_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.Focus;
+            bool? hw_ = QICoreCommon_4_0_000.Instance.references(context, hv_, tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject);
+            CodeableConcept hx_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.Code;
+            CqlConcept hy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hx_);
+            CqlCode hz_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
+            CqlConcept ia_ = context.Operators.ConvertCodeToConcept(hz_);
+            bool? ib_ = context.Operators.Equivalent(hy_, ia_);
+            bool? ic_ = context.Operators.And(hw_, ib_);
+            Code<MedicationRequest.MedicationrequestStatus> id_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.StatusElement;
+            MedicationRequest.MedicationrequestStatus? ie_ = id_?.Value;
+            string if_ = context.Operators.Convert<string>(ie_);
+            bool? ig_ = context.Operators.Equal(if_, "active");
+            bool? ih_ = context.Operators.And(ic_, ig_);
+            return ih_;
         }
 
         IEnumerable<(CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?> de_ = context.Operators.Where<(CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?>(dc_, dd_);
 
         (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? df_((CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)? tuple_iiuqmbcjhjbpgddolhattrue) {
-            Id if_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.IdElement;
-            string ig_ = if_?.Value;
-            CodeableConcept ih_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.StatusReason;
-            CqlConcept ii_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ih_);
-            CqlConcept[] ij_ = [
-                ii_,
+            Id ii_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.IdElement;
+            string ij_ = ii_?.Value;
+            CodeableConcept ik_ = tuple_iiuqmbcjhjbpgddolhattrue?.T?.StatusReason;
+            CqlConcept il_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ik_);
+            CqlConcept[] im_ = [
+                il_,
             ];
-            FhirDateTime ik_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.AuthoredOnElement;
-            CqlDateTime il_ = context.Operators.Convert<CqlDateTime>(ik_);
-            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? im_ = (CqlTupleMetadata_CNeQfiIHcQEUBjZNVZiOLfdeP, ig_, (IEnumerable<CqlConcept>)ij_, il_);
-            return im_;
+            FhirDateTime in_ = tuple_iiuqmbcjhjbpgddolhattrue?.MedicationOrderReject?.AuthoredOnElement;
+            CqlDateTime io_ = context.Operators.Convert<CqlDateTime>(in_);
+            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? ip_ = (CqlTupleMetadata_CNeQfiIHcQEUBjZNVZiOLfdeP, ij_, (IEnumerable<CqlConcept>)im_, io_);
+            return ip_;
         }
 
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> dg_ = context.Operators.Select<(CqlTupleMetadata, MedicationRequest MedicationOrderReject, Task T)?, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(de_, df_);
@@ -3709,69 +3727,87 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
 
         IEnumerable<(CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)?> u_ = context.Operators.Select<ServiceRequest, (CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)?>(s_, t_);
         IEnumerable<(CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)?> v_ = context.Operators.Distinct<(CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)?>(u_);
-        IEnumerable<ServiceRequest> x_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-        IEnumerable<ServiceRequest> z_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-        IEnumerable<ServiceRequest> aa_ = context.Operators.Union<ServiceRequest>(x_, z_);
-        IEnumerable<ServiceRequest> ac_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-        IEnumerable<ServiceRequest> ad_ = context.Operators.Union<ServiceRequest>(aa_, ac_);
-        IEnumerable<Task> ae_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
-        IEnumerable<ValueTuple<ServiceRequest, Task>> af_ = context.Operators.CrossJoin<ServiceRequest, Task>(ad_, ae_);
 
-        (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? ag_(ValueTuple<ServiceRequest, Task> _valueTuple) {
-            (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? cj_ = (CqlTupleMetadata_YYIDPXBNjhOGFRJKYRBMGChb, _valueTuple.Item1, _valueTuple.Item2);
-            return cj_;
+        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? w_((CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)? tuple_gnbatbigxtpdibanunzcndfbr) {
+
+            (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? cj_() {
+                if (tuple_gnbatbigxtpdibanunzcndfbr is null)
+                {
+                    return null as (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?;
+                }
+                else
+                {
+                    CqlConcept ck_ = context.Operators.Convert<CqlConcept>(tuple_gnbatbigxtpdibanunzcndfbr?.requestStatusReason);
+                    (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? cl_ = (CqlTupleMetadata_DheTAGNHbFgKVJGaRbPLJVjKH, tuple_gnbatbigxtpdibanunzcndfbr?.id, ck_, tuple_gnbatbigxtpdibanunzcndfbr?.authoredOn);
+                    return cl_;
+                };
+            }
+
+            return cj_();
         }
 
-        IEnumerable<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?> ah_ = context.Operators.Select<ValueTuple<ServiceRequest, Task>, (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?>(af_, ag_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> x_ = context.Operators.Select<(CqlTupleMetadata, string id, CodeableConcept requestStatusReason, CqlDateTime authoredOn)?, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(v_, w_);
+        IEnumerable<ServiceRequest> z_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
+        IEnumerable<ServiceRequest> ab_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
+        IEnumerable<ServiceRequest> ac_ = context.Operators.Union<ServiceRequest>(z_, ab_);
+        IEnumerable<ServiceRequest> ae_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
+        IEnumerable<ServiceRequest> af_ = context.Operators.Union<ServiceRequest>(ac_, ae_);
+        IEnumerable<Task> ag_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
+        IEnumerable<ValueTuple<ServiceRequest, Task>> ah_ = context.Operators.CrossJoin<ServiceRequest, Task>(af_, ag_);
 
-        bool? ai_((CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? tuple_yyidpxbnjhogfrjkyrbmgchb) {
-            Code<RequestIntent> ck_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.IntentElement;
-            RequestIntent? cl_ = ck_?.Value;
-            Code<RequestIntent> cm_ = context.Operators.Convert<Code<RequestIntent>>(cl_);
-            string cn_ = context.Operators.Convert<string>(cm_);
-            string[] co_ = [
+        (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? ai_(ValueTuple<ServiceRequest, Task> _valueTuple) {
+            (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? cm_ = (CqlTupleMetadata_YYIDPXBNjhOGFRJKYRBMGChb, _valueTuple.Item1, _valueTuple.Item2);
+            return cm_;
+        }
+
+        IEnumerable<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?> aj_ = context.Operators.Select<ValueTuple<ServiceRequest, Task>, (CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?>(ah_, ai_);
+
+        bool? ak_((CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? tuple_yyidpxbnjhogfrjkyrbmgchb) {
+            Code<RequestIntent> cn_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.IntentElement;
+            RequestIntent? co_ = cn_?.Value;
+            Code<RequestIntent> cp_ = context.Operators.Convert<Code<RequestIntent>>(co_);
+            string cq_ = context.Operators.Convert<string>(cp_);
+            string[] cr_ = [
                 "order",
                 "original-order",
                 "reflex-order",
                 "filler-order",
                 "instance-order",
             ];
-            bool? cp_ = context.Operators.In<string>(cn_, (IEnumerable<string>)co_);
-            Code<RequestStatus> cq_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.StatusElement;
-            RequestStatus? cr_ = cq_?.Value;
-            Code<RequestStatus> cs_ = context.Operators.Convert<Code<RequestStatus>>(cr_);
-            bool? ct_ = context.Operators.Equal(cs_, "active");
-            bool? cu_ = context.Operators.And(cp_, ct_);
-            ResourceReference cv_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.Focus;
-            bool? cw_ = QICoreCommon_4_0_000.Instance.references(context, cv_, tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject);
-            bool? cx_ = context.Operators.And(cu_, cw_);
-            CodeableConcept cy_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.Code;
-            CqlConcept cz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cy_);
-            CqlCode da_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
-            CqlConcept db_ = context.Operators.ConvertCodeToConcept(da_);
-            bool? dc_ = context.Operators.Equivalent(cz_, db_);
-            bool? dd_ = context.Operators.And(cx_, dc_);
-            return dd_;
+            bool? cs_ = context.Operators.In<string>(cq_, (IEnumerable<string>)cr_);
+            Code<RequestStatus> ct_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.StatusElement;
+            RequestStatus? cu_ = ct_?.Value;
+            Code<RequestStatus> cv_ = context.Operators.Convert<Code<RequestStatus>>(cu_);
+            bool? cw_ = context.Operators.Equal(cv_, "active");
+            bool? cx_ = context.Operators.And(cs_, cw_);
+            ResourceReference cy_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.Focus;
+            bool? cz_ = QICoreCommon_4_0_000.Instance.references(context, cy_, tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject);
+            bool? da_ = context.Operators.And(cx_, cz_);
+            CodeableConcept db_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.Code;
+            CqlConcept dc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, db_);
+            CqlCode dd_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
+            CqlConcept de_ = context.Operators.ConvertCodeToConcept(dd_);
+            bool? df_ = context.Operators.Equivalent(dc_, de_);
+            bool? dg_ = context.Operators.And(da_, df_);
+            return dg_;
         }
 
-        IEnumerable<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?> aj_ = context.Operators.Where<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?>(ah_, ai_);
+        IEnumerable<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?> al_ = context.Operators.Where<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?>(aj_, ak_);
 
-        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? ak_((CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? tuple_yyidpxbnjhogfrjkyrbmgchb) {
-            Id de_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.IdElement;
-            string df_ = de_?.Value;
-            CodeableConcept dg_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.StatusReason;
-            CqlConcept dh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dg_);
-            FhirDateTime di_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.AuthoredOnElement;
-            CqlDateTime dj_ = context.Operators.Convert<CqlDateTime>(di_);
-            (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? dk_ = (CqlTupleMetadata_DheTAGNHbFgKVJGaRbPLJVjKH, df_, dh_, dj_);
-            return dk_;
+        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? am_((CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)? tuple_yyidpxbnjhogfrjkyrbmgchb) {
+            Id dh_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.IdElement;
+            string di_ = dh_?.Value;
+            CodeableConcept dj_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.T?.StatusReason;
+            CqlConcept dk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dj_);
+            FhirDateTime dl_ = tuple_yyidpxbnjhogfrjkyrbmgchb?.DeviceOrderReject?.AuthoredOnElement;
+            CqlDateTime dm_ = context.Operators.Convert<CqlDateTime>(dl_);
+            (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? dn_ = (CqlTupleMetadata_DheTAGNHbFgKVJGaRbPLJVjKH, di_, dk_, dm_);
+            return dn_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> al_ = context.Operators.Select<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(aj_, ak_);
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> am_ = context.Operators.Distinct<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(al_);
-        IEnumerable<object> an_ = context.Operators.Union<object>(v_ as IEnumerable<object>, am_ as IEnumerable<object>);
-        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? ao_(object @object) => ((CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?)@object;
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> ap_ = context.Operators.Select<object, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(an_, ao_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> an_ = context.Operators.Select<(CqlTupleMetadata, ServiceRequest DeviceOrderReject, Task T)?, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(al_, am_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> ao_ = context.Operators.Distinct<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(an_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> ap_ = context.Operators.Union<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(x_, ao_);
         CqlValueSet aq_ = this.Application_of_Intermittent_Pneumatic_Compression_Devices(context);
         IEnumerable<Procedure> ar_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, aq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
         IEnumerable<Procedure> at_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, aq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
@@ -3788,38 +3824,57 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<Procedure> bg_ = context.Operators.Union<Procedure>(ba_, bf_);
 
         (CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)? bh_(Procedure DeviceNotApplied) {
-            Id dl_ = DeviceNotApplied?.IdElement;
-            string dm_ = dl_?.Value;
-            CodeableConcept dn_ = DeviceNotApplied?.StatusReason;
-            CqlConcept do_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dn_);
+            Id do_ = DeviceNotApplied?.IdElement;
+            string dp_ = do_?.Value;
+            CodeableConcept dq_ = DeviceNotApplied?.StatusReason;
+            CqlConcept dr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dq_);
 
-            bool? dp_(Extension @this) {
-                FhirUri dw_ = @this?.UrlElement;
-                string dx_ = FHIRHelpers_4_4_000.Instance.ToString(context, dw_);
-                bool? dy_ = context.Operators.Equal(dx_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
-                return dy_;
+            bool? ds_(Extension @this) {
+                FhirUri dz_ = @this?.UrlElement;
+                string ea_ = FHIRHelpers_4_4_000.Instance.ToString(context, dz_);
+                bool? eb_ = context.Operators.Equal(ea_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                return eb_;
             }
 
-            IEnumerable<Extension> dq_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(DeviceNotApplied is DomainResource
+            IEnumerable<Extension> dt_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(DeviceNotApplied is DomainResource
                 ? (DeviceNotApplied as DomainResource).Extension
-                : default), dp_);
+                : default), ds_);
 
-            DataType dr_(Extension @this) {
-                DataType dz_ = @this?.Value;
-                return dz_;
+            DataType du_(Extension @this) {
+                DataType ec_ = @this?.Value;
+                return ec_;
             }
 
-            IEnumerable<DataType> ds_ = context.Operators.Select<Extension, DataType>(dq_, dr_);
-            DataType dt_ = context.Operators.SingletonFrom<DataType>(ds_);
-            FhirDateTime du_ = context.Operators.Convert<FhirDateTime>(dt_);
-            (CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)? dv_ = (CqlTupleMetadata_DPXDaXjPQUNAIiZCCbGhNdDMi, dm_, do_, du_);
-            return dv_;
+            IEnumerable<DataType> dv_ = context.Operators.Select<Extension, DataType>(dt_, du_);
+            DataType dw_ = context.Operators.SingletonFrom<DataType>(dv_);
+            FhirDateTime dx_ = context.Operators.Convert<FhirDateTime>(dw_);
+            (CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)? dy_ = (CqlTupleMetadata_DPXDaXjPQUNAIiZCCbGhNdDMi, dp_, dr_, dx_);
+            return dy_;
         }
 
         IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)?> bi_ = context.Operators.Select<Procedure, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)?>(bg_, bh_);
         IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)?> bj_ = context.Operators.Distinct<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)?>(bi_);
-        IEnumerable<object> bk_ = context.Operators.Union<object>(ap_ as IEnumerable<object>, bj_ as IEnumerable<object>);
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> bm_ = context.Operators.Select<object, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(bk_, ao_);
+
+        (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? bk_((CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)? tuple_fcgxmnobtfvlcbqjjfugxtftk) {
+
+            (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? ed_() {
+                if (tuple_fcgxmnobtfvlcbqjjfugxtftk is null)
+                {
+                    return null as (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?;
+                }
+                else
+                {
+                    CqlDateTime ee_ = context.Operators.Convert<CqlDateTime>(tuple_fcgxmnobtfvlcbqjjfugxtftk?.authoredOn);
+                    (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? ef_ = (CqlTupleMetadata_DheTAGNHbFgKVJGaRbPLJVjKH, tuple_fcgxmnobtfvlcbqjjfugxtftk?.id, tuple_fcgxmnobtfvlcbqjjfugxtftk?.requestStatusReason, ee_);
+                    return ef_;
+                };
+            }
+
+            return ed_();
+        }
+
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> bl_ = context.Operators.Select<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, FhirDateTime authoredOn)?, (CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(bj_, bk_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> bm_ = context.Operators.Union<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(ap_, bl_);
         return bm_;
     }
 
@@ -4676,25 +4731,29 @@ public partial class CMS190FHIRVTEProphylaxisICU_1_0_000 : ILibrary, ISingleton<
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> a_ = this.No_VTE_Prophylaxis_Medication_Administered_Or_Ordered(context);
 
         bool? b_((CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? NoVTEMedication) {
-            IEnumerable<CqlConcept> h_ = NoVTEMedication?.medicationStatusReason;
-            CqlValueSet i_ = this.Patient_Refusal(context);
-            bool? j_ = context.Operators.ConceptsInValueSet(h_, i_);
-            return j_;
+            IEnumerable<CqlConcept> l_ = NoVTEMedication?.medicationStatusReason;
+            CqlValueSet m_ = this.Patient_Refusal(context);
+            bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
+            return n_;
         }
 
         IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?> c_ = context.Operators.Where<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(a_, b_);
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> d_ = this.No_Mechanical_VTE_Prophylaxis_Performed_Or_Ordered(context);
+        object d_((CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)? tuple_eodcxckcyhgehinqchjlrjuqw) => tuple_eodcxckcyhgehinqchjlrjuqw;
+        IEnumerable<object> e_ = context.Operators.Select<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?, object>(c_, d_);
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> f_ = this.No_Mechanical_VTE_Prophylaxis_Performed_Or_Ordered(context);
 
-        bool? e_((CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? NoVTEDevice) {
-            CqlConcept k_ = NoVTEDevice?.requestStatusReason;
-            CqlValueSet l_ = this.Patient_Refusal(context);
-            bool? m_ = context.Operators.ConceptInValueSet(k_, l_);
-            return m_;
+        bool? g_((CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? NoVTEDevice) {
+            CqlConcept o_ = NoVTEDevice?.requestStatusReason;
+            CqlValueSet p_ = this.Patient_Refusal(context);
+            bool? q_ = context.Operators.ConceptInValueSet(o_, p_);
+            return q_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> f_ = context.Operators.Where<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(d_, e_);
-        IEnumerable<object> g_ = context.Operators.Union<object>(c_ as IEnumerable<object>, f_ as IEnumerable<object>);
-        return g_;
+        IEnumerable<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?> h_ = context.Operators.Where<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(f_, g_);
+        object i_((CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)? tuple_dahzgfwmlihdcaesamjofzbqi) => tuple_dahzgfwmlihdcaesamjofzbqi;
+        IEnumerable<object> j_ = context.Operators.Select<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?, object>(h_, i_);
+        IEnumerable<object> k_ = context.Operators.Union<object>(e_, j_);
+        return k_;
     }
 
 
