@@ -217,6 +217,35 @@ public class FhirMeasureExtensionsTests
     }
 
     [TestMethod]
+    public void NullTagEntries_AreIgnored()
+    {
+        // Deserialized ELM can contain null entries in an annotation's tag array.
+        var stratifierDef = new ExpressionDef
+        {
+            name = "Region Stratifier",
+            annotation =
+            [
+                new ElmAnnotation
+                {
+                    t =
+                    [
+                        null!,
+                        CreateTag("group", "RateA"),
+                        CreateTag("stratifier", "Region"),
+                    ],
+                },
+            ],
+        };
+
+        var measure = CreateMeasure(BaseStatements(stratifierDef));
+
+        measure.Group.Single(g => g.ElementId == "RateA")
+               .Stratifier.Single()
+               .Component.Single()
+               .ElementId.Should().Be("RateA-StratifierComponent-Region");
+    }
+
+    [TestMethod]
     public void LibraryWithoutStratifierTags_ProducesNoStratifiers()
     {
         var measure = CreateMeasure(BaseStatements());

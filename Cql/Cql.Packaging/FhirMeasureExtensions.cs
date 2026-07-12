@@ -76,11 +76,11 @@ internal static class FhirMeasureExtensions
             SysDateTime overrideDate)
         {
             var tags = elmLibrary.statements?
-                                 .SelectMany(def => def.annotation?.OfType<ElmAnnotation>()?.SelectMany(a => a.t ?? []) ?? [])
+                                 .SelectMany(GetAnnotationTags)
                                  .ToList() ?? [];
 
-            var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
-            var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
+            var measureAnnotation = tags.SingleOrDefault(t => t.name == "measure");
+            var yearAnnotation = tags.SingleOrDefault(t => t.name == "year");
             if (measureAnnotation != null
                 && !string.IsNullOrWhiteSpace(measureAnnotation.value)
                 && yearAnnotation != null
@@ -105,6 +105,7 @@ internal static class FhirMeasureExtensions
             .OfType<ElmAnnotation>()
             .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
          ?? [])
+        .Where(t => t is not null)
         .ToArray();
 
     private static FhirMeasure.GroupComponent GetOrCreateGroup(FhirMeasure fhirMeasure, string rate)
