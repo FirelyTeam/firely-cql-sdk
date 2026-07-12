@@ -2486,7 +2486,16 @@ internal partial class ExpressionBuilderContext
             var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, this));
             var lambdaBody = ChangeType(lambdaParameter, outputElementType, out typeConversion, throwOnError: true);
             var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-            return BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
+            var select = BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
+
+            // The element-wise Select is the conversion: callers such as the As handler must
+            // use it rather than fall back to a type-as cast on the whole list, which for
+            // tuple-typed elements would yield null at runtime after the C# code generator
+            // lowers them to value tuples (see #1354).
+            if (isTupleListConversion)
+                typeConversion = TypeConversion.OperatorConvert;
+
+            return select;
         }
 
         Type toType = TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo)
