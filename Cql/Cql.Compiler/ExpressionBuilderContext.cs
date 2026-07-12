@@ -2434,9 +2434,19 @@ internal partial class ExpressionBuilderContext
                         }
 
                         var inputAccess = Expression.Property(input, inputProp);
-                        var convertedValue = inputProp.PropertyType != outputProp.PropertyType
-                            ? ChangeType(inputAccess, outputProp.PropertyType, considerSafeUpcast: true)
-                            : (Expression)inputAccess;
+                        Expression convertedValue = inputAccess;
+                        if (inputProp.PropertyType != outputProp.PropertyType)
+                        {
+                            convertedValue = ChangeType(inputAccess, outputProp.PropertyType, out var propertyConversion, considerSafeUpcast: true);
+                            if (propertyConversion == TypeConversion.NoMatch || convertedValue is null)
+                            {
+                                // The property values cannot be converted, so the tuple types are
+                                // not convertible either.
+                                allMatched = false;
+                                break;
+                            }
+                        }
+
                         bindings.Add(Expression.Bind(outputProp, convertedValue));
                     }
 
