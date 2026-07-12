@@ -13,9 +13,12 @@ using Hl7.Cql.Runtime;
 namespace CoreTests
 {
     /// <summary>
-    /// Regression tests for issue #1352: a null open interval boundary is unknown and
-    /// comparisons against it must yield null, while a null closed boundary keeps the
-    /// minimum/maximum interpretation.
+    /// Regression tests for issue #1352: a null open interval boundary is unknown, while a
+    /// null closed boundary keeps the minimum/maximum interpretation. An unknown boundary
+    /// still ranges over the values permitted by its own interval (an unknown high lies
+    /// between the low boundary and the maximum), so comparisons involving it are true when
+    /// every possible value satisfies them, false when none does, and null only when the
+    /// outcome genuinely depends on the unknown value.
     /// </summary>
     [TestClass]
     public class OpenNullIntervalBoundaryTests
