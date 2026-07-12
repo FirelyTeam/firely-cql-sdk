@@ -1916,8 +1916,11 @@ namespace Hl7.Cql.Operators
                 return null;
             left = toClosed(left!)!;
             right = toClosed(right!)!;
-            if (Comparer.Compare(left.low ?? MaxValue<T>()!, right.high ?? MinValue<T>()!, precision) <= 0
-                && Comparer.Compare(left.high ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) > 0)
+            // A null low boundary is the minimum value and a null high boundary the maximum
+            // (see #1356: these substitutions used to be inverted, so intervals with an
+            // unbounded end never overlapped after anything).
+            if (Comparer.Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) <= 0
+                && Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision) > 0)
                 return true;
             else
                 return false;
