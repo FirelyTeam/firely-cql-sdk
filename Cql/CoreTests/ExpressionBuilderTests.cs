@@ -259,6 +259,106 @@ namespace CoreTests
             Assert.AreEqual(typeof(IEnumerable<object>), lambda.ReturnType);
         }
 
+        [TestMethod]
+        public void Union_OfCompatibleTuplesWithDifferentElementTypes_KeepsAllElements()
+        {
+            // Regression test for https://github.com/FirelyTeam/firely-cql-sdk/issues/1354:
+            // a union of two structurally compatible tuple lists whose element types differ
+            // (here FHIR.dateTime vs System.DateTime) was bound as
+            // Union<object>(left as IEnumerable<object>, right as IEnumerable<object>).
+            // The C# code generator lowers the compiler-generated tuple types to value
+            // tuples, for which IEnumerable<T> covariance does not apply, so both casts
+            // yielded null at runtime and the whole define silently evaluated to empty.
+            var stringType = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "String");
+            var dateTimeType = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "DateTime");
+            var fhirDateTimeType = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "dateTime");
+
+            Hl7.Cql.Elm.TupleTypeSpecifier TupleTypeWith(Hl7.Cql.Elm.TypeSpecifier whenType) => new()
+            {
+                element =
+                [
+                    new Hl7.Cql.Elm.TupleElementDefinition { name = "id", elementType = stringType },
+                    new Hl7.Cql.Elm.TupleElementDefinition { name = "when", elementType = whenType },
+                ],
+            };
+
+            Hl7.Cql.Elm.List TupleListWith(string id, Hl7.Cql.Elm.TypeSpecifier whenType)
+            {
+                var tupleType = TupleTypeWith(whenType);
+                return new Hl7.Cql.Elm.List
+                {
+                    resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = tupleType },
+                    element =
+                    [
+                        new Hl7.Cql.Elm.Tuple
+                        {
+                            resultTypeSpecifier = tupleType,
+                            element =
+                            [
+                                new Hl7.Cql.Elm.TupleElement
+                                {
+                                    name = "id",
+                                    value = new Hl7.Cql.Elm.Literal
+                                    {
+                                        value = id,
+                                        valueType = new System.Xml.XmlQualifiedName("{urn:hl7-org:elm-types:r1}String"),
+                                        resultTypeSpecifier = stringType,
+                                    },
+                                },
+                                new Hl7.Cql.Elm.TupleElement
+                                {
+                                    name = "when",
+                                    value = new Hl7.Cql.Elm.Null { resultTypeSpecifier = whenType },
+                                },
+                            ],
+                        },
+                    ],
+                };
+            }
+
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "TupleUnionTest", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "MixedTupleUnion",
+                        context = "Unfiltered",
+                        expression = new Hl7.Cql.Elm.Union
+                        {
+                            resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = TupleTypeWith(dateTimeType) },
+                            operand =
+                            [
+                                TupleListWith("a", fhirDateTimeType),
+                                TupleListWith("b", dateTimeType),
+                            ],
+                        },
+                    },
+                ],
+            };
+
+            var result = InvokeLibrary(elmLibrary, "MixedTupleUnion");
+
+            Assert.IsNotNull(result, "The union of two compatible tuple lists must not evaluate to null.");
+            var items = ((System.Collections.IEnumerable)result).Cast<object>().Where(item => item is not null).ToList();
+            Assert.AreEqual(2, items.Count);
+
+            // Both elements must have been converted to a single tuple type whose second
+            // item is the id; the generated code represents tuples as value tuples.
+            var ids = items
+                      .Select(item => item.GetType().GetField("Item2")?.GetValue(item) as string
+                                      ?? item.GetType().GetProperty("id")?.GetValue(item) as string)
+                      .OrderBy(id => id)
+                      .ToList();
+            CollectionAssert.AreEqual(new List<string> { "a", "b" }, ids);
+        }
+
         private static Hl7.Cql.Runtime.DefinitionDictionary<Hl7.Cql.Abstractions.CqlDefinition> ProcessLibraryWithChoiceResult(
             Hl7.Cql.Elm.ChoiceTypeSpecifier choiceType)
         {

@@ -81,14 +81,34 @@ partial class CqlOperatorsBinder
             // Check if the element types are structurally compatible for union
             if (ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElementType, rightListElementType, _typeConverter))
             {
-                // Cast both to IEnumerable<object> to allow union
-                var leftAsObjectEnumerable = left.NewTypeAsExpression<IEnumerable<object>>();
-                var rightAsObjectEnumerable = right.NewTypeAsExpression<IEnumerable<object>>();
+                // Convert both to IEnumerable<object> to allow union
+                var leftAsObjectEnumerable = ToObjectEnumerable(left, leftListElementType);
+                var rightAsObjectEnumerable = ToObjectEnumerable(right, rightListElementType);
                 return BindToBestMethodOverload(nameof(ICqlOperators.Union), [leftAsObjectEnumerable, rightAsObjectEnumerable], [])!;
             }
         }
 
         return BindToBestMethodOverload(nameof(ICqlOperators.Union), [left, right], [])!;
+    }
+
+    /// <summary>
+    /// Converts a list-typed expression to <c>IEnumerable&lt;object&gt;</c>. Reference-typed
+    /// elements convert covariantly, but value-typed elements and the compiler-generated tuple
+    /// types - which the C# code generator lowers to value tuples - must be boxed element-wise:
+    /// <c>IEnumerable&lt;T&gt;</c> covariance does not apply to value types, so a type-as
+    /// conversion would silently yield null at runtime (see #1354).
+    /// </summary>
+    private Expression ToObjectEnumerable(Expression list, Type elementType)
+    {
+        if (elementType == typeof(object))
+            return list;
+
+        if (!elementType.IsValueType && !elementType.IsTupleBaseType())
+            return list.NewTypeAsExpression<IEnumerable<object>>();
+
+        var parameter = Expression.Parameter(elementType, "item");
+        var boxLambda = Expression.Lambda(Expression.Convert(parameter, typeof(object)), parameter);
+        return BindToBestMethodOverload(nameof(ICqlOperators.Select), [list, boxLambda], [elementType, typeof(object)])!;
     }
 
     private Expression ResolveValueSet(Expression expression)

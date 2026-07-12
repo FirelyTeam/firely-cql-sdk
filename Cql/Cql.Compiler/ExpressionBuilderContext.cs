@@ -342,7 +342,25 @@ partial class ExpressionBuilderContext
                 if (_typeResolver.GetListElementType(left.Type, throwError: false) is { } leftListElemType
                     && _typeResolver.GetListElementType(right.Type, throwError: false) is { } rightListElemType
                     && ElmTupleTypeUtility.AreCompatibleForUnionOperation(leftListElemType, rightListElemType, _typeConverter))
+                {
+                    if (leftListElemType != rightListElemType)
+                    {
+                        // The operands are compatible but materialize as different element types
+                        // (e.g. structurally equivalent tuple types whose elements need a
+                        // conversion). Convert both operands to the declared result type so the
+                        // union is performed over a single element type; a union over
+                        // IEnumerable<object> cannot survive the value-tuple lowering performed
+                        // by the C# code generator (see #1354).
+                        var unionType = TypeFor(e, throwIfNotFound: false) is { } declaredType
+                                        && _typeResolver.IsListType(declaredType)
+                            ? declaredType
+                            : left.Type;
+                        left = ChangeType(left, unionType, throwOnError: true);
+                        right = ChangeType(right, unionType, throwOnError: true);
+                    }
+
                     return [left, right];
+                }
 
                 if (left.Type.IsCqlInterval(out var leftPointType)
                     && right.Type.IsCqlInterval(out var rightPointType)
@@ -2365,11 +2383,25 @@ internal partial class ExpressionBuilderContext
         bool throwOnError = false,
         bool considerSafeUpcast = false) // @TODO: Cast - ChangeType
     {
-        var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, considerSafeUpcast);
-        if (tc != TypeConversion.NoMatch)
+        // A covariant list conversion (e.g. IEnumerable<Derived> as IEnumerable<Base>) is not
+        // an option when compiler-generated tuple types are involved: the C# code generator
+        // lowers those element types to value tuples, and IEnumerable<T> covariance does not
+        // apply to value types, so the emitted 'as' cast would silently yield null at runtime
+        // (see #1354). Convert such lists element-wise below instead.
+        bool isTupleListConversion =
+            _typeResolver.GetListElementType(input.Type, throwError: false) is { } inputListElemType
+            && _typeResolver.GetListElementType(outputType, throwError: false) is { } outputListElemType
+            && inputListElemType != outputListElemType
+            && (inputListElemType.IsTupleBaseType() || outputListElemType.IsTupleBaseType());
+
+        if (!isTupleListConversion)
         {
-            typeConversion = tc;
-            return expression!;
+            var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, considerSafeUpcast);
+            if (tc != TypeConversion.NoMatch)
+            {
+                typeConversion = tc;
+                return expression!;
+            }
         }
 
         // tuples are not convertible.
@@ -2411,7 +2443,22 @@ internal partial class ExpressionBuilderContext
                     if (allMatched)
                     {
                         typeConversion = TypeConversion.OperatorConvert;
-                        return Expression.MemberInit(Expression.New(outputType), bindings);
+                        Expression memberInit = Expression.MemberInit(Expression.New(outputType), bindings);
+
+                        // A freshly constructed tuple can never be null; skipping the null check
+                        // also matters for the generated C#, which cannot null-check the
+                        // resulting value tuple literal.
+                        if (input is NewExpression or MemberInitExpression)
+                            return memberInit;
+
+                        // A null tuple converts to null rather than to a tuple whose elements
+                        // are all null; without this check the property accesses in the
+                        // bindings would also throw when the conversion is evaluated as an
+                        // expression tree.
+                        return Expression.Condition(
+                            Expression.Equal(input, NullExpression.ForType(input.Type)),
+                            NullExpression.Object.NewTypeAsExpression(outputType),
+                            memberInit);
                     }
                 }
             }
