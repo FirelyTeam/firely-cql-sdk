@@ -1,6 +1,8 @@
 # Concept: Stratifier Support in Packager-Generated FHIR Measures
 
-Status: **Proposal / concept** — no implementation yet.
+Status: **Implemented** in `Cql/Cql.Packaging/FhirMeasureExtensions.cs`, with unit tests in
+`Cql/CoreTests/Packaging/FhirMeasureExtensionsTests.cs` and user documentation in
+`docs/cql-packager.md` (section "Measure Annotations").
 
 > All CQL, ELM, and FHIR snippets in this document are invented examples. No measure content from
 > any external source is reproduced here.
@@ -188,10 +190,11 @@ All changes are contained in `FhirMeasureExtensions.cs`:
    - `@stratifier` with an empty value → throw (matches the spirit of the population whitelist
      check).
    - Duplicate component code within a group → throw (mirrors duplicate-population handling).
-   - `@stratifier` present but no `@group` tag → today a `@population` in that situation is
-     silently dropped (empty cross product). For stratifiers we should at least log a warning;
-     silently dropping an annotated stratifier is the bug this feature is meant to fix. (Optionally
-     tighten the population path the same way in a follow-up.)
+   - `@stratifier` present but no `@group` tag → throw. (A `@population` in that situation is
+     still silently dropped today — empty cross product; silently dropping an annotated stratifier
+     is the bug this feature fixes, and no logging is plumbed into this code path, so an error is
+     the only non-silent option. Tightening the population path the same way is a possible
+     follow-up — see open questions.)
    - No result-type validation: any CQL type is an acceptable stratum value.
 
 5. **`@productline` interaction.** Populations suffix their id and coding with the product line.
@@ -218,9 +221,10 @@ All test content is synthetic — no external measure content may be added to th
    - a group first mentioned by a stratifier-only definition is still created and later populated.
 2. **Golden-file test**: run the packager over a synthetic test library and compare the generated
    `Measure.group[*].stratifier` subtree against a hand-authored expected JSON.
-3. **Demo content**: extend `LibrarySets/Demo/Cql/MeasureExample.cql` with two stratifier
-   definitions (e.g. `Age Band Stratifier`, `Region Stratifier`) so the demo pipeline exercises the
-   container/component shape end to end.
+3. **Demo content** (follow-up, not yet done): extend `LibrarySets/Demo/Cql/MeasureExample.cql`
+   with two stratifier definitions (e.g. `Age Band Stratifier`, `Region Stratifier`) so the demo
+   pipeline exercises the container/component shape end to end. Requires regenerating the
+   committed `LibrarySets/Demo/Elm/MeasureExample.json` with the Java CQL-to-ELM translator.
 
 ## Documentation & release
 
@@ -230,9 +234,9 @@ All test content is synthetic — no external measure content may be added to th
 
 ## Open questions
 
-1. Should the "annotation without `@group` is silently dropped" behavior become an error for both
-   populations and stratifiers? (Behavioral change for existing content — needs a decision from
-   content owners.)
+1. Should a `@population` annotation without `@group` also become an error, as `@stratifier` now
+   is, instead of being silently dropped? (Behavioral change for existing content — needs a
+   decision from content owners.)
 
 ## Resolved decisions (2026-07)
 

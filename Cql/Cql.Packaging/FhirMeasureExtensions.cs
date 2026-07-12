@@ -60,6 +60,7 @@ internal static class FhirMeasureExtensions
             measure.Group = [];
 
             FhirMeasureExtensions.AnnotateMeasurePopulations(measure, elmLibrary);
+            FhirMeasureExtensions.AnnotateMeasureStratifiers(measure, elmLibrary);
             string[] library = [resourceCanonicalBuilder("Library", libName, libVer)];
             measure.Library = library;
             return measure;
@@ -99,16 +100,39 @@ internal static class FhirMeasureExtensions
         }
     }
 
+    private static Tag[] GetAnnotationTags(Hl7.Cql.Elm.ExpressionDef def) =>
+        (def.annotation?
+            .OfType<ElmAnnotation>()
+            .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
+         ?? [])
+        .ToArray();
+
+    private static FhirMeasure.GroupComponent GetOrCreateGroup(FhirMeasure fhirMeasure, string rate)
+    {
+        var groupsForRate = fhirMeasure.Group?
+                                       .Where(g => g.ElementId == rate)
+                                       .ToArray() ?? [];
+        if (groupsForRate.Length == 1)
+            return groupsForRate[0];
+        if (groupsForRate.Length > 1)
+            throw new InvalidOperationException($"Rate {rate} is defined twice for this measure.");
+
+        var group = new FhirMeasure.GroupComponent
+        {
+            ElementId = rate,
+            //Code = new CodeableConcept(rate, MeasureGroupCodeSystem),
+            Description = $"Rate {rate}",
+        };
+        fhirMeasure.Group!.Add(group);
+        return group;
+    }
+
     private static void AnnotateMeasurePopulations(FhirMeasure fhirMeasure, ElmLibrary library)
     {
         var defs = library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>();
         foreach (var def in defs)
         {
-            var annotations = (def.annotation?
-                                  .OfType<ElmAnnotation>()
-                                  .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
-                               ?? [])
-                .ToArray();
+            var annotations = GetAnnotationTags(def);
             if (annotations.Length > 0)
             {
                 var groups = annotations
@@ -130,25 +154,7 @@ internal static class FhirMeasureExtensions
                             $"Definition {def.name} has a @population annotation whose value is {tuple.Population}.  @population must be one of: {string.Join(", ", Populations.Keys)}");
 
                     var rate = $"{tuple.Group}";
-                    var groupsForRate = fhirMeasure.Group?
-                                                   .Where(g => g.ElementId == rate)
-                                                   .ToArray() ?? [];
-                    FhirMeasure.GroupComponent? group;
-                    if (groupsForRate.Length == 1)
-                    {
-                        group = groupsForRate[0];
-                    }
-                    else if (groupsForRate.Length == 0)
-                    {
-                        group = new FhirMeasure.GroupComponent
-                        {
-                            ElementId = rate,
-                            //Code = new CodeableConcept(rate, MeasureGroupCodeSystem),
-                            Description = $"Rate {tuple.Group}",
-                        };
-                        fhirMeasure.Group!.Add(group);
-                    }
-                    else throw new InvalidOperationException($"Rate {rate} is defined twice for this measure.");
+                    var group = GetOrCreateGroup(fhirMeasure, rate);
 
                     var populationSuffix = productLine != null ? $"{tuple.Population}-{productLine.value}" : tuple.Population;
                     var pop = $"{rate}-{populationSuffix}";
@@ -192,6 +198,75 @@ internal static class FhirMeasureExtensions
         }
     }
 
-    extension(FhirMeasure fhirMeasure)
-    { }
+    private static FhirMeasure.StratifierComponent GetOrCreateStratifier(FhirMeasure.GroupComponent group)
+    {
+        var id = $"{group.ElementId}-Stratifier";
+        var existing = group.Stratifier.FirstOrDefault(s => s.ElementId == id);
+        if (existing != null)
+            return existing;
+
+        var container = new FhirMeasure.StratifierComponent
+        {
+            ElementId = id,
+            Code = new CodeableConcept { Text = id },
+            Description = id,
+        };
+        group.Stratifier.Add(container);
+        return container;
+    }
+
+    private static void AnnotateMeasureStratifiers(FhirMeasure fhirMeasure, ElmLibrary library)
+    {
+        var defs = library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>();
+        foreach (var def in defs)
+        {
+            var annotations = GetAnnotationTags(def);
+            var stratifiers = annotations
+                              .Where(t => t.name == "stratifier")
+                              .ToArray();
+            if (stratifiers.Length == 0)
+                continue;
+
+            foreach (var stratifier in stratifiers)
+            {
+                if (string.IsNullOrWhiteSpace(stratifier.value))
+                    throw new InvalidOperationException(
+                        $"Definition {def.name} has a @stratifier annotation with an empty value.");
+            }
+
+            var groups = annotations
+                         .Where(t => t.name == "group")
+                         .ToArray();
+            if (groups.Length == 0)
+                throw new InvalidOperationException(
+                    $"Definition {def.name} has a @stratifier annotation but no @group annotation. Add a @group annotation for each measure group the stratifier belongs to.");
+
+            var description = annotations.FirstOrDefault(t => t.name == "description");
+
+            var tuples = from g in groups
+                         from s in stratifiers
+                         select new { Group = g.value, Stratifier = s.value };
+            foreach (var tuple in tuples)
+            {
+                var group = GetOrCreateGroup(fhirMeasure, tuple.Group);
+                var container = GetOrCreateStratifier(group);
+
+                var componentId = $"{tuple.Group}-StratifierComponent-{tuple.Stratifier}";
+                if (container.Component.Any(c => c.ElementId == componentId))
+                    throw new InvalidOperationException($"Stratifier component {componentId} is defined twice for this measure.");
+
+                container.Component.Add(new FhirMeasure.ComponentComponent
+                {
+                    ElementId = componentId,
+                    Code = new CodeableConcept { Text = tuple.Stratifier },
+                    Description = description?.value ?? tuple.Stratifier,
+                    Criteria = new Hl7.Fhir.Model.Expression
+                    {
+                        Language = "text/cql-identifier",
+                        ExpressionElement = new FhirString(def.name)
+                    }
+                });
+            }
+        }
+    }
 }
