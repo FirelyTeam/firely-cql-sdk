@@ -355,10 +355,9 @@
 			<expression>null includes {2}</expression>
 			<output>null</output>
 		</test>
-		<!-- this test is going to the ContainsEvaluator -->
 		<test name="IncludesNullRight">
-			<expression>{'s', 'a', 'm'} includes null</expression>
-			<output>false</output>
+			<expression>{'s', 'a', 'm'} includes null as List&lt;String&gt;</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="IncludedIn">
@@ -398,10 +397,9 @@
 			<expression>@T16:59:59.999 included in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }</expression>
 			<output>false</output>
 		</test>
-		<!-- the following expression is going to the InEvaluator -->
 		<test name="IncludedInNullLeft">
-			<expression>null included in {2}</expression>
-			<output>false</output>
+			<expression>null as List&lt;Integer&gt; included in {2}</expression>
+			<output>null</output>
 		</test>
 		<test name="IncludedInNullRight">
 			<expression>{'s', 'a', 'm'} included in null</expression>
@@ -655,11 +653,11 @@
 	</group>
 	<group name="ProperContains">
 		<test name="ProperContainsNullRightFalse">
-			<expression>{'s', 'u', 'n'} properly includes null</expression>
+			<expression>{'s', 'u', 'n'} properly includes null as String</expression>
 			<output>false</output>
 		</test>
 		<test name="ProperContainsNullRightTrue">
-			<expression>{'s', 'u', 'n', null} properly includes null</expression>
+			<expression>{'s', 'u', 'n', null} properly includes null as String</expression>
 			<output>true</output>
 		</test>
 		<test name="ProperContainsTimeTrue">
@@ -668,12 +666,12 @@
 		</test>
 		<test name="ProperContainsTimeNull">
 			<expression>{ @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59</expression>
-			<output>null</output>
+			<output>false</output>
 		</test>
 	</group>
 	<group name="ProperIn">
 		<test name="ProperInNullRightFalse">
-			<expression>null properly included in {'s', 'u', 'n'}</expression>
+			<expression>null as String properly included in {'s', 'u', 'n'}</expression>
 			<output>false</output>
 		</test>
 		<test name="ProperInNullRightTrue">
@@ -686,7 +684,7 @@
 		</test>
 		<test name="ProperInTimeNull">
 			<expression>@T15:59:59 properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 }</expression>
-			<output>null</output>
+			<output>false</output>
 		</test>
 	</group>
 	<group name="ProperlyIncludes">
@@ -727,7 +725,7 @@
 			<output>false</output>
 		</test>
 		<test name="ProperlyIncludesNullLeft">
-			<expression>null properly includes {2}</expression>
+			<expression>null as List&lt;Integer&gt; properly includes {2}</expression>
 			<output>null</output>
 		</test>
 	</group>
@@ -769,7 +767,7 @@
 			<output>false</output>
 		</test>
 		<test name="ProperlyIncludedInNulRight">
-			<expression>{'s', 'u', 'n'} properly included in null</expression>
+			<expression>{'s', 'u', 'n'} properly included in null as List&lt;String&gt;</expression>
 			<output>null</output>
 		</test>
 	</group>

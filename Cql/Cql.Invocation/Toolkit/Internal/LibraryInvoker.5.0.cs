@@ -88,6 +88,8 @@ file sealed class DefinitionInvoker_5_0(
     methodInfo.GetCustomAttributes<CqlTagAttribute>()
               .ToArray())
 {
+    private readonly Func<CqlContext, object?[], object?> _compiledInvoker = CreateInvoker(library, methodInfo);
+
     public static (bool success, DefinitionInvoker definitionInvoker) TryCreate(
         ILibrary library,
         LibraryInvoker libraryInvoker,
@@ -101,16 +103,106 @@ file sealed class DefinitionInvoker_5_0(
         return (true, definitionInvoker);
     }
 
-    public override object? Invoke(CqlContext cqlContext, params object?[] args)
+    public override object? Invoke(CqlContext cqlContext, params object?[] args) =>
+        _compiledInvoker(cqlContext, args);
+
+    /// <summary>
+    /// Creates a delegate that directly calls the definition method on the library instance,
+    /// avoiding the per-invocation overhead of <see cref="MethodBase.Invoke(object?, object?[])"/>.
+    /// For common arities a strongly-typed delegate is bound via <see cref="MethodInfo.CreateDelegate{T}(object?)"/>
+    /// (a direct call, no IL generation); other shapes fall back to a compiled expression tree.
+    /// The delegate is created once per definition when the invoker is constructed.
+    /// Exceptions thrown by the definition propagate unwrapped, matching the previous
+    /// <see cref="BindingFlags.DoNotWrapExceptions"/> behavior.
+    /// </summary>
+    private static Func<CqlContext, object?[], object?> CreateInvoker(ILibrary library, MethodInfo methodInfo)
     {
-        object?[] methodArgs = args is { Length: > 0 }
-                             ? [cqlContext, ..args]
-                             : [cqlContext];
-        return methodInfo.Invoke(
-            library,
-            BindingFlags.DoNotWrapExceptions,
-            null,
-            methodArgs,
-            CultureInfo.InvariantCulture);
+        var parameters = methodInfo.GetParameters();
+        if (methodInfo.ReturnType != typeof(void)
+            && parameters.Length is >= 1 and <= 5
+            && parameters[0].ParameterType == typeof(CqlContext))
+        {
+            var wrapperName = parameters.Length switch
+            {
+                1 => nameof(WrapArity0),
+                2 => nameof(WrapArity1),
+                3 => nameof(WrapArity2),
+                4 => nameof(WrapArity3),
+                _ => nameof(WrapArity4),
+            };
+            Type[] typeArguments = [.. parameters.Skip(1).Select(p => p.ParameterType), methodInfo.ReturnType];
+            var wrapper = typeof(DefinitionInvoker_5_0)
+                          .GetMethod(wrapperName, BindingFlags.NonPublic | BindingFlags.Static)!
+                          .MakeGenericMethod(typeArguments);
+            return (Func<CqlContext, object?[], object?>)wrapper.Invoke(
+                null,
+                BindingFlags.DoNotWrapExceptions,
+                binder: null,
+                parameters: [library, methodInfo],
+                culture: null)!;
+        }
+
+        return CompileInvoker(library, methodInfo);
+    }
+
+    private static Func<CqlContext, object?[], object?> WrapArity0<TResult>(ILibrary library, MethodInfo methodInfo)
+    {
+        var invoke = methodInfo.CreateDelegate<Func<CqlContext, TResult>>(library);
+        return (cqlContext, _) => invoke(cqlContext);
+    }
+
+    private static Func<CqlContext, object?[], object?> WrapArity1<T1, TResult>(ILibrary library, MethodInfo methodInfo)
+    {
+        var invoke = methodInfo.CreateDelegate<Func<CqlContext, T1, TResult>>(library);
+        return (cqlContext, args) => invoke(cqlContext, (T1)args[0]!);
+    }
+
+    private static Func<CqlContext, object?[], object?> WrapArity2<T1, T2, TResult>(ILibrary library, MethodInfo methodInfo)
+    {
+        var invoke = methodInfo.CreateDelegate<Func<CqlContext, T1, T2, TResult>>(library);
+        return (cqlContext, args) => invoke(cqlContext, (T1)args[0]!, (T2)args[1]!);
+    }
+
+    private static Func<CqlContext, object?[], object?> WrapArity3<T1, T2, T3, TResult>(ILibrary library, MethodInfo methodInfo)
+    {
+        var invoke = methodInfo.CreateDelegate<Func<CqlContext, T1, T2, T3, TResult>>(library);
+        return (cqlContext, args) => invoke(cqlContext, (T1)args[0]!, (T2)args[1]!, (T3)args[2]!);
+    }
+
+    private static Func<CqlContext, object?[], object?> WrapArity4<T1, T2, T3, T4, TResult>(ILibrary library, MethodInfo methodInfo)
+    {
+        var invoke = methodInfo.CreateDelegate<Func<CqlContext, T1, T2, T3, T4, TResult>>(library);
+        return (cqlContext, args) => invoke(cqlContext, (T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!);
+    }
+
+    /// <summary>
+    /// Fallback for definition shapes not covered by the typed <c>WrapArityN</c> adapters:
+    /// compiles an expression tree that calls the definition directly.
+    /// </summary>
+    private static Func<CqlContext, object?[], object?> CompileInvoker(ILibrary library, MethodInfo methodInfo)
+    {
+        var parameters = methodInfo.GetParameters();
+        var cqlContextParameter = Expression.Parameter(typeof(CqlContext), "cqlContext");
+        var argsParameter = Expression.Parameter(typeof(object?[]), "args");
+
+        var callArguments = new Expression[parameters.Length];
+        callArguments[0] = parameters[0].ParameterType == typeof(CqlContext)
+            ? cqlContextParameter
+            : Expression.Convert(cqlContextParameter, parameters[0].ParameterType);
+        for (var i = 1; i < parameters.Length; i++)
+        {
+            callArguments[i] = Expression.Convert(
+                Expression.ArrayIndex(argsParameter, Expression.Constant(i - 1)),
+                parameters[i].ParameterType);
+        }
+
+        var call = Expression.Call(Expression.Constant(library), methodInfo, callArguments);
+        var body = methodInfo.ReturnType == typeof(void)
+            ? (Expression)Expression.Block(call, Expression.Constant(null, typeof(object)))
+            : Expression.Convert(call, typeof(object));
+
+        return Expression
+               .Lambda<Func<CqlContext, object?[], object?>>(body, cqlContextParameter, argsParameter)
+               .Compile();
     }
 }
